@@ -15,14 +15,14 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedCities1} options={cities} onChange={(e) => setSelectedCities1(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
+<MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
+    placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
-import './MultiSelectDemo.css';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const [selectedCities, setSelectedCities] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -32,22 +32,26 @@ export default function BasicDoc() {
         { name: 'Paris', code: 'PRS' }
     ];
 
-
     return (
-        <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
+        <div className="card flex justify-content-center">
+            <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
-import './MultiSelectDemo.css';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 
-export default function BasicDoc() {
-    const [selectedCities, setSelectedCities] = useState<any>(null);
-    const cities = [
+interface City {
+    name: string;
+    code: string;
+}
+
+export default function BasicDemo() {
+    const [selectedCities, setSelectedCities] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -56,53 +60,26 @@ export default function BasicDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedCities} options={cities} onChange={(e : MultiSelectChangeParams) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
+        <div className="card flex justify-content-center">
+            <MultiSelect value={selectedCities} onChange={(e: MultiSelectChangeEvent) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
+                placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>
     );
 }
-        `,
-        extFiles: {
-            'MultiSelectDemo.css': `
-/* MultiSelectDemo.css */
-
-.multiselect-demo .p-multiselect {
-    min-width: 15rem;
-}
-
-.multiselect-demo .multiselect-custom .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-}
-
-.multiselect-demo .multiselect-custom .country-item-value {
-    padding: .25rem .5rem;
-    border-radius: 3px;
-    display: inline-flex;
-    margin-right: .5rem;
-    background-color: var(--primary-color);
-    color: var(--primary-color-text);
-}
-
-.multiselect-demo .multiselect-custom .country-item-value img.flag {
-    width: 17px;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with the options collection. There are two alternatives of how to define the options property; One way is providing a collection
-                    of <i>SelectItem</i>
-                    instances having label-value pairs whereas other way is providing an array of arbitrary objects along with the <i>optionLabel</i> and <i>optionValue</i> properties to specify the label/value field pair. In addition, options can be
-                    simple primitive values such as a string array, in this case no optionLabel or optionValue is necessary.
+                    MultiSelect is used as a controlled component with <i>value</i> and <i>onChange</i> properties along with an <i>options</i> collection. Label and value of an option are defined with the <i>optionLabel</i> and <i>optionValue</i>{' '}
+                    properties respectively. Default property name for the <i>optionLabel</i> is <i>label</i> and <i>value</i> for the <i>optionValue</i>. If <i>optionValue</i> is omitted and the object has no <i>value</i> property, the object itself
+                    becomes the value of an option. Note that, when options are simple primitive values such as a string array, no <i>optionLabel</i> and <i>optionValue</i> would be necessary.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center multiselect-demo">
-                <MultiSelect value={selectedCities} options={cities} onChange={(e) => setSelectedCities(e.value)} optionLabel="name" placeholder="Select a City" maxSelectedLabels={3} />
+            <div className="card flex justify-content-center">
+                <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
             </div>
             <DocSectionCode code={code} />
         </>

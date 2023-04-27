@@ -2,10 +2,15 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PanelMenuBase } from './PanelMenuBase';
 import { PanelMenuSub } from './PanelMenuSub';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const PanelMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = PanelMenuBase.getProps(inProps);
+
         const [idState, setIdState] = React.useState(props.id);
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [animationDisabled, setAnimationDisabled] = React.useState(false);
@@ -103,10 +108,10 @@ export const PanelMenu = React.memo(
             const active = isItemActive(item);
             const className = classNames('p-panelmenu-panel', item.className);
             const headerClassName = classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled });
-            const submenuIconClassName = classNames('p-panelmenu-icon pi', { 'pi-chevron-right': !active, ' pi-chevron-down': active });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
-            const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
+            const submenuIconClassName = 'p-panelmenu-icon';
+            const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />);
             const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
             const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
             const menuContentRef = React.createRef();
@@ -142,7 +147,7 @@ export const PanelMenu = React.memo(
                     <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} onEnter={onEnter} disabled={animationDisabled} in={active} unmountOnExit options={props.transitionOptions}>
                         <div ref={menuContentRef} className={contentWrapperClassName} role="region" id={contentId} aria-labelledby={headerId}>
                             <div className="p-panelmenu-content">
-                                <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} />
+                                <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} />
                             </div>
                         </div>
                     </CSSTransition>
@@ -154,7 +159,7 @@ export const PanelMenu = React.memo(
             return props.model ? props.model.map(createPanel) : null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PanelMenu.defaultProps);
+        const otherProps = PanelMenuBase.getOtherProps(props);
         const className = classNames('p-panelmenu p-component', props.className);
         const panels = createPanels();
 
@@ -167,12 +172,3 @@ export const PanelMenu = React.memo(
 );
 
 PanelMenu.displayName = 'PanelMenu';
-PanelMenu.defaultProps = {
-    __TYPE: 'Panel',
-    id: null,
-    model: null,
-    style: null,
-    className: null,
-    multiple: false,
-    transitionOptions: null
-};

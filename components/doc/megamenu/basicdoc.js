@@ -121,10 +121,10 @@ export function BasicDoc(props) {
     ];
     const code = {
         basic: `
-<MegaMenu model={items} />        
+<MegaMenu model={items}  breakpoint="960px" />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 
 export default function BasicDemo() {
@@ -243,13 +243,13 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <MegaMenu model={items} />
+            <MegaMenu model={items} breakpoint="960px" />
         </div>
     )
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { MenuItem } from 'primereact/menuitem';
 
@@ -369,7 +369,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card">
-            <MegaMenu model={items} />
+            <MegaMenu model={items} breakpoint="960px" />
         </div>
     )
 }
@@ -384,7 +384,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <MegaMenu model={items} />
+                <MegaMenu model={items} breakpoint="960px" />
             </div>
             <DocSectionCode code={code} />
         </>

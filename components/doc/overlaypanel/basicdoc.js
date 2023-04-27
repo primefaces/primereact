@@ -11,7 +11,7 @@ export function BasicDoc(props) {
         basic: `
 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
 <OverlayPanel ref={op}>
-    <img src="'https://www.primereact.org/images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
+    <img src="/images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
 </OverlayPanel>
         `,
         javascript: `
@@ -26,7 +26,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
             <OverlayPanel ref={op}>
-                <img src={'https://www.primereact.org/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
             </OverlayPanel>
         </div>
     );
@@ -44,7 +44,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
             <OverlayPanel ref={op}>
-                <img src={'https://www.primereact.org/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
             </OverlayPanel>
         </div>
     );
@@ -62,7 +62,7 @@ export default function BasicDemo() {
             <div className="card flex justify-content-center">
                 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
                 <OverlayPanel ref={op}>
-                    <img src={'https://www.primereact.org/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
+                    <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
                 </OverlayPanel>
             </div>
             <DocSectionCode code={code} />

@@ -1,5 +1,5 @@
-import { useRef } from 'react';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
 import { Menu } from '../../lib/menu/Menu';
 import { Toast } from '../../lib/toast/Toast';
@@ -56,14 +56,14 @@ export function PopupDoc(props) {
 `,
         javascript: `
 import React, { useRef } from 'react';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function PopupDoc() {
     const menu = useRef(null);
-    const router = useRouter();
+    //const router = useRouter();
     const toast = useRef(null);
     const items = [
         {
@@ -97,7 +97,7 @@ export default function PopupDoc() {
                     label: 'Router',
                     icon: 'pi pi-upload',
                     command:(e) => {
-                        router.push('/fileupload');
+                        //router.push('/fileupload');
                     }
                 }
             ]
@@ -115,7 +115,7 @@ export default function PopupDoc() {
         `,
         typescript: `
 import React, { useRef } from 'react';
-import { useRouter } from 'next/router';
+//import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
@@ -123,7 +123,7 @@ import { Toast } from 'primereact/toast';
 
 export default function PopupDoc() {
     const menu = useRef<Menu>(null);
-    const router = useRouter();
+    //const router = useRouter();
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
         {
@@ -157,7 +157,7 @@ export default function PopupDoc() {
                     label: 'Router',
                     icon: 'pi pi-upload',
                     command:(e) => {
-                        window.location.hash = "/fileupload"
+                        //router.push('/fileupload');
                     }
                 }
             ]

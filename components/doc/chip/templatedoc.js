@@ -1,10 +1,8 @@
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { Chip } from '../../../components/lib/chip/Chip';
-import getConfig from 'next/config';
 
 export function TemplateDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const content = (
         <>
             <span className="bg-primary border-circle w-2rem h-2rem flex align-items-center justify-content-center">P</span>

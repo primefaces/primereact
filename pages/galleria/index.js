@@ -1,26 +1,24 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/galleria/importdoc';
-import { BasicDoc } from '../../components/doc/galleria/basicdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/galleria/styledoc';
-import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
-import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
-import { AutoPlayDoc } from '../../components/doc/galleria/autoplaydoc';
-import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
 import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
+import { AutoPlayDoc } from '../../components/doc/galleria/autoplaydoc';
+import { BasicDoc } from '../../components/doc/galleria/basicdoc';
+import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
+import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
+import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/customcontentdoc';
+import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnailsdoc';
+import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnailsdoc';
+import { ImportDoc } from '../../components/doc/galleria/importdoc';
 import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickeventdoc';
 import { HoverEventDoc } from '../../components/doc/galleria/indicator/hovereventdoc';
 import { PositionDoc } from '../../components/doc/galleria/indicator/positiondoc';
 import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/templatedoc';
-import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnailsdoc';
-import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnailsdoc';
-import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/customcontentdoc';
-import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnailsdoc';
-import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnailsdoc';
 import { HoverDoc } from '../../components/doc/galleria/navigator/hoverdoc';
 import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicatorsdoc';
+import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnailsdoc';
+import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnailsdoc';
+import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
+import { StyleDoc } from '../../components/doc/galleria/styledoc';
 import { ThumbnailDoc } from '../../components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
@@ -150,32 +148,10 @@ const GalleriaDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Galleria', pathname: '/modules/galleria.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Gallery Component</title>
-                <meta name="description" content="Galleria is a content gallery component." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Galleria</h1>
-                    <p>Galleria is a content gallery component.</p>
-                </div>
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} />;
 };
 
 export default GalleriaDemo;

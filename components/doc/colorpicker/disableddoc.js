@@ -11,8 +11,7 @@ export function DisabledDoc(props) {
 import React from "react";
 import { ColorPicker } from 'primereact/colorpicker';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <ColorPicker disabled />
@@ -22,10 +21,9 @@ export default function DisabledDoc() {
         `,
         typescript: `
 import React from "react";
-import { ColorPicker, ColorPickerChangeParams } from 'primereact/colorpicker';
+import { ColorPicker } from 'primereact/colorpicker';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <ColorPicker disabled />
@@ -39,7 +37,7 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

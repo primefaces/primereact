@@ -2,7 +2,7 @@
  *
  * Chart components are based on Chart.js, an open source HTML5 based charting library.
  *
- * [Live Demo](https://www.primefaces.org/primereact/chart)
+ * [Live Demo](https://www.primereact.org/chart)
  *
  * @module chart
  *
@@ -51,6 +51,11 @@ export interface ChartProps {
      */
     className?: string | undefined;
     /**
+     * ARIA label for the chart canvas. Defaults to options.plugins.title.text if available.
+     * @default options.plugins.title.text
+     */
+    ariaLabel?: string | undefined;
+    /**
      * Used to get the child elements of the component.
      * @readonly
      */
@@ -62,9 +67,9 @@ export interface ChartProps {
  *
  * _Chart components are based on Chart.js, an open source HTML5 based charting library._
  *
- * [Live Demo](https://www.primefaces.org/primereact/chart/)
+ * [Live Demo](https://www.primereact.org/chart/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

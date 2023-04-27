@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
@@ -17,9 +15,7 @@ import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
 import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const AutoCompleteDemo = () => {
     const docs = [
@@ -109,34 +105,10 @@ const AutoCompleteDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'AutoComplete', pathname: '/modules/autocomplete.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React AutoComplete Component</title>
-                <meta name="description" content="AutoComplete is an input component that provides real-time suggestions while being typed." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>AutoComplete</h1>
-                    <p>AutoComplete is an input component that provides real-time suggestions while being typed.</p>
-                </div>
-                <DocActions github="/autocomplete" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React AutoComplete Component" header="AutoComplete" description="AutoComplete is an input component that provides real-time suggestions while being typed" componentDocs={docs} apiDocs={['AutoComplete']} />;
 };
 
 export default AutoCompleteDemo;

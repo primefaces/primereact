@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -82,14 +82,15 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<CascadeSelect value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} onChange={event => setSelectedCity(event.value)}/>
-<label htmlFor="cascadeselect">Invalid State</label>
+<CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
+    optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+    className="p-invalid w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const countries = [
         {
@@ -169,22 +170,37 @@ export default function InvalidDoc() {
     ];
 
     return (
-        <div className="card flex flex-column align-items-center">
-            <div className="flex flex-column gap-2">
-                <label htmlFor="cascadeselect">Invalid State</label>
-                <CascadeSelect className="p-invalid" value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} onChange={event => setSelectedCity(event.value)}/>
-            </div>
+        <div className="card flex justify-content-center">
+            <CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
+                optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+                className="p-invalid w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { CascadeSelect } from 'primereact/cascadeselect';
+import { CascadeSelect, CascadeSelectChangeEvent } from 'primereact/cascadeselect';
 
-export default function InvalidDoc() {
-    const [selectedCity, setSelectedCity] = useState(null);
-    const countries = [
+interface City {
+    cname: string;
+    code: string;
+}
+
+interface CountryState {
+    name: string;
+    cities: City[];
+}
+
+interface Country {
+    name: string;
+    code: string;
+    states: CountryState[];
+}
+
+export default function InvalidDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const countries: Country[] = [
         {
             name: 'Australia',
             code: 'AU',
@@ -262,11 +278,10 @@ export default function InvalidDoc() {
     ];
 
     return (
-        <div className="card flex flex-column align-items-center">
-            <div className="flex flex-column gap-2">
-                <label htmlFor="cascadeselect">Invalid State</label>
-                <CascadeSelect className="p-invalid" value={selectedCity} options={countries} optionLabel={"cname"} optionGroupLabel={"name"} optionGroupChildren={['states', 'cities']} style={{minWidth: '14rem'}} onChange={event => setSelectedCity(event.value)}/>
-            </div>
+        <div className="card flex justify-content-center">
+            <CascadeSelect value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
+                optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
+                className="p-invalid w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" />
         </div>
     )
 }
@@ -276,23 +291,22 @@ export default function InvalidDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center">
-                <div className="flex flex-column gap-2">
-                    <label htmlFor="invalidcascadeselect">Invalid State</label>
-                    <CascadeSelect
-                        className="p-invalid"
-                        value={selectedCity}
-                        options={countries}
-                        optionLabel={'cname'}
-                        optionGroupLabel={'name'}
-                        optionGroupChildren={['states', 'cities']}
-                        style={{ minWidth: '14rem' }}
-                        onChange={(event) => setSelectedCity(event.value)}
-                    />
-                </div>
+            <div className="card flex justify-content-center">
+                <CascadeSelect
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
+                    options={countries}
+                    optionLabel="cname"
+                    optionGroupLabel="name"
+                    optionGroupChildren={['states', 'cities']}
+                    className="p-invalid w-full md:w-14rem"
+                    breakpoint="767px"
+                    placeholder="Select a City"
+                />
             </div>
             <DocSectionCode code={code} />
         </>

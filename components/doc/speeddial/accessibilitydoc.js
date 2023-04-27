@@ -1,8 +1,14 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<SpeedDial aria-label="Options" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -15,11 +21,8 @@ export function AccessibilityDoc() {
                 <p>
                     The popup overlay uses <i>menu</i> role on the list and each action item has a <i>menuitem</i> role with an <i>aria-label</i> as the menuitem label. The id of the menu refers to the <i>aria-controls</i> of the button.
                 </p>
-                <CodeHighlight>
-                    {`
-<SpeedDial aria-label="Options" />
-`}
-                </CodeHighlight>
+
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Menu Button Keyboard Support</h3>
                 <div className="doc-tablewrapper">

@@ -1,13 +1,13 @@
 import { Image } from '../../lib/image/Image';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const icon = <i className="pi pi-check"></i>;
 
     const code = {
         basic: `
-<Image src="https://www.primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+<Image src="/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
         `,
         javascript: `
 import React from 'react'; 
@@ -18,7 +18,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
         </div>
     )
 }
@@ -32,7 +32,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primereact.org/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
         </div>
     )
 }
@@ -47,7 +47,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`https://www.primereact.org/images/galleria/galleria12.jpg`} template={icon} alt="Image" preview width="250" />
+                <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
             </div>
             <DocSectionCode code={code} />
         </>

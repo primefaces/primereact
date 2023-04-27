@@ -2,7 +2,7 @@
  *
  * RadioButton is an extension to standard radio button element with theming.
  *
- * [Live Demo](https://www.primefaces.org/primereact/radiobutton/)
+ * [Live Demo](https://www.primereact.org/radiobutton/)
  *
  * @module radiobutton
  *
@@ -80,9 +80,9 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
  *
  * _RadioButton is an extension to standard radio button element with theming._
  *
- * [Live Demo](https://www.primefaces.org/primereact/radiobutton/)
+ * [Live Demo](https://www.primereact.org/radiobutton/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

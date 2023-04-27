@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
@@ -34,37 +31,10 @@ const ContextMenuDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'ContextMenu', pathname: '/modules/contextmenu.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ContextMenu Component</title>
-                <meta name="description" content="ContextMenu displays an overlay menu on right click of its target." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ContextMenu</h1>
-                    <p>
-                        ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a
-                        special integration.
-                    </p>
-                </div>
-                <DocActions github="/contextmenu" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ContextMenu Component" header="ContextMenu" description="ContextMenu displays an overlay menu on right click of its target." componentDocs={docs} apiDocs={['ContextMenu', 'MenuItem']} />;
 };
 
 export default ContextMenuDemo;

@@ -2,7 +2,7 @@
  *
  * MultiStateCheckbox is used to select a state from given multiple states.
  *
- * [Live Demo](https://www.primefaces.org/primereact/multistatecheckbox/)
+ * [Live Demo](https://www.primereact.org/multistatecheckbox/)
  *
  * @module multistatecheckbox
  *
@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom MultiStateCheckbox option.
- * @group Misc
  */
 interface MultiStateCheckboxOption {
     /**
@@ -124,6 +123,10 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      */
     optionLabel?: string | undefined;
     /**
+     * Property name to use as the icon of an option, defaults to the icon property.
+     */
+    optionIcon?: string | undefined;
+    /**
      * Template of icon for the selected option.
      */
     iconTemplate?: React.ReactNode | ((options: MultiStateCheckboxIconTemplateEvent) => React.ReactNode);
@@ -171,9 +174,9 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
  *
  * _MultiStateCheckbox is used to select a state from given multiple states._
  *
- * [Live Demo](https://www.primefaces.org/primereact/multistatecheckbox/)
+ * [Live Demo](https://www.primereact.org/multistatecheckbox/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

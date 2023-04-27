@@ -1,23 +1,25 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
-import { DefaultDoc } from '../../components/doc/treeselect/defaultdoc';
 import { DisabledDoc } from '../../components/doc/treeselect/disableddoc';
 import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/treeselect/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
-import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
-import { ProgrammaticDoc } from '../../components/doc/treeselect/programmaticdoc';
-import { StyleDoc } from '../../components/doc/treeselect/styledoc';
 import { FormikDoc } from '../../components/doc/treeselect/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/treeselect/importdoc';
+import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
+import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
+import { ControlledDoc } from '../../components/doc/treeselect/controlleddoc';
+import { StyleDoc } from '../../components/doc/treeselect/styledoc';
 
 const TreeSelectDemo = () => {
     const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
         {
             id: 'basic',
             label: 'Basic',
@@ -39,14 +41,9 @@ const TreeSelectDemo = () => {
             component: FilterDoc
         },
         {
-            id: 'default',
-            label: 'Default Value',
-            component: DefaultDoc
-        },
-        {
-            id: 'programmatic',
-            label: 'Programmatic',
-            component: ProgrammaticDoc
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
         },
         {
             id: 'floatlabel',
@@ -89,34 +86,10 @@ const TreeSelectDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'TreeSelect', pathname: '/modules/treeselect.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React TreeSelect Component</title>
-                <meta name="description" content="TreeSelect is a form component to choose from hierarchical data." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>TreeSelect</h1>
-                    <p>TreeSelect is a form component to choose from hierarchical data.</p>
-                </div>
-
-                <DocActions github="/treeselect" />
-            </div>
-            <div className="content-section doc treeselect-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect']} />;
 };
 
 export default TreeSelectDemo;

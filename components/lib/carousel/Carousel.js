@@ -2,7 +2,12 @@ import * as React from 'react';
 import PrimeReact, { ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { CarouselBase } from './CarouselBase';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
@@ -16,7 +21,9 @@ const CarouselItem = React.memo((props) => {
 });
 
 export const Carousel = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = CarouselBase.getProps(inProps);
+
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
         const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState(props.page * props.numScroll * -1);
@@ -474,14 +481,13 @@ export const Carousel = React.memo(
                 const className = classNames('p-carousel-prev p-link', {
                     'p-disabled': isDisabled
                 });
-                const iconClassName = classNames('p-carousel-prev-icon pi', {
-                    'pi-chevron-left': !isVertical,
-                    'pi-chevron-up': isVertical
-                });
+                const iconClassName = 'p-carousel-prev-icon';
+                const icon = isVertical ? props.prevIcon || <ChevronUpIcon className={iconClassName} /> : props.prevIcon || <ChevronLeftIcon className={iconClassName} />;
+                const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: className }, { props });
 
                 return (
                     <button type="button" className={className} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')}>
-                        <span className={iconClassName}></span>
+                        {backwardNavigatorIcon}
                         <Ripple />
                     </button>
                 );
@@ -496,14 +502,13 @@ export const Carousel = React.memo(
                 const className = classNames('p-carousel-next p-link', {
                     'p-disabled': isDisabled
                 });
-                const iconClassName = classNames('p-carousel-next-icon pi', {
-                    'pi-chevron-right': !isVertical,
-                    'pi-chevron-down': isVertical
-                });
+                const iconClassName = 'p-carousel-next-icon';
+                const icon = isVertical ? props.nextIcon || <ChevronDownIcon className={iconClassName} /> : props.nextIcon || <ChevronRightIcon className={iconClassName} />;
+                const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: className }, { props });
 
                 return (
                     <button type="button" className={className} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')}>
-                        <span className={iconClassName}></span>
+                        {forwardNavigatorIcon}
                         <Ripple />
                     </button>
                 );
@@ -543,7 +548,7 @@ export const Carousel = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Carousel.defaultProps);
+        const otherProps = CarouselBase.getOtherProps(props);
         const className = classNames(
             'p-carousel p-component',
             {
@@ -574,27 +579,3 @@ export const Carousel = React.memo(
 CarouselItem.displayName = 'CarouselItem';
 
 Carousel.displayName = 'Carousel';
-Carousel.defaultProps = {
-    __TYPE: 'Carousel',
-    id: null,
-    value: null,
-    page: 0,
-    header: null,
-    footer: null,
-    style: null,
-    className: null,
-    itemTemplate: null,
-    circular: false,
-    showIndicators: true,
-    showNavigators: true,
-    autoplayInterval: 0,
-    numVisible: 1,
-    numScroll: 1,
-    responsiveOptions: null,
-    orientation: 'horizontal',
-    verticalViewPortHeight: '300px',
-    contentClassName: null,
-    containerClassName: null,
-    indicatorsContentClassName: null,
-    onPageChange: null
-};

@@ -1,13 +1,11 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
-import { ContentDoc } from '../../components/doc/paginator/contentdoc';
-import { CustomDoc } from '../../components/doc/paginator/customdoc';
+import { ImagesDoc } from '../../components/doc/paginator/imagesdoc';
 import { ImportDoc } from '../../components/doc/paginator/importdoc';
+import { LayoutDoc } from '../../components/doc/paginator/layoutdoc';
 import { StyleDoc } from '../../components/doc/paginator/styledoc';
+import { TemplateDoc } from '../../components/doc/paginator/templatedoc';
 
 const PaginatorDemo = () => {
     const docs = [
@@ -22,14 +20,19 @@ const PaginatorDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'custom',
-            label: 'Custom Template',
-            component: CustomDoc
+            id: 'layout',
+            label: 'Layout',
+            component: LayoutDoc
         },
         {
-            id: 'content',
-            label: 'Left and Right Content',
-            component: ContentDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'images',
+            label: 'Images',
+            component: ImagesDoc
         },
         {
             id: 'style',
@@ -40,35 +43,10 @@ const PaginatorDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Paginator', pathname: '/modules/paginator.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Paginator Component</title>
-                <meta name="description" content="Paginator is a generic widget to display content in paged format." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Paginator</h1>
-                    <p>Paginator is a generic widget to display content in paged format.</p>
-                </div>
-
-                <DocActions github="/paginator" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Paginator Component" header="Paginator" description="Paginator displays data in paged format and provides navigation between pages." componentDocs={docs} apiDocs={['Paginator']} />;
 };
 
 export default PaginatorDemo;

@@ -1,11 +1,11 @@
 import { Image } from '../../lib/image/Image';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function PreviewDoc(props) {
     const code = {
         basic: `
-<Image src="https://www.primereact.org/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
+<Image src="/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
         `,
         javascript: `
 import React from 'react'; 
@@ -14,7 +14,7 @@ import { Image } from 'primereact/image';
 export default function PreviewDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primereact.org/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
         </div>
     )
 }
@@ -26,7 +26,7 @@ import { Image } from 'primereact/image';
 export default function PreviewDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://www.primereact.org/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
         </div>
     )
 }
@@ -41,7 +41,7 @@ export default function PreviewDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src={`https://www.primereact.org/images/galleria/galleria10.jpg`} alt="Image" width="250" preview />
+                <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg" alt="Image" width="250" preview />
             </div>
             <DocSectionCode code={code} />
         </>

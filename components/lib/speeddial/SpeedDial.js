@@ -3,9 +3,14 @@ import { Button } from '../button/Button';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { SpeedDialBase } from './SpeedDialBase';
+import { PlusIcon } from '../icons/plus';
+import { MinusIcon } from '../icons/minus';
 
 export const SpeedDial = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = SpeedDialBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
@@ -216,21 +221,9 @@ export const SpeedDial = React.memo(
                 [`${props.showIcon}`]: (!visible && !!props.showIcon) || !props.hideIcon,
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
-            const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : hideIconVisible ? props.hideIcon : null, undefined, { props });
-            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
-
-            if (props.buttonTemplate) {
-                const defaultContentOptions = {
-                    onClick,
-                    className,
-                    iconClassName,
-                    element: content,
-                    props,
-                    visible
-                };
-
-                return ObjectUtils.getJSXElement(props.buttonTemplate, defaultContentOptions);
-            }
+            const icon = showIconVisible ? props.showIcon || <PlusIcon className={iconClassName} onClick={onClick} /> : hideIconVisible ? props.hideIcon || <MinusIcon className={iconClassName} onClick={onClick} /> : null;
+            const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, visible });
+            const content = <Button type="button" style={props.buttonStyle} className={className} icon={toggleIcon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
 
             return content;
         };
@@ -251,7 +244,7 @@ export const SpeedDial = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, SpeedDial.defaultProps);
+        const otherProps = SpeedDialBase.getOtherProps(props);
         const className = classNames(
             `p-speeddial p-component p-speeddial-${props.type}`,
             {
@@ -278,31 +271,3 @@ export const SpeedDial = React.memo(
 );
 
 SpeedDial.displayName = 'SpeedDial';
-SpeedDial.defaultProps = {
-    __TYPE: 'SpeedDial',
-    id: null,
-    model: null,
-    visible: false,
-    style: null,
-    className: null,
-    direction: 'up',
-    transitionDelay: 30,
-    type: 'linear',
-    radius: 0,
-    mask: false,
-    disabled: false,
-    hideOnClickOutside: true,
-    buttonStyle: null,
-    buttonClassName: null,
-    buttonTemplate: null,
-    'aria-label': null,
-    maskStyle: null,
-    maskClassName: null,
-    showIcon: 'pi pi-plus',
-    hideIcon: null,
-    rotateAnimation: true,
-    onVisibleChange: null,
-    onClick: null,
-    onShow: null,
-    onHide: null
-};

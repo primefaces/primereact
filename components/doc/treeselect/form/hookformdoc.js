@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { NodeService } from '../../../../service/NodeService';
 import { Button } from '../../../lib/button/Button';
-import { TreeSelect } from '../../../lib/treeselect/TreeSelect';
 import { Toast } from '../../../lib/toast/Toast';
+import { TreeSelect } from '../../../lib/treeselect/TreeSelect';
 import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
@@ -42,7 +42,7 @@ export function HookFormDoc(props) {
     rules={{ required: 'Value is required.' }}
     render={({ field, fieldState }) => (
         <>
-            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames('w-full md:w-20rem', { 'p-invalid': fieldState.error })} />
             {getFormErrorMessage(field.name)}
         </>
     )}
@@ -85,7 +85,7 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column md:w-20rem w-full gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
@@ -93,7 +93,7 @@ export default function HookFormDoc() {
                     rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames('w-full md:w-20rem', { 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -110,11 +110,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { TreeSelect } from "primereact/treeselect";
+import { TreeNode } from 'primereact/treenode';
 import { Toast } from 'primereact/toast';
 import { NodeService } from './service/NodeService';
 
 export default function HookFormDoc() {
-    const [nodes, setNodes] = useState(null);
+    const [node, setNodes] = useState<TreeNode[] | null>([]);
     const defaultValues = { value: null };
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
@@ -140,7 +141,7 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column md:w-20rem w-full gap-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
@@ -148,7 +149,7 @@ export default function HookFormDoc() {
                     rules={{ required: 'Value is required.' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                            <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames('w-full md:w-20rem', { 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}
                         </>
                     )}
@@ -198,7 +199,7 @@ export default function HookFormDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column md:w-20rem w-full gap-2">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"
@@ -206,7 +207,7 @@ export default function HookFormDoc() {
                         rules={{ required: 'Value is required.' }}
                         render={({ field, fieldState }) => (
                             <>
-                                <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames({ 'p-invalid': fieldState.error })} />
+                                <TreeSelect id={field.name} value={field.value} onChange={field.onChange} inputRef={field.ref} options={nodes} placeholder="Select Item" className={classNames('w-full md:w-20rem', { 'p-invalid': fieldState.error })} />
                                 {getFormErrorMessage(field.name)}
                             </>
                         )}

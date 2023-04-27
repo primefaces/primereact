@@ -110,7 +110,7 @@ export function DocumentDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -131,7 +131,7 @@ export function DocumentDoc(props) {
     ];
     const code = {
         basic: `
-<ContextMenu global model={items} />
+<ContextMenu global model={items} breakpoint="767px" />
 `,
         javascript: `
 import React from 'react';
@@ -249,7 +249,7 @@ export default function DocumentDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -272,7 +272,7 @@ export default function DocumentDemo() {
     return (
         <div className="card text-center">
             <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
-            <ContextMenu global model={items} />
+            <ContextMenu global model={items} breakpoint="767px" />
         </div>
     )
 }
@@ -394,7 +394,7 @@ export default function DocumentDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -417,7 +417,7 @@ export default function DocumentDemo() {
     return (
         <div className="card text-center">
             <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
-            <ContextMenu global model={items} />
+            <ContextMenu global model={items} breakpoint="767px" />
         </div>
     )
 }
@@ -431,7 +431,7 @@ export default function DocumentDemo() {
             </DocSectionText>
             <div className="card text-center">
                 <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
-                <ContextMenu global model={items} />
+                <ContextMenu global model={items} breakpoint="767px" />
             </div>
             <DocSectionCode code={code} />
         </>

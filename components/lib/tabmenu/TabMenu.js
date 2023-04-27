@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { TabMenuBase } from './TabMenuBase';
 
 export const TabMenu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TabMenuBase.getProps(inProps);
+
         const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);
         const inkbarRef = React.useRef(null);
@@ -45,10 +48,12 @@ export const TabMenu = React.memo(
         };
 
         const updateInkBar = () => {
-            const tabHeader = tabsRef.current[`tab_${activeIndex}`];
+            if (props.model) {
+                const tabHeader = tabsRef.current[`tab_${activeIndex}`];
 
-            inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
-            inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
+                inkbarRef.current.style.width = DomHandler.getWidth(tabHeader) + 'px';
+                inkbarRef.current.style.left = DomHandler.getOffset(tabHeader).left - DomHandler.getOffset(navRef.current).left + 'px';
+            }
         };
 
         React.useImperativeHandle(ref, () => ({
@@ -115,7 +120,7 @@ export const TabMenu = React.memo(
         };
 
         if (props.model) {
-            const otherProps = ObjectUtils.findDiffKeys(props, TabMenu.defaultProps);
+            const otherProps = TabMenuBase.getOtherProps(props);
             const className = classNames('p-tabmenu p-component', props.className);
             const items = createItems();
 
@@ -134,12 +139,3 @@ export const TabMenu = React.memo(
 );
 
 TabMenu.displayName = 'TabMenu';
-TabMenu.defaultProps = {
-    __TYPE: 'TabMenu',
-    id: null,
-    model: null,
-    activeIndex: 0,
-    style: null,
-    className: null,
-    onTabChange: null
-};

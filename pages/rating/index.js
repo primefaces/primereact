@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/rating/basicdoc';
 import { DisabledDoc } from '../../components/doc/rating/disableddoc';
@@ -31,16 +28,6 @@ const RatingDemo = () => {
             component: WithoutCancelDoc
         },
         {
-            id: 'readonly',
-            label: 'ReadOnly',
-            component: ReadOnlyDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'numberofstars',
             label: 'Number of Stars',
             component: NumberOfStarsDoc
@@ -51,6 +38,16 @@ const RatingDemo = () => {
             component: TemplateDoc
         },
         {
+            id: 'readonly',
+            label: 'ReadOnly',
+            component: ReadOnlyDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
             id: 'style',
             label: 'Style',
             component: StyleDoc
@@ -59,36 +56,10 @@ const RatingDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            doc: [{ name: 'Rating', pathname: '/modules/rating.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Rating Component</title>
-                <meta name="description" content="Rating component is a star based selection input." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Rating</h1>
-                    <p>Rating component is a star based selection input.</p>
-                </div>
-
-                <DocActions github="/rating" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Rating Component" header="Rating" description="Rating component is a star based selection input." componentDocs={docs} apiDocs={['Rating']} />;
 };
 
 export default RatingDemo;

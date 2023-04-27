@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
+import { SearchIcon } from '../icons/search';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const Tree = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TreeBase.getProps(inProps);
+
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
         const elementRef = React.useRef(null);
@@ -302,6 +307,9 @@ export const Tree = React.memo(
                     index={index}
                     last={last}
                     path={String(index)}
+                    checkboxIcon={props.checkboxIcon}
+                    expandIcon={props.expandIcon}
+                    collapseIcon={props.collapseIcon}
                     disabled={props.disabled}
                     selectionMode={props.selectionMode}
                     selectionKeys={props.selectionKeys}
@@ -360,13 +368,11 @@ export const Tree = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
-                const icon = classNames('p-tree-loading-icon pi-spin', props.loadingIcon);
+                const iconClassName = 'p-tree-loading-icon';
+                const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+                const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-                return (
-                    <div className="p-tree-loading-overlay p-component-overlay">
-                        <i className={icon} />
-                    </div>
-                );
+                return <div className="p-tree-loading-overlay p-component-overlay">{loadingIcon}</div>;
             }
 
             return null;
@@ -375,6 +381,10 @@ export const Tree = React.memo(
         const createFilter = () => {
             if (props.filter) {
                 const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                const iconClassName = 'p-tree-filter-icon';
+                const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
                 let content = (
                     <div className="p-tree-filter-container">
                         <input
@@ -387,7 +397,7 @@ export const Tree = React.memo(
                             onChange={onFilterInputChange}
                             disabled={props.disabled}
                         />
-                        <span className="p-tree-filter-icon pi pi-search"></span>
+                        {filterIcon}
                     </div>
                 );
 
@@ -398,7 +408,7 @@ export const Tree = React.memo(
                         filterOptions: filterOptions,
                         filterInputKeyDown: onFilterInputKeyDown,
                         filterInputChange: onFilterInputChange,
-                        filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                        filterIconClassName: 'p-dropdown-filter-icon',
                         props
                     };
 
@@ -419,7 +429,7 @@ export const Tree = React.memo(
                 if (props.header) {
                     const defaultContentOptions = {
                         filterContainerClassName: 'p-tree-filter-container',
-                        filterIconClasssName: 'p-tree-filter-icon pi pi-search',
+                        filterIconClassName: 'p-tree-filter-icon',
                         filterInput: {
                             className: 'p-tree-filter p-inputtext p-component',
                             onKeyDown: onFilterInputKeyDown,
@@ -445,7 +455,7 @@ export const Tree = React.memo(
             return <div className="p-tree-footer">{content}</div>;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Tree.defaultProps);
+        const otherProps = TreeBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tree p-component', props.className, {
             'p-tree-selectable': props.selectionMode,
@@ -469,47 +479,3 @@ export const Tree = React.memo(
 );
 
 Tree.displayName = 'Tree';
-Tree.defaultProps = {
-    __TYPE: 'Tree',
-    id: null,
-    value: null,
-    disabled: false,
-    selectionMode: null,
-    selectionKeys: null,
-    onSelectionChange: null,
-    contextMenuSelectionKey: null,
-    onContextMenuSelectionChange: null,
-    expandedKeys: null,
-    style: null,
-    className: null,
-    contentStyle: null,
-    contentClassName: null,
-    metaKeySelection: true,
-    propagateSelectionUp: true,
-    propagateSelectionDown: true,
-    loading: false,
-    loadingIcon: 'pi pi-spinner',
-    dragdropScope: null,
-    header: null,
-    footer: null,
-    showHeader: true,
-    filter: false,
-    filterValue: null,
-    filterBy: 'label',
-    filterMode: 'lenient',
-    filterPlaceholder: null,
-    filterLocale: undefined,
-    filterTemplate: null,
-    nodeTemplate: null,
-    togglerTemplate: null,
-    onSelect: null,
-    onUnselect: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    onDragDrop: null,
-    onContextMenu: null,
-    onFilterValueChange: null,
-    onNodeClick: null,
-    onNodeDoubleClick: null
-};

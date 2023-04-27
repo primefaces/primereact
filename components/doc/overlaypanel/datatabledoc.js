@@ -15,7 +15,7 @@ export function DataTableDoc(props) {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -49,7 +49,7 @@ export function DataTableDoc(props) {
     };
 
     const imageBody = (rowData) => {
-        return <img src={`${contextPath}/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
+        return <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="w-4rem shadow-1" />;
     };
 
     const priceBody = (rowData) => {
@@ -85,7 +85,7 @@ export default function DataTableDemo() {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -94,7 +94,7 @@ export default function DataTableDemo() {
             <span className="text-600">{selectedProduct.category}</span>
         </div>
     );
-    
+
     const op = useRef(null);
     const toast = useRef(null);
     const isMounted = useRef(false);
@@ -120,7 +120,7 @@ export default function DataTableDemo() {
     };
 
     const imageBody = (rowData) => {
-        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData) => {
@@ -149,13 +149,13 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
-import { DataTable, DataTableSelectionChangeParams } from 'primereact/datatable';
+import { DataTable, DataTableSelectionChangeEvent } from 'primereact/datatable';
 import { ProductService } from './service/ProductService';
 
 export default function DataTableDemo() {
     const [products, setProducts] = useState<Product[]>(null);
     const [selectedProduct, setSelectedProduct] = useState<Product>(null);
-    
+
     const op = useRef<OverlayPanel>(null);
     const toast = useRef<Toast>(null);
     const isMounted = useRef(false);
@@ -163,7 +163,7 @@ export default function DataTableDemo() {
     const selectedProductContent = selectedProduct && (
         <div className="p-5 surface-card shadow-2 border-round">
             <div className="relative">
-                <img src={'https://www.primereact.org/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/' + selectedProduct.image} alt={selectedProduct.name}></img>
             </div>
             <div className="flex align-items-center justify-content-between mt-3 mb-2">
                 <span className="text-900 font-medium text-xl">{selectedProduct.name}</span>
@@ -189,12 +189,12 @@ export default function DataTableDemo() {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
-    const onProductSelect = (e: DataTableSelectionChangeParams) => {
+    const onProductSelect = (e: DataTableSelectionChangeEvent) => {
         setSelectedProduct(e.value);
     };
 
     const imageBody = (rowData: Product) => {
-        return <img src={\`https://www.primereact.org/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="w-4rem shadow-1" />
     };
 
     const priceBody = (rowData: Product) => {
@@ -218,7 +218,7 @@ export default function DataTableDemo() {
 }
         `,
         data: `
-/* ProductService */        
+/* ProductService */
 {
     id: '1000',
     code: 'f230fh0g3',

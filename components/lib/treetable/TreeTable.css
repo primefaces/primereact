@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.p-treetable > .p-treetable-wrapper {
+    overflow: auto;
+}
+
 .p-treetable table {
     border-collapse: collapse;
     width: 100%;
@@ -11,14 +15,6 @@
 .p-treetable .p-sortable-column {
     cursor: pointer;
     user-select: none;
-}
-
-.p-treetable-auto-layout > .p-treetable-wrapper {
-    overflow-x: auto;
-}
-
-.p-treetable-auto-layout > .p-treetable-wrapper > table {
-    table-layout: auto;
 }
 
 .p-treetable-selectable .p-treetable-tbody > tr {
@@ -71,10 +67,10 @@
     top: 0;
     right: 0;
     margin: 0;
-    width: .5rem;
+    width: 0.5rem;
     height: 100%;
     padding: 0px;
-    cursor:col-resize;
+    cursor: col-resize;
     border: 1px solid transparent;
 }
 
@@ -128,5 +124,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    z-index: 2;
 }

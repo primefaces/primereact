@@ -4,12 +4,16 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
+import { TimesIcon } from '../icons/times';
 
 export const Galleria = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = GalleriaBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [slideShowActiveState, setSlideShowActiveState] = React.useState(false);
@@ -133,7 +137,7 @@ export const Galleria = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Galleria.defaultProps);
+            const otherProps = GalleriaBase.getOtherProps(props);
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
             const galleriaClassName = classNames(
@@ -150,9 +154,13 @@ export const Galleria = React.memo(
                 indicatorPosClassName
             );
 
-            const closeIcon = props.fullScreen && (
+            const iconProps = { className: 'p-galleria-close-icon', 'aria-hidden': true };
+            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
+            const closeButton = props.fullScreen && (
                 <button type="button" className="p-galleria-close p-link" aria-label={localeOption('close')} onClick={hide}>
-                    <span className="p-galleria-close-icon pi pi-times" aria-hidden="true"></span>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
@@ -161,7 +169,7 @@ export const Galleria = React.memo(
             const footer = createFooter();
             const element = (
                 <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
-                    {closeIcon}
+                    {closeButton}
                     {header}
                     <div className="p-galleria-content">
                         <GalleriaItem
@@ -173,6 +181,8 @@ export const Galleria = React.memo(
                             circular={props.circular}
                             caption={props.caption}
                             showIndicators={props.showIndicators}
+                            itemPrevIcon={props.itemPrevIcon}
+                            itemNextIcon={props.itemNextIcon}
                             changeItemOnIndicatorHover={props.changeItemOnIndicatorHover}
                             indicator={props.indicator}
                             showItemNavigators={props.showItemNavigators}
@@ -189,6 +199,8 @@ export const Galleria = React.memo(
                                 onActiveItemChange={onActiveItemChange}
                                 itemTemplate={props.thumbnail}
                                 numVisible={numVisibleState}
+                                nextThumbnailIcon={props.nextThumbnailIcon}
+                                prevThumbnailIcon={props.prevThumbnailIcon}
                                 responsiveOptions={props.responsiveOptions}
                                 circular={props.circular}
                                 isVertical={isVertical}
@@ -246,36 +258,3 @@ export const Galleria = React.memo(
 );
 
 Galleria.displayName = 'Galleria';
-Galleria.defaultProps = {
-    __TYPE: 'Galleria',
-    id: null,
-    value: null,
-    activeIndex: 0,
-    fullScreen: false,
-    item: null,
-    thumbnail: null,
-    indicator: null,
-    caption: null,
-    className: null,
-    style: null,
-    header: null,
-    footer: null,
-    numVisible: 3,
-    responsiveOptions: null,
-    showItemNavigators: false,
-    showThumbnailNavigators: true,
-    showItemNavigatorsOnHover: false,
-    changeItemOnIndicatorHover: false,
-    circular: false,
-    autoPlay: false,
-    transitionInterval: 4000,
-    showThumbnails: true,
-    thumbnailsPosition: 'bottom',
-    verticalThumbnailViewPortHeight: '300px',
-    showIndicators: false,
-    showIndicatorsOnItem: false,
-    indicatorsPosition: 'bottom',
-    baseZIndex: 0,
-    transitionOptions: null,
-    onItemChange: null
-};

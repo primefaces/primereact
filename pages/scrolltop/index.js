@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/scrolltop/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/scrolltop/basicdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
@@ -35,35 +32,10 @@ const ScrollTopDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'ScrollTop', pathname: '/modules/scrolltop.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ScrollTop Component</title>
-                <meta name="description" content="ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ScrollTop</h1>
-                    <p>ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.</p>
-                </div>
-                <DocActions github="/scrolltop" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ScrollTop Component" header="ScrollTop" description="ScrollTop gets displayed when it gets into viewport and used to navigate back to the top of the page." componentDocs={docs} apiDocs={['ScrollTop']} />;
 };
 
 export default ScrollTopDemo;

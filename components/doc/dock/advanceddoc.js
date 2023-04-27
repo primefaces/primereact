@@ -26,46 +26,46 @@ export function AdvancedDoc(props) {
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={'images/dock/finder.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/finder.svg" width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={'images/dock/terminal.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/terminal.svg" width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={'images/dock/appstore.svg'} width="100%" />,
+            icon: () => <img alt="App Store" src="https://primefaces.org/cdn/primereact/images/dock/appstore.svg" width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={'images/dock/safari.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/safari.svg" width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={'images/dock/photos.svg'} width="100%" />,
+            icon: () => <img alt="Photos" src="https://primefaces.org/cdn/primereact/images/dock/photos.svg" width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={'images/dock/github.svg'} width="100%" />
+            icon: () => <img alt="Settings" src="https://primefaces.org/cdn/primereact/images/dock/github.svg" width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={'images/dock/trash.png'} width="100%" />,
+            icon: () => <img alt="trash" src="https://primefaces.org/cdn/primereact/images/dock/trash.png" width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -179,7 +179,7 @@ export function AdvancedDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -321,46 +321,46 @@ export default function AdvanceDemo() {
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={'https://www.primereact.org/images/dock/finder.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/finder.svg" width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={'https://www.primereact.org/images/dock/terminal.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/terminal.svg" width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={'https://www.primereact.org/images/dock/appstore.svg'} width="100%" />,
+            icon: () => <img alt="App Store" src="https://primefaces.org/cdn/primereact/images/dock/appstore.svg" width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={'https://www.primereact.org/images/dock/safari.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/safari.svg" width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={'https://www.primereact.org/images/dock/photos.svg'} width="100%" />,
+            icon: () => <img alt="Photos" src="https://primefaces.org/cdn/primereact/images/dock/photos.svg" width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={'https://www.primereact.org/images/dock/github.svg'} width="100%" />
+            icon: () => <img alt="Settings" src="https://primefaces.org/cdn/primereact/images/dock/github.svg" width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={'https://www.primereact.org/images/dock/trash.png'} width="100%" />,
+            icon: () => <img alt="trash" src="https://primefaces.org/cdn/primereact/images/dock/trash.png" width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -474,7 +474,7 @@ export default function AdvanceDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -620,46 +620,46 @@ export default function AdvanceDemo() {
     const dockItems = [
         {
             label: 'Finder',
-            icon: () => <img alt="Finder" src={'https://www.primereact.org/images/dock/finder.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/finder.svg" width="100%" />,
             command: () => {
                 setDisplayFinder(true);
             }
         },
         {
             label: 'Terminal',
-            icon: () => <img alt="Finder" src={'https://www.primereact.org/images/dock/terminal.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/terminal.svg" width="100%" />,
             command: () => {
                 setDisplayTerminal(true);
             }
         },
         {
             label: 'App Store',
-            icon: () => <img alt="App Store" src={'https://www.primereact.org/images/dock/appstore.svg'} width="100%" />,
+            icon: () => <img alt="App Store" src="https://primefaces.org/cdn/primereact/images/dock/appstore.svg" width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'error', summary: 'An unexpected error occurred while signing in.', detail: 'UNTRUSTED_CERT_TITLE' });
             }
         },
         {
             label: 'Safari',
-            icon: () => <img alt="Finder" src={'https://www.primereact.org/images/dock/safari.svg'} width="100%" />,
+            icon: () => <img alt="Finder" src="https://primefaces.org/cdn/primereact/images/dock/safari.svg" width="100%" />,
             command: () => {
                 toast2.current.show({ severity: 'warn', summary: 'Safari has stopped working' });
             }
         },
         {
             label: 'Photos',
-            icon: () => <img alt="Photos" src={'https://www.primereact.org/images/dock/photos.svg'} width="100%" />,
+            icon: () => <img alt="Photos" src="https://primefaces.org/cdn/primereact/images/dock/photos.svg" width="100%" />,
             command: () => {
                 galleria.current.show();
             }
         },
         {
             label: 'GitHub',
-            icon: () => <img alt="Settings" src={'https://www.primereact.org/images/dock/github.svg'} width="100%" />
+            icon: () => <img alt="Settings" src="https://primefaces.org/cdn/primereact/images/dock/github.svg" width="100%" />
         },
         {
             label: 'Trash',
-            icon: () => <img alt="trash" src={'https://www.primereact.org/images/dock/trash.png'} width="100%" />,
+            icon: () => <img alt="trash" src="https://primefaces.org/cdn/primereact/images/dock/trash.png" width="100%" />,
             command: () => {
                 toast.current.show({ severity: 'info', summary: 'Empty Trash' });
             }
@@ -773,7 +773,7 @@ export default function AdvanceDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -898,7 +898,7 @@ export default function AdvanceDemo() {
     width: 100%;
     height: 450px;
     position: relative;
-    background-image: url('https://www.primereact.org/images/dock/window.jpg');
+    background-image: url('https://primefaces.org/cdn/primereact/images/dock/window.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -1003,8 +1003,8 @@ export default function AdvanceDemo() {
 
 /* PhotoService */
 {
-    itemImageSrc: 'https://www.primereact.org/images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'https://www.primereact.org/images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },
@@ -1021,7 +1021,7 @@ export default function AdvanceDemo() {
             <div className="card">
                 <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
                 <Menubar model={menubarItems} start={start} end={end} />
-                <div className="dock-window dock-advanced" style={{ backgroundImage: 'url(images/dock/window.jpg)' }}>
+                <div className="dock-window dock-advanced" style={{ backgroundImage: 'url(/images/dock/window.jpg)' }}>
                     <Toast ref={toast} />
                     <Toast ref={toast2} position="top-center" />
 

@@ -1,9 +1,5 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/confirmdialog/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/confirmdialog/basicdoc';
 import { DeclarativeDoc } from '../../components/doc/confirmdialog/declarativedoc';
 import { ImportDoc } from '../../components/doc/confirmdialog/importdoc';
@@ -42,34 +38,14 @@ const ConfirmDialogDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'ConfirmDialog', pathname: '/modules/confirmdialog.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Confirmation Dialog Component</title>
-                <meta name="description" content="ConfirmDialog is an easy to use and customizable Confirmation API using a dialog" />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ConfirmDialog</h1>
-                    <p>ConfirmDialog is an easy to use and customizable Confirmation API using a dialog.</p>
-                </div>
-                <DocActions github="/confirmdialog" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-                <ConfirmDialog />
-            </div>
-        </div>
+        <>
+            <DocComponent title="React Confirmation Dialog Component" header="ConfirmDialog" description="ConfirmDialog is an easy to use and customizable Confirmation API using a dialog." componentDocs={docs} apiDocs={['ConfirmDialog']} />
+            <ConfirmDialog />
+        </>
     );
 };
 

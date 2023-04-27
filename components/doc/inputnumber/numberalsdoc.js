@@ -27,7 +27,7 @@ export default function NumeralsDemo() {
     const [value4, setValue4] = useState(50);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="integeronly" className="font-bold block mb-2">Integer Only</label>
                 <InputNumber inputId="integeronly" value={value1} onValueChange={(e) => setValue1(e.value)} />
@@ -59,7 +59,7 @@ export default function NumeralsDemo() {
     const [value4, setValue4] = useState<number>(50);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="integeronly" className="font-bold block mb-2">Integer Only</label>
                 <InputNumber inputId="integeronly" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} />
@@ -89,7 +89,7 @@ export default function NumeralsDemo() {
                     InputNumber is used as a controlled input with <i>value</i> and <i>onValueChange</i> properties.
                 </p>
             </DocSectionText>
-            <div class="card flex flex-wrap gap-3 p-fluid">
+            <div className="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
                     <label htmlFor="integeronly" className="font-bold block mb-2">
                         Integer Only

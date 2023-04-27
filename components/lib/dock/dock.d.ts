@@ -2,7 +2,7 @@
  *
  * Dock is a navigation component consisting of menuitems.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dock/)
+ * [Live Demo](https://www.primereact.org/dock/)
  *
  * @module dock
  *
@@ -13,7 +13,6 @@ import { MenuItem } from '../menuitem';
 /**
  * Custom header template
  * @see {@link DockProps.header}
- * @group Misc
  */
 interface DockHeaderTemplateOptions {
     /**
@@ -26,7 +25,6 @@ interface DockHeaderTemplateOptions {
  * Custom footer template
  * @see {@link DockProps.footer}
  * @extends {DockHeaderTemplateOptions}
- * @group Misc
  */
 interface DockFooterTemplateOptions extends DockHeaderTemplateOptions {}
 
@@ -68,9 +66,9 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  *
  * _Dock is a navigation component consisting of menuitems._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dock/)
+ * [Live Demo](https://www.primereact.org/dock/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

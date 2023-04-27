@@ -2,7 +2,7 @@
  *
  * TabView is a container component to group content with tabs.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tabview/)
+ * [Live Demo](https://www.primereact.org/tabview/)
  *
  * Helper Components:
  *
@@ -12,10 +12,10 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom Tabpanel header template options
- * @group Misc
  */
 interface TabPanelHeaderTemplateOptions {
     /**
@@ -86,11 +86,23 @@ export interface TabPanelProps {
     /**
      * Icons can be placed at left of a header.
      */
-    leftIcon?: string | undefined;
+    leftIcon?: IconType<TabPanel> | undefined;
     /**
      * Icons can be placed at right of a header.
      */
-    rightIcon?: string | undefined;
+    rightIcon?: IconType<TabPanel> | undefined;
+    /**
+     * Previous button of the tab header.
+     */
+    prevButton?: IconType<TabPanel> | undefined;
+    /**
+     * Next button of the tab header.
+     */
+    nextButton?: IconType<TabPanel> | undefined;
+    /**
+     * Close button of the tab header.
+     */
+    closeIcon?: IconType<TabPanel> | undefined;
     /**
      * Whether the tab is disabled.
      * @defaultValue false
@@ -230,9 +242,9 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _TabView is a container component to group content with tabs._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tabview/)
+ * [Live Demo](https://www.primereact.org/tabview/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  *

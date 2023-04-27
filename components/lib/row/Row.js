@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { ObjectUtils } from '../utils/Utils';
+import { RowBase } from './RowBase';
 
-export const Row = (props) => {
-    const otherProps = ObjectUtils.findDiffKeys(props, Row.defaultProps);
+export const Row = (inProps) => {
+    const props = RowBase.getProps(inProps);
+    const otherProps = RowBase.getOtherProps(props);
 
     return (
         <tr className={props.className} style={props.style} {...otherProps}>
@@ -12,8 +13,3 @@ export const Row = (props) => {
 };
 
 Row.displayName = 'Row';
-Row.defaultProps = {
-    __TYPE: 'Row',
-    style: null,
-    className: null
-};

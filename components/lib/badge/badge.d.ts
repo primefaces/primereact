@@ -2,7 +2,7 @@
  *
  * Badge represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/badge)
+ * [Live Demo](https://www.primereact.org/badge)
  *
  * @module badge
  *
@@ -41,9 +41,9 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  *
  * _Badge represents people using icons, labels and images._
  *
- * [Live Demo](https://www.primefaces.org/primereact/badge/)
+ * [Live Demo](https://www.primereact.org/badge/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

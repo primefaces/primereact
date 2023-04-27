@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/datascroller/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
 import { ImportDoc } from '../../components/doc/datascroller/importdoc';
@@ -40,35 +37,10 @@ const DataScrollerDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'DataScroller', pathname: '/modules/datascroller.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React DataScroller Component</title>
-                <meta name="description" content="DataScroller displays data with on demand loading using scroll." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataScroller</h1>
-                    <p>DataScroller displays data with on demand loading using scroll.</p>
-                </div>
-
-                <DocActions github="/datascroller" />
-            </div>
-
-            <div className="content-section doc datascroller-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React DataScroller Component" header="DataScroller" description="DataScroller displays data with on demand loading using scroll." componentDocs={docs} apiDocs={['DataScroller']} />;
 };
 
 export default DataScrollerDemo;

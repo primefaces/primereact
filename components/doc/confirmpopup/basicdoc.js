@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
-import { ConfirmPopup, confirmPopup } from '../../lib/confirmpopup/ConfirmPopup';
+import { confirmPopup } from '../../lib/confirmpopup/ConfirmPopup';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -48,7 +48,7 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React, { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
 
 export default function BasicDemo() {
@@ -155,7 +155,6 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <Toast ref={toast} />
-            <ConfirmPopup />
             <div className="card flex flex-wrap gap-2 justify-content-center">
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>

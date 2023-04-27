@@ -2,7 +2,7 @@
  *
  * SplitButton groups a set of commands in an overlay with a default command.
  *
- * [Live Demo](https://www.primefaces.org/primereact/splitbutton/)
+ * [Live Demo](https://www.primereact.org/splitbutton/)
  *
  * @module splitbutton
  *
@@ -26,6 +26,34 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * Name of the icon.
      */
     icon?: IconType<SplitButtonProps> | undefined;
+    /**
+     * Add a textual class to the button without a background initially.
+     * @defaultValue false
+     */
+    text?: boolean | undefined;
+    /**
+     * Add a circular border radius to the button.
+     * @defaultValue false
+     */
+    rounded?: boolean | undefined;
+    /**
+     * Add a shadow to indicate elevation.
+     * @defaultValue false
+     */
+    raised?: boolean | undefined;
+    /**
+     * Add a border class without a background initially.
+     * @defaultValue false
+     */
+    outlined?: boolean | undefined;
+    /**
+     * Defines the style of the button, valid values are "secondary", "success", "info", "warning", "danger".
+     */
+    severity?: 'secondary' | 'success' | 'info' | 'warning' | 'danger' | undefined;
+    /**
+     * Defines the size of the button, valid values are "small" and "large".
+     */
+    size?: 'small' | 'large' | undefined;
     /**
      * Display loading icon of the button
      * @defaultValue false
@@ -95,8 +123,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Name of the dropdown icon or JSX.Element for dropdown icon.
      */
     dropdownIcon?: IconType<SplitButtonProps> | undefined;
     /**
@@ -124,9 +151,9 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _SplitButton groups a set of commands in an overlay with a default command._
  *
- * [Live Demo](https://www.primefaces.org/primereact/splitbutton/)
+ * [Live Demo](https://www.primereact.org/splitbutton/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

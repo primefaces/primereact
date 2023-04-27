@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tag/basicdoc';
 import { IconDoc } from '../../components/doc/tag/icondoc';
@@ -53,33 +50,10 @@ const TerminalDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Tag', pathname: '/modules/tag.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Tag Component</title>
-                <meta name="description" content="Tag component is used to categorize content." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Tag</h1>
-                    <p>Tag component is used to categorize content.</p>
-                </div>
-                <DocActions github="/tag" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} />;
 };
 
 export default TerminalDemo;

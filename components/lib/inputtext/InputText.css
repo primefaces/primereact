@@ -43,13 +43,14 @@
     position: absolute;
     pointer-events: none;
     top: 50%;
-    margin-top: -.5rem;
+    margin-top: -0.5rem;
     transition-property: all;
     transition-timing-function: ease;
     line-height: 1;
 }
 
-.p-float-label textarea ~ label {
+.p-float-label textarea ~ label,
+.p-float-label .p-mention ~ label {
     top: 1rem;
 }
 
@@ -59,8 +60,9 @@
 .p-float-label textarea:focus ~ label,
 .p-float-label textarea.p-filled ~ label,
 .p-float-label .p-inputwrapper-focus ~ label,
-.p-float-label .p-inputwrapper-filled ~ label {
-    top: -.75rem;
+.p-float-label .p-inputwrapper-filled ~ label,
+.p-float-label .p-tooltip-target-wrapper ~ label {
+    top: -0.75rem;
     font-size: 12px;
 }
 
@@ -94,7 +96,7 @@
 .p-input-icon-right > .p-input-suffix {
     position: absolute;
     top: 50%;
-    margin-top: -.5rem;
+    margin-top: -0.5rem;
 }
 
 .p-fluid .p-input-icon-left,

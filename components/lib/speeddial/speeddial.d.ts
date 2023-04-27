@@ -2,7 +2,7 @@
  *
  * When pressed, a floating action button can display multiple primary actions that can be performed on a page.
  *
- * [Live Demo](https://www.primefaces.org/primereact/speeddial/)
+ * [Live Demo](https://www.primereact.org/speeddial/)
  *
  * @module speeddial
  *
@@ -12,7 +12,6 @@ import { MenuItem } from '../menuitem';
 import { IconType } from '../utils';
 
 /**
- * @group Misc
  */
 interface SpeedDialButtonOptions {
     /**
@@ -113,13 +112,12 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     maskClassName?: string | undefined;
     /**
      * Show icon of the button element.
-     * @defaultValue pi pi-plus
      */
-    showIcon?: IconType<SpeedDialProps>;
+    showIcon?: IconType<SpeedDialProps> | undefined;
     /**
      * Hide icon of the button element.
      */
-    hideIcon?: IconType<SpeedDialProps>;
+    hideIcon?: IconType<SpeedDialProps> | undefined;
     /**
      * Defined to rotate showIcon when hideIcon is not present.
      * @defaultValue true
@@ -155,9 +153,9 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _When pressed, a floating action button can display multiple primary actions that can be performed on a page._
  *
- * [Live Demo](https://www.primefaces.org/primereact/speeddial/)
+ * [Live Demo](https://www.primereact.org/speeddial/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

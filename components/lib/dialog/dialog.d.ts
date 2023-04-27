@@ -2,17 +2,17 @@
  *
  * Dialog is a container to display content in an overlay window.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dialog)
+ * [Live Demo](https://www.primereact.org/dialog)
  *
  * @module dialog
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Dialog break options
- * @group Misc
  */
 interface DialogBreakpoints {
     /**
@@ -121,6 +121,10 @@ export interface DialogProps {
      */
     headerClassName?: string | undefined;
     /**
+     * Icon to display in the dialog close button.
+     */
+    closeIcon?: IconType<DialogProps> | undefined;
+    /**
      * Style of the header section.
      */
     headerStyle?: React.CSSProperties | undefined;
@@ -190,6 +194,14 @@ export interface DialogProps {
      * @defaultValue true
      */
     showHeader?: boolean | undefined;
+    /**
+     * Icon to display in the dialog maximize button when dialog is not maximized.
+     */
+    maximizeIcon?: IconType<DialogProps> | undefined;
+    /**
+     * Icon to display in the dialog maximize button when dialog is maximized.
+     */
+    minimizeIcon?: IconType<DialogProps> | undefined;
     /**
      * Inline style of the component.
      */
@@ -263,9 +275,9 @@ export interface DialogProps {
  *
  * _Dialog is a container to display content in an overlay window._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dialog/)
+ * [Live Demo](https://www.primereact.org/dialog/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

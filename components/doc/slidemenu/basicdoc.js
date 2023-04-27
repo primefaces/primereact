@@ -110,7 +110,7 @@ export function BasicDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -250,7 +250,7 @@ export default function BasicDemo() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -394,7 +394,7 @@ export default function BasicDemo() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {

@@ -1,14 +1,22 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { FirstPageLinkBase } from './PaginatorBase';
+import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
 
-export const FirstPageLink = React.memo((props) => {
+export const FirstPageLink = React.memo((inProps) => {
+    const props = FirstPageLinkBase.getProps(inProps);
+
     const className = classNames('p-paginator-first p-paginator-element p-link', { 'p-disabled': props.disabled });
-    const iconClassName = 'p-paginator-icon pi pi-angle-double-left';
+
+    const iconClassName = 'p-paginator-icon';
+    const icon = props.firstPageLinkIcon || <AngleDoubleLeftIcon className={iconClassName} />;
+    const firstPageLinkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
     const element = (
         <button type="button" className={className} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('firstPageLabel')}>
-            <span className={iconClassName}></span>
+            {firstPageLinkIcon}
             <Ripple />
         </button>
     );
@@ -30,9 +38,3 @@ export const FirstPageLink = React.memo((props) => {
 });
 
 FirstPageLink.displayName = 'FirstPageLink';
-FirstPageLink.defaultProps = {
-    __TYPE: 'FirstPageLink',
-    disabled: false,
-    onClick: null,
-    template: null
-};

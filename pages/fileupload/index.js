@@ -1,7 +1,5 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/fileupload/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
 import { AutoDoc } from '../../components/doc/fileupload/autodoc';
 import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
@@ -42,38 +40,26 @@ const FileUploadDemo = () => {
             label: 'Custom Upload',
             component: CustomUploadDoc
         },
-
         {
             id: 'style',
             label: 'Style',
             component: StyleDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'FileUpload', pathname: '/modules/fileupload.html' }]
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Upload Component</title>
-                <meta name="description" content="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>FileUpload</h1>
-                    <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
-                </div>
-                <DocActions github="/fileupload" />
-            </div>
-
-            <div className="content-section doc dropdown-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Upload Component"
+            header="FileUpload"
+            description="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations."
+            componentDocs={docs}
+            apiDocs={['FileUpload']}
+        />
     );
 };
 

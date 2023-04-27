@@ -1,10 +1,10 @@
-import { Card } from '../../lib/card/Card';
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
+import { Card } from '../../lib/card/Card';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AdvancedDoc(props) {
-    const header = <img alt="Card" src="images/usercard.png" />;
+    const header = <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />;
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button label="Save" icon="pi pi-check" />
@@ -27,7 +27,7 @@ import { Button } from 'primereact/button';
 
 export default function AdvancedDemo() {
     const header = (
-        <img alt="Card" src="https://www.primereact.org/images/usercard.png" />
+        <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
     );
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
@@ -55,7 +55,7 @@ import { Button } from 'primereact/button';
 
 export default function AdvancedDemo() {
     const header = (
-        <img alt="Card" src="https://www.primereact.org/images/usercard.png" />
+        <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
     );
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">

@@ -6,6 +6,7 @@ import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ConfirmPopupBase } from './ConfirmPopupBase';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -23,7 +24,9 @@ export const confirmPopup = (props = {}) => {
 };
 
 export const ConfirmPopup = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ConfirmPopupBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const overlayRef = React.useRef(null);
@@ -240,7 +243,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopup.defaultProps);
+            const otherProps = ConfirmPopupBase.getOtherProps(props);
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
@@ -276,27 +279,3 @@ export const ConfirmPopup = React.memo(
 );
 
 ConfirmPopup.displayName = 'ConfirmPopup';
-ConfirmPopup.defaultProps = {
-    __TYPE: 'ConfirmPopup',
-    tagKey: undefined,
-    target: null,
-    visible: false,
-    message: null,
-    rejectLabel: null,
-    acceptLabel: null,
-    icon: null,
-    rejectIcon: null,
-    acceptIcon: null,
-    rejectClassName: null,
-    acceptClassName: null,
-    className: null,
-    style: null,
-    appendTo: null,
-    dismissable: true,
-    footer: null,
-    onShow: null,
-    onHide: null,
-    accept: null,
-    reject: null,
-    transitionOptions: null
-};

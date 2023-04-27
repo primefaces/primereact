@@ -1,30 +1,38 @@
+import { Button } from '../../lib/button/Button';
 import { Divider } from '../../lib/divider/Divider';
 import { InputText } from '../../lib/inputtext/InputText';
-import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function LoginDoc(props) {
     const code = {
         basic: `
 <div className="flex flex-column md:flex-row">
-    <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-        <div className="flex align-items-center gap-2">
-            <label htmlFor="username">Username</label>
-            <InputText id="username" type="text" className="w-full" />
+    <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
+        <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label htmlFor="username" className="w-6rem">
+                Username
+            </label>
+            <InputText id="username" type="text" />
         </div>
-        <div className="flex align-items-center gap-2">
-            <label htmlFor="password">Password</label>
-            <InputText id="password" type="password" className="w-full" />
+        <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label htmlFor="password" className="w-6rem">
+                Password
+            </label>
+            <InputText id="password" type="password" />
         </div>
-        <Button label="Login" icon="pi pi-user" className="w-10rem"></Button>
+        <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
     </div>
     <div className="w-full md:w-2">
-        <Divider layout="vertical" className="hidden md:flex"><b>OR</b></Divider>
-        <Divider layout="horizontal" className="flex md:hidden" align="center"><b>OR</b></Divider>
+        <Divider layout="vertical" className="hidden md:flex">
+            <b>OR</b>
+        </Divider>
+        <Divider layout="horizontal" className="flex md:hidden" align="center">
+            <b>OR</b>
+        </Divider>
     </div>
     <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
-        <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success w-10rem"></Button>
+        <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
     </div>
 </div>
         `,
@@ -38,23 +46,31 @@ export default function LoginDemo() {
     return (
         <div className="card">
             <div className="flex flex-column md:flex-row">
-                <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-                    <div className="flex align-items-center gap-2">
-                        <label htmlFor="username">Username</label>
-                        <InputText id="username" type="text" className="w-full" />
+                <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label htmlFor="username" className="w-6rem">
+                            Username
+                        </label>
+                        <InputText id="username" type="text" />
                     </div>
-                    <div className="flex align-items-center gap-2">
-                        <label htmlFor="password">Password</label>
-                        <InputText id="password" type="password" className="w-full" />
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label htmlFor="password" className="w-6rem">
+                            Password
+                        </label>
+                        <InputText id="password" type="password" />
                     </div>
-                    <Button label="Login" icon="pi pi-user" className="w-10rem"></Button>
+                    <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
                 </div>
                 <div className="w-full md:w-2">
-                    <Divider layout="vertical" className="hidden md:flex"><b>OR</b></Divider>
-                    <Divider layout="horizontal" className="flex md:hidden" align="center"><b>OR</b></Divider>
+                    <Divider layout="vertical" className="hidden md:flex">
+                        <b>OR</b>
+                    </Divider>
+                    <Divider layout="horizontal" className="flex md:hidden" align="center">
+                        <b>OR</b>
+                    </Divider>
                 </div>
                 <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
-                    <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success w-10rem"></Button>
+                    <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                 </div>
             </div>
         </div>
@@ -71,23 +87,31 @@ export default function LoginDemo() {
     return (
         <div className="card">
             <div className="flex flex-column md:flex-row">
-                <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-                    <div className="flex align-items-center gap-2">
-                        <label htmlFor="username">Username</label>
-                        <InputText id="username" type="text" className="w-full" />
+                <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label htmlFor="username" className="w-6rem">
+                            Username
+                        </label>
+                        <InputText id="username" type="text" />
                     </div>
-                    <div className="flex align-items-center gap-2">
-                        <label htmlFor="password">Password</label>
-                        <InputText id="password" type="password" className="w-full" />
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label htmlFor="password" className="w-6rem">
+                            Password
+                        </label>
+                        <InputText id="password" type="password" />
                     </div>
-                    <Button label="Login" icon="pi pi-user" className="w-10rem"></Button>
+                    <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
                 </div>
                 <div className="w-full md:w-2">
-                    <Divider layout="vertical" className="hidden md:flex"><b>OR</b></Divider>
-                    <Divider layout="horizontal" className="flex md:hidden" align="center"><b>OR</b></Divider>
+                    <Divider layout="vertical" className="hidden md:flex">
+                        <b>OR</b>
+                    </Divider>
+                    <Divider layout="horizontal" className="flex md:hidden" align="center">
+                        <b>OR</b>
+                    </Divider>
                 </div>
                 <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
-                    <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success w-10rem"></Button>
+                    <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                 </div>
             </div>
         </div>
@@ -103,16 +127,20 @@ export default function LoginDemo() {
             </DocSectionText>
             <div className="card">
                 <div className="flex flex-column md:flex-row">
-                    <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-                        <div className="flex align-items-center gap-2">
-                            <label htmlFor="username">Username</label>
-                            <InputText id="username" type="text" className="w-full" />
+                    <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
+                        <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                            <label htmlFor="username" className="w-6rem">
+                                Username
+                            </label>
+                            <InputText id="username" type="text" />
                         </div>
-                        <div className="flex align-items-center gap-2">
-                            <label htmlFor="password">Password</label>
-                            <InputText id="password" type="password" className="w-full" />
+                        <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                            <label htmlFor="password" className="w-6rem">
+                                Password
+                            </label>
+                            <InputText id="password" type="password" />
                         </div>
-                        <Button label="Login" icon="pi pi-user" className="w-10rem"></Button>
+                        <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
                     </div>
                     <div className="w-full md:w-2">
                         <Divider layout="vertical" className="hidden md:flex">
@@ -123,7 +151,7 @@ export default function LoginDemo() {
                         </Divider>
                     </div>
                     <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
-                        <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success w-10rem"></Button>
+                        <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
                     </div>
                 </div>
             </div>

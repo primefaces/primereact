@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
+import { OrganizationChartBase } from './OrganizationChartBase';
 import { OrganizationChartNode } from './OrganizationChartNode';
 
 export const OrganizationChart = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = OrganizationChartBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const root = props.value && props.value.length ? props.value[0] : null;
 
@@ -11,7 +14,7 @@ export const OrganizationChart = React.memo(
             if (props.selectionMode) {
                 const target = event.target;
 
-                if (node.selectable === false || !DomHandler.hasClass(target, 'p-node-toggler') || !DomHandler.hasClass(target, 'p-node-toggler-icon')) {
+                if (node.selectable === false || DomHandler.hasClass(target, 'p-node-toggler') || DomHandler.hasClass(target, 'p-node-toggler-icon')) {
                     return;
                 }
 
@@ -64,28 +67,15 @@ export const OrganizationChart = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, OrganizationChart.defaultProps);
+        const otherProps = OrganizationChartBase.getOtherProps(props);
         const className = classNames('p-organizationchart p-component', props.className);
 
         return (
             <div id={props.id} ref={elementRef} style={props.style} className={className} {...otherProps}>
-                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} />
+                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} togglerIcon={props.togglerIcon} />
             </div>
         );
     })
 );
 
 OrganizationChart.displayName = 'OrganizationChart';
-OrganizationChart.defaultProps = {
-    __TYPE: 'OrganizationChart',
-    id: null,
-    value: null,
-    style: null,
-    className: null,
-    selectionMode: null,
-    selection: null,
-    nodeTemplate: null,
-    onSelectionChange: null,
-    onNodeSelect: null,
-    onNodeUnselect: null
-};

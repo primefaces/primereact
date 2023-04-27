@@ -27,7 +27,7 @@ export default function PrefixSuffixDemo() {
     const [value4, setValue4] = useState(20);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="mile" className="font-bold block mb-2">Mile</label>
                 <InputNumber inputId="mile" value={value1} onValueChange={(e) => setValue1(e.value)} suffix=" mi" />
@@ -59,7 +59,7 @@ export default function PrefixSuffixDemo() {
     const [value4, setValue4] = useState<number>(20);
 
     return (
-        <div class="card flex flex-wrap gap-3 p-fluid">
+        <div className="card flex flex-wrap gap-3 p-fluid">
             <div className="flex-auto">
                 <label htmlFor="mile" className="font-bold block mb-2">Mile</label>
                 <InputNumber inputId="mile" value={value1} onValueChange={(e: InputNumberValueChangeEvent) => setValue1(e.value)} suffix=" mi" />
@@ -89,7 +89,7 @@ export default function PrefixSuffixDemo() {
                     Custom texts e.g. units can be placed before or after the input section with the <i>prefix</i> and <i>suffix</i> properties.
                 </p>
             </DocSectionText>
-            <div class="card flex flex-wrap gap-3 p-fluid">
+            <div className="card flex flex-wrap gap-3 p-fluid">
                 <div className="flex-auto">
                     <label htmlFor="mile" className="font-bold block mb-2">
                         Mile

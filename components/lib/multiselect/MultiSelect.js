@@ -3,11 +3,17 @@ import PrimeReact, { FilterService } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { TimesIcon } from '../icons/times';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const MultiSelect = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = MultiSelectBase.getProps(inProps);
+
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(props.inline);
@@ -486,7 +492,13 @@ export const MultiSelect = React.memo(
 
                     return value.map((val) => {
                         const label = getLabelByValue(val);
-                        const icon = !props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props });
+                        const icon =
+                            !props.disabled &&
+                            (props.removeIcon ? (
+                                IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props })
+                            ) : (
+                                <TimesCircleIcon className="p-multiselect-token-icon" onClick={(e) => removeChip(e, val)} />
+                            ));
 
                         return (
                             <div className="p-multiselect-token" key={label}>
@@ -557,8 +569,16 @@ export const MultiSelect = React.memo(
         });
 
         const createClearIcon = () => {
+            const iconClassName = 'p-multiselect-clear-icon';
+            const icon = props.clearIcon || <TimesIcon className={iconClassName} />;
+            const clearIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
             if (!empty && props.showClear && !props.disabled) {
-                return <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => updateModel(e, null)}></i>;
+                return (
+                    <i className={iconClassName} onClick={(e) => updateModel(e, null)}>
+                        {clearIcon}
+                    </i>
+                );
             }
 
             return null;
@@ -582,7 +602,7 @@ export const MultiSelect = React.memo(
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, MultiSelect.defaultProps);
+        const otherProps = MultiSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-multiselect p-component p-inputwrapper',
@@ -596,6 +616,10 @@ export const MultiSelect = React.memo(
             },
             props.className
         );
+
+        const dropdownIconClass = 'p-multiselect-trigger-icon p-c';
+        const dropdownIcon = <div className="p-multiselect-trigger">{props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { className: dropdownIconClass }, { props }) : <ChevronDownIcon className={dropdownIconClass} />}</div>;
+
         const label = !props.inline && createLabel();
         const clearIcon = !props.inline && createClearIcon();
 
@@ -623,7 +647,7 @@ export const MultiSelect = React.memo(
                         <>
                             {label}
                             {clearIcon}
-                            <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                            {dropdownIcon}
                         </>
                     )}
                     <MultiSelectPanel
@@ -664,67 +688,3 @@ export const MultiSelect = React.memo(
 );
 
 MultiSelect.displayName = 'MultiSelect';
-MultiSelect.defaultProps = {
-    __TYPE: 'MultiSelect',
-    appendTo: null,
-    ariaLabelledBy: null,
-    className: null,
-    dataKey: null,
-    disabled: false,
-    display: 'comma',
-    dropdownIcon: 'pi pi-chevron-down',
-    emptyFilterMessage: null,
-    filter: false,
-    filterBy: null,
-    filterLocale: undefined,
-    filterMatchMode: 'contains',
-    filterPlaceholder: null,
-    filterTemplate: null,
-    fixedPlaceholder: false,
-    flex: false,
-    id: null,
-    inline: false,
-    inputId: null,
-    inputRef: null,
-    itemClassName: null,
-    itemTemplate: null,
-    maxSelectedLabels: null,
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onFilter: null,
-    onFocus: null,
-    onHide: null,
-    onSelectAll: null,
-    onShow: null,
-    optionDisabled: null,
-    optionGroupChildren: null,
-    optionGroupLabel: null,
-    optionGroupTemplate: null,
-    optionLabel: null,
-    optionValue: null,
-    options: null,
-    overlayVisible: false,
-    panelClassName: null,
-    panelFooterTemplate: null,
-    panelHeaderTemplate: null,
-    panelStyle: null,
-    placeholder: null,
-    removeIcon: 'pi pi-times-circle',
-    resetFilterOnHide: false,
-    scrollHeight: '200px',
-    selectAll: false,
-    selectedItemTemplate: null,
-    selectedItemsLabel: '{0} items selected',
-    selectionLimit: null,
-    showClear: false,
-    showSelectAll: true,
-    style: null,
-    tabIndex: 0,
-    tooltip: null,
-    tooltipOptions: null,
-    transitionOptions: null,
-    useOptionAsValue: false,
-    value: null,
-    virtualScrollerOptions: null
-};

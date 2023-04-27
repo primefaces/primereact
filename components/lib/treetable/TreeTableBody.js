@@ -162,11 +162,12 @@ export const TreeTableBody = React.memo((props) => {
     const createRow = (node, index) => {
         return (
             <TreeTableRow
-                key={node.key || JSON.stringify(node.data)}
+                key={`${node.key || JSON.stringify(node.data)}_${index}`}
                 level={0}
                 rowIndex={index}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
+                checkboxIcon={props.checkboxIcon}
                 columns={props.columns}
                 expandedKeys={props.expandedKeys}
                 onToggle={props.onToggle}

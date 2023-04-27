@@ -20,29 +20,15 @@ export function TemplateDoc(props) {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
     };
 
-    const selectedCountriesTemplate = (option) => {
-        if (option) {
-            return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" />
-                    <div>{option.name}</div>
-                </div>
-            );
-        }
-
-        return 'Select Countries';
-    };
-
     const panelFooterTemplate = () => {
-        const selectedItems = selectedCountries;
-        const length = selectedItems ? selectedItems.length : 0;
+        const length = selectedCountries ? selectedCountries.length : 0;
 
         return (
             <div className="py-2 px-3">
@@ -53,14 +39,14 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" className="multiselect-custom" itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
+<MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" 
+    placeholder="Select Countries" itemTemplate={countryTemplate} panelFooterTemplate={panelFooterTemplate} className="w-full md:w-20rem" display="chip" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { MultiSelect } from 'primereact/multiselect';
-import './MultiSelectDemo.css';
 
-export default function TemplateDocs() {
+export default function TemplateDemo() {
     const [selectedCountries, setSelectedCountries] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
@@ -77,29 +63,15 @@ export default function TemplateDocs() {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item flex">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
     };
 
-    const selectedCountriesTemplate = (option) => {
-        if (option) {
-            return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
-                    <div>{option.name}</div>
-                </div>
-            );
-        }
-
-        return 'Select Countries';
-    };
-
     const panelFooterTemplate = () => {
-        const selectedItems = selectedCountries;
-        const length = selectedItems ? selectedItems.length : 0;
+        const length = selectedCountries ? selectedCountries.length : 0;
 
         return (
             <div className="py-2 px-3">
@@ -109,21 +81,25 @@ export default function TemplateDocs() {
     };
 
     return (
-        <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-            itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
+        <div className="card flex justify-content-center">
+            <MultiSelect value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" 
+                placeholder="Select Countries" itemTemplate={countryTemplate} panelFooterTemplate={panelFooterTemplate} className="w-full md:w-20rem" display="chip" />
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { MultiSelect, MultiSelectChangeParams } from 'primereact/multiselect';
-import './MultiSelectDemo.css';
+import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
 
-export default function TemplateDocs() {
-    const [selectedCountries, setSelectedCountries] = useState(null);
-    const countries = [
+interface Country {
+    name: string;
+    code: string;
+}
+
+export default function TemplateDemo() {
+    const [selectedCountries, setSelectedCountries] = useState<Country[] | null>(null);
+    const countries: Country[] = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
         { name: 'China', code: 'CN' },
@@ -138,29 +114,15 @@ export default function TemplateDocs() {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item flex">
-                <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()} h-1 w-1 mr-2\`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`mr-2 flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.name}</div>
             </div>
         );
     };
 
-    const selectedCountriesTemplate = (option) => {
-        if (option) {
-            return (
-                <div className="country-item country-item-value">
-                    <img alt={option.name} src="https://www.primereact.org/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} />
-                    <div>{option.name}</div>
-                </div>
-            );
-        }
-
-        return 'Select Countries';
-    };
-
     const panelFooterTemplate = () => {
-        const selectedItems = selectedCountries;
-        const length = selectedItems ? selectedItems.length : 0;
+        const length = selectedCountries ? selectedCountries.length : 0;
 
         return (
             <div className="py-2 px-3">
@@ -170,58 +132,33 @@ export default function TemplateDocs() {
     };
 
     return (
-        <div className="card flex justify-content-center multiselect-demo">
-            <MultiSelect value={selectedCountries} options={countries} onChange={(e : MultiSelectChangeParams) => setSelectedCountries(e.value)} optionLabel="name" placeholder="Select Countries" filter className="multiselect-custom"
-            itemTemplate={countryTemplate} selectedItemTemplate={selectedCountriesTemplate} panelFooterTemplate={panelFooterTemplate} />
+        <div className="card flex justify-content-center">
+            <MultiSelect value={selectedCountries} options={countries} onChange={(e: MultiSelectChangeEvent) => setSelectedCountries(e.value)} optionLabel="name" 
+                placeholder="Select Countries" itemTemplate={countryTemplate} panelFooterTemplate={panelFooterTemplate} className="w-full md:w-20rem" display="chip" />
         </div>
     );
 }
-        `,
-        extFiles: {
-            'MultiSelectDemo.css': `
-/* MultiSelectDemo.css */
-
-.multiselect-demo .p-multiselect {
-    min-width: 15rem;
-}
-
-.multiselect-demo .multiselect-custom .p-multiselect-label:not(.p-placeholder):not(.p-multiselect-items-label) {
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-}
-
-.multiselect-demo .multiselect-custom .country-item-value {
-    padding: .25rem .5rem;
-    border-radius: 3px;
-    display: inline-flex;
-    margin-right: .5rem;
-    background-color: var(--primary-color);
-    color: var(--primary-color-text);
-}
-
-.multiselect-demo .multiselect-custom .country-item-value img.flag {
-    width: 17px;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template of the panel header.</p>
+                <p>
+                    Available options and the selected options support templating with <i>itemTemplate</i> and <i>valueTemplate</i> properties respectively. In addition, header, footer and filter sections can be templated as well.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center multiselect-demo">
+            <div className="card flex justify-content-center">
                 <MultiSelect
                     value={selectedCountries}
                     options={countries}
                     onChange={(e) => setSelectedCountries(e.value)}
                     optionLabel="name"
                     placeholder="Select Countries"
-                    className="multiselect-custom"
                     itemTemplate={countryTemplate}
-                    selectedItemTemplate={selectedCountriesTemplate}
                     panelFooterTemplate={panelFooterTemplate}
+                    className="w-full md:w-20rem"
+                    display="chip"
                 />
             </div>
             <DocSectionCode code={code} />
