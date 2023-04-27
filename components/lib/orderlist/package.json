@@ -2,5 +2,6 @@
     "main": "./orderlist.cjs.js",
     "module": "./orderlist.esm.js",
     "unpkg": "./orderlist.min.js",
-    "types": "./orderlist.d.ts"
+    "types": "./orderlist.d.ts",
+    "sideEffects": false
 }

@@ -2,7 +2,7 @@
  *
  * TreeSelect is a form component to choose from hierarchical data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/treeselect/)
+ * [Live Demo](https://www.primereact.org/treeselect/)
  *
  * @module treeselect
  *
@@ -10,111 +10,75 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import TreeNode from '../treenode';
+import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
- * @todo Write the documentation.
+ * Custom panel header template options.
  */
 interface TreeSelectPanelHeaderTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Style class of the panel.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the filter of the panel.
      */
     filterElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the close of the panel.
      */
     closeElement: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * Style class of the panel close element.
      */
     closeElementClassName: string;
     /**
-     * @todo Write the documentation.
+     * Style class of the panel close icon.
      */
     closeIconClassName: string;
     /**
-     * @todo Write the documentation.
+     * Callback to invoke when the close button is clicked.
      */
     onCloseClick(): void;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the panel.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of the TreeSelect component.
      */
     props: TreeSelectProps;
 }
 
 /**
- * @todo Write the documentation.
- */
-interface TreeSelectChangeTargetOptions {
-    /**
-     * @todo Write the documentation.
-     */
-    name: string;
-    /**
-     * @todo Write the documentation.
-     */
-    id: string;
-    /**
-     * @todo Write the documentation.
-     */
-    value: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
-}
-
-/**
  * Custom change event.
  * @see {@link TreeSelectProps.onChange}
+ * @extends {FormEvent}
  * @event
  */
-interface TreeSelectChangeEvent {
-    /**
-     * Browser event
-     */
-    originalEvent: React.SyntheticEvent;
-    /**
-     * Selected node key(s).
-     */
-    value: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
-    /**
-     * @todo Write the documentation.
-     */
-    stopPropagation(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    preventDefault(): void;
-    /**
-     * @todo Write the documentation.
-     */
-    target: TreeSelectChangeTargetOptions;
-}
+interface TreeSelectChangeEvent extends FormEvent<string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[]> {}
 
 /**
- * @todo Write the documentation.
+ * Custom treeselect selection keys type
  */
 interface TreeSelectSelectionKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean | TreeSelectCheckboxSelectionKeyType;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom checkbox selection key type
  */
 interface TreeSelectCheckboxSelectionKeyType {
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is checked or not.
      */
     checked?: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is partially checked or not.
      */
     partialChecked?: boolean;
 }
@@ -136,11 +100,11 @@ interface TreeSelectEventNodeEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Custom expanded keys type.
  */
 interface TreeSelectExpandedKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean;
 }
@@ -178,15 +142,16 @@ interface TreeSelectFilterValueChangeEvent {
 }
 
 /**
- * @todo Write the documentation.
+ * Custom filter options.
  */
 interface TreeSelectFilterOptions {
     /**
-     * @todo Write the documentation.
+     * Used to filter options
+     * @param {KeyboardEvent} event - Browser event.
      */
     filter?: (event?: KeyboardEvent) => void;
     /**
-     * @todo Write the documentation.
+     * Used to reset the filtered options
      */
     reset?: () => void;
 }
@@ -215,6 +180,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     children?: React.ReactNode | undefined;
     /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<TreeSelectProps> | undefined;
+    /**
      * When present, it specifies that the component should be disabled.
      * @defaultValue false
      */
@@ -225,16 +194,15 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     display?: 'comma' | 'chip' | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
-    dropdownIcon?: string | undefined;
+    dropdownIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * Text to display when there is no data.
      */
     emptyMessage?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * An array of keys to represent the state of the treeselect expansion state in controlled mode.
      */
     expandedKeys?: TreeSelectExpandedKeysType | undefined;
     /**
@@ -247,6 +215,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @defaultValue label
      */
     filterBy?: string | undefined;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true
@@ -279,7 +251,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     inputId?: string | undefined;
     /**
-     * @todo Write the documentation.
+     * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
@@ -387,6 +359,14 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
 }
 
 /**
+ * **PrimeReact - TreeSelect**
+ *
+ * _TreeSelect is a form component to choose from hierarchical data._
+ *
+ * [Live Demo](https://www.primereact.org/treeselect/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class TreeSelect extends React.Component<TreeSelectProps, any> {

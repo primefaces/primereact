@@ -2,17 +2,17 @@
  *
  * Tree is used to display hierarchical data.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tree/)
+ * [Live Demo](https://www.primereact.org/tree/)
  *
  * @module tree
  *
  */
 import * as React from 'react';
 import TreeNode from '../treenode';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom tree header template options
- * @group Misc
  */
 interface TreeHeaderTemplateOptions {
     /**
@@ -43,7 +43,6 @@ interface TreeHeaderTemplateOptions {
 
 /**
  * Custom tree filter input options
- * @group Misc
  */
 interface TreeFilterInputOptions {
     /**
@@ -64,7 +63,6 @@ interface TreeFilterInputOptions {
 
 /**
  * Custom tree node template options
- * @group Misc
  */
 interface TreeNodeTemplateOptions {
     /**
@@ -92,7 +90,6 @@ interface TreeNodeTemplateOptions {
 
 /**
  * Custom tree toggler template options
- * @group Misc
  */
 interface TreeTogglerTemplateOptions {
     /**
@@ -124,7 +121,6 @@ interface TreeTogglerTemplateOptions {
 
 /**
  * Custom tree multiple selection keys
- * @group Misc
  */
 interface TreeMultipleSelectionKeys {
     /**
@@ -135,7 +131,6 @@ interface TreeMultipleSelectionKeys {
 
 /**
  * Custom tree checkbox selection keys
- * @group Misc
  */
 interface TreeCheckboxSelectionKeys {
     /**
@@ -146,7 +141,6 @@ interface TreeCheckboxSelectionKeys {
 
 /**
  * Custom tree checkbox selection type
- * @group Misc
  */
 interface TreeCheckboxSelectionKeyType {
     /**
@@ -161,7 +155,6 @@ interface TreeCheckboxSelectionKeyType {
 
 /**
  * Custom tree expanded keys type
- * @group Misc
  */
 interface TreeExpandedKeysType {
     /**
@@ -237,6 +230,10 @@ interface TreeDragDropEvent {
      */
     dragNode: TreeNode;
     /**
+     * The node that is being dropped on.
+     */
+    dropNode: TreeNode;
+    /**
      * The index of the drop.
      */
     dropIndex: number;
@@ -275,7 +272,6 @@ interface TreeNodeClickEvent {
 
 /**
  * Custom tree filter options
- * @group Misc
  */
 interface TreeFilterOptions {
     /**
@@ -369,9 +365,20 @@ export interface TreeProps {
     loading?: boolean | undefined;
     /**
      * Icon to display when tree is loading.
-     * @defaultValue pi pi-spin
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon to display in the checkbox.
+     */
+    checkboxIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon of an expanded tab.
+     */
+    collapseIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon of an collapsed tab.
+     */
+    expandIcon?: IconType<TreeProps> | undefined;
     /**
      * Unique key to enable dragdrop functionality.
      * @defaultValue false
@@ -399,6 +406,10 @@ export interface TreeProps {
      * @defaultValue false
      */
     filter?: boolean | undefined;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<TreeProps> | string;
     /**
      * When filtering is enabled, the value of input field.
      */
@@ -499,6 +510,14 @@ export interface TreeProps {
 }
 
 /**
+ * **PrimeReact - Tree**
+ *
+ * _Tree is used to display hierarchical data._
+ *
+ * [Live Demo](https://www.primereact.org/tree/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Tree extends React.Component<TreeProps, any> {

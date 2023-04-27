@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronUpIcon } from '../icons/chevronup';
 
 export const OrganizationChartNode = React.memo((props) => {
     const node = props.node;
@@ -25,7 +27,7 @@ export const OrganizationChartNode = React.memo((props) => {
                     node.children.map((child, index) => {
                         return (
                             <td key={index} colSpan="2">
-                                <OrganizationChartNode node={child} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={props.onNodeClick} isSelected={props.isSelected} />
+                                <OrganizationChartNode node={child} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={props.onNodeClick} isSelected={props.isSelected} togglerIcon={props.togglerIcon} />
                             </td>
                         );
                     })}
@@ -74,15 +76,22 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createToggler = () => {
         if (!leaf) {
-            const toggleIconClassName = classNames('p-node-toggler-icon', {
-                'pi pi-chevron-down': expandedState,
-                'pi pi-chevron-up': !expandedState
-            });
+            const iconClassName = 'p-node-toggler-icon';
+
+            let icon;
+
+            if (expandedState) {
+                icon = props.togglerIcon || <ChevronDownIcon className={iconClassName} />;
+            } else {
+                icon = props.togglerIcon || <ChevronUpIcon className={iconClassName} />;
+            }
+
+            const togglerIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 /* eslint-disable */
                 <a href="#" className="p-node-toggler" onClick={(e) => toggleNode(e, node)}>
-                    <i className={toggleIconClassName}></i>
+                    <i> {togglerIcon} </i>
                 </a>
                 /* eslint-enable */
             );
@@ -112,7 +121,7 @@ export const OrganizationChartNode = React.memo((props) => {
         return (
             <tr>
                 <td colSpan={colspan}>
-                    <div className={nodeClassName} onClick={(e) => onNodeClick(e, node)}>
+                    <div className={nodeClassName} style={node.style} onClick={(e) => onNodeClick(e, node)}>
                         {label}
                         {toggler}
                     </div>

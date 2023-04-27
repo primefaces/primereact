@@ -2,13 +2,13 @@
  *
  * Checkbox is an extension to standard checkbox element with skinning capabilities.
  *
- * [Live Demo](https://www.primefaces.org/primereact/checkbox/)
+ * [Live Demo](https://www.primereact.org/checkbox/)
  *
  * @module checkbox
  *
  */
 import * as React from 'react';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType } from '../utils';
 
@@ -49,7 +49,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Specifies whether a checkbox should be checked or not.
      * @defaultValue false
      */
-    checked?: boolean | undefined;
+    checked: boolean;
     /**
      * Value in checked state.
      * @defaultValue true
@@ -89,8 +89,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     tabIndex?: number | undefined;
     /**
-     * Icon class of the checkbox icon.
-     * @defaultValue pi pi-check
+     * Icon to display in checkbox.
      */
     icon?: IconType<CheckboxProps> | undefined;
     /**
@@ -125,6 +124,14 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
 }
 
 /**
+ * **PrimeReact - Checkbox**
+ *
+ * _Checkbox is an extension to standard checkbox element with skinning capabilities._
+ *
+ * [Live Demo](https://www.primereact.org/checkbox/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Checkbox extends React.Component<CheckboxProps, any> {

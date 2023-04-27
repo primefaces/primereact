@@ -1,24 +1,21 @@
-import Head from 'next/head';
 import React from 'react';
-import { ApiDoc } from '../../components/doc/autocomplete/apidoc';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
 import { DropdownDoc } from '../../components/doc/autocomplete/dropdowndoc';
-import { FloatlabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
+import { FloatLabelDoc } from '../../components/doc/autocomplete/floatlabeldoc';
 import { ForceSelectionDoc } from '../../components/doc/autocomplete/forceselectiondoc';
+import { FormikDoc } from '../../components/doc/autocomplete/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/autocomplete/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/autocomplete/groupdoc';
 import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
-import { InvalidStateDoc } from '../../components/doc/autocomplete/invalidstatedoc';
+import { InvalidDoc } from '../../components/doc/autocomplete/invaliddoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
+import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
-import { FormikDoc } from '../../components/doc/autocomplete/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/autocomplete/validation/hookformdoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const AutoCompleteDemo = () => {
     const docs = [
@@ -31,21 +28,6 @@ const AutoCompleteDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatlabelDoc
-        },
-        {
-            id: 'invalidstate',
-            label: 'Invalid State',
-            component: InvalidStateDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'dropdown',
@@ -83,9 +65,24 @@ const AutoCompleteDemo = () => {
             component: MultipleDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -108,33 +105,10 @@ const AutoCompleteDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React AutoComplete Component</title>
-                <meta name="description" content="AutoComplete is an input component that provides real-time suggestions when being typed." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>AutoComplete</h1>
-                    <p>AutoComplete is an input component that provides real-time suggestions when being typed.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React AutoComplete Component" header="AutoComplete" description="AutoComplete is an input component that provides real-time suggestions while being typed" componentDocs={docs} apiDocs={['AutoComplete']} />;
 };
 
 export default AutoCompleteDemo;

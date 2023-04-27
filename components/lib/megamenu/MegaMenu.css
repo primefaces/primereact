@@ -77,7 +77,6 @@
     margin-left: auto;
 }
 
-
 .p-megamenu-grid {
     display: flex;
 }
@@ -109,4 +108,12 @@
 
 .p-megamenu-col-12 {
     width: 100%;
+}
+
+.p-megamenu-button {
+    display: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }

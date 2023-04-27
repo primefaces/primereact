@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function RadarDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -11,7 +11,6 @@ export function RadarDoc(props) {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-
         const data = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
@@ -35,9 +34,6 @@ export function RadarDoc(props) {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             plugins: {
                 legend: {
@@ -55,18 +51,19 @@ export function RadarDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     const code = {
         basic: `
-<Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+<Chart type="radar" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function RadarDoc() {
+export default function RadarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -74,7 +71,6 @@ export default function RadarDoc() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-
         const data = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
@@ -98,9 +94,6 @@ export default function RadarDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             plugins: {
                 legend: {
@@ -118,12 +111,13 @@ export default function RadarDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+            <Chart type="radar" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -132,7 +126,7 @@ export default function RadarDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function RadarDoc() {
+export default function RadarDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -140,7 +134,6 @@ export default function RadarDoc() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-
         const data = {
             labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
             datasets: [
@@ -164,9 +157,6 @@ export default function RadarDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             plugins: {
                 legend: {
@@ -184,12 +174,13 @@ export default function RadarDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
     
     return (
         <div className="card flex justify-content-center">
-            <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+            <Chart type="radar" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -202,7 +193,7 @@ export default function RadarDoc() {
                 <p>A radar chart is a graphical method of displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables represented on axes starting from the same point.</p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Chart type="radar" data={chartData} options={chartOptions} style={{ position: 'relative', width: '40%' }} />
+                <Chart type="radar" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} dependencies={{ 'chart.js': '3.9.1' }} />
         </>

@@ -1,19 +1,16 @@
-import getConfig from 'next/config';
 import { Avatar } from '../../lib/avatar/Avatar';
 import { Badge } from '../../lib/badge/Badge';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ImageDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-
     const code = {
         basic: `
-<Avatar image="images/avatar/amyelsner.png" size="xlarge" shape="circle" />
-<Avatar image="images/avatar/asiyajavayant.png" size="large" shape="circle" />
-<Avatar image="images/avatar/onyamalimba.png" shape="circle" />
+<Avatar image="/images/avatar/amyelsner.png" size="xlarge" shape="circle" />
+<Avatar image="/images/avatar/asiyajavayant.png" size="large" shape="circle" />
+<Avatar image="/images/avatar/onyamalimba.png" shape="circle" />
 
-<Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+<Avatar className="p-overlay-badge" image="/images/organization/walter.jpg" size="xlarge">
     <Badge value="4" severity="danger" />
 </Avatar>
 
@@ -30,14 +27,14 @@ export default function ImageDemo() {
             <div className="flex flex-wrap gap-5">
                 <div className="flex-auto">
                     <h5>Image</h5>
-                    <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                    <Avatar image="images/avatar/onyamalimba.png" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                 </div>
 
                 <div className="flex-auto">
                     <h5>Badge</h5>
-                    <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+                    <Avatar className="p-overlay-badge" image="https://primefaces.org/cdn/primereact/images/organization/walter.jpg" size="xlarge">
                         <Badge value="4" severity="danger" />
                     </Avatar>
                 </div>
@@ -62,14 +59,14 @@ export default function ImageDemo() {
             <div className="flex flex-wrap gap-5">
                 <div className="flex-auto">
                     <h5>Image</h5>
-                    <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                    <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                    <Avatar image="images/avatar/onyamalimba.png" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                    <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                 </div>
 
                 <div className="flex-auto">
                     <h5>Badge</h5>
-                    <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+                    <Avatar className="p-overlay-badge" image="https://primefaces.org/cdn/primereact/images/organization/walter.jpg" size="xlarge">
                         <Badge value="4" severity="danger" />
                     </Avatar>
                 </div>
@@ -96,14 +93,14 @@ export default function ImageDemo() {
                 <div className="flex flex-wrap gap-5">
                     <div className="flex-auto">
                         <h5>Image</h5>
-                        <Avatar image="images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
-                        <Avatar image="images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
-                        <Avatar image="images/avatar/onyamalimba.png" shape="circle" />
+                        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" className="mr-2" size="xlarge" shape="circle" />
+                        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/asiyajavayant.png" className="mr-2" size="large" shape="circle" />
+                        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" shape="circle" />
                     </div>
 
                     <div className="flex-auto">
                         <h5>Badge</h5>
-                        <Avatar className="p-overlay-badge" image="images/organization/walter.jpg" size="xlarge">
+                        <Avatar className="p-overlay-badge" image="https://primefaces.org/cdn/primereact/images/organization/walter.jpg" size="xlarge">
                             <Badge value="4" severity="danger" />
                         </Avatar>
                     </div>

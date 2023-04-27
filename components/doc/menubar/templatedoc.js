@@ -1,11 +1,9 @@
-import { Menubar } from '../../lib/menubar/Menubar';
 import { InputText } from '../../lib/inputtext/InputText';
+import { Menubar } from '../../lib/menubar/Menubar';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function TemplateDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const items = [
         {
             label: 'File',
@@ -113,7 +111,7 @@ export function TemplateDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -130,15 +128,15 @@ export function TemplateDoc(props) {
         }
     ];
 
-    const start = <img alt="logo" src={contextPath + '/images/logo.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" className="w-full" />;
 
     const code = {
         basic: `
-<Menubar model={items} start={start} end={end} />  
+<Menubar model={items} start={start} end={end} />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
@@ -254,7 +252,7 @@ export default function TemplateDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -271,8 +269,8 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" className="w-full" />;
 
     return (
         <div className="card">
@@ -282,7 +280,7 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { MenuItem } from 'primereact/menuitem';
@@ -399,7 +397,7 @@ export default function TemplateDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -416,9 +414,9 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="images/logo.png" onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
-    
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+    const end = <InputText placeholder="Search" type="text" className="w-full" />;
+
     return (
         <div className="card">
             <Menubar model={items} start={start} end={end} />

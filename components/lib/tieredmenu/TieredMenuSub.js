@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { AngleRightIcon } from '../icons/angleright';
 
 export const TieredMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -10,9 +11,15 @@ export const TieredMenuSub = React.memo((props) => {
     const [bindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (event) => {
-            if (elementRef.current && !elementRef.current.contains(event.target)) {
+            if (!props.isMobileMode && elementRef.current && !elementRef.current.contains(event.target)) {
                 setActiveItemState(null);
             }
+        }
+    });
+
+    const [bindDocumentResizeListener] = useResizeListener({
+        listener: () => {
+            !props.isMobileMode && setActiveItemState(null);
         }
     });
 
@@ -38,7 +45,7 @@ export const TieredMenuSub = React.memo((props) => {
     };
 
     const onItemMouseEnter = (event, item) => {
-        if (item.disabled) {
+        if (item.disabled || props.isMobileMode) {
             event.preventDefault();
 
             return;
@@ -71,7 +78,7 @@ export const TieredMenuSub = React.memo((props) => {
             });
         }
 
-        if (props.root) {
+        if (props.root || props.isMobileMode) {
             if (item.items) {
                 if (activeItemState && item === activeItemState) setActiveItemState(null);
                 else setActiveItemState(item);
@@ -144,13 +151,16 @@ export const TieredMenuSub = React.memo((props) => {
     };
 
     const onLeafClick = (event) => {
-        setActiveItemState(null);
-        props.onLeafClick && props.onLeafClick(event);
-        props.onHide && props.onHide(event);
+        if (!props.isMobileMode || props.popup) {
+            setActiveItemState(null);
+            props.onLeafClick && props.onLeafClick(event);
+            props.onHide && props.onHide(event);
+        }
     };
 
     useMountEffect(() => {
         bindDocumentClickListener();
+        bindDocumentResizeListener();
     });
 
     useUpdateEffect(() => {
@@ -158,10 +168,14 @@ export const TieredMenuSub = React.memo((props) => {
             setActiveItemState(null);
         }
 
-        if (!props.root && props.parentActive) {
+        if (!props.root && props.parentActive && !props.isMobileMode) {
             position();
         }
     }, [props.parentActive]);
+
+    useUpdateEffect(() => {
+        props.onItemToggle && props.onItemToggle();
+    }, [activeItemState]);
 
     const createSeparator = (index) => {
         const key = 'separator_' + index;
@@ -171,7 +185,19 @@ export const TieredMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <TieredMenuSub menuProps={props.menuProps} model={item.items} onLeafClick={onLeafClick} popup={props.popup} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} />;
+            return (
+                <TieredMenuSub
+                    menuProps={props.menuProps}
+                    model={item.items}
+                    onLeafClick={onLeafClick}
+                    popup={props.popup}
+                    onKeyDown={onChildItemKeyDown}
+                    parentActive={item === activeItemState}
+                    isMobileMode={props.isMobileMode}
+                    onItemToggle={props.onItemToggle}
+                    submenuIcon={props.submenuIcon}
+                />
+            );
         }
 
         return null;
@@ -188,10 +214,10 @@ export const TieredMenuSub = React.memo((props) => {
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, _className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
-        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
         const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
         const label = _label && <span className="p-menuitem-text">{_label}</span>;
-        const submenuIcon = items && <span className={submenuIconClassName}></span>;
+        const submenuIconClassName = 'p-submenu-icon';
+        const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon className={submenuIconClassName} />, { className: submenuIconClassName }, { props: props.menuProps });
         const submenu = createSubmenu(item);
         let content = (
             <a href={url || '#'} className={linkClassName} target={target} role="menuitem" aria-haspopup={items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)} aria-disabled={disabled}>
@@ -220,7 +246,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         return (
-            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
+            <li key={key} id={item.id} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
                 {content}
                 {submenu}
             </li>

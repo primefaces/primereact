@@ -18,19 +18,23 @@ export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputSwitch, InputSwitchChangeParams } from "primereact/inputswitch";
+import { InputSwitch, InputSwitchChangeEvent } from "primereact/inputswitch";
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeEvent) => setChecked(e.value)} />
+        </div>
     );
 }
         `

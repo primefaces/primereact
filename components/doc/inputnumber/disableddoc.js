@@ -8,38 +8,32 @@ export function DisabledDoc(props) {
 
     const code = {
         basic: `
-<InputNumber inputId="percent" value={value} disabled prefix="%" />
+<InputNumber value={value} disabled prefix="%" />
 `,
         javascript: `
 import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
-export default function DisabledDoc() {
+export default function DisabledDemo() {
     const [value, setValue] = useState(50);
 
     return (
-        <div className="card flex justify-content-center p-fluid">
-            <div className="field col-12 md:col-3">
-                <label htmlFor="percent">Percent</label>
-                <InputNumber inputId="percent" value={value} disabled prefix="%" />
-            </div>
+        <div className="card flex justify-content-center">
+            <InputNumber value={value} disabled prefix="%" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
+import { InputNumber } from 'primereact/inputnumber';
 
-export default function DisabledDoc() {
+export default function DisabledDemo() {
     const [value, setValue] = useState<number>(50);
 
     return (
-        <div className="card flex justify-content-center p-fluid">
-            <div className="field col-12 md:col-3">
-                <label htmlFor="percent">Percent</label>
-                <InputNumber inputId="percent" value={value} disabled prefix="%" />
-            </div>
+        <div className="card flex justify-content-center">
+            <InputNumber value={value} disabled prefix="%" />
         </div>
     )
 }
@@ -50,14 +44,11 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center p-fluid">
-                <div className="field col-12 md:col-3">
-                    <label htmlFor="percent">Percent</label>
-                    <InputNumber inputId="percent" value={value} disabled prefix="%" />
-                </div>
+            <div className="card flex justify-content-center">
+                <InputNumber value={value} disabled prefix="%" />
             </div>
             <DocSectionCode code={code} />
         </>

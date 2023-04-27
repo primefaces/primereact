@@ -2,7 +2,7 @@
  *
  * Menu is a navigation/command component that supports dynamic and static positioning.
  *
- * [Live Demo](https://www.primefaces.org/primereact/menu/)
+ * [Live Demo](https://www.primereact.org/menu/)
  *
  * @module menu
  *
@@ -63,6 +63,14 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 }
 
 /**
+ * **PrimeReact - Menu**
+ *
+ * _Menu is a navigation/command component that supports dynamic and static positioning._
+ *
+ * [Live Demo](https://www.primereact.org/menu/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Menu extends React.Component<MenuProps, any> {

@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
-    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
     const groupedCities = [
         {
             label: 'Germany',
@@ -38,10 +38,10 @@ export function GroupDoc(props) {
         }
     ];
 
-    const groupedItemTemplate = (option) => {
+    const groupTemplate = (option) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={`flag flag-${option.code.toLowerCase()}`} />
+            <div className="flex align-items-center gap-2">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
@@ -49,14 +49,15 @@ export function GroupDoc(props) {
 
     const code = {
         basic: `
-<ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+<ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={groupedCities} optionLabel="label" 
+    optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function GroupDoc() {
-    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
+export default function GroupDemo() {
+    const [selectedCity, setSelectedCity] = useState(null);
     const groupedCities = [
         {
             label: 'Germany',
@@ -90,10 +91,10 @@ export default function GroupDoc() {
         }
     ];
 
-    const groupedItemTemplate = (option) => {
+    const groupTemplate = (option) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center gap-2">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }} />
                 <div>{option.label}</div>
             </div>
         );
@@ -101,19 +102,30 @@ export default function GroupDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+            <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={groupedCities} optionLabel="label" 
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
-export default function GroupDoc() {
-    const [selectedGroupedCity, setSelectedGroupedCity] = useState(null);
-    const groupedCities = [
+interface City {
+    label: string;
+    value: string;
+} 
+
+interface Country {
+    label: string;
+    code: string;
+    items: City[];
+}
+
+export default function GroupDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const groupedCities: Country[] = [
         {
             label: 'Germany',
             code: 'DE',
@@ -146,10 +158,10 @@ export default function GroupDoc() {
         }
     ];
 
-    const groupedItemTemplate = (option: any) => {
+    const groupTemplate = (option: City) => {
         return (
-            <div className="flex align-items-center country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center gap-2">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '18px' }}/>
                 <div>{option.label}</div>
             </div>
         );
@@ -157,8 +169,8 @@ export default function GroupDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <ListBox value={selectedGroupedCity} options={groupedCities} onChange={(e: ListBoxChangeParams) => setSelectedGroupedCity(e.value)} optionLabel="label" optionGroupLabel="label" optionGroupChildren="items"
-                optionGroupTemplate={groupedItemTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }}/>
+            <ListBox value={selectedCity} onChange={(e: ListBoxChangeEvent) => setSelectedCity(e.value)} options={groupedCities} optionLabel="label" 
+                optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
         </div>
     )
 }
@@ -168,18 +180,21 @@ export default function GroupDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Property name or getter function to use as the label of an option group.</p>
+                <p>
+                    Options can be grouped when a nested data structures is provided. To define the label of a group <i>optionGroupLabel</i> property is needed and also <i>optionGroupChildren</i> is required to define the property that refers to the
+                    children of a group.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <ListBox
-                    value={selectedGroupedCity}
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
                     options={groupedCities}
-                    onChange={(e) => setSelectedGroupedCity(e.value)}
                     optionLabel="label"
                     optionGroupLabel="label"
                     optionGroupChildren="items"
-                    optionGroupTemplate={groupedItemTemplate}
-                    style={{ width: '15rem' }}
+                    optionGroupTemplate={groupTemplate}
+                    className="w-full md:w-14rem"
                     listStyle={{ maxHeight: '250px' }}
                 />
             </div>

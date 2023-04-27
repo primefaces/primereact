@@ -2,7 +2,7 @@
  *
  * Messages is used to display inline messages with various severities.
  *
- * [Live Demo](https://www.primefaces.org/primereact/messages)
+ * [Live Demo](https://www.primereact.org/messages)
  *
  * @module messages
  *
@@ -38,6 +38,10 @@ export interface MessagesMessage {
      */
     closable?: boolean;
     /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<MessagesProps> | undefined;
+    /**
      * When enabled, message is not removed automatically.
      */
     sticky?: boolean;
@@ -50,7 +54,7 @@ export interface MessagesMessage {
      * Defines the icon to display.
      * @defaultValue Defaults to severity icon
      */
-    icon?: IconType<MessagesProps>;
+    icon?: IconType<MessagesProps> | undefined;
 }
 
 /**
@@ -80,6 +84,14 @@ export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
+ * **PrimeReact - Messages**
+ *
+ * _Messages is used to display inline messages with various severities._
+ *
+ * [Live Demo](https://www.primereact.org/messages/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Messages extends React.Component<MessagesProps, any> {
@@ -97,6 +109,11 @@ export declare class Messages extends React.Component<MessagesProps, any> {
      * @param {MessagesMessage | MessagesMessage[]} message - New message.
      */
     public replace(message: MessagesMessage | MessagesMessage[]): void;
+    /**
+     * Used to remove messages.
+     * @param {MessagesMessage | MessagesMessage[]} message - Message to remove
+     */
+    public remove(message: MessagesMessage | MessagesMessage[]): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element

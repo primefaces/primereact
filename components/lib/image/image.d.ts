@@ -2,12 +2,13 @@
  *
  * Displays a single image with preview and tranformation options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/image/)
+ * [Live Demo](https://www.primereact.org/image/)
  *
  * @module image
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in Image component. In addition to these, all properties of HTMLSpanElement can be used in this component.
@@ -24,10 +25,50 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     children?: React.ReactNode | undefined;
     /**
+     * The crossorigin content attribute on media elements is a CORS settings attribute.
+     */
+    crossOrigin?: 'anonymous' | 'use-credentials' | '' | undefined;
+    /**
      * Adds a download button to the preview control menu.
      * @default false
      */
     downloadable?: boolean | undefined;
+    /**
+     * Icon of the download button.
+     */
+    downloadIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Specifies whether a browser should load an image immediately or to defer loading of off-screen images until for example the user scrolls near them.
+     */
+    loading?: 'eager' | 'lazy' | undefined;
+    /**
+     * Icon of the rotate right button.
+     */
+    rotateRightIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the rotate left button.
+     */
+    rotateLeftIcon?: IconType<ImageProps> | undefined;
+    /**
+     *  HTTP header controls how much referrer information (sent with the Referer header) should be included with requests.
+     */
+    referrerPolicy?: React.HTMLAttributeReferrerPolicy | undefined;
+    /**
+     * Specifies an image as a client-side image map (an image map is an image with clickable areas)
+     */
+    useMap?: string | undefined;
+    /**
+     * Icon of the zoom out button.
+     */
+    zoomOutIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the zoom in button.
+     */
+    zoomInIcon?: IconType<ImageProps> | undefined;
+    /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<ImageProps> | undefined;
     /**
      * Height of the image element.
      */
@@ -46,11 +87,16 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     preview?: boolean | undefined;
     /**
+     * Changing the default icon when the image is hovered in preview mode.
+     */
+    indicatorIcon?: IconType<ImageProps> | undefined;
+    /**
      * Specifies the path to the image.
      */
     src?: string | undefined;
     /**
      * Changing the default icon when the image is hovered in preview mode.
+     * @deprecated Since v9, use `indicatorIcon` instead.
      */
     template?: any | undefined;
     /**
@@ -72,6 +118,14 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
 }
 
 /**
+ * **PrimeReact - Image**
+ *
+ * _Displays a single image with preview and tranformation options._
+ *
+ * [Live Demo](https://www.primereact.org/image/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Image extends React.Component<ImageProps, any> {

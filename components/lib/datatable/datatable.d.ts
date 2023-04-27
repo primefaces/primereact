@@ -2,7 +2,7 @@
  *
  * DataTable displays data in tabular format.
  *
- * [Live Demo](https://www.primefaces.org/primereact/datatable/)
+ * [Live Demo](https://www.primereact.org/datatable/)
  *
  * @module datatable
  *
@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
+import { IconType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
@@ -22,7 +23,6 @@ type DataTableRowGroupFooterTemplateType<TValue extends DataTableValueArray> = R
 
 /**
  * Custom datatable header template options.
- * @group Misc
  */
 interface DataTableHeaderTemplateOptions<TValue extends DataTableValueArray> {
     /**
@@ -35,7 +35,6 @@ interface DataTableFooterTemplateOptions<TValue extends DataTableValueArray> ext
 
 /**
  * Custom datatable row group header template options.
- * @group Misc
  */
 interface DataTableRowGroupHeaderTemplateOptions<TValue extends DataTableValueArray> {
     /**
@@ -54,7 +53,6 @@ interface DataTableRowGroupHeaderTemplateOptions<TValue extends DataTableValueAr
 
 /**
  * Custom datatable row group footer template options.
- * @group Misc
  */
 interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValueArray> extends DataTableRowGroupHeaderTemplateOptions<T> {
     /**
@@ -64,7 +62,7 @@ interface DataTableRowGroupFooterTemplateOptions<T extends DataTableValueArray> 
 }
 
 /**
- * @group Misc
+ * Custom datatable sort meta
  */
 interface DataTableSortMeta {
     /**
@@ -79,7 +77,6 @@ interface DataTableSortMeta {
 
 /**
  * Custom datatable filter metadata.
- * @group Misc
  */
 interface DataTableFilterMetaData {
     /**
@@ -94,7 +91,6 @@ interface DataTableFilterMetaData {
 
 /**
  * Custom datatable operator filter metadata.
- * @group Misc
  */
 interface DataTableOperatorFilterMetaData {
     /**
@@ -109,15 +105,16 @@ interface DataTableOperatorFilterMetaData {
 
 /**
  * Custom datatable filter meta.
- * @group Misc
  */
 interface DataTableFilterMeta {
+    /**
+     * Extra options.
+     */
     [key: string]: DataTableFilterMetaData | DataTableOperatorFilterMetaData;
 }
 
 /**
  * Custom datatable expanded rows.
- * @group Misc
  */
 interface DataTableExpandedRows {
     [key: string]: boolean;
@@ -125,7 +122,6 @@ interface DataTableExpandedRows {
 
 /**
  * Custom datatable editing rows.
- * @group Misc
  */
 interface DataTableEditingRows {
     [key: string]: boolean;
@@ -185,6 +181,8 @@ interface DataTableColumnResizerClickEvent {
 
 /**
  * Custom pagination event
+ * @see {@link DataTableProps.onPage}
+ * @event
  */
 interface DataTablePageEvent {
     /**
@@ -203,10 +201,15 @@ interface DataTablePageEvent {
      * Total number of pages.
      */
     pageCount?: number;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
 }
 
 /**
  * Custom sort event.
+ * @see {@link DataTableProps.onSort}
  * @event
  */
 interface DataTableSortEvent {
@@ -222,6 +225,10 @@ interface DataTableSortEvent {
      * MultiSort metadata.
      */
     multiSortMeta: DataTableSortMeta[] | null | undefined;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
 }
 
 /**
@@ -234,15 +241,20 @@ interface DataTableFilterEvent {
      * Collection of active filters.
      */
     filters: DataTableFilterMeta;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
 }
 
 /**
- * Custom page, sort, filter event.
- * @see {@link DataTableProps.onPage}, {@link DataTableProps.onSort}, {@link DataTableProps.onFilter}
- * @extends @check
+ * Custom state event containing page, filter and sort states.
+ * @see {@link DataTableProps.onFilter}
+ * @see {@link DataTableProps.onSort}
+ * @see {@link DataTableProps.onPage}
  * @event
  */
-interface DataTablePFSEvent extends DataTablePageEvent, DataTableSortEvent, DataTableFilterEvent {
+interface DataTableStateEvent extends DataTablePageEvent, DataTableFilterEvent, DataTableSortEvent {
     /**
      * Extra options.
      */
@@ -266,8 +278,24 @@ interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
 }
 
 /**
+ * Custom selection change event for context menu.
+ * @see {@link DataTableProps.onContextMenuSelectionChange}
+ * @event
+ */
+interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection object.
+     */
+    value: DataTableSelection<TValue>;
+}
+
+/**
  * Custom selection change event.
- * @see {@link DataTableProps.onContextMenuSelectionChange}, {@link DataTableProps.onSelectionChange}
+ * @see {@link DataTableProps.onSelectionChange}
  * @event
  */
 interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
@@ -528,7 +556,6 @@ interface DataTableRowReorderEvent<TValue extends DataTableValueArray> {
 /**
  * Options for the row expansion template
  * @see {@link DataTableProps.rowExpansionTemplate}
- * @group Misc
  */
 interface DataTableRowExpansionTemplate {
     /**
@@ -544,7 +571,6 @@ interface DataTableRowExpansionTemplate {
 /**
  * Custom row className options.
  * @see {@link DataTableProps.rowClassName}
- * @group Misc
  */
 interface DataTableRowClassNameOptions<TValue extends DataTableValueArray> {
     /**
@@ -556,7 +582,6 @@ interface DataTableRowClassNameOptions<TValue extends DataTableValueArray> {
 /**
  * Custom cell className options.
  * @see {@link DataTableProps.cellClassName}
- * @group Misc
  */
 interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
     /**
@@ -584,7 +609,6 @@ interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
 /**
  * Custom show selection element options.
  * @see {@link DataTableProps.showSelectionElement}
- * @group Misc
  */
 interface DataTableShowSelectionElementOptions<TValue extends DataTableValueArray> {
     /**
@@ -600,7 +624,6 @@ interface DataTableShowSelectionElementOptions<TValue extends DataTableValueArra
 /**
  * Custom show row reorder element options.
  * @see {@link DataTableProps.showRowReorderElement}
- * @group Misc
  */
 interface DataTableShowRowReorderElementOptions<TValue extends DataTableValueArray> {
     /**
@@ -616,7 +639,6 @@ interface DataTableShowRowReorderElementOptions<TValue extends DataTableValueArr
 /**
  * Custom row edit validator options.
  * @see {@link DataTableProps.rowEditValidator}
- * @group Misc
  */
 interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
     /**
@@ -625,25 +647,22 @@ interface DataTableRowEditValidatorOptions<TValue extends DataTableValueArray> {
     props: DataTableProps<TValue>;
 }
 
+/**
+ * Custom value definition.
+ * @extends Record<string, any>
+ */
 interface DataTableValue extends Record<string, any> {}
 
+/**
+ * Custom value array definition.
+ * @extends Array<DataTableValue>
+ */
 interface DataTableValueArray extends Array<DataTableValue> {}
 
-/**
- * @group Misc
- */
-type DataTableRowData<TValue extends DataTableValueArray> = {
-    [K in keyof TValue]: TValue[K];
-};
+type DataTableRowData<TValueArray extends DataTableValueArray> = TValueArray extends Array<infer TValue> ? TValue : never;
 
-/**
- * @group Misc
- */
 type DataTableRowDataArray<TValue extends DataTableValueArray> = DataTableRowData<TValue>[];
 
-/**
- * @group Misc
- */
 type DataTableCellSelection<TValue extends DataTableValueArray> = {
     /**
      * Index of the cell.
@@ -676,12 +695,9 @@ type DataTableCellSelection<TValue extends DataTableValueArray> = {
     /**
      * Value of the cell.
      */
-    value: TValue[keyof TValue];
+    value: TValue[number][keyof TValue[number]];
 };
 
-/**
- * @group Misc
- */
 type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
 
 /**
@@ -703,15 +719,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     alwaysShowPaginator?: boolean | undefined;
     /**
-     * Whether the cell widths scale according to their content or not.
-     * @defaultValue false
-     */
-    autoLayout?: boolean | undefined;
-    /**
      * The breakpoint to define the maximum width boundary when using stack responsive layout.
      * @defaultValue 960px
      */
     breakpoint?: string | undefined;
+    /**
+     * Icon to display in the checkbox.
+     */
+    checkIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Whether to cell selection is enabled or not.
      * @defaultValue false
@@ -723,9 +738,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     className?: string | undefined;
     /**
      * Icon of the row toggler to display the row as collapsed.
-     * @defaultValue pi pi-chevron-up
      */
-    collapsedRowIcon?: string | undefined;
+    collapsedRowIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Used to define the resize mode of the columns, valid values are "fit" and "expand".
      * @defaultValue fit
@@ -785,9 +799,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     expandableRowGroups?: boolean | undefined;
     /**
      * Icon of the row toggler to display the row as expanded.
-     * @defaultValue pi pi-chevron-down
      */
-    expandedRowIcon?: string | undefined;
+    expandedRowIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * A collection of rows or a map object row data keys that are expanded.
      */
@@ -874,9 +887,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     loading?: boolean | undefined;
     /**
      * The icon to show while indicating data load is in progress.
-     * @defaultValue pi pi-spinner
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -939,15 +951,36 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     reorderableRows?: boolean | undefined;
     /**
+     * Defines the reorder indicator down icon.
+     */
+    reorderIndicatorDownIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Defines the reorder indicator up icon.
+     */
+    reorderIndicatorUpIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
      */
     resizableColumns?: boolean | undefined;
     /**
      * Defines the responsive mode, valid options are "stack" and "scroll".
-     * @defaultValue stack
+     * @defaultValue scroll
+     * @deprecated since version 9.2.0
      */
     responsiveLayout?: 'scroll' | 'stack' | undefined;
+    /**
+     * Icon to display in the row editor cancel button.
+     */
+    rowEditorCancelIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Icon to display in the row editor init button.
+     */
+    rowEditorInitIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Icon to display in the row editor save button.
+     */
+    rowEditorSaveIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Function to provide the content of row group footer.
      */
@@ -972,11 +1005,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Array of integer values to display inside rows per page dropdown.
      */
     rowsPerPageOptions?: number[] | undefined;
-    /**
-     * Orientation of the scrolling, options are "vertical", "horizontal" and "both".
-     * @defaultValue vertical|horizontal
-     */
-    scrollDirection?: 'vertical' | 'horizontal' | 'both' | undefined;
     /**
      * Height of the scroll viewport.
      */
@@ -1042,6 +1070,10 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @defaultValue single
      */
     sortMode?: 'single' | 'multiple' | undefined;
+    /**
+     * Icon to display the current sorting status.
+     */
+    sortIcon?: IconType<DataTable<TValue>> | undefined;
     /**
      * Order to sort the data by default.
      */
@@ -1167,17 +1199,17 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Callback to invoke when a row selected with right click.
      * @param {DataTableRowEvent} event - Custom row event.
      */
-    onContextMenuSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
+    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
-     * @param {DataTablePFSEvent} event - Custom filter event.
+     * @param {DataTableStateEvent} event - Custom state event.
      */
-    onFilter?(event: DataTablePFSEvent): void;
+    onFilter?(event: DataTableStateEvent): void;
     /**
      * Callback to invoke on pagination.
-     * @param {DataTablePFSEvent} event - Custom pagination event.
+     * @param {DataTableStateEvent} event - Custom state event.
      */
-    onPage?(event: DataTablePFSEvent): void;
+    onPage?(event: DataTableStateEvent): void;
     /**
      * Callback to invoke when a row is clicked.
      * @param {DataTableRowClickEvent} event - Custom row click event.
@@ -1265,9 +1297,9 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on sort.
-     * @param {DataTablePFSEvent} event - Custom sort event.
+     * @param {DataTableStateEvent} event - Custom state event.
      */
-    onSort?(event: DataTablePFSEvent): void;
+    onSort?(event: DataTableStateEvent): void;
     /**
      * Callback to invoke table state is restored.
      * @param {object} state - Table state.
@@ -1319,6 +1351,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
 }
 
 /**
+ * **PrimeReact - DataTable<TValue**
+ *
+ * _DataTable displays data in tabular format._
+ *
+ * [Live Demo](https://www.primereact.org/datatable/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class DataTable<TValue extends DataTableValueArray> extends React.Component<DataTableProps<TValue>, any> {
@@ -1374,12 +1414,10 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
     public resetScroll(): void;
     /**
      * Restores the column widths.
-     * @check
      */
     public restoreColumnWidths(): void;
     /**
      * Restores the table state.
-     * @check
      */
     public restoreState(): void;
     /**

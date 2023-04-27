@@ -1,14 +1,11 @@
-import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/ripple/apidoc';
+import React, { useContext } from 'react';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/ripple/styledoc';
+import { BasicDoc } from '../../components/doc/ripple/basicdoc';
+import { ConfigurationDoc } from '../../components/doc/ripple/configurationdoc';
 import { ImportDoc } from '../../components/doc/ripple/importdoc';
-import { DefaultDoc } from '../../components/doc/ripple/defaultdoc';
-import { CustomDoc } from '../../components/doc/ripple/customdoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { StyleDoc } from '../../components/doc/ripple/styledoc';
+import AppContentContext from '../../components/layout/appcontentcontext';
 
 const RippleDemo = () => {
     const docs = [
@@ -18,14 +15,14 @@ const RippleDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'default',
-            label: 'Default',
-            component: DefaultDoc
+            id: 'configuration',
+            label: 'ConfigurationDoc',
+            component: ConfigurationDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'style',
@@ -36,35 +33,13 @@ const RippleDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
+    const appContentContext = useContext(AppContentContext);
 
-    return (
-        <div>
-            <Head>
-                <title>React Ripple Component</title>
-                <meta name="description" content="Ripple component adds ripple effect to the host element." />
-            </Head>
+    appContentContext.onRippleChange(true);
 
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Ripple</h1>
-                    <p>Ripple component adds ripple effect to the host element.</p>
-                </div>
-                <DocActions github="ripple/index.js" />
-            </div>
-
-            <div className="content-section doc ripple-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={['Ripple']} />;
 };
 
 export default RippleDemo;

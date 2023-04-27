@@ -5,65 +5,43 @@ import { DocSectionText } from '../common/docsectiontext';
 export function DisabledDoc(props) {
     const code = {
         basic: `
-<Dropdown className="p-disabled" />
-<label htmlFor="dropdown">Dropdown</label>
+<Dropdown disabled placeholder="Select a City" className="w-full md:w-14rem" />
         `,
         javascript: `
-import React from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <span className="p-float-label">
-                <Dropdown className="p-disabled" />
-                <label htmlFor="dropdown">Dropdown</label>
-            </span>
+        <div className="card flex justify-content-center">
+            <Dropdown disabled placeholder="Select a City" className="w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
-import React from "react";
+import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <span className="p-float-label">
-                <Dropdown className="p-disabled" />
-                <label htmlFor="dropdown">Dropdown</label>
-            </span>
+        <div className="card flex justify-content-center">
+            <Dropdown disabled placeholder="Select a City" className="w-full md:w-14rem" />
         </div>
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                {/* To Do:  */}
-                <p></p>
+                <p>
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <span className="p-float-label">
-                    <Dropdown className="p-disabled" />
-                    <label htmlFor="dropdown">Dropdown</label>
-                </span>
+            <div className="card flex justify-content-center">
+                <Dropdown disabled placeholder="Select a City" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

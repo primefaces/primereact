@@ -2,7 +2,7 @@
  *
  * ConfirmPopup displays a confirmation overlay displayed relatively to its target.
  *
- * [Live Demo](https://www.primefaces.org/primereact/confirmpopup)
+ * [Live Demo](https://www.primereact.org/confirmpopup)
  *
  * @module confirmpopup
  *
@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom confirm popup options
- * @group Misc
  */
 interface ConfirmPopupOptions {
     /**
@@ -164,7 +163,6 @@ export interface ConfirmPopupProps {
 
 /**
  * Object returned by the {@link confirmPopup} method.
- * @group Misc
  */
 interface ConfirmPopupReturn {
     /**
@@ -178,6 +176,14 @@ interface ConfirmPopupReturn {
 }
 
 /**
+ * **PrimeReact - ConfirmPopup**
+ *
+ * _ConfirmPopup displays a confirmation overlay displayed relatively to its target._
+ *
+ * [Live Demo](https://www.primereact.org/confirmpopup/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ConfirmPopup extends React.Component<ConfirmPopupProps, any> {

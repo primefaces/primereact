@@ -23,6 +23,7 @@ export const PrimeIcons = Object.freeze({
     ARROW_DOWN_RIGHT: 'pi pi-arrow-down-right',
     ARROW_LEFT: 'pi pi-arrow-left',
     ARROW_RIGHT: 'pi pi-arrow-right',
+    ARROW_RIGHT_ARROW_LEFT: 'pi-arrow-right-arrow-left',
     ARROW_UP: 'pi pi-arrow-up',
     ARROW_UP_LEFT: 'pi pi-arrow-up-left',
     ARROW_UP_RIGHT: 'pi pi-arrow-up-right',

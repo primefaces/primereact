@@ -13,7 +13,7 @@ export function PositionDoc(props) {
     const code = {
         basic: `
 <div className="flex gap-2 justify-content-center">
-    <Button icon="pi pi-arrow-right" onClick={() => setVisibleRight(true)} />
+    <Button icon="pi pi-arrow-right" onClick={() => setVisibleLeft(true)} />
     <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} />
     <Button icon="pi pi-arrow-down" onClick={() => setVisibleTop(true)} />
     <Button icon="pi pi-arrow-up" onClick={() => setVisibleBottom(true)} />
@@ -65,7 +65,7 @@ export default function PositionDemo() {
     return (
         <div className="card">
             <div className="flex gap-2 justify-content-center">
-                <Button icon="pi pi-arrow-right" onClick={() => setVisibleRight(true)} />
+                <Button icon="pi pi-arrow-right" onClick={() => setVisibleLeft(true)} />
                 <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} />
                 <Button icon="pi pi-arrow-down" onClick={() => setVisibleTop(true)} />
                 <Button icon="pi pi-arrow-up" onClick={() => setVisibleBottom(true)} />
@@ -120,7 +120,7 @@ export default function PositionDemo() {
     return (
         <div className="card">
             <div className="flex gap-2 justify-content-center">
-                <Button icon="pi pi-arrow-right" onClick={() => setVisibleRight(true)} />
+                <Button icon="pi pi-arrow-right" onClick={() => setVisibleLeft(true)} />
                 <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} />
                 <Button icon="pi pi-arrow-down" onClick={() => setVisibleTop(true)} />
                 <Button icon="pi pi-arrow-up" onClick={() => setVisibleBottom(true)} />
@@ -172,7 +172,7 @@ export default function PositionDemo() {
             </DocSectionText>
             <div className="card">
                 <div className="flex gap-2 justify-content-center">
-                    <Button icon="pi pi-arrow-right" onClick={() => setVisibleRight(true)} />
+                    <Button icon="pi pi-arrow-right" onClick={() => setVisibleLeft(true)} />
                     <Button icon="pi pi-arrow-left" onClick={() => setVisibleRight(true)} />
                     <Button icon="pi pi-arrow-down" onClick={() => setVisibleTop(true)} />
                     <Button icon="pi pi-arrow-up" onClick={() => setVisibleBottom(true)} />

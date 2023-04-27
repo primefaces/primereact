@@ -2,67 +2,87 @@
  *
  * Panel is a grouping component providing with content toggle feature.
  *
- * [Live Demo](https://www.primefaces.org/primereact/panel/)
+ * [Live Demo](https://www.primereact.org/panel/)
  *
  * @module panel
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type PanelPassThroughType<T> = PassThroughType<T, PanelPassThroughMethodOptions>;
 
 /**
- * @todo Write the documantation
+ * Custom panel header template options.
  */
 interface PanelHeaderTemplateOptions {
     /**
-     * @todo Write the documantation
+     * Style class of the panel.
      */
     className: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel title.
      */
-    titleClssName: string;
+    titleClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel icons.
      */
     iconsClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel toggler.
      */
     togglerClassName: string;
     /**
-     * @todo Write the documantation
+     * Style class of the panel toggler icon.
      */
     togglerIconClassName: string;
     /**
-     * @todo Write the documantation
+     * Callback to invoke when the toggler button is clicked.
+     * @param {React.MouseEvent<HTMLElement>} event Browser event.
      */
     onTogglerClick(event: React.MouseEvent<HTMLElement>): void;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the title of the panel.
      */
     titleElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the icons of the panel.
      */
     iconsElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the toggler of the panel.
      */
     togglerElement: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The JSX element that represents the panel.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documantation
+     * The props of the Panel component.
      */
     props: PanelProps;
     /**
-     * @todo Write the documantation
+     * Whether the panel header is collapsed or not.
      */
     collapsed: boolean;
+}
+/**
+ * Custom panel footer template options.
+ */
+interface PanelFooterTemplateOptions {
+    /**
+     * Style class of the panel.
+     */
+    className: string;
+    /**
+     * The JSX element that represents the panel.
+     */
+    element: JSX.Element;
+    /**
+     * The props of the Panel component.
+     */
+    props: PanelProps;
 }
 
 /**
@@ -82,6 +102,72 @@ interface PanelToggleEvent {
 }
 
 /**
+ * Custom passthrough(pt) option method.
+ */
+export interface PanelPassThroughMethodOptions {
+    props: PanelProps;
+    state: PanelState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link PanelProps.pt}
+ */
+export interface PanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the title's DOM element.
+     */
+    title?: PanelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icons' DOM element.
+     */
+    icons?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the toggler's DOM element.
+     */
+    toggler?: PanelPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the togglericon's DOM element.
+     */
+    togglerIcon?: PanelPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the toggleablecontent's DOM element.
+     */
+    toggleableContent?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Panel component.
+ */
+export interface PanelState {
+    /**
+     * Current id state.
+     */
+    id: string;
+    /**
+     * Current collapsed state as a boolean.
+     * @defaultValue false
+     */
+    collapsed: boolean;
+}
+
+/**
  * Defines valid properties in Panel component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -91,10 +177,19 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     header?: React.ReactNode | undefined;
     /**
+     * Custom footer template of the panel.
+     */
+    footer?: React.ReactNode | undefined;
+    /**
      * Header template of the panel to customize more.
      * @param {PanelHeaderTemplateOptions} options - Options to customize the header template.
      */
     headerTemplate?: React.ReactNode | ((options: PanelHeaderTemplateOptions) => React.ReactNode);
+    /**
+     * Footer template of the panel to customize more.
+     * @param {PanelFooterTemplateOptions} options - Options to customize the footer template.
+     */
+    footerTemplate?: React.ReactNode | ((options: PanelFooterTemplateOptions) => React.ReactNode);
     /**
      * Defines if content of panel can be expanded and collapsed.
      * @defaultValue false
@@ -106,11 +201,11 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     collapsed?: boolean | undefined;
     /**
-     * @todo Write the documentation
+     * Icon of a expanded tab.
      */
     expandIcon?: IconType<PanelProps> | undefined;
     /**
-     * @todo Write the documentation
+     * Icon of a collapsed tab.
      */
     collapseIcon?: IconType<PanelProps> | undefined;
     /**
@@ -142,9 +237,22 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {PanelPassThroughOptions}
+     */
+    pt?: PanelPassThroughOptions;
 }
 
 /**
+ * **PrimeReact - Panel**
+ *
+ * _Panel is a grouping component providing with content toggle feature._
+ *
+ * [Live Demo](https://www.primereact.org/panel/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Panel extends React.Component<PanelProps, any> {

@@ -18,7 +18,7 @@ export function classNames(...args) {
             }
         }
 
-        return classes.join(' ');
+        return classes.join(' ').trim();
     }
 
     return undefined;

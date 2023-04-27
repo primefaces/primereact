@@ -2,7 +2,7 @@
  *
  * ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag.
  *
- * [Live Demo](https://www.primefaces.org/primereact/confirmdialog)
+ * [Live Demo](https://www.primereact.org/confirmdialog)
  *
  * @module confirmdialog
  *
@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom confirm dialog options
- * @group Misc
  */
 interface ConfirmDialogOptions {
     /**
@@ -139,7 +138,6 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
 
 /**
  * Object returned by the {@link confirmDialog} method.
- * @group Misc
  */
 interface ConfirmDialogReturn {
     /**
@@ -153,6 +151,14 @@ interface ConfirmDialogReturn {
 }
 
 /**
+ * **PrimeReact - ConfirmDialog**
+ *
+ * _ConfirmDialog uses a Dialog UI with confirmDialog method or <ConfirmDialog> tag._
+ *
+ * [Live Demo](https://www.primereact.org/confirmdialog/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ConfirmDialog extends React.Component<ConfirmDialogProps, any> {

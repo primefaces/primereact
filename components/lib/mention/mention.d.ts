@@ -2,7 +2,7 @@
  *
  * Mention component is used to refer someone or something.
  *
- * [Live Demo](https://www.primefaces.org/primereact/mention/)
+ * [Live Demo](https://www.primereact.org/mention/)
  *
  * @module mention
  *
@@ -12,7 +12,6 @@ import { CSSTransitionProps } from '../csstransition';
 import { InputTextarea } from '../inputtextarea';
 
 /**
- * @group Misc
  */
 interface MentionItemTemplateOptions {
     /**
@@ -185,6 +184,14 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
 }
 
 /**
+ * **PrimeReact - Mention**
+ *
+ * _Mention component is used to refer someone or something._
+ *
+ * [Live Demo](https://www.primereact.org/mention/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Mention extends React.Component<MentionProps, any> {

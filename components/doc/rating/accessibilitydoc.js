@@ -1,5 +1,5 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 import Link from 'next/link';
 

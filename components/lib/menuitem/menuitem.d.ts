@@ -2,12 +2,12 @@
  *
  * PrimeReact menus components share a common api to specify the menuitems and submenus.
  *
- * [Live Demo](https://www.primefaces.org/primereact/menumodel/)
+ * [Live Demo](https://www.primereact.org/menumodel/)
  *
  * @module menuitem
  *
  */
-import React from 'react';
+import * as React from 'react';
 
 /**
  * Custom command event.
@@ -27,7 +27,7 @@ interface MenuItemCommandEvent {
 
 /**
  * Menu item options
- * @group Misc
+ * @deprecated Since v9.3.0
  */
 interface MenuItemOptions {
     /**
@@ -58,8 +58,8 @@ interface MenuItemOptions {
 }
 
 /**
- * Defines valid properties in MenuItem API.
- * @group Properties
+ * Defines model of MenuItem API.
+ * @group Model
  */
 export interface MenuItem {
     /**
@@ -121,6 +121,7 @@ export interface MenuItem {
     command?(event: MenuItemCommandEvent): void;
     /**
      * Template of the menuitem.
+     * @deprecated Since v9.3.0
      */
     template?: React.ReactNode | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
     /**

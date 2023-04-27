@@ -2,14 +2,14 @@
  *
  * InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputmask/)
+ * [Live Demo](https://www.primereact.org/inputmask/)
  *
  * @module inputmask
  *
  */
 import * as React from 'react';
 import { InputText, InputTextProps } from '../inputtext';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
@@ -52,7 +52,7 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
     slotChar?: string | undefined;
     /**
      * Clears the incomplete value on blur.
-     * @defaultValue false
+     * @defaultValue true
      */
     autoClear?: boolean | undefined;
     /**
@@ -112,6 +112,14 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
 }
 
 /**
+ * **PrimeReact - InputMask**
+ *
+ * _InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone._
+ *
+ * [Live Demo](https://www.primereact.org/inputmask/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class InputMask extends React.Component<InputMaskProps, any> {

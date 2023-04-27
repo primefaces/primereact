@@ -1,22 +1,20 @@
 .layout-footer {
-    font-size: 1rem;
-    padding: 2rem;
+    padding: 2rem 0;
+    margin-top: 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    font-weight: 500;
+    color: var(--text-800);
+    border-top: 1px solid var(--surface-border);
 
     a {
-        color: var(--text-color);
-        font-weight: 600;
-    }
+        color: var(--primary-color);
+        font-weight: 700;
 
-    .layout-footer-right {
-        a {
-            i {
-                color: var(--text-secondary-color);
-                font-size: 1.5rem;
-            }
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

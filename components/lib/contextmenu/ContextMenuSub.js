@@ -2,7 +2,8 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils } from '../utils/Utils';
+import { AngleRightIcon } from '../icons/angleright';
 
 export const ContextMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -14,7 +15,7 @@ export const ContextMenuSub = React.memo((props) => {
     }
 
     const onItemMouseEnter = (event, item) => {
-        if (item.disabled) {
+        if (item.disabled || props.isMobileMode) {
             event.preventDefault();
 
             return;
@@ -41,29 +42,36 @@ export const ContextMenuSub = React.memo((props) => {
             });
         }
 
+        if (props.isMobileMode && item.items) {
+            if (activeItemState && item === activeItemState) setActiveItemState(null);
+            else setActiveItemState(item);
+        }
+
         if (!item.items) {
             props.onLeafClick(event);
         }
     };
 
     const position = () => {
-        const parentItem = submenuRef.current.parentElement;
-        const containerOffset = DomHandler.getOffset(parentItem);
-        const viewport = DomHandler.getViewport();
-        const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
-        const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
-        const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight - DomHandler.getWindowScrollTop();
+        if (!props.isMobileMode) {
+            const parentItem = submenuRef.current.parentElement;
+            const containerOffset = DomHandler.getOffset(parentItem);
+            const viewport = DomHandler.getViewport();
+            const sublistWidth = submenuRef.current.offsetParent ? submenuRef.current.offsetWidth : DomHandler.getHiddenElementOuterWidth(submenuRef.current);
+            const itemOuterWidth = DomHandler.getOuterWidth(parentItem.children[0]);
+            const top = parseInt(containerOffset.top, 10) + submenuRef.current.offsetHeight - DomHandler.getWindowScrollTop();
 
-        if (top > viewport.height) {
-            submenuRef.current.style.top = viewport.height - top + 'px';
-        } else {
-            submenuRef.current.style.top = '0px';
-        }
+            if (top > viewport.height) {
+                submenuRef.current.style.top = viewport.height - top + 'px';
+            } else {
+                submenuRef.current.style.top = '0px';
+            }
 
-        if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
-            submenuRef.current.style.left = -1 * sublistWidth + 'px';
-        } else {
-            submenuRef.current.style.left = itemOuterWidth + 'px';
+            if (parseInt(containerOffset.left, 10) + itemOuterWidth + sublistWidth > viewport.width - DomHandler.calculateScrollbarWidth()) {
+                submenuRef.current.style.left = -1 * sublistWidth + 'px';
+            } else {
+                submenuRef.current.style.left = itemOuterWidth + 'px';
+            }
         }
     };
 
@@ -81,7 +89,7 @@ export const ContextMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} />;
+            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} isMobileMode={props.isMobileMode} submenuIcon={props.submenuIcon} />;
         }
 
         return null;
@@ -96,11 +104,11 @@ export const ContextMenuSub = React.memo((props) => {
         const key = item.label + '_' + index;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
-        const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
-        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
+        const iconClassName = 'p-menuitem-icon';
+        const icon = IconUtils.getJSXIcon(item.icon, { className: iconClassName }, { props: props.menuProps });
+        const submenuIconClassName = 'p-submenu-icon';
+        const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon className={submenuIconClassName} />, { className: submenuIconClassName }, { props: props.menuProps });
         const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
-        const submenuIcon = item.items && <span className={submenuIconClassName}></span>;
         const submenu = createSubmenu(item);
         let content = (
             <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-haspopup={item.items != null} aria-disabled={item.disabled}>
@@ -110,21 +118,6 @@ export const ContextMenuSub = React.memo((props) => {
                 <Ripple />
             </a>
         );
-
-        if (item.template) {
-            const defaultContentOptions = {
-                onClick: (event) => onItemClick(event, item, index),
-                className: linkClassName,
-                labelClassName: 'p-menuitem-text',
-                iconClassName,
-                submenuIconClassName,
-                element: content,
-                props,
-                active
-            };
-
-            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
-        }
 
         return (
             <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>

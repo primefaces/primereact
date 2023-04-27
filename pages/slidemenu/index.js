@@ -1,12 +1,8 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
-import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
-import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
-import { ApiDoc } from '../../components/doc/slidemenu/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
+import { ImportDoc } from '../../components/doc/slidemenu/importdoc';
+import { PopupDoc } from '../../components/doc/slidemenu/popupdoc';
 import { StyleDoc } from '../../components/doc/slidemenu/styledoc';
 
 const SlideMenuDemo = () => {
@@ -35,33 +31,10 @@ const SlideMenuDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React SlideMenu Component</title>
-                <meta name="description" content="SlideMenu displays submenus with a slide animation." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Slide Menu</h1>
-                    <p>SlideMenu displays submenus with a slide animation.</p>
-                </div>
-                <DocActions github="slidemenu/index.js" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React SlideMenu Component" header="SlideMenu" description="SlideMenu displays submenus with a slide animation." componentDocs={docs} apiDocs={['SlideMenu', 'MenuItem']} />;
 };
 
 export default SlideMenuDemo;

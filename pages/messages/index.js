@@ -1,17 +1,13 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/messages/importdoc';
-import { SeverityDoc } from '../../components/doc/messages/severitydoc';
-import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
-import { TemplateDoc } from '../../components/doc/messages/templatedoc';
-import { ApiDoc } from '../../components/doc/messages/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/messages/styledoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
+import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
+import { ImportDoc } from '../../components/doc/messages/importdoc';
+import { SeverityDoc } from '../../components/doc/messages/severitydoc';
 import { StickyDoc } from '../../components/doc/messages/stickydoc';
+import { StyleDoc } from '../../components/doc/messages/styledoc';
+import { TemplateDoc } from '../../components/doc/messages/templatedoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -59,34 +55,10 @@ const MessagesDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Messages Component</title>
-                <meta name="description" content="Messages component is used to display inline messages" />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Messages</h1>
-                    <p>Messages component is used to display inline messages.</p>
-                </div>
-                <DocActions github="messages/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Messages Component" header="Messages" description="Messages component is used to display inline messages." componentDocs={docs} apiDocs={['Messages']} />;
 };
 
 export default MessagesDemo;

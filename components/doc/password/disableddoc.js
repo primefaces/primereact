@@ -8,11 +8,10 @@ export function DisabledDoc(props) {
 <Password disabled placeholder="Disabled" />
         `,
         javascript: `
-import React, { useState } from "react";
+import React from "react";
 import { Password } from 'primereact/password';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <Password disabled placeholder="Disabled" />
@@ -21,11 +20,10 @@ export default function DisabledDoc() {
 }
         `,
         typescript: `
-import React, { useState } from "react";
+import React from "react";
 import { Password } from 'primereact/password';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <Password disabled placeholder="Disabled" />
@@ -39,7 +37,7 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

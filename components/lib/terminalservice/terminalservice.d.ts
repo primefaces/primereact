@@ -2,14 +2,14 @@
  *
  * Terminal is a text based user interface.
  *
- * [Live Demo](https://www.primefaces.org/primereact/terminal/)
+ * [Live Demo](https://www.primereact.org/terminal/)
  *
  * @module terminal
  *
  */
 
 /**
- * @group Misc
+ * Custom terminal service options.
  */
 export interface TerminalServiceOptions {
     /**
@@ -33,6 +33,14 @@ export interface TerminalServiceOptions {
 }
 
 /**
+ * **PrimeReact - TerminalService**
+ *
+ * _Terminal is a text based user interface._
+ *
+ * [Live Demo](https://www.primereact.org/terminal/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare const TerminalService: TerminalServiceOptions;

@@ -1,3 +1,4 @@
 {
-    "types": "./treenode.d.ts"
+    "types": "./treenode.d.ts",
+    "sideEffects": false
 }

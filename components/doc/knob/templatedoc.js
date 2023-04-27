@@ -8,30 +8,33 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<Knob value={value} valueTemplate={'{value}%'} onChange={(e) => setValue(e.value)} />
-
+<Knob value={value} onChange={(e) => setValue(e.value)} valueTemplate={'{value}%'} />
         `,
         javascript: `
 import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const [value, setValue] = useState(60);
 
     return (
-        <Knob value={value} valueTemplate={'{value}%'} onChange={(e) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e) => setValue(e.value)} valueTemplate={'{value}%'} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from 'react';
-import { Knob, KnobChangeParams } from 'primereact/knob';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function TemplateDoc() {
+export default function TemplateDemo() {
     const [value, setValue] = useState<number>(60);
 
     return (
-        <Knob value={value} valueTemplate={"{value}%"} onChange={(e : KnobChangeParams) => setValue(e.value)}/>
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e : KnobChangeEvent) => setValue(e.value)} valueTemplate={"{value}%"} />
+        </div>
     )
 }
         `
@@ -40,10 +43,12 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template string of the value.</p>
+                <p>
+                    Label is a string template that can be customized with the <i>valueTemplate</i> property having <i>{value}</i> as the placeholder .
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Knob value={value} valueTemplate={'{value}%'} onChange={(e) => setValue(e.value)} />
+                <Knob value={value} onChange={(e) => setValue(e.value)} valueTemplate={'{value}%'} />
             </div>
             <DocSectionCode code={code} />
         </>

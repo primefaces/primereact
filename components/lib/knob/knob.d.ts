@@ -2,7 +2,7 @@
  *
  * Knob is a form component to define number inputs with a dial.
  *
- * [Live Demo](https://www.primefaces.org/primereact/knob/)
+ * [Live Demo](https://www.primereact.org/knob/)
  *
  * @module knob
  *
@@ -119,6 +119,14 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
 }
 
 /**
+ * **PrimeReact - Knob**
+ *
+ * _Knob is a form component to define number inputs with a dial._
+ *
+ * [Live Demo](https://www.primereact.org/knob/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Knob extends React.Component<KnobProps, any> {

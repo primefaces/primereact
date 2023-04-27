@@ -2,7 +2,7 @@
  *
  * TreeTable is used to display hierarchical data in tabular format.
  *
- * [Live Demo](https://www.primefaces.org/primereact/treetable/)
+ * [Live Demo](https://www.primereact.org/treetable/)
  *
  * @module treetable
  *
@@ -11,75 +11,76 @@ import * as React from 'react';
 import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import TreeNode from '../treenode';
+import { IconType } from '../utils/utils';
 
 /**
- * @todo Write the documentation.
+ * Custom selection keys type.
  */
 interface TreeTableSelectionKeysType {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean | TreeTableCheckboxSelectionKeyType | undefined;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treetable checkbox selection type
  */
 interface TreeTableCheckboxSelectionKeyType {
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is checked or not.
      */
     checked?: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the checkbox is partially checked or not.
      */
     partialChecked?: boolean;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom expanded keys type.
  */
 type TreeTableExpandedKeysType = {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: boolean;
 };
 
 /**
- * @todo Write the documentation.
+ * Custom treetable sort meta.
  */
 interface TreeTableSortMeta {
     /**
-     * @todo Write the documentation.
+     * The field to sort against.
      */
     field: string;
     /**
-     * @todo Write the documentation.
+     * Sort order as integer.
      */
-    order: 1 | 0 | -1 | undefined | null;
+    order: 1 | 0 | -1 | null | undefined;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treetable filter metadata.
  */
 interface TreeTableFilterMetaData {
     /**
-     * @todo Write the documentation.
+     * Value to filter against.
      */
     value: any;
     /**
-     * @todo Write the documentation.
+     * Type of filter match.
      */
     matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom treetable filter meta.
  */
 interface TreeTableFilterMeta {
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: TreeTableFilterMetaData;
 }
@@ -111,7 +112,7 @@ interface TreeTableToggleEvent {
      */
     originalEvent: React.SyntheticEvent;
     /**
-     * @todo Write the documentation.
+     * Collapsed state as a boolean.
      */
     value: TreeTableExpandedKeysType;
 }
@@ -131,11 +132,11 @@ interface TreeTablePageEvent {
      */
     rows: number;
     /**
-     * @todo Write the documentation.
+     * Value of the new page.
      */
     page: number;
     /**
-     * @todo Write the documentation.
+     * Total number of pages.
      */
     pageCount: number;
 }
@@ -226,6 +227,62 @@ interface TreeTableColReorderEvent {
  */
 export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onContextMenu' | 'onSelect' | 'ref' | 'value'> {
     /**
+     * Whether to show it even there is only one page.
+     * @defaultValue true
+     */
+    alwaysShowPaginator?: boolean | undefined;
+    /**
+     * Icon of the checkbox when checked.
+     */
+    checkboxIcon?: IconType<TreeTableProps> | undefined;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
+    /**
+     * Style class of the node.
+     */
+    className?: string | undefined;
+    /**
+     * Defines whether the overall table width should change on column resize, valid values are "fit" and "expand".
+     * @defaultValue fit
+     */
+    columnResizeMode?: 'fit' | 'expand' | undefined;
+    /**
+     * A single key to control the selection with the context menu.
+     */
+    contextMenuSelectionKey?: string | undefined;
+    /**
+     * Template of the current page report element. Available placeholders are &#123;currentPage&#125;, &#123;totalPages&#125;, &#123;rows&#125;, &#123;first&#125;, &#123;last&#125; and &#123;totalRecords&#125;
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
+     */
+    currentPageReportTemplate?: string | undefined;
+    /**
+     * Default sort order of an unsorted column.
+     * @defaultValue 1
+     */
+    defaultSortOrder?: 1 | 0 | -1 | undefined | null;
+    /**
+     * Text to display when there is no data.
+     * @defaultValue No records found
+     */
+    emptyMessage?: string | undefined;
+    /**
+     * An array of keys to represent the state of the tree expansion state in controlled mode.
+     */
+    expandedKeys?: TreeTableExpandedKeysType | undefined;
+    /**
+     * Delay in milliseconds before filtering the data.
+     * @defaultValue 300
+     */
+    filterDelay?: number | undefined;
+    /**
+     * Locale to use in filtering. The default locale is the host environment's current locale.
+     * @defaultValue undefined
+     */
+    filterLocale?: string | undefined;
+    /**
      * Mode for filtering valid values are lenient and strict. Default is lenient.
      * @defaultValue lenient
      */
@@ -292,9 +349,8 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     loading?: boolean | undefined;
     /**
      * The icon to show while indicating data load is in progress.
-     * @defaultValue pi pi-spinner
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -362,6 +418,14 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     reorderableColumns?: boolean | undefined;
     /**
+     * Defines the reorder indicator down icon.
+     */
+    reorderIndicatorDownIcon?: IconType<TreeTableProps> | undefined;
+    /**
+     * Defines the reorder indicator up icon.
+     */
+    reorderIndicatorUpIcon?: IconType<TreeTableProps> | undefined;
+    /**
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
      */
@@ -410,6 +474,10 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * Name of the field to sort data by default.
      */
     sortField?: string | undefined;
+    /**
+     * Icon to display the current sorting status.
+     */
+    sortIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Defines whether sorting works on single column or on multiple columns.
      * @defaultValue single
@@ -520,22 +588,43 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     onUnselect?(event: TreeTableEvent): void;
     /**
      * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
-     * @param {TreeNode} data - @todo Write the documentation.
+     * @param {TreeNode} data - Value displayed by the treetable.
      */
     rowClassName?(data: TreeNode): object;
 }
 
 /**
+ * **PrimeReact - TreeTable**
+ *
+ * _TreeTable is used to display hierarchical data in tabular format._
+ *
+ * [Live Demo](https://www.primereact.org/treetable/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class TreeTable extends React.Component<TreeTableProps, any> {
     /**
-     * @todo Write the documentation.
-     * @param {T} value - @todo Write the documentation.
-     * @param {string} field - @todo Write the documentation.
-     * @param {string} mode - @todo Write the documentation.
+     * Filters the data.
+     * @param {T} value - The filter value
+     * @param {string} field - The filter field
+     * @param {string} mode - Filter match mode.
      */
-    public filter<T>(value: T, field: string, mode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined): void;
+    public filter<T>(
+        /**
+         * The filter value
+         */
+        value: T,
+        /**
+         * The filter field
+         */
+        field: string,
+        /**
+         * Filter match mode.
+         */
+        mode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined
+    ): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element

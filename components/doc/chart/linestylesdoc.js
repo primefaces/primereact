@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from '../../lib/chart/Chart';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function LineStylesDoc(props) {
     const [chartData, setChartData] = useState({});
@@ -12,7 +12,6 @@ export function LineStylesDoc(props) {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -41,9 +40,6 @@ export function LineStylesDoc(props) {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -74,6 +70,7 @@ export function LineStylesDoc(props) {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -85,7 +82,7 @@ export function LineStylesDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function LineStylesDoc() {
+export default function LineStylesDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -94,7 +91,6 @@ export default function LineStylesDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -123,9 +119,6 @@ export default function LineStylesDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -156,6 +149,7 @@ export default function LineStylesDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -170,7 +164,7 @@ export default function LineStylesDoc() {
 import React, { useState, useEffect } from 'react';
 import { Chart } from 'primereact/chart';
 
-export default function LineStylesDoc() {
+export default function LineStylesDemo() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
@@ -179,7 +173,6 @@ export default function LineStylesDoc() {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -208,9 +201,6 @@ export default function LineStylesDoc() {
                 }
             ]
         };
-
-        setChartData(data);
-
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -241,6 +231,7 @@ export default function LineStylesDoc() {
             }
         };
 
+        setChartData(data);
         setChartOptions(options);
     }, []);
     
@@ -256,7 +247,7 @@ export default function LineStylesDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>A line chart or line graph is a type of chart which displays information as a series of data points called 'markers' connected by straight line segments.</p>
+                <p>Various styles of a line series can be customized to display customizations like an area chart.</p>
             </DocSectionText>
             <div className="card">
                 <Chart type="line" data={chartData} options={chartOptions} />

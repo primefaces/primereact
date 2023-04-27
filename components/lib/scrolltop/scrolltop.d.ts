@@ -2,7 +2,7 @@
  *
  * ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly.
  *
- * [Live Demo](https://www.primefaces.org/primereact/scrolltop/)
+ * [Live Demo](https://www.primereact.org/scrolltop/)
  *
  * @module scrolltop
  *
@@ -27,8 +27,7 @@ export interface ScrollTopProps {
      */
     threshold?: number;
     /**
-     * Icon to display.
-     * @defaultValue pi pi-chevron-up
+     * Name of the icon or JSX.Element for icon.
      */
     icon?: IconType<ScrollTopProps>;
     /**
@@ -65,6 +64,14 @@ export interface ScrollTopProps {
 }
 
 /**
+ * **PrimeReact - ScrollTop**
+ *
+ * _ScrollTop gets displayed after a certain scroll position and used to navigates to the top of the page quickly._
+ *
+ * [Live Demo](https://www.primereact.org/scrolltop/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ScrollTop extends React.Component<ScrollTopProps, any> {

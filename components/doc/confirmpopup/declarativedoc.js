@@ -49,7 +49,7 @@ export default function DeclarativeDemo() {
             <Toast ref={toast} />
             <ConfirmPopup target={buttonEl.current} visible={visible} onHide={() => setVisible(false)} 
                 message="Are you sure you want to proceed?" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>
         </>
@@ -80,7 +80,7 @@ export default function DeclarativeDemo() {
             <Toast ref={toast} />
             <ConfirmPopup target={buttonEl.current} visible={visible} onHide={() => setVisible(false)} 
                 message="Are you sure you want to proceed?" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>
         </>
@@ -98,7 +98,7 @@ export default function DeclarativeDemo() {
             </DocSectionText>
             <Toast ref={toast} />
             <ConfirmPopup target={buttonEl.current} visible={visible} onHide={() => setVisible(false)} message="Are you sure you want to proceed?" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
             </div>
             <DocSectionCode code={code} />

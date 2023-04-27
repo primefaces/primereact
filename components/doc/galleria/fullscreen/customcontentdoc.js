@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useEffect, useRef, useState } from 'react';
 import { PhotoService } from '../../../../service/PhotoService';
 import { Galleria } from '../../../lib/galleria/Galleria';
@@ -8,7 +7,6 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function CustomContentDoc(props) {
     const [images, setImages] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const galleria = useRef(null);
 
     useEffect(() => {
@@ -16,11 +14,11 @@ export function CustomContentDoc(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={`${contextPath}/${item.itemImageSrc}`} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     };
 
     const thumbnailTemplate = (item) => {
-        return <img src={`${contextPath}/${item.thumbnailImageSrc}`} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     };
 
     const code = {
@@ -32,7 +30,7 @@ export function CustomContentDoc(props) {
 <div className="grid" style={{ maxWidth: '400px' }}>
     {
         images && images.map((image, index) => {
-            let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+            let imgEl = <img src={image.thumbnailImageSrc} onClick={
                 () => {setActiveIndex(index); galleria.current.show()}
             } />
             return (
@@ -59,11 +57,11 @@ export default function CustomContentDemo() {
     }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png''} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png''} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     return (
@@ -74,7 +72,7 @@ export default function CustomContentDemo() {
             <div className="grid" style={{ maxWidth: '400px' }}>
                 {
                     images && images.map((image, index) => {
-                        let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png''} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+                        let imgEl = <img src={image.thumbnailImageSrc} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
                             () => {setActiveIndex(index); galleria.current.show()}
                         } />
                         return (
@@ -104,11 +102,11 @@ export default function CustomContentDemo() {
     }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={item.alt} style={{ display: 'block' }} />;
+        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;
     }
 
     return (
@@ -119,7 +117,7 @@ export default function CustomContentDemo() {
             <div className="grid" style={{ maxWidth: '400px' }}>
                 {
                     images && images.map((image, index) => {
-                        let imgEl = <img src={image.thumbnailImageSrc} onError={(e) => e.target.src='https://www.primefaces.org/cdn/images/placeholder.png'} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
+                        let imgEl = <img src={image.thumbnailImageSrc} alt={image.alt} style={{ cursor: 'pointer' }} onClick={
                             () => {setActiveIndex(index); galleria.current.show()}
                         } />
                         return (
@@ -137,8 +135,8 @@ export default function CustomContentDemo() {
         data: `
 /* PhotoService */
 {
-    itemImageSrc: 'images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },
@@ -174,7 +172,7 @@ export default function CustomContentDemo() {
                             return (
                                 <div className="col-4" key={index}>
                                     <img
-                                        src={`${contextPath}/${image.thumbnailImageSrc}`}
+                                        src={image.thumbnailImageSrc}
                                         alt={image.alt}
                                         style={{ cursor: 'pointer' }}
                                         onClick={() => {

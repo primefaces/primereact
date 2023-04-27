@@ -1,3 +1,10 @@
+/**
+ *
+ * This module contains the data interface for nodes in tree components.
+ *
+ * @module treenode
+ *
+ */
 import { IconType } from '../utils';
 
 export default interface TreeNode {

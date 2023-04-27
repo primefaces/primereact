@@ -1,45 +1,32 @@
-import { useState } from 'react';
 import { Password } from '../../lib/password/Password';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
-    const [value, setValue] = useState('');
-
     const code = {
         basic: `
-<Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} className="p-invalid" />
+<Password className="p-invalid" />
         `,
         javascript: `
-import React, { useState } from "react";
+import React from "react";
 import { Password } from 'primereact/password';
 
-export default function InvalidDoc() {
-    const [value, setValue] = useState('');
-
+export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column">
-                <label htmlFor="password">Password</label>
-                <Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} className="p-invalid" />
-            </div>
+            <Password className="p-invalid" />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useState } from "react";
+import React from "react";
 import { Password } from 'primereact/password';
 
-export default function InvalidDoc() {
-    const [value, setValue] = useState<string>('');
-
+export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center">
-            <div className="flex flex-column">
-                <label htmlFor="password">Password</label>
-                <Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} className="p-invalid" />
-            </div>
+            <Password className="p-invalid" />
         </div>
     )
 }
@@ -49,14 +36,12 @@ export default function InvalidDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. IT'S WRITTEN WITH INPUTCLASSNAME  */}
-                <p></p>
+                <p>
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center justify-content-center ">
-                <div className="flex flex-column">
-                    <label htmlFor="password">Password</label>
-                    <Password inputId="password" value={value} onChange={(e) => setValue(e.target.value)} className="p-invalid" />
-                </div>
+            <div className="card flex justify-content-center">
+                <Password className="p-invalid" />
             </div>
             <DocSectionCode code={code} />
         </>

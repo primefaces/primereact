@@ -29,11 +29,6 @@
     position: relative;
 }
 
-/* Github #3122: Prevent animation flickering */
-.p-dialog:not([class*='p-dialog-']) {
-    display: none;
-}
-
 .p-dialog-content {
     overflow-y: auto;
     flex-grow: 1;
@@ -93,7 +88,7 @@
 .p-dialog-exit-active {
     opacity: 0;
     transform: scale(0.7);
-    transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Top, Bottom, Left, Right, Top* and Bottom* */
@@ -105,11 +100,11 @@
 .p-dialog-top-right .p-dialog,
 .p-dialog-bottom-left .p-dialog,
 .p-dialog-bottom-right .p-dialog {
-    margin: .75em;
+    margin: 0.75em;
 }
 
 .p-dialog-top .p-dialog-enter,
-.p-dialog-top .p-dialog-exit-active  {
+.p-dialog-top .p-dialog-exit-active {
     transform: translate3d(0px, -100%, 0px);
 }
 
@@ -145,7 +140,7 @@
 .p-dialog-top-right .p-dialog-enter-active,
 .p-dialog-bottom-right .p-dialog-enter-active {
     transform: translate3d(0px, 0px, 0px);
-    transition: all .3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .p-dialog-top .p-dialog-exit-active,
@@ -156,7 +151,7 @@
 .p-dialog-right .p-dialog-exit-active,
 .p-dialog-top-right .p-dialog-exit-active,
 .p-dialog-bottom-right .p-dialog-exit-active {
-    transition: all .3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 /* Maximize */

@@ -1,7 +1,21 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<Button icon="pi pi-check" aria-label="Submit" />
+
+<Button icon="pi pi-check" label="Submit" />
+
+<Button className="youtube p-0" aria-label="Youtube">
+    <i className="pi pi-youtube px-2"></i>
+    <span className="px-3">Youtube</span>
+</Button>
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -11,16 +25,7 @@ export function AccessibilityDoc() {
                     button is icon only or custom templating is used, it is recommended to use <i>aria-label</i> so that screen readers would be able to read the element properly.
                 </p>
 
-                {`
-<Button icon="pi pi-check" aria-label="Submit" />
-
-<Button icon="pi pi-check" label="Submit" />
-
-<Button className="youtube p-0" aria-label="Youtube">
-    <i className="pi pi-youtube px-2"></i>
-    <span className="px-3">Youtube</span>
-</Button>
-`}
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

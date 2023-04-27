@@ -4,40 +4,38 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
+    const [value, setValue] = useState(null);
+
     const code = {
         basic: `
-<TriStateCheckbox className="p-invalid" />
-<label>Invalid</label>
+<TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} className="p-invalid" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
+    const [value, setValue] = useState(null);
 
     return (
-        <div className="card flex justify-content-center align-items-center">
-            <div className="mr-2">
-                <TriStateCheckbox className="p-invalid" />
-            </div>
-            <label>Invalid</label>
+        <div className="card flex flex-column align-items-center gap-3">
+            <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} className="p-invalid" />
+            <label>{String(value)}</label>
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { TriStateCheckbox, TriStateCheckboxChangeParams } from 'primereact/tristatecheckbox';
+import { TriStateCheckbox, TriStateCheckboxChangeEvent } from 'primereact/tristatecheckbox';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [value, setValue] = useState<boolean | undefined | null>(null);
 
     return (
-        <div className="card flex justify-content-center align-items-center">
-            <div className="mr-2">
-                <TriStateCheckbox className="p-invalid" />
-            </div>
-            <label>Invalid</label>
+        <div className="card flex flex-column align-items-center gap-3">
+            <TriStateCheckbox value={value} onChange={(e : TriStateCheckboxChangeEvent) => setValue(e.value)} className="p-invalid" />
+            <label>{String(value)}</label>
         </div>
     );
 }
@@ -47,14 +45,13 @@ export default function InvalidDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center">
-                <div className="mr-2">
-                    <TriStateCheckbox className="p-invalid" />
-                </div>
-                <label>Invalid</label>
+            <div className="card flex flex-column align-items-center gap-3">
+                <TriStateCheckbox value={value} onChange={(e) => setValue(e.value)} className="p-invalid" />
+                <label>{String(value)}</label>
             </div>
             <DocSectionCode code={code} />
         </>

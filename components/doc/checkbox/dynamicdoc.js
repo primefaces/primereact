@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DynamicDoc(props) {
     const categories = [
@@ -23,16 +23,14 @@ export function DynamicDoc(props) {
 
     const code = {
         basic: `
-<div className="flex flex-column gap-3">
-    {categories.map((category) => {
-        return (
-            <div key={category.key} className="flex align-items-center">
-                <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                <label htmlFor={category.key} className="ml-2">{category.name}</label>
-            </div>
-        );
-    })}
-</div>
+{categories.map((category) => {
+    return (
+        <div key={category.key} className="flex align-items-center">
+            <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
+            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+        </div>
+    );
+})}
         `,
         javascript: `
 import React, { useState } from "react";
@@ -59,13 +57,15 @@ export default function DynamicDemo() {
     };
 
     return (
-        <div "card flex justify-content-center">
+        <div className="card flex justify-content-center">
             <div className="flex flex-column gap-3">
                 {categories.map((category) => {
                     return (
                         <div key={category.key} className="flex align-items-center">
                             <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                            <label htmlFor={category.key} className="ml-2">
+                                {category.name}
+                            </label>
                         </div>
                     );
                 })}
@@ -92,7 +92,7 @@ export default function DynamicDemo() {
     ];
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([categories[1]]);
 
-    const onCategoryChange = (e: CheckboxChangeParams) => {
+    const onCategoryChange = (e: CheckboxChangeEvent) => {
         let _selectedCategories = [...selectedCategories];
 
         if (e.checked)
@@ -104,13 +104,15 @@ export default function DynamicDemo() {
     };
 
     return (
-        <div "card flex justify-content-center">
+        <div className="card flex justify-content-center">
             <div className="flex flex-column gap-3">
                 {categories.map((category) => {
                     return (
                         <div key={category.key} className="flex align-items-center">
                             <Checkbox inputId={category.key} name="category" value={category} onChange={onCategoryChange} checked={selectedCategories.some((item) => item.key === category.key)} />
-                            <label htmlFor={category.key} className="ml-2">{category.name}</label>
+                            <label htmlFor={category.key} className="ml-2">
+                                {category.name}
+                            </label>
                         </div>
                     );
                 })}

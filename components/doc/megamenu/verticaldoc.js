@@ -121,7 +121,7 @@ export function VerticalDoc(props) {
     ];
     const code = {
         basic: `
-<MegaMenu model={items} orientation="vertical" />        
+<MegaMenu model={items} orientation="vertical" breakpoint="767px" />        
 `,
         javascript: `
 import React from 'react'; 
@@ -243,7 +243,7 @@ export default function VerticalDemo() {
 
     return (
         <div className="card">
-            <MegaMenu model={items} orientation="vertical" />
+            <MegaMenu model={items} orientation="vertical" breakpoint="767px" />
         </div>
     )
 }
@@ -369,7 +369,7 @@ export default function VerticalDemo() {
 
     return (
         <div className="card">
-            <MegaMenu model={items} orientation="vertical" />
+            <MegaMenu model={items} orientation="vertical" breakpoint="767px" />
         </div>
     )
 }
@@ -384,7 +384,7 @@ export default function VerticalDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <MegaMenu model={items} orientation="vertical" />
+                <MegaMenu model={items} orientation="vertical" breakpoint="767px" />
             </div>
             <DocSectionCode code={code} />
         </>

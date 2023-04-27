@@ -2,14 +2,14 @@
  *
  * InputNumber is an input component to provide numerical input.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputnumber/)
+ * [Live Demo](https://www.primereact.org/inputnumber/)
  *
  * @module inputnumber
  *
  */
 import * as React from 'react';
 import { InputText } from '../inputtext/inputtext';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
@@ -74,12 +74,10 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     decrementButtonClassName?: string | undefined;
     /**
      * Style class of the increment button.
-     * @defaultValue pi pi-caret-up
      */
     incrementButtonIcon?: string | undefined;
     /**
      * Style class of the decrement button.
-     * @defaultValue pi pi-caret-down
      */
     decrementButtonIcon?: string | undefined;
     /**
@@ -252,6 +250,14 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
+ * **PrimeReact - InputNumber**
+ *
+ * _InputNumber is an input component to provide numerical input._
+ *
+ * [Live Demo](https://www.primereact.org/inputnumber/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class InputNumber extends React.Component<InputNumberProps, any> {

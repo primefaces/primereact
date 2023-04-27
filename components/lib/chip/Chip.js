@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-
+import { ChipBase } from './ChipBase';
+import { TimesCircleIcon } from '../icons/timescircle';
 export const Chip = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ChipBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
 
@@ -23,6 +26,8 @@ export const Chip = React.memo(
 
         const createContent = () => {
             let content = [];
+            const iconProps = { key: 'removeIcon', tabIndex: 0, className: 'p-chip-remove-icon', onClick: close, onKeyDown };
+            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
 
             if (props.image) {
                 content.push(<img key="image" src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>);
@@ -39,14 +44,14 @@ export const Chip = React.memo(
             }
 
             if (props.removable) {
-                content.push(IconUtils.getJSXIcon(props.removeIcon, { key: 'removeIcon', tabIndex: 0, className: 'p-chip-remove-icon', onClick: close, onKeyDown }, { props }));
+                content.push(IconUtils.getJSXIcon(icon, { ...iconProps }, { props }));
             }
 
             return content;
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Chip.defaultProps);
+            const otherProps = ChipBase.getOtherProps(props);
             const className = classNames(
                 'p-chip p-component',
                 {
@@ -74,17 +79,3 @@ export const Chip = React.memo(
 );
 
 Chip.displayName = 'Chip';
-Chip.defaultProps = {
-    __TYPE: 'Chip',
-    label: null,
-    icon: null,
-    image: null,
-    removable: false,
-    removeIcon: 'pi pi-times-circle',
-    className: null,
-    style: null,
-    template: null,
-    imageAlt: 'chip',
-    onImageError: null,
-    onRemove: null
-};

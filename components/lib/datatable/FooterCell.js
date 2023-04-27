@@ -1,13 +1,12 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 
 export const FooterCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
 
-    const getColumnProp = (prop) => {
-        return props.column.props[prop];
-    };
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
 
     const getStyle = () => {
         const footerStyle = getColumnProp('footerStyle');

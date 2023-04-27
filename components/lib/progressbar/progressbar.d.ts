@@ -2,7 +2,7 @@
  *
  * ProgressBar is a process status indicator.
  *
- * [Live Demo](https://www.primefaces.org/primereact/progressbar)
+ * [Live Demo](https://www.primereact.org/progressbar)
  *
  * @module progressbar
  *
@@ -49,6 +49,14 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
 }
 
 /**
+ * **PrimeReact - ProgressBar**
+ *
+ * _ProgressBar is a process status indicator._
+ *
+ * [Live Demo](https://www.primereact.org/progressbar/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ProgressBar extends React.Component<ProgressBarProps, any> {

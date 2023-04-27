@@ -3,39 +3,36 @@ import { FileUpload } from '../../lib/fileupload/FileUpload';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function AutoDoc(props) {
     const toast = useRef(null);
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
-    const onBasicUploadAuto = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
 
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
-
+<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function AutoDoc() {
+export default function AutoDemo() {
     const toast = useRef(null);
 
-    const onBasicUploadAuto = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
-    
+        
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
-        </div>
+            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
+        </div>  
     )
 }
         `,
@@ -44,38 +41,33 @@ import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function AutoDoc() {
-    const toast = useRef(null);
+export default function AutoDemo() {
+    const toast = useRef<Toast>(null);
 
-    const onBasicUploadAuto = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
-    
+        
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
-        </div>
+            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
+        </div>  
     )
 }
-        `,
-        php: `
-/* public/upload.php */
-
-<?php
-header ("Access-Control-Allow-Origin: *");
-echo '<p>Fake Upload Process</p>'; ?>
-    `
+        `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
+                <p>
+                    When <i>auto</i> property is enabled, a file gets uploaded instantly after selection.
+                </p>
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" maxFileSize={1000000} onUpload={onBasicUploadAuto} auto chooseLabel="Browse" />
+                <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} auto chooseLabel="Browse" />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,16 +1,13 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/timeline/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/timeline/styledoc';
+import { AlignmentDoc } from '../../components/doc/timeline/alignmentdoc';
+import { BasicDoc } from '../../components/doc/timeline/basicdoc';
 import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
-import { AlignmentDoc } from '../../components/doc/timeline/aligndoc';
-import { OppositeContentDoc } from '../../components/doc/timeline/oppositecontentdoc';
-import { CustomizedDoc } from '../../components/doc/timeline/customizeddoc';
 import { ImportDoc } from '../../components/doc/timeline/importdoc';
+import { OppositeDoc } from '../../components/doc/timeline/oppositedoc';
+import { StyleDoc } from '../../components/doc/timeline/styledoc';
+import { TemplateDoc } from '../../components/doc/timeline/templatedoc';
 
 const TimelineDemo = () => {
     const docs = [
@@ -20,19 +17,24 @@ const TimelineDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'alignment',
             label: 'Alignment',
             component: AlignmentDoc
         },
         {
-            id: 'oppositecontent',
-            label: 'Opposite Content',
-            component: OppositeContentDoc
+            id: 'opposite',
+            label: 'Opposite',
+            component: OppositeDoc
         },
         {
-            id: 'customized',
-            label: 'Customized',
-            component: CustomizedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'horizontal',
@@ -48,36 +50,10 @@ const TimelineDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Timeline Component</title>
-                <meta name="description" content="Timeline visualizes a series of chained events." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Timeline</h1>
-                    <p>Timeline visualizes a series of chained events.</p>
-                </div>
-
-                <DocActions github="timeline/index.js" />
-            </div>
-
-            <div className="content-section doc timeline-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={['Timeline']} />;
 };
 
 export default TimelineDemo;

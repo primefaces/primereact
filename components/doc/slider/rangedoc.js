@@ -8,7 +8,7 @@ export function RangeDoc(props) {
 
     const code = {
         basic: `
-<Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />
+<Slider value={value} onChange={(e) => setValue(e.value)} range />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -18,19 +18,23 @@ export default function RangeDemo() {
     const [value, setValue] = useState([20,80]);
 
     return (
-        <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" range />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" range />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Slider, SliderChangeParams } from "primereact/slider";
+import { Slider, SliderChangeEvent } from "primereact/slider";
 
 export default function RangeDemo() {
     const [value, setValue] = useState<number[]>([20,80]);
 
     return (
-        <Slider value={value} onChange={(e: SliderChangeParams) => setValue(e.value)} className="w-14rem" range/>
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e: SliderChangeEvent) => setValue(e.value)} className="w-14rem" range/>
+        </div>
     )
 }
         `
@@ -40,7 +44,7 @@ export default function RangeDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Range slider provides two handles to define two values. Enable <i>range</i> property and bind an array to implement a range slider.
+                    When <i>range</i> property is present, slider provides two handles to define two values. In range mode, value should be an array instead of a single value.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

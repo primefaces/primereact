@@ -2,15 +2,16 @@
  *
  * Chips is used to enter multiple values on an input field.
  *
- * [Live Demo](https://www.primefaces.org/primereact/chips/)
+ * [Live Demo](https://www.primereact.org/chips/)
  *
  * @module chips
  *
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
  * @group Others
@@ -114,6 +115,10 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      */
     removable?: boolean | ((options: ChipsRemovableOptions) => boolean);
     /**
+     * Icon of the remove element.
+     */
+    removeIcon?: IconType<ChipsProps> | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;
@@ -188,6 +193,14 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
 }
 
 /**
+ * **PrimeReact - Chips**
+ *
+ * _Chips is used to enter multiple values on an input field._
+ *
+ * [Live Demo](https://www.primereact.org/chips/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Chips extends React.Component<ChipsProps, any> {

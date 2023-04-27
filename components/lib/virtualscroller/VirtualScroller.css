@@ -44,3 +44,12 @@
 .p-virtualscroller-loading-icon {
     font-size: 2rem;
 }
+
+.p-virtualscroller-horizontal > .p-virtualscroller-content {
+    display: flex;
+}
+
+/* Inline */
+.p-virtualscroller-inline .p-virtualscroller-content {
+    position: static;
+}

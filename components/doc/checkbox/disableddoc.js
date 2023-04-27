@@ -1,6 +1,6 @@
 import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const code = {
@@ -37,7 +37,7 @@ export default function DisabledDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

@@ -1,6 +1,6 @@
 import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const code = {
@@ -11,8 +11,7 @@ export function DisabledDoc(props) {
 import React from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <CascadeSelect disabled placeholder="Disabled" style={{ minWidth: '14rem' }} />
@@ -24,8 +23,7 @@ export default function DisabledDoc() {
 import React from "react";
 import { CascadeSelect } from 'primereact/cascadeselect';
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <CascadeSelect disabled placeholder="Disabled" style={{ minWidth: '14rem' }} />
@@ -39,7 +37,7 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">

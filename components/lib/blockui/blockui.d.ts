@@ -2,7 +2,7 @@
  *
  * BlockUI represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/blockui)
+ * [Live Demo](https://www.primereact.org/blockui)
  *
  * @module blockui
  *
@@ -62,6 +62,14 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
 }
 
 /**
+ * **PrimeReact - BlockUI**
+ *
+ * _BlockUI represents people using icons, labels and images._
+ *
+ * [Live Demo](https://www.primereact.org/blockui/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class BlockUI extends React.Component<BlockUIProps, any> {

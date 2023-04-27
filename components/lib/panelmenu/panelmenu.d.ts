@@ -2,14 +2,15 @@
  *
  * PanelMenu is a hybrid of accordion-tree components.
  *
- * [Live Demo](https://www.primefaces.org/primereact/panelmenu/)
+ * [Live Demo](https://www.primereact.org/panelmenu/)
  *
  * @module panelmenu
  *
  */
 import * as React from 'react';
-import { MenuItem } from '../menuitem';
 import { CSSTransitionProps } from '../csstransition';
+import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in PanelMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -26,6 +27,10 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     multiple?: boolean | undefined;
     /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<PanelMenuProps> | undefined;
+    /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
     transitionOptions?: CSSTransitionProps | undefined;
@@ -37,6 +42,14 @@ export interface PanelMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
 }
 
 /**
+ * **PrimeReact - PanelMenu**
+ *
+ * _PanelMenu is a hybrid of accordion-tree components._
+ *
+ * [Live Demo](https://www.primereact.org/panelmenu/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class PanelMenu extends React.Component<PanelMenuProps, any> {

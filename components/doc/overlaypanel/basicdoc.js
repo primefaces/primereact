@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { useRef } from 'react';
 import { Button } from '../../lib/button/Button';
 import { OverlayPanel } from '../../lib/overlaypanel/OverlayPanel';
@@ -6,14 +5,13 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const op = useRef(null);
 
     const code = {
         basic: `
 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
 <OverlayPanel ref={op}>
-    <img src="contextPath + 'images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
+    <img src="/images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
 </OverlayPanel>
         `,
         javascript: `
@@ -28,7 +26,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
             <OverlayPanel ref={op}>
-                <img src={contextPath + 'images/product/bamboo-watch.jpg'} alt="Bamboo Watch" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
             </OverlayPanel>
         </div>
     );
@@ -46,7 +44,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
             <OverlayPanel ref={op}>
-                <img src={contextPath + 'images/product/bamboo-watch.jpg'} alt="Bamboo Watch" onError={(e) => (e.target.src = 'https://www.primefaces.org/cdn/images/placeholder.png')}></img>
+                <img src={'https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
             </OverlayPanel>
         </div>
     );
@@ -64,7 +62,7 @@ export default function BasicDemo() {
             <div className="card flex justify-content-center">
                 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
                 <OverlayPanel ref={op}>
-                    <img src={contextPath + 'images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>
+                    <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch"></img>
                 </OverlayPanel>
             </div>
             <DocSectionCode code={code} />

@@ -2,222 +2,223 @@
  *
  * VirtualScroller is a performant approach to handle huge data efficiently.
  *
- * [Live Demo](https://www.primefaces.org/primereact/virtualscroller/)
+ * [Live Demo](https://www.primereact.org/virtualscroller/)
  *
  * @module virtualscroller
  *
  */
 
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
- * @todo Write the documentation.
+ * Custom virtual scroller options type.
  */
 interface VirtualScrollerOptionsType {
     /**
-     * @todo Write the documentation.
+     * Left position of scroll.
      */
     left: number;
     /**
-     * @todo Write the documentation.
+     * Top position of scroll
      */
     top: number;
     /**
-     * @todo Write the documentation.
+     * Behavior of scroll, valid values are 'auto' and 'smooth'
      */
     behavior: 'auto' | 'smooth';
 }
 
 /**
- * @todo Write the documentation.
+ * Viewport rendered range.
  */
 interface VirtualScrollerViewportRenderedRange {
     /**
-     * @todo Write the documentation.
+     * The first number of the current viewport.
      */
     first: number;
     /**
-     * @todo Write the documentation.
+     * The last number of the current viewport.
      */
     last: number;
 }
 
 /**
- * @todo Write the documentation.
+ * Virtual scroller rendered range.
  */
 interface VirtualScrollerRenderedRange {
     /**
-     * @todo Write the documentation.
+     * First index of the new data range to be rendered.
      */
     first: number;
     /**
-     * @todo Write the documentation.
+     * Last index of the new data range to be rendered.
      */
     last: number;
     /**
-     * @todo Write the documentation.
+     * Viewport of the rendered range.
      */
     viewport: VirtualScrollerViewportRenderedRange;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom virtual scroller state.
  */
 interface VirtualScrollerState {
     /**
-     * @todo Write the documentation.
+     * Number of rows to be rendered.
      */
     rows: number;
     /**
-     * @todo Write the documentation.
+     * Number of columns to be rendered.
      */
     cols: number;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom template options.
  */
 interface VirtualScrollerTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Index of the item.
      */
     index: number;
     /**
-     * @todo Write the documentation.
+     * Total numbers of items.
      */
     count: number;
     /**
-     * @todo Write the documentation.
+     * Whether this is the first item.
      */
     first: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether this is the last item.
      */
     last: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the index is even.
      */
     even: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the index is odd.
      */
     odd: boolean;
     /**
-     * @todo Write the documentation.
+     * The props of the virtual scroller.
      */
     props: VirtualScrollerProps;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom template options.
  * @extends VirtualScrollerTemplateOptions
  */
 interface VirtualScrollerLoadingTemplateOptions extends VirtualScrollerTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Total number of columns in a row in 'both' orientation mode in view.
      */
     numCols: number;
     /**
-     * @todo Write the documentation.
+     * Extra options.
      */
     [key: string]: any;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom loader icon template props.
  */
 interface VirtualScrollerLoaderIconTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Style class of the loader icon.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * The JSX element that represents the loader icon.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * The props of the VirtualScroller component.
      */
     props: VirtualScrollerProps;
 }
 
 /**
- * @todo Write the documentation.
+ * Custom content template options.
  */
 interface VirtualScrollerContentTemplateOptions {
     /**
-     * @todo Write the documentation.
+     * Style class of the wrapper element.
      */
     className: string;
     /**
-     * @todo Write the documentation.
+     * Ref of wrapper element.
      */
     contentRef: any;
     /**
-     * @todo Write the documentation.
+     * Ref of spacer element.
      */
     spacerRef: any;
     /**
-     * @todo Write the documentation.
+     * Ref of sticky element in content.
      */
     stickyRef: any;
     /**
-     * @todo Write the documentation.
+     * Loaded data.
      */
     items: any[] | any[][] | undefined | null;
     /**
-     * @todo Write the documentation.
-     * @param {number} index - @todo Write a description
+     * Information of any item.
+     * @param {number} index - Index of the template item.
      */
     getItemOptions(index: number): VirtualScrollerTemplateOptions;
     /**
-     * @todo Write the documentation.
+     * Items of wrapper element.
      */
     children: any;
     /**
-     * @todo Write the documentation.
+     * Default wrapper element.
      */
     element: JSX.Element;
     /**
-     * @todo Write the documentation.
+     * Props of VirtualScroller component.
      */
     props: VirtualScrollerProps;
     /**
-     * @todo Write the documentation.
+     * Whether the data is loaded.
      */
     loading: boolean;
     /**
-     * @todo Write the documentation.
-     * @param {number} index - @todo Write a description
-     * @param {object} ext - @todo Write a description
+     * Information of any item during the loading.
+     * @param {number} index - Index of the item.
+     * @param {object} ext - The extra options to pass to the content.
      */
     getLoaderOptions(index: number, ext?: object): VirtualScrollerLoadingTemplateOptions;
     /**
-     * @todo Write the documentation.
+     * Template of loading item.
      */
     loadingTemplate: React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
     /**
-     * @todo Write the documentation.
+     * The height/width of item according to orientation.
      */
     itemSize: number | number[];
     /**
-     * @todo Write the documentation.
+     * Rows of the virtual scroller.
      */
     rows: any[];
     /**
-     * @todo Write the documentation.
+     * Columns of the virtual scroller.
      */
     columns: any[];
     /**
-     * @todo Write the documentation.
+     * Whether the orientation is vertical.
      */
     vertical: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the orientation is horizontal.
      */
     horizontal: boolean;
     /**
-     * @todo Write the documentation.
+     * Whether the orientation is both.
      */
     both: boolean;
 }
@@ -264,6 +265,11 @@ export interface VirtualScrollerProps {
      */
     className?: string | undefined;
     /**
+     * Index of the element in tabbing order.
+     * @defaultValue 0
+     */
+    tabIndex?: number | undefined;
+    /**
      * An array of objects to display.
      */
     items?: any[] | any[][] | undefined | null;
@@ -285,6 +291,11 @@ export interface VirtualScrollerProps {
      */
     orientation?: 'vertical' | 'horizontal' | 'both' | undefined;
     /**
+     * Used to specify how many items to load in each load method in lazy mode.
+     * @defaultValue 0
+     */
+    step?: number | undefined;
+    /**
      * Determines how many additional elements to add to the DOM outside of the view. According to the scrolls made up and down, extra items are added in a certain algorithm in the form of multiples of this number. Default value is half the number of items shown in the view.
      */
     numToleratedItems?: number | undefined;
@@ -298,6 +309,16 @@ export interface VirtualScrollerProps {
      * @defaultValue 10
      */
     resizeDelay?: number | undefined;
+    /**
+     * Used to append each loaded item to top without removing any items from the DOM. Using very large data may cause the browser to crash.
+     * @defaultValue false
+     */
+    appendOnly?: boolean | undefined;
+    /**
+     * When enabled, positions the content as inline.
+     * @defaultValue false
+     */
+    inline?: boolean | undefined;
     /**
      * Defines if data is loaded and interacted with in lazy manner.
      * @defaultValue false
@@ -314,7 +335,7 @@ export interface VirtualScrollerProps {
      */
     loaderDisabled?: boolean | undefined;
     /**
-     * @todo Write the documentation.
+     * Columns of the virtual scroller for vertical option.
      */
     columns?: any | undefined;
     /**
@@ -338,11 +359,16 @@ export interface VirtualScrollerProps {
      */
     showLoader?: boolean | undefined;
     /**
+     * The icon to show while indicating data load is in progress.
+     */
+    loadingIcon?: IconType<VirtualScrollerProps> | undefined;
+    /**
      * The template of loader.
      */
     loadingTemplate?: React.ReactNode | ((options: VirtualScrollerLoadingTemplateOptions) => React.ReactNode);
     /**
      * The template of loader's icon.
+     * @deprecated Since v9.2.3, use `loadingIcon` instead.
      */
     loaderIconTemplate?: React.ReactNode | ((options: VirtualScrollerLoaderIconTemplateOptions) => React.ReactNode);
     /**
@@ -355,7 +381,7 @@ export interface VirtualScrollerProps {
     contentTemplate?: React.ReactNode | ((options: VirtualScrollerContentTemplateOptions) => React.ReactNode);
     /**
      * Callback to invoke when scroll position changes.
-     * @param {React.UIEvent<HTMLElement>} event - @todo Write the documentation.
+     * @param {React.UIEvent<HTMLElement>} event - Browser event
      */
     onScroll?(event: React.UIEvent<HTMLElement>): void;
     /**
@@ -376,6 +402,14 @@ export interface VirtualScrollerProps {
 }
 
 /**
+ * **PrimeReact - VirtualScroller**
+ *
+ * _VirtualScroller is a performant approach to handle huge data efficiently._
+ *
+ * [Live Demo](https://www.primereact.org/virtualscroller/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class VirtualScroller extends React.Component<VirtualScrollerProps, any> {
@@ -386,20 +420,20 @@ export declare class VirtualScroller extends React.Component<VirtualScrollerProp
     public getElementRef(): React.Ref<HTMLDivElement>;
     /**
      * Scroll to move to a specific position.
-     * @param {VirtualScrollerOptionsType} options
+     * @param {VirtualScrollerOptionsType} options - Custom virtual scroller options.
      */
     public scrollTo(options: VirtualScrollerOptionsType): void;
     /**
      * Scroll to move to a specific item.
-     * @param {number} index - @todo Write the documentation.
-     * @param {'auto' | 'smooth'} behavior - @todo Write the documentation.
+     * @param {number} index - Index of item according to orientation mode.
+     * @param {'auto' | 'smooth'} behavior - Behavior of scroll, valid values are 'auto' and 'smooth'
      */
     public scrollToIndex(index: number | number[], behavior?: 'auto' | 'smooth'): void;
     /**
      * It is used to move the specified index into the view. It is a method that will usually be needed when keyboard support is added to the virtualScroller component.
-     * @param {number} index - @todo Write the documentation.
-     * @param {'to-start' | 'to-end'} to - @todo Write the documentation.
-     * @param {'auto' | 'smooth'} behavior - @todo Write the documentation.
+     * @param {number} index - Index of item according to orientation mode.
+     * @param {'to-start' | 'to-end'} to - Defines the location of the item in view, valid values are 'to-start' and 'to-end'.
+     * @param {'auto' | 'smooth'} behavior - Behavior of scroll, valid values are 'auto' and 'smooth'
      */
     public scrollInView(index: number | number[], to: 'to-start' | 'to-end', behavior?: 'auto' | 'smooth'): void;
     /**

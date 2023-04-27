@@ -1,13 +1,10 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ApiDoc } from '../../components/doc/picklist/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/picklist/styledoc';
+import { BasicDoc } from '../../components/doc/picklist/basicdoc';
+import { FilterDoc } from '../../components/doc/picklist/filterdoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
-import { PickListDoc } from '../../components/doc/picklist/picklistdoc';
+import { StyleDoc } from '../../components/doc/picklist/styledoc';
 
 const PickListDemo = () => {
     const docs = [
@@ -17,9 +14,14 @@ const PickListDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'picklist',
-            label: 'PickList',
-            component: PickListDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
         },
         {
             id: 'style',
@@ -30,35 +32,10 @@ const PickListDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React PickList Component</title>
-                <meta name="description" content="PickList is used to reorder items between different lists." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>PickList</h1>
-                    <p>PickList is used to reorder items between different lists.</p>
-                </div>
-
-                <DocActions github="picklist/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React PickList Component" header="PickList" description="PickList is used to reorder items between different lists.." componentDocs={docs} apiDocs={['PickList']} />;
 };
 
 export default PickListDemo;

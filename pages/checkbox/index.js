@@ -1,18 +1,15 @@
-import Head from 'next/head';
 import React from 'react';
-import { ApiDoc } from '../../components/doc/checkbox/apidoc';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/checkbox/styledoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
 import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
+import { FormikDoc } from '../../components/doc/checkbox/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/checkbox/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
 import { ImportDoc } from '../../components/doc/checkbox/importdoc';
 import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
-import { FormikDoc } from '../../components/doc/checkbox/validation/formikdoc';
-import { HookFormDoc, ValidationDoc } from '../../components/doc/checkbox/validation/hookformdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { StyleDoc } from '../../components/doc/checkbox/styledoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const CheckboxDemo = () => {
     const docs = [
@@ -47,9 +44,9 @@ const CheckboxDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -72,34 +69,10 @@ const CheckboxDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Checkbox Component</title>
-                <meta name="description" content="Checkbox is an extension to standard checkbox element with theming." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Checkbox</h1>
-                    <p>Checkbox is an extension to standard checkbox element with theming.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} />;
 };
 
 export default CheckboxDemo;

@@ -1,10 +1,18 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DevelopmentSection } from '../common/developmentsection';
-
 import Link from 'next/link';
-import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<span id="lb">Options</span>
+<OrderList aria-labelledby="lb" />
+
+<OrderList aria-label="City" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -18,14 +26,8 @@ export function AccessibilityDoc() {
                     API by default, alternatively you may use
                     <i>moveTopButtonProps</i>, <i>moveUpButtonProps</i>, <i>moveDownButtonProps</i> and <i>moveBottomButtonProps</i> to customize the buttons like overriding the default <i>aria-label</i> attributes.
                 </p>
-                <CodeHighlight>
-                    {`
-<span id="lb">Options</span>
-<OrderList aria-labelledby="lb" />
 
-<OrderList aria-label="City" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>ListBox Keyboard Support</h3>
                 <div className="doc-tablewrapper">

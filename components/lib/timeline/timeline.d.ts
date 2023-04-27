@@ -2,7 +2,7 @@
  *
  * Timeline visualizes a series of chained events.
  *
- * [Live Demo](https://www.primefaces.org/primereact/timeline/)
+ * [Live Demo](https://www.primereact.org/timeline/)
  *
  * @module timeline
  *
@@ -52,6 +52,14 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
 }
 
 /**
+ * **PrimeReact - Timeline**
+ *
+ * _Timeline visualizes a series of chained events._
+ *
+ * [Live Demo](https://www.primereact.org/timeline/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Timeline extends React.Component<TimelineProps, any> {

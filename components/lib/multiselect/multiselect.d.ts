@@ -2,7 +2,7 @@
  *
  * MultiSelect is used to select multiple items from a collection.
  *
- * [Live Demo](https://www.primefaces.org/primereact/multiselect/)
+ * [Live Demo](https://www.primereact.org/multiselect/)
  *
  * @module multiselect
  *
@@ -10,7 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType } from '../utils';
 import { VirtualScrollerProps } from '../virtualscroller';
 
@@ -78,7 +78,6 @@ interface MultiSelectPanelHeaderTemplateEvent {
 
 /**
  * Custom multiselect change target options
- * @group Misc
  */
 interface MultiSelectChangeTargetOptions {
     /**
@@ -157,7 +156,6 @@ interface MultiSelectAllEvent {
 
 /**
  * Multiselect filter options
- * @group Misc
  */
 interface MultiSelectFilterOptions {
     /**
@@ -169,6 +167,32 @@ interface MultiSelectFilterOptions {
      * Used to reset the filtered options
      */
     reset?: () => void;
+}
+
+/**
+ * Custom filter template options.
+ */
+interface MultiSelectTemplateOptions {
+    /**
+     * Style class of the filter.
+     */
+    className: string;
+    /**
+     * The filter element.
+     */
+    element: HTMLDivElement;
+    /**
+     * Style class of the filter icon.
+     */
+    filterIconClassName: string;
+    /**
+     * The filter input options.
+     */
+    filterOptions?: MultiSelectFilterOptions;
+    /**
+     * The props of multiselect header.
+     */
+    props?: any;
 }
 
 /**
@@ -191,9 +215,17 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     children?: React.ReactNode | undefined;
     /**
+     * Icon of the checkbox when checked.
+     */
+    checkboxIcon?: IconType<MultiSelectProps> | undefined;
+    /**
      * Style class of the element.
      */
     className?: string | undefined;
+    /**
+     * Close icon of the multiselect panel header.
+     */
+    closeIcon?: IconType<MultiSelectProps> | undefined;
     /**
      * A property to uniquely match the value in options for better performance.
      */
@@ -210,7 +242,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     display?: 'comma' | 'chip' | undefined;
     /**
      * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
      */
     dropdownIcon?: IconType<MultiSelectProps>;
     /**
@@ -229,6 +260,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     filterBy?: string | undefined;
     /**
+     * Icon of the filter icon.
+     */
+    filterIcon?: IconType<MultiSelect> | undefined;
+    /**
      * Locale to use in filtering. The default locale is the host environment's current locale.
      * @defaultValue undefined
      */
@@ -245,7 +280,7 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     /**
      * The template of filter element.
      */
-    filterTemplate?: React.ReactNode | ((options: MultiSelectFilterOptions) => React.ReactNode);
+    filterTemplate?: React.ReactNode | ((options: MultiSelectTemplateOptions) => React.ReactNode);
     /**
      * Whether to display selected items in the label section or always display the placeholder as the default label.
      * @defaultValue false
@@ -277,6 +312,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Style class of the items.
      */
     itemClassName?: string | undefined;
+    /**
+     * The icon displayed in the header when all checkboxes are checked.
+     */
+    itemCheckboxIcon?: IconType<MultiSelect> | undefined;
     /**
      * Function that gets the option and returns the content for it.
      */
@@ -344,7 +383,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     placeholder?: string | undefined;
     /**
      * Icon of the remove chip element.
-     * @defaultValue pi pi-times-circle
      */
     removeIcon?: IconType<MultiSelectProps> | undefined;
     /**
@@ -453,6 +491,14 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
+ * **PrimeReact - MultiSelect**
+ *
+ * _MultiSelect is used to select multiple items from a collection._
+ *
+ * [Live Demo](https://www.primereact.org/multiselect/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class MultiSelect extends React.Component<MultiSelectProps, any> {

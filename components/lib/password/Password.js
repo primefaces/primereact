@@ -5,10 +5,15 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { PasswordBase } from './PasswordBase';
+import { EyeIcon } from '../icons/eye';
+import { EyeSlashIcon } from '../icons/eyeslash';
 
 export const Password = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = PasswordBase.getProps(inProps);
+
         const promptLabel = props.promptLabel || localeOption('passwordPrompt');
         const weakLabel = props.weakLabel || localeOption('weak');
         const mediumLabel = props.mediumLabel || localeOption('medium');
@@ -237,14 +242,23 @@ export const Password = React.memo(
         });
 
         const createIcon = () => {
+            let icon;
+
+            if (unmaskedState) {
+                icon = props.hideIcon || <EyeSlashIcon />;
+            } else {
+                icon = props.showIcon || <EyeIcon />;
+            }
+
+            const eyeIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+
             if (props.toggleMask) {
-                const iconClassName = unmaskedState ? 'pi pi-eye-slash' : 'pi pi-eye';
-                let content = <i className={iconClassName} onClick={onMaskToggle} />;
+                let content = <i onClick={onMaskToggle}> {eyeIcon} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
                         onClick: onMaskToggle,
-                        className: iconClassName,
+                        className,
                         element: content,
                         props
                     };
@@ -311,7 +325,7 @@ export const Password = React.memo(
             props.className
         );
         const inputClassName = classNames('p-password-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, Password.defaultProps);
+        const inputProps = PasswordBase.getOtherProps(props);
         const icon = createIcon();
         const panel = createPanel();
 
@@ -339,34 +353,3 @@ export const Password = React.memo(
 );
 
 Password.displayName = 'Password';
-Password.defaultProps = {
-    __TYPE: 'Password',
-    id: null,
-    inputId: null,
-    inputRef: null,
-    promptLabel: null,
-    weakLabel: null,
-    mediumLabel: null,
-    strongLabel: null,
-    mediumRegex: '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-    strongRegex: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})',
-    feedback: true,
-    toggleMask: false,
-    appendTo: null,
-    header: null,
-    content: null,
-    footer: null,
-    icon: null,
-    tooltip: null,
-    tooltipOptions: null,
-    style: null,
-    className: null,
-    inputStyle: null,
-    inputClassName: null,
-    panelStyle: null,
-    panelClassName: null,
-    transitionOptions: null,
-    onInput: null,
-    onShow: null,
-    onHide: null
-};

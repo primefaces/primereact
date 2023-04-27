@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Editor } from '../../lib/editor/Editor';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [text, setText] = useState('');
 
     const code = {
         basic: `
-<Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
+<Editor value={text} onTextChange={(e) => setText(e.htmlValue)} style={{ height: '320px' }} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -18,19 +18,23 @@ export default function BasicDemo() {
     const [text, setText] = useState('');
 
     return (
-        <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
+        <div className="card">
+            <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} style={{ height: '320px' }} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Editor } from "primereact/editor";
+import { Editor, EditorTextChangeEvent } from "primereact/editor";
 
 export default function BasicDemo() {
     const [text, setText] = useState<string>('');
 
     return (
-        <Editor style={{ height: '320px' }} value={text} onTextChange={(e: EditorTextChangeParams) => setText(e.htmlValue)} />
+        <div className="card">
+            <Editor value={text} onTextChange={(e: EditorTextChangeEvent) => setText(e.htmlValue)} style={{ height: '320px' }} />
+        </div>
     )
 }
         `
@@ -44,7 +48,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <Editor style={{ height: '320px' }} value={text} onTextChange={(e) => setText(e.htmlValue)} />
+                <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} style={{ height: '320px' }} />
             </div>
             <DocSectionCode code={code} dependencies={{ quill: '1.3.7' }} />
         </>

@@ -2,14 +2,14 @@
  *
  * ColorPicker is an input component to select a color.
  *
- * [Live Demo](https://www.primefaces.org/primereact/colorpicker/)
+ * [Live Demo](https://www.primereact.org/colorpicker/)
  *
  * @module colorpicker
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
 /**
@@ -137,6 +137,14 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
 }
 
 /**
+ * **PrimeReact - ColorPicker**
+ *
+ * _ColorPicker is an input component to select a color._
+ *
+ * [Live Demo](https://www.primereact.org/colorpicker/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class ColorPicker extends React.Component<ColorPickerProps, any> {
