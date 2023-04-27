@@ -8360,7 +8360,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
+                                    "type": "PointerEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
@@ -12654,7 +12654,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
+                                    "type": "PointerEvent<HTMLElement>",
                                     "description": "Browser event."
                                 }
                             ],
