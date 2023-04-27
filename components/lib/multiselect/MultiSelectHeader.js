@@ -75,9 +75,8 @@ export const MultiSelectHeader = React.memo((props) => {
 
     const checkboxElement = props.showSelectAll && (
         <div>
-            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} />
             <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} />
-            {props.showSelectAll && !props.filter && (
+            {!props.filter && (
                 <label for={selectAllId} className="p-multiselect-select-all-label">
                     {props.selectAllLabel}
                 </label>
