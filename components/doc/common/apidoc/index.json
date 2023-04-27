@@ -24055,12 +24055,28 @@
                             "description": "Custom header template of the panel."
                         },
                         {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Custom footer template of the panel."
+                        },
+                        {
                             "name": "headerTemplate",
                             "optional": true,
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Header template of the panel to customize more."
+                        },
+                        {
+                            "name": "footerTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Footer template of the panel to customize more."
                         },
                         {
                             "name": "toggleable",
@@ -24299,6 +24315,34 @@
                             "description": "Callback to invoke when the toggler button is clicked."
                         }
                     ]
+                },
+                "PanelFooterTemplateOptions": {
+                    "description": "Custom panel footer template options.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the panel."
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Element",
+                            "description": "The JSX element that represents the panel."
+                        },
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PanelProps",
+                            "description": "The props of the Panel component."
+                        }
+                    ],
+                    "callbacks": []
                 },
                 "PanelPassThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
