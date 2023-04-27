@@ -83,8 +83,22 @@ export const TableBody = React.memo(
                 if (isSubheaderGrouping && props.expandableRowGroups) {
                     return isRowGroupExpanded(rowData);
                 } else {
-                    if (props.dataKey) return props.expandedRows ? props.expandedRows[ObjectUtils.resolveFieldData(rowData, props.dataKey)] !== undefined : false;
-                    else return findIndex(props.expandedRows, rowData) !== -1;
+                    if (props.dataKey) {
+                        const rowId = ObjectUtils.resolveFieldData(rowData, props.dataKey);
+                        let expanded = false;
+
+                        if (props.expandedRows) {
+                            if (Array.isArray(props.expandedRows)) {
+                                expanded = props.expandedRows.some((row) => ObjectUtils.resolveFieldData(row, props.dataKey) === rowId);
+                            } else {
+                                expanded = props.expandedRows[rowId] !== undefined;
+                            }
+                        }
+
+                        return expanded;
+                    } else {
+                        return findIndex(props.expandedRows, rowData) !== -1;
+                    }
                 }
             }
 
