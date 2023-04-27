@@ -6,6 +6,7 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TimesIcon } from '../icons/times';
 import { SearchIcon } from '../icons/search';
+import { CheckIcon } from '../icons/check';
 
 export const MultiSelectHeader = React.memo((props) => {
     const filterOptions = {
