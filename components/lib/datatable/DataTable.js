@@ -1213,10 +1213,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         //headers
         columns.forEach((column, i) => {
-            const [field, header, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportable')];
+            const [field, header, exportHeader, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader'), getColumnProp(column, 'exportable')];
 
             if (exportable && field) {
-                const columnHeader = String(header || field)
+                const columnHeader = String(exportHeader || header || field)
                     .replace(/"/g, '""')
                     .replace(/\n/g, '\u2028');
 
