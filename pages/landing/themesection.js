@@ -5,6 +5,7 @@ import { Column } from '../../components/lib/column/Column';
 import { DataTable } from '../../components/lib/datatable/DataTable';
 import { InputText } from '../../components/lib/inputtext/InputText';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
+import { Tag } from '../../components/lib/tag/Tag';
 import { classNames } from '../../components/lib/utils/Utils';
 import { CustomerService } from '../../service/CustomerService';
 
@@ -108,7 +109,7 @@ const ThemeSection = (props) => {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>;
+        return <Tag value={rowData.status} severity={getSeverity(rowData.status)} className="text-sm font-bold" />;
     };
 
     const activityBodyTemplate = (rowData) => {
@@ -119,10 +120,29 @@ const ThemeSection = (props) => {
         return <Button type="button" icon="pi pi-cog" className="p-button-text"></Button>;
     };
 
+    const getSeverity = (status) => {
+        switch (status) {
+            case 'unqualified':
+                return 'danger';
+
+            case 'qualified':
+                return 'success';
+
+            case 'new':
+                return 'info';
+
+            case 'negotiation':
+                return 'warning';
+
+            case 'renewal':
+                return null;
+        }
+    };
+
     const header = renderHeader();
 
     return (
-        <section className="landing-themes py-8">
+        <section className="landing-themes py-8 ">
             <div className="section-header">Themes</div>
             <p className="section-detail">Crafted on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex flex-wrap justify-content-center">
@@ -139,7 +159,7 @@ const ThemeSection = (props) => {
                     more...
                 </a>
             </div>
-            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="themes-main flex mt-7 justify-content-center px-5 lg:px-8" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable
                         value={customers}
@@ -155,7 +175,6 @@ const ThemeSection = (props) => {
                         filters={filters}
                         filterDisplay="menu"
                         loading={loading}
-                        responsiveLayout="scroll"
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
                         emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

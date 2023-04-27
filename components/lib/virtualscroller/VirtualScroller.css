@@ -45,6 +45,11 @@
     font-size: 2rem;
 }
 
-.p-horizontal-scroll > .p-virtualscroller-content {
+.p-virtualscroller-horizontal > .p-virtualscroller-content {
     display: flex;
+}
+
+/* Inline */
+.p-virtualscroller-inline .p-virtualscroller-content {
+    position: static;
 }

@@ -21,23 +21,26 @@ export function DocComponent(props) {
     }, []);
 
     return (
-        <div className="doc-component">
+        <div className={classNames(props.className, 'doc-component')}>
             <Head>
                 <title>{props.title}</title>
                 <meta name="description" content={props.description} />
             </Head>
-            <ul className="doc-tabmenu">
-                <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
-                    <button type="button" onClick={() => activateTab(0)}>
-                        {props.header.startsWith('use') ? 'HOOK' : 'COMPONENT'}
-                    </button>
-                </li>
-                <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
-                    <button type="button" onClick={() => activateTab(1)}>
-                        API
-                    </button>
-                </li>
-            </ul>
+            {!props.hideTabMenu ? (
+                <ul className="doc-tabmenu">
+                    <li className={classNames({ 'doc-tabmenu-active': tab === 0 })}>
+                        <button type="button" onClick={() => activateTab(0)}>
+                            {props.header.startsWith('use') ? 'HOOK' : 'FEATURES'}
+                        </button>
+                    </li>
+
+                    <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
+                        <button type="button" onClick={() => activateTab(1)}>
+                            API
+                        </button>
+                    </li>
+                </ul>
+            ) : null}
             <div className="doc-tabpanels">
                 {tab === 0 ? (
                     <div className="doc-tabpanel">
@@ -53,7 +56,18 @@ export function DocComponent(props) {
                 ) : null}
                 {tab === 1 ? (
                     <div className="doc-tabpanel">
-                        <DocApiSection header={props.header} doc={props.apiDocs} />
+                        {props.apiDocs ? (
+                            <DocApiSection header={props.header} doc={props.apiDocs} />
+                        ) : (
+                            <>
+                                <div className="doc-main">
+                                    <div className="doc-intro">
+                                        <h1>{props.header} API</h1>
+                                        <p>{props.header} is a CSS feature so does not provide a Javascript API</p>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 ) : null}
             </div>

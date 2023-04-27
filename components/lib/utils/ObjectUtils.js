@@ -167,13 +167,7 @@ export default class ObjectUtils {
     }
 
     static getPropValue(obj, ...params) {
-        let methodParams = params;
-
-        if (params && params.length === 1) {
-            methodParams = params[0];
-        }
-
-        return this.isFunction(obj) ? obj(...methodParams) : obj;
+        return this.isFunction(obj) ? obj(...params) : obj;
     }
 
     static getComponentProp(component, prop = '', defaultProps = {}) {
@@ -190,20 +184,32 @@ export default class ObjectUtils {
 
     static isValidChild(child, type, validTypes) {
         /* eslint-disable */
-        try {
-            if (process.env.NODE_ENV !== 'production' && this.getProp(child, '__TYPE') !== type && child.type.displayName !== type) {
-                if (validTypes && validTypes.includes(type)) {
+        if (child) {
+            const childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
+            const isValid = childType === type;
+
+            try {
+                if (process.env.NODE_ENV !== 'production' && !isValid) {
+                    if (validTypes && validTypes.includes(childType)) {
+                        return false;
+                    }
+                    const messageTypes = validTypes ? validTypes : [type];
+
+                    console.error(
+                        `PrimeReact: Unexpected type; '${childType}'. Parent component expects a ${messageTypes.map((t) => `${t}`).join(' or ')} component or a component with the ${messageTypes
+                            .map((t) => `__TYPE="${t}"`)
+                            .join(' or ')} property as a child component.`
+                    );
                     return false;
                 }
-
-                console.error(`PrimeReact: Parent component expects a '${type}' component or a component with the '__TYPE="${type}"' property as a child component.`);
-                return false;
+            } catch (error) {
+                // NOOP
             }
-        } catch (error) {
-            // NOOP
+
+            return isValid;
         }
 
-        return true;
+        return false;
         /* eslint-enable */
     }
 
@@ -252,6 +258,11 @@ export default class ObjectUtils {
         }
 
         return str;
+    }
+
+    static convertToFlatCase(str) {
+        // convert snake, kebab, camel and pascal cases to flat case
+        return this.isNotEmpty(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
     }
 
     static isEmpty(value) {

@@ -52,9 +52,9 @@ import React, { useState } from "react";
 import { Calendar, CalendarChangeEvent} from 'primereact/calendar';
 
 export default function TimeDemo() {
-    const [datetime12h, setDateTime12h] = useState<Date | null>(null);
-    const [datetime24h, setDateTime24h] = useState<Date | null>(null);
-    const [time, setTime] = useState<Date | null>(null);
+    const [datetime12h, setDateTime12h] = useState<string | Date | Date[] | null>(null);
+    const [datetime24h, setDateTime24h] = useState<string | Date | Date[] | null>(null);
+    const [time, setTime] = useState<string | Date | Date[] | null>(null);
 
     return (
         <div className="card flex flex-wrap gap-3 p-fluid">

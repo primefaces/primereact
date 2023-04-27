@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in MegaMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -28,6 +29,23 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * The template of starting element.
      */
     start?: React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);
+    /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
+    /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<MegaMenuProps> | undefined;
+    /**
+     * Icon to display in the horizontal menu.
+     */
+    menuIcon?: IconType<MegaMenuProps> | undefined;
     /**
      * The template of trailing element
      */

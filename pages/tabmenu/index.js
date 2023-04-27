@@ -34,7 +34,7 @@ const TabMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React TabMenu Component" header="TabMenu" description="TabMenu is a navigation component that displays menu items as tab headers." componentDocs={docs} apiDocs={['TabMenu']} />;
+    return <DocComponent title="React TabMenu Component" header="TabMenu" description="TabMenu is a navigation component that displays menu items as tab headers." componentDocs={docs} apiDocs={['TabMenu', 'MenuItem']} />;
 };
 
 export default TabMenuDemo;

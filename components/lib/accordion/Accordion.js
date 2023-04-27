@@ -4,6 +4,8 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const AccordionTab = () => {};
 
@@ -81,13 +83,15 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const ariaControls = idState + '_content_' + index;
         const tabIndex = getTabProp(tab, 'disabled') ? -1 : getTabProp(tab, 'tabIndex');
         const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span className="p-accordion-header-text">{getTabProp(tab, 'header')}</span>;
-        const icon = IconUtils.getJSXIcon(selected ? props.collapseIcon : props.expandIcon, { className: 'p-accordion-toggle-icon' }, { props, selected });
+        const iconClassName = 'p-accordion-toggle-icon';
+        const icon = selected ? props.collapseIcon || <ChevronDownIcon className={iconClassName} /> : props.expandIcon || <ChevronRightIcon className={iconClassName} />;
+        const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, selected });
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
 
         return (
             <div className={className} style={style}>
                 <a href={'#' + ariaControls} id={headerId} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(e) => onTabHeaderClick(e, tab, index)} tabIndex={tabIndex} aria-label={label}>
-                    {icon}
+                    {toggleIcon}
                     {header}
                 </a>
             </div>

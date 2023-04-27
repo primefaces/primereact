@@ -17,12 +17,30 @@ PrimeReact is available at npm, if you have an existing application run the foll
 
 ```
 // with npm
-npm install primereact primeicons
+npm install primereact
 
 // with yarn
-yarn add primereact primeicons
+yarn add primereact
 ```
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
+
+## Styles
+Theme and core are the necessary css files of the components, visit the Themes section for the complete list of available themes to choose from.
+
+```javascript
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css";
+```
+
+If you are using a bundler such as webpack with a css loader you may also import them to your main application component.
+
+```javascript
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
+```
 
 ## Import
 
@@ -51,51 +69,20 @@ Import all components and structures
 <script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
 
-## Dependencies
-
-Majority of PrimeReact components (95%) are native and there are some exceptions having 3rd party dependencies such as Google Maps for GMap.
-
-In addition, components require PrimeIcons for icons and react-transition-group for animations. The react-transition-group is available as dependencies in the npm package of PrimeReact.
-
-```javascript
-dependencies: {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0",
-    "primeicons": "^5.0.0 || ^6.0.0"
-}
-```
-
-#### Optional
-
-Here is the list of components with 3rd party dependencies.
-
-| Component | Dependency |
-| --- | --- |
-| Charts | Charts.js 3.x |
-| GMap | Google Maps |
-| Editor | Quill.js |
-| DataView | PrimeFlex |
-
-## Styles
-The css dependencies are as follows, note that you may change the theme with another one of your choice.
-
-```
-primereact/resources/themes/lara-light-indigo/theme.css
-primereact/resources/primereact.min.css
-primeicons/primeicons.css
-```
-
-If you are using a bundler such as webpack with a css loader you may also import them to your main application component, an example from create-react-app would be.
-
-```javascript
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-```
-
 ## QuickStart
 
 [Example applications](https://github.com/primefaces/primereact-examples) based on create-react-app and Next.js are available at github.
+
+Next.js
+PrimeReact has first class support for SSR and Next.JS, in fact this website is also built with Next.js
+
+[![Getting Started with NextJS and PrimeReact](http://img.youtube.com/vi/OrRffCobuts/0.jpg)](http://www.youtube.com/watch?v=OrRffCobuts "Getting Started with NextJS and PrimeReact")
+
+CRA
+Create-React-App is the official scaffolding project by Facebook
+
+[![Getting Started with PrimeReact](http://img.youtube.com/vi/Prz3phy2bHY/0.jpg)](http://www.youtube.com/watch?v=Prz3phy2bHY "Getting Started with PrimeReact")
+
 
 ## TypeScript
 

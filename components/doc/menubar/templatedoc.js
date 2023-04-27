@@ -111,7 +111,7 @@ export function TemplateDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -129,14 +129,14 @@ export function TemplateDoc(props) {
     ];
 
     const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
+    const end = <InputText placeholder="Search" type="text" className="w-full" />;
 
     const code = {
         basic: `
-<Menubar model={items} start={start} end={end} />  
+<Menubar model={items} start={start} end={end} />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 
@@ -252,7 +252,7 @@ export default function TemplateDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -270,7 +270,7 @@ export default function TemplateDemo() {
     ];
 
     const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
+    const end = <InputText placeholder="Search" type="text" className="w-full" />;
 
     return (
         <div className="card">
@@ -280,7 +280,7 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { MenuItem } from 'primereact/menuitem';
@@ -397,7 +397,7 @@ export default function TemplateDemo() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -415,8 +415,8 @@ export default function TemplateDemo() {
     ];
 
     const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
-    const end = <InputText placeholder="Search" type="text" />;
-    
+    const end = <InputText placeholder="Search" type="text" className="w-full" />;
+
     return (
         <div className="card">
             <Menubar model={items} start={start} end={end} />

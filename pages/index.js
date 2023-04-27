@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Analytics from '../components/layout/analytics';
 import { classNames } from '../components/lib/utils/ClassNames';
 import NewsSection from '../components/news/newssection';
 import BlockSection from './landing/blocksection';
@@ -38,7 +37,6 @@ export default function Home(props) {
 
     return (
         <div className={rootClassName}>
-            <Analytics />
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
@@ -61,12 +59,12 @@ export default function Home(props) {
                 <HeaderSection dark={props.dark} onToggleColorScheme={toggleColorScheme} />
                 <HeroSection />
             </div>
+            <UsersSection dark={props.dark} />
             <ComponentSection />
             <ThemeSection theme={tableTheme} onThemeChange={(t) => changeTableTheme(t)} dark={props.dark} />
             <BlockSection />
             <DesignerSection dark={props.dark} />
             <TemplateSection dark={props.dark} />
-            <UsersSection dark={props.dark} />
             <FeaturesSection dark={props.dark} />
             <FooterSection dark={props.dark} />
         </div>

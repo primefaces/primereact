@@ -4,10 +4,11 @@ import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -109,12 +110,34 @@ export const SplitButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = SplitButtonBase.getOtherProps(props);
-        const className = classNames('p-splitbutton p-component', props.className, { 'p-disabled': props.disabled });
+        const sizeMapping = {
+            large: 'lg',
+            small: 'sm'
+        };
+        const size = sizeMapping[props.size];
+        const className = classNames('p-splitbutton p-component', props.className, {
+            'p-disabled': props.disabled,
+            'p-button-loading-label-only': props.loading && !props.icon && props.label,
+            [`p-button-${props.severity}`]: props.severity,
+            'p-button-raised': props.raised,
+            'p-button-rounded': props.rounded,
+            'p-button-text': props.text,
+            'p-button-outlined': props.outlined,
+            [`p-button-${size}`]: size
+        });
         const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
         const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
         const buttonContent = props.buttonTemplate ? ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;
         const items = createItems();
         const menuId = idState + '_menu';
+
+        const dropdownIcon = () => {
+            const iconClassName = 'p-button-icon p-c';
+            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+            return dropdownIcon;
+        };
 
         return (
             <>
@@ -137,7 +160,7 @@ export const SplitButton = React.memo(
                     <Button
                         type="button"
                         className={menuButtonClassName}
-                        icon={props.dropdownIcon}
+                        icon={dropdownIcon}
                         onClick={onDropdownButtonClick}
                         disabled={props.disabled}
                         aria-expanded={overlayVisibleState}

@@ -286,8 +286,8 @@ export const Tooltip = React.memo(
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
 
-                showEvents.forEach((event) => currentTarget.addEventListener(event, show));
-                hideEvents.forEach((event) => currentTarget.addEventListener(event, hide));
+                showEvents.forEach((event) => currentTarget?.addEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget?.addEventListener(event, hide));
             }
         };
 
@@ -296,8 +296,8 @@ export const Tooltip = React.memo(
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
 
-                showEvents.forEach((event) => currentTarget.removeEventListener(event, show));
-                hideEvents.forEach((event) => currentTarget.removeEventListener(event, hide));
+                showEvents.forEach((event) => currentTarget?.removeEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget?.removeEventListener(event, hide));
             }
         };
 
@@ -333,6 +333,7 @@ export const Tooltip = React.memo(
                     if (!target.hasWrapper) {
                         const wrapper = document.createElement('span');
 
+                        DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;

@@ -276,6 +276,10 @@ interface FileUploadProps {
      */
     accept?: string | undefined;
     /**
+     * Icon of the remove element.
+     */
+    removeIcon?: IconType<FileUploadProps> | undefined;
+    /**
      * Disables the upload functionality.
      * @defaultValue false
      */

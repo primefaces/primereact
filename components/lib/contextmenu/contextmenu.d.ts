@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in ContextMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -36,6 +37,15 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     baseZIndex?: number | undefined;
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
+    /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
@@ -44,6 +54,10 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<ContextMenuProps> | undefined;
     /**
      * Callback to invoke when a popup menu is shown.
      * @param {React.SyntheticEvent} event - Browser event.

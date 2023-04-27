@@ -3,7 +3,7 @@ import { useUpdateEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-
+import { CheckIcon } from '../icons/check';
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CheckboxBase.getProps(inProps);
@@ -15,7 +15,7 @@ export const Checkbox = React.memo(
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly && props.onChange) {
                 const checked = isChecked();
-                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement;
+                const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement || event.target instanceof Object;
                 const isInputToggled = event.target === inputRef.current;
                 const isCheckboxToggled = checkboxClicked && event.target.checked !== checked;
 
@@ -95,7 +95,9 @@ export const Checkbox = React.memo(
             'p-disabled': props.disabled,
             'p-focus': focusedState
         });
-        const icon = IconUtils.getJSXIcon(checked ? props.icon : '', { className: 'p-checkbox-icon p-c' }, { props, checked });
+        const iconClassName = 'p-checkbox-icon p-c';
+        const icon = checked ? props.icon || <CheckIcon className={iconClassName} /> : null;
+        const checkboxIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, checked });
 
         return (
             <>
@@ -117,7 +119,7 @@ export const Checkbox = React.memo(
                             {...ariaProps}
                         />
                     </div>
-                    <div className={boxClass}>{icon}</div>
+                    <div className={boxClass}>{checkboxIcon}</div>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
             </>

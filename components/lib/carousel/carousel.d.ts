@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom responsive option
@@ -95,6 +96,14 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @defaultValue 1
      */
     numScroll?: number | undefined;
+    /**
+     * Icon for the previous button by orientation.
+     */
+    prevIcon?: IconType<CarouselProps> | undefined;
+    /**
+     * Icon for the next button by orientation.
+     */
+    nextIcon?: IconType<CarouselProps> | undefined;
     /**
      * An array of options for responsive design.
      * @type {CarouselResponsiveOption}

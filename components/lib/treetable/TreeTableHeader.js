@@ -4,7 +4,10 @@ import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 
 export const TreeTableHeader = React.memo((props) => {
     const filterTimeout = React.useRef(null);
@@ -136,10 +139,8 @@ export const TreeTableHeader = React.memo((props) => {
 
     const getAriaSort = (column, sorted, sortOrder) => {
         if (getColumnProp(column, 'sortable')) {
-            let sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-down' : 'pi-sort-up') : 'pi-sort';
-
-            if (sortIcon === 'pi-sort-down') return 'descending';
-            else if (sortIcon === 'pi-sort-up') return 'ascending';
+            if (sorted && sortOrder < 0) return 'descending';
+            else if (sorted && sortOrder > 0) return 'ascending';
             else return 'none';
         } else {
             return null;
@@ -152,10 +153,11 @@ export const TreeTableHeader = React.memo((props) => {
 
     const createSortIcon = (column, sorted, sortOrder) => {
         if (getColumnProp(column, 'sortable')) {
-            const sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt') : 'pi-sort-alt';
-            const sortIconClassName = classNames('p-sortable-column-icon', 'pi pi-fw', sortIcon);
+            let iconClassName = 'p-sortable-column-icon';
+            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon className={iconClassName} /> : <SortAmountUpAltIcon className={iconClassName} /> : <SortAltIcon className={iconClassName} />;
+            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { className: iconClassName }, { props, sorted, sortOrder });
 
-            return <span className={sortIconClassName}></span>;
+            return sortIcon;
         } else {
             return null;
         }
@@ -175,6 +177,12 @@ export const TreeTableHeader = React.memo((props) => {
         }
 
         return null;
+    };
+
+    const createTitle = (column, options) => {
+        const title = ObjectUtils.getJSXElement(getColumnProp(column, 'header'), { props: options });
+
+        return <span className="p-column-title">{title}</span>;
     };
 
     const createHeaderCell = (column, options) => {
@@ -229,7 +237,7 @@ export const TreeTableHeader = React.memo((props) => {
 
             const headerTooltip = getColumnProp(column, 'headerTooltip');
             const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
-
+            const title = createTitle(column, options);
             const resizer = createResizer(column);
 
             return (
@@ -251,7 +259,7 @@ export const TreeTableHeader = React.memo((props) => {
                         onDrop={(e) => onDrop(e, column)}
                     >
                         {resizer}
-                        <span className="p-column-title">{getColumnProp(column, 'header')}</span>
+                        {title}
                         {sortIconElement}
                         {sortBadge}
                         {filterElement}

@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Message options for toast component
@@ -35,6 +36,14 @@ export interface ToastMessage {
      * @defaultValue true
      */
     closable?: boolean | undefined;
+    /**
+     * Icon of the message.
+     */
+    icon?: IconType<ToastProps> | undefined;
+    /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<ToastProps> | undefined;
     /**
      * When enabled, message is not removed automatically.
      */

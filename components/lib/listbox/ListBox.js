@@ -271,6 +271,7 @@ export const ListBox = React.memo(
             return props.filter ? (
                 <ListBoxHeader
                     filter={filteredValue}
+                    filterIcon={props.filterIcon}
                     onFilter={onFilter}
                     resetFilter={resetFilter}
                     filterTemplate={props.filterTemplate}
@@ -370,12 +371,12 @@ export const ListBox = React.memo(
                         items: visibleOptions,
                         onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
-                        contentTemplate: (option) => {
-                            const className = classNames('p-listbox-list', option.className);
+                        contentTemplate: (options) => {
+                            const className = classNames('p-listbox-list', options.className);
 
                             return (
-                                <ul ref={option.contentRef} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
-                                    {option.children}
+                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
+                                    {options.children}
                                 </ul>
                             );
                         }

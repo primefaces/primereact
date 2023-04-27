@@ -30,6 +30,8 @@ app.bootstrap({
     includeVersion: true,
     searchInComments: true,
     disableSources: true,
+    logLevel: 'Error',
+    sort: ['source-order'],
     exclude: ['node_modules', 'components/lib/**/*.js'],
     externalSymbolLinkMappings: {
         '@types/react': {
@@ -51,7 +53,7 @@ if (project) {
     project.children.forEach((module) => {
         const { name, comment } = module;
 
-        //if (name !== 'hooks') return; // REMOVE
+        // if (name !== 'datatable') return; // REMOVE
 
         const description = comment && comment.summary.map((s) => s.text || '').join(' ');
 
@@ -102,7 +104,7 @@ if (project) {
 
                 const component_props_id = component.extendedTypes && component.extendedTypes[0].typeArguments && component.extendedTypes[0].typeArguments[0] && component.extendedTypes[0].typeArguments[0]._target;
                 const module_properties_group = module.groups.find((g) => g.title === 'Properties');
-                const component_props = module_properties_group && module_properties_group.children.find((c) => c.id === component_props_id);
+                const component_props = module_properties_group && module_properties_group.children.find((c) => (component_props_id ? c.id === component_props_id : true));
 
                 const props = {
                     description: '',
@@ -120,14 +122,15 @@ if (project) {
 
                     component_props_group &&
                         component_props_group.children.forEach((prop) => {
-                            if (!prop.inheritedFrom) {
+                            if (!prop.inheritedFrom || (prop.inheritedFrom && !prop.inheritedFrom.toString().startsWith('Omit.data-pr-'))) {
                                 props.values.push({
                                     name: prop.name,
                                     optional: prop.flags.isOptional,
                                     readonly: prop.flags.isReadonly,
                                     type: prop.type.toString(),
-                                    defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
-                                    description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' ')
+                                    default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
+                                    description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' '),
+                                    deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0].text) : undefined
                                 });
                             }
                         });
@@ -183,7 +186,7 @@ if (project) {
                             optional: prop.flags.isOptional,
                             readonly: prop.flags.isReadonly,
                             type: prop.type.toString(),
-                            defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                            default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                             description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
                         });
                     });
@@ -248,7 +251,7 @@ if (project) {
                             optional: prop.flags.isOptional,
                             readonly: prop.flags.isReadonly,
                             type: prop.type.toString(),
-                            //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                            //default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                             description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
                         });
                     });
@@ -289,7 +292,7 @@ if (project) {
                                 optional: prop.flags.isOptional,
                                 readonly: prop.flags.isReadonly,
                                 type: prop.type.toString(),
-                                //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                                //default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                                 description: prop.comment && prop.comment.summary.map((s) => s.text || '').join(' ')
                             });
                         });
@@ -326,7 +329,7 @@ if (project) {
                         optional: parameter.flags.isOptional,
                         readonly: parameter.flags.isReadonly,
                         type: signature[0].type.toString(),
-                        //defaultValue: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
+                        //default: prop.comment && prop.comment.getTag('@defaultValue') ? prop.comment.getTag('@defaultValue').content[0].text : '', // TODO: Check
                         description: signature[0].comment && signature[0].comment.summary.map((s) => s.text || '').join(' ')
                     });
                 }

@@ -54,12 +54,7 @@ export const Ripple = React.memo(
 
             DomHandler.removeClass(inkRef.current, 'p-ink-active');
 
-            if (!DomHandler.getHeight(inkRef.current) && !DomHandler.getWidth(inkRef.current)) {
-                let d = Math.max(DomHandler.getOuterWidth(targetRef.current), DomHandler.getOuterHeight(targetRef.current));
-
-                inkRef.current.style.height = d + 'px';
-                inkRef.current.style.width = d + 'px';
-            }
+            setDimensions();
 
             inkRef.current.style.top = offsetY + 'px';
             inkRef.current.style.left = offsetX + 'px';
@@ -70,9 +65,19 @@ export const Ripple = React.memo(
             DomHandler.removeClass(event.currentTarget, 'p-ink-active');
         };
 
+        const setDimensions = () => {
+            if (inkRef.current && !DomHandler.getHeight(inkRef.current) && !DomHandler.getWidth(inkRef.current)) {
+                let d = Math.max(DomHandler.getOuterWidth(targetRef.current), DomHandler.getOuterHeight(targetRef.current));
+
+                inkRef.current.style.height = d + 'px';
+                inkRef.current.style.width = d + 'px';
+            }
+        };
+
         useMountEffect(() => {
             if (inkRef.current) {
                 targetRef.current = getTarget();
+                setDimensions();
                 bindEvents();
             }
         });
@@ -80,6 +85,7 @@ export const Ripple = React.memo(
         useUpdateEffect(() => {
             if (inkRef.current && !targetRef.current) {
                 targetRef.current = getTarget();
+                setDimensions();
                 bindEvents();
             }
         });

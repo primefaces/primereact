@@ -10,6 +10,7 @@ export const DialogBase = {
         breakpoints: null,
         className: null,
         closable: true,
+        closeIcon: null,
         closeOnEscape: true,
         contentClassName: null,
         contentStyle: null,
@@ -48,6 +49,8 @@ export const DialogBase = {
         style: null,
         transitionOptions: null,
         visible: false,
+        maximizeIcon: null,
+        minimizeIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, DialogBase.defaultProps),

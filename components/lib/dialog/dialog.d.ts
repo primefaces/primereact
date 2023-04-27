@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Dialog break options
@@ -120,6 +121,10 @@ export interface DialogProps {
      */
     headerClassName?: string | undefined;
     /**
+     * Icon to display in the dialog close button.
+     */
+    closeIcon?: IconType<DialogProps> | undefined;
+    /**
      * Style of the header section.
      */
     headerStyle?: React.CSSProperties | undefined;
@@ -189,6 +194,14 @@ export interface DialogProps {
      * @defaultValue true
      */
     showHeader?: boolean | undefined;
+    /**
+     * Icon to display in the dialog maximize button when dialog is not maximized.
+     */
+    maximizeIcon?: IconType<DialogProps> | undefined;
+    /**
+     * Icon to display in the dialog maximize button when dialog is maximized.
+     */
+    minimizeIcon?: IconType<DialogProps> | undefined;
     /**
      * Inline style of the component.
      */

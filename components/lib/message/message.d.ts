@@ -14,7 +14,7 @@ import { IconType } from '../utils/utils';
  * Defines valid properties in Message component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content'> {
     /**
      * Text of the message.
      */

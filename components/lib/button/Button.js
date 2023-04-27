@@ -3,6 +3,7 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -19,11 +20,11 @@ export const Button = React.memo(
         }
 
         const createIcon = () => {
-            const icon = props.loading ? props.loadingIcon : props.icon;
             const className = classNames('p-button-icon p-c', {
                 'p-button-loading-icon': props.loading,
                 [`p-button-icon-${props.iconPos}`]: props.label
             });
+            const icon = props.loading ? props.loadingIcon || <SpinnerIcon className={className} spin /> : props.icon;
 
             return IconUtils.getJSXIcon(icon, { className }, { props });
         };
@@ -50,6 +51,11 @@ export const Button = React.memo(
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
         const otherProps = ButtonBase.getOtherProps(props);
+        const sizeMapping = {
+            large: 'lg',
+            small: 'sm'
+        };
+        const size = sizeMapping[props.size];
         const className = classNames('p-button p-component', props.className, {
             'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
@@ -62,7 +68,7 @@ export const Button = React.memo(
             'p-button-rounded': props.rounded,
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
             [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label,
-            [`p-button-${props.size}`]: props.size,
+            [`p-button-${size}`]: size,
             [`p-button-${props.severity}`]: props.severity
         });
 

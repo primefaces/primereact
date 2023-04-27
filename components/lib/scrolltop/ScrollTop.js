@@ -5,6 +5,7 @@ import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hoo
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
+import { ChevronUpIcon } from '../icons/chevronup';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -81,11 +82,15 @@ export const ScrollTop = React.memo(
             props.className
         );
 
+        const iconClassName = 'p-scrolltop-icon';
+        const icon = props.icon || <ChevronUpIcon className={iconClassName} />;
+        const scrollIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
         return (
             <>
                 <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
                     <button ref={scrollElementRef} type="button" className={className} style={props.style} {...otherProps} onClick={onClick}>
-                        {IconUtils.getJSXIcon(props.icon, { className: 'p-scrolltop-icon' }, { props })}
+                        {scrollIcon}
                         <Ripple />
                     </button>
                 </CSSTransition>

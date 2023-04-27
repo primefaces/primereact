@@ -10,10 +10,13 @@ export const TieredMenuBase = {
         className: null,
         autoZIndex: true,
         baseZIndex: 0,
+        breakpoint: undefined,
+        scrollHeight: '400px',
         appendTo: null,
         transitionOptions: null,
         onShow: null,
         onHide: null,
+        submenuIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, TieredMenuBase.defaultProps),

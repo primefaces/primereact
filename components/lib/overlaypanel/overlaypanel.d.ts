@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom overlay panel breakpoints
@@ -35,6 +36,10 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue false
      */
     showCloseIcon?: boolean | undefined;
+    /**
+     * Icon to display as close icon.
+     */
+    closeIcon?: IconType<OverlayPanelProps> | undefined;
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body

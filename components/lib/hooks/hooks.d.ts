@@ -67,8 +67,23 @@ interface EventOptions {
     options?: any;
     /**
      * Whether to listen to the event or not.
+     * @defaultValue true
      */
     when?: boolean;
+}
+
+/**
+ * The options of event listener in OverlayEventOptions
+ */
+interface OverlayListenerOptions {
+    /**
+     * Type of listener.
+     */
+    type: 'scroll' | 'outside' | 'resize' | 'orientationChange';
+    /**
+     * Whether it is valid.
+     */
+    valid: boolean;
 }
 
 /**
@@ -86,9 +101,10 @@ interface OverlayEventOptions {
     /**
      * The event listener.
      */
-    listener?(event: Event, type?: string): void;
+    listener?(event: Event, options?: OverlayListenerOptions): void;
     /**
      * Whether to listen to the event or not.
+     * @defaultValue true
      */
     when?: boolean;
 }
@@ -102,6 +118,11 @@ interface ResizeEventOptions {
      * @param {Event} event - The browser event object.
      */
     listener?(event: Event): void;
+    /**
+     * Whether to listen to the event or not.
+     * @defaultValue true
+     */
+    when?: boolean;
 }
 
 /**
@@ -207,13 +228,20 @@ export declare function useMove(mode: 'horizontal' | 'vertical' | 'both', initia
 export declare function useFavicon(newIcon: string, rel: string): void;
 /**
  * Custom hook to use change the current favicon.
- * @param {React.RefObject<Element>} ref - The ref of the element to observe.
- * @param {IntersectionObserver} options - The options of the intersection observer.
+ * @param {React.RefObject<Element>} ref The ref of the element to observe.
+ * @param {IntersectionObserver} options The options of the intersection observer.
+ * @return {boolean} Whether the element is intersecting or not.
  */
-export declare function useIntersectionObserver(ref: React.RefObject<Element>, options: IntersectionObserver): void;
+export declare function useIntersectionObserver(ref: React.RefObject<Element>, options?: IntersectionObserver): boolean;
 /**
  * Custom hook to use detect click outside.
  * @param {React.RefObject<Element>} ref - The ref of the element to detect click outside.
  * @param {*} callback - The callback to run when click outside.
  */
 export declare function useClickOutside(ref: React.RefObject<Element>, callback: any): void;
+/**
+ * Custom hook to detect if window size matches or not.
+ * @param {string} query - the media query
+ * @param {boolean} when - Whether to listen to the event or not.
+ */
+export declare function useMatchMedia(query: string, when?: boolean): boolean;

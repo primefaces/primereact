@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom change event.
@@ -66,8 +67,33 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     dataKey?: string | undefined;
     /**
-     * When specified, displays an input field to filter the items on keyup.
-     * @defaultValue false
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     * @defaultValue '960px'.
+     */
+    breakpoint?: string | undefined;
+    /**
+     * Icon of the move up icon.
+     */
+    moveUpIcon?: IconType<OrderListProps> | undefined;
+    /**
+     * Icon of the move top icon.
+     */
+    moveTopIcon?: IconType<OrderListProps> | undefined;
+    /**
+     * Icon of the move down icon.
+     */
+    moveDownIcon?: IconType<OrderListProps> | undefined;
+    /**
+     * Icon of the move bottom icon.
+     */
+    moveBottomIcon?: IconType<OrderListProps> | undefined;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<OrderListProps> | undefined;
+    /**
+     * When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.
+     * @defaultValue label
      */
     filter?: boolean | undefined;
     /**

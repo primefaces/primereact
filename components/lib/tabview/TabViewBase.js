@@ -35,6 +35,9 @@ export const TabPanelBase = {
         headerTemplate: null,
         leftIcon: null,
         rightIcon: null,
+        prevButton: null,
+        nextButton: null,
+        closeIcon: null,
         style: null,
         children: undefined
     },

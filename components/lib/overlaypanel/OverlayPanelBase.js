@@ -6,6 +6,7 @@ export const OverlayPanelBase = {
         id: null,
         dismissable: true,
         showCloseIcon: false,
+        closeIcon: null,
         style: null,
         className: null,
         appendTo: null,

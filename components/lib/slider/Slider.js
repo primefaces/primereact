@@ -145,10 +145,10 @@ export const Slider = React.memo(
             if (props.range) {
                 if (handleIndex.current === 0) {
                     if (parsedValue < props.min) parsedValue = props.min;
-                    else if (parsedValue > value[1]) parsedValue = value[1];
+                    else if (parsedValue > props.max) parsedValue = props.max;
                 } else {
                     if (parsedValue > props.max) parsedValue = props.max;
-                    else if (parsedValue < value[0]) parsedValue = value[0];
+                    else if (parsedValue < props.min) parsedValue = props.min;
                 }
 
                 newValue = [...value];
@@ -213,7 +213,10 @@ export const Slider = React.memo(
 
             const rangeStartHandle = horizontal ? createHandle(handleValueStart, null, 0) : createHandle(null, handleValueStart, 0);
             const rangeEndHandle = horizontal ? createHandle(handleValueEnd, null, 1) : createHandle(null, handleValueEnd, 1);
-            const rangeStyle = horizontal ? { left: handleValueStart + '%', width: handleValueEnd - handleValueStart + '%' } : { bottom: handleValueStart + '%', height: handleValueEnd - handleValueStart + '%' };
+            const rangeSliderWidth = handleValueEnd > handleValueStart ? handleValueEnd - handleValueStart : handleValueStart - handleValueEnd;
+            const rangeSliderPosition = handleValueEnd > handleValueStart ? handleValueStart : handleValueEnd;
+
+            const rangeStyle = horizontal ? { left: rangeSliderPosition + '%', width: rangeSliderWidth + '%' } : { bottom: rangeSliderPosition + '%', height: rangeSliderWidth + '%' };
 
             return (
                 <>

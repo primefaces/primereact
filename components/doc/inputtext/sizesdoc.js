@@ -43,7 +43,7 @@ export default function SizesDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Apply <i>.p-input-sm</i> to reduce the size of the input element or <i>.p-input-lg</i> to enlarge it.
+                    Apply <i>.p-inputtext-sm</i> to reduce the size of the input element or <i>.p-inputtext-lg</i> to enlarge it.
                 </p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center gap-3 ">

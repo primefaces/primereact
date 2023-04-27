@@ -5,12 +5,14 @@ on:
     branches: [ master ]
     paths:
       - '**/**/*.d.ts'
+      - 'api-generator/build-apidoc.js'
 
 permissions:
   contents: write
 
 jobs:
   build:
+    if: github.repository == 'primefaces/primereact' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     strategy:

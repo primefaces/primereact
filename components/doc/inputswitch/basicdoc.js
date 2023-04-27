@@ -33,7 +33,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeEvent) => setChecked(e.value)} />
         </div>
     );
 }

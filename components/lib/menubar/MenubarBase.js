@@ -8,6 +8,8 @@ export const MenubarBase = {
         style: null,
         className: null,
         start: null,
+        submenuIcon: null,
+        menuIcon: null,
         end: null,
         children: undefined
     },

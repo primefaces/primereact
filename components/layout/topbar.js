@@ -1,13 +1,14 @@
 import { DocSearch } from '@docsearch/react';
 import { useEffect, useRef } from 'react';
+import pkg from '../../package.json';
 import { StyleClass } from '../lib/styleclass/StyleClass';
 
 export default function Topbar(props) {
     const versionsRef = useRef(null);
     const versions = [
         {
-            name: 'v9',
-            version: '9.0.0',
+            name: `v${pkg.version.split('.')[0]}`,
+            version: pkg.version,
             url: 'https://www.primereact.org'
         },
         {
@@ -36,6 +37,27 @@ export default function Topbar(props) {
             url: 'https://www.primefaces.org/primereact-v4'
         }
     ];
+
+    {
+        /* doc https://docsearch.algolia.com/docs/api/#transformitems */
+    }
+
+    function handleDocSearchTransformItems(items) {
+        const isLocalhost = process.env.NODE_ENV !== 'production';
+
+        return items.map((item) => {
+            if (isLocalhost) {
+                const url = new URL(item.url);
+
+                url.protocol = window.location.protocol;
+                url.hostname = window.location.hostname;
+                url.port = window.location.port;
+                item.url = url.toString();
+            }
+
+            return item;
+        });
+    }
 
     const onMenuButtonClick = () => {
         props.onMenuButtonClick();
@@ -80,13 +102,13 @@ export default function Topbar(props) {
                 <button type="button" className="p-link menu-button" onClick={onMenuButtonClick} aria-haspopup aria-label="Menu">
                     <i className="pi pi-bars"></i>
                 </button>
-                <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} />
+                <DocSearch appId="SCRI13XXZO" apiKey="ea9e6c8a983c5646d6b9079921d4aed7" indexName="primereact" container="" debug={false} transformItems={handleDocSearchTransformItems} />
 
                 <ul className="flex list-none m-0 p-0 gap-2 align-items-center">
                     <li></li>
                     <li>
                         <a
-                            href="https://primefaces.github.io/primereact"
+                            href="https://github.com/primefaces/primereact"
                             className="flex p-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
                         >
                             <i className="pi pi-github text-700"></i>

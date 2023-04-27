@@ -34,7 +34,7 @@ const PanelMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React PanelMenu Component" header="PanelMenu" description="PanelMenu is a hybrid of accordion-tree components." componentDocs={docs} apiDocs={['PanelMenu']} />;
+    return <DocComponent title="React PanelMenu Component" header="PanelMenu" description="PanelMenu is a hybrid of accordion-tree components." componentDocs={docs} apiDocs={['PanelMenu', 'MenuItem']} />;
 };
 
 export default PanelMenuDemo;

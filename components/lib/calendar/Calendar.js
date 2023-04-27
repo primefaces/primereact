@@ -5,10 +5,14 @@ import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useU
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-
+import { CalendarIcon } from '../icons/calendar';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { ChevronDownIcon } from '../icons/chevrondown';
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CalendarBase.getProps(inProps);
@@ -2477,7 +2481,7 @@ export const Calendar = React.memo(
             }
 
             return () => {
-                props.mask && unbindMaskEvents();
+                props.mask && unbindMaskEvents && unbindMaskEvents();
             };
         });
 
@@ -2580,10 +2584,13 @@ export const Calendar = React.memo(
 
         const createBackwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
+            const iconClassName = 'p-datepicker-prev-icon';
+            const icon = props.prevIcon || <ChevronLeftIcon className={iconClassName} />;
+            const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <button type="button" className="p-datepicker-prev" {...navigatorProps}>
-                    <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
+                    {backwardNavigatorIcon}
                     <Ripple />
                 </button>
             );
@@ -2591,10 +2598,13 @@ export const Calendar = React.memo(
 
         const createForwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onNextButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
+            const iconClassName = 'p-datepicker-next-icon';
+            const icon = props.nextIcon || <ChevronRightIcon className={iconClassName} />;
+            const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <button type="button" className="p-datepicker-next" {...navigatorProps}>
-                    <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
+                    {forwardNavigatorIcon}
                     <Ripple />
                 </button>
             );
@@ -2688,7 +2698,7 @@ export const Calendar = React.memo(
                 return content;
             }
 
-            const displayYear = props.inline ? metaYear : currentYear;
+            const displayYear = props.numberOfMonths > 1 ? metaYear : currentYear;
 
             return (
                 currentView !== 'year' && (
@@ -2811,9 +2821,10 @@ export const Calendar = React.memo(
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
+            const monthKey = monthMetaData.month + '-' + monthMetaData.year;
 
             return (
-                <div key={monthMetaData.month} className="p-datepicker-group">
+                <div key={monthKey} className="p-datepicker-group">
                     <div className="p-datepicker-header">
                         {header}
                         {backwardNavigator}
@@ -2920,6 +2931,9 @@ export const Calendar = React.memo(
             return null;
         };
 
+        const incrementIcon = IconUtils.getJSXIcon(props.incrementIcon || <ChevronUpIcon />, undefined, { props });
+        const decrementIcon = IconUtils.getJSXIcon(props.decrementIcon || <ChevronDownIcon />, undefined, { props });
+
         const createHourPicker = () => {
             const currentTime = getCurrentDateTime();
             const minute = doStepMinute(currentTime.getMinutes());
@@ -2945,7 +2959,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-up"></span>
+                        {incrementIcon}
                         <Ripple />
                     </button>
                     <span>{hourDisplay}</span>
@@ -2957,7 +2971,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-down"></span>
+                        {decrementIcon}
                         <Ripple />
                     </button>
                 </div>
@@ -2981,7 +2995,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-up"></span>
+                        {incrementIcon}
                         <Ripple />
                     </button>
                     <span>{minuteDisplay}</span>
@@ -2993,7 +3007,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-down"></span>
+                        {decrementIcon}
                         <Ripple />
                     </button>
                 </div>
@@ -3016,7 +3030,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-up"></span>
+                            {incrementIcon}
                             <Ripple />
                         </button>
                         <span>{secondDisplay}</span>
@@ -3028,7 +3042,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-down"></span>
+                            {decrementIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -3054,7 +3068,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-up"></span>
+                            {incrementIcon}
                             <Ripple />
                         </button>
                         <span>{millisecondDisplay}</span>
@@ -3066,7 +3080,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-down"></span>
+                            {decrementIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -3085,12 +3099,12 @@ export const Calendar = React.memo(
                 return (
                     <div className="p-ampm-picker">
                         <button type="button" className="p-link" onClick={toggleAmPm}>
-                            <span className="pi pi-chevron-up"></span>
+                            {incrementIcon}
                             <Ripple />
                         </button>
                         <span>{display}</span>
                         <button type="button" className="p-link" onClick={toggleAmPm}>
-                            <span className="pi pi-chevron-down"></span>
+                            {decrementIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -3161,7 +3175,7 @@ export const Calendar = React.memo(
 
         const createButton = () => {
             if (props.showIcon) {
-                return <Button type="button" icon={props.icon} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" />;
+                return <Button type="button" icon={props.icon || <CalendarIcon />} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" />;
             }
 
             return null;

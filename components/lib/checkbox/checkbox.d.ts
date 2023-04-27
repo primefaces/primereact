@@ -89,8 +89,7 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     tabIndex?: number | undefined;
     /**
-     * Icon class of the checkbox icon.
-     * @defaultValue pi pi-check
+     * Icon to display in checkbox.
      */
     icon?: IconType<CheckboxProps> | undefined;
     /**

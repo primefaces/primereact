@@ -45,6 +45,7 @@ export const FirstPageLinkBase = {
         disabled: false,
         onClick: null,
         template: null,
+        firstPageLinkIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, FirstPageLinkBase.defaultProps),
@@ -72,6 +73,7 @@ export const LastPageLinkBase = {
         disabled: false,
         onClick: null,
         template: null,
+        lastPageLinkIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, LastPageLinkBase.defaultProps),
@@ -84,6 +86,7 @@ export const NextPageLinkBase = {
         disabled: false,
         onClick: null,
         template: null,
+        nextPageLinkIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, NextPageLinkBase.defaultProps),
@@ -111,6 +114,7 @@ export const PrevPageLinkBase = {
         disabled: false,
         onClick: null,
         template: null,
+        prevPageLinkIcon: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, PrevPageLinkBase.defaultProps),

@@ -5,9 +5,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function SizesDoc(props) {
     const code = {
         basic: `
-<Button label="Small" icon="pi pi-check" size="sm" />
+<Button label="Small" icon="pi pi-check" size="small" />
 <Button label="Normal" icon="pi pi-check" />
-<Button label="Large" icon="pi pi-check" size="lg" />
+<Button label="Large" icon="pi pi-check" size="large" />
         `,
         javascript: `
 import React from 'react'; 
@@ -16,9 +16,9 @@ import { Button } from 'primereact/button';
 export default function SizesDemo() {
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
-            <Button label="Small" icon="pi pi-check" size="sm" />
+            <Button label="Small" icon="pi pi-check" size="small" />
             <Button label="Normal" icon="pi pi-check" />
-            <Button label="Large" icon="pi pi-check" size="lg" />
+            <Button label="Large" icon="pi pi-check" size="large" />
         </div>
     )
 }
@@ -30,9 +30,9 @@ import { Button } from 'primereact/button';
 export default function SizesDemo() {
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
-            <Button label="Small" icon="pi pi-check" size="sm" />
+            <Button label="Small" icon="pi pi-check" size="small" />
             <Button label="Normal" icon="pi pi-check" />
-            <Button label="Large" icon="pi pi-check" size="lg" />
+            <Button label="Large" icon="pi pi-check" size="large" />
         </div>
     )
 }
@@ -47,9 +47,9 @@ export default function SizesDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
-                <Button label="Small" icon="pi pi-check" size="sm" />
+                <Button label="Small" icon="pi pi-check" size="small" />
                 <Button label="Normal" icon="pi pi-check" />
-                <Button label="Large" icon="pi pi-check" size="lg" />
+                <Button label="Large" icon="pi pi-check" size="large" />
             </div>
             <DocSectionCode code={code} />
         </>

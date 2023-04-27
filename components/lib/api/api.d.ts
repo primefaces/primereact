@@ -36,6 +36,7 @@ export interface APIOptions {
     zIndex?: ZIndexOptions;
     filterMatchModeOptions?: FilterMatchModeOptions;
     nullSortOrder?: number;
+    changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
 }
 
 declare const PrimeReact: APIOptions;
@@ -79,8 +80,8 @@ export interface PrimeIconsOptions {
     readonly ARROW_UP: string;
     readonly ARROW_UP_LEFT: string;
     readonly ARROW_UP_RIGHT: string;
-    readonly ARROW_H: string;
-    readonly ARROW_V: string;
+    readonly ARROWS_H: string;
+    readonly ARROWS_V: string;
     readonly AT: string;
     readonly BACKWARD: string;
     readonly BAN: string;

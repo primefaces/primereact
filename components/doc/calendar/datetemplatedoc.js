@@ -47,7 +47,7 @@ import React, { useState } from "react";
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
 export default function DateTemplateDemo() {
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     const dateTemplate = (date: Date) => {
         if (date.day > 10 && date.day < 15) {

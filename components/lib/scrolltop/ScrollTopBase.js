@@ -5,7 +5,7 @@ export const ScrollTopBase = {
         __TYPE: 'ScrollTop',
         target: 'window',
         threshold: 400,
-        icon: 'pi pi-chevron-up',
+        icon: null,
         behavior: 'smooth',
         className: null,
         style: null,

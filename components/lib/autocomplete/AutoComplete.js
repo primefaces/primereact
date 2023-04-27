@@ -8,6 +8,9 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const AutoComplete = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -533,11 +536,14 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
+                    const iconProps = { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) };
+                    const icon = props.removeTokenIcon || <TimesCircleIcon {...iconProps} />;
+                    const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                     return (
                         <li key={key} className="p-autocomplete-token p-highlight">
                             <span className="p-autocomplete-token-label">{formatValue(val)}</span>
-                            {!props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) }, { props })}
+                            {removeTokenIcon}
                         </li>
                     );
                 });
@@ -600,7 +606,7 @@ export const AutoComplete = React.memo(
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
-                return <Button type="button" icon={props.dropdownIcon} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
+                return <Button type="button" icon={props.dropdownIcon || <ChevronDownIcon />} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
             }
 
             return null;
@@ -608,7 +614,11 @@ export const AutoComplete = React.memo(
 
         const createLoader = () => {
             if (searchingState) {
-                return <i className="p-autocomplete-loader pi pi-spinner pi-spin"></i>;
+                const iconClassName = 'p-autocomplete-loader p-icon-spin';
+                const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} />;
+                const loaderIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+                return loaderIcon;
             }
 
             return null;

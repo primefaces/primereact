@@ -34,7 +34,7 @@ const TieredMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React TieredMenu Component" header="TieredMenu" description="TieredMenu displays submenus in nested overlays." componentDocs={docs} apiDocs={['TieredMenu']} />;
+    return <DocComponent title="React TieredMenu Component" header="TieredMenu" description="TieredMenu displays submenus in nested overlays." componentDocs={docs} apiDocs={['TieredMenu', 'MenuItem']} />;
 };
 
 export default TieredMenuDemo;

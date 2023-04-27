@@ -147,7 +147,7 @@ export default function GroupDemo() {
         `,
         typescript: `
 import React, { useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 interface City {
     label: string;
@@ -210,7 +210,7 @@ export default function GroupDemo() {
         );
     };
 
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         let query = event.query;
         let _filteredCities = [];
 
@@ -227,7 +227,7 @@ export default function GroupDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
+            <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeEvent) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
                 field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
         </div>
     )

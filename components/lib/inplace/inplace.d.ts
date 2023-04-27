@@ -14,6 +14,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom toggle event.
@@ -55,6 +56,10 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * Used to define a string that labels the component.
      */
     ariaLabel?: string | undefined;
+    /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<InplaceProps> | undefined;
     /**
      * Callback to invoke when inplace is opened.
      * @param {React.MouseEvent}  event - Browser event.

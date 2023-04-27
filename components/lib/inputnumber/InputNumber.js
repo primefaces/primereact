@@ -3,8 +3,10 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDownIcon } from '../icons/angledown';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -1032,7 +1034,9 @@ export const InputNumber = React.memo(
                 },
                 props.incrementButtonClassName
             );
-            const icon = classNames('p-button-icon', props.incrementButtonIcon);
+            const iconsClassName = 'p-button-icon';
+            const icon = props.incrementButtonIcon || <AngleUpIcon className={iconsClassName} />;
+            const upButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
 
             return (
                 <button
@@ -1046,7 +1050,7 @@ export const InputNumber = React.memo(
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
-                    <span className={icon}></span>
+                    {upButton}
                     <Ripple />
                 </button>
             );
@@ -1060,7 +1064,9 @@ export const InputNumber = React.memo(
                 },
                 props.decrementButtonClassName
             );
-            const icon = classNames('p-button-icon', props.decrementButtonIcon);
+            const iconsClassName = 'p-button-icon';
+            const icon = props.decrementButtonIcon || <AngleDownIcon className={iconsClassName} />;
+            const downButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
 
             return (
                 <button
@@ -1074,7 +1080,7 @@ export const InputNumber = React.memo(
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
-                    <span className={icon}></span>
+                    {downButton}
                     <Ripple />
                 </button>
             );

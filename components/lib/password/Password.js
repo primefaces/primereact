@@ -5,8 +5,10 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
+import { EyeIcon } from '../icons/eye';
+import { EyeSlashIcon } from '../icons/eyeslash';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -240,14 +242,23 @@ export const Password = React.memo(
         });
 
         const createIcon = () => {
+            let icon;
+
+            if (unmaskedState) {
+                icon = props.hideIcon || <EyeSlashIcon />;
+            } else {
+                icon = props.showIcon || <EyeIcon />;
+            }
+
+            const eyeIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+
             if (props.toggleMask) {
-                const iconClassName = unmaskedState ? 'pi pi-eye-slash' : 'pi pi-eye';
-                let content = <i className={iconClassName} onClick={onMaskToggle} />;
+                let content = <i onClick={onMaskToggle}> {eyeIcon} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
                         onClick: onMaskToggle,
-                        className: iconClassName,
+                        className,
                         element: content,
                         props
                     };

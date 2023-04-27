@@ -51,6 +51,11 @@ export interface ChartProps {
      */
     className?: string | undefined;
     /**
+     * ARIA label for the chart canvas. Defaults to options.plugins.title.text if available.
+     * @default options.plugins.title.text
+     */
+    ariaLabel?: string | undefined;
+    /**
      * Used to get the child elements of the component.
      * @readonly
      */

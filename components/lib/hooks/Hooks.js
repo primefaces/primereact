@@ -5,6 +5,7 @@ import { useEventListener } from './useEventListener';
 import { useFavicon } from './useFavicon';
 import { useIntersectionObserver } from './useIntersectionObserver';
 import { useInterval } from './useInterval';
+import { useMatchMedia } from './useMatchMedia';
 import { useMountEffect } from './useMountEffect';
 import { useMouse } from './useMouse';
 import { useMove } from './useMove';
@@ -37,5 +38,6 @@ export {
     useMouse,
     useMove,
     useClickOutside,
-    useDebounce
+    useDebounce,
+    useMatchMedia
 };

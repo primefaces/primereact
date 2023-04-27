@@ -64,7 +64,7 @@ const SpeedDialDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Speed Dial Component" header="Speed Dial" description="SpeedDial is a floating button with a popup menu." componentDocs={docs} apiDocs={['Speed Dial']} />;
+    return <DocComponent title="React Speed Dial Component" header="Speed Dial" description="SpeedDial is a floating button with a popup menu." componentDocs={docs} apiDocs={['SpeedDial']} />;
 };
 
 export default SpeedDialDemo;
