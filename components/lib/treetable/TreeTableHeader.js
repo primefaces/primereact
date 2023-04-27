@@ -179,6 +179,12 @@ export const TreeTableHeader = React.memo((props) => {
         return null;
     };
 
+    const createTitle = (column, options) => {
+        const title = ObjectUtils.getJSXElement(getColumnProp(column, 'header'), { props: options });
+
+        return <span className="p-column-title">{title}</span>;
+    };
+
     const createHeaderCell = (column, options) => {
         let filterElement;
 
@@ -231,7 +237,7 @@ export const TreeTableHeader = React.memo((props) => {
 
             const headerTooltip = getColumnProp(column, 'headerTooltip');
             const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
-
+            const title = createTitle(column, options);
             const resizer = createResizer(column);
 
             return (
@@ -253,7 +259,7 @@ export const TreeTableHeader = React.memo((props) => {
                         onDrop={(e) => onDrop(e, column)}
                     >
                         {resizer}
-                        <span className="p-column-title">{getColumnProp(column, 'header')}</span>
+                        {title}
                         {sortIconElement}
                         {sortBadge}
                         {filterElement}
