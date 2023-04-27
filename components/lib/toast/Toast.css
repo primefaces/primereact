@@ -13,6 +13,10 @@
     flex: 1 1 auto;
 }
 
+.p-toast-summary {
+    overflow-wrap: anywhere;
+}
+
 .p-toast-detail {
     overflow-wrap: anywhere;
 }
@@ -93,7 +97,7 @@
     max-height: 1000px;
 }
 
-.p-toast-message-exit-active {
+.p-toast .p-toast-message.p-toast-message-exit-active {
     opacity: 0;
     max-height: 0;
     margin-bottom: 0;

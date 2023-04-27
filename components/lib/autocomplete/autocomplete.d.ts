@@ -2,7 +2,7 @@
  *
  * AutoComplete is an input component that provides real-time suggestions while being typed.
  *
- * [Live Demo](https://www.primefaces.org/primereact/autocomplete/)
+ * [Live Demo](https://www.primereact.org/autocomplete/)
  *
  * @module autocomplete
  *
@@ -132,8 +132,7 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     dropdownAutoFocus?: boolean | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
     dropdownIcon?: IconType<AutoCompleteProps> | undefined;
     /**
@@ -171,6 +170,10 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * Inline style of the input field.
      */
     inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Icon of the loader.
+     */
+    loadingIcon?: IconType<AutoCompleteProps> | undefined;
     /**
      * Template of a list item.
      */
@@ -228,9 +231,8 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
     readOnly?: boolean | undefined;
     /**
      * Icon of the remove chip element in multiple mode.
-     * @defaultValue pi pi-times-circle
      */
-    removeIcon?: IconType<AutoCompleteProps> | undefined;
+    removeTokenIcon?: IconType<AutoCompleteProps> | undefined;
     /**
      * Maximum height of the suggestions panel.
      * @defaultValue 200px
@@ -378,9 +380,9 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
  *
  * _AutoComplete is an input component that provides real-time suggestions while being typed._
  *
- * [Live Demo](https://www.primefaces.org/primereact/autocomplete/)
+ * [Live Demo](https://www.primereact.org/autocomplete/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

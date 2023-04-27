@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
 import { GroupDoc } from '../../components/doc/menu/groupdoc';
@@ -46,33 +43,10 @@ const MenuDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Menu', pathname: '/modules/menu.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Menu Component</title>
-                <meta name="description" content="Menu is a navigation/command component that supports dynamic and static positioning." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Menu</h1>
-                    <p>Menu is a navigation/command component that supports dynamic and static positioning.</p>
-                </div>
-                <DocActions github="/menu" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu', 'MenuItem']} />;
 };
 
 export default MenuDemo;

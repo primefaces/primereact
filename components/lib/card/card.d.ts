@@ -2,7 +2,7 @@
  *
  * Card is a flexible container component.
  *
- * [Live Demo](https://www.primefaces.org/primereact/card/)
+ * [Live Demo](https://www.primereact.org/card/)
  *
  * @module card
  *
@@ -42,9 +42,9 @@ export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
  *
  * _Card is a flexible container component._
  *
- * [Live Demo](https://www.primefaces.org/primereact/card/)
+ * [Live Demo](https://www.primereact.org/card/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

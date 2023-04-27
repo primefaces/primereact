@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
 import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
 import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
@@ -95,35 +92,10 @@ const InputNumberDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'InputNumber', pathname: '/modules/inputnumber.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputNumber Component</title>
-                <meta name="description" content="InputNumber is an input component to provide numerical input." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputNumber</h1>
-                    <p>InputNumber is an input component to provide numerical input.</p>
-                </div>
-
-                <DocActions github="/inputnumber" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React InputNumber Component" header="InputNumber" description="InputNumber is an input component to provide numerical input." componentDocs={docs} apiDocs={['InputNumber']} />;
 };
 
 export default InputNumberDemo;

@@ -16,13 +16,13 @@ export function DateTemplateDoc(props) {
 
     const code = {
         basic: `
-<Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
+<Calendar value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function DateTemplateDoc() {
+export default function DateTemplateDemo() {
     const [date, setDate] = useState(null);
 
     const dateTemplate = (date) => {
@@ -37,17 +37,17 @@ export default function DateTemplateDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function DateTemplateDoc() {
-    const [date, setDate] = useState<Date | null>(null);
+export default function DateTemplateDemo() {
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     const dateTemplate = (date: Date) => {
         if (date.day > 10 && date.day < 15) {
@@ -61,7 +61,7 @@ export default function DateTemplateDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar id="datetemplate" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} dateTemplate={dateTemplate} />
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} dateTemplate={dateTemplate} />
         </div>
     )
 }
@@ -71,10 +71,12 @@ export default function DateTemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Function that gets a date information and returns the cell content in datepicker.</p>
+                <p>
+                    Custom content can be placed inside date cells with the <i>dateTemplate</i> property that takes a Date as a parameter.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="datetemplate" value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
             </div>
             <DocSectionCode code={code} />
         </>

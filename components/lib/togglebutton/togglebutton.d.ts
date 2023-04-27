@@ -2,7 +2,7 @@
  *
  * ToggleButton is used to select a boolean value using a button.
  *
- * [Live Demo](https://www.primefaces.org/primereact/togglebutton/)
+ * [Live Demo](https://www.primereact.org/togglebutton/)
  *
  * @module togglebutton
  *
@@ -13,7 +13,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom toggle button change target options
- * @group Misc
  */
 interface ToggleButtonChangeTargetOptions {
     /**
@@ -126,9 +125,9 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
  *
  * _ToggleButton is used to select a boolean value using a button._
  *
- * [Live Demo](https://www.primefaces.org/primereact/togglebutton/)
+ * [Live Demo](https://www.primereact.org/togglebutton/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

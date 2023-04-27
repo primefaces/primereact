@@ -1,7 +1,6 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/chart/basicdoc';
+import { ChartJSDoc } from '../../components/doc/chart/chartjsdoc';
 import { ComboDoc } from '../../components/doc/chart/combodoc';
 import { DoughnutChartDoc } from '../../components/doc/chart/doughnutdoc';
 import { HorizontalBarDoc } from '../../components/doc/chart/horizontalbardoc';
@@ -14,9 +13,7 @@ import { PolarAreaDoc } from '../../components/doc/chart/polarareadoc';
 import { RadarDoc } from '../../components/doc/chart/radardoc';
 import { StackedBarDoc } from '../../components/doc/chart/stackedbardoc';
 import { VerticalBarDoc } from '../../components/doc/chart/verticalbardoc';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ChartDemo = () => {
     const docs = [
@@ -24,6 +21,11 @@ const ChartDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'chartjs',
+            label: 'Chart.js',
+            component: ChartJSDoc
         },
         {
             id: 'basic',
@@ -89,39 +91,10 @@ const ChartDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Chart', pathname: '/modules/chart.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Chart</title>
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Chart</h1>
-                    <p>
-                        Chart components are based on{' '}
-                        <a href="http://www.chartjs.org/" className="text-primary-500 no-underline hover:underline">
-                            Chart.js
-                        </a>
-                        , an open source HTML5 based charting library.
-                    </p>
-                </div>
-                <DocActions github="/chart" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Chart Component" header="Chart" description="Chart components are based on Chart.js, an open source HTML5 based charting library." componentDocs={docs} apiDocs={['Chart']} />;
 };
 
 export default ChartDemo;

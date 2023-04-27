@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/steps/basicdoc';
 import { ImportDoc } from '../../components/doc/steps/importdoc';
@@ -34,33 +31,18 @@ const StepsDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Steps', pathname: '/modules/steps.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Stepper Component</title>
-                <meta name="description" content="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Steps</h1>
-                    <p>Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.</p>
-                </div>
-                <DocActions github="/steps" />
-            </div>
-
-            <div className="content-section doc steps-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Stepper Component"
+            header="Steps"
+            description="Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design."
+            componentDocs={docs}
+            apiDocs={['Steps', 'MenuItem']}
+            className="steps-demo"
+        />
     );
 };
 

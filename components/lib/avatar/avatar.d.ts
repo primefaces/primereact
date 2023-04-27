@@ -2,7 +2,7 @@
  *
  * Avatar represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatar)
+ * [Live Demo](https://www.primereact.org/avatar)
  *
  * @module avatar
  *
@@ -73,9 +73,9 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
  *
  * _Avatar represents people using icons, labels and images._
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatar/)
+ * [Live Demo](https://www.primereact.org/avatar/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

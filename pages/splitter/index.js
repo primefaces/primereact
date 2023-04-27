@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
 import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
 import { ImportDoc } from '../../components/doc/splitter/importdoc';
@@ -46,37 +43,10 @@ const SplitterDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'Splitter', pathname: '/modules/splitter.html' },
-                { name: 'SplitterPanel', pathname: '/classes/splitter.SplitterPanel.html' }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Splitter Component</title>
-                <meta name="description" content="Splitter is utilized to separate and resize panels." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Splitter</h1>
-                    <p>Splitter is utilized to separate and resize panels.</p>
-                </div>
-                <DocActions github="/splitter" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Splitter Component" header="Splitter" description="Splitter is utilized to separate and resize panels." componentDocs={docs} apiDocs={['Splitter', 'SplitterPanel']} />;
 };
 
 export default SplitterDemo;

@@ -113,7 +113,7 @@ export function PopupDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -256,7 +256,7 @@ export default function PopupDemo() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {
@@ -403,7 +403,7 @@ export default function PopupDemo() {
                     ]
                 },
                 {
-                    label:'Archieve',
+                    label:'Archive',
                     icon:'pi pi-fw pi-calendar-times',
                     items:[
                     {

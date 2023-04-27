@@ -29,6 +29,7 @@
 .p-menubar-root-list {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .p-menubar-root-list > li ul {
@@ -46,7 +47,7 @@
     z-index: 1;
 }
 
-.p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list  {
+.p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list {
     display: block;
     left: 100%;
     top: 0;

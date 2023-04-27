@@ -1,5 +1,5 @@
-import React from 'react';
 import { useRouter } from 'next/router';
+import React from 'react';
 import { Button } from '../../lib/button/Button';
 import { SplitButton } from '../../lib/splitbutton/SplitButton';
 import { Toolbar } from '../../lib/toolbar/Toolbar';
@@ -55,12 +55,13 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React from 'react';
+//import { useRouter } from 'next/router';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { SplitButton } from 'primereact/splitbutton';
 
 export default function BasicDemo() {
-    const router = useRouter();
+    //const router = useRouter();
     const items = [
         {
             label: 'Update',
@@ -80,7 +81,7 @@ export default function BasicDemo() {
         {   label: 'Upload',
             icon: 'pi pi-upload',
             command: () => {
-                router.push('/fileupload');
+                //router.push('/fileupload');
             }
         }
     ];
@@ -111,13 +112,14 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React from 'react';
+//import { useRouter } from 'next/router';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { MenuItem } from 'primereact/menuitem';
 import { SplitButton } from 'primereact/splitbutton';
 
 export default function BasicDemo() {
-    const router = useRouter();
+    //const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Update',
@@ -137,7 +139,7 @@ export default function BasicDemo() {
         {   label: 'Upload',
             icon: 'pi pi-upload',
             command: () => {
-                router.push('/fileupload');
+                //router.push('/fileupload');
             }
         }
     ];

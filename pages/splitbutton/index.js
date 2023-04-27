@@ -1,20 +1,17 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/splitbutton/basic';
+import { BasicDoc } from '../../components/doc/splitbutton/basicdoc';
 import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
 import { ImportDoc } from '../../components/doc/splitbutton/importdoc';
 import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
-import { OutlinedButtonsDoc } from '../../components/doc/splitbutton/outlinedbuttonsdoc';
-import { RaisedButtonsDoc } from '../../components/doc/splitbutton/raisedbuttonsdoc';
-import { RaisedTextButtonsDoc } from '../../components/doc/splitbutton/raisedtextbuttonsdoc';
-import { RoundedButtonsDoc } from '../../components/doc/splitbutton/roundedbuttonsdoc';
-import { SeveritiesDoc } from '../../components/doc/splitbutton/severitiesdoc';
+import { OutlinedDoc } from '../../components/doc/splitbutton/outlineddoc';
+import { RaisedDoc } from '../../components/doc/splitbutton/raiseddoc';
+import { RaisedTextDoc } from '../../components/doc/splitbutton/raisedtextdoc';
+import { RoundedDoc } from '../../components/doc/splitbutton/roundeddoc';
+import { SeverityDoc } from '../../components/doc/splitbutton/severitydoc';
 import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
 import { StyleDoc } from '../../components/doc/splitbutton/styledoc';
-import { TextButtonsDoc } from '../../components/doc/splitbutton/textbuttonsdoc';
+import { TextDoc } from '../../components/doc/splitbutton/textdoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -29,49 +26,49 @@ const SplitButtonDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'loading',
             label: 'Loading',
             component: LoadingDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
         },
         {
-            id: 'raisedbuttons',
+            id: 'raised',
             label: 'Raised',
-            component: RaisedButtonsDoc
+            component: RaisedDoc
         },
         {
-            id: 'roundedbuttons',
+            id: 'rounded',
             label: 'Rounded',
-            component: RoundedButtonsDoc
+            component: RoundedDoc
         },
         {
-            id: 'textbuttons',
+            id: 'text',
             label: 'Text',
-            component: TextButtonsDoc
+            component: TextDoc
         },
         {
-            id: 'raisedtextbuttons',
+            id: 'raisedtext',
             label: 'Raised Text',
-            component: RaisedTextButtonsDoc
+            component: RaisedTextDoc
         },
         {
             id: 'outlinedbuttons',
             label: 'Outlined',
-            component: OutlinedButtonsDoc
+            component: OutlinedDoc
         },
         {
             id: 'sizes',
             label: 'Sizes',
             component: SizesDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'style',
@@ -82,35 +79,10 @@ const SplitButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'SplitButton', pathname: '/modules/splitbutton.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React SplitButton Component</title>
-                <meta name="description" content="SplitButton groups a set of commands in an overlay with a default command." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>SplitButton</h1>
-                    <p>SplitButton groups a set of commands in an overlay with a default command.</p>
-                </div>
-
-                <DocActions github="/splitbutton" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React SplitButton Component" header="SplitButton" description="SplitButton groups a set of commands in an overlay with a default action item." componentDocs={docs} apiDocs={['SplitButton']} />;
 };
 
 export default SplitButtonDemo;

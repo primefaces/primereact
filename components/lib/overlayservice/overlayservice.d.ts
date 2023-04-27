@@ -2,7 +2,7 @@
  *
  * OverlayService allows all overlay components to communicate with each other.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  *
  * @module overlayservice
  *
@@ -24,7 +24,6 @@ export interface OverlayServiceEvent {
 }
 
 /**
- * @group Misc
  */
 export interface OverlayServiceOptions {
     /**
@@ -52,9 +51,9 @@ export interface OverlayServiceOptions {
  *
  * _OverlayService allows all overlay components to communicate with each other._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Service
  */

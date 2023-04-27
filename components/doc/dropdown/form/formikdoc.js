@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { Dropdown } from '../../../lib/dropdown/Dropdown';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -112,7 +112,7 @@ export default function FormikDoc() {
     
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Dropdown
                     inputId="city"
@@ -136,14 +136,19 @@ export default function FormikDoc() {
         typescript: `
 import React, { useRef } from "react";
 import { useFormik } from 'formik';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 
+interface City {
+    name: string;
+    code: string;
+}
+
 export default function FormikDoc() {
     const toast = useRef(null);
-    const cities = [
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -182,7 +187,7 @@ export default function FormikDoc() {
     
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Dropdown
                     inputId="city"
@@ -192,7 +197,7 @@ export default function FormikDoc() {
                     optionLabel="name"
                     placeholder="Select a City"
                     className={classNames({ 'p-invalid': isFormFieldInvalid('city') })}
-                    onChange={(e) => {
+                    onChange={(e: DropdownChangeEvent) => {
                         formik.setFieldValue('city', e.value);
                     }}
                 />
@@ -213,7 +218,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Dropdown
                         inputId="city"

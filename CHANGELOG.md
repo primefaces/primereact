@@ -1,6 +1,168 @@
 # Changelog
 
-## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1)
+## [9.3.1](https://github.com/primefaces/primereact/tree/9.3.1)  (2023-04-26)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.3.0...9.3.1)
+
+**Implemented New Features and Enhancements:**
+
+- Messages: Cannot pass Id property [\#4281](https://github.com/primefaces/primereact/issues/4281)
+- Image:  missing `crossOrigin`, `referrerPolicy`, `loading` and `useMap`  [\#4273](https://github.com/primefaces/primereact/issues/4273)
+- Mention: autoResize wont resize back to starting height [\#4197](https://github.com/primefaces/primereact/issues/4197)
+- DataTable: Cell edit support Dropdown. [\#2666](https://github.com/primefaces/primereact/issues/2666)
+
+**Fixed bugs:**
+
+- DataTable: Correct "Select All" behavior in checkbox selection mode [\#4284](https://github.com/primefaces/primereact/issues/4284)
+- DataTable: multisortField - Cannot read properties of undefined \(reading 'field'\) [\#4269](https://github.com/primefaces/primereact/issues/4269)
+- Image: No overload matches this call. [\#4268](https://github.com/primefaces/primereact/issues/4268)
+- Uncaught reference error for icons.  [\#4264](https://github.com/primefaces/primereact/issues/4264)
+- Calendar: `numberOfMonths` \> 12 issue [\#4259](https://github.com/primefaces/primereact/issues/4259)
+- DataTable: paginator with alwaysShowPaginator: false is displayed for empty table [\#4254](https://github.com/primefaces/primereact/issues/4254)
+- PickList: source/target filterTemplate not working [\#4249](https://github.com/primefaces/primereact/issues/4249)
+- DataTable: Data are not displayed when "Column" has no "field" attributes [\#4248](https://github.com/primefaces/primereact/issues/4248)
+- Tooltip: Does not work if target is dynamic [\#4243](https://github.com/primefaces/primereact/issues/4243)
+- TabView: Conditionally render TabPanel under TabView [\#4235](https://github.com/primefaces/primereact/issues/4235)
+- Mention: wrong value when clicking on suggestion [\#4221](https://github.com/primefaces/primereact/issues/4221)
+- Dropdown: with react-hook-form . Control prop doesn't exist [\#4215](https://github.com/primefaces/primereact/issues/4215)
+- TieredMenu: Menu items in are assigned with id attribute with a value of \[object Object\] [\#4011](https://github.com/primefaces/primereact/issues/4011)
+
+## [9.3.0](https://github.com/primefaces/primereact/tree/9.3.0) (2023-04-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.3...9.3.0)
+
+**Implemented New Features and Enhancements:**
+
+- Improve icon implementation in core [\#4220](https://github.com/primefaces/primereact/issues/4220)
+- Add icon templating support to components [\#4226](https://github.com/primefaces/primereact/issues/4226)
+- Add new Icon components [\#4227](https://github.com/primefaces/primereact/issues/4227)
+
+## [9.2.3](https://github.com/primefaces/primereact/tree/9.2.3) (2023-04-11)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.2...9.2.3)
+
+**Fixed bugs:**
+
+- Type missing for PrimeReact.changeTheme [\#4240](https://github.com/primefaces/primereact/issues/4240)
+
+## [9.2.2](https://github.com/primefaces/primereact/tree/9.2.2) (2023-03-28)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.1...9.2.2)
+
+**Implemented New Features and Enhancements:**
+
+- Slider: Change positioning of handles in range mode [\#4184](https://github.com/primefaces/primereact/issues/4184)
+
+**Fixed bugs:**
+
+- OverlayEventOptions type inccorrect [\#4189](https://github.com/primefaces/primereact/issues/4189)
+- Mention: selected result to replace the search query [\#4188](https://github.com/primefaces/primereact/issues/4188)
+- Tree: Missing property `dropNode` in type signature of `TreeDragDropEvent` [\#4179](https://github.com/primefaces/primereact/issues/4179)
+- CodeSandbox demos are broken [\#4172](https://github.com/primefaces/primereact/issues/4172)
+- Sidebar:  Unexpected component hide [\#4170](https://github.com/primefaces/primereact/issues/4170)
+- Calendar: `view` typescript missing `year` [\#4163](https://github.com/primefaces/primereact/issues/4163)
+- Ripple: first click on component has incorrect location [\#4160](https://github.com/primefaces/primereact/issues/4160)
+- primereact.min.css Error at background:transparent URL\(\) with base64 image [\#4097](https://github.com/primefaces/primereact/issues/4097)
+
+## [9.2.1](https://github.com/primefaces/primereact/tree/9.2.1) (2023-03-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.2.0...9.2.1)
+
+**Implemented New Features and Enhancements:**
+
+- Timeline: subgroups [\#4154](https://github.com/primefaces/primereact/issues/4154)
+- Add new style props to SplitButton component [\#4144](https://github.com/primefaces/primereact/issues/4144)
+- Using the tooltip attribute inside the Shadow Dom crashes Primereact on hover [\#4143](https://github.com/primefaces/primereact/issues/4143)
+- DataTable: responsiveLayout="stack" and scrollable not working together [\#3693](https://github.com/primefaces/primereact/issues/3693)
+
+**Fixed bugs:**
+
+- Showcase: multiple pages have a typo of the word 'archive' [\#4146](https://github.com/primefaces/primereact/issues/4146)
+- MegaMenu: does not hide menuItem when visible = false [\#4140](https://github.com/primefaces/primereact/issues/4140)
+- Multiselect: Errors on types and behaviour not as documented [\#4129](https://github.com/primefaces/primereact/issues/4129)
+- DataTable with VirtualScroller: multi selection bug [\#4120](https://github.com/primefaces/primereact/issues/4120)
+- InputText: Tooltip and float-label incompatibility when using showOnDisabled [\#4110](https://github.com/primefaces/primereact/issues/4110)
+- useIntersectionObserver: Make the options parameter optional [\#4109](https://github.com/primefaces/primereact/issues/4109)
+- Button: Severity 'help' missing in TypeScript definition [\#4108](https://github.com/primefaces/primereact/issues/4108)
+- DataTable Virtual Scroller: Column Resize Not Working [\#4102](https://github.com/primefaces/primereact/issues/4102)
+- Dataview: Callback Documentation Typo [\#4099](https://github.com/primefaces/primereact/issues/4099)
+- Datatable: Duplicate events fire in `paginatorPosition=both` [\#4095](https://github.com/primefaces/primereact/issues/4095)
+- Button: Size 'large' vs 'lg'  [\#4093](https://github.com/primefaces/primereact/issues/4093)
+- Theme: `vela-blue` TreeSelect inconsistent theming  [\#3669](https://github.com/primefaces/primereact/issues/3669)
+
+## [9.2.0](https://github.com/primefaces/primereact/tree/9.2.0) (2023-02-21)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.1.1...9.2.0)
+
+**Breaking Changes:**
+
+- DataTable CSS and responsive structure improvements [\#4078](https://github.com/primefaces/primereact/issues/4078)
+
+**Implemented New Features and Enhancements:**
+
+- New Hook: useMatchMedia [\#4090](https://github.com/primefaces/primereact/issues/4090)
+- Add breakpoint and scrollHeight props to ContextMenu, MegaMenu and TieredMenu components. [\#4082](https://github.com/primefaces/primereact/issues/4082)
+- TreeTable CSS improvements [\#4081](https://github.com/primefaces/primereact/issues/4081)
+- Add `when` option to useResizeListener hook  [\#4080](https://github.com/primefaces/primereact/issues/4080)
+- Add tabIndex, appendOnly and inline properties to VirtualScroller [\#4079](https://github.com/primefaces/primereact/issues/4079)
+
+**Fixed bugs:**
+
+- Toast: Flick issue on toast-message-exit-active class [\#4084](https://github.com/primefaces/primereact/issues/4084)
+- Inplace is not working as expected [\#4070](https://github.com/primefaces/primereact/issues/4070)
+- PrimeIcons: can't use pi-arrow-right-arrow-left [\#4062](https://github.com/primefaces/primereact/issues/4062)
+- Calendar: Popup incorrect year in multiple month [\#4058](https://github.com/primefaces/primereact/issues/4058)
+- Avatar: Wrong className is getting used when image is undefined [\#4049](https://github.com/primefaces/primereact/issues/4049)
+- Inline Calendar inside DataTable filter error [\#4042](https://github.com/primefaces/primereact/issues/4042)
+- Toast: Summary Overflow Bug [\#4023](https://github.com/primefaces/primereact/issues/4023)
+
+## [9.1.1](https://github.com/primefaces/primereact/tree/9.1.1) (2023-02-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.1.0...9.1.1)
+
+**Fixed bugs:**
+
+- primereact 9.1.0 it is not loaded using vite [\#4064](https://github.com/primefaces/primereact/issues/4064)
+
+## [9.1.0](https://github.com/primefaces/primereact/tree/9.1.0) (2023-02-15)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0...9.1.0)
+
+**Implemented New Features and Enhancements:**
+
+- Improve responsive styling on Menubar [\#4060](https://github.com/primefaces/primereact/issues/4060)
+- FileUpload: Advanced Section same as PrimeVue FileUpload section [\#4059](https://github.com/primefaces/primereact/issues/4059)
+- Add breakpoint and scrollHeight properties to CascadeSelect [\#4052](https://github.com/primefaces/primereact/issues/4052)
+- Add breakpoint property to PickList and OrderList [\#4050](https://github.com/primefaces/primereact/issues/4050)
+
+## [9.0.0](https://github.com/primefaces/primereact/tree/9.0.0) (2023-02-13)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-rc.1...9.0.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add sideEffects: false to nested package.json files on components [\#4028](https://github.com/primefaces/primereact/issues/4028)
+- Remove GMap and Captcha [\#4025](https://github.com/primefaces/primereact/issues/4025)
+- Core: Deprecated defaultProps still used [\#3786](https://github.com/primefaces/primereact/issues/3786)
+
+**Fixed bugs:**
+
+- DataTable: Export Function Newline Separator [\#4001](https://github.com/primefaces/primereact/issues/4001)
+
+## [9.0.0-rc.1](https://github.com/primefaces/primereact/tree/9.0.0-rc.1) (2023-02-09)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.0.0-beta.1...9.0.0-rc.1)
+
+**Breaking Changes:**
+
+- Remove Maps [\#4038](https://github.com/primefaces/primereact/issues/4038)
+- Remove Recaptcha [\#4037](https://github.com/primefaces/primereact/issues/4037)
+
+**Implemented New Features and Enhancements:**
+
+- New Hooks [\#4039](https://github.com/primefaces/primereact/issues/4039)
+
+## [9.0.0-beta.1](https://github.com/primefaces/primereact/tree/9.0.0-beta.1) (2023-01-26)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/8.7.3...9.0.0-beta.1)
 

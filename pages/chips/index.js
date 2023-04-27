@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/chips/basicdoc';
 import { DisabledDoc } from '../../components/doc/chips/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
@@ -13,9 +11,7 @@ import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
 import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
 import { StyleDoc } from '../../components/doc/chips/styledoc';
 import { TemplateDoc } from '../../components/doc/chips/templatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ChipsDemo = () => {
     const docs = [
@@ -28,21 +24,6 @@ const ChipsDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'separator',
@@ -58,6 +39,21 @@ const ChipsDemo = () => {
             id: 'keyfilter',
             label: 'Key Filter',
             component: KeyFilterDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',
@@ -85,35 +81,10 @@ const ChipsDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Chips', pathname: '/modules/chips.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Chips Component</title>
-                <meta name="description" content="Chips is used to enter multiple values on an input field." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Chips</h1>
-                    <p>Chips is used to enter multiple values on an input field.</p>
-                </div>
-                <DocActions github="/chips" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Chips Component" header="Chips" description="Chips is used to enter multiple values on an input field." componentDocs={docs} apiDocs={['Chips']} />;
 };
 
 export default ChipsDemo;

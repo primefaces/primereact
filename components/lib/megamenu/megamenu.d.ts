@@ -2,13 +2,14 @@
  *
  * MegaMenu is navigation component that displays submenus together.
  *
- * [Live Demo](https://www.primefaces.org/primereact/megamenu/)
+ * [Live Demo](https://www.primereact.org/megamenu/)
  *
  * @module megamenu
  *
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in MegaMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -29,6 +30,23 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     start?: React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);
     /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     */
+    breakpoint?: string | undefined;
+    /**
+     * Maximum height of the options panel on responsive mode.
+     * @defaultValue 400px
+     */
+    scrollHeight?: string | undefined;
+    /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<MegaMenuProps> | undefined;
+    /**
+     * Icon to display in the horizontal menu.
+     */
+    menuIcon?: IconType<MegaMenuProps> | undefined;
+    /**
      * The template of trailing element
      */
     end?: React.ReactNode | ((props: MegaMenuProps) => React.ReactNode);
@@ -44,9 +62,9 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _MegaMenu is navigation component that displays submenus together._
  *
- * [Live Demo](https://www.primefaces.org/primereact/megamenu/)
+ * [Live Demo](https://www.primereact.org/megamenu/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

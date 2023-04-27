@@ -2,7 +2,7 @@
  *
  * A set of Avatars can be displayed together using the AvatarGroup component.
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatar/)
+ * [Live Demo](https://www.primereact.org/avatar/)
  *
  * @module avatargroup
  *
@@ -26,9 +26,9 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _A set of Avatars can be displayed together using the AvatarGroup component._
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatargroup/)
+ * [Live Demo](https://www.primereact.org/avatargroup/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

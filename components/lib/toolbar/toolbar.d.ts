@@ -2,7 +2,7 @@
  *
  * Toolbar is a grouping component for buttons and other content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/toolbar/)
+ * [Live Demo](https://www.primereact.org/toolbar/)
  *
  * @module toolbar
  *
@@ -48,9 +48,9 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _Toolbar is a grouping component for buttons and other content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/toolbar/)
+ * [Live Demo](https://www.primereact.org/toolbar/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

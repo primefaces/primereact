@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
+import { useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
-import { TreeSelect } from '../../../lib/treeselect/TreeSelect';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
+import { TreeSelect } from '../../../lib/treeselect/TreeSelect';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -53,9 +53,8 @@ export function FormikDoc(props) {
     name="item"
     value={formik.values.item}
     options={node}
-    optionLabel="name"
     placeholder="Select Item"
-    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+    className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
     onChange={(e) => {
         formik.setFieldValue('item', e.value);
     }}
@@ -110,16 +109,15 @@ export default function FormikDoc() {
     
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column md:w-20rem w-full gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <TreeSelect
                     id="item"
                     name="item"
                     value={formik.values.item}
                     options={node}
-                    optionLabel="name"
                     placeholder="Select Item"
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                    className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
                     onChange={(e) => {
                         formik.setFieldValue('item', e.value);
                     }}
@@ -135,13 +133,14 @@ export default function FormikDoc() {
 import React, { useState, useEffect, useRef } from "react";
 import { useFormik } from 'formik';
 import { Button } from 'primereact/button';
-import { TreeSelect } from "primereact/treeselect";
+import { TreeSelect, TreeSelectChangeEvent } from "primereact/treeselect";
+import { TreeNode } from 'primereact/treenode';
 import { Toast } from 'primereact/toast';
 import { NodeService } from './service/NodeService';
 
 export default function FormikDoc() {
     const toast = useRef(null);
-    const [node, setNodes] = useState([]);
+    const [node, setNodes] = useState<TreeNode[] | null>([]);
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -178,17 +177,16 @@ export default function FormikDoc() {
     
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column md:w-20rem w-full gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <TreeSelect
                     id="item"
                     name="item"
                     value={formik.values.item}
                     options={node}
-                    optionLabel="name"
                     placeholder="Select Item"
-                    className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
-                    onChange={(e) => {
+                    className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
+                    onChange={(e: TreeSelectChangeEvent) => {
                         formik.setFieldValue('item', e.value);
                     }}
                 />
@@ -209,16 +207,15 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column md:w-20rem w-full gap-2">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <TreeSelect
                         id="item"
                         name="item"
                         value={formik.values.item}
                         options={node}
-                        optionLabel="name"
                         placeholder="Select Item"
-                        className={classNames({ 'p-invalid': isFormFieldInvalid('item') })}
+                        className={classNames('w-full md:w-20rem', { 'p-invalid': isFormFieldInvalid('item') })}
                         onChange={(e) => {
                             formik.setFieldValue('item', e.value);
                         }}

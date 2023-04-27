@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
@@ -58,34 +55,10 @@ const MessagesDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Messages', pathname: '/modules/messages.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Messages Component</title>
-                <meta name="description" content="Messages component is used to display inline messages" />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Messages</h1>
-                    <p>Messages component is used to display inline messages.</p>
-                </div>
-                <DocActions github="/messages" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Messages Component" header="Messages" description="Messages component is used to display inline messages." componentDocs={docs} apiDocs={['Messages']} />;
 };
 
 export default MessagesDemo;

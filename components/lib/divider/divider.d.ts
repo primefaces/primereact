@@ -2,7 +2,7 @@
  *
  * Divider is used to separate contents.
  *
- * [Live Demo](https://www.primefaces.org/primereact/divider/)
+ * [Live Demo](https://www.primereact.org/divider/)
  *
  * @module divider
  *
@@ -40,9 +40,9 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _Divider is used to separate contents._
  *
- * [Live Demo](https://www.primefaces.org/primereact/divider/)
+ * [Live Demo](https://www.primereact.org/divider/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

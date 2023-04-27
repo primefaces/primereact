@@ -19,14 +19,14 @@ export function TemplateDoc(props) {
         { icon: 'pi pi-calculator', template: iconItemTemplate }
     ];
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' };
+    const home = { icon: 'pi pi-home', url: 'https://www.primereact.org' };
 
     const code = {
         basic: `
 <BreadCrumb model={items} home={home} />
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 
 export default function TemplateDemo() {
@@ -46,7 +46,7 @@ export default function TemplateDemo() {
         { icon: 'pi pi-calculator', template: iconItemTemplate }
     ];
 
-    const home = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' };
+    const home = { icon: 'pi pi-home', url: 'https://www.primereact.org' };
 
     return (
         <BreadCrumb model={items} home={home} />
@@ -54,7 +54,7 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import { MenuItem } from 'primereact/menuitem';
 
@@ -75,8 +75,8 @@ export default function TemplateDoc() {
         { icon: 'pi pi-calculator', template: iconItemTemplate }
     ];
 
-    const home: MenuItem = { icon: 'pi pi-home', url: 'https://www.primefaces.org/primereact' };
-    
+    const home: MenuItem = { icon: 'pi pi-home', url: 'https://www.primereact.org' };
+
     return (
         <BreadCrumb model={items} home={home} />
     )

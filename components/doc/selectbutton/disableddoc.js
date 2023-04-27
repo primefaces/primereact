@@ -5,67 +5,59 @@ import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const [value, setValue] = useState(null);
-    const paymentOptions = [
+    const options1 = ['Off', 'On'];
+    const options2 = [
         { name: 'Option 1', value: 1 },
-        { name: 'Option 2', value: 2, disabled: true }
+        { name: 'Option 2', value: 2, constant: true }
     ];
-
-    const toggleOptions = ['Off', 'On'];
 
     const code = {
         basic: `
-<SelectButton value={value} options={paymentOptions} onChange={(e) => setValue(e.value)} optionLabel="name" multiple />
+<SelectButton disabled options={options1} />
+<SelectButton value={value} onChange={(e) => setValue(e.value)} options={options2} optionLabel="name" optionDisabled="constant" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { SelectButton } from 'primereact/selectbutton';
 
-export default function DisabledDoc() {
+export default function DisabledDemo() {
     const [value, setValue] = useState(null);
-    const paymentOptions = [
+    const options1 = ['Off', 'On'];
+    const options2 = [
         { name: 'Option 1', value: 1 },
-        { name: 'Option 2', value: 2, disabled: true }
+        { name: 'Option 2', value: 2, constant: true }
     ];
-
-    const toggleOptions = ['Off', 'On'];
     
     return (
-        <div className="card flex justify-content-center flex-wrap gap-2">
-            <div className="flex flex-column align-items-center mr-3">
-                <span className="font-semibold mb-2">Disable a particular option.</span>
-                <SelectButton value={value} options={paymentOptions} onChange={(e) => setValue(e.value)} optionLabel="name" />
-            </div>
-            <div className="flex flex-column align-items-center">
-                <span className="font-semibold mb-2">Disabled.</span>
-                <SelectButton disabled options={toggleOptions} />
-            </div>
+        <div className="card flex flex-wrap justify-content-center flex-wrap gap-3">
+            <SelectButton disabled options={options1} />
+            <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options2} optionLabel="name" optionDisabled="constant" />
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { SelectButton, SelectButtonChangeParams } from 'primereact/selectbutton';
+import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 
-export default function DisabledDoc() {
-    const [value, setValue] = useState<string | null>(null);
-    const paymentOptions = [
+interface Item {
+    name: string;
+    value: number;
+    constant: boolean;
+}
+
+export default function DisabledDemo() {
+    const [value, setValue] = useState(null);
+    const options1: string[] = ['Off', 'On'];
+    const options2: Item[] = [
         { name: 'Option 1', value: 1 },
-        { name: 'Option 2', value: 2, disabled: true }
+        { name: 'Option 2', value: 2, constant: true }
     ];
-
-    const toggleOptions = ['Off', 'On'];
-
+    
     return (
-        <div className="card flex justify-content-center flex-wrap gap-2">
-            <div className="flex flex-column align-items-center mr-3">
-                <span className="font-semibold mb-2">Disable a particular option.</span>
-                <SelectButton value={value} options={paymentOptions} onChange={(e) => setValue(e.value)} optionLabel="name" />
-            </div>
-            <div className="flex flex-column align-items-center">
-                <span className="font-semibold mb-2">Disabled.</span>
-                <SelectButton disabled options={toggleOptions} />
-            </div>
+        <div className="card flex flex-wrap justify-content-center flex-wrap gap-3">
+            <SelectButton disabled options={options1} />
+            <SelectButton value={value} onChange={(e: SelectButtonChangeEvent) => setValue(e.value)} options={options2} optionLabel="name" optionDisabled="constant" />
         </div>
     );
 }
@@ -76,18 +68,12 @@ export default function DisabledDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    <i>disabled</i> prop prevents an input from being editable.
+                    When <i>disabled</i> is present, the element cannot be edited and focused entirely. Certain options can also be disabled using the <i>optionDisabled</i> property.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center flex-wrap gap-2">
-                <div className="flex flex-column align-items-center mr-3">
-                    <span className="font-semibold mb-2">Disable a particular option.</span>
-                    <SelectButton value={value} options={paymentOptions} onChange={(e) => setValue(e.value)} optionLabel="name" />
-                </div>
-                <div className="flex flex-column align-items-center">
-                    <span className="font-semibold mb-2">Disabled.</span>
-                    <SelectButton disabled options={toggleOptions} />
-                </div>
+            <div className="card flex flex-wrap justify-content-center flex-wrap gap-3">
+                <SelectButton disabled options={options1} />
+                <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options2} optionLabel="name" optionDisabled="constant" />
             </div>
             <DocSectionCode code={code} />
         </>

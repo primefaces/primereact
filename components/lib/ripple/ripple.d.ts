@@ -2,7 +2,7 @@
  *
  * Ripple component adds ripple effect to the host element.
  *
- * [Live Demo](https://www.primefaces.org/primereact/ripple)
+ * [Live Demo](https://www.primereact.org/ripple)
  *
  * @module ripple
  *
@@ -26,9 +26,9 @@ export interface RippleProps {
  *
  * _Ripple component adds ripple effect to the host element._
  *
- * [Live Demo](https://www.primefaces.org/primereact/ripple/)
+ * [Live Demo](https://www.primereact.org/ripple/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

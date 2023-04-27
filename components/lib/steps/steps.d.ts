@@ -2,7 +2,7 @@
  *
  * Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design.
  *
- * [Live Demo](https://www.primefaces.org/primereact/steps/)
+ * [Live Demo](https://www.primereact.org/steps/)
  *
  * @module steps
  *
@@ -66,9 +66,9 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  *
  * _Steps also known as Stepper, is an indicator for the steps in a workflow. Layout of steps component is optimized for responsive design._
  *
- * [Live Demo](https://www.primefaces.org/primereact/steps/)
+ * [Live Demo](https://www.primereact.org/steps/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

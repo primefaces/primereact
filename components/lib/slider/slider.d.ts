@@ -2,7 +2,7 @@
  *
  * Slider is a component to provide input with a drag handle.
  *
- * [Live Demo](https://www.primefaces.org/primereact/slider/)
+ * [Live Demo](https://www.primereact.org/slider/)
  *
  * @module slider
  *
@@ -99,9 +99,9 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
  *
  * _Slider is a component to provide input with a drag handle._
  *
- * [Live Demo](https://www.primefaces.org/primereact/slider/)
+ * [Live Demo](https://www.primereact.org/slider/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

@@ -2,7 +2,7 @@
  *
  * SlideMenu displays submenus with a slide animation.
  *
- * [Live Demo](https://www.primefaces.org/primereact/slidemenu/)
+ * [Live Demo](https://www.primereact.org/slidemenu/)
  *
  * @module slidemenu
  *
@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom navigate event
@@ -38,6 +39,10 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @defaultValue true
      */
     autoZIndex?: boolean | undefined;
+    /**
+     * Defines the backward icon.
+     */
+    backIcon?: IconType<SlideMenuProps> | undefined;
     /**
      * Label of element to navigate back.
      * @defaultValue Back
@@ -78,6 +83,10 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     popup?: boolean | undefined;
     /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<SlideMenuProps> | undefined;
+    /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
     transitionOptions?: CSSTransitionProps | undefined;
@@ -108,9 +117,9 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _SlideMenu displays submenus with a slide animation._
  *
- * [Live Demo](https://www.primefaces.org/primereact/slidemenu/)
+ * [Live Demo](https://www.primereact.org/slidemenu/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

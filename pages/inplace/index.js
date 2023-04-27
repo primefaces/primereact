@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inplace/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inplace/basicdoc';
 import { ImageDoc } from '../../components/doc/inplace/imagedoc';
@@ -47,38 +44,17 @@ const ChipDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'Inplace', pathname: '/modules/inplace.html' },
-                { name: 'InplaceDisplay', pathname: '/classes/inplace.InplaceDisplay.html' },
-                { name: 'InplaceContent', pathname: '/classes/inplace.InplaceContent.html' }
-            ]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Inplace Component</title>
-                <meta name="description" content="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Inplace</h1>
-                    <p>Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content.</p>
-                </div>
-                <DocActions github="/inplace" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Inplace Component"
+            header="Inplace"
+            description="Inplace provides an easy to do editing and display at the same time where clicking the output displays the actual content."
+            componentDocs={docs}
+            apiDocs={['Inplace', 'InplaceDisplay', 'InplaceContent']}
+        />
     );
 };
 

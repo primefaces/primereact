@@ -2,13 +2,14 @@
  *
  * Fieldset is an input component that provides real-time suggestions when being typed.
  *
- * [Live Demo](https://www.primefaces.org/primereact/fieldset/)
+ * [Live Demo](https://www.primereact.org/fieldset/)
  *
  * @module fieldset
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom toggle event.
@@ -46,10 +47,18 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     collapsed?: boolean | undefined;
     /**
+     * Icon of an expanded tab.
+     */
+    collapseIcon?: IconType<FieldsetProps> | undefined;
+    /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Icon of an collapsed tab.
+     */
+    expandIcon?: IconType<FieldsetProps> | undefined;
     /**
      * Callback to invoke when a tab gets expanded.
      * @param {React.MouseEvent<HTMLElement>} event - Browser event.
@@ -82,9 +91,9 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Fieldset is an input component that provides real-time suggestions when being typed._
  *
- * [Live Demo](https://www.primefaces.org/primereact/fieldset/)
+ * [Live Demo](https://www.primereact.org/fieldset/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

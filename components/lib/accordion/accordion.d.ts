@@ -2,7 +2,7 @@
  *
  * Accordion groups a collection of contents in tabs.
  *
- * [Live Demo](https://www.primefaces.org/primereact/accordion/)
+ * [Live Demo](https://www.primereact.org/accordion/)
  *
  * Helper Components:
  *
@@ -132,12 +132,10 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     multiple?: boolean | undefined;
     /**
      * Icon of a collapsed tab.
-     * @defaultValue pi pi-chevron-right
      */
     expandIcon?: IconType<AccordionProps> | undefined;
     /**
      * Icon of an expanded tab.
-     * @defaultValue pi pi-chevron-down
      */
     collapseIcon?: IconType<AccordionProps> | undefined;
     /**
@@ -172,9 +170,9 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _Accordion groups a collection of contents in tabs._
  *
- * [Live Demo](https://www.primefaces.org/primereact/accordion/)
+ * [Live Demo](https://www.primereact.org/accordion/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

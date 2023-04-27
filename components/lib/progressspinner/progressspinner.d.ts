@@ -2,7 +2,7 @@
  *
  * ProgressSpinner is a process status indicator.
  *
- * [Live Demo](https://www.primefaces.org/primereact/progressspinner)
+ * [Live Demo](https://www.primereact.org/progressspinner)
  *
  * @module progressspinner
  *
@@ -40,9 +40,9 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
  *
  * _ProgressSpinner is a process status indicator._
  *
- * [Live Demo](https://www.primefaces.org/primereact/progressspinner/)
+ * [Live Demo](https://www.primereact.org/progressspinner/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

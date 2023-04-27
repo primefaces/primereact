@@ -2,5 +2,6 @@
     "main": "./timeline.cjs.js",
     "module": "./timeline.esm.js",
     "unpkg": "./timeline.min.js",
-    "types": "./timeline.d.ts"
+    "types": "./timeline.d.ts",
+    "sideEffects": false
 }

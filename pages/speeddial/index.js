@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
 import { CircleDoc } from '../../components/doc/speeddial/circledoc';
 import { CustomDoc } from '../../components/doc/speeddial/customdoc';
@@ -64,35 +61,10 @@ const SpeedDialDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Speed Dial', pathname: '/modules/speeddial.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Speed Dial Component</title>
-                <meta name="description" content="When pressed, a floating action button can display multiple primary actions that can be performed on a page." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Speed Dial</h1>
-                    <p>When pressed, a floating action button can display multiple primary actions that can be performed on a page.</p>
-                </div>
-
-                <DocActions github="/speeddial" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Speed Dial Component" header="Speed Dial" description="SpeedDial is a floating button with a popup menu." componentDocs={docs} apiDocs={['SpeedDial']} />;
 };
 
 export default SpeedDialDemo;

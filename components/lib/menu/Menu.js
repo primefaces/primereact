@@ -5,9 +5,12 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { MenuBase } from './MenuBase';
 
 export const Menu = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = MenuBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
@@ -226,7 +229,7 @@ export const Menu = React.memo(
 
         const createElement = () => {
             if (props.model) {
-                const otherProps = ObjectUtils.findDiffKeys(props, Menu.defaultProps);
+                const otherProps = MenuBase.getOtherProps(props);
                 const className = classNames(
                     'p-menu p-component',
                     {
@@ -270,17 +273,3 @@ export const Menu = React.memo(
 );
 
 Menu.displayName = 'Menu';
-Menu.defaultProps = {
-    __TYPE: 'Menu',
-    id: null,
-    model: null,
-    popup: false,
-    style: null,
-    className: null,
-    autoZIndex: true,
-    baseZIndex: 0,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

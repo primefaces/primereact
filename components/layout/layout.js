@@ -1,10 +1,9 @@
-import getConfig from 'next/config';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import PrimeReact from '../lib/api/PrimeReact';
 import { classNames } from '../lib/utils/ClassNames';
 import NewsSection from '../news/newssection';
-import Analytics from './analytics';
 import AppContentContext from './appcontentcontext';
 import Config from './config';
 import Footer from './footer';
@@ -13,9 +12,10 @@ import Topbar from './topbar';
 
 export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
-    const [ripple, setRipple] = useState(false);
+    const [ripple, setRipple] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
+    const [configActive, setConfigActive] = useState(false);
+    const router = useRouter();
 
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': props.newsActive,
@@ -30,10 +30,6 @@ export default function Layout(props) {
 
     const onMenuButtonClick = () => {
         setSidebarActive(true);
-    };
-
-    const onMenuItemClick = () => {
-        setSidebarActive(false);
     };
 
     const onMaskClick = () => {
@@ -56,18 +52,36 @@ export default function Layout(props) {
         setRipple(value);
     };
 
+    const onConfigHide = () => {
+        setConfigActive(false);
+    };
+
+    const onConfigButtonClick = () => {
+        setConfigActive(true);
+    };
+
     useEffect(() => {
         if (sidebarActive) document.body.classList.add('blocked-scroll');
         else document.body.classList.remove('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        const handleRouteChange = (url, { shallow }) => {
+            setSidebarActive(false);
+        };
+
+        router.events.on('routeChangeComplete', handleRouteChange);
+
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
     PrimeReact.ripple = true;
 
     return (
         <div className={wrapperClassName}>
-            <Analytics />
             <Head>
-                <base href="/"></base>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
                 <meta name="description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
@@ -79,15 +93,15 @@ export default function Layout(props) {
                 <meta name="twitter:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:type" content="website"></meta>
                 <meta property="og:title" content="PrimeReact | React UI Component Library"></meta>
-                <meta property="og:url" content="https://www.primefaces.org/primereact"></meta>
+                <meta property="og:url" content="https://primereact.org"></meta>
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
-                <link rel="icon" href={`${contextPath}/images/favicon.ico`} type="image/x-icon"></link>
+                <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon"></link>
             </Head>
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-            <Topbar onMenuButtonClick={onMenuButtonClick} onThemeChange={onThemeChange} theme={props.theme} darkTheme={props.dark} versions={[]} />
-            <Menu active={sidebarActive} onMenuItemClick={onMenuItemClick} darkTheme={props.dark} />
+            <Topbar onMenuButtonClick={onMenuButtonClick} onConfigButtonClick={onConfigButtonClick} />
+            <Menu active={sidebarActive} darkTheme={props.dark} />
             <AppContentContext.Provider
                 value={{
                     ripple: ripple,
@@ -103,7 +117,7 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} />
+                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} active={configActive} onHide={onConfigHide} />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>

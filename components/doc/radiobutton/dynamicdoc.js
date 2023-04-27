@@ -54,7 +54,7 @@ export default function DynamicDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { RadioButton, RadioButtonChangeParams } from "primereact/radiobutton";
+import { RadioButton, RadioButtonChangeEvent } from "primereact/radiobutton";
 
 interface Category {
     name: string;
@@ -76,7 +76,7 @@ export default function DynamicDemo() {
                 {categories.map((category) => {
                     return (
                         <div key={category.key} className="flex align-items-center">
-                            <RadioButton inputId={category.key} name="category" value={category} onChange={(e: RadioButtonChangeParams) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
+                            <RadioButton inputId={category.key} name="category" value={category} onChange={(e: RadioButtonChangeEvent) => setSelectedCategory(e.value)} checked={selectedCategory.key === category.key} />
                             <label htmlFor={category.key} className="ml-2">{category.name}</label>
                         </div>
                     );

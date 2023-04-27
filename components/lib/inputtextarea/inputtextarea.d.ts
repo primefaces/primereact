@@ -2,7 +2,7 @@
  *
  * Inputtextarea add styling and autoResize functionality to standard textarea element.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputtextarea/)
+ * [Live Demo](https://www.primereact.org/inputtextarea/)
  *
  * @module inputtextarea
  *
@@ -50,9 +50,9 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
  *
  * _Inputtextarea add styling and autoResize functionality to standard textarea element._
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputtextarea/)
+ * [Live Demo](https://www.primereact.org/inputtextarea/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

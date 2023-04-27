@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
 import { Panel } from './Panel';
@@ -66,19 +66,23 @@ describe('Panel', () => {
         expect(container).toMatchSnapshot('expandable-open');
 
         // Act
-        await userEvent.click(toggler);
+        userEvent.click(toggler);
 
         // Assert
-        expect(expandOn).toHaveBeenCalledTimes(0);
-        expect(collapseOn).toHaveBeenCalledTimes(1);
-        expect(container).toMatchSnapshot('expandable-closed');
+        await waitFor(() => {
+            expect(expandOn).toHaveBeenCalledTimes(0);
+            expect(collapseOn).toHaveBeenCalledTimes(1);
+            expect(container).toMatchSnapshot('expandable-closed');
+        });
 
         // Act
-        await userEvent.click(toggler);
+        userEvent.click(toggler);
 
         // Assert
-        expect(expandOn).toHaveBeenCalledTimes(1);
-        expect(collapseOn).toHaveBeenCalledTimes(1);
-        expect(container).toMatchSnapshot('expandable-open');
+        await waitFor(() => {
+            expect(expandOn).toHaveBeenCalledTimes(1);
+            expect(collapseOn).toHaveBeenCalledTimes(1);
+            expect(container).toMatchSnapshot('expandable-open');
+        });
     });
 });

@@ -2,7 +2,7 @@
  *
  * DataScroller displays data with on demand loading using scroll.
  *
- * [Live Demo](https://www.primefaces.org/primereact/datascroller/)
+ * [Live Demo](https://www.primereact.org/datascroller/)
  *
  * @module datascroller
  *
@@ -96,9 +96,9 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
  *
  * _DataScroller displays data with on demand loading using scroll._
  *
- * [Live Demo](https://www.primefaces.org/primereact/datascroller/)
+ * [Live Demo](https://www.primereact.org/datascroller/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

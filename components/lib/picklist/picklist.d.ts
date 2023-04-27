@@ -2,12 +2,13 @@
  *
  * PickList is used to reorder items between different lists.
  *
- * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * [Live Demo](https://www.primereact.org/picklist/)
  *
  * @module picklist
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom picklist event.
@@ -54,7 +55,6 @@ interface PickListChangeEvent {
 
 /**
  * Custom filter template options.
- * @group Misc
  */
 interface PickListFilterTemplateOptions {
     /**
@@ -164,6 +164,51 @@ export interface PickListProps {
      */
     metaKeySelection?: boolean | undefined;
     /**
+     * When specified, displays an input field to filter the items on keyup.
+     * @defaultValue false
+     */
+    filter?: boolean | undefined;
+    /**
+     * Icon of the target list filter.
+     */
+    targetFilterIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the source list filter.
+     */
+    sourceFilterIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving all items to the source list.
+     */
+    moveAllToSourceIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving an item to the source list.
+     */
+    moveToSourceIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving all items to the target list.
+     */
+    moveAllToTargetIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving an item to the target list.
+     */
+    moveToTargetIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move up icon.
+     */
+    moveUpIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move top icon.
+     */
+    moveTopIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move down icon.
+     */
+    moveDownIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move bottom icon.
+     */
+    moveBottomIcon?: IconType<PickListProps> | undefined;
+    /**
      * When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).
      */
     filterBy?: string | undefined;
@@ -219,6 +264,11 @@ export interface PickListProps {
      * Name of the field that uniquely identifies the a record in the data.
      */
     dataKey?: string | undefined;
+    /**
+     * The breakpoint to define the maximum width boundary when responsiveness is enabled.
+     * @defaultValue '960px'.
+     */
+    breakpoint?: string | undefined;
     /**
      * Template that gets the options for both source and target items and returns the content for it. Useful if you want the same template for both lists else use the custom sourceItemTemplate or targetItemTemplate properties.
      */
@@ -288,9 +338,9 @@ export interface PickListProps {
  *
  * _PickList is used to reorder items between different lists._
  *
- * [Live Demo](https://www.primefaces.org/primereact/picklist/)
+ * [Live Demo](https://www.primereact.org/picklist/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

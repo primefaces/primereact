@@ -2,17 +2,17 @@
  *
  * Galleria is a content gallery component.
  *
- * [Live Demo](https://www.primefaces.org/primereact/galleria)
+ * [Live Demo](https://www.primereact.org/galleria)
  *
  * @module galleria
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom galleria responsive options
- * @group Misc
  */
 interface GalleriaResponsiveOptions {
     /**
@@ -71,6 +71,10 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @param {number} index - Index of the indicator.
      */
     indicator?(index: number): React.ReactNode | undefined;
+    /**
+     * Icon to display in the galleria close button.
+     */
+    closeIcon?: IconType<GalleriaProps> | undefined;
     /**
      * Custom header template.
      */
@@ -134,6 +138,22 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     showThumbnails?: boolean | undefined;
     /**
+     * Icon to show in the next item button.
+     */
+    itemNextIcon?: IconType<GalleriaProps> | undefined;
+    /**
+     * Icon to show in the previous item button.
+     */
+    itemPrevIcon?: IconType<GalleriaProps> | undefined;
+    /**
+     * Icon to show in the next thumbnail button.
+     */
+    nextThumbnailIcon?: IconType<GalleriaProps> | undefined;
+    /**
+     * Icon to show in the previous thumbnail button.
+     */
+    prevThumbnailIcon?: IconType<GalleriaProps> | undefined;
+    /**
      * Position of thumbnails. Valid values are "bottom", "top", "left" and "right".
      * @defaultValue bottom
      */
@@ -187,9 +207,9 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Galleria is a content gallery component._
  *
- * [Live Demo](https://www.primefaces.org/primereact/galleria/)
+ * [Live Demo](https://www.primereact.org/galleria/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

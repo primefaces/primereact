@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = StepsBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
 
         const itemClick = (event, item, index) => {
@@ -96,7 +99,7 @@ export const Steps = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Steps.defaultProps);
+        const otherProps = StepsBase.getOtherProps(props);
         const className = classNames(
             'p-steps p-component',
             {
@@ -115,13 +118,3 @@ export const Steps = React.memo(
 );
 
 Steps.displayName = 'Steps';
-Steps.defaultProps = {
-    __TYPE: 'Steps',
-    id: null,
-    model: null,
-    activeIndex: 0,
-    readOnly: true,
-    style: null,
-    className: null,
-    onSelect: null
-};

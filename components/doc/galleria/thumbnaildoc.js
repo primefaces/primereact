@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Galleria } from '../../lib/galleria/Galleria';
-import { DocSectionCode } from '../common/docsectioncode';
+import { useEffect, useState } from 'react';
 import { PhotoService } from '../../../service/PhotoService';
+import { Galleria } from '../../lib/galleria/Galleria';
 import { RadioButton } from '../../lib/radiobutton/RadioButton';
+import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function ThumbnailDoc(props) {
@@ -211,8 +211,8 @@ export default function ThumbnailDemo() {
         data: `
 /* PhotoService */
 {
-    itemImageSrc: 'https://www.primereact.org/images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'https://www.primereact.org/images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },

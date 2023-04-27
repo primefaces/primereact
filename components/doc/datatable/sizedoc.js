@@ -2,40 +2,27 @@ import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
 import { Column } from '../../lib/column/Column';
 import { DataTable } from '../../lib/datatable/DataTable';
+import { SelectButton } from '../../lib/selectbutton/SelectButton';
 import { DocSectionCode } from '../common/docsectioncode';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function SizeDoc(props) {
     const [products, setProducts] = useState([]);
-    const [selectedOption, setSelectedOption] = useState({ label: 'Small', value: 'small' });
-
-    const onRadioButtonChange = (option) => {
-        setSelectedOption(option);
-    };
+    const [sizeOptions] = useState([
+        { label: 'Small', value: 'small' },
+        { label: 'Normal', value: 'normal' },
+        { label: 'Large', value: 'large' }
+    ]);
+    const [size, setSize] = useState(sizeOptions[1].value);
 
     useEffect(() => {
         ProductService.getProductsMini().then((data) => setProducts(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const demoOptions = [
-        {
-            label: 'Small',
-            value: 'small'
-        },
-        {
-            label: 'Normal',
-            value: 'normal'
-        },
-        {
-            label: 'Large',
-            value: 'large'
-        }
-    ];
-
     const code = {
         basic: `
-<DataTable value={products} size="${selectedOption.value}" responsiveLayout="scroll">
+<SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
+<DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
     <Column field="code" header="Code"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -46,19 +33,28 @@ export function SizeDoc(props) {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { SelectButton } from 'primereact/selectbutton';
 import { ProductService } from './service/ProductService';
 
-const ${selectedOption.label}TableDemo = () => {
+export default function SizeDemo() {
     const [products, setProducts] = useState([]);
-    
+    const [sizeOptions] = useState([
+        { label: 'Small', value: 'small' },
+        { label: 'Normal', value: 'normal' },
+        { label: 'Large', value: 'large' }
+    ]);
+    const [size, setSize] = useState(sizeOptions[1].value);
 
     useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then((data) => setProducts(data));
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} size="${selectedOption.value}" responsiveLayout="scroll">
+            <div className="flex justify-content-center mb-4">
+                <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
+            </div>
+            <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -72,19 +68,46 @@ const ${selectedOption.label}TableDemo = () => {
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { SelectButton, SelectButtonChangeEvent } from 'primereact/selectbutton';
 import { ProductService } from './service/ProductService';
 
-const ${selectedOption.label}TableDemo = () => {
-    const [products, setProducts] = useState([]);
-    
+interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: string;
+    rating: number;
+}
+
+interface SizeOption {
+    label: string;
+    value: string;
+}
+
+export default function SizeDemo() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [sizeOptions] = useState<SizeOption[]>([
+        { label: 'Small', value: 'small' },
+        { label: 'Normal', value: 'normal' },
+        { label: 'Large', value: 'large' }
+    ]);
+    const [size, setSize] = useState<string>(sizeOptions[1].value);
 
     useEffect(() => {
-        ProductService.getProductsSmall().then(data => setProducts(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        ProductService.getProductsMini().then((data) => setProducts(data));
+    }, []);
 
     return (
         <div className="card">
-            <DataTable value={products} size="${selectedOption.value}" responsiveLayout="scroll">
+            <div className="flex justify-content-center mb-4">
+                <SelectButton value={size} onChange={(e: SelectButtonChangeEvent) => setSize(e.value)} options={sizeOptions} />
+            </div>
+            <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
@@ -95,7 +118,6 @@ const ${selectedOption.label}TableDemo = () => {
 }
             `,
         data: `
-/* ProductService */        
 {
     id: '1000',
     code: 'f230fh0g3',
@@ -117,24 +139,11 @@ const ${selectedOption.label}TableDemo = () => {
             <DocSectionText {...props}>
                 <p>In addition to a regular table, alternatives with alternative sizes are available.</p>
             </DocSectionText>
-            <div className="card mt-3 flex flex-column justify-content-center">
-                <div className="flex flex-row justify-content-center align-items-center flex-wrap">
-                    <div className="card flex flex-wrap justify-content-center align-items-center w-full gap-3">
-                        {demoOptions.map((option) => {
-                            const { value, label } = option;
-
-                            return (
-                                <div className="mr-4" key={label}>
-                                    <RadioButton value={label} onChange={() => onRadioButtonChange(option)} checked={selectedOption.value === value} />
-                                    <label htmlFor={label} className="ml-2">
-                                        {label} Size
-                                    </label>
-                                </div>
-                            );
-                        })}
-                    </div>
+            <div className="card">
+                <div className="flex justify-content-center mb-4">
+                    <SelectButton value={size} onChange={(e) => setSize(e.value)} options={sizeOptions} />
                 </div>
-                <DataTable value={products} size={selectedOption.value} responsiveLayout="scroll">
+                <DataTable value={products} size={size} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="code" header="Code"></Column>
                     <Column field="name" header="Name"></Column>
                     <Column field="category" header="Category"></Column>

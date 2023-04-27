@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/slider/basicdoc';
 import { ImportDoc } from '../../components/doc/slider/importdoc';
@@ -53,34 +50,10 @@ const SliderDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Slider', pathname: '/modules/slider.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Slider Component</title>
-                <meta name="description" content="Slider is a component to provide input with a drag handle." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Slider</h1>
-                    <p>Slider is a component to provide input with a drag handle.</p>
-                </div>
-                <DocActions github="/slider" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Slider Component" header="Slider" description="Slider is a component to provide input with a drag handle." componentDocs={docs} apiDocs={['Slider']} />;
 };
 
 export default SliderDemo;

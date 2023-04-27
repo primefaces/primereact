@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Button } from '../../../lib/button/Button';
 import { Checkbox } from '../../../lib/checkbox/Checkbox';
 import { Toast } from '../../../lib/toast/Toast';
@@ -89,7 +89,7 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 I've read and accept the terms & conditions.
                 <Toast ref={toast} />
                 <Controller
@@ -149,7 +149,7 @@ export default function HookFormDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 I've read and accept the terms & conditions.
                 <Toast ref={toast} />
                 <Controller
@@ -180,7 +180,7 @@ export default function HookFormDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-2">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     I've read and accept the terms & conditions.
                     <Toast ref={toast} />
                     <Controller

@@ -1,9 +1,15 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { RatingBase } from './RatingBase';
+import { StarIcon } from '../icons/star';
+import { StarFillIcon } from '../icons/starfill';
+import { BanIcon } from '../icons/ban';
 
 export const Rating = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = RatingBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
         const tabIndex = enabled ? 0 : null;
@@ -60,8 +66,9 @@ export const Rating = React.memo(
             return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
                 const active = value <= props.value;
                 const className = classNames('p-rating-item', { 'p-rating-item-active': active });
-                const icon = active ? { type: props.onIcon, props: props.onIconProps } : { type: props.offIcon, props: props.offIconProps };
-                const content = IconUtils.getJSXIcon(icon.type, { className: 'p-rating-icon', ...icon.props }, { props });
+                const iconClassName = 'p-rating-icon';
+                const icon = active ? { type: props.onIcon || <StarFillIcon className={iconClassName} /> } : { type: props.offIcon || <StarIcon className={iconClassName} /> };
+                const content = IconUtils.getJSXIcon(icon.type, { className: iconClassName, ...icon.props }, { props });
 
                 return (
                     <div key={value} className={className} tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
@@ -73,7 +80,9 @@ export const Rating = React.memo(
 
         const createCancelIcon = () => {
             if (props.cancel) {
-                const content = IconUtils.getJSXIcon(props.cancelIcon, { className: 'p-rating-icon p-rating-cancel', ...props.cancelIconProps }, { props });
+                const iconClassName = 'p-rating-icon p-rating-cancel';
+                const icon = props.cancelIcon || <BanIcon className={iconClassName} />;
+                const content = IconUtils.getJSXIcon(icon, { className: { iconClassName }, ...props.cancelIconProps }, { props });
 
                 return (
                     <div className="p-rating-item p-rating-cancel-item" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
@@ -91,7 +100,7 @@ export const Rating = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Rating.defaultProps);
+        const otherProps = RatingBase.getOtherProps(props);
         const className = classNames(
             'p-rating',
             {
@@ -116,23 +125,3 @@ export const Rating = React.memo(
 );
 
 Rating.displayName = 'Rating';
-Rating.defaultProps = {
-    __TYPE: 'Rating',
-    id: null,
-    value: null,
-    disabled: false,
-    readOnly: false,
-    stars: 5,
-    cancel: true,
-    style: null,
-    className: null,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onIcon: 'pi pi-star-fill',
-    offIcon: 'pi pi-star',
-    cancelIcon: 'pi pi-ban',
-    cancelIconProps: null,
-    onIconProps: null,
-    offIconProps: null
-};

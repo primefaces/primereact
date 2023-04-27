@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import { useEffect, useState } from 'react';
 import { PhotoService } from '../../../../service/PhotoService';
+import { Galleria } from '../../../lib/galleria/Galleria';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function IndicatorsDoc(props) {
     const [images, setImages] = useState(null);
@@ -86,8 +86,8 @@ export default function IndicatorsDemo() {
         data: `
 /* PhotoService */
 {
-    itemImageSrc: 'https://www.primereact.org/images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'https://www.primereact.org/images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },

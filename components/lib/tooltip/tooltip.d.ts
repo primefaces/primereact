@@ -2,7 +2,7 @@
  *
  * Tooltip functionality is integrated within various PrimeReact components.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tooltip/)
+ * [Live Demo](https://www.primereact.org/tooltip/)
  *
  * @module tooltip
  *
@@ -40,9 +40,9 @@ export interface TooltipProps extends TooltipOptions {
  *
  * _Tooltip functionality is integrated within various PrimeReact components._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tooltip/)
+ * [Live Demo](https://www.primereact.org/tooltip/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

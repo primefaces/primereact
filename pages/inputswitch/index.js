@@ -1,7 +1,4 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
@@ -65,35 +62,10 @@ const InputSwitchDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            doc: [{ name: 'InputSwitch', pathname: '/modules/inputswitch.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputSwitch Component</title>
-                <meta name="description" content="InputSwitch is used to select a boolean value." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputSwitch</h1>
-                    <p>InputSwitch is used to select a boolean value.</p>
-                </div>
-                <DocActions github="/inputswitch" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={['InputSwitch']} />;
 };
 
 export default InputSwitchDemo;

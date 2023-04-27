@@ -1,8 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
@@ -90,35 +87,10 @@ const InputTextDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'InputText', pathname: '/modules/inputtext.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputText Component</title>
-                <meta name="description" content="InputText is an extension to standard input element with theming and keyfiltering." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputText</h1>
-                    <p>InputText is an extension to standard input element with theming and keyfiltering.</p>
-                </div>
-                <DocActions github="/inputtext" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Input Component" header="InputText" description="InputText is an extension to standard input element with theming and keyfiltering." componentDocs={docs} apiDocs={['InputText']} />;
 };
 
 export default InputTextDemo;

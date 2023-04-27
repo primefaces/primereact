@@ -1,5 +1,5 @@
-import { MegaMenu } from '../../lib/megamenu/MegaMenu';
 import { InputText } from '../../lib/inputtext/InputText';
+import { MegaMenu } from '../../lib/megamenu/MegaMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -120,15 +120,15 @@ export function TemplateDoc(props) {
             ]
         }
     ];
-    const start = <img alt="logo" src={'https://www.primereact.org/images/logo.png'} height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     const code = {
         basic: `
-<MegaMenu model={items} orientation="horizontal" start={start} end={end} />        
+<MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
 `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 
@@ -246,18 +246,18 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="https://www.primereact.org/images/logo.png" height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
         <div className="card">
-            <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+            <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
         </div>
     )
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { MegaMenu } from 'primereact/megamenu';
 import { InputText } from 'primereact/inputtext';
 import { MenuItem } from 'primereact/menuitem';
@@ -376,12 +376,12 @@ export default function TemplateDemo() {
         }
     ];
 
-    const start = <img alt="logo" src="https://www.primereact.org/images/logo.png" height="40" className="mr-2"></img>;
+    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
     const end = <InputText placeholder="Search" type="text" />;
 
     return (
         <div className="card">
-            <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+            <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
         </div>
     )
 }
@@ -396,7 +396,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <MegaMenu model={items} orientation="horizontal" start={start} end={end} />
+                <MegaMenu model={items} orientation="horizontal" start={start} end={end} breakpoint="960px" />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -2,7 +2,7 @@
  *
  * InputText is an extension to standard input element with theming and keyfiltering.
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputtext/)
+ * [Live Demo](https://www.primereact.org/inputtext/)
  *
  * @module inputtext
  *
@@ -56,9 +56,9 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
  *
  * _InputText is an extension to standard input element with theming and keyfiltering._
  *
- * [Live Demo](https://www.primefaces.org/primereact/inputtext/)
+ * [Live Demo](https://www.primereact.org/inputtext/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

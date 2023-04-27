@@ -1,8 +1,39 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
+import { AngleLeftIcon } from '../icons/angleleft';
+import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
+import { AngleDoubleRightIcon } from '../icons/angledoubleright';
+import { AngleRightIcon } from '../icons/angleright';
+import { useMatchMedia } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
 
 export const PickListTransferControls = React.memo((props) => {
+    const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+
+    function getIconComponent(iconType) {
+        switch (iconType) {
+            case 'moveToTargetIcon':
+                return props.moveToTargetIcon || viewChanged ? <AngleDownIcon /> : <AngleRightIcon />;
+            case 'moveAllToTargetIcon':
+                return props.moveAllToTargetIcon || viewChanged ? <AngleDoubleDownIcon /> : <AngleDoubleRightIcon />;
+            case 'moveToSourceIcon':
+                return props.moveToSourceIcon || viewChanged ? <AngleUpIcon /> : <AngleLeftIcon />;
+            case 'moveAllToSourceIcon':
+                return props.moveAllToSourceIcon || viewChanged ? <AngleDoubleUpIcon /> : <AngleDoubleLeftIcon />;
+            default:
+                return null;
+        }
+    }
+
+    const moveToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveToTargetIcon'), undefined, { props, viewChanged });
+    const moveAllToTargetIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToTargetIcon'), undefined, { props, viewChanged });
+    const moveToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveToSourceIcon'), undefined, { props, viewChanged });
+    const moveAllToSourceIcon = IconUtils.getJSXIcon(getIconComponent('moveAllToSourceIcon'), undefined, { props, viewChanged });
+
     const moveRightDisabled = ObjectUtils.isEmpty(props.sourceSelection) || ObjectUtils.isEmpty(props.visibleSourceList);
     const moveLeftDisabled = ObjectUtils.isEmpty(props.targetSelection) || ObjectUtils.isEmpty(props.visibleTargetList);
     const moveAllRightDisabled = ObjectUtils.isEmpty(props.visibleSourceList);
@@ -96,10 +127,10 @@ export const PickListTransferControls = React.memo((props) => {
 
     return (
         <div className={className}>
-            <Button disabled={moveRightDisabled} type="button" icon="pi pi-angle-right" onClick={moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon="pi pi-angle-double-right" onClick={moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon="pi pi-angle-left" onClick={moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon="pi pi-angle-double-left" onClick={moveAllLeft}></Button>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft}></Button>
         </div>
     );
 });

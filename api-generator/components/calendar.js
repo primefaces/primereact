@@ -400,7 +400,7 @@ const CalendarProps = [
 const CalendarEvents = [
     {
         name: 'onFocus',
-        description: 'The callback function to be executed when the user submits a successful CAPTCHA response.',
+        description: 'Callback to invoke on focus event of input field.',
         arguments: [
             {
                 name: 'event',

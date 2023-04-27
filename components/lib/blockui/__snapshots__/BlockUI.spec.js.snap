@@ -39,6 +39,7 @@ exports[`BlockUI block and unblock panel events: blocked-event 1`] = `
   >
     <div
       class="p-panel p-component"
+      id="pr_id_3"
     >
       <div
         aria-hidden="false"
@@ -69,6 +70,7 @@ exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
   >
     <div
       class="p-panel p-component"
+      id="pr_id_3"
     >
       <div
         aria-hidden="false"
@@ -118,6 +120,7 @@ exports[`BlockUI block panel 1`] = `
     >
       <div
         class="p-panel p-component"
+        id="pr_id_1"
       >
         <div
           aria-hidden="false"
@@ -153,6 +156,7 @@ exports[`BlockUI container style and className 1`] = `
     >
       <div
         class="p-panel p-component"
+        id="pr_id_4"
       >
         <div
           aria-hidden="false"
@@ -187,6 +191,7 @@ exports[`BlockUI unblock panel 1`] = `
     >
       <div
         class="p-panel p-component"
+        id="pr_id_2"
       >
         <div
           aria-hidden="false"

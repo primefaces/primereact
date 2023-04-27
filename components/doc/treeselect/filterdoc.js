@@ -14,44 +14,48 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+<TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+    filter className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from './service/NodeService';
 
-export default function FilterDoc() {
+export default function FilterDemo() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
-        </div>   
+            <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+                filter className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
+        </div>
     );
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
-import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
+import { TreeSelect, TreeSelectChangeEvent } from 'primereact/treeselect';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function FilterDoc() {
-    const [nodes, setNodes] = useState<any[]>(null);
-    const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
+export default function FilterDemo() {
+    const [nodes, setNodes] = useState<TreeNode[] | null>(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState<string>(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
+                filter className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         </div>
     );
 }
@@ -91,13 +95,13 @@ export default function FilterDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Filtering is enabled by setting the <i>filter</i> property to true, by default label property of a node is used to compare against the value in the text field, in order to customize which field(s) should be used during search
-                    define <i>filterBy</i> property. In addition <i>filterMode</i> specifies the filtering strategy. In lenient mode when the query matches a node, children of the node are not searched further as all descendants of the node are
-                    included. On the other hand, in strict mode when the query matches a node, filtering continues on all descendants.
+                    Filtering is enabled by adding the <i>filter</i> property, by default label property of a node is used to compare against the value in the text field, in order to customize which field(s) should be used during search define{' '}
+                    <i>filterBy</i> property. In addition <i>filterMode</i> specifies the filtering strategy. In <i>lenient</i> mode when the query matches a node, children of the node are not searched further as all descendants of the node are
+                    included. On the other hand, in <i>strict</i> mode when the query matches a node, filtering continues on all descendants.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} filter className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} filter className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

@@ -2,7 +2,7 @@
  *
  * SelectButton is used to choose single or multiple items from a list using buttons.
  *
- * [Live Demo](https://www.primefaces.org/primereact/selectbutton/)
+ * [Live Demo](https://www.primereact.org/selectbutton/)
  *
  * @module selectbutton
  *
@@ -102,9 +102,9 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
  *
  * _SelectButton is used to choose single or multiple items from a list using buttons._
  *
- * [Live Demo](https://www.primefaces.org/primereact/selectbutton/)
+ * [Live Demo](https://www.primereact.org/selectbutton/)
  * --- ---
- * ![PrimeReact](https://www.primefaces.org/primereact/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */
