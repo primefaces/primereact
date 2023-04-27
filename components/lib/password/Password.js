@@ -250,13 +250,10 @@ export const Password = React.memo(
                 icon = props.showIcon || <EyeIcon />;
             }
 
-            const hideIcon = IconUtils.getJSXIcon(icon, undefined, { props });
-            const showIcon = IconUtils.getJSXIcon(icon, undefined, { props });
-
-            const eyeIcons = hideIcon || showIcon;
+            const eyeIcon = IconUtils.getJSXIcon(icon, undefined, { props });
 
             if (props.toggleMask) {
-                let content = <i onClick={onMaskToggle}> {eyeIcons} </i>;
+                let content = <i onClick={onMaskToggle}> {eyeIcon} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
@@ -347,8 +344,6 @@ export const Password = React.memo(
                     onInput={onInput}
                     tooltip={props.tooltip}
                     tooltipOptions={props.tooltipOptions}
-                    hideIcon={props.hideIcon}
-                    showIcon={props.showIcon}
                 />
                 {icon}
                 {panel}

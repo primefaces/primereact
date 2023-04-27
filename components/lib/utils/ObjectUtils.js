@@ -167,13 +167,7 @@ export default class ObjectUtils {
     }
 
     static getPropValue(obj, ...params) {
-        let methodParams = params;
-
-        if (params && params.length === 1) {
-            methodParams = params[0];
-        }
-
-        return this.isFunction(obj) ? obj(...methodParams) : obj;
+        return this.isFunction(obj) ? obj(...params) : obj;
     }
 
     static getComponentProp(component, prop = '', defaultProps = {}) {
@@ -264,6 +258,11 @@ export default class ObjectUtils {
         }
 
         return str;
+    }
+
+    static convertToFlatCase(str) {
+        // convert snake, kebab, camel and pascal cases to flat case
+        return this.isNotEmpty(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
     }
 
     static isEmpty(value) {

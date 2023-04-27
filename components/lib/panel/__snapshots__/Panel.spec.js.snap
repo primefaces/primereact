@@ -4,6 +4,7 @@ exports[`Panel default 1`] = `
 <div>
   <div
     class="p-panel p-component"
+    id="pr_id_1"
   >
     <div
       aria-hidden="false"
@@ -60,6 +61,7 @@ exports[`Panel headerTemplate 1`] = `
 <div>
   <div
     class="p-panel p-component p-panel-toggleable"
+    id="pr_id_2"
   >
     <div
       class="p-panel-header justify-content-start"
@@ -97,6 +99,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
 <div>
   <div
     class="p-panel p-component p-panel-toggleable"
+    id="pr_id_4"
   >
     <div
       class="p-panel-header"
@@ -172,6 +175,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
 <div>
   <div
     class="p-panel p-component p-panel-toggleable"
+    id="pr_id_4"
   >
     <div
       class="p-panel-header"
@@ -231,6 +235,7 @@ exports[`Panel when Panel is toggleable it must expand and collapse: expandable-
 <div>
   <div
     class="p-panel p-component p-panel-toggleable"
+    id="pr_id_4"
   >
     <div
       class="p-panel-header"
@@ -291,6 +296,7 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
 <div>
   <div
     class="p-panel p-component p-panel-toggleable"
+    id="pr_id_3"
   >
     <div
       class="p-panel-header"
@@ -350,6 +356,7 @@ exports[`Panel when Panel is toggleable it will toggle when clicked: toggleable-
 <div>
   <div
     class="p-panel p-component p-panel-toggleable"
+    id="pr_id_3"
   >
     <div
       class="p-panel-header"

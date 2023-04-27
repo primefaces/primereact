@@ -1,5 +1,32 @@
 # Changelog
 
+## [9.3.1](https://github.com/primefaces/primereact/tree/9.3.1)  (2023-04-26)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.3.0...9.3.1)
+
+**Implemented New Features and Enhancements:**
+
+- Messages: Cannot pass Id property [\#4281](https://github.com/primefaces/primereact/issues/4281)
+- Image:  missing `crossOrigin`, `referrerPolicy`, `loading` and `useMap`  [\#4273](https://github.com/primefaces/primereact/issues/4273)
+- Mention: autoResize wont resize back to starting height [\#4197](https://github.com/primefaces/primereact/issues/4197)
+- DataTable: Cell edit support Dropdown. [\#2666](https://github.com/primefaces/primereact/issues/2666)
+
+**Fixed bugs:**
+
+- DataTable: Correct "Select All" behavior in checkbox selection mode [\#4284](https://github.com/primefaces/primereact/issues/4284)
+- DataTable: multisortField - Cannot read properties of undefined \(reading 'field'\) [\#4269](https://github.com/primefaces/primereact/issues/4269)
+- Image: No overload matches this call. [\#4268](https://github.com/primefaces/primereact/issues/4268)
+- Uncaught reference error for icons.  [\#4264](https://github.com/primefaces/primereact/issues/4264)
+- Calendar: `numberOfMonths` \> 12 issue [\#4259](https://github.com/primefaces/primereact/issues/4259)
+- DataTable: paginator with alwaysShowPaginator: false is displayed for empty table [\#4254](https://github.com/primefaces/primereact/issues/4254)
+- PickList: source/target filterTemplate not working [\#4249](https://github.com/primefaces/primereact/issues/4249)
+- DataTable: Data are not displayed when "Column" has no "field" attributes [\#4248](https://github.com/primefaces/primereact/issues/4248)
+- Tooltip: Does not work if target is dynamic [\#4243](https://github.com/primefaces/primereact/issues/4243)
+- TabView: Conditionally render TabPanel under TabView [\#4235](https://github.com/primefaces/primereact/issues/4235)
+- Mention: wrong value when clicking on suggestion [\#4221](https://github.com/primefaces/primereact/issues/4221)
+- Dropdown: with react-hook-form . Control prop doesn't exist [\#4215](https://github.com/primefaces/primereact/issues/4215)
+- TieredMenu: Menu items in are assigned with id attribute with a value of \[object Object\] [\#4011](https://github.com/primefaces/primereact/issues/4011)
+
 ## [9.3.0](https://github.com/primefaces/primereact/tree/9.3.0) (2023-04-19)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.2.3...9.3.0)

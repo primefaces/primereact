@@ -179,7 +179,7 @@ export const Image = React.memo(
             getImage: () => imageRef.current
         }));
 
-        const { src, alt, width, height } = props;
+        const { src, alt, width, height, crossOrigin, referrerPolicy, useMap, loading } = props;
         const otherProps = ImageBase.getOtherProps(props);
         const containerClassName = classNames('p-image p-component', props.className, {
             'p-image-preview-container': props.preview
@@ -190,7 +190,22 @@ export const Image = React.memo(
         const indicatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
         const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : indicatorIcon;
         const preview = createPreview();
-        const image = props.src && <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
+        const image = props.src && (
+            <img
+                ref={imageRef}
+                src={src}
+                className={props.imageClassName}
+                width={width}
+                height={height}
+                crossOrigin={crossOrigin}
+                referrerPolicy={referrerPolicy}
+                useMap={useMap}
+                loading={loading}
+                alt={alt}
+                style={props.imageStyle}
+                onError={props.onError}
+            />
+        );
 
         return (
             <span ref={elementRef} className={containerClassName} {...otherProps}>

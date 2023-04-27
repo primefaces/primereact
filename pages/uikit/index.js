@@ -1,15 +1,7 @@
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
-import { classNames } from '../../components/lib/utils/Utils';
-import fetchPricing from '../../service/PricingService';
+import React from 'react';
 
 const UIKitPage = (props) => {
-    const [pricing, setPricing] = useState({});
-
-    useEffect(() => {
-        fetchPricing().then((data) => data && setPricing(data));
-    }, []);
-
     return (
         <>
             <div>
@@ -141,12 +133,9 @@ const UIKitPage = (props) => {
                                         <div className="text-900 font-medium text-xl mb-2">Single Designer</div>
                                         <div className="text-600 font-medium">For individual designers</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
-                                        {pricing.single ? (
-                                            <div className="flex flex-wrap gap-3">
-                                                {pricing.single.old ? <span className={classNames('single-old-price', pricing.single.old.class)}>{pricing.single.old.value || ''}</span> : null}
-                                                {pricing.single.new ? <span className={classNames('single-new-price', pricing.single.new.class)}>{pricing.single.new.value || ''}</span> : null}
-                                            </div>
-                                        ) : null}
+                                        <div className="flex gap-3 flex-wrap">
+                                            <span className="text-2xl font-bold text-900">$99</span>
+                                        </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
                                             <li className="flex align-items-center mb-3">
@@ -184,12 +173,9 @@ const UIKitPage = (props) => {
                                         <div className="text-900 font-medium text-xl mb-2">Team</div>
                                         <div className="text-600 font-medium">For small teams</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
-                                        {pricing.team ? (
-                                            <div className="flex flex-wrap gap-3">
-                                                {pricing.team.old ? <span className={classNames('team-old-price', pricing.team.old.class)}>{pricing.team.old.value || ''}</span> : null}
-                                                {pricing.team.new ? <span className={classNames('team-new-price', pricing.team.new.class)}>{pricing.team.new.value || ''}</span> : null}
-                                            </div>
-                                        ) : null}
+                                        <div className="flex gap-3 flex-wrap">
+                                            <span className="text-2xl font-bold text-900">$249</span>
+                                        </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
                                             <li className="flex align-items-center mb-3">
@@ -227,12 +213,9 @@ const UIKitPage = (props) => {
                                         <div className="text-900 font-medium text-xl mb-2">Enterprise</div>
                                         <div className="text-600 font-medium">For large teams</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
-                                        {pricing.enterprise ? (
-                                            <div className="flex flex-wrap gap-3">
-                                                {pricing.enterprise.old ? <span className={classNames('enterprise-old-price', pricing.enterprise.old.class)}>{pricing.enterprise.old.value || ''}</span> : null}
-                                                {pricing.enterprise.new ? <span className={classNames('enterprise-new-price', pricing.enterprise.new.class)}>{pricing.enterprise.new.value || ''}</span> : null}
-                                            </div>
-                                        ) : null}
+                                        <div className="flex gap-3 flex-wrap">
+                                            <span className="text-2xl font-bold text-900">EXCLUSIVE DEALS</span>
+                                        </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
                                             <li className="flex align-items-center mb-3">
@@ -321,34 +304,6 @@ const UIKitPage = (props) => {
                     </div>
                 </div>
             </div>
-            <style jsx>{`
-                ${pricing.single
-                    ? `.single-new-price {
-                            ${pricing.single.new ? pricing.single.new.style || '' : ''}
-                        }
-                        .single-old-price {
-                            ${pricing.single.old ? pricing.single.old.style || '' : ''}
-                        }`
-                    : ''}
-
-                ${pricing.team
-                    ? `.team-new-price {
-                            ${pricing.team.new ? pricing.team.new.style || '' : ''}
-                        }
-                        .team-old-price {
-                            ${pricing.team.old ? pricing.team.old.style || '' : ''}
-                        }`
-                    : ''}
-
-                ${pricing.enterprise
-                    ? `.enterprise-new-price {
-                            ${pricing.enterprise.new ? pricing.enterprise.new.style || '' : ''}
-                        }
-                        .enterprise-old-price {
-                            ${pricing.enterprise.old ? pricing.enterprise.old.style || '' : ''}
-                        }`
-                    : ''}
-            `}</style>
         </>
     );
 };

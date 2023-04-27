@@ -73,7 +73,7 @@ export const MultiSelectHeader = React.memo((props) => {
     const checkedIcon = props.itemCheckboxIcon || <CheckIcon className={checkboxIconClassName} />;
     const itemCheckboxIcon = IconUtils.getJSXIcon(checkedIcon, { className: checkboxIconClassName }, { selected: props.selected });
 
-    const checkboxElement = props.showSelectAll && <Checkbox checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} />;
+    const checkboxElement = props.showSelectAll ? <Checkbox checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} /> : null;
 
     const iconProps = { className: 'p-multiselect-close-icon', 'aria-hidden': true };
     const icon = props.closeIcon || <TimesIcon {...iconProps} />;

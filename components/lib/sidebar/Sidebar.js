@@ -20,7 +20,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const [bindDocumentEscapeListener, unbindDocumentEscapeListener] = useEventListener({
         type: 'keydown',
         listener: (event) => {
-            if (event.which === 27) {
+            if (event.key === 'Escape') {
                 if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', PrimeReact.autoZIndex)) {
                     onClose(event);
                 }
@@ -31,8 +31,8 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (event) => {
-            if (event.which === 2) {
-                // left click
+            if (event.button !== 0) {
+                // ignore anything other than left click
                 return;
             }
 

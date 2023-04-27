@@ -547,6 +547,10 @@ export interface ColumnProps {
      */
     exportField?: string | undefined;
     /**
+     * Custom export header of the column to be exported.
+     */
+    exportHeader?: string | undefined;
+    /**
      * Property of a row data.
      */
     field?: string | undefined;

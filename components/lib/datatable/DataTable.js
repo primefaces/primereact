@@ -2,16 +2,16 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { SpinnerIcon } from '../icons/spinner';
-import { ArrowDownIcon } from '../icons/arrowdown';
-import { ArrowUpIcon } from '../icons/arrowup';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);
@@ -433,7 +433,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
             const selectableVal = getSelectableData(val);
 
-            return selectableVal && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
+            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
         }
     };
 
@@ -971,6 +971,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const multisortField = (data1, data2, multiSortMeta, index) => {
+        if (!multiSortMeta || !multiSortMeta[index]) {
+            return;
+        }
+
         const value1 = ObjectUtils.resolveFieldData(data1, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
@@ -1209,10 +1213,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         //headers
         columns.forEach((column, i) => {
-            const [field, header, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportable')];
+            const [field, header, exportHeader, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader'), getColumnProp(column, 'exportable')];
 
             if (exportable && field) {
-                const columnHeader = String(header || field)
+                const columnHeader = String(exportHeader || header || field)
                     .replace(/"/g, '""')
                     .replace(/\n/g, '\u2028');
 
@@ -1316,7 +1320,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     useMountEffect(() => {
         !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
 
-        setFiltersState(cloneFilters(props.filters));
+        //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
 
         if (isStateful()) {

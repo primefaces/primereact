@@ -1,7 +1,7 @@
 {
     "name": "primereact",
     "private": false,
-    "version": "9.3.0",
+    "version": "9.3.1",
     "scripts": {
         "dev": "next dev",
         "start": "next start",
@@ -43,7 +43,7 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.18.6",
-        "@babel/plugin-transform-runtime": "^7.19.6",
+        "@babel/plugin-transform-runtime": "^7.21.4",
         "@babel/preset-env": "^7.20.2",
         "@babel/preset-react": "^7.18.6",
         "@rollup/plugin-alias": "^4.0.2",
@@ -62,7 +62,7 @@
         "@types/react-transition-group": "^4.4.5",
         "@typescript-eslint/eslint-plugin": "^5.42.1",
         "eslint": "8.31.0",
-        "eslint-config-next": "13.1.6",
+        "eslint-config-next": "13.2.4",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-jest-dom": "^4.0.3",
         "gulp": "^4.0.2",
@@ -78,7 +78,7 @@
         "rollup-plugin-postcss": "^4.0.0",
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.56.1",
-        "typedoc": "^0.23.23",
+        "typedoc": "^0.23.28",
         "typescript": "^4.9.4"
     },
     "engines": {
