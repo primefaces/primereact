@@ -3,9 +3,12 @@ import PrimeReact from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TooltipBase } from './TooltipBase';
 
 export const Tooltip = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TooltipBase.getProps(inProps);
+
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
@@ -283,8 +286,8 @@ export const Tooltip = React.memo(
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
 
-                showEvents.forEach((event) => currentTarget.addEventListener(event, show));
-                hideEvents.forEach((event) => currentTarget.addEventListener(event, hide));
+                showEvents.forEach((event) => currentTarget?.addEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget?.addEventListener(event, hide));
             }
         };
 
@@ -293,8 +296,8 @@ export const Tooltip = React.memo(
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
 
-                showEvents.forEach((event) => currentTarget.removeEventListener(event, show));
-                hideEvents.forEach((event) => currentTarget.removeEventListener(event, hide));
+                showEvents.forEach((event) => currentTarget?.removeEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget?.removeEventListener(event, hide));
             }
         };
 
@@ -330,6 +333,7 @@ export const Tooltip = React.memo(
                     if (!target.hasWrapper) {
                         const wrapper = document.createElement('span');
 
+                        DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;
@@ -458,7 +462,7 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
+            const otherProps = TooltipBase.getOtherProps(props);
             const tooltipClassName = classNames(
                 'p-tooltip p-component',
                 {
@@ -490,33 +494,3 @@ export const Tooltip = React.memo(
 );
 
 Tooltip.displayName = 'Tooltip';
-Tooltip.defaultProps = {
-    __TYPE: 'Tooltip',
-    appendTo: null,
-    at: null,
-    autoHide: true,
-    autoZIndex: true,
-    baseZIndex: 0,
-    className: null,
-    content: null,
-    disabled: false,
-    event: null,
-    hideDelay: 0,
-    hideEvent: 'mouseleave',
-    id: null,
-    mouseTrack: false,
-    mouseTrackLeft: 5,
-    mouseTrackTop: 5,
-    my: null,
-    onBeforeHide: null,
-    onBeforeShow: null,
-    onHide: null,
-    onShow: null,
-    position: 'right',
-    showDelay: 0,
-    showEvent: 'mouseenter',
-    showOnDisabled: false,
-    style: null,
-    target: null,
-    updateDelay: 0
-};

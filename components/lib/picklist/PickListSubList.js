@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
+import { SearchIcon } from '../icons/search';
 
 export const PickListSubList = React.memo(
     React.forwardRef((props, ref) => {
@@ -130,11 +131,15 @@ export const PickListSubList = React.memo(
         };
 
         const createFilter = () => {
+            const iconClassName = 'p-picklist-filter-icon';
+            const icon = props.type === 'source' ? props.sourceFilterIcon || <SearchIcon className={iconClassName} /> : props.targetFilterIcon || <SearchIcon className={iconClassName} />;
+            const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
             if (props.showFilter) {
                 let content = (
                     <div className="p-picklist-filter">
                         <input type="text" value={props.filterValue} onChange={onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-picklist-filter-input p-inputtext p-component" />
-                        <span className="p-picklist-filter-icon pi pi-search"></span>
+                        <span> {filterIcon} </span>
                     </div>
                 );
 
@@ -146,7 +151,7 @@ export const PickListSubList = React.memo(
                             onChange: onFilter,
                             onKeyDown: onFilterInputKeyDown
                         },
-                        iconClassName: 'p-picklist-filter-icon pi pi-search',
+                        iconClassName,
                         element: content,
                         props
                     };

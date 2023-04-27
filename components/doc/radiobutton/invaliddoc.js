@@ -1,6 +1,6 @@
 import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
     const code = {
@@ -11,8 +11,7 @@ export function InvalidDoc(props) {
 import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
-export default function InvalidDoc() {
-
+export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center align-items-center">
             <RadioButton className="p-invalid" />
@@ -24,8 +23,7 @@ export default function InvalidDoc() {
 import React from 'react'; 
 import { RadioButton } from "primereact/radiobutton";
 
-export default function InvalidDoc() {
-
+export default function InvalidDemo() {
     return (
         <div className="card flex justify-content-center align-items-center">
             <RadioButton className="p-invalid" />
@@ -38,8 +36,9 @@ export default function InvalidDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center align-items-center">
                 <RadioButton className="p-invalid" />

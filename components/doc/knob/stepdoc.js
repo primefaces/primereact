@@ -8,30 +8,33 @@ export function StepDoc(props) {
 
     const code = {
         basic: `
-<Knob value={value} step={40} onChange={(e) => setValue(value)} />
-
+<Knob value={value} onChange={(e) => setValue(value)} step={40} />
         `,
         javascript: `
 import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function StepDoc() {
+export default function StepDemo() {
     const [value, setValue] = useState(40);
 
     return (
-        <Knob value={value} step={40} onChange={(e) => setValue(value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e) => setValue(value)} step={40} />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from 'react';
-import { Knob, KnobChangeParams } from 'primereact/knob';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function StepDoc() {
+export default function StepDemo() {
     const [value, setValue] = useState<number>(40);
 
     return (
-        <Knob value={value} step={40} onChange={(e : KnobChangeParams) => setValue(value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e : KnobChangeEvent) => setValue(value)} step={40} />
+        </div>
     )
 }
         `
@@ -40,7 +43,9 @@ export default function StepDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Step factor is 1 by default and can be customized with step option.</p>
+                <p>
+                    Size of each movement is defined with the <i>step</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Knob value={value} step={40} onChange={(e) => setValue(value)} />

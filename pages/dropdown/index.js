@@ -1,24 +1,19 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/dropdown/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
 import { EditableDoc } from '../../components/doc/dropdown/editabledoc';
 import { FilterDoc } from '../../components/doc/dropdown/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/dropdown/floatlabeldoc';
-import { GroupedDoc } from '../../components/doc/dropdown/groupeddoc';
+import { FormikDoc } from '../../components/doc/dropdown/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
+import { GroupDoc } from '../../components/doc/dropdown/groupdoc';
 import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
-import { TemplatingDoc } from '../../components/doc/dropdown/templatingdoc';
-import { FormikDoc } from '../../components/doc/dropdown/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/dropdown/validation/hookformdoc';
-import { EagerDoc } from '../../components/doc/dropdown/virtualscroll/eagerdoc';
-import { LazyDoc } from '../../components/doc/dropdown/virtualscroll/lazydoc';
+import { StyleDoc } from '../../components/doc/dropdown/styledoc';
+import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
+import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
 
 const DropdownDemo = () => {
     const docs = [
@@ -38,9 +33,29 @@ const DropdownDemo = () => {
             component: EditableDoc
         },
         {
-            id: 'grouped',
-            label: 'Grouped',
-            component: GroupedDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
+            id: 'clearicon',
+            label: 'Clear Icon',
+            component: ClearIconDoc
+        },
+        {
+            id: 'virtualscroll',
+            label: 'Virtual Scroll',
+            component: VirtualScrollDoc
         },
         {
             id: 'floatlabel',
@@ -58,41 +73,9 @@ const DropdownDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'templating',
-            label: 'Templating',
-            component: TemplatingDoc
-        },
-        {
-            id: 'filter',
-            label: 'Filter',
-            component: FilterDoc
-        },
-        {
-            id: 'clearicon',
-            label: 'Clear Icon',
-            component: ClearIconDoc
-        },
-        {
-            id: 'virtualscroll',
-            label: 'Virtual Scroll',
-            description: 'Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.',
-            children: [
-                {
-                    id: 'eager',
-                    label: 'Eager',
-                    component: EagerDoc
-                },
-                {
-                    id: 'lazy',
-                    label: 'Lazy',
-                    component: LazyDoc
-                }
-            ]
-        },
-        {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -116,48 +99,10 @@ const DropdownDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Select Component</title>
-                <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Dropdown</h1>
-                    <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
-                </div>
-                <DocActions github="dropdown/index.js" />
-            </div>
-
-            <div className="content-section doc dropdown-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Select Component" header="Dropdown" description="Dropdown also known as Select, is used to choose an item from a collection of options." componentDocs={docs} apiDocs={['Dropdown']} />;
 };
 
 export default DropdownDemo;

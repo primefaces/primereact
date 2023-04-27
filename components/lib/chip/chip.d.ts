@@ -2,7 +2,7 @@
  *
  * Chip represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/chip)
+ * [Live Demo](https://www.primereact.org/chip)
  *
  * @module chip
  *
@@ -17,17 +17,14 @@ import { IconType, TemplateType } from '../utils';
 export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * Defines the text to display.
-     *
      */
     label?: string;
     /**
      * Defines the icon to display.
-     *
      */
     icon?: IconType<ChipProps> | undefined;
     /**
      * Defines the image to display.
-     *
      */
     image?: string | undefined;
     /**
@@ -37,17 +34,14 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     removable?: boolean | undefined;
     /**
      * Icon of the remove element.
-     * @defaultValue pi pi-times-circle
      */
-    removeIcon?: string | undefined;
+    removeIcon?: IconType<ChipProps> | undefined;
     /**
      * Template of an item.
-     *
      */
     template?: TemplateType<ChipProps> | undefined;
     /**
      * It specifies an alternate text for an image, if the image cannot be displayed.
-     *
      */
     imageAlt?: string | undefined;
     /**
@@ -68,6 +62,14 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
 }
 
 /**
+ * **PrimeReact - Chip**
+ *
+ * _Chip represents people using icons, labels and images._
+ *
+ * [Live Demo](https://www.primereact.org/chip/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
  * @group Component
  */
 export declare class Chip extends React.Component<ChipProps, any> {

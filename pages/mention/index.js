@@ -1,19 +1,15 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/mention/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/mention/styledoc';
-import { ImportDoc } from '../../components/doc/mention/importdoc';
+import { AutoResizeDoc } from '../../components/doc/mention/autoresizedoc';
 import { BasicDoc } from '../../components/doc/mention/basicdoc';
-import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
-import { AutoDoc } from '../../components/doc/mention/autodoc';
-import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
 import { DisabledDoc } from '../../components/doc/mention/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/mention/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/mention/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/mention/importdoc';
 import { InvalidDoc } from '../../components/doc/mention/invaliddoc';
-import { FormikDoc } from '../../components/doc/mention/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/mention/validation/hookformdoc';
+import { StyleDoc } from '../../components/doc/mention/styledoc';
+import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
 
 const MentionDemo = () => {
     const docs = [
@@ -28,9 +24,14 @@ const MentionDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'auto',
+            id: 'triggers',
+            label: 'Triggers',
+            component: TriggersDoc
+        },
+        {
+            id: 'autoresize',
             label: 'Auto Resize',
-            component: AutoDoc
+            component: AutoResizeDoc
         },
         {
             id: 'floatlabel',
@@ -38,24 +39,19 @@ const MentionDemo = () => {
             component: FloatLabelDoc
         },
         {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
-        },
-        {
             id: 'invalid',
             label: 'Invalid',
             component: InvalidDoc
         },
         {
-            id: 'triggers',
-            label: 'Triggers',
-            component: TriggersDoc
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -78,45 +74,10 @@ const MentionDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Mention Component</title>
-                <meta name="description" content="Mention component is used to refer someone or something." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Mention</h1>
-                    <p>Mention component is used to refer someone or something.</p>
-                </div>
-
-                <DocActions github="mention/index.js" />
-            </div>
-
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={['Mention']} />;
 };
 
 export default MentionDemo;

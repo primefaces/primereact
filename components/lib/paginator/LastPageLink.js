@@ -1,14 +1,20 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { LastPageLinkBase } from './PaginatorBase';
+import { AngleDoubleRightIcon } from '../icons/angledoubleright';
 
-export const LastPageLink = React.memo((props) => {
+export const LastPageLink = React.memo((inProps) => {
+    const props = LastPageLinkBase.getProps(inProps);
+
     const className = classNames('p-paginator-last p-paginator-element p-link', { 'p-disabled': props.disabled });
-    const iconClassName = 'p-paginator-icon pi pi-angle-double-right';
+    const iconClassName = 'p-paginator-icon';
+    const icon = props.lastPageLinkIcon || <AngleDoubleRightIcon className={iconClassName} />;
+    const lastPageLinkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
     const element = (
         <button type="button" className={className} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('lastPageLabel')}>
-            <span className={iconClassName}></span>
+            {lastPageLinkIcon}
             <Ripple />
         </button>
     );
@@ -30,9 +36,3 @@ export const LastPageLink = React.memo((props) => {
 });
 
 LastPageLink.displayName = 'LastPageLink';
-LastPageLink.defaultProps = {
-    __TYPE: 'LastPageLink',
-    disabled: false,
-    onClick: null,
-    template: null
-};

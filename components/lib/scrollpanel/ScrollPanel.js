@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler } from '../utils/Utils';
+import { ScrollPanelBase } from './ScrollPanelBase';
 
-export const ScrollPanel = React.forwardRef((props, ref) => {
+export const ScrollPanel = React.forwardRef((inProps, ref) => {
+    const props = ScrollPanelBase.getProps(inProps);
+
     const containerRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const xBarRef = React.useRef(null);
@@ -157,7 +160,7 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
         getYBar: () => yBarRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, ScrollPanel.defaultProps);
+    const otherProps = ScrollPanelBase.getOtherProps(props);
     const className = classNames('p-scrollpanel p-component', props.className);
 
     return (
@@ -174,9 +177,3 @@ export const ScrollPanel = React.forwardRef((props, ref) => {
 });
 
 ScrollPanel.displayName = 'ScrollPanel';
-ScrollPanel.defaultProps = {
-    __TYPE: 'ScrollPanel',
-    id: null,
-    style: null,
-    className: null
-};

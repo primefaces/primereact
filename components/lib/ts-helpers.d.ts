@@ -10,11 +10,14 @@ export interface FormTarget<T = any> {
     name: string;
     id: string;
     value: Nullable<T>;
+    checked?: boolean;
+    [key: string]: any;
 }
 
-export interface FormEvent<T = any> {
-    originalEvent?: React.SyntheticEvent;
+export interface FormEvent<T = any, E = React.SyntheticEvent> {
+    originalEvent?: E;
     value: Nullable<T>;
+    checked?: boolean;
     stopPropagation(): void;
     preventDefault(): void;
     target: FormTarget<T>;

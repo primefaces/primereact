@@ -1,19 +1,16 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/inputtextarea/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
 import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
 import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
 import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputtextarea/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputtextarea/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
-import { FormikDoc } from '../../components/doc/inputtextarea/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtextarea/validation/hookformdoc';
+import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
 
 const InputTextareaDemo = () => {
     const docs = [
@@ -53,9 +50,9 @@ const InputTextareaDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'validation',
-            label: 'Validation',
-            description: 'Validate using popular React validation libraries.',
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
                     id: 'formik',
@@ -78,40 +75,10 @@ const InputTextareaDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Textarea Component</title>
-                <meta name="description" content="InputTextarea adds styling, key filtering and autoResize functionality to standard textarea element." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputTextarea</h1>
-                    <p>InputTextarea adds styling and autoResize functionality to standard textarea element.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Textarea Component" header="InputTextarea" description="InputTextarea adds styling and autoResize functionality to standard textarea element." componentDocs={docs} apiDocs={['InputTextarea']} />;
 };
 
 export default InputTextareaDemo;

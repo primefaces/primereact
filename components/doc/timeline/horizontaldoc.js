@@ -7,97 +7,54 @@ export function HorizontalDoc(props) {
 
     const code = {
         basic: `
-<h6>Top Align</h6>
 <Timeline value={events} layout="horizontal" align="top" content={(item) => item} />
-<h6>Bottom Align</h6>
 <Timeline value={events} layout="horizontal" align="bottom" content={(item) => item} />
-<h6>Alternate Align</h6>
 <Timeline value={events} layout="horizontal" align="alternate" content={(item) => item} opposite={<span>&nbsp;</span>} />
         `,
         javascript: `
 import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
-import './TimelineDemo.css';
 
-export default function HorizontalDoc() {
+export default function HorizontalDemo() {
     const events = ['2020', '2021', '2022', '2023'];
-        
+
     return (
-        <div className="card timeline-demo">
-            <h6>Top Align</h6>
+        <div className="card flex flex-column gap-3">
             <Timeline value={events} layout="horizontal" align="top" content={(item) => item} />
-        
-            <h6>Bottom Align</h6>
             <Timeline value={events} layout="horizontal" align="bottom" content={(item) => item} />
-        
-            <h6>Alternate Align</h6>
             <Timeline value={events} layout="horizontal" align="alternate" content={(item) => item} opposite={<span>&nbsp;</span>} />
-    </div>
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
-import './TimelineDemo.css';
 
-export default function HorizontalDoc() {
-    const events = ['2020', '2021', '2022', '2023'];
+export default function HorizontalDemo() {
+    const events: string[] = ['2020', '2021', '2022', '2023'];
 
     return (
-        <div className="card timeline-demo">
-            <h6>Top Align</h6>
+        <div className="card flex flex-column gap-3">
             <Timeline value={events} layout="horizontal" align="top" content={(item) => item} />
-
-            <h6>Bottom Align</h6>
             <Timeline value={events} layout="horizontal" align="bottom" content={(item) => item} />
-
-            <h6>Alternate Align</h6>
             <Timeline value={events} layout="horizontal" align="alternate" content={(item) => item} opposite={<span>&nbsp;</span>} />
-    </div>
+        </div>
     )
 }
-        `,
-        extFiles: {
-            'TimelineDemo.css': `
-/* TimelineDemo.css */
-
-.timeline-demo .p-timeline-event-content,
-.timeline-demo .p-timeline-event-opposite {
-    line-height: 1;
-}
-
-@media screen and (max-width: 960px) {
-    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) {
-        flex-direction: row !important;
-    }
-    .timeline-demo .customized-timeline .p-timeline-event:nth-child(even) .p-timeline-event-content {
-        text-align: left !important;
-    }
-    .timeline-demo .customized-timeline .p-timeline-event-opposite {
-        flex: 0;
-    }
-    .timeline-demo .customized-timeline .p-card {
-        margin-top: 1rem;
-    }
-}
-    `
-        }
+        `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Horizontal Connect content.</p>
+                <p>
+                    TimeLine orientation is controlled with the <i>layout</i> property, default is <i>vertical</i> having <i>horizontal</i> as the alternative.
+                </p>
             </DocSectionText>
-            <div className="card">
-                <h6>Top Align</h6>
+            <div className="card flex flex-column gap-3">
                 <Timeline value={events} layout="horizontal" align="top" content={(item) => item} />
-
-                <h6>Bottom Align</h6>
                 <Timeline value={events} layout="horizontal" align="bottom" content={(item) => item} />
-
-                <h6>Alternate Align</h6>
                 <Timeline value={events} layout="horizontal" align="alternate" content={(item) => item} opposite={<span>&nbsp;</span>} />
             </div>
             <DocSectionCode code={code} />

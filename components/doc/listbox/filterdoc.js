@@ -15,13 +15,13 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<ListBox filter value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+<ListBox filter value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function FilterDoc() {
+export default function BasicDemo() {
     const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
@@ -32,19 +32,24 @@ export default function FilterDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <ListBox filter value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <div className="card flex justify-content-center">  
+            <ListBox filter value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { ListBox, ListBoxChangeParams } from 'primereact/listbox';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
-export default function FilterDoc() {
-    const [selectedCity, setSelectedCity] = useState<any>(null);
-    const cities = [
+interface City {
+    name: string;
+    code: string;
+} 
+
+export default function BasicDemo() {
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
+    const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
         { name: 'London', code: 'LDN' },
@@ -53,8 +58,8 @@ export default function FilterDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <ListBox filter value={selectedCity} options={cities} onChange={(e: ListBoxChangeParams) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+        <div className="card flex justify-content-center">  
+            <ListBox filter value={selectedCity} onChange={(e: ListBoxChangeEvent) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )
 }
@@ -64,11 +69,12 @@ export default function FilterDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    ListBox provides built-in filtering that is enabled by adding the <i>filter</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ListBox filter value={selectedCity} options={cities} onChange={(e) => setSelectedCity(e.value)} optionLabel="name" style={{ width: '15rem' }} />
+                <ListBox filter value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

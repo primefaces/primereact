@@ -18,19 +18,23 @@ export default function VerticalDemo() {
     const [value, setValue] = useState(50);
 
     return (
-        <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" className="h-14rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Slider, SliderChangeParams } from "primereact/slider";
+import { Slider, SliderChangeEvent } from "primereact/slider";
 
 export default function VerticalDemo() {
     const [value, setValue] = useState<number>(50);
 
     return (
-        <Slider value={value} onChange={(e: SliderChangeParams) => setValue(e.value)} orientation="vertical" />
+        <div className="card flex justify-content-center">
+            <Slider value={value} onChange={(e: SliderChangeEvent) => setValue(e.value)} orientation="vertical" className="h-14rem" />
+        </div>
     )
 }
         `
@@ -40,11 +44,11 @@ export default function VerticalDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Default layout of slider is horizontal, use <i>orientation</i> property for the alternative vertical mode.
+                    Default layout of slider is <i>horizontal</i>, use <i>orientation</i> property for the alternative <i>vertical</i> mode.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" />
+                <Slider value={value} onChange={(e) => setValue(e.value)} orientation="vertical" className="h-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

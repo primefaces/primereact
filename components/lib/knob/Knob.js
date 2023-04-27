@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
+import { KnobBase } from './KnobBase';
 
 const radius = 40;
 const midX = 50;
@@ -9,7 +10,9 @@ const minRadians = (4 * Math.PI) / 3;
 const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = KnobBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
 
@@ -148,7 +151,7 @@ export const Knob = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Knob.defaultProps);
+        const otherProps = KnobBase.getOtherProps(props);
         const className = classNames(
             'p-knob p-component',
             {
@@ -175,24 +178,3 @@ export const Knob = React.memo(
 );
 
 Knob.displayName = 'Knob';
-Knob.defaultProps = {
-    __TYPE: 'Knob',
-    id: null,
-    style: null,
-    className: null,
-    value: null,
-    size: 100,
-    disabled: false,
-    readOnly: false,
-    showValue: true,
-    step: 1,
-    min: 0,
-    max: 100,
-    strokeWidth: 14,
-    name: null,
-    valueColor: 'var(--primary-color, Black)',
-    rangeColor: 'var(--surface-border, LightGray)',
-    textColor: 'var(--text-color-secondary, Black)',
-    valueTemplate: '{value}',
-    onChange: null
-};

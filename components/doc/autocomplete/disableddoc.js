@@ -12,8 +12,7 @@ export function DisabledDoc(props) {
 import React from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete disabled placeholder="Disabled" />
@@ -23,10 +22,9 @@ export default function DisabledDoc() {
         `,
         typescript: `
 import React from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete } from "primereact/autocomplete";
 
-export default function DisabledDoc() {
-
+export default function DisabledDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete disabled placeholder="Disabled" />
@@ -39,8 +37,9 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <AutoComplete disabled placeholder="Disabled" />

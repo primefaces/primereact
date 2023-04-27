@@ -14,7 +14,7 @@ export function InvalidDoc(props) {
 import React, { useState } from "react";
 import { InputNumber } from 'primereact/inputnumber';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [value, setValue] = useState(151351);
 
     return (
@@ -26,14 +26,14 @@ export default function InvalidDoc() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputNumber, InputNumberValueChangeParams } from 'primereact/inputnumber';
+import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [value, setValue] = useState<number>(151351);
 
     return (
         <div className="card flex justify-content-center">
-            <InputNumber className="p-invalid" value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
+            <InputNumber className="p-invalid" value={value} onValueChange={(e: InputNumberValueChangeEvent) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
         </div>
     )
 }
@@ -44,11 +44,11 @@ export default function InvalidDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Applying <i>p-invalid</i> class to an input element indicates a failed validation.
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputNumber className="p-invalid" value={value} onValueChange={(e) => setValue(e.value)} mode="decimal" minFractionDigits={2} />
+                <InputNumber className="p-invalid" value={value} onValueChange={(e) => setValue(e.value)} minFractionDigits={2} />
             </div>
             <DocSectionCode code={code} />
         </>

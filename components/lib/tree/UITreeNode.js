@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { CheckIcon } from '../icons/check';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { MinusIcon } from '../icons/minus';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -549,12 +553,14 @@ export const UITreeNode = React.memo((props) => {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
             const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': props.disabled });
-            const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
+            const iconClassName = 'p-checkbox-icon p-c';
+            const icon = checked ? props.checkboxIcon || <CheckIcon className={iconClassName} /> : partialChecked ? props.checkboxIcon || <MinusIcon className={iconClassName} /> : null;
+            const checkboxIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, props);
 
             return (
                 <div className="p-checkbox p-component">
                     <div className={className} role="checkbox" aria-checked={checked}>
-                        <span className={icon}></span>
+                        {checkboxIcon}
                     </div>
                 </div>
             );
@@ -577,10 +583,12 @@ export const UITreeNode = React.memo((props) => {
 
     const createToggler = () => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
-        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
+        const iconProps = { className: 'p-tree-toggler-icon', 'aria-hidden': true };
+        const icon = expanded ? props.collapseIcon || <ChevronDownIcon {...iconProps} /> : props.expandIcon || <ChevronRightIcon {...iconProps} />;
+        const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, expanded });
         let content = (
             <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={onTogglerClick} aria-label={label}>
-                <span className={iconClassName} aria-hidden="true"></span>
+                {togglerIcon}
                 <Ripple />
             </button>
         );

@@ -14,44 +14,48 @@ export function InvalidDoc(props) {
 
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+<TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+    className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from './service/NodeService';
 
-export default function InvalidDoc() {
+export default function InvalidDemo() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKey, setSelectedNodeKey] = useState(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+            <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
+                className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
         </div>
     );
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
-import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
+import { TreeSelect, TreeSelectChangeEvent } from 'primereact/treeselect';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function InvalidDoc() {
-    const [nodes, setNodes] = useState<any[]>(null);
-    const [selectedNodeKey, setSelectedNodeKey] = useState<any>(null);
+export default function InvalidDemo() {
+    const [nodes, setNodes] = useState<TreeNode[] | null>(null);
+    const [selectedNodeKey, setSelectedNodeKey] = useState<string>(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+            <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e : TreeSelectChangeEvent) => setSelectedNodeKey(e.value)} 
+                className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
         </div>
     );
 }
@@ -91,11 +95,11 @@ export default function InvalidDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    TreeSelect component requires an array of TreeNode objects as its <i>options</i> and keys of the nodes as its value.
+                    Invalid state style is added using the <i>p-invalid</i> class to indicate a failed validation.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKey} options={nodes} onChange={(e) => setSelectedNodeKey(e.value)} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
+                <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} className="md:w-20rem w-full p-invalid" placeholder="Select Item"></TreeSelect>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

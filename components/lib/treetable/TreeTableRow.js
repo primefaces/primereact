@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { ColumnBase } from '../column/ColumnBase';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { CheckIcon } from '../icons/check';
+import { MinusIcon } from '../icons/minus';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -13,6 +18,10 @@ export const TreeTableRow = React.memo((props) => {
 
     const isLeaf = () => {
         return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
+    };
+
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
     };
 
     const onTogglerClick = (event) => {
@@ -269,12 +278,14 @@ export const TreeTableRow = React.memo((props) => {
 
     const createToggler = () => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
-        const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', { 'pi-chevron-right': !expanded, 'pi-chevron-down': expanded });
+        const iconProps = { className: 'p-treetable-toggler-icon', 'aria-hidden': true };
+        const icon = expanded ? <ChevronDownIcon {...iconProps} /> : <ChevronRightIcon {...iconProps} />;
+        const togglerIcon = IconUtils.getJSXIcon(props.togglerIcon || icon, { ...iconProps }, { props });
         const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
 
         return (
             <button type="button" className="p-treetable-toggler p-link p-unselectable-text" onClick={onTogglerClick} tabIndex={-1} style={style} aria-label={label}>
-                <i className={iconClassName} aria-hidden="true"></i>
+                {togglerIcon}
                 <Ripple />
             </button>
         );
@@ -285,7 +296,9 @@ export const TreeTableRow = React.memo((props) => {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
             const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked });
-            const icon = classNames('p-checkbox-icon p-c', { 'pi pi-check': checked, 'pi pi-minus': partialChecked });
+            const iconClassName = 'p-checkbox-icon p-c';
+            const icon = checked ? props.checkboxIcon || <CheckIcon className={iconClassName} /> : partialChecked ? props.checkboxIcon || <MinusIcon className={iconClassName} /> : null;
+            const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, checked, partialChecked });
 
             return (
                 <div className="p-checkbox p-treetable-checkbox p-component" ref={checkboxRef} onClick={onCheckboxChange} role="checkbox" aria-checked={checked}>
@@ -293,7 +306,7 @@ export const TreeTableRow = React.memo((props) => {
                         <input type="checkbox" onFocus={onCheckboxFocus} onBlur={onCheckboxBlur} />
                     </div>
                     <div className={className} ref={checkboxBoxRef}>
-                        <span className={icon}></span>
+                        {checkIcon}
                     </div>
                 </div>
             );
@@ -302,16 +315,24 @@ export const TreeTableRow = React.memo((props) => {
         }
     };
 
-    const createCell = (column) => {
+    const createCell = (column, index) => {
         let toggler, checkbox;
 
-        if (column.props.expander) {
+        if (getColumnProp(column, 'expander')) {
             toggler = createToggler();
             checkbox = createCheckbox();
         }
 
         return (
-            <TreeTableBodyCell key={column.props.columnKey || column.props.field} {...column.props} column={column} selectOnEdit={props.selectOnEdit} selected={isSelected()} node={props.node} rowIndex={props.rowIndex}>
+            <TreeTableBodyCell
+                key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
+                {...ColumnBase.getCProps(column)}
+                column={column}
+                selectOnEdit={props.selectOnEdit}
+                selected={isSelected()}
+                node={props.node}
+                rowIndex={props.rowIndex}
+            >
                 {toggler}
                 {checkbox}
             </TreeTableBodyCell>
@@ -323,10 +344,11 @@ export const TreeTableRow = React.memo((props) => {
             return props.node.children.map((childNode, index) => {
                 return (
                     <TreeTableRow
-                        key={childNode.key || JSON.stringify(childNode.data)}
+                        key={`${childNode.key || JSON.stringify(childNode.data)}_${index}`}
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}
                         node={childNode}
+                        checkboxIcon={props.checkboxIcon}
                         columns={props.columns}
                         expandedKeys={props.expandedKeys}
                         selectOnEdit={props.selectOnEdit}

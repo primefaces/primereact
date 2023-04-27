@@ -2,12 +2,17 @@ import * as React from 'react';
 import { localeOption } from '../api/Locale';
 import { useTimeout } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { TimesIcon } from '../icons/times';
+import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
+import { InfoCircleIcon } from '../icons/infocircle';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { CheckIcon } from '../icons/check';
 
 export const ToastMessage = React.memo(
     React.forwardRef((props, ref) => {
         const messageInfo = props.messageInfo;
-        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle } = messageInfo.message;
+        const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon } = messageInfo.message;
 
         const [focused, setFocused] = React.useState(false);
         const [clearTimer] = useTimeout(
@@ -59,11 +64,16 @@ export const ToastMessage = React.memo(
         };
 
         const createCloseIcon = () => {
+            const iconClassName = 'p-toast-icon-close-icon';
+            const icon = _closeIcon || <TimesIcon className={iconClassName} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+
             if (closable !== false) {
                 return (
                     <div>
-                        <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={localeOption('close')}>
-                            <span className="p-toast-icon-close-icon pi pi-times" aria-hidden="true"></span>
+                        <button type="button" className="p-toast-icon-close p-link" onClick={onClose} aria-label={ariaLabel}>
+                            {closeIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -76,17 +86,34 @@ export const ToastMessage = React.memo(
         const createMessage = () => {
             if (messageInfo) {
                 const contentEl = ObjectUtils.getJSXElement(content, { message: messageInfo.message, onClick, onClose });
-                const iconClassName = classNames('p-toast-message-icon pi', {
-                    'pi-info-circle': severity === 'info',
-                    'pi-exclamation-triangle': severity === 'warn',
-                    'pi-times': severity === 'error',
-                    'pi-check': severity === 'success'
-                });
+                const iconClassName = 'p-toast-message-icon';
+                let icon = _icon;
+
+                if (!_icon) {
+                    switch (severity) {
+                        case 'info':
+                            icon = <InfoCircleIcon className={iconClassName} />;
+                            break;
+                        case 'warn':
+                            icon = <ExclamationTriangleIcon className={iconClassName} />;
+                            break;
+                        case 'error':
+                            icon = <TimesCircleIcon className={iconClassName} />;
+                            break;
+                        case 'success':
+                            icon = <CheckIcon className={iconClassName} />;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                const messageIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
                 return (
                     contentEl || (
                         <>
-                            <span className={iconClassName}></span>
+                            {messageIcon}
                             <div className="p-toast-message-text">
                                 <span className="p-toast-summary">{summary}</span>
                                 {detail && <div className="p-toast-detail">{detail}</div>}

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
 import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { NodeService } from '../../../service/NodeService';
 
 export function BasicDoc(props) {
-    const [nodes, setNodes] = useState(null);
+    const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -13,44 +13,48 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Tree value={nodes} />
+<Tree value={nodes} className="w-full md:w-30rem" />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
 import { NodeService } from './service/NodeService';
 
-export default function BasicDoc() {
-    const [nodes, setNodes] = useState(null);
+export default function BasicDemo() {
+    const [nodes, setNodes] = useState([]);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <Tree value={nodes} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { Tree } from 'primereact/tree';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function BasicDoc() {
-    const [nodes, setNodes] = useState(null);
+export default function BasicDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    
+    }, []);
+
     return (
-        <Tree value={nodes} />
+        <div className="card flex justify-content-center">
+            <Tree value={nodes} className="w-full md:w-30rem" />
+        </div>
     )
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -83,10 +87,12 @@ export default function BasicDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Basic</p>
+                <p>
+                    Tree requires a collection of <i>TreeNode</i> instances as a <i>value</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Tree value={nodes} />
+                <Tree value={nodes} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

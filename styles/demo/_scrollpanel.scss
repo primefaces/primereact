@@ -1,43 +1,33 @@
 .scrollpanel-demo {
     .p-scrollpanel {
-        p {
-            padding: .5rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-
         &.custombar1 {
             .p-scrollpanel-wrapper {
-                border-right: 10px solid var(--surface-b);
+                border-right: 10px solid var(--surface-ground);
             }
 
             .p-scrollpanel-bar {
-                background-color: var(--primary-color);
+                background-color: var(--primary-300);
                 opacity: 1;
-                transition: background-color .2s;
+                transition: background-color .3s;
 
                 &:hover {
-                    background-color: #007ad9;
+                    background-color: var(--primary-400);
                 }
             }
         }
 
         &.custombar2 {
             .p-scrollpanel-wrapper {
-                border-right: 10px solid var(--surface-b);
-                border-bottom: 10px solid var(--surface-b);
+                border-right: 10px solid var(--surface-50);
+                border-bottom: 10px solid var(--surface-50);
             }
 
             .p-scrollpanel-bar {
-                background-color: var(--surface-d);
+                background-color: var(--surface-200);
                 border-radius: 0;
                 opacity: 1;
-                transition: background-color .2s;
+                transition: background-color .3s;
             }
         }
-    }
-
-    .col-12 {
-        padding: 2rem;
     }
 }

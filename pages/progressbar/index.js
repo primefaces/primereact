@@ -1,16 +1,12 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/progressbar/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/progressbar/styledoc';
-import { ImportDoc } from '../../components/doc/progressbar/importdoc';
-import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
 import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
-import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
+import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
+import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { StyleDoc } from '../../components/doc/progressbar/styledoc';
+import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -48,41 +44,10 @@ const ProgressBarDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ProgressBar Component</title>
-                <meta name="description" content="ProgressBar is a process status indicator." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ProgressBar</h1>
-                    <p>ProgressBar is a process status indicator.</p>
-                </div>
-                <DocActions github="progressbar/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} />;
 };
 
 export default ProgressBarDemo;

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
 import { Fieldset } from './Fieldset';
@@ -25,11 +25,13 @@ describe('Fieldset', () => {
         expect(container).toMatchSnapshot('toggleable-open');
 
         // Act
-        await userEvent.click(legend);
+        userEvent.click(legend);
 
         // Assert
-        expect(toggleOn).toHaveBeenCalledTimes(1);
-        expect(container).toMatchSnapshot('toggleable-closed');
+        await waitFor(() => {
+            expect(toggleOn).toHaveBeenCalledTimes(1);
+            expect(container).toMatchSnapshot('toggleable-closed');
+        });
     });
     test('when Fieldset is toggleable it must expand and collapse', async () => {
         // Arrange
@@ -45,19 +47,23 @@ describe('Fieldset', () => {
         expect(container).toMatchSnapshot('expandable-open');
 
         // Act
-        await userEvent.click(legend);
+        userEvent.click(legend);
 
         // Assert
-        expect(expandOn).toHaveBeenCalledTimes(0);
-        expect(collapseOn).toHaveBeenCalledTimes(1);
-        expect(container).toMatchSnapshot('expandable-closed');
+        await waitFor(() => {
+            expect(expandOn).toHaveBeenCalledTimes(0);
+            expect(collapseOn).toHaveBeenCalledTimes(1);
+            expect(container).toMatchSnapshot('expandable-closed');
+        });
 
         // Act
-        await userEvent.click(legend);
+        userEvent.click(legend);
 
         // Assert
-        expect(expandOn).toHaveBeenCalledTimes(1);
-        expect(collapseOn).toHaveBeenCalledTimes(1);
-        expect(container).toMatchSnapshot('expandable-open');
+        await waitFor(() => {
+            expect(expandOn).toHaveBeenCalledTimes(1);
+            expect(collapseOn).toHaveBeenCalledTimes(1);
+            expect(container).toMatchSnapshot('expandable-open');
+        });
     });
 });

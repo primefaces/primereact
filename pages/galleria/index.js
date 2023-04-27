@@ -1,27 +1,24 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/galleria/importdoc';
-import { BasicDoc } from '../../components/doc/galleria/basicdoc';
-import { ApiDoc } from '../../components/doc/galleria/apidoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
-import { StyleDoc } from '../../components/doc/galleria/styledoc';
-import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
-import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
-import { AutoPlayDemoDoc } from '../../components/doc/galleria/autoplaydoc';
-import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
 import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
+import { AutoPlayDoc } from '../../components/doc/galleria/autoplaydoc';
+import { BasicDoc } from '../../components/doc/galleria/basicdoc';
+import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
+import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
+import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/customcontentdoc';
+import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnailsdoc';
+import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnailsdoc';
+import { ImportDoc } from '../../components/doc/galleria/importdoc';
 import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickeventdoc';
 import { HoverEventDoc } from '../../components/doc/galleria/indicator/hovereventdoc';
 import { PositionDoc } from '../../components/doc/galleria/indicator/positiondoc';
 import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/templatedoc';
-import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnails';
-import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnails';
-import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/custom';
-import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnails';
-import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnails';
-import { ItemHoverDoc } from '../../components/doc/galleria/navigator/hover';
-import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicators';
+import { HoverDoc } from '../../components/doc/galleria/navigator/hoverdoc';
+import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicatorsdoc';
+import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnailsdoc';
+import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnailsdoc';
+import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
+import { StyleDoc } from '../../components/doc/galleria/styledoc';
 import { ThumbnailDoc } from '../../components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
@@ -81,7 +78,7 @@ const GalleriaDemo = () => {
         {
             id: 'fullscreen',
             label: 'Full Screen',
-            description: 'In fullscreen mode content covers the whole page over a mask.',
+            description: 'In fullscreen mode content covers the whole page over a modal layer.',
             children: [
                 {
                     id: 'fullscreenwiththumbnail',
@@ -103,26 +100,26 @@ const GalleriaDemo = () => {
         {
             id: 'navigator',
             label: 'Navigator',
-            description: 'Combining item navigators, thumbnails and indicators provide various UI alternatives.',
+            description: 'Navigators are used to move back and forth between the images.',
             children: [
                 {
                     id: 'itemthumbnails',
-                    label: 'Item Navigators and Thumbnails',
+                    label: 'With Thumbnails',
                     component: ItemThumbnailsDoc
                 },
                 {
                     id: 'itemwithouthumbnails',
-                    label: 'Item Navigators without Thumbnails',
+                    label: 'Without Thumbnails',
                     component: ItemWithoutThumbnailsDoc
                 },
                 {
                     id: 'itemhover',
-                    label: 'Item Navigators on Hover',
-                    component: ItemHoverDoc
+                    label: 'Display on Hover',
+                    component: HoverDoc
                 },
                 {
                     id: 'indicators',
-                    label: 'Item Navigators and Indicators',
+                    label: 'With Indicators',
                     component: IndicatorsDoc
                 }
             ]
@@ -130,7 +127,7 @@ const GalleriaDemo = () => {
         {
             id: 'autoplay',
             label: 'AutoPlay',
-            component: AutoPlayDemoDoc
+            component: AutoPlayDoc
         },
         {
             id: 'caption',
@@ -143,7 +140,7 @@ const GalleriaDemo = () => {
             component: AdvancedDoc
         },
         {
-            id: 'styling',
+            id: 'style',
             label: 'Style',
             component: StyleDoc
         },
@@ -151,42 +148,10 @@ const GalleriaDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Gallery Component</title>
-                <meta name="description" content="Galleria is a content gallery component." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Galleria</h1>
-                    <p>Galleria is a content gallery component.</p>
-                </div>
-            </div>
-            <div className="content-section doc galleria-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} />;
 };
 
 export default GalleriaDemo;

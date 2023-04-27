@@ -4,7 +4,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
-    const [selectedCountries, setSelectedCountries] = useState(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
@@ -20,8 +20,8 @@ export function TemplateDoc(props) {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={`flag flag-${option.code.toLowerCase()}`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${option.code.toLowerCase()}`} style={{ width: '1.25rem', marginRight: '.5rem' }} />
                 <div>{option.name}</div>
             </div>
         );
@@ -29,14 +29,15 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+<ListBox value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" 
+    itemTemplate={countryTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
         `,
         javascript: `
 import React, { useState } from "react";
 import { ListBox } from 'primereact/listbox';
 
-export default function TemplateDoc() {
-    const [selectedCountries, setSelectedCountries] = useState(null);
+export default function TemplateDemo() {
+    const [selectedCountry, setSelectedCountry] = useState(null);
     const countries = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
@@ -52,8 +53,8 @@ export default function TemplateDoc() {
 
     const countryTemplate = (option) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '1.25rem', marginRight: '.5rem' }}/>
                 <div>{option.name}</div>
             </div>
         );
@@ -61,18 +62,24 @@ export default function TemplateDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+            <ListBox value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" 
+                itemTemplate={countryTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { ListBox } from 'primereact/listbox';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
-export default function TemplateDoc() {
-    const [selectedCountries, setSelectedCountries] = useState(null);
-    const countries = [
+interface Country {
+    name: string;
+    code: string;
+}
+
+export default function TemplateDemo() {
+    const [selectedCountries, setSelectedCountries] = useState<Country | null>(null);
+    const countries: Country[] = [
         { name: 'Australia', code: 'AU' },
         { name: 'Brazil', code: 'BR' },
         { name: 'China', code: 'CN' },
@@ -85,10 +92,10 @@ export default function TemplateDoc() {
         { name: 'United States', code: 'US' }
     ];
 
-    const countryTemplate = (option) => {
+    const countryTemplate = (option: Country) => {
         return (
-            <div className="country-item">
-                <img alt={option.name} src="images/flag/flag_placeholder.png" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} className={\`flag flag-\${option.code.toLowerCase()}\`} />
+            <div className="flex align-items-center">
+                <img alt={option.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={\`flag flag-\${option.code.toLowerCase()}\`} style={{ width: '1.25rem', marginRight: '.5rem' }}/>
                 <div>{option.name}</div>
             </div>
         );
@@ -96,7 +103,8 @@ export default function TemplateDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+            <ListBox value={selectedCountry} onChange={(e: ListBoxChangeEvent) => setSelectedCountry(e.value)} options={countries} optionLabel="name" 
+                itemTemplate={countryTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
         </div>
     )
 }
@@ -106,11 +114,12 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                {/* TO DO: Add demo content. */}
-                <p></p>
+                <p>
+                    Custom content for an option is displayed with the <i>itemTemplate</i> property that takes an option as a parameter. Additional available templating sections are <i>filterTemplate</i> and <i>optionGroupTemplate</i>.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ListBox value={selectedCountries} options={countries} onChange={(e) => setSelectedCountries(e.value)} optionLabel="name" itemTemplate={countryTemplate} style={{ width: '15rem' }} listStyle={{ maxHeight: '250px' }} />
+                <ListBox value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" itemTemplate={countryTemplate} className="w-full md:w-14rem" listStyle={{ maxHeight: '250px' }} />
             </div>
             <DocSectionCode code={code} />
         </>
