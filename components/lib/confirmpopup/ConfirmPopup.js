@@ -5,7 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
 
 export const confirmPopup = (props = {}) => {
@@ -34,6 +34,7 @@ export const ConfirmPopup = React.memo(
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
+        const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -64,18 +65,25 @@ export const ConfirmPopup = React.memo(
         };
 
         const accept = () => {
-            callbackFromProp('accept');
-            hide('accept');
+            if (!isExecuting.current) {
+                isExecuting.current = true;
+                callbackFromProp('accept');
+                hide('accept');
+            }
         };
 
         const reject = () => {
-            callbackFromProp('reject');
-            hide('reject');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('reject');
+                hide('reject');
+            }
         };
 
         const show = () => {
             setVisibleState(true);
             setReshowState(false);
+            isCallbackExecuting.current = false;
 
             overlayEventListener.current = (e) => {
                 !isOutsideClicked(e.target) && (isPanelClicked.current = true);
