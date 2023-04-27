@@ -5245,6 +5245,14 @@
                             "description": "Style class of the element."
                         },
                         {
+                            "name": "ariaLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "ARIA label for the chart canvas. Defaults to options.plugins.title.text if available."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
