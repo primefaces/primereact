@@ -167,7 +167,8 @@ export const DropdownPanel = React.memo(
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
                             const className = classNames('p-dropdown-items', options.className);
-                            const content = isEmptyFilter ? createEmptyMessage() : options.children;
+                            const emptyMessage = props.hasFilter ? props.emptyFilterMessage : props.emptyMessage;
+                            const content = isEmptyFilter ? createEmptyMessage(emptyMessage) : options.children;
 
                             return (
                                 <ul ref={options.contentRef} style={options.style} className={className} role="listbox">

@@ -155,7 +155,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * The template of filter element.
      * @deprecated Since v9.3.0
      */
-    filterTemplate?: React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode) | undefined;
+    filterTemplate?: React.ReactNode | ((options: { filterOptions: DropdownFilterOptions }) => React.ReactNode) | undefined;
     /**
      * Reference of the focusable input element.
      */
