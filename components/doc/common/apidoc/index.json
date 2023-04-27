@@ -6437,6 +6437,14 @@
                             "description": "Property of a row data used for exporting, defaults to field."
                         },
                         {
+                            "name": "exportHeader",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Custom export header of the column to be exported."
+                        },
+                        {
                             "name": "field",
                             "optional": true,
                             "readonly": false,
