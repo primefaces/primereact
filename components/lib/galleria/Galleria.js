@@ -33,6 +33,13 @@ export const Galleria = React.memo(
         );
 
         const onActiveItemChange = (event) => {
+            if (event.index >= props.value.length) {
+                // #3973 AutoPlay without circular should stop the slideshow when it reaches the end
+                stopSlideShow();
+
+                return;
+            }
+
             if (props.onItemChange) {
                 props.onItemChange(event);
             } else {
