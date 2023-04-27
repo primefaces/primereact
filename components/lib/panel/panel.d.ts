@@ -67,6 +67,23 @@ interface PanelHeaderTemplateOptions {
      */
     collapsed: boolean;
 }
+/**
+ * Custom panel footer template options.
+ */
+interface PanelFooterTemplateOptions {
+    /**
+     * Style class of the panel.
+     */
+    className: string;
+    /**
+     * The JSX element that represents the panel.
+     */
+    element: JSX.Element;
+    /**
+     * The props of the Panel component.
+     */
+    props: PanelProps;
+}
 
 /**
  * Custom toggle event.
@@ -160,10 +177,19 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     header?: React.ReactNode | undefined;
     /**
+     * Custom footer template of the panel.
+     */
+    footer?: React.ReactNode | undefined;
+    /**
      * Header template of the panel to customize more.
      * @param {PanelHeaderTemplateOptions} options - Options to customize the header template.
      */
     headerTemplate?: React.ReactNode | ((options: PanelHeaderTemplateOptions) => React.ReactNode);
+    /**
+     * Footer template of the panel to customize more.
+     * @param {PanelFooterTemplateOptions} options - Options to customize the footer template.
+     */
+    footerTemplate?: React.ReactNode | ((options: PanelFooterTemplateOptions) => React.ReactNode);
     /**
      * Defines if content of panel can be expanded and collapsed.
      * @defaultValue false

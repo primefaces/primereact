@@ -6,6 +6,8 @@ export const PanelBase = ComponentBase.extend({
         id: null,
         header: null,
         headerTemplate: null,
+        footer: null,
+        footerTemplate: null,
         toggleable: null,
         style: null,
         className: null,
