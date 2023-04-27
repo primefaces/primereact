@@ -17,7 +17,7 @@ export const FileUploadBase = {
         invalidFileSizeMessageDetail: 'maximum upload size is {0}.',
         style: null,
         className: null,
-        widthCredentials: false,
+        withCredentials: false,
         previewWidth: 50,
         chooseLabel: null,
         uploadLabel: null,
