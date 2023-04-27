@@ -4,7 +4,7 @@ import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
@@ -17,6 +17,14 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
     const contentId = idState + '_content';
+
+    const { ptm } = PanelBase.setMetaData({
+        props,
+        state: {
+            id: idState,
+            collapsed: collapsed
+        }
+    });
 
     const toggle = (event) => {
         if (props.toggleable) {
@@ -68,11 +76,24 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const createToggleIcon = () => {
         if (props.toggleable) {
             const buttonId = idState + '_label';
-            const icon = collapsed ? props.expandIcon || <PlusIcon /> : props.collapseIcon || <MinusIcon />;
-            const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, collapsed });
+            const togglerProps = mergeProps(
+                {
+                    className: 'p-panel-header-icon p-panel-toggler p-link',
+                    onClick: toggle,
+                    id: buttonId,
+                    'aria-controls': contentId,
+                    'aria-expanded': !collapsed,
+                    role: 'tab'
+                },
+                ptm('toggler')
+            );
+            const togglerIconProps = mergeProps(ptm('togglericon'));
+
+            const icon = collapsed ? props.expandIcon || <PlusIcon {...togglerIconProps} /> : props.collapseIcon || <MinusIcon {...togglerIconProps} />;
+            const toggleIcon = IconUtils.getJSXIcon(icon, togglerIconProps, { props, collapsed });
 
             return (
-                <button className="p-panel-header-icon p-panel-toggler p-link" onClick={toggle} id={buttonId} aria-controls={contentId} aria-expanded={!collapsed} role="tab">
+                <button {...togglerProps}>
                     {toggleIcon}
                     <Ripple />
                 </button>
@@ -86,19 +107,37 @@ export const Panel = React.forwardRef((inProps, ref) => {
         const header = ObjectUtils.getJSXElement(props.header, props);
         const icons = ObjectUtils.getJSXElement(props.icons, props);
         const togglerElement = createToggleIcon();
-        const titleElement = (
-            <span className="p-panel-title" id={headerId}>
-                {header}
-            </span>
+
+        const titleProps = mergeProps(
+            {
+                id: headerId,
+                className: 'p-panel-title'
+            },
+            ptm('title')
+        );
+        const titleElement = <span {...titleProps}>{header}</span>;
+
+        const iconsProps = mergeProps(
+            {
+                className: 'p-panel-icons'
+            },
+            ptm('icons')
         );
         const iconsElement = (
-            <div className="p-panel-icons">
+            <div {...iconsProps}>
                 {icons}
                 {togglerElement}
             </div>
         );
+
+        const headerProps = mergeProps(
+            {
+                className: 'p-panel-header'
+            },
+            ptm('header')
+        );
         const content = (
-            <div className="p-panel-header">
+            <div {...headerProps}>
                 {titleElement}
                 {iconsElement}
             </div>
@@ -128,28 +167,54 @@ export const Panel = React.forwardRef((inProps, ref) => {
     };
 
     const createContent = () => {
+        const toggleableContentProps = mergeProps(
+            {
+                ref: contentRef,
+                className: 'p-toggleable-content',
+                'aria-hidden': collapsed,
+                role: 'region',
+                id: contentId,
+                'aria-labelledby': headerId
+            },
+            ptm('toggleablecontent')
+        );
+        const contentProps = mergeProps(
+            {
+                className: 'p-panel-content'
+            },
+            ptm('content')
+        );
+
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
-                <div ref={contentRef} className="p-toggleable-content" aria-hidden={collapsed} role="region" id={contentId} aria-labelledby={headerId}>
-                    <div className="p-panel-content">{props.children}</div>
+                <div {...toggleableContentProps}>
+                    <div {...contentProps}>{props.children}</div>
                 </div>
             </CSSTransition>
         );
     };
 
-    const otherProps = PanelBase.getOtherProps(props);
-    const className = classNames(
-        'p-panel p-component',
+    const rootProps = mergeProps(
         {
-            'p-panel-toggleable': props.toggleable
+            id: idState,
+            ref: elementRef,
+            style: props.style,
+            className: classNames(
+                'p-panel p-component',
+                {
+                    'p-panel-toggleable': props.toggleable
+                },
+                props.className
+            )
         },
-        props.className
+        PanelBase.getOtherProps(props),
+        ptm('root')
     );
     const header = createHeader();
     const content = createContent();
 
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div {...rootProps}>
             {header}
             {content}
         </div>

@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const PanelBase = {
+export const PanelBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Panel',
         id: null,
@@ -18,7 +18,5 @@ export const PanelBase = {
         onCollapse: null,
         onToggle: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PanelBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PanelBase.defaultProps)
-};
+    }
+});

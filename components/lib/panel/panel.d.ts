@@ -11,6 +11,8 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { IconType } from '../utils';
 
+export declare type PanelPassThroughOptionType = PanelPassThroughAttributes | ((options: PanelPassThroughMethodOptions) => PanelPassThroughAttributes) | null | undefined;
+
 /**
  * Custom panel header template options.
  */
@@ -83,6 +85,79 @@ interface PanelToggleEvent {
 }
 
 /**
+ * Custom passthrough(pt) option method.
+ */
+export interface PanelPassThroughMethodOptions {
+    props: PanelProps;
+    state: PanelState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link PanelProps.pt}
+ */
+export interface PanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the title's DOM element.
+     */
+    title?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the icons' DOM element.
+     */
+    icons?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the toggler's DOM element.
+     */
+    toggler?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the togglericon's DOM element.
+     */
+    togglerIcon?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the toggleablecontent's DOM element.
+     */
+    toggleableContent?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: PanelPassThroughOptionType;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: PanelPassThroughOptionType;
+}
+
+/**
+ * Custom passthrough attributes for each DOM elements
+ */
+export interface PanelPassThroughAttributes {
+    [key: string]: any;
+}
+
+/**
+ * Defines current inline state in Panel component.
+ */
+export interface PanelState {
+    /**
+     * Current id state.
+     */
+    id: string;
+    /**
+     * Current collapsed state as a boolean.
+     * @defaultValue false
+     */
+    collapsed: boolean;
+}
+
+/**
  * Defines valid properties in Panel component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -143,6 +218,11 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {PanelPassThroughOptions}
+     */
+    pt?: PanelPassThroughOptions;
 }
 
 /**

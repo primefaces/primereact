@@ -5,7 +5,7 @@ import { Dialog } from '../dialog/Dialog';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
@@ -53,7 +53,7 @@ export const ConfirmDialog = React.memo(
 
         const hide = (result = 'cancel') => {
             setVisibleState(false);
-            callbackFromProp('onHide', result);
+            callbackFromProp('onHide', { result });
         };
 
         const confirm = (updatedProps) => {

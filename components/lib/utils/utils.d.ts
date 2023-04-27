@@ -9,6 +9,8 @@ import * as React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 
+export declare function mergeProps(...args: object[]): object | undefined;
+
 /**
  * Use 'useOverlayScrollListener' hook instead
  * @deprecated since version 8.0.0
