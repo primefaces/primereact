@@ -24327,77 +24327,64 @@
                             "name": "root",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
                             "name": "title",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the title's DOM element."
                         },
                         {
                             "name": "icons",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the icons' DOM element."
                         },
                         {
                             "name": "toggler",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the toggler's DOM element."
                         },
                         {
                             "name": "togglerIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the togglericon's DOM element."
                         },
                         {
                             "name": "toggleableContent",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the toggleablecontent's DOM element."
                         },
                         {
                             "name": "content",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
                         },
                         {
                             "name": "footer",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptionType",
+                            "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the footer's DOM element."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "PanelPassThroughAttributes": {
-                    "description": "Custom passthrough attributes for each DOM elements",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "[key: string]",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
                         }
                     ],
                     "callbacks": []
@@ -24428,8 +24415,8 @@
         "types": {
             "description": "Defines the custom types used by the module.",
             "values": {
-                "PanelPassThroughOptionType": {
-                    "values": "PanelPassThroughAttributes | Function | null | undefined"
+                "PanelPassThroughType": {
+                    "values": "PassThroughType<T, PanelPassThroughMethodOptions>"
                 }
             }
         }
@@ -33293,6 +33280,9 @@
                 },
                 "TemplateType": {
                     "values": "React.ReactNode | Function"
+                },
+                "PassThroughType": {
+                    "values": "T | Function | null | undefined"
                 }
             }
         }

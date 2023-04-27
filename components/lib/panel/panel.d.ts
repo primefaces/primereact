@@ -9,9 +9,9 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
 
-export declare type PanelPassThroughOptionType = PanelPassThroughAttributes | ((options: PanelPassThroughMethodOptions) => PanelPassThroughAttributes) | null | undefined;
+export declare type PanelPassThroughType<T> = PassThroughType<T, PanelPassThroughMethodOptions>;
 
 /**
  * Custom panel header template options.
@@ -100,46 +100,39 @@ export interface PanelPassThroughOptions {
     /**
      * Uses to pass attributes to the root's DOM element.
      */
-    root?: PanelPassThroughOptionType;
+    root?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the header's DOM element.
      */
-    header?: PanelPassThroughOptionType;
+    header?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the title's DOM element.
      */
-    title?: PanelPassThroughOptionType;
+    title?: PanelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the icons' DOM element.
      */
-    icons?: PanelPassThroughOptionType;
+    icons?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the toggler's DOM element.
      */
-    toggler?: PanelPassThroughOptionType;
+    toggler?: PanelPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the togglericon's DOM element.
      */
-    togglerIcon?: PanelPassThroughOptionType;
+    togglerIcon?: PanelPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the toggleablecontent's DOM element.
      */
-    toggleableContent?: PanelPassThroughOptionType;
+    toggleableContent?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
-    content?: PanelPassThroughOptionType;
+    content?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the footer's DOM element.
      */
-    footer?: PanelPassThroughOptionType;
-}
-
-/**
- * Custom passthrough attributes for each DOM elements
- */
-export interface PanelPassThroughAttributes {
-    [key: string]: any;
+    footer?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

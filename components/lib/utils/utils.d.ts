@@ -153,3 +153,5 @@ export interface IconOptions<ParentProps> {
 export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
 
 export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);
+
+export type PassThroughType<T, O> = T | ((options?: O) => T | void) | null | undefined;
