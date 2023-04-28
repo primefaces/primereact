@@ -2,16 +2,16 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ImageBase } from './ImageBase';
 import { DownloadIcon } from '../icons/download';
-import { RefreshIcon } from '../icons/refresh';
 import { EyeIcon } from '../icons/eye';
-import { UndoIcon } from '../icons/undo';
+import { RefreshIcon } from '../icons/refresh';
 import { SearchMinusIcon } from '../icons/searchminus';
 import { SearchPlusIcon } from '../icons/searchplus';
 import { TimesIcon } from '../icons/times';
+import { UndoIcon } from '../icons/undo';
+import { Portal } from '../portal/Portal';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -116,7 +116,7 @@ export const Image = React.memo(
         };
 
         const createElement = () => {
-            const { downloadable } = props;
+            const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
             const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
             const zoomDisabled = scaleState <= 0.5 || scaleState >= 1.5;
             // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
@@ -164,7 +164,17 @@ export const Image = React.memo(
                         onExited={onExited}
                     >
                         <div ref={previewRef}>
-                            <img src={props.zoomSrc || props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
+                            <img
+                                src={props.zoomSrc || props.src}
+                                className="p-image-preview"
+                                style={imagePreviewStyle}
+                                onClick={onPreviewImageClick}
+                                alt={alt}
+                                crossOrigin={crossOrigin}
+                                referrerPolicy={referrerPolicy}
+                                useMap={useMap}
+                                loading={loading}
+                            />
                         </div>
                     </CSSTransition>
                 </div>
