@@ -16,7 +16,7 @@ import "primereact/resources/primereact.min.css";
     const code2 = {
         basic: `
 body {
-    font-family: (--font-family);
+    font-family: var(--font-family);
 }                                        
         `
     };
