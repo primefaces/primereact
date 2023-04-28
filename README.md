@@ -9,7 +9,7 @@
 
 # PrimeReact
 
-PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://www.primereact.org) for live showcase and documentation.
+PrimeReact is available at [npm](https://www.npmjs.com/package/primereact).
 
 ## Download
 
@@ -22,51 +22,39 @@ npm install primereact
 // with yarn
 yarn add primereact
 ```
+
 Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
 
 ## Styles
-Theme and core are the necessary css files of the components, visit the Themes section for the complete list of available themes to choose from.
+
+Theme and core are the necessary css files of the components, visit the [Themes](https://primereact.org/theming) section for the complete list of available themes to choose from.
 
 ```javascript
 //theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";     
-    
-//core
-import "primereact/resources/primereact.min.css";
-```
-
-If you are using a bundler such as webpack with a css loader you may also import them to your main application component.
-
-```javascript
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
+
+//core
 import 'primereact/resources/primereact.min.css';
 ```
 
-## Import
+Each PrimeReact theme has its own font family so it is suggested to apply it to your application for a unified look.
+
+```
+body {
+    font-family: var(--font-family);
+}
+```
+
+## Usage
+
+Each component can be imported individually so that you only bundle what you use. Import path is available in the documentation of the corresponding component.
 
 #### Module
+
 ```javascript
 //import { ComponentName } from 'primereact/{componentname}';
 import { Dialog } from 'primereact/dialog';
 import { Accordion, AccordionTab } from 'primereact/accordion';
-```
-
-#### CDN
-
-```javascript
-<script src="https://unpkg.com/primereact/core/core.min.js"></script>
-<script src="https://unpkg.com/primereact/accordion/accordion.min.js"></script>
-//<script src="https://unpkg.com/primereact/{componentname}/{componentname}.min.js"></script>
-```
-
-```javascript
-const { Dialog } = primereact.dialog;
-const { Accordion, AccordionTab } = primereact.accordion;
-```
-
-Import all components and structures
-```javascript
-<script src="https://unpkg.com/primereact/primereact.all.min.js"></script>
 ```
 
 ## QuickStart
@@ -76,13 +64,12 @@ Import all components and structures
 Next.js
 PrimeReact has first class support for SSR and Next.JS, in fact this website is also built with Next.js
 
-[![Getting Started with NextJS and PrimeReact](http://img.youtube.com/vi/OrRffCobuts/0.jpg)](http://www.youtube.com/watch?v=OrRffCobuts "Getting Started with NextJS and PrimeReact")
+[![Getting Started with NextJS and PrimeReact](http://img.youtube.com/vi/OrRffCobuts/0.jpg)](http://www.youtube.com/watch?v=OrRffCobuts 'Getting Started with NextJS and PrimeReact')
 
 CRA
 Create-React-App is the official scaffolding project by Facebook
 
-[![Getting Started with PrimeReact](http://img.youtube.com/vi/Prz3phy2bHY/0.jpg)](http://www.youtube.com/watch?v=Prz3phy2bHY "Getting Started with PrimeReact")
-
+[![Getting Started with PrimeReact](http://img.youtube.com/vi/Prz3phy2bHY/0.jpg)](http://www.youtube.com/watch?v=Prz3phy2bHY 'Getting Started with PrimeReact')
 
 ## TypeScript
 
