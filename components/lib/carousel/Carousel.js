@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { CarouselBase } from './CarouselBase';
-import { ChevronUpIcon } from '../icons/chevronup';
-import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
@@ -46,9 +46,10 @@ export const Carousel = React.memo(
         const isVertical = props.orientation === 'vertical';
         const circular = props.circular || !!props.autoplayInterval;
         const isCircular = circular && props.value && props.value.length >= numVisibleState;
-        const currentPage = props.onPageChange ? props.page : pageState;
         const totalIndicators = props.value ? Math.max(Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1, 0) : 0;
         const isAutoplay = totalIndicators && props.autoplayInterval && allowAutoplay.current;
+        const isControlled = props.onPageChange && !isAutoplay;
+        const currentPage = isControlled ? props.page : pageState;
 
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
@@ -98,15 +99,8 @@ export const Carousel = React.memo(
                 itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
             }
 
-            if (props.onPageChange) {
-                setTotalShiftedItemsState(totalShiftedItems);
-                props.onPageChange({
-                    page
-                });
-            } else {
-                setPageState(page);
-                setTotalShiftedItemsState(totalShiftedItems);
-            }
+            changePage(page);
+            setTotalShiftedItemsState(totalShiftedItems);
         };
 
         const calculatePosition = () => {
@@ -135,14 +129,7 @@ export const Carousel = React.memo(
 
                     setTotalShiftedItemsState(totalShiftedItems);
                     setNumScrollState(matchedResponsiveData.numScroll);
-
-                    if (props.onPageChange) {
-                        props.onPageChange({
-                            page
-                        });
-                    } else {
-                        setPageState(page);
-                    }
+                    changePage(page);
                 }
 
                 if (numVisibleState !== matchedResponsiveData.numVisible) {
@@ -289,6 +276,11 @@ export const Carousel = React.memo(
             }
         };
 
+        const changePage = (page) => {
+            !isControlled && setPageState(page);
+            props.onPageChange && props.onPageChange({ page });
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
@@ -322,13 +314,7 @@ export const Carousel = React.memo(
                 if (totalIndicators !== 0 && page >= totalIndicators) {
                     page = totalIndicators - 1;
 
-                    if (props.onPageChange) {
-                        props.onPageChange({
-                            page
-                        });
-                    } else {
-                        setPageState(page);
-                    }
+                    changePage(page);
 
                     stateChanged = true;
                 }
