@@ -1321,7 +1321,7 @@ export const Calendar = React.memo(
                     let endDate = props.value[1];
 
                     if (!endDate) {
-                        if (date.valueOf() >= startDate.valueOf()) {
+                        if (date.getTime() >= startDate.getTime()) {
                             endDate = date;
                         } else {
                             endDate = startDate;
