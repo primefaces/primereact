@@ -742,15 +742,15 @@ export const Calendar = React.memo(
 
         const getCurrentDateTime = () => {
             if (isSingleSelection()) {
-                return props.value && props.value instanceof Date ? props.value : getViewDate();
+                return props.value && props.value instanceof Date ? new Date(props.value.valueOf()) : getViewDate();
             } else if (isMultipleSelection()) {
                 if (props.value && props.value.length) {
-                    return props.value[props.value.length - 1];
+                    return new Date(props.value[props.value.length - 1].valueOf());
                 }
             } else if (isRangeSelection()) {
                 if (props.value && props.value.length) {
-                    let startDate = props.value[0];
-                    let endDate = props.value[1];
+                    let startDate = new Date(props.value[0].valueOf());
+                    let endDate = new Date(props.value[1].valueOf());
 
                     return endDate || startDate;
                 }
@@ -2530,7 +2530,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
