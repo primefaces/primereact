@@ -2,17 +2,17 @@ import * as React from 'react';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { CalendarIcon } from '../icons/calendar';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { CalendarIcon } from '../icons/calendar';
-import { ChevronLeftIcon } from '../icons/chevronleft';
-import { ChevronRightIcon } from '../icons/chevronright';
-import { ChevronUpIcon } from '../icons/chevronup';
-import { ChevronDownIcon } from '../icons/chevrondown';
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CalendarBase.getProps(inProps);
@@ -269,7 +269,7 @@ export const Calendar = React.memo(
                 return;
             }
 
-            let newViewDate = new Date(getViewDate().getTime());
+            let newViewDate = cloneDate(getViewDate());
 
             newViewDate.setDate(1);
 
@@ -314,7 +314,7 @@ export const Calendar = React.memo(
                 return;
             }
 
-            let newViewDate = new Date(getViewDate().getTime());
+            let newViewDate = cloneDate(getViewDate());
 
             newViewDate.setDate(1);
 
@@ -392,7 +392,7 @@ export const Calendar = React.memo(
 
         const onMonthDropdownChange = (event, value) => {
             const currentViewDate = getViewDate();
-            let newViewDate = new Date(currentViewDate.getTime());
+            let newViewDate = cloneDate(currentViewDate);
 
             newViewDate.setMonth(parseInt(value, 10));
 
@@ -401,7 +401,7 @@ export const Calendar = React.memo(
 
         const onYearDropdownChange = (event, value) => {
             const currentViewDate = getViewDate();
-            let newViewDate = new Date(currentViewDate.getTime());
+            let newViewDate = cloneDate(currentViewDate);
 
             newViewDate.setFullYear(parseInt(value, 10));
 
@@ -742,21 +742,25 @@ export const Calendar = React.memo(
 
         const getCurrentDateTime = () => {
             if (isSingleSelection()) {
-                return props.value && props.value instanceof Date ? props.value : getViewDate();
+                return props.value && props.value instanceof Date ? cloneDate(props.value) : getViewDate();
             } else if (isMultipleSelection()) {
                 if (props.value && props.value.length) {
-                    return props.value[props.value.length - 1];
+                    return cloneDate(props.value[props.value.length - 1]);
                 }
             } else if (isRangeSelection()) {
                 if (props.value && props.value.length) {
-                    let startDate = props.value[0];
-                    let endDate = props.value[1];
+                    let startDate = cloneDate(props.value[0]);
+                    let endDate = cloneDate(props.value[1]);
 
                     return endDate || startDate;
                 }
             }
 
             return new Date();
+        };
+
+        const cloneDate = (date) => {
+            return isValidDate(date) ? new Date(date.valueOf()) : date;
         };
 
         const isValidDate = (date) => {
@@ -962,7 +966,7 @@ export const Calendar = React.memo(
 
             // previous (check first day of month at 00:00:00)
             if (props.minDate) {
-                let firstDayOfMonth = new Date(newViewDate.getTime());
+                let firstDayOfMonth = cloneDate(newViewDate);
 
                 if (firstDayOfMonth.getMonth() === 0) {
                     firstDayOfMonth.setMonth(11, 1);
@@ -984,7 +988,7 @@ export const Calendar = React.memo(
 
             // next (check last day of month at 11:59:59)
             if (props.maxDate) {
-                let lastDayOfMonth = new Date(newViewDate.getTime());
+                let lastDayOfMonth = cloneDate(newViewDate);
 
                 if (lastDayOfMonth.getMonth() === 11) {
                     lastDayOfMonth.setMonth(0, 1);
@@ -1379,7 +1383,7 @@ export const Calendar = React.memo(
             } else {
                 setCurrentMonth(month);
                 createMonthsMeta(month, currentYear);
-                const currentDate = new Date(getCurrentDateTime().getTime());
+                const currentDate = cloneDate(getCurrentDateTime());
 
                 currentDate.setDate(1); // #2948 always set to 1st of month
                 currentDate.setMonth(month);
@@ -1403,7 +1407,7 @@ export const Calendar = React.memo(
 
         const updateModel = (event, value) => {
             if (props.onChange) {
-                const newValue = value && value instanceof Date ? new Date(value.getTime()) : value;
+                const newValue = cloneDate(value);
 
                 viewStateChanged.current = true;
 
@@ -1754,7 +1758,7 @@ export const Calendar = React.memo(
         };
 
         const getWeekNumber = (date) => {
-            let checkDate = new Date(date.getTime());
+            let checkDate = cloneDate(date);
 
             checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
             let time = checkDate.getTime();
@@ -2530,7 +2534,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
