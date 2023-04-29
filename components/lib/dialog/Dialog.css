@@ -166,6 +166,11 @@
     left: 0px !important;
 }
 
+.p-dialog-maximized .p-dialog-content:last-of-type,
+.p-dialog-maximized .p-dialog-header {
+    border-radius: 0;
+}
+
 .p-dialog-maximized .p-dialog-content {
     flex-grow: 1;
 }
