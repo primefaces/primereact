@@ -2,13 +2,13 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Portal } from '../portal/Portal';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { DialogBase } from './DialogBase';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const props = DialogBase.getProps(inProps);
@@ -365,7 +365,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const changeScrollOnMaximizable = () => {
         if (!props.blockScroll) {
-            let funcName = maximized ? 'addClass' : 'removeClass';
+            let funcName = maximized && visibleState ? 'addClass' : 'removeClass';
 
             DomHandler[funcName](document.body, 'p-overflow-hidden');
         }
@@ -400,7 +400,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         changeScrollOnMaximizable();
-    }, [props.maximized, maximizedState]);
+    }, [props.maximized, maximizedState, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
