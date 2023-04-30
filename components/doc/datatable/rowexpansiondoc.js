@@ -299,7 +299,7 @@ export default function RowExpansionDemo() {
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
-import { DataTable, DataTableRowEvent } from 'primereact/datatable';
+import { DataTable, DataTableExpandedRows, DataTableRowEvent, DataTableValueArray } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
@@ -333,7 +333,7 @@ interface Product {
 
 export default function RowExpansionDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [expandedRows, setExpandedRows] = useState<DataTableExpandedRows>(null);
+    const [expandedRows, setExpandedRows] = useState<DataTableExpandedRows | DataTableValueArray | undefined>(undefined);
     const toast = useRef<Toast>(null);
 
     useEffect(() => {
@@ -341,11 +341,11 @@ export default function RowExpansionDemo() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onRowExpand = (event: DataTableRowEvent) => {
-        toast.current.show({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
+        toast.current?.show({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
     };
 
     const onRowCollapse = (event: DataTableRowEvent) => {
-        toast.current.show({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
+        toast.current?.show({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
     };
 
     const expandAll = () => {
@@ -357,7 +357,7 @@ export default function RowExpansionDemo() {
     };
 
     const collapseAll = () => {
-        setExpandedRows(null);
+        setExpandedRows(undefined);
     };
 
     const formatCurrency = (value: number) => {
@@ -428,7 +428,7 @@ export default function RowExpansionDemo() {
     };
 
     const allowExpansion = (rowData: Product) => {
-        return rowData.orders.length > 0;
+        return rowData.orders!.length > 0;
     };
 
     const rowExpansionTemplate = (data: Product) => {

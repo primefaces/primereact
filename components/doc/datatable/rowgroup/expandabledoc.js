@@ -26,7 +26,7 @@ export function ExpandableRowGroupDoc(props) {
     const footerTemplate = (data) => {
         return (
             <React.Fragment>
-                <td colSpan="5">
+                <td colSpan={5}>
                     <div className="flex justify-content-end font-bold w-full">Total Customers: {calculateCustomerTotal(data.representative.name)}</div>
                 </td>
             </React.Fragment>
@@ -119,7 +119,7 @@ export default function ExpandableRowGroupDemo() {
     const footerTemplate = (data) => {
         return (
             <React.Fragment>
-                <td colSpan="5">
+                <td colSpan={5}>
                     <div className="flex justify-content-end font-bold w-full">Total Customers: {calculateCustomerTotal(data.representative.name)}</div>
                 </td>
             </React.Fragment>
@@ -202,7 +202,7 @@ interface Country {
 
 interface Representative {
     name: string;
-    code: string;
+    image: string;
 }
 
 interface Customer {
@@ -238,7 +238,7 @@ export default function ExpandableRowGroupDemo() {
     const footerTemplate = (data: Customer) => {
         return (
             <React.Fragment>
-                <td colSpan="5">
+                <td colSpan={5}>
                     <div className="flex justify-content-end font-bold w-full">Total Customers: {calculateCustomerTotal(data.representative.name)}</div>
                 </td>
             </React.Fragment>
