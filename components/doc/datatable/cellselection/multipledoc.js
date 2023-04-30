@@ -84,7 +84,7 @@ interface Product {
 
 export default function MultipleCellsSelectionDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedCells, setSelectedCells] = useState<DataTableCellSelection[] | null>(null);
+    const [selectedCells, setSelectedCells] = useState<DataTableCellSelection<Product[]> | null>(null);
     const [metaKey, setMetaKey] = useState<boolean>(true);
 
     useEffect(() => {
@@ -94,11 +94,14 @@ export default function MultipleCellsSelectionDemo() {
     return (
         <div className="card">
             <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
+                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value!)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells}
-                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCells(e.value)}
+            <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells!}
+                    onSelectionChange={(e) => {
+                        const value = e.value as DataTableCellSelection<Product[]>;
+                        setSelectedCells(value);
+                    }}
                     metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

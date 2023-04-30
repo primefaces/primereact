@@ -82,7 +82,7 @@ interface Product {
 
 export default function CheckboxRowSelectionDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedProducts, setSelectedProducts] = useState<Product | null>(null);
+    const [selectedProducts, setSelectedProducts] = useState<Product[] | null>(null);
     const [rowClick, setRowClick] = useState<boolean>(true);
 
     useEffect(() => {
@@ -92,10 +92,14 @@ export default function CheckboxRowSelectionDemo() {
     return (
         <div className="card">
             <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e: InputSwitchChangeEvent) => setRowClick(e.value)} />
+                <InputSwitch inputId="input-rowclick" checked={rowClick} onChange={(e: InputSwitchChangeEvent) => setRowClick(e.value!)} />
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
-            <DataTable value={products} selectionMode={rowClick ? null : 'multiple'} selection={selectedProducts} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={products} selectionMode={rowClick ? undefined : 'multiple'} selection={selectedProducts!}
+                        onSelectionChange={(e) => {
+                            const value = e.value as Product[];
+                            setSelectedProducts(value);
+                        }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

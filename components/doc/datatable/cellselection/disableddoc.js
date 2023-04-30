@@ -93,7 +93,7 @@ interface Product {
 
 export default function DisabledCellSelectionDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection | null>(null);
+    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection<Product[]> | null>(null);
     const [metaKey, setMetaKey] = useState<boolean>(true);
 
     const isCellSelectable = (event: DataTableDataSelectableEvent) => (event.data.field === 'category' && event.data.value === 'Fitness' ? false : true);
@@ -107,11 +107,14 @@ export default function DisabledCellSelectionDemo() {
     return (
         <div className="card">
             <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
+                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value!)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell}
-                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCell(e.value)} metaKeySelection={metaKey}
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell!} metaKeySelection={metaKey}
+                    onSelectionChange={(e) => {
+                        const value = e.value as DataTableCellSelection<Product[]>;
+                        setSelectedCell(value);
+                    }} 
                     isDataSelectable={isCellSelectable} cellClassName={cellClassName} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

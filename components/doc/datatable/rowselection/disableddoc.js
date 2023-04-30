@@ -87,7 +87,7 @@ export default function DisabledRowSelectionDemo() {
 
     const isSelectable = (data: Product) => data.quantity >= 10;
 
-    const isRowSelectable = (event: DataTableDataSelectableEvent<Product>) => (event.data ? isSelectable(event.data) : true);
+    const isRowSelectable = (event: DataTableDataSelectableEvent) => (event.data ? isSelectable(event.data) : true);
 
     const rowClassName = (data: Product) => (isSelectable(data) ? '' : 'p-disabled');
 
@@ -97,8 +97,11 @@ export default function DisabledRowSelectionDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProduct(e.value)} dataKey="id"
-                    isDataSelectable={isRowSelectable} rowClassName={rowClassName} tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={products} selectionMode="single" selection={selectedProduct!}
+                    onSelectionChange={(e) => {
+                        const value = e.value as Product;
+                        setSelectedProduct(value);
+                    }} dataKey="id" isDataSelectable={isRowSelectable} rowClassName={rowClassName} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>

@@ -97,11 +97,11 @@ export default function RowSelectEventsDemo() {
     const toast = useRef<Toast>(null);
 
     const onRowSelect = (event: DataTableSelectEvent) => {
-        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+        toast.current?.show({ severity: 'info', summary: 'Product Selected', detail: \`Name: \${event.data.name}\`, life: 3000 });
     };
 
     const onRowUnselect = (event: DataTableUnselectEvent) => {
-        toast.current.show({ severity: 'warn', summary: 'Product Unselected', detail: \`Name: \${event.data.name}\`, life: 3000 });
+        toast.current?.show({ severity: 'warn', summary: 'Product Unselected', detail: \`Name: \${event.data.name}\`, life: 3000 });
     };
 
     useEffect(() => {
@@ -111,8 +111,11 @@ export default function RowSelectEventsDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} selectionMode="single" selection={selectedProduct} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProduct(e.value)} dataKey="id"
-                    onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={products} selectionMode="single" selection={selectedProduct!} 
+                        onSelectionChange={(e) => {
+                            const value = e.value as Product;
+                            setSelectedProduct(value);
+                        }}  dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>
