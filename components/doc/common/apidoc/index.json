@@ -10202,7 +10202,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableDataSelectableEvent<TValue>",
+                                    "type": "DataTableDataSelectableEvent",
                                     "description": "Custom data selectable event."
                                 }
                             ],
@@ -10254,7 +10254,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableSelectEvent",
+                                    "type": "DataTableCellClickEvent<TValue>",
                                     "description": "Custom select event."
                                 }
                             ],
@@ -10267,7 +10267,7 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "DataTableUnselectEvent",
+                                    "type": "DataTableCellClickEvent<TValue>",
                                     "description": "Custom unselect event."
                                 }
                             ],
@@ -10965,7 +10965,7 @@
                             "name": "data",
                             "optional": false,
                             "readonly": false,
-                            "type": "DataTableRowDataArray<TValue>",
+                            "type": "DataTableValue",
                             "description": "Original data of the row."
                         },
                         {
