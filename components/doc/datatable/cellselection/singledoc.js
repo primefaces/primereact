@@ -82,7 +82,7 @@ interface Product {
 
 export default function SingleCellSelectionDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection | null>(null);
+    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection<Product[]> | null>(null);
     const [metaKey, setMetaKey] = useState<boolean>(true);
 
     useEffect(() => {
@@ -92,11 +92,14 @@ export default function SingleCellSelectionDemo() {
     return (
         <div className="card">
             <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
+                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value!)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell}
-                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCell(e.value)} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell!}
+                    onSelectionChange={(e) => {
+                        const value = e.value as DataTableCellSelection<Product[]>;
+                         setSelectedCell(value);
+                    }} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>

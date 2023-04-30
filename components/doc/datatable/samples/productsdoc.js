@@ -654,41 +654,42 @@ import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+  id: string | null;
+  code: string;
+  name: string;
+  description: string;
+  image: string | null;
+  price: number;
+  category: string | null;
+  quantity: number;
+  inventoryStatus: string;
+  rating: number;
 }
 
 export default function ProductsDemo() {
-    let emptyProduct = {
-        id: null,
-        name: '',
-        image: null,
-        description: '',
-        category: null,
-        price: 0,
-        quantity: 0,
-        rating: 0,
-        inventoryStatus: 'INSTOCK'
+    let emptyProduct: Product = {
+       id: null,
+       code: '',
+       name: '',
+       image: null,
+       description: '',
+       category: null,
+       price: 0,
+       quantity: 0,
+       rating: 0,
+       inventoryStatus: 'INSTOCK',
     };
 
-    const [products, setProducts] = useState<Product[] | null>(null);
+    const [products, setProducts] = useState<Product[]>([]);
     const [productDialog, setProductDialog] = useState<boolean>(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState<boolean>(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState<boolean>(false);
     const [product, setProduct] = useState<Product>(emptyProduct);
-    const [selectedProducts, setSelectedProducts] = useState<Product[] | null>(null);
+    const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const [globalFilter, setGlobalFilter] = useState<string>(null);
+    const [globalFilter, setGlobalFilter] = useState<string>('');
     const toast = useRef<Toast>(null);
-    const dt = useRef<DataTable>(null);
+    const dt = useRef<DataTable<Product[]>>(null);
 
     useEffect(() => {
         ProductService.getProducts().then((data) => setProducts(data));
@@ -728,12 +729,12 @@ export default function ProductsDemo() {
                 const index = findIndexById(product.id);
 
                 _products[index] = _product;
-                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                toast.current?.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             } else {
                 _product.id = createId();
                 _product.image = 'product-placeholder.svg';
                 _products.push(_product);
-                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                toast.current?.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
             setProducts(_products);
@@ -758,7 +759,7 @@ export default function ProductsDemo() {
         setProducts(_products);
         setDeleteProductDialog(false);
         setProduct(emptyProduct);
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+        toast.current?.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     };
 
     const findIndexById = (id: string) => {
@@ -786,7 +787,7 @@ export default function ProductsDemo() {
     };
 
     const exportCSV = () => {
-        dt.current.exportCSV();
+        dt.current?.exportCSV();
     };
 
     const confirmDeleteSelected = () => {
@@ -798,8 +799,8 @@ export default function ProductsDemo() {
 
         setProducts(_products);
         setDeleteProductsDialog(false);
-        setSelectedProducts(null);
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+        setSelectedProducts([]);
+        toast.current?.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     };
 
     const onCategoryChange = (e: RadioButtonChangeEvent) => {
@@ -813,6 +814,7 @@ export default function ProductsDemo() {
         const val = (e.target && e.target.value) || '';
         let _product = { ...product };
 
+        // @ts-ignore
         _product[\`\${name}\`] = val;
 
         setProduct(_product);
@@ -822,6 +824,7 @@ export default function ProductsDemo() {
         const val = e.value || 0;
         let _product = { ...product };
 
+        // @ts-ignore
         _product[\`\${name}\`] = val;
 
         setProduct(_product);
@@ -841,7 +844,7 @@ export default function ProductsDemo() {
     };
 
     const imageBodyTemplate = (rowData: Product) => {
-        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
+        return <img src={\`https://primefaces.org/cdn/primereact/images/product/\${rowData.image}\`} alt={rowData.image!} className="shadow-2 border-round" style={{ width: '64px' }} />;
     };
 
     const priceBodyTemplate = (rowData: Product) => {
@@ -886,7 +889,7 @@ export default function ProductsDemo() {
             <h4 className="m-0">Manage Products</h4>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+                <InputText type="search" placeholder="Search..." onInput={(e) => {const target = e.target as HTMLInputElement; setGlobalFilter(target.value);}}  />
             </span>
         </div>
     );
@@ -915,7 +918,12 @@ export default function ProductsDemo() {
             <div className="card">
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
-                <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
+                <DataTable ref={dt} value={products} selection={selectedProducts} 
+                        onSelectionChange={(e) => {
+                            if (Array.isArray(e.value)) {
+                                setSelectedProducts(e.value);
+                            }
+                        }}
                         dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" globalFilter={globalFilter} header={header}>
