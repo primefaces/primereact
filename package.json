@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "@docsearch/react": "3.3.2",
-        "chart.js": "3.9.1",
+        "chart.js": "4.3.0",
         "file-saver": "2.0.5",
         "final-form": "^4.20.7",
         "formik": "^2.2.6",
