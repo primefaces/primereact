@@ -13,7 +13,7 @@ import * as React from 'react';
  * Defines valid properties in Timeline component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content'> {
     /**
      * Position of the timeline bar relative to the content. Valid values are "left", "right for vertical layout and "top", "bottom" for horizontal layout.
      * @defaultValue left
