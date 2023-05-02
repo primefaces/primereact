@@ -826,6 +826,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     filterLocale?: string | undefined;
     /**
+     * Icon to display the current filtering status.
+     */
+    filterIcon?: IconType<DataTable<TValue>> | undefined;
+    /**
+     * Icon to display when the filter can be cleared.
+     */
+    filterClearIcon?: IconType<DataTable<TValue>> | undefined;
+    /**
      * An array of FilterMetadata objects to provide external filters.
      */
     filters?: DataTableFilterMeta | undefined;
