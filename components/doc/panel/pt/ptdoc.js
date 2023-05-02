@@ -1,4 +1,4 @@
-export default PTDoc
+export default PTDoc;
 import { Panel } from '../../../lib/panel/Panel';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
@@ -69,8 +69,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card">
                 <Panel
                     header="Header"
@@ -78,7 +77,8 @@ export default function PTDemo() {
                         header: { className: 'bg-primary' },
                         title: { className: 'text-white' },
                         toggler: { className: 'text-white hover:bg-primary-reverse' }
-                    }}>
+                    }}
+                >
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

@@ -6,7 +6,7 @@ export const Wireframe = (props) => {
         <>
             <DocSectionText {...props} />
             <div>
-                <img className="w-full" src="/images/pt/panel.jpg" alt="panel" />
+                <img className="w-full" src="/images/pt/card.jpg" alt="card" />
             </div>
         </>
     );

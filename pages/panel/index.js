@@ -61,7 +61,7 @@ const PanelDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Panel Component" header="Panel" description="Panel is a container component with an optional content toggle feature." componentDocs={docs} apiDocs={['Panel']} ptDocs={ptDocs} ptDescription={""} />;
+    return <DocComponent title="React Panel Component" header="Panel" description="Panel is a container component with an optional content toggle feature." componentDocs={docs} apiDocs={['Panel']} ptDocs={ptDocs} ptDescription={''} />;
 };
 
 export default PanelDemo;

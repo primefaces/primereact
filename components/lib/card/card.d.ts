@@ -8,6 +8,62 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils';
+
+export declare type CardPassThroughType<T> = PassThroughType<T, CardPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface CardPassThroughMethodOptions {
+    props: CardProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link CardProps.pt}
+ */
+export interface CardPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the body's DOM element.
+     */
+    body?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the title's DOM element.
+     */
+    title?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the subtitle's DOM element.
+     */
+    subtitle?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines valid properties in Card component.
+ */
+export interface CardProps {
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CardPassThroughOptions}
+     */
+    pt?: CardPassThroughOptions;
+}
 
 /**
  * Defines valid properties in Card component. In addition to these, all properties of HTMLDivElement can be used in this component.

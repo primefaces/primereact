@@ -3,7 +3,6 @@ import { DocSectionText } from './docsectiontext';
 import APIDocs from './apidoc/index.json';
 
 export function DocSections({ docs }) {
-
     const getPTOption = (name) => {
         const { props } = APIDocs[name.toLowerCase()].interfaces.values[`${name}PassThroughOptions`];
         let data = [];
@@ -39,12 +38,12 @@ export function DocSections({ docs }) {
         return docs.map((doc, i) => {
             const { component: Comp, id, label, children } = doc;
             const isPT = label.includes('PT');
-            const key = label.split(" ")[0];
+            const key = label.split(' ')[0];
 
             const props = {
                 id,
                 label,
-                ...(isPT && { data: getPTOption(key) }),
+                ...(isPT && { data: getPTOption(key) })
             };
 
             return (

@@ -6,7 +6,7 @@ import { ObjectUtils, classNames } from '../../lib/utils/Utils';
 
 const DocApiTable = (props) => {
     const { id, data, name, description, allowLink = true } = props;
-    const isPT = id.startsWith("pt.");
+    const isPT = id.startsWith('pt.');
 
     const router = useRouter();
 
@@ -104,16 +104,16 @@ const DocApiTable = (props) => {
                                                 <td key={index} className={classNames({ 'doc-option-type': k === 'type', 'doc-option-default': k === 'defaultValue' })}>
                                                     {k === 'parameters'
                                                         ? v.map((_v, i) => {
-                                                            return (
-                                                                <React.Fragment key={i}>
-                                                                    {_v.name}:{createContent(_v.type)}
-                                                                    <br />
-                                                                </React.Fragment>
-                                                            );
-                                                        })
+                                                              return (
+                                                                  <React.Fragment key={i}>
+                                                                      {_v.name}:{createContent(_v.type)}
+                                                                      <br />
+                                                                  </React.Fragment>
+                                                              );
+                                                          })
                                                         : k !== 'description'
-                                                            ? createContent(v, k === 'name', d['deprecated'])
-                                                            : v}
+                                                        ? createContent(v, k === 'name', d['deprecated'])
+                                                        : v}
                                                 </td>
                                             )
                                     )}

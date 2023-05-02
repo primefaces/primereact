@@ -20,7 +20,6 @@ export function DocComponent(props) {
         if (router.asPath.includes('#pt.')) setTab(2);
     }, [router.asPath]);
 
-
     return (
         <div className={classNames(props.className, 'doc-component')}>
             <Head>
@@ -41,11 +40,13 @@ export function DocComponent(props) {
                         </button>
                     </li>
 
-                    {props.ptDocs ? <li className={classNames({ 'doc-tabmenu-active': tab === 2 })}>
-                        <button type="button" onClick={() => activateTab(2)}>
-                            PASS THROUGH
-                        </button>
-                    </li> : null}
+                    {props.ptDocs ? (
+                        <li className={classNames({ 'doc-tabmenu-active': tab === 2 })}>
+                            <button type="button" onClick={() => activateTab(2)}>
+                                PASS THROUGH
+                            </button>
+                        </li>
+                    ) : null}
                 </ul>
             ) : null}
             <div className="doc-tabpanels">
