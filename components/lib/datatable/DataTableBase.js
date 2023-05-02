@@ -33,6 +33,8 @@ export const DataTableBase = {
         filterDisplay: 'menu',
         filterLocale: undefined,
         filters: null,
+        filterIcon: null,
+        filterClearIcon: null,
         first: 0,
         footer: null,
         footerColumnGroup: null,

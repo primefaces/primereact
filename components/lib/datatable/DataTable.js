@@ -1459,6 +1459,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 filterDisplay={props.filterDisplay}
                 filters={filters}
                 filtersStore={filtersStore}
+                filterIcon={props.filterIcon}
+                filterClearIcon={props.filterClearIcon}
                 onFilterChange={onFilterChange}
                 onFilterApply={onFilterApply}
                 showSelectAll={props.showSelectAll}
