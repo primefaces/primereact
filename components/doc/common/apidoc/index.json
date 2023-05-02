@@ -9814,6 +9814,22 @@
                             "description": "Locale to use in filtering. The default locale is the host environment's current locale."
                         },
                         {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTable<TValue>>",
+                            "default": "",
+                            "description": "Icon to display the current filtering status."
+                        },
+                        {
+                            "name": "filterClearIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<DataTable<TValue>>",
+                            "default": "",
+                            "description": "Icon to display when the filter can be cleared."
+                        },
+                        {
                             "name": "filters",
                             "optional": true,
                             "readonly": false,
