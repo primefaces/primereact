@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DividerBase = {
+export const DividerBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Divider',
         align: null,
@@ -9,7 +9,5 @@ export const DividerBase = {
         style: null,
         className: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DividerBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DividerBase.defaultProps)
-};
+    }
+});
