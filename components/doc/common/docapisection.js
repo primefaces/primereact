@@ -1,138 +1,10 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+
 import React, { useEffect } from 'react';
-import { classNames, ObjectUtils } from '../../lib/utils/Utils';
+import { ObjectUtils } from '../../lib/utils/Utils';
 import APIDoc from './apidoc';
 import { DocSectionNav } from './docsectionnav';
 import { DocSections } from './docsections';
-import { DocSectionText } from './docsectiontext';
-
-const Component = (props) => {
-    const { id, value, name, description, allowLink = true } = props;
-    const router = useRouter();
-
-    const createCard = (data) => {
-        if (ObjectUtils.isNotEmpty(data)) {
-            const headers = Object.keys(data[0]);
-
-            const onClick = (id, behavior) => {
-                const element = document.getElementById(id);
-
-                element && element.parentElement.scrollIntoView({ block: 'start', behavior });
-            };
-
-            const createContent = (value, isLinkableOption, deprecated) => {
-                if (allowLink && value) {
-                    const splitedValues = value.split('|');
-
-                    return splitedValues.map((sValue, i) => {
-                        if (sValue.includes(name)) {
-                            let matchedIndex = sValue.indexOf(name);
-                            let val = sValue
-                                .substring(matchedIndex)
-                                .replace(/(\[|\]|<|>).*$/gm, '')
-                                .trim();
-
-                            const apiId = name === val ? `api.${name}` : `api.${name}.${val === `${name}Props` ? 'props' : val}`;
-
-                            return (
-                                <React.Fragment key={i}>
-                                    {i !== 0 ? '|' : ''}
-                                    <Link href={router.basePath + router.pathname + `#${apiId}`} target="_self">
-                                        <a onClick={() => onClick(apiId, 'smooth')}>{sValue}</a>
-                                    </Link>
-                                </React.Fragment>
-                            );
-                        }
-
-                        return (
-                            <React.Fragment key={i}>
-                                {i !== 0 ? '|' : ''}
-                                {isLinkableOption ? (
-                                    <span id={id + '.' + sValue} className={classNames('doc-option-name', { 'line-through cursor-pointer': !!deprecated })} title={deprecated}>
-                                        {sValue}
-                                        <Link href={router.basePath + router.pathname + `#${id + '.' + sValue}`} target="_self">
-                                            <a onClick={() => onClick(id + '.' + sValue)} className="doc-option-link">
-                                                <i className="pi pi-link"></i>
-                                            </a>
-                                        </Link>
-                                    </span>
-                                ) : (
-                                    sValue
-                                )}
-                            </React.Fragment>
-                        );
-                    });
-                }
-
-                const val = value && value.includes('": "') ? value.replace(/['"]+/g, '').replace(/\.,/gm, '.') : value;
-
-                return isLinkableOption ? (
-                    <span id={id + '.' + val} className={classNames('doc-option-name', { 'line-through cursor-pointer': !!deprecated })} title={deprecated}>
-                        {val}
-                        <Link href={router.basePath + router.pathname + `#${id + '.' + val}`} target="_self">
-                            <a onClick={() => onClick(id + '.' + val)} className="doc-option-link">
-                                <i className="pi pi-link"></i>
-                            </a>
-                        </Link>
-                    </span>
-                ) : (
-                    val
-                );
-            };
-
-            return (
-                <div className="doc-tablewrapper">
-                    <table className="doc-table">
-                        <thead>
-                            <tr>{headers.map((h) => h !== 'readonly' && h !== 'optional' && h !== 'deprecated' && <th key={h}>{h}</th>)}</tr>
-                        </thead>
-                        <tbody>
-                            {data.map((d, i) => {
-                                return (
-                                    <tr key={i}>
-                                        {Object.entries(d).map(
-                                            ([k, v], index) =>
-                                                k !== 'readonly' &&
-                                                k !== 'optional' &&
-                                                k !== 'deprecated' && (
-                                                    <td key={index} className={classNames({ 'doc-option-type': k === 'type', 'doc-option-default': k === 'defaultValue' })}>
-                                                        {k === 'parameters'
-                                                            ? v.map((_v, i) => {
-                                                                  return (
-                                                                      <React.Fragment key={i}>
-                                                                          {_v.name}:{createContent(_v.type)}
-                                                                          <br />
-                                                                      </React.Fragment>
-                                                                  );
-                                                              })
-                                                            : k !== 'description'
-                                                            ? createContent(v, k === 'name', d['deprecated'])
-                                                            : v}
-                                                    </td>
-                                                )
-                                        )}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            );
-        }
-
-        return null;
-    };
-
-    return (
-        <React.Fragment key={id}>
-            <DocSectionText {...props}>
-                <p>{description}</p>
-            </DocSectionText>
-            {createCard(value)}
-        </React.Fragment>
-    );
-};
+import DocApiTable from './docapitable';
 
 export function DocApiSection(props) {
     const { doc, header } = props;
@@ -160,9 +32,9 @@ export function DocApiSection(props) {
                             id,
                             label,
                             component: (inProps) => (
-                                <Component
+                                <DocApiTable
                                     name={componentName}
-                                    value={eValue.props}
+                                    data={eValue.props}
                                     description={
                                         <>
                                             {eValue.description} See <i>{eValue.relatedProp}</i>.
@@ -192,9 +64,9 @@ export function DocApiSection(props) {
                             id,
                             label,
                             component: (inProps) => (
-                                <Component
+                                <DocApiTable
                                     name={componentName}
-                                    value={iValue.props}
+                                    data={iValue.props}
                                     description={
                                         <>
                                             {iValue.description}{' '}
@@ -228,7 +100,7 @@ export function DocApiSection(props) {
                         tMap.children.push({
                             id,
                             label,
-                            component: (inProps) => <Component name={componentName} value={[tValue]} allowLink={false} {...inProps} />
+                            component: (inProps) => <DocApiTable name={componentName} data={[tValue]} allowLink={false} {...inProps} />
                         });
                     });
 
@@ -260,7 +132,7 @@ export function DocApiSection(props) {
                     fMap.children.push({
                         id,
                         label,
-                        component: (inProps) => <Component name={modName} value={[values]} description={value.description} {...inProps} />
+                        component: (inProps) => <DocApiTable name={modName} data={[values]} description={value.description} {...inProps} />
                     });
 
                     const types = value.parameters && value.parameters.map((p) => p.type);
@@ -297,7 +169,7 @@ export function DocApiSection(props) {
                                     tMap.children.push({
                                         id: `${id}.props`,
                                         label: 'Props',
-                                        component: (inProps) => <Component value={iValue.props} {...inProps} />
+                                        component: (inProps) => <DocApiTable data={iValue.props} {...inProps} />
                                     });
                                 }
 
@@ -305,7 +177,7 @@ export function DocApiSection(props) {
                                     tMap.children.push({
                                         id: `${id}.callbacks`,
                                         label: 'Callbacks',
-                                        component: (inProps) => <Component value={iValue.callbacks} {...inProps} />
+                                        component: (inProps) => <DocApiTable data={iValue.callbacks} {...inProps} />
                                     });
                                 }
 
@@ -334,7 +206,7 @@ export function DocApiSection(props) {
                             cMap.children.push({
                                 id,
                                 label,
-                                component: (inProps) => <Component name={cKey} value={cValue.props.values} description={cValue.props.description} {...inProps} />
+                                component: (inProps) => <DocApiTable name={cKey} data={cValue.props.values} description={cValue.props.description} {...inProps} />
                             });
                         }
 
@@ -344,7 +216,7 @@ export function DocApiSection(props) {
                             cMap.children.push({
                                 id,
                                 label,
-                                component: (inProps) => <Component name={cKey} value={cValue.callbacks.values} description={cValue.callbacks.description} {...inProps} />
+                                component: (inProps) => <DocApiTable name={cKey} data={cValue.callbacks.values} description={cValue.callbacks.description} {...inProps} />
                             });
                         }
 
@@ -354,7 +226,7 @@ export function DocApiSection(props) {
                             cMap.children.push({
                                 id,
                                 label,
-                                component: (inProps) => <Component name={cKey} value={cValue.methods.values} description={cValue.methods.description} {...inProps} />
+                                component: (inProps) => <DocApiTable name={cKey} data={cValue.methods.values} description={cValue.methods.description} {...inProps} />
                             });
                         }
 
@@ -380,7 +252,7 @@ export function DocApiSection(props) {
                             mMap.children.push({
                                 id,
                                 label,
-                                component: (inProps) => <Component name={mKey} value={mValue.props.values} description={mValue.props.description} {...inProps} />
+                                component: (inProps) => <DocApiTable name={mKey} data={mValue.props.values} description={mValue.props.description} {...inProps} />
                             });
                         }
 
