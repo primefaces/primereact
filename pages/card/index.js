@@ -50,7 +50,7 @@ const CardDemo = () => {
         },
         {
             id: 'pt.demo',
-            label: 'Demo',
+            label: 'Example',
             component: PTDoc
         }
     ];

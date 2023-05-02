@@ -56,7 +56,7 @@ const PanelDemo = () => {
         },
         {
             id: 'pt.demo',
-            label: 'Demo',
+            label: 'Example',
             component: PTDoc
         }
     ];

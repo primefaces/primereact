@@ -8,6 +8,7 @@ export function PTDoc(props) {
         basic: `
 <Panel
     header="Header"
+    toggleable
     pt={{
         header: { className: 'bg-primary' },
         title: { className: 'text-white' },
@@ -28,6 +29,7 @@ export default function PTDemo() {
         <div className="card">
             <Panel
                 header="Header"
+                toggleable
                 pt={{
                     header: { className: 'bg-primary' },
                     title: { className: 'text-white' },
@@ -51,6 +53,7 @@ export default function PTDemo() {
         <div className="card">
             <Panel
                 header="Header"
+                toggleable
                 pt={{
                     header: { className: 'bg-primary' },
                     title: { className: 'text-white' },
@@ -73,6 +76,7 @@ export default function PTDemo() {
             <div className="card">
                 <Panel
                     header="Header"
+                    toggleable
                     pt={{
                         header: { className: 'bg-primary' },
                         title: { className: 'text-white' },
