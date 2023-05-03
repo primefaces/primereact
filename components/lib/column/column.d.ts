@@ -769,7 +769,7 @@ export interface ColumnProps {
      */
     onBeforeCellEditHide?(event: ColumnEvent): void;
     /**
-     * Callback to invoke before the cell editor is shown.
+     * Callback to invoke before the cell editor is shown. To prevent editor from showing return false or originalEvent.preventDefault().
      * @param {ColumnEvent} event - Custom event.
      */
     onBeforeCellEditShow?(event: ColumnEvent): void;
@@ -784,7 +784,7 @@ export interface ColumnProps {
      */
     onCellEditComplete?(event: ColumnEvent): void;
     /**
-     * Callback to invoke when cell edit is initiated.
+     * Callback to invoke when cell edit is initiated. To prevent editor from showing return false or originalEvent.preventDefault().
      * @param {ColumnEvent} event - Custom event.
      */
     onCellEditInit?(event: ColumnEvent): void;
