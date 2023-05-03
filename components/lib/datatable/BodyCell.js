@@ -2,17 +2,17 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { OverlayService } from '../overlayservice/OverlayService';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { RowCheckbox } from './RowCheckbox';
-import { RowRadioButton } from './RowRadioButton';
+import { BarsIcon } from '../icons/bars';
 import { CheckIcon } from '../icons/check';
-import { TimesIcon } from '../icons/times';
-import { PencilIcon } from '../icons/pencil';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { BarsIcon } from '../icons/bars';
+import { PencilIcon } from '../icons/pencil';
+import { TimesIcon } from '../icons/times';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { RowCheckbox } from './RowCheckbox';
+import { RowRadioButton } from './RowRadioButton';
 
 export const BodyCell = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(props.editing);
@@ -475,7 +475,7 @@ export const BodyCell = React.memo((props) => {
     }, [props.editingMeta]);
 
     React.useEffect(() => {
-        if (props.editMode === 'row') {
+        if (props.editMode === 'cell' || props.editMode === 'row') {
             const callbackParams = getCellCallbackParams();
             const params = { ...callbackParams, editing: editingState, editingKey };
 
