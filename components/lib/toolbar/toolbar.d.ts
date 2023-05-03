@@ -8,6 +8,50 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils';
+
+export declare type ToolbarPassThroughType<T> = PassThroughType<T, ToolbarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ToolbarPassThroughMethodOptions {
+    props: ToolbarProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ToolbarProps.pt}
+ */
+export interface ToolbarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the start's DOM element.
+     */
+    start?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the center's DOM element.
+     */
+    center?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the right's DOM element.
+     */
+    end?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines valid properties in Toolbar component.
+ */
+export interface ToolbarProps {
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToolbarPassThroughOptions}
+     */
+    pt?: ToolbarPassThroughOptions;
+}
 
 /**
  * Defines valid properties in Toolbar component. In addition to these, all properties of HTMLDivElement can be used in this component.

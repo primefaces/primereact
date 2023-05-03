@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ToolbarBase = {
+export const ToolbarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Toolbar',
         id: null,
@@ -12,7 +12,5 @@ export const ToolbarBase = {
         center: null,
         end: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ToolbarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ToolbarBase.defaultProps)
-};
+    }
+});
