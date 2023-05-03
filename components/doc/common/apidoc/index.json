@@ -26415,6 +26415,115 @@
                     "values": []
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ScrollPanelThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollPanelProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollPanelState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ScrollPanelPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "ScrollPanelProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "wrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the wrapper's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "barX",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the horizontal panel's DOM element."
+                        },
+                        {
+                            "name": "barY",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the vertical panel's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ScrollPanelState": {
+                    "description": "Defines current inline state in Panel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "id",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current id state as a string."
+                        },
+                        {
+                            "name": "orientation",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current scrollpanel orientation."
+                        },
+                        {
+                            "name": "lastScrollTop",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Latest scroll top position."
+                        },
+                        {
+                            "name": "lastScrollLeft",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Latest scroll left position."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollPanelThroughType": {
+                    "values": "PassThroughType<T, ScrollPanelThroughMethodOptions>"
+                }
+            }
         }
     },
     "scrolltop": {
