@@ -275,7 +275,15 @@ export const BodyCell = React.memo((props) => {
             const cellEditValidatorEvent = getColumnProp('cellEditValidatorEvent');
 
             if (onBeforeCellEditShow) {
-                onBeforeCellEditShow(params);
+                // if user returns false do not show the editor
+                if (onBeforeCellEditShow(params) === false) {
+                    return;
+                }
+
+                // if user prevents default stop the editor
+                if (event && event.defaultPrevented) {
+                    return;
+                }
             }
 
             // If the data is sorted using sort icon, it has been added to wait for the sort operation when any cell is wanted to be opened.
@@ -283,7 +291,14 @@ export const BodyCell = React.memo((props) => {
                 setEditingState(true);
 
                 if (onCellEditInit) {
-                    onCellEditInit(params);
+                    if (onCellEditInit(params) === false) {
+                        return;
+                    }
+
+                    // if user prevents default stop the editor
+                    if (event && event.defaultPrevented) {
+                        return;
+                    }
                 }
 
                 if (cellEditValidatorEvent === 'click') {
