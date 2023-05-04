@@ -14288,28 +14288,126 @@
                 }
             }
         },
-        "events": {
-            "description": "Defines the custom events used by the component's callbacks.",
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "FieldsetPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FieldsetProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FieldsetState"
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "FieldsetToggleEvent": {
                     "description": "Custom toggle event.",
-                    "relatedProp": "onToggle",
+                    "relatedProp": "FieldsetEmits.toggle",
                     "props": [
                         {
                             "name": "originalEvent",
                             "optional": false,
                             "readonly": false,
                             "type": "MouseEvent<HTMLElement, MouseEvent>",
-                            "description": "Browser mouse event."
+                            "description": "Browser event."
                         },
                         {
                             "name": "value",
                             "optional": false,
                             "readonly": false,
                             "type": "boolean",
-                            "description": "Collapsed state as a boolean."
+                            "description": "Collapsed state as a boolean"
                         }
-                    ]
+                    ],
+                    "callbacks": []
+                },
+                "FieldsetPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "FieldsetProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "legend",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the legend's DOM element."
+                        },
+                        {
+                            "name": "toggler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the toggler's DOM element."
+                        },
+                        {
+                            "name": "togglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the toggler icon's DOM element."
+                        },
+                        {
+                            "name": "legendTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the legend title's DOM element."
+                        },
+                        {
+                            "name": "toggleableContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the toggleable content's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "FieldsetState": {
+                    "description": "Defines current inline state in Fieldset component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "collapse",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current collapsed state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "FieldsetPassThroughType": {
+                    "values": "PassThroughType<T, FieldsetPassThroughMethodOptions>"
                 }
             }
         }
