@@ -1,5 +1,3 @@
-export default PTDoc;
-import { Panel } from '../../../lib/panel/Panel';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Fieldset } from '../../../lib/fieldset/Fieldset';

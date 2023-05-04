@@ -28907,6 +28907,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -28984,6 +28992,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled displays buttons at each side of the tab headers to scroll the tab list."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -29197,6 +29213,216 @@
                             "description": "Callback to invoke when the key pressed."
                         }
                     ]
+                },
+                "TabPanelPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabPanelProps"
+                        },
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabViewPassThroughMethodOptions"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabPanelPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerAction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header action's DOM element."
+                        },
+                        {
+                            "name": "headerTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the title's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabViewPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabViewProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabViewState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabViewState": {
+                    "description": "Defines current inline state in TabView component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "activeIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current active index state."
+                        },
+                        {
+                            "name": "id",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Unique id for the TabView component."
+                        },
+                        {
+                            "name": "hiddenTabsState",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number[]",
+                            "description": "Current state of hidden tab."
+                        },
+                        {
+                            "name": "isPrevButtonDisabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current state of previous button."
+                        },
+                        {
+                            "name": "isNextButtonDisabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current state of the next button."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabViewPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "navcontainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the nav container's DOM element."
+                        },
+                        {
+                            "name": "navcontent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the nav content's DOM element."
+                        },
+                        {
+                            "name": "nav",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "inkbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the inkbar's DOM element."
+                        },
+                        {
+                            "name": "prevbutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the previous button's DOM element."
+                        },
+                        {
+                            "name": "previcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the previous button icon's DOM element."
+                        },
+                        {
+                            "name": "nextbutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the nex button's DOM element."
+                        },
+                        {
+                            "name": "nexticon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the next button icon's DOM element."
+                        },
+                        {
+                            "name": "panelcontainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TabViewPassThroughType": {
+                    "values": "PassThroughType<T, TabViewPassThroughMethodOptions>"
+                },
+                "TabPanelPassThroughType": {
+                    "values": "PassThroughType<T, TabPanelPassThroughMethodOptions>"
                 }
             }
         }

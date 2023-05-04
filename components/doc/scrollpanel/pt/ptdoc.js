@@ -1,4 +1,3 @@
-export default PTDoc;
 import { ScrollPanel } from '../../../lib/scrollpanel/ScrollPanel';
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';

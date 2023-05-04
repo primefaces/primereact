@@ -8,7 +8,7 @@ import { LoginDoc } from '../../components/doc/divider/logindoc';
 import { StyleDoc } from '../../components/doc/divider/styledoc';
 import { TypeDoc } from '../../components/doc/divider/typedoc';
 import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
-import PTDoc from '../../components/doc/divider/pt/ptdoc';
+import { PTDoc } from '../../components/doc/divider/pt/ptdoc';
 import { Wireframe } from '../../components/doc/divider/pt/wireframe';
 
 const DividerDemo = () => {

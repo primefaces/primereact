@@ -56,17 +56,13 @@ export const DeferredContent = React.forwardRef((inProps, ref) => {
 
     const rootProps = mergeProps(
         {
-            ref: elementRef,
+            ref: elementRef
         },
         DeferredContentBase.getOtherProps(props),
-        ptm("root")
+        ptm('root')
     );
 
-    return (
-        <div {...rootProps}>
-            {loadedState && props.children}
-        </div>
-    );
+    return <div {...rootProps}>{loadedState && props.children}</div>;
 });
 
 DeferredContent.displayName = 'DeferredContent';

@@ -3,7 +3,7 @@ import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
 import { ImportDoc } from '../../components/doc/fieldset/importdoc';
-import PTDoc from '../../components/doc/fieldset/pt/ptdoc';
+import { PTDoc } from '../../components/doc/fieldset/pt/ptdoc';
 import { Wireframe } from '../../components/doc/fieldset/pt/wireframe';
 import { StyleDoc } from '../../components/doc/fieldset/styledoc';
 import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';

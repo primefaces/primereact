@@ -4,15 +4,29 @@ import APIDocs from './apidoc/index.json';
 
 export function DocSections({ docs }) {
     const getPTOption = (name) => {
-        const { props } = APIDocs[name.toLowerCase()].interfaces.values[`${name}PassThroughOptions`];
+        const key = name.toLowerCase();
+
+        let values = APIDocs[key]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+
+        if (!values) {
+            for (const parentKey in APIDocs) {
+                if (APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`]) {
+                    values = APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+                    if (values) break;
+                }
+            }
+        }
+
         let data = [];
 
-        for (const [i, prop] of props.entries()) {
-            data.push({
-                value: i + 1,
-                label: prop.name,
-                description: prop.description
-            });
+        if (values) {
+            for (const [i, prop] of values.props.entries()) {
+                data.push({
+                    value: i + 1,
+                    label: prop.name,
+                    description: prop.description
+                });
+            }
         }
 
         return data;

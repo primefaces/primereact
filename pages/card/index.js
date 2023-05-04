@@ -2,7 +2,7 @@ import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
 import { BasicDoc } from '../../components/doc/card/basicdoc';
 import { ImportDoc } from '../../components/doc/card/importdoc';
-import PTDoc from '../../components/doc/card/pt/ptdoc';
+import { PTDoc } from '../../components/doc/card/pt/ptdoc';
 import { Wireframe } from '../../components/doc/card/pt/wireframe';
 import { StyleDoc } from '../../components/doc/card/styledoc';
 import DocApiTable from '../../components/doc/common/docapitable';

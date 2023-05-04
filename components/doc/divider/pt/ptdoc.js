@@ -1,4 +1,3 @@
-export default PTDoc;
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Divider } from '../../../lib/divider/Divider';

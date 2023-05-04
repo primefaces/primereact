@@ -1,4 +1,3 @@
-export default PTDoc;
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { Card } from '../../../lib/card/Card';
