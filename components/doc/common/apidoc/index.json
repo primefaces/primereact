@@ -12486,6 +12486,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DeferredContentPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -12506,6 +12514,66 @@
                             "description": "Callback to invoke when deferred content is loaded."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "DeferredContentPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DeferredContentProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DeferredContentState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DeferredContentPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DeferredContentPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DeferredContentState": {
+                    "description": "Defines current inline state in DeferredContent component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "loaded",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current loaded state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "DeferredContentPassThroughType": {
+                    "values": "PassThroughType<T, DeferredContentPassThroughMethodOptions>"
                 }
             }
         }

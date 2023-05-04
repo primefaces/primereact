@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect } from '../hooks/Hooks';
 import { DeferredContentBase } from './DeferredContentBase';
+import { mergeProps } from '../utils/Utils';
 
 export const DeferredContent = React.forwardRef((inProps, ref) => {
     const props = DeferredContentBase.getProps(inProps);
@@ -16,6 +17,13 @@ export const DeferredContent = React.forwardRef((inProps, ref) => {
                 load();
                 unbindScrollListener();
             }
+        }
+    });
+
+    const { ptm } = DeferredContentBase.setMetaData({
+        props,
+        state: {
+            loaded: loadedState
         }
     });
 
@@ -46,10 +54,16 @@ export const DeferredContent = React.forwardRef((inProps, ref) => {
         }
     });
 
-    const otherProps = DeferredContentBase.getOtherProps(props);
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+        },
+        DeferredContentBase.getOtherProps(props),
+        ptm("root")
+    );
 
     return (
-        <div ref={elementRef} {...otherProps}>
+        <div {...rootProps}>
             {loadedState && props.children}
         </div>
     );
