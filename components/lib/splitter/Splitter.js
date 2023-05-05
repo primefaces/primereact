@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 
 export const SplitterPanel = () => {};
@@ -26,6 +26,26 @@ export const Splitter = React.memo(
         const isStateful = props.stateKey != null;
         const childrenLength = (props.children && props.children.length) || 1;
         const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children && [].concat(props.children)[index].props.size) || 100 / childrenLength);
+
+        const parentProps = {
+            props,
+            state: {
+                panelSizes: panelSizes
+            }
+        };
+
+        const { ptm, ptmo } = SplitterBase.setMetaData({
+            ...parentProps
+        });
+
+        const getPanelPT = (panel, key) => {
+            return ptmo(getPanelProp(panel, 'pt'), key, {
+                props: panel.props,
+                parent: {
+                    ...parentProps
+                }
+            });
+        };
 
         const [bindDocumentMouseMoveListener, unbindDocumentMouseMoveListener] = useEventListener({ type: 'mousemove', listener: (event) => onResize(event) });
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({
@@ -206,30 +226,51 @@ export const Splitter = React.memo(
         }, [restoreState, isStateful]);
 
         const createPanel = (panel, index) => {
-            const otherProps = SplitterPanelBase.getCOtherProps(panel);
             const panelClassName = classNames('p-splitter-panel', getPanelProp(panel, 'className'));
             const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' };
+
+            const gutterProps = mergeProps(
+                {
+                    ref: (el) => (gutterRefs.current[index] = el),
+                    className: 'p-splitter-gutter',
+                    style: gutterStyle,
+
+                    onMouseDown: (event) => onGutterMouseDown(event, index),
+                    onTouchStart: (event) => onGutterTouchStart(event, index),
+                    onTouchMove: (event) => onGutterTouchMove(event),
+                    onTouchEnd: (event) => onGutterTouchEnd(event)
+                },
+                ptm('gutter')
+            );
+
+            const gutterHandlerProps = mergeProps(
+                {
+                    className: 'p-splitter-gutter-handle'
+                },
+                ptm('gutterHandler')
+            );
+
             const gutter = index !== props.children.length - 1 && (
-                <div
-                    ref={(el) => (gutterRefs.current[index] = el)}
-                    className="p-splitter-gutter"
-                    style={gutterStyle}
-                    onMouseDown={(event) => onGutterMouseDown(event, index)}
-                    onTouchStart={(event) => onGutterTouchStart(event, index)}
-                    onTouchMove={(event) => onGutterTouchMove(event)}
-                    onTouchEnd={(event) => onGutterTouchEnd(event)}
-                >
-                    <div className="p-splitter-gutter-handle"></div>
+                <div {...gutterProps}>
+                    <div {...gutterHandlerProps}></div>
                 </div>
             );
 
             const flexBasis = 'calc(' + panelSize(panelSizes, index) + '% - ' + (childrenLength - 1) * props.gutterSize + 'px)';
 
+            const rootProps = mergeProps(
+                {
+                    key: index,
+                    className: panelClassName,
+                    style: { ...getPanelProp(panel, 'style'), flexBasis },
+                    role: 'presentation'
+                },
+                getPanelPT(panel, 'root')
+            );
+
             return (
                 <React.Fragment>
-                    <div key={index} className={panelClassName} style={{ ...getPanelProp(panel, 'style'), flexBasis }} {...otherProps}>
-                        {getPanelProp(panel, 'children')}
-                    </div>
+                    <div {...rootProps}>{getPanelProp(panel, 'children')}</div>
                     {gutter}
                 </React.Fragment>
             );
@@ -239,15 +280,22 @@ export const Splitter = React.memo(
             return React.Children.map(props.children, createPanel);
         };
 
-        const otherProps = SplitterBase.getOtherProps(props);
         const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
+
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style: props.style,
+                className
+            },
+            SplitterBase.getOtherProps(props),
+            ptm('root')
+        );
+
         const panels = createPanels();
 
-        return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-                {panels}
-            </div>
-        );
+        return <div {...rootProps}>{panels}</div>;
     })
 );
 

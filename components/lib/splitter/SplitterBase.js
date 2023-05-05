@@ -1,6 +1,7 @@
+import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
-export const SplitterBase = {
+export const SplitterBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Splitter',
         className: null,
@@ -12,12 +13,10 @@ export const SplitterBase = {
         stateStorage: 'session',
         style: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SplitterBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SplitterBase.defaultProps)
-};
+    }
+});
 
-export const SplitterPanelBase = {
+export const SplitterPanelBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SplitterPanel',
         className: null,
@@ -29,4 +28,5 @@ export const SplitterPanelBase = {
     getCProps: (panel) => ObjectUtils.getComponentProps(panel, SplitterPanelBase.defaultProps),
     getCOtherProps: (panel) => ObjectUtils.getComponentDiffProps(panel, SplitterPanelBase.defaultProps),
     getCProp: (panel, name) => ObjectUtils.getComponentProp(panel, name, SplitterPanelBase.defaultProps)
-};
+});
+
