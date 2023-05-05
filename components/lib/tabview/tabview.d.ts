@@ -273,11 +273,11 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the nav container's DOM element.
      */
-    navcontainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    navContainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the nav content's DOM element.
      */
-    navcontent?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    navContent?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the list's DOM element.
      */
@@ -289,23 +289,23 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the previous button's DOM element.
      */
-    prevbutton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    previousButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the previous button icon's DOM element.
      */
-    previcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    previousIcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
-     * Uses to pass attributes to the nex button's DOM element.
+     * Uses to pass attributes to the next button's DOM element.
      */
-    nextbutton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    nextButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the next button icon's DOM element.
      */
-    nexticon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    nextIcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the panel's DOM element.
      */
-    panelcontainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    panelContainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

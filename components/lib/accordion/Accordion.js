@@ -17,7 +17,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
-    const parentProps = {
+    const metaData = {
         props,
         state: {
             id: idState,
@@ -26,15 +26,13 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     };
 
     const { ptm, ptmo } = AccordionBase.setMetaData({
-        ...parentProps
+        ...metaData
     });
 
     const getTabPT = (tab, key) => {
         return ptmo(getTabProp(tab, 'pt'), key, {
             props: tab.props,
-            parent: {
-                ...parentProps
-            }
+            parent: metaData
         });
     };
 
@@ -174,7 +172,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             {
                 className: 'p-accordion-content'
             },
-            getTabPT(tab, 'toggleablecontent')
+            getTabPT(tab, 'content')
         );
 
         return (

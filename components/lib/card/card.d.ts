@@ -43,7 +43,7 @@ export interface CardPassThroughOptions {
     /**
      * Uses to pass attributes to the subtitle's DOM element.
      */
-    subtitle?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    subTitle?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */

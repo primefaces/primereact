@@ -27,7 +27,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const tabsRef = React.useRef({});
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
-    const parentProps = {
+    const metaData = {
         props,
         state: {
             id: idState,
@@ -39,15 +39,13 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const { ptm, ptmo } = TabViewBase.setMetaData({
-        ...parentProps
+        ...metaData
     });
 
     const getTabPT = (tab, key) => {
         return ptmo(getTabProp(tab, 'pt'), key, {
             props: tab.props,
-            parent: {
-                ...parentProps
-            }
+            parent: metaData
         });
     };
 
@@ -343,9 +341,9 @@ export const TabView = React.forwardRef((inProps, ref) => {
                         style,
                         role: 'tabpanel',
                         'aria-labelledby': ariaLabelledBy,
-                        'aria-hidden': !selected,
-                        ...TabPanelBase.getCOtherProps(tab)
+                        'aria-hidden': !selected
                     },
+                    TabPanelBase.getCOtherProps(tab),
                     getTabPT(tab, 'root'),
                     getTabPT(tab, 'content')
                 );
