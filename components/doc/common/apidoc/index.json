@@ -29248,21 +29248,21 @@
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
                             "name": "headerAction",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
                             "description": "Uses to pass attributes to the header action's DOM element."
                         },
                         {
                             "name": "headerTitle",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabPanelPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the title's DOM element."
                         },
                         {
@@ -29365,42 +29365,42 @@
                             "name": "nav",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
                             "name": "inkbar",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the inkbar's DOM element."
                         },
                         {
                             "name": "prevbutton",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the previous button's DOM element."
                         },
                         {
                             "name": "previcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the previous button icon's DOM element."
                         },
                         {
                             "name": "nextbutton",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the nex button's DOM element."
                         },
                         {
                             "name": "nexticon",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the next button icon's DOM element."
                         },
                         {
