@@ -38,19 +38,19 @@ export interface AccordionTabPassThroughOptions {
     /**
      * Uses to pass attributes to the header's DOM element.
      */
-    header?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    header?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the headeraction's DOM element.
      */
-    headerAction?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerAction?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
      * Uses to pass attributes to the headericon's DOM element.
      */
-    headerIcon?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerIcon?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the headertitle's DOM element.
      */
-    headerTitle?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerTitle?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the toggleablecontent's DOM element.
      */
