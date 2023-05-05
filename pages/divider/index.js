@@ -73,7 +73,7 @@ const DividerDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={['Divider']} ptDocs={ptDocs} ptDescription={''} />;
+    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={['Divider']} ptDocs={ptDocs} />;
 };
 
 export default DividerDemo;

@@ -3,7 +3,6 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
 
 export function PTDoc(props) {
-
     const tabs = [
         { title: 'Header 1', content: 'Tab 1 Content' },
         { title: 'Header 2', content: 'Tab 2 Content' },
@@ -117,8 +116,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card">
                 <Accordion activeIndex={0}>
                     {tabs.map((tab, i) => {
@@ -130,12 +128,11 @@ export default function PTDemo() {
                                         className: panelClassName(parent, i)
                                     })
                                 }}
-                                header={tab.title}>
-                                <p className="m-0">
-                                    {tab.content}
-                                </p>
+                                header={tab.title}
+                            >
+                                <p className="m-0">{tab.content}</p>
                             </AccordionTab>
-                        )
+                        );
                     })}
                 </Accordion>
             </div>

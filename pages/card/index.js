@@ -55,7 +55,7 @@ const CardDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Card Component" header="Card" description="Card is a flexible container component." componentDocs={docs} apiDocs={['Card']} ptDocs={ptDocs} ptDescription={''} />;
+    return <DocComponent title="React Card Component" header="Card" description="Card is a flexible container component." componentDocs={docs} apiDocs={['Card']} ptDocs={ptDocs} />;
 };
 
 export default CardDemo;

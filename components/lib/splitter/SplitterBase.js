@@ -29,4 +29,3 @@ export const SplitterPanelBase = ComponentBase.extend({
     getCOtherProps: (panel) => ObjectUtils.getComponentDiffProps(panel, SplitterPanelBase.defaultProps),
     getCProp: (panel, name) => ObjectUtils.getComponentProp(panel, name, SplitterPanelBase.defaultProps)
 });
-

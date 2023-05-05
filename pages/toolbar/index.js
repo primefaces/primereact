@@ -49,7 +49,7 @@ const ToolbarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Toolbar Component" header="Toolbar" description="Toolbar is a grouping component for buttons and other content." componentDocs={docs} apiDocs={['Toolbar']} ptDocs={ptDocs} ptDescription={''} />;
+    return <DocComponent title="React Toolbar Component" header="Toolbar" description="Toolbar is a grouping component for buttons and other content." componentDocs={docs} apiDocs={['Toolbar']} ptDocs={ptDocs} />;
 };
 
 export default ToolbarDemo;

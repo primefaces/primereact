@@ -72,7 +72,7 @@ const SplitterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Splitter Component" header="Splitter" description="Splitter is utilized to separate and resize panels." componentDocs={docs} apiDocs={['Splitter', 'SplitterPanel']} ptDocs={ptDocs} ptDescription="" />;
+    return <DocComponent title="React Splitter Component" header="Splitter" description="Splitter is utilized to separate and resize panels." componentDocs={docs} apiDocs={['Splitter', 'SplitterPanel']} ptDocs={ptDocs} />;
 };
 
 export default SplitterDemo;

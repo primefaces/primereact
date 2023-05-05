@@ -63,7 +63,6 @@ const ScrollPanelDemo = () => {
             componentDocs={docs}
             apiDocs={['ScrollPanel']}
             ptDocs={ptDocs}
-            ptDescription={''}
         />
     );
 };

@@ -7,7 +7,7 @@ import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
 
-export const AccordionTab = () => { };
+export const AccordionTab = () => {};
 
 export const Accordion = React.forwardRef((inProps, ref) => {
     const props = AccordionBase.getProps(inProps);
@@ -131,8 +131,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             {
                 id: headerId,
                 href: '#' + ariaControls,
-                className: "p-accordion-header-link",
-                role: "tab",
+                className: 'p-accordion-header-link',
+                role: 'tab',
                 tabIndex,
                 onClick: (e) => onTabHeaderClick(e, tab, index),
                 'aria-label': label,
@@ -164,7 +164,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 ref: contentRef,
                 className,
                 style,
-                role: "region",
+                role: 'region',
                 'aria-labelledby': ariaLabelledby
             },
             getTabPT(tab, 'toggleablecontent')
@@ -172,7 +172,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
         const contentProps = mergeProps(
             {
-                className: "p-accordion-content"
+                className: 'p-accordion-content'
             },
             getTabPT(tab, 'toggleablecontent')
         );
@@ -231,13 +231,9 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         },
         AccordionBase.getOtherProps(props),
         ptm('root')
-    )
-
-    return (
-        <div {...rootProps}>
-            {tabs}
-        </div>
     );
+
+    return <div {...rootProps}>{tabs}</div>;
 });
 
 AccordionTab.displayName = 'AccordionTab';

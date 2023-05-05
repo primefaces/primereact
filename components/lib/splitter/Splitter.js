@@ -27,7 +27,7 @@ export const Splitter = React.memo(
         const childrenLength = (props.children && props.children.length) || 1;
         const panelSize = (sizes, index) => (index in sizes ? sizes[index] : (props.children && [].concat(props.children)[index].props.size) || 100 / childrenLength);
 
-        const parentProps = {
+        const metaData = {
             props,
             state: {
                 panelSizes: panelSizes
@@ -35,14 +35,14 @@ export const Splitter = React.memo(
         };
 
         const { ptm, ptmo } = SplitterBase.setMetaData({
-            ...parentProps
+            ...metaData
         });
 
         const getPanelPT = (panel, key) => {
             return ptmo(getPanelProp(panel, 'pt'), key, {
                 props: panel.props,
                 parent: {
-                    ...parentProps
+                    ...metaData
                 }
             });
         };
