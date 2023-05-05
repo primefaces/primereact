@@ -4684,7 +4684,7 @@
                             "description": "Uses to pass attributes to the title's DOM element."
                         },
                         {
-                            "name": "subtitle",
+                            "name": "subTitle",
                             "optional": true,
                             "readonly": false,
                             "type": "CardPassThroughType<HTMLAttributes<HTMLDivElement>>",
@@ -29619,14 +29619,14 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "navcontainer",
+                            "name": "navContainer",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the nav container's DOM element."
                         },
                         {
-                            "name": "navcontent",
+                            "name": "navContent",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
@@ -29647,35 +29647,35 @@
                             "description": "Uses to pass attributes to the inkbar's DOM element."
                         },
                         {
-                            "name": "prevbutton",
+                            "name": "previousButton",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the previous button's DOM element."
                         },
                         {
-                            "name": "previcon",
+                            "name": "previousIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the previous button icon's DOM element."
                         },
                         {
-                            "name": "nextbutton",
+                            "name": "nextButton",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLButtonElement>>",
-                            "description": "Uses to pass attributes to the nex button's DOM element."
+                            "description": "Uses to pass attributes to the next button's DOM element."
                         },
                         {
-                            "name": "nexticon",
+                            "name": "nextIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the next button icon's DOM element."
                         },
                         {
-                            "name": "panelcontainer",
+                            "name": "panelContainer",
                             "optional": true,
                             "readonly": false,
                             "type": "TabViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
