@@ -93,15 +93,15 @@ export interface TabPanelPassThroughOptions {
     /**
      * Uses to pass attributes to the header's DOM element.
      */
-    header?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    header?: TabPanelPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the header action's DOM element.
      */
-    headerAction?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerAction?: TabPanelPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
      * Uses to pass attributes to the title's DOM element.
      */
-    headerTitle?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerTitle?: TabPanelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the list's DOM element.
      */
@@ -281,27 +281,27 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the list's DOM element.
      */
-    nav?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    nav?: TabViewPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Uses to pass attributes to the inkbar's DOM element.
      */
-    inkbar?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    inkbar?: TabViewPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the previous button's DOM element.
      */
-    prevbutton?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    prevbutton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the previous button icon's DOM element.
      */
-    previcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    previcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the nex button's DOM element.
      */
-    nextbutton?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    nextbutton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the next button icon's DOM element.
      */
-    nexticon?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    nexticon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the panel's DOM element.
      */
