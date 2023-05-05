@@ -337,28 +337,28 @@
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
                         },
                         {
                             "name": "headerAction",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
                             "description": "Uses to pass attributes to the headeraction's DOM element."
                         },
                         {
                             "name": "headerIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "AccordionTabPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the headericon's DOM element."
                         },
                         {
                             "name": "headerTitle",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the headertitle's DOM element."
                         },
                         {
