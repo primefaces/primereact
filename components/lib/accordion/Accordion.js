@@ -2,12 +2,12 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
 
-export const AccordionTab = () => {};
+export const AccordionTab = () => { };
 
 export const Accordion = React.forwardRef((inProps, ref) => {
     const props = AccordionBase.getProps(inProps);
@@ -16,6 +16,27 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
+
+    const parentProps = {
+        props,
+        state: {
+            id: idState,
+            activeIndex: activeIndexState
+        }
+    };
+
+    const { ptm, ptmo } = AccordionBase.setMetaData({
+        ...parentProps
+    });
+
+    const getTabPT = (tab, key) => {
+        return ptmo(getTabProp(tab, 'pt'), key, {
+            props: tab.props,
+            parent: {
+                ...parentProps
+            }
+        });
+    };
 
     const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
 
@@ -82,15 +103,48 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = getTabProp(tab, 'disabled') ? -1 : getTabProp(tab, 'tabIndex');
-        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span className="p-accordion-header-text">{getTabProp(tab, 'header')}</span>;
+        const headerTitleProps = mergeProps(
+            {
+                className: 'p-accordion-header-text'
+            },
+            getTabPT(tab, 'headertitle')
+        );
+        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span {...headerTitleProps}>{getTabProp(tab, 'header')}</span>;
         const iconClassName = 'p-accordion-toggle-icon';
-        const icon = selected ? props.collapseIcon || <ChevronDownIcon className={iconClassName} /> : props.expandIcon || <ChevronRightIcon className={iconClassName} />;
-        const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, selected });
+        const headerIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            getTabPT(tab, 'headericon')
+        );
+        const icon = selected ? props.collapseIcon || <ChevronDownIcon {...headerIconProps} /> : props.expandIcon || <ChevronRightIcon {...headerIconProps} />;
+        const toggleIcon = IconUtils.getJSXIcon(icon, { ...headerIconProps }, { props, selected });
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
+        const headerProps = mergeProps(
+            {
+                className,
+                style
+            },
+            getTabPT(tab, 'header')
+        );
+        const headerActionProps = mergeProps(
+            {
+                id: headerId,
+                href: '#' + ariaControls,
+                className: "p-accordion-header-link",
+                role: "tab",
+                tabIndex,
+                onClick: (e) => onTabHeaderClick(e, tab, index),
+                'aria-label': label,
+                'aria-controls': ariaControls,
+                'aria-expanded': selected
+            },
+            getTabPT(tab, 'headeraction')
+        );
 
         return (
-            <div className={className} style={style}>
-                <a href={'#' + ariaControls} id={headerId} className="p-accordion-header-link" aria-controls={ariaControls} role="tab" aria-expanded={selected} onClick={(e) => onTabHeaderClick(e, tab, index)} tabIndex={tabIndex} aria-label={label}>
+            <div {...headerProps}>
+                <a {...headerActionProps}>
                     {toggleIcon}
                     {header}
                 </a>
@@ -104,11 +158,29 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const contentId = idState + '_content_' + index;
         const ariaLabelledby = idState + '_header_' + index;
         const contentRef = React.createRef();
+        const toggleableContentProps = mergeProps(
+            {
+                id: contentId,
+                ref: contentRef,
+                className,
+                style,
+                role: "region",
+                'aria-labelledby': ariaLabelledby
+            },
+            getTabPT(tab, 'toggleablecontent')
+        );
+
+        const contentProps = mergeProps(
+            {
+                className: "p-accordion-content"
+            },
+            getTabPT(tab, 'toggleablecontent')
+        );
 
         return (
             <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
-                <div ref={contentRef} id={contentId} className={className} style={style} role="region" aria-labelledby={ariaLabelledby}>
-                    <div className="p-accordion-content">{getTabProp(tab, 'children')}</div>
+                <div {...toggleableContentProps}>
+                    <div {...contentProps}>{getTabProp(tab, 'children')}</div>
                 </div>
             </CSSTransition>
         );
@@ -118,15 +190,23 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         if (ObjectUtils.isValidChild(tab, 'AccordionTab')) {
             const key = idState + '_' + index;
             const selected = isSelected(index);
-            const otherProps = AccordionTabBase.getCOtherProps(tab);
             const tabHeader = createTabHeader(tab, selected, index);
             const tabContent = createTabContent(tab, selected, index);
             const tabClassName = classNames('p-accordion-tab', {
                 'p-accordion-tab-active': selected
             });
 
+            const rootProps = mergeProps(
+                {
+                    key,
+                    className: tabClassName
+                },
+                AccordionTabBase.getCOtherProps(tab),
+                getTabPT(tab, 'root')
+            );
+
             return (
-                <div key={key} className={tabClassName} {...otherProps}>
+                <div {...rootProps}>
                     {tabHeader}
                     {tabContent}
                 </div>
@@ -140,12 +220,21 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         return React.Children.map(props.children, createTab);
     };
 
-    const otherProps = AccordionBase.getOtherProps(props);
     const className = classNames('p-accordion p-component', props.className);
     const tabs = createTabs();
+    const rootProps = mergeProps(
+        {
+            id: idState,
+            ref: elementRef,
+            className,
+            style: props.style
+        },
+        AccordionBase.getOtherProps(props),
+        ptm('root')
+    )
 
     return (
-        <div id={idState} ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <div {...rootProps}>
             {tabs}
         </div>
     );
