@@ -19,13 +19,11 @@ export const Toast = React.memo(
 
         const show = (messageInfo) => {
             if (messageInfo) {
-                const messages = assignIdentifiers(messageInfo, true);
-
-                setMessagesState(messages);
+                setMessagesState((previousMessagesState) => assignIdentifiers(previousMessagesState, messageInfo, true));
             }
         };
 
-        const assignIdentifiers = (messageInfo, copy) => {
+        const assignIdentifiers = (previousMessagesState, messageInfo, copy) => {
             let messages;
 
             if (Array.isArray(messageInfo)) {
@@ -36,7 +34,7 @@ export const Toast = React.memo(
                 }, []);
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
+                    messages = previousMessagesState ? [...previousMessagesState, ...multipleMessages] : multipleMessages;
                 } else {
                     messages = multipleMessages;
                 }
@@ -44,7 +42,7 @@ export const Toast = React.memo(
                 const message = { _pId: messageIdx++, message: messageInfo };
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, message] : [message];
+                    messages = previousMessagesState ? [...previousMessagesState, message] : [message];
                 } else {
                     messages = [message];
                 }
@@ -59,15 +57,11 @@ export const Toast = React.memo(
         };
 
         const replace = (messageInfo) => {
-            const replaced = assignIdentifiers(messageInfo, false);
-
-            setMessagesState(replaced);
+            setMessagesState((previousMessagesState) => assignIdentifiers(previousMessagesState, messageInfo, false));
         };
 
         const remove = (messageInfo) => {
-            const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
-
-            setMessagesState(messages);
+            setMessagesState((m) => m.filter((msg) => msg._pId !== messageInfo._pId));
 
             props.onRemove && props.onRemove(messageInfo.message);
         };
