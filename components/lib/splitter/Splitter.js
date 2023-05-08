@@ -41,9 +41,7 @@ export const Splitter = React.memo(
         const getPanelPT = (panel, key) => {
             return ptmo(getPanelProp(panel, 'pt'), key, {
                 props: panel.props,
-                parent: {
-                    ...metaData
-                }
+                parent: metaData
             });
         };
 

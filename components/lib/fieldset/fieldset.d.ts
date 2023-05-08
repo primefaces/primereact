@@ -44,15 +44,15 @@ export interface FieldsetPassThroughOptions {
     /**
      * Uses to pass attributes to the root's DOM element.
      */
-    root?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    root?: FieldsetPassThroughType<React.HTMLAttributes<HTMLFieldSetElement>>;
     /**
      * Uses to pass attributes to the legend's DOM element.
      */
-    legend?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    legend?: FieldsetPassThroughType<React.HTMLAttributes<HTMLLegendElement>>;
     /**
      * Uses to pass attributes to the toggler's DOM element.
      */
-    toggler?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    toggler?: FieldsetPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
      * Uses to pass attributes to the toggler icon's DOM element.
      */
@@ -60,7 +60,7 @@ export interface FieldsetPassThroughOptions {
     /**
      * Uses to pass attributes to the legend title's DOM element.
      */
-    legendTitle?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    legendTitle?: FieldsetPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the toggleable content's DOM element.
      */
