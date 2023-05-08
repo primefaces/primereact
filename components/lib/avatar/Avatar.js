@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { AvatarBase } from './AvatarBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
@@ -8,13 +8,42 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
 
+    const { ptm } = AvatarBase.setMetaData({
+        props,
+        state: {
+            imageFailed: imageFailed
+        }
+    });
+
     const createContent = () => {
         if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
-            return <img src={props.image} alt={props.imageAlt} onError={onImageError}></img>;
+            const imageProps = mergeProps(
+                {
+                    src: props.image,
+                    onError: onImageError
+                },
+                ptm('image')
+            );
+
+            return <img alt={props.imageAlt} {...imageProps}></img>;
         } else if (props.label) {
-            return <span className="p-avatar-text">{props.label}</span>;
+            const labelProps = mergeProps(
+                {
+                    className: 'p-avatar-text'
+                },
+                ptm('label')
+            );
+
+            return <span {...labelProps}>{props.label}</span>;
         } else if (props.icon) {
-            return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
+            const iconProps = mergeProps(
+                {
+                    className: 'p-avatar-icon'
+                },
+                ptm('icon')
+            );
+
+            return IconUtils.getJSXIcon(props.icon, iconProps, { props });
         }
 
         return null;
@@ -40,7 +69,6 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const otherProps = AvatarBase.getOtherProps(props);
     const containerClassName = classNames(
         'p-avatar p-component',
         {
@@ -53,10 +81,20 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         props.className
     );
 
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            style: props.style,
+            className: containerClassName
+        },
+        AvatarBase.getOtherProps(props),
+        ptm('root')
+    );
+
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
     return (
-        <div ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
+        <div {...rootProps}>
             {content}
             {props.children}
         </div>
