@@ -27333,6 +27333,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollTopPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -27352,6 +27360,86 @@
                             "description": "Callback to invoke when overlay becomes hidden."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ScrollTopPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollTopProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ScrollTopState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ScrollTopPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollTopPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollTopPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ScrollTopPassThroughAttributes": {
+                    "description": "Custom passthrough attributes for each DOM elements",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ScrollTopState": {
+                    "description": "Defines current inline state in ScrollTop component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ScrollTopPassThroughType": {
+                    "values": "PassThroughType<T, ScrollTopPassThroughMethodOptions>"
                 }
             }
         }
@@ -27839,6 +27927,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SkeletonPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -27866,7 +27962,7 @@
                 },
                 "SkeletonPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "SkeletonProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",

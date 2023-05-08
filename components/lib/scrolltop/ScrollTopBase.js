@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ScrollTopBase = {
+export const ScrollTopBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ScrollTop',
         target: 'window',
@@ -13,7 +13,5 @@ export const ScrollTopBase = {
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ScrollTopBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ScrollTopBase.defaultProps)
-};
+    }
+});
