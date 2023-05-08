@@ -1,4 +1,4 @@
-import { ComponentBase } from "../componentbase/ComponentBase";
+import { ComponentBase } from '../componentbase/ComponentBase';
 
 export const ProgressSpinnerBase = ComponentBase.extend({
     defaultProps: {

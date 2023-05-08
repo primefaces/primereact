@@ -25,32 +25,32 @@ export const ProgressSpinner = React.memo(
                 ref: elementRef,
                 style: props.style,
                 className,
-                role: "alert",
-                "aria-busy": true
+                role: 'alert',
+                'aria-busy': true
             },
-            ptm("spinner")
+            ptm('spinner')
         );
 
         const spinnerProps = mergeProps(
             {
-                className: "p-progress-spinner-svg",
-                viewBox: "25 25 50 50",
+                className: 'p-progress-spinner-svg',
+                viewBox: '25 25 50 50',
                 style: { animationDuration: props.animationDuration }
             },
-            ptm("spinner")
+            ptm('spinner')
         );
 
         const circleProps = mergeProps(
             {
-                className: "p-progress-spinner-circle",
-                cx: "50",
-                cy: "50",
-                r: "20",
+                className: 'p-progress-spinner-circle',
+                cx: '50',
+                cy: '50',
+                r: '20',
                 fill: props.fill,
                 strokeWidth: props.strokeWidth,
-                strokeMiterlimit: "10"
+                strokeMiterlimit: '10'
             },
-            ptm("circle")
+            ptm('circle')
         );
 
         return (
