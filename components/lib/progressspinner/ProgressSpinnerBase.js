@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from "../componentbase/ComponentBase";
 
-export const ProgressSpinnerBase = {
+export const ProgressSpinnerBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ProgressSpinner',
         id: null,
@@ -10,7 +10,5 @@ export const ProgressSpinnerBase = {
         fill: 'none',
         animationDuration: '2s',
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ProgressSpinnerBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ProgressSpinnerBase.defaultProps)
-};
+    }
+});
