@@ -22,7 +22,7 @@ export const Tag = React.forwardRef((inProps, ref) => {
         {
             className: 'p-tag-icon'
         },
-        ptm("icon")
+        ptm('icon')
     );
 
     const icon = IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
@@ -39,15 +39,15 @@ export const Tag = React.forwardRef((inProps, ref) => {
             style: props.style
         },
         TagBase.getOtherProps(props),
-        ptm("root")
-    )
+        ptm('root')
+    );
 
     const valueProps = mergeProps(
         {
-            className: "p-tag-value"
+            className: 'p-tag-value'
         },
-        ptm("value")
-    )
+        ptm('value')
+    );
 
     return (
         <span {...rootProps}>

@@ -28,7 +28,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
         }
     });
 
-    const [storedValue, setStoredValue] = React.useState(undefined);
+    const [storedValue, setStoredValue] = React.useState(initialValue);
 
     const setValue = (value) => {
         try {
