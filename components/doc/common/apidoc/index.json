@@ -26430,12 +26430,74 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressSpinnerPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ProgressSpinnerPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ProgressSpinnerProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ProgressSpinnerPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressSpinnerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "spinner",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressSpinnerPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the spinner's DOM element."
+                        },
+                        {
+                            "name": "circle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressSpinnerPassThroughType<HTMLAttributes<SVGCircleElement>>",
+                            "description": "Uses to pass attributes to the circle's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressSpinnerPassThroughType": {
+                    "values": "PassThroughType<T, ProgressSpinnerPassThroughMethodOptions>"
                 }
             }
         }
