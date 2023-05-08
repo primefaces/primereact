@@ -40,7 +40,7 @@ export const DropdownBase = {
         onMouseDown: null,
         onShow: null,
         optionDisabled: null,
-        optionGroupChildren: null,
+        optionGroupChildren: 'items',
         optionGroupLabel: null,
         optionGroupTemplate: null,
         optionLabel: null,
