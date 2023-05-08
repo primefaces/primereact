@@ -7,6 +7,9 @@ import { ImportDoc } from '../../components/doc/skeleton/importdoc';
 import { ListDoc } from '../../components/doc/skeleton/listdoc';
 import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
 import { StyleDoc } from '../../components/doc/skeleton/styledoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/skeleton/pt/wireframe';
+import { PTDoc } from '../../components/doc/skeleton/pt/ptdoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -47,7 +50,25 @@ const SkeletonDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Skeleton Component" header="Skeleton" description="Skeleton is a placeholder to display instead of the actual content." componentDocs={docs} apiDocs={['Skeleton']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.skeleton.options',
+            label: 'Skeleton PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Skeleton Component" header="Skeleton" description="Skeleton is a placeholder to display instead of the actual content." componentDocs={docs} apiDocs={['Skeleton']} ptDocs={ptDocs} />;
 };
 
 export default SkeletonDemo;
