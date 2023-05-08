@@ -8,6 +8,27 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type BadgePassThroughType<T> = PassThroughType<T, BadgePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface BadgePassThroughMethodOptions {
+    props: BadgeProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link BadgeProps.pt}
+ */
+export interface BadgePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: BadgePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Defines valid properties in Badge component. In addition to these, all properties of HTMLSpanElement can be used in this component.

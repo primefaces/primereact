@@ -3221,6 +3221,46 @@
                     "values": []
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "BadgePassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "BadgeProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "BadgePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "BadgeProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BadgePassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "BadgePassThroughType": {
+                    "values": "PassThroughType<T, BadgePassThroughMethodOptions>"
+                }
+            }
         }
     },
     "blockui": {
