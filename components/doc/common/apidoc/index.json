@@ -14061,7 +14061,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "default": "",
+                            "default": "items",
                             "description": "Property name or getter function that refers to the children options of option group."
                         },
                         {
