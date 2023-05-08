@@ -26378,6 +26378,60 @@
                     ]
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ProgressBarPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ProgressBarProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ProgressBarPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "ProgressBarProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the value's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ProgressBarPassThroughType": {
+                    "values": "PassThroughType<T, ProgressBarPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "progressspinner": {

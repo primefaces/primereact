@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ProgressBarBase = {
+export const ProgressBarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ProgressBar',
         id: null,
@@ -13,7 +13,5 @@ export const ProgressBarBase = {
         displayValueTemplate: null,
         color: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ProgressBarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ProgressBarBase.defaultProps)
-};
+    }
+});
