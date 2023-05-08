@@ -190,6 +190,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     optionDisabled?: string | ((option: any) => boolean) | undefined;
     /**
      * Property name or getter function that refers to the children options of option group.
+     * @defaultValue items
      */
     optionGroupChildren?: string | undefined;
     /**

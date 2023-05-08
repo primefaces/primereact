@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { OverlayService } from '../overlayservice/OverlayService';
-import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { DropdownBase } from './DropdownBase';
-import { DropdownPanel } from './DropdownPanel';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { Tooltip } from '../tooltip/Tooltip';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DropdownBase } from './DropdownBase';
+import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -50,7 +50,7 @@ export const Dropdown = React.memo(
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
 
                         if (filteredSubOptions && filteredSubOptions.length) {
-                            filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                            filteredGroups.push({ ...optgroup, ...{ [`${props.optionGroupChildren}`]: filteredSubOptions } });
                         }
                     }
 

@@ -93,20 +93,20 @@ export const ScrollTop = React.memo(
                 className: iconClassName
             },
             ptm('icon')
-        )
+        );
         const icon = props.icon || <ChevronUpIcon {...iconProps} />;
         const scrollIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
         const rootProps = mergeProps(
             {
                 ref: scrollElementRef,
-                type: "button",
+                type: 'button',
                 className,
                 style: props.style,
                 onClick
             },
             ScrollTopBase.getOtherProps(props),
             ptm('root')
-        )
+        );
 
         return (
             <>
