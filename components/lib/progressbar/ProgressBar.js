@@ -29,34 +29,32 @@ export const ProgressBar = React.memo(
                     ref: elementRef,
                     className,
                     style: props.style,
-                    role: "progressbar",
-                    "aria-valuemin": "0",
-                    "aria-valuenow": props.value,
-                    "aria-valuemax": "100"
+                    role: 'progressbar',
+                    'aria-valuemin': '0',
+                    'aria-valuenow': props.value,
+                    'aria-valuemax': '100'
                 },
                 ProgressBarBase.getOtherProps(props),
-                ptm("root")
+                ptm('root')
             );
             const valueProps = mergeProps(
                 {
-                    className: "p-progressbar-value p-progressbar-value-animate",
+                    className: 'p-progressbar-value p-progressbar-value-animate',
                     style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
                 },
-                ptm("value")
+                ptm('value')
             );
 
             const labelProps = mergeProps(
                 {
-                    className: "p-progressbar-label"
+                    className: 'p-progressbar-label'
                 },
-                ptm("label")
+                ptm('label')
             );
 
             return (
                 <div {...rootProps}>
-                    <div {...valueProps}>
-                        {props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}
-                    </div>
+                    <div {...valueProps}>{props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
         };
@@ -69,25 +67,25 @@ export const ProgressBar = React.memo(
                     ref: elementRef,
                     className,
                     style: props.style,
-                    role: "progressbar"
+                    role: 'progressbar'
                 },
                 ProgressBarBase.getOtherProps(props),
-                ptm("root")
+                ptm('root')
             );
 
             const containerProps = mergeProps(
                 {
-                    className: "p-progressbar-indeterminate-container"
+                    className: 'p-progressbar-indeterminate-container'
                 },
-                ptm("root")
+                ptm('root')
             );
 
             const valueProps = mergeProps(
                 {
-                    className: "p-progressbar-value p-progressbar-value-animate",
+                    className: 'p-progressbar-value p-progressbar-value-animate',
                     style: { backgroundColor: props.color }
                 },
-                ptm("root")
+                ptm('root')
             );
 
             return (

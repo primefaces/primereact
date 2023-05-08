@@ -43,7 +43,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
                 ptm('icon')
             );
 
-            return IconUtils.getJSXIcon(props.icon, iconProps, { props });
+            return IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
         }
 
         return null;

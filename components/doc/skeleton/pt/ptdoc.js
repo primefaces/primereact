@@ -4,7 +4,6 @@ import { DocSectionText } from '../../common/docsectiontext';
 import { Skeleton } from '../../../lib/skeleton/Skeleton';
 
 export function PTDoc(props) {
-
     const code = {
         basic: `
 <Skeleton
@@ -55,7 +54,7 @@ export default function PTDemo() {
             <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
                 <Skeleton
-                    shape='rectangle'
+                    shape="rectangle"
                     pt={{
                         root: { className: 'w-3rem h-3rem' }
                     }}
