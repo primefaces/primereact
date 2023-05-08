@@ -8,7 +8,35 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type TagPassThroughType<T> = PassThroughType<T, TagPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TagPassThroughMethodOptions {
+    props: TagProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TagProps.pt}
+ */
+export interface TagPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the value's DOM element.
+     */
+    value?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Defines valid properties in Tag component. In addition to these, all properties of HTMLSpanElement can be used in this component.
@@ -38,6 +66,11 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TagPassThroughOptions}
+     */
+    pt?: TagPassThroughOptions;
 }
 
 /**

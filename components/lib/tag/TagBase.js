@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TagBase = {
+export const TagBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Tag',
         value: null,
@@ -10,7 +10,5 @@ export const TagBase = {
         style: null,
         className: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TagBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TagBase.defaultProps)
-};
+    }
+});
