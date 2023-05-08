@@ -14,7 +14,7 @@ import { Avatar } from 'primereact/avatar';
 
 export default function PTDemo() {
     return (
-        <div class="card flex justify-content-center">
+        <div className="card flex justify-content-center">
             <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" 
                 pt={{ image: { className: 'w-4rem h-4rem' } }} />
         </div>
@@ -27,7 +27,7 @@ import { Avatar } from 'primereact/avatar';
 
 export default function PTDemo() {
     return (
-        <div class="card flex justify-content-center">
+        <div className="card flex justify-content-center">
             <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" 
                 pt={{ image: { className: 'w-4rem h-4rem' } }} />
         </div>
@@ -39,7 +39,7 @@ export default function PTDemo() {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <div class="card flex justify-content-center">
+            <div className="card flex justify-content-center">
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" pt={{ image: { className: 'w-4rem h-4rem' } }} />
             </div>
 
