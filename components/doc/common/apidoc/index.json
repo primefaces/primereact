@@ -14568,21 +14568,21 @@
                             "name": "root",
                             "optional": true,
                             "readonly": false,
-                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLFieldSetElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
                             "name": "legend",
                             "optional": true,
                             "readonly": false,
-                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLLegendElement>>",
                             "description": "Uses to pass attributes to the legend's DOM element."
                         },
                         {
                             "name": "toggler",
                             "optional": true,
                             "readonly": false,
-                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
                             "description": "Uses to pass attributes to the toggler's DOM element."
                         },
                         {
@@ -14596,7 +14596,7 @@
                             "name": "legendTitle",
                             "optional": true,
                             "readonly": false,
-                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "FieldsetPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the legend title's DOM element."
                         },
                         {
