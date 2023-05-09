@@ -4,7 +4,7 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, ZIndexUtils } from '../utils/Utils';
+import { ZIndexUtils, classNames } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
@@ -19,11 +19,11 @@ export const Toast = React.memo(
 
         const show = (messageInfo) => {
             if (messageInfo) {
-                setMessagesState((previousMessagesState) => assignIdentifiers(previousMessagesState, messageInfo, true));
+                setMessagesState((prev) => assignIdentifiers(prev, messageInfo, true));
             }
         };
 
-        const assignIdentifiers = (previousMessagesState, messageInfo, copy) => {
+        const assignIdentifiers = (currentState, messageInfo, copy) => {
             let messages;
 
             if (Array.isArray(messageInfo)) {
@@ -34,7 +34,7 @@ export const Toast = React.memo(
                 }, []);
 
                 if (copy) {
-                    messages = previousMessagesState ? [...previousMessagesState, ...multipleMessages] : multipleMessages;
+                    messages = currentState ? [...currentState, ...multipleMessages] : multipleMessages;
                 } else {
                     messages = multipleMessages;
                 }
@@ -42,7 +42,7 @@ export const Toast = React.memo(
                 const message = { _pId: messageIdx++, message: messageInfo };
 
                 if (copy) {
-                    messages = previousMessagesState ? [...previousMessagesState, message] : [message];
+                    messages = currentState ? [...currentState, message] : [message];
                 } else {
                     messages = [message];
                 }
