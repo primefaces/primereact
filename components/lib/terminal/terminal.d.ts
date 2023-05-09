@@ -8,6 +8,74 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type TerminalPassThroughType<T> = PassThroughType<T, TerminalPassThroughMethodOptions>;
+
+/**
+ * Defines current inline state in Terminal component.
+ */
+export interface TerminalState {
+    /**
+     * Current command text as a string.
+     */
+    commandText: string;
+    /**
+     * Current commands as an array.
+     */
+    commands: string[];
+}
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TerminalPassThroughMethodOptions {
+    props: TerminalProps;
+    state: TerminalState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TerminalProps.pt}
+ */
+export interface TerminalPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TerminalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the welcome message's DOM element.
+     */
+    welcomeMessage?: TerminalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: TerminalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the commands' DOM element.
+     */
+    commands?: TerminalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the prompt's DOM element.
+     */
+    prompt?: TerminalPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the command's DOM element.
+     */
+    command?: TerminalPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the response's DOM element.
+     */
+    response?: TerminalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: TerminalPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the command text's DOM element.
+     */
+    commandText?: TerminalPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+}
 
 /**
  * Defines valid properties in Terminal component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -27,6 +95,11 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TerminalPassThroughOptions}
+     */
+    pt?: TerminalPassThroughOptions;
 }
 
 /**
