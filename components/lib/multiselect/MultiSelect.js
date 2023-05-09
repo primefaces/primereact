@@ -210,12 +210,12 @@ export const MultiSelect = React.memo(
             }
         };
 
-        const updateModel = (event, value, option) => {
+        const updateModel = (event, value, selectedOption) => {
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
                     value,
-                    option,
+                    selectedOption,
                     stopPropagation: () => {},
                     preventDefault: () => {},
                     target: {

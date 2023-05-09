@@ -111,7 +111,7 @@ interface MultiSelectChangeEvent {
     /**
      * Selected option
      */
-    option?: any;
+    selectedOption?: any;
     /**
      * Stops the event from propagating.
      */
