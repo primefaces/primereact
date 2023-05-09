@@ -28126,6 +28126,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -28145,6 +28153,101 @@
                             "description": "Callback to invoke when the actions used to close the sidebar are triggered. Exp; close icon, mask and esc key."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "SidebarPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SidebarProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SidebarState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "SidebarPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the close icon's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the mask's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "SidebarState": {
+                    "description": "Defines current inline state in Sidebar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "containerVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current container visible state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "SidebarPassThroughType": {
+                    "values": "PassThroughType<T, SidebarPassThroughMethodOptions>"
                 }
             }
         }

@@ -9,7 +9,59 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type SidebarPassThroughType<T> = PassThroughType<T, SidebarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SidebarPassThroughMethodOptions {
+    props: SidebarProps;
+    state: SidebarState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SidebarProps.pt}
+ */
+export interface SidebarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: SidebarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Sidebar component.
+ */
+export interface SidebarState {
+    /**
+     * Current container visible state as a boolean.
+     * @defaultValue false
+     */
+    containerVisible: boolean;
+}
 
 /**
  * Defines valid properties in Sidebar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -106,6 +158,11 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SidebarPassThroughOptions}
+     */
+    pt?: SidebarPassThroughOptions;
 }
 
 /**

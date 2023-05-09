@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SidebarBase = {
+export const SidebarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Sidebar',
         id: null,
@@ -25,7 +25,5 @@ export const SidebarBase = {
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SidebarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SidebarBase.defaultProps)
-};
+    }
+});
