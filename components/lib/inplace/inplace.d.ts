@@ -14,7 +14,52 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+// import { ButtonPassThroughOptions } from '../button'; //@TODO
+
+export declare type InplacePassThroughType<T> = PassThroughType<T, InplacePassThroughMethodOptions>;
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InplacePassThroughMethodOptions {
+    props: InplaceProps;
+    state: InplaceState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InplaceProps.pt}
+ */
+export interface InplacePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the display's DOM element.
+     */
+    display?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    // closeButton?: ButtonPassThroughOptions<React.HTMLAttributes<HTMLButtonElement>>; //@TODO
+}
+
+/**
+ * Defines current inline state in Inplace component.
+ */
+export interface InplaceState {
+    /**
+     * Current active state as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Custom toggle event.
