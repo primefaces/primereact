@@ -15,13 +15,11 @@ export const Messages = React.memo(
 
         const show = (value) => {
             if (value) {
-                const messages = assignIdentifiers(value, true);
-
-                setMessagesState(messages);
+                setMessagesState((prev) => assignIdentifiers(prev, value, true));
             }
         };
 
-        const assignIdentifiers = (messageInfo, copy) => {
+        const assignIdentifiers = (messagesState, messageInfo, copy) => {
             let messages;
 
             if (Array.isArray(messageInfo)) {
@@ -54,15 +52,11 @@ export const Messages = React.memo(
         };
 
         const replace = (messageInfo) => {
-            const replaced = assignIdentifiers(messageInfo, false);
-
-            setMessagesState(replaced);
+            setMessagesState((prev) => assignIdentifiers(prev, messageInfo, false));
         };
 
         const remove = (messageInfo) => {
-            const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
-
-            setMessagesState(messages);
+            setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId));
 
             props.onRemove && props.onRemove(messageInfo.message);
         };
