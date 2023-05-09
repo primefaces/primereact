@@ -26791,6 +26791,13 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
+                            "name": "indeterminateContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the indeterminate container's DOM element."
+                        },
+                        {
                             "name": "value",
                             "optional": true,
                             "readonly": false,

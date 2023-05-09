@@ -7,7 +7,6 @@ export const ProgressSpinner = React.memo(
         const props = ProgressSpinnerBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
-        const otherProps = ProgressSpinnerBase.getOtherProps(props);
         const className = classNames('p-progress-spinner', props.className);
 
         const { ptm } = ProgressSpinnerBase.setMetaData({

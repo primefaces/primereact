@@ -73,11 +73,11 @@ export const ProgressBar = React.memo(
                 ptm('root')
             );
 
-            const containerProps = mergeProps(
+            const indeterminateContainerProps = mergeProps(
                 {
                     className: 'p-progressbar-indeterminate-container'
                 },
-                ptm('root')
+                ptm('indeterminateContainer')
             );
 
             const valueProps = mergeProps(
@@ -85,12 +85,12 @@ export const ProgressBar = React.memo(
                     className: 'p-progressbar-value p-progressbar-value-animate',
                     style: { backgroundColor: props.color }
                 },
-                ptm('root')
+                ptm('value')
             );
 
             return (
                 <div {...rootProps}>
-                    <div {...containerProps}>
+                    <div {...indeterminateContainerProps}>
                         <div {...valueProps}></div>
                     </div>
                 </div>
