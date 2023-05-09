@@ -55,7 +55,16 @@ const OverlayPanelDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Popover Component" header="OverlayPanel" description="OverlayPanel, also known as Popover, is a container component that can overlay other components on page." componentDocs={docs} apiDocs={['OverlayPanel']} ptDocs={ptDocs} />;
+    return (
+        <DocComponent
+            title="React Popover Component"
+            header="OverlayPanel"
+            description="OverlayPanel, also known as Popover, is a container component that can overlay other components on page."
+            componentDocs={docs}
+            apiDocs={['OverlayPanel']}
+            ptDocs={ptDocs}
+        />
+    );
 };
 
 export default OverlayPanelDemo;

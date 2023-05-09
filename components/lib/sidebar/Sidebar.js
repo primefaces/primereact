@@ -170,9 +170,9 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         const iconClassName = 'p-sidebar-close-icon';
         const closeButtonProps = mergeProps(
             {
-                type: "button",
+                type: 'button',
                 ref: closeIconRef,
-                className: "p-sidebar-close p-sidebar-icon p-link",
+                className: 'p-sidebar-close p-sidebar-icon p-link',
                 onClick: (e) => onClose(e),
                 'aria-label': ariaLabel
             },
@@ -247,7 +247,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
                 ref: sidebarRef,
                 className,
                 style: props.style,
-                role: "complementary"
+                role: 'complementary'
             },
             SidebarBase.getOtherProps(props),
             ptm('root')
@@ -255,14 +255,14 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         const headerProps = mergeProps(
             {
-                className: "p-sidebar-header"
+                className: 'p-sidebar-header'
             },
             ptm('header')
         );
 
         const contentProps = mergeProps(
             {
-                className: "p-sidebar-content"
+                className: 'p-sidebar-content'
             },
             ptm('content')
         );

@@ -70,7 +70,8 @@ export default function PTDemo() {
             <div className="card flex justify-content-center">
                 <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
 
-                <OverlayPanel ref={op}
+                <OverlayPanel
+                    ref={op}
                     pt={{
                         root: { className: 'surface-ground' }
                     }}

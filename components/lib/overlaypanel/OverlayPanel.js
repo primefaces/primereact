@@ -206,13 +206,13 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         const ariaLabel = props.ariaCloseLabel || localeOption('close');
         const closeButtonProps = mergeProps(
             {
-                type: "button",
-                className: "p-overlaypanel-close p-link",
+                type: 'button',
+                className: 'p-overlaypanel-close p-link',
                 onClick: (e) => onCloseClick(e),
                 'aria-label': ariaLabel
             },
             ptm('closeButton')
-        )
+        );
 
         if (props.showCloseIcon) {
             return (
@@ -246,7 +246,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
         const contentProps = mergeProps(
             {
-                className: "p-overlaypanel-content",
+                className: 'p-overlaypanel-content',
                 onClick: (e) => onContentClick(e),
                 onMouseDown: onContentClick
             },
@@ -268,9 +268,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
                 onExited={onExited}
             >
                 <div {...rootProps}>
-                    <div {...contentProps}>
-                        {props.children}
-                    </div>
+                    <div {...contentProps}>{props.children}</div>
                     {closeIcon}
                 </div>
             </CSSTransition>
