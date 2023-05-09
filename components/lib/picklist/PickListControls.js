@@ -1,8 +1,17 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
 import { classNames, ObjectUtils } from '../utils/Utils';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 
 export const PickListControls = React.memo((props) => {
+    const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
+    const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
+    const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;
+    const moveBottomIcon = props.moveBottomIcon || <AngleDoubleDownIcon />;
+
     const moveDisabled = !props.selection || !props.selection.length;
 
     const moveUp = (event) => {
@@ -129,10 +138,10 @@ export const PickListControls = React.memo((props) => {
 
     return (
         <div className={className}>
-            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-up" onClick={moveUp}></Button>
-            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-up" onClick={moveTop}></Button>
-            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
-            <Button disabled={moveDisabled} type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveUpIcon} onClick={moveUp}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveTopIcon} onClick={moveTop}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveDownIcon} onClick={moveDown}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveBottomIcon} onClick={moveBottom}></Button>
         </div>
     );
 });

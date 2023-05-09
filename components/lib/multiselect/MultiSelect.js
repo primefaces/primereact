@@ -4,12 +4,15 @@ import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { MultiSelectDefaultProps } from './MultiSelectBase';
+import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { TimesIcon } from '../icons/times';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MultiSelectDefaultProps);
+        const props = MultiSelectBase.getProps(inProps);
 
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
@@ -489,7 +492,13 @@ export const MultiSelect = React.memo(
 
                     return value.map((val) => {
                         const label = getLabelByValue(val);
-                        const icon = !props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props });
+                        const icon =
+                            !props.disabled &&
+                            (props.removeIcon ? (
+                                IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props })
+                            ) : (
+                                <TimesCircleIcon className="p-multiselect-token-icon" onClick={(e) => removeChip(e, val)} />
+                            ));
 
                         return (
                             <div className="p-multiselect-token" key={label}>
@@ -560,8 +569,16 @@ export const MultiSelect = React.memo(
         });
 
         const createClearIcon = () => {
+            const iconClassName = 'p-multiselect-clear-icon';
+            const icon = props.clearIcon || <TimesIcon className={iconClassName} />;
+            const clearIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
             if (!empty && props.showClear && !props.disabled) {
-                return <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => updateModel(e, null)}></i>;
+                return (
+                    <i className={iconClassName} onClick={(e) => updateModel(e, null)}>
+                        {clearIcon}
+                    </i>
+                );
             }
 
             return null;
@@ -585,7 +602,7 @@ export const MultiSelect = React.memo(
         const visibleOptions = getVisibleOptions();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, MultiSelectDefaultProps);
+        const otherProps = MultiSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-multiselect p-component p-inputwrapper',
@@ -599,6 +616,10 @@ export const MultiSelect = React.memo(
             },
             props.className
         );
+
+        const dropdownIconClass = 'p-multiselect-trigger-icon p-c';
+        const dropdownIcon = <div className="p-multiselect-trigger">{props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { className: dropdownIconClass }, { props }) : <ChevronDownIcon className={dropdownIconClass} />}</div>;
+
         const label = !props.inline && createLabel();
         const clearIcon = !props.inline && createClearIcon();
 
@@ -626,7 +647,7 @@ export const MultiSelect = React.memo(
                         <>
                             {label}
                             {clearIcon}
-                            <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                            {dropdownIcon}
                         </>
                     )}
                     <MultiSelectPanel

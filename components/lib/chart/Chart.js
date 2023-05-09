@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { ChartDefaultProps } from './ChartBase';
+import { classNames } from '../utils/Utils';
+import { ChartBase } from './ChartBase';
 
 // GitHub #3059 wrapper if loaded by script tag
 const ChartJS = (function () {
@@ -14,7 +14,7 @@ const ChartJS = (function () {
 
 const PrimeReactChart = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ChartDefaultProps);
+        const props = ChartBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const chartRef = React.useRef(null);
@@ -81,13 +81,15 @@ const PrimeReactChart = React.memo(
             destroyChart();
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, ChartDefaultProps);
+        const otherProps = ChartBase.getOtherProps(props);
         const className = classNames('p-chart', props.className);
         const style = Object.assign({ width: props.width, height: props.height }, props.style);
+        const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
+        const ariaLabel = props.ariaLabel || title;
 
         return (
             <div id={props.id} ref={elementRef} style={style} className={className} {...otherProps}>
-                <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
+                <canvas ref={canvasRef} width={props.width} height={props.height} role="img" aria-label={ariaLabel}></canvas>
             </div>
         );
     }),

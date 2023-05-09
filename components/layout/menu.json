@@ -1,13 +1,16 @@
 {
     "data": [
         {
-            "name": "Overview",
+            "name": "Getting Started",
             "icon": "pi pi-home",
-            "expanded": true,
             "children": [
                 {
-                    "name": "Get Started",
-                    "to": "/setup"
+                    "name": "Installation",
+                    "to": "/installation"
+                },
+                {
+                    "name": "Configuration",
+                    "to": "/configuration"
                 },
                 {
                     "name": "Locale",
@@ -71,6 +74,10 @@
                             "to": "/inputswitch"
                         },
                         {
+                            "name": "InputNumber",
+                            "to": "/inputnumber"
+                        },
+                        {
                             "name": "InputText",
                             "to": "/inputtext"
                         },
@@ -79,16 +86,12 @@
                             "to": "/inputtextarea"
                         },
                         {
-                            "name": "InputNumber",
-                            "to": "/inputnumber"
+                            "name": "KeyFilter",
+                            "to": "/keyfilter"
                         },
                         {
                             "name": "Knob",
                             "to": "/knob"
-                        },
-                        {
-                            "name": "KeyFilter",
-                            "to": "/keyfilter"
                         },
                         {
                             "name": "Listbox",
@@ -101,6 +104,10 @@
                         {
                             "name": "MultiSelect",
                             "to": "/multiselect"
+                        },
+                        {
+                            "name": "MultiStateCheckbox",
+                            "to": "/multistatecheckbox"
                         },
                         {
                             "name": "Password",
@@ -131,10 +138,6 @@
                             "to": "/tristatecheckbox"
                         },
                         {
-                            "name": "MultiStateCheckbox",
-                            "to": "/multistatecheckbox"
-                        },
-                        {
                             "name": "ToggleButton",
                             "to": "/togglebutton"
                         }
@@ -148,12 +151,12 @@
                             "to": "/button"
                         },
                         {
-                            "name": "SplitButton",
-                            "to": "/splitbutton"
-                        },
-                        {
                             "name": "Speed Dial",
                             "to": "/speeddial"
+                        },
+                        {
+                            "name": "SplitButton",
+                            "to": "/splitbutton"
                         }
                     ]
                 },
@@ -167,14 +170,6 @@
                         {
                             "name": "DataView",
                             "to": "/dataview"
-                        },
-                        {
-                            "name": "DataScroller",
-                            "to": "/datascroller"
-                        },
-                        {
-                            "name": "VirtualScroller",
-                            "to": "/virtualscroller"
                         },
                         {
                             "name": "OrderList",
@@ -203,6 +198,10 @@
                         {
                             "name": "Timeline",
                             "to": "/timeline"
+                        },
+                        {
+                            "name": "VirtualScroller",
+                            "to": "/virtualscroller"
                         }
                     ]
                 },
@@ -234,12 +233,12 @@
                             "to": "/panel"
                         },
                         {
-                            "name": "Splitter",
-                            "to": "/splitter"
-                        },
-                        {
                             "name": "ScrollPanel",
                             "to": "/scrollpanel"
+                        },
+                        {
+                            "name": "Splitter",
+                            "to": "/splitter"
                         },
                         {
                             "name": "TabView",
@@ -305,17 +304,16 @@
                             "to": "/dock"
                         },
                         {
+                            "name": "MegaMenu",
+                            "to": "/megamenu"
+                        },
+                        {
                             "name": "Menu",
                             "to": "/menu"
                         },
-                        
                         {
                             "name": "Menubar",
                             "to": "/menubar"
-                        },
-                        {
-                            "name": "MegaMenu",
-                            "to": "/megamenu"
                         },
                         {
                             "name": "PanelMenu",
@@ -426,25 +424,20 @@
                             "to": "/ripple"
                         },
                         {
+                            "name": "StyleClass",
+                            "to": "/styleclass"
+                        },
+                        {
                             "name": "Tag",
                             "to": "/tag"
                         },
                         {
                             "name": "Terminal",
                             "to": "/terminal"
-                        },
-                        {
-                            "name": "StyleClass",
-                            "to": "/styleclass"
                         }
                     ]
                 }
             ]
-        },
-        {
-            "name": "Component API",
-            "icon": "pi pi-list",
-            "href": "https://primefaces.github.io/primereact"
         },
         {
             "name": "Theming",
@@ -453,10 +446,6 @@
                 {
                     "name": "Overview",
                     "to": "/theming"
-                },
-                {
-                    "name": "Theme Designer",
-                    "href": "https://www.primefaces.org/designer/primereact"
                 },
                 {
                     "name": "Visual Editor",
@@ -468,7 +457,7 @@
                 },
                 {
                     "name": "SASS API",
-                    "href": "https://www.primefaces.org/designer/api/primereact/8.1.0"
+                    "href": "https://www.primefaces.org/designer/api/primereact/9.0.0"
                 }
             ]
         },
@@ -478,9 +467,122 @@
             "to": "/uikit"
         },
         {
-            "name": "PrimeIcons",
+            "name": "Icons",
             "icon": "pi pi-eye",
-            "to": "/icons"
+            "to": "/icons",
+            "children": [
+                {
+                    "name": "Prime Icons",
+                    "to": "/icons"
+                },
+                {
+                    "name": "Custom Icons",
+                    "to": "/customicons"
+                }
+            ]
+        },
+        {
+            "name": "Hooks",
+            "icon": "pi pi-link",
+            "children": [
+                {
+                    "name": "Lifecycle",
+                    "children": [
+                        {
+                            "name": "useMountEffect",
+                            "to": "/hooks/usemounteffect"
+                        },
+                        {
+                            "name": "useUpdateEffect",
+                            "to": "/hooks/useupdateeffect"
+                        },
+                        {
+                            "name": "useUnmountEffect",
+                            "to": "/hooks/useunmounteffect"
+                        }
+                    ]
+                },
+                {
+                    "name": "Listener",
+                    "children": [
+                        {
+                            "name": "useEventListener",
+                            "to": "/hooks/useeventlistener"
+                        },
+                        {
+                            "name": "useOverlayListener",
+                            "to": "/hooks/useoverlaylistener"
+                        },
+                        {
+                            "name": "useOverlayScrollListener",
+                            "to": "/hooks/useoverlayscrolllistener"
+                        },
+                        {
+                            "name": "useResizeListener",
+                            "to": "/hooks/useresizelistener"
+                        }
+                    ]
+                },
+                {
+                    "name": "Element",
+                    "children": [
+                        {
+                            "name": "useClickOutside",
+                            "to": "/hooks/useclickoutside"
+                        },
+                        {
+                            "name": "useIntersectionObserver",
+                            "to": "/hooks/useintersectionobserver"
+                        },
+                        {
+                            "name": "useMouse",
+                            "to": "/hooks/usemouse"
+                        },
+                        {
+                            "name": "useMove",
+                            "to": "/hooks/usemove"
+                        }
+                    ]
+                },
+                {
+                    "name": "Timer",
+                    "children": [
+                        {
+                            "name": "useInterval",
+                            "to": "/hooks/useinterval"
+                        },
+                        {
+                            "name": "useTimeout",
+                            "to": "/hooks/usetimeout"
+                        }
+                    ]
+                },
+                {
+                    "name": "State",
+                    "children": [
+                        {
+                            "name": "useCounter",
+                            "to": "/hooks/usecounter"
+                        },
+                        {
+                            "name": "useDebounce",
+                            "to": "/hooks/usedebounce"
+                        },
+                        {
+                            "name": "useFavicon",
+                            "to": "/hooks/usefavicon"
+                        },
+                        {
+                            "name": "usePrevious",
+                            "to": "/hooks/useprevious"
+                        },
+                        {
+                            "name": "useStorage",
+                            "to": "/hooks/usestorage"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "Templates",
@@ -496,6 +598,24 @@
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
             "href": "https://www.primefaces.org/primeflex"
+        },
+        {
+            "name": "Support",
+            "icon": "pi pi-question",
+            "children": [
+                {
+                    "name": "Discord",
+                    "href": "https://discord.gg/gzKFYnpmCY"
+                },
+                {
+                    "name": "Forum",
+                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
+                },
+                {
+                    "name": "PRO",
+                    "to": "/support"
+                }
+            ]
         },
         {
             "name": "Discover",
@@ -536,24 +656,6 @@
                 {
                     "name": "PrimeGear",
                     "href": "https://gear.primefaces.org"
-                }
-            ]
-        },
-        {
-            "name": "Support",
-            "icon": "pi pi-question",
-            "children": [
-                {
-                    "name": "Discord Server",
-                    "href": "https://discord.gg/gzKFYnpmCY"
-                },
-                {
-                    "name": "Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
-                },
-                {
-                    "name": "PRO Support",
-                    "to": "/support"
                 }
             ]
         }

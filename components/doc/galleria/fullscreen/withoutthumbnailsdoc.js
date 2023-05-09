@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { PhotoService } from '../../../../service/PhotoService';
 import { Button } from '../../../lib/button/Button';
 import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { PhotoService } from '../../../../service/PhotoService';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function WithoutThumbnailsDoc(props) {
     const [images, setImages] = useState(null);
@@ -95,8 +95,8 @@ export default function WithoutThumbnailsDemo() {
         data: `
 /* PhotoService */
 {
-    itemImageSrc: 'https://primereact.org/images/galleria/galleria1.jpg',
-    thumbnailImageSrc: 'https://primereact.org/images/galleria/galleria1s.jpg',
+    itemImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1.jpg',
+    thumbnailImageSrc: 'https://primefaces.org/cdn/primereact/images/galleria/galleria1s.jpg',
     alt: 'Description for Image 1',
     title: 'Title 1'
 },

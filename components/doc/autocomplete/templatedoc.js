@@ -29,7 +29,7 @@ export function TemplateDoc(props) {
     const itemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img alt={item.name} src={'/images/flag/flag_placeholder.png'} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
+                <img alt={item.name} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.name}</div>
             </div>
         );
@@ -77,7 +77,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src="https://primereact.org/images/flag/flag_placeholder.png"
+                    src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -100,7 +100,7 @@ export default function TemplateDemo() {
         `,
         typescript: `
 import React, { useEffect, useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 import { CountryService } from './service/CountryService';
 
 interface Country {
@@ -113,7 +113,7 @@ export default function TemplateDemo() {
     const [selectedCountry, setSelectedCountry] = useState<Country>(null);
     const [filteredCountries, setFilteredCountries] = useState<Country[]>(null);
     
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         // Timeout to emulate a network connection
         setTimeout(() => {
             let _filteredCountries;
@@ -136,7 +136,7 @@ export default function TemplateDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.name}
-                    src="https://primereact.org/images/flag/flag_placeholder.png"
+                    src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -152,7 +152,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-                completeMethod={search} onChange={(e: AutoCompleteChangeParams) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                completeMethod={search} onChange={(e: AutoCompleteChangeEvent) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
         </div>
     )
 }

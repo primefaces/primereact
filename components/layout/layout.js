@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import PrimeReact from '../lib/api/PrimeReact';
 import { classNames } from '../lib/utils/ClassNames';
 import NewsSection from '../news/newssection';
-import Analytics from './analytics';
 import AppContentContext from './appcontentcontext';
 import Config from './config';
 import Footer from './footer';
@@ -13,7 +12,7 @@ import Topbar from './topbar';
 
 export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
-    const [ripple, setRipple] = useState(false);
+    const [ripple, setRipple] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
@@ -82,7 +81,6 @@ export default function Layout(props) {
 
     return (
         <div className={wrapperClassName}>
-            <Analytics />
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
@@ -99,7 +97,7 @@ export default function Layout(props) {
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
                 <meta property="og:image" content="https://www.primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
-                <link rel="icon" href="/images/favicon.ico" type="image/x-icon"></link>
+                <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon"></link>
             </Head>
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
             <Topbar onMenuButtonClick={onMenuButtonClick} onConfigButtonClick={onConfigButtonClick} />

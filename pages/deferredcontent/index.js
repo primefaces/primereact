@@ -1,10 +1,10 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/deferredcontent/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
 import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
 import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
+import { Wireframe } from '../../components/doc/deferredcontent/pt/wireframe';
 import { StyleDoc } from '../../components/doc/deferredcontent/styledoc';
 
 const DeferredContentDemo = () => {
@@ -33,31 +33,32 @@ const DeferredContentDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.image',
+            label: 'Wireframe',
+            component: Wireframe
         },
         {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'DeferredContent', pathname: '/modules/deferredcontent.html' }]
+            id: 'pt.deferredcontent.options',
+            label: 'DeferredContent PT Options',
+            component: DocApiTable
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Deferred Content Component</title>
-                <meta name="description" content="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>DeferredContent</h1>
-                        <p>DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Deferred Content Component"
+            header="DeferredContent"
+            description="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll."
+            componentDocs={docs}
+            apiDocs={['DeferredContent']}
+            ptDocs={ptDocs}
+            ptDescription=""
+        />
     );
 };
 

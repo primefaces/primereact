@@ -42,13 +42,13 @@ export default function FloatLabelDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 export default function FloatLabelDemo() {
     const [value, setValue] = useState<string>('');
     const [items, setItems] = useState<string[]>([]);
 
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         setItems([...Array(10).keys()].map(item => event.query + '-' + item));
     }
 

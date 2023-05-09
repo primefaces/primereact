@@ -2,7 +2,7 @@
  *
  * TriStateCheckbox is used to select either "true", "false" or "null" as the value.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tristatecheckbox/)
+ * [Live Demo](https://www.primereact.org/tristatecheckbox/)
  *
  * @module tristatecheckbox
  *
@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom change event.
@@ -39,6 +40,14 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      */
     readOnly?: boolean | undefined;
     /**
+     * Icon of the checkbox when checked.
+     */
+    checkIcon?: IconType<TriStateCheckboxProps> | undefined;
+    /**
+     * Icon of the checkbox when unchecked.
+     */
+    uncheckIcon?: IconType<TriStateCheckboxProps> | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;
@@ -63,9 +72,9 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
  *
  * _TriStateCheckbox is used to select either "true", "false" or "null" as the value._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tristatecheckbox/)
+ * [Live Demo](https://www.primereact.org/tristatecheckbox/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

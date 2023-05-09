@@ -2,12 +2,33 @@
  *
  * Skeleton is a placeholder to display instead of the actual content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/skeleton/)
+ * [Live Demo](https://www.primereact.org/skeleton/)
  *
  * @module skeleton
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type SkeletonPassThroughType<T> = PassThroughType<T, SkeletonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SkeletonPassThroughMethodOptions {
+    props: SkeletonProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SkeletonProps.pt}
+ */
+export interface SkeletonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SkeletonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Skeleton component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -47,6 +68,11 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SkeletonPassThroughOptions}
+     */
+    pt?: SkeletonPassThroughOptions;
 }
 
 /**
@@ -54,9 +80,9 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _Skeleton is a placeholder to display instead of the actual content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/skeleton/)
+ * [Live Demo](https://www.primereact.org/skeleton/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

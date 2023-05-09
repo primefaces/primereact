@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { BreadCrumbDefaultProps } from './BreadCrumbBase';
+import { BreadCrumbBase } from './BreadCrumbBase';
+import { ChevronRightIcon } from '../icons/chevronright';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, BreadCrumbDefaultProps);
+        const props = BreadCrumbBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
 
@@ -68,7 +69,11 @@ export const BreadCrumb = React.memo(
         };
 
         const createSeparator = () => {
-            return <li className="p-breadcrumb-chevron pi pi-chevron-right"></li>;
+            const iconClassName = 'p-breadcrumb-chevron';
+            const icon = props.separatorIcon || <ChevronRightIcon className={iconClassName} />;
+            const separatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+            return separatorIcon;
         };
 
         const createMenuitem = (item) => {
@@ -133,7 +138,7 @@ export const BreadCrumb = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, BreadCrumbDefaultProps);
+        const otherProps = BreadCrumbBase.getOtherProps(props);
         const className = classNames('p-breadcrumb p-component', props.className);
         const home = createHome();
         const items = createMenuitems();

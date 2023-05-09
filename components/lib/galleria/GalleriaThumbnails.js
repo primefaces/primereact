@@ -2,7 +2,11 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronDownIcon } from '../icons/chevrondown';
 
 const GalleriaThumbnailItem = React.memo((props) => {
     const onItemClick = (event) => {
@@ -324,16 +328,16 @@ export const GalleriaThumbnails = React.memo(
             if (props.showThumbnailNavigators) {
                 let isDisabled = (!props.circular && props.activeItemIndex === 0) || props.value.length <= numVisibleState;
                 let buttonClassName = classNames('p-galleria-thumbnail-prev p-link', {
-                        'p-disabled': isDisabled
-                    }),
-                    iconClassName = classNames('p-galleria-thumbnail-prev-icon pi', {
-                        'pi-chevron-left': !props.isVertical,
-                        'pi-chevron-up': props.isVertical
-                    });
+                    'p-disabled': isDisabled
+                });
+
+                const iconClassName = 'p-galleria-thumbnail-prev-icon';
+                const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon className={iconClassName} /> : props.prevThumbnailIcon || <ChevronLeftIcon className={iconClassName} />;
+                const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
                 return (
                     <button className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
-                        <span className={iconClassName}></span>
+                        {prevThumbnailIcon}
                         <Ripple />
                     </button>
                 );
@@ -348,14 +352,14 @@ export const GalleriaThumbnails = React.memo(
                 const buttonClassName = classNames('p-galleria-thumbnail-next p-link', {
                     'p-disabled': isDisabled
                 });
-                const iconClassName = classNames('p-galleria-thumbnail-next-icon pi', {
-                    'pi-chevron-right': !props.isVertical,
-                    'pi-chevron-down': props.isVertical
-                });
+
+                const iconClassName = 'p-galleria-thumbnail-next-icon';
+                const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon className={iconClassName} /> : props.nextThumbnailIcon || <ChevronRightIcon className={iconClassName} />;
+                const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
                 return (
                     <button className={buttonClassName} onClick={navForward} disabled={isDisabled}>
-                        <span className={iconClassName}></span>
+                        {nextThumbnailIcon}
                         <Ripple />
                     </button>
                 );

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
     return (
@@ -8,7 +8,7 @@ export function AccessibilityDoc() {
             <DocSectionText id="accessibility" label="Accessibility">
                 <h3>Screen Reader</h3>
                 <p>
-                    DataTable uses a <i>treegrid</i> element whose attributes can be extended with the <i>tableProps</i> option. This property allows passing aria roles and attributes like <i>aria-label</i> and <i>aria-describedby</i> to define the
+                    TreeTable uses a <i>treegrid</i> element whose attributes can be extended with the <i>tableProps</i> option. This property allows passing aria roles and attributes like <i>aria-label</i> and <i>aria-describedby</i> to define the
                     table for readers. Default role of the table is <i>table</i>. Header, body and footer elements use <i>rowgroup</i>, rows use <i>row</i> role, header cells have <i>columnheader</i> and body cells use <i>cell</i> roles. Sortable
                     headers utilizer <i>aria-sort</i> attribute either set to "ascending" or "descending".
                 </p>
@@ -24,7 +24,7 @@ export function AccessibilityDoc() {
                 <p>Editable cells use custom templating so you need to manage aria roles and attributes manually if required.</p>
 
                 <p>
-                    Paginator is a standalone component used inside the DataTable, refer to the <Link href="/paginator">paginator</Link> for more information about the accessibility features.
+                    Paginator is a standalone component used inside the TreeTable, refer to the <Link href="/paginator">paginator</Link> for more information about the accessibility features.
                 </p>
 
                 <h3>Sortable Headers Keyboard Support</h3>

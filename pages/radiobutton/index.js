@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
 import { DisabledDoc } from '../../components/doc/radiobutton/disableddoc';
 import { DynamicDoc } from '../../components/doc/radiobutton/dynamicdoc';
@@ -65,32 +63,10 @@ const RadioButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'RadioButton', pathname: '/modules/radiobutton.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React RadioButton Component</title>
-                <meta name="description" content="RadioButton is an extension to standard radio button element with theming." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>RadioButton</h1>
-                        <p>RadioButton is an extension to standard radio button element with theming.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React RadioButton Component" header="RadioButton" description="RadioButton is an extension to standard radio button element with theming." componentDocs={docs} apiDocs={['RadioButton']} />;
 };
 
 export default RadioButtonDemo;

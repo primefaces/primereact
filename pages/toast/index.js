@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/toast/basicdoc';
 import { ImportDoc } from '../../components/doc/toast/importdoc';
@@ -57,32 +55,10 @@ const ToastDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Toast', pathname: '/modules/toast.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Toast Component</title>
-                <meta name="description" content="Toast is used to display messages in an overlay." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Toast</h1>
-                        <p>Toast is used to display messages in an overlay.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={['Toast']} />;
 };
 
 export default ToastDemo;

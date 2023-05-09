@@ -2,12 +2,31 @@
  *
  * A set of Avatars can be displayed together using the AvatarGroup component.
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatar/)
+ * [Live Demo](https://www.primereact.org/avatar/)
  *
  * @module avatargroup
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type AvatarGroupPassThroughType<T> = PassThroughType<T, AvatarGroupPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface AvatarGroupPassThroughMethodOptions {}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link AvatarGroupProps.pt}
+ */
+export interface AvatarGroupPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: AvatarGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Avatar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -26,9 +45,9 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _A set of Avatars can be displayed together using the AvatarGroup component._
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatargroup/)
+ * [Live Demo](https://www.primereact.org/avatargroup/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

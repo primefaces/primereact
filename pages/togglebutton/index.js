@@ -1,13 +1,11 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/togglebutton/basicdoc';
 import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
+import { FormikDoc } from '../../components/doc/togglebutton/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/togglebutton/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
 import { StyleDoc } from '../../components/doc/togglebutton/styledoc';
-import { FormikDoc } from '../../components/doc/togglebutton/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/togglebutton/validation/hookformdoc';
 
 const ToggleButtonDemo = () => {
     const docs = [
@@ -52,33 +50,10 @@ const ToggleButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            doc: [{ name: 'ToggleButton', pathname: '/modules/togglebutton.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ToggleButton Component</title>
-                <meta name="description" content="ToggleButton is used to select a boolean value using a button." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>ToggleButton</h1>
-                        <p>ToggleButton is used to select a boolean value using a button.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ToggleButton Component" header="ToggleButton" description="ToggleButton is used to select a boolean value using a button." componentDocs={docs} apiDocs={['ToggleButton']} />;
 };
 
 export default ToggleButtonDemo;

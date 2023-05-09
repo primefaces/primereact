@@ -2,7 +2,7 @@
  *
  * Dropdown also known as Select, is used to choose an item from a collection of options.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  *
  * @module dropdown
  *
@@ -42,7 +42,7 @@ interface DropdownFilterEvent {
 /**
  * Custom filter options
  * @see {@link DropdownProps.filterTemplate}
- * @group Misc
+ * @deprecated Since v9.3.0
  */
 interface DropdownFilterOptions {
     /**
@@ -84,8 +84,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     className?: string | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-times
+     * Icon of the dropdown.
      */
     clearIcon?: IconType<DropdownProps> | undefined;
     /**
@@ -98,8 +97,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     disabled?: boolean | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Icon of the dropdown.
      */
     dropdownIcon?: IconType<DropdownProps> | undefined;
     /**
@@ -123,10 +121,18 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     filter?: boolean | undefined;
     /**
+     * Icon of the filter to search.
+     */
+    filterIcon?: IconType<DropdownProps> | undefined;
+    /**
      * When filtering is enabled, filterBy decides which field or fields (comma separated) to search against.
      * @defaultValue label
      */
     filterBy?: 'label' | string | undefined;
+    /**
+     * Icon of the filter to clear.
+     */
+    filterClearIcon?: IconType<DropdownProps> | undefined;
     /**
      * When the panel is opened, it specifies that the filter input should focus automatically.
      * @defaultValue true
@@ -147,8 +153,9 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     filterPlaceholder?: string | undefined;
     /**
      * The template of filter element.
+     * @deprecated Since v9.3.0
      */
-    filterTemplate?: React.ReactNode | ((options: DropdownFilterOptions) => React.ReactNode) | undefined;
+    filterTemplate?: React.ReactNode | ((options: { filterOptions: DropdownFilterOptions }) => React.ReactNode) | undefined;
     /**
      * Reference of the focusable input element.
      */
@@ -183,6 +190,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     optionDisabled?: string | ((option: any) => boolean) | undefined;
     /**
      * Property name or getter function that refers to the children options of option group.
+     * @defaultValue items
      */
     optionGroupChildren?: string | undefined;
     /**
@@ -337,9 +345,9 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
  *
  * _Dropdown also known as Select, is used to choose an item from a collection of options._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dropdown/)
+ * [Live Demo](https://www.primereact.org/dropdown/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

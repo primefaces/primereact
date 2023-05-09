@@ -2,11 +2,11 @@ import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { InputTextareaDefaultProps } from './InputTextareaBase';
+import { InputTextareaBase } from './InputTextareaBase';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, InputTextareaDefaultProps);
+        const props = InputTextareaBase.getProps(inProps);
 
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);
@@ -52,13 +52,13 @@ export const InputTextarea = React.memo(
         };
 
         const onInput = (event) => {
+            const target = event.target;
+
             if (props.autoResize) {
-                resize();
+                resize(ObjectUtils.isEmpty(target.value));
             }
 
             props.onInput && props.onInput(event);
-
-            const target = event.target;
 
             ObjectUtils.isNotEmpty(target.value) ? DomHandler.addClass(target, 'p-filled') : DomHandler.removeClass(target, 'p-filled');
         };
@@ -88,9 +88,6 @@ export const InputTextarea = React.memo(
             }
         };
 
-        const currentValue = elementRef.current && elementRef.current.value;
-        const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue) || ObjectUtils.isNotEmpty(currentValue), [props.value, props.defaultValue, currentValue]);
-
         React.useEffect(() => {
             ObjectUtils.combinedRefs(elementRef, ref);
         }, [elementRef, ref]);
@@ -101,8 +98,9 @@ export const InputTextarea = React.memo(
             }
         }, [props.autoResize]);
 
+        const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, InputTextareaDefaultProps);
+        const otherProps = InputTextareaBase.getOtherProps(props);
         const className = classNames(
             'p-inputtextarea p-inputtext p-component',
             {

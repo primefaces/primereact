@@ -1,6 +1,5 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/divider/basicdoc';
 import { ContentDoc } from '../../components/doc/divider/contentdoc';
@@ -9,6 +8,8 @@ import { LoginDoc } from '../../components/doc/divider/logindoc';
 import { StyleDoc } from '../../components/doc/divider/styledoc';
 import { TypeDoc } from '../../components/doc/divider/typedoc';
 import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
+import { PTDoc } from '../../components/doc/divider/pt/ptdoc';
+import { Wireframe } from '../../components/doc/divider/pt/wireframe';
 
 const DividerDemo = () => {
     const docs = [
@@ -51,32 +52,28 @@ const DividerDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Divider', pathname: '/modules/divider.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Divider Component</title>
-                <meta name="description" content="Divider is used to separate contents." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Divider</h1>
-                        <p>Divider is used to separate contents.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.divider.options',
+            label: 'Divider PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={['Divider']} ptDocs={ptDocs} />;
 };
 
 export default DividerDemo;

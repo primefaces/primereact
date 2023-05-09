@@ -2,12 +2,56 @@
  *
  * Toolbar is a grouping component for buttons and other content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/toolbar/)
+ * [Live Demo](https://www.primereact.org/toolbar/)
  *
  * @module toolbar
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils';
+
+export declare type ToolbarPassThroughType<T> = PassThroughType<T, ToolbarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ToolbarPassThroughMethodOptions {
+    props: ToolbarProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ToolbarProps.pt}
+ */
+export interface ToolbarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the start's DOM element.
+     */
+    start?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the center's DOM element.
+     */
+    center?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the right's DOM element.
+     */
+    end?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines valid properties in Toolbar component.
+ */
+export interface ToolbarProps {
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToolbarPassThroughOptions}
+     */
+    pt?: ToolbarPassThroughOptions;
+}
 
 /**
  * Defines valid properties in Toolbar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -48,9 +92,9 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _Toolbar is a grouping component for buttons and other content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/toolbar/)
+ * [Live Demo](https://www.primereact.org/toolbar/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

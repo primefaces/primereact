@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/message/basicdoc';
 import { ImportDoc } from '../../components/doc/message/importdoc';
@@ -45,32 +43,10 @@ const MessageDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Message', pathname: '/modules/message.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Message Component</title>
-                <meta name="description" content="Message component displays information related to another element such as invalid input." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Message</h1>
-                        <p>Message component displays information related to another element such as invalid input.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Message Component" header="Message" description="Message component displays information related to another element such as invalid input." componentDocs={docs} apiDocs={['Message']} />;
 };
 
 export default MessageDemo;

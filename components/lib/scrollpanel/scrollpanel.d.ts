@@ -2,12 +2,75 @@
  *
  * ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.
  *
- * [Live Demo](https://www.primefaces.org/primereact/scrollpanel/)
+ * [Live Demo](https://www.primereact.org/scrollpanel/)
  *
  * @module scrollpanel
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ScrollPanelThroughType<T> = PassThroughType<T, ScrollPanelThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ScrollPanelThroughMethodOptions {
+    props: ScrollPanelProps;
+    state: ScrollPanelState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ScrollPanelProps.pt}
+ */
+export interface ScrollPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the horizontal panel's DOM element.
+     */
+    barX?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the vertical panel's DOM element.
+     */
+    barY?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Panel component.
+ */
+export interface ScrollPanelState {
+    /**
+     * Current id state as a string.
+     */
+    id: string;
+    /**
+     * Current scrollpanel orientation.
+     * @defaultValue vertical
+     */
+    orientation: string;
+    /**
+     * Latest scroll top position.
+     * @defaultValue 0
+     */
+    lastScrollTop: number;
+    /**
+     * Latest scroll left position.
+     * @defaultValue 0
+     */
+    lastScrollLeft: number;
+}
 
 /**
  * Defines valid properties in ScrollPanel component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -26,9 +89,9 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar._
  *
- * [Live Demo](https://www.primefaces.org/primereact/scrollpanel/)
+ * [Live Demo](https://www.primereact.org/scrollpanel/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

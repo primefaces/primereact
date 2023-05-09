@@ -2,7 +2,7 @@
  *
  * Password displays strength indicator for password fields.
  *
- * [Live Demo](https://www.primefaces.org/primereact/password/)
+ * [Live Demo](https://www.primereact.org/password/)
  *
  * @module password
  *
@@ -12,6 +12,7 @@ import { CSSTransitionProps } from '../csstransition';
 import { InputText } from '../inputtext';
 import { KeyFilterType } from '../keyfilter/keyfilteroptions';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom icon event
@@ -41,7 +42,7 @@ interface PasswordIconEvent {
  * Defines valid properties in Password component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref'> {
+export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'content'> {
     /**
      * Identifier of the input element.
      */
@@ -58,6 +59,14 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Style class of the input field.
      */
     inputClassName?: string | undefined;
+    /**
+     * Hide icon template.
+     */
+    hideIcon?: IconType<PasswordProps> | undefined;
+    /**
+     * Show icon template.
+     */
+    showIcon?: IconType<PasswordProps> | undefined;
     /**
      * Text to prompt password entry.
      * @defaultValue Please enter a password
@@ -169,9 +178,9 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
  *
  * _Password displays strength indicator for password fields._
  *
- * [Live Demo](https://www.primefaces.org/primereact/password/)
+ * [Live Demo](https://www.primereact.org/password/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

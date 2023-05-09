@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
-export function HorizontalDoc(props) {
+export function HorizontalScrollDoc(props) {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
@@ -14,10 +14,13 @@ export function HorizontalDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} scrollable style={{ width: '600px' }}>
-    <Column field="name" header="Name" expander style={{ width: '350px' }} ></Column>
-    <Column field="size" header="Size" style={{ width: '350px' }} ></Column>
-    <Column field="type" header="Type" style={{ width: '350px' }} ></Column>
+<TreeTable value={nodes} scrollable scrollHeight="200px">
+    <Column field="name" header="Name" expander style={{ width: '250px' }}></Column>
+    <Column field="size" header="Size" style={{ width: '250px' }}></Column>
+    <Column field="type" header="Type 2" style={{ width: '250px' }}></Column>
+    <Column field="size" header="Size 2" style={{ width: '250px' }}></Column>
+    <Column field="type" header="Type 3" style={{ width: '250px' }}></Column>
+    <Column field="size" header="Size 3" style={{ width: '250px' }}></Column>
 </TreeTable>
         `,
         javascript: `
@@ -26,19 +29,22 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function HorizontalDoc() {
+export default function HorizontalScrollDemo() {
     const [nodes, setNodes] = useState([]);
     
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} scrollable style={{ width: '600px' }}>
-                <Column field="name" header="Name" expander style={{ width: '350px' }} ></Column>
-                <Column field="size" header="Size" style={{ width: '350px' }} ></Column>
-                <Column field="type" header="Type" style={{ width: '350px' }} ></Column>
+            <TreeTable value={nodes} scrollable scrollHeight="200px">
+                <Column field="name" header="Name" expander style={{ width: '250px' }}></Column>
+                <Column field="size" header="Size" style={{ width: '250px' }}></Column>
+                <Column field="type" header="Type 2" style={{ width: '250px' }}></Column>
+                <Column field="size" header="Size 2" style={{ width: '250px' }}></Column>
+                <Column field="type" header="Type 3" style={{ width: '250px' }}></Column>
+                <Column field="size" header="Size 3" style={{ width: '250px' }}></Column>
             </TreeTable>
         </div>
     );
@@ -48,28 +54,31 @@ export default function HorizontalDoc() {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function HorizontalDoc() {
-    const [nodes, setNodes] = useState([]);
+export default function HorizontalScrollDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
     
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} scrollable style={{ width: '600px' }}>
-                <Column field="name" header="Name" expander style={{ width: '350px' }} ></Column>
-                <Column field="size" header="Size" style={{ width: '350px' }} ></Column>
-                <Column field="type" header="Type" style={{ width: '350px' }} ></Column>
+            <TreeTable value={nodes} scrollable scrollHeight="200px">
+                <Column field="name" header="Name" expander style={{ width: '250px' }}></Column>
+                <Column field="size" header="Size" style={{ width: '250px' }}></Column>
+                <Column field="type" header="Type 2" style={{ width: '250px' }}></Column>
+                <Column field="size" header="Size 2" style={{ width: '250px' }}></Column>
+                <Column field="type" header="Type 3" style={{ width: '250px' }}></Column>
+                <Column field="size" header="Size 3" style={{ width: '250px' }}></Column>
             </TreeTable>
         </div>
     );
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -102,13 +111,16 @@ export default function HorizontalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
+                <p>Horizontal scrolling is enabled when the total width of columns exceeds table width.</p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} scrollable style={{ width: '600px' }}>
-                    <Column field="name" header="Name" expander style={{ width: '350px' }}></Column>
-                    <Column field="size" header="Size" style={{ width: '350px' }}></Column>
-                    <Column field="type" header="Type" style={{ width: '350px' }}></Column>
+                <TreeTable value={nodes} scrollable scrollHeight="200px">
+                    <Column field="name" header="Name" expander style={{ width: '250px' }}></Column>
+                    <Column field="size" header="Size" style={{ width: '250px' }}></Column>
+                    <Column field="type" header="Type 2" style={{ width: '250px' }}></Column>
+                    <Column field="size" header="Size 2" style={{ width: '250px' }}></Column>
+                    <Column field="type" header="Type 3" style={{ width: '250px' }}></Column>
+                    <Column field="size" header="Size 3" style={{ width: '250px' }}></Column>
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

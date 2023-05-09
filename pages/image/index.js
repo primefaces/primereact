@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/image/basicdoc';
 import { ImportDoc } from '../../components/doc/image/importdoc';
@@ -45,32 +43,10 @@ const ImageDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Image', pathname: '/modules/image.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Image Component</title>
-                <meta name="description" content="Displays a single image with preview and tranformation options." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Image</h1>
-                        <p>Displays a single image with preview and tranformation options.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Image Component" header="Image" description="Displays a single image with preview and tranformation options." componentDocs={docs} apiDocs={['Image']} />;
 };
 
 export default ImageDemo;

@@ -10,12 +10,13 @@ export function DocSectionCode(props) {
     const codeEditor = useCodeEditor({ ...props, template: 'cra' });
 
     const toggleCodeMode = (content) => {
-        setCodeMode(codeMode === 'basic' ? content : 'basic');
-    };
+        if (codeMode === 'data') {
+            setCodeMode('javascript');
+        } else {
+            setCodeMode(codeMode === 'basic' ? content : 'basic');
+        }
 
-    const onToggleData = () => {
-        toggleCodeMode('data');
-        setCodeLang('data');
+        setCodeLang('javascript');
     };
 
     const copyCode = async () => {
@@ -24,11 +25,39 @@ export function DocSectionCode(props) {
 
     return (
         <div className="relative doc-section-code">
-            <div className="flex surface-card align-items-center justify-content-end absolute z-2" style={{ right: '.75rem', top: '.75rem', gap: '.75rem' }}>
-                {codeMode !== 'basic' && !props.hideToggleCode && (
+            {codeMode === 'basic' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code {...props}>
+                        {props.code.basic}
+                    </CodeHighlight>
+                </div>
+            )}
+            {codeMode === 'data' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code lang={'json'}>
+                        {props.code.data}
+                    </CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'javascript' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code>{props.code.javascript}</CodeHighlight>
+                </div>
+            )}
+            {codeMode !== 'basic' && codeLang === 'typescript' && (
+                <div className={props.codeClassName}>
+                    <CodeHighlight code lang={'tsx'}>
+                        {props.code.typescript}
+                    </CodeHighlight>
+                </div>
+            )}
+            <div className="flex surface-card align-items-center justify-content-end absolute" style={{ right: '.75rem', top: '.75rem', gap: '.75rem' }}>
+                {codeMode !== 'basic' && !props.hideToggleCode && codeMode !== 'data' && (
                     <>
                         <Button
-                            className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'javascript' })}
+                            className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', {
+                                'doc-section-code-active text-primary': codeLang === 'javascript' && codeMode !== 'data'
+                            })}
                             label="JS"
                             onClick={() => setCodeLang('javascript')}
                             tooltip="JavaScript Code"
@@ -41,15 +70,6 @@ export function DocSectionCode(props) {
                             tooltip="TypeScript Code"
                             tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                         ></Button>
-                        {props.code.php ? (
-                            <Button
-                                className={classNames('p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center', { 'doc-section-code-active text-primary': codeLang === 'php' })}
-                                label="PHP"
-                                onClick={() => setCodeLang('php')}
-                                tooltip="Php Code"
-                                tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
-                            ></Button>
-                        ) : null}
                     </>
                 )}
 
@@ -66,7 +86,7 @@ export function DocSectionCode(props) {
                 {!props.hideToggleCode && props.code.data ? (
                     <Button
                         type="button"
-                        onClick={onToggleData}
+                        onClick={() => setCodeMode('data')}
                         className="p-button-rounded p-button-text p-button-plain h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
                         icon="pi pi-database"
                         tooltip="View Data"
@@ -108,40 +128,6 @@ export function DocSectionCode(props) {
                     tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                 ></Button>
             </div>
-
-            {codeMode === 'basic' && (
-                <div>
-                    <CodeHighlight code {...props}>
-                        {props.code.basic}
-                    </CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'javascript' && (
-                <div>
-                    <CodeHighlight code>{props.code.javascript}</CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'typescript' && (
-                <div>
-                    <CodeHighlight code lang={'tsx'}>
-                        {props.code.typescript}
-                    </CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'php' && (
-                <div>
-                    <CodeHighlight code lang={'php'}>
-                        {props.code.php}
-                    </CodeHighlight>
-                </div>
-            )}
-            {codeMode !== 'basic' && codeLang === 'data' && (
-                <div>
-                    <CodeHighlight code lang={'json'}>
-                        {props.code.data}
-                    </CodeHighlight>
-                </div>
-            )}
         </div>
     );
 }

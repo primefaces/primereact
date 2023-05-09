@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
 import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
@@ -64,32 +62,10 @@ const SelectButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'SelectButton', pathname: '/modules/selectbutton.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React SelectButton Component</title>
-                <meta name="description" content="SelectButton is used to choose single or multiple items from a list using buttons." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>SelectButton</h1>
-                        <p>SelectButton is used to choose single or multiple items from a list using buttons.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React SelectButton Component" header="SelectButton" description="SelectButton is used to choose single or multiple items from a list using buttons." componentDocs={docs} apiDocs={['SelectButton']} />;
 };
 
 export default SelectButtonDemo;

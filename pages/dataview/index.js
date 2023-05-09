@@ -1,10 +1,12 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dataview/basicdoc';
 import { ImportDoc } from '../../components/doc/dataview/importdoc';
-import { LazyDataViewDoc } from '../../components/doc/dataview/lazydoc';
+import { LayoutDoc } from '../../components/doc/dataview/layoutdoc';
+import { LoadingDoc } from '../../components/doc/dataview/loadingdoc';
+import { PaginationDoc } from '../../components/doc/dataview/paginationdoc';
+import { PrimeFlexDoc } from '../../components/doc/dataview/primeflexdoc';
+import { SortingDoc } from '../../components/doc/dataview/sortingdoc';
 import { StyleDoc } from '../../components/doc/dataview/styledoc';
 
 const DataViewDemo = () => {
@@ -15,14 +17,34 @@ const DataViewDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'primeflex',
+            label: 'PrimeFlex',
+            component: PrimeFlexDoc
+        },
+        {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
         },
         {
-            id: 'lazy',
-            label: 'Lazy',
-            component: LazyDataViewDoc
+            id: 'pagination',
+            label: 'Pagination',
+            component: PaginationDoc
+        },
+        {
+            id: 'sorting',
+            label: 'Sorting',
+            component: SortingDoc
+        },
+        {
+            id: 'layout',
+            label: 'Layout',
+            component: LayoutDoc
+        },
+        {
+            id: 'loading',
+            label: 'Loading',
+            component: LoadingDoc
         },
         {
             id: 'style',
@@ -33,32 +55,10 @@ const DataViewDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'DataView', pathname: '/modules/dataview.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React DataView Component</title>
-                <meta name="description" content="DataView displays data in grid or list layout with pagination and sorting features." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>DataView</h1>
-                        <p>DataView displays data in grid or list layout with pagination and sorting features.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React DataView Component" header="DataView" description="DataView displays data in grid or list layout with pagination and sorting features." componentDocs={docs} apiDocs={['DataView']} className="dataview-demo" />;
 };
 
 export default DataViewDemo;

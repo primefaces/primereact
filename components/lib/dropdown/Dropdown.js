@@ -1,15 +1,17 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { DropdownDefaultProps } from './DropdownBase';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, DropdownDefaultProps);
+        const props = DropdownBase.getProps(inProps);
 
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
@@ -48,7 +50,7 @@ export const Dropdown = React.memo(
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
 
                         if (filteredSubOptions && filteredSubOptions.length) {
-                            filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                            filteredGroups.push({ ...optgroup, ...{ [`${props.optionGroupChildren}`]: filteredSubOptions } });
                         }
                     }
 
@@ -720,8 +722,9 @@ export const Dropdown = React.memo(
             if (props.value != null && props.showClear && !props.disabled) {
                 const iconClassName = classNames('p-dropdown-clear-icon p-clickable');
                 const iconProps = { className: iconClassName, onPointerUp: clear };
+                const icon = props.clearIcon || <TimesIcon {...iconProps} />;
 
-                return IconUtils.getJSXIcon(props.clearIcon, iconProps);
+                return IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
             }
 
             return null;
@@ -729,13 +732,14 @@ export const Dropdown = React.memo(
 
         const createDropdownIcon = () => {
             const iconClassName = classNames('p-dropdown-trigger-icon p-clickable');
-            const icon = IconUtils.getJSXIcon(props.dropdownIcon, { className: iconClassName });
+            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
                 <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
-                    {icon}
+                    {dropdownIcon}
                 </div>
             );
         };
@@ -744,7 +748,7 @@ export const Dropdown = React.memo(
         const selectedOption = getSelectedOption();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, DropdownDefaultProps);
+        const otherProps = DropdownBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',

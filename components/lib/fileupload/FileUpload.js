@@ -5,12 +5,16 @@ import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { FileUploadDefaultProps } from './FileUploadBase';
+import { FileUploadBase } from './FileUploadBase';
+import { Badge } from '../badge/Badge';
+import { PlusIcon } from '../icons/plus';
+import { UploadIcon } from '../icons/upload';
+import { TimesIcon } from '../icons/times';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, FileUploadDefaultProps);
-
+        const props = FileUploadBase.getProps(inProps);
+        const [uploadedFilesState, setUploadedFilesState] = React.useState([]);
         const [filesState, setFilesState] = React.useState([]);
         const [progressState, setProgressState] = React.useState(0);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -21,6 +25,7 @@ export const FileUpload = React.memo(
         const duplicateIEEvent = React.useRef(false);
         const uploadedFileCount = React.useRef(0);
         const hasFiles = ObjectUtils.isNotEmpty(filesState);
+        const hasUploadedFiles = ObjectUtils.isNotEmpty(uploadedFilesState);
         const disabled = props.disabled || uploadingState;
         const chooseButtonLabel = props.chooseLabel || props.chooseOptions.label || localeOption('choose');
         const uploadButtonLabel = props.uploadLabel || props.uploadOptions.label || localeOption('upload');
@@ -40,6 +45,22 @@ export const FileUpload = React.memo(
 
             currentFiles.splice(index, 1);
             setFilesState(currentFiles);
+
+            if (props.onRemove) {
+                props.onRemove({
+                    originalEvent: event,
+                    file: removedFile
+                });
+            }
+        };
+
+        const removeUploadedFiles = (event, index) => {
+            clearInput();
+            let currentUploadedFiles = [...uploadedFilesState];
+            let removedFile = filesState[index];
+
+            currentUploadedFiles.splice(index, 1);
+            setUploadedFilesState(currentUploadedFiles);
 
             if (props.onRemove) {
                 props.onRemove({
@@ -234,6 +255,7 @@ export const FileUpload = React.memo(
                             }
                         }
 
+                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                         clear();
                     }
                 };
@@ -350,39 +372,49 @@ export const FileUpload = React.memo(
                 className
             );
             const labelClassName = 'p-button-label p-clickable';
+            const iconClassName = classNames('p-button-icon p-clickable', { 'p-button-icon-left': !iconOnly });
             const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const input = <input ref={fileInputRef} type="file" onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
-            const icon = IconUtils.getJSXIcon(_icon || 'pi pi-fw pi-plus', { className: 'p-button-icon p-button-icon-left p-clickable' }, { props });
+            const icon = _icon || <PlusIcon className={iconClassName} />;
+            const chooseIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <span className={chooseClassName} style={style} onClick={choose} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
                     {input}
-                    {icon}
+                    {chooseIcon}
                     {label}
                     <Ripple />
                 </span>
             );
         };
 
-        const createFile = (file, index) => {
+        const onRemoveClick = (e, badgeOptions, index) => {
+            if (badgeOptions.severity === 'warning') remove(e, index);
+            else removeUploadedFiles(e, index);
+        };
+
+        const createFile = (file, index, badgeOptions) => {
             const key = file.name + file.type + file.size;
-            const preview = isImage(file) ? (
-                <div>
-                    <img alt={file.name} role="presentation" src={file.objectURL} width={props.previewWidth} />
-                </div>
-            ) : null;
+            const preview = isImage(file) ? <img role="presentation" className="p-fileupload-file-thumbnail" alt={file.name} src={file.objectURL} width={props.previewWidth} /> : null;
             const fileName = <div className="p-fileupload-filename">{file.name}</div>;
             const size = <div>{formatSize(file.size)}</div>;
+
+            const contentBody = (
+                <div>
+                    <div> {file.name}</div>
+                    <span>{formatSize(file.size)}</span>
+                    <Badge className="p-fileupload-file-badge" value={badgeOptions.value} severity={badgeOptions.severity} />
+                </div>
+            );
             const removeButton = (
                 <div>
-                    <Button type="button" icon="pi pi-times" onClick={(e) => remove(e, index)} disabled={disabled} />
+                    <Button type="button" icon={props.removeIcon || <TimesIcon />} text rounded className="p-button-danger" onClick={(e) => onRemoveClick(e, badgeOptions, index)} disabled={disabled} />
                 </div>
             );
             let content = (
                 <>
                     {preview}
-                    {fileName}
-                    {size}
+                    {contentBody}
                     {removeButton}
                 </>
             );
@@ -411,13 +443,27 @@ export const FileUpload = React.memo(
         };
 
         const createFiles = () => {
-            const content = filesState.map(createFile);
+            const badgeOptions = {
+                severity: 'warning',
+                value: 'Pending'
+            };
+            const content = filesState.map((file, index) => createFile(file, index, badgeOptions));
 
-            return <div className="p-fileupload-files">{content}</div>;
+            return <div>{content}</div>;
+        };
+
+        const createUploadedFiles = () => {
+            const badgeOptions = {
+                severity: 'success',
+                value: 'Completed'
+            };
+            const content = uploadedFilesState && uploadedFilesState.map((file, index) => createFile(file, index, badgeOptions));
+
+            return <div>{content}</div>;
         };
 
         const createEmptyContent = () => {
-            return props.emptyTemplate && !hasFiles ? ObjectUtils.getJSXElement(props.emptyTemplate, props) : null;
+            return props.emptyTemplate && !hasFiles && !hasUploadedFiles ? ObjectUtils.getJSXElement(props.emptyTemplate, props) : null;
         };
 
         const createProgressBarContent = () => {
@@ -429,27 +475,35 @@ export const FileUpload = React.memo(
         };
 
         const createAdvanced = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, FileUploadDefaultProps);
+            const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-advanced p-component', props.className);
             const headerClassName = classNames('p-fileupload-buttonbar', props.headerClassName);
             const contentClassName = classNames('p-fileupload-content', props.contentClassName);
             const chooseButton = createChooseButton();
             const emptyContent = createEmptyContent();
-            let uploadButton, cancelButton, filesList, progressBar;
+            let uploadButton, cancelButton, filesList, uplaodedFilesList, progressBar;
 
             if (!props.auto) {
                 const uploadOptions = props.uploadOptions;
                 const cancelOptions = props.cancelOptions;
                 const uploadLabel = !uploadOptions.iconOnly ? uploadButtonLabel : '';
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
+                const uploadIconClassName = classNames('p-button-icon p-c', { 'p-button-icon-left': !uploadOptions.iconOnly });
+                const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon className={uploadIconClassName} />, { className: uploadIconClassName }, { props });
+                const cancelIconClassName = classNames('p-button-icon p-c', { 'p-button-icon-left': !cancelOptions.iconOnly });
+                const cancelIcon = IconUtils.getJSXIcon(cancelOptions.icon || <TimesIcon className={cancelIconClassName} />, { className: cancelIconClassName }, { props });
 
-                uploadButton = <Button type="button" label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
-                cancelButton = <Button type="button" label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
+                uploadButton = <Button type="button" label={uploadLabel} icon={uploadIcon} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
+                cancelButton = <Button type="button" label={cancelLabel} icon={cancelIcon} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
             }
 
             if (hasFiles) {
                 filesList = createFiles();
                 progressBar = createProgressBarContent();
+            }
+
+            if (hasUploadedFiles) {
+                uplaodedFilesList = createUploadedFiles();
             }
 
             let header = (
@@ -479,7 +533,8 @@ export const FileUpload = React.memo(
                     <div ref={contentRef} className={contentClassName} style={props.contentStyle} onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
                         {progressBar}
                         <Messages ref={messagesRef} />
-                        {filesList}
+                        {hasFiles ? filesList : null}
+                        {hasUploadedFiles ? uplaodedFilesList : null}
                         {emptyContent}
                     </div>
                 </div>
@@ -488,21 +543,22 @@ export const FileUpload = React.memo(
 
         const createBasic = () => {
             const chooseOptions = props.chooseOptions;
-            const otherProps = ObjectUtils.findDiffKeys(props, FileUploadDefaultProps);
+            const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
             const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, chooseOptions.className);
-            const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });
+            const iconClassName = classNames('p-button-icon', { 'p-button-icon-left': !chooseOptions.iconOnly });
+            const icon = chooseOptions.icon ? chooseOptions.icon : !chooseOptions.icon && (!hasFiles || props.auto) ? <PlusIcon className={iconClassName} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon className={iconClassName} />;
             const labelClassName = 'p-button-label p-clickable';
             const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
             const label = props.auto ? chooseLabel : <span className={labelClassName}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
-            const icon = IconUtils.getJSXIcon(chooseIcon, { className: 'p-button-icon p-button-icon-left' }, { props, hasFiles });
+            const chooseIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, hasFiles });
             const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
 
             return (
                 <div className={className} style={props.style} {...otherProps}>
                     <Messages ref={messagesRef} />
                     <span className={buttonClassName} style={chooseOptions.style} onMouseUp={onSimpleUploaderClick} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
-                        {icon}
+                        {chooseIcon}
                         {label}
                         {input}
                         <Ripple />

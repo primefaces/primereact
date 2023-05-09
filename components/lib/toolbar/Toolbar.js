@@ -1,28 +1,64 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { ToolbarDefaultProps } from './ToolbarBase';
+import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
+import { ToolbarBase } from './ToolbarBase';
 
 export const Toolbar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ToolbarDefaultProps);
+        const props = ToolbarBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, ToolbarDefaultProps);
-        const toolbarClass = classNames('p-toolbar p-component', props.className);
+
         const start = ObjectUtils.getJSXElement(props.left || props.start, props);
         const center = ObjectUtils.getJSXElement(props.center, props);
         const end = ObjectUtils.getJSXElement(props.right || props.end, props);
+
+        const { ptm } = ToolbarBase.setMetaData({
+            props
+        });
 
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
 
+        const startProps = mergeProps(
+            {
+                className: 'p-toolbar-group-start p-toolbar-group-left'
+            },
+            ptm('start')
+        );
+
+        const centerProps = mergeProps(
+            {
+                className: 'p-toolbar-group-center'
+            },
+            ptm('center')
+        );
+
+        const endProps = mergeProps(
+            {
+                className: 'p-toolbar-group-end p-toolbar-group-right'
+            },
+            ptm('end')
+        );
+
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style: props.style,
+                className: classNames('p-toolbar p-component', props.className),
+                role: 'toolbar'
+            },
+            ToolbarBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role="toolbar" {...otherProps}>
-                <div className="p-toolbar-group-start p-toolbar-group-left">{start}</div>
-                <div className="p-toolbar-group-center">{center}</div>
-                <div className="p-toolbar-group-end p-toolbar-group-right">{end}</div>
+            <div {...rootProps}>
+                <div {...startProps}>{start}</div>
+                <div {...centerProps}>{center}</div>
+                <div {...endProps}>{end}</div>
             </div>
         );
     })

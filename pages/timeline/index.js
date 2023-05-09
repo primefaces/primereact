@@ -1,14 +1,13 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
-import { AlignmentDoc } from '../../components/doc/timeline/aligndoc';
-import { CustomizedDoc } from '../../components/doc/timeline/customizeddoc';
+import { AlignmentDoc } from '../../components/doc/timeline/alignmentdoc';
+import { BasicDoc } from '../../components/doc/timeline/basicdoc';
 import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
 import { ImportDoc } from '../../components/doc/timeline/importdoc';
-import { OppositeContentDoc } from '../../components/doc/timeline/oppositecontentdoc';
+import { OppositeDoc } from '../../components/doc/timeline/oppositedoc';
 import { StyleDoc } from '../../components/doc/timeline/styledoc';
+import { TemplateDoc } from '../../components/doc/timeline/templatedoc';
 
 const TimelineDemo = () => {
     const docs = [
@@ -18,19 +17,24 @@ const TimelineDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'alignment',
             label: 'Alignment',
             component: AlignmentDoc
         },
         {
-            id: 'oppositecontent',
-            label: 'Opposite Content',
-            component: OppositeContentDoc
+            id: 'opposite',
+            label: 'Opposite',
+            component: OppositeDoc
         },
         {
-            id: 'customized',
-            label: 'Customized',
-            component: CustomizedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'horizontal',
@@ -46,32 +50,10 @@ const TimelineDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Timeline', pathname: '/modules/timeline.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Timeline Component</title>
-                <meta name="description" content="Timeline visualizes a series of chained events." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Timeline</h1>
-                        <p>Timeline visualizes a series of chained events.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={['Timeline']} />;
 };
 
 export default TimelineDemo;

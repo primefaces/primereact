@@ -1,9 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { CarouselDefaultProps } from './CarouselBase';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
@@ -18,7 +22,7 @@ const CarouselItem = React.memo((props) => {
 
 export const Carousel = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, CarouselDefaultProps);
+        const props = CarouselBase.getProps(inProps);
 
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
@@ -42,9 +46,10 @@ export const Carousel = React.memo(
         const isVertical = props.orientation === 'vertical';
         const circular = props.circular || !!props.autoplayInterval;
         const isCircular = circular && props.value && props.value.length >= numVisibleState;
-        const currentPage = props.onPageChange ? props.page : pageState;
         const totalIndicators = props.value ? Math.max(Math.ceil((props.value.length - numVisibleState) / numScrollState) + 1, 0) : 0;
         const isAutoplay = totalIndicators && props.autoplayInterval && allowAutoplay.current;
+        const isControlled = props.onPageChange && !isAutoplay;
+        const currentPage = isControlled ? props.page : pageState;
 
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
@@ -94,15 +99,8 @@ export const Carousel = React.memo(
                 itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
             }
 
-            if (props.onPageChange) {
-                setTotalShiftedItemsState(totalShiftedItems);
-                props.onPageChange({
-                    page
-                });
-            } else {
-                setPageState(page);
-                setTotalShiftedItemsState(totalShiftedItems);
-            }
+            changePage(page);
+            setTotalShiftedItemsState(totalShiftedItems);
         };
 
         const calculatePosition = () => {
@@ -131,14 +129,7 @@ export const Carousel = React.memo(
 
                     setTotalShiftedItemsState(totalShiftedItems);
                     setNumScrollState(matchedResponsiveData.numScroll);
-
-                    if (props.onPageChange) {
-                        props.onPageChange({
-                            page
-                        });
-                    } else {
-                        setPageState(page);
-                    }
+                    changePage(page);
                 }
 
                 if (numVisibleState !== matchedResponsiveData.numVisible) {
@@ -285,6 +276,11 @@ export const Carousel = React.memo(
             }
         };
 
+        const changePage = (page) => {
+            !isControlled && setPageState(page);
+            props.onPageChange && props.onPageChange({ page });
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
@@ -318,13 +314,7 @@ export const Carousel = React.memo(
                 if (totalIndicators !== 0 && page >= totalIndicators) {
                     page = totalIndicators - 1;
 
-                    if (props.onPageChange) {
-                        props.onPageChange({
-                            page
-                        });
-                    } else {
-                        setPageState(page);
-                    }
+                    changePage(page);
 
                     stateChanged = true;
                 }
@@ -477,14 +467,13 @@ export const Carousel = React.memo(
                 const className = classNames('p-carousel-prev p-link', {
                     'p-disabled': isDisabled
                 });
-                const iconClassName = classNames('p-carousel-prev-icon pi', {
-                    'pi-chevron-left': !isVertical,
-                    'pi-chevron-up': isVertical
-                });
+                const iconClassName = 'p-carousel-prev-icon';
+                const icon = isVertical ? props.prevIcon || <ChevronUpIcon className={iconClassName} /> : props.prevIcon || <ChevronLeftIcon className={iconClassName} />;
+                const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: className }, { props });
 
                 return (
                     <button type="button" className={className} onClick={navBackward} disabled={isDisabled} aria-label={ariaLabel('previousPageLabel')}>
-                        <span className={iconClassName}></span>
+                        {backwardNavigatorIcon}
                         <Ripple />
                     </button>
                 );
@@ -499,14 +488,13 @@ export const Carousel = React.memo(
                 const className = classNames('p-carousel-next p-link', {
                     'p-disabled': isDisabled
                 });
-                const iconClassName = classNames('p-carousel-next-icon pi', {
-                    'pi-chevron-right': !isVertical,
-                    'pi-chevron-down': isVertical
-                });
+                const iconClassName = 'p-carousel-next-icon';
+                const icon = isVertical ? props.nextIcon || <ChevronDownIcon className={iconClassName} /> : props.nextIcon || <ChevronRightIcon className={iconClassName} />;
+                const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: className }, { props });
 
                 return (
                     <button type="button" className={className} onClick={navForward} disabled={isDisabled} aria-label={ariaLabel('nextPageLabel')}>
-                        <span className={iconClassName}></span>
+                        {forwardNavigatorIcon}
                         <Ripple />
                     </button>
                 );
@@ -546,7 +534,7 @@ export const Carousel = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, CarouselDefaultProps);
+        const otherProps = CarouselBase.getOtherProps(props);
         const className = classNames(
             'p-carousel p-component',
             {

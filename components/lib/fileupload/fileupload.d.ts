@@ -2,7 +2,7 @@
  *
  * FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.
  *
- * [Live Demo](https://www.primefaces.org/primereact/fileupload)
+ * [Live Demo](https://www.primereact.org/fileupload)
  *
  * @module fileupload
  *
@@ -12,7 +12,6 @@ import { IconType } from '../utils';
 
 /**
  * Custom file upload options
- * @group Misc
  */
 interface FileUploadOptions {
     /**
@@ -39,7 +38,6 @@ interface FileUploadOptions {
 
 /**
  * Custom file upload header options
- * @group Misc
  */
 interface FileUploadHeaderTemplateOptions {
     /**
@@ -71,7 +69,6 @@ interface FileUploadHeaderTemplateOptions {
 
 /**
  * Custom item template options
- * @group Misc
  */
 interface ItemTemplateOptions {
     /**
@@ -204,7 +201,6 @@ interface FileUploadProgressEvent {
 
 /**
  * Custom file upload handler options
- * @group Misc
  */
 interface FileUploadHandlerOptions {
     /**
@@ -279,6 +275,10 @@ interface FileUploadProps {
      * @defaultValue false
      */
     accept?: string | undefined;
+    /**
+     * Icon of the remove element.
+     */
+    removeIcon?: IconType<FileUploadProps> | undefined;
     /**
      * Disables the upload functionality.
      * @defaultValue false
@@ -453,9 +453,9 @@ interface FileUploadProps {
  *
  * _FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations._
  *
- * [Live Demo](https://www.primefaces.org/primereact/fileupload/)
+ * [Live Demo](https://www.primereact.org/fileupload/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

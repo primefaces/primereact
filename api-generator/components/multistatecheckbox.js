@@ -30,6 +30,12 @@ const MultiStateCheckboxProps = [
         description: 'Property name to refer to the option label, used by screen readers only. Defaults to optionValue.'
     },
     {
+        name: 'optionIcon',
+        type: 'string',
+        default: 'icon',
+        description: 'Property name to use as the icon of an option, defaults to the icon property.'
+    },
+    {
         name: 'iconTemplate',
         type: 'any',
         default: 'null',

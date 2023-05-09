@@ -5,22 +5,24 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function LocaleDoc(props) {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} />
+<Password value={value} onChange={(e) => setValue(e.target.value)}
+    promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password"/>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function LocaleDemo() {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e) => setValue(e.target.value)} />
+            <Password value={value} onChange={(e) => setValue(e.target.value)}
+                promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password"/>
         </div>
     )
 }
@@ -30,11 +32,12 @@ import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function LocaleDemo() {
-    const [value, setValue] = useState<string>(null);
+    const [value, setValue] = useState<string>('');
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
+            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} 
+                promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password"/>
         </div>
     )
 }
@@ -50,7 +53,7 @@ export default function LocaleDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} promptLabel="Choose a password" weakLabel="Too simple" mediumLabel="Average complexity" strongLabel="Complex password" />
             </div>
             <DocSectionCode code={code} />
         </>

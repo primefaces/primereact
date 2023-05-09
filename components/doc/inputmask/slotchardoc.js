@@ -26,14 +26,14 @@ export default function SlotCharDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
+import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
 export default function SlotCharDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
         <div className="card flex justify-content-center">
-            <InputMask value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy"/>
+            <InputMask value={value} onChange={(e: InputMaskChangeEvent) => setValue(e.target.value)} mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy"/>
         </div>
     )
 }

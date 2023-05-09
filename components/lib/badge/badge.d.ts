@@ -2,12 +2,33 @@
  *
  * Badge represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/badge)
+ * [Live Demo](https://www.primereact.org/badge)
  *
  * @module badge
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type BadgePassThroughType<T> = PassThroughType<T, BadgePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface BadgePassThroughMethodOptions {
+    props: BadgeProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link BadgeProps.pt}
+ */
+export interface BadgePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: BadgePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Defines valid properties in Badge component. In addition to these, all properties of HTMLSpanElement can be used in this component.
@@ -41,9 +62,9 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
  *
  * _Badge represents people using icons, labels and images._
  *
- * [Live Demo](https://www.primefaces.org/primereact/badge/)
+ * [Live Demo](https://www.primereact.org/badge/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

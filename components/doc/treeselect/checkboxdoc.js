@@ -12,16 +12,28 @@ export function CheckboxDoc(props) {
         NodeService.getTreeNodes().then((data) => setNodes(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const introCode = {
+        basic: `
+{
+    '0-0': {
+        partialChecked: false,
+        checked: true
+    }
+}
+        `
+    };
+
     const code = {
         basic: `
-<TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+<TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} metaKeySelection={false}  
+    className="md:w-20rem w-full" selectionMode="checkbox" display="chip" placeholder="Select Items"></TreeSelect>
         `,
         javascript: `
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from 'primereact/treeselect';
 import { NodeService } from './service/NodeService';
 
-export default function CheckboxDoc() {
+export default function CheckboxDemo() {
     const [nodes, setNodes] = useState(null);
     const [selectedNodeKeys, setSelectedNodeKeys] = useState(null);
     
@@ -31,19 +43,21 @@ export default function CheckboxDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+            <TreeSelect value={selectedNodeKeys} onChange={(e) => setSelectedNodeKeys(e.value)} options={nodes} 
+                metaKeySelection={false} className="md:w-20rem w-full" selectionMode="checkbox" display="chip" placeholder="Select Items"></TreeSelect>
         </div>    
     );
 }
         `,
         typescript: `
 import React, { useState, useEffect } from "react";
-import { TreeSelect, TreeSelectChangeParams } from 'primereact/treeselect';
+import { TreeSelect, TreeSelectChangeEvent } from 'primereact/treeselect';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function CheckboxDoc() {
-    const [nodes, setNodes] = useState<any[]>(null);
-    const [selectedNodeKeys, setSelectedNodeKeys] = useState<any>(null);
+export default function CheckboxDemo() {
+    const [nodes, setNodes] = useState<TreeNode[] | null>(null);
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState<string[]>(null);
     
     useEffect(() => {
         NodeService.getTreeNodes().then((data) => setNodes(data));
@@ -51,7 +65,8 @@ export default function CheckboxDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e : TreeSelectChangeParams) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+            <TreeSelect value={selectedNodeKeys} onChange={(e: TreeSelectChangeEvent) => setSelectedNodeKeys(e.value)} options={nodes} 
+                metaKeySelection={false} className="md:w-20rem w-full" selectionMode="checkbox" display="chip" placeholder="Select Items"></TreeSelect>
         </div>
     );
 }
@@ -91,12 +106,25 @@ export default function CheckboxDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Value passed to and from the TreeSelect via the value property should be a an object with key-value pairs where key is the node key and value is a boolean to indicate selection. On the other hand in "checkbox" mode, instead of a
-                    boolean, value should be an object that has "checked" and "partialChecked" properties to represent the checked state of a node. Best way to clarify it is prepopulating a TreeSelect with an existing value.
+                    Selection of multiple nodes via checkboxes is enabled by configuring <i>selectionMode</i> as <i>checkbox</i>.
                 </p>
+                <p>
+                    In checkbox selection mode, value binding should be a key-value pair where key is the node key and value is an object that has <i>checked</i> and <i>partialChecked</i> properties to represent the checked state of a node obje to
+                    indicate selection.
+                </p>
+                <DocSectionCode code={introCode} hideToggleCode import hideCodeSandbox hideStackBlitz />
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <TreeSelect value={selectedNodeKeys} options={nodes} onChange={(e) => setSelectedNodeKeys(e.value)} display="chip" selectionMode="checkbox" className="md:w-20rem w-full" placeholder="Select Items"></TreeSelect>
+                <TreeSelect
+                    value={selectedNodeKeys}
+                    onChange={(e) => setSelectedNodeKeys(e.value)}
+                    options={nodes}
+                    metaKeySelection={false}
+                    className="md:w-20rem w-full"
+                    selectionMode="checkbox"
+                    display="chip"
+                    placeholder="Select Items"
+                ></TreeSelect>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />
         </>

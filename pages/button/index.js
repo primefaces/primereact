@@ -1,26 +1,23 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
 import { BadgesDoc } from '../../components/doc/button/badgesdoc';
 import { BasicDoc } from '../../components/doc/button/basicdoc';
 import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
 import { DisabledDoc } from '../../components/doc/button/disableddoc';
+import { IconOnlyDoc } from '../../components/doc/button/icononlydoc';
 import { IconsDoc } from '../../components/doc/button/iconsdoc';
 import { ImportDoc } from '../../components/doc/button/importdoc';
+import { LinkDoc } from '../../components/doc/button/linkdoc';
 import { LoadingDoc } from '../../components/doc/button/loadingdoc';
-import { OutlinedButtonsDoc } from '../../components/doc/button/outlinedbuttonsdoc';
-import { RaisedButtonsDoc } from '../../components/doc/button/raisedbuttonsdoc';
-import { RaisedTextButtonsDoc } from '../../components/doc/button/raisedtextdoc';
-import { RoundedButtonsDoc } from '../../components/doc/button/roundedbuttonsdoc';
-import { RoundedIconButtonsDoc } from '../../components/doc/button/roundedicondoc';
-import { RoundedOutlinedButtonsDoc } from '../../components/doc/button/roundedoutlineddoc';
-import { RoundedTextIconButtonsDoc } from '../../components/doc/button/roundedtextdoc';
-import { SeveritiesDoc } from '../../components/doc/button/severitiesdoc';
+import { OutlinedDoc } from '../../components/doc/button/outlineddoc';
+import { RaisedDoc } from '../../components/doc/button/raiseddoc';
+import { RaisedTextDoc } from '../../components/doc/button/raisedtextdoc';
+import { RoundedDoc } from '../../components/doc/button/roundeddoc';
+import { SeverityDoc } from '../../components/doc/button/severitydoc';
 import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { StyleDoc } from '../../components/doc/button/styledoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
-import { TextButtonsDoc } from '../../components/doc/button/textdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { TextDoc } from '../../components/doc/button/textdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ButtonDemo = () => {
     const docs = [
@@ -35,6 +32,11 @@ const ButtonDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'link',
+            label: 'Link',
+            component: LinkDoc
+        },
+        {
             id: 'icons',
             label: 'Icons',
             component: IconsDoc
@@ -45,9 +47,9 @@ const ButtonDemo = () => {
             component: LoadingDoc
         },
         {
-            id: 'severities',
-            label: 'Severities',
-            component: SeveritiesDoc
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
         },
         {
             id: 'disabled',
@@ -57,42 +59,32 @@ const ButtonDemo = () => {
         {
             id: 'raised',
             label: 'Raised',
-            component: RaisedButtonsDoc
+            component: RaisedDoc
         },
         {
             id: 'rounded',
             label: 'Rounded',
-            component: RoundedButtonsDoc
+            component: RoundedDoc
         },
         {
             id: 'text',
             label: 'Text',
-            component: TextButtonsDoc
+            component: TextDoc
         },
         {
             id: 'raisedtext',
             label: 'Raised Text',
-            component: RaisedTextButtonsDoc
+            component: RaisedTextDoc
         },
         {
             id: 'outlined',
             label: 'Outlined',
-            component: OutlinedButtonsDoc
+            component: OutlinedDoc
         },
         {
-            id: 'roundedicon',
-            label: 'Rounded Icon',
-            component: RoundedIconButtonsDoc
-        },
-        {
-            id: 'roundedtexticon',
-            label: 'Rounded Text Icon',
-            component: RoundedTextIconButtonsDoc
-        },
-        {
-            id: 'roundedoutlined',
-            label: 'Rounded and Outlined Icon',
-            component: RoundedOutlinedButtonsDoc
+            id: 'icononly',
+            label: 'Icon Only',
+            component: IconOnlyDoc
         },
         {
             id: 'badges',
@@ -123,32 +115,10 @@ const ButtonDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Button', pathname: '/modules/button.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Button Component</title>
-                <meta name="description" content="Button is an extension to standard input element with icons and theming." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Button</h1>
-                        <p>Button is an extension to standard input element with icons and theming.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} />;
 };
 
 export default ButtonDemo;

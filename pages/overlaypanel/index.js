@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/overlaypanel/basicdoc';
 import { DataTableDoc } from '../../components/doc/overlaypanel/datatabledoc';
@@ -33,32 +31,10 @@ const OverlayPanelDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'OverlayPanel', pathname: '/modules/overlaypanel.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Popover Component</title>
-                <meta name="description" content="OverlayPanel, also known as Popover, is a container component that can overlay other components on page." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>OverlayPanel</h1>
-                        <p>OverlayPanel, also known as Popover, is a container component that can overlay other components on page.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Popover Component" header="OverlayPanel" description="OverlayPanel, also known as Popover, is a container component that can overlay other components on page." componentDocs={docs} apiDocs={['OverlayPanel']} />;
 };
 
 export default OverlayPanelDemo;

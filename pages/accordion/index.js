@@ -1,14 +1,15 @@
-import Head from 'next/head';
 import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { DisabledDoc } from '../../components/doc/accordion/disableddoc';
 import { ImportDoc } from '../../components/doc/accordion/importdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
+import { PTDoc } from '../../components/doc/accordion/pt/ptdoc';
+import { Wireframe } from '../../components/doc/accordion/pt/wireframe';
 import { StyleDoc } from '../../components/doc/accordion/styledoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const AccordionDemo = () => {
     const docs = [
@@ -51,35 +52,33 @@ const AccordionDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'Accordion', pathname: '/modules/accordion.html' },
-                { name: 'AccordionTab', pathname: '/classes/accordion.AccordionTab.html' }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Accordion Component</title>
-                <meta name="description" content="Accordion groups a collection of contents in tabs." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Accordion</h1>
-                        <p>Accordion groups a collection of contents in tabs.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.accordion.options',
+            label: 'Accordion PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.accordiontab.options',
+            label: 'AccordionTab PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Accordion Component" header="Accordion" description="Accordion groups a collection of contents in tabs." componentDocs={docs} apiDocs={['Accordion', 'AccordionTab']} ptDocs={ptDocs} ptDescription="" />;
 };
 
 export default AccordionDemo;

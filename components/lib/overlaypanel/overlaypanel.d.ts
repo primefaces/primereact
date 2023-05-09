@@ -2,17 +2,17 @@
  *
  * OverlayPanel, also known as Popover, is a container component that can overlay other components on page.
  *
- * [Live Demo](https://www.primefaces.org/primereact/overlaypanel)
+ * [Live Demo](https://www.primereact.org/overlaypanel)
  *
  * @module overlaypanel
  *
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom overlay panel breakpoints
- * @group Misc
  */
 interface OverlayPanelBreakpoints {
     /**
@@ -36,6 +36,10 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue false
      */
     showCloseIcon?: boolean | undefined;
+    /**
+     * Icon to display as close icon.
+     */
+    closeIcon?: IconType<OverlayPanelProps> | undefined;
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
@@ -74,9 +78,9 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
  *
  * _OverlayPanel, also known as Popover, is a container component that can overlay other components on page._
  *
- * [Live Demo](https://www.primefaces.org/primereact/overlaypanel/)
+ * [Live Demo](https://www.primereact.org/overlaypanel/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

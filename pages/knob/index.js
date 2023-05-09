@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/knob/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/knob/basicdoc';
 import { ColorDoc } from '../../components/doc/knob/colordoc';
@@ -100,32 +98,10 @@ const KnobDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Knob', pathname: '/modules/knob.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Knob Component</title>
-                <meta name="description" content="Knob is a form component to define number inputs with a dial." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Knob</h1>
-                        <p>Knob is a form component to define number inputs with a dial.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Knob Component" header="Knob" description="Knob is a form component to define number inputs with a dial." componentDocs={docs} apiDocs={['Knob']} />;
 };
 
 export default KnobDemo;

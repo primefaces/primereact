@@ -2,12 +2,41 @@
  *
  * ProgressBar is a process status indicator.
  *
- * [Live Demo](https://www.primefaces.org/primereact/progressbar)
+ * [Live Demo](https://www.primereact.org/progressbar)
  *
  * @module progressbar
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ProgressBarPassThroughType<T> = PassThroughType<T, ProgressBarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ProgressBarPassThroughMethodOptions {
+    props: ProgressBarProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ProgressBarProps.pt}
+ */
+export interface ProgressBarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the value's DOM element.
+     */
+    value?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in ProgressBar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -53,9 +82,9 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
  *
  * _ProgressBar is a process status indicator._
  *
- * [Live Demo](https://www.primefaces.org/primereact/progressbar/)
+ * [Live Demo](https://www.primereact.org/progressbar/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

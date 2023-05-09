@@ -1,41 +1,68 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React from 'react';
-import { classNames } from '../../lib/utils/Utils';
-import DocApiSection from './docapisection';
+import { DocSectionText } from './docsectiontext';
+import APIDocs from './apidoc/index.json';
 
 export function DocSections({ docs }) {
-    const router = useRouter();
+    const getPTOption = (name) => {
+        const key = name.toLowerCase();
+
+        let values = APIDocs[key]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+
+        if (!values) {
+            for (const parentKey in APIDocs) {
+                if (APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`]) {
+                    values = APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+                    if (values) break;
+                }
+            }
+        }
+
+        let data = [];
+
+        if (values) {
+            for (const [i, prop] of values.props.entries()) {
+                data.push({
+                    value: i + 1,
+                    label: prop.name,
+                    description: prop.description
+                });
+            }
+        }
+
+        return data;
+    };
+
+    const renderDocChildren = (doc, level = 2) => {
+        return (
+            <React.Fragment key={doc.id + '_' + level}>
+                <DocSectionText {...doc} level={level}>
+                    {doc.description ? <p>{doc.description}</p> : null}
+                </DocSectionText>
+                {doc.children.map((d) => {
+                    const { id, label, component, children } = d;
+                    const Component = component;
+
+                    return component ? <Component id={id} key={id} label={label} level={level + 1} /> : children ? renderDocChildren(d, level + 1) : null;
+                })}
+            </React.Fragment>
+        );
+    };
 
     const renderDocs = () => {
-        return docs.map((doc) => {
-            const Comp = doc.component;
+        return docs.map((doc, i) => {
+            const { component: Comp, id, label, children } = doc;
+            const isPT = label.includes('PT');
+            const key = label.split(' ')[0];
+
+            const props = {
+                id,
+                label,
+                ...(isPT && { data: getPTOption(key) })
+            };
 
             return (
-                <section key={doc.label} className="py-3">
-                    {doc.children && doc.id !== 'api' ? (
-                        <div id={doc.id}>
-                            <h2 className="doc-section-label" id={doc.id}>
-                                {doc.label}
-                                <Link href={router.basePath + router.pathname + '#' + doc.id}>
-                                    <a id={doc.id}>#</a>
-                                </Link>
-                            </h2>
-                            <div className={classNames('doc-section-description main')}>{doc.description || 'Section Content'}</div>
-                        </div>
-                    ) : null}
-                    {doc.component && !doc.doc && <Comp id={doc.id} label={doc.label} />}
-                    {doc.children && !doc.component && (
-                        <React.Fragment>
-                            {doc.children.map((comp, i) => {
-                                const { id, label, component } = comp;
-                                const Component = component;
-
-                                return <Component id={id} key={label} label={label} level="2" />;
-                            })}
-                        </React.Fragment>
-                    )}
-                    {doc.id === 'api' && doc.doc ? <DocApiSection id={doc.id} label={doc.label} doc={doc.doc} /> : null}
+                <section key={`${label}_${i}`} className="py-3">
+                    {children ? renderDocChildren(doc) : Comp ? <Comp {...props} /> : null}
                 </section>
             );
         });

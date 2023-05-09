@@ -5,8 +5,8 @@ import { Dialog } from '../dialog/Dialog';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ConfirmDialogDefaultProps } from './ConfirmDialogBase';
+import { IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { ConfirmDialogBase } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -25,11 +25,12 @@ export const confirmDialog = (props = {}) => {
 
 export const ConfirmDialog = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ConfirmDialogDefaultProps);
+        const props = ConfirmDialogBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const confirmProps = React.useRef(null);
+        const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -38,22 +39,29 @@ export const ConfirmDialog = React.memo(
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
         const accept = () => {
-            callbackFromProp('accept');
-            hide('accept');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('accept');
+                hide('accept');
+            }
         };
 
         const reject = () => {
-            callbackFromProp('reject');
-            hide('reject');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('reject');
+                hide('reject');
+            }
         };
 
         const show = () => {
             setVisibleState(true);
+            isCallbackExecuting.current = false;
         };
 
         const hide = (result = 'cancel') => {
             setVisibleState(false);
-            callbackFromProp('onHide', result);
+            callbackFromProp('onHide', { result });
         };
 
         const confirm = (updatedProps) => {
@@ -138,7 +146,7 @@ export const ConfirmDialog = React.memo(
         const createElement = () => {
             const currentProps = getCurrentProps();
             const className = classNames('p-confirm-dialog', getPropValue('className'));
-            const otherProps = ObjectUtils.findDiffKeys(currentProps, ConfirmDialogDefaultProps);
+            const otherProps = ConfirmDialogBase.getOtherProps(currentProps);
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-dialog-icon' }, { props: currentProps });
             const footer = createFooter();

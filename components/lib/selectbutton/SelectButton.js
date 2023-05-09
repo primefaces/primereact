@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { SelectButtonDefaultProps } from './SelectButtonBase';
+import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
 
 export const SelectButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, SelectButtonDefaultProps);
+        const props = SelectButtonBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
 
@@ -100,7 +100,7 @@ export const SelectButton = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, SelectButtonDefaultProps);
+        const otherProps = SelectButtonBase.getOtherProps(props);
         const className = classNames('p-selectbutton p-buttonset p-component', props.className);
         const items = createItems();
 

@@ -1,21 +1,18 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
 import { DisabledDoc } from '../../components/doc/multiselect/disableddoc';
-import { EagerDoc } from '../../components/doc/multiselect/eagerdoc';
 import { FilterDoc } from '../../components/doc/multiselect/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/multiselect/floatlabeldoc';
-import { GroupedDoc } from '../../components/doc/multiselect/groupeddoc';
+import { FormikDoc } from '../../components/doc/multiselect/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/multiselect/form/hookformdoc';
+import { GroupDoc } from '../../components/doc/multiselect/groupdoc';
 import { ImportDoc } from '../../components/doc/multiselect/importdoc';
 import { InvalidDoc } from '../../components/doc/multiselect/invaliddoc';
-import { LazyDoc } from '../../components/doc/multiselect/lazydoc';
 import { StyleDoc } from '../../components/doc/multiselect/styledoc';
 import { TemplateDoc } from '../../components/doc/multiselect/templatedoc';
-import { FormikDoc } from '../../components/doc/multiselect/validation/formikdoc';
-import { HookFormDoc } from '../../components/doc/multiselect/validation/hookformdoc';
+import { VirtualScrollDoc } from '../../components/doc/multiselect/virtualscrolldoc';
 
 const MultiSelectDemo = () => {
     const docs = [
@@ -35,6 +32,26 @@ const MultiSelectDemo = () => {
             component: ChipsDoc
         },
         {
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
+            id: 'virtualscroll',
+            label: 'Virtual Scroll',
+            component: VirtualScrollDoc
+        },
+        {
             id: 'floatlabel',
             label: 'Float Label',
             component: FloatLabelDoc
@@ -48,39 +65,6 @@ const MultiSelectDemo = () => {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
-        },
-        {
-            id: 'grouped',
-            label: 'Grouped',
-            component: GroupedDoc
-        },
-        {
-            id: 'template',
-            label: 'Template',
-            component: TemplateDoc
-        },
-        {
-            id: 'filter',
-            label: 'Filter',
-            component: FilterDoc
-        },
-        {
-            id: 'virtual',
-            label: 'Virtual Scroll (100K Items)',
-            // TO DO: Add a description
-            description: '',
-            children: [
-                {
-                    id: 'eager',
-                    label: 'Eager',
-                    component: EagerDoc
-                },
-                {
-                    id: 'lazy',
-                    label: 'Lazy',
-                    component: LazyDoc
-                }
-            ]
         },
         {
             id: 'form',
@@ -108,32 +92,10 @@ const MultiSelectDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'MultiSelect', pathname: '/modules/multiselect.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React MultiSelect Component</title>
-                <meta name="description" content="MultiSelect is used to select multiple items from a collection." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>MultiSelect</h1>
-                        <p>MultiSelect is used to select multiple items from a collection.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React MultiSelect Component" header="MultiSelect" description="MultiSelect is used to select multiple items from a collection." componentDocs={docs} apiDocs={['MultiSelect']} />;
 };
 
 export default MultiSelectDemo;

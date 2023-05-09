@@ -28,6 +28,11 @@
     overflow: hidden;
 }
 
+.p-fileupload-buttonbar {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .p-button.p-fileupload-choose input[type=file] {
     display: none;
 }
@@ -38,6 +43,14 @@
 
 .p-fileupload-filename {
     word-break: break-all;
+}
+
+.p-fileupload-file-thumbnail {
+    flex-shrink: 0;
+}
+
+.p-fileupload-file-badge {
+    margin: 0.5rem;
 }
 
 .p-fluid .p-fileupload .p-button {

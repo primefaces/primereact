@@ -6,11 +6,15 @@
     left: 250px;
     width: calc(100% - 250px);
     z-index: 1100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 4rem;
     border-bottom: 1px solid var(--surface-border);
+
+    .layout-topbar-inner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 4rem;
+    }
 
     &.layout-topbar-sticky {
         backdrop-filter: blur(8px);

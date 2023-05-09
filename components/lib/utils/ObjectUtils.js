@@ -152,46 +152,64 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
-    static getProps(inProps, defaultProps) {
-        return Object.assign({}, defaultProps, inProps);
+    static getProp(props, prop = '', defaultProps = {}) {
+        const value = props ? props[prop] : undefined;
+
+        return value === undefined ? defaultProps[prop] : value;
     }
 
-    static getProp(component, propertyName = '', defaultProperties = {}) {
-        if (this.isNotEmpty(component)) {
-            const value = component.props ? component.props[propertyName] : undefined;
+    static getMergedProps(props, defaultProps) {
+        return Object.assign({}, defaultProps, props);
+    }
 
-            return value === undefined ? defaultProperties[propertyName] : value;
-        }
-
-        return undefined;
+    static getDiffProps(props, defaultProps) {
+        return this.findDiffKeys(props, defaultProps);
     }
 
     static getPropValue(obj, ...params) {
-        let methodParams = params;
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
 
-        if (params && params.length === 1) {
-            methodParams = params[0];
-        }
+    static getComponentProp(component, prop = '', defaultProps = {}) {
+        return this.isNotEmpty(component) ? this.getProp(component.props, prop, defaultProps) : undefined;
+    }
 
-        return this.isFunction(obj) ? obj(...methodParams) : obj;
+    static getComponentProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getMergedProps(component.props, defaultProps) : undefined;
+    }
+
+    static getComponentDiffProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getDiffProps(component.props, defaultProps) : undefined;
     }
 
     static isValidChild(child, type, validTypes) {
         /* eslint-disable */
-        try {
-            if (process.env.NODE_ENV !== 'production' && this.getProp(child, '__TYPE') !== type && child.type.displayName !== type) {
-                if (validTypes && validTypes.includes(type)) {
+        if (child) {
+            const childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
+            const isValid = childType === type;
+
+            try {
+                if (process.env.NODE_ENV !== 'production' && !isValid) {
+                    if (validTypes && validTypes.includes(childType)) {
+                        return false;
+                    }
+                    const messageTypes = validTypes ? validTypes : [type];
+
+                    console.error(
+                        `PrimeReact: Unexpected type; '${childType}'. Parent component expects a ${messageTypes.map((t) => `${t}`).join(' or ')} component or a component with the ${messageTypes
+                            .map((t) => `__TYPE="${t}"`)
+                            .join(' or ')} property as a child component.`
+                    );
                     return false;
                 }
-
-                console.error(`PrimeReact: Parent component expects a '${type}' component or a component with the '__TYPE="${type}"' property as a child component.`);
-                return false;
+            } catch (error) {
+                // NOOP
             }
-        } catch (error) {
-            // NOOP
+
+            return isValid;
         }
 
-        return true;
+        return false;
         /* eslint-enable */
     }
 
@@ -240,6 +258,11 @@ export default class ObjectUtils {
         }
 
         return str;
+    }
+
+    static convertToFlatCase(str) {
+        // convert snake, kebab, camel and pascal cases to flat case
+        return this.isNotEmpty(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
     }
 
     static isEmpty(value) {

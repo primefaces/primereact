@@ -7,11 +7,11 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { MentionDefaultProps } from './MentionBase';
+import { MentionBase } from './MentionBase';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MentionDefaultProps);
+        const props = MentionBase.getProps(inProps);
 
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -178,20 +178,11 @@ export const Mention = React.memo(
             const selectedText = formatValue(suggestion).replace(/\s+/g, '');
 
             if (currentText.trim() !== selectedText) {
-                let diff = 0;
-
-                while (diff < selectedText.length) {
-                    const s_c = selectedText.charAt(diff);
-                    const c_c = currentText.charAt(diff);
-
-                    if (s_c === c_c || c_c === ' ') diff++;
-                    else break;
-                }
-
                 const prevText = value.substring(0, triggerState.index);
-                const nextText = value.substring(triggerState.index + diff);
+                const nextText = value.substring(triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
+                event.target = inputRef.current;
                 props.onChange && props.onChange(event);
             }
 
@@ -423,7 +414,7 @@ export const Mention = React.memo(
             props.className
         );
         const inputClassName = classNames('p-mention-input', props.inputClassName);
-        const inputProps = ObjectUtils.findDiffKeys(props, MentionDefaultProps);
+        const inputProps = MentionBase.getOtherProps(props);
         const panel = createPanel();
 
         return (

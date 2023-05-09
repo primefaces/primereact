@@ -7,16 +7,15 @@ import { JumpToPageInput } from './JumpToPageInput';
 import { LastPageLink } from './LastPageLink';
 import { NextPageLink } from './NextPageLink';
 import { PageLinks } from './PageLinks';
-import { PaginatorDefaultProps } from './PaginatorBase';
+import { PaginatorBase } from './PaginatorBase';
 import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, PaginatorDefaultProps);
+        const props = PaginatorBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
-        const rppChanged = React.useRef(false);
         const page = Math.floor(props.first / props.rows);
         const pageCount = Math.ceil(props.totalRecords / props.rows);
         const isFirstPage = page === 0;
@@ -97,8 +96,6 @@ export const Paginator = React.memo(
         const onRowsChange = (event) => {
             const rows = event.value;
 
-            rppChanged.current = rows !== props.rows;
-
             changePage(0, rows);
         };
 
@@ -106,14 +103,6 @@ export const Paginator = React.memo(
             props,
             getElement: () => elementRef.current
         }));
-
-        useUpdateEffect(() => {
-            if (!rppChanged.current) {
-                changePage(props.first, props.rows);
-            }
-
-            rppChanged.current = false;
-        }, [props.rows]);
 
         useUpdateEffect(() => {
             if (page > 0 && props.first >= props.totalRecords) {
@@ -126,19 +115,19 @@ export const Paginator = React.memo(
 
             switch (key) {
                 case 'FirstPageLink':
-                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} />;
+                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} />;
                     break;
 
                 case 'PrevPageLink':
-                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} />;
+                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} />;
                     break;
 
                 case 'NextPageLink':
-                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} />;
+                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} />;
                     break;
 
                 case 'LastPageLink':
-                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} />;
+                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} />;
                     break;
 
                 case 'PageLinks':
@@ -201,10 +190,10 @@ export const Paginator = React.memo(
             return null;
         };
 
-        if (!props.alwaysShow && pageCount === 1) {
+        if (!props.alwaysShow && pageCount <= 1) {
             return null;
         } else {
-            const otherProps = ObjectUtils.findDiffKeys(props, PaginatorDefaultProps);
+            const otherProps = PaginatorBase.getOtherProps(props);
             const className = classNames('p-paginator p-component', props.className);
             const leftContent = ObjectUtils.getJSXElement(props.leftContent, props);
             const rightContent = ObjectUtils.getJSXElement(props.rightContent, props);

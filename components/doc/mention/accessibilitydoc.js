@@ -1,8 +1,20 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<label htmlFor="men1">Username</label>
+<Mention inputId="men1" />
+
+<span id="men2">Email</span>
+<Mention aria-labelledby="men2" />
+
+<Mention aria-label="City" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -16,17 +28,9 @@ export function AccessibilityDoc() {
                     The popup list has an id that refers to the <i>aria-controls</i> attribute of the input element and uses <i>listbox</i> as the role. Each list item has <i>option</i> role and an id to match the <i>aria-activedescendant</i> of the
                     input element.
                 </p>
-                <CodeHighlight>
-                    {`
-<label htmlFor="men1">Username</label>
-<Mention inputId="men1" />
 
-<span id="men2">Email</span>
-<Mention aria-labelledby="men2" />
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
-<Mention aria-label="City" />
-`}
-                </CodeHighlight>
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">
                     <table className="doc-table">

@@ -2,7 +2,7 @@
  *
  * Accordion groups a collection of contents in tabs.
  *
- * [Live Demo](https://www.primefaces.org/primereact/accordion/)
+ * [Live Demo](https://www.primereact.org/accordion/)
  *
  * Helper Components:
  *
@@ -13,7 +13,53 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type AccordionPassThroughType<T> = PassThroughType<T, AccordionPassThroughMethodOptions>;
+export declare type AccordionTabPassThroughType<T> = PassThroughType<T, AccordionTabPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface AccordionTabPassThroughMethodOptions {
+    props: AccordionTabProps;
+    parent: AccordionPassThroughMethodOptions;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link AccordionTabProps.pt}
+ */
+export interface AccordionTabPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the headeraction's DOM element.
+     */
+    headerAction?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the headericon's DOM element.
+     */
+    headerIcon?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the headertitle's DOM element.
+     */
+    headerTitle?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the toggleablecontent's DOM element.
+     */
+    toggleableContent?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in AccordionTab component.
@@ -67,6 +113,11 @@ interface AccordionTabProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {AccordionTabPassThroughOptions}
+     */
+    pt?: AccordionTabPassThroughOptions;
 }
 
 /**
@@ -116,6 +167,39 @@ export interface AccordionTabChangeEvent {
 }
 
 /**
+ * Custom passthrough(pt) option method.
+ */
+export interface AccordionPassThroughMethodOptions {
+    props: AccordionProps;
+    state: AccordionState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link AccordionProps.pt}
+ */
+export interface AccordionPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: AccordionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Accordion component.
+ */
+export interface AccordionState {
+    /**
+     * Current id state as a string
+     */
+    id: string;
+    /**
+     * Current active index state.
+     */
+    activeIndex: number | number[];
+}
+
+/**
  * Defines valid properties in Accordion component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -132,12 +216,10 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
     multiple?: boolean | undefined;
     /**
      * Icon of a collapsed tab.
-     * @defaultValue pi pi-chevron-right
      */
     expandIcon?: IconType<AccordionProps> | undefined;
     /**
      * Icon of an expanded tab.
-     * @defaultValue pi pi-chevron-down
      */
     collapseIcon?: IconType<AccordionProps> | undefined;
     /**
@@ -165,6 +247,11 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {AccordionPassThroughOptions}
+     */
+    pt?: AccordionPassThroughOptions;
 }
 
 /**
@@ -172,9 +259,9 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
  *
  * _Accordion groups a collection of contents in tabs._
  *
- * [Live Demo](https://www.primefaces.org/primereact/accordion/)
+ * [Live Demo](https://www.primereact.org/accordion/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

@@ -2,9 +2,11 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
+import { TimesIcon } from '../icons/times';
+import { SearchIcon } from '../icons/search';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
@@ -107,8 +109,11 @@ export const DropdownPanel = React.memo(
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
                 const ariaLabel = localeOption('clear');
+                const iconProps = { className: 'p-dropdown-filter-clear-icon', 'aria-label': ariaLabel, onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current)) };
+                const icon = props.filterClearIcon || <TimesIcon {...iconProps} />;
+                const filterClearIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
-                return <i className="p-dropdown-filter-clear-icon pi pi-times" aria-label={ariaLabel} onClick={() => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))}></i>;
+                return filterClearIcon;
             }
 
             return null;
@@ -118,6 +123,9 @@ export const DropdownPanel = React.memo(
             if (props.filter) {
                 const clearIcon = createFilterClearIcon();
                 const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
+                const iconClassName = 'p-dropdown-filter-icon';
+                const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
                 let content = (
                     <div className={containerClassName}>
                         <input
@@ -131,7 +139,7 @@ export const DropdownPanel = React.memo(
                             value={props.filterValue}
                         />
                         {clearIcon}
-                        <i className="p-dropdown-filter-icon pi pi-search"></i>
+                        {filterIcon}
                     </div>
                 );
 
@@ -142,7 +150,7 @@ export const DropdownPanel = React.memo(
                         filterOptions: filterOptions,
                         filterInputKeyDown: props.onFilterInputKeyDown,
                         filterInputChange: onFilterInputChange,
-                        filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                        filterIconClassName: 'p-dropdown-filter-icon',
                         clearIcon: clearIcon,
                         props
                     };
@@ -169,10 +177,11 @@ export const DropdownPanel = React.memo(
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
                             const className = classNames('p-dropdown-items', options.className);
-                            const content = isEmptyFilter ? createEmptyMessage() : options.children;
+                            const emptyMessage = props.hasFilter ? props.emptyFilterMessage : props.emptyMessage;
+                            const content = isEmptyFilter ? createEmptyMessage(emptyMessage) : options.children;
 
                             return (
-                                <ul ref={options.contentRef} className={className} role="listbox">
+                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox">
                                     {content}
                                 </ul>
                             );

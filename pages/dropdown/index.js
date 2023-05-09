@@ -1,8 +1,5 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
-
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
 import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
 import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
@@ -11,13 +8,12 @@ import { FilterDoc } from '../../components/doc/dropdown/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/dropdown/floatlabeldoc';
 import { FormikDoc } from '../../components/doc/dropdown/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
-import { GroupedDoc } from '../../components/doc/dropdown/groupeddoc';
+import { GroupDoc } from '../../components/doc/dropdown/groupdoc';
 import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
 import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
-import { EagerDoc } from '../../components/doc/dropdown/virtualscroll/eagerdoc';
-import { LazyDoc } from '../../components/doc/dropdown/virtualscroll/lazydoc';
+import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
 
 const DropdownDemo = () => {
     const docs = [
@@ -37,24 +33,9 @@ const DropdownDemo = () => {
             component: EditableDoc
         },
         {
-            id: 'grouped',
-            label: 'Grouped',
-            component: GroupedDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
         },
         {
             id: 'template',
@@ -74,19 +55,22 @@ const DropdownDemo = () => {
         {
             id: 'virtualscroll',
             label: 'Virtual Scroll',
-            description: 'Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.',
-            children: [
-                {
-                    id: 'eager',
-                    label: 'Eager',
-                    component: EagerDoc
-                },
-                {
-                    id: 'lazy',
-                    label: 'Lazy',
-                    component: LazyDoc
-                }
-            ]
+            component: VirtualScrollDoc
+        },
+        {
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
         },
         {
             id: 'form',
@@ -115,32 +99,10 @@ const DropdownDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Dropdown', pathname: '/modules/dropdown.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Select Component</title>
-                <meta name="description" content="Dropdown also known as Select, is used to choose an item from a collection of options." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Dropdown</h1>
-                        <p>Dropdown also known as Select, is used to choose an item from a collection of options.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Select Component" header="Dropdown" description="Dropdown also known as Select, is used to choose an item from a collection of options." componentDocs={docs} apiDocs={['Dropdown']} />;
 };
 
 export default DropdownDemo;

@@ -1,10 +1,18 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DevelopmentSection } from '../common/developmentsection';
-
 import Link from 'next/link';
-import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<span id="dd1">Options</span>
+<MultiSelect aria-labelledby="dd1" />
+
+<MultiSelect aria-label="Options" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -29,14 +37,8 @@ export function AccessibilityDoc() {
                 <p>
                     Close button uses <i>close</i> key of the <i>aria</i> property from the <Link href="/locale">locale</Link> API as the <i>aria-label</i> by default, this can be overriden with the <i>closeButtonProps</i>.
                 </p>
-                <CodeHighlight>
-                    {`
-<span id="dd1">Options</span>
-<MultiSelect aria-labelledby="dd1" />
 
-<MultiSelect aria-label="Options" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Closed State Keyboard Support</h3>
                 <div className="doc-tablewrapper">

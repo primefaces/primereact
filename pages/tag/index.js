@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tag/basicdoc';
 import { IconDoc } from '../../components/doc/tag/icondoc';
@@ -10,6 +8,9 @@ import { PillDoc } from '../../components/doc/tag/pilldoc';
 import { SeverityDoc } from '../../components/doc/tag/severitydoc';
 import { StyleDoc } from '../../components/doc/tag/styledoc';
 import { TemplateDoc } from '../../components/doc/tag/templatedoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/tag/pt/wireframe';
+import { PTDoc } from '../../components/doc/tag/pt/ptdoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -52,32 +53,28 @@ const TerminalDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Tag', pathname: '/modules/tag.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Tag Component</title>
-                <meta name="description" content="Tag component is used to categorize content." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Tag</h1>
-                        <p>Tag component is used to categorize content.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tag.options',
+            label: 'Tag PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} ptDocs={ptDocs} />;
 };
 
 export default TerminalDemo;

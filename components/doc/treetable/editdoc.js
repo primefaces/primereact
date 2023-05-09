@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { InputText } from '../../lib/inputtext/InputText';
-import { Column } from '../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
+import { Column } from '../../lib/column/Column';
+import { InputText } from '../../lib/inputtext/InputText';
+import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -57,10 +57,10 @@ export function EditDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes}>
-    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
-    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
+<TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
+    <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
+    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
+    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
 </TreeTable>
         `,
         javascript: `
@@ -69,22 +69,22 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { NodeService } from './service/NodeService';
-import './TreeTableDemo.css';
 
-export default function EditDoc() {
+export default function EditDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
     const onEditorValueChange = (options, value) => {
         let newNodes = JSON.parse(JSON.stringify(nodes));
         let editedNode = findNodeByKey(newNodes, options.node.key);
+
         editedNode.data[options.field] = value;
 
         setNodes(newNodes);
-    }
+    };
 
     const findNodeByKey = (nodes, key) => {
         let path = key.split('-');
@@ -92,44 +92,40 @@ export default function EditDoc() {
 
         while (path.length) {
             let list = node ? node.children : nodes;
+
             node = list[parseInt(path[0], 10)];
             path.shift();
         }
 
         return node;
-    }
+    };
 
     const inputTextEditor = (options) => {
-        return (
-            <InputText type="text" value={options.rowData[options.field]}
-                onChange={(e) => onEditorValueChange(options, e.target.value)} />
-        );
-    }
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(e) => onEditorValueChange(options, e.target.value)} />;
+    };
 
     const sizeEditor = (options) => {
         return inputTextEditor(options);
-    }
+    };
 
     const typeEditor = (options) => {
         return inputTextEditor(options);
-    }
+    };
 
     const requiredValidator = (e) => {
         let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
-    }
+    };
 
     return (
-        <div>
-            <div className="card treetable-editing-demo">
-                <TreeTable value={nodes}>
-                    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
-                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
+                <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
+                <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
+            </TreeTable>
         </div>
     );
 }
@@ -137,88 +133,72 @@ export default function EditDoc() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
-import { Column } from 'primereact/column';
+import { Column, ColumnEditorOptions, ColumnEvent } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
-import './TreeTableDemo.css';
 
-export default function EditDoc() {
-    const [nodes, setNodes] = useState([]);
-    
+export default function EditDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
+
     useEffect(() => {
-        NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        NodeService.getTreeTableNodes().then((data) => setNodes(data));
+    }, []);
 
-    const onEditorValueChange = (options, value) => {
+    const onEditorValueChange = (options: ColumnEditorOptions, value: string) => {
         let newNodes = JSON.parse(JSON.stringify(nodes));
         let editedNode = findNodeByKey(newNodes, options.node.key);
+
         editedNode.data[options.field] = value;
 
         setNodes(newNodes);
-    }
+    };
 
-    const findNodeByKey = (nodes, key) => {
+    const findNodeByKey = (nodes: TreeNode[], key: string) => {
         let path = key.split('-');
         let node;
 
         while (path.length) {
             let list = node ? node.children : nodes;
+
             node = list[parseInt(path[0], 10)];
             path.shift();
         }
 
         return node;
-    }
+    };
 
-    const inputTextEditor = (options) => {
-        return (
-            <InputText type="text" value={options.rowData[options.field]}
-                onChange={(e) => onEditorValueChange(options, e.target.value)} />
-        );
-    }
+    const inputTextEditor = (options: ColumnEditorOptions) => {
+        return <InputText type="text" value={options.rowData[options.field]} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onEditorValueChange(options, e.target.value)} />;
+    };
 
-    const sizeEditor = (options) => {
+    const sizeEditor = (options: ColumnEditorOptions) => {
         return inputTextEditor(options);
-    }
+    };
 
-    const typeEditor = (options) => {
+    const typeEditor = (options: ColumnEditorOptions) => {
         return inputTextEditor(options);
-    }
+    };
 
-    const requiredValidator = (e) => {
+    const requiredValidator = (e: ColumnEvent) => {
         let props = e.columnProps;
         let value = props.node.data[props.field];
 
         return value && value.length > 0;
-    }
+    };
 
     return (
-        <div>
-            <div className="card treetable-editing-demo">
-                <TreeTable value={nodes}>
-                    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
-                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
-                </TreeTable>
-            </div>
+        <div className="card">
+            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
+                <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
+                <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
+            </TreeTable>
         </div>
     );
 }
         `,
-
-        extFiles: {
-            'TreeTableDemo.css': `
-/* TreeTableDemo.css */
-
-.treetable-editing-demo .p-treetable .p-treetable-tbody > tr > td.p-cell-editing {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-            `
-        },
-
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -251,13 +231,15 @@ export default function EditDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Incell editing provides a quick and user friendly way to manipulate data.</p>
+                <p>
+                    Incell editing is enabled by defining input elements with <i>editor</i> property of a Column.
+                </p>
             </DocSectionText>
-            <div className="card treetable-editing-demo">
-                <TreeTable value={nodes}>
-                    <Column field="name" header="Name" expander style={{ height: '3.5em' }}></Column>
-                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5em' }}></Column>
-                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5em' }}></Column>
+            <div className="card">
+                <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }}>
+                    <Column field="name" header="Name" expander style={{ height: '3.5rem' }}></Column>
+                    <Column field="size" header="Size" editor={sizeEditor} cellEditValidator={requiredValidator} style={{ height: '3.5rem' }}></Column>
+                    <Column field="type" header="Type" editor={typeEditor} style={{ height: '3.5rem' }}></Column>
                 </TreeTable>
             </div>
             <DocSectionCode code={code} service={['NodeService']} />

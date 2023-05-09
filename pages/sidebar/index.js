@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
 import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
@@ -51,32 +49,10 @@ const SidebarDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Sidebar', pathname: '/modules/sidebar.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Sidebar Component</title>
-                <meta name="description" content="Sidebar, also known as Drawer, is a container component displayed as an overlay." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Sidebar</h1>
-                        <p>Sidebar, also known as Drawer, is a container component displayed as an overlay.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Sidebar Component" header="Sidebar" description="Sidebar, also known as Drawer, is a container component displayed as an overlay." componentDocs={docs} apiDocs={['Sidebar']} />;
 };
 
 export default SidebarDemo;

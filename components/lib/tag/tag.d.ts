@@ -2,13 +2,41 @@
  *
  * Tag component is used to categorize content.
  *
- * [Live Demo](https://www.primefaces.org/primereact/tag)
+ * [Live Demo](https://www.primereact.org/tag)
  *
  * @module tag
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type TagPassThroughType<T> = PassThroughType<T, TagPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TagPassThroughMethodOptions {
+    props: TagProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TagProps.pt}
+ */
+export interface TagPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the value's DOM element.
+     */
+    value?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Defines valid properties in Tag component. In addition to these, all properties of HTMLSpanElement can be used in this component.
@@ -38,6 +66,11 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TagPassThroughOptions}
+     */
+    pt?: TagPassThroughOptions;
 }
 
 /**
@@ -45,9 +78,9 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
  *
  * _Tag component is used to categorize content._
  *
- * [Live Demo](https://www.primefaces.org/primereact/tag/)
+ * [Live Demo](https://www.primereact.org/tag/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

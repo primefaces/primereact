@@ -2,15 +2,19 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { BlockUIDefaultProps } from './BlockUIBase';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { BlockUIBase } from './BlockUIBase';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
-    const props = ObjectUtils.getProps(inProps, BlockUIDefaultProps);
+    const props = BlockUIBase.getProps(inProps);
 
     const [visibleState, setVisibleState] = React.useState(props.blocked);
     const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
+
+    const { ptm } = BlockUIBase.setMetaData({
+        props
+    });
 
     const block = () => {
         setVisibleState(true);
@@ -96,12 +100,22 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    const otherProps = ObjectUtils.findDiffKeys(props, BlockUIDefaultProps);
     const mask = createMask();
     const className = classNames('p-blockui-container', props.containerClassName);
 
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            ref: elementRef,
+            style: props.containerStyle,
+            className: className
+        },
+        BlockUIBase.getOtherProps(props),
+        ptm('root')
+    );
+
     return (
-        <div id={props.id} ref={elementRef} className={className} style={props.containerStyle} {...otherProps}>
+        <div {...rootProps}>
             {props.children}
             {mask}
         </div>

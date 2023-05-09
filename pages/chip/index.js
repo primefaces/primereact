@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/chip/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/chip/basicdoc';
@@ -7,8 +6,10 @@ import { ImageDoc } from '../../components/doc/chip/imagedoc';
 import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { TemplateDoc } from '../../components/doc/chip/templatedoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/chip/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/chip/pt/ptdoc';
 
 const ChipDemo = () => {
     const docs = [
@@ -46,32 +47,28 @@ const ChipDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Chip', pathname: '/modules/chip.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Chip Component</title>
-                <meta name="description" content="Chip represents entities using icons, labels and images." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Chip</h1>
-                        <p>Chip represents entities using icons, labels and images.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.chip.options',
+            label: 'Chip PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Chip Component" header="Chip" description="Chip represents entities using icons, labels and images." componentDocs={docs} apiDocs={['Chip']} ptDocs={ptDocs} />;
 };
 
 export default ChipDemo;

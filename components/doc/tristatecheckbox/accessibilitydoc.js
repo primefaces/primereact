@@ -1,10 +1,18 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DevelopmentSection } from '../common/developmentsection';
-
 import Link from 'next/link';
-import { CodeHighlight } from '../common/codehighlight';
+import { DevelopmentSection } from '../common/developmentsection';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
+    const code = {
+        basic: `
+<span id="chkbox1">Remember Me</span>
+<TriStateCheckbox aria-labelledby="chkbox1" />
+
+<TriStateCheckbox aria-label="Remember Me" />
+    `
+    };
+
     return (
         <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
@@ -14,14 +22,8 @@ export function AccessibilityDoc() {
                     <i>aria-live</i> attribute that is only visible to screen readers to read the value displayed. Values to read are defined with the <i>trueLabel</i>, <i>falseLabel</i> and <i>nullLabel</i> keys of the <i>aria</i>
                     property from the <Link href="/locale">locale</Link> API. This is an example of a custom accessibility implementation as there is no one to one mapping between the component design and the WCAG specification.
                 </p>
-                <CodeHighlight>
-                    {`
-<span id="chkbox1">Remember Me</span>
-<TriStateCheckbox aria-labelledby="chkbox1" />
 
-<TriStateCheckbox aria-label="Remember Me" />
-`}
-                </CodeHighlight>
+                <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
 
                 <h3>Keyboard Support</h3>
                 <div className="doc-tablewrapper">

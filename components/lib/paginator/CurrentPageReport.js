@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ObjectUtils } from '../utils/Utils';
-import { CurrentPageReportDefaultProps } from './PaginatorBase';
+import { CurrentPageReportBase } from './PaginatorBase';
 
 export const CurrentPageReport = React.memo((inProps) => {
-    const props = ObjectUtils.getProps(inProps, CurrentPageReportDefaultProps);
+    const props = CurrentPageReportBase.getProps(inProps);
 
     const report = {
         currentPage: props.page + 1,

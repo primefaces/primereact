@@ -2,12 +2,45 @@
  *
  * DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.
  *
- * [Live Demo](https://www.primefaces.org/primereact/deferredcontent/)
+ * [Live Demo](https://www.primereact.org/deferredcontent/)
  *
  * @module deferredcontent
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type DeferredContentPassThroughType<T> = PassThroughType<T, DeferredContentPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DeferredContentPassThroughMethodOptions {
+    props: DeferredContentProps;
+    state: DeferredContentState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DeferredContentProps.pt}
+ */
+export interface DeferredContentPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DeferredContentPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in DeferredContent component.
+ */
+export interface DeferredContentState {
+    /**
+     * Current loaded state as a boolean.
+     * @defaultValue false
+     */
+    loaded?: boolean;
+}
 
 /**
  * Defines valid properties in DeferredContent component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -24,6 +57,11 @@ export interface DeferredContentProps extends Omit<React.DetailedHTMLProps<React
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DeferredContentPassThroughOptions}
+     */
+    pt?: DeferredContentPassThroughOptions;
 }
 
 /**
@@ -31,9 +69,9 @@ export interface DeferredContentProps extends Omit<React.DetailedHTMLProps<React
  *
  * _DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll._
  *
- * [Live Demo](https://www.primefaces.org/primereact/deferredcontent/)
+ * [Live Demo](https://www.primereact.org/deferredcontent/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

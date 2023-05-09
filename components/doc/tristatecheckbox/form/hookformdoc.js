@@ -62,7 +62,7 @@ import { TriStateCheckbox } from "primereact/tristatecheckbox";
 import { classNames } from 'primereact/utils';
 
 export default function HookFormDoc() {
-    c    const toast = useRef(null);
+    const toast = useRef(null);
 
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: getValues('value').toString() });
@@ -91,23 +91,24 @@ export default function HookFormDoc() {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-2">
-            <Toast ref={toast} />
-            <Controller
-                name="value"
-                control={control}
-                rules={{ required: 'Value is required.' }}
-                render={({ field, fieldState }) => (
-                    <>
-                        <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
-                        <label>* I've read and accept the terms & conditions.</label>
-                        {getFormErrorMessage(field.name)}
-                    </>
-                )}
-            />
-            <Button label="Submit" type="submit" icon="pi pi-check" />
-        </form>
-    </div>
+        <div className="card flex justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
+                <Toast ref={toast} />
+                <Controller
+                    name="value"
+                    control={control}
+                    rules={{ required: 'Value is required.' }}
+                    render={({ field, fieldState }) => (
+                        <>
+                            <TriStateCheckbox id={field.name} value={field.value} ref={field.ref} onChange={field.onChange} className={classNames({ 'p-invalid': fieldState.error })} />
+                            <label>* I've read and accept the terms & conditions.</label>
+                            {getFormErrorMessage(field.name)}
+                        </>
+                    )}
+                />
+                <Button label="Submit" type="submit" icon="pi pi-check" />
+            </form>
+        </div>
     )
 }
         `,
@@ -149,8 +150,8 @@ export default function HookFormDoc() {
     };
 
     return (
-        <div className="card flex flex-column align-items-center">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-2">
+        <div className="card flex justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <Controller
                     name="value"
@@ -179,8 +180,8 @@ export default function HookFormDoc() {
                     <a href="https://react-hook-form.com/">React Hook Form</a> is another popular React library to handle forms.
                 </p>
             </DocSectionText>
-            <div className="card flex flex-column align-items-center">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column gap-2">
+            <div className="card flex justify-content-center">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <Controller
                         name="value"

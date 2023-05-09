@@ -1,11 +1,11 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ImportDoc(props) {
     const code = {
         basic: `
-import { Column } from 'primereact/column';
 import { TreeTable } from 'primereact/treetable';
+import { Column } from 'primereact/column';
         `
     };
 

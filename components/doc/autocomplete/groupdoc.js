@@ -42,7 +42,7 @@ export function GroupDoc(props) {
     const groupedItemTemplate = (item) => {
         return (
             <div className="flex align-items-center">
-                <img alt={item.label} src={'/images/flag/flag_placeholder.png'} className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
+                <img alt={item.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${item.code.toLowerCase()} mr-2`} style={{ width: '18px' }} />
                 <div>{item.label}</div>
             </div>
         );
@@ -113,7 +113,7 @@ export default function GroupDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.label}
-                    src="https://primereact.org/images/flag/flag_placeholder.png"
+                    src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -147,7 +147,7 @@ export default function GroupDemo() {
         `,
         typescript: `
 import React, { useState } from 'react';
-import { AutoComplete, AutoCompleteCompleteMethodParams } from "primereact/autocomplete";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 interface City {
     label: string;
@@ -201,7 +201,7 @@ export default function GroupDemo() {
             <div className="flex align-items-center">
                 <img
                     alt={item.label}
-                    src="https://primereact.org/images/flag/flag_placeholder.png"
+                    src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png"
                     className={\`flag flag-\${item.code.toLowerCase()} mr-2\`}
                     style={{width: '18px'}}
                 />
@@ -210,7 +210,7 @@ export default function GroupDemo() {
         );
     };
 
-    const search = (event: AutoCompleteCompleteMethodParams) => {
+    const search = (event: AutoCompleteCompleteEvent) => {
         let query = event.query;
         let _filteredCities = [];
 
@@ -227,7 +227,7 @@ export default function GroupDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeParams) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
+            <AutoComplete value={selectedCity} onChange={(e: AutoCompleteChangeEvent) => setSelectedCity(e.value)} suggestions={filteredCities} completeMethod={search}
                 field="label" optionGroupLabel="label" optionGroupChildren="items" optionGroupTemplate={groupedItemTemplate} placeholder="Hint: type 'a'" />
         </div>
     )

@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tooltip/accessibilitydoc';
 import { AutoHideDoc } from '../../components/doc/tooltip/autohidedoc';
 import { DelayDoc } from '../../components/doc/tooltip/delaydoc';
@@ -75,32 +73,10 @@ const TooltipDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Tooltip', pathname: '/modules/tooltip.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Tooltip Component</title>
-                <meta name="description" content="Tooltip functionality is integrated within various PrimeReact components." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Tooltip</h1>
-                        <p>Tooltip functionality is integrated within various PrimeReact components.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Tooltip Component" header="Tooltip" description="Tooltip functionality is integrated within various PrimeReact components." componentDocs={docs} apiDocs={['Tooltip', 'TooltipOptions']} />;
 };
 
 export default TooltipDemo;

@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
 import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
@@ -34,32 +32,14 @@ const ConfirmPopupDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'ConfirmPopup', pathname: '/modules/confirmpopup.html' }]
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Confirmation Popup Component</title>
-                <meta name="description" content="ConfirmPopup is an easy to use and customizable Confirmation API using a popover." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>ConfirmPopup</h1>
-                        <p>ConfirmPopup is an easy to use and customizable Confirmation API using a popover.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
+        <>
+            <DocComponent title="React Confirmation Popup Component" header="ConfirmPopup" description="ConfirmPopup is an easy to use and customizable Confirmation API using a popover." componentDocs={docs} apiDocs={['ConfirmPopup']} />
             <ConfirmPopup />
-        </div>
+        </>
     );
 };
 

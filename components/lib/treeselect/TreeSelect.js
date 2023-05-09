@@ -4,13 +4,16 @@ import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect }
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { TreeSelectDefaultProps } from './TreeSelectBase';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { SearchIcon } from '../icons/search';
+import { TimesIcon } from '../icons/times';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, TreeSelectDefaultProps);
+        const props = TreeSelectBase.getProps(inProps);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -401,11 +404,13 @@ export const TreeSelect = React.memo(
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-treeselect-trigger-icon p-clickable', props.dropdownIcon);
+            const iconClassName = 'p-treeselect-trigger-icon p-clickable';
+            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <div ref={triggerRef} className="p-treeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
-                    <span className={iconClassName}></span>
+                    {dropdownIcon}
                 </div>
             );
         };
@@ -443,6 +448,9 @@ export const TreeSelect = React.memo(
         const createFilterElement = () => {
             if (props.filter) {
                 const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                const iconClassName = 'p-treeselect-filter-icon';
+                const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
                 let filterContent = (
                     <div className="p-treeselect-filter-container">
@@ -457,7 +465,7 @@ export const TreeSelect = React.memo(
                             onChange={onFilterInputChange}
                             disabled={props.disabled}
                         />
-                        <span className="p-treeselect-filter-icon pi pi-search"></span>
+                        {filterIcon}
                     </div>
                 );
 
@@ -468,7 +476,7 @@ export const TreeSelect = React.memo(
                         filterOptions: filterOptions,
                         filterInputKeyDown: onFilterInputKeyDown,
                         filterInputChange: onFilterInputChange,
-                        filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                        filterIconClassName: 'p-dropdown-filter-icon',
                         props
                     };
 
@@ -481,9 +489,13 @@ export const TreeSelect = React.memo(
 
         const createHeader = () => {
             const filterElement = createFilterElement();
+            const iconProps = { className: 'p-treeselect-close-icon', 'aria-hidden': true };
+            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
             const closeElement = (
                 <button type="button" className="p-treeselect-close p-link" onClick={hide} aria-label={localeOption('close')}>
-                    <span className="p-treeselect-close-icon pi pi-times" aria-hidden="true"></span>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
@@ -500,7 +512,7 @@ export const TreeSelect = React.memo(
                     filterElement,
                     closeElement,
                     closeElementClassName: 'p-treeselect-close p-link',
-                    closeIconClassName: 'p-treeselect-close-icon pi pi-times',
+                    closeIconClassName: 'p-treeselect-close-icon',
                     onCloseClick: hide,
                     element: content,
                     props
@@ -518,7 +530,7 @@ export const TreeSelect = React.memo(
 
         const selectedNodes = getSelectedNodes();
 
-        const otherProps = ObjectUtils.findDiffKeys(props, TreeSelectDefaultProps);
+        const otherProps = TreeSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-treeselect p-component p-inputwrapper',

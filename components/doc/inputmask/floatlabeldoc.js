@@ -32,7 +32,7 @@ export default function FloatLabelDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { InputMask, InputMaskChangeParams } from "primereact/inputmask";
+import { InputMask, InputMaskChangeEvent } from "primereact/inputmask";
 
 export default function FloatLabelDemo() {
     const [value, setValue] = useState<string>('');
@@ -40,7 +40,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <InputMask id="ssn_input" value={value} onChange={(e: InputMaskChangeParams) => setValue(e.target.value)} mask="999-99-9999" />
+                <InputMask id="ssn_input" value={value} onChange={(e: InputMaskChangeEvent) => setValue(e.target.value)} mask="999-99-9999" />
                 <label htmlFor="ssn_input">SSN</label>
             </span>
         </div>

@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/editor/basicdoc';
 import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
@@ -65,32 +63,10 @@ const EditorDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Editor', pathname: '/modules/editor.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Editor Component</title>
-                <meta name="description" content="Editor is rich text editor component based on Quill." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Editor</h1>
-                        <p>Editor is rich text editor component based on Quill.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Editor Component" header="Editor" description="Editor is rich text editor component based on Quill." componentDocs={docs} apiDocs={['Editor']} />;
 };
 
 export default EditorDemo;

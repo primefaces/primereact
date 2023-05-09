@@ -4,14 +4,15 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { GalleriaDefaultProps } from './GalleriaBase';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
+import { TimesIcon } from '../icons/times';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, GalleriaDefaultProps);
+        const props = GalleriaBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
@@ -32,6 +33,13 @@ export const Galleria = React.memo(
         );
 
         const onActiveItemChange = (event) => {
+            if (event.index >= props.value.length) {
+                // #3973 AutoPlay without circular should stop the slideshow when it reaches the end
+                stopSlideShow();
+
+                return;
+            }
+
             if (props.onItemChange) {
                 props.onItemChange(event);
             } else {
@@ -136,7 +144,7 @@ export const Galleria = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, GalleriaDefaultProps);
+            const otherProps = GalleriaBase.getOtherProps(props);
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
             const galleriaClassName = classNames(
@@ -153,9 +161,13 @@ export const Galleria = React.memo(
                 indicatorPosClassName
             );
 
-            const closeIcon = props.fullScreen && (
+            const iconProps = { className: 'p-galleria-close-icon', 'aria-hidden': true };
+            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
+            const closeButton = props.fullScreen && (
                 <button type="button" className="p-galleria-close p-link" aria-label={localeOption('close')} onClick={hide}>
-                    <span className="p-galleria-close-icon pi pi-times" aria-hidden="true"></span>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
@@ -164,7 +176,7 @@ export const Galleria = React.memo(
             const footer = createFooter();
             const element = (
                 <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
-                    {closeIcon}
+                    {closeButton}
                     {header}
                     <div className="p-galleria-content">
                         <GalleriaItem
@@ -176,6 +188,8 @@ export const Galleria = React.memo(
                             circular={props.circular}
                             caption={props.caption}
                             showIndicators={props.showIndicators}
+                            itemPrevIcon={props.itemPrevIcon}
+                            itemNextIcon={props.itemNextIcon}
                             changeItemOnIndicatorHover={props.changeItemOnIndicatorHover}
                             indicator={props.indicator}
                             showItemNavigators={props.showItemNavigators}
@@ -192,6 +206,8 @@ export const Galleria = React.memo(
                                 onActiveItemChange={onActiveItemChange}
                                 itemTemplate={props.thumbnail}
                                 numVisible={numVisibleState}
+                                nextThumbnailIcon={props.nextThumbnailIcon}
+                                prevThumbnailIcon={props.prevThumbnailIcon}
                                 responsiveOptions={props.responsiveOptions}
                                 circular={props.circular}
                                 isVertical={isVertical}

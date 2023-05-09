@@ -5,8 +5,8 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ConfirmPopupDefaultProps } from './ConfirmPopupBase';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { ConfirmPopupBase } from './ConfirmPopupBase';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -25,7 +25,7 @@ export const confirmPopup = (props = {}) => {
 
 export const ConfirmPopup = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ConfirmPopupDefaultProps);
+        const props = ConfirmPopupBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
@@ -34,6 +34,7 @@ export const ConfirmPopup = React.memo(
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
+        const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -64,18 +65,25 @@ export const ConfirmPopup = React.memo(
         };
 
         const accept = () => {
-            callbackFromProp('accept');
-            hide('accept');
+            if (!isExecuting.current) {
+                isExecuting.current = true;
+                callbackFromProp('accept');
+                hide('accept');
+            }
         };
 
         const reject = () => {
-            callbackFromProp('reject');
-            hide('reject');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('reject');
+                hide('reject');
+            }
         };
 
         const show = () => {
             setVisibleState(true);
             setReshowState(false);
+            isCallbackExecuting.current = false;
 
             overlayEventListener.current = (e) => {
                 !isOutsideClicked(e.target) && (isPanelClicked.current = true);
@@ -243,7 +251,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ConfirmPopupDefaultProps);
+            const otherProps = ConfirmPopupBase.getOtherProps(props);
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false

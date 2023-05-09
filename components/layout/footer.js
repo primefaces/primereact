@@ -1,6 +1,7 @@
+import pkg from '../../package.json';
+
 export default function Footer() {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const version = require('../../package.json') && require('../../package.json').version;
+    const version = pkg.version;
 
     return (
         <div className="layout-footer">

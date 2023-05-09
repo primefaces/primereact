@@ -2,13 +2,44 @@
  *
  * Avatar represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatar)
+ * [Live Demo](https://www.primereact.org/avatar)
  *
  * @module avatar
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type AvatarPassThroughType<T> = PassThroughType<T, AvatarPassThroughMethodOptions>;
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface AvatarPassThroughMethodOptions {
+    props: AvatarProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link AvatarProps.pt}
+ */
+export interface AvatarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: AvatarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: AvatarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: AvatarPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the image's DOM element.
+     */
+    image?: AvatarPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+}
 
 /**
  * Defines valid properties in Avatar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -73,9 +104,9 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
  *
  * _Avatar represents people using icons, labels and images._
  *
- * [Live Demo](https://www.primefaces.org/primereact/avatar/)
+ * [Live Demo](https://www.primereact.org/avatar/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

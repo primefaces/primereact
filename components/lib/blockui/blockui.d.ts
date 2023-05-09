@@ -2,12 +2,45 @@
  *
  * BlockUI represents people using icons, labels and images.
  *
- * [Live Demo](https://www.primefaces.org/primereact/blockui)
+ * [Live Demo](https://www.primereact.org/blockui)
  *
  * @module blockui
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type BlockUIPassThroughType<T> = PassThroughType<T, BlockUIPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface BlockUIPassThroughMethodOptions {
+    props: BlockUIProps;
+    state: BlockUIState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link BlockUIProps.pt}
+ */
+export interface BlockUIPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: BlockUIPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in BlockUI component.
+ */
+export interface BlockUIState {
+    /**
+     * Current blocked state as a boolean.
+     * @defaultValue false
+     */
+    blocked: boolean;
+}
 
 /**
  * Defines valid properties in BlockUI component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -66,9 +99,9 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
  *
  * _BlockUI represents people using icons, labels and images._
  *
- * [Live Demo](https://www.primefaces.org/primereact/blockui/)
+ * [Live Demo](https://www.primereact.org/blockui/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

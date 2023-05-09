@@ -1,12 +1,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { StyleClass } from '../lib/styleclass/StyleClass';
 import { classNames } from '../lib/utils/ClassNames';
 import MenuData from './menu.json';
 
-export default function Menu(props) {
+const Menu = memo((props) => {
     const router = useRouter();
+    const menu = MenuData.data.map((data) => {
+        const rootItem = { ...data };
+
+        rootItem.expanded = rootItem.children && rootItem.children.some((item) => item.to === router.pathname || (item.children && item.children.some((it) => it.to === router.pathname)));
+
+        return rootItem;
+    });
 
     const renderLink = (item) => {
         const { name, to, href } = item;
@@ -35,6 +42,18 @@ export default function Menu(props) {
             );
         }
     };
+
+    const scrollToActiveItem = () => {
+        const activeItem = document.querySelector('.router-link-active');
+
+        if (activeItem) {
+            activeItem.scrollIntoView({ block: 'center' });
+        }
+    };
+
+    useEffect(() => {
+        scrollToActiveItem();
+    }, []);
 
     const renderChild = (menuitem, key) => {
         if (menuitem.children) {
@@ -88,17 +107,18 @@ export default function Menu(props) {
     const renderRootMenuItems = () => {
         return (
             <>
-                {MenuData.data.map((menuitem, index) => {
-                    const label = menuitem.children ? renderRootItemButton(menuitem, index) : renderLink(menuitem);
-                    const children = renderRootMenuItemChildren(menuitem, index);
+                {menu &&
+                    menu.map((menuitem, index) => {
+                        const label = menuitem.children ? renderRootItemButton(menuitem, index) : renderLink(menuitem);
+                        const children = renderRootMenuItemChildren(menuitem, index);
 
-                    return (
-                        <li key={'root_' + index}>
-                            {label}
-                            {children}
-                        </li>
-                    );
-                })}
+                        return (
+                            <li key={'root_' + index}>
+                                {label}
+                                {children}
+                            </li>
+                        );
+                    })}
             </>
         );
     };
@@ -110,7 +130,7 @@ export default function Menu(props) {
         <aside className={sidebarClassName}>
             <Link href="/">
                 <a className="logo" aria-label="PrimeReact logo">
-                    <img alt="logo" src={`/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
+                    <img alt="logo" src={`https://primefaces.org/cdn/primereact/images/primereact-logo${props.darkTheme ? '-light' : '-dark'}.svg`} />
                 </a>
             </Link>
             <nav>
@@ -118,4 +138,6 @@ export default function Menu(props) {
             </nav>
         </aside>
     );
-}
+});
+
+export default Menu;

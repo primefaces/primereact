@@ -2,7 +2,7 @@
  *
  * Rating component is a star based selection input.
  *
- * [Live Demo](https://www.primefaces.org/primereact/rating/)
+ * [Live Demo](https://www.primereact.org/rating/)
  *
  * @module rating
  *
@@ -68,20 +68,17 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      */
     children?: React.ReactNode | undefined;
     /**
-     * ClassName of the on icon component.
-     * @defaultValue pi pi-star-fill
+     * Icon for the on state.
      */
     onIcon?: IconType<RatingProps> | undefined;
     /**
-     * ClassName of the off icon component.
-     * @defaultValue pi pi-star
+     * Icon for the off state.
      */
-    offIcon?: IconType<RatingProps>;
+    offIcon?: IconType<RatingProps> | undefined;
     /**
-     * ClassName of the cancel icon component.
-     * @defaultValue pi pi-ban
+     * Icon for the cancelable state.
      */
-    cancelIcon?: IconType<RatingProps>;
+    cancelIcon?: IconType<RatingProps> | undefined;
     /**
      * Properties of the cancel icon.
      */
@@ -101,9 +98,9 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
  *
  * _Rating component is a star based selection input._
  *
- * [Live Demo](https://www.primefaces.org/primereact/rating/)
+ * [Live Demo](https://www.primereact.org/rating/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

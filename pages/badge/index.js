@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/badge/basicdoc';
@@ -8,8 +7,10 @@ import { PositionDoc } from '../../components/doc/badge/positiondoc';
 import { SeverityDoc } from '../../components/doc/badge/severitydoc';
 import { SizeDoc } from '../../components/doc/badge/sizedoc';
 import { StyleDoc } from '../../components/doc/badge/styledoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/badge/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/badge/pt/ptdoc';
 
 const BadgeDemo = () => {
     const docs = [
@@ -52,32 +53,28 @@ const BadgeDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Badge', pathname: '/modules/badge.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Badge Component</title>
-                <meta name="description" content="Badge is a small status indicator for another element." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Badge</h1>
-                        <p>Badge is a small status indicator for another element.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.badge.options',
+            label: 'Badge PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Badge Component" header="Badge" description="Badge is a small status indicator for another element." componentDocs={docs} apiDocs={['Badge']} ptDocs={ptDocs} />;
 };
 
 export default BadgeDemo;

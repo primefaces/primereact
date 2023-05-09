@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
 import { AutoPlayDoc } from '../../components/doc/galleria/autoplaydoc';
@@ -150,32 +148,10 @@ const GalleriaDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [{ name: 'Galleria', pathname: '/modules/galleria.html' }]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Gallery Component</title>
-                <meta name="description" content="Galleria is a content gallery component." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>Galleria</h1>
-                        <p>Galleria is a content gallery component.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} />;
 };
 
 export default GalleriaDemo;

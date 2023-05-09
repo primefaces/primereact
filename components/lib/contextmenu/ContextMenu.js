@@ -1,21 +1,24 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { ContextMenuDefaultProps } from './ContextMenuBase';
+import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, ContextMenuDefaultProps);
+        const props = ContextMenuBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [reshowState, setReshowState] = React.useState(false);
         const [resetMenuState, setResetMenuState] = React.useState(false);
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const menuRef = React.useRef(null);
         const currentEvent = React.useRef(null);
+        const styleElementRef = React.useRef(null);
+        const isMobileMode = useMatchMedia(`screen and (max-width: ${props.breakpoint})`, !!props.breakpoint);
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -41,6 +44,47 @@ export const ContextMenu = React.memo(
                 }
             }
         });
+
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                const selector = `${attributeSelectorState}`;
+                const innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-contextmenu[${selector}] > ul {
+        max-height: ${props.scrollHeight};
+        overflow: ${props.scrollHeight ? 'auto' : ''};
+    }
+
+    .p-contextmenu[${selector}] .p-submenu-list {
+        position: relative;
+    }
+
+    .p-contextmenu[${selector}] .p-menuitem-active > .p-submenu-list {
+        left: 0 !important;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
+    }
+
+    .p-contextmenu[${selector}] .p-menuitem-active > .p-menuitem-link > .p-submenu-icon {
+        transform: rotate(-180deg);
+    }
+
+    .p-contextmenu[${selector}] .p-submenu-icon:before {
+        content: "\\e930";
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
 
         const onMenuClick = () => {
             setResetMenuState(false);
@@ -78,6 +122,11 @@ export const ContextMenu = React.memo(
             }
 
             position(currentEvent.current);
+
+            if (attributeSelectorState && props.breakpoint) {
+                menuRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
         };
 
         const onEntered = () => {
@@ -91,6 +140,7 @@ export const ContextMenu = React.memo(
 
         const onExited = () => {
             ZIndexUtils.clear(menuRef.current);
+            destroyStyle();
         };
 
         const position = (event) => {
@@ -151,7 +201,22 @@ export const ContextMenu = React.memo(
             if (props.global) {
                 bindDocumentContextMenuListener();
             }
+
+            if (props.breakpoint) {
+                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+            }
         });
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState && menuRef.current) {
+                menuRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
 
         useUpdateEffect(() => {
             if (visibleState) {
@@ -175,7 +240,7 @@ export const ContextMenu = React.memo(
         }));
 
         const createContextMenu = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ContextMenuDefaultProps);
+            const otherProps = ContextMenuBase.getOtherProps(props);
             const className = classNames('p-contextmenu p-component', props.className, {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
@@ -195,7 +260,7 @@ export const ContextMenu = React.memo(
                     onExited={onExited}
                 >
                     <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onMenuClick} onMouseEnter={onMenuMouseEnter}>
-                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} />
+                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} />
                     </div>
                 </CSSTransition>
             );

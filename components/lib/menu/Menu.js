@@ -5,11 +5,11 @@ import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { MenuDefaultProps } from './MenuBase';
+import { MenuBase } from './MenuBase';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, MenuDefaultProps);
+        const props = MenuBase.getProps(inProps);
 
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const menuRef = React.useRef(null);
@@ -229,7 +229,7 @@ export const Menu = React.memo(
 
         const createElement = () => {
             if (props.model) {
-                const otherProps = ObjectUtils.findDiffKeys(props, MenuDefaultProps);
+                const otherProps = MenuBase.getOtherProps(props);
                 const className = classNames(
                     'p-menu p-component',
                     {

@@ -2,13 +2,14 @@
  *
  * DataView displays data in grid or list layout with pagination and sorting features.
  *
- * [Live Demo](https://www.primefaces.org/primereact/dataview/)
+ * [Live Demo](https://www.primereact.org/dataview/)
  *
  * @module dataview
  *
  */
 import * as React from 'react';
 import { PaginatorTemplate } from '../paginator';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom page event.
@@ -50,7 +51,6 @@ interface DataViewLayoutOptionsChangeEvent {
 
 /**
  * Custom data view layout options props
- * @group Misc
  */
 export interface DataViewLayoutOptionsProps {
     /**
@@ -61,6 +61,14 @@ export interface DataViewLayoutOptionsProps {
      * Orientation of the panels, valid values are "list" and "grid".
      */
     layout?: 'list' | 'grid' | (string & Record<string, unknown>);
+    /**
+     * Defines the display mode list icon.
+     */
+    listIcon?: IconType<DataViewProps> | undefined;
+    /**
+     * Defines the display mode grid icon.
+     */
+    gridIcon?: IconType<DataViewProps> | undefined;
     /**
      * Inline style of the element.
      */
@@ -83,7 +91,6 @@ export interface DataViewLayoutOptionsProps {
 
 /**
  * Custom data view layout options
- * @group Misc
  * @extends {React.Component<DataViewLayoutOptionsProps, any>}
  */
 export declare class DataViewLayoutOptions extends React.Component<DataViewLayoutOptionsProps, any> {}
@@ -175,7 +182,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     rowsPerPageOptions?: number[] | undefined;
     /**
      * Template of the current page report element.
-     * @defaultValue (&123;currentPage&125; of &123;totalPages&125;)
+     * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)
      */
     currentPageReportTemplate?: string | undefined;
     /**
@@ -203,7 +210,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
     /**
      * Name of the loading icon or JSX.Element for loading icon.
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<DataViewProps> | undefined;
     /**
      * Whether the grid structure in the container has gutter. Default value is false.
      * @defaultValue false
@@ -215,7 +222,7 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     onPage?(event: DataViewPageEvent): void;
     /**
-     * Function that gets the option along with the layout mdoe and returns the content.
+     * Function that gets the option along with the layout mode and returns the content.
      * @param {*} item - Current item.
      * @param {'list' | 'grid' | (string & Record<string, unknown>)} layout - Current layout.
      */
@@ -232,9 +239,9 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  *
  * _DataView displays data in grid or list layout with pagination and sorting features._
  *
- * [Live Demo](https://www.primefaces.org/primereact/dataview/)
+ * [Live Demo](https://www.primereact.org/dataview/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  *

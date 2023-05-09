@@ -26,14 +26,14 @@ export default function SeparatorDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Chips, ChipsChangeParams } from "primereact/chips";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 export default function SeparatorDemo() {
     const [value, setValue] = useState<string[]>([]);
 
     return (
         <div className="card p-fluid">
-            <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} separator="," />
+            <Chips value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} separator="," />
         </div>
     )
 }

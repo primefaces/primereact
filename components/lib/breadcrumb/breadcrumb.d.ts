@@ -2,13 +2,14 @@
  *
  * Breadcrumb provides contextual information about page hierarchy.
  *
- * [Live Demo](https://www.primefaces.org/primereact/breadcrumb/)
+ * [Live Demo](https://www.primereact.org/breadcrumb/)
  *
  * @module breadcrumb
  *
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { IconType } from '../utils/utils';
 
 /**
  * Defines valid properties in BreadCrumb component. In addition to these, all properties of HTMLElement can be used in this component.
@@ -24,6 +25,10 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
      */
     home?: MenuItem | undefined;
     /**
+     * Icon of the separator.
+     */
+    separatorIcon?: IconType<BreadCrumbProps> | undefined;
+    /**
      * Used to get the child elements of the component.
      * @readonly
      */
@@ -35,9 +40,9 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
  *
  * _Breadcrumb provides contextual information about page hierarchy._
  *
- * [Live Demo](https://www.primefaces.org/primereact/breadcrumb/)
+ * [Live Demo](https://www.primereact.org/breadcrumb/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

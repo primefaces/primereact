@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
-import { BadgeDefaultProps } from './BadgeBase';
+import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
+import { BadgeBase } from './BadgeBase';
 
 export const Badge = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, BadgeDefaultProps);
+        const props = BadgeBase.getProps(inProps);
+
+        const { ptm } = BadgeBase.setMetaData({
+            props
+        });
 
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, BadgeDefaultProps);
         const className = classNames(
             'p-badge p-component',
             {
@@ -25,11 +28,17 @@ export const Badge = React.memo(
             getElement: () => elementRef.current
         }));
 
-        return (
-            <span ref={elementRef} className={className} style={props.style} {...otherProps}>
-                {props.value}
-            </span>
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                style: props.style,
+                className: className
+            },
+            BadgeBase.getOtherProps(props),
+            ptm('root')
         );
+
+        return <span {...rootProps}>{props.value}</span>;
     })
 );
 

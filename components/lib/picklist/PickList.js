@@ -1,25 +1,27 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
-import { useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
-import { PickListDefaultProps } from './PickListBase';
+import PrimeReact, { FilterService } from '../api/Api';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { PickListBase } from './PickListBase';
 import { PickListControls } from './PickListControls';
 import { PickListSubList } from './PickListSubList';
 import { PickListTransferControls } from './PickListTransferControls';
 
 export const PickList = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ObjectUtils.getProps(inProps, PickListDefaultProps);
+        const props = PickListBase.getProps(inProps);
 
         const [sourceSelectionState, setSourceSelectionState] = React.useState([]);
         const [targetSelectionState, setTargetSelectionState] = React.useState([]);
         const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
         const [targetFilterValueState, setTargetFilterValueState] = React.useState('');
+        const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const elementRef = React.useRef(null);
         const sourceListElementRef = React.useRef(null);
         const targetListElementRef = React.useRef(null);
         const reorderedListElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
+        const styleElementRef = React.useRef(null);
         const sourceSelection = props.sourceSelection ? props.sourceSelection : sourceSelectionState;
         const targetSelection = props.targetSelection ? props.targetSelection : targetSelectionState;
         const sourceFilteredValue = props.onSourceFilterChange ? props.sourceFilterValue : sourceFilterValueState;
@@ -199,10 +201,59 @@ export const PickList = React.memo(
             return FilterService.filter(list, searchFields, filterValue, props.filterMatchMode, props.filterLocale);
         };
 
+        const createStyle = () => {
+            if (!styleElementRef.current) {
+                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+
+                let innerHTML = `
+@media screen and (max-width: ${props.breakpoint}) {
+    .p-picklist[${attributeSelectorState}] {
+        flex-direction: column;
+    }
+
+    .p-picklist[${attributeSelectorState}] .p-picklist-buttons {
+        padding: var(--content-padding);
+        flex-direction: row;
+    }
+
+    .p-picklist[${attributeSelectorState}] .p-picklist-buttons .p-button {
+        margin-right: var(--inline-spacing);
+        margin-bottom: 0;
+    }
+
+    .p-picklist[${attributeSelectorState}] .p-picklist-buttons .p-button:last-child {
+        margin-right: 0;
+    }
+}
+`;
+
+                styleElementRef.current.innerHTML = innerHTML;
+            }
+        };
+
+        const destroyStyle = () => {
+            styleElementRef.current = DomHandler.removeInlineStyle(styleElementRef.current);
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
+
+        useMountEffect(() => {
+            !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+        });
+
+        useUpdateEffect(() => {
+            if (attributeSelectorState) {
+                elementRef.current.setAttribute(attributeSelectorState, '');
+                createStyle();
+            }
+
+            return () => {
+                destroyStyle();
+            };
+        }, [attributeSelectorState, props.breakpoint]);
 
         useUpdateEffect(() => {
             if (reorderedListElementRef.current) {
@@ -212,7 +263,7 @@ export const PickList = React.memo(
             }
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PickListDefaultProps);
+        const otherProps = PickListBase.getOtherProps(props);
         const className = classNames('p-picklist p-component', props.className);
         const sourceItemTemplate = props.sourceItemTemplate ? props.sourceItemTemplate : props.itemTemplate;
         const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;
@@ -221,7 +272,19 @@ export const PickList = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                {props.showSourceControls && <PickListControls list={props.source} selection={sourceSelection} onReorder={onSourceReorder} className="p-picklist-source-controls" dataKey={props.dataKey} />}
+                {props.showSourceControls && (
+                    <PickListControls
+                        list={props.source}
+                        selection={sourceSelection}
+                        onReorder={onSourceReorder}
+                        className="p-picklist-source-controls"
+                        dataKey={props.dataKey}
+                        moveUpIcon={props.moveUpIcon}
+                        moveTopIcon={props.moveTopIcon}
+                        moveDownIcon={props.moveDownIcon}
+                        moveBottomIcon={props.moveBottomIcon}
+                    />
+                )}
 
                 <PickListSubList
                     ref={sourceListElementRef}
@@ -241,7 +304,8 @@ export const PickList = React.memo(
                     onFilter={onFilter}
                     showFilter={showSourceFilter}
                     placeholder={props.sourceFilterPlaceholder}
-                    template={props.sourceFilterTemplate}
+                    filterTemplate={props.sourceFilterTemplate}
+                    sourceFilterIcon={props.sourceFilterIcon}
                 />
 
                 <PickListTransferControls
@@ -249,10 +313,15 @@ export const PickList = React.memo(
                     source={props.source}
                     visibleSourceList={sourceList}
                     target={props.target}
+                    breakpoint={props.breakpoint}
                     visibleTargetList={targetList}
                     sourceSelection={sourceSelection}
                     targetSelection={targetSelection}
                     dataKey={props.dataKey}
+                    moveToTargetIcon={props.moveToTargetIcon}
+                    moveAllToTargetIcon={props.moveAllToTargetIcon}
+                    moveToSourceIcon={props.moveToSourceIcon}
+                    moveAllToSourceIcon={props.moveAllToSourceIcon}
                 />
 
                 <PickListSubList
@@ -273,10 +342,23 @@ export const PickList = React.memo(
                     onFilter={onFilter}
                     showFilter={showTargetFilter}
                     placeholder={props.targetFilterPlaceholder}
-                    template={props.targetFilterTemplate}
+                    filterTemplate={props.targetFilterTemplate}
+                    targetFilterIcon={props.targetFilterIcon}
                 />
 
-                {props.showTargetControls && <PickListControls list={props.target} selection={targetSelection} onReorder={onTargetReorder} className="p-picklist-target-controls" dataKey={props.dataKey} />}
+                {props.showTargetControls && (
+                    <PickListControls
+                        list={props.target}
+                        selection={targetSelection}
+                        onReorder={onTargetReorder}
+                        className="p-picklist-target-controls"
+                        dataKey={props.dataKey}
+                        moveUpIcon={props.moveUpIcon}
+                        moveTopIcon={props.moveTopIcon}
+                        moveDownIcon={props.moveDownIcon}
+                        moveBottomIcon={props.moveBottomIcon}
+                    />
+                )}
             </div>
         );
     })

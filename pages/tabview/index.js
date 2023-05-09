@@ -1,6 +1,4 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tabview/basicdoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
@@ -11,6 +9,9 @@ import { ImportDoc } from '../../components/doc/tabview/importdoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { StyleDoc } from '../../components/doc/tabview/styledoc';
 import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
+import { Wireframe } from '../../components/doc/tabview/pt/wireframe';
+import { PTDoc } from '../../components/doc/tabview/pt/ptdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 
 const TabViewDemo = () => {
     const docs = [
@@ -63,35 +64,33 @@ const TabViewDemo = () => {
             id: 'accessibility',
             label: 'Accessibility',
             component: AccessibilityDoc
-        },
-        {
-            id: 'api',
-            label: 'API',
-            doc: [
-                { name: 'TabView', pathname: '/modules/tabview.html' },
-                { name: 'TabPanel', pathname: '/classes/tabview.TabPanel.html' }
-            ]
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Tabs Component</title>
-                <meta name="description" content="TabView is a container component to group content with tabs." />
-            </Head>
-            <div className="doc">
-                <div className="doc-main">
-                    <div className="doc-intro">
-                        <h1>TabView</h1>
-                        <p>TabView is a container component to group content with tabs.</p>
-                    </div>
-                    <DocSections docs={docs} />
-                </div>
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tabview.options',
+            label: 'TabView PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.tabpanel.options',
+            label: 'TabPanel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Tabs Component" header="TabView" description="TabView is a container component to group content with tabs." componentDocs={docs} apiDocs={['TabView', 'TabPanel']} ptDocs={ptDocs} ptDescription="" />;
 };
 
 export default TabViewDemo;

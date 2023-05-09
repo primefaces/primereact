@@ -2,7 +2,7 @@
  *
  * TreeTable is used to display hierarchical data in tabular format.
  *
- * [Live Demo](https://www.primefaces.org/primereact/treetable/)
+ * [Live Demo](https://www.primereact.org/treetable/)
  *
  * @module treetable
  *
@@ -11,10 +11,10 @@ import * as React from 'react';
 import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
 import TreeNode from '../treenode';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom selection keys type.
- * @group Misc
  */
 interface TreeTableSelectionKeysType {
     /**
@@ -25,7 +25,6 @@ interface TreeTableSelectionKeysType {
 
 /**
  * Custom treetable checkbox selection type
- * @group Misc
  */
 interface TreeTableCheckboxSelectionKeyType {
     /**
@@ -40,7 +39,6 @@ interface TreeTableCheckboxSelectionKeyType {
 
 /**
  * Custom expanded keys type.
- * @group Misc
  */
 type TreeTableExpandedKeysType = {
     /**
@@ -51,7 +49,6 @@ type TreeTableExpandedKeysType = {
 
 /**
  * Custom treetable sort meta.
- * @group Misc
  */
 interface TreeTableSortMeta {
     /**
@@ -80,7 +77,6 @@ interface TreeTableFilterMetaData {
 
 /**
  * Custom treetable filter meta.
- * @group Misc
  */
 interface TreeTableFilterMeta {
     /**
@@ -236,10 +232,9 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     alwaysShowPaginator?: boolean | undefined;
     /**
-     * Whether the cell widths scale according to their content or not.
-     * @defaultValue true
+     * Icon of the checkbox when checked.
      */
-    autoLayout?: boolean | undefined;
+    checkboxIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -354,9 +349,8 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     loading?: boolean | undefined;
     /**
      * The icon to show while indicating data load is in progress.
-     * @defaultValue pi pi-spinner
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -424,6 +418,14 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     reorderableColumns?: boolean | undefined;
     /**
+     * Defines the reorder indicator down icon.
+     */
+    reorderIndicatorDownIcon?: IconType<TreeTableProps> | undefined;
+    /**
+     * Defines the reorder indicator up icon.
+     */
+    reorderIndicatorUpIcon?: IconType<TreeTableProps> | undefined;
+    /**
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
      */
@@ -472,6 +474,10 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * Name of the field to sort data by default.
      */
     sortField?: string | undefined;
+    /**
+     * Icon to display the current sorting status.
+     */
+    sortIcon?: IconType<TreeTableProps> | undefined;
     /**
      * Defines whether sorting works on single column or on multiple columns.
      * @defaultValue single
@@ -592,9 +598,9 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
  *
  * _TreeTable is used to display hierarchical data in tabular format._
  *
- * [Live Demo](https://www.primefaces.org/primereact/treetable/)
+ * [Live Demo](https://www.primereact.org/treetable/)
  * --- ---
- * ![PrimeReact](https://www.primereact.org/images/logo-100.png)
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
  *
  * @group Component
  */

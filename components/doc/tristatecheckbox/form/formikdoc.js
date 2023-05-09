@@ -1,11 +1,11 @@
-import { useRef } from 'react';
 import { useFormik } from 'formik';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
+import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { Toast } from '../../../lib/toast/Toast';
 import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
 import { classNames } from '../../../lib/utils/Utils';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -97,7 +97,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <TriStateCheckbox
                     id="item"
@@ -158,7 +158,7 @@ export default function FormikDoc() {
 
     return (
         <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                 <Toast ref={toast} />
                 <TriStateCheckbox
                     id="item"
@@ -187,7 +187,7 @@ export default function FormikDoc() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
+                <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
                     <Toast ref={toast} />
                     <TriStateCheckbox
                         id="item"
