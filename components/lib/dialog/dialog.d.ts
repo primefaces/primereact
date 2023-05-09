@@ -9,7 +9,84 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type DialogPassThroughType<T> = PassThroughType<T, DialogPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DialogPassThroughMethodOptions {
+    props: DialogProps;
+    state: DialogState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DialogProps.pt}
+ */
+export interface DialogPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header title's DOM element.
+     */
+    headerTitle?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header icons' DOM element.
+     */
+    headerIcons?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the maximizable button's DOM element.
+     */
+    maximizableButton?: DialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the maximizable icon's DOM element.
+     */
+    maximizableIcon?: DialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the close button's component.
+     */
+    closeButton?: DialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the close button icon's component.
+     */
+    closeButtonIcon?: DialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Dialog component.
+ */
+export interface DialogState {
+    /**
+     * Current visible state of the container as a boolean.
+     * @defaultValue false
+     */
+    containerVisible: boolean;
+    /**
+     * Current maximized state as a boolean.
+     * @defaultValue false
+     */
+    maximized: boolean;
+}
 
 /**
  * Dialog break options

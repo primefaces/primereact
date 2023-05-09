@@ -1,3 +1,4 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dialog/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dialog/basicdoc';
@@ -6,6 +7,8 @@ import { ImportDoc } from '../../components/doc/dialog/importdoc';
 import { LongContentDoc } from '../../components/doc/dialog/longcontentdoc';
 import { MaximizableDoc } from '../../components/doc/dialog/maximizabledoc';
 import { PositionDoc } from '../../components/doc/dialog/positiondoc';
+import { PTDoc } from '../../components/doc/dialog/pt/ptdoc';
+import { Wireframe } from '../../components/doc/dialog/pt/wireframe';
 import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
 import { StyleDoc } from '../../components/doc/dialog/styledoc';
 import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
@@ -64,7 +67,25 @@ const DialogDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={['Dialog']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.dialog.options',
+            label: 'Dialog PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={['Dialog']} ptDocs={ptDocs} />;
 };
 
 export default DialogDemo;

@@ -25,9 +25,9 @@ export const Terminal = React.memo(
 
         const promptProps = mergeProps(
             {
-                className: "p-terminal-prompt",
+                className: 'p-terminal-prompt'
             },
-            ptm("prompt")
+            ptm('prompt')
         );
 
         const onClick = () => {
@@ -117,7 +117,7 @@ export const Terminal = React.memo(
 
         const createWelcomeMessage = () => {
             if (props.welcomeMessage) {
-                const welcomeMessageProps = mergeProps(ptm("welcomeMessage"));
+                const welcomeMessageProps = mergeProps(ptm('welcomeMessage'));
 
                 return <div {...welcomeMessageProps}>{props.welcomeMessage}</div>;
             }
@@ -128,21 +128,18 @@ export const Terminal = React.memo(
         const createCommand = (command, index) => {
             const { text, response } = command;
             const key = text + '_' + index;
-            const commandsProps = mergeProps(
-                { key },
-                ptm("commands")
-            );
+            const commandsProps = mergeProps({ key }, ptm('commands'));
             const commandProps = mergeProps(
                 {
-                    className: "p-terminal-command",
+                    className: 'p-terminal-command'
                 },
-                ptm("command")
+                ptm('command')
             );
             const responseProps = mergeProps(
                 {
-                    className: "p-terminal-response",
+                    className: 'p-terminal-response'
                 },
-                ptm("response")
+                ptm('response')
             );
 
             return (
@@ -158,9 +155,9 @@ export const Terminal = React.memo(
             const content = commandsState.map(createCommand);
             const contentProps = mergeProps(
                 {
-                    className: "p-terminal-content",
+                    className: 'p-terminal-content'
                 },
-                ptm("content")
+                ptm('content')
             );
 
             return <div {...contentProps}>{content}</div>;
@@ -169,23 +166,23 @@ export const Terminal = React.memo(
         const createPromptContainer = () => {
             const containerProps = mergeProps(
                 {
-                    className: "p-terminal-prompt-container"
+                    className: 'p-terminal-prompt-container'
                 },
-                ptm("container")
+                ptm('container')
             );
 
             const commandTextProps = mergeProps(
                 {
                     ref: inputRef,
                     value: commandTextState,
-                    type: "text",
-                    className: "p-terminal-input",
-                    autoComplete: "off",
+                    type: 'text',
+                    className: 'p-terminal-input',
+                    autoComplete: 'off',
                     onChange: (e) => onInputChange(e),
                     onKeyDown: (e) => onInputKeyDown(e)
                 },
-                ptm("commandText")
-            )
+                ptm('commandText')
+            );
 
             return (
                 <div {...containerProps}>
@@ -209,7 +206,7 @@ export const Terminal = React.memo(
             },
             TerminalBase.getOtherProps(props),
             ptm('root')
-        )
+        );
 
         return (
             <div {...rootProps}>
