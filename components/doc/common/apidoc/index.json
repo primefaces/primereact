@@ -23084,6 +23084,13 @@
                             "description": "Current selected values"
                         },
                         {
+                            "name": "selectedOption",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Selected option"
+                        },
+                        {
                             "name": "target",
                             "optional": false,
                             "readonly": false,
