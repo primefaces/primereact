@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import { PassThroughType } from '../utils/utils';
+import { PassThroughType } from '../utils';
 
 export declare type TerminalPassThroughType<T> = PassThroughType<T, TerminalPassThroughMethodOptions>;
 
