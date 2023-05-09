@@ -3669,6 +3669,74 @@
                     "values": []
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ButtonPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ButtonProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ButtonPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "ButtonProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the loading icon's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "badge",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the badge's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ButtonPassThroughType": {
+                    "values": "PassThroughType<T, ButtonPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "calendar": {
@@ -13546,6 +13614,130 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "DialogPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DialogProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DialogState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DialogPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "DialogProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header title's DOM element."
+                        },
+                        {
+                            "name": "headerIcons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header icons' DOM element."
+                        },
+                        {
+                            "name": "maximizableButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the maximizable button's DOM element."
+                        },
+                        {
+                            "name": "maximizableIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the maximizable icon's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the close button's component."
+                        },
+                        {
+                            "name": "closeButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button icon's component."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the mask's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DialogState": {
+                    "description": "Defines current inline state in Dialog component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "containerVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state of the container as a boolean."
+                        },
+                        {
+                            "name": "maximized",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current maximized state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "DialogBreakpoints": {
                     "description": "Dialog break options",
                     "relatedProp": "",
@@ -13558,6 +13750,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "DialogPassThroughType": {
+                    "values": "PassThroughType<T, DialogPassThroughMethodOptions>"
                 }
             }
         }
@@ -19117,6 +19317,87 @@
                             "description": "Current value"
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "InplacePassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InplaceProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InplaceState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InplacePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "InplaceProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "display",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the display's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InplaceState": {
+                    "description": "Defines current inline state in Inplace component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InplacePassThroughType": {
+                    "values": "PassThroughType<T, InplacePassThroughMethodOptions>"
                 }
             }
         }
@@ -30363,6 +30644,195 @@
         }
     },
     "terminal": {
+        "description": "Terminal is a text based user interface.\n\n[Live Demo](https://www.primereact.org/terminal)",
+        "components": {
+            "Terminal": {
+                "description": "Terminal is a text based user interface.",
+                "methods": {
+                    "description": "Defines methods that can be accessed by the component's reference.",
+                    "values": [
+                        {
+                            "name": "focus",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to focus the component."
+                        },
+                        {
+                            "name": "getElement",
+                            "parameters": [],
+                            "returnType": "HTMLDivElement",
+                            "description": "Used to get container element."
+                        }
+                    ]
+                },
+                "props": {
+                    "description": "Defines valid properties in Terminal component. In addition to these, all properties of HTMLDivElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "welcomeMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Initial text to display on terminal."
+                        },
+                        {
+                            "name": "prompt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Prompt text for each command."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        }
+                    ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "TerminalState": {
+                    "description": "Defines current inline state in Terminal component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "commandText",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current command text as a string."
+                        },
+                        {
+                            "name": "commands",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "Current commands as an array."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TerminalPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TerminalProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TerminalState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TerminalPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "welcomeMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the welcome message's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "commands",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the commands' DOM element."
+                        },
+                        {
+                            "name": "prompt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the prompt's DOM element."
+                        },
+                        {
+                            "name": "command",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the command's DOM element."
+                        },
+                        {
+                            "name": "response",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the response's DOM element."
+                        },
+                        {
+                            "name": "container",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the container's DOM element."
+                        },
+                        {
+                            "name": "commandText",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the command text's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TerminalPassThroughType": {
+                    "values": "PassThroughType<T, TerminalPassThroughMethodOptions>"
+                }
+            }
+        }
+    },
+    "terminalservice": {
         "description": "Terminal is a text based user interface.\n\n[Live Demo](https://www.primereact.org/terminal/)",
         "components": {
             "TerminalService": {
@@ -30845,6 +31315,13 @@
                     "description": "Message options for toast component",
                     "relatedProp": "",
                     "props": [
+                        {
+                            "name": "id",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Unique id of the message."
+                        },
                         {
                             "name": "severity",
                             "optional": true,

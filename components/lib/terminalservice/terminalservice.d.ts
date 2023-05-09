@@ -4,7 +4,7 @@
  *
  * [Live Demo](https://www.primereact.org/terminal/)
  *
- * @module terminal
+ * @module terminalservice
  *
  */
 

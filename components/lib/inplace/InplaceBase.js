@@ -1,22 +1,20 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const InplaceDisplayBase = {
+export const InplaceDisplayBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InplaceDisplay',
         children: undefined
-    },
-    getOtherProps: (display) => ObjectUtils.getComponentDiffProps(display, InplaceDisplayBase.defaultProps)
-};
+    }
+});
 
-export const InplaceContentBase = {
+export const InplaceContentBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InplaceContent',
         children: undefined
-    },
-    getOtherProps: (content) => ObjectUtils.getComponentDiffProps(content, InplaceContentBase.defaultProps)
-};
+    }
+});
 
-export const InplaceBase = {
+export const InplaceBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Inplace',
         style: null,
@@ -31,7 +29,5 @@ export const InplaceBase = {
         onClose: null,
         onToggle: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, InplaceBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, InplaceBase.defaultProps)
-};
+    }
+});

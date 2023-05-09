@@ -9,6 +9,8 @@ import { ImportDoc } from '../../components/doc/button/importdoc';
 import { LinkDoc } from '../../components/doc/button/linkdoc';
 import { LoadingDoc } from '../../components/doc/button/loadingdoc';
 import { OutlinedDoc } from '../../components/doc/button/outlineddoc';
+import { PTDoc } from '../../components/doc/button/pt/ptdoc';
+import { Wireframe } from '../../components/doc/button/pt/wireframe';
 import { RaisedDoc } from '../../components/doc/button/raiseddoc';
 import { RaisedTextDoc } from '../../components/doc/button/raisedtextdoc';
 import { RoundedDoc } from '../../components/doc/button/roundeddoc';
@@ -17,6 +19,7 @@ import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { StyleDoc } from '../../components/doc/button/styledoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { TextDoc } from '../../components/doc/button/textdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ButtonDemo = () => {
@@ -118,7 +121,25 @@ const ButtonDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.button.options',
+            label: 'Button PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} ptDocs={ptDocs} />;
 };
 
 export default ButtonDemo;

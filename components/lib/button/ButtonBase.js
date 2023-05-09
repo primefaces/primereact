@@ -1,28 +1,27 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ButtonBase = {
+export const ButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Button',
-        label: null,
+        badge: null,
+        badgeClassName: null,
+        className: null,
+        children: undefined,
+        disabled: false,
         icon: null,
         iconPos: 'left',
-        badge: null,
-        severity: null,
-        rounded: false,
-        raised: false,
-        outlined: false,
-        text: false,
+        label: null,
         link: false,
-        badgeClassName: null,
-        tooltip: null,
-        size: null,
-        tooltipOptions: null,
-        disabled: false,
         loading: false,
         loadingIcon: null,
-        visible: true,
-        children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ButtonBase.defaultProps)
-};
+        outlined: false,
+        raised: false,
+        rounded: false,
+        severity: null,
+        size: null,
+        text: false,
+        tooltip: null,
+        tooltipOptions: null,
+        visible: true
+    }
+});

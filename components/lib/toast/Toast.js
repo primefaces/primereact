@@ -4,7 +4,7 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, ZIndexUtils } from '../utils/Utils';
+import { ZIndexUtils, classNames } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
@@ -19,13 +19,11 @@ export const Toast = React.memo(
 
         const show = (messageInfo) => {
             if (messageInfo) {
-                const messages = assignIdentifiers(messageInfo, true);
-
-                setMessagesState(messages);
+                setMessagesState((prev) => assignIdentifiers(prev, messageInfo, true));
             }
         };
 
-        const assignIdentifiers = (messageInfo, copy) => {
+        const assignIdentifiers = (currentState, messageInfo, copy) => {
             let messages;
 
             if (Array.isArray(messageInfo)) {
@@ -36,7 +34,7 @@ export const Toast = React.memo(
                 }, []);
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
+                    messages = currentState ? [...currentState, ...multipleMessages] : multipleMessages;
                 } else {
                     messages = multipleMessages;
                 }
@@ -44,7 +42,7 @@ export const Toast = React.memo(
                 const message = { _pId: messageIdx++, message: messageInfo };
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, message] : [message];
+                    messages = currentState ? [...currentState, message] : [message];
                 } else {
                     messages = [message];
                 }
@@ -59,15 +57,11 @@ export const Toast = React.memo(
         };
 
         const replace = (messageInfo) => {
-            const replaced = assignIdentifiers(messageInfo, false);
-
-            setMessagesState(replaced);
+            setMessagesState((previousMessagesState) => assignIdentifiers(previousMessagesState, messageInfo, false));
         };
 
         const remove = (messageInfo) => {
-            const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
-
-            setMessagesState(messages);
+            setMessagesState((m) => m.filter((msg) => msg._pId !== messageInfo._pId));
 
             props.onRemove && props.onRemove(messageInfo.message);
         };

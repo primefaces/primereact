@@ -9,7 +9,43 @@
  */
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type ButtonPassThroughType<T> = PassThroughType<T, ButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ButtonPassThroughMethodOptions {
+    props: ButtonProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ButtonProps.pt}
+ */
+export interface ButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ButtonPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the loading icon's DOM element.
+     */
+    loadingIcon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the badge's DOM element.
+     */
+    badge?: ButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Defines valid properties in Button component. In addition to these, all properties of HTMLButtonElement can be used in this component.
