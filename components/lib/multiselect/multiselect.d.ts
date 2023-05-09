@@ -109,6 +109,10 @@ interface MultiSelectChangeEvent {
      */
     value: any;
     /**
+     * Selected option
+     */
+    option?: any;
+    /**
      * Stops the event from propagating.
      */
     stopPropagation(): void;

@@ -59,12 +59,15 @@ export const MultiSelect = React.memo(
             const selected = isSelected(option);
             const allowSelect = allowOptionSelect();
 
-            if (selected)
+            if (selected) {
                 updateModel(
                     originalEvent,
-                    props.value.filter((val) => !ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey))
+                    props.value.filter((val) => !ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey)),
+                    option
                 );
-            else if (allowSelect) updateModel(originalEvent, [...(props.value || []), optionValue]);
+            } else if (allowSelect) {
+                updateModel(originalEvent, [...(props.value || []), optionValue], option);
+            }
         };
 
         const onOptionKeyDown = (event) => {
@@ -203,15 +206,16 @@ export const MultiSelect = React.memo(
                     }
                 }
 
-                updateModel(event.originalEvent, value);
+                updateModel(event.originalEvent, value, value);
             }
         };
 
-        const updateModel = (event, value) => {
+        const updateModel = (event, value, option) => {
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
                     value,
+                    option,
                     stopPropagation: () => {},
                     preventDefault: () => {},
                     target: {
@@ -444,7 +448,7 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
-            updateModel(event, value);
+            updateModel(event, value, item);
         };
 
         const getSelectedItemsLabel = () => {
@@ -575,7 +579,7 @@ export const MultiSelect = React.memo(
 
             if (!empty && props.showClear && !props.disabled) {
                 return (
-                    <i className={iconClassName} onClick={(e) => updateModel(e, null)}>
+                    <i className={iconClassName} onClick={(e) => updateModel(e, null, null)}>
                         {clearIcon}
                     </i>
                 );
