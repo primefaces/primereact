@@ -14313,6 +14313,14 @@
                             "description": "Style class of the overlay panel element."
                         },
                         {
+                            "name": "panelFooterTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Template of the panel footer."
+                        },
+                        {
                             "name": "panelStyle",
                             "optional": true,
                             "readonly": false,
