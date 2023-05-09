@@ -31316,6 +31316,13 @@
                     "relatedProp": "",
                     "props": [
                         {
+                            "name": "id",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Unique id of the message."
+                        },
+                        {
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
