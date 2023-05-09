@@ -24247,6 +24247,74 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "OverlayPanelPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OverlayPanelProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OverlayPanelState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OverlayPanelPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "OverlayPanelProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OverlayPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OverlayPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OverlayPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OverlayPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the close icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OverlayPanelState": {
+                    "description": "Defines current inline state in OverlayPanel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "OverlayPanelBreakpoints": {
                     "description": "Custom overlay panel breakpoints",
                     "relatedProp": "",
@@ -24259,6 +24327,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "OverlayPanelPassThroughType": {
+                    "values": "PassThroughType<T, OverlayPanelPassThroughMethodOptions>"
                 }
             }
         }

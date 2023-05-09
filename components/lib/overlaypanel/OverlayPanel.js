@@ -5,14 +5,19 @@ import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/H
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
 import { TimesIcon } from '../icons/times';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const props = OverlayPanelBase.getProps(inProps);
-
     const [visibleState, setVisibleState] = React.useState(false);
+    const { ptm } = OverlayPanelBase.setMetaData({
+        props,
+        state: {
+            visible: visibleState
+        }
+    });
     const attributeSelector = React.useRef('');
     const overlayRef = React.useRef(null);
     const currentTargetRef = React.useRef(null);
@@ -189,14 +194,29 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
     }));
 
     const createCloseIcon = () => {
-        const iconProps = { className: 'p-overlaypanel-close-icon', 'aria-hidden': true };
-        const icon = props.closeIcon || <TimesIcon {...iconProps} />;
-        const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+        const closeIconProps = mergeProps(
+            {
+                className: 'p-overlaypanel-close-icon',
+                'aria-hidden': true
+            },
+            ptm('closeIcon')
+        );
+        const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+        const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
         const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const closeButtonProps = mergeProps(
+            {
+                type: "button",
+                className: "p-overlaypanel-close p-link",
+                onClick: (e) => onCloseClick(e),
+                'aria-label': ariaLabel
+            },
+            ptm('closeButton')
+        )
 
         if (props.showCloseIcon) {
             return (
-                <button type="button" className="p-overlaypanel-close p-link" onClick={onCloseClick} aria-label={ariaLabel}>
+                <button {...closeButtonProps}>
                     {closeIcon}
                     <Ripple />
                 </button>
@@ -207,12 +227,32 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = OverlayPanelBase.getOtherProps(props);
         const className = classNames('p-overlaypanel p-component', props.className, {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
         });
         const closeIcon = createCloseIcon();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: overlayRef,
+                className,
+                style: props.style,
+                onClick: (e) => onPanelClick(e)
+            },
+            OverlayPanelBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const contentProps = mergeProps(
+            {
+                className: "p-overlaypanel-content",
+                onClick: (e) => onContentClick(e),
+                onMouseDown: onContentClick
+            },
+            OverlayPanelBase.getOtherProps(props),
+            ptm('content')
+        );
 
         return (
             <CSSTransition
@@ -227,8 +267,8 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
                 onExit={onExit}
                 onExited={onExited}
             >
-                <div ref={overlayRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                    <div className="p-overlaypanel-content" onClick={onContentClick} onMouseDown={onContentClick}>
+                <div {...rootProps}>
+                    <div {...contentProps}>
                         {props.children}
                     </div>
                     {closeIcon}
