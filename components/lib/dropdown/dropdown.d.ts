@@ -219,6 +219,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     panelClassName?: string | undefined;
     /**
+     * Template of the panel footer.
+     */
+    panelFooterTemplate?: React.ReactNode | ((props: DropdownProps, hide: () => void) => React.ReactNode);
+    /**
      * Inline style of the overlay panel element.
      */
     panelStyle?: React.CSSProperties | undefined;

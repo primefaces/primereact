@@ -40,10 +40,24 @@ export function TemplateDoc(props) {
         );
     };
 
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                {selectedCountry ? (
+                    <span>
+                        <b>{selectedCountry.name}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     const code = {
         basic: `
 <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -86,10 +100,24 @@ export default function TemplateDemo() {
         );
     };
 
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                {selectedCountry ? (
+                    <span>
+                        <b>{selectedCountry.name}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} />
         </div>    
     )
 }
@@ -140,10 +168,24 @@ export default function TemplateDemo() {
         );
     };
 
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                {selectedCountry ? (
+                    <span>
+                        <b>{selectedCountry.name}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCountry} onChange={(e: DropdownChangeEvent) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} />
         </div>    
     )
 }
@@ -166,6 +208,7 @@ export default function TemplateDemo() {
                     placeholder="Select a Country"
                     valueTemplate={selectedCountryTemplate}
                     itemTemplate={countryOptionTemplate}
+                    panelFooterTemplate={panelFooterTemplate}
                     className="w-full md:w-14rem"
                 />
             </div>
