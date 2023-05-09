@@ -13,13 +13,13 @@ export const Messages = React.memo(
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
 
-        const show = (value) => {
-            if (value) {
-                setMessagesState((prev) => assignIdentifiers(prev, value, true));
+        const show = (messageInfo) => {
+            if (messageInfo) {
+                setMessagesState((prev) => assignIdentifiers(prev, messageInfo, true));
             }
         };
 
-        const assignIdentifiers = (messagesState, messageInfo, copy) => {
+        const assignIdentifiers = (currentState, messageInfo, copy) => {
             let messages;
 
             if (Array.isArray(messageInfo)) {
@@ -30,7 +30,7 @@ export const Messages = React.memo(
                 }, []);
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
+                    messages = currentState ? [...currentState, ...multipleMessages] : multipleMessages;
                 } else {
                     messages = multipleMessages;
                 }
@@ -38,7 +38,7 @@ export const Messages = React.memo(
                 const message = { _pId: messageIdx++, message: messageInfo };
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, message] : [message];
+                    messages = currentState ? [...currentState, message] : [message];
                 } else {
                     messages = [message];
                 }
