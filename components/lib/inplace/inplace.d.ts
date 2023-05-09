@@ -15,7 +15,7 @@
  */
 import * as React from 'react';
 import { IconType, PassThroughType } from '../utils/utils';
-// import { ButtonPassThroughOptions } from '../button'; //@TODO
+import { ButtonPassThroughOptions } from '../button';
 
 export declare type InplacePassThroughType<T> = PassThroughType<T, InplacePassThroughMethodOptions>;
 /**
@@ -47,7 +47,7 @@ export interface InplacePassThroughOptions {
      * Uses to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
-    // closeButton?: ButtonPassThroughOptions<React.HTMLAttributes<HTMLButtonElement>>; //@TODO
+    closeButton?: ButtonPassThroughOptions;
 }
 
 /**
