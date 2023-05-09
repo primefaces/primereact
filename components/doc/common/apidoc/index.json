@@ -23945,13 +23945,13 @@
                             "description": "Template function that gets a node as a parameter and returns a content."
                         },
                         {
-                            "name": "selectionChange",
+                            "name": "onSelectionChange",
                             "parameters": [
                                 {
-                                    "name": "node",
+                                    "name": "event",
                                     "optional": false,
-                                    "type": "undefined | null | OrganizationChartNodeData | OrganizationChartNodeData[]",
-                                    "description": "A node instance."
+                                    "type": "OrganizationChartSelectionChangeEvent",
+                                    "description": "Custom selection changed event."
                                 }
                             ],
                             "returnType": "void",
@@ -24027,6 +24027,26 @@
                             "readonly": false,
                             "type": "undefined | null | OrganizationChartNodeData",
                             "description": "Unselected node instance."
+                        }
+                    ]
+                },
+                "OrganizationChartSelectionChangeEvent": {
+                    "description": "Custom selection change event.",
+                    "relatedProp": "onSelectionChange",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "data",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "undefined | null | OrganizationChartNodeData | OrganizationChartNodeData[]",
+                            "description": "Selected node(s)."
                         }
                     ]
                 }
