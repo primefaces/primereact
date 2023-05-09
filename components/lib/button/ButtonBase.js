@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ButtonBase = {
+export const ButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Button',
         label: null,
@@ -22,7 +22,5 @@ export const ButtonBase = {
         loadingIcon: null,
         visible: true,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ButtonBase.defaultProps)
-};
+    }
+});
