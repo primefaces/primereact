@@ -1,17 +1,18 @@
-import { useEffect, useRef } from 'react';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { useRef } from 'react';
+import { useMountEffect } from '../../lib/hooks/Hooks';
 import { Messages } from '../../lib/messages/Messages';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ClosableDoc(props) {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show([
             { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message' },
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    });
 
     const code = {
         basic: `
@@ -22,17 +23,18 @@ msgs.current.show([
         `,
         javascript: `
 import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function ClosableDemo() {
     const msgs = useRef(null);
     
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show([
             { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message'},
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false}
         ]);
-    }, []);
+    });
 
     return (
         <div className="card">
@@ -43,18 +45,19 @@ export default function ClosableDemo() {
         `,
         typescript: `
 import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function ClosableDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current?.show([
             msgs.current.show([
                 { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message'},
                 { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false}
             ]);
-    }, []);
+    };
 
     return (
         <div className="card">

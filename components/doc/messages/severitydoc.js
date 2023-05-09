@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { useMountEffect } from '../../lib/hooks/Hooks';
 import { Messages } from '../../lib/messages/Messages';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -6,14 +7,14 @@ import { DocSectionText } from '../common/docsectiontext';
 export function SeverityDoc(props) {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show([
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    });
 
     const code = {
         basic: `
@@ -25,20 +26,21 @@ msgs.current.show([
 ]);
         `,
         javascript: `
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function SeverityDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show([
             {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false},
             {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false},
             {sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false},
             {sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false}
         ]);
-    }, []);
+    });
 
     return (
         <Messages ref={msgs} />
@@ -46,20 +48,21 @@ export default function SeverityDemo() {
 }
         `,
         typescript: `
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function SeverityDemo() {
     const msgs = useRef<Messages>(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current?.show([
             {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content'},
             {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content'},
             {sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content'},
             {sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content'}
         ]);
-    }, []);
+    });
 
     return (
         <Messages ref={msgs} />
