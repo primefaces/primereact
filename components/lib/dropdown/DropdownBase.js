@@ -7,6 +7,7 @@ export const DropdownBase = {
         ariaLabel: null,
         ariaLabelledBy: null,
         autoFocus: false,
+        children: undefined,
         className: null,
         clearIcon: null,
         dataKey: null,
@@ -16,9 +17,9 @@ export const DropdownBase = {
         emptyFilterMessage: null,
         emptyMessage: null,
         filter: false,
-        filterIcon: null,
         filterBy: null,
         filterClearIcon: null,
+        filterIcon: null,
         filterInputAutoFocus: true,
         filterLocale: undefined,
         filterMatchMode: 'contains',
@@ -47,6 +48,7 @@ export const DropdownBase = {
         optionValue: null,
         options: null,
         panelClassName: null,
+        panelFooterTemplate: null,
         panelStyle: null,
         placeholder: null,
         required: false,
@@ -62,8 +64,7 @@ export const DropdownBase = {
         transitionOptions: null,
         value: null,
         valueTemplate: null,
-        virtualScrollerOptions: null,
-        children: undefined
+        virtualScrollerOptions: null
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, DropdownBase.defaultProps),
     getOtherProps: (props) => ObjectUtils.getDiffProps(props, DropdownBase.defaultProps)
