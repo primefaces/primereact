@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { CheckIcon } from '../icons/check';
+import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
-import { TimesIcon } from '../icons/times';
-import { CheckIcon } from '../icons/check';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -30,8 +30,12 @@ export const TriStateCheckbox = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

@@ -30,8 +30,12 @@ export const InputSwitch = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

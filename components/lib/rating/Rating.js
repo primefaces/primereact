@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { BanIcon } from '../icons/ban';
+import { StarIcon } from '../icons/star';
+import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
-import { StarIcon } from '../icons/star';
-import { StarFillIcon } from '../icons/starfill';
-import { BanIcon } from '../icons/ban';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -19,8 +19,12 @@ export const Rating = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: i,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -37,8 +41,12 @@ export const Rating = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: null,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
