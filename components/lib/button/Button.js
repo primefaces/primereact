@@ -35,7 +35,7 @@ export const Button = React.memo(
                 ptm('icon')
             );
 
-            className = classNames({
+            className = classNames(className, {
                 'p-button-loading-icon': props.loading
             });
 
