@@ -11,30 +11,33 @@ export const RadioButton = React.memo(
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
-        const select = (e) => {
-            onClick(e);
+        const select = (event) => {
+            onClick(event);
         };
 
-        const onClick = (e) => {
-            if (!props.disabled && props.onChange) {
+        const onClick = (event) => {
+            if (props.disabled) {
+                return;
+            }
+
+            if (props.onChange || props.onClick) {
                 const checked = props.checked;
-                const radioClicked = e.target instanceof HTMLDivElement;
-                const inputClicked = e.target === inputRef.current;
-                const isInputToggled = inputClicked && e.target.checked !== checked;
+                const radioClicked = event.target instanceof HTMLDivElement;
+                const inputClicked = event.target === inputRef.current;
+                const isInputToggled = inputClicked && event.target.checked !== checked;
                 const isRadioToggled = radioClicked && (DomHandler.hasClass(elementRef.current, 'p-radiobutton-checked') === checked ? !checked : false);
 
                 if (isInputToggled || isRadioToggled) {
                     const value = !checked;
-
-                    props.onChange({
-                        originalEvent: e,
+                    const eventData = {
+                        originalEvent: event,
                         value: props.value,
                         checked: value,
                         stopPropagation: () => {
-                            e.stopPropagation();
+                            event.stopPropagation();
                         },
                         preventDefault: () => {
-                            e.preventDefault();
+                            event.preventDefault();
                         },
                         target: {
                             type: 'radio',
@@ -43,7 +46,16 @@ export const RadioButton = React.memo(
                             value: props.value,
                             checked: value
                         }
-                    });
+                    };
+
+                    props.onClick && props.onClick(eventData);
+
+                    // do not continue if the user defined click wants to prevent
+                    if (event.defaultPrevented) {
+                        return;
+                    }
+
+                    props.onChange && props.onChange(eventData);
 
                     if (isRadioToggled) {
                         inputRef.current.checked = value;
@@ -51,7 +63,7 @@ export const RadioButton = React.memo(
                 }
 
                 DomHandler.focus(inputRef.current);
-                e.preventDefault();
+                event.preventDefault();
             }
         };
 
@@ -108,7 +120,7 @@ export const RadioButton = React.memo(
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onPointerUp={onClick}>
                     <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}

@@ -13,7 +13,11 @@ export const Checkbox = React.memo(
         const inputRef = React.useRef(props.inputRef);
 
         const onClick = (event) => {
-            if (!props.disabled && !props.readOnly && props.onChange) {
+            if (props.disabled || props.readOnly) {
+                return;
+            }
+
+            if (props.onChange || props.onClick) {
                 const checked = isChecked();
                 const checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement || event.target instanceof Object;
                 const isInputToggled = event.target === inputRef.current;
@@ -21,8 +25,7 @@ export const Checkbox = React.memo(
 
                 if (isInputToggled || isCheckboxToggled) {
                     const value = checked ? props.falseValue : props.trueValue;
-
-                    props.onChange({
+                    const eventData = {
                         originalEvent: event,
                         value: props.value,
                         checked: value,
@@ -39,7 +42,16 @@ export const Checkbox = React.memo(
                             value: props.value,
                             checked: value
                         }
-                    });
+                    };
+
+                    props.onClick && props.onClick(eventData);
+
+                    // do not continue if the user defined click wants to prevent
+                    if (event.defaultPrevented) {
+                        return;
+                    }
+
+                    props.onChange && props.onChange(eventData);
                 }
 
                 DomHandler.focus(inputRef.current);
@@ -105,7 +117,7 @@ export const Checkbox = React.memo(
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
+                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onPointerUp={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
                     <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}
