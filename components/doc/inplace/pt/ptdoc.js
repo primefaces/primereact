@@ -1,6 +1,5 @@
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { Card } from '../../../lib/card/Card';
 import { Inplace } from '../../../lib/inplace/Inplace';
 import { InplaceDisplay } from '../../../lib/inplace/Inplace';
 import { InplaceContent } from '../../../lib/inplace/Inplace';

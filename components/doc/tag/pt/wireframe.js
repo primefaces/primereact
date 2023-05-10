@@ -6,7 +6,7 @@ export const Wireframe = (props) => {
         <>
             <DocSectionText {...props} />
             <div>
-                <img className="w-full" src="/images/pt/tag.jpg" alt="tag" />
+                <img className="w-full" src="https://primefaces.org/cdn/primevue/images/pt/tag.jpg" alt="tag" />
             </div>
         </>
     );
