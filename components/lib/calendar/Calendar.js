@@ -3239,7 +3239,7 @@ export const Calendar = React.memo(
                     <div className="p-monthpicker">
                         {monthPickerValues().map((m, i) => {
                             return (
-                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) })}>
+                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(1, i, currentYear) })}>
                                     {m}
                                 </span>
                             );
