@@ -33222,7 +33222,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "default[]",
+                            "type": "TreeNode[]",
                             "default": "",
                             "description": "An array of treenodes."
                         },
@@ -33705,7 +33705,7 @@
                             "name": "node",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "Unselected node instance."
                         }
                     ]
@@ -33725,21 +33725,21 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "default[]",
+                            "type": "TreeNode[]",
                             "description": "New value after the dragdrop."
                         },
                         {
                             "name": "dragNode",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "The node that is being dragged."
                         },
                         {
                             "name": "dropNode",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "The node that is being dropped on."
                         },
                         {
@@ -33786,7 +33786,7 @@
                             "name": "node",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "The current node"
                         }
                     ]
@@ -34066,7 +34066,7 @@
                             "name": "node",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "The current node"
                         }
                     ],
@@ -34097,17 +34097,18 @@
     },
     "treenode": {
         "description": "This module contains the data interface for nodes in tree components.",
-        "interfaces": {
-            "description": "Defines the custom interfaces used by the module.",
-            "values": {
-                "default": {
-                    "relatedProp": "",
-                    "props": [
+        "model": {
+            "TreeNode": {
+                "description": "Defines model of TreeNode API.",
+                "props": {
+                    "description": "",
+                    "values": [
                         {
                             "name": "id",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
+                            "default": "",
                             "description": "Unique identifier of the element."
                         },
                         {
@@ -34115,6 +34116,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string | number",
+                            "default": "",
                             "description": "Unique key of the node."
                         },
                         {
@@ -34122,6 +34124,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
+                            "default": "",
                             "description": "Label of the node."
                         },
                         {
@@ -34129,20 +34132,23 @@
                             "optional": true,
                             "readonly": false,
                             "type": "any",
+                            "default": "",
                             "description": "Data represented by the node."
                         },
                         {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<default>",
+                            "type": "IconType<TreeNode>",
+                            "default": "",
                             "description": "Icon of the node to display next to content."
                         },
                         {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
-                            "type": "default[]",
+                            "type": "TreeNode[]",
+                            "default": "",
                             "description": "Used to get the child elements of the component."
                         },
                         {
@@ -34150,6 +34156,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "CSSProperties",
+                            "default": "",
                             "description": "Inline style of the node."
                         },
                         {
@@ -34157,6 +34164,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
+                            "default": "",
                             "description": "Style class of the node."
                         },
                         {
@@ -34164,6 +34172,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
+                            "default": "true",
                             "description": "Whether the node is droppable when dragdrop is enabled."
                         },
                         {
@@ -34171,6 +34180,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
+                            "default": "true",
                             "description": "Whether the node is draggable when dragdrop is enabled."
                         },
                         {
@@ -34178,6 +34188,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
+                            "default": "",
                             "description": "Whether the node is selectable when selection mode is enabled."
                         },
                         {
@@ -34185,6 +34196,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
+                            "default": "",
                             "description": "Specifies if the node has children. Used in lazy loading."
                         },
                         {
@@ -34192,10 +34204,10 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
+                            "default": "",
                             "description": "Visibility of node."
                         }
-                    ],
-                    "callbacks": []
+                    ]
                 }
             }
         }
@@ -34413,7 +34425,7 @@
                             "name": "options",
                             "optional": true,
                             "readonly": false,
-                            "type": "default[]",
+                            "type": "TreeNode[]",
                             "default": "",
                             "description": "An array of options to display."
                         },
@@ -34665,7 +34677,7 @@
                             "name": "node",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "Unselected node instance."
                         }
                     ]
@@ -35404,7 +35416,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "default[]",
+                            "type": "TreeNode[]",
                             "default": "",
                             "description": "An array of treenodes to display."
                         }
@@ -35601,7 +35613,7 @@
                                 {
                                     "name": "data",
                                     "optional": false,
-                                    "type": "default",
+                                    "type": "TreeNode",
                                     "description": "Value displayed by the treetable."
                                 }
                             ],
@@ -35630,7 +35642,7 @@
                             "name": "node",
                             "optional": false,
                             "readonly": false,
-                            "type": "default",
+                            "type": "TreeNode",
                             "description": "Expanded node instance."
                         }
                     ]

@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import TreeNode from '../treenode';
+import { TreeNode } from '../treenode';
 import { IconType } from '../utils/utils';
 
 /**
