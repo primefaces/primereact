@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { SpinnerIcon } from '../icons/spinner';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
-import { SpinnerIcon } from '../icons/spinner';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -24,7 +24,7 @@ export const Button = React.memo(
         }
 
         const createIcon = () => {
-            const className = classNames('p-button-icon p-c', {
+            let className = classNames('p-button-icon p-c', {
                 [`p-button-icon-${props.iconPos}`]: props.label
             });
 
@@ -35,9 +35,13 @@ export const Button = React.memo(
                 ptm('icon')
             );
 
+            className = classNames({
+                'p-button-loading-icon': props.loading
+            });
+
             const loadingIconProps = mergeProps(
                 {
-                    'p-button-loading-icon': props.loading
+                    className
                 },
                 ptm('loadingIcon')
             );
