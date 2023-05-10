@@ -90,6 +90,14 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
     /**
+     * Inline style of the input field.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputClassName?: string | undefined;
+    /**
      * Style class of the overlay panel.
      */
     panelClassName?: string | undefined;
