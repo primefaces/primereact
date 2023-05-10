@@ -8,8 +8,91 @@
  *
  */
 import * as React from 'react';
-import { DialogProps } from '../dialog';
-import { IconType } from '../utils';
+import { DialogPassThroughOptions, DialogProps } from '../dialog';
+import { IconType, PassThroughType } from '../utils';
+import { ButtonPassThroughOptions } from '../button/button';
+
+export declare type ConfirmDialogPassThroughType<T> = PassThroughType<T, ConfirmDialogThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ConfirmDialogThroughMethodOptions {
+    props: ConfirmDialogProps;
+    state: ConfirmDialogState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ConfirmDialogProps.pt}
+ */
+export interface ConfirmDialogPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header title's DOM element.
+     */
+    headerTitle?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header icons' DOM element.
+     */
+    headerIcons?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the close button's component.
+     */
+    closeButton?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close button icon's component.
+     */
+    closeButtonIcon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the message's DOM element.
+     */
+    message?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: ConfirmDialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    rejectButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    acceptButton?: ButtonPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in ConfirmDialog component.
+ */
+export interface ConfirmDialogState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+    /**
+     * Current confirmation message.
+     */
+    confirmation: any;
+}
 
 /**
  * Custom confirm dialog options

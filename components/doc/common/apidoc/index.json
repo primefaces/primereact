@@ -9220,6 +9220,137 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "ConfirmDialogThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ConfirmDialogProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ConfirmDialogState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ConfirmDialogPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "ConfirmDialogProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header title's DOM element."
+                        },
+                        {
+                            "name": "headerIcons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the header icons' DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the close button's component."
+                        },
+                        {
+                            "name": "closeButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the close button icon's component."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "message",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the message's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "rejectButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "acceptButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ConfirmDialogState": {
+                    "description": "Defines current inline state in ConfirmDialog component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state as a boolean."
+                        },
+                        {
+                            "name": "confirmation",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Current confirmation message."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ConfirmDialogOptions": {
                     "description": "Custom confirm dialog options",
                     "relatedProp": "",
@@ -9306,6 +9437,14 @@
                             "description": "Used to hide the dialog."
                         }
                     ]
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ConfirmDialogPassThroughType": {
+                    "values": "PassThroughType<T, ConfirmDialogThroughMethodOptions>"
                 }
             }
         }
