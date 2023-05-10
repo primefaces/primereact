@@ -4,7 +4,7 @@ import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
@@ -19,6 +19,10 @@ export const SplitButton = React.memo(
         const elementRef = React.useRef(null);
         const defaultButtonRef = React.useRef(null);
         const overlayRef = React.useRef(null);
+
+        const { ptm } = SplitButtonBase.setMetaData({
+            props
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -109,7 +113,6 @@ export const SplitButton = React.memo(
         }
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = SplitButtonBase.getOtherProps(props);
         const sizeMapping = {
             large: 'lg',
             small: 'sm'
@@ -132,58 +135,83 @@ export const SplitButton = React.memo(
         const menuId = idState + '_menu';
 
         const dropdownIcon = () => {
-            const iconClassName = 'p-button-icon p-c';
-            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
-            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const iconProps = mergeProps(
+                {
+                    className: 'p-button-icon p-c'
+                },
+
+                ptm('icon')
+            );
+
+            const icon = props.dropdownIcon || <ChevronDownIcon {...iconProps} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
             return dropdownIcon;
         };
 
+        const menuButtonProps = mergeProps({
+            type: 'button',
+            className: menuButtonClassName,
+            icon: dropdownIcon,
+            onClick: onDropdownButtonClick,
+            disabled: props.disabled,
+            'aria-expanded': overlayVisibleState,
+            'aria-haspopup': true,
+            'aria-controls': overlayVisibleState ? menuId : null,
+            ...props.menuButtonProps,
+            pt: props.pt && props.pt.menuButton ? props.pt.menuButton : {}
+        });
+
+        const menuProps = mergeProps(
+            {
+                ref: overlayRef,
+                appendTo: props.appendTo,
+                menuId: menuId,
+                menuStyle: props.menuStyle,
+                menuClassName: props.menuClassName,
+                onClick: onPanelClick,
+                in: overlayVisibleState,
+                onEnter: onOverlayEnter,
+                onEntered: onOverlayEntered,
+                onExit: onOverlayExit,
+                onExited: onOverlayExited,
+                transitionOptions: props.transitionOptions
+            },
+            ptm('menu')
+        );
+
+        const splitButtonProps = mergeProps({
+            ref: defaultButtonRef,
+            type: 'button',
+            className: buttonClassName,
+            icon: props.icon,
+            loading: props.loading,
+            loadingIcon: props.loadingIcon,
+            label: props.label,
+            onClick: props.onClick,
+            disabled: props.disabled,
+            tabIndex: props.tabIndex,
+            ...props.buttonProps,
+            pt: props.pt && props.pt.button ? props.pt.button : {}
+        });
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: idState,
+                className: className,
+                style: props.style
+            },
+            SplitButtonBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={idState} className={className} style={props.style} {...otherProps}>
-                    <Button
-                        ref={defaultButtonRef}
-                        type="button"
-                        className={buttonClassName}
-                        icon={props.icon}
-                        loading={props.loading}
-                        loadingIcon={props.loadingIcon}
-                        label={props.label}
-                        onClick={props.onClick}
-                        disabled={props.disabled}
-                        tabIndex={props.tabIndex}
-                        {...props.buttonProps}
-                    >
-                        {buttonContent}
-                    </Button>
-                    <Button
-                        type="button"
-                        className={menuButtonClassName}
-                        icon={dropdownIcon}
-                        onClick={onDropdownButtonClick}
-                        disabled={props.disabled}
-                        aria-expanded={overlayVisibleState}
-                        aria-haspopup="true"
-                        aria-controls={overlayVisibleState ? menuId : null}
-                        {...props.menuButtonProps}
-                    />
-                    <SplitButtonPanel
-                        ref={overlayRef}
-                        appendTo={props.appendTo}
-                        menuId={menuId}
-                        menuStyle={props.menuStyle}
-                        menuClassName={props.menuClassName}
-                        onClick={onPanelClick}
-                        in={overlayVisibleState}
-                        onEnter={onOverlayEnter}
-                        onEntered={onOverlayEntered}
-                        onExit={onOverlayExit}
-                        onExited={onOverlayExited}
-                        transitionOptions={props.transitionOptions}
-                    >
-                        {items}
-                    </SplitButtonPanel>
+                <div {...rootProps}>
+                    <Button {...splitButtonProps}>{buttonContent}</Button>
+                    <Button {...menuButtonProps} />
+                    <SplitButtonPanel {...menuProps}>{items}</SplitButtonPanel>
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
             </>

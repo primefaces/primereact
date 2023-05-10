@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SplitButtonBase = {
+export const SplitButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SplitButton',
         id: null,
@@ -35,7 +35,5 @@ export const SplitButtonBase = {
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SplitButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SplitButtonBase.defaultProps)
-};
+    }
+});
