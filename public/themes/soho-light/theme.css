@@ -4372,6 +4372,9 @@
   margin: 0 0.5rem 0 0;
   width: auto;
 }
+.p-dialog.p-dialog-maximized .p-dialog-header, .p-dialog.p-dialog-maximized .p-dialog-content:last-of-type {
+  border-radius: 0;
+}
 .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
   font-size: 2rem;
 }
