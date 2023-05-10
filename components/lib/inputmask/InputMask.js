@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputMaskBase } from './InputMaskBase';
 
 export const InputMask = React.memo(
@@ -437,8 +437,12 @@ export const InputMask = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: defaultBuffer.current !== val ? val : '',
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

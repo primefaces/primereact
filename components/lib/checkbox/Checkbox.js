@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-import { CheckIcon } from '../icons/check';
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CheckboxBase.getProps(inProps);
@@ -26,8 +26,12 @@ export const Checkbox = React.memo(
                         originalEvent: event,
                         value: props.value,
                         checked: value,
-                        stopPropagation: () => {},
-                        preventDefault: () => {},
+                        stopPropagation: () => {
+                            event.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            event.preventDefault();
+                        },
                         target: {
                             type: 'checkbox',
                             name: props.name,

@@ -19,8 +19,12 @@ export const ToggleButton = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: !props.checked,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

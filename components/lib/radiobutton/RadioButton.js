@@ -30,8 +30,12 @@ export const RadioButton = React.memo(
                         originalEvent: e,
                         value: props.value,
                         checked: value,
-                        stopPropagation: () => {},
-                        preventDefault: () => {},
+                        stopPropagation: () => {
+                            e.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            e.preventDefault();
+                        },
                         target: {
                             type: 'radio',
                             name: props.name,
