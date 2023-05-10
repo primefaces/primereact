@@ -7,7 +7,11 @@
  */
 import { IconType } from '../utils';
 
-export default interface TreeNode {
+/**
+ * Defines model of TreeNode API.
+ * @group Model
+ */
+export interface TreeNode {
     /**
      * Unique identifier of the element.
      */

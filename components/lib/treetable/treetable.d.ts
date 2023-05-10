@@ -10,7 +10,7 @@
 import * as React from 'react';
 import { ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
-import TreeNode from '../treenode';
+import { TreeNode } from '../treenode';
 import { IconType } from '../utils/utils';
 
 /**
