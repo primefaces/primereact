@@ -16,6 +16,10 @@ import { IconType } from '../utils/utils';
  */
 export interface ToastMessage {
     /**
+     * Unique id of the message.
+     */
+    id?: string | undefined;
+    /**
      * Severity of the message.
      */
     severity?: 'success' | 'info' | 'warn' | 'error' | undefined;

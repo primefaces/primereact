@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import { useMountEffect } from '../../lib/hooks/Hooks';
 import { Messages } from '../../lib/messages/Messages';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
@@ -6,7 +7,7 @@ import { DocSectionText } from '../common/docsectiontext';
 export function TemplateDoc(props) {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show({
             severity: 'info',
             sticky: true,
@@ -17,11 +18,10 @@ export function TemplateDoc(props) {
                 </React.Fragment>
             )
         });
-    }, []);
+    });
 
     const code = {
         basic: `
-useEffect(() => {
     msgs.current.show({
         severity: 'info',
         sticky: true,
@@ -32,16 +32,16 @@ useEffect(() => {
             </React.Fragment>
         )
     });
-}, []);
         `,
         javascript: `
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function TemplateDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
@@ -50,7 +50,7 @@ export default function TemplateDemo() {
                 </React.Fragment>
             )
         });
-    }, []);
+    });
 
     return (
         <div className="card">
@@ -60,13 +60,14 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function TemplateDemo() {
     const msgs = useRef<Messages>(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current?.show({
             severity: 'info', sticky: true, content: (
                 <React.Fragment>
@@ -75,7 +76,7 @@ export default function TemplateDemo() {
                 </React.Fragment>
             )
         });
-    }, []);
+    });
 
     return (
         <div className="card">

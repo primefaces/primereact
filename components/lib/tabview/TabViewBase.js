@@ -1,6 +1,7 @@
+import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
-export const TabViewBase = {
+export const TabViewBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TabView',
         id: null,
@@ -16,12 +17,10 @@ export const TabViewBase = {
         scrollable: false,
         style: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TabViewBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TabViewBase.defaultProps)
-};
+    }
+});
 
-export const TabPanelBase = {
+export const TabPanelBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TabPanel',
         className: null,
@@ -44,4 +43,4 @@ export const TabPanelBase = {
     getCProp: (tab, name) => ObjectUtils.getComponentProp(tab, name, TabPanelBase.defaultProps),
     getCProps: (tab) => ObjectUtils.getComponentProps(tab, TabPanelBase.defaultProps),
     getCOtherProps: (tab) => ObjectUtils.getComponentDiffProps(tab, TabPanelBase.defaultProps)
-};
+});

@@ -12,6 +12,28 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type SplitterPassThroughType<T> = PassThroughType<T, SplitterPassThroughMethodOptions>;
+export declare type SplitterPanelPassThroughType<T> = PassThroughType<T, SplitterPanelPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SplitterPassThroughMethodOptions {
+    props: SplitterProps;
+    state: SplitterState;
+}
+
+/**
+ * Defines current inline state in Panel component.
+ */
+export interface SplitterState {
+    /**
+     * Previous size state as a number.
+     */
+    panelSizes: number[];
+}
 
 /**
  * Custom resize end event.
@@ -27,6 +49,44 @@ interface SplitterResizeEndEvent {
      * Sizes of the panels as an array.
      */
     sizes: number[];
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link PanelProps.pt}
+ */
+export interface SplitterPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SplitterPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SplitterPanelPassThroughMethodOptions {
+    props: SplitterPanelProps;
+    parent: SplitterPassThroughMethodOptions;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SplitterProps.pt}
+ */
+export interface SplitterPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SplitterPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the gutter's DOM element.
+     */
+    gutter?: SplitterPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the gutter handler's DOM element.
+     */
+    gutterHandler?: SplitterPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

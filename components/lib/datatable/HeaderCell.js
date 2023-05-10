@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { usePrevious } from '../hooks/Hooks';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
-import { SortAltIcon } from '../icons/sortalt';
-import { SortAmountDownIcon } from '../icons/sortamountdown';
-import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 
 export const HeaderCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
@@ -247,7 +247,18 @@ export const HeaderCell = React.memo((props) => {
 
     const createFilter = () => {
         if (props.filterDisplay === 'menu' && getColumnProp('filter')) {
-            return <ColumnFilter display="menu" column={props.column} filters={props.filters} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} filtersStore={props.filtersStore} />;
+            return (
+                <ColumnFilter
+                    display="menu"
+                    column={props.column}
+                    filters={props.filters}
+                    onFilterChange={props.onFilterChange}
+                    onFilterApply={props.onFilterApply}
+                    filtersStore={props.filtersStore}
+                    filterIcon={props.filterIcon}
+                    filterClearIcon={props.filterClearIcon}
+                />
+            );
         }
 
         return null;

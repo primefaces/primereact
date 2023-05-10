@@ -16,9 +16,9 @@ export function DocComponent(props) {
     };
 
     useEffect(() => {
-        setTab(router.asPath.includes('#api.') ? 1 : 0);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        if (router.asPath.includes('#api.')) setTab(1);
+        if (router.asPath.includes('#pt.')) setTab(2);
+    }, [router.asPath]);
 
     return (
         <div className={classNames(props.className, 'doc-component')}>
@@ -39,6 +39,14 @@ export function DocComponent(props) {
                             API
                         </button>
                     </li>
+
+                    {props.ptDocs ? (
+                        <li className={classNames({ 'doc-tabmenu-active': tab === 2 })}>
+                            <button type="button" onClick={() => activateTab(2)}>
+                                PASS THROUGH
+                            </button>
+                        </li>
+                    ) : null}
                 </ul>
             ) : null}
             <div className="doc-tabpanels">
@@ -69,6 +77,22 @@ export function DocComponent(props) {
                             </>
                         )}
                     </div>
+                ) : null}
+                {tab === 2 ? (
+                    <>
+                        {props.ptDocs ? (
+                            <div className="doc-tabpanel">
+                                <div className="doc-main">
+                                    <div className="doc-intro">
+                                        <h1>{props.header} Pass Through</h1>
+                                        <p>{props.ptDescription}</p>
+                                    </div>
+                                    <DocSections docs={props.ptDocs} />
+                                </div>
+                                <DocSectionNav docs={props.ptDocs} />
+                            </div>
+                        ) : null}
+                    </>
                 ) : null}
             </div>
         </div>

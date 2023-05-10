@@ -8,6 +8,39 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ProgressBarPassThroughType<T> = PassThroughType<T, ProgressBarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ProgressBarPassThroughMethodOptions {
+    props: ProgressBarProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ProgressBarProps.pt}
+ */
+export interface ProgressBarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the indeterminate container's DOM element.
+     */
+    indeterminateContainer?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the value's DOM element.
+     */
+    value?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in ProgressBar component. In addition to these, all properties of HTMLDivElement can be used in this component.

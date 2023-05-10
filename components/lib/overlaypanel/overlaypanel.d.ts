@@ -9,7 +9,51 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type OverlayPanelPassThroughType<T> = PassThroughType<T, OverlayPanelPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface OverlayPanelPassThroughMethodOptions {
+    props: OverlayPanelProps;
+    state: OverlayPanelState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link OverlayPanelProps.pt}
+ */
+export interface OverlayPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in OverlayPanel component.
+ */
+export interface OverlayPanelState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+}
 
 /**
  * Custom overlay panel breakpoints

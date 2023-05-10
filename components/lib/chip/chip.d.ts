@@ -8,7 +8,54 @@
  *
  */
 import * as React from 'react';
-import { IconType, TemplateType } from '../utils';
+import { IconType, PassThroughType, TemplateType } from '../utils';
+
+export declare type ChipPassThroughType<T> = PassThroughType<T, ChipPassThroughMethodOptions>;
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ChipPassThroughMethodOptions {
+    props: ChipProps;
+    state: ChipState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ChipProps.pt}
+ */
+export interface ChipPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ChipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the image's DOM element.
+     */
+    image?: ChipPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ChipPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the label' DOM element.
+     */
+    label?: ChipPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the removeIcon's DOM element.
+     */
+    removeIcon?: ChipPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+}
+
+/**
+ * Defines current inline state in Chip component.
+ */
+export interface ChipState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue true
+     */
+    visible: boolean;
+}
 
 /**
  * Defines valid properties in Chip component. In addition to these, all properties of HTMLDivElement can be used in this component.

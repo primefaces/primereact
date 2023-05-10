@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { SpeedDialBase } from './SpeedDialBase';
-import { PlusIcon } from '../icons/plus';
 import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -224,6 +224,19 @@ export const SpeedDial = React.memo(
             const icon = showIconVisible ? props.showIcon || <PlusIcon className={iconClassName} onClick={onClick} /> : hideIconVisible ? props.hideIcon || <MinusIcon className={iconClassName} onClick={onClick} /> : null;
             const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, visible });
             const content = <Button type="button" style={props.buttonStyle} className={className} icon={toggleIcon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
+
+            if (props.buttonTemplate) {
+                const defaultContentOptions = {
+                    onClick,
+                    className,
+                    iconClassName,
+                    element: content,
+                    props,
+                    visible
+                };
+
+                return ObjectUtils.getJSXElement(props.buttonTemplate, defaultContentOptions);
+            }
 
             return content;
         };

@@ -97,15 +97,15 @@ interface Product {
 
 export default function CellSelectEventsDemo() {
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection | null>(null);
+    const [selectedCell, setSelectedCell] = useState<DataTableCellSelection<Product[]> | null>(null);
     const toast = useRef<Toast>(null);
 
-    const onCellSelect = (event: DataTableSelectEvent) => {
-        toast.current.show({ severity: 'info', summary: 'Cell Selected', detail: \`Name: \${event.value}\`, life: 3000 });
+    const onCellSelect = (event: DataTableCellClickEvent<Product[]>) => {
+        toast.current?.show({ severity: 'info', summary: 'Cell Selected', detail: \`Name: \${event.value}\`, life: 3000 });
     };
 
-    const onCellUnselect = (event: DataTableUnselectEvent) => {
-        toast.current.show({ severity: 'warn', summary: 'Cell Unselected', detail: \`Name: \${event.value}\`, life: 3000 });
+    const onCellUnselect = (event: DataTableCellClickEvent<Product[]>) => {
+        toast.current?.show({ severity: 'warn', summary: 'Cell Unselected', detail: \`Name: \${event.value}\`, life: 3000 });
     };
 
     useEffect(() => {
@@ -115,8 +115,11 @@ export default function CellSelectEventsDemo() {
     return (
         <div className="card">
             <Toast ref={toast} />
-            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell}
-                    onSelectionChange={(e: DataTableSelectionChangeEvent) => setSelectedCell(e.value)} metaKeySelection={false}
+            <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell!} metaKeySelection={false}
+                    onSelectionChange={(e) => {
+                        const value = e.value as DataTableCellSelection<Product[]>;
+                        setSelectedCell(value);
+                    }}
                     onCellSelect={onCellSelect} onCellUnselect={onCellUnselect} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

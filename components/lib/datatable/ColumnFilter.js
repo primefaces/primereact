@@ -5,15 +5,15 @@ import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { FilterIcon } from '../icons/filter';
+import { FilterSlashIcon } from '../icons/filterslash';
+import { PlusIcon } from '../icons/plus';
+import { TrashIcon } from '../icons/trash';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { FilterIcon } from '../icons/filter';
-import { FilterSlashIcon } from '../icons/filterslash';
-import { TrashIcon } from '../icons/trash';
-import { PlusIcon } from '../icons/plus';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -484,7 +484,7 @@ export const ColumnFilter = React.memo((props) => {
 
     const createMenuButton = () => {
         const iconProps = { 'aria-hidden': true };
-        const icon = props.columnFilterIcon || <FilterIcon {...iconProps} />;
+        const icon = props.filterIcon || <FilterIcon {...iconProps} />;
         const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
         if (showMenuButton()) {

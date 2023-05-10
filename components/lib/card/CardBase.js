@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const CardBase = {
+export const CardBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Card',
         id: null,
@@ -11,7 +11,5 @@ export const CardBase = {
         style: null,
         className: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CardBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CardBase.defaultProps)
-};
+    }
+});

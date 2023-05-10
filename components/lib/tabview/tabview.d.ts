@@ -12,7 +12,10 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type TabViewPassThroughType<T> = PassThroughType<T, TabViewPassThroughMethodOptions>;
+export declare type TabPanelPassThroughType<T> = PassThroughType<T, TabPanelPassThroughMethodOptions>;
 
 /**
  * Custom Tabpanel header template options
@@ -68,6 +71,41 @@ interface TabPanelHeaderTemplateOptions {
      * The aria-controls attribute of the tab header.
      */
     ariaControls: string;
+}
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TabPanelPassThroughMethodOptions {
+    props: TabPanelProps;
+    parent: TabViewPassThroughMethodOptions;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TabPanelProps.pt}
+ */
+export interface TabPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: TabPanelPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the header action's DOM element.
+     */
+    headerAction?: TabPanelPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the title's DOM element.
+     */
+    headerTitle?: TabPanelPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    content?: TabPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -142,6 +180,11 @@ export interface TabPanelProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TabPanelPassThroughOptions}
+     */
+    pt?: TabPanelPassThroughOptions;
 }
 
 /**
@@ -183,6 +226,89 @@ interface TabViewTabCloseEvent {
 }
 
 /**
+ * Custom passthrough(pt) option method.
+ */
+export interface TabViewPassThroughMethodOptions {
+    props: TabViewProps;
+    state: TabViewState;
+}
+
+/**
+ * Defines current inline state in TabView component.
+ */
+export interface TabViewState {
+    /**
+     * Current active index state.
+     */
+    activeIndex: number;
+    /**
+     * Unique id for the TabView component.
+     */
+    id: string;
+    /**
+     * Current state of hidden tab.
+     */
+    hiddenTabsState: number[];
+    /**
+     * Current state of previous button.
+     * @defaultValue true
+     */
+    isPrevButtonDisabled: boolean;
+    /**
+     * Current state of the next button.
+     * @defaultValue false
+     */
+    isNextButtonDisabled: boolean;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TabViewProps.pt}
+ */
+export interface TabViewPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the nav container's DOM element.
+     */
+    navContainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the nav content's DOM element.
+     */
+    navContent?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    nav?: TabViewPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the inkbar's DOM element.
+     */
+    inkbar?: TabViewPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the previous button's DOM element.
+     */
+    previousButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the previous button icon's DOM element.
+     */
+    previousIcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the next button's DOM element.
+     */
+    nextButton?: TabViewPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the next button icon's DOM element.
+     */
+    nextIcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panelContainer?: TabViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
  * Defines valid properties in TabView component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -215,6 +341,11 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @defaultValue false
      */
     scrollable?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TabViewPassThroughOptions}
+     */
+    pt?: TabViewPassThroughOptions;
     /**
      * Callback to invoke before an active tab is changed. Return false to prevent tab from changing.
      * @param {TabViewTabChangeEvent} event - Custom tab change event.

@@ -266,11 +266,11 @@ interface DataTableStateEvent extends DataTablePageEvent, DataTableFilterEvent, 
  * @see {@link DataTableProps.isDataSelectable}
  * @event
  */
-interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
+interface DataTableDataSelectableEvent {
     /**
      * Original data of the row.
      */
-    data: DataTableRowDataArray<TValue>;
+    data: DataTableValue;
     /**
      * Index of the row.
      */
@@ -826,6 +826,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     filterLocale?: string | undefined;
     /**
+     * Icon to display the current filtering status.
+     */
+    filterIcon?: IconType<DataTable<TValue>> | undefined;
+    /**
+     * Icon to display when the filter can be cleared.
+     */
+    filterClearIcon?: IconType<DataTable<TValue>> | undefined;
+    /**
      * An array of FilterMetadata objects to provide external filters.
      */
     filters?: DataTableFilterMeta | undefined;
@@ -1144,7 +1152,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Function that returns a boolean to decide whether the data should be selectable.
      * @param {DataTableDataSelectableEvent<TValue>} event - Custom data selectable event.
      */
-    isDataSelectable?(event: DataTableDataSelectableEvent<TValue>): boolean | undefined | null;
+    isDataSelectable?(event: DataTableDataSelectableEvent): boolean | undefined | null;
     /**
      * Callback to invoke when all rows are selected using the header checkbox.
      * @param {DataTableSelectEvent} event - Custom select event.
@@ -1162,14 +1170,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onCellClick?(event: DataTableCellClickEvent<TValue>): void;
     /**
      * Callback to invoke on cell select.
-     * @param {DataTableSelectEvent} event - Custom select event.
+     * @param {DataTableCellClickEvent<TValue>} event - Custom select event.
      */
-    onCellSelect?(event: DataTableSelectEvent): void;
+    onCellSelect?(event: DataTableCellClickEvent<TValue>): void;
     /**
      * Callback to invoke on cell unselect.
-     * @param {DataTableUnselectEvent} event - Custom unselect event.
+     * @param {DataTableCellClickEvent<TValue>} event - Custom unselect event.
      */
-    onCellUnselect?(event: DataTableUnselectEvent): void;
+    onCellUnselect?(event: DataTableCellClickEvent<TValue>): void;
     /**
      * Callback to invoke when a column is reordered.
      * @param {DataTableColReorderEvent} event - Custom column reorder event.

@@ -43,6 +43,16 @@ export const DropdownPanel = React.memo(
             props.onFilterInputChange && props.onFilterInputChange(event);
         };
 
+        const createFooter = () => {
+            if (props.panelFooterTemplate) {
+                const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
+
+                return <div className="p-multiselect-footer">{content}</div>;
+            }
+
+            return null;
+        };
+
         const createGroupChildren = (optionGroup, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
@@ -200,6 +210,7 @@ export const DropdownPanel = React.memo(
             });
             const filter = createFilter();
             const content = createContent();
+            const footer = createFooter();
 
             return (
                 <CSSTransition
@@ -218,6 +229,7 @@ export const DropdownPanel = React.memo(
                     <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
                         {filter}
                         {content}
+                        {footer}
                     </div>
                 </CSSTransition>
             );

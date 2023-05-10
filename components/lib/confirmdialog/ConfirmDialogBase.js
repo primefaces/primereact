@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ConfirmDialogBase = {
+export const ConfirmDialogBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ConfirmDialog',
         tagKey: undefined,
@@ -21,7 +21,5 @@ export const ConfirmDialogBase = {
         accept: null,
         reject: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ConfirmDialogBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ConfirmDialogBase.defaultProps)
-};
+    }
+});

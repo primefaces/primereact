@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const OverlayPanelBase = {
+export const OverlayPanelBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'OverlayPanel',
         id: null,
@@ -16,7 +16,5 @@ export const OverlayPanelBase = {
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, OverlayPanelBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, OverlayPanelBase.defaultProps)
-};
+    }
+});

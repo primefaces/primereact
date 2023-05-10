@@ -43,6 +43,22 @@ interface OrganizationChartNodeUnselectEvent {
 }
 
 /**
+ * Custom selection change event.
+ * @see {@link OrganizationChartProps.onSelectionChange}
+ * @event
+ */
+interface OrganizationChartSelectionChangeEvent {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selected node(s).
+     */
+    data: OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined;
+}
+
+/**
  * Custom organizationchart node data.
  */
 interface OrganizationChartNodeData {
@@ -97,9 +113,9 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
     nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
     /**
      * Callback to invoke when node selection changes.
-     * @param {OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined} node - A node instance.
+     * @param {OrganizationChartSelectionChangeEvent} event - Custom selection changed event.
      */
-    selectionChange?(node: OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined): void;
+    onSelectionChange?(event: OrganizationChartSelectionChangeEvent): void;
     /**
      * Callback to invoke when a node is selected.
      * @param {OrganizationChartNodeSelectEvent} event - Custom node select event.

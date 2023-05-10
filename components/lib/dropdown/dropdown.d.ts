@@ -190,6 +190,7 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
     optionDisabled?: string | ((option: any) => boolean) | undefined;
     /**
      * Property name or getter function that refers to the children options of option group.
+     * @defaultValue items
      */
     optionGroupChildren?: string | undefined;
     /**
@@ -217,6 +218,10 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * Style class of the overlay panel element.
      */
     panelClassName?: string | undefined;
+    /**
+     * Template of the panel footer.
+     */
+    panelFooterTemplate?: React.ReactNode | ((props: DropdownProps, hide: () => void) => React.ReactNode);
     /**
      * Inline style of the overlay panel element.
      */

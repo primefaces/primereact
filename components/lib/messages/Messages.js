@@ -13,15 +13,13 @@ export const Messages = React.memo(
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
 
-        const show = (value) => {
-            if (value) {
-                const messages = assignIdentifiers(value, true);
-
-                setMessagesState(messages);
+        const show = (messageInfo) => {
+            if (messageInfo) {
+                setMessagesState((prev) => assignIdentifiers(prev, messageInfo, true));
             }
         };
 
-        const assignIdentifiers = (messageInfo, copy) => {
+        const assignIdentifiers = (currentState, messageInfo, copy) => {
             let messages;
 
             if (Array.isArray(messageInfo)) {
@@ -32,7 +30,7 @@ export const Messages = React.memo(
                 }, []);
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, ...multipleMessages] : multipleMessages;
+                    messages = currentState ? [...currentState, ...multipleMessages] : multipleMessages;
                 } else {
                     messages = multipleMessages;
                 }
@@ -40,7 +38,7 @@ export const Messages = React.memo(
                 const message = { _pId: messageIdx++, message: messageInfo };
 
                 if (copy) {
-                    messages = messagesState ? [...messagesState, message] : [message];
+                    messages = currentState ? [...currentState, message] : [message];
                 } else {
                     messages = [message];
                 }
@@ -54,15 +52,11 @@ export const Messages = React.memo(
         };
 
         const replace = (messageInfo) => {
-            const replaced = assignIdentifiers(messageInfo, false);
-
-            setMessagesState(replaced);
+            setMessagesState((prev) => assignIdentifiers(prev, messageInfo, false));
         };
 
         const remove = (messageInfo) => {
-            const messages = messagesState.filter((msg) => msg._pId !== messageInfo._pId);
-
-            setMessagesState(messages);
+            setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId));
 
             props.onRemove && props.onRemove(messageInfo.message);
         };

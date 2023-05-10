@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SkeletonBase = {
+export const SkeletonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Skeleton',
         shape: 'rectangle',
@@ -12,7 +12,5 @@ export const SkeletonBase = {
         style: null,
         className: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SkeletonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SkeletonBase.defaultProps)
-};
+    }
+});

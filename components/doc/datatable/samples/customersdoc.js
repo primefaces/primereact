@@ -450,22 +450,27 @@ import { Slider, SliderChangeEvent } from 'primereact/slider';
 import { Tag } from 'primereact/tag';
 import { CustomerService } from './service/CustomerService';
 
-interface RepresentativeOption {
-    name: string;
-    image: string;
+interface Country {
+  name: string;
+  code: string;
+}
+
+interface Representative {
+  name: string;
+  image: string;
 }
 
 interface Customer {
-    id: number;
-    name: string;
-    country: Country;
-    company: string;
-    date: string;
-    status: string;
-    verified: boolean;
-    activity: number;
-    representative: Representative;
-    balance: number;
+  id: number;
+  name: string;
+  country: Country;
+  company: string;
+  date: string | Date;
+  status: string;
+  verified: boolean;
+  activity: number;
+  representative: Representative;
+  balance: number;
 }
 
 export default function CustomersDemo() {
@@ -482,7 +487,7 @@ export default function CustomersDemo() {
         activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
     });
     const [globalFilterValue, setGlobalFilterValue] = useState<string>('');
-    const [representatives] = useState<RepresentativeOption[]>([
+    const [representatives] = useState<Representative[]>([
         { name: 'Amy Elsner', image: 'amyelsner.png' },
         { name: 'Anna Fali', image: 'annafali.png' },
         { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
@@ -527,8 +532,8 @@ export default function CustomersDemo() {
         });
     };
 
-    const formatDate = (value: string) => {
-        return value.toLocaleDateString('en-US', {
+    const formatDate = (value: string | Date) => {
+        return new Date(value).toLocaleDateString('en-US', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric'
@@ -590,7 +595,7 @@ export default function CustomersDemo() {
         );
     };
 
-    const representativesItemTemplate = (option: RepresentativeOption) => {
+    const representativesItemTemplate = (option: Representative) => {
         return (
             <div className="flex align-items-center gap-2">
                 <img alt={option.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${option.image}\`} width="32" />
@@ -653,7 +658,11 @@ export default function CustomersDemo() {
         <div className="card">
             <DataTable value={customers} paginator header={header} rows={10}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    rowsPerPageOptions={[10, 25, 50]} dataKey="id" selectionMode="checkbox" selection={selectedCustomers} onSelectionChange={(e) => setSelectedCustomers(e.value)}
+                    rowsPerPageOptions={[10, 25, 50]} dataKey="id" selectionMode="checkbox" selection={selectedCustomers} 
+                    onSelectionChange={(e) => {
+                        const customers = e.value as Customer[];
+                        setSelectedCustomers(customers);
+                    }}
                     filters={filters} filterDisplay="menu" globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
                     emptyMessage="No customers found." currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>

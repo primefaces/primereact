@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const FieldsetBase = {
+export const FieldsetBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Fieldset',
         id: null,
@@ -17,7 +17,5 @@ export const FieldsetBase = {
         onToggle: null,
         onClick: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, FieldsetBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, FieldsetBase.defaultProps)
-};
+    }
+});

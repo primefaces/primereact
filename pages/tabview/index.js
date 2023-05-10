@@ -9,6 +9,9 @@ import { ImportDoc } from '../../components/doc/tabview/importdoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { StyleDoc } from '../../components/doc/tabview/styledoc';
 import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
+import { Wireframe } from '../../components/doc/tabview/pt/wireframe';
+import { PTDoc } from '../../components/doc/tabview/pt/ptdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 
 const TabViewDemo = () => {
     const docs = [
@@ -64,7 +67,30 @@ const TabViewDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tabs Component" header="TabView" description="TabView is a container component to group content with tabs." componentDocs={docs} apiDocs={['TabView', 'TabPanel']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tabview.options',
+            label: 'TabView PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.tabpanel.options',
+            label: 'TabPanel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Tabs Component" header="TabView" description="TabView is a container component to group content with tabs." componentDocs={docs} apiDocs={['TabView', 'TabPanel']} ptDocs={ptDocs} ptDescription="" />;
 };
 
 export default TabViewDemo;

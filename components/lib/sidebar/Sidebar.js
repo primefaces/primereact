@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
 import { TimesIcon } from '../icons/times';
 
@@ -13,6 +13,12 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
+    const { ptm } = SidebarBase.setMetaData({
+        props,
+        state: {
+            containerVisible: maskVisibleState
+        }
+    });
     const sidebarRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
@@ -162,13 +168,31 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const createCloseIcon = () => {
         const iconClassName = 'p-sidebar-close-icon';
-        const icon = props.closeIcon || <TimesIcon className={iconClassName} />;
-        const closeIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const closeButtonProps = mergeProps(
+            {
+                type: 'button',
+                ref: closeIconRef,
+                className: 'p-sidebar-close p-sidebar-icon p-link',
+                onClick: (e) => onClose(e),
+                'aria-label': ariaLabel
+            },
+            ptm('closeButton')
+        );
+
+        const closeIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('closeIcon')
+        );
+
+        const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+        const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
         const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
         if (props.showCloseIcon) {
             return (
-                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={ariaLabel}>
+                <button {...closeButtonProps}>
                     {closeIcon}
                     <Ripple />
                 </button>
@@ -183,7 +207,6 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = SidebarBase.getOtherProps(props);
         const className = classNames('p-sidebar p-component', props.className, {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
@@ -208,15 +231,51 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             exit: props.fullScreen ? 150 : 300
         };
 
+        const maskProps = mergeProps(
+            {
+                ref: maskRef,
+                style: props.maskStyle,
+                className: maskClassName,
+                onMouseDown: (e) => onMaskClick(e)
+            },
+            ptm('mask')
+        );
+
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: sidebarRef,
+                className,
+                style: props.style,
+                role: 'complementary'
+            },
+            SidebarBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const headerProps = mergeProps(
+            {
+                className: 'p-sidebar-header'
+            },
+            ptm('header')
+        );
+
+        const contentProps = mergeProps(
+            {
+                className: 'p-sidebar-content'
+            },
+            ptm('content')
+        );
+
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
+            <div {...maskProps}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role="complementary">
-                        <div className="p-sidebar-header">
+                    <div {...rootProps}>
+                        <div {...headerProps}>
                             {icons}
                             {closeIcon}
                         </div>
-                        <div className="p-sidebar-content">{props.children}</div>
+                        <div {...contentProps}>{props.children}</div>
                     </div>
                 </CSSTransition>
             </div>

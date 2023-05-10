@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ConfirmPopupBase = {
+export const ConfirmPopupBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ConfirmPopup',
         tagKey: undefined,
@@ -25,7 +25,5 @@ export const ConfirmPopupBase = {
         reject: null,
         transitionOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ConfirmPopupBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ConfirmPopupBase.defaultProps)
-};
+    }
+});

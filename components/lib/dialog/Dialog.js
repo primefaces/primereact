@@ -2,13 +2,13 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Portal } from '../portal/Portal';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
-import { DialogBase } from './DialogBase';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
+import { Portal } from '../portal/Portal';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const props = DialogBase.getProps(inProps);
@@ -32,6 +32,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const styleElement = React.useRef(null);
     const attributeSelector = React.useRef(uniqueId);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
+
+    const { ptm } = DialogBase.setMetaData({
+        props,
+        state: {
+            id: idState,
+            maximized: maximized,
+            containerVisible: maskVisibleState
+        }
+    });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
@@ -365,7 +374,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const changeScrollOnMaximizable = () => {
         if (!props.blockScroll) {
-            let funcName = maximized ? 'addClass' : 'removeClass';
+            let funcName = maximized && visibleState ? 'addClass' : 'removeClass';
 
             DomHandler[funcName](document.body, 'p-overflow-hidden');
         }
@@ -400,7 +409,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         changeScrollOnMaximizable();
-    }, [props.maximized, maximizedState]);
+    }, [props.maximized, maximizedState, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
@@ -422,12 +431,31 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const createCloseIcon = () => {
         if (props.closable) {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
-            const iconProps = { className: 'p-dialog-header-close-icon', 'aria-hidden': true };
-            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
-            const headerCloseIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
+            const closeButtonIconProps = mergeProps(
+                {
+                    className: 'p-dialog-header-close-icon',
+                    'aria-hidden': true
+                },
+                ptm('closeButtonIcon')
+            );
+
+            const icon = props.closeIcon || <TimesIcon {...closeButtonIconProps} />;
+            const headerCloseIcon = IconUtils.getJSXIcon(icon, { ...closeButtonIconProps }, { props });
+
+            const closeButtonProps = mergeProps(
+                {
+                    ref: closeRef,
+                    type: 'button',
+                    className: 'p-dialog-header-icon p-dialog-header-close p-link',
+                    'aria-label': ariaLabel,
+                    onClick: onClose
+                },
+                ptm('closeButton')
+            );
 
             return (
-                <button ref={closeRef} type="button" className="p-dialog-header-icon p-dialog-header-close p-link" aria-label={ariaLabel} onClick={onClose}>
+                <button {...closeButtonProps}>
                     {headerCloseIcon}
                     <Ripple />
                 </button>
@@ -440,18 +468,33 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const createMaximizeIcon = () => {
         let icon;
         const iconClassName = 'p-dialog-header-maximize-icon';
+        const maximizableIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('maximizableIcon')
+        );
 
         if (!maximized) {
-            icon = props.maximizeIcon || <WindowMaximizeIcon className={iconClassName} />;
+            icon = props.maximizeIcon || <WindowMaximizeIcon {...maximizableIconProps} />;
         } else {
-            icon = props.minimizeIcon || <WindowMinimizeIcon className={iconClassName} />;
+            icon = props.minimizeIcon || <WindowMinimizeIcon {...maximizableIconProps} />;
         }
 
-        const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const toggleIcon = IconUtils.getJSXIcon(icon, maximizableIconProps, { props });
 
         if (props.maximizable) {
+            const maximizableButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-dialog-header-icon p-dialog-header-maximize p-link',
+                    onClick: toggleMaximize
+                },
+                ptm('maximizableButton')
+            );
+
             return (
-                <button type="button" className="p-dialog-header-icon p-dialog-header-maximize p-link" onClick={toggleMaximize}>
+                <button {...maximizableButtonProps}>
                     {toggleIcon}
                     <Ripple />
                 </button>
@@ -470,12 +513,35 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const headerId = idState + '_header';
             const headerClassName = classNames('p-dialog-header', props.headerClassName);
 
+            const headerProps = mergeProps(
+                {
+                    ref: headerRef,
+                    style: props.headerStyle,
+                    className: headerClassName,
+                    onMouseDown: onDragStart
+                },
+                ptm('header')
+            );
+
+            const headerTitleProps = mergeProps(
+                {
+                    id: headerId,
+                    className: 'p-dialog-title'
+                },
+                ptm('headerTitle')
+            );
+
+            const headerIconsProps = mergeProps(
+                {
+                    className: 'p-dialog-header-icons'
+                },
+                ptm('headerIcons')
+            );
+
             return (
-                <div ref={headerRef} style={props.headerStyle} className={headerClassName} onMouseDown={onDragStart}>
-                    <div id={headerId} className="p-dialog-title">
-                        {header}
-                    </div>
-                    <div className="p-dialog-header-icons">
+                <div {...headerProps}>
+                    <div {...headerTitleProps}>{header}</div>
+                    <div {...headerIconsProps}>
                         {icons}
                         {maximizeIcon}
                         {closeIcon}
@@ -491,23 +557,31 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         const className = classNames('p-dialog-content', props.contentClassName);
         const contentId = idState + '_content';
 
-        return (
-            <div id={contentId} ref={contentRef} className={className} style={props.contentStyle}>
-                {props.children}
-            </div>
+        const contentProps = mergeProps(
+            {
+                id: contentId,
+                ref: contentRef,
+                style: props.contentStyle,
+                className: className
+            },
+            ptm('content')
         );
+
+        return <div {...contentProps}>{props.children}</div>;
     };
 
     const createFooter = () => {
         const footer = ObjectUtils.getJSXElement(props.footer, props);
 
-        return (
-            footer && (
-                <div ref={footerRef} className="p-dialog-footer">
-                    {footer}
-                </div>
-            )
+        const footerProps = mergeProps(
+            {
+                ref: footerRef,
+                className: 'p-dialog-footer'
+            },
+            ptm('footer')
         );
+
+        return footer && <div {...footerProps}>{footer}</div>;
     };
 
     const createResizer = () => {
@@ -519,7 +593,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = DialogBase.getOtherProps(props);
         const className = classNames('p-dialog p-component', props.className, {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
@@ -550,22 +623,37 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             exit: props.position === 'center' ? 150 : 300
         };
 
+        const maskProps = mergeProps(
+            {
+                ref: maskRef,
+                style: props.maskStyle,
+                className: maskClassName,
+                onPointerUp: onMaskPointerUp
+            },
+            ptm('mask')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: dialogRef,
+                id: idState,
+                className: className,
+                style: props.style,
+                onClick: props.onClick,
+                role: 'dialog',
+                'aria-labelledby': headerId,
+                'aria-describedby': contentId,
+                'aria-modal': props.modal,
+                onPointerDown: onDialogPointerDown
+            },
+            DialogBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onPointerUp={onMaskPointerUp}>
+            <div {...maskProps}>
                 <CSSTransition nodeRef={dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={visibleState} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div
-                        ref={dialogRef}
-                        id={idState}
-                        className={className}
-                        style={props.style}
-                        onClick={props.onClick}
-                        role="dialog"
-                        {...otherProps}
-                        aria-labelledby={headerId}
-                        aria-describedby={contentId}
-                        aria-modal={props.modal}
-                        onPointerDown={onDialogPointerDown}
-                    >
+                    <div {...rootProps}>
                         {header}
                         {content}
                         {footer}
