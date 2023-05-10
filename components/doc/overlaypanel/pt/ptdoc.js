@@ -15,7 +15,7 @@ export function PTDoc(props) {
         root: { className: 'surface-ground' }
     }}
 >
-    <img src="https://primefaces.org/cdn/primevue/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
+    <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
 </OverlayPanel>
         `,
         javascript: `
@@ -34,7 +34,7 @@ export default function PTDemo() {
                     root: { className: 'surface-ground' }
                 }}
             >
-                <img src="https://primefaces.org/cdn/primevue/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
+                <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
             </OverlayPanel>
         </div>
     );
@@ -56,7 +56,7 @@ export default function PTDemo() {
                     root: { className: 'surface-ground' }
                 }}
             >
-                <img src="https://primefaces.org/cdn/primevue/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
+                <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
             </OverlayPanel>
         </div>
     );
@@ -76,7 +76,7 @@ export default function PTDemo() {
                         root: { className: 'surface-ground' }
                     }}
                 >
-                    <img src="https://primefaces.org/cdn/primevue/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
+                    <img src="https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg" alt="Bamboo Watch" />
                 </OverlayPanel>
             </div>
             <DocSectionCode code={code} />
