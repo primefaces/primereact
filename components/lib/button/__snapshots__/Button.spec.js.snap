@@ -89,10 +89,9 @@ exports[`Button when click the button if loading is true it renders Button with 
   >
     <svg
       aria-hidden="true"
-      class="p-icon p-icon-spin"
+      class="p-icon p-icon-spin p-button-loading-icon"
       fill="none"
       height="14"
-      p-button-loading-icon="test"
       viewBox="0 0 14 14"
       width="14"
       xmlns="http://www.w3.org/2000/svg"
