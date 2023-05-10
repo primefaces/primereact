@@ -6866,6 +6866,22 @@
                             "description": "Reference of the input element."
                         },
                         {
+                            "name": "inputStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CSSProperties",
+                            "default": "",
+                            "description": "Inline style of the input field."
+                        },
+                        {
+                            "name": "inputClassName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Inline style of the input field."
+                        },
+                        {
                             "name": "panelClassName",
                             "optional": true,
                             "readonly": false,
