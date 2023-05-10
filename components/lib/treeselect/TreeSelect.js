@@ -1,15 +1,15 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { OverlayService } from '../overlayservice/OverlayService';
-import { Ripple } from '../ripple/Ripple';
-import { Tree } from '../tree/Tree';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
-import { TreeSelectBase } from './TreeSelectBase';
-import { TreeSelectPanel } from './TreeSelectPanel';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
+import { OverlayService } from '../overlayservice/OverlayService';
+import { Ripple } from '../ripple/Ripple';
+import { Tree } from '../tree/Tree';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { TreeSelectBase } from './TreeSelectBase';
+import { TreeSelectPanel } from './TreeSelectPanel';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -79,8 +79,12 @@ export const TreeSelect = React.memo(
                 props.onChange({
                     originalEvent: event.originalEvent,
                     value: event.value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.originalEvent.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.originalEvent.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

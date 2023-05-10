@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import { AngleUpIcon } from '../icons/angleup';
-import { AngleDownIcon } from '../icons/angledown';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -893,8 +893,12 @@ export const InputNumber = React.memo(
                 props.onValueChange({
                     originalEvent: event,
                     value: value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
