@@ -65,8 +65,8 @@ export const ConfirmPopup = React.memo(
         };
 
         const accept = () => {
-            if (!isExecuting.current) {
-                isExecuting.current = true;
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
                 callbackFromProp('accept');
                 hide('accept');
             }
