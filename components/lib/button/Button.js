@@ -92,7 +92,7 @@ export const Button = React.memo(
         };
         const size = sizeMapping[props.size];
         const className = classNames('p-button p-component', props.className, {
-            'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
+            'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
             'p-disabled': disabled,
             'p-button-loading': props.loading,
@@ -102,7 +102,7 @@ export const Button = React.memo(
             'p-button-text': props.text,
             'p-button-rounded': props.rounded,
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label,
+            [`p-button-loading-${props.iconPos}`]: props.loading && props.label,
             [`p-button-${size}`]: size,
             [`p-button-${props.severity}`]: props.severity
         });
