@@ -138,6 +138,11 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      * @defaultValue true
      */
     visible?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ButtonPassThroughOptions}
+     */
+    pt?: ButtonPassThroughOptions;
 }
 
 /**
