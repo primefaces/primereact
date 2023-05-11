@@ -173,21 +173,19 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card">
                 <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
                     <Toast ref={toast} />
                     <SpeedDial
                         pt={{
                             menu: ({ state }) => ({
-                                className: classNames("mt-2", { "border-1 border-primary surface-border border-round surface-ground": state.visible })
+                                className: classNames('mt-2', { 'border-1 border-primary surface-border border-round surface-ground': state.visible })
                             })
                         }}
                         model={items}
                         radius={80}
-                        direction='down'
-
+                        direction="down"
                     />
                 </div>
             </div>

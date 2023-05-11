@@ -180,7 +180,7 @@ export const SpeedDial = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    role: "menuitem",
+                    role: 'menuitem',
                     className: contentClassName,
                     target: target,
                     'data-pr-tooltip': label,
@@ -212,18 +212,14 @@ export const SpeedDial = React.memo(
             const menuItemProps = mergeProps(
                 {
                     key: index,
-                    className: "p-speeddial-item",
+                    className: 'p-speeddial-item',
                     style,
-                    role: "none"
+                    role: 'none'
                 },
                 ptm('menuitem')
-            )
-
-            return (
-                <li {...menuItemProps}>
-                    {content}
-                </li>
             );
+
+            return <li {...menuItemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -235,17 +231,13 @@ export const SpeedDial = React.memo(
             const menuProps = mergeProps(
                 {
                     ref: listRef,
-                    className: "p-speeddial-list",
-                    role: "menu"
+                    className: 'p-speeddial-list',
+                    role: 'menu'
                 },
                 ptm('menu')
-            )
-
-            return (
-                <ul {...menuProps}>
-                    {items}
-                </ul>
             );
+
+            return <ul {...menuProps}>{items}</ul>;
         };
 
         const createButton = () => {
@@ -264,18 +256,16 @@ export const SpeedDial = React.memo(
             });
             const icon = showIconVisible ? props.showIcon || <PlusIcon className={iconClassName} onClick={onClick} /> : hideIconVisible ? props.hideIcon || <MinusIcon className={iconClassName} onClick={onClick} /> : null;
             const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, visible });
-            const buttonProps = mergeProps(
-                {
-                    type: "button",
-                    style: props.buttonStyle,
-                    className,
-                    icon: toggleIcon,
-                    onClick: (e) => onClick(e),
-                    disabled: props.disabled,
-                    'aria-label': props['aria-label'],
-                    pt: props.pt && props.pt.button ? props.pt.button : {}
-                }
-            )
+            const buttonProps = mergeProps({
+                type: 'button',
+                style: props.buttonStyle,
+                className,
+                icon: toggleIcon,
+                onClick: (e) => onClick(e),
+                disabled: props.disabled,
+                'aria-label': props['aria-label'],
+                pt: props.pt && props.pt.button ? props.pt.button : {}
+            });
             const content = <Button {...buttonProps} />;
 
             if (props.buttonTemplate) {
@@ -310,7 +300,7 @@ export const SpeedDial = React.memo(
                         style: props.maskStyle
                     },
                     ptm('mask')
-                )
+                );
 
                 return <div {...maskProps}></div>;
             }
@@ -335,11 +325,11 @@ export const SpeedDial = React.memo(
                 id: props.id,
                 ref: elementRef,
                 className,
-                style: props.style,
+                style: props.style
             },
             SpeedDialBase.getOtherProps(props),
             ptm('root')
-        )
+        );
 
         return (
             <React.Fragment>
