@@ -85,16 +85,14 @@ export const Inplace = React.forwardRef((inProps, ref) => {
         const ariaLabel = localeOption('close');
 
         if (props.closable) {
-            const closeButtonProps = mergeProps(
-                {
-                    className: 'p-inplace-content-close',
-                    icon: closeIcon,
-                    type: 'button',
-                    onClick: close,
-                    'aria-label': ariaLabel
-                },
-                ptm('closeButton')
-            );
+            const closeButtonProps = mergeProps({
+                className: 'p-inplace-content-close',
+                icon: closeIcon,
+                type: 'button',
+                onClick: close,
+                'aria-label': ariaLabel,
+                pt: ptm('closeButton')
+            });
 
             return <Button {...closeButtonProps}></Button>;
         }

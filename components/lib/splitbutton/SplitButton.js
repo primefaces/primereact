@@ -21,7 +21,11 @@ export const SplitButton = React.memo(
         const overlayRef = React.useRef(null);
 
         const { ptm } = SplitButtonBase.setMetaData({
-            props
+            props,
+            state: {
+                id: idState,
+                overlayVisible: overlayVisibleState
+            }
         });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
@@ -159,7 +163,7 @@ export const SplitButton = React.memo(
             'aria-haspopup': true,
             'aria-controls': overlayVisibleState ? menuId : null,
             ...props.menuButtonProps,
-            pt: props.pt && props.pt.menuButton ? props.pt.menuButton : {}
+            pt: ptm('menuButton')
         });
 
         const menuProps = mergeProps(
@@ -192,7 +196,7 @@ export const SplitButton = React.memo(
             disabled: props.disabled,
             tabIndex: props.tabIndex,
             ...props.buttonProps,
-            pt: props.pt && props.pt.button ? props.pt.button : {}
+            pt: ptm('button')
         });
 
         const rootProps = mergeProps(

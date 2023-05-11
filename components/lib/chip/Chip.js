@@ -42,8 +42,7 @@ export const Chip = React.memo(
                 ptm('removeIcon')
             );
 
-            const iconProps = { ...removeIconProps };
-            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} />;
 
             if (props.image) {
                 const imageProps = mergeProps(
@@ -81,7 +80,7 @@ export const Chip = React.memo(
             }
 
             if (props.removable) {
-                content.push(IconUtils.getJSXIcon(icon, { ...iconProps }, { props }));
+                content.push(IconUtils.getJSXIcon(icon, { ...removeIconProps }, { props }));
             }
 
             return content;

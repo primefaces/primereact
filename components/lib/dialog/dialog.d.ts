@@ -53,11 +53,11 @@ export interface DialogPassThroughOptions {
     /**
      * Uses to pass attributes to the close button's component.
      */
-    closeButton?: DialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    closeButton?: DialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
      * Uses to pass attributes to the close button icon's component.
      */
-    closeButtonIcon?: DialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    closeButtonIcon?: DialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
@@ -292,6 +292,11 @@ export interface DialogProps {
      * @defaultValue false
      */
     visible?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DialogPassThroughOptions}
+     */
+    pt?: DialogPassThroughOptions;
     /**
      * Callback to invoke when dialog is clicked.
      * @param {React.PointerEvent<HTMLElement>} event - Browser event.

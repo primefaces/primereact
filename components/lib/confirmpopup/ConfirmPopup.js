@@ -30,7 +30,11 @@ export const ConfirmPopup = React.memo(
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const { ptm } = ConfirmPopupBase.setMetaData({
-            props
+            props,
+            state: {
+                visible: visibleState,
+                reshow: reshowState
+            }
         });
 
         const overlayRef = React.useRef(null);
@@ -256,26 +260,22 @@ export const ConfirmPopup = React.memo(
                 ptm('footer')
             );
 
-            const rejectButtonProps = mergeProps(
-                {
-                    label: rejectLabel,
-                    icon: getPropValue('rejectIcon'),
-                    className: rejectClassName,
-                    onClick: reject
-                },
-                ptm('rejectButton')
-            );
+            const rejectButtonProps = mergeProps({
+                label: rejectLabel,
+                icon: getPropValue('rejectIcon'),
+                className: rejectClassName,
+                onClick: reject,
+                pt: ptm('rejectButton')
+            });
 
-            const acceptButtonProps = mergeProps(
-                {
-                    ref: acceptBtnRef,
-                    label: acceptLabel,
-                    icon: getPropValue('acceptIcon'),
-                    className: acceptClassName,
-                    onClick: accept
-                },
-                ptm('acceptButton')
-            );
+            const acceptButtonProps = mergeProps({
+                ref: acceptBtnRef,
+                label: acceptLabel,
+                icon: getPropValue('acceptIcon'),
+                className: acceptClassName,
+                onClick: accept,
+                pt: ptm('acceptButton')
+            });
 
             const content = (
                 <div {...footerProps}>

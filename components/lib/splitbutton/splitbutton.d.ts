@@ -183,6 +183,25 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SplitButtonPassThroughOptions}
+     */
+    pt?: SplitButtonPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in SplitButton component.
+ */
+export interface SplitButtonState {
+    /**
+     * Current id state as a boolean.
+     */
+    id: string;
+    /**
+     * Current overlay visible state as a boolean.
+     */
+    overlayVisible: boolean;
 }
 
 /**

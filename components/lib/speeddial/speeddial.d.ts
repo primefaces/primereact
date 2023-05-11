@@ -51,7 +51,7 @@ export interface SpeedDialPassThroughOptions {
     /**
      * Uses to pass attributes to the action icon's DOM element.
      */
-    actionIcon?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    actionIcon?: SpeedDialPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the mask's DOM element.
      */

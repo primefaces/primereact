@@ -155,6 +155,11 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {FieldsetPassThroughOptions}
+     */
+    pt?: FieldsetPassThroughOptions;
 }
 
 /**

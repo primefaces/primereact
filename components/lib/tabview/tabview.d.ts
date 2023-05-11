@@ -293,7 +293,7 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the previous button icon's DOM element.
      */
-    previousIcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    previousIcon?: TabViewPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the next button's DOM element.
      */
@@ -301,7 +301,7 @@ export interface TabViewPassThroughOptions {
     /**
      * Uses to pass attributes to the next button icon's DOM element.
      */
-    nextIcon?: TabViewPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    nextIcon?: TabViewPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the panel's DOM element.
      */

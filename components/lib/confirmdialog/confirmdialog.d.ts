@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import { DialogPassThroughOptions, DialogProps } from '../dialog';
+import { DialogProps } from '../dialog';
 import { IconType, PassThroughType } from '../utils';
 import { ButtonPassThroughOptions } from '../button/button';
 
@@ -143,7 +143,7 @@ interface ConfirmDialogOptions {
  * Defines valid properties in ConfirmDialog component. In addition to these, all properties of {@link dialog} can be used in this component.
  * @group Properties
  */
-export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer'> {
+export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer' | 'pt'> {
     /**
      * Unique tag key used to separate the confirmDialog components in the page.
      */
@@ -217,6 +217,11 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ConfirmDialogPassThroughOptions}
+     */
+    pt?: ConfirmDialogPassThroughOptions;
 }
 
 /**

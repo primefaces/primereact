@@ -58,6 +58,11 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DividerPassThroughOptions}
+     */
+    pt?: DividerPassThroughOptions;
 }
 
 /**

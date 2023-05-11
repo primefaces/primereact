@@ -85,6 +85,11 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     template?: React.ReactNode | ((props: BlockUIProps) => React.ReactNode) | null | undefined;
     /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {BlockUIPassThroughOptions}
+     */
+    pt?: BlockUIPassThroughOptions;
+    /**
      * Fired when the element gets blocked.
      */
     onBlocked?(): void;
