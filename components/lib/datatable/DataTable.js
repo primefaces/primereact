@@ -1427,6 +1427,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const createTableHeader = (options, empty, _isVirtualScrollerDisabled) => {
+        if (props.showHeaders === false) {
+            return null;
+        }
+
         const sortField = getSortField();
         const sortOrder = getSortOrder();
         const multiSortMeta = [...getMultiSortMeta()];
