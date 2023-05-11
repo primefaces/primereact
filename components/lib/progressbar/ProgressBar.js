@@ -37,10 +37,12 @@ export const ProgressBar = React.memo(
                 ProgressBarBase.getOtherProps(props),
                 ptm('root')
             );
+            const valueWidth = Math.max(props.value, 2); // min 2 to display full label of 0% and 1%
+            const valueColor = props.value ? props.color : 'transparent';
             const valueProps = mergeProps(
                 {
                     className: 'p-progressbar-value p-progressbar-value-animate',
-                    style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
+                    style: { width: valueWidth + '%', display: 'flex', backgroundColor: valueColor }
                 },
                 ptm('value')
             );
@@ -54,7 +56,7 @@ export const ProgressBar = React.memo(
 
             return (
                 <div {...rootProps}>
-                    <div {...valueProps}>{props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}</div>
+                    <div {...valueProps}>{label != null && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
         };
