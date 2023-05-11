@@ -3661,6 +3661,14 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "When present, it specifies that the element should be visible."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -3688,7 +3696,7 @@
                 },
                 "ButtonPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ButtonProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -27132,6 +27140,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -27172,7 +27188,7 @@
                 },
                 "ProgressBarPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ProgressBarProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
