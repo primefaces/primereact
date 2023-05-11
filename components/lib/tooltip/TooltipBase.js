@@ -1,6 +1,7 @@
+import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
-export const TooltipBase = {
+export const TooltipBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Tooltip',
         appendTo: null,
@@ -31,7 +32,5 @@ export const TooltipBase = {
         target: null,
         updateDelay: 0,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TooltipBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TooltipBase.defaultProps)
-};
+    }
+});

@@ -2,16 +2,23 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = TooltipBase.getProps(inProps);
-
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
+        const { ptm } = TooltipBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                position: positionState,
+                className: classNameState
+            }
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -462,7 +469,6 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = TooltipBase.getOtherProps(props);
             const tooltipClassName = classNames(
                 'p-tooltip p-component',
                 {
@@ -472,11 +478,40 @@ export const Tooltip = React.memo(
                 classNameState
             );
             const empty = isTargetContentEmpty(currentTargetRef.current);
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: tooltipClassName,
+                    style: props.style,
+                    role: "tooltip",
+                    'aria-hidden': visibleState,
+                    onMouseEnter: (e) => onMouseEnter(e),
+                    onMouseLeave: (e) => onMouseLeave
+                },
+                TooltipBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const arrowProps = mergeProps(
+                {
+                    className: "p-tooltip-arrow"
+                },
+                ptm('arrow')
+            );
+
+            const textProps = mergeProps(
+                {
+                    ref: textRef,
+                    className: "p-tooltip-text"
+                },
+                ptm('text')
+            );
 
             return (
-                <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role="tooltip" aria-hidden={visibleState} {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                    <div className="p-tooltip-arrow"></div>
-                    <div ref={textRef} className="p-tooltip-text">
+                <div {...rootProps}>
+                    <div {...arrowProps}></div>
+                    <div {...textProps}>
                         {empty && props.children}
                     </div>
                 </div>
