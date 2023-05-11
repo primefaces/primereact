@@ -3709,14 +3709,14 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "ButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the loading icon's DOM element."
                         },
                         {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "ButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
