@@ -11053,6 +11053,14 @@
                             "description": "Whether to show grid lines between cells."
                         },
                         {
+                            "name": "showHeaders",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether to show headers."
+                        },
+                        {
                             "name": "showSelectAll",
                             "optional": true,
                             "readonly": false,
