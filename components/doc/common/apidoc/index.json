@@ -9335,7 +9335,7 @@
                             "name": "headerIcons",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "ConfirmDialogPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the header icons' DOM element."
                         },
                         {
@@ -9349,7 +9349,7 @@
                             "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "ConfirmDialogPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the close button icon's component."
                         },
                         {
@@ -9363,7 +9363,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmDialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "ConfirmDialogPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
