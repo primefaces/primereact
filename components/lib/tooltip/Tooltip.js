@@ -484,7 +484,7 @@ export const Tooltip = React.memo(
                     ref: elementRef,
                     className: tooltipClassName,
                     style: props.style,
-                    role: "tooltip",
+                    role: 'tooltip',
                     'aria-hidden': visibleState,
                     onMouseEnter: (e) => onMouseEnter(e),
                     onMouseLeave: (e) => onMouseLeave
@@ -495,7 +495,7 @@ export const Tooltip = React.memo(
 
             const arrowProps = mergeProps(
                 {
-                    className: "p-tooltip-arrow"
+                    className: 'p-tooltip-arrow'
                 },
                 ptm('arrow')
             );
@@ -503,7 +503,7 @@ export const Tooltip = React.memo(
             const textProps = mergeProps(
                 {
                     ref: textRef,
-                    className: "p-tooltip-text"
+                    className: 'p-tooltip-text'
                 },
                 ptm('text')
             );
@@ -511,9 +511,7 @@ export const Tooltip = React.memo(
             return (
                 <div {...rootProps}>
                     <div {...arrowProps}></div>
-                    <div {...textProps}>
-                        {empty && props.children}
-                    </div>
+                    <div {...textProps}>{empty && props.children}</div>
                 </div>
             );
         };
