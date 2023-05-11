@@ -1061,6 +1061,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     showGridlines?: boolean | undefined;
     /**
+     * Whether to show headers.
+     * @defaultValue true
+     */
+    showHeaders?: boolean | undefined;
+    /**
      * Whether to show the select all checkbox inside the datatable's header.
      */
     showSelectAll?: boolean | undefined;
