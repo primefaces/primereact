@@ -48,7 +48,7 @@ export const Button = React.memo(
 
             const icon = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
 
-            return IconUtils.getJSXIcon(icon, iconsProps, { props });
+            return IconUtils.getJSXIcon(icon, {...iconsProps}, { props });
         };
 
         const createLabel = () => {

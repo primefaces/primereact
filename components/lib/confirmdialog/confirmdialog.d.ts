@@ -42,7 +42,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Uses to pass attributes to the header icons' DOM element.
      */
-    headerIcons?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    headerIcons?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the close button's component.
      */
@@ -50,7 +50,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Uses to pass attributes to the close button icon's component.
      */
-    closeButtonIcon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    closeButtonIcon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
@@ -58,7 +58,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the message's DOM element.
      */
