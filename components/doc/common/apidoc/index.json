@@ -351,7 +351,7 @@
                             "name": "headerIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionTabPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the headericon's DOM element."
                         },
                         {
@@ -2996,6 +2996,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AvatarPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -3050,7 +3058,7 @@
                 },
                 "AvatarPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "AvatarProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -3070,7 +3078,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "AvatarPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "type": "AvatarPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
@@ -3120,6 +3128,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AvatarGroupPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -3140,7 +3156,7 @@
                 },
                 "AvatarGroupPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "AvatarGroupProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -3213,6 +3229,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BadgePassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -3240,7 +3264,7 @@
                 },
                 "BadgePassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "BadgeProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -3355,6 +3379,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "Template of mask."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BlockUIPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -3401,7 +3433,7 @@
                 },
                 "BlockUIPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "BlockUIProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -6294,6 +6326,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -6354,7 +6394,7 @@
                 },
                 "ChipPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ChipProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -6374,7 +6414,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ChipPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "type": "ChipPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
@@ -6388,7 +6428,7 @@
                             "name": "removeIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ChipPassThroughType<HTMLAttributes<SVGSVGElement>>",
+                            "type": "ChipPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the removeIcon's DOM element."
                         }
                     ],
@@ -8850,6 +8890,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
                             "name": "ariaCloseIconLabel",
                             "optional": true,
                             "readonly": false,
@@ -9308,7 +9356,7 @@
                 },
                 "ConfirmDialogPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ConfirmDialogProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -9684,6 +9732,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmPopupPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -9763,7 +9819,7 @@
                 },
                 "ConfirmPopupPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ConfirmPopupProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -9783,7 +9839,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmPopupPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "ConfirmPopupPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
@@ -9827,6 +9883,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current visible state as a boolean."
+                        },
+                        {
+                            "name": "reshow",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current reshow state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -13758,6 +13821,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Specifies the visibility of the dialog."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -13946,7 +14017,7 @@
                 },
                 "DialogPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "DialogProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -13994,14 +14065,14 @@
                             "name": "closeButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "DialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the close button's component."
                         },
                         {
                             "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "DialogPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "type": "DialogPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the close button icon's component."
                         },
                         {
@@ -14123,6 +14194,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DividerPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -14150,7 +14229,7 @@
                 },
                 "DividerPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "DividerProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -15256,6 +15335,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -15363,7 +15450,7 @@
                 },
                 "FieldsetPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "FieldsetProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -19517,6 +19604,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -19663,7 +19758,7 @@
                 },
                 "InplacePassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "InplaceProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -27893,6 +27988,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -27914,19 +28017,13 @@
                             "optional": false,
                             "readonly": false,
                             "type": "ScrollPanelProps"
-                        },
-                        {
-                            "name": "state",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "ScrollPanelState"
                         }
                     ],
                     "callbacks": []
                 },
                 "ScrollPanelPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ScrollPanelProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -27962,41 +28059,6 @@
                             "readonly": false,
                             "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the vertical panel's DOM element."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "ScrollPanelState": {
-                    "description": "Defines current inline state in Panel component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "id",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Current id state as a string."
-                        },
-                        {
-                            "name": "orientation",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Current scrollpanel orientation."
-                        },
-                        {
-                            "name": "lastScrollTop",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Latest scroll top position."
-                        },
-                        {
-                            "name": "lastScrollLeft",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Latest scroll left position."
                         }
                     ],
                     "callbacks": []
@@ -28163,19 +28225,6 @@
                             "readonly": false,
                             "type": "ScrollTopPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "ScrollTopPassThroughAttributes": {
-                    "description": "Custom passthrough attributes for each DOM elements",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "[key: string]",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
                         }
                     ],
                     "callbacks": []
@@ -29575,7 +29624,7 @@
                             "name": "actionIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "SpeedDialPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "SpeedDialPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the action icon's DOM element."
                         },
                         {
@@ -29907,6 +29956,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -29960,7 +30017,7 @@
                 },
                 "SplitButtonPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "SplitButtonProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -29989,6 +30046,27 @@
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "SplitButtonState": {
+                    "description": "Defines current inline state in SplitButton component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "id",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current id state as a boolean."
+                        },
+                        {
+                            "name": "overlayVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current overlay visible state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -31221,7 +31299,7 @@
                             "name": "previousIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the previous button icon's DOM element."
                         },
                         {
@@ -31235,7 +31313,7 @@
                             "name": "nextIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughType<HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "TabViewPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the next button icon's DOM element."
                         },
                         {
