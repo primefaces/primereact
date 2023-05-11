@@ -38,7 +38,7 @@ export interface ConfirmPopupPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: ConfirmPopupPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: ConfirmPopupPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the message's DOM element.
      */

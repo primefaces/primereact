@@ -9783,7 +9783,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmPopupPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "ConfirmPopupPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
