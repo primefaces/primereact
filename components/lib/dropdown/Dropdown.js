@@ -106,8 +106,12 @@ export const Dropdown = React.memo(
                     props.onBlur({
                         originalEvent: event.originalEvent,
                         value: currentValue,
-                        stopPropagation: () => {},
-                        preventDefault: () => {},
+                        stopPropagation: () => {
+                            event.originalEvent.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            event.originalEvent.preventDefault();
+                        },
                         target: {
                             name: props.name,
                             id: props.id,
@@ -366,8 +370,12 @@ export const Dropdown = React.memo(
                 props.onChange({
                     originalEvent: event.originalEvent,
                     value: event.target.value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.originalEvent.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.originalEvent.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -422,8 +430,12 @@ export const Dropdown = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: undefined,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -444,8 +456,12 @@ export const Dropdown = React.memo(
                     props.onChange({
                         originalEvent: event.originalEvent,
                         value: optionValue,
-                        stopPropagation: () => {},
-                        preventDefault: () => {},
+                        stopPropagation: () => {
+                            event.originalEvent.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            event.originalEvent.preventDefault();
+                        },
                         target: {
                             name: props.name,
                             id: props.id,

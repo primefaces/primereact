@@ -79,6 +79,11 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ProgressBarPassThroughOptions}
+     */
+    pt?: ProgressBarPassThroughOptions;
 }
 
 /**

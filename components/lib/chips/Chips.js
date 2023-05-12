@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
-import { TimesCircleIcon } from '../icons/timescircle';
 
 export const Chips = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -37,8 +37,12 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: values,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -124,8 +128,12 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: items,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

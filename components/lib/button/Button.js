@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { SpinnerIcon } from '../icons/spinner';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
-import { SpinnerIcon } from '../icons/spinner';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -24,7 +24,7 @@ export const Button = React.memo(
         }
 
         const createIcon = () => {
-            const className = classNames('p-button-icon p-c', {
+            let className = classNames('p-button-icon p-c', {
                 [`p-button-icon-${props.iconPos}`]: props.label
             });
 
@@ -35,16 +35,20 @@ export const Button = React.memo(
                 ptm('icon')
             );
 
+            className = classNames(className, {
+                'p-button-loading-icon': props.loading
+            });
+
             const loadingIconProps = mergeProps(
                 {
-                    'p-button-loading-icon': props.loading
+                    className
                 },
                 ptm('loadingIcon')
             );
 
             const icon = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
 
-            return IconUtils.getJSXIcon(icon, iconsProps, { props });
+            return IconUtils.getJSXIcon(icon, { ...iconsProps }, { props });
         };
 
         const createLabel = () => {
@@ -88,7 +92,7 @@ export const Button = React.memo(
         };
         const size = sizeMapping[props.size];
         const className = classNames('p-button p-component', props.className, {
-            'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
+            'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
             'p-disabled': disabled,
             'p-button-loading': props.loading,
@@ -98,7 +102,7 @@ export const Button = React.memo(
             'p-button-text': props.text,
             'p-button-rounded': props.rounded,
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label,
+            [`p-button-loading-${props.iconPos}`]: props.loading && props.label,
             [`p-button-${size}`]: size,
             [`p-button-${props.severity}`]: props.severity
         });

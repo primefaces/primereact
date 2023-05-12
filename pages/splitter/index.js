@@ -4,7 +4,7 @@ import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc
 import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
 import { ImportDoc } from '../../components/doc/splitter/importdoc';
 import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
-import PTDoc from '../../components/doc/splitter/pt/ptdoc';
+import { PTDoc } from '../../components/doc/splitter/pt/ptdoc';
 import { Wireframe } from '../../components/doc/splitter/pt/wireframe';
 import { SizeDoc } from '../../components/doc/splitter/sizedoc';
 import { StyleDoc } from '../../components/doc/splitter/styledoc';

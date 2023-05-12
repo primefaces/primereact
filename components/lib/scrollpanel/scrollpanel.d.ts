@@ -17,7 +17,6 @@ export declare type ScrollPanelThroughType<T> = PassThroughType<T, ScrollPanelTh
  */
 export interface ScrollPanelThroughMethodOptions {
     props: ScrollPanelProps;
-    state: ScrollPanelState;
 }
 
 /**
@@ -48,31 +47,6 @@ export interface ScrollPanelPassThroughOptions {
 }
 
 /**
- * Defines current inline state in Panel component.
- */
-export interface ScrollPanelState {
-    /**
-     * Current id state as a string.
-     */
-    id: string;
-    /**
-     * Current scrollpanel orientation.
-     * @defaultValue vertical
-     */
-    orientation: string;
-    /**
-     * Latest scroll top position.
-     * @defaultValue 0
-     */
-    lastScrollTop: number;
-    /**
-     * Latest scroll left position.
-     * @defaultValue 0
-     */
-    lastScrollLeft: number;
-}
-
-/**
  * Defines valid properties in ScrollPanel component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -82,6 +56,11 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ScrollPanelPassThroughOptions}
+     */
+    pt?: ScrollPanelPassThroughOptions;
 }
 
 /**

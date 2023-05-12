@@ -84,15 +84,14 @@ exports[`Button when click the button if loading is false it renders Button with
 exports[`Button when click the button if loading is true it renders Button with loading icon 1`] = `
 <div>
   <button
-    class="p-button p-component p-disabled p-button-loading"
+    class="p-button p-component p-button-icon-only p-disabled p-button-loading"
     disabled=""
   >
     <svg
       aria-hidden="true"
-      class="p-icon p-icon-spin"
+      class="p-icon p-icon-spin p-button-icon p-c p-button-loading-icon"
       fill="none"
       height="14"
-      p-button-loading-icon="test"
       viewBox="0 0 14 14"
       width="14"
       xmlns="http://www.w3.org/2000/svg"

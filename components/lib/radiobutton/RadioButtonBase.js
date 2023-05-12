@@ -17,6 +17,7 @@ export const RadioButtonBase = {
         tooltip: null,
         tooltipOptions: null,
         onChange: null,
+        onClick: null,
         children: undefined
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, RadioButtonBase.defaultProps),

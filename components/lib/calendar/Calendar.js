@@ -1414,8 +1414,12 @@ export const Calendar = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

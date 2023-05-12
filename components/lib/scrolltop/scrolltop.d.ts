@@ -37,13 +37,6 @@ export interface ScrollTopPassThroughOptions {
 }
 
 /**
- * Custom passthrough attributes for each DOM elements
- */
-export interface ScrollTopPassThroughAttributes {
-    [key: string]: any;
-}
-
-/**
  * Defines current inline state in ScrollTop component.
  */
 export interface ScrollTopState {

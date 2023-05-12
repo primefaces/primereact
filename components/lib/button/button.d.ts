@@ -32,11 +32,11 @@ export interface ButtonPassThroughOptions {
     /**
      * Uses to pass attributes to the loading icon's DOM element.
      */
-    loadingIcon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    loadingIcon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the label's DOM element.
      */
@@ -138,6 +138,11 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      * @defaultValue true
      */
     visible?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ButtonPassThroughOptions}
+     */
+    pt?: ButtonPassThroughOptions;
 }
 
 /**

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesIcon } from '../icons/times';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import { TimesCircleIcon } from '../icons/timescircle';
-import { TimesIcon } from '../icons/times';
-import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -216,8 +216,12 @@ export const MultiSelect = React.memo(
                     originalEvent: event,
                     value,
                     selectedOption,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,

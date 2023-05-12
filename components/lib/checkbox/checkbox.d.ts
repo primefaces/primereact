@@ -21,10 +21,18 @@ import { IconType } from '../utils';
 interface CheckboxChangeEvent extends FormEvent {}
 
 /**
+ * Custom click event.
+ * @see {@link CheckboxProps.onClick}
+ * @extends {FormEvent}
+ * @event
+ */
+interface CheckboxClickEvent extends FormEvent {}
+
+/**
  * Defines valid properties in Checkbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
     /**
      * Unique identifier of the element.
      */
@@ -106,6 +114,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @param {CheckboxChangeEvent} event - Custom change event
      */
     onChange?(event: CheckboxChangeEvent): void;
+    /**
+     * Callback to invoke on value change. Mark the event with preventDefault to prevent the option from changing.
+     * @param {CheckboxClickEvent} event - Custom click event
+     */
+    onClick?(event: CheckboxClickEvent): void;
     /**
      * Callback to invoke to when a mouse button is pressed.
      * @param {React.MouseEvent<HTMLElement>} event - Browser event

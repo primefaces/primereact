@@ -21,6 +21,7 @@ export const CheckboxBase = {
         tooltip: null,
         tooltipOptions: null,
         onChange: null,
+        onClick: null,
         onMouseDown: null,
         onContextMenu: null,
         children: undefined

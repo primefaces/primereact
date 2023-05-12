@@ -3,7 +3,7 @@ import PrimeReact from '../api/Api';
 import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
 
@@ -546,13 +546,27 @@ export const ColorPicker = React.memo(
 
         const createInput = () => {
             if (!props.inline) {
-                const inputClassName = classNames('p-colorpicker-preview p-inputtext', {
+                const inputClassName = classNames('p-colorpicker-preview p-inputtext', props.inputClassName, {
                     'p-disabled': props.disabled
                 });
 
                 const inputProps = ColorPickerBase.getOtherProps(props);
 
-                return <input ref={inputRef} type="text" className={inputClassName} readOnly id={props.inputId} tabIndex={props.tabIndex} disabled={props.disabled} onClick={onInputClick} onKeyDown={onInputKeydown} {...inputProps} />;
+                return (
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        readOnly
+                        className={inputClassName}
+                        style={props.inputStyle}
+                        id={props.inputId}
+                        tabIndex={props.tabIndex}
+                        disabled={props.disabled}
+                        onClick={onInputClick}
+                        onKeyDown={onInputKeydown}
+                        {...inputProps}
+                    />
+                );
             }
 
             return null;

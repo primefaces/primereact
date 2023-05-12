@@ -20,10 +20,18 @@ import { FormEvent } from '../ts-helpers';
 interface RadioButtonChangeEvent extends FormEvent {}
 
 /**
+ * Custom click event.
+ * @see {@link RadioButtonProps.onClick}
+ * @extends {FormEvent}
+ * @event
+ */
+interface RadioButtonClickEvent extends FormEvent {}
+
+/**
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
     /**
      * Reference of the input element.
      */
@@ -68,6 +76,11 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @param {RadioButtonChangeEvent} event - Custom change event.
      */
     onChange?(event: RadioButtonChangeEvent): void;
+    /**
+     * Callback to invoke on click.  Mark the event with preventDefault to prevent the option from changing.
+     * @param {RadioButtonClickEvent} event - Custom click event.
+     */
+    onClick?(event: RadioButtonClickEvent): void;
     /**
      * Used to get the child elements of the component.
      * @readonly

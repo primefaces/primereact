@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import TreeNode from '../treenode';
+import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
 import { IconType } from '../utils/utils';
 
