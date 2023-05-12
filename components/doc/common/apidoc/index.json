@@ -33323,6 +33323,14 @@
                             "type": "number",
                             "default": "0",
                             "description": "Delay to update the tooltip in milliseconds."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 }
