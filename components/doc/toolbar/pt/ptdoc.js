@@ -62,7 +62,7 @@ export default function PTDemo() {
         `,
         typescript: `
 import React from 'react'; 
-import { Toolbar } from 'primereact/Toolbar';
+import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 
 export default function PTDemo() {
@@ -78,16 +78,17 @@ export default function PTDemo() {
             <Button icon="pi pi-times" severity="danger" />
         </React.Fragment>
     );
+
     return (
         <div className="card">
-        <Toolbar
-            pt={{
-                root: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)', borderRadius: '24px' } }
-            }}
-            start={startContent}
-            end={endContent}
-        ></Toolbar>
-    </div>
+            <Toolbar
+                pt={{
+                    root: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)', borderRadius: '24px' } }
+                }}
+                start={startContent}
+                end={endContent}
+            ></Toolbar>
+        </div>
     )
 }
         `

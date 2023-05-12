@@ -5,7 +5,7 @@ import { Fieldset } from '../../../lib/fieldset/Fieldset';
 export function PTDoc(props) {
     const code = {
         basic: `
-    <Fieldset
+<Fieldset
     legend="Header"
     toggleable
     pt={{
@@ -13,12 +13,11 @@ export function PTDoc(props) {
         legendTitle: { className: 'text-white' },
         togglerIcon: { className: 'text-white' }
     }}
->
+    >
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillumdolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, suntin culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillumdolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, suntin culpa qui officia deserunt mollit anim id est laborum.
     </p>
-    </Fieldset>
+</Fieldset>
         `,
         javascript: `
 import React from 'react'; 

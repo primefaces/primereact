@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { InputText } from '../../../lib/inputtext/Inputtext';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
