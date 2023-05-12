@@ -1,46 +1,30 @@
-import { useRef } from 'react';
 import { SpeedDial } from '../../../lib/speeddial/SpeedDial';
-import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/utils';
 
 export function PTDoc(props) {
-    const toast = useRef(null);
     const items = [
         {
             label: 'Add',
-            icon: 'pi pi-pencil',
-            command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-            }
+            icon: 'pi pi-pencil'
         },
         {
             label: 'Update',
-            icon: 'pi pi-refresh',
-            command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-            }
+            icon: 'pi pi-refresh'
         },
         {
             label: 'Delete',
-            icon: 'pi pi-trash',
-            command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-            }
+            icon: 'pi pi-trash'
         },
         {
             label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
-            }
+            icon: 'pi pi-external-link'
         }
     ];
 
     const code = {
         basic: `
-<Toast ref={toast} />
 <SpeedDial
     pt={{
         menu: ({ state }) => ({
@@ -55,45 +39,30 @@ export function PTDoc(props) {
         javascript: `
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
-import { Toast } from 'primereact/toast';
 
 export default function PTDemo() {
-    const toast = useRef(null);
     const items = [
         {
             label: 'Add',
-            icon: 'pi pi-pencil',
-            command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-            }
+            icon: 'pi pi-pencil'
         },
         {
             label: 'Update',
-            icon: 'pi pi-refresh',
-            command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-            }
+            icon: 'pi pi-refresh'
         },
         {
             label: 'Delete',
-            icon: 'pi pi-trash',
-            command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-            }
+            icon: 'pi pi-trash'
         },
         {
             label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
-            }
+            icon: 'pi pi-external-link'
         }
     ];
 
     return (
         <div className="card">
             <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
-                <Toast ref={toast} />
                 <SpeedDial
                     pt={{
                         menu: ({ state }) => ({
@@ -113,46 +82,31 @@ export default function PTDemo() {
         typescript: `
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
-import { Toast } from 'primereact/toast';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function PTDemo() {
-    const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
         {
             label: 'Add',
-            icon: 'pi pi-pencil',
-            command: () => {
-                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-            }
+            icon: 'pi pi-pencil'
         },
         {
             label: 'Update',
-            icon: 'pi pi-refresh',
-            command: () => {
-                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-            }
+            icon: 'pi pi-refresh'
         },
         {
             label: 'Delete',
-            icon: 'pi pi-trash',
-            command: () => {
-                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-            }
+            icon: 'pi pi-trash'
         },
         {
             label: 'React Website',
-            icon: 'pi pi-external-link',
-            command: () => {
-                window.location.href = 'https://facebook.github.io/react/';
-            }
+            icon: 'pi pi-external-link'
         }
     ];
 
     return (
         <div className="card">
             <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
-                <Toast ref={toast} />
                 <SpeedDial
                     pt={{
                         menu: ({ state }) => ({
@@ -176,7 +130,6 @@ export default function PTDemo() {
             <DocSectionText {...props}></DocSectionText>
             <div className="card">
                 <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
-                    <Toast ref={toast} />
                     <SpeedDial
                         pt={{
                             menu: ({ state }) => ({

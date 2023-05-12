@@ -2,13 +2,13 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
-import { ChevronDownIcon } from '../icons/chevrondown';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -143,7 +143,6 @@ export const SplitButton = React.memo(
                 {
                     className: 'p-button-icon p-c'
                 },
-
                 ptm('icon')
             );
 

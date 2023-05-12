@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { InplaceBase, InplaceContentBase, InplaceDisplayBase } from './InplaceBase';
 import { TimesIcon } from '../icons/times';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { InplaceBase } from './InplaceBase';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
@@ -72,7 +72,6 @@ export const Inplace = React.forwardRef((inProps, ref) => {
                 tabIndex: props.tabIndex,
                 'aria-label': props.ariaLabel
             },
-            InplaceDisplayBase.getOtherProps(props),
             ptm('display')
         );
 
@@ -107,7 +106,6 @@ export const Inplace = React.forwardRef((inProps, ref) => {
             {
                 className: 'p-inplace-content'
             },
-            InplaceContentBase.getOtherProps(props),
             ptm('content')
         );
 
