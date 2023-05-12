@@ -7,58 +7,27 @@ import { ConfirmPopup } from '../../../lib/confirmpopup/ConfirmPopup';
 
 export function PTDoc(props) {
     const [visible, setVisible] = useState(false);
-    const toast = useRef(null);
     const buttonEl = useRef(null);
-
-    const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    };
-
-    const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-    };
 
     const code = {
         basic: `
-<Toast ref={toast} />
 <ConfirmPopup
     pt={{
         root: { className: 'surface-100' }
     }}
-    target={buttonEl.current}
-    visible={visible}
-    onHide={() => setVisible(false)}
-    message="Are you sure you want to proceed?"
-    icon="pi pi-exclamation-triangle"
-    accept={accept}
-    reject={reject}
 />
-<div className="card flex justify-content-center">
-    <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
-</div>
         `,
         javascript: `
 import React, { useRef, useState } from 'react'; 
-import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { ConfirmPopup } from 'primereact/confirmpopup';
 
 export default function PTDemo() {
     const [visible, setVisible] = useState(false);
-    const toast = useRef(null);
     const buttonEl = useRef(null);
-
-    const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    };
-
-    const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-    };
 
     return (
         <>
-            <Toast ref={toast} />
             <ConfirmPopup
                 pt={{
                     root: { className: 'surface-100' }
@@ -68,8 +37,6 @@ export default function PTDemo() {
                 onHide={() => setVisible(false)}
                 message="Are you sure you want to proceed?"
                 icon="pi pi-exclamation-triangle"
-                accept={accept}
-                reject={reject}
             />
             <div className="card flex justify-content-center">
                 <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
@@ -80,26 +47,15 @@ export default function PTDemo() {
         `,
         typescript: `
 import React, { useRef, useState } from 'react'; 
-import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { ConfirmPopup } from 'primereact/confirmpopup';
 
 export default function PTDemo() {
-    const [visible, setVisible] = useState(false);
-    const toast = useRef(null);
+    const [visible, setVisible] = useState<boolean>(false);
     const buttonEl = useRef(null);
 
-    const accept = () => {
-        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    };
-
-    const reject = () => {
-        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-    };
-    
     return (
         <>
-            <Toast ref={toast} />
             <ConfirmPopup
                 pt={{
                     root: { className: 'surface-100' }
@@ -109,8 +65,6 @@ export default function PTDemo() {
                 onHide={() => setVisible(false)}
                 message="Are you sure you want to proceed?"
                 icon="pi pi-exclamation-triangle"
-                accept={accept}
-                reject={reject}
             />
             <div className="card flex justify-content-center">
                 <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />
@@ -125,7 +79,6 @@ export default function PTDemo() {
         <>
             <DocSectionText {...props}></DocSectionText>
             <>
-                <Toast ref={toast} />
                 <ConfirmPopup
                     pt={{
                         root: { className: 'surface-100' }
@@ -135,8 +88,6 @@ export default function PTDemo() {
                     onHide={() => setVisible(false)}
                     message="Are you sure you want to proceed?"
                     icon="pi pi-exclamation-triangle"
-                    accept={accept}
-                    reject={reject}
                 />
                 <div className="card flex justify-content-center">
                     <Button ref={buttonEl} onClick={() => setVisible(true)} icon="pi pi-check" label="Confirm" />

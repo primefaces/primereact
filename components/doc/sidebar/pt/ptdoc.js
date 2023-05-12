@@ -8,16 +8,12 @@ export function PTDoc(props) {
     const [visible, setVisible] = useState(false);
     const code = {
         basic: `
-<Terminal
-    welcomeMessage="Welcome to PrimeReact"
-    prompt="primereact $"
+<Sidebar
     pt={{
-        root: { className: 'surface-900 text-white' },
-        command: { className: 'text-blue-500' },
-        prompt: { className: 'text-yellow-500' },
-        response: { className: 'text-purple-500' }
+        root: { className: 'w-25rem' }
     }}
-/>
+>
+</Sidebar>
         `,
         javascript: `
 import React, { useState } from 'react';
