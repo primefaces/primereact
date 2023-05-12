@@ -36,8 +36,7 @@ import { Tag } from 'primereact/tag';
 export default function PTDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Tag 
-                value="New"
+            <Tag value="New"
                 pt={{
                     root: { style: { background: 'linear-gradient(to right, #8e2de2, #4a00e0)', borderRadius: '24px' } }
                 }}

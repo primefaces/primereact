@@ -11,8 +11,6 @@ export function PTDoc(props) {
         root: { className: 'w-2rem h-2rem bg-primary' },
         icon: { className: 'w-1rem h-1rem' }
     }}
-    target="parent"
-    threshold={100}
 />
         `,
         javascript: `
