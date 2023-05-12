@@ -1,8 +1,8 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Dialog } from '../../../lib/dialog/Dialog';
-import { Button } from '../../../lib/button/Button';
 import { useState } from 'react';
+import { Button } from '../../../lib/button/Button';
+import { Dialog } from '../../../lib/dialog/Dialog';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const [visible, setVisible] = useState(false);
@@ -10,6 +10,10 @@ export function PTDoc(props) {
     const code = {
         basic: `
 <Dialog
+    header="Header"
+    visible={visible}
+    modal
+    onHide={() => setVisible(false)}
     pt={{
         root: { className: 'w-12 sm:w-9 md:w-6' }
     }}
@@ -17,7 +21,7 @@ export function PTDoc(props) {
 </Dialog>
         `,
         javascript: `
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
@@ -47,7 +51,7 @@ export default function PTDemo() {
 }
         `,
         typescript: `
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 

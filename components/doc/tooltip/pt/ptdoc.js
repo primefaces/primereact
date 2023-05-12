@@ -1,4 +1,4 @@
-import { InputText } from '../../../lib/inputtext/Inputtext';
+import { InputText } from '../../../lib/inputtext/InputText';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -6,7 +6,7 @@ export function PTDoc(props) {
     const code = {
         basic: `
 <InputText
-    type="text"  
+    type="text"
     tooltip="Enter your username"
     tooltipOptions={{
         pt: {
@@ -26,7 +26,7 @@ export default function PTDemo() {
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
             <InputText
-                type="text"                
+                type="text"
                 tooltip="Enter your username"
                 tooltipOptions={{
                     pt: {
@@ -49,7 +49,7 @@ export default function PTDemo() {
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
             <InputText
-                type="text"                
+                type="text"
                 tooltip="Enter your username"
                 tooltipOptions={{
                     pt: {

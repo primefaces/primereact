@@ -1,9 +1,8 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Toast } from '../../../lib/toast/Toast';
-import { Button } from '../../../lib/button/Button';
 import { useRef, useState } from 'react';
+import { Button } from '../../../lib/button/Button';
 import { ConfirmPopup } from '../../../lib/confirmpopup/ConfirmPopup';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const [visible, setVisible] = useState(false);
@@ -15,10 +14,15 @@ export function PTDoc(props) {
     pt={{
         root: { className: 'surface-100' }
     }}
+    target={buttonEl.current}
+    visible={visible}
+    onHide={() => setVisible(false)}
+    message="Are you sure you want to proceed?"
+    icon="pi pi-exclamation-triangle"
 />
         `,
         javascript: `
-import React, { useRef, useState } from 'react'; 
+import React, { useRef, useState } from 'react';
 import { Button } from 'primereact/button';
 import { ConfirmPopup } from 'primereact/confirmpopup';
 
@@ -46,7 +50,7 @@ export default function PTDemo() {
 }
         `,
         typescript: `
-import React, { useRef, useState } from 'react'; 
+import React, { useRef, useState } from 'react';
 import { Button } from 'primereact/button';
 import { ConfirmPopup } from 'primereact/confirmpopup';
 
