@@ -6,6 +6,7 @@ export const CalendarBase = {
         appendTo: null,
         ariaLabelledBy: null,
         autoZIndex: true,
+        autoFocus: false,
         baseZIndex: 0,
         className: null,
         clearButtonClassName: 'p-button-secondary',

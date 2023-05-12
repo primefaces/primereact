@@ -188,6 +188,11 @@ export interface CalendarProps {
      */
     appendTo?: 'self' | HTMLElement | undefined | null;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;

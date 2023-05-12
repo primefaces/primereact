@@ -2488,6 +2488,11 @@ export const Calendar = React.memo(
                 setValue(props.value);
             }
 
+            if (props.autoFocus) {
+                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
+                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
+            }
+
             return () => {
                 props.mask && unbindMaskEvents && unbindMaskEvents();
             };
