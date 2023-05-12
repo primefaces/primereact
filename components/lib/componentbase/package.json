@@ -1,0 +1,6 @@
+{
+    "main": "./componentbase.cjs.js",
+    "module": "./componentbase.esm.js",
+    "unpkg": "./componentbase.min.js",
+    "sideEffects": false
+}
