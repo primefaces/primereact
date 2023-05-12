@@ -7,7 +7,6 @@ export function PTDoc(props) {
     const code = {
         basic: `
 <Skeleton
-    shape='rectangle'
     pt={{
         root: { class: 'w-3rem h-3rem' }
     }}
@@ -21,7 +20,6 @@ export default function PTDemo() {
     return (
         <div className="card flex justify-content-center">
             <Skeleton
-                shape='rectangle'
                 pt={{
                     root: { class: 'w-3rem h-3rem' }
                 }}
@@ -38,7 +36,6 @@ export default function PTDemo() {
     return (
         <div className="card flex justify-content-center">
             <Skeleton
-                shape='rectangle'
                 pt={{
                     root: { class: 'w-3rem h-3rem' }
                 }}
@@ -54,7 +51,6 @@ export default function PTDemo() {
             <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
                 <Skeleton
-                    shape="rectangle"
                     pt={{
                         root: { className: 'w-3rem h-3rem' }
                     }}
