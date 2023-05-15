@@ -3568,21 +3568,21 @@
                             "name": "menu",
                             "optional": true,
                             "readonly": false,
-                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
                             "name": "menuitem",
                             "optional": true,
                             "readonly": false,
-                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the list item's DOM element."
                         },
                         {
                             "name": "action",
                             "optional": true,
                             "readonly": false,
-                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
                             "description": "Uses to pass attributes to the action's DOM element."
                         },
                         {
@@ -3596,7 +3596,7 @@
                             "name": "label",
                             "optional": true,
                             "readonly": false,
-                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
