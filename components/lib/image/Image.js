@@ -118,8 +118,8 @@ export const Image = React.memo(
         const createElement = () => {
             const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
             const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
-            const zoomDisabled = scaleState <= 0.5 || scaleState >= 1.5;
-            // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
+            const zoomOutDisabled = scaleState <= 0.5;
+            const zoomInDisabled = scaleState >= 1.5;
             const downloadIcon = IconUtils.getJSXIcon(props.downloadIcon || <DownloadIcon />, undefined, { props });
             const rotateRightIcon = IconUtils.getJSXIcon(props.rotateRightIcon || <RefreshIcon />, undefined, { props });
             const rotateLeftIcon = IconUtils.getJSXIcon(props.rotateLeftIcon || <UndoIcon />, undefined, { props });
@@ -128,23 +128,23 @@ export const Image = React.memo(
             const closeIcon = IconUtils.getJSXIcon(props.closeIcon || <TimesIcon />, undefined, { props });
 
             return (
-                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={hide}>
+                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onPointerUp={hide}>
                     <div className="p-image-toolbar">
                         {downloadable && (
-                            <button className="p-image-action p-link" onClick={onDownload} type="button">
+                            <button className="p-image-action p-link" onPointerUp={onDownload} type="button">
                                 {downloadIcon}
                             </button>
                         )}
-                        <button className="p-image-action p-link" onClick={rotateRight} type="button">
+                        <button className="p-image-action p-link" onPointerUp={rotateRight} type="button">
                             {rotateRightIcon}
                         </button>
-                        <button className="p-image-action p-link" onClick={rotateLeft} type="button">
+                        <button className="p-image-action p-link" onPointerUp={rotateLeft} type="button">
                             {rotateLeftIcon}
                         </button>
-                        <button className="p-image-action p-link" onClick={zoomOut} type="button" disabled={zoomDisabled}>
+                        <button className="p-image-action p-link" onPointerUp={zoomOut} type="button" disabled={zoomOutDisabled}>
                             {zoomOutIcon}
                         </button>
-                        <button className="p-image-action p-link" onClick={zoomIn} type="button" disabled={zoomDisabled}>
+                        <button className="p-image-action p-link" onPointerUp={zoomIn} type="button" disabled={zoomInDisabled}>
                             {zoomInIcon}
                         </button>
                         <button className="p-image-action p-link" type="button" aria-label={localeOption('close')}>
@@ -168,7 +168,7 @@ export const Image = React.memo(
                                 src={props.zoomSrc || props.src}
                                 className="p-image-preview"
                                 style={imagePreviewStyle}
-                                onClick={onPreviewImageClick}
+                                onPointerUp={onPreviewImageClick}
                                 alt={alt}
                                 crossOrigin={crossOrigin}
                                 referrerPolicy={referrerPolicy}
