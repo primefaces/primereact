@@ -32,15 +32,15 @@ export interface BreadCrumbPassThroughOptions {
     /**
      * Uses to pass attributes to the list's DOM element.
      */
-    menu?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    menu?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Uses to pass attributes to the list item's DOM element.
      */
-    menuitem?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    menuitem?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the action's DOM element.
      */
-    action?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    action?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
@@ -48,7 +48,7 @@ export interface BreadCrumbPassThroughOptions {
     /**
      * Uses to pass attributes to the label's DOM element.
      */
-    label?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    label?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the separator icon's DOM element.
      */
