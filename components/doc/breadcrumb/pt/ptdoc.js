@@ -8,7 +8,16 @@ export function PTDoc(props) {
 
     const code = {
         basic: `
-<BreadCrumb model={items} home={home} />
+<BreadCrumb 
+    model={items}
+    home={home}
+    pt={{
+        root: { className: 'surface-ground' },
+        label: ({ props }) => ({
+            className: props.index === items.length - 1 ? 'font-italic' : undefined
+        })
+    }}
+/>
         `,
         javascript: `
 import React from 'react';
