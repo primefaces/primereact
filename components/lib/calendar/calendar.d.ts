@@ -309,7 +309,6 @@ export interface CalendarProps {
     minDate?: Date | undefined;
     /**
      * Whether the month should be rendered as a dropdown instead of text.
-     * @deprecated since v6. Navigator is always on.
      * @defaultValue false
      */
     monthNavigator?: boolean | undefined;
@@ -490,7 +489,6 @@ export interface CalendarProps {
     visible?: boolean | undefined;
     /**
      * Whether the year should be rendered as a dropdown instead of text.
-     * @deprecated since v6. Navigator is always on.
      * @defaultValue false
      */
     yearNavigator?: boolean | undefined;
