@@ -4095,8 +4095,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether the month should be rendered as a dropdown instead of text.",
-                            "deprecated": "since v6. Navigator is always on."
+                            "description": "Whether the month should be rendered as a dropdown instead of text."
                         },
                         {
                             "name": "name",
@@ -4400,8 +4399,7 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "false",
-                            "description": "Whether the year should be rendered as a dropdown instead of text.",
-                            "deprecated": "since v6. Navigator is always on."
+                            "description": "Whether the year should be rendered as a dropdown instead of text."
                         },
                         {
                             "name": "yearRange",
