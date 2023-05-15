@@ -200,9 +200,9 @@ export const ConfirmDialog = React.memo(
                     footer,
                     onHide: hide,
                     breakpoints: getPropValue('breakpoints'),
-                    pt: props.pt
+                    pt: currentProps.pt
                 },
-                ConfirmDialogBase.getOtherProps(props)
+                ConfirmDialogBase.getOtherProps(currentProps)
             );
 
             return (
