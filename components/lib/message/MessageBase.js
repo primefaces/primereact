@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MessageBase = {
+export const MessageBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Message',
         id: null,
@@ -11,7 +11,5 @@ export const MessageBase = {
         severity: 'info',
         content: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MessageBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MessageBase.defaultProps)
-};
+    }
+});
