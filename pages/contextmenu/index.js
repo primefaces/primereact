@@ -36,24 +36,23 @@ const ContextMenuDemo = () => {
             component: AccessibilityDoc
         }
     ];
-const ptDocs = [
-    {
-        id: 'pt.wireframe',
-        label: 'Wireframe',
-        component: Wireframe
-    },
-    {
-        id: 'pt.contextmenu.options',
-        label: 'ContextMenu PT Options',
-        component: DocApiTable
-    },
-    {
-        id: 'pt.demo',
-        label: 'Example',
-        component: PTDoc
-    }
-];
-
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.contextmenu.options',
+            label: 'ContextMenu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
     return <DocComponent title="React ContextMenu Component" header="ContextMenu" description="ContextMenu displays an overlay menu on right click of its target." componentDocs={docs} apiDocs={['ContextMenu', 'MenuItem']} ptDocs={ptDocs} />;
 };

@@ -67,6 +67,11 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     appendTo?: 'self' | HTMLElement | undefined | null;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Default color to display when value is null.
      * @defaultValue ff0000
      */

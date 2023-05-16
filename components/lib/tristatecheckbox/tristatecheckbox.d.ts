@@ -26,6 +26,11 @@ interface TriStateCheckboxChangeEvent extends FormEvent<boolean> {}
  */
 export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Value of the TriStateCheckbox.
      */
     value?: boolean | undefined | null;

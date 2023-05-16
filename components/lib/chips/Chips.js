@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
@@ -206,6 +207,12 @@ export const Chips = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
+        });
 
         const createRemoveIcon = (value, index) => {
             const iconProps = { className: 'p-chips-token-icon', onClick: (event) => removeItem(event, index) };

@@ -316,6 +316,10 @@ export const TreeSelect = React.memo(
 
         useMountEffect(() => {
             updateTreeState();
+
+            if (props.autoFocus) {
+                DomHandler.focus(focusInputRef.current, props.autoFocus);
+            }
         });
 
         useUpdateEffect(() => {

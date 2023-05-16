@@ -33,6 +33,11 @@ interface RadioButtonClickEvent extends FormEvent {}
  */
 export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;

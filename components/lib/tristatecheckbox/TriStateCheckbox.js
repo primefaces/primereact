@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { useMountEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
@@ -65,6 +66,12 @@ export const TriStateCheckbox = React.memo(
             focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
+
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
+        });
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = TriStateCheckboxBase.getOtherProps(props);

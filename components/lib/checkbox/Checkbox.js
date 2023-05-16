@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -92,6 +92,12 @@ export const Checkbox = React.memo(
         useUpdateEffect(() => {
             inputRef.current.checked = isChecked();
         }, [props.checked, props.trueValue]);
+
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
+        });
 
         const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);

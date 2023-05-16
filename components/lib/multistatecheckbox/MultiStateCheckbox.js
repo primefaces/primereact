@@ -99,6 +99,10 @@ export const MultiStateCheckbox = React.memo(
             if (!props.empty && props.value === null) {
                 toggle();
             }
+
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
         });
 
         const createIcon = () => {

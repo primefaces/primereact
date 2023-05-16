@@ -3,6 +3,7 @@ import { ObjectUtils } from '../utils/Utils';
 export const InputSwitchBase = {
     defaultProps: {
         __TYPE: 'InputSwitch',
+        autoFocus: false,
         checked: false,
         className: null,
         disabled: false,
