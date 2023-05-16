@@ -8,6 +8,31 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ChartPassThroughType<T> = PassThroughType<T, ChartPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ChartPassThroughMethodOptions {
+    props: ChartProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ChartProps.pt}
+ */
+export interface ChartPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ChartPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the canvas's DOM element.
+     */
+    canvas?: ChartPassThroughType<React.HTMLAttributes<HTMLCanvasElement>>;
+}
 
 /**
  * Defines valid properties in Chart component.
@@ -60,6 +85,11 @@ export interface ChartProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ChartPassThroughOptions}
+     */
+    pt?: ChartPassThroughOptions;
 }
 
 /**

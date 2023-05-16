@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/chart/pt/ptdoc';
+import { Wireframe } from '../../components/doc/chart/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/chart/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/chart/basicdoc';
 import { ChartJSDoc } from '../../components/doc/chart/chartjsdoc';
@@ -93,8 +96,26 @@ const ChartDemo = () => {
             component: AccessibilityDoc
         }
     ];
+const ptDocs = [
+    {
+        id: 'pt.wireframe',
+        label: 'Wireframe',
+        component: Wireframe
+    },
+    {
+        id: 'pt.chart.options',
+        label: 'Chart PT Options',
+        component: DocApiTable
+    },
+    {
+        id: 'pt.demo',
+        label: 'Example',
+        component: PTDoc
+    }
+];
 
-    return <DocComponent title="React Chart Component" header="Chart" description="Chart components are based on Chart.js, an open source HTML5 based charting library." componentDocs={docs} apiDocs={['Chart']} />;
+
+    return <DocComponent title="React Chart Component" header="Chart" description="Chart components are based on Chart.js, an open source HTML5 based charting library." componentDocs={docs} apiDocs={['Chart']} ptDocs={ptDocs} />;
 };
 
 export default ChartDemo;

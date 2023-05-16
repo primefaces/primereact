@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { ChartBase } from './ChartBase';
 
 // GitHub #3059 wrapper if loaded by script tag
@@ -15,7 +15,9 @@ const ChartJS = (function () {
 const PrimeReactChart = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = ChartBase.getProps(inProps);
-
+        const { ptm } = ChartBase.setMetaData({
+            props
+        });
         const elementRef = React.useRef(null);
         const chartRef = React.useRef(null);
         const canvasRef = React.useRef(null);
@@ -81,15 +83,34 @@ const PrimeReactChart = React.memo(
             destroyChart();
         });
 
-        const otherProps = ChartBase.getOtherProps(props);
         const className = classNames('p-chart', props.className);
         const style = Object.assign({ width: props.width, height: props.height }, props.style);
         const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
         const ariaLabel = props.ariaLabel || title;
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style,
+                className
+            },
+            ChartBase.getOtherProps(props),
+            ptm('root')
+        );
+        const canvasProps = mergeProps(
+            {
+                ref: canvasRef,
+                width: props.width,
+                height: props.height,
+                role: "img",
+                'aria-label': ariaLabel
+            },
+            ptm('canvas')
+        );
 
         return (
-            <div id={props.id} ref={elementRef} style={style} className={className} {...otherProps}>
-                <canvas ref={canvasRef} width={props.width} height={props.height} role="img" aria-label={ariaLabel}></canvas>
+            <div {...rootProps}>
+                <canvas {...canvasProps}></canvas>
             </div>
         );
     }),
