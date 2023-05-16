@@ -576,6 +576,7 @@ export const InputMask = React.memo(
         return (
             <InputText
                 ref={elementRef}
+                autoFocus={props.autoFocus}
                 id={props.id}
                 type={props.type}
                 name={props.name}

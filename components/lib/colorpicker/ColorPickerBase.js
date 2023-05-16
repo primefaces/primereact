@@ -4,6 +4,7 @@ export const ColorPickerBase = {
     defaultProps: {
         __TYPE: 'ColorPicker',
         appendTo: null,
+        autoFocus: false,
         children: undefined,
         className: null,
         defaultColor: 'ff0000',

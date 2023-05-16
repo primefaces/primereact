@@ -38,6 +38,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     id?: string | undefined;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;

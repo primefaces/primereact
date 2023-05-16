@@ -2,12 +2,12 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
-import { ChevronDownIcon } from '../icons/chevrondown';
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CascadeSelectBase.getProps(inProps);
@@ -251,6 +251,10 @@ export const CascadeSelect = React.memo(
         useMountEffect(() => {
             if (props.breakpoint) {
                 !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+            }
+
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
             }
         });
 

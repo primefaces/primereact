@@ -46,6 +46,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      */
     id?: string | undefined;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;

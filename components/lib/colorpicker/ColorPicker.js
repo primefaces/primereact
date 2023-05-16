@@ -498,6 +498,10 @@ export const ColorPicker = React.memo(
         useMountEffect(() => {
             updateHSBValue(props.value);
             updateUI();
+
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
         });
 
         useUpdateEffect(() => {
