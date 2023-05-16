@@ -502,7 +502,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const onColumnResizeEnd = () => {
-        let delta = resizeHelperRef.current.offsetLeft - lastResizeHelperX.current;
+        let delta = Math.abs(resizeHelperRef.current.offsetLeft - lastResizeHelperX.current);
         let columnWidth = resizeColumnElement.current.offsetWidth;
         let newColumnWidth = columnWidth + delta;
         let minWidth = resizeColumnElement.current.style.minWidth || 15;
