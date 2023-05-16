@@ -16261,6 +16261,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -16611,7 +16619,7 @@
                 },
                 "FileUploadPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "FileUploadProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
