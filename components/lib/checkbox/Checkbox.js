@@ -117,7 +117,7 @@ export const Checkbox = React.memo(
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onPointerUp={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
+                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
                     <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}
