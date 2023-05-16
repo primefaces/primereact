@@ -16590,6 +16590,228 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "FileUploadPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FileUploadProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FileUploadState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "FileUploadPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "FileUploadProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "buttonbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the buttonbar's DOM element."
+                        },
+                        {
+                            "name": "chooseButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the choose button's DOM element."
+                        },
+                        {
+                            "name": "chooseIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the choose icon's DOM element."
+                        },
+                        {
+                            "name": "chooseButtonLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the choose button label's DOM element."
+                        },
+                        {
+                            "name": "uploadButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the upload button's DOM element."
+                        },
+                        {
+                            "name": "cancelButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the cancel button's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "progressbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the progressbar's DOM element."
+                        },
+                        {
+                            "name": "message",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagePassThroughOptions",
+                            "description": "Uses to pass attributes to the messages' DOM element."
+                        },
+                        {
+                            "name": "file",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the file's DOM element."
+                        },
+                        {
+                            "name": "thumbnail",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the thumbnail's DOM element."
+                        },
+                        {
+                            "name": "details",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the details's DOM element."
+                        },
+                        {
+                            "name": "fileName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the fileName's DOM element."
+                        },
+                        {
+                            "name": "fileSize",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the fileSize's DOM element."
+                        },
+                        {
+                            "name": "badge",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the badge's DOM element."
+                        },
+                        {
+                            "name": "actions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the actions's DOM element."
+                        },
+                        {
+                            "name": "removeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the remove button's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "basicButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the basic button's DOM element."
+                        },
+                        {
+                            "name": "uploadIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the upload icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "FileUploadState": {
+                    "description": "Defines current inline state in FileUpload component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "files",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any[]",
+                            "description": "Current files."
+                        },
+                        {
+                            "name": "uploading",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current uplaoding state as a boolean."
+                        },
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
+                        },
+                        {
+                            "name": "progress",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current progress state as a number."
+                        },
+                        {
+                            "name": "uploadedFiles",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any[]",
+                            "description": "Current uploaded files."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "FileUploadOptions": {
                     "description": "Custom file upload options",
                     "relatedProp": "",
@@ -16800,6 +17022,14 @@
                             "description": "Clears the current files selected for upload."
                         }
                     ]
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "FileUploadPassThroughType": {
+                    "values": "PassThroughType<T, FileUploadPassThroughMethodOptions>"
                 }
             }
         }
