@@ -120,7 +120,7 @@ export const RadioButton = React.memo(
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onPointerUp={onClick}>
+                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
                     <div className="p-hidden-accessible">
                         <input
                             ref={inputRef}
