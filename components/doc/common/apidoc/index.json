@@ -16680,42 +16680,42 @@
                             "name": "root",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
                             "name": "buttonbar",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the buttonbar's DOM element."
                         },
                         {
                             "name": "chooseButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the choose button's DOM element."
                         },
                         {
                             "name": "chooseIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the choose icon's DOM element."
                         },
                         {
                             "name": "chooseButtonLabel",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the choose button label's DOM element."
                         },
                         {
@@ -16736,14 +16736,14 @@
                             "name": "content",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
                         },
                         {
                             "name": "progressbar",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "ProgressBarPassThroughOptions",
                             "description": "Uses to pass attributes to the progressbar's DOM element."
                         },
                         {
@@ -16757,49 +16757,49 @@
                             "name": "file",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the file's DOM element."
                         },
                         {
                             "name": "thumbnail",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the thumbnail's DOM element."
                         },
                         {
                             "name": "details",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the details's DOM element."
                         },
                         {
                             "name": "fileName",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the fileName's DOM element."
                         },
                         {
                             "name": "fileSize",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the fileSize's DOM element."
                         },
                         {
                             "name": "badge",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "BadgePassThroughOptions",
                             "description": "Uses to pass attributes to the badge's DOM element."
                         },
                         {
                             "name": "actions",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the actions's DOM element."
                         },
                         {
@@ -16813,21 +16813,21 @@
                             "name": "label",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
                             "name": "basicButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the basic button's DOM element."
                         },
                         {
                             "name": "uploadIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the upload icon's DOM element."
                         }
                     ],
