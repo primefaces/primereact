@@ -10,7 +10,93 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type ContextMenuPassThroughType<T> = PassThroughType<T, ContextMenuPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ContextMenuPassThroughMethodOptions {
+    props: ContextMenuProps;
+    state: ContextMenuState;
+    context: ContextMenuContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ContextMenuProps.pt}
+ */
+export interface ContextMenuPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ContextMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the submenu icon's DOM element.
+     */
+    submenuIcon?: ContextMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Defines current inline state in ContextMenu component.
+ */
+export interface ContextMenuState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+    /**
+     * Current reshow state as a boolean.
+     * @defaultValue false
+     */
+    reshow: boolean;
+    /**
+     * Current resetMenu state as a boolean.
+     * @defaultValue false
+     */
+    resetMenu: boolean;
+    /**
+     * Current attributeSelector visible state as a string.
+     */
+    attributeSelector: boolean;
+}
+
+/**
+ * Defines current options in ContextMenu component.
+ */
+export interface ContextMenuContext {
+    /**
+     * Current active state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Defines valid properties in ContextMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -73,6 +159,11 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ContextMenuPassThroughOptions}
+     */
+    pt?: ContextMenuPassThroughOptions;
 }
 
 /**

@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ContextMenuBase = {
+export const ContextMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ContextMenu',
         id: null,
@@ -18,7 +18,5 @@ export const ContextMenuBase = {
         onHide: null,
         submenuIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ContextMenuBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ContextMenuBase.defaultProps)
-};
+    }
+});
