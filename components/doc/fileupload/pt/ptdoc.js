@@ -5,7 +5,22 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function PTDoc(props) {
     const code = {
         basic: `
-<FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+<FileUpload
+    name="demo[]"
+    url={'/api/upload'}
+    multiple
+    accept="image/*"
+    maxFileSize={1000000}
+    pt={{
+        content: { className: 'surface-ground' },
+        message: {
+            root: {
+                className: "w-1rem"
+            }
+        }
+    }}
+    emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>}
+/>
         `,
         javascript: `
 import React from 'react';
@@ -15,7 +30,22 @@ export default function PTDemo() {
         
     return (
         <div className="card">
-            <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload
+                name="demo[]"
+                url={'/api/upload'}
+                multiple
+                accept="image/*"
+                maxFileSize={1000000}
+                pt={{
+                    content: { className: 'surface-ground' },
+                    message: {
+                        root: {
+                            className: "w-1rem"
+                        }
+                    }
+                }}
+                emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>}
+            />
         </div>
     )
 }
@@ -29,7 +59,22 @@ export default function PTDemo() {
         
     return (
         <div className="card">
-            <FileUpload name="demo[]" url={'/api/upload'} multiple accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>} />
+            <FileUpload
+                name="demo[]"
+                url={'/api/upload'}
+                multiple
+                accept="image/*"
+                maxFileSize={1000000}
+                pt={{
+                    content: { className: 'surface-ground' },
+                    message: {
+                        root: {
+                            className: "w-1rem"
+                        }
+                    }
+                }}
+                emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>}
+            />
         </div>
     )
 }
@@ -38,9 +83,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card">
                 <FileUpload
                     name="demo[]"

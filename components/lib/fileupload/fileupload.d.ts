@@ -11,6 +11,8 @@ import * as React from 'react';
 import { IconType, PassThroughType } from '../utils';
 import { ButtonPassThroughOptions } from '../button/button';
 import { MessagePassThroughOptions } from '../message/message';
+import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
+import { BadgePassThroughOptions } from '../badge/badge';
 
 export declare type FileUploadPassThroughType<T> = PassThroughType<T, FileUploadPassThroughMethodOptions>;
 
@@ -30,27 +32,27 @@ export interface FileUploadPassThroughOptions {
     /**
      * Uses to pass attributes to the root's DOM element.
      */
-    root?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    root?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the input's DOM element.
      */
-    input?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    input?: FileUploadPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the buttonbar's DOM element.
      */
-    buttonbar?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    buttonbar?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the choose button's DOM element.
      */
-    chooseButton?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    chooseButton?: FileUploadPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the choose icon's DOM element.
      */
-    chooseIcon?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    chooseIcon?: FileUploadPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the choose button label's DOM element.
      */
-    chooseButtonLabel?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    chooseButtonLabel?: FileUploadPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the upload button's DOM element.
      * @see {@link ButtonPassThroughOptions}
@@ -64,11 +66,12 @@ export interface FileUploadPassThroughOptions {
     /**
      * Uses to pass attributes to the content's DOM element.
      */
-    content?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    content?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the progressbar's DOM element.
+     * @see {@link ProgressBarPassThroughOptions}
      */
-    progressbar?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    progressbar?: ProgressBarPassThroughOptions;
     /**
      * Uses to pass attributes to the messages' DOM element.
      * @see {@link MessagePassThroughOptions}
@@ -77,31 +80,32 @@ export interface FileUploadPassThroughOptions {
     /**
      * Uses to pass attributes to the file's DOM element.
      */
-    file?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    file?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the thumbnail's DOM element.
      */
-    thumbnail?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    thumbnail?: FileUploadPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
     /**
      * Uses to pass attributes to the details's DOM element.
      */
-    details?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    details?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the fileName's DOM element.
      */
-    fileName?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    fileName?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the fileSize's DOM element.
      */
-    fileSize?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    fileSize?: FileUploadPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the badge's DOM element.
+     * @see {@link BadgePassThroughOptions}
      */
-    badge?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    badge?: BadgePassThroughOptions;
     /**
      * Uses to pass attributes to the actions's DOM element.
      */
-    actions?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    actions?: FileUploadPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the remove button's DOM element.
      * @see {@link ButtonPassThroughOptions}
@@ -110,15 +114,15 @@ export interface FileUploadPassThroughOptions {
     /**
      * Uses to pass attributes to the label's DOM element.
      */
-    label?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    label?: FileUploadPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the basic button's DOM element.
      */
-    basicButton?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    basicButton?: FileUploadPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the upload icon's DOM element.
      */
-    uploadIcon?: FileUploadPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    uploadIcon?: FileUploadPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
