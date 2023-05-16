@@ -58,7 +58,7 @@ export default function PTDemo() {
         `,
         typescript: `
 import React from 'react'; 
-import { TabMenu } from 'primereact/steps';
+import { TabMenu } from 'primereact/tabmenu';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function PTDemo() {
