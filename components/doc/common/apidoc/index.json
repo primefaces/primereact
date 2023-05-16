@@ -5595,6 +5595,14 @@
                             "description": "Unique identifier of the element."
                         },
                         {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "inputRef",
                             "optional": true,
                             "readonly": false,
@@ -6076,6 +6084,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Unique identifier of the element."
+                        },
+                        {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
                             "name": "inputRef",
@@ -6587,6 +6603,14 @@
                     "description": "Defines valid properties in Chips component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "inputRef",
                             "optional": true,
                             "readonly": false,
@@ -6968,6 +6992,14 @@
                             "type": "null | HTMLElement | \"self\"",
                             "default": "document.body",
                             "description": "DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and \"self\". The \"self\" value is used to render a component where it is located."
+                        },
+                        {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
                         },
                         {
                             "name": "defaultColor",
@@ -20982,6 +21014,14 @@
                             "description": "Unique identifier of the element."
                         },
                         {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "inputRef",
                             "optional": true,
                             "readonly": false,
@@ -24192,6 +24232,14 @@
                 "props": {
                     "description": "Defines valid properties in MultiStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
+                        {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
                         {
                             "name": "value",
                             "optional": true,
@@ -27928,6 +27976,14 @@
                 "props": {
                     "description": "Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
+                        {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
                         {
                             "name": "inputRef",
                             "optional": true,
@@ -35217,6 +35273,14 @@
                             "description": "Establishes relationships between the component and label(s) where its value should be one or more element IDs."
                         },
                         {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
+                        {
                             "name": "children",
                             "optional": true,
                             "readonly": true,
@@ -36895,6 +36959,14 @@
                 "props": {
                     "description": "Defines valid properties in TriStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
+                        {
+                            "name": "autoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that the component should automatically get focus on load."
+                        },
                         {
                             "name": "value",
                             "optional": true,
