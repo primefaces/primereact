@@ -30923,6 +30923,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -30975,6 +30983,108 @@
                             "description": "Index of the selected tab"
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "TabMenuThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabMenuProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabMenuState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabMenuPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "inkbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the inkbar's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabMenuState": {
+                    "description": "Defines current inline state in TabMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "activeIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current active index state as a number."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TabMenuPassThroughType": {
+                    "values": "PassThroughType<T, TabMenuThroughMethodOptions>"
                 }
             }
         }

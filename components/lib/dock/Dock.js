@@ -57,7 +57,7 @@ export const Dock = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    role: "menuitem",
+                    role: 'menuitem',
                     className: contentClassName,
                     target,
                     'data-pr-tooltip': label,
@@ -90,17 +90,13 @@ export const Dock = React.memo(
                 {
                     key: index,
                     className,
-                    role: "none",
+                    role: 'none',
                     onMouseEnter: () => onItemMouseEnter(index)
                 },
                 ptm('menuitem')
-            )
-
-            return (
-                <li {...menuitemProps}>
-                    {content}
-                </li>
             );
+
+            return <li {...menuitemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -112,7 +108,7 @@ export const Dock = React.memo(
                 const header = ObjectUtils.getJSXElement(props.header, { props });
                 const headerProps = mergeProps(
                     {
-                        className: "p-dock-header"
+                        className: 'p-dock-header'
                     },
                     ptm('header')
                 );
@@ -127,18 +123,14 @@ export const Dock = React.memo(
             const items = createItems();
             const menuProps = mergeProps(
                 {
-                    className: "p-dock-list",
-                    role: "menu",
+                    className: 'p-dock-list',
+                    role: 'menu',
                     onMouseLeave: onListMouseLeave
                 },
                 ptm('menu')
-            )
-
-            return (
-                <ul {...menuProps}>
-                    {items}
-                </ul>
             );
+
+            return <ul {...menuProps}>{items}</ul>;
         };
 
         const createFooter = () => {
@@ -146,10 +138,10 @@ export const Dock = React.memo(
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
                 const footerProps = mergeProps(
                     {
-                        className: "p-dock-footer"
+                        className: 'p-dock-footer'
                     },
                     ptm('footer')
-                )
+                );
 
                 return <div {...footerProps}>{footer}</div>;
             }
@@ -185,7 +177,7 @@ export const Dock = React.memo(
 
         const containerProps = mergeProps(
             {
-                className: "p-dock-container"
+                className: 'p-dock-container'
             },
             ptm('container')
         );

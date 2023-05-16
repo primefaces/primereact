@@ -167,7 +167,7 @@ export default function PTDemo() {
                 <div className="dock-window" style={{ backgroundImage: 'url(/images/dock/window.jpg)' }}>
                     <Dock
                         model={items}
-                        position={"bottom"}
+                        position={'bottom'}
                         pt={{
                             container: {
                                 style: { background: 'linear-gradient(to right,#056BAE, #673976, #056BAE)', borderRadius: '12px' }

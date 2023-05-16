@@ -1,35 +1,30 @@
 import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
-import { Steps } from '../../../lib/steps/Steps';
+import { TabMenu } from '../../../lib/tabmenu/TabMenu';
 
 export function PTDoc(props) {
     const items = [
-        {
-            label: 'Personal'
-        },
-        {
-            label: 'Seat'
-        },
-        {
-            label: 'Payment'
-        },
-        {
-            label: 'Confirmation'
-        }
+        { label: 'Home', icon: 'pi pi-fw pi-home' },
+        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
+        { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
+        { label: 'Documentation', icon: 'pi pi-fw pi-file' },
+        { label: 'Settings', icon: 'pi pi-fw pi-cog' }
     ];
 
     const code = {
         basic: `
-<Steps
+<TabMenu
     model={items}
     pt={{
-    root: { className: 'w-30rem' }
+        action: {
+            className: 'surface-ground'
+        }
     }}
 />
         `,
         javascript: `
 import React from 'react'; 
-import { Steps } from 'primereact/steps';
+import { TabMenu } from 'primereact/tabmenu';
 
 export default function PTDemo() {
     const items = [
@@ -49,10 +44,12 @@ export default function PTDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Steps
+            <TabMenu
                 model={items}
                 pt={{
-                    root: { className: 'w-30rem' }
+                    action: {
+                        className: 'surface-ground'
+                    }
                 }}
             />
         </div>
@@ -61,7 +58,7 @@ export default function PTDemo() {
         `,
         typescript: `
 import React from 'react'; 
-import { Steps } from 'primereact/steps';
+import { TabMenu } from 'primereact/steps';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function PTDemo() {
@@ -82,10 +79,12 @@ export default function PTDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Steps
+            <TabMenu
                 model={items}
                 pt={{
-                    root: { className: 'w-30rem' }
+                    action: {
+                        className: 'surface-ground'
+                    }
                 }}
             />
         </div>
@@ -98,10 +97,12 @@ export default function PTDemo() {
         <>
             <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
-                <Steps
+                <TabMenu
                     model={items}
                     pt={{
-                        root: { className: 'w-30rem' }
+                        action: {
+                            className: 'surface-ground'
+                        }
                     }}
                 />
             </div>

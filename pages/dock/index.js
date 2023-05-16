@@ -54,7 +54,6 @@ const DockDemo = () => {
         }
     ];
 
-
     return <DocComponent title="React Dock Component" header="Dock" description="Dock is a navigation component consisting of menuitems." componentDocs={docs} apiDocs={['Dock', 'MenuItem']} className="dock-demo" ptDocs={ptDocs} />;
 };
 
