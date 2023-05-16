@@ -94,9 +94,9 @@ export const ContextMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const separatorProps = mergeProps(
             {
-                role: "separator",
+                role: 'separator',
                 key: 'separator_' + index,
-                className: "p-menu-separator",
+                className: 'p-menu-separator'
             },
             props.ptm('separator')
         );
@@ -139,7 +139,7 @@ export const ContextMenuSub = React.memo((props) => {
 
         const labelProps = mergeProps(
             {
-                className: "p-menuitem-text"
+                className: 'p-menuitem-text'
             },
             getPTOptions(item, 'label')
         );
@@ -152,11 +152,11 @@ export const ContextMenuSub = React.memo((props) => {
                 className: linkClassName,
                 target: item.target,
                 onClick: (event) => onItemClick(event, item, index),
-                role: "menuitem",
+                role: 'menuitem',
                 'aria-haspopup': item.items != null,
                 'aria-disabled': item.disabled
             },
-            getPTOptions(item, "action")
+            getPTOptions(item, 'action')
         );
 
         let content = (
@@ -171,7 +171,7 @@ export const ContextMenuSub = React.memo((props) => {
         const menuitemProps = mergeProps(
             {
                 id: item.id,
-                role: "none",
+                role: 'none',
                 className,
                 style: item.style,
                 key,
@@ -206,13 +206,11 @@ export const ContextMenuSub = React.memo((props) => {
             className
         },
         props.ptm('menu')
-    )
+    );
 
     return (
         <CSSTransition nodeRef={submenuRef} classNames="p-contextmenusub" in={active} timeout={{ enter: 0, exit: 0 }} unmountOnExit onEnter={onEnter}>
-            <ul {...menuProps}>
-                {submenu}
-            </ul>
+            <ul {...menuProps}>{submenu}</ul>
         </CSSTransition>
     );
 });
