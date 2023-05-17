@@ -718,6 +718,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
                 let widths = [];
                 let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
+                
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
                 let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
                 const movedItem = widths.find((items, index) => index === dragColIndex);
@@ -734,6 +735,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
                 reorderedWidths.forEach((width, index) => {
                     let style = `width: ${width}px !important; max-width: ${width}px !important`;
+
                     innerHTML += `
                         ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
                         ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
@@ -742,7 +744,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         }
                     `;
                 });
-                
+
                 styleElement.current.innerHTML = innerHTML;
 
                 if (dropColIndex < dragColIndex && dropPosition.current === 1) {
