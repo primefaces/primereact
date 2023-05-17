@@ -1333,12 +1333,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     });
 
     useUpdateEffect(() => {
-        if (attributeSelector.current) {
-            elementRef.current.setAttribute(attributeSelector.current, '');
+        elementRef.current.setAttribute(attributeSelector.current, '');
 
-            if (props.responsiveLayout === 'stack' && !props.scrollable) {
-                createResponsiveStyle();
-            }
+        if (props.responsiveLayout === 'stack' && !props.scrollable) {
+            createResponsiveStyle();
         }
 
         return () => {
