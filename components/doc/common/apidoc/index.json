@@ -23192,6 +23192,170 @@
                     "values": []
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MenubarPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenubarProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenubarState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenubarContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenubarPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "MenubarProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the submenu icon's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the mobile popup menu button's DOM element."
+                        },
+                        {
+                            "name": "popupIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the mobile popup menu button icon's DOM element."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the start of the component."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the end of the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenubarState": {
+                    "description": "Defines current inline state in Menubar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "mobileActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current mobile menu active state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenubarContext": {
+                    "description": "Defines current options in Menubar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MenubarPassThroughType": {
+                    "values": "PassThroughType<T, MenubarPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "menuitem": {
