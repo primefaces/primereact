@@ -393,14 +393,14 @@ export const FileUpload = React.memo(
             const inputProps = mergeProps(
                 {
                     ref: fileInputRef,
-                    type: "file",
+                    type: 'file',
                     onChange: (e) => onFileSelect(e),
                     multiple: props.multiple,
                     accept: props.accept,
                     disabled: chooseDisabled
                 },
                 ptm('input')
-            )
+            );
             const input = <input {...inputProps} />;
             const chooseIconProps = mergeProps(
                 {
@@ -442,8 +442,8 @@ export const FileUpload = React.memo(
             const key = file.name + file.type + file.size;
             const thumbnailProps = mergeProps(
                 {
-                    role: "presentation",
-                    className: "p-fileupload-file-thumbnail",
+                    role: 'presentation',
+                    className: 'p-fileupload-file-thumbnail',
                     src: file.objectURL,
                     width: props.previewWidth
                 },
@@ -454,12 +454,12 @@ export const FileUpload = React.memo(
             const fileSizeProps = mergeProps(ptm('fileSize'));
             const fileNameProps = mergeProps(
                 {
-                    className: "p-fileupload-filename"
+                    className: 'p-fileupload-filename'
                 },
                 ptm('fileName')
             );
             const actionsProps = mergeProps(ptm('actions'));
-            const fileName = <div {...fileNameProps} >{file.name}</div>;
+            const fileName = <div {...fileNameProps}>{file.name}</div>;
             const size = <div {...fileSizeProps}>{formatSize(file.size)}</div>;
 
             const contentBody = (
@@ -501,16 +501,12 @@ export const FileUpload = React.memo(
             const fileProps = mergeProps(
                 {
                     key,
-                    className: "p-fileupload-row",
+                    className: 'p-fileupload-row'
                 },
                 ptm('file')
-            )
-
-            return (
-                <div {...fileProps}>
-                    {content}
-                </div>
             );
+
+            return <div {...fileProps}>{content}</div>;
         };
 
         const createFiles = () => {
@@ -621,7 +617,7 @@ export const FileUpload = React.memo(
                 {
                     id: props.id,
                     className,
-                    style: props.style,
+                    style: props.style
                 },
                 FileUploadBase.getOtherProps(props),
                 ptm('root')
@@ -680,7 +676,7 @@ export const FileUpload = React.memo(
             const rootProps = mergeProps(
                 {
                     className,
-                    style: props.style,
+                    style: props.style
                 },
                 FileUploadBase.getOtherProps(props),
                 ptm('root')

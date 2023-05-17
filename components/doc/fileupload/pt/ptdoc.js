@@ -95,7 +95,7 @@ export default function PTDemo() {
                         content: { className: 'surface-ground' },
                         message: {
                             root: {
-                                className: "w-1rem"
+                                className: 'w-1rem'
                             }
                         }
                     }}

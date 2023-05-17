@@ -102,7 +102,7 @@ const PrimeReactChart = React.memo(
                 ref: canvasRef,
                 width: props.width,
                 height: props.height,
-                role: "img",
+                role: 'img',
                 'aria-label': ariaLabel
             },
             ptm('canvas')

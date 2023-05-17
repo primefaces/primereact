@@ -96,24 +96,23 @@ const ChartDemo = () => {
             component: AccessibilityDoc
         }
     ];
-const ptDocs = [
-    {
-        id: 'pt.wireframe',
-        label: 'Wireframe',
-        component: Wireframe
-    },
-    {
-        id: 'pt.chart.options',
-        label: 'Chart PT Options',
-        component: DocApiTable
-    },
-    {
-        id: 'pt.demo',
-        label: 'Example',
-        component: PTDoc
-    }
-];
-
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.chart.options',
+            label: 'Chart PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
     return <DocComponent title="React Chart Component" header="Chart" description="Chart components are based on Chart.js, an open source HTML5 based charting library." componentDocs={docs} apiDocs={['Chart']} ptDocs={ptDocs} />;
 };

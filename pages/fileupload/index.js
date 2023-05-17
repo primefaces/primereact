@@ -72,7 +72,6 @@ const FileUploadDemo = () => {
         }
     ];
 
-
     return (
         <DocComponent
             title="React Upload Component"
