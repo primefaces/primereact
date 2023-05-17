@@ -23525,6 +23525,75 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "MessagesPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MessagesProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MessagesPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "MessagesProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "wrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the wrapper's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "summary",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the summary's DOM element."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the detail's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the button's DOM element."
+                        },
+                        {
+                            "name": "buttonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the button icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "MessagesMessage": {
                     "relatedProp": "",
                     "props": [
@@ -23597,9 +23666,24 @@
                             "readonly": false,
                             "type": "IconType<MessagesProps>",
                             "description": "Defines the icon to display."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughOptions",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MessagesPassThroughType": {
+                    "values": "PassThroughType<T, MessagesPassThroughMethodOptions>"
                 }
             }
         }
