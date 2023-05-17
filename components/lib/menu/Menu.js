@@ -161,16 +161,14 @@ export const Menu = React.memo(
                 {
                     className,
                     style: submenu.style,
-                    role: "presentation"
+                    role: 'presentation'
                 },
                 ptm('submenuHeader')
             );
 
             return (
                 <React.Fragment key={key}>
-                    <li {...submenuHeaderProps}>
-                        {submenu.label}
-                    </li>
+                    <li {...submenuHeaderProps}>{submenu.label}</li>
                     {items}
                 </React.Fragment>
             );
@@ -181,11 +179,11 @@ export const Menu = React.memo(
             const separatorProps = mergeProps(
                 {
                     key,
-                    className: "p-menu-separator",
-                    role: "separator"
+                    className: 'p-menu-separator',
+                    role: 'separator'
                 },
                 ptm('separator')
-            )
+            );
 
             return <li {...separatorProps}></li>;
         };
@@ -207,7 +205,7 @@ export const Menu = React.memo(
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
-                    className: "p-menuitem-text"
+                    className: 'p-menuitem-text'
                 },
                 ptm('label')
             );
@@ -218,12 +216,12 @@ export const Menu = React.memo(
                 {
                     href: item.url || '#',
                     className: linkClassName,
-                    role: "menuitem",
+                    role: 'menuitem',
                     target: item.target,
                     onClick: (event) => onItemClick(event, item),
                     onKeyDown: (event) => onItemKeyDown(event, item),
                     tabIndex: tabIndex,
-                    'aria-disabled': item.disabled,
+                    'aria-disabled': item.disabled
                 },
                 ptm('action')
             );
@@ -255,16 +253,12 @@ export const Menu = React.memo(
                     key,
                     className,
                     style: item.style,
-                    role: "none"
+                    role: 'none'
                 },
                 ptm('menuitem')
             );
 
-            return (
-                <li {...menuitemProps}>
-                    {content}
-                </li>
-            );
+            return <li {...menuitemProps}>{content}</li>;
         };
 
         const createItem = (item, index) => {
@@ -301,8 +295,8 @@ export const Menu = React.memo(
 
                 const menuProps = mergeProps(
                     {
-                        className: "p-menu-list p-reset",
-                        role: "menu"
+                        className: 'p-menu-list p-reset',
+                        role: 'menu'
                     },
                     ptm('menu')
                 );
@@ -321,9 +315,7 @@ export const Menu = React.memo(
                         onExited={onExited}
                     >
                         <div {...rootProps}>
-                            <ul {...menuProps}>
-                                {menuitems}
-                            </ul>
+                            <ul {...menuProps}>{menuitems}</ul>
                         </div>
                     </CSSTransition>
                 );
