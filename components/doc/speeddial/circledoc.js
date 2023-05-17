@@ -29,13 +29,6 @@ export function CircleDoc(props) {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -48,21 +41,13 @@ export function CircleDoc(props) {
         basic: `
 <Toast ref={toast} />
 <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
-<SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
-<SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
-<SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
-<SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
-<SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
-<SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
-<SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
-<SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 
-export default function CircleDoc() {
+export default function CircleDemo() {
     const toast = useRef(null);
     const items = [
         {
@@ -87,13 +72,6 @@ export default function CircleDoc() {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -104,17 +82,9 @@ export default function CircleDoc() {
 
     return (
         <div className="card">
-            <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
+            <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
                 <Toast ref={toast} />
                 <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
-                <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
-                <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
             </div>
         </div>
     )
@@ -124,10 +94,11 @@ export default function CircleDoc() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function CircleDoc() {
+export default function CircleDemo() {
     const toast = useRef<Toast>(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
@@ -139,21 +110,14 @@ export default function CircleDoc() {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.current?.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.current?.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-            }
-        },
-        {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
@@ -167,17 +131,9 @@ export default function CircleDoc() {
 
     return (
         <div className="card">
-            <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
+            <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
                 <Toast ref={toast} />
                 <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
-                <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
-                <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
-                <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
-                <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
             </div>
         </div>
     )
@@ -188,20 +144,14 @@ export default function CircleDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Circle, Semi-Circle and Quarter-Circle</p>
+                <p>
+                    Items can be displayed around the button when <i>type</i> is set to <i>circle</i>. Additional <i>radius</i> property defines the radius of the circle.
+                </p>
             </DocSectionText>
             <div className="card">
-                <div className="speeddial-circle-demo" style={{ position: 'relative', height: '500px' }}>
+                <div style={{ height: '500px' }} className="flex align-items-center justify-content-center">
                     <Toast ref={toast} />
                     <SpeedDial model={items} radius={80} type="circle" buttonClassName="p-button-warning" />
-                    <SpeedDial model={items} radius={80} direction="up" type="semi-circle" />
-                    <SpeedDial model={items} radius={80} direction="down" type="semi-circle" />
-                    <SpeedDial model={items} radius={80} direction="left" type="semi-circle" />
-                    <SpeedDial model={items} radius={80} direction="right" type="semi-circle" />
-                    <SpeedDial model={items} radius={120} direction="up-left" type="quarter-circle" buttonClassName="p-button-success" />
-                    <SpeedDial model={items} radius={120} direction="up-right" type="quarter-circle" buttonClassName="p-button-success" />
-                    <SpeedDial model={items} radius={120} direction="down-left" type="quarter-circle" buttonClassName="p-button-success" />
-                    <SpeedDial model={items} radius={120} direction="down-right" type="quarter-circle" buttonClassName="p-button-success" />
                 </div>
             </div>
             <DocSectionCode code={code} />

@@ -1,11 +1,12 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
-import { BasicDoc } from '../../components/doc/contextmenu/BasicDoc';
-import { ApiDoc } from '../../components/doc/contextmenu/apidoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/contextmenu/pt/ptdoc';
+import { Wireframe } from '../../components/doc/contextmenu/pt/wireframe';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
+import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
+import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
 
 const ContextMenuDemo = () => {
     const docs = [
@@ -21,61 +22,39 @@ const ContextMenuDemo = () => {
         },
         {
             id: 'document',
-            label: 'Document Menu',
+            label: 'Document',
             component: DocumentDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.contextmenu.options',
+            label: 'ContextMenu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ContextMenu Component</title>
-                <meta name="description" content="ContextMenu displays an overlay menu on right click of its target." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ContextMenu</h1>
-                    <p>
-                        ContextMenu displays an overlay menu on right click of its target. Note that components like DataTable has special integration with ContextMenu. Refer to documentation of the individual documentation of the components having a
-                        special integration.
-                    </p>
-                </div>
-                <DocActions github="contextmenu/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ContextMenu Component" header="ContextMenu" description="ContextMenu displays an overlay menu on right click of its target." componentDocs={docs} apiDocs={['ContextMenu', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default ContextMenuDemo;

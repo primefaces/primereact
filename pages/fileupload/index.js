@@ -1,13 +1,14 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/fileupload/pt/ptdoc';
+import { Wireframe } from '../../components/doc/fileupload/pt/wireframe';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/fileupload/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
-import { ApiDoc } from '../../components/doc/fileupload/apidoc';
+import { AutoDoc } from '../../components/doc/fileupload/autodoc';
 import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
-import { BasicWithAuto } from '../../components/doc/fileupload/basicwithautodoc';
-import { CustomDoc } from '../../components/doc/fileupload/customdoc';
+import { CustomUploadDoc } from '../../components/doc/fileupload/customuploaddoc';
 import { ImportDoc } from '../../components/doc/fileupload/importdoc';
+import { StyleDoc } from '../../components/doc/fileupload/styledoc';
 import { TemplateDoc } from '../../components/doc/fileupload/templatedoc';
 
 const FileUploadDemo = () => {
@@ -16,6 +17,16 @@ const FileUploadDemo = () => {
             id: 'import',
             label: 'Import',
             component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'auto',
+            label: 'Auto',
+            component: AutoDoc
         },
         {
             id: 'advanced',
@@ -28,65 +39,48 @@ const FileUploadDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'basic',
-            label: 'Basic',
-            component: BasicDoc
-        },
-        {
-            id: 'basicwithauto',
-            label: 'Basic with Auto',
-            component: BasicWithAuto
-        },
-        {
             id: 'custom',
-            label: 'Custom (base64 encoded)',
-            component: CustomDoc
+            label: 'Custom Upload',
+            component: CustomUploadDoc
         },
-
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.fileupload.options',
+            label: 'FileUpload PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Upload Component</title>
-                <meta name="description" content="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>FileUpload</h1>
-                    <p>FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations.</p>
-                </div>
-                <DocActions github="fileupload/index.js" />
-            </div>
-
-            <div className="content-section doc dropdown-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Upload Component"
+            header="FileUpload"
+            description="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations."
+            componentDocs={docs}
+            apiDocs={['FileUpload']}
+            ptDocs={ptDocs}
+        />
     );
 };
 

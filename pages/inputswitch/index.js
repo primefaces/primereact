@@ -1,11 +1,13 @@
-import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
-import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
 import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
-import { ApiDoc } from '../../components/doc/inputswitch/apidoc';
+import { FormikDoc } from '../../components/doc/inputswitch/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputswitch/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
+import { InvalidDoc } from '../../components/doc/inputswitch/invaliddoc';
+import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
+import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
 
 const InputSwitchDemo = () => {
     const docs = [
@@ -25,55 +27,45 @@ const InputSwitchDemo = () => {
             component: PreselectionDoc
         },
         {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
             id: 'disabled',
             label: 'Disabled',
             component: DisabledDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            type: 'api',
-            component: ApiDoc,
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
                 }
             ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React InputSwitch Component</title>
-                <meta name="description" content="InputSwitch is used to select a boolean value." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputSwitch</h1>
-                    <p>InputSwitch is used to select a boolean value.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={['InputSwitch']} />;
 };
 
 export default InputSwitchDemo;

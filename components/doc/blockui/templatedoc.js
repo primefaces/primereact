@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Panel } from '../../../components/lib/panel/Panel';
-import { Button } from '../../../components/lib/button/Button';
+import { useState } from 'react';
+import { Button } from '../../lib/button/Button';
 
 export function TemplateDoc(props) {
-    const [blockedPanel, setBlockedPanel] = useState(false);
-
-    const blockPanel = () => {
-        setBlockedPanel(true);
-    };
-
-    const unblockPanel = () => {
-        setBlockedPanel(false);
-    };
+    const [blocked, setBlocked] = useState(false);
 
     const code = {
         basic: `
-<Button type="button" className='mr-2' label="Block" onClick={blockPanel} />
-<Button type="button" label="Unblock" onClick={unblockPanel} />
-<BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-    <Panel header="Template with blocking" className='mt-4'>
-        <p>
+<div className="mb-3">
+    <Button label="Block" onClick={() => setBlocked(true)} className="mr-2"></Button>
+    <Button label="Unblock" onClick={() => setBlocked(false)}></Button>
+</div>
+<BlockUI blocked={blocked}>
+    <Panel header="Template">
+        <p className="m-0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
             laborum.
@@ -31,31 +25,22 @@ export function TemplateDoc(props) {
 </BlockUI>
         `,
         javascript: `
-import React, { useState } from 'react';
+import React from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
-import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-    const [blockedPanel, setBlockedPanel] = useState(false);
-
-    const blockPanel = () => {
-        setBlockedPanel(true);
-    };
-
-    const unblockPanel = () => {
-        setBlockedPanel(false);
-    };
+export default function TemplateDemo() {
+    const [blocked, setBlocked] = useState(false);
 
     return (
-        <div className="card flex flex-column">
-            <div className="flex flex-row flex-wrap mb-2">
-                <Button type="button" className='mr-2' label="Block" onClick={blockPanel} />
-                <Button type="button" label="Unblock" onClick={unblockPanel} />
+        <div className="card">
+            <div className="mb-3">
+                <Button label="Block" onClick={() => setBlocked(true)} className="mr-2"></Button>
+                <Button label="Unblock" onClick={() => setBlocked(false)}></Button>
             </div>
-            <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-                <Panel header="Template with blocking" className='mt-4'>
-                    <p>
+            <BlockUI blocked={blocked}>
+                <Panel header="Template">
+                    <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
                         laborum.
@@ -67,31 +52,22 @@ export default function TemplateDoc() {
 }
         `,
         typescript: `
-import React, { useState } from 'react';
+import React from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
-import { Button } from 'primereact/button';
 
-export default function TemplateDoc() {
-    const [blockedPanel, setBlockedPanel] = useState<boolean>(false);
-
-    function blockPanel(): void {
-        setBlockedPanel(true);
-    };
-
-    function unblockPanel(): void {
-        setBlockedPanel(false);
-    };
+export default function TemplateDemo() {
+    const [blocked, setBlocked] = useState<boolean>(false);
 
     return (
-        <div className="card flex flex-column">
-            <div className="flex flex-row flex-wrap mb-2">
-                <Button type="button" className='mr-2' label="Block" onClick={blockPanel} />
-                <Button type="button" label="Unblock" onClick={unblockPanel} />
+        <div className="card">
+            <div className="mb-3">
+                <Button label="Block" onClick={() => setBlocked(true)} className="mr-2"></Button>
+                <Button label="Unblock" onClick={() => setBlocked(false)}></Button>
             </div>
-            <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-                <Panel header="Template with blocking" className='mt-4'>
-                    <p>
+            <BlockUI blocked={blocked}>
+                <Panel header="Template">
+                    <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
                         laborum.
@@ -107,16 +83,18 @@ export default function TemplateDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Template Demo Content.</p>
+                <p>
+                    Custom content can be placed inside the modal layer using the <i>template</i> property.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column">
-                <div className="flex flex-row flex-wrap mb-2">
-                    <Button type="button" className="mr-2" label="Block" onClick={blockPanel} />
-                    <Button type="button" label="Unblock" onClick={unblockPanel} />
+            <div className="card">
+                <div className="mb-3">
+                    <Button label="Block" onClick={() => setBlocked(true)} className="mr-2"></Button>
+                    <Button label="Unblock" onClick={() => setBlocked(false)}></Button>
                 </div>
-                <BlockUI blocked={blockedPanel} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }} />}>
-                    <Panel header="Template with blocking" className="mt-4">
-                        <p>
+                <BlockUI blocked={blocked} template={<i className="pi pi-lock" style={{ fontSize: '3rem' }}></i>}>
+                    <Panel header="Template">
+                        <p className="m-0">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
                             laborum.

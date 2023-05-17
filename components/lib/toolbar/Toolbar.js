@@ -1,34 +1,67 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
+import { ToolbarBase } from './ToolbarBase';
 
 export const Toolbar = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ToolbarBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, Toolbar.defaultProps);
-        const toolbarClass = classNames('p-toolbar p-component', props.className);
-        const left = ObjectUtils.getJSXElement(props.left, props);
-        const right = ObjectUtils.getJSXElement(props.right, props);
+
+        const start = ObjectUtils.getJSXElement(props.left || props.start, props);
+        const center = ObjectUtils.getJSXElement(props.center, props);
+        const end = ObjectUtils.getJSXElement(props.right || props.end, props);
+
+        const { ptm } = ToolbarBase.setMetaData({
+            props
+        });
 
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
 
+        const startProps = mergeProps(
+            {
+                className: 'p-toolbar-group-start p-toolbar-group-left'
+            },
+            ptm('start')
+        );
+
+        const centerProps = mergeProps(
+            {
+                className: 'p-toolbar-group-center'
+            },
+            ptm('center')
+        );
+
+        const endProps = mergeProps(
+            {
+                className: 'p-toolbar-group-end p-toolbar-group-right'
+            },
+            ptm('end')
+        );
+
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style: props.style,
+                className: classNames('p-toolbar p-component', props.className),
+                role: 'toolbar'
+            },
+            ToolbarBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} className={toolbarClass} style={props.style} role="toolbar" {...otherProps}>
-                <div className="p-toolbar-group-left">{left}</div>
-                <div className="p-toolbar-group-right">{right}</div>
+            <div {...rootProps}>
+                <div {...startProps}>{start}</div>
+                <div {...centerProps}>{center}</div>
+                <div {...endProps}>{end}</div>
             </div>
         );
     })
 );
 
 Toolbar.displayName = 'Toolbar';
-Toolbar.defaultProps = {
-    __TYPE: 'Toolbar',
-    id: null,
-    style: null,
-    className: null,
-    left: null,
-    right: null
-};

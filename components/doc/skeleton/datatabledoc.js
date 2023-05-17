@@ -6,7 +6,7 @@ import { DataTable } from '../../lib/datatable/DataTable';
 import { Column } from '../../lib/column/Column';
 
 export function DataTableDoc(props) {
-    const products = Array.from({ length: 5 });
+    const items = Array.from({ length: 5 }, (v, i) => i);
 
     const bodyTemplate = () => {
         return <Skeleton></Skeleton>;
@@ -14,7 +14,7 @@ export function DataTableDoc(props) {
 
     const code = {
         basic: `
-<DataTable value={products} className="p-datatable-striped">
+<DataTable value={items} className="p-datatable-striped">
     <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
     <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
     <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
@@ -27,8 +27,8 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export default function DataTableDoc() {
-    const products = Array.from({ length: 5 });
+export default function DataTableDemo() {
+    const items = Array.from({ length: 5 }, (v, i) => i);
 
     const bodyTemplate = () => {
         return <Skeleton></Skeleton>
@@ -36,7 +36,7 @@ export default function DataTableDoc() {
 
     return (
         <div className="card">
-            <DataTable value={products} className="p-datatable-striped">
+            <DataTable value={items} className="p-datatable-striped">
                 <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
@@ -52,13 +52,8 @@ import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-export default function DataTableDoc() {
-
-    interface Product {
-        length: number
-      }
-
-    const products: Product[] = [{ length: 5 }];
+export default function DataTableDemo() {
+    const items: number[] = Array.from({ length: 5 }, (v, i) => i);
 
     function bodyTemplate(): JSX.Element {
         return <Skeleton></Skeleton>
@@ -66,7 +61,7 @@ export default function DataTableDoc() {
 
     return (
         <div className="card">
-            <DataTable value={products} className="p-datatable-striped">
+            <DataTable value={items} className="p-datatable-striped">
                 <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
                 <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>
@@ -81,10 +76,10 @@ export default function DataTableDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>DataTable Demo Content.</p>
+                <p>Sample DataTable implementation using different Skeleton components and PrimeFlex CSS utilities.</p>
             </DocSectionText>
             <div className="card">
-                <DataTable value={products} className="p-datatable-striped">
+                <DataTable value={items} className="p-datatable-striped">
                     <Column field="code" header="Code" style={{ width: '25%' }} body={bodyTemplate}></Column>
                     <Column field="name" header="Name" style={{ width: '25%' }} body={bodyTemplate}></Column>
                     <Column field="category" header="Category" style={{ width: '25%' }} body={bodyTemplate}></Column>

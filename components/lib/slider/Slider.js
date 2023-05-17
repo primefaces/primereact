@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { SliderBase } from './SliderBase';
 
 export const Slider = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = SliderBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const handleIndex = React.useRef(0);
         const sliderHandleClick = React.useRef(false);
@@ -142,10 +145,10 @@ export const Slider = React.memo(
             if (props.range) {
                 if (handleIndex.current === 0) {
                     if (parsedValue < props.min) parsedValue = props.min;
-                    else if (parsedValue > value[1]) parsedValue = value[1];
+                    else if (parsedValue > props.max) parsedValue = props.max;
                 } else {
                     if (parsedValue > props.max) parsedValue = props.max;
-                    else if (parsedValue < value[0]) parsedValue = value[0];
+                    else if (parsedValue < props.min) parsedValue = props.min;
                 }
 
                 newValue = [...value];
@@ -210,7 +213,10 @@ export const Slider = React.memo(
 
             const rangeStartHandle = horizontal ? createHandle(handleValueStart, null, 0) : createHandle(null, handleValueStart, 0);
             const rangeEndHandle = horizontal ? createHandle(handleValueEnd, null, 1) : createHandle(null, handleValueEnd, 1);
-            const rangeStyle = horizontal ? { left: handleValueStart + '%', width: handleValueEnd - handleValueStart + '%' } : { bottom: handleValueStart + '%', height: handleValueEnd - handleValueStart + '%' };
+            const rangeSliderWidth = handleValueEnd > handleValueStart ? handleValueEnd - handleValueStart : handleValueStart - handleValueEnd;
+            const rangeSliderPosition = handleValueEnd > handleValueStart ? handleValueStart : handleValueEnd;
+
+            const rangeStyle = horizontal ? { left: rangeSliderPosition + '%', width: rangeSliderWidth + '%' } : { bottom: rangeSliderPosition + '%', height: rangeSliderWidth + '%' };
 
             return (
                 <>
@@ -244,7 +250,7 @@ export const Slider = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Slider.defaultProps);
+        const otherProps = SliderBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-slider p-component', props.className, {
             'p-disabled': props.disabled,
@@ -262,19 +268,3 @@ export const Slider = React.memo(
 );
 
 Slider.displayName = 'Slider';
-Slider.defaultProps = {
-    __TYPE: 'Slider',
-    id: null,
-    value: null,
-    min: 0,
-    max: 100,
-    orientation: 'horizontal',
-    step: null,
-    range: false,
-    style: null,
-    className: null,
-    disabled: false,
-    tabIndex: 0,
-    onChange: null,
-    onSlideEnd: null
-};

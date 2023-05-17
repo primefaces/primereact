@@ -1,14 +1,15 @@
-import Head from 'next/head';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocActions } from '../../components/doc/common/docactions';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
+import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ImportDoc } from '../../components/doc/sidebar/importdoc';
 import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
-import { CustomDoc } from '../../components/doc/sidebar/customdoc';
-import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
-import { ApiDoc } from '../../components/doc/sidebar/apidoc';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
+import { StyleDoc } from '../../components/doc/sidebar/styledoc';
+import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
+import { Wireframe } from '../../components/doc/sidebar/pt/wireframe';
+import { PTDoc } from '../../components/doc/sidebar/pt/ptdoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -38,55 +39,41 @@ const SidebarDemo = () => {
             component: FullScreenDoc
         },
         {
-            id: 'custom',
-            label: 'Custom',
-            component: CustomDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Sidebar Component</title>
-                <meta name="description" content="Sidebar is a panel component displayed as an overlay." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h3>Sidebar</h3>
-                    <p>Sidebar is a panel component displayed as an overlay.</p>
-                </div>
-                <DocActions github="sidebar/index.js" />
-            </div>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.sidebar.options',
+            label: 'Sidebar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Sidebar Component" header="Sidebar" description="Sidebar, also known as Drawer, is a container component displayed as an overlay." componentDocs={docs} apiDocs={['Sidebar']} ptDocs={ptDocs} />;
 };
 
 export default SidebarDemo;

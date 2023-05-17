@@ -5,10 +5,19 @@ import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/H
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { OverlayPanelBase } from './OverlayPanelBase';
+import { TimesIcon } from '../icons/times';
 
-export const OverlayPanel = React.forwardRef((props, ref) => {
+export const OverlayPanel = React.forwardRef((inProps, ref) => {
+    const props = OverlayPanelBase.getProps(inProps);
     const [visibleState, setVisibleState] = React.useState(false);
+    const { ptm } = OverlayPanelBase.setMetaData({
+        props,
+        state: {
+            visible: visibleState
+        }
+    });
     const attributeSelector = React.useRef('');
     const overlayRef = React.useRef(null);
     const currentTargetRef = React.useRef(null);
@@ -185,12 +194,30 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     }));
 
     const createCloseIcon = () => {
-        if (props.showCloseIcon) {
-            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const closeIconProps = mergeProps(
+            {
+                className: 'p-overlaypanel-close-icon',
+                'aria-hidden': true
+            },
+            ptm('closeIcon')
+        );
+        const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+        const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
+        const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const closeButtonProps = mergeProps(
+            {
+                type: 'button',
+                className: 'p-overlaypanel-close p-link',
+                onClick: (e) => onCloseClick(e),
+                'aria-label': ariaLabel
+            },
+            ptm('closeButton')
+        );
 
+        if (props.showCloseIcon) {
             return (
-                <button type="button" className="p-overlaypanel-close p-link" onClick={onCloseClick} aria-label={ariaLabel}>
-                    <span className="p-overlaypanel-close-icon pi pi-times" aria-hidden="true"></span>
+                <button {...closeButtonProps}>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
@@ -200,12 +227,32 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, OverlayPanel.defaultProps);
         const className = classNames('p-overlaypanel p-component', props.className, {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
         });
         const closeIcon = createCloseIcon();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: overlayRef,
+                className,
+                style: props.style,
+                onClick: (e) => onPanelClick(e)
+            },
+            OverlayPanelBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const contentProps = mergeProps(
+            {
+                className: 'p-overlaypanel-content',
+                onClick: (e) => onContentClick(e),
+                onMouseDown: onContentClick
+            },
+            OverlayPanelBase.getOtherProps(props),
+            ptm('content')
+        );
 
         return (
             <CSSTransition
@@ -220,10 +267,8 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
                 onExit={onExit}
                 onExited={onExited}
             >
-                <div ref={overlayRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                    <div className="p-overlaypanel-content" onClick={onContentClick} onMouseDown={onContentClick}>
-                        {props.children}
-                    </div>
+                <div {...rootProps}>
+                    <div {...contentProps}>{props.children}</div>
                     {closeIcon}
                 </div>
             </CSSTransition>
@@ -236,17 +281,3 @@ export const OverlayPanel = React.forwardRef((props, ref) => {
 });
 
 OverlayPanel.displayName = 'OverlayPanel';
-OverlayPanel.defaultProps = {
-    __TYPE: 'OverlayPanel',
-    id: null,
-    dismissable: true,
-    showCloseIcon: false,
-    style: null,
-    className: null,
-    appendTo: null,
-    breakpoints: null,
-    ariaCloseLabel: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

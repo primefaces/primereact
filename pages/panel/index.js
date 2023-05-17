@@ -1,12 +1,13 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/panel/basicdoc';
 import { ImportDoc } from '../../components/doc/panel/importdoc';
-import { RegularDoc } from '../../components/doc/panel/regulardoc';
-import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
+import { PTDoc } from '../../components/doc/panel/pt/ptdoc';
+import { Wireframe } from '../../components/doc/panel/pt/wireframe';
+import { StyleDoc } from '../../components/doc/panel/styledoc';
 import { TemplateDoc } from '../../components/doc/panel/templatedoc';
-import { ApiDoc } from '../../components/doc/panel/apidoc';
+import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
 
 const PanelDemo = () => {
     const docs = [
@@ -16,9 +17,9 @@ const PanelDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'regular',
-            label: 'Regular',
-            component: RegularDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
             id: 'toggleable',
@@ -31,50 +32,36 @@ const PanelDemo = () => {
             component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Panel Component</title>
-                <meta name="description" content="Panel is a grouping component providing with content toggle feature." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Panel</h1>
-                    <p>Panel is a grouping component providing with content toggle feature.</p>
-                </div>
-                <DocActions github="panel/index.js" />
-            </div>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.panel.options',
+            label: 'Panel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Panel Component" header="Panel" description="Panel is a container component with an optional content toggle feature." componentDocs={docs} apiDocs={['Panel']} ptDocs={ptDocs} ptDescription={''} />;
 };
 
 export default PanelDemo;

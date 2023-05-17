@@ -1,17 +1,49 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { AvatarBase } from './AvatarBase';
 
-export const Avatar = React.forwardRef((props, ref) => {
+export const Avatar = React.forwardRef((inProps, ref) => {
+    const props = AvatarBase.getProps(inProps);
+
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
 
+    const { ptm } = AvatarBase.setMetaData({
+        props,
+        state: {
+            imageFailed: imageFailed
+        }
+    });
+
     const createContent = () => {
-        if (props.image && !imageFailed) {
-            return <img src={props.image} alt={props.imageAlt} onError={onImageError}></img>;
+        if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
+            const imageProps = mergeProps(
+                {
+                    src: props.image,
+                    onError: onImageError
+                },
+                ptm('image')
+            );
+
+            return <img alt={props.imageAlt} {...imageProps}></img>;
         } else if (props.label) {
-            return <span className="p-avatar-text">{props.label}</span>;
+            const labelProps = mergeProps(
+                {
+                    className: 'p-avatar-text'
+                },
+                ptm('label')
+            );
+
+            return <span {...labelProps}>{props.label}</span>;
         } else if (props.icon) {
-            return IconUtils.getJSXIcon(props.icon, { className: 'p-avatar-icon' }, { props });
+            const iconProps = mergeProps(
+                {
+                    className: 'p-avatar-icon'
+                },
+                ptm('icon')
+            );
+
+            return IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
         }
 
         return null;
@@ -37,11 +69,10 @@ export const Avatar = React.forwardRef((props, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Avatar.defaultProps);
     const containerClassName = classNames(
         'p-avatar p-component',
         {
-            'p-avatar-image': props.image !== null && !imageFailed,
+            'p-avatar-image': ObjectUtils.isNotEmpty(props.image) && !imageFailed,
             'p-avatar-circle': props.shape === 'circle',
             'p-avatar-lg': props.size === 'large',
             'p-avatar-xl': props.size === 'xlarge',
@@ -50,10 +81,20 @@ export const Avatar = React.forwardRef((props, ref) => {
         props.className
     );
 
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            style: props.style,
+            className: containerClassName
+        },
+        AvatarBase.getOtherProps(props),
+        ptm('root')
+    );
+
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
     return (
-        <div ref={elementRef} className={containerClassName} style={props.style} {...otherProps}>
+        <div {...rootProps}>
             {content}
             {props.children}
         </div>
@@ -61,17 +102,3 @@ export const Avatar = React.forwardRef((props, ref) => {
 });
 
 Avatar.displayName = 'Avatar';
-Avatar.defaultProps = {
-    __TYPE: 'Avatar',
-    className: null,
-    icon: null,
-    image: null,
-    imageAlt: 'avatar',
-    imageFallback: 'default',
-    label: null,
-    onImageError: null,
-    shape: 'square',
-    size: 'normal',
-    style: null,
-    template: null
-};

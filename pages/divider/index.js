@@ -1,14 +1,15 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/divider/importdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/divider/basicdoc';
 import { ContentDoc } from '../../components/doc/divider/contentdoc';
-import { TextDoc } from '../../components/doc/divider/textdoc';
+import { ImportDoc } from '../../components/doc/divider/importdoc';
+import { LoginDoc } from '../../components/doc/divider/logindoc';
+import { StyleDoc } from '../../components/doc/divider/styledoc';
+import { TypeDoc } from '../../components/doc/divider/typedoc';
 import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
-import { VerticalContentDoc } from '../../components/doc/divider/verticalcontentdoc';
-import { ApiDoc } from '../../components/doc/divider/apidoc';
+import { PTDoc } from '../../components/doc/divider/pt/ptdoc';
+import { Wireframe } from '../../components/doc/divider/pt/wireframe';
 
 const DividerDemo = () => {
     const docs = [
@@ -23,9 +24,9 @@ const DividerDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'text',
-            label: 'Text with Dashed Style',
-            component: TextDoc
+            id: 'type',
+            label: 'Type',
+            component: TypeDoc
         },
         {
             id: 'content',
@@ -38,53 +39,41 @@ const DividerDemo = () => {
             component: VerticalDoc
         },
         {
-            id: 'verticalcontent',
-            label: 'Vertical with Content',
-            component: VerticalContentDoc
+            id: 'login',
+            label: 'Login',
+            component: LoginDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Divider Component</title>
-                <meta name="description" content="Divider is used to separate contents." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <div>
-                        <h1>Divider</h1>
-                        <p>Divider is used to separate contents.</p>
-                    </div>
-                </div>
-                <DocActions github="divider/index.js" />
-            </div>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.divider.options',
+            label: 'Divider PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={['Divider']} ptDocs={ptDocs} />;
 };
 
 export default DividerDemo;

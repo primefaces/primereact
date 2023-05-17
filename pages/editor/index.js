@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
+import React from 'react';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/editor/basicdoc';
+import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/editor/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/editor/importdoc';
 import { QuillDoc } from '../../components/doc/editor/quilldoc';
-import { BasicDoc } from '../../components/doc/editor/basicdoc';
+import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
+import { StyleDoc } from '../../components/doc/editor/styledoc';
 import { TemplateDoc } from '../../components/doc/editor/templatedoc';
-import { ApiDoc } from '../../components/doc/editor/apidoc';
 
 const EditorDemo = () => {
     const docs = [
@@ -17,7 +19,7 @@ const EditorDemo = () => {
         },
         {
             id: 'quill',
-            label: 'QuillJS',
+            label: 'Quill',
             component: QuillDoc
         },
         {
@@ -26,55 +28,45 @@ const EditorDemo = () => {
             component: BasicDoc
         },
         {
+            id: 'readOnly',
+            label: 'ReadOnly',
+            component: ReadOnlyDoc
+        },
+        {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
                 }
             ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Editor Component</title>
-                <meta name="description" content="Editor is rich text editor component based on Quill." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Editor</h1>
-                    <p>Editor is rich text editor component based on Quill.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Editor Component" header="Editor" description="Editor is rich text editor component based on Quill." componentDocs={docs} apiDocs={['Editor']} />;
 };
 
 export default EditorDemo;

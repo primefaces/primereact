@@ -5,7 +5,6 @@ export function ImportDoc(props) {
     const code = {
         basic: `
 import { Messages } from 'primereact/messages';
-import { Message } from 'primereact/message';
         `
     };
 

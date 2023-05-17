@@ -180,8 +180,8 @@ const CascadeSelectStyles = [
 
 module.exports = {
     cascadeselect: {
-        name: 'CascadeSelect displays a nested structure of options.',
-        description: 'TODO',
+        name: 'CascadeSelect',
+        description: 'CascadeSelect displays a nested structure of options.',
         docUrl: 'https://primefaces.org/primereact/showcase/#/cascadeselect',
         props: CascadeSelectProps,
         events: CascadeSelectEvents,

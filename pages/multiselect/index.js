@@ -1,15 +1,18 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/multiselect/apidoc';
-import { ImportDoc } from '../../components/doc/multiselect/importdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
 import { ChipsDoc } from '../../components/doc/multiselect/chipsdoc';
-import { GroupedDoc } from '../../components/doc/multiselect/groupeddoc';
-import { AdvancedDoc } from '../../components/doc/multiselect/advanceddoc';
-import { VirtualDoc } from '../../components/doc/multiselect/virtualdoc';
-import { VirtualLazyDoc } from '../../components/doc/multiselect/virtuallazydoc';
+import { DisabledDoc } from '../../components/doc/multiselect/disableddoc';
+import { FilterDoc } from '../../components/doc/multiselect/filterdoc';
+import { FloatLabelDoc } from '../../components/doc/multiselect/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/multiselect/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/multiselect/form/hookformdoc';
+import { GroupDoc } from '../../components/doc/multiselect/groupdoc';
+import { ImportDoc } from '../../components/doc/multiselect/importdoc';
+import { InvalidDoc } from '../../components/doc/multiselect/invaliddoc';
+import { StyleDoc } from '../../components/doc/multiselect/styledoc';
+import { TemplateDoc } from '../../components/doc/multiselect/templatedoc';
+import { VirtualScrollDoc } from '../../components/doc/multiselect/virtualscrolldoc';
 
 const MultiSelectDemo = () => {
     const docs = [
@@ -29,74 +32,70 @@ const MultiSelectDemo = () => {
             component: ChipsDoc
         },
         {
-            id: 'grouped',
-            label: 'Grouped',
-            component: GroupedDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
         },
         {
-            id: 'advanced',
-            label: 'Advanced with Templating and Filtering',
-            component: AdvancedDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
-            id: 'virtual',
-            label: 'Virtual Scroll (100000 Items)',
-            component: VirtualDoc
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
         },
         {
-            id: 'virtuallazy',
-            label: 'Virtual Scroll (100000 Items) and Lazy',
-            component: VirtualLazyDoc
+            id: 'virtualscroll',
+            label: 'Virtual Scroll',
+            component: VirtualScrollDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
             children: [
                 {
-                    id: 'properties',
-                    label: 'Properties'
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
                 },
                 {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
                 }
             ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React MultiSelect Component</title>
-                <meta name="description" content="MultiSelect is used to select multiple items from a collection." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>MultiSelect</h1>
-                    <p>MultiSelect is used to select multiple items from a collection.</p>
-                </div>
-
-                <DocActions github="multiselect/index.js" />
-            </div>
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React MultiSelect Component" header="MultiSelect" description="MultiSelect is used to select multiple items from a collection." componentDocs={docs} apiDocs={['MultiSelect']} />;
 };
 
 export default MultiSelectDemo;

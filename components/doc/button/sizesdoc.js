@@ -1,26 +1,24 @@
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SizesDoc(props) {
     const code = {
         basic: `
-<Button label="Small" icon="pi pi-check" className="p-button-sm" />
-<Button label="Normal" icon="pi pi-check" className="p-button" />
-<Button label="Large" icon="pi pi-check" className="p-button-lg" />
+<Button label="Small" icon="pi pi-check" size="small" />
+<Button label="Normal" icon="pi pi-check" />
+<Button label="Large" icon="pi pi-check" size="large" />
         `,
         javascript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import './ButtonDemo.css';
 
-export default function SizesDoc() {
-
+export default function SizesDemo() {
     return (
-        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
-            <Button label="Small" icon="pi pi-check" className="p-button-sm" />
-            <Button label="Normal" icon="pi pi-check" className="p-button" />
-            <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+        <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
+            <Button label="Small" icon="pi pi-check" size="small" />
+            <Button label="Normal" icon="pi pi-check" />
+            <Button label="Large" icon="pi pi-check" size="large" />
         </div>
     )
 }
@@ -28,49 +26,30 @@ export default function SizesDoc() {
         typescript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import './ButtonDemo.css';
 
-export default function SizesDoc() {
-
+export default function SizesDemo() {
     return (
-        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
-            <Button label="Small" icon="pi pi-check" className="p-button-sm" />
-            <Button label="Normal" icon="pi pi-check" className="p-button" />
-            <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+        <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
+            <Button label="Small" icon="pi pi-check" size="small" />
+            <Button label="Normal" icon="pi pi-check" />
+            <Button label="Large" icon="pi pi-check" size="large" />
         </div>
     )
 }
-        `,
-        exitFiles: {
-            'ButtonDemo.css': `
-/* ButtonDemo.css */
-
-.button-demo .p-button {
-    margin-right: 0.5rem;
-}
-
-@media screen and (max-width: 960px) {
-    .button-demo .p-button {
-        margin-bottom: 0.5rem;
-    }
-    .button-demo .p-button:not(.p-button-icon-only) {
-        display: flex;
-        width: 100%;
-    }
-}                
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Sizes</p>
+                <p>
+                    Button provides <i>small</i> and <i>large</i> sizes as alternatives to the standard.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
-                <Button label="Small" icon="pi pi-check" className="p-button-sm" />
-                <Button label="Normal" icon="pi pi-check" className="p-button" />
-                <Button label="Large" icon="pi pi-check" className="p-button-lg" />
+            <div className="card flex flex-wrap align-items-center justify-content-center gap-3">
+                <Button label="Small" icon="pi pi-check" size="small" />
+                <Button label="Normal" icon="pi pi-check" />
+                <Button label="Large" icon="pi pi-check" size="large" />
             </div>
             <DocSectionCode code={code} />
         </>

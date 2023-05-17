@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { StyleClassBase } from './StyleClassBase';
 
-export const StyleClass = React.forwardRef((props, ref) => {
+export const StyleClass = React.forwardRef((inProps, ref) => {
+    const props = StyleClassBase.getProps(inProps);
+
     const targetRef = React.useRef(null);
     const animating = React.useRef(false);
     const elementRef = React.useRef(null);
@@ -134,16 +137,16 @@ export const StyleClass = React.forwardRef((props, ref) => {
 
         switch (props.selector) {
             case '@next':
-                return elementRef.current.nextElementSibling;
+                return elementRef.current && elementRef.current.nextElementSibling;
 
             case '@prev':
-                return elementRef.current.previousElementSibling;
+                return elementRef.current && elementRef.current.previousElementSibling;
 
             case '@parent':
-                return elementRef.current.parentElement;
+                return elementRef.current && elementRef.current.parentElement;
 
             case '@grandparent':
-                return elementRef.current.parentElement.parentElement;
+                return elementRef.current && elementRef.current.parentElement.parentElement;
 
             default:
                 return document.querySelector(props.selector);
@@ -151,8 +154,10 @@ export const StyleClass = React.forwardRef((props, ref) => {
     };
 
     const init = () => {
-        elementRef.current = ObjectUtils.getRefElement(props.nodeRef);
-        bindClickListener({ target: elementRef.current });
+        Promise.resolve().then(() => {
+            elementRef.current = ObjectUtils.getRefElement(props.nodeRef);
+            bindClickListener({ target: elementRef.current });
+        });
     };
 
     const destroy = () => {
@@ -195,16 +200,3 @@ export const StyleClass = React.forwardRef((props, ref) => {
 });
 
 StyleClass.displayName = 'StyleClass';
-StyleClass.defaultProps = {
-    __TYPE: 'StyleClass',
-    nodeRef: null,
-    selector: null,
-    enterClassName: null,
-    enterActiveClassName: null,
-    enterToClassName: null,
-    leaveClassName: null,
-    leaveActiveClassName: null,
-    leaveToClassName: null,
-    hideOnOutsideClick: false,
-    toggleClassName: null
-};

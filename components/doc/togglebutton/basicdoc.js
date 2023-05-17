@@ -3,13 +3,12 @@ import { ToggleButton } from '../../lib/togglebutton/ToggleButton';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function BasicDemo(props) {
+export function BasicDoc(props) {
     const [checked, setChecked] = useState(false);
 
     const code = {
         basic: `
 <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} />
-
         `,
         javascript: `
 import React, { useState } from "react";
@@ -19,19 +18,23 @@ export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} className="w-8rem" />
+        </div>
     );
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { ToggleButton, ToggleButtonChangeParams } from 'primereact/togglebutton';
+import { ToggleButton, ToggleButtonChangeEvent } from 'primereact/togglebutton';
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState<boolean>(false);
 
     return (
-        <ToggleButton checked={checked} onChange={(e : ToggleButtonChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <ToggleButton checked={checked} onChange={(e: ToggleButtonChangeEvent) => setChecked(e.value)} className="w-8rem" />
+        </div>
     );
 }
         `
@@ -41,11 +44,11 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Rating is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                    ToggleButton is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} />
+                <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} className="w-8rem" />
             </div>
             <DocSectionCode code={code} />
         </>

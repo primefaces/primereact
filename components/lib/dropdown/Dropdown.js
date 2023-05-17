@@ -1,13 +1,18 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = DropdownBase.getProps(inProps);
+
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -45,7 +50,7 @@ export const Dropdown = React.memo(
                         let filteredSubOptions = FilterService.filter(getOptionGroupChildren(optgroup), searchFields, filterValue, props.filterMatchMode, props.filterLocale);
 
                         if (filteredSubOptions && filteredSubOptions.length) {
-                            filteredGroups.push({ ...optgroup, ...{ items: filteredSubOptions } });
+                            filteredGroups.push({ ...optgroup, ...{ [`${props.optionGroupChildren}`]: filteredSubOptions } });
                         }
                     }
 
@@ -64,6 +69,13 @@ export const Dropdown = React.memo(
 
         const onClick = (event) => {
             if (props.disabled) {
+                return;
+            }
+
+            props.onClick && props.onClick(event);
+
+            // do not continue if the user defined click wants to prevent it
+            if (event.defaultPrevented) {
                 return;
             }
 
@@ -94,8 +106,12 @@ export const Dropdown = React.memo(
                     props.onBlur({
                         originalEvent: event.originalEvent,
                         value: currentValue,
-                        stopPropagation: () => {},
-                        preventDefault: () => {},
+                        stopPropagation: () => {
+                            event.originalEvent.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            event.originalEvent.preventDefault();
+                        },
                         target: {
                             name: props.name,
                             id: props.id,
@@ -354,8 +370,12 @@ export const Dropdown = React.memo(
                 props.onChange({
                     originalEvent: event.originalEvent,
                     value: event.target.value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.originalEvent.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.originalEvent.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -410,8 +430,12 @@ export const Dropdown = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: undefined,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -432,8 +456,12 @@ export const Dropdown = React.memo(
                     props.onChange({
                         originalEvent: event.originalEvent,
                         value: optionValue,
-                        stopPropagation: () => {},
-                        preventDefault: () => {},
+                        stopPropagation: () => {
+                            event.originalEvent.stopPropagation();
+                        },
+                        preventDefault: () => {
+                            event.originalEvent.preventDefault();
+                        },
                         target: {
                             name: props.name,
                             id: props.id,
@@ -708,19 +736,26 @@ export const Dropdown = React.memo(
 
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
-                return <i className="p-dropdown-clear-icon pi pi-times" onClick={clear}></i>;
+                const iconClassName = classNames('p-dropdown-clear-icon p-clickable');
+                const iconProps = { className: iconClassName, onPointerUp: clear };
+                const icon = props.clearIcon || <TimesIcon {...iconProps} />;
+
+                return IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
             }
 
             return null;
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable', props.dropdownIcon);
+            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable');
+            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
             const ariaLabel = props.placeholder || props.ariaLabel;
 
             return (
                 <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
-                    <span className={iconClassName}></span>
+                    {dropdownIcon}
                 </div>
             );
         };
@@ -729,7 +764,7 @@ export const Dropdown = React.memo(
         const selectedOption = getSelectedOption();
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Dropdown.defaultProps);
+        const otherProps = DropdownBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-dropdown p-component p-inputwrapper',
@@ -791,63 +826,3 @@ export const Dropdown = React.memo(
 );
 
 Dropdown.displayName = 'Dropdown';
-Dropdown.defaultProps = {
-    __TYPE: 'Dropdown',
-    appendTo: null,
-    ariaLabel: null,
-    ariaLabelledBy: null,
-    autoFocus: false,
-    className: null,
-    dataKey: null,
-    disabled: false,
-    dropdownIcon: 'pi pi-chevron-down',
-    editable: false,
-    emptyFilterMessage: null,
-    emptyMessage: null,
-    filter: false,
-    filterBy: null,
-    filterInputAutoFocus: true,
-    filterLocale: undefined,
-    filterMatchMode: 'contains',
-    filterPlaceholder: null,
-    filterTemplate: null,
-    focusInputRef: null,
-    id: null,
-    inputId: null,
-    inputRef: null,
-    itemTemplate: null,
-    maxLength: null,
-    name: null,
-    onBlur: null,
-    onChange: null,
-    onContextMenu: null,
-    onFilter: null,
-    onFocus: null,
-    onHide: null,
-    onMouseDown: null,
-    onShow: null,
-    optionDisabled: null,
-    optionGroupChildren: null,
-    optionGroupLabel: null,
-    optionGroupTemplate: null,
-    optionLabel: null,
-    optionValue: null,
-    options: null,
-    panelClassName: null,
-    panelStyle: null,
-    placeholder: null,
-    required: false,
-    resetFilterOnHide: false,
-    scrollHeight: '200px',
-    showClear: false,
-    showFilterClear: false,
-    showOnFocus: false,
-    style: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    transitionOptions: null,
-    value: null,
-    valueTemplate: null,
-    virtualScrollerOptions: null
-};

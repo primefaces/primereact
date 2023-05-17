@@ -4,10 +4,13 @@ import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect,
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
 
 export const ColorPicker = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ColorPickerBase.getProps(inProps);
+
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
@@ -495,6 +498,10 @@ export const ColorPicker = React.memo(
         useMountEffect(() => {
             updateHSBValue(props.value);
             updateUI();
+
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
         });
 
         useUpdateEffect(() => {
@@ -543,20 +550,34 @@ export const ColorPicker = React.memo(
 
         const createInput = () => {
             if (!props.inline) {
-                const inputClassName = classNames('p-colorpicker-preview p-inputtext', {
+                const inputClassName = classNames('p-colorpicker-preview p-inputtext', props.inputClassName, {
                     'p-disabled': props.disabled
                 });
 
-                const inputProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
+                const inputProps = ColorPickerBase.getOtherProps(props);
 
-                return <input ref={inputRef} type="text" className={inputClassName} readOnly id={props.inputId} tabIndex={props.tabIndex} disabled={props.disabled} onClick={onInputClick} onKeyDown={onInputKeydown} {...inputProps} />;
+                return (
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        readOnly
+                        className={inputClassName}
+                        style={props.inputStyle}
+                        id={props.inputId}
+                        tabIndex={props.tabIndex}
+                        disabled={props.disabled}
+                        onClick={onInputClick}
+                        onKeyDown={onInputKeydown}
+                        {...inputProps}
+                    />
+                );
             }
 
             return null;
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, ColorPicker.defaultProps);
+        const otherProps = ColorPickerBase.getOtherProps(props);
         const className = classNames(
             'p-colorpicker p-component',
             {
@@ -596,26 +617,3 @@ export const ColorPicker = React.memo(
 );
 
 ColorPicker.displayName = 'ColorPicker';
-ColorPicker.defaultProps = {
-    __TYPE: 'ColorPicker',
-    appendTo: null,
-    className: null,
-    defaultColor: 'ff0000',
-    disabled: false,
-    format: 'hex',
-    id: null,
-    inline: false,
-    inputId: null,
-    inputRef: null,
-    onChange: null,
-    onHide: null,
-    onShow: null,
-    panelClassName: null,
-    panelStyle: null,
-    style: null,
-    tabIndex: null,
-    tooltip: null,
-    tooltipOptions: null,
-    transitionOptions: null,
-    value: null
-};

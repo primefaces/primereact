@@ -1,5 +1,13 @@
+/**
+ *
+ * @todo Write the documentation.
+ *
+ * @module api
+ *
+ */
+
 // Config
-interface ZIndexOptions {
+export interface ZIndexOptions {
     modal: number;
     overlay: number;
     menu: number;
@@ -11,13 +19,13 @@ export type InputStyleType = 'outlined' | 'filled';
 
 export type AppendToType = 'self' | HTMLElement | undefined | null;
 
-interface FilterMatchModeOptions {
+export interface FilterMatchModeOptions {
     text: any[];
     numeric: any[];
     date: any[];
 }
 
-interface APIOptions {
+export interface APIOptions {
     ripple?: boolean;
     inputStyle?: InputStyleType;
     nonce?: string;
@@ -28,6 +36,7 @@ interface APIOptions {
     zIndex?: ZIndexOptions;
     filterMatchModeOptions?: FilterMatchModeOptions;
     nullSortOrder?: number;
+    changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
 }
 
 declare const PrimeReact: APIOptions;
@@ -71,8 +80,8 @@ export interface PrimeIconsOptions {
     readonly ARROW_UP: string;
     readonly ARROW_UP_LEFT: string;
     readonly ARROW_UP_RIGHT: string;
-    readonly ARROW_H: string;
-    readonly ARROW_V: string;
+    readonly ARROWS_H: string;
+    readonly ARROWS_V: string;
     readonly AT: string;
     readonly BACKWARD: string;
     readonly BAN: string;

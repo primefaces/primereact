@@ -5,7 +5,7 @@ import { DocSectionCode } from '../common/docsectioncode';
 export function HorizontalDoc(props) {
     const code = {
         basic: `
-<Splitter style={{ height: '300px' }} className="mb-5">
+<Splitter style={{ height: '300px' }}>
     <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
     <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
 </Splitter>
@@ -14,10 +14,9 @@ export function HorizontalDoc(props) {
 import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function HorizontalDoc() {
-
+export default function HorizontalDemo() {
     return (
-        <Splitter style={{ height: '300px' }} className="mb-5">
+        <Splitter style={{ height: '300px' }}>
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
         </Splitter>
@@ -28,10 +27,9 @@ export default function HorizontalDoc() {
 import React from 'react'; 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
-export default function HorizontalDoc() {
-
+export default function HorizontalDemo() {
     return (
-        <Splitter style={{ height: '300px' }} className="mb-5">
+        <Splitter style={{ height: '300px' }}>
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
             <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
         </Splitter>
@@ -43,10 +41,10 @@ export default function HorizontalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Splitter requires two SplitterPanel components to wrap.</p>
+                <p>Splitter requires two SplitterPanel components as children which are displayed horizontally by default.</p>
             </DocSectionText>
             <div className="card">
-                <Splitter style={{ height: '300px' }} className="mb-5">
+                <Splitter style={{ height: '300px' }}>
                     <SplitterPanel className="flex align-items-center justify-content-center">Panel 1</SplitterPanel>
                     <SplitterPanel className="flex align-items-center justify-content-center">Panel 2</SplitterPanel>
                 </Splitter>

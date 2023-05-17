@@ -1,10 +1,15 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
+import { SkeletonBase } from './SkeletonBase';
 
 export const Skeleton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = SkeletonBase.getProps(inProps);
+        const { ptm } = SkeletonBase.setMetaData({
+            props
+        });
+
         const elementRef = React.useRef(null);
-        const otherProps = ObjectUtils.findDiffKeys(props, Skeleton.defaultProps);
         const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
         const className = classNames(
             'p-skeleton p-component',
@@ -20,19 +25,18 @@ export const Skeleton = React.memo(
             getElement: () => elementRef.current
         }));
 
-        return <div ref={elementRef} style={style} className={className} {...otherProps}></div>;
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className,
+                style
+            },
+            SkeletonBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        return <div {...rootProps}></div>;
     })
 );
 
 Skeleton.displayName = 'Skeleton';
-Skeleton.defaultProps = {
-    __TYPE: 'Skeleton',
-    shape: 'rectangle',
-    size: null,
-    width: '100%',
-    height: '1rem',
-    borderRadius: null,
-    animation: 'wave',
-    style: null,
-    className: null
-};

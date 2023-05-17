@@ -1,12 +1,11 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/menu/importdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
-import { InlineDoc } from '../../components/doc/menu/inlinedoc';
-import { OverlayDoc } from '../../components/doc/menu/overlaydoc';
-import { ApiDoc } from '../../components/doc/menu/apidoc';
+import { GroupDoc } from '../../components/doc/menu/groupdoc';
+import { ImportDoc } from '../../components/doc/menu/importdoc';
+import { PopupDoc } from '../../components/doc/menu/popupdoc';
+import { StyleDoc } from '../../components/doc/menu/styledoc';
+import { TemplateDoc } from '../../components/doc/menu/templatedoc';
 
 const MenuDemo = () => {
     const docs = [
@@ -21,63 +20,33 @@ const MenuDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'inline',
-            label: 'Inline',
-            component: InlineDoc
+            id: 'group',
+            label: 'Group',
+            component: GroupDoc
         },
         {
-            id: 'overlay',
-            label: 'Overlay',
-            component: OverlayDoc
+            id: 'popup',
+            label: 'Popup',
+            component: PopupDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Menu Component</title>
-                <meta name="description" content="Menu is a navigation/command component that supports dynamic and static positioning." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Menu</h1>
-                    <p>Menu is a navigation/command component that supports dynamic and static positioning.</p>
-                </div>
-                <DocActions github="menu/index.js" />
-            </div>
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu', 'MenuItem']} />;
 };
 
 export default MenuDemo;

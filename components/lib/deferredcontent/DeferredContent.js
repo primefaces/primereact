@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect } from '../hooks/Hooks';
-import { ObjectUtils } from '../utils/Utils';
+import { DeferredContentBase } from './DeferredContentBase';
+import { mergeProps } from '../utils/Utils';
 
-export const DeferredContent = React.forwardRef((props, ref) => {
+export const DeferredContent = React.forwardRef((inProps, ref) => {
+    const props = DeferredContentBase.getProps(inProps);
+
     const [loadedState, setLoadedState] = React.useState(false);
     const elementRef = React.useRef(null);
 
@@ -14,6 +17,13 @@ export const DeferredContent = React.forwardRef((props, ref) => {
                 load();
                 unbindScrollListener();
             }
+        }
+    });
+
+    const { ptm } = DeferredContentBase.setMetaData({
+        props,
+        state: {
+            loaded: loadedState
         }
     });
 
@@ -44,17 +54,15 @@ export const DeferredContent = React.forwardRef((props, ref) => {
         }
     });
 
-    const otherProps = ObjectUtils.findDiffKeys(props, DeferredContent.defaultProps);
-
-    return (
-        <div ref={elementRef} {...otherProps}>
-            {loadedState && props.children}
-        </div>
+    const rootProps = mergeProps(
+        {
+            ref: elementRef
+        },
+        DeferredContentBase.getOtherProps(props),
+        ptm('root')
     );
+
+    return <div {...rootProps}>{loadedState && props.children}</div>;
 });
 
 DeferredContent.displayName = 'DeferredContent';
-DeferredContent.defaultProps = {
-    __TYPE: 'DeferredContent',
-    onload: null
-};

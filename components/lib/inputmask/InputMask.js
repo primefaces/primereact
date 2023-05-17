@@ -2,9 +2,12 @@ import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { InputMaskBase } from './InputMaskBase';
 
 export const InputMask = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = InputMaskBase.getProps(inProps);
+
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);
@@ -190,12 +193,11 @@ export const InputMask = React.memo(
                 pos,
                 begin,
                 end;
-            let iPhone = /iphone/i.test(DomHandler.getUserAgent());
 
             oldVal.current = elementRef.current.value;
 
             //backspace, delete, and escape get special treatment
-            if (k === 8 || k === 46 || (iPhone && k === 127)) {
+            if (k === 8 || k === 46 || (DomHandler.isIOS() && k === 127)) {
                 pos = caret();
                 begin = pos.begin;
                 end = pos.end;
@@ -256,7 +258,7 @@ export const InputMask = React.memo(
                         writeBuffer();
                         next = seekNext(p);
 
-                        if (/android/i.test(DomHandler.getUserAgent())) {
+                        if (DomHandler.isAndroid()) {
                             //Path for CSP Violation on FireFox OS 1.1
                             let proxy = () => {
                                 caret(next);
@@ -431,8 +433,12 @@ export const InputMask = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: defaultBuffer.current !== val ? val : '',
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -490,9 +496,7 @@ export const InputMask = React.memo(
                     '*': '[A-Za-z0-9]'
                 };
 
-                let ua = DomHandler.getUserAgent();
-
-                androidChrome.current = /chrome/i.test(ua) && /android/i.test(ua);
+                androidChrome.current = DomHandler.isChrome() && DomHandler.isAndroid();
 
                 let maskTokens = props.mask.split('');
 
@@ -562,12 +566,13 @@ export const InputMask = React.memo(
             }
         }, [isValueUpdated]);
 
-        const otherProps = ObjectUtils.findDiffKeys(props, InputMask.defaultProps);
+        const otherProps = InputMaskBase.getOtherProps(props);
         const className = classNames('p-inputmask', props.className);
 
         return (
             <InputText
                 ref={elementRef}
+                autoFocus={props.autoFocus}
                 id={props.id}
                 type={props.type}
                 name={props.name}
@@ -595,29 +600,3 @@ export const InputMask = React.memo(
 );
 
 InputMask.displayName = 'InputMask';
-InputMask.defaultProps = {
-    __TYPE: 'InputMask',
-    id: null,
-    value: null,
-    type: 'text',
-    mask: null,
-    slotChar: '_',
-    autoClear: true,
-    unmask: false,
-    style: null,
-    className: null,
-    placeholder: null,
-    size: null,
-    maxLength: null,
-    tabIndex: null,
-    disabled: false,
-    readOnly: false,
-    name: null,
-    required: false,
-    tooltip: null,
-    tooltipOptions: null,
-    onComplete: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null
-};

@@ -8,7 +8,7 @@ export function AutoResizeDoc(props) {
 
     const code = {
         basic: `
-<InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} autoResize />
+<InputTextarea autoResize value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -18,7 +18,9 @@ export default function AutoResizeDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} autoResize />
+        <div className="card flex justify-content-center">
+            <InputTextarea autoResize value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
+        </div>
     )
 }
         `,
@@ -30,7 +32,9 @@ export default function AutoResizeDemo() {
     const [value, setValue] = useState<string>('');
 
     return (
-        <InputTextarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} rows={5} cols={30} autoResize />
+        <div className="card flex justify-content-center">
+            <InputTextarea autoResize value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)} rows={5} cols={30} />
+        </div>
     )
 }
         `
@@ -39,10 +43,12 @@ export default function AutoResizeDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>In auto resize mode, textarea grows instead of displaying a scrollbar.</p>
+                <p>
+                    When <i>autoResize</i> is enabled, textarea grows instead of displaying a scrollbar.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <InputTextarea rows={5} cols={30} value={value} onChange={(e) => setValue(e.target.value)} autoResize />
+                <InputTextarea autoResize rows={5} cols={30} value={value} onChange={(e) => setValue(e.target.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

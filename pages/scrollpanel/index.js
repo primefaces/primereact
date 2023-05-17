@@ -1,11 +1,12 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
-import { ApiDoc } from '../../components/doc/scrollpanel/apidoc';
-import { CustomDemo } from '../../components/doc/scrollpanel/scrolldemo';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/scrollpanel/pt/wireframe';
+import { AccessibilityDoc } from '../../components/doc/scrollpanel/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/scrollpanel/basicdoc';
+import { CustomDemo } from '../../components/doc/scrollpanel/customdoc';
+import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
+import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
+import { PTDoc } from '../../components/doc/scrollpanel/pt/ptdoc';
 
 const ScrollPanelDemo = () => {
     const docs = [
@@ -25,49 +26,44 @@ const ScrollPanelDemo = () => {
             component: CustomDemo
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.scrollpanel.options',
+            label: 'ScrollPanel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React ScrollPanel Component</title>
-                <meta name="description" content="ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>ScrollPanel</h1>
-                    <p>ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar.</p>
-                </div>
-                <DocActions github="scrollpanel/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React ScrollPanel Component"
+            header="ScrollPanel"
+            description="ScrollPanel is a cross browser, lightweight and skinnable alternative to native browser scrollbar."
+            componentDocs={docs}
+            apiDocs={['ScrollPanel']}
+            ptDocs={ptDocs}
+        />
     );
 };
 

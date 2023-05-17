@@ -36,7 +36,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-export default function LazyDoc() {
+export default function LazyDemo() {
     const [products, setProducts] = useState([]);
     
     const onOpen = () => {
@@ -67,10 +67,10 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { ProductService } from './service/ProductService';
 
-export default function LazyDoc() {
+export default function LazyDemo() {
     const [products, setProducts] = useState<any[]>([]);
     
-    function onOpen(): void {
+    const onOpen = () => {
         ProductService.getProductsSmall().then(data => setProducts(data));
     }
 
@@ -112,7 +112,9 @@ export default function LazyDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Lazy Demo Content.</p>
+                <p>
+                    Using the <i>onOpen</i> event, data can be loaded in a lazy manner before displaying it in a table.
+                </p>
             </DocSectionText>
             <div className="card">
                 <Inplace onOpen={onOpen}>

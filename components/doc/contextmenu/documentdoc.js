@@ -1,10 +1,8 @@
-import { useRef } from 'react';
 import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function DocumentDoc(props) {
-    const cm = useRef(null);
     const items = [
         {
             label: 'File',
@@ -112,7 +110,7 @@ export function DocumentDoc(props) {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -133,17 +131,13 @@ export function DocumentDoc(props) {
     ];
     const code = {
         basic: `
-<div>
-    <ContextMenu global model={items} />
-    <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
-</div>
+<ContextMenu global model={items} breakpoint="767px" />
 `,
         javascript: `
-import React, { useRef } from 'react';
+import React from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 
-export default function DocumentDoc() {
-    const cm = useRef(null);
+export default function DocumentDemo() {
     const items = [
         {
             label: 'File',
@@ -255,7 +249,7 @@ export default function DocumentDoc() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -276,20 +270,20 @@ export default function DocumentDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <ContextMenu global model={items} />
-            <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+        <div className="card text-center">
+            <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
+            <ContextMenu global model={items} breakpoint="767px" />
         </div>
     )
 }
         `,
         typescript: `
-import React, { useRef } from 'react';
+import React from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function DocumentDoc() {
-    const cm = useRef(null);
-    const items = [
+export default function DocumentDemo() {
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
@@ -400,7 +394,7 @@ export default function DocumentDoc() {
                     ]
                 },
                 {
-                    label: 'Archieve',
+                    label: 'Archive',
                     icon: 'pi pi-fw pi-calendar-times',
                     items: [
                         {
@@ -421,9 +415,9 @@ export default function DocumentDoc() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
-            <ContextMenu global model={items} />
-            <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+        <div className="card text-center">
+            <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
+            <ContextMenu global model={items} breakpoint="767px" />
         </div>
     )
 }
@@ -435,9 +429,9 @@ export default function DocumentDoc() {
             <DocSectionText {...props}>
                 <p>Setting global property attaches the context menu to the document.</p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <ContextMenu global model={items} />
-                <img src="images/nature/nature3.jpg" onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt="Logo" onContextMenu={(e) => cm.current.show(e)} />
+            <div className="card text-center">
+                <p className="mb-0">Right-Click anywhere on this page to view the global ContextMenu.</p>
+                <ContextMenu global model={items} breakpoint="767px" />
             </div>
             <DocSectionCode code={code} />
         </>

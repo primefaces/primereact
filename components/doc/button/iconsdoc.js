@@ -1,6 +1,6 @@
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function IconsDoc(props) {
     const code = {
@@ -12,12 +12,10 @@ export function IconsDoc(props) {
         javascript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import './ButtonDemo.css';
 
-export default function IconsDoc() {
-
+export default function IconsDemo() {
     return (
-        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+        <div className="card flex flex-wrap justify-content-center gap-3">
             <Button icon="pi pi-check" />
             <Button label="Submit" icon="pi pi-check" />
             <Button label="Submit" icon="pi pi-check" iconPos="right" />
@@ -28,48 +26,27 @@ export default function IconsDoc() {
         typescript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import './ButtonDemo.css';
 
-export default function IconsDoc() {
-
+export default function IconsDemo() {
     return (
-        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
+        <div className="card flex flex-wrap justify-content-center gap-3">
             <Button icon="pi pi-check" />
             <Button label="Submit" icon="pi pi-check" />
             <Button label="Submit" icon="pi pi-check" iconPos="right" />
         </div>
     )
 }
-        `,
-        exitFiles: {
-            'ButtonDemo.css': `
-/* ButtonDemo.css */
-
-.button-demo .p-button {
-    margin-right: 0.5rem;
-}
-
-@media screen and (max-width: 960px) {
-    .button-demo .p-button {
-        margin-bottom: 0.5rem;
-    }
-    .button-demo .p-button:not(.p-button-icon-only) {
-        display: flex;
-        width: 100%;
-    }
-}                
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    Icon on a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute. Default icon position is "left" and alternative is "right". To display only an icon, leave label as undefined.
+                    Icon of a button is specified with <i>icon</i> property and position is configured using <i>iconPos</i> attribute.
                 </p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
+            <div className="card flex flex-wrap justify-content-center gap-3">
                 <Button icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" />
                 <Button label="Submit" icon="pi pi-check" iconPos="right" />

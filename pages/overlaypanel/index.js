@@ -1,10 +1,12 @@
-import Head from 'next/head';
-import { DocActions } from '../../components/doc/common/docactions';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/overlaypanel/apidoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/overlaypanel/basicdoc';
+import { DataTableDoc } from '../../components/doc/overlaypanel/datatabledoc';
 import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
-import { OverlayPanelDoc } from '../../components/doc/overlaypanel/overlaypaneldoc';
+import { PTDoc } from '../../components/doc/overlaypanel/pt/ptdoc';
+import { Wireframe } from '../../components/doc/overlaypanel/pt/wireframe';
+import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
 
 const OverlayPanelDemo = () => {
     const docs = [
@@ -14,57 +16,54 @@ const OverlayPanelDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'overlaypanel',
-            label: 'OverlayPanel',
-            component: OverlayPanelDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'methods',
-                    label: 'Methods'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'dataTable',
+            label: 'DataTable',
+            component: DataTableDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.overlaypanel.options',
+            label: 'OverlayPanel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Popover Component</title>
-                <meta name="description" content="OverlayPanel also known as Popover, is a container component that can overlay other components on page." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>OverlayPanel</h1>
-                    <p>OverlayPanel also known as Popover, is a container component that can overlay other components on page.</p>
-                </div>
-                <DocActions github="overlaypanel/index.js" />
-            </div>
-            <div className="content-section doc multiselect-demo">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Popover Component"
+            header="OverlayPanel"
+            description="OverlayPanel, also known as Popover, is a container component that can overlay other components on page."
+            componentDocs={docs}
+            apiDocs={['OverlayPanel']}
+            ptDocs={ptDocs}
+        />
     );
 };
 

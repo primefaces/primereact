@@ -36,12 +36,11 @@ export function ShapesDoc(props) {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export default function ShapesDoc() {
-
+export default function ShapesDemo() {
     return (
         <div className="card">
-            <div className="grid formgrid">
-                <div className="field col-12 md:col-6">
+            <div className="flex flex-wrap">
+                <div className="w-full md:w-6 p-3">
                     <h5>Rectangle</h5>
                     <Skeleton className="mb-2"></Skeleton>
                     <Skeleton width="10rem" className="mb-2"></Skeleton>
@@ -49,7 +48,7 @@ export default function ShapesDoc() {
                     <Skeleton height="2rem" className="mb-2"></Skeleton>
                     <Skeleton width="10rem" height="4rem"></Skeleton>
                 </div>
-                <div className="field col-12 md:col-6">
+                <div className="w-full md:w-6 p-3">
                     <h5>Rounded</h5>
                     <Skeleton className="mb-2" borderRadius="16px"></Skeleton>
                     <Skeleton width="10rem" className="mb-2" borderRadius="16px"></Skeleton>
@@ -57,8 +56,8 @@ export default function ShapesDoc() {
                     <Skeleton height="2rem" className="mb-2" borderRadius="16px"></Skeleton>
                     <Skeleton width="10rem" height="4rem" borderRadius="16px"></Skeleton>
                 </div>
-                <div className="field col-12 md:col-6">
-                    <h5 className="mt-3">Square</h5>
+                <div className="w-full md:w-6 p-3">
+                    <h5>Square</h5>
                     <div className="flex align-items-end">
                         <Skeleton size="2rem" className="mr-2"></Skeleton>
                         <Skeleton size="3rem" className="mr-2"></Skeleton>
@@ -66,8 +65,8 @@ export default function ShapesDoc() {
                         <Skeleton size="5rem"></Skeleton>
                     </div>
                 </div>
-                <div className="field col-12 md:col-6">
-                    <h5 className="mt-3">Circle</h5>
+                <div className="w-full md:w-6 p-3">
+                    <h5>Circle</h5>
                     <div className="flex align-items-end">
                         <Skeleton shape="circle" size="2rem" className="mr-2"></Skeleton>
                         <Skeleton shape="circle" size="3rem" className="mr-2"></Skeleton>
@@ -84,12 +83,11 @@ export default function ShapesDoc() {
 import React from 'react';
 import { Skeleton } from 'primereact/skeleton';
 
-export default function ShapesDoc() {
-
+export default function ShapesDemo() {
     return (
         <div className="card">
-            <div className="grid formgrid">
-                <div className="field col-12 md:col-6">
+            <div className="flex flex-wrap">
+                <div className="w-full md:w-6 p-3">
                     <h5>Rectangle</h5>
                     <Skeleton className="mb-2"></Skeleton>
                     <Skeleton width="10rem" className="mb-2"></Skeleton>
@@ -97,7 +95,7 @@ export default function ShapesDoc() {
                     <Skeleton height="2rem" className="mb-2"></Skeleton>
                     <Skeleton width="10rem" height="4rem"></Skeleton>
                 </div>
-                <div className="field col-12 md:col-6">
+                <div className="w-full md:w-6 p-3">
                     <h5>Rounded</h5>
                     <Skeleton className="mb-2" borderRadius="16px"></Skeleton>
                     <Skeleton width="10rem" className="mb-2" borderRadius="16px"></Skeleton>
@@ -105,8 +103,8 @@ export default function ShapesDoc() {
                     <Skeleton height="2rem" className="mb-2" borderRadius="16px"></Skeleton>
                     <Skeleton width="10rem" height="4rem" borderRadius="16px"></Skeleton>
                 </div>
-                <div className="field col-12 md:col-6">
-                    <h5 className="mt-3">Square</h5>
+                <div className="w-full md:w-6 p-3">
+                    <h5>Square</h5>
                     <div className="flex align-items-end">
                         <Skeleton size="2rem" className="mr-2"></Skeleton>
                         <Skeleton size="3rem" className="mr-2"></Skeleton>
@@ -114,8 +112,8 @@ export default function ShapesDoc() {
                         <Skeleton size="5rem"></Skeleton>
                     </div>
                 </div>
-                <div className="field col-12 md:col-6">
-                    <h5 className="mt-3">Circle</h5>
+                <div className="w-full md:w-6 p-3">
+                    <h5>Circle</h5>
                     <div className="flex align-items-end">
                         <Skeleton shape="circle" size="2rem" className="mr-2"></Skeleton>
                         <Skeleton shape="circle" size="3rem" className="mr-2"></Skeleton>
@@ -133,11 +131,13 @@ export default function ShapesDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Shapes Demo Content.</p>
+                <p>
+                    Various shapes and sizes can be created using styling properties like <i>shape</i>, <i>width</i>, <i>height</i>, <i>borderRadius</i> and <i>className</i>.
+                </p>
             </DocSectionText>
             <div className="card">
-                <div className="grid formgrid">
-                    <div className="field col-12 md:col-6">
+                <div className="flex flex-wrap">
+                    <div className="w-full md:w-6 p-3">
                         <h5>Rectangle</h5>
                         <Skeleton className="mb-2"></Skeleton>
                         <Skeleton width="10rem" className="mb-2"></Skeleton>
@@ -145,7 +145,7 @@ export default function ShapesDoc() {
                         <Skeleton height="2rem" className="mb-2"></Skeleton>
                         <Skeleton width="10rem" height="4rem"></Skeleton>
                     </div>
-                    <div className="field col-12 md:col-6">
+                    <div className="w-full md:w-6 p-3">
                         <h5>Rounded</h5>
                         <Skeleton className="mb-2" borderRadius="16px"></Skeleton>
                         <Skeleton width="10rem" className="mb-2" borderRadius="16px"></Skeleton>
@@ -153,8 +153,8 @@ export default function ShapesDoc() {
                         <Skeleton height="2rem" className="mb-2" borderRadius="16px"></Skeleton>
                         <Skeleton width="10rem" height="4rem" borderRadius="16px"></Skeleton>
                     </div>
-                    <div className="field col-12 md:col-6">
-                        <h5 className="mt-3">Square</h5>
+                    <div className="w-full md:w-6 p-3">
+                        <h5>Square</h5>
                         <div className="flex align-items-end">
                             <Skeleton size="2rem" className="mr-2"></Skeleton>
                             <Skeleton size="3rem" className="mr-2"></Skeleton>
@@ -162,8 +162,8 @@ export default function ShapesDoc() {
                             <Skeleton size="5rem"></Skeleton>
                         </div>
                     </div>
-                    <div className="field col-12 md:col-6">
-                        <h5 className="mt-3">Circle</h5>
+                    <div className="w-full md:w-6 p-3">
+                        <h5>Circle</h5>
                         <div className="flex align-items-end">
                             <Skeleton shape="circle" size="2rem" className="mr-2"></Skeleton>
                             <Skeleton shape="circle" size="3rem" className="mr-2"></Skeleton>

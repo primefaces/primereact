@@ -1,26 +1,20 @@
 import { Button } from '../../lib/button/Button';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const code = {
         basic: `
-<Button label="Submit" aria-label="Submit" />
-<Button label="Disabled" disabled />
-<Button label="Link" className="p-button-link" />
+<Button label="Submit" />
         `,
         javascript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import './ButtonDemo.css';
 
-export default function BasicDoc() {
-
+export default function BasicDemo() {
     return (
-        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
-            <Button label="Submit" aria-label="Submit" />
-            <Button label="Disabled" disabled />
-            <Button label="Link" className="p-button-link" />
+        <div className="card flex justify-content-center">
+            <Button label="Submit" />
         </div>
     )
 }
@@ -28,49 +22,26 @@ export default function BasicDoc() {
         typescript: `
 import React from 'react'; 
 import { Button } from 'primereact/button';
-import './ButtonDemo.css';
 
-export default function BasicDoc() {
-
+export default function BasicDemo() {
     return (
-        <div className="card flex flex-column lg:flex-row align-items-center justify-content-center button-demo">
-            <Button label="Submit" aria-label="Submit" />
-            <Button label="Disabled" disabled />
-            <Button label="Link" className="p-button-link" />
+        <div className="card flex justify-content-center">
+            <Button label="Submit" />
         </div>
     )
 }
-        `,
-        exitFiles: {
-            'ButtonDemo.css': `
-/* ButtonDemo.css */
-
-.button-demo .p-button {
-    margin-right: 0.5rem;
-}
-
-@media screen and (max-width: 960px) {
-    .button-demo .p-button {
-        margin-bottom: 0.5rem;
-    }
-    .button-demo .p-button:not(.p-button-icon-only) {
-        display: flex;
-        width: 100%;
-    }
-}                
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>Button is created using the Button element. </p>
+                <p>
+                    Text to display on a button is defined with the <i>label</i> property.
+                </p>
             </DocSectionText>
-            <div className="card flex flex-column lg:flex-row align-items-center justify-content-center">
-                <Button label="Submit" aria-label="Submit" />
-                <Button label="Disabled" disabled />
-                <Button label="Link" className="p-button-link" />
+            <div className="card flex justify-content-center">
+                <Button label="Submit" />
             </div>
             <DocSectionCode code={code} />
         </>

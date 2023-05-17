@@ -1,14 +1,15 @@
-import Head from 'next/head';
 import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ApiDoc } from '../../components/doc/progressbar/apidoc';
-import { ImportDoc } from '../../components/doc/progressbar/importdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
 import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
-import { StaticDoc } from '../../components/doc/progressbar/staticdoc';
-import { CustomDisplayValueDoc } from '../../components/doc/progressbar/customdisplayvaluedoc';
+import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
-import { DocActions } from '../../components/doc/common/docactions';
+import { StyleDoc } from '../../components/doc/progressbar/styledoc';
+import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/progressbar/pt/wireframe';
+import { PTDoc } from '../../components/doc/progressbar/pt/ptdoc';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -18,19 +19,19 @@ const ProgressBarDemo = () => {
             component: ImportDoc
         },
         {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
             id: 'dynamic',
             label: 'Dynamic',
             component: DynamicDoc
         },
         {
-            id: 'static',
-            label: 'Static',
-            component: StaticDoc
-        },
-        {
-            id: 'customdisplayvalue',
-            label: 'Custom display value',
-            component: CustomDisplayValueDoc
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
         },
         {
             id: 'indeterminate',
@@ -38,47 +39,36 @@ const ProgressBarDemo = () => {
             component: IndeterminateDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React ProgressBar Component</title>
-                <meta name="description" content="ProgressBar is a process status indicator." />
-            </Head>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.progressbar.options',
+            label: 'ProgressBar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ProgressBar</h1>
-                    <p>ProgressBar is a process status indicator.</p>
-                </div>
-                <DocActions github="progressbar/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} ptDocs={ptDocs} />;
 };
 
 export default ProgressBarDemo;

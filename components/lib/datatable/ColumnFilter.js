@@ -1,14 +1,19 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Dropdown } from '../dropdown/Dropdown';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { FilterIcon } from '../icons/filter';
+import { FilterSlashIcon } from '../icons/filterslash';
+import { PlusIcon } from '../icons/plus';
+import { TrashIcon } from '../icons/trash';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -17,7 +22,8 @@ export const ColumnFilter = React.memo((props) => {
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
 
-    const getColumnProp = (prop) => props.column.props[prop];
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
+
     const field = getColumnProp('filterField') || getColumnProp('field');
     const filterModel = props.filters[field];
     const filterStoreModel = props.filtersStore && props.filtersStore[field];
@@ -477,6 +483,10 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createMenuButton = () => {
+        const iconProps = { 'aria-hidden': true };
+        const icon = props.filterIcon || <FilterIcon {...iconProps} />;
+        const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
         if (showMenuButton()) {
             const className = classNames('p-column-filter-menu-button p-link', {
                 'p-column-filter-menu-button-open': overlayVisibleState,
@@ -486,7 +496,7 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <button ref={iconRef} type="button" className={className} aria-haspopup aria-expanded={overlayVisibleState} onClick={toggleMenu} onKeyDown={onToggleButtonKeyDown} aria-label={label}>
-                    <span className="pi pi-filter-icon pi-filter" aria-hidden="true"></span>
+                    {columnFilterIcon}
                     <Ripple />
                 </button>
             );
@@ -496,6 +506,10 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createClearButton = () => {
+        const iconProps = { 'aria-hidden': true };
+        const icon = props.filterClearIcon || <FilterSlashIcon {...iconProps} />;
+        const filterClearIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
         if (getColumnProp('showClearButton') && props.display === 'row') {
             const className = classNames('p-column-filter-clear-button p-link', {
                 'p-hidden-space': !hasRowFilter()
@@ -504,7 +518,7 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <button className={className} type="button" onClick={clearFilter} aria-label={clearLabel}>
-                    <span className="pi pi-filter-slash" aria-hidden="true"></span>
+                    {filterClearIcon}
                     <Ripple />
                 </button>
             );
@@ -571,7 +585,7 @@ export const ColumnFilter = React.memo((props) => {
         if (showRemoveIcon()) {
             const removeRuleLabel = removeRuleButtonLabel();
 
-            return <Button type="button" icon="pi pi-trash" className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
+            return <Button type="button" icon={props.filterRemoveIcon || <TrashIcon />} className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} />;
         }
 
         return null;
@@ -605,7 +619,7 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <div className="p-column-filter-add-rule">
-                    <Button type="button" label={addRuleLabel} icon="pi pi-plus" className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} />
+                    <Button type="button" label={addRuleLabel} icon={props.filterAddIcon || <PlusIcon />} className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} />
                 </div>
             );
         }

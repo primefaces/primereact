@@ -1,48 +1,72 @@
 import React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
-import { classNames } from '../../lib/utils/Utils';
+import { DocSectionText } from './docsectiontext';
+import APIDocs from './apidoc/index.json';
 
-export function DocSections(props) {
-    const router = useRouter();
+export function DocSections({ docs }) {
+    const getPTOption = (name) => {
+        const key = name.toLowerCase();
 
-    return (
-        <div className="doc-main">
-            {props.docs.map((doc) => {
-                const Comp = doc.component;
+        let values = APIDocs[key]?.interfaces?.values[`${name}PassThroughOptions`] || null;
 
-                return (
-                    <section key={doc.label}>
-                        {doc.children && doc.id !== 'api' ? (
-                            <div id={doc.id}>
-                                <h1 className="doc-section-label" id={doc.id}>
-                                    {doc.label}
-                                    <Link href={router.basePath + router.pathname + '#' + doc.id}>
-                                        <a id={doc.id}>#</a>
-                                    </Link>
-                                </h1>
-                                <div className={classNames('doc-section-description main')}>{doc.description || 'Section Content'}</div>
-                            </div>
-                        ) : null}
-                        {doc.component && <Comp id={doc.id} label={doc.label} />}
-                        {doc.children && !doc.component && (
-                            <React.Fragment>
-                                {doc.children.map((comp, i) => {
-                                    const { id, label, component } = comp;
-                                    const Component = component;
+        if (!values) {
+            for (const parentKey in APIDocs) {
+                if (APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`]) {
+                    values = APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+                    if (values) break;
+                }
+            }
+        }
 
-                                    return (
-                                        <DeferredContent id={id} key={i}>
-                                            <Component id={id} key={label} label={label} />
-                                        </DeferredContent>
-                                    );
-                                })}
-                            </React.Fragment>
-                        )}
-                    </section>
-                );
-            })}
-        </div>
-    );
+        let data = [];
+
+        if (values) {
+            for (const [i, prop] of values.props.entries()) {
+                data.push({
+                    value: i + 1,
+                    label: prop.name,
+                    description: prop.description
+                });
+            }
+        }
+
+        return data;
+    };
+
+    const renderDocChildren = (doc, level = 2) => {
+        return (
+            <React.Fragment key={doc.id + '_' + level}>
+                <DocSectionText {...doc} level={level}>
+                    {doc.description ? <p>{doc.description}</p> : null}
+                </DocSectionText>
+                {doc.children.map((d) => {
+                    const { id, label, component, children } = d;
+                    const Component = component;
+
+                    return component ? <Component id={id} key={id} label={label} level={level + 1} /> : children ? renderDocChildren(d, level + 1) : null;
+                })}
+            </React.Fragment>
+        );
+    };
+
+    const renderDocs = () => {
+        return docs.map((doc, i) => {
+            const { component: Comp, id, label, children } = doc;
+            const isPT = label.includes('PT');
+            const key = label.split(' ')[0];
+
+            const props = {
+                id,
+                label,
+                ...(isPT && { data: getPTOption(key) })
+            };
+
+            return (
+                <section key={`${label}_${i}`} className="py-3">
+                    {children ? renderDocChildren(doc) : Comp ? <Comp {...props} /> : null}
+                </section>
+            );
+        });
+    };
+
+    return renderDocs();
 }

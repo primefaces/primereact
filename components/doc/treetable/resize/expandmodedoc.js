@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../../lib/treetable/TreeTable';
-import { Column } from '../../../lib/column/Column';
+import React, { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
+import { Column } from '../../../lib/column/Column';
+import { TreeTable } from '../../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -14,7 +14,7 @@ export function ExpandModeDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} resizableColumns columnResizeMode="expand" showGridlines>
+<TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -26,16 +26,16 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from './service/NodeService';
 
-export default function ExpandModeDoc() {
+export default function ExpandModeDemo() {
     const [nodes, setNodes] = useState([]);
-    
+
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns columnResizeMode="expand" showGridlines>
+            <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -48,18 +48,19 @@ export default function ExpandModeDoc() {
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
+import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-export default function ExpandModeDoc() {
-    const [nodes, setNodes] = useState([]);
+export default function ExpandModeDemo() {
+    const [nodes, setNodes] = useState<TreeNode[]>([]);
 
     useEffect(() => {
         NodeService.getTreeTableNodes().then(data => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="card">
-            <TreeTable value={nodes} resizableColumns columnResizeMode="expand" showGridlines>
+            <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -69,7 +70,6 @@ export default function ExpandModeDoc() {
 }
         `,
         data: `
-/* NodeService */
 {
     key: '0',
     label: 'Documents',
@@ -102,10 +102,12 @@ export default function ExpandModeDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Scrolling data is available horizontally, vertically or both with optional support for frozen columns.</p>
+                <p>
+                    Setting <i>columnResizeMode</i> as <i>expand</i> changes the table width as well.
+                </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} resizableColumns columnResizeMode="expand" showGridlines>
+                <TreeTable value={nodes} resizableColumns showGridlines columnResizeMode="expand" tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

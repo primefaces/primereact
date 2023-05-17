@@ -3,38 +3,36 @@ import { FileUpload } from '../../lib/fileupload/FileUpload';
 import { Toast } from '../../lib/toast/Toast';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import getConfig from 'next/config';
 
 export function BasicDoc(props) {
     const toast = useRef(null);
-    const uploadPath = getConfig().publicRuntimeConfig.uploadPath;
 
-    const onBasicUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
 
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+<FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function BasicDoc() {
+export default function BasicDemo() {
     const toast = useRef(null);
 
-    const onBasicUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
         
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
-        </div>     
+            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
+        </div>  
     )
 }
         `,
@@ -43,38 +41,33 @@ import React, { useRef } from 'react';
 import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 
-export default function BasicDoc() {
-    const toast = useRef(null);
+export default function BasicDemo() {
+    const toast = useRef<Toast>(null);
 
-    const onBasicUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
-
+        
     return (
-        <div className="card">
+        <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
-        </div>
+            <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
+        </div>  
     )
 }
-        `,
-        php: `
-/* public/upload.php */
-
-<?php
-header ("Access-Control-Allow-Origin: *");
-echo '<p>Fake Upload Process</p>'; ?>
-    `
+        `
     };
 
     return (
         <>
             <DocSectionText {...props}>
-                <p>FileUpload basic mode provides a simpler UI as an alternative to advanced mode.</p>
+                <p>
+                    FileUpload basic <i>mode</i> provides a simpler UI as an alternative to default advanced mode.
+                </p>
             </DocSectionText>
-            <div className="card">
+            <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <FileUpload mode="basic" name="demo[]" url={uploadPath} accept="image/*" maxFileSize={1000000} onUpload={onBasicUpload} />
+                <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" maxFileSize={1000000} onUpload={onUpload} />
             </div>
             <DocSectionCode code={code} />
         </>

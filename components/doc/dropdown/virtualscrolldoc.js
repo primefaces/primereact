@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
 import { DocSectionCode } from '../common/docsectioncode';
@@ -13,68 +14,58 @@ export function VirtualScrollDoc(props) {
 
     const code = {
         basic: `
-<Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+<Dropdown value={selectedItem} onChange={(e) => setSelectedItem(e.value)} options={items} virtualScrollerOptions={{ itemSize: 38 }} 
+    placeholder="Select Item" className="w-full md:w-14rem" />
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
-import './DropdownDemo.css';
 
-export default function VirtualScrollDoc() {
-      const [selectedItem, setSelectedItem] = useState(null);
-      const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
-
-      const onItemChange = (e) => {
-        setSelectedItem(e.value)
-    }
+export default function VirtualScrollDemo() {
+    const [selectedItem, setSelectedItem] = useState(null);
+    const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedItem} onChange={(e) => setSelectedItem(e.value)} options={items} virtualScrollerOptions={{ itemSize: 38 }} 
+                placeholder="Select Item" className="w-full md:w-14rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { Dropdown, DropdownChangeParams } from 'primereact/dropdown';
-import './DropdownDemo.css';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 
-export default function VirtualScrollDoc() {
-      const [selectedItem, setSelectedItem] = useState<any | null>(null);
-      const items = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
+interface Item {
+    label: string;
+    value: number;
+}
 
-      const onItemChange = (e: DropdownChangeParams) => {
-        setSelectedItem(e.value)
-    }
+export default function VirtualScrollDemo() {
+    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+    const items: Item[] = Array.from({ length: 100000 }).map((_, i) => ({ label: \`Item #\${i}\`, value: i }));
 
     return (
-        <div className="card flex justify-content-center dropdown-demo">
-            <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item"/>
+        <div className="card flex justify-content-center">
+            <Dropdown value={selectedItem} onChange={(e: DropdownChangeEvent) => setSelectedItem(e.value)} options={items} virtualScrollerOptions={{ itemSize: 38 }} 
+                placeholder="Select Item" className="w-full md:w-14rem" />
         </div>
     )
 }
-        `,
-        extFiles: {
-            'DropdownDemo.css': `
-/* DropdownDemo.css */
-
-.dropdown-demo .p-dropdown {
-    width: 14rem;
-}
         `
-        }
     };
 
     return (
         <>
             <DocSectionText {...props}>
                 <p>
-                    Whether to use the virtualScroller feature. The properties of <i>VirtualScroller</i> component can be used like an object in it.
+                    VirtualScroller is used to render a long list of options efficiently like 100K records in this demo. The configuration is done with <i>virtualScrollerOptions</i> property, refer to the{' '}
+                    <Link href="/virtualscroller">VirtualScroller</Link> for more information about the available options as it is used internally by Dropdown.
                 </p>
             </DocSectionText>
-            <div className="card flex justify-content-center dropdown-demo">
-                <Dropdown value={selectedItem} options={items} onChange={onItemChange} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" />
+            <div className="card flex justify-content-center">
+                <Dropdown value={selectedItem} onChange={(e) => setSelectedItem(e.value)} options={items} virtualScrollerOptions={{ itemSize: 38 }} placeholder="Select Item" className="w-full md:w-14rem" />
             </div>
             <DocSectionCode code={code} />
         </>

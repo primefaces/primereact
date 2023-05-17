@@ -29,13 +29,6 @@ export function MaskDoc(props) {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -47,14 +40,14 @@ export function MaskDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<SpeedDial model={items} direction="up" mask />
+<SpeedDial mask model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
         `,
         javascript: `
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 
-export default function MaskDoc() {
+export default function MaskDemo() {
     const toast = useRef(null);
     const items = [
         {
@@ -79,13 +72,6 @@ export default function MaskDoc() {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -96,9 +82,9 @@ export default function MaskDoc() {
 
     return (
         <div className="card">
-            <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+            <div style={{ position: 'relative', height: '350px' }}>
                 <Toast ref={toast} />
-                <SpeedDial model={items} direction="up" mask />
+                <SpeedDial mask model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
             </div>
         </div>
     )
@@ -108,36 +94,30 @@ export default function MaskDoc() {
 import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function MaskDoc() {
+export default function MaskDemo() {
     const toast = useRef<Toast>(null);
-    const items = [
+    const items: MenuItem[] = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
             command: () => {
-                toast.current?.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+                toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
             }
         },
         {
             label: 'Update',
             icon: 'pi pi-refresh',
             command: () => {
-                toast.current?.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+                toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
             }
         },
         {
             label: 'Delete',
             icon: 'pi pi-trash',
             command: () => {
-                toast.current?.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-            }
-        },
-        {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
             }
         },
         {
@@ -151,9 +131,9 @@ export default function MaskDoc() {
 
     return (
         <div className="card">
-            <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+            <div style={{ position: 'relative', height: '350px' }}>
                 <Toast ref={toast} />
-                <SpeedDial model={items} direction="up" mask />
+                <SpeedDial mask model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
             </div>
         </div>
     )
@@ -164,12 +144,14 @@ export default function MaskDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Mask</p>
+                <p>
+                    Adding <i>mask</i> property displays a modal layer behind the popup items.
+                </p>
             </DocSectionText>
             <div className="card">
-                <div className="speeddial-mask-demo" style={{ position: 'relative', height: '350px' }}>
+                <div style={{ position: 'relative', height: '350px' }}>
                     <Toast ref={toast} />
-                    <SpeedDial model={items} direction="up" mask />
+                    <SpeedDial mask model={items} radius={120} type="quarter-circle" direction="up-left" style={{ right: 0, bottom: 0 }} />
                 </div>
             </div>
             <DocSectionCode code={code} />

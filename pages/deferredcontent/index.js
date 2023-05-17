@@ -1,10 +1,11 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/deferredcontent/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
+import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
 import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
-import { DeferredContentDoc } from '../../components/doc/deferredcontent/contentdoc';
-import { ApiDoc } from '../../components/doc/deferredcontent/apidoc';
+import { Wireframe } from '../../components/doc/deferredcontent/pt/wireframe';
+import { StyleDoc } from '../../components/doc/deferredcontent/styledoc';
 
 const DeferredContentDemo = () => {
     const docs = [
@@ -14,54 +15,50 @@ const DeferredContentDemo = () => {
             component: ImportDoc
         },
         {
-            id: 'deferredcontent',
-            label: 'DeferredContent',
-            component: DeferredContentDoc
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
         },
         {
-            id: 'Api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'properties',
-                    label: 'Properties'
-                },
-                {
-                    id: 'events',
-                    label: 'Events'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'datatable',
+            label: 'DataTable',
+            component: DataTableDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+
+    const ptDocs = [
+        {
+            id: 'pt.image',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.deferredcontent.options',
+            label: 'DeferredContent PT Options',
+            component: DocApiTable
         }
     ];
 
     return (
-        <div>
-            <Head>
-                <title>React Deferred Content Component</title>
-                <meta name="description" content="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>DeferredContent</h1>
-                    <p>DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll.</p>
-                </div>
-                <DocActions github="deferredcontent/index.js" />
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
+        <DocComponent
+            title="React Deferred Content Component"
+            header="DeferredContent"
+            description="DeferredContent postpones the loading the content that is initially not in the viewport until it becomes visible on scroll."
+            componentDocs={docs}
+            apiDocs={['DeferredContent']}
+            ptDocs={ptDocs}
+            ptDescription=""
+        />
     );
 };
 

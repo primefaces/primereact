@@ -121,13 +121,13 @@ export function VerticalDoc(props) {
     ];
     const code = {
         basic: `
-<MegaMenu model={items} orientation="vertical" />        
+<MegaMenu model={items} orientation="vertical" breakpoint="767px" />        
 `,
         javascript: `
 import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
 
-export default function VerticalDoc() {
+export default function VerticalDemo() {
     const items = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
@@ -242,16 +242,19 @@ export default function VerticalDoc() {
     ];
 
     return (
-        <MegaMenu model={items} orientation="vertical" />
+        <div className="card">
+            <MegaMenu model={items} orientation="vertical" breakpoint="767px" />
+        </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
 import { MegaMenu } from 'primereact/megamenu';
+import { MenuItem } from 'primereact/menuitem';
 
-export default function VerticalDoc() {
-    const items = [
+export default function VerticalDemo() {
+    const items: MenuItem[] = [
         {
             label: 'Videos', icon: 'pi pi-fw pi-video',
             items: [
@@ -365,7 +368,9 @@ export default function VerticalDoc() {
     ];
 
     return (
-        <MegaMenu model={items} orientation="vertical" />
+        <div className="card">
+            <MegaMenu model={items} orientation="vertical" breakpoint="767px" />
+        </div>
     )
 }
         `
@@ -374,10 +379,12 @@ export default function VerticalDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Default orientation is "horizontal" with "vertical" as the alternative.</p>
+                <p>
+                    Layout of the MegaMenu is changed with the <i>orientation</i> property that accepts <i>horizontal</i> and <i>vertical</i> as options.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <MegaMenu model={items} orientation="vertical" />
+            <div className="card">
+                <MegaMenu model={items} orientation="vertical" breakpoint="767px" />
             </div>
             <DocSectionCode code={code} />
         </>

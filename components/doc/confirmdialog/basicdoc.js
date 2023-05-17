@@ -41,7 +41,7 @@ export function BasicDoc(props) {
         basic: `
 <Toast ref={toast} />
 <ConfirmDialog />
-<Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
+<Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
         `,
         javascript: `
@@ -49,62 +49,16 @@ import React, { useRef } from 'react';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { Toast } from 'primereact/toast';
 
-export default function BasicDoc() {
-const toast = useRef(null);
+export default function BasicDemo() {
+    const toast = useRef(null);
 
-const accept = () => {
-    toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-}
+    const accept = () => {
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    }
 
-const reject = () => {
-    toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-}
-        const confirm1 = () => {
-        confirmDialog({
-            message: 'Are you sure you want to proceed?',
-            header: 'Confirmation',
-            icon: 'pi pi-exclamation-triangle',
-            accept,
-            reject
-        });
-    };
-
-    const confirm2 = () => {
-        confirmDialog({
-            message: 'Do you want to delete this record?',
-            header: 'Delete Confirmation',
-            icon: 'pi pi-info-circle',
-            acceptClassName: 'p-button-danger',
-            accept,
-            reject
-        });
-    };
-
-    return (
-        <div className="card flex justify-content-center">
-            <Toast ref={toast} />
-            <ConfirmDialog />
-            <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-            <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
-        </div>
-    )
-}
-        `,
-        typescript: `
-import React, { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Toast } from 'primereact/toast';
-
-export default function BasicDoc() {
-const toast = useRef<Toast>(null);
-
-const accept = () => {
-    toast.current?.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-}
-
-const reject = () => {
-    toast.current?.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-}
+    const reject = () => {
+        toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+    }
 
     const confirm1 = () => {
         confirmDialog({
@@ -128,12 +82,63 @@ const reject = () => {
     };
 
     return (
-        <div className="card flex justify-content-center">
+        <>
             <Toast ref={toast} />
             <ConfirmDialog />
-            <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-            <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
-        </div>
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+            </div>
+        </>
+    )
+}
+        `,
+        typescript: `
+import React, { useRef } from 'react';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Toast } from 'primereact/toast';
+
+export default function BasicDemo() {
+    const toast = useRef<Toast>(null);
+
+    const accept = () => {
+        toast.current?.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    }
+
+    const reject = () => {
+        toast.current?.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+    }
+
+    const confirm1 = () => {
+        confirmDialog({
+            message: 'Are you sure you want to proceed?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            accept,
+            reject
+        });
+    };
+
+    const confirm2 = () => {
+        confirmDialog({
+            message: 'Do you want to delete this record?',
+            header: 'Delete Confirmation',
+            icon: 'pi pi-info-circle',
+            acceptClassName: 'p-button-danger',
+            accept,
+            reject
+        });
+    };
+
+    return (
+        <>
+            <Toast ref={toast} />
+            <ConfirmDialog />
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+            </div>
+        </>
     )
 }
         `
@@ -142,12 +147,14 @@ const reject = () => {
     return (
         <>
             <DocSectionText {...props}>
-                <p>ConfirmDialog is used as a container and visibility is managed with visible property where onHide event is required to update the visibility state.</p>
+                <p>
+                    A ConfirmDialog component needs to be present on the page that is interacted with the <i>confirmDialog</i> function that takes a configuration object for customization.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center">
-                <Toast ref={toast} />
-                <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
-                <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
+            <Toast ref={toast} />
+            <div className="card flex flex-wrap gap-2 justify-content-center">
+                <Button onClick={confirm1} icon="pi pi-check" label="Confirm"></Button>
+                <Button onClick={confirm2} icon="pi pi-times" label="Delete" className="p-button-danger p-button-outlined"></Button>
             </div>
             <DocSectionCode code={code} />
         </>

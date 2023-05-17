@@ -1,12 +1,14 @@
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { DocActions } from '../../components/doc/common/docactions';
-import { ImportDoc } from '../../components/doc/splitter/importdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/splitter/accessibilitydoc';
 import { HorizontalDoc } from '../../components/doc/splitter/horizontaldoc';
-import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
+import { ImportDoc } from '../../components/doc/splitter/importdoc';
 import { NestedDoc } from '../../components/doc/splitter/nesteddoc';
-import { ApiDoc } from '../../components/doc/splitter/apidoc';
+import { PTDoc } from '../../components/doc/splitter/pt/ptdoc';
+import { Wireframe } from '../../components/doc/splitter/pt/wireframe';
+import { SizeDoc } from '../../components/doc/splitter/sizedoc';
+import { StyleDoc } from '../../components/doc/splitter/styledoc';
+import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
 
 const SplitterDemo = () => {
     const docs = [
@@ -21,6 +23,11 @@ const SplitterDemo = () => {
             component: HorizontalDoc
         },
         {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
             id: 'vertical',
             label: 'Vertical',
             component: VerticalDoc
@@ -31,54 +38,41 @@ const SplitterDemo = () => {
             component: NestedDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc,
-            children: [
-                {
-                    id: 'propertiesofsplitterpanel',
-                    label: 'Properties of SplitterPanel'
-                },
-                {
-                    id: 'propertiesofsplitter',
-                    label: 'Properties of Splitter'
-                },
-                {
-                    id: 'eventsofsplitter',
-                    label: 'Events of Splitter'
-                },
-                {
-                    id: 'styling',
-                    label: 'Styling'
-                },
-                {
-                    id: 'accessibility',
-                    label: 'Accessibility'
-                }
-            ]
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Splitter Component</title>
-                <meta name="description" content="Splitter is utilized to separate and resize panels." />
-            </Head>
-            <div className="content-section introduction">
-                <div>
-                    <h1>Splitter</h1>
-                    <p>Splitter is utilized to separate and resize panels.</p>
-                </div>
-                <DocActions github="splitter/index.js" />
-            </div>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.splitter.options',
+            label: 'Splitter PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.splitterpanel.options',
+            label: 'SplitterPanel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Splitter Component" header="Splitter" description="Splitter is utilized to separate and resize panels." componentDocs={docs} apiDocs={['Splitter', 'SplitterPanel']} ptDocs={ptDocs} />;
 };
 
 export default SplitterDemo;

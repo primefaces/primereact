@@ -5,6 +5,7 @@ export function ImportDoc(props) {
     const code = {
         basic: `
 import { Terminal } from 'primereact/terminal';
+import { TerminalService } from 'primereact/terminalservice';
         `
     };
 

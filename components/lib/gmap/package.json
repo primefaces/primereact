@@ -1,6 +1,0 @@
-{
-    "main": "./gmap.cjs.js",
-    "module": "./gmap.esm.js",
-    "unpkg": "./gmap.min.js",
-    "types": "./gmap.d.ts"
-}
