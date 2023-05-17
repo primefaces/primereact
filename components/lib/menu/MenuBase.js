@@ -6,6 +6,7 @@ export const MenuBase = {
         id: null,
         model: null,
         popup: false,
+        popupAlignment: 'left',
         style: null,
         className: null,
         autoZIndex: true,

@@ -26,6 +26,11 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      */
     popup?: boolean | undefined;
     /**
+     * In popup mode determines how the overlay is aligned with its target. Values either 'left' or 'right'.
+     * @defaultValue left
+     */
+    popupAlignment?: 'left' | 'right';
+    /**
      * Whether to automatically manage layering.
      * @defaultValue true
      */

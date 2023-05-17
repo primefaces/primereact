@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
 
 export const Menu = React.memo(
@@ -113,7 +113,7 @@ export const Menu = React.memo(
 
         const onEnter = () => {
             ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
-            DomHandler.absolutePosition(menuRef.current, targetRef.current);
+            DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
 
         const onEntered = () => {
