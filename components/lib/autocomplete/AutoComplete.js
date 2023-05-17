@@ -379,6 +379,12 @@ export const AutoComplete = React.memo(
         };
 
         const forceItemSelection = (event) => {
+            if (props.multiple) {
+                inputRef.current.value = '';
+
+                return;
+            }
+
             const inputValue = event.target.value.trim();
             const item = (props.suggestions || []).find((it) => {
                 const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
