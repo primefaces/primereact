@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import PrimeReact from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-
+import { Ripple } from '../ripple/Ripple';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { AngleRightIcon } from '../icons/angleright';
 export const CascadeSelectSub = React.memo((props) => {
     const [activeOptionState, setActiveOptionState] = React.useState(null);
     const elementRef = React.useRef(null);
@@ -207,7 +208,9 @@ export const CascadeSelectSub = React.memo((props) => {
         );
         const submenu = createSubmenu(option);
         const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span className="p-cascadeselect-item-text">{getOptionLabelToRender(option)}</span>;
-        const optionGroup = isOptionGroup(option) && <span className="p-cascadeselect-group-icon pi pi-angle-right" />;
+        const iconClassName = 'p-cascadeselect-group-icon';
+        const icon = props.optionGroupIcon || <AngleRightIcon className={iconClassName} />;
+        const optionGroup = isOptionGroup(option) && IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
         const key = getOptionLabelToRender(option) + '_' + index;
 
         return (
@@ -226,7 +229,10 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className);
+    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className, {
+        'p-input-filled': PrimeReact.inputStyle === 'filled',
+        'p-ripple-disabled': PrimeReact.ripple === false
+    });
     const submenu = createMenu();
 
     return (

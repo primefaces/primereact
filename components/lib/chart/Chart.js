@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
+import { ChartBase } from './ChartBase';
 
 // GitHub #3059 wrapper if loaded by script tag
 const ChartJS = (function () {
@@ -12,7 +13,11 @@ const ChartJS = (function () {
 })();
 
 const PrimeReactChart = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ChartBase.getProps(inProps);
+        const { ptm } = ChartBase.setMetaData({
+            props
+        });
         const elementRef = React.useRef(null);
         const chartRef = React.useRef(null);
         const canvasRef = React.useRef(null);
@@ -33,6 +38,12 @@ const PrimeReactChart = React.memo(
             } else {
                 import('chart.js/auto').then((module) => {
                     destroyChart();
+
+                    // In case that the Chart component has been unmounted during asynchronous loading of ChartJS,
+                    // the canvasRef will not be available anymore, and no Chart should be created.
+                    if (!canvasRef.current) {
+                        return;
+                    }
 
                     if (module) {
                         if (module.default) {
@@ -72,13 +83,34 @@ const PrimeReactChart = React.memo(
             destroyChart();
         });
 
-        const otherProps = ObjectUtils.findDiffKeys(props, PrimeReactChart.defaultProps);
         const className = classNames('p-chart', props.className);
         const style = Object.assign({ width: props.width, height: props.height }, props.style);
+        const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
+        const ariaLabel = props.ariaLabel || title;
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style,
+                className
+            },
+            ChartBase.getOtherProps(props),
+            ptm('root')
+        );
+        const canvasProps = mergeProps(
+            {
+                ref: canvasRef,
+                width: props.width,
+                height: props.height,
+                role: 'img',
+                'aria-label': ariaLabel
+            },
+            ptm('canvas')
+        );
 
         return (
-            <div id={props.id} ref={elementRef} style={style} className={className} {...otherProps}>
-                <canvas ref={canvasRef} width={props.width} height={props.height}></canvas>
+            <div {...rootProps}>
+                <canvas {...canvasProps}></canvas>
             </div>
         );
     }),
@@ -86,17 +118,5 @@ const PrimeReactChart = React.memo(
 );
 
 PrimeReactChart.displayName = 'Chart';
-PrimeReactChart.defaultProps = {
-    __TYPE: 'Chart',
-    id: null,
-    type: null,
-    data: null,
-    options: null,
-    plugins: null,
-    width: null,
-    height: null,
-    style: null,
-    className: null
-};
 
 export { PrimeReactChart as Chart };

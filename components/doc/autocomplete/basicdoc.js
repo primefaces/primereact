@@ -1,108 +1,55 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { CountryService } from '../../../service/CountryService';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
-    const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const [filteredCountries, setFilteredCountries] = useState(null);
-    const countryservice = new CountryService();
+    const [value, setValue] = useState('');
+    const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const searchCountry = (event) => {
-        setTimeout(() => {
-            let _filteredCountries;
-
-            if (!event.query.trim().length) {
-                _filteredCountries = [...countries];
-            } else {
-                _filteredCountries = countries.filter((country) => {
-                    return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-                });
-            }
-
-            setFilteredCountries(_filteredCountries);
-        }, 250);
+    const search = (event) => {
+        setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
 
     const code = {
         basic: `
-<AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} aria-label="Countries" dropdownAriaLabel="Select Country" />
+<AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)}  />
         `,
         javascript: `
-import { useState, useEffect } from 'react';
-import { AutoComplete } from 'primereact/autocomplete';
-import { CountryService } from '../../../service/CountryService';
+import React, { useState } from "react";
+import { AutoComplete } from "primereact/autocomplete";
 
 export default function BasicDemo() {
-    const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const [filteredCountries, setFilteredCountries] = useState(null);
-    const countryservice = new CountryService();
+    const [value, setValue] = useState('');
+    const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const searchCountry = (event) => {
-        setTimeout(() => {
-            let _filteredCountries;
-
-            if (!event.query.trim().length) {
-                _filteredCountries = [...countries];
-            } else {
-                _filteredCountries = countries.filter((country) => {
-                    return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-                });
-            }
-
-            setFilteredCountries(_filteredCountries);
-        }, 250);
-    };
+    const search = (event) => {
+        setItems([...Array(10).keys()].map(item => event.query + '-' + item));
+    }
 
     return (
-        <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} aria-label="Countries" dropdownAriaLabel="Select Country" />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState, useEffect } from 'react';
-import { AutoComplete } from 'primereact/autocomplete';
-import { CountryService } from '../../../service/CountryService';
+import React, { useState } from "react";
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
 
 export default function BasicDemo() {
-    const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState(null);
-    const [filteredCountries, setFilteredCountries] = useState(null);
-    const countryservice = new CountryService();
+    const [value, setValue] = useState<string>('');
+    const [items, setItems] = useState<string[]>([]);
 
-    useEffect(() => {
-        countryservice.getCountries().then((data) => setCountries(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const search = (event: AutoCompleteCompleteEvent) => {
+        setItems([...Array(10).keys()].map(item => event.query + '-' + item));
+    }
 
-    const searchCountry = (event) => {
-        setTimeout(() => {
-            let _filteredCountries;
-
-            if (!event.query.trim().length) {
-                _filteredCountries = [...countries];
-            } else {
-                _filteredCountries = countries.filter((country) => {
-                    return country.name.toLowerCase().startsWith(event.query.toLowerCase());
-                });
-            }
-
-            setFilteredCountries(_filteredCountries);
-        }, 250);
-    };
-    
     return (
-        <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e : AutoCompleteChangeParams) => setSelectedCountry(e.value)} aria-label="Countries" dropdownAriaLabel="Select Country" />
+        <div className="card flex justify-content-center">
+            <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `
@@ -111,10 +58,12 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, the component requires a list of <i>suggestions</i> and a <i>completeMethod</i> to query the results.
+                <p>
+                    AutoComplete is used as a controlled component with <i>value</i> and <i>onChange</i> properties. In addition, <i>suggestions</i> and a <i>completeMethod</i> are required to query the results.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete value={selectedCountry} suggestions={filteredCountries} completeMethod={searchCountry} field="name" onChange={(e) => setSelectedCountry(e.value)} aria-label="Countries" dropdownAriaLabel="Select Country" />
+                <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
             </div>
             <DocSectionCode code={code} />
         </>

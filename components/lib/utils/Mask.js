@@ -177,12 +177,11 @@ export function mask(el, options) {
             pos,
             begin,
             end;
-        let iPhone = /iphone/i.test(DomHandler.getUserAgent());
 
         oldVal = el.value;
 
         //backspace, delete, and escape get special treatment
-        if (k === 8 || k === 46 || (iPhone && k === 127)) {
+        if (k === 8 || k === 46 || (DomHandler.isIOS() && k === 127)) {
             pos = caret();
             begin = pos.begin;
             end = pos.end;
@@ -243,7 +242,7 @@ export function mask(el, options) {
                     writeBuffer();
                     next = seekNext(p);
 
-                    if (/android/i.test(DomHandler.getUserAgent())) {
+                    if (DomHandler.isAndroid()) {
                         //Path for CSP Violation on FireFox OS 1.1
                         let proxy = () => {
                             caret(next);
@@ -453,9 +452,7 @@ export function mask(el, options) {
             '*': '[A-Za-z0-9]'
         };
 
-        let ua = DomHandler.getUserAgent();
-
-        androidChrome = /chrome/i.test(ua) && /android/i.test(ua);
+        androidChrome = DomHandler.isChrome() && DomHandler.isAndroid();
 
         let maskTokens = options.mask.split('');
 

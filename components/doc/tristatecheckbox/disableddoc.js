@@ -1,37 +1,31 @@
-import { useState } from 'react';
 import { TriStateCheckbox } from '../../lib/tristatecheckbox/TriStateCheckbox';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
-    const [value, setValue] = useState('Disabled');
-
     const code = {
         basic: `
-<TriStateCheckbox disabled value={value} onChange={(e) => setValue(e.value)} />
-
+<TriStateCheckbox disabled />
         `,
         javascript: `
-import { useState } from "react";
-import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import React from "react";
 
-export default function DisabledDoc() {
-    const [value, setValue] = useState(null);
-
+export default function DisabledDemo() {
     return (
-        <TriStateCheckbox disabled value={value} onChange={(e) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <TriStateCheckbox disabled />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { TriStateCheckbox } from 'primereact/tristatecheckbox';
+import React from "react";
 
-export default function DisabledDoc() {
-    const [value, setValue] = useState<any>(null);
-
+export default function DisabledDemo() {
     return (
-        <TriStateCheckbox disabled value={value} onChange={(e : TriStateCheckboxChangeParams) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <TriStateCheckbox disabled />
+        </div>
     );
 }
         `
@@ -40,13 +34,12 @@ export default function DisabledDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                With <i>disabled</i> it specifies that the element value cannot be altered.
+                <p>
+                    When <i>disabled</i> is present, the element cannot be edited and focused.
+                </p>
             </DocSectionText>
-            <div className="card flex justify-content-center align-items-center">
-                <div className="mr-2">
-                    <TriStateCheckbox disabled value={value} onChange={(e) => setValue(e.value)} />
-                </div>
-                <label>{String(value)}</label>
+            <div className="card flex justify-content-center">
+                <TriStateCheckbox disabled />
             </div>
             <DocSectionCode code={code} />
         </>

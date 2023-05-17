@@ -1,49 +1,45 @@
-import React from 'react';
-import RippleDoc from '../../components/doc/ripple';
-import { Ripple } from '../../components/lib/ripple/Ripple';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import React, { useContext } from 'react';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/ripple/basicdoc';
+import { ConfigurationDoc } from '../../components/doc/ripple/configurationdoc';
+import { ImportDoc } from '../../components/doc/ripple/importdoc';
+import { StyleDoc } from '../../components/doc/ripple/styledoc';
+import AppContentContext from '../../components/layout/appcontentcontext';
 
 const RippleDemo = () => {
-    return (
-        <div>
-            <Head>
-                <title>React Ripple Component</title>
-                <meta name="description" content="Ripple component adds ripple effect to the host element." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Ripple</h1>
-                    <p>Ripple component adds ripple effect to the host element.</p>
-                </div>
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'configuration',
+            label: 'ConfigurationDoc',
+            component: ConfigurationDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
+    const appContentContext = useContext(AppContentContext);
 
-                <DocActions github="ripple/index.js" />
-            </div>
+    appContentContext.onRippleChange(true);
 
-            <div className="content-section implementation ripple-demo">
-                <div className="card-container flex">
-                    <div className="card primary-box p-ripple">
-                        Default
-                        <Ripple />
-                    </div>
-                    <div className="card styled-box-green p-ripple">
-                        Green
-                        <Ripple />
-                    </div>
-                    <div className="card styled-box-orange p-ripple">
-                        Orange
-                        <Ripple />
-                    </div>
-                    <div className="card styled-box-purple p-ripple">
-                        Purple
-                        <Ripple />
-                    </div>
-                </div>
-            </div>
-
-            <RippleDoc />
-        </div>
-    );
+    return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={['Ripple']} />;
 };
 
 export default RippleDemo;

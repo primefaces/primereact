@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ColumnBase } from '../column/ColumnBase';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
 
@@ -6,13 +7,17 @@ export const BodyRow = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
 
+    const getColumnProp = (column, name) => ColumnBase.getCProp(column, name);
+
     const isFocusable = () => {
         return props.selectionMode && props.selectionModeInColumn !== 'single' && props.selectionModeInColumn !== 'multiple';
     };
 
     const isGrouped = (column) => {
-        if (props.groupRowsBy && getColumnProp(column, 'field')) {
-            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(column.props.field) > -1 : props.groupRowsBy === column.props.field;
+        const columnField = getColumnProp(column, 'field');
+
+        if (props.groupRowsBy && columnField) {
+            return Array.isArray(props.groupRowsBy) ? props.groupRowsBy.indexOf(columnField) > -1 : props.groupRowsBy === columnField;
         }
 
         return false;
@@ -22,12 +27,8 @@ export const BodyRow = React.memo((props) => {
         return props.compareSelectionBy === 'equals' ? data1 === data2 : ObjectUtils.equals(data1, data2, props.dataKey);
     };
 
-    const getColumnProp = (col, prop) => {
-        return col ? col.props[prop] : null;
-    };
-
     const getTabIndex = () => {
-        return isFocusable() && !props.allowCellSelection ? (props.index === 0 ? props.tabIndex : -1) : null;
+        return isFocusable() && !props.allowCellSelection ? (props.rowIndex === 0 ? props.tabIndex : -1) : null;
     };
 
     const findIndex = (collection, rowData) => {
@@ -94,15 +95,23 @@ export const BodyRow = React.memo((props) => {
     };
 
     const onClick = (event) => {
-        props.onRowClick({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowClick({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onDoubleClick = (event) => {
-        props.onRowDoubleClick({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowDoubleClick({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onRightClick = (event) => {
-        props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowRightClick({ originalEvent: event, data: props.rowData, index: props.rowIndex });
+    };
+
+    const onMouseEnter = (event) => {
+        props.onRowMouseEnter({ originalEvent: event, data: props.rowData, index: props.rowIndex });
+    };
+
+    const onMouseLeave = (event) => {
+        props.onRowMouseLeave({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onTouchEnd = (event) => {
@@ -164,31 +173,31 @@ export const BodyRow = React.memo((props) => {
     };
 
     const onMouseDown = (event) => {
-        props.onRowMouseDown({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowMouseDown({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onMouseUp = (event) => {
-        props.onRowMouseUp({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowMouseUp({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onDragStart = (event) => {
-        props.onRowDragStart({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowDragStart({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onDragOver = (event) => {
-        props.onRowDragOver({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowDragOver({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onDragLeave = (event) => {
-        props.onRowDragLeave({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowDragLeave({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onDragEnd = (event) => {
-        props.onRowDragEnd({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowDragEnd({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onDrop = (event) => {
-        props.onRowDrop({ originalEvent: event, data: props.rowData, index: props.index });
+        props.onRowDrop({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onEditChange = (e, isEditing) => {
@@ -237,7 +246,7 @@ export const BodyRow = React.memo((props) => {
             props.onRowEditInit({
                 originalEvent: event,
                 data: props.rowData,
-                index: props.index
+                index: props.rowIndex
             });
         }
 
@@ -254,7 +263,7 @@ export const BodyRow = React.memo((props) => {
             props.onRowEditSave({
                 originalEvent: event,
                 data: props.rowData,
-                index: props.index,
+                index: props.rowIndex,
                 valid
             });
         }
@@ -277,7 +286,7 @@ export const BodyRow = React.memo((props) => {
             props.onRowEditCancel({
                 originalEvent: event,
                 data: props.rowData,
-                index: props.index
+                index: props.rowIndex
             });
         }
 
@@ -289,7 +298,7 @@ export const BodyRow = React.memo((props) => {
     const createContent = () => {
         return props.columns.map((col, i) => {
             if (shouldRenderBodyCell(props.value, col, props.index)) {
-                const key = `${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
+                const key = `${props.rowIndex}_${getColumnProp(col, 'columnKey') || getColumnProp(col, 'field')}_${i}`;
                 const rowSpan = props.rowGroupMode === 'rowspan' ? calculateRowGroupSize(props.value, col, props.index) : null;
 
                 return (
@@ -300,7 +309,7 @@ export const BodyRow = React.memo((props) => {
                         tableSelector={props.tableSelector}
                         column={col}
                         rowData={props.rowData}
-                        rowIndex={props.index}
+                        rowIndex={props.rowIndex}
                         index={i}
                         rowSpan={rowSpan}
                         dataKey={props.dataKey}
@@ -333,6 +342,7 @@ export const BodyRow = React.memo((props) => {
                         expanded={props.expanded}
                         expandedRowIcon={props.expandedRowIcon}
                         collapsedRowIcon={props.collapsedRowIcon}
+                        checkIcon={props.checkIcon}
                         virtualScrollerOptions={props.virtualScrollerOptions}
                     />
                 );
@@ -344,10 +354,10 @@ export const BodyRow = React.memo((props) => {
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
     const className = classNames(rowClassName, {
-        'p-highlight': !props.allowCellSelection && props.selected,
+        'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
         'p-highlight-contextmenu': props.contextMenuSelected,
-        'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.index }),
-        'p-row-odd': props.index % 2 !== 0
+        'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
+        'p-row-odd': props.rowIndex % 2 !== 0
     });
     const style = { height: props.virtualScrollerOptions ? props.virtualScrollerOptions.itemSize : undefined };
     const content = createContent();
@@ -361,6 +371,8 @@ export const BodyRow = React.memo((props) => {
             style={style}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             onClick={onClick}
             onDoubleClick={onDoubleClick}
             onContextMenu={onRightClick}

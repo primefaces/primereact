@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { ObjectUtils } from '../utils/Utils';
+import { CurrentPageReportBase } from './PaginatorBase';
 
-export const CurrentPageReport = React.memo((props) => {
+export const CurrentPageReport = React.memo((inProps) => {
+    const props = CurrentPageReportBase.getProps(inProps);
+
     const report = {
         currentPage: props.page + 1,
         totalPages: props.pageCount,
@@ -38,13 +41,3 @@ export const CurrentPageReport = React.memo((props) => {
 });
 
 CurrentPageReport.displayName = 'CurrentPageReport';
-CurrentPageReport.defaultProps = {
-    __TYPE: 'CurrentPageReport',
-    pageCount: null,
-    page: null,
-    first: null,
-    rows: null,
-    totalRecords: null,
-    reportTemplate: '({currentPage} of {totalPages})',
-    template: null
-};

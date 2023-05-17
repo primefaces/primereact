@@ -110,7 +110,7 @@ const DataViewProps = [
     {
         name: 'currentPageReportTemplate',
         type: 'string',
-        default: '(&123;currentPage&125; of &123;totalPages&125;)',
+        default: '(&#123;currentPage&#125; of &#123;totalPages&#125;)',
         description: 'Template of the current page report element.'
     },
     {
@@ -139,7 +139,7 @@ const DataViewProps = [
     },
     {
         name: 'style',
-        type: 'object',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the element.'
     },
@@ -159,7 +159,7 @@ const DataViewProps = [
         name: 'itemTemplate',
         type: 'function',
         default: 'null',
-        description: 'Function that gets the option along with the layout mdoe and returns the content.'
+        description: 'Function that gets the option along with the layout mode and returns the content.'
     }
 ];
 

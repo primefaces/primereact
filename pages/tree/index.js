@@ -1,76 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import { Tree } from '../../components/lib/tree/Tree';
-import { Button } from '../../components/lib/button/Button';
-import { NodeService } from '../../service/NodeService';
-import TreeDoc from '../../components/doc/tree';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/tree/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/tree/basicdoc';
+import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
+import { EventsDoc } from '../../components/doc/tree/eventsdoc';
+import { ImportDoc } from '../../components/doc/tree/importdoc';
+import { LazyDoc } from '../../components/doc/tree/lazydoc';
+import { ControlledDoc } from '../../components/doc/tree/controlleddoc';
+import { CheckboxSelectionDoc } from '../../components/doc/tree/selection/checkboxselectiondoc';
+import { SingleSelectionDoc } from '../../components/doc/tree/selection/singleselectiondoc';
+import { StyleDoc } from '../../components/doc/tree/styledoc';
+import { TemplateDoc } from '../../components/doc/tree/templatedoc';
+import { MultipleSelectionDoc } from '../../components/doc/tree/selection/multipleselectiondoc';
+import { DragDropDoc } from '../../components/doc/tree/dragdropdoc';
+import { FilterDoc } from '../../components/doc/tree/filterdoc';
 
 const TreeDemo = () => {
-    const [nodes, setNodes] = useState(null);
-    const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeService = new NodeService();
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'selection',
+            label: 'Selection',
+            children: [
+                {
+                    id: 'singleselection',
+                    label: 'Single',
+                    component: SingleSelectionDoc
+                },
+                {
+                    id: 'multipleselection',
+                    label: 'Multiple',
+                    component: MultipleSelectionDoc
+                },
 
-    const expandAll = () => {
-        let _expandedKeys = {};
-
-        for (let node of nodes) {
-            expandNode(node, _expandedKeys);
+                {
+                    id: 'checkboxselection',
+                    label: 'Checkbox',
+                    component: CheckboxSelectionDoc
+                }
+            ]
+        },
+        {
+            id: 'events',
+            label: 'Events',
+            component: EventsDoc
+        },
+        {
+            id: 'lazy',
+            label: 'Lazy',
+            component: LazyDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'dragdrop',
+            label: 'DragDrop',
+            component: DragDropDoc
+        },
+        {
+            id: 'contextmenu',
+            label: 'ContextMenu',
+            component: ContextMenuDoc
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
+    ];
 
-        setExpandedKeys(_expandedKeys);
-    };
-
-    const collapseAll = () => {
-        setExpandedKeys({});
-    };
-
-    const expandNode = (node, _expandedKeys) => {
-        if (node.children && node.children.length) {
-            _expandedKeys[node.key] = true;
-
-            for (let child of node.children) {
-                expandNode(child, _expandedKeys);
-            }
-        }
-    };
-
-    useEffect(() => {
-        nodeService.getTreeNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    return (
-        <div>
-            <Head>
-                <title>React Tree Component</title>
-                <meta name="description" content="Tree is used to display hierarchical data." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Tree</h1>
-                    <p>Tree is used to display hierarchical data.</p>
-                </div>
-
-                <DocActions github="tree/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <Tree value={nodes} />
-
-                    <h5>Programmatic Control</h5>
-                    <div className="mb-4">
-                        <Button type="button" icon="pi pi-plus" label="Expand All" onClick={expandAll} className="mr-2" />
-                        <Button type="button" icon="pi pi-minus" label="Collapse All" onClick={collapseAll} />
-                    </div>
-                    <Tree value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} />
-                </div>
-            </div>
-
-            <TreeDoc />
-        </div>
-    );
+    return <DocComponent title="React Tree Component" header="Tree" description="Tree is used to display hierarchical data." componentDocs={docs} apiDocs={['Tree', 'TreeNode']} />;
 };
 
 export default TreeDemo;

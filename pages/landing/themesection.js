@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FilterMatchMode, FilterOperator } from '../../components/lib/api/Api';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { InputText } from '../../components/lib/inputtext/InputText';
 import { Button } from '../../components/lib/button/Button';
+import { Column } from '../../components/lib/column/Column';
+import { DataTable } from '../../components/lib/datatable/DataTable';
+import { InputText } from '../../components/lib/inputtext/InputText';
 import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
-import { CustomerService } from '../../service/CustomerService';
+import { Tag } from '../../components/lib/tag/Tag';
 import { classNames } from '../../components/lib/utils/Utils';
-import getConfig from 'next/config';
+import { CustomerService } from '../../service/CustomerService';
 
 const ThemeSection = (props) => {
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -25,7 +24,6 @@ const ThemeSection = (props) => {
     });
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [loading, setLoading] = useState(true);
-    const customerService = new CustomerService();
 
     const changeTheme = (name, color) => {
         let newTheme = name + '-' + (props.dark ? 'dark' : 'light') + '-' + color;
@@ -34,7 +32,7 @@ const ThemeSection = (props) => {
     };
 
     useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
+        CustomerService.getCustomersLarge().then((data) => {
             setCustomers(getCustomers(data));
             setLoading(false);
         });
@@ -85,14 +83,8 @@ const ThemeSection = (props) => {
     const countryBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
+                <img alt="flag" src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`flag flag-${rowData.country.code}`} width={30} />
+                <span className="vertical-align-middle ml-2">{rowData.country.name}</span>
             </React.Fragment>
         );
     };
@@ -102,14 +94,8 @@ const ThemeSection = (props) => {
 
         return (
             <React.Fragment>
-                <img
-                    alt={representative.name}
-                    src={`${contextPath}/images/avatar/${representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{representative.name}</span>
+                <img alt={representative.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${representative.image}`} width={32} style={{ verticalAlign: 'middle' }} />
+                <span className="vertical-align-middle ml-2">{representative.name}</span>
             </React.Fragment>
         );
     };
@@ -123,7 +109,7 @@ const ThemeSection = (props) => {
     };
 
     const statusBodyTemplate = (rowData) => {
-        return <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>;
+        return <Tag value={rowData.status} severity={getSeverity(rowData.status)} className="text-sm font-bold" />;
     };
 
     const activityBodyTemplate = (rowData) => {
@@ -134,10 +120,29 @@ const ThemeSection = (props) => {
         return <Button type="button" icon="pi pi-cog" className="p-button-text"></Button>;
     };
 
+    const getSeverity = (status) => {
+        switch (status) {
+            case 'unqualified':
+                return 'danger';
+
+            case 'qualified':
+                return 'success';
+
+            case 'new':
+                return 'info';
+
+            case 'negotiation':
+                return 'warning';
+
+            case 'renewal':
+                return null;
+        }
+    };
+
     const header = renderHeader();
 
     return (
-        <section className="landing-themes py-8">
+        <section className="landing-themes py-8 ">
             <div className="section-header">Themes</div>
             <p className="section-detail">Crafted on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex flex-wrap justify-content-center">
@@ -150,11 +155,11 @@ const ThemeSection = (props) => {
                 <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: props.theme && props.theme.startsWith('bootstrap4') })} onClick={() => changeTheme('bootstrap4', 'blue')}>
                     Bootstrap
                 </button>
-                <a type="button" className="font-medium p-link linkbox mt-4" href="https://www.primefaces.org/designer-react">
+                <a type="button" className="font-medium p-link linkbox mt-4" href="https://designer.primereact.org">
                     more...
                 </a>
             </div>
-            <div className="themes-main flex mt-7 justify-content-center pad-section" style={{ backgroundImage: `url(${contextPath}/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div className="themes-main flex mt-7 justify-content-center px-5 lg:px-8" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable
                         value={customers}
@@ -170,7 +175,6 @@ const ThemeSection = (props) => {
                         filters={filters}
                         filterDisplay="menu"
                         loading={loading}
-                        responsiveLayout="scroll"
                         globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
                         emptyMessage="No customers found."
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

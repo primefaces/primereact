@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { SpeedDial } from '../../lib/speeddial/SpeedDial';
 import { Toast } from '../../lib/toast/Toast';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function LinearDoc(props) {
     const toast = useRef(null);
@@ -29,13 +29,6 @@ export function LinearDoc(props) {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -47,17 +40,17 @@ export function LinearDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<SpeedDial model={items} direction="up" />
-<SpeedDial model={items} direction="down" />
-<SpeedDial model={items} direction="left" />
-<SpeedDial model={items} direction="right" />
+<SpeedDial model={items} direction="up" style={{ left: 'calc(50% - 2rem)', bottom: 0 }} />
+<SpeedDial model={items} direction="down" style={{ left: 'calc(50% - 2rem)', top: 0 }} />
+<SpeedDial model={items} direction="left" style={{ top: 'calc(50% - 2rem)', right: 0 }} />
+<SpeedDial model={items} direction="right" style={{ top: 'calc(50% - 2rem)', left: 0 }} />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
 
-export default function LinearDoc() {
+export default function LinearDemo() {
     const toast = useRef(null);
     const items = [
         {
@@ -82,13 +75,6 @@ export default function LinearDoc() {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -98,24 +84,27 @@ export default function LinearDoc() {
     ];
 
     return (
-        <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" />
-            <SpeedDial model={items} direction="down" />
-            <SpeedDial model={items} direction="left" />
-            <SpeedDial model={items} direction="right" />
+        <div className="card">
+            <div style={{ position: 'relative', height: '500px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" style={{ left: 'calc(50% - 2rem)', bottom: 0 }} />
+                <SpeedDial model={items} direction="down" style={{ left: 'calc(50% - 2rem)', top: 0 }} />
+                <SpeedDial model={items} direction="left" style={{ top: 'calc(50% - 2rem)', right: 0 }} />
+                <SpeedDial model={items} direction="right" style={{ top: 'calc(50% - 2rem)', left: 0 }} />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Toast } from 'primereact/toast';
+import { MenuItem } from 'primereact/menuitem';
 
 export default function LinearDoc() {
-    const toast = useRef(null);
-    const items = [
+    const toast = useRef<Toast>(null);
+    const items: MenuItem[] = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
@@ -138,13 +127,6 @@ export default function LinearDoc() {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -154,12 +136,14 @@ export default function LinearDoc() {
     ];
 
     return (
-        <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
-            <Toast ref={toast} />
-            <SpeedDial model={items} direction="up" />
-            <SpeedDial model={items} direction="down" />
-            <SpeedDial model={items} direction="left" />
-            <SpeedDial model={items} direction="right" />
+        <div className="card">
+            <div style={{ position: 'relative', height: '500px' }}>
+                <Toast ref={toast} />
+                <SpeedDial model={items} direction="up" style={{ left: 'calc(50% - 2rem)', bottom: 0 }} />
+                <SpeedDial model={items} direction="down" style={{ left: 'calc(50% - 2rem)', top: 0 }} />
+                <SpeedDial model={items} direction="left" style={{ top: 'calc(50% - 2rem)', right: 0 }} />
+                <SpeedDial model={items} direction="right" style={{ top: 'calc(50% - 2rem)', left: 0 }} />
+            </div>
         </div>
     )
 }
@@ -169,16 +153,17 @@ export default function LinearDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                When pressed, a floating action button can display multiple primary actions that can be performed on a page. It has a collection of additional options defined by the <i>model</i> property. SpeedDial's position is calculated according
-                to the container element with the position type style.
+                <p>
+                    SpeedDial items are defined with the <i>model</i> property based on MenuModel API. Default orientation of the items is linear and <i>direction</i> property is used to define the position of the items related to the button.
+                </p>
             </DocSectionText>
             <div className="card">
-                <div className="speeddial-linear-demo" style={{ position: 'relative', height: '500px' }}>
+                <div style={{ position: 'relative', height: '500px' }}>
                     <Toast ref={toast} />
-                    <SpeedDial model={items} direction="up" />
-                    <SpeedDial model={items} direction="down" />
-                    <SpeedDial model={items} direction="left" />
-                    <SpeedDial model={items} direction="right" />
+                    <SpeedDial model={items} direction="up" style={{ left: 'calc(50% - 2rem)', bottom: 0 }} />
+                    <SpeedDial model={items} direction="down" style={{ left: 'calc(50% - 2rem)', top: 0 }} />
+                    <SpeedDial model={items} direction="left" style={{ top: 'calc(50% - 2rem)', right: 0 }} />
+                    <SpeedDial model={items} direction="right" style={{ top: 'calc(50% - 2rem)', left: 0 }} />
                 </div>
             </div>
             <DocSectionCode code={code} />

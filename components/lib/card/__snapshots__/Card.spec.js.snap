@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card advanced 1`] = `
+<div>
+  <div
+    class="p-card p-component"
+    id="card"
+    style="width: 25rem; margin-bottom: 2em;"
+  >
+    <div
+      class="p-card-header"
+    >
+      <img
+        alt="Card"
+        src="/images/usercard.png"
+      />
+    </div>
+    <div
+      class="p-card-body"
+    >
+      <div
+        class="p-card-title"
+      >
+        Advanced Card
+      </div>
+      <div
+        class="p-card-subtitle"
+      >
+        Subtitle
+      </div>
+      <div
+        class="p-card-content"
+      >
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+        </p>
+      </div>
+      <div
+        class="p-card-footer"
+      >
+        <span>
+          <button
+            aria-label="Save"
+            class="p-button p-component"
+          >
+            <span
+              class="p-button-icon p-c p-button-icon-left pi pi-check"
+            />
+            <span
+              class="p-button-label p-c"
+            >
+              Save
+            </span>
+          </button>
+          <button
+            aria-label="Cancel"
+            class="p-button p-component p-button-secondary ml-2"
+          >
+            <span
+              class="p-button-icon p-c p-button-icon-left pi pi-times"
+            />
+            <span
+              class="p-button-label p-c"
+            >
+              Cancel
+            </span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card default 1`] = `
+<div>
+  <div
+    class="p-card p-component"
+  >
+    <div
+      class="p-card-body"
+    />
+  </div>
+</div>
+`;
+
+exports[`Card subtitle 1`] = `
+<div>
+  <div
+    class="p-card p-component"
+  >
+    <div
+      class="p-card-body"
+    >
+      <div
+        class="p-card-title"
+      >
+        subtitle
+      </div>
+      <div
+        class="p-card-subtitle"
+      >
+        subtitle
+      </div>
+      <div
+        class="p-card-content"
+      >
+        Content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card title 1`] = `
+<div>
+  <div
+    class="p-card p-component"
+  >
+    <div
+      class="p-card-body"
+    >
+      <div
+        class="p-card-title"
+      >
+        Simple Card
+      </div>
+      <div
+        class="p-card-content"
+      >
+        Content
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -52,7 +52,7 @@ export default class DomHandler {
 
     static getOuterWidth(el, margin) {
         if (el) {
-            let width = el.offsetWidth || el.getBoundingClientRect().width;
+            let width = el.getBoundingClientRect().width || el.offsetWidth;
 
             if (margin) {
                 let style = getComputedStyle(el);
@@ -68,7 +68,7 @@ export default class DomHandler {
 
     static getOuterHeight(el, margin) {
         if (el) {
-            let height = el.offsetHeight || el.getBoundingClientRect().height;
+            let height = el.getBoundingClientRect().height || el.offsetHeight;
 
             if (margin) {
                 let style = getComputedStyle(el);
@@ -263,8 +263,8 @@ export default class DomHandler {
         }
     }
 
-    static absolutePosition(element, target) {
-        if (element) {
+    static absolutePosition(element, target, align = 'left') {
+        if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             let elementOuterHeight = elementDimensions.height;
             let elementOuterWidth = elementDimensions.width;
@@ -289,8 +289,11 @@ export default class DomHandler {
                 element.style.transformOrigin = 'top';
             }
 
-            if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth);
-            else left = targetOffset.left + windowScrollLeft;
+            const targetOffsetPx = targetOffset.left;
+            const alignOffset = align === 'left' ? 0 : elementOuterWidth - targetOuterWidth;
+
+            if (targetOffsetPx + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+            else left = targetOffsetPx - alignOffset + windowScrollLeft;
 
             element.style.top = top + 'px';
             element.style.left = left + 'px';
@@ -298,7 +301,7 @@ export default class DomHandler {
     }
 
     static relativePosition(element, target) {
-        if (element) {
+        if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             const targetHeight = target.offsetHeight;
             const targetOffset = target.getBoundingClientRect();
@@ -541,7 +544,7 @@ export default class DomHandler {
                     }
                 }
 
-                if (parent.nodeType !== 9 && overflowCheck(parent)) {
+                if (parent.nodeType === 1 && overflowCheck(parent)) {
                     scrollableParents.push(parent);
                 }
             }
@@ -645,6 +648,10 @@ export default class DomHandler {
 
     static isAndroid() {
         return /(android)/i.test(navigator.userAgent);
+    }
+
+    static isChrome() {
+        return /(chrome)/i.test(navigator.userAgent);
     }
 
     static isTouchDevice() {
@@ -766,7 +773,7 @@ export default class DomHandler {
     }
 
     static isExist(element) {
-        return element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode;
+        return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
     }
 
     static hasDOM() {
@@ -816,6 +823,22 @@ export default class DomHandler {
         const preventScroll = scrollTo === undefined ? true : !scrollTo;
 
         el && document.activeElement !== el && el.focus({ preventScroll });
+    }
+
+    /**
+     * Focus the first focusable element if it does not already have focus.
+     *
+     * @param {HTMLElement} el a HTML element
+     * @param {boolean} scrollTo flag to control whether to scroll to the element, false by default
+     * @return {HTMLElement | undefined} the first focusable HTML element found
+     */
+    static focusFirstElement(el, scrollTo) {
+        if (!el) return;
+        const firstFocusableElement = DomHandler.getFirstFocusableElement(el);
+
+        firstFocusableElement && DomHandler.focus(firstFocusableElement, scrollTo);
+
+        return firstFocusableElement;
     }
 
     static getCursorOffset(el, prevText, nextText, currentText) {

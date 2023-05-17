@@ -1,16 +1,17 @@
 import React from 'react';
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/inputmask/importdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
+import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
+import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/inputmask/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/inputmask/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/inputmask/importdoc';
+import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
-import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
-import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
-import { ApiDoc } from '../../components/doc/inputmask/apidoc';
+import { StyleDoc } from '../../components/doc/inputmask/styledoc';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -55,32 +56,35 @@ const InputMaskDemo = () => {
             component: DisabledDoc
         },
         {
-            id: 'api',
-            label: 'API',
-            component: ApiDoc
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    return (
-        <div>
-            <Head>
-                <title>React Mask Component</title>
-                <meta name="description" content="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>InputMask</h1>
-                    <p>InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Mask Component" header="InputMask" description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." componentDocs={docs} apiDocs={['InputMask']} />;
 };
 
 export default InputMaskDemo;

@@ -61,7 +61,7 @@
 /* Animation */
 /* Top, Bottom, Left and Right */
 .p-sidebar-top .p-sidebar-enter,
-.p-sidebar-top .p-sidebar-exit-active  {
+.p-sidebar-top .p-sidebar-exit-active {
     transform: translate3d(0px, -100%, 0px);
 }
 
@@ -85,7 +85,7 @@
 .p-sidebar-left .p-sidebar-enter-active,
 .p-sidebar-right .p-sidebar-enter-active {
     transform: translate3d(0px, 0px, 0px);
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .p-sidebar-top .p-sidebar-enter-done,
@@ -99,7 +99,7 @@
 .p-sidebar-bottom .p-sidebar-exit-active,
 .p-sidebar-left .p-sidebar-exit-active,
 .p-sidebar-right .p-sidebar-exit-active {
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 /* Full */
@@ -111,7 +111,7 @@
 .p-sidebar-full .p-sidebar-enter-active {
     opacity: 1;
     transform: scale(1);
-    transition: all .15s cubic-bezier(0, 0, 0.2, 1);
+    transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .p-sidebar-full .p-sidebar-enter-done {
@@ -121,7 +121,7 @@
 .p-sidebar-full .p-sidebar-exit-active {
     opacity: 0;
     transform: scale(0.5);
-    transition: all .15s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Position */

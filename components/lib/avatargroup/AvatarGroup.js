@@ -1,9 +1,15 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
+import { AvatarGroupBase } from './AvatarGroupBase';
 
-export const AvatarGroup = React.forwardRef((props, ref) => {
+export const AvatarGroup = React.forwardRef((inProps, ref) => {
+    const props = AvatarGroupBase.getProps(inProps);
+
+    const { ptm } = AvatarGroupBase.setMetaData({
+        props
+    });
+
     const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, AvatarGroup.defaultProps);
     const className = classNames('p-avatar-group p-component', props.className);
 
     React.useImperativeHandle(ref, () => ({
@@ -11,16 +17,17 @@ export const AvatarGroup = React.forwardRef((props, ref) => {
         getElement: () => elementRef.current
     }));
 
-    return (
-        <div ref={elementRef} className={className} style={props.style} {...otherProps}>
-            {props.children}
-        </div>
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            style: props.style,
+            className
+        },
+        AvatarGroupBase.getOtherProps(props),
+        ptm('root')
     );
+
+    return <div {...rootProps}>{props.children}</div>;
 });
 
 AvatarGroup.displayName = 'AvatarGroup';
-AvatarGroup.defaultProps = {
-    __TYPE: 'AvatarGroup',
-    style: null,
-    className: null
-};

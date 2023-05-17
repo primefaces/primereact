@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ButtonBarDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+<Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function ButtonBarDoc() {
+export default function ButtonBarDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function ButtonBarDoc() {
-    const [date, setDate] = useState<any | null>(null);
+export default function ButtonBarDemo() {
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
-        <Calendar id="buttonbar" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showButtonBar />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} showButtonBar />
+        </div>
     )
 }
         `
@@ -38,9 +42,13 @@ export default function ButtonBarDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Whether to display today and clear buttons at the footer</DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    When <i>showButtonBar</i> is present, today and clear buttons are displayed at the footer.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="buttonbar" value={date} onChange={(e) => setDate(e.value)} showButtonBar />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showButtonBar />
             </div>
             <DocSectionCode code={code} />
         </>

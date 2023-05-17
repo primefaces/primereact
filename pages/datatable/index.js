@@ -1,286 +1,388 @@
-import React, { useState, useEffect } from 'react';
-import { FilterMatchMode, FilterOperator } from '../../components/lib/api/Api';
-import { DataTable } from '../../components/lib/datatable/DataTable';
-import { Column } from '../../components/lib/column/Column';
-import { InputText } from '../../components/lib/inputtext/InputText';
-import { Dropdown } from '../../components/lib/dropdown/Dropdown';
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { Button } from '../../components/lib/button/Button';
-import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
-import { Calendar } from '../../components/lib/calendar/Calendar';
-import { MultiSelect } from '../../components/lib/multiselect/MultiSelect';
-import { Slider } from '../../components/lib/slider/Slider';
-import { CustomerService } from '../../service/CustomerService';
-import DataTableDoc from '../../components/doc/datatable';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
-import getConfig from 'next/config';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/datatable/basicdoc';
+import { DisabledCellSelectionDoc } from '../../components/doc/datatable/cellselection/disableddoc';
+import { CellSelectEventsDoc } from '../../components/doc/datatable/cellselection/eventsdoc';
+import { MultipleCellsSelectionDoc } from '../../components/doc/datatable/cellselection/multipledoc';
+import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselection/singledoc';
+import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
+import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
+import { ColumnGroupDoc } from '../../components/doc/datatable/columngroupdoc';
+import { ColumnToggleDoc } from '../../components/doc/datatable/columntoggledoc';
+import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
+import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
+import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
+import { CellEditDoc } from '../../components/doc/datatable/edit/celleditdoc';
+import { RowEditDoc } from '../../components/doc/datatable/edit/roweditdoc';
+import { ExportDoc } from '../../components/doc/datatable/exportdoc';
+import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advanceddoc';
+import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
+import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
+import { ImportDoc } from '../../components/doc/datatable/importdoc';
+import { LazyLoadDoc } from '../../components/doc/datatable/lazyloaddoc';
+import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
+import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
+import { RowExpansionDoc } from '../../components/doc/datatable/rowexpansiondoc';
+import { ExpandableRowGroupDoc } from '../../components/doc/datatable/rowgroup/expandabledoc';
+import { RowSpanRowGroupDoc } from '../../components/doc/datatable/rowgroup/rowspandoc';
+import { SubHeaderRowGroupDoc } from '../../components/doc/datatable/rowgroup/subheaderdoc';
+import { CheckboxRowSelectionDoc } from '../../components/doc/datatable/rowselection/checkboxdoc';
+import { DisabledRowSelectionDoc } from '../../components/doc/datatable/rowselection/disableddoc';
+import { RowSelectEventsDoc } from '../../components/doc/datatable/rowselection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '../../components/doc/datatable/rowselection/multipledoc';
+import { RadioButtonRowSelectionDoc } from '../../components/doc/datatable/rowselection/radiobuttondoc';
+import { SingleRowSelectionDoc } from '../../components/doc/datatable/rowselection/singledoc';
+import { CustomersDoc } from '../../components/doc/datatable/samples/customersdoc';
+import { ProductsDoc } from '../../components/doc/datatable/samples/productsdoc';
+import { FlexibleScrollDoc } from '../../components/doc/datatable/scroll/flexibledoc';
+import { FrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
+import { FrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
+import { HorizontalScrollDoc } from '../../components/doc/datatable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '../../components/doc/datatable/scroll/verticaldoc';
+import { SizeDoc } from '../../components/doc/datatable/sizedoc';
+import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
+import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
+import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
+import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
+import { StatefulDoc } from '../../components/doc/datatable/statefuldoc';
+import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
+import { StyleDoc } from '../../components/doc/datatable/styledoc';
+import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
+import { LazyVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/lazydoc';
+import { PreloadVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/preloaddoc';
 
 const DataTableDemo = () => {
-    const [customers, setCustomers] = useState(null);
-    const [selectedCustomers, setSelectedCustomers] = useState(null);
-    const [filters, setFilters] = useState({
-        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-        'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-        representative: { value: null, matchMode: FilterMatchMode.IN },
-        date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
-        balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-        status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-        activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
-    });
-    const [globalFilterValue, setGlobalFilterValue] = useState('');
-    const [loading, setLoading] = useState(true);
-    const representatives = [
-        { name: 'Amy Elsner', image: 'amyelsner.png' },
-        { name: 'Anna Fali', image: 'annafali.png' },
-        { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-        { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-        { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-        { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-        { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-        { name: 'Onyama Limba', image: 'onyamalimba.png' },
-        { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-        { name: 'XuXue Feng', image: 'xuxuefeng.png' }
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'dynamic_columns',
+            label: 'Dynamic Columns',
+            component: DynamicColumnsDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
+            id: 'gridlines',
+            label: 'Grid Lines',
+            component: GridLinesDoc
+        },
+        {
+            id: 'striped',
+            label: 'Striped Rows',
+            component: StripedRowsDoc
+        },
+        {
+            id: 'paginator',
+            label: 'Paginator',
+            children: [
+                {
+                    id: 'paginator_basic',
+                    label: 'Basic',
+                    component: PaginatorBasicDoc
+                },
+                {
+                    id: 'paginator_template',
+                    label: 'Template',
+                    component: PaginatorTemplateDoc
+                }
+            ]
+        },
+        {
+            id: 'sort',
+            label: 'Sort',
+            children: [
+                {
+                    id: 'single_sort',
+                    label: 'Single Column',
+                    component: SingleColumnDoc
+                },
+                {
+                    id: 'multiple_sort',
+                    label: 'Multiple Columns',
+                    component: MultipleColumnsDoc
+                },
+                {
+                    id: 'pre_sort',
+                    label: 'Presort',
+                    component: PresortDoc
+                },
+                {
+                    id: 'removable_sort',
+                    label: 'Removable',
+                    component: RemovableSortDoc
+                }
+            ]
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            children: [
+                {
+                    id: 'basic_filter',
+                    label: 'Basic',
+                    component: BasicFilterDoc
+                },
+                {
+                    id: 'advanced_filter',
+                    label: 'Advanced',
+                    component: AdvancedFilterDoc
+                }
+            ]
+        },
+        {
+            id: 'row_selection',
+            label: 'Row Selection',
+            children: [
+                {
+                    id: 'single_row_selection',
+                    label: 'Single',
+                    component: SingleRowSelectionDoc
+                },
+                {
+                    id: 'multiple_rows_selection',
+                    label: 'Multiple',
+                    component: MultipleRowsSelectionDoc
+                },
+                {
+                    id: 'radiobutton_row_selection',
+                    label: 'RadioButton',
+                    component: RadioButtonRowSelectionDoc
+                },
+                {
+                    id: 'checkbox_row_selection',
+                    label: 'Checkbox',
+                    component: CheckboxRowSelectionDoc
+                },
+                {
+                    id: 'row_selection_events',
+                    label: 'Events',
+                    component: RowSelectEventsDoc
+                },
+                {
+                    id: 'disabled_row_selection',
+                    label: 'Disabled',
+                    component: DisabledRowSelectionDoc
+                }
+            ]
+        },
+        {
+            id: 'cell_selection',
+            label: 'Cell Selection',
+            children: [
+                {
+                    id: 'single_cell_selection',
+                    label: 'Single',
+                    component: SingleCellSelectionDoc
+                },
+                {
+                    id: 'multiple_cells_selection',
+                    label: 'Multiple',
+                    component: MultipleCellsSelectionDoc
+                },
+                {
+                    id: 'cell_selection_events',
+                    label: 'Events',
+                    component: CellSelectEventsDoc
+                },
+                {
+                    id: 'disabled_cells_selection',
+                    label: 'Disabled',
+                    component: DisabledCellSelectionDoc
+                }
+            ]
+        },
+        {
+            id: 'row_expansion',
+            label: 'Row Expansion',
+            component: RowExpansionDoc
+        },
+        {
+            id: 'edit',
+            label: 'Edit',
+            children: [
+                {
+                    id: 'cell_edit',
+                    label: 'Cell',
+                    component: CellEditDoc
+                },
+                {
+                    id: 'row_edit',
+                    label: 'Row',
+                    component: RowEditDoc
+                }
+            ]
+        },
+        {
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
+        },
+        {
+            id: 'scroll',
+            label: 'Scroll',
+            children: [
+                {
+                    id: 'vertical_scroll',
+                    label: 'Vertical',
+                    component: VerticalScrollDoc
+                },
+                {
+                    id: 'flex_scroll',
+                    label: 'Flexible',
+                    component: FlexibleScrollDoc
+                },
+                {
+                    id: 'horizontal_scroll',
+                    label: 'Horizontal',
+                    component: HorizontalScrollDoc
+                },
+                {
+                    id: 'frozen_rows',
+                    label: 'Frozen Rows',
+                    component: FrozenRowsDoc
+                },
+                {
+                    id: 'frozen_columns',
+                    label: 'Frozen Columns',
+                    component: FrozenColumnsDoc
+                }
+            ]
+        },
+        {
+            id: 'virtualscroll',
+            label: 'Virtual Scroll',
+            children: [
+                {
+                    id: 'preload_virtualscroll',
+                    label: 'Preload',
+                    component: PreloadVirtualScrollDoc
+                },
+                {
+                    id: 'lazy_virtualscroll',
+                    label: 'Lazy',
+                    component: LazyVirtualScrollDoc
+                }
+            ]
+        },
+        {
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
+        },
+        {
+            id: 'row_group',
+            label: 'Row Group',
+            children: [
+                {
+                    id: 'rowgroup_subheader',
+                    label: 'Subheader',
+                    component: SubHeaderRowGroupDoc
+                },
+                {
+                    id: 'rowgroup_expandable',
+                    label: 'Expandable',
+                    component: ExpandableRowGroupDoc
+                },
+                {
+                    id: 'rowgroup_rowspan',
+                    label: 'RowSpan',
+                    component: RowSpanRowGroupDoc
+                }
+            ]
+        },
+        {
+            id: 'conditional_style',
+            label: 'Conditional Style',
+            component: ConditionalStyleDoc
+        },
+        {
+            id: 'column_resize',
+            label: 'Column Resize',
+            children: [
+                {
+                    id: 'resize_fitmode',
+                    label: 'Fit Mode',
+                    component: FitModeDoc
+                },
+                {
+                    id: 'resize_expandmode',
+                    label: 'Expand Mode',
+                    component: ExpandModeDoc
+                }
+            ]
+        },
+        {
+            id: 'reorder',
+            label: 'Reorder',
+            component: ReorderDoc
+        },
+        {
+            id: 'column_toggle',
+            label: 'Column Toggle',
+            component: ColumnToggleDoc
+        },
+        {
+            id: 'export',
+            label: 'Export',
+            component: ExportDoc
+        },
+        {
+            id: 'contextmenu',
+            label: 'Context Menu',
+            component: ContextMenuDoc
+        },
+        {
+            id: 'stateful',
+            label: 'Stateful',
+            component: StatefulDoc
+        },
+        {
+            id: 'samples',
+            label: 'Samples',
+            children: [
+                {
+                    id: 'customers',
+                    label: 'Customers',
+                    component: CustomersDoc
+                },
+                {
+                    id: 'dtproducts',
+                    label: 'Products',
+                    component: ProductsDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
     ];
 
-    const statuses = ['unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'];
-
-    const contextPath = getConfig().publicRuntimeConfig.contextPath;
-    const customerService = new CustomerService();
-
-    useEffect(() => {
-        customerService.getCustomersLarge().then((data) => {
-            setCustomers(getCustomers(data));
-            setLoading(false);
-        });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    const getCustomers = (data) => {
-        return [...(data || [])].map((d) => {
-            d.date = new Date(d.date);
-
-            return d;
-        });
-    };
-
-    const formatDate = (value) => {
-        return value.toLocaleDateString('en-US', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-    };
-
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    };
-
-    const onGlobalFilterChange = (e) => {
-        const value = e.target.value;
-        let _filters = { ...filters };
-
-        _filters['global'].value = value;
-
-        setFilters(_filters);
-        setGlobalFilterValue(value);
-    };
-
-    const renderHeader = () => {
-        return (
-            <div className="flex justify-content-between align-items-center">
-                <h5 className="m-0">Customers</h5>
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-                </span>
-            </div>
-        );
-    };
-
-    const countryBodyTemplate = (rowData) => {
-        return (
-            <React.Fragment>
-                <img
-                    alt="flag"
-                    src={`${contextPath}/images/flag/flag_placeholder.png`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    className={`flag flag-${rowData.country.code}`}
-                    width={30}
-                />
-                <span className="image-text">{rowData.country.name}</span>
-            </React.Fragment>
-        );
-    };
-
-    const representativeBodyTemplate = (rowData) => {
-        const representative = rowData.representative;
-
-        return (
-            <React.Fragment>
-                <img
-                    alt={representative.name}
-                    src={`${contextPath}/images/avatar/${representative.image}`}
-                    onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-                    width={32}
-                    style={{ verticalAlign: 'middle' }}
-                />
-                <span className="image-text">{representative.name}</span>
-            </React.Fragment>
-        );
-    };
-
-    const representativeFilterTemplate = (options) => {
-        return (
-            <React.Fragment>
-                <div className="mb-3 font-bold">Agent Picker</div>
-                <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />
-            </React.Fragment>
-        );
-    };
-
-    const representativesItemTemplate = (option) => {
-        return (
-            <div className="p-multiselect-representative-option">
-                <img alt={option.name} src={`${contextPath}/images/avatar/${option.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} width={32} style={{ verticalAlign: 'middle' }} />
-                <span className="image-text">{option.name}</span>
-            </div>
-        );
-    };
-
-    const dateBodyTemplate = (rowData) => {
-        return formatDate(rowData.date);
-    };
-
-    const dateFilterTemplate = (options) => {
-        return <Calendar value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" mask="99/99/9999" />;
-    };
-
-    const balanceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.balance);
-    };
-
-    const balanceFilterTemplate = (options) => {
-        return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />;
-    };
-
-    const statusBodyTemplate = (rowData) => {
-        return <span className={`customer-badge status-${rowData.status}`}>{rowData.status}</span>;
-    };
-
-    const statusFilterTemplate = (options) => {
-        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterCallback(e.value, options.index)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
-    };
-
-    const statusItemTemplate = (option) => {
-        return <span className={`customer-badge status-${option}`}>{option}</span>;
-    };
-
-    const activityBodyTemplate = (rowData) => {
-        return <ProgressBar value={rowData.activity} showValue={false}></ProgressBar>;
-    };
-
-    const activityFilterTemplate = (options) => {
-        return (
-            <>
-                <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
-                <div className="flex align-items-center justify-content-between px-2">
-                    <span>{options.value ? options.value[0] : 0}</span>
-                    <span>{options.value ? options.value[1] : 100}</span>
-                </div>
-            </>
-        );
-    };
-
-    const representativeRowFilterTemplate = (options) => {
-        return (
-            <MultiSelect
-                value={options.value}
-                options={representatives}
-                itemTemplate={representativesItemTemplate}
-                onChange={(e) => options.filterApplyCallback(e.value)}
-                optionLabel="name"
-                placeholder="Any"
-                className="p-column-filter"
-                maxSelectedLabels={1}
-            />
-        );
-    };
-
-    const statusRowFilterTemplate = (options) => {
-        return <Dropdown value={options.value} options={statuses} onChange={(e) => options.filterApplyCallback(e.value)} itemTemplate={statusItemTemplate} placeholder="Select a Status" className="p-column-filter" showClear />;
-    };
-
-    const actionBodyTemplate = () => {
-        return <Button type="button" icon="pi pi-cog"></Button>;
-    };
-
-    const header = renderHeader();
-
-    return (
-        <div>
-            <Head>
-                <title>React Table Component</title>
-                <meta name="description" content="DataTable displays data in tabular format" />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>DataTable</h1>
-                    <p>DataTable displays data in tabular format.</p>
-                </div>
-
-                <DocActions github="datatable/index.js" />
-            </div>
-
-            <div className="content-section implementation datatable-doc-demo">
-                <div className="card">
-                    <DataTable
-                        value={customers}
-                        paginator
-                        className="p-datatable-customers"
-                        header={header}
-                        rows={10}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        rowsPerPageOptions={[10, 25, 50]}
-                        dataKey="id"
-                        rowHover
-                        selection={selectedCustomers}
-                        onSelectionChange={(e) => setSelectedCustomers(e.value)}
-                        filters={filters}
-                        filterDisplay="menu"
-                        loading={loading}
-                        responsiveLayout="scroll"
-                        globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']}
-                        emptyMessage="No customers found."
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    >
-                        <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-                        <Column field="name" header="Name" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '14rem' }} />
-                        <Column field="country.name" header="Country" sortable filterField="country.name" style={{ minWidth: '14rem' }} body={countryBodyTemplate} filter filterPlaceholder="Search by country" />
-                        <Column
-                            header="Agent"
-                            sortable
-                            sortField="representative.name"
-                            filterField="representative"
-                            showFilterMatchModes={false}
-                            filterMenuStyle={{ width: '14rem' }}
-                            style={{ minWidth: '14rem' }}
-                            body={representativeBodyTemplate}
-                            filter
-                            filterElement={representativeFilterTemplate}
-                        />
-                        <Column field="date" header="Date" sortable filterField="date" dataType="date" style={{ minWidth: '8rem' }} body={dateBodyTemplate} filter filterElement={dateFilterTemplate} />
-                        <Column field="balance" header="Balance" sortable dataType="numeric" style={{ minWidth: '8rem' }} body={balanceBodyTemplate} filter filterElement={balanceFilterTemplate} />
-                        <Column field="status" header="Status" sortable filterMenuStyle={{ width: '14rem' }} style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter filterElement={statusFilterTemplate} />
-                        <Column field="activity" header="Activity" sortable showFilterMatchModes={false} style={{ minWidth: '10rem' }} body={activityBodyTemplate} filter filterElement={activityFilterTemplate} />
-                        <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
-                    </DataTable>
-                </div>
-            </div>
-
-            <DataTableDoc></DataTableDoc>
-        </div>
-    );
+    return <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} />;
 };
 
 export default DataTableDemo;

@@ -4,11 +4,21 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils, mergeProps } from '../utils/Utils';
+import { SidebarBase } from './SidebarBase';
+import { TimesIcon } from '../icons/times';
 
-export const Sidebar = React.forwardRef((props, ref) => {
+export const Sidebar = React.forwardRef((inProps, ref) => {
+    const props = SidebarBase.getProps(inProps);
+
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
+    const { ptm } = SidebarBase.setMetaData({
+        props,
+        state: {
+            containerVisible: maskVisibleState
+        }
+    });
     const sidebarRef = React.useRef(null);
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
@@ -16,7 +26,7 @@ export const Sidebar = React.forwardRef((props, ref) => {
     const [bindDocumentEscapeListener, unbindDocumentEscapeListener] = useEventListener({
         type: 'keydown',
         listener: (event) => {
-            if (event.which === 27) {
+            if (event.key === 'Escape') {
                 if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', PrimeReact.autoZIndex)) {
                     onClose(event);
                 }
@@ -27,8 +37,8 @@ export const Sidebar = React.forwardRef((props, ref) => {
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
         listener: (event) => {
-            if (event.which === 2) {
-                // left click
+            if (event.button !== 0) {
+                // ignore anything other than left click
                 return;
             }
 
@@ -140,18 +150,50 @@ export const Sidebar = React.forwardRef((props, ref) => {
         }
     }, [maskVisibleState]);
 
+    useUpdateEffect(() => {
+        // #3811 if dismissible state is toggled while open we must unregister and re-regisetr
+        if (visibleState) {
+            unbindDocumentClickListener();
+
+            if (props.dismissable && !props.modal) {
+                bindDocumentClickListener();
+            }
+        }
+    }, [props.dismissable, props.modal, visibleState]);
+
     useUnmountEffect(() => {
         disableDocumentSettings();
         maskRef.current && ZIndexUtils.clear(maskRef.current);
     });
 
     const createCloseIcon = () => {
-        if (props.showCloseIcon) {
-            const ariaLabel = props.ariaCloseLabel || localeOption('close');
+        const iconClassName = 'p-sidebar-close-icon';
+        const closeButtonProps = mergeProps(
+            {
+                type: 'button',
+                ref: closeIconRef,
+                className: 'p-sidebar-close p-sidebar-icon p-link',
+                onClick: (e) => onClose(e),
+                'aria-label': ariaLabel
+            },
+            ptm('closeButton')
+        );
 
+        const closeIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('closeIcon')
+        );
+
+        const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+        const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
+        const ariaLabel = props.ariaCloseLabel || localeOption('close');
+
+        if (props.showCloseIcon) {
             return (
-                <button type="button" ref={closeIconRef} className="p-sidebar-close p-sidebar-icon p-link" onClick={onClose} aria-label={ariaLabel}>
-                    <span className="p-sidebar-close-icon pi pi-times" aria-hidden="true" />
+                <button {...closeButtonProps}>
+                    {closeIcon}
                     <Ripple />
                 </button>
             );
@@ -165,8 +207,10 @@ export const Sidebar = React.forwardRef((props, ref) => {
     };
 
     const createElement = () => {
-        const otherProps = ObjectUtils.findDiffKeys(props, Sidebar.defaultProps);
-        const className = classNames('p-sidebar p-component', props.className);
+        const className = classNames('p-sidebar p-component', props.className, {
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
+        });
         const maskClassName = classNames(
             'p-sidebar-mask',
             {
@@ -187,15 +231,51 @@ export const Sidebar = React.forwardRef((props, ref) => {
             exit: props.fullScreen ? 150 : 300
         };
 
+        const maskProps = mergeProps(
+            {
+                ref: maskRef,
+                style: props.maskStyle,
+                className: maskClassName,
+                onMouseDown: (e) => onMaskClick(e)
+            },
+            ptm('mask')
+        );
+
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: sidebarRef,
+                className,
+                style: props.style,
+                role: 'complementary'
+            },
+            SidebarBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const headerProps = mergeProps(
+            {
+                className: 'p-sidebar-header'
+            },
+            ptm('header')
+        );
+
+        const contentProps = mergeProps(
+            {
+                className: 'p-sidebar-content'
+            },
+            ptm('content')
+        );
+
         return (
-            <div ref={maskRef} style={props.maskStyle} className={maskClassName} onMouseDown={onMaskClick}>
+            <div {...maskProps}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
-                    <div ref={sidebarRef} id={props.id} className={className} style={props.style} {...otherProps} role="complementary">
-                        <div className="p-sidebar-header">
+                    <div {...rootProps}>
+                        <div {...headerProps}>
                             {icons}
                             {closeIcon}
                         </div>
-                        <div className="p-sidebar-content">{props.children}</div>
+                        <div {...contentProps}>{props.children}</div>
                     </div>
                 </CSSTransition>
             </div>
@@ -212,26 +292,3 @@ export const Sidebar = React.forwardRef((props, ref) => {
 });
 
 Sidebar.displayName = 'Sidebar';
-Sidebar.defaultProps = {
-    __TYPE: 'Sidebar',
-    id: null,
-    style: null,
-    className: null,
-    maskStyle: null,
-    maskClassName: null,
-    visible: false,
-    position: 'left',
-    fullScreen: false,
-    blockScroll: false,
-    baseZIndex: 0,
-    dismissable: true,
-    showCloseIcon: true,
-    ariaCloseLabel: null,
-    closeOnEscape: true,
-    icons: null,
-    modal: true,
-    appendTo: null,
-    transitionOptions: null,
-    onShow: null,
-    onHide: null
-};

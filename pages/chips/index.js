@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import Head from 'next/head';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ImportDoc } from '../../components/doc/chips/importdoc';
+import React from 'react';
+import { AccessibilityDoc } from '../../components/doc/chips/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/chips/basicdoc';
-import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
-import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
 import { DisabledDoc } from '../../components/doc/chips/disableddoc';
-import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
-import { TemplateDoc } from '../../components/doc/chips/templatedoc';
+import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
+import { FormikDoc } from '../../components/doc/chips/form/formikdoc';
+import { HookFormDoc } from '../../components/doc/chips/form/hookformdoc';
+import { ImportDoc } from '../../components/doc/chips/importdoc';
+import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
-import { ApiDoc } from '../../components/doc/chips/apidoc';
+import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
+import { StyleDoc } from '../../components/doc/chips/styledoc';
+import { TemplateDoc } from '../../components/doc/chips/templatedoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ChipsDemo = () => {
     const docs = [
@@ -23,21 +24,6 @@ const ChipsDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
-        },
-        {
-            id: 'floatlabel',
-            label: 'Float Label',
-            component: FloatLabelDoc
-        },
-        {
-            id: 'invalid',
-            label: 'Invalid',
-            component: InvalidDoc
-        },
-        {
-            id: 'disabled',
-            label: 'Disabled',
-            component: DisabledDoc
         },
         {
             id: 'separator',
@@ -55,45 +41,50 @@ const ChipsDemo = () => {
             component: KeyFilterDoc
         },
         {
-            id: 'apidoc',
-            label: 'API',
-            component: ApiDoc
+            id: 'floatlabel',
+            label: 'Float Label',
+            component: FloatLabelDoc
+        },
+        {
+            id: 'invalid',
+            label: 'Invalid',
+            component: InvalidDoc
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            component: DisabledDoc
+        },
+        {
+            id: 'form',
+            label: 'Form',
+            description: 'Compatibility with popular React form libraries.',
+            children: [
+                {
+                    id: 'formik',
+                    label: 'Formik',
+                    component: FormikDoc
+                },
+                {
+                    id: 'hookform',
+                    label: 'Hook Form',
+                    component: HookFormDoc
+                }
+            ]
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
         }
     ];
 
-    const [values1, setValues1] = useState([]);
-    const [values2, setValues2] = useState([]);
-    const [values3, setValues3] = useState([]);
-
-    const customChip = (item) => {
-        return (
-            <div>
-                <span>{item} - (active) </span>
-                <i className="pi pi-user-plus" style={{ fontSize: '14px' }}></i>
-            </div>
-        );
-    };
-
-    return (
-        <div>
-            <Head>
-                <title>React Chips Component</title>
-                <meta name="description" content="Chips is used to enter multiple values on an input field." />
-            </Head>
-
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Chips</h1>
-                    <p>Chips is used to enter multiple values on an input field.</p>
-                </div>
-            </div>
-
-            <div className="content-section doc">
-                <DocSections docs={docs} />
-                <DocSectionNav docs={docs} />
-            </div>
-        </div>
-    );
+    return <DocComponent title="React Chips Component" header="Chips" description="Chips is used to enter multiple values on an input field." componentDocs={docs} apiDocs={['Chips']} />;
 };
 
 export default ChipsDemo;

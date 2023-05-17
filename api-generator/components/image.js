@@ -25,7 +25,7 @@ const ImageProps = [
     },
     {
         name: 'imageStyle',
-        type: 'any',
+        type: 'React.CSSProperties',
         default: 'null',
         description: 'Inline style of the image element..'
     },

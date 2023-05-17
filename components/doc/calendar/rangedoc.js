@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function RangeDoc(props) {
     const [dates, setDates] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="range" value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+<Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function RangeDoc() {
+export default function RangeDemo() {
     const [dates, setDates] = useState(null);
 
     return (
-        <Calendar id="range" value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function RangeDoc() {
-    const [dates, setDates] = useState<any | null>(null);
+export default function RangeDemo() {
+    const [dates, setDates] = useState<string | Date | Date[] | null>(null);
 
     return (
-        <Calendar id="range" value={dates} onChange={(e : CalendarChangeParams) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar value={dates} onChange={(e : CalendarChangeEvent) => setDates(e.value)} selectionMode="range" readOnlyInput />
+        </div>
 
     )
 }
@@ -40,11 +44,12 @@ export default function RangeDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Calendar offers "single" (default), "multiple" and "range" selection types controlled via the <i>selectionMode</i> property. In single, mode the bound value should be an array whereas in multiple case an array is required. Third
-                alternative is the range mode that allows selecting a range based on an array of two values where first value is the start date and second value is the end date. Note: Time picker is supported in range mode but not in multiple mode.
+                <p>
+                    A range of dates can be selected by defining <i>selectionMode</i> as <i>range</i>, in this case the bound value would be an array with two values where first date is the start of the range and second date is the end.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="range" value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+                <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MinMaxDoc(props) {
     let today = new Date();
@@ -29,10 +29,10 @@ export function MinMaxDoc(props) {
 <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function MinMaxDoc() {
+export default function MinMaxDemo() {
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
@@ -52,17 +52,19 @@ export default function MinMaxDoc() {
 
     maxDate.setMonth(nextMonth);
     maxDate.setFullYear(nextYear);
-    
+
     return (
-        <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function MinMaxDoc() {
+export default function MinMaxDemo() {
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
@@ -71,7 +73,7 @@ export default function MinMaxDoc() {
     let nextMonth = month === 11 ? 0 : month + 1;
     let nextYear = nextMonth === 0 ? year + 1 : year;
 
-    const [date, setDate] = useState<any | null>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     let minDate = new Date();
 
@@ -84,7 +86,9 @@ export default function MinMaxDoc() {
     maxDate.setFullYear(nextYear);
 
     return (
-        <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e: CalendarChangeEvent) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+        </div>
     )
 }
         `
@@ -92,9 +96,13 @@ export default function MinMaxDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>When specified, prevents entering the date manually with keyboard. The minimum selectable date. The maximum selectable date.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    Boundaries for the permitted dates that can be entered are defined with <i>minDate</i> and <i>maxDate</i> properties.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="minmax" value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,10 +1,14 @@
 import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { ToggleButtonBase } from './ToggleButtonBase';
 
 export const ToggleButton = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ToggleButtonBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
         const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
@@ -16,8 +20,12 @@ export const ToggleButton = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: !props.checked,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -49,12 +57,19 @@ export const ToggleButton = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focusFirstElement(elementRef.current),
             getElement: () => elementRef.current
         }));
 
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
+        });
+
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const tabIndex = !props.disabled && props.tabIndex;
-        const otherProps = ObjectUtils.findDiffKeys(props, ToggleButton.defaultProps);
+        const tabIndex = props.disabled ? -1 : props.tabIndex;
+        const otherProps = ToggleButtonBase.getOtherProps(props);
         const className = classNames(
             'p-button p-togglebutton p-component',
             {
@@ -93,21 +108,3 @@ export const ToggleButton = React.memo(
 );
 
 ToggleButton.displayName = 'ToggleButton';
-ToggleButton.defaultProps = {
-    __TYPE: 'ToggleButton',
-    id: null,
-    onIcon: null,
-    offIcon: null,
-    onLabel: 'Yes',
-    offLabel: 'No',
-    iconPos: 'left',
-    style: null,
-    className: null,
-    checked: false,
-    tabIndex: 0,
-    tooltip: null,
-    tooltipOptions: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null
-};

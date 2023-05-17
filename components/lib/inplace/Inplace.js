@@ -1,18 +1,26 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { TimesIcon } from '../icons/times';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { InplaceBase } from './InplaceBase';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
-export const Inplace = React.forwardRef((props, ref) => {
+export const Inplace = React.forwardRef((inProps, ref) => {
+    const props = InplaceBase.getProps(inProps);
+
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);
     const active = props.onToggle ? props.active : activeState;
 
-    const shouldUseInplaceContent = (child) => child && child.props.__TYPE === 'InplaceContent';
-    const shouldUseInplaceDisplay = (child) => child && child.props.__TYPE === 'InplaceDisplay';
+    const { ptm } = InplaceBase.setMetaData({
+        props,
+        state: {
+            active: activeState
+        }
+    });
 
     const open = (event) => {
         if (props.disabled) {
@@ -52,32 +60,57 @@ export const Inplace = React.forwardRef((props, ref) => {
     };
 
     const createDisplay = (content) => {
-        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceDisplay.defaultProps);
         const className = classNames('p-inplace-display', {
             'p-disabled': props.disabled
         });
 
-        return (
-            <div className={className} {...otherProps} onClick={open} onKeyDown={onDisplayKeyDown} tabIndex={props.tabIndex} aria-label={props.ariaLabel}>
-                {content}
-            </div>
+        const displayProps = mergeProps(
+            {
+                onClick: open,
+                className,
+                onKeyDown: onDisplayKeyDown,
+                tabIndex: props.tabIndex,
+                'aria-label': props.ariaLabel
+            },
+            ptm('display')
         );
+
+        return <div {...displayProps}>{content}</div>;
     };
 
     const createCloseButton = () => {
+        const icon = props.closeIcon || <TimesIcon />;
+        const closeIcon = IconUtils.getJSXIcon(icon, undefined, { props });
+        const ariaLabel = localeOption('close');
+
         if (props.closable) {
-            return <Button type="button" className="p-inplace-content-close" icon="pi pi-times" onClick={close} aria-label={localeOption('close')} />;
+            const closeButtonProps = mergeProps({
+                className: 'p-inplace-content-close',
+                icon: closeIcon,
+                type: 'button',
+                onClick: close,
+                'aria-label': ariaLabel,
+                pt: ptm('closeButton')
+            });
+
+            return <Button {...closeButtonProps}></Button>;
         }
 
         return null;
     };
 
     const createContent = (content) => {
-        const otherProps = ObjectUtils.findDiffKeys(content.props, InplaceContent.defaultProps);
         const closeButton = createCloseButton();
 
+        const contentProps = mergeProps(
+            {
+                className: 'p-inplace-content'
+            },
+            ptm('content')
+        );
+
         return (
-            <div className="p-inplace-content" {...otherProps}>
+            <div {...contentProps}>
                 {content}
                 {closeButton}
             </div>
@@ -85,10 +118,12 @@ export const Inplace = React.forwardRef((props, ref) => {
     };
 
     const createChildren = () => {
+        const validChildTypes = ['InplaceContent', 'InplaceDisplay'];
+
         return React.Children.map(props.children, (child) => {
-            if (active && shouldUseInplaceContent(child)) {
+            if (active && ObjectUtils.isValidChild(child, 'InplaceContent', validChildTypes)) {
                 return createContent(child);
-            } else if (!active && shouldUseInplaceDisplay(child)) {
+            } else if (!active && ObjectUtils.isValidChild(child, 'InplaceDisplay', validChildTypes)) {
                 return createDisplay(child);
             }
         });
@@ -99,7 +134,6 @@ export const Inplace = React.forwardRef((props, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const otherProps = ObjectUtils.findDiffKeys(props, Inplace.defaultProps);
     const children = createChildren();
     const className = classNames(
         'p-inplace p-component',
@@ -109,34 +143,20 @@ export const Inplace = React.forwardRef((props, ref) => {
         props.className
     );
 
-    return (
-        <div ref={elementRef} className={className} {...otherProps}>
-            {children}
-        </div>
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            className
+        },
+        InplaceBase.getOtherProps(props),
+        ptm('root')
     );
+
+    return <div {...rootProps}>{children}</div>;
 });
 
 InplaceDisplay.displayName = 'InplaceDisplay';
-InplaceDisplay.defaultProps = {
-    __TYPE: 'InplaceDisplay'
-};
 
 InplaceContent.displayName = 'InplaceContent';
-InplaceContent.defaultProps = {
-    __TYPE: 'InplaceContent'
-};
 
 Inplace.displayName = 'Inplace';
-Inplace.defaultProps = {
-    __TYPE: 'Inplace',
-    style: null,
-    className: null,
-    active: false,
-    closable: false,
-    disabled: false,
-    tabIndex: 0,
-    ariaLabel: null,
-    onOpen: null,
-    onClose: null,
-    onToggle: null
-};

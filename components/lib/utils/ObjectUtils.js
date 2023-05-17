@@ -87,6 +87,10 @@ export default class ObjectUtils {
         return !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
+    static isLetter(char) {
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+    }
+
     static findDiffKeys(obj1, obj2) {
         if (!obj1 || !obj2) {
             return {};
@@ -126,15 +130,10 @@ export default class ObjectUtils {
     }
 
     static reorderArray(value, from, to) {
-        let target;
-
         if (value && from !== to) {
             if (to >= value.length) {
-                target = to - value.length;
-
-                while (target-- + 1) {
-                    value.push(undefined);
-                }
+                to %= value.length;
+                from %= value.length;
             }
 
             value.splice(to, 0, value.splice(from, 1)[0]);
@@ -153,14 +152,65 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
-    static getPropValue(obj, ...params) {
-        let methodParams = params;
+    static getProp(props, prop = '', defaultProps = {}) {
+        const value = props ? props[prop] : undefined;
 
-        if (params && params.length === 1) {
-            methodParams = params[0];
+        return value === undefined ? defaultProps[prop] : value;
+    }
+
+    static getMergedProps(props, defaultProps) {
+        return Object.assign({}, defaultProps, props);
+    }
+
+    static getDiffProps(props, defaultProps) {
+        return this.findDiffKeys(props, defaultProps);
+    }
+
+    static getPropValue(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
+    static getComponentProp(component, prop = '', defaultProps = {}) {
+        return this.isNotEmpty(component) ? this.getProp(component.props, prop, defaultProps) : undefined;
+    }
+
+    static getComponentProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getMergedProps(component.props, defaultProps) : undefined;
+    }
+
+    static getComponentDiffProps(component, defaultProps) {
+        return this.isNotEmpty(component) ? this.getDiffProps(component.props, defaultProps) : undefined;
+    }
+
+    static isValidChild(child, type, validTypes) {
+        /* eslint-disable */
+        if (child) {
+            const childType = this.getComponentProp(child, '__TYPE') || (child.type ? child.type.displayName : undefined);
+            const isValid = childType === type;
+
+            try {
+                if (process.env.NODE_ENV !== 'production' && !isValid) {
+                    if (validTypes && validTypes.includes(childType)) {
+                        return false;
+                    }
+                    const messageTypes = validTypes ? validTypes : [type];
+
+                    console.error(
+                        `PrimeReact: Unexpected type; '${childType}'. Parent component expects a ${messageTypes.map((t) => `${t}`).join(' or ')} component or a component with the ${messageTypes
+                            .map((t) => `__TYPE="${t}"`)
+                            .join(' or ')} property as a child component.`
+                    );
+                    return false;
+                }
+            } catch (error) {
+                // NOOP
+            }
+
+            return isValid;
         }
 
-        return this.isFunction(obj) ? obj(...methodParams) : obj;
+        return false;
+        /* eslint-enable */
     }
 
     static getRefElement(ref) {
@@ -210,6 +260,11 @@ export default class ObjectUtils {
         return str;
     }
 
+    static convertToFlatCase(str) {
+        // convert snake, kebab, camel and pascal cases to flat case
+        return this.isNotEmpty(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
+    }
+
     static isEmpty(value) {
         return value === null || value === undefined || value === '' || (Array.isArray(value) && value.length === 0) || (!(value instanceof Date) && typeof value === 'object' && Object.keys(value).length === 0);
     }
@@ -220,16 +275,20 @@ export default class ObjectUtils {
 
     static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
         const result = ObjectUtils.compare(value1, value2, locale, order);
+        let finalSortOrder = order;
+
         // nullSortOrder == 1 means Excel like sort nulls at bottom
-        const finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
+        if (ObjectUtils.isEmpty(value1) || ObjectUtils.isEmpty(value2)) {
+            finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
+        }
 
         return finalSortOrder * result;
     }
 
     static compare(value1, value2, locale, order = 1) {
         let result = -1;
-        const emptyValue1 = this.isEmpty(value1);
-        const emptyValue2 = this.isEmpty(value2);
+        const emptyValue1 = ObjectUtils.isEmpty(value1);
+        const emptyValue2 = ObjectUtils.isEmpty(value2);
 
         if (emptyValue1 && emptyValue2) result = 0;
         else if (emptyValue1) result = order;

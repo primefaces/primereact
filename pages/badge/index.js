@@ -1,63 +1,80 @@
 import React from 'react';
-import { Button } from '../../components/lib/button/Button';
-import { Badge } from '../../components/lib/badge/Badge';
-import BadgeDoc from '../../components/doc/badge';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/badge/basicdoc';
+import { ButtonDoc } from '../../components/doc/badge/buttondoc';
+import { ImportDoc } from '../../components/doc/badge/importdoc';
+import { PositionDoc } from '../../components/doc/badge/positiondoc';
+import { SeverityDoc } from '../../components/doc/badge/severitydoc';
+import { SizeDoc } from '../../components/doc/badge/sizedoc';
+import { StyleDoc } from '../../components/doc/badge/styledoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/badge/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/badge/pt/ptdoc';
 
 const BadgeDemo = () => {
-    return (
-        <div>
-            <Head>
-                <title>React Badge Component</title>
-                <meta name="description" content="Badge is a small status indicator for another element." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>Badge</h1>
-                    <p>Badge is a small status indicator for another element.</p>
-                </div>
-                <DocActions github="badge/index.js" />
-            </div>
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'severity',
+            label: 'Severity',
+            component: SeverityDoc
+        },
+        {
+            id: 'size',
+            label: 'Size',
+            component: SizeDoc
+        },
+        {
+            id: 'positioned',
+            label: 'Position',
+            component: PositionDoc
+        },
+        {
+            id: 'button',
+            label: 'Button',
+            component: ButtonDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Numbers</h5>
-                    <Badge value="2" className="mr-2"></Badge>
-                    <Badge value="8" severity="success" className="mr-2"></Badge>
-                    <Badge value="4" severity="info" className="mr-2"></Badge>
-                    <Badge value="12" severity="warning" className="mr-2"></Badge>
-                    <Badge value="3" severity="danger"></Badge>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.badge.options',
+            label: 'Badge PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-                    <h5 className="mb-4">Positioned Badge</h5>
-                    <i className="pi pi-bell mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}>
-                        <Badge value="2"></Badge>
-                    </i>
-                    <i className="pi pi-calendar mr-4 p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}>
-                        <Badge value="10+" severity="danger"></Badge>
-                    </i>
-                    <i className="pi pi-envelope p-text-secondary p-overlay-badge" style={{ fontSize: '2rem' }}>
-                        <Badge severity="danger"></Badge>
-                    </i>
-
-                    <h5>Button Badge</h5>
-                    <Button type="button" label="Emails" className="mr-2">
-                        <Badge value="8"></Badge>
-                    </Button>
-                    <Button type="button" label="Messages" icon="pi pi-users" className="p-button-warning">
-                        <Badge value="8" severity="danger"></Badge>
-                    </Button>
-
-                    <h5>Sizes</h5>
-                    <Badge value="2" className="mr-2"></Badge>
-                    <Badge value="4" className="mr-2" size="large" severity="warning"></Badge>
-                    <Badge value="6" size="xlarge" severity="success"></Badge>
-                </div>
-            </div>
-
-            <BadgeDoc />
-        </div>
-    );
+    return <DocComponent title="React Badge Component" header="Badge" description="Badge is a small status indicator for another element." componentDocs={docs} apiDocs={['Badge']} ptDocs={ptDocs} />;
 };
 
 export default BadgeDemo;

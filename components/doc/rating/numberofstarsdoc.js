@@ -1,37 +1,40 @@
 import { useState } from 'react';
 import { Rating } from '../../lib/rating/Rating';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function NumberOfStarsDoc(props) {
-    const [val, setVal] = useState(true);
+    const [value, setValue] = useState(null);
 
     const code = {
         basic: `
-<Rating value={val} onChange={(e) => setValue(e.val)} stars={5} />
-
+<Rating value={value} onChange={(e) => setValue(e.value)} stars={10} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating } from "primereact/rating";
 
-export default function NumberOfStarsDoc() {
-    const [val, setVal] = useState(true);
+export default function NumberOfStarsDemo() {
+    const [value, setValue] = useState(null);
 
     return (
-        <Rating value={val} onChange={(e) => setValue(e.val)} stars={5} />
+        <div className="card flex justify-content-center">
+            <Rating value={value} onChange={(e) => setValue(e.value)} stars={10} />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Rating } from "primereact/rating";
+import React, { useState } from "react";
+import { Rating, RatingChangeEvent } from "primereact/rating";
 
-export default function NumberOfStarsDoc() {
-    const [val, setVal] = useState<boolean>(true);
+export default function NumberOfStarsDemo() {
+    const [value, setValue] = useState<number>(null);
 
     return (
-        <Rating value={val} onChange={(e : RatingChangeParams) => setValue(e.val)} stars={5} />
+        <div className="card flex justify-content-center">
+            <Rating value={value} onChange={(e : RatingChangeEvent) => setValue(e.value)} stars={10} />
+        </div>
     );
 }
         `
@@ -40,10 +43,12 @@ export default function NumberOfStarsDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Number of stars to display is defined with <i>stars</i> property, default is 5.
+                <p>
+                    Number of stars to display is defined with <i>stars</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Rating value={val} onChange={(e) => setVal(e.val)} stars={5} />
+                <Rating value={value} onChange={(e) => setValue(e.value)} stars={10} />
             </div>
             <DocSectionCode code={code} />
         </>

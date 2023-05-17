@@ -1,9 +1,16 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = StepsBase.getProps(inProps);
+
         const elementRef = React.useRef(null);
+
+        const { ptm } = StepsBase.setMetaData({
+            props
+        });
 
         const itemClick = (event, item, index) => {
             if (props.readOnly || item.disabled) {
@@ -46,12 +53,48 @@ export const Steps = React.memo(
                 'p-highlight p-steps-current': active,
                 'p-disabled': disabled
             });
+
             const iconClassName = classNames('p-menuitem-icon', item.icon);
-            const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
-            const label = item.label && <span className="p-steps-title">{item.label}</span>;
+            const iconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('icon')
+            );
+
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
+
+            const labelProps = mergeProps(
+                {
+                    className: 'p-steps-title'
+                },
+                ptm('label')
+            );
+
+            const label = item.label && <span {...labelProps}>{item.label}</span>;
+
+            const stepProps = mergeProps(
+                {
+                    className: 'p-steps-number'
+                },
+                ptm('step')
+            );
+
+            const actionProps = mergeProps(
+                {
+                    href: item.url || '#',
+                    className: 'p-menuitem-link',
+                    role: 'presentation',
+                    target: item.target,
+                    onClick: (event) => itemClick(event, item, index),
+                    tabIndex
+                },
+                ptm('action')
+            );
+
             let content = (
-                <a href={item.url || '#'} className="p-menuitem-link" role="presentation" target={item.target} onClick={(event) => itemClick(event, item, index)} tabIndex={tabIndex}>
-                    <span className="p-steps-number">{index + 1}</span>
+                <a {...actionProps}>
+                    <span {...stepProps}>{index + 1}</span>
                     {icon}
                     {label}
                 </a>
@@ -74,18 +117,34 @@ export const Steps = React.memo(
                 content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
-            return (
-                <li key={key} id={item.id} className={className} style={item.style} role="tab" aria-selected={active} aria-expanded={active}>
-                    {content}
-                </li>
+            const menuItemProps = mergeProps(
+                {
+                    key: key,
+                    id: item.id,
+                    className: className,
+                    style: item.style,
+                    role: 'tab',
+                    'aria-selected': active,
+                    'aria-expanded': active
+                },
+                ptm('menuitem')
             );
+
+            return <li {...menuItemProps}>{content}</li>;
         };
 
         const createItems = () => {
+            const menuProps = mergeProps(
+                {
+                    role: 'tablist'
+                },
+                ptm('menu')
+            );
+
             if (props.model) {
                 const items = props.model.map(createItem);
 
-                return <ul role="tablist">{items}</ul>;
+                return <ul {...menuProps}>{items}</ul>;
             }
 
             return null;
@@ -96,7 +155,6 @@ export const Steps = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Steps.defaultProps);
         const className = classNames(
             'p-steps p-component',
             {
@@ -104,24 +162,22 @@ export const Steps = React.memo(
             },
             props.className
         );
+
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className,
+                style: props.style
+            },
+            StepsBase.getOtherProps(props),
+            ptm('root')
+        );
+
         const items = createItems();
 
-        return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                {items}
-            </div>
-        );
+        return <div {...rootProps}>{items}</div>;
     })
 );
 
 Steps.displayName = 'Steps';
-Steps.defaultProps = {
-    __TYPE: 'Steps',
-    id: null,
-    model: null,
-    activeIndex: 0,
-    readOnly: true,
-    style: null,
-    className: null,
-    onSelect: null
-};

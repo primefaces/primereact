@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { useRef } from 'react';
 import { SpeedDial } from '../../lib/speeddial/SpeedDial';
 import { Toast } from '../../lib/toast/Toast';
 import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TooltipDoc(props) {
     const toast = useRef(null);
@@ -30,13 +31,6 @@ export function TooltipDoc(props) {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -48,19 +42,19 @@ export function TooltipDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-<SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
+<Tooltip target=".speeddial-bottom-right .p-speeddial-action" position="left" />
+<SpeedDial model={items} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
 
-<Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-<SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+<Tooltip target=".speeddial-bottom-left .p-speeddial-action" />
+<SpeedDial model={items} direction="up" className="speeddial-bottom-left left-0 bottom-0" buttonClassName="p-button-help" />
         `,
         javascript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
 
-export default function TooltipDoc() {
+export default function TooltipDemo() {
     const toast = useRef(null);
     const items = [
         {
@@ -85,13 +79,6 @@ export default function TooltipDoc() {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -101,26 +88,28 @@ export default function TooltipDoc() {
     ];
 
     return (
-        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-            <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
-
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-            <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+        <div className="card">
+            <div style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <Tooltip target=".speeddial-bottom-right .p-speeddial-action" position="left" />
+                <SpeedDial model={items} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
+                <Tooltip target=".speeddial-bottom-left .p-speeddial-action" />
+                <SpeedDial model={items} direction="up" className="speeddial-bottom-left left-0 bottom-0" buttonClassName="p-button-help" />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
+import { MenuItem } from 'primereact/menuitem';
 
 export default function TooltipDoc() {
-    const toast = useRef(null);
-    const items = [
+    const toast = useRef<Toast>(null);
+    const items: MenuItem = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',
@@ -143,13 +132,6 @@ export default function TooltipDoc() {
             }
         },
         {
-            label: 'Upload',
-            icon: 'pi pi-upload',
-            command: () => {
-                window.location.hash = '/fileupload';
-            }
-        },
-        {
             label: 'React Website',
             icon: 'pi pi-external-link',
             command: () => {
@@ -159,13 +141,14 @@ export default function TooltipDoc() {
     ];
 
     return (
-        <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
-            <Toast ref={toast} />
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-            <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
-            
-            <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-            <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+        <div className="card">
+            <div style={{ position: 'relative', height: '350px' }}>
+                <Toast ref={toast} />
+                <Tooltip target=".speeddial-bottom-right .p-speeddial-action" position="left" />
+                <SpeedDial model={items} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
+                <Tooltip target=".speeddial-bottom-left .p-speeddial-action" />
+                <SpeedDial model={items} direction="up" className="speeddial-bottom-left left-0 bottom-0" buttonClassName="p-button-help" />
+            </div>
         </div>
     )
 }
@@ -174,14 +157,18 @@ export default function TooltipDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Tooltip</DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    Items display a tooltip on hober when a standalone <Link href="/tooltip">Tooltip</Link> is present with a target that matches the items.
+                </p>
+            </DocSectionText>
             <div className="card">
-                <div className="speeddial-tooltip-demo" style={{ position: 'relative', height: '350px' }}>
+                <div style={{ position: 'relative', height: '350px' }}>
                     <Toast ref={toast} />
-                    <Tooltip target=".speeddial-tooltip-demo .speeddial-right .p-speeddial-action" position="left" />
-                    <SpeedDial model={items} direction="up" className="speeddial-right" buttonClassName="p-button-danger" />
-                    <Tooltip target=".speeddial-tooltip-demo .speeddial-left .p-speeddial-action" />
-                    <SpeedDial model={items} direction="up" className="speeddial-left" buttonClassName="p-button-help" />
+                    <Tooltip target=".speeddial-bottom-right .p-speeddial-action" position="left" />
+                    <SpeedDial model={items} direction="up" className="speeddial-bottom-right right-0 bottom-0" buttonClassName="p-button-danger" />
+                    <Tooltip target=".speeddial-bottom-left .p-speeddial-action" />
+                    <SpeedDial model={items} direction="up" className="speeddial-bottom-left left-0 bottom-0" buttonClassName="p-button-help" />
                 </div>
             </div>
             <DocSectionCode code={code} />

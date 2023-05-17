@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { classNames } from '../utils/Utils';
+import { IconUtils, classNames } from '../utils/Utils';
+import { CheckIcon } from '../icons/check';
 
 export const HeaderCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -24,7 +25,8 @@ export const HeaderCheckbox = React.memo((props) => {
     };
 
     const onKeyDown = (event) => {
-        if (event.code === 'Space') {
+        if (event.code === 'Space' || event.key === ' ') {
+            // event.key is for Android support
             onClick(event);
             event.preventDefault();
         }
@@ -35,15 +37,15 @@ export const HeaderCheckbox = React.memo((props) => {
         'p-disabled': props.disabled,
         'p-focus': focusedState
     });
-    const iconClassName = classNames('p-checkbox-icon', {
-        'pi pi-check': props.checked
-    });
+    const iconClassName = 'p-checkbox-icon';
+    const icon = props.checked ? props.checkIcon || <CheckIcon className={iconClassName} /> : null;
+    const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
     const tabIndex = props.disabled ? null : 0;
 
     return (
         <div className="p-checkbox p-component" onClick={onClick}>
             <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}>
-                <span className={iconClassName}></span>
+                {checkIcon}
             </div>
         </div>
     );

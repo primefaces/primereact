@@ -1,10 +1,15 @@
 import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { ChipsBase } from './ChipsBase';
 
 export const Chips = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ChipsBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -33,8 +38,12 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: values,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -82,17 +91,15 @@ export const Chips = React.memo(
                 return;
             }
 
-            switch (event.which) {
-                //backspace
-                case 8:
+            switch (event.key) {
+                case 'Backspace':
                     if (inputRef.current.value.length === 0 && values.length > 0) {
                         removeItem(event, values.length - 1);
                     }
 
                     break;
 
-                //enter
-                case 13:
+                case 'Enter':
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
                     }
@@ -106,8 +113,11 @@ export const Chips = React.memo(
 
                     if (isMaxedOut()) {
                         event.preventDefault();
-                    } else if (props.separator === ',' && event.which === 188) {
-                        addItem(event, inputValue, true);
+                    } else if (props.separator === ',') {
+                        // GitHub #3885 Android Opera gives strange code 229 for comma
+                        if (event.key === props.separator || (DomHandler.isAndroid() && event.which === 229)) {
+                            addItem(event, inputValue, true);
+                        }
                     }
 
                     break;
@@ -119,8 +129,12 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: items,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -185,6 +199,7 @@ export const Chips = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getInput: () => inputRef.current
         }));
@@ -193,9 +208,19 @@ export const Chips = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
+        });
+
         const createRemoveIcon = (value, index) => {
+            const iconProps = { className: 'p-chips-token-icon', onClick: (event) => removeItem(event, index) };
+            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+            const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
             if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
-                return <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => removeItem(event, index)}></span>;
+                return removeIcon;
             }
 
             return null;
@@ -256,7 +281,7 @@ export const Chips = React.memo(
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ObjectUtils.findDiffKeys(props, Chips.defaultProps);
+        const otherProps = ChipsBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames(
             'p-chips p-component p-inputwrapper',
@@ -280,32 +305,3 @@ export const Chips = React.memo(
 );
 
 Chips.displayName = 'Chips';
-Chips.defaultProps = {
-    __TYPE: 'Chips',
-    id: null,
-    inputRef: null,
-    inputId: null,
-    name: null,
-    placeholder: null,
-    value: null,
-    max: null,
-    disabled: null,
-    readOnly: false,
-    removable: true,
-    style: null,
-    className: null,
-    tooltip: null,
-    tooltipOptions: null,
-    ariaLabelledBy: null,
-    separator: null,
-    allowDuplicate: true,
-    itemTemplate: null,
-    keyfilter: null,
-    addOnBlur: null,
-    onAdd: null,
-    onRemove: null,
-    onChange: null,
-    onFocus: null,
-    onBlur: null,
-    onKeyDown: null
-};

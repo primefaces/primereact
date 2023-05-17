@@ -99,7 +99,7 @@ export const FilterService = {
         },
         notEquals(value, filter, filterLocale) {
             if (filter === undefined || filter === null || (typeof filter === 'string' && filter.trim() === '')) {
-                return false;
+                return true;
             }
 
             if (value === undefined || value === null) {

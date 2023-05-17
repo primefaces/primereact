@@ -2,13 +2,23 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { TooltipBase } from './TooltipBase';
 
 export const Tooltip = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = TooltipBase.getProps(inProps);
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
+        const { ptm } = TooltipBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                position: positionState,
+                className: classNameState
+            }
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -128,7 +138,7 @@ export const Tooltip = React.memo(
                     elementRef.current.style.pointerEvents = 'none';
                 }
 
-                if (isMouseTrack(currentTargetRef.current) && !containerSize.current) {
+                if ((isMouseTrack(currentTargetRef.current) || position == 'mouse') && !containerSize.current) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
                         height: DomHandler.getOuterHeight(elementRef.current)
@@ -192,7 +202,7 @@ export const Tooltip = React.memo(
                 top = 0,
                 currentPosition = position || positionState;
 
-            if (isMouseTrack(target) && coordinate) {
+            if ((isMouseTrack(target) || currentPosition == 'mouse') && coordinate) {
                 const _containerSize = {
                     width: DomHandler.getOuterWidth(elementRef.current),
                     height: DomHandler.getOuterHeight(elementRef.current)
@@ -209,6 +219,7 @@ export const Tooltip = React.memo(
                         top -= _containerSize.height / 2 - mouseTrackTop;
                         break;
                     case 'right':
+                    case 'mouse':
                         left += mouseTrackLeft;
                         top -= _containerSize.height / 2 - mouseTrackTop;
                         break;
@@ -282,8 +293,8 @@ export const Tooltip = React.memo(
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
 
-                showEvents.forEach((event) => currentTarget.addEventListener(event, show));
-                hideEvents.forEach((event) => currentTarget.addEventListener(event, hide));
+                showEvents.forEach((event) => currentTarget?.addEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget?.addEventListener(event, hide));
             }
         };
 
@@ -292,8 +303,8 @@ export const Tooltip = React.memo(
                 const { showEvents, hideEvents } = getEvents(target);
                 const currentTarget = getTarget(target);
 
-                showEvents.forEach((event) => currentTarget.removeEventListener(event, show));
-                hideEvents.forEach((event) => currentTarget.removeEventListener(event, hide));
+                showEvents.forEach((event) => currentTarget?.removeEventListener(event, show));
+                hideEvents.forEach((event) => currentTarget?.removeEventListener(event, hide));
             }
         };
 
@@ -329,6 +340,7 @@ export const Tooltip = React.memo(
                     if (!target.hasWrapper) {
                         const wrapper = document.createElement('span');
 
+                        DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;
@@ -457,7 +469,6 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, Tooltip.defaultProps);
             const tooltipClassName = classNames(
                 'p-tooltip p-component',
                 {
@@ -467,13 +478,40 @@ export const Tooltip = React.memo(
                 classNameState
             );
             const empty = isTargetContentEmpty(currentTargetRef.current);
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: tooltipClassName,
+                    style: props.style,
+                    role: 'tooltip',
+                    'aria-hidden': visibleState,
+                    onMouseEnter: (e) => onMouseEnter(e),
+                    onMouseLeave: (e) => onMouseLeave
+                },
+                TooltipBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const arrowProps = mergeProps(
+                {
+                    className: 'p-tooltip-arrow'
+                },
+                ptm('arrow')
+            );
+
+            const textProps = mergeProps(
+                {
+                    ref: textRef,
+                    className: 'p-tooltip-text'
+                },
+                ptm('text')
+            );
 
             return (
-                <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role="tooltip" aria-hidden={visibleState} {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                    <div className="p-tooltip-arrow"></div>
-                    <div ref={textRef} className="p-tooltip-text">
-                        {empty && props.children}
-                    </div>
+                <div {...rootProps}>
+                    <div {...arrowProps}></div>
+                    <div {...textProps}>{empty && props.children}</div>
                 </div>
             );
         };
@@ -489,33 +527,3 @@ export const Tooltip = React.memo(
 );
 
 Tooltip.displayName = 'Tooltip';
-Tooltip.defaultProps = {
-    __TYPE: 'Tooltip',
-    id: null,
-    target: null,
-    content: null,
-    disabled: false,
-    className: null,
-    style: null,
-    appendTo: null,
-    position: 'right',
-    my: null,
-    at: null,
-    event: null,
-    showEvent: 'mouseenter',
-    hideEvent: 'mouseleave',
-    autoZIndex: true,
-    baseZIndex: 0,
-    mouseTrack: false,
-    mouseTrackTop: 5,
-    mouseTrackLeft: 5,
-    showDelay: 0,
-    updateDelay: 0,
-    hideDelay: 0,
-    autoHide: true,
-    showOnDisabled: false,
-    onBeforeShow: null,
-    onBeforeHide: null,
-    onShow: null,
-    onHide: null
-};

@@ -1,38 +1,62 @@
 import React from 'react';
-import { ProgressSpinner } from '../../components/lib/progressspinner/ProgressSpinner';
-import ProgressSpinnerDoc from '../../components/doc/progressspinner';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
+import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
+import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
+import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
+import { Wireframe } from '../../components/doc/progressspinner/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/progressspinner/pt/ptdoc';
 
-const ProgressSpinnerDemo = () => {
-    return (
-        <div>
-            <Head>
-                <title>React ProgressSpinner Component</title>
-                <meta name="description" content="ProgressSpinner is a process status indicator." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>ProgressSpinner</h1>
-                    <p>ProgressSpinner is a process status indicator.</p>
-                </div>
+const SkeletonDemo = () => {
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'custom',
+            label: 'Custom',
+            component: CustomDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-                <DocActions github="progressspinner/index.js" />
-            </div>
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.progressspinner.options',
+            label: 'ProgressSpinner PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <ProgressSpinner />
-
-                    <h5>Custom</h5>
-                    <ProgressSpinner style={{ width: '50px', height: '50px' }} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
-                </div>
-            </div>
-
-            <ProgressSpinnerDoc />
-        </div>
-    );
+    return <DocComponent title="React ProgressSpinner Component" header="ProgressSpinner" description="ProgressSpinner is a process status indicator." componentDocs={docs} apiDocs={['ProgressSpinner']} ptDocs={ptDocs} />;
 };
 
-export default ProgressSpinnerDemo;
+export default SkeletonDemo;

@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function MultipleMonthsDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
+<Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function MultipleMonthsDoc() {
+export default function MultipleMonthsDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3}/>
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function MultipleMonthsDoc() {
-    const [date, setDate] = useState<any | null>(null);
+export default function MultipleMonthsDemo() {
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
-        <Calendar id="multiplemonths" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} numberOfMonths={3}/>
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} numberOfMonths={2} />
+        </div>
     )
 }
         `
@@ -38,9 +42,13 @@ export default function MultipleMonthsDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Number of months to display. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    Number of months to display is configured with the <i>numberOfMonths</i> property.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="multiplemonths" value={date} onChange={(e) => setDate(e.value)} numberOfMonths={3} />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} numberOfMonths={2} />
             </div>
             <DocSectionCode code={code} />
         </>

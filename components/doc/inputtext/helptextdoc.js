@@ -6,9 +6,7 @@ export function HelpTextDoc(props) {
     const code = {
         basic: `
 <div className="flex flex-column gap-2">
-    <label htmlFor="username">
-        Username
-    </label>
+    <label htmlFor="username">Username</label>
     <InputText id="username" aria-describedby="username-help" />
     <small id="username-help">
         Enter your username to reset your password.
@@ -16,35 +14,37 @@ export function HelpTextDoc(props) {
 </div>
         `,
         javascript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function HelpTextDemo() {
     return (
-        <div className="flex flex-column gap-2">
-            <label htmlFor="username">
-                Username
-            </label>
-            <InputText id="username" aria-describedby="username-help" />
-            <small id="username-help">
-                Enter your username to reset your password.
-            </small>
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <label htmlFor="username">Username</label>
+                <InputText id="username" aria-describedby="username-help" />
+                <small id="username-help">
+                    Enter your username to reset your password.
+                </small>
+            </div>
         </div>
     )
 }
         `,
         typescript: `
+import React from 'react'; 
 import { InputText } from "primereact/inputtext";
 
 export default function HelpTextDemo() {
     return (
-        <div className="flex flex-column gap-2">
-            <label htmlFor="username">
-                Username
-            </label>
-            <InputText id="username" aria-describedby="username-help" />
-            <small id="username-help">
-                Enter your username to reset your password.
-            </small>
+        <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-2">
+                <label htmlFor="username">Username</label>
+                <InputText id="username" aria-describedby="username-help" />
+                <small id="username-help">
+                    Enter your username to reset your password.
+                </small>
+            </div>
         </div>
     )
 }
@@ -54,7 +54,9 @@ export default function HelpTextDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                An advisory text can be defined with the semantic <i>small</i> tag.
+                <p>
+                    An advisory text can be defined with the semantic <i>small</i> tag.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="flex flex-column gap-2">

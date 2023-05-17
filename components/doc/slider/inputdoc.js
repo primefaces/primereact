@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import { Slider } from '../../lib/slider/Slider';
 import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
+import { Slider } from '../../lib/slider/Slider';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InputDoc(props) {
     const [value, setValue] = useState(50);
 
     const code = {
         basic: `
-<div className="w-14rem">
-    <InputText value={value} onChange={(e) => setValue(e.target.value)} className="w-full" />
-    <Slider value={value} onChange={(e) => setValue(e.value)} className="w-full" />
-</div>
+<InputText value={value} onChange={(e) => setValue(e.target.value)} />
+<Slider value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Slider } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 
@@ -23,25 +21,29 @@ export default function InputDemo() {
     const [value, setValue] = useState(50);
 
     return (
-        <div className="w-14rem">
-            <InputText value={value} onChange={(e) => setValue(e.target.value)} className="w-full" />
-            <Slider value={value} onChange={(e) => setValue(e.value)} className="w-full" />
+        <div className="card flex justify-content-center">
+            <div className="w-14rem">
+                <InputText value={value} onChange={(e) => setValue(e.target.value)} className="w-full" />
+                <Slider value={value} onChange={(e) => setValue(e.value)} className="w-full" />
+            </div>
         </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Slider } from "primereact/slider";
+import React, { useState } from "react";
+import { Slider, SliderChangeEvent } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 
 export default function InputDemo() {
     const [value, setValue] = useState<number>(50);
 
     return (
-        <div className="w-14rem">
-            <InputText value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} className="w-full" />
-            <Slider value={value} onChange={(e: SliderChangeParams) => setValue(e.value)} className="w-full" />
+        <div className="card flex justify-content-center">
+            <div className="w-14rem">
+                <InputText value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} className="w-full" />
+                <Slider value={value} onChange={(e: SliderChangeEvent) => setValue(e.value)} className="w-full" />
+            </div>
         </div>
     )
 }
@@ -50,7 +52,9 @@ export default function InputDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>Slider can be connected to an input field using two-way binding.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>Slider is connected to an input field using two-way binding.</p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <div className="w-14rem">
                     <InputText value={value} onChange={(e) => setValue(e.target.value)} className="w-full" />

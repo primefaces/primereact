@@ -1,122 +1,429 @@
+/**
+ *
+ * AutoComplete is an input component that provides real-time suggestions while being typed.
+ *
+ * [Live Demo](https://www.primereact.org/autocomplete/)
+ *
+ * @module autocomplete
+ *
+ */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import TooltipOptions from '../tooltip/tooltipoptions';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { FormEvent } from '../ts-helpers';
 import { IconType } from '../utils';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
 
-type AutoCompleteOptionGroupTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+/**
+ * Custom change event.
+ * @see {@link AutoCompleteProps.onChange}
+ * @extends {FormEvent}
+ * @event
+ */
+interface AutoCompleteChangeEvent extends FormEvent {}
 
-type AutoCompleteItemTemplateType = React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
-
-type AutoCompleteSelectedItemTemplateType = React.ReactNode | ((value: any) => React.ReactNode);
-
-type AutoCompleteAppendToType = 'self' | HTMLElement | undefined | null;
-
-type AutoCompleteSourceType = 'dropdown' | 'input';
-
-interface AutoCompleteChangeTargetOptions {
-    name: string;
-    id: string;
+/**
+ * Custom select event.
+ * @see {@link AutoCompleteProps.onSelect}
+ * @event
+ */
+interface AutoCompleteSelectEvent {
+    /**
+     * Browser event
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selected option value
+     */
     value: any;
 }
 
-interface AutoCompleteChangeParams {
-    originalEvent: React.SyntheticEvent;
-    value: any;
-    stopPropagation(): void;
-    preventDefault(): void;
-    target: AutoCompleteChangeTargetOptions;
-}
+/**
+ * Custom unselect event.
+ * @see {@link AutoCompleteProps.onUnselect}
+ * @extends {AutoCompleteSelectEvent}
+ * @event
+ */
+interface AutoCompleteUnselectEvent extends AutoCompleteSelectEvent {}
 
-interface AutoCompleteSelectParams {
+/**
+ * Custom click event.
+ * @see {@link AutoCompleteProps.onDropdownClick}
+ * @event
+ */
+interface AutoCompleteDropdownClickEvent {
+    /**
+     * Browser event
+     */
     originalEvent: React.SyntheticEvent;
-    value: any;
-}
-
-interface AutoCompleteUnselectParams extends AutoCompleteSelectParams {}
-
-interface AutoCompleteDropdownClickParams {
-    originalEvent: React.SyntheticEvent;
+    /**
+     * Current value of the input field
+     */
     query: string;
 }
 
-interface AutoCompleteCompleteMethodParams {
+/**
+ * Custom complete method event.
+ * @see {@link AutoCompleteProps.completeMethod}
+ * @event
+ */
+interface AutoCompleteCompleteEvent {
+    /**
+     * Browser event
+     */
     originalEvent: React.SyntheticEvent;
+    /**
+     * Value to search with
+     */
     query: string;
 }
 
-export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
-    id?: string;
-    appendTo?: AutoCompleteAppendToType;
-    autoFocus?: boolean;
-    autoHighlight?: boolean;
-    children?: React.ReactNode;
-    className?: string;
-    delay?: number;
-    disabled?: boolean;
-    dropdown?: boolean;
-    dropdownAriaLabel?: string;
-    dropdownAutoFocus?: boolean;
-    dropdownIcon?: IconType<AutoCompleteProps>;
-    dropdownMode?: string;
-    emptyMessage?: string;
-    field?: string;
-    forceSelection?: boolean;
-    inputClassName?: string;
-    inputId?: string;
-    inputRef?: React.Ref<HTMLInputElement>;
-    inputStyle?: React.CSSProperties;
-    itemTemplate?: AutoCompleteItemTemplateType;
-    maxLength?: number;
-    minLength?: number;
-    multiple?: boolean;
-    selectionLimit?: number;
-    name?: string;
-    optionGroupChildren?: string;
-    optionGroupLabel?: string;
-    optionGroupTemplate?: AutoCompleteOptionGroupTemplateType;
-    panelClassName?: string;
-    panelStyle?: React.CSSProperties;
-    placeholder?: string;
-    readOnly?: boolean;
-    removeIcon?: IconType<AutoCompleteProps>;
-    scrollHeight?: string;
-    selectedItemTemplate?: AutoCompleteSelectedItemTemplateType;
-    showEmptyMessage?: boolean;
-    size?: number;
-    style?: React.CSSProperties;
+/**
+ * Defines valid properties in AutoComplete component. In addition to these, all properties of HTMLSpanElement can be used in this component.
+ * @group Properties
+ */
+export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'onChange' | 'onSelect' | 'ref'> {
+    /**
+     * Unique identifier of the element.
+     */
+    id?: string | undefined;
+    /**
+     * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
+     * @defaultValue document.body
+     */
+    appendTo?: 'self' | HTMLElement | undefined | null;
+    /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
+     * When enabled, highlights the first item in the list by default.
+     * @defaultValue false
+     */
+    autoHighlight?: boolean | undefined;
+    /**
+     * Style class of the component.
+     */
+    className?: string | undefined;
+    /**
+     * Delay between keystrokes to wait before sending a query.
+     * @defaultValue 300
+     */
+    delay?: number | undefined;
+    /**
+     * When present, it specifies that the component should be disabled.
+     * @defaultValue false
+     */
+    disabled?: boolean | undefined;
+    /**
+     * Displays a button next to the input field when enabled.
+     * @defaultValue false
+     */
+    dropdown?: boolean | undefined;
+    /**
+     * ARIA label for the dropdown button. Defaults to placeholder then Locale "choose" label.
+     * @defaultValue Choose
+     */
+    dropdownAriaLabel?: string | undefined;
+    /**
+     * Focus the input field when the dropdown button is clicked if enabled.
+     * @defaultValue true
+     */
+    dropdownAutoFocus?: boolean | undefined;
+    /**
+     * Icon of the dropdown.
+     */
+    dropdownIcon?: IconType<AutoCompleteProps> | undefined;
+    /**
+     * Specifies the behavior dropdown button. Default "blank" mode sends an empty string and "current" mode sends the input value.
+     * @defaultValue blank
+     */
+    dropdownMode?: 'blank' | 'current' | undefined;
+    /**
+     * Text to display when there is no data. Defaults to global value in i18n translation configuration.
+     * @defaultValue No results found.
+     */
+    emptyMessage?: string | undefined;
+    /**
+     * Field of a suggested object to resolve and display.
+     */
+    field?: string | undefined;
+    /**
+     * When present, autocomplete clears the manual input if it does not match of the suggestions to force only accepting values from the suggestions.
+     * @defaultValue false
+     */
+    forceSelection?: boolean | undefined;
+    /**
+     * Style class of the input field.
+     */
+    inputClassName?: string | undefined;
+    /**
+     * Identifier of the input element.
+     */
+    inputId?: string | undefined;
+    /**
+     * Reference of the input element.
+     */
+    inputRef?: React.Ref<HTMLInputElement> | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Icon of the loader.
+     */
+    loadingIcon?: IconType<AutoCompleteProps> | undefined;
+    /**
+     * Template of a list item.
+     */
+    itemTemplate?: React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+    /**
+     * Maximum number of characters to initiate a search.
+     */
+    maxLength?: number | undefined;
+    /**
+     * Minimum number of characters to initiate a search.
+     * @defaultValue 1
+     */
+    minLength?: number | undefined;
+    /**
+     * Specifies if multiple values can be selected.
+     * @defaultValue false
+     */
+    multiple?: boolean | undefined;
+    /**
+     * Number of maximum options that can be selected.
+     */
+    selectionLimit?: number | undefined;
+    /**
+     * Name of the input element.
+     */
+    name?: string | undefined;
+    /**
+     * Property name or getter function that refers to the children options of option group.
+     */
+    optionGroupChildren?: string | undefined;
+    /**
+     * Property name or getter function to use as the label of an option group.
+     */
+    optionGroupLabel?: string | undefined;
+    /**
+     * Template of an option group item.
+     */
+    optionGroupTemplate?: React.ReactNode | ((suggestion: any, index: number) => React.ReactNode);
+    /**
+     * Style class of the overlay panel element.
+     */
+    panelClassName?: string | undefined;
+    /**
+     * Inline style of the overlay panel element.
+     */
+    panelStyle?: React.CSSProperties | undefined;
+    /**
+     * Hint text for the input field.
+     */
+    placeholder?: string | undefined;
+    /**
+     * When present, it specifies that the input cannot be typed.
+     * @defaultValue false
+     */
+    readOnly?: boolean | undefined;
+    /**
+     * Icon of the remove chip element in multiple mode.
+     */
+    removeTokenIcon?: IconType<AutoCompleteProps> | undefined;
+    /**
+     * Maximum height of the suggestions panel.
+     * @defaultValue 200px
+     */
+    scrollHeight?: string | undefined;
+    /**
+     * Template of a selected item.
+     */
+    selectedItemTemplate?: React.ReactNode | ((value: any) => React.ReactNode);
+    /**
+     * Whether to show the empty message or not.
+     * @defaultValue false
+     */
+    showEmptyMessage?: boolean | undefined;
+    /**
+     * Size of the input field.
+     */
+    size?: number | undefined;
+    /**
+     * Inline style of the component.
+     */
+    style?: React.CSSProperties | undefined;
+    /**
+     * An array of suggestions to display.
+     */
     suggestions?: any[];
-    tabIndex?: number;
-    tooltip?: string;
-    tooltipOptions?: TooltipOptions;
-    transitionOptions?: CSSTransitionProps;
-    type?: string;
+    /**
+     * Index of the element in tabbing order.
+     */
+    tabIndex?: number | undefined;
+    /**
+     * Content of the tooltip.
+     */
+    tooltip?: string | undefined;
+    /**
+     * Configuration of the tooltip, refer to the tooltip documentation for more information.
+     * @type {TooltipOptions}
+     */
+    tooltipOptions?: TooltipOptions | undefined;
+    /**
+     * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
+     * @type {CSSTransitionProps}
+     */
+    transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Type of the input element.
+     */
+    type?: string | undefined;
+    /**
+     * Value of the component.
+     */
     value?: any;
-    virtualScrollerOptions?: VirtualScrollerProps;
-    completeMethod?(e: AutoCompleteCompleteMethodParams): void;
+    /**
+     * Whether to use the virtualScroller feature. The properties of VirtualScroller component can be used like an object in it.
+     * @type {VirtualScrollerProps}
+     */
+    virtualScrollerOptions?: VirtualScrollerProps | undefined;
+    /**
+     * Callback to invoke to search for suggestions.
+     * @param {AutoCompleteCompleteEvent} event - Custom complete method event.
+     */
+    completeMethod?(event: AutoCompleteCompleteEvent): void;
+    /**
+     * Callback to invoke when autocomplete loses focus.
+     * @param {React.FocusEvent<HTMLInputElement>} event - Browser event.
+     */
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
-    onChange?(e: AutoCompleteChangeParams): void;
+    /**
+     * Callback to invoke when autocomplete value changes.
+     * @param {AutoCompleteChangeEvent} event - Custom change event.
+     */
+    onChange?(event: AutoCompleteChangeEvent): void;
+    /**
+     * Callback to invoke when input is cleared by the user.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
     onClear?(event: React.SyntheticEvent): void;
+    /**
+     * Callback to invoke on click.
+     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
+     */
     onClick?(event: React.MouseEvent<HTMLElement>): void;
+    /**
+     * Callback to invoke on right-click.
+     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
+     */
     onContextMenu?(event: React.MouseEvent<HTMLElement>): void;
+    /**
+     * Callback to invoke on double click.
+     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
+     */
     onDblClick?(event: React.MouseEvent<HTMLElement>): void;
-    onDropdownClick?(e: AutoCompleteDropdownClickParams): void;
+    /**
+     * Callback to invoke to when dropdown button is clicked.
+     * @param {AutoCompleteDropdownClickEvent} event - Custom click event.
+     */
+    onDropdownClick?(event: AutoCompleteDropdownClickEvent): void;
+    /**
+     * Callback to invoke when autocomplete gets focus.
+     * @param {React.FocusEvent<HTMLInputElement>} event - Browser event.
+     */
     onFocus?(event: React.FocusEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke when overlay panel becomes hidden.
+     */
     onHide?(): void;
+    /**
+     * Callback to invoke to when a key is pressed.
+     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event.
+     */
     onKeyPress?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke to when a key is released.
+     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event.
+     */
     onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke to when a mouse button is pressed.
+     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
+     */
     onMouseDown?(event: React.MouseEvent<HTMLElement>): void;
-    onSelect?(e: AutoCompleteSelectParams): void;
+    /**
+     * Callback to invoke when a suggestion is selected.
+     * @param {AutoCompleteSelectEvent} event - Custom select event.
+     */
+    onSelect?(event: AutoCompleteSelectEvent): void;
+    /**
+     * Callback to invoke when overlay panel becomes visible.
+     */
     onShow?(): void;
-    onUnselect?(e: AutoCompleteUnselectParams): void;
+    /**
+     * Callback to invoke when a selected value is removed.
+     * @param {AutoCompleteUnselectEvent} event - Custom unselect event.
+     */
+    onUnselect?(event: AutoCompleteUnselectEvent): void;
+    /**
+     * Used to get the child elements of the component.
+     * @readonly
+     */
+    children?: React.ReactNode | undefined;
 }
 
+/**
+ * **PrimeReact - AutoComplete**
+ *
+ * _AutoComplete is an input component that provides real-time suggestions while being typed._
+ *
+ * [Live Demo](https://www.primereact.org/autocomplete/)
+ * --- ---
+ * ![PrimeReact](https://primefaces.org/cdn/primereact/images/logo-100.png)
+ *
+ * @group Component
+ */
 export declare class AutoComplete extends React.Component<AutoCompleteProps, any> {
+    /**
+     * Used to show the overlay.
+     */
     public show(): void;
+    /**
+     * Used to hide the overlay.
+     */
     public hide(): void;
-    public search(event: React.SyntheticEvent, query: string, source: AutoCompleteSourceType): void;
+    /**
+     * Used to focus the component.
+     */
+    public focus(): void;
+    /**
+     * Used to search new suggestions.
+     * @param {React.SyntheticEvent} event - Browser event.
+     * @param {string} query - Value to search with.
+     * @param {string} [source] - Source type, valid values are 'dropdown' and 'input'
+     */
+    public search(event: React.SyntheticEvent, query: string, source?: 'dropdown' | 'input' | null | undefined): void;
+    /**
+     * Used to get container element.
+     * @return {HTMLSpanElement} Container element
+     */
     public getElement(): HTMLSpanElement;
+    /**
+     * Used to get input element.
+     * @return {HTMLInputElement} Input element
+     */
     public getInput(): HTMLInputElement;
+    /**
+     * Used to get overlay element.
+     * @return {HTMLElement} Overlay element
+     */
     public getOverlay(): HTMLElement;
+    /**
+     * Used to get the options of inline virtualScroller component.
+     * @return {VirtualScroller} VirtualScroller component
+     */
     public getVirtualScroller(): VirtualScroller;
 }

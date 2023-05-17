@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function IconDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+<Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function IconDoc() {
+export default function IconDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function IconDoc() {
-    const [date, setDate] = useState<any | null>(null);
+export default function IconDemo() {
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
-        <Calendar id="icon" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} showIcon />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} showIcon />
+        </div>
     )
 }
         `
@@ -39,10 +43,12 @@ export default function IconDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                Calendar is used a controlled input component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    An additional icon is displayed next to the input field when <i>showIcon</i> is present.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="icon" value={date} onChange={(e) => setDate(e.value)} showIcon />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} showIcon />
             </div>
             <DocSectionCode code={code} />
         </>

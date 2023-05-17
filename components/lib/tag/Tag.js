@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps } from '../utils/Utils';
+import { TagBase } from './TagBase';
 
-export const Tag = React.forwardRef((props, ref) => {
+export const Tag = React.forwardRef((inProps, ref) => {
+    const props = TagBase.getProps(inProps);
+    const { ptm } = TagBase.setMetaData({
+        props
+    });
+
     const elementRef = React.useRef(null);
-    const otherProps = ObjectUtils.findDiffKeys(props, Tag.defaultProps);
     const className = classNames(
         'p-tag p-component',
         {
@@ -12,29 +17,45 @@ export const Tag = React.forwardRef((props, ref) => {
         },
         props.className
     );
-    const icon = IconUtils.getJSXIcon(props.icon, { className: 'p-tag-icon' }, { props });
+
+    const iconProps = mergeProps(
+        {
+            className: 'p-tag-icon'
+        },
+        ptm('icon')
+    );
+
+    const icon = IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
 
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => elementRef.current
     }));
 
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            className,
+            style: props.style
+        },
+        TagBase.getOtherProps(props),
+        ptm('root')
+    );
+
+    const valueProps = mergeProps(
+        {
+            className: 'p-tag-value'
+        },
+        ptm('value')
+    );
+
     return (
-        <span ref={elementRef} className={className} style={props.style} {...otherProps}>
+        <span {...rootProps}>
             {icon}
-            <span className="p-tag-value">{props.value}</span>
+            <span {...valueProps}>{props.value}</span>
             <span>{props.children}</span>
         </span>
     );
 });
 
 Tag.displayName = 'Tag';
-Tag.defaultProps = {
-    __TYPE: 'Tag',
-    value: null,
-    severity: null,
-    rounded: false,
-    icon: null,
-    style: null,
-    className: null
-};

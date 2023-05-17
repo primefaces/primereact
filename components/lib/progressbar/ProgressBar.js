@@ -1,8 +1,13 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
+import { ProgressBarBase } from './ProgressBarBase';
 
 export const ProgressBar = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = ProgressBarBase.getProps(inProps);
+        const { ptm } = ProgressBarBase.setMetaData({
+            props
+        });
         const elementRef = React.useRef(null);
 
         const createLabel = () => {
@@ -16,27 +21,77 @@ export const ProgressBar = React.memo(
         };
 
         const createDeterminate = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ProgressBar.defaultProps);
             const className = classNames('p-progressbar p-component p-progressbar-determinate', props.className);
             const label = createLabel();
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className,
+                    style: props.style,
+                    role: 'progressbar',
+                    'aria-valuemin': '0',
+                    'aria-valuenow': props.value,
+                    'aria-valuemax': '100'
+                },
+                ProgressBarBase.getOtherProps(props),
+                ptm('root')
+            );
+            const valueProps = mergeProps(
+                {
+                    className: 'p-progressbar-value p-progressbar-value-animate',
+                    style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
+                },
+                ptm('value')
+            );
+
+            const labelProps = mergeProps(
+                {
+                    className: 'p-progressbar-label'
+                },
+                ptm('label')
+            );
 
             return (
-                <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} aria-valuemin="0" aria-valuenow={props.value} aria-valuemax="100" {...otherProps}>
-                    <div className="p-progressbar-value p-progressbar-value-animate" style={{ width: props.value + '%', display: 'flex', backgroundColor: props.color }}>
-                        {props.value != null && props.value !== 0 && props.showValue && <div className={`p-progressbar-label`}>{label}</div>}
-                    </div>
+                <div {...rootProps}>
+                    <div {...valueProps}>{props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
         };
 
         const createIndeterminate = () => {
-            const otherProps = ObjectUtils.findDiffKeys(props, ProgressBar.defaultProps);
             const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className,
+                    style: props.style,
+                    role: 'progressbar'
+                },
+                ProgressBarBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const indeterminateContainerProps = mergeProps(
+                {
+                    className: 'p-progressbar-indeterminate-container'
+                },
+                ptm('indeterminateContainer')
+            );
+
+            const valueProps = mergeProps(
+                {
+                    className: 'p-progressbar-value p-progressbar-value-animate',
+                    style: { backgroundColor: props.color }
+                },
+                ptm('value')
+            );
 
             return (
-                <div role="progressbar" id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                    <div className="p-progressbar-indeterminate-container">
-                        <div className="p-progressbar-value p-progressbar-value-animate" style={{ backgroundColor: props.color }}></div>
+                <div {...rootProps}>
+                    <div {...indeterminateContainerProps}>
+                        <div {...valueProps}></div>
                     </div>
                 </div>
             );
@@ -54,15 +109,3 @@ export const ProgressBar = React.memo(
 );
 
 ProgressBar.displayName = 'ProgressBar';
-ProgressBar.defaultProps = {
-    __TYPE: 'ProgressBar',
-    id: null,
-    value: null,
-    showValue: true,
-    unit: '%',
-    style: null,
-    className: null,
-    mode: 'determinate',
-    displayValueTemplate: null,
-    color: null
-};

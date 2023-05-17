@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TouchUIDoc(props) {
     const [date, setDate] = useState(null);
 
     const code = {
         basic: `
-<Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+<Calendar value={date} onChange={(e) => setDate(e.value)} touchUI />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function TouchUIDoc() {
+export default function TouchUIDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} touchUI />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function TouchUIDoc() {
-    const [date, setDate] = useState<any | null>(null);
+export default function TouchUIDemo() {
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
-        <Calendar id="touchUI" value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} touchUI />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} touchUI />
+        </div>
     )
 }
         `
@@ -38,9 +42,13 @@ export default function TouchUIDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> When enabled, calendar overlay is displayed as optimized for touch devices.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    When <i>touchUI</i> is enabled, overlay is displayed as optimized for touch devices.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
-                <Calendar id="touchUI" value={date} onChange={(e) => setDate(e.value)} touchUI />
+                <Calendar value={date} onChange={(e) => setDate(e.value)} touchUI />
             </div>
             <DocSectionCode code={code} />
         </>

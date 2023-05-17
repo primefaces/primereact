@@ -54,6 +54,18 @@ const MultiSelectProps = [
         description: 'Property name or getter function that refers to the children options of option group.'
     },
     {
+        name: 'inline',
+        type: 'boolean',
+        default: 'false',
+        description: 'Render the items panel inline.'
+    },
+    {
+        name: 'flex',
+        type: 'boolean',
+        default: 'false',
+        description: 'Use flex layout for the items panel.'
+    },
+    {
         name: 'style',
         type: 'string',
         default: 'null',
@@ -64,6 +76,12 @@ const MultiSelectProps = [
         type: 'string',
         default: 'null',
         description: 'Style class of the element.'
+    },
+    {
+        name: 'itemClassName',
+        type: 'string',
+        default: 'null',
+        description: 'Style class of the items.'
     },
     {
         name: 'panelClassName',
@@ -280,6 +298,18 @@ const MultiSelectProps = [
         type: 'boolean',
         default: 'false',
         description: 'Whether all data is selected.'
+    },
+    {
+        name: 'useOptionAsValue',
+        type: 'boolean',
+        default: 'false',
+        description: 'Defaults to the option itself as the value of an option. Overrides the optionValue prop.'
+    },
+    {
+        name: 'overlayVisible',
+        type: 'boolean',
+        default: 'false',
+        description: 'Specifies the visibility of the overlay panel.'
     }
 ];
 

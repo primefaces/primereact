@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function InlineDoc(props) {
     const [date, setDate] = useState(null);
@@ -12,27 +12,31 @@ export function InlineDoc(props) {
 
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function InlineDoc() {
+export default function InlineDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
+        </div>
 
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Calendar } from 'primereact/calendar';
+import React, { useState } from "react";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
-export default function InlineDoc() {
-    const [date, setDate] = useState<any | null>(null);
+export default function InlineDemo() {
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
-        <Calendar value={date} onChange={(e : CalendarChangeParams) => setDate(e.value)} inline showWeek />
+        <div className="card flex justify-content-center">
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} inline showWeek />
+        </div>
     )
 }
         `
@@ -40,7 +44,11 @@ export default function InlineDoc() {
 
     return (
         <>
-            <DocSectionText {...props}> Calendar is displayed in a popup by default whereas inline property needs to be enabled for inline mode. </DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    Calendar is displayed as a popup by default, add <i>inline</i> property to customize this behavior.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
                 <Calendar value={date} onChange={(e) => setDate(e.value)} inline showWeek />
             </div>

@@ -1,69 +1,209 @@
-import React, { useState, useEffect } from 'react';
-import { TreeTable } from '../../components/lib/treetable/TreeTable';
-import { Column } from '../../components/lib/column/Column';
-import { Button } from '../../components/lib/button/Button';
-import { NodeService } from '../../service/NodeService';
-import TreeTableDoc from '../../components/doc/treetable';
-import { DocActions } from '../../components/doc/common/docactions';
-import Head from 'next/head';
+import React from 'react';
+import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
+import { BasicDoc } from '../../components/doc/treetable/basicdoc';
+import { ColumnGroupDoc } from '../../components/doc/treetable/columngroupdoc';
+import { ColumnToggleDoc } from '../../components/doc/treetable/columntoggledoc';
+import { ConditionalStyleDoc } from '../../components/doc/treetable/conditionalstyledoc';
+import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
+import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
+import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
+import { EditDoc } from '../../components/doc/treetable/editdoc';
+import { FilterDoc } from '../../components/doc/treetable/filterdoc';
+import { ImportDoc } from '../../components/doc/treetable/importdoc';
+import { LazyLoadDoc } from '../../components/doc/treetable/lazyloaddoc';
+import { PaginatorBasicDoc } from '../../components/doc/treetable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/templatedoc';
+import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
+import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
+import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
+import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolumnsdoc';
+import { HorizontalScrollDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '../../components/doc/treetable/scroll/verticaldoc';
+import { CheckboxRowSelectionDoc } from '../../components/doc/treetable/selection/checkboxdoc';
+import { RowSelectionEventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
+import { SingleRowSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
+import { MultipleColumnsDoc } from '../../components/doc/treetable/sort/multiplecolumnsdoc';
+import { SingleColumnDoc } from '../../components/doc/treetable/sort/singlecolumndoc';
+import { StyleDoc } from '../../components/doc/treetable/styledoc';
+import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
 
 const TreeTableDemo = () => {
-    const [nodes, setNodes] = useState([]);
-    const [expandedKeys, setExpandedKeys] = useState({});
-    const nodeservice = new NodeService();
+    const docs = [
+        {
+            id: 'import',
+            label: 'Import',
+            component: ImportDoc
+        },
+        {
+            id: 'basic',
+            label: 'Basic',
+            component: BasicDoc
+        },
+        {
+            id: 'dynamic_columns',
+            label: 'Dynamic Columns',
+            component: DynamicColumnsDoc
+        },
+        {
+            id: 'controlled',
+            label: 'Controlled',
+            component: ControlledDoc
+        },
+        {
+            id: 'template',
+            label: 'Template',
+            component: TemplateDoc
+        },
+        {
+            id: 'paginator',
+            label: 'Paginator',
+            children: [
+                {
+                    id: 'paginator_basic',
+                    label: 'Basic',
+                    component: PaginatorBasicDoc
+                },
+                {
+                    id: 'paginator_template',
+                    label: 'Template',
+                    component: PaginatorTemplateDoc
+                }
+            ]
+        },
+        {
+            id: 'sort',
+            label: 'Sort',
+            children: [
+                {
+                    id: 'single_sort',
+                    label: 'Single Column',
+                    component: SingleColumnDoc
+                },
+                {
+                    id: 'multiple_sort',
+                    label: 'Multiple Columns',
+                    component: MultipleColumnsDoc
+                }
+            ]
+        },
+        {
+            id: 'filter',
+            label: 'Filter',
+            component: FilterDoc
+        },
+        {
+            id: 'selection',
+            label: 'Selection',
+            children: [
+                {
+                    id: 'single_row_selection',
+                    label: 'Single',
+                    component: SingleRowSelectionDoc
+                },
+                {
+                    id: 'multiple_rows_selection',
+                    label: 'Multiple',
+                    component: MultipleRowsSelectionDoc
+                },
+                {
+                    id: 'checkbox_row_selection',
+                    label: 'Checkbox',
+                    component: CheckboxRowSelectionDoc
+                },
+                {
+                    id: 'row_selection_events',
+                    label: 'Events',
+                    component: RowSelectionEventsDoc
+                }
+            ]
+        },
+        {
+            id: 'column_group',
+            label: 'Column Group',
+            component: ColumnGroupDoc
+        },
+        {
+            id: 'lazy_load',
+            label: 'Lazy Load',
+            component: LazyLoadDoc
+        },
+        {
+            id: 'edit',
+            label: 'Edit',
+            component: EditDoc
+        },
+        {
+            id: 'scroll',
+            label: 'Scroll',
+            children: [
+                {
+                    id: 'vertical_scroll',
+                    label: 'Vertical',
+                    component: VerticalScrollDoc
+                },
+                {
+                    id: 'horizontal_scroll',
+                    label: 'Horizontal',
+                    component: HorizontalScrollDoc
+                },
+                {
+                    id: 'frozen_columns',
+                    label: 'Frozen Columns',
+                    component: FrozenColumnsDoc
+                }
+            ]
+        },
+        {
+            id: 'column_resize',
+            label: 'Column Resize',
+            children: [
+                {
+                    id: 'resize_fitmode',
+                    label: 'Fit Mode',
+                    component: FitModeDoc
+                },
+                {
+                    id: 'resize_expandmode',
+                    label: 'Expand Mode',
+                    component: ExpandModeDoc
+                }
+            ]
+        },
+        {
+            id: 'reorder',
+            label: 'Reorder',
+            component: ReorderDoc
+        },
+        {
+            id: 'column_toggle',
+            label: 'Column Toggle',
+            component: ColumnToggleDoc
+        },
+        {
+            id: 'conditional_style',
+            label: 'Conditional Style',
+            component: ConditionalStyleDoc
+        },
+        {
+            id: 'contextmenu',
+            label: 'Context Menu',
+            component: ContextMenuDoc
+        },
+        {
+            id: 'style',
+            label: 'Style',
+            component: StyleDoc
+        },
+        {
+            id: 'accessibility',
+            label: 'Accessibility',
+            component: AccessibilityDoc
+        }
+    ];
 
-    const toggleApplications = () => {
-        let _expandedKeys = { ...expandedKeys };
-
-        if (_expandedKeys['0']) delete _expandedKeys['0'];
-        else _expandedKeys['0'] = true;
-
-        setExpandedKeys(_expandedKeys);
-    };
-
-    useEffect(() => {
-        nodeservice.getTreeTableNodes().then((data) => setNodes(data));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    return (
-        <div>
-            <Head>
-                <title>React TreeTable Component</title>
-                <meta name="description" content="TreeTable is used to display hierarchical data in tabular format." />
-            </Head>
-            <div className="content-section introduction">
-                <div className="feature-intro">
-                    <h1>TreeTable</h1>
-                    <p>TreeTable is used to display hierarchical data in tabular format.</p>
-                </div>
-
-                <DocActions github="treetable/index.js" />
-            </div>
-
-            <div className="content-section implementation">
-                <div className="card">
-                    <h5>Basic</h5>
-                    <TreeTable value={nodes}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                </div>
-
-                <div className="card">
-                    <h5>Programmatic</h5>
-                    <Button onClick={toggleApplications} label="Toggle Applications" />
-                    <TreeTable value={nodes} expandedKeys={expandedKeys} onToggle={(e) => setExpandedKeys(e.value)} style={{ marginTop: '.5em' }}>
-                        <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
-                    </TreeTable>
-                </div>
-            </div>
-
-            <TreeTableDoc />
-        </div>
-    );
+    return <DocComponent title="React TreeTable Component" header="TreeTable" description="TreeTable is used to display hierarchical data in tabular format." componentDocs={docs} apiDocs={['TreeTable', 'Column', 'TreeNode']} />;
 };
 
 export default TreeTableDemo;

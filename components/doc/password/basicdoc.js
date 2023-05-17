@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Password } from '../../lib/password/Password';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');
@@ -11,26 +11,30 @@ export function BasicDoc(props) {
 <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function BasicDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Password } from 'primereact/password';
 
 export default function BasicDemo() {
-    const [value, setValue] = useState<any>('');
+    const [value, setValue] = useState<string>('');
 
     return (
-        <Password value={value} onChange={(e : ChangeEventHandler) => setValue(e.target.value)} feedback={false} />
+        <div className="card flex justify-content-center">
+            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} feedback={false} />
+        </div>
     )
 }
         `
@@ -39,7 +43,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties.
+                <p>
+                    Password is used as a controlled component with <i>value</i> and <i>onChange</i> properties. Strength meter is enabled by default so <i>feedback</i> needs to be set as false for a basic password input.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />

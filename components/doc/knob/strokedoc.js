@@ -1,38 +1,40 @@
 import { useState } from 'react';
 import { Knob } from '../../lib/knob/Knob';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function StrokeDoc(props) {
     const [value, setValue] = useState(40);
 
     const code = {
         basic: `
-<Knob value={value} strokeWidth={5} onChange={(e) => setValue(e.value)}/>
-
+<Knob value={value} onChange={(e) => setValue(e.value)} strokeWidth={5} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function StrokeDoc() {
+export default function StrokeDemo() {
     const [value, setValue] = useState(40);
 
     return (
-        <Knob value={value} strokeWidth={5} onChange={(e) => setValue(e.value)}/>
-
+        <div className="card flex justify-content-center">
+            <Knob value={value} strokeWidth={5} onChange={(e) => setValue(e.value)} strokeWidth={5} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
-import { Knob } from 'primereact/knob';
+import React, { useState } from 'react';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function StrokeDoc() {
+export default function StrokeDemo() {
     const [value, setValue] = useState<number>(40);
 
     return (
-        <Knob value={value} strokeWidth={5} onChange={(e : KnobChangeParams) => setValue(e.value)}/>
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e : KnobChangeEvent) => setValue(e.value)} strokeWidth={5} />
+        </div>
 
     )
 }
@@ -41,9 +43,13 @@ export default function StrokeDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Width of the knob stroke.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    The border size is specified with the <i>stroke</i> property as a number in pixels.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
-                <Knob value={value} strokeWidth={5} onChange={(e) => setValue(e.value)} />
+                <Knob value={value} onChange={(e) => setValue(e.value)} strokeWidth={5} />
             </div>
             <DocSectionCode code={code} />
         </>

@@ -1,36 +1,40 @@
 import { useState } from 'react';
 import { Knob } from '../../lib/knob/Knob';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SizeDoc(props) {
     const [value, setValue] = useState(60);
 
     const code = {
         basic: `
-<Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
+<Knob value={value} onChange={(e) => setValue(e.value)} size={200} />
         `,
         javascript: `
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Knob } from 'primereact/knob';
 
-export default function SizeDoc() {
+export default function SizeDemo() {
     const [value, setValue] = useState(60);
 
     return (
-        <Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e) => setValue(e.value)} size={200} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from 'react';
-import { Knob } from 'primereact/knob';
+import React, { useState } from 'react';
+import { Knob, KnobChangeEvent } from 'primereact/knob';
 
-export default function SizeDoc() {
+export default function SizeDemo() {
     const [value, setValue] = useState<number>(60);
 
     return (
-        <Knob value={value} size={200} onChange={(e : KnobChangeParams) => setValue(e.value)} />
+        <div className="card flex justify-content-center">
+            <Knob value={value} onChange={(e : KnobChangeEvent) => setValue(e.value)} size={200} />
+        </div>
     )
 }
         `
@@ -38,9 +42,13 @@ export default function SizeDoc() {
 
     return (
         <>
-            <DocSectionText {...props}>Size of the component in pixels.</DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    Diameter of the knob is defined in pixels using the <i>size</i> property.
+                </p>
+            </DocSectionText>
             <div className="card flex justify-content-center">
-                <Knob value={value} size={200} onChange={(e) => setValue(e.value)} />
+                <Knob value={value} onChange={(e) => setValue(e.value)} size={200} />
             </div>
             <DocSectionCode code={code} />
         </>

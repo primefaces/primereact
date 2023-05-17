@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Chips } from '../../lib/chips/Chips';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState([]);
@@ -11,26 +11,30 @@ export function BasicDoc(props) {
 <Chips value={value} onChange={(e) => setValue(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { Chips } from "primereact/chips";
 
 export default function BasicDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <Chips value={value} onChange={(e) => setValue(e.value)} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e) => setValue(e.value)} />
+        </div>
     )
 }
         `,
         typescript: `
-import { useState } from "react";
-import { Chips } from "primereact/chips";
+import React, { useState } from "react";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 export default function BasicDemo() {
-    const [value, setValue] = useState<string>([]);
+    const [value, setValue] = useState<string[]>([]);
 
     return (
-        <Chips value={value} onChange={(e: ChipsChangeParams) => setValue(e.value)} />
+        <div className="card p-fluid">
+            <Chips value={value} onChange={(e: ChipsChangeEvent) => setValue(e.value)} />
+        </div>
     )
 }
         `
@@ -39,7 +43,9 @@ export default function BasicDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Chips requires an array as its <i>value</i> and <i>onChange</i> callback to update the model.
+                <p>
+                    Chips is used as a controlled input with <i>value</i> and <i>onChange</i> properties where <i>value</i> should be an array.
+                </p>
             </DocSectionText>
             <div className="card p-fluid">
                 <Chips value={value} onChange={(e) => setValue(e.value)} />

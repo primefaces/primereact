@@ -1,8 +1,17 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleUpIcon } from '../icons/angleup';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 
 export const OrderListControls = React.memo((props) => {
+    const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
+    const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
+    const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;
+    const moveBottomIcon = props.moveBottomIcon || <AngleDoubleDownIcon />;
+
     const moveUp = (event) => {
         if (props.selection) {
             let value = [...props.value];
@@ -117,10 +126,10 @@ export const OrderListControls = React.memo((props) => {
 
     return (
         <div className="p-orderlist-controls">
-            <Button type="button" icon="pi pi-angle-up" onClick={moveUp}></Button>
-            <Button type="button" icon="pi pi-angle-double-up" onClick={moveTop}></Button>
-            <Button type="button" icon="pi pi-angle-down" onClick={moveDown}></Button>
-            <Button type="button" icon="pi pi-angle-double-down" onClick={moveBottom}></Button>
+            <Button type="button" icon={moveUpIcon} onClick={moveUp}></Button>
+            <Button type="button" icon={moveTopIcon} onClick={moveTop}></Button>
+            <Button type="button" icon={moveDownIcon} onClick={moveDown}></Button>
+            <Button type="button" icon={moveBottomIcon} onClick={moveBottom}></Button>
         </div>
     );
 });

@@ -2,14 +2,21 @@ import * as React from 'react';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { CalendarIcon } from '../icons/calendar';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mask, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
+import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-
 export const Calendar = React.memo(
-    React.forwardRef((props, ref) => {
+    React.forwardRef((inProps, ref) => {
+        const props = CalendarBase.getProps(inProps);
+
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
@@ -252,7 +259,7 @@ export const Calendar = React.memo(
                 return;
             }
 
-            let newViewDate = new Date(getViewDate().getTime());
+            let newViewDate = cloneDate(getViewDate());
 
             newViewDate.setDate(1);
 
@@ -297,7 +304,7 @@ export const Calendar = React.memo(
                 return;
             }
 
-            let newViewDate = new Date(getViewDate().getTime());
+            let newViewDate = cloneDate(getViewDate());
 
             newViewDate.setDate(1);
 
@@ -375,7 +382,7 @@ export const Calendar = React.memo(
 
         const onMonthDropdownChange = (event, value) => {
             const currentViewDate = getViewDate();
-            let newViewDate = new Date(currentViewDate.getTime());
+            let newViewDate = cloneDate(currentViewDate);
 
             newViewDate.setMonth(parseInt(value, 10));
 
@@ -384,7 +391,7 @@ export const Calendar = React.memo(
 
         const onYearDropdownChange = (event, value) => {
             const currentViewDate = getViewDate();
-            let newViewDate = new Date(currentViewDate.getTime());
+            let newViewDate = cloneDate(currentViewDate);
 
             newViewDate.setFullYear(parseInt(value, 10));
 
@@ -725,21 +732,25 @@ export const Calendar = React.memo(
 
         const getCurrentDateTime = () => {
             if (isSingleSelection()) {
-                return props.value && props.value instanceof Date ? props.value : getViewDate();
+                return props.value && props.value instanceof Date ? cloneDate(props.value) : getViewDate();
             } else if (isMultipleSelection()) {
                 if (props.value && props.value.length) {
-                    return props.value[props.value.length - 1];
+                    return cloneDate(props.value[props.value.length - 1]);
                 }
             } else if (isRangeSelection()) {
                 if (props.value && props.value.length) {
-                    let startDate = props.value[0];
-                    let endDate = props.value[1];
+                    let startDate = cloneDate(props.value[0]);
+                    let endDate = cloneDate(props.value[1]);
 
                     return endDate || startDate;
                 }
             }
 
             return new Date();
+        };
+
+        const cloneDate = (date) => {
+            return isValidDate(date) ? new Date(date.valueOf()) : date;
         };
 
         const isValidDate = (date) => {
@@ -945,7 +956,7 @@ export const Calendar = React.memo(
 
             // previous (check first day of month at 00:00:00)
             if (props.minDate) {
-                let firstDayOfMonth = new Date(newViewDate.getTime());
+                let firstDayOfMonth = cloneDate(newViewDate);
 
                 if (firstDayOfMonth.getMonth() === 0) {
                     firstDayOfMonth.setMonth(11, 1);
@@ -967,7 +978,7 @@ export const Calendar = React.memo(
 
             // next (check last day of month at 11:59:59)
             if (props.maxDate) {
-                let lastDayOfMonth = new Date(newViewDate.getTime());
+                let lastDayOfMonth = cloneDate(newViewDate);
 
                 if (lastDayOfMonth.getMonth() === 11) {
                     lastDayOfMonth.setMonth(0, 1);
@@ -1362,7 +1373,7 @@ export const Calendar = React.memo(
             } else {
                 setCurrentMonth(month);
                 createMonthsMeta(month, currentYear);
-                const currentDate = new Date(getCurrentDateTime().getTime());
+                const currentDate = cloneDate(getCurrentDateTime());
 
                 currentDate.setDate(1); // #2948 always set to 1st of month
                 currentDate.setMonth(month);
@@ -1386,15 +1397,19 @@ export const Calendar = React.memo(
 
         const updateModel = (event, value) => {
             if (props.onChange) {
-                const newValue = value && value instanceof Date ? new Date(value.getTime()) : value;
+                const newValue = cloneDate(value);
 
                 viewStateChanged.current = true;
 
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -1737,7 +1752,7 @@ export const Calendar = React.memo(
         };
 
         const getWeekNumber = (date) => {
-            let checkDate = new Date(date.getTime());
+            let checkDate = cloneDate(date);
 
             checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
             let time = checkDate.getTime();
@@ -1787,7 +1802,7 @@ export const Calendar = React.memo(
                 validDate = !isDateDisabled(day, month, year);
             }
 
-            if (props.disabledDays) {
+            if (props.disabledDays && currentView !== 'month') {
                 validDay = !isDayDisabled(day, month, year);
             }
 
@@ -2463,8 +2478,13 @@ export const Calendar = React.memo(
                 setValue(props.value);
             }
 
+            if (props.autoFocus) {
+                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
+                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
+            }
+
             return () => {
-                props.mask && unbindMaskEvents();
+                props.mask && unbindMaskEvents && unbindMaskEvents();
             };
         });
 
@@ -2513,7 +2533,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
@@ -2538,6 +2558,7 @@ export const Calendar = React.memo(
             getCurrentDateTime,
             getViewDate,
             updateViewDate,
+            focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current
@@ -2566,10 +2587,13 @@ export const Calendar = React.memo(
 
         const createBackwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
+            const iconClassName = 'p-datepicker-prev-icon';
+            const icon = props.prevIcon || <ChevronLeftIcon className={iconClassName} />;
+            const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <button type="button" className="p-datepicker-prev" {...navigatorProps}>
-                    <span className="p-datepicker-prev-icon pi pi-chevron-left"></span>
+                    {backwardNavigatorIcon}
                     <Ripple />
                 </button>
             );
@@ -2577,10 +2601,13 @@ export const Calendar = React.memo(
 
         const createForwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onNextButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
+            const iconClassName = 'p-datepicker-next-icon';
+            const icon = props.nextIcon || <ChevronRightIcon className={iconClassName} />;
+            const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
             return (
                 <button type="button" className="p-datepicker-next" {...navigatorProps}>
-                    <span className="p-datepicker-next-icon pi pi-chevron-right"></span>
+                    {forwardNavigatorIcon}
                     <Ripple />
                 </button>
             );
@@ -2632,7 +2659,7 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleYearElement = () => {
+        const createTitleYearElement = (metaYear) => {
             if (props.yearNavigator) {
                 let yearOptions = [];
                 const years = props.yearRange.split(':');
@@ -2674,10 +2701,12 @@ export const Calendar = React.memo(
                 return content;
             }
 
+            const displayYear = props.numberOfMonths > 1 ? metaYear : currentYear;
+
             return (
                 currentView !== 'year' && (
                     <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
-                        {currentYear}
+                        {displayYear}
                     </button>
                 )
             );
@@ -2795,9 +2824,10 @@ export const Calendar = React.memo(
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
+            const monthKey = monthMetaData.month + '-' + monthMetaData.year;
 
             return (
-                <div key={monthMetaData.month} className="p-datepicker-group">
+                <div key={monthKey} className="p-datepicker-group">
                     <div className="p-datepicker-header">
                         {header}
                         {backwardNavigator}
@@ -2904,9 +2934,16 @@ export const Calendar = React.memo(
             return null;
         };
 
+        const incrementIcon = IconUtils.getJSXIcon(props.incrementIcon || <ChevronUpIcon />, undefined, { props });
+        const decrementIcon = IconUtils.getJSXIcon(props.decrementIcon || <ChevronDownIcon />, undefined, { props });
+
         const createHourPicker = () => {
-            let currentTime = getCurrentDateTime();
+            const currentTime = getCurrentDateTime();
+            const minute = doStepMinute(currentTime.getMinutes());
             let hour = currentTime.getHours();
+
+            // #3770 account for step minutes rolling to next hour
+            hour = minute > 59 ? hour + 1 : hour;
 
             if (props.hourFormat === '12') {
                 if (hour === 0) hour = 12;
@@ -2925,7 +2962,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-up"></span>
+                        {incrementIcon}
                         <Ripple />
                     </button>
                     <span>{hourDisplay}</span>
@@ -2937,7 +2974,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-down"></span>
+                        {decrementIcon}
                         <Ripple />
                     </button>
                 </div>
@@ -2946,7 +2983,9 @@ export const Calendar = React.memo(
 
         const createMinutePicker = () => {
             const currentTime = getCurrentDateTime();
-            const minute = currentTime.getMinutes();
+            let minute = doStepMinute(currentTime.getMinutes());
+
+            minute = minute > 59 ? minute - 60 : minute;
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
 
             return (
@@ -2959,7 +2998,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-up"></span>
+                        {incrementIcon}
                         <Ripple />
                     </button>
                     <span>{minuteDisplay}</span>
@@ -2971,7 +3010,7 @@ export const Calendar = React.memo(
                         onMouseLeave={onTimePickerElementMouseLeave}
                         onKeyDown={(e) => onContainerButtonKeydown(e)}
                     >
-                        <span className="pi pi-chevron-down"></span>
+                        {decrementIcon}
                         <Ripple />
                     </button>
                 </div>
@@ -2994,7 +3033,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-up"></span>
+                            {incrementIcon}
                             <Ripple />
                         </button>
                         <span>{secondDisplay}</span>
@@ -3006,7 +3045,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-down"></span>
+                            {decrementIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -3032,7 +3071,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-up"></span>
+                            {incrementIcon}
                             <Ripple />
                         </button>
                         <span>{millisecondDisplay}</span>
@@ -3044,7 +3083,7 @@ export const Calendar = React.memo(
                             onMouseLeave={onTimePickerElementMouseLeave}
                             onKeyDown={(e) => onContainerButtonKeydown(e)}
                         >
-                            <span className="pi pi-chevron-down"></span>
+                            {decrementIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -3063,12 +3102,12 @@ export const Calendar = React.memo(
                 return (
                     <div className="p-ampm-picker">
                         <button type="button" className="p-link" onClick={toggleAmPm}>
-                            <span className="pi pi-chevron-up"></span>
+                            {incrementIcon}
                             <Ripple />
                         </button>
                         <span>{display}</span>
                         <button type="button" className="p-link" onClick={toggleAmPm}>
-                            <span className="pi pi-chevron-down"></span>
+                            {decrementIcon}
                             <Ripple />
                         </button>
                     </div>
@@ -3139,7 +3178,7 @@ export const Calendar = React.memo(
 
         const createButton = () => {
             if (props.showIcon) {
-                return <Button type="button" icon={props.icon} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" />;
+                return <Button type="button" icon={props.icon || <CalendarIcon />} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" />;
             }
 
             return null;
@@ -3199,7 +3238,7 @@ export const Calendar = React.memo(
                     <div className="p-monthpicker">
                         {monthPickerValues().map((m, i) => {
                             return (
-                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) })}>
+                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(1, i, currentYear) })}>
                                     {m}
                                 </span>
                             );
@@ -3217,7 +3256,11 @@ export const Calendar = React.memo(
                     <div className="p-yearpicker">
                         {yearPickerValues().map((y, i) => {
                             return (
-                                <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, 0, y) })}>
+                                <span
+                                    onClick={(event) => onYearSelect(event, y)}
+                                    key={`year${i + 1}`}
+                                    className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !(isSelectable(0, 0, y) || isSelectable(30, 11, y)) })}
+                                >
                                     {y}
                                 </span>
                             );
@@ -3229,7 +3272,7 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const otherProps = ObjectUtils.findDiffKeys(props, Calendar.defaultProps);
+        const otherProps = CalendarBase.getOtherProps(props);
         const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
@@ -3243,7 +3286,9 @@ export const Calendar = React.memo(
             'p-datepicker-timeonly': props.timeOnly,
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
-            'p-datepicker-touch-ui': props.touchUI
+            'p-datepicker-touch-ui': props.touchUI,
+            'p-input-filled': PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': PrimeReact.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();
@@ -3284,89 +3329,3 @@ export const Calendar = React.memo(
 );
 
 Calendar.displayName = 'Calendar';
-Calendar.defaultProps = {
-    __TYPE: 'Calendar',
-    appendTo: null,
-    ariaLabelledBy: null,
-    autoZIndex: true,
-    baseZIndex: 0,
-    className: null,
-    clearButtonClassName: 'p-button-secondary',
-    dateFormat: null,
-    dateTemplate: null,
-    decadeTemplate: null,
-    disabled: false,
-    disabledDates: null,
-    disabledDays: null,
-    footerTemplate: null,
-    headerTemplate: null,
-    hideOnDateTimeSelect: false,
-    hourFormat: '24',
-    icon: 'pi pi-calendar',
-    iconPos: 'right',
-    id: null,
-    inline: false,
-    inputClassName: null,
-    inputId: null,
-    inputMode: 'none',
-    inputRef: null,
-    inputStyle: null,
-    keepInvalid: false,
-    locale: null,
-    mask: null,
-    maxDate: null,
-    maxDateCount: null,
-    minDate: null,
-    monthNavigator: false,
-    monthNavigatorTemplate: null,
-    name: null,
-    numberOfMonths: 1,
-    onBlur: null,
-    onChange: null,
-    onClearButtonClick: null,
-    onFocus: null,
-    onHide: null,
-    onInput: null,
-    onMonthChange: null,
-    onSelect: null,
-    onShow: null,
-    onTodayButtonClick: null,
-    onViewDateChange: null,
-    onVisibleChange: null,
-    panelClassName: null,
-    panelStyle: null,
-    placeholder: null,
-    readOnlyInput: false,
-    required: false,
-    selectOtherMonths: false,
-    selectionMode: 'single',
-    shortYearCutoff: '+10',
-    showButtonBar: false,
-    showIcon: false,
-    showMillisec: false,
-    showMinMaxRange: false,
-    showOnFocus: true,
-    showOtherMonths: true,
-    showSeconds: false,
-    showTime: false,
-    showWeek: false,
-    stepHour: 1,
-    stepMillisec: 1,
-    stepMinute: 1,
-    stepSecond: 1,
-    style: null,
-    tabIndex: null,
-    timeOnly: false,
-    todayButtonClassName: 'p-button-secondary',
-    tooltip: null,
-    tooltipOptions: null,
-    touchUI: false,
-    transitionOptions: null,
-    value: null,
-    view: 'date',
-    viewDate: null,
-    visible: false,
-    yearNavigator: false,
-    yearNavigatorTemplate: null,
-    yearRange: null
-};

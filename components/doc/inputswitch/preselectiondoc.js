@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputSwitch } from '../../lib/inputswitch/InputSwitch';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function PreselectionDoc(props) {
     const [checked, setChecked] = useState(true);
@@ -11,26 +11,30 @@ export function PreselectionDoc(props) {
 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
         `,
         javascript: `
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputSwitch } from "primereact/inputswitch";
 
 export default function PreselectionDemo() {
     const [checked, setChecked] = useState(true);
 
     return (
-        <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
+        </div>
     );
 }
         `,
         typescript: `
-import { useState } from "react";
-import { InputSwitch } from "primereact/inputswitch";
+import React, { useState } from "react";
+import { InputSwitch, InputSwitchChangeEvent } from "primereact/inputswitch";
 
 export default function PreselectionDemo() {
     const [checked, setChecked] = useState<boolean>(true);
 
     return (
-        <InputSwitch checked={checked} onChange={(e: InputSwitchChangeParams) => setChecked(e.value)} />
+        <div className="card flex justify-content-center">
+            <InputSwitch checked={checked} onChange={(e: InputSwitchChangeEvent) => setChecked(e.value)} />
+        </div>
     );
 }
         `
@@ -39,7 +43,9 @@ export default function PreselectionDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                Enabling <i>checked</i> property displays the component as active.
+                <p>
+                    Enabling <i>checked</i> property displays the component as active initially.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
