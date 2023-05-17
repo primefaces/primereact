@@ -53,11 +53,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>
-                    Text to display is defined with the <i>text</i> property.
-                </p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
                 <Message
                     text="Message Content"
