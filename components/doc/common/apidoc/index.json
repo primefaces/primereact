@@ -22906,6 +22906,14 @@
                             "description": "Defines if menu would displayed as a popup."
                         },
                         {
+                            "name": "popupAlignment",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"right\"",
+                            "default": "left",
+                            "description": "In popup mode determines how the overlay is aligned with its target. Values either 'left' or 'right'."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
