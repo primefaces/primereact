@@ -1,10 +1,18 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { AngleRightIcon } from '../icons/angleright';
 
 export const SlideMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const [renderSubMenu, setRenderSubMenu] = React.useState({});
+
+    const getPTOptions = (item, key) => {
+        return props.ptm(key, {
+            context: {
+                active: activeItemState === item
+            }
+        });
+    };
 
     const onItemClick = (event, item, index) => {
         if (item.disabled) {
@@ -35,8 +43,15 @@ export const SlideMenuSub = React.memo((props) => {
 
     const createSeparator = (index) => {
         const key = 'separator_' + index;
+        const separatorProps = mergeProps(
+            {
+                key,
+                className: "p-menu-separator"
+            },
+            props.ptm('separator')
+        );
 
-        return <li key={key} className="p-menu-separator"></li>;
+        return <li {...separatorProps}></li>;
     };
 
     const createSubmenu = (item, index) => {
@@ -53,6 +68,7 @@ export const SlideMenuSub = React.memo((props) => {
                     onForward={props.onForward}
                     parentActive={item === activeItemState}
                     submenuIcon={props.submenuIcon}
+                    ptm={props.ptm}
                 />
             );
         }
@@ -73,13 +89,42 @@ export const SlideMenuSub = React.memo((props) => {
         const active = activeItemState === item;
         const className = classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className);
         const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
+        const iconProps = mergeProps(
+            {
+                className: 'p-menuitem-icon'
+            },
+            getPTOptions(item, 'icon')
+        );
+        const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
         const submenuIconClassName = 'p-submenu-icon';
-        const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon className={submenuIconClassName} />, { className: submenuIconClassName }, { props });
-        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const submenuIconProps = mergeProps(
+            {
+                className: submenuIconClassName
+            },
+            getPTOptions(item, 'submenuIcon')
+        );
+        const labelProps = mergeProps(
+            {
+                className: "p-menuitem-text"
+            },
+            getPTOptions(item, 'label')
+        );
+        const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props });
+        const label = item.label && <span {...labelProps}>{item.label}</span>;
         const submenu = createSubmenu(item, index);
+        const actionProps = mergeProps(
+            {
+                href: item.url || '#',
+                className: "p-menuitem-link",
+                target: item.target,
+                onClick: (event) => onItemClick(event, item, index),
+                'aria-disabled': item.disabled
+            },
+            getPTOptions(item, 'action')
+        );
+
         let content = (
-            <a href={item.url || '#'} className="p-menuitem-link" target={item.target} onClick={(event) => onItemClick(event, item, index)} aria-disabled={item.disabled}>
+            <a {...actionProps}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -101,8 +146,18 @@ export const SlideMenuSub = React.memo((props) => {
             content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
         }
 
+        const menuitemProps = mergeProps(
+            {
+                id: item.id,
+                key,
+                className,
+                style: item.style
+            },
+            getPTOptions(item, 'menuitem')
+        )
+
         return (
-            <li key={key} id={item.id} className={className} style={item.style}>
+            <li {...menuitemProps}>
                 {content}
                 {submenu}
             </li>
@@ -130,9 +185,16 @@ export const SlideMenuSub = React.memo((props) => {
         'p-active-submenu': props.parentActive
     });
     const items = createItems();
+    const menuProps = mergeProps(
+        {
+            className,
+            style
+        },
+        props.ptm('menu')
+    )
 
     return (
-        <ul className={className} style={style}>
+        <ul {...menuProps}>
             {items}
         </ul>
     );
