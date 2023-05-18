@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
@@ -30,8 +31,12 @@ export const InputSwitch = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -61,6 +66,12 @@ export const InputSwitch = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
+        });
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = InputSwitchBase.getOtherProps(props);

@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SpeedDialBase = {
+export const SpeedDialBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SpeedDial',
         id: null,
@@ -21,7 +21,7 @@ export const SpeedDialBase = {
         'aria-label': null,
         maskStyle: null,
         maskClassName: null,
-        showIcon: 'pi pi-plus',
+        showIcon: null,
         hideIcon: null,
         rotateAnimation: true,
         onVisibleChange: null,
@@ -29,7 +29,5 @@ export const SpeedDialBase = {
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SpeedDialBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SpeedDialBase.defaultProps)
-};
+    }
+});

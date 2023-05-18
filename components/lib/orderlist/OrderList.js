@@ -223,7 +223,16 @@ export const OrderList = React.memo(
 
         return (
             <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-                <OrderListControls value={visibleList} selection={selectionState} onReorder={onReorder} dataKey={props.dataKey} />
+                <OrderListControls
+                    value={visibleList}
+                    selection={selectionState}
+                    onReorder={onReorder}
+                    dataKey={props.dataKey}
+                    moveUpIcon={props.moveUpIcon}
+                    moveTopIcon={props.moveTopIcon}
+                    moveDownIcon={props.moveDownIcon}
+                    moveBottomIcon={props.moveBottomIcon}
+                />
                 <OrderListSubList
                     value={visibleList}
                     selection={selectionState}
@@ -241,6 +250,7 @@ export const OrderList = React.memo(
                     dragdrop={props.dragdrop}
                     onChange={props.onChange}
                     tabIndex={props.tabIndex}
+                    filterIcon={props.filterIcon}
                 />
             </div>
         );

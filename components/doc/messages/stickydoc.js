@@ -1,46 +1,46 @@
-import { useEffect, useRef } from 'react';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { useRef } from 'react';
+import { useMountEffect } from '../../lib/hooks/Hooks';
 import { Messages } from '../../lib/messages/Messages';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function StickyDoc(props) {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show([
             { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
         ]);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    });
 
     const code = {
         basic: `
-useEffect(() => {
-    msgs.current.show([
+msgs.current.show([
         { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
         { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
         { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
         { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
-    ]);
-}, []);
+]);
         `,
         javascript: `
 import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function StickyDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show([
             { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
         ]);
-    }, []);
+    });
 
     return (
         <div className="card">
@@ -51,19 +51,20 @@ export default function StickyDemo() {
         `,
         typescript: `
 import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function StickyDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current?.show([
             { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
             { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
         ]);
-    }, []);
+    });
 
     return (
         <div className="card">

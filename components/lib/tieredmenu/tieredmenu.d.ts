@@ -10,12 +10,89 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type TieredMenuPassThroughType<T> = PassThroughType<T, TieredMenuPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TieredMenuPassThroughMethodOptions {
+    props: TieredMenuProps;
+    state: TieredMenuState;
+    context: TieredMenuContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TieredMenuProps.pt}
+ */
+export interface TieredMenuPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: TieredMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the submenu icon's DOM element.
+     */
+    submenuIcon?: TieredMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Defines current inline state in TieredMenu component.
+ */
+export interface TieredMenuState {
+    /**
+     * Current attributeSelector visible state as a string.
+     */
+    attributeSelector: string;
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue true
+     */
+    visible: boolean;
+}
+
+/**
+ * Defines current options in TieredMenu component.
+ */
+export interface TieredMenuContext {
+    /**
+     * Current active state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Defines valid properties in TieredMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * An array of menuitems.
      */
@@ -55,6 +132,10 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
+     * Icon of the submenu.
+     */
+    submenuIcon?: IconType<TieredMenuProps> | undefined;
+    /**
      * Callback to invoke when a popup menu is shown.
      * @param {React.SyntheticEvent} event - Browser event.
      */
@@ -69,6 +150,11 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TieredMenuPassThroughOptions}
+     */
+    pt?: TieredMenuPassThroughOptions;
 }
 
 /**

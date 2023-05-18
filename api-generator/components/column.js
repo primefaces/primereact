@@ -30,6 +30,12 @@ const ColumnProps = [
         description: 'Property of a row data used for exporting, defaults to field.'
     },
     {
+        name: 'exportHeader',
+        type: 'string',
+        default: 'null',
+        description: 'Custom export header of the column to be exported.'
+    },
+    {
         name: 'header',
         type: 'any',
         default: 'null',

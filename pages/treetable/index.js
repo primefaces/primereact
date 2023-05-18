@@ -203,7 +203,7 @@ const TreeTableDemo = () => {
         }
     ];
 
-    return <DocComponent title="React TreeTable Component" header="TreeTable" description="TreeTable is used to display hierarchical data in tabular format." componentDocs={docs} apiDocs={['TreeTable', 'Column']} />;
+    return <DocComponent title="React TreeTable Component" header="TreeTable" description="TreeTable is used to display hierarchical data in tabular format." componentDocs={docs} apiDocs={['TreeTable', 'Column', 'TreeNode']} />;
 };
 
 export default TreeTableDemo;

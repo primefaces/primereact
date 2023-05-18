@@ -9,7 +9,71 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+import { ButtonPassThroughOptions } from '../button/button';
+
+export declare type ConfirmPopupPassThroughType<T> = PassThroughType<T, ConfirmPopupPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ConfirmPopupPassThroughMethodOptions {
+    props: ConfirmPopupProps;
+    state: ConfirmPopupState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ConfirmPopupProps.pt}
+ */
+export interface ConfirmPopupPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ConfirmPopupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ConfirmPopupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ConfirmPopupPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the message's DOM element.
+     */
+    message?: ConfirmPopupPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: ConfirmPopupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    rejectButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    acceptButton?: ButtonPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in ConfirmPopup component.
+ */
+export interface ConfirmPopupState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+    /**
+     * Current reshow state as a boolean.
+     * @defaultValue false
+     */
+    reshow: boolean;
+}
 
 /**
  * Custom confirm popup options
@@ -159,6 +223,11 @@ export interface ConfirmPopupProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ConfirmPopupPassThroughOptions}
+     */
+    pt?: ConfirmPopupPassThroughOptions;
 }
 
 /**

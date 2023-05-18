@@ -7,6 +7,9 @@ import { ImportDoc } from '../../components/doc/avatar/importdoc';
 import { LabelDoc } from '../../components/doc/avatar/labeldoc';
 import { StyleDoc } from '../../components/doc/avatar/styledoc';
 import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/avatar/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/avatar/pt/ptdoc';
 
 const AvatarDemo = () => {
     const docs = [
@@ -47,7 +50,30 @@ const AvatarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Avatar Component" header="Avatar" description="Avatar represents people using icons, labels and images." componentDocs={docs} apiDocs={['Avatar']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.avatar.options',
+            label: 'Avatar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.avatargroup.options',
+            label: 'AvatarGroup PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Avatar Component" header="Avatar" description="Avatar represents people using icons, labels and images." componentDocs={docs} apiDocs={['Avatar']} ptDocs={ptDocs} />;
 };
 
 export default AvatarDemo;

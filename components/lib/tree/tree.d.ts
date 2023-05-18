@@ -8,7 +8,8 @@
  *
  */
 import * as React from 'react';
-import TreeNode from '../treenode';
+import { TreeNode } from '../treenode';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom tree header template options
@@ -229,6 +230,10 @@ interface TreeDragDropEvent {
      */
     dragNode: TreeNode;
     /**
+     * The node that is being dropped on.
+     */
+    dropNode: TreeNode;
+    /**
      * The index of the drop.
      */
     dropIndex: number;
@@ -360,9 +365,20 @@ export interface TreeProps {
     loading?: boolean | undefined;
     /**
      * Icon to display when tree is loading.
-     * @defaultValue pi pi-spin
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon to display in the checkbox.
+     */
+    checkboxIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon of an expanded tab.
+     */
+    collapseIcon?: IconType<TreeProps> | undefined;
+    /**
+     * Icon of an collapsed tab.
+     */
+    expandIcon?: IconType<TreeProps> | undefined;
     /**
      * Unique key to enable dragdrop functionality.
      * @defaultValue false
@@ -390,6 +406,10 @@ export interface TreeProps {
      * @defaultValue false
      */
     filter?: boolean | undefined;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<TreeProps> | string;
     /**
      * When filtering is enabled, the value of input field.
      */

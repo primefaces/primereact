@@ -11,6 +11,7 @@ import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
  * @group Others
@@ -75,6 +76,11 @@ interface ChipsChangeEvent extends FormEvent<any[]> {}
  */
 export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onFocus' | 'onBlur' | 'onKeyDown' | 'ref'> {
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
@@ -113,6 +119,10 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      * @defaultValue true
      */
     removable?: boolean | ((options: ChipsRemovableOptions) => boolean);
+    /**
+     * Icon of the remove element.
+     */
+    removeIcon?: IconType<ChipsProps> | undefined;
     /**
      * Content of the tooltip.
      */

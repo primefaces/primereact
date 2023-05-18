@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/fileupload/pt/ptdoc';
+import { Wireframe } from '../../components/doc/fileupload/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/fileupload/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
@@ -51,6 +54,23 @@ const FileUploadDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.fileupload.options',
+            label: 'FileUpload PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
     return (
         <DocComponent
@@ -59,6 +79,7 @@ const FileUploadDemo = () => {
             description="FileUpload is an advanced uploader with dragdrop support, multi file uploads, auto uploading, progress tracking and validations."
             componentDocs={docs}
             apiDocs={['FileUpload']}
+            ptDocs={ptDocs}
         />
     );
 };

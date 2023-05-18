@@ -9,7 +9,7 @@ export function FloatLabelDoc(props) {
     const code = {
         basic: `
 <span className="p-float-label">
-    <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.date)} />
+    <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.value)} />
     <label htmlFor="birth_date">Birth Date</label>
 </span>
         `,
@@ -23,7 +23,7 @@ export default function FloatLabelDemo() {
     return (
         <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.date)} />
+                <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.value)} />
                 <label htmlFor="birth_date">Birth Date</label>
             </span>
         </div>
@@ -35,12 +35,12 @@ import React, { useState } from "react";
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
 export default function FloatLabelDemo() {
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
         <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <Calendar inputId="birth_date" value={date} onChange={(e: CalendarChangeEvent) => setDate(e.date)} />
+                <Calendar inputId="birth_date" value={date} onChange={(e: CalendarChangeEvent) => setDate(e.value)} />
                 <label htmlFor="birth_date">Birth Date</label>
             </span>
         </div>
@@ -56,7 +56,7 @@ export default function FloatLabelDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <span className="p-float-label">
-                    <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.date)} />
+                    <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.value)} />
                     <label htmlFor="birth_date">Birth Date</label>
                 </span>
             </div>

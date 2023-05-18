@@ -7,6 +7,9 @@ import { ImportDoc } from '../../components/doc/chip/importdoc';
 import { StyleDoc } from '../../components/doc/chip/styledoc';
 import { TemplateDoc } from '../../components/doc/chip/templatedoc';
 import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/chip/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/chip/pt/ptdoc';
 
 const ChipDemo = () => {
     const docs = [
@@ -47,7 +50,25 @@ const ChipDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Chip Component" header="Chip" description="Chip represents entities using icons, labels and images." componentDocs={docs} apiDocs={['Chip']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.chip.options',
+            label: 'Chip PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Chip Component" header="Chip" description="Chip represents entities using icons, labels and images." componentDocs={docs} apiDocs={['Chip']} ptDocs={ptDocs} />;
 };
 
 export default ChipDemo;

@@ -5,6 +5,9 @@ import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
 import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
 import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
 import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
+import { Wireframe } from '../../components/doc/progressspinner/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/progressspinner/pt/ptdoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -35,7 +38,25 @@ const SkeletonDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ProgressSpinner Component" header="ProgressSpinner" description="ProgressSpinner is a process status indicator." componentDocs={docs} apiDocs={['ProgressSpinner']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.progressspinner.options',
+            label: 'ProgressSpinner PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React ProgressSpinner Component" header="ProgressSpinner" description="ProgressSpinner is a process status indicator." componentDocs={docs} apiDocs={['ProgressSpinner']} ptDocs={ptDocs} />;
 };
 
 export default SkeletonDemo;

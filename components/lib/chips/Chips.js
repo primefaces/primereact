@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { useMountEffect } from '../hooks/Hooks';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
 
 export const Chips = React.memo(
@@ -36,8 +38,12 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: values,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -123,8 +129,12 @@ export const Chips = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: items,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -198,9 +208,19 @@ export const Chips = React.memo(
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
 
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focus(inputRef.current, props.autoFocus);
+            }
+        });
+
         const createRemoveIcon = (value, index) => {
+            const iconProps = { className: 'p-chips-token-icon', onClick: (event) => removeItem(event, index) };
+            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+            const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
             if (!props.disabled && !props.readOnly && isRemovable(value, index)) {
-                return <span className="p-chips-token-icon pi pi-times-circle" onClick={(event) => removeItem(event, index)}></span>;
+                return removeIcon;
             }
 
             return null;

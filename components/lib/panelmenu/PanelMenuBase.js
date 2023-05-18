@@ -1,16 +1,15 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const PanelMenuBase = {
+export const PanelMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Panel',
         id: null,
         model: null,
         style: null,
+        submenuIcon: null,
         className: null,
         multiple: false,
         transitionOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PanelMenuBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PanelMenuBase.defaultProps)
-};
+    }
+});

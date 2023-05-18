@@ -2,8 +2,11 @@ import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
@@ -22,9 +25,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [columnOrderState, setColumnOrderState] = React.useState([]);
     const [groupRowsSortMetaState, setGroupRowsSortMetaState] = React.useState(null);
     const [editingMetaState, setEditingMetaState] = React.useState({});
-    const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+    const attributeSelector = React.useRef('');
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
     const wrapperRef = React.useRef(null);
@@ -369,7 +372,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 createStyleElement();
 
                 let innerHTML = '';
-                let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+                let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
                 widths.forEach((width, index) => {
                     let style = `width: ${width}px !important; max-width: ${width}px !important`;
@@ -430,7 +433,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
             const selectableVal = getSelectableData(val);
 
-            return selectableVal && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
+            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
         }
     };
 
@@ -519,6 +522,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     !!el && (el.style.width = el.style.minWidth = tableWidth);
                 };
 
+                // https://github.com/primefaces/primereact/issues/3970 Reasoning: resize table cells before updating the table width so that it can use existing computed cell widths and adjust only the one column.
+                resizeTableCells(newColumnWidth);
                 updateTableWidth(tableRef.current);
 
                 if (!isVirtualScrollerDisabled()) {
@@ -529,8 +534,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         updateTableWidth(DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller-content'));
                     }
                 }
-
-                resizeTableCells(newColumnWidth);
             }
 
             if (props.onColumnResizeEnd) {
@@ -565,7 +568,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         createStyleElement();
 
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
@@ -758,8 +761,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             responsiveStyleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
-            let selector = `.p-datatable[${attributeSelectorState}] > ${tableSelector}`;
-            let gridLinesSelector = `.p-datatable[${attributeSelectorState}].p-datatable-gridlines > ${tableSelector}`;
+            let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
+            let gridLinesSelector = `.p-datatable[${attributeSelector.current}].p-datatable-gridlines > ${tableSelector}`;
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
@@ -968,6 +971,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const multisortField = (data1, data2, multiSortMeta, index) => {
+        if (!multiSortMeta || !multiSortMeta[index]) {
+            return;
+        }
+
         const value1 = ObjectUtils.resolveFieldData(data1, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
@@ -1206,10 +1213,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         //headers
         columns.forEach((column, i) => {
-            const [field, header, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportable')];
+            const [field, header, exportHeader, exportable] = [getColumnProp(column, 'field'), getColumnProp(column, 'header'), getColumnProp(column, 'exportHeader'), getColumnProp(column, 'exportable')];
 
             if (exportable && field) {
-                const columnHeader = String(header || field)
+                const columnHeader = String(exportHeader || header || field)
                     .replace(/"/g, '""')
                     .replace(/\n/g, '\u2028');
 
@@ -1311,9 +1318,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
-        !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+        attributeSelector.current = UniqueComponentId();
 
-        setFiltersState(cloneFilters(props.filters));
+        //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
 
         if (isStateful()) {
@@ -1326,18 +1333,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     });
 
     useUpdateEffect(() => {
-        if (attributeSelectorState) {
-            elementRef.current.setAttribute(attributeSelectorState, '');
+        elementRef.current.setAttribute(attributeSelector.current, '');
 
-            if (props.responsiveLayout === 'stack' && !props.scrollable) {
-                createResponsiveStyle();
-            }
+        if (props.responsiveLayout === 'stack' && !props.scrollable) {
+            createResponsiveStyle();
         }
 
         return () => {
             destroyResponsiveStyle();
         };
-    }, [attributeSelectorState, props.breakpoint]);
+    }, [props.breakpoint]);
 
     useUpdateEffect(() => {
         const filters = cloneFilters(props.filters);
@@ -1399,13 +1404,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const createLoader = () => {
         if (props.loading) {
-            const iconClassName = classNames('p-datatable-loading-icon pi-spin', props.loadingIcon);
+            const iconClassName = 'p-datatable-loading-icon';
+            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-            return (
-                <div className="p-datatable-loading-overlay p-component-overlay">
-                    <i className={iconClassName} />
-                </div>
-            );
+            return <div className="p-datatable-loading-overlay p-component-overlay">{loadingIcon}</div>;
         }
 
         return null;
@@ -1422,6 +1425,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const createTableHeader = (options, empty, _isVirtualScrollerDisabled) => {
+        if (props.showHeaders === false) {
+            return null;
+        }
+
         const sortField = getSortField();
         const sortOrder = getSortOrder();
         const multiSortMeta = [...getMultiSortMeta()];
@@ -1445,6 +1452,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
                 sortMode={props.sortMode}
                 sortField={sortField}
+                sortIcon={props.sortIcon}
                 sortOrder={sortOrder}
                 multiSortMeta={multiSortMeta}
                 groupRowsBy={props.groupRowsBy}
@@ -1453,6 +1461,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 filterDisplay={props.filterDisplay}
                 filters={filters}
                 filtersStore={filtersStore}
+                filterIcon={props.filterIcon}
+                filterClearIcon={props.filterClearIcon}
                 onFilterChange={onFilterChange}
                 onFilterApply={onFilterApply}
                 showSelectAll={props.showSelectAll}
@@ -1480,7 +1490,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 className="p-datatable-tbody p-datatable-frozen-tbody"
                 frozenRow
                 tableProps={props}
-                tableSelector={attributeSelectorState}
+                tableSelector={attributeSelector.current}
                 columns={columns}
                 selectionModeInColumn={selectionModeInColumn}
                 first={first}
@@ -1541,6 +1551,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 showRowReorderElement={props.showRowReorderElement}
                 expandedRowIcon={props.expandedRowIcon}
                 collapsedRowIcon={props.collapsedRowIcon}
+                checkIcon={props.checkIcon}
                 rowClassName={props.rowClassName}
                 virtualScrollerOptions={options}
                 isVirtualScrollerDisabled={true}
@@ -1555,7 +1566,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 empty={empty}
                 frozenRow={false}
                 tableProps={props}
-                tableSelector={attributeSelectorState}
+                tableSelector={attributeSelector.current}
                 columns={columns}
                 selectionModeInColumn={selectionModeInColumn}
                 first={first}
@@ -1616,6 +1627,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 showRowReorderElement={props.showRowReorderElement}
                 expandedRowIcon={props.expandedRowIcon}
                 collapsedRowIcon={props.collapsedRowIcon}
+                checkIcon={props.checkIcon}
                 rowClassName={props.rowClassName}
                 virtualScrollerContentRef={contentRef}
                 virtualScrollerOptions={options}
@@ -1750,11 +1762,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
+            const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
+            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
+            const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
+            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
 
             return (
                 <>
-                    <span ref={reorderIndicatorUpRef} className="pi pi-arrow-down p-datatable-reorder-indicator-up" style={style}></span>
-                    <span ref={reorderIndicatorDownRef} className="pi pi-arrow-up p-datatable-reorder-indicator-down" style={style}></span>
+                    <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
+                        {reorderIndicatorUpIcon}
+                    </span>
+                    <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
+                        {reorderIndicatorDownIcon}
+                    </span>
                 </>
             );
         }

@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
+import { IconType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
@@ -265,11 +266,11 @@ interface DataTableStateEvent extends DataTablePageEvent, DataTableFilterEvent, 
  * @see {@link DataTableProps.isDataSelectable}
  * @event
  */
-interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
+interface DataTableDataSelectableEvent {
     /**
      * Original data of the row.
      */
-    data: DataTableRowDataArray<TValue>;
+    data: DataTableValue;
     /**
      * Index of the row.
      */
@@ -277,8 +278,24 @@ interface DataTableDataSelectableEvent<TValue extends DataTableValueArray> {
 }
 
 /**
+ * Custom selection change event for context menu.
+ * @see {@link DataTableProps.onContextMenuSelectionChange}
+ * @event
+ */
+interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection object.
+     */
+    value: DataTableSelection<TValue>;
+}
+
+/**
  * Custom selection change event.
- * @see {@link DataTableProps.onContextMenuSelectionChange}, {@link DataTableProps.onSelectionChange}
+ * @see {@link DataTableProps.onSelectionChange}
  * @event
  */
 interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
@@ -707,6 +724,10 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     breakpoint?: string | undefined;
     /**
+     * Icon to display in the checkbox.
+     */
+    checkIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
      * Whether to cell selection is enabled or not.
      * @defaultValue false
      */
@@ -717,9 +738,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     className?: string | undefined;
     /**
      * Icon of the row toggler to display the row as collapsed.
-     * @defaultValue pi pi-chevron-up
      */
-    collapsedRowIcon?: string | undefined;
+    collapsedRowIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Used to define the resize mode of the columns, valid values are "fit" and "expand".
      * @defaultValue fit
@@ -779,9 +799,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     expandableRowGroups?: boolean | undefined;
     /**
      * Icon of the row toggler to display the row as expanded.
-     * @defaultValue pi pi-chevron-down
      */
-    expandedRowIcon?: string | undefined;
+    expandedRowIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * A collection of rows or a map object row data keys that are expanded.
      */
@@ -806,6 +825,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @defaultValue undefined
      */
     filterLocale?: string | undefined;
+    /**
+     * Icon to display the current filtering status.
+     */
+    filterIcon?: IconType<DataTable<TValue>> | undefined;
+    /**
+     * Icon to display when the filter can be cleared.
+     */
+    filterClearIcon?: IconType<DataTable<TValue>> | undefined;
     /**
      * An array of FilterMetadata objects to provide external filters.
      */
@@ -868,9 +895,8 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     loading?: boolean | undefined;
     /**
      * The icon to show while indicating data load is in progress.
-     * @defaultValue pi pi-spinner
      */
-    loadingIcon?: string | undefined;
+    loadingIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Defines whether metaKey is requred or not for the selection. When true metaKey needs to be pressed to select or unselect an item and when set to false selection of each item can be toggled individually. On touch enabled devices, metaKeySelection is turned off automatically.
      * @defaultValue true
@@ -933,6 +959,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     reorderableRows?: boolean | undefined;
     /**
+     * Defines the reorder indicator down icon.
+     */
+    reorderIndicatorDownIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Defines the reorder indicator up icon.
+     */
+    reorderIndicatorUpIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
      * When enabled, columns can be resized using drag and drop.
      * @defaultValue false
      */
@@ -943,6 +977,18 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @deprecated since version 9.2.0
      */
     responsiveLayout?: 'scroll' | 'stack' | undefined;
+    /**
+     * Icon to display in the row editor cancel button.
+     */
+    rowEditorCancelIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Icon to display in the row editor init button.
+     */
+    rowEditorInitIcon?: IconType<DataTableProps<TValue>> | undefined;
+    /**
+     * Icon to display in the row editor save button.
+     */
+    rowEditorSaveIcon?: IconType<DataTableProps<TValue>> | undefined;
     /**
      * Function to provide the content of row group footer.
      */
@@ -1015,6 +1061,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     showGridlines?: boolean | undefined;
     /**
+     * Whether to show headers.
+     * @defaultValue true
+     */
+    showHeaders?: boolean | undefined;
+    /**
      * Whether to show the select all checkbox inside the datatable's header.
      */
     showSelectAll?: boolean | undefined;
@@ -1032,6 +1083,10 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @defaultValue single
      */
     sortMode?: 'single' | 'multiple' | undefined;
+    /**
+     * Icon to display the current sorting status.
+     */
+    sortIcon?: IconType<DataTable<TValue>> | undefined;
     /**
      * Order to sort the data by default.
      */
@@ -1102,7 +1157,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Function that returns a boolean to decide whether the data should be selectable.
      * @param {DataTableDataSelectableEvent<TValue>} event - Custom data selectable event.
      */
-    isDataSelectable?(event: DataTableDataSelectableEvent<TValue>): boolean | undefined | null;
+    isDataSelectable?(event: DataTableDataSelectableEvent): boolean | undefined | null;
     /**
      * Callback to invoke when all rows are selected using the header checkbox.
      * @param {DataTableSelectEvent} event - Custom select event.
@@ -1120,14 +1175,14 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     onCellClick?(event: DataTableCellClickEvent<TValue>): void;
     /**
      * Callback to invoke on cell select.
-     * @param {DataTableSelectEvent} event - Custom select event.
+     * @param {DataTableCellClickEvent<TValue>} event - Custom select event.
      */
-    onCellSelect?(event: DataTableSelectEvent): void;
+    onCellSelect?(event: DataTableCellClickEvent<TValue>): void;
     /**
      * Callback to invoke on cell unselect.
-     * @param {DataTableUnselectEvent} event - Custom unselect event.
+     * @param {DataTableCellClickEvent<TValue>} event - Custom unselect event.
      */
-    onCellUnselect?(event: DataTableUnselectEvent): void;
+    onCellUnselect?(event: DataTableCellClickEvent<TValue>): void;
     /**
      * Callback to invoke when a column is reordered.
      * @param {DataTableColReorderEvent} event - Custom column reorder event.
@@ -1157,7 +1212,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Callback to invoke when a row selected with right click.
      * @param {DataTableRowEvent} event - Custom row event.
      */
-    onContextMenuSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
+    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
      * @param {DataTableStateEvent} event - Custom state event.

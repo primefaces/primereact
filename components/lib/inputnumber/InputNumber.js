@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
 
 export const InputNumber = React.memo(
@@ -891,8 +893,12 @@ export const InputNumber = React.memo(
                 props.onValueChange({
                     originalEvent: event,
                     value: value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -1032,7 +1038,9 @@ export const InputNumber = React.memo(
                 },
                 props.incrementButtonClassName
             );
-            const icon = classNames('p-button-icon', props.incrementButtonIcon);
+            const iconsClassName = 'p-button-icon';
+            const icon = props.incrementButtonIcon || <AngleUpIcon className={iconsClassName} />;
+            const upButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
 
             return (
                 <button
@@ -1046,7 +1054,7 @@ export const InputNumber = React.memo(
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
-                    <span className={icon}></span>
+                    {upButton}
                     <Ripple />
                 </button>
             );
@@ -1060,7 +1068,9 @@ export const InputNumber = React.memo(
                 },
                 props.decrementButtonClassName
             );
-            const icon = classNames('p-button-icon', props.decrementButtonIcon);
+            const iconsClassName = 'p-button-icon';
+            const icon = props.decrementButtonIcon || <AngleDownIcon className={iconsClassName} />;
+            const downButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
 
             return (
                 <button
@@ -1074,7 +1084,7 @@ export const InputNumber = React.memo(
                     disabled={props.disabled}
                     tabIndex={-1}
                 >
-                    <span className={icon}></span>
+                    {downButton}
                     <Ripple />
                 </button>
             );

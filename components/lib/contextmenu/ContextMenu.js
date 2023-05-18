@@ -3,7 +3,7 @@ import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
 
@@ -15,6 +15,15 @@ export const ContextMenu = React.memo(
         const [reshowState, setReshowState] = React.useState(false);
         const [resetMenuState, setResetMenuState] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+        const { ptm } = ContextMenuBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                reshow: reshowState,
+                resetMenu: resetMenuState,
+                attributeSelector: attributeSelectorState
+            }
+        });
         const menuRef = React.useRef(null);
         const currentEvent = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -240,11 +249,23 @@ export const ContextMenu = React.memo(
         }));
 
         const createContextMenu = () => {
-            const otherProps = ContextMenuBase.getOtherProps(props);
             const className = classNames('p-contextmenu p-component', props.className, {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
             });
+
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: menuRef,
+                    className,
+                    style: props.style,
+                    onClick: (e) => onMenuClick(e),
+                    onMouseEnter: (e) => onMenuMouseEnter(e)
+                },
+                ContextMenuBase.getOtherProps(props),
+                ptm('root')
+            );
 
             return (
                 <CSSTransition
@@ -259,8 +280,8 @@ export const ContextMenu = React.memo(
                     onExit={onExit}
                     onExited={onExited}
                 >
-                    <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onMenuClick} onMouseEnter={onMenuMouseEnter}>
-                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} />
+                    <div {...rootProps}>
+                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} />
                     </div>
                 </CSSTransition>
             );

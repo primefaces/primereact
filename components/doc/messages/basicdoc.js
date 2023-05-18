@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { useMountEffect } from '../../lib/hooks/Hooks';
 import { Messages } from '../../lib/messages/Messages';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const msgs = useRef(null);
 
-    useEffect(() => {
-        msgs.current.show({ sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    useMountEffect(() => {
+        msgs.current && msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
+    });
 
     const code = {
         basic: `
@@ -16,16 +17,17 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function BasicDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show(
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
         );
-    }, []); 
+    }); 
 
     return (
         <div className="card flex justify-content-center">
@@ -36,16 +38,17 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useEffect, useRef } from 'react'; 
+import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function BasicDemo() {
     const msgs = useRef(null);
 
-    useEffect(() => {
+    useMountEffect(() => {
         msgs.current.show(
             { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
         );
-    }, []);
+    });
 
     return (
         <div className="card flex justify-content-center">

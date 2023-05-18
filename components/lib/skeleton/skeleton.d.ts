@@ -8,6 +8,27 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type SkeletonPassThroughType<T> = PassThroughType<T, SkeletonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SkeletonPassThroughMethodOptions {
+    props: SkeletonProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SkeletonProps.pt}
+ */
+export interface SkeletonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SkeletonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Skeleton component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -47,6 +68,11 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SkeletonPassThroughOptions}
+     */
+    pt?: SkeletonPassThroughOptions;
 }
 
 /**

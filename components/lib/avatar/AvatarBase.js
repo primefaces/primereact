@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const AvatarBase = {
+export const AvatarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Avatar',
         className: null,
@@ -15,7 +15,5 @@ export const AvatarBase = {
         style: null,
         template: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, AvatarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, AvatarBase.defaultProps)
-};
+    }
+});

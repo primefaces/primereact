@@ -8,7 +8,54 @@
  *
  */
 import * as React from 'react';
-import { IconType, TemplateType } from '../utils';
+import { IconType, PassThroughType, TemplateType } from '../utils';
+
+export declare type ChipPassThroughType<T> = PassThroughType<T, ChipPassThroughMethodOptions>;
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ChipPassThroughMethodOptions {
+    props: ChipProps;
+    state: ChipState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ChipProps.pt}
+ */
+export interface ChipPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ChipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the image's DOM element.
+     */
+    image?: ChipPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ChipPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label' DOM element.
+     */
+    label?: ChipPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the removeIcon's DOM element.
+     */
+    removeIcon?: ChipPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Defines current inline state in Chip component.
+ */
+export interface ChipState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue true
+     */
+    visible: boolean;
+}
 
 /**
  * Defines valid properties in Chip component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -17,17 +64,14 @@ import { IconType, TemplateType } from '../utils';
 export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
     /**
      * Defines the text to display.
-     *
      */
     label?: string;
     /**
      * Defines the icon to display.
-     *
      */
     icon?: IconType<ChipProps> | undefined;
     /**
      * Defines the image to display.
-     *
      */
     image?: string | undefined;
     /**
@@ -37,17 +81,14 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
     removable?: boolean | undefined;
     /**
      * Icon of the remove element.
-     * @defaultValue pi pi-times-circle
      */
-    removeIcon?: string | undefined;
+    removeIcon?: IconType<ChipProps> | undefined;
     /**
      * Template of an item.
-     *
      */
     template?: TemplateType<ChipProps> | undefined;
     /**
      * It specifies an alternate text for an image, if the image cannot be displayed.
-     *
      */
     imageAlt?: string | undefined;
     /**
@@ -65,6 +106,11 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ChipPassThroughOptions}
+     */
+    pt?: ChipPassThroughOptions;
 }
 
 /**

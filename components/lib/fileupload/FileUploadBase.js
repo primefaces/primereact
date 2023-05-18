@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const FileUploadBase = {
+export const FileUploadBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'FileUpload',
         id: null,
@@ -9,6 +9,7 @@ export const FileUploadBase = {
         mode: 'advanced',
         multiple: false,
         accept: null,
+        removeIcon: null,
         disabled: false,
         auto: false,
         maxFileSize: null,
@@ -16,7 +17,7 @@ export const FileUploadBase = {
         invalidFileSizeMessageDetail: 'maximum upload size is {0}.',
         style: null,
         className: null,
-        widthCredentials: false,
+        withCredentials: false,
         previewWidth: 50,
         chooseLabel: null,
         uploadLabel: null,
@@ -64,7 +65,5 @@ export const FileUploadBase = {
         uploadHandler: null,
         onRemove: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, FileUploadBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, FileUploadBase.defaultProps)
-};
+    }
+});

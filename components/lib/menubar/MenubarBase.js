@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MenubarBase = {
+export const MenubarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Menubar',
         id: null,
@@ -8,9 +8,9 @@ export const MenubarBase = {
         style: null,
         className: null,
         start: null,
+        submenuIcon: null,
+        menuIcon: null,
         end: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MenubarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MenubarBase.defaultProps)
-};
+    }
+});

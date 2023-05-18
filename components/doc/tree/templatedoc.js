@@ -1,4 +1,5 @@
 import { Tree } from '../../lib/tree/Tree';
+import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -42,12 +43,31 @@ export function TemplateDoc(props) {
         return <span className={options.className}>{label}</span>;
     };
 
+    const togglerTemplate = (node, options) => {
+        if (!node) {
+            return;
+        }
+
+        const expanded = options.expanded;
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {
+            'pi-caret-right': !expanded,
+            'pi-caret-down': expanded
+        });
+
+        return (
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={options.onClick}>
+                <span className={iconClassName} aria-hidden="true"></span>
+            </button>
+        );
+    };
+
     const code = {
         basic: `
-<Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
+<Tree value={nodes} nodeTemplate={nodeTemplate} togglerTemplate={togglerTemplate} className="w-full md:w-30rem" />
         `,
         javascript: `
 import React from 'react'; 
+import { classNames } from 'primereact/utils';
 import { Tree } from 'primereact/tree';
 
 export default function TemplateDemo() {
@@ -86,16 +106,35 @@ export default function TemplateDemo() {
         return <span className={options.className}>{label}</span>;
     }
 
+    const togglerTemplate = (node, options) => {
+        if (!node) {
+            return;
+        }
+
+        const expanded = options.expanded;
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {
+            'pi-caret-right': !expanded,
+            'pi-caret-down': expanded
+        });
+
+        return (
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={options.onClick}>
+                <span className={iconClassName} aria-hidden="true"></span>
+            </button>
+        );
+    };
+
     return (
         <div className="card flex justify-content-center">
-            <Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
+            <Tree value={nodes} nodeTemplate={nodeTemplate} togglerTemplate={togglerTemplate} className="w-full md:w-30rem" />
         </div>
     )
 }
         `,
         typescript: `
 import React from 'react'; 
-import { Tree, TreeNodeTemplateOptions } from 'primereact/tree';
+import { classNames } from 'primereact/utils';
+import { Tree, TreeNodeTemplateOptions, TreeTogglerTemplateOptions } from 'primereact/tree';
 import { TreeNode } from 'primereact/treenode';
 
 export default function TemplateDemo() {
@@ -134,9 +173,27 @@ export default function TemplateDemo() {
         return <span className={options.className}>{label}</span>;
     }
 
+    const togglerTemplate = (node: TreeNode, options: TreeTogglerTemplateOptions) => {
+        if (!node) {
+            return;
+        }
+
+        const expanded = options.expanded;
+        const iconClassName = classNames('p-tree-toggler-icon pi pi-fw', {
+            'pi-caret-right': !expanded,
+            'pi-caret-down': expanded
+        });
+
+        return (
+            <button type="button" className="p-tree-toggler p-link" tabIndex={-1} onClick={options.onClick}>
+                <span className={iconClassName} aria-hidden="true"></span>
+            </button>
+        );
+    };
+
     return (
         <div className="card flex justify-content-center">
-            <Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
+            <Tree value={nodes} nodeTemplate={nodeTemplate} togglerTemplate={togglerTemplate} className="w-full md:w-30rem" />
         </div>
     )
 }
@@ -147,12 +204,12 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Custom node content instead of a node label is defined with the <i>nodeTemplate</i> property.
+                    Custom node content instead of a node label is defined with the <i>nodeTemplate</i> property. The toggler can be customized with the <i>togglerTemplate</i> property.
                 </p>
             </DocSectionText>
 
             <div className="card flex justify-content-center">
-                <Tree value={nodes} nodeTemplate={nodeTemplate} className="w-full md:w-30rem" />
+                <Tree value={nodes} nodeTemplate={nodeTemplate} togglerTemplate={togglerTemplate} className="w-full md:w-30rem" />
             </div>
             <DocSectionCode code={code} />
         </>

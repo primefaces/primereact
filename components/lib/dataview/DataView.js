@@ -2,8 +2,11 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
+import { BarsIcon } from '../icons/bars';
+import { ThLargeIcon } from '../icons/thlarge';
+import { SpinnerIcon } from '../icons/spinner';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
     const props = DataViewLayoutOptionsBase.getProps(inProps);
@@ -20,15 +23,17 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', props.className);
     const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' });
     const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' });
+    const listIcon = IconUtils.getJSXIcon(props.listIcon || <BarsIcon />, undefined, { props });
+    const gridIcon = IconUtils.getJSXIcon(props.gridIcon || <ThLargeIcon />, undefined, { props });
 
     return (
         <div id={props.id} style={props.style} className={className} {...otherProps}>
             <button type="button" className={buttonListClass} onClick={(event) => changeLayout(event, 'list')}>
-                <i className="pi pi-bars"></i>
+                {listIcon}
                 <Ripple />
             </button>
             <button type="button" className={buttonGridClass} onClick={(event) => changeLayout(event, 'grid')}>
-                <i className="pi pi-th-large"></i>
+                {gridIcon}
                 <Ripple />
             </button>
         </div>
@@ -108,13 +113,11 @@ export const DataView = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
-                let iconClassName = classNames('p-dataview-loading-icon pi-spin', props.loadingIcon);
+                let iconClassName = 'p-dataview-loading-icon';
+                let icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
+                const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
 
-                return (
-                    <div className="p-dataview-loading-overlay p-component-overlay">
-                        <i className={iconClassName}></i>
-                    </div>
-                );
+                return <div className="p-dataview-loading-overlay p-component-overlay">{loadingIcon}</div>;
             }
 
             return null;

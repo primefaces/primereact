@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TieredMenuBase = {
+export const TieredMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TieredMenu',
         id: null,
@@ -16,8 +16,7 @@ export const TieredMenuBase = {
         transitionOptions: null,
         onShow: null,
         onHide: null,
+        submenuIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TieredMenuBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TieredMenuBase.defaultProps)
-};
+    }
+});

@@ -11,7 +11,46 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType, TemplateType } from '../utils';
+import { IconType, PassThroughType, TemplateType } from '../utils';
+import { ButtonPassThroughOptions } from '../button/button';
+
+export declare type SplitButtonPassThroughType<T> = PassThroughType<T, SplitButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SplitButtonPassThroughMethodOptions {
+    props: SplitButtonProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SplitButtonProps.pt}
+ */
+export interface SplitButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the button's DOM element.
+     */
+    button?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    menuButton?: ButtonPassThroughOptions;
+    // /**
+    //  * Uses to pass attributes to the TieredMenu component.
+    //  * @see {@link TieredMenuPassThroughOptions}
+    //  */
+    //  menu?: TieredMenuPassThroughOptions; @TODO
+}
 
 /**
  * Defines valid properties in SplitButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -123,8 +162,7 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
+     * Name of the dropdown icon or JSX.Element for dropdown icon.
      */
     dropdownIcon?: IconType<SplitButtonProps> | undefined;
     /**
@@ -145,6 +183,25 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SplitButtonPassThroughOptions}
+     */
+    pt?: SplitButtonPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in SplitButton component.
+ */
+export interface SplitButtonState {
+    /**
+     * Current id state as a boolean.
+     */
+    id: string;
+    /**
+     * Current overlay visible state as a boolean.
+     */
+    overlayVisible: boolean;
 }
 
 /**

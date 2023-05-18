@@ -9,6 +9,63 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { PassThroughType } from '../utils/utils';
+
+export declare type TabMenuPassThroughType<T> = PassThroughType<T, TabMenuThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TabMenuThroughMethodOptions {
+    props: TabMenuProps;
+    state: TabMenuState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TabMenuProps.pt}
+ */
+export interface TabMenuPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TabMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: TabMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: TabMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: TabMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: TabMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: TabMenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the inkbar's DOM element.
+     */
+    inkbar?: TabMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Defines current inline state in TabMenu component.
+ */
+export interface TabMenuState {
+    /**
+     * Current active index state as a number.
+     * @defaulValue 0
+     */
+    activeIndex: number;
+}
 
 /**
  * Custom tab change event.
@@ -54,6 +111,11 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TabMenuPassThroughOptions}
+     */
+    pt?: TabMenuPassThroughOptions;
 }
 
 /**

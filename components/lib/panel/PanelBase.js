@@ -1,24 +1,24 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const PanelBase = {
+export const PanelBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Panel',
         id: null,
         header: null,
         headerTemplate: null,
+        footer: null,
+        footerTemplate: null,
         toggleable: null,
         style: null,
         className: null,
         collapsed: null,
-        expandIcon: 'pi pi-plus',
-        collapseIcon: 'pi pi-minus',
+        expandIcon: null,
+        collapseIcon: null,
         icons: null,
         transitionOptions: null,
         onExpand: null,
         onCollapse: null,
         onToggle: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PanelBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PanelBase.defaultProps)
-};
+    }
+});

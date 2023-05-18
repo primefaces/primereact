@@ -68,20 +68,17 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      */
     children?: React.ReactNode | undefined;
     /**
-     * ClassName of the on icon component.
-     * @defaultValue pi pi-star-fill
+     * Icon for the on state.
      */
     onIcon?: IconType<RatingProps> | undefined;
     /**
-     * ClassName of the off icon component.
-     * @defaultValue pi pi-star
+     * Icon for the off state.
      */
-    offIcon?: IconType<RatingProps>;
+    offIcon?: IconType<RatingProps> | undefined;
     /**
-     * ClassName of the cancel icon component.
-     * @defaultValue pi pi-ban
+     * Icon for the cancelable state.
      */
-    cancelIcon?: IconType<RatingProps>;
+    cancelIcon?: IconType<RatingProps> | undefined;
     /**
      * Properties of the cancel icon.
      */

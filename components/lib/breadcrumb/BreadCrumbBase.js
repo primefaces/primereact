@@ -1,15 +1,14 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const BreadCrumbBase = {
+export const BreadCrumbBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'BreadCrumb',
         id: null,
         model: null,
         home: null,
+        separatorIcon: null,
         style: null,
         className: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, BreadCrumbBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, BreadCrumbBase.defaultProps)
-};
+    }
+});

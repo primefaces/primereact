@@ -1,7 +1,37 @@
 import React from 'react';
 import { DocSectionText } from './docsectiontext';
+import APIDocs from './apidoc/index.json';
 
 export function DocSections({ docs }) {
+    const getPTOption = (name) => {
+        const key = name.toLowerCase();
+
+        let values = APIDocs[key]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+
+        if (!values) {
+            for (const parentKey in APIDocs) {
+                if (APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`]) {
+                    values = APIDocs[parentKey]?.interfaces?.values[`${name}PassThroughOptions`] || null;
+                    if (values) break;
+                }
+            }
+        }
+
+        let data = [];
+
+        if (values) {
+            for (const [i, prop] of values.props.entries()) {
+                data.push({
+                    value: i + 1,
+                    label: prop.name,
+                    description: prop.description
+                });
+            }
+        }
+
+        return data;
+    };
+
     const renderDocChildren = (doc, level = 2) => {
         return (
             <React.Fragment key={doc.id + '_' + level}>
@@ -20,11 +50,19 @@ export function DocSections({ docs }) {
 
     const renderDocs = () => {
         return docs.map((doc, i) => {
-            const Comp = doc.component;
+            const { component: Comp, id, label, children } = doc;
+            const isPT = label.includes('PT');
+            const key = label.split(' ')[0];
+
+            const props = {
+                id,
+                label,
+                ...(isPT && { data: getPTOption(key) })
+            };
 
             return (
-                <section key={doc.label + '_' + i} className="py-3">
-                    {doc.children ? renderDocChildren(doc) : doc.component && <Comp id={doc.id} label={doc.label} />}
+                <section key={`${label}_${i}`} className="py-3">
+                    {children ? renderDocChildren(doc) : Comp ? <Comp {...props} /> : null}
                 </section>
             );
         });

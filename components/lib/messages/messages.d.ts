@@ -9,7 +9,51 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type MessagesPassThroughType<T> = PassThroughType<T, MessagesPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MessagesPassThroughMethodOptions {
+    props: MessagesProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MessagesProps.pt}
+ */
+export interface MessagesPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MessagesPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: MessagesPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MessagesPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the summary's DOM element.
+     */
+    summary?: MessagesPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the detail's DOM element.
+     */
+    detail?: MessagesPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the button's DOM element.
+     */
+    button?: MessagesPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the button icon's DOM element.
+     */
+    buttonIcon?: MessagesPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 export interface MessagesMessage {
     /**
@@ -38,6 +82,10 @@ export interface MessagesMessage {
      */
     closable?: boolean;
     /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<MessagesProps> | undefined;
+    /**
      * When enabled, message is not removed automatically.
      */
     sticky?: boolean;
@@ -50,14 +98,19 @@ export interface MessagesMessage {
      * Defines the icon to display.
      * @defaultValue Defaults to severity icon
      */
-    icon?: IconType<MessagesProps>;
+    icon?: IconType<MessagesProps> | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MessagesPassThroughOptions}
+     */
+    pt?: MessagesPassThroughOptions;
 }
 
 /**
  * Defines valid properties in Messages component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
@@ -105,6 +158,11 @@ export declare class Messages extends React.Component<MessagesProps, any> {
      * @param {MessagesMessage | MessagesMessage[]} message - New message.
      */
     public replace(message: MessagesMessage | MessagesMessage[]): void;
+    /**
+     * Used to remove messages.
+     * @param {MessagesMessage | MessagesMessage[]} message - Message to remove
+     */
+    public remove(message: MessagesMessage | MessagesMessage[]): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element

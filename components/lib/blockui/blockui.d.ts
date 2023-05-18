@@ -8,6 +8,39 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type BlockUIPassThroughType<T> = PassThroughType<T, BlockUIPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface BlockUIPassThroughMethodOptions {
+    props: BlockUIProps;
+    state: BlockUIState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link BlockUIProps.pt}
+ */
+export interface BlockUIPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: BlockUIPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in BlockUI component.
+ */
+export interface BlockUIState {
+    /**
+     * Current blocked state as a boolean.
+     * @defaultValue false
+     */
+    blocked: boolean;
+}
 
 /**
  * Defines valid properties in BlockUI component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -51,6 +84,11 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * Template of mask.
      */
     template?: React.ReactNode | ((props: BlockUIProps) => React.ReactNode) | null | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {BlockUIPassThroughOptions}
+     */
+    pt?: BlockUIPassThroughOptions;
     /**
      * Fired when the element gets blocked.
      */

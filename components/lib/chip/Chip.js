@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
-
+import { TimesCircleIcon } from '../icons/timescircle';
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = ChipBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
+
+        const { ptm } = ChipBase.setMetaData({
+            props
+        });
 
         const onKeyDown = (event) => {
             if (event.keyCode === 13) {
@@ -27,29 +31,62 @@ export const Chip = React.memo(
         const createContent = () => {
             let content = [];
 
+            const removeIconProps = mergeProps(
+                {
+                    key: 'removeIcon',
+                    tabIndex: 0,
+                    className: 'p-chip-remove-icon',
+                    onClick: close,
+                    onKeyDown
+                },
+                ptm('removeIcon')
+            );
+
+            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} />;
+
             if (props.image) {
-                content.push(<img key="image" src={props.image} alt={props.imageAlt} onError={props.onImageError}></img>);
+                const imageProps = mergeProps(
+                    {
+                        key: 'image',
+                        src: props.image,
+                        onError: props.onImageError
+                    },
+                    ptm('image')
+                );
+
+                content.push(<img alt={props.imageAlt} {...imageProps}></img>);
             } else if (props.icon) {
-                content.push(IconUtils.getJSXIcon(props.icon, { key: 'icon', className: 'p-chip-icon' }, { props }));
+                const chipIconProps = mergeProps(
+                    {
+                        key: 'icon',
+                        className: 'p-chip-icon'
+                    },
+                    ptm('icon')
+                );
+
+                content.push(IconUtils.getJSXIcon(props.icon, { ...chipIconProps }, { props }));
             }
 
             if (props.label) {
-                content.push(
-                    <span key="label" className="p-chip-text">
-                        {props.label}
-                    </span>
+                const labelProps = mergeProps(
+                    {
+                        key: 'label',
+                        className: 'p-chip-text'
+                    },
+                    ptm('label')
                 );
+
+                content.push(<span {...labelProps}>{props.label}</span>);
             }
 
             if (props.removable) {
-                content.push(IconUtils.getJSXIcon(props.removeIcon, { key: 'removeIcon', tabIndex: 0, className: 'p-chip-remove-icon', onClick: close, onKeyDown }, { props }));
+                content.push(IconUtils.getJSXIcon(icon, { ...removeIconProps }, { props }));
             }
 
             return content;
         };
 
         const createElement = () => {
-            const otherProps = ChipBase.getOtherProps(props);
             const className = classNames(
                 'p-chip p-component',
                 {
@@ -60,11 +97,17 @@ export const Chip = React.memo(
 
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
-            return (
-                <div ref={elementRef} className={className} style={props.style} {...otherProps}>
-                    {content}
-                </div>
+            const rootProps = mergeProps(
+                {
+                    ref: elementRef,
+                    style: props.style,
+                    className: className
+                },
+                ChipBase.getOtherProps(props),
+                ptm('root')
             );
+
+            return <div {...rootProps}>{content}</div>;
         };
 
         React.useImperativeHandle(ref, () => ({

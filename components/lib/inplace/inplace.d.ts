@@ -14,6 +14,52 @@
  *
  */
 import * as React from 'react';
+import { IconType, PassThroughType } from '../utils/utils';
+import { ButtonPassThroughOptions } from '../button';
+
+export declare type InplacePassThroughType<T> = PassThroughType<T, InplacePassThroughMethodOptions>;
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InplacePassThroughMethodOptions {
+    props: InplaceProps;
+    state: InplaceState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InplaceProps.pt}
+ */
+export interface InplacePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the display's DOM element.
+     */
+    display?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: InplacePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    closeButton?: ButtonPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in Inplace component.
+ */
+export interface InplaceState {
+    /**
+     * Current active state as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Custom toggle event.
@@ -56,6 +102,10 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     ariaLabel?: string | undefined;
     /**
+     * Icon of the close button.
+     */
+    closeIcon?: IconType<InplaceProps> | undefined;
+    /**
      * Callback to invoke when inplace is opened.
      * @param {React.MouseEvent}  event - Browser event.
      */
@@ -75,6 +125,11 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InplacePassThroughOptions}
+     */
+    pt?: InplacePassThroughOptions;
 }
 
 /**

@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom change event.
@@ -25,6 +26,11 @@ interface TriStateCheckboxChangeEvent extends FormEvent<boolean> {}
  */
 export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Value of the TriStateCheckbox.
      */
     value?: boolean | undefined | null;
@@ -38,6 +44,14 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      * @defaultValue false
      */
     readOnly?: boolean | undefined;
+    /**
+     * Icon of the checkbox when checked.
+     */
+    checkIcon?: IconType<TriStateCheckboxProps> | undefined;
+    /**
+     * Icon of the checkbox when unchecked.
+     */
+    uncheckIcon?: IconType<TriStateCheckboxProps> | undefined;
     /**
      * Content of the tooltip.
      */

@@ -9,6 +9,78 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type FieldsetPassThroughType<T> = PassThroughType<T, FieldsetPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface FieldsetPassThroughMethodOptions {
+    props: FieldsetProps;
+    state: FieldsetState;
+}
+
+/**
+ * Custom toggle event.
+ * @see {@link FieldsetEmits.toggle}
+ */
+export interface FieldsetToggleEvent {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.MouseEvent<HTMLElement>;
+    /**
+     * Collapsed state as a boolean
+     */
+    value: boolean;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link FieldsetProps.pt}
+ */
+export interface FieldsetPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: FieldsetPassThroughType<React.HTMLAttributes<HTMLFieldSetElement>>;
+    /**
+     * Uses to pass attributes to the legend's DOM element.
+     */
+    legend?: FieldsetPassThroughType<React.HTMLAttributes<HTMLLegendElement>>;
+    /**
+     * Uses to pass attributes to the toggler's DOM element.
+     */
+    toggler?: FieldsetPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the toggler icon's DOM element.
+     */
+    togglerIcon?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the legend title's DOM element.
+     */
+    legendTitle?: FieldsetPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the toggleable content's DOM element.
+     */
+    toggleableContent?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Fieldset component.
+ */
+export interface FieldsetState {
+    /**
+     * Current collapsed state as a boolean.
+     * @defaultValue false
+     */
+    collapse: boolean;
+}
 
 /**
  * Custom toggle event.
@@ -46,10 +118,18 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      */
     collapsed?: boolean | undefined;
     /**
+     * Icon of an expanded tab.
+     */
+    collapseIcon?: IconType<FieldsetProps> | undefined;
+    /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Icon of an collapsed tab.
+     */
+    expandIcon?: IconType<FieldsetProps> | undefined;
     /**
      * Callback to invoke when a tab gets expanded.
      * @param {React.MouseEvent<HTMLElement>} event - Browser event.
@@ -75,6 +155,11 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {FieldsetPassThroughOptions}
+     */
+    pt?: FieldsetPassThroughOptions;
 }
 
 /**

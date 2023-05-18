@@ -7,6 +7,9 @@ import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
 import { StyleDoc } from '../../components/doc/progressbar/styledoc';
 import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/progressbar/pt/wireframe';
+import { PTDoc } from '../../components/doc/progressbar/pt/ptdoc';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -47,7 +50,25 @@ const ProgressBarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.progressbar.options',
+            label: 'ProgressBar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} ptDocs={ptDocs} />;
 };
 
 export default ProgressBarDemo;

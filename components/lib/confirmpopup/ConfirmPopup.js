@@ -5,7 +5,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
 
 export const confirmPopup = (props = {}) => {
@@ -29,11 +29,20 @@ export const ConfirmPopup = React.memo(
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
+        const { ptm } = ConfirmPopupBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                reshow: reshowState
+            }
+        });
+
         const overlayRef = React.useRef(null);
         const acceptBtnRef = React.useRef(null);
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
+        const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -64,18 +73,25 @@ export const ConfirmPopup = React.memo(
         };
 
         const accept = () => {
-            callbackFromProp('accept');
-            hide('accept');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('accept');
+                hide('accept');
+            }
         };
 
         const reject = () => {
-            callbackFromProp('reject');
-            hide('reject');
+            if (!isCallbackExecuting.current) {
+                isCallbackExecuting.current = true;
+                callbackFromProp('reject');
+                hide('reject');
+            }
         };
 
         const show = () => {
             setVisibleState(true);
             setReshowState(false);
+            isCallbackExecuting.current = false;
 
             overlayEventListener.current = (e) => {
                 !isOutsideClicked(e.target) && (isPanelClicked.current = true);
@@ -196,12 +212,33 @@ export const ConfirmPopup = React.memo(
         const createContent = () => {
             const currentProps = getCurrentProps();
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
-            const icon = IconUtils.getJSXIcon(getPropValue('icon'), { className: 'p-confirm-popup-icon' }, { props: currentProps });
+
+            const iconProps = mergeProps(
+                {
+                    className: 'p-confirm-popup-icon'
+                },
+                ptm('icon')
+            );
+
+            const icon = IconUtils.getJSXIcon(getPropValue('icon'), { ...iconProps }, { props: currentProps });
+            const messageProps = mergeProps(
+                {
+                    className: 'p-confirm-popup-message'
+                },
+                ptm('message')
+            );
+
+            const contentProps = mergeProps(
+                {
+                    className: 'p-confirm-popup-content'
+                },
+                ptm('content')
+            );
 
             return (
-                <div className="p-confirm-popup-content">
+                <div {...contentProps}>
                     {icon}
-                    <span className="p-confirm-popup-message">{message}</span>
+                    <span {...messageProps}>{message}</span>
                 </div>
             );
         };
@@ -216,10 +253,34 @@ export const ConfirmPopup = React.memo(
                 getPropValue('rejectClassName')
             );
 
+            const footerProps = mergeProps(
+                {
+                    className: 'p-confirm-popup-footer'
+                },
+                ptm('footer')
+            );
+
+            const rejectButtonProps = mergeProps({
+                label: rejectLabel,
+                icon: getPropValue('rejectIcon'),
+                className: rejectClassName,
+                onClick: reject,
+                pt: ptm('rejectButton')
+            });
+
+            const acceptButtonProps = mergeProps({
+                ref: acceptBtnRef,
+                label: acceptLabel,
+                icon: getPropValue('acceptIcon'),
+                className: acceptClassName,
+                onClick: accept,
+                pt: ptm('acceptButton')
+            });
+
             const content = (
-                <div className="p-confirm-popup-footer">
-                    <Button label={rejectLabel} icon={getPropValue('rejectIcon')} className={rejectClassName} onClick={reject} />
-                    <Button ref={acceptBtnRef} label={acceptLabel} icon={getPropValue('acceptIcon')} className={acceptClassName} onClick={accept} />
+                <div {...footerProps}>
+                    <Button {...rejectButtonProps} />
+                    <Button {...acceptButtonProps} />
                 </div>
             );
 
@@ -243,13 +304,24 @@ export const ConfirmPopup = React.memo(
         };
 
         const createElement = () => {
-            const otherProps = ConfirmPopupBase.getOtherProps(props);
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
             });
             const content = createContent();
             const footer = createFooter();
+
+            const rootProps = mergeProps(
+                {
+                    ref: overlayRef,
+                    id: getPropValue('id'),
+                    className,
+                    style: getPropValue('style'),
+                    onClick: onPanelClick
+                },
+                ConfirmPopupBase.getOtherProps(props),
+                ptm('root')
+            );
 
             return (
                 <CSSTransition
@@ -264,7 +336,7 @@ export const ConfirmPopup = React.memo(
                     onExit={onExit}
                     onExited={onExited}
                 >
-                    <div ref={overlayRef} id={getPropValue('id')} className={className} style={getPropValue('style')} {...otherProps} onClick={onPanelClick}>
+                    <div {...rootProps}>
                         {content}
                         {footer}
                     </div>

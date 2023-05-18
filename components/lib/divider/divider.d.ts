@@ -8,6 +8,31 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils';
+
+export declare type DividerPassThroughType<T> = PassThroughType<T, DividerPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DividerPassThroughMethodOptions {
+    props: DividerProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DividerProps.pt}
+ */
+export interface DividerPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DividerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: DividerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Divider component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -33,6 +58,11 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DividerPassThroughOptions}
+     */
+    pt?: DividerPassThroughOptions;
 }
 
 /**

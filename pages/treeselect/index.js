@@ -89,7 +89,7 @@ const TreeSelectDemo = () => {
         }
     ];
 
-    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect']} />;
+    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect', 'TreeNode']} />;
 };
 
 export default TreeSelectDemo;

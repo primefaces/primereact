@@ -178,20 +178,11 @@ export const Mention = React.memo(
             const selectedText = formatValue(suggestion).replace(/\s+/g, '');
 
             if (currentText.trim() !== selectedText) {
-                let diff = 0;
-
-                while (diff < selectedText.length) {
-                    const s_c = selectedText.charAt(diff);
-                    const c_c = currentText.charAt(diff);
-
-                    if (s_c === c_c || c_c === ' ') diff++;
-                    else break;
-                }
-
                 const prevText = value.substring(0, triggerState.index);
-                const nextText = value.substring(triggerState.index + diff);
+                const nextText = value.substring(triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
+                event.target = inputRef.current;
                 props.onChange && props.onChange(event);
             }
 

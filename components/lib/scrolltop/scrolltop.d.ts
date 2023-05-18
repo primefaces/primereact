@@ -9,7 +9,43 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type ScrollTopPassThroughType<T> = PassThroughType<T, ScrollTopPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ScrollTopPassThroughMethodOptions {
+    props: ScrollTopProps;
+    state: ScrollTopState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ScrollTopProps.pt}
+ */
+export interface ScrollTopPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ScrollTopPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ScrollTopPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Defines current inline state in ScrollTop component.
+ */
+export interface ScrollTopState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+}
 
 /**
  * Defines valid properties in ScrollTop component.
@@ -27,8 +63,7 @@ export interface ScrollTopProps {
      */
     threshold?: number;
     /**
-     * Icon to display.
-     * @defaultValue pi pi-chevron-up
+     * Name of the icon or JSX.Element for icon.
      */
     icon?: IconType<ScrollTopProps>;
     /**
@@ -62,6 +97,11 @@ export interface ScrollTopProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ScrollTopPassThroughOptions}
+     */
+    pt?: ScrollTopPassThroughOptions;
 }
 
 /**

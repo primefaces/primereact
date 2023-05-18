@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TerminalBase = {
+export const TerminalBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Terminal',
         id: null,
@@ -9,7 +9,5 @@ export const TerminalBase = {
         welcomeMessage: null,
         prompt: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TerminalBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TerminalBase.defaultProps)
-};
+    }
+});

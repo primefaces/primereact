@@ -5,6 +5,7 @@ export const SlideMenuBase = {
         __TYPE: 'SlideMenu',
         appendTo: null,
         autoZIndex: true,
+        backIcon: null,
         backLabel: 'Back',
         baseZIndex: 0,
         className: null,
@@ -18,6 +19,7 @@ export const SlideMenuBase = {
         onNavigate: null,
         popup: false,
         style: null,
+        submenuIcon: null,
         transitionOptions: null,
         viewportHeight: 175,
         children: undefined

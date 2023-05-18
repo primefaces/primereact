@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { usePrevious } from '../hooks/Hooks';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
@@ -56,10 +59,8 @@ export const HeaderCell = React.memo((props) => {
 
     const getAriaSort = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            const sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt') : 'pi-sort-alt';
-
-            if (sortIcon === 'pi-sort-amount-down') return 'descending';
-            else if (sortIcon === 'pi-sort-amount-up-alt') return 'ascending';
+            if (sorted && sortOrder < 0) return 'descending';
+            else if (sorted && sortOrder > 0) return 'ascending';
             else return 'none';
         }
 
@@ -214,10 +215,11 @@ export const HeaderCell = React.memo((props) => {
 
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            let sortIcon = sorted ? (sortOrder < 0 ? 'pi-sort-amount-down' : 'pi-sort-amount-up-alt') : 'pi-sort-alt';
-            let className = classNames('p-sortable-column-icon pi pi-fw', sortIcon);
+            let iconClassName = 'p-sortable-column-icon';
+            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon /> : <SortAmountUpAltIcon /> : <SortAltIcon />;
+            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, undefined, { props, sorted, sortOrder });
 
-            return <span className={className}></span>;
+            return <span className={iconClassName}>{sortIcon}</span>;
         }
 
         return null;
@@ -245,7 +247,18 @@ export const HeaderCell = React.memo((props) => {
 
     const createFilter = () => {
         if (props.filterDisplay === 'menu' && getColumnProp('filter')) {
-            return <ColumnFilter display="menu" column={props.column} filters={props.filters} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} filtersStore={props.filtersStore} />;
+            return (
+                <ColumnFilter
+                    display="menu"
+                    column={props.column}
+                    filters={props.filters}
+                    onFilterChange={props.onFilterChange}
+                    onFilterApply={props.onFilterApply}
+                    filtersStore={props.filtersStore}
+                    filterIcon={props.filterIcon}
+                    filterClearIcon={props.filterClearIcon}
+                />
+            );
         }
 
         return null;

@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/breadcrumb/pt/ptdoc';
+import { Wireframe } from '../../components/doc/breadcrumb/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
@@ -34,7 +37,25 @@ const BreadCrumbDemo = () => {
         }
     ];
 
-    return <DocComponent title="React BreadCrumb Component" header="BreadCrumb" description="Breadcrumb provides contextual information about page hierarchy." componentDocs={docs} apiDocs={['Breadcrumb', 'MenuItem']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.breadcrumb.options',
+            label: 'BreadCrumb PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React BreadCrumb Component" header="BreadCrumb" description="Breadcrumb provides contextual information about page hierarchy." componentDocs={docs} apiDocs={['Breadcrumb', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default BreadCrumbDemo;

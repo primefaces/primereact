@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom page change event.
@@ -470,6 +471,22 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * Content to inject into the right side of the paginator.
      */
     rightContent?: React.ReactNode | undefined;
+    /**
+     * Icon of the first page link icon template.
+     */
+    firstPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Icon of the prev page link icon template.
+     */
+    prevPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Icon of the next page link icon template.
+     */
+    nextPageLinkIcon?: IconType<PaginatorProps> | undefined;
+    /**
+     * Icon of the last page link icon template.
+     */
+    lastPageLinkIcon?: IconType<PaginatorProps> | undefined;
     /**
      * Template of the current page report element. Available placeholders are &#123;currentPage&#125;, &#123;totalPages&#125;, &#123;rows&#125;, &#123;first&#125;, &#123;last&#125; and &#123;totalRecords&#125;
      * @defaultValue (&#123;currentPage&#125; of &#123;totalPages&#125;)

@@ -8,7 +8,38 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type AvatarPassThroughType<T> = PassThroughType<T, AvatarPassThroughMethodOptions>;
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface AvatarPassThroughMethodOptions {
+    props: AvatarProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link AvatarProps.pt}
+ */
+export interface AvatarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: AvatarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: AvatarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: AvatarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the image's DOM element.
+     */
+    image?: AvatarPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+}
 
 /**
  * Defines valid properties in Avatar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -66,6 +97,11 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {AvatarPassThroughOptions}
+     */
+    pt?: AvatarPassThroughOptions;
 }
 
 /**

@@ -8,13 +8,41 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type MessagePassThroughType<T> = PassThroughType<T, MessagePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MessagePassThroughMethodOptions {
+    props: MessageProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MessageProps.pt}
+ */
+export interface MessagePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MessagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MessagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the text's DOM element.
+     */
+    text?: MessagePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Defines valid properties in Message component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content' | 'pt'> {
     /**
      * Text of the message.
      */
@@ -37,6 +65,11 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MessagePassThroughOptions}
+     */
+    pt?: MessagePassThroughOptions;
 }
 
 /**

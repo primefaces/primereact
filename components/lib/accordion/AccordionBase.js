@@ -1,6 +1,7 @@
+import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
-export const AccordionBase = {
+export const AccordionBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Accordion',
         id: null,
@@ -8,19 +9,17 @@ export const AccordionBase = {
         className: null,
         style: null,
         multiple: false,
-        expandIcon: 'pi pi-chevron-right',
-        collapseIcon: 'pi pi-chevron-down',
+        expandIcon: null,
+        collapseIcon: null,
         transitionOptions: null,
         onTabOpen: null,
         onTabClose: null,
         onTabChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, AccordionBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, AccordionBase.defaultProps)
-};
+    }
+});
 
-export const AccordionTabBase = {
+export const AccordionTabBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'AccordionTab',
         className: null,
@@ -38,4 +37,4 @@ export const AccordionTabBase = {
     getCProp: (tab, name) => ObjectUtils.getComponentProp(tab, name, AccordionTabBase.defaultProps),
     getCProps: (tab) => ObjectUtils.getComponentProps(tab, AccordionTabBase.defaultProps),
     getCOtherProps: (tab) => ObjectUtils.getComponentDiffProps(tab, AccordionTabBase.defaultProps)
-};
+});

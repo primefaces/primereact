@@ -107,6 +107,11 @@ interface MultiStateCheckboxChangeEvent {
  */
 export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Value of the MultiStateCheckbox.
      */
     value?: any | undefined;

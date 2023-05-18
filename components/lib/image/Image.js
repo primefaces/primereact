@@ -2,8 +2,15 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
+import { DownloadIcon } from '../icons/download';
+import { EyeIcon } from '../icons/eye';
+import { RefreshIcon } from '../icons/refresh';
+import { SearchMinusIcon } from '../icons/searchminus';
+import { SearchPlusIcon } from '../icons/searchplus';
+import { TimesIcon } from '../icons/times';
+import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
@@ -109,33 +116,39 @@ export const Image = React.memo(
         };
 
         const createElement = () => {
-            const { downloadable } = props;
+            const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
             const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
-            const zoomDisabled = scaleState <= 0.5 || scaleState >= 1.5;
-            // const rotateClassName = 'p-image-preview-rotate-' + rotateScale;
+            const zoomOutDisabled = scaleState <= 0.5;
+            const zoomInDisabled = scaleState >= 1.5;
+            const downloadIcon = IconUtils.getJSXIcon(props.downloadIcon || <DownloadIcon />, undefined, { props });
+            const rotateRightIcon = IconUtils.getJSXIcon(props.rotateRightIcon || <RefreshIcon />, undefined, { props });
+            const rotateLeftIcon = IconUtils.getJSXIcon(props.rotateLeftIcon || <UndoIcon />, undefined, { props });
+            const zoomOutIcon = IconUtils.getJSXIcon(props.zoomOutIcon || <SearchMinusIcon />, undefined, { props });
+            const zoomInIcon = IconUtils.getJSXIcon(props.zoomInIcon || <SearchPlusIcon />, undefined, { props });
+            const closeIcon = IconUtils.getJSXIcon(props.closeIcon || <TimesIcon />, undefined, { props });
 
             return (
-                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onClick={hide}>
+                <div ref={maskRef} className="p-image-mask p-component-overlay p-component-overlay-enter" onPointerUp={hide}>
                     <div className="p-image-toolbar">
                         {downloadable && (
-                            <button className="p-image-action p-link" onClick={onDownload} type="button">
-                                <i className="pi pi-download"></i>
+                            <button className="p-image-action p-link" onPointerUp={onDownload} type="button">
+                                {downloadIcon}
                             </button>
                         )}
-                        <button className="p-image-action p-link" onClick={rotateRight} type="button">
-                            <i className="pi pi-refresh"></i>
+                        <button className="p-image-action p-link" onPointerUp={rotateRight} type="button">
+                            {rotateRightIcon}
                         </button>
-                        <button className="p-image-action p-link" onClick={rotateLeft} type="button">
-                            <i className="pi pi-undo"></i>
+                        <button className="p-image-action p-link" onPointerUp={rotateLeft} type="button">
+                            {rotateLeftIcon}
                         </button>
-                        <button className="p-image-action p-link" onClick={zoomOut} type="button" disabled={zoomDisabled}>
-                            <i className="pi pi-search-minus"></i>
+                        <button className="p-image-action p-link" onPointerUp={zoomOut} type="button" disabled={zoomOutDisabled}>
+                            {zoomOutIcon}
                         </button>
-                        <button className="p-image-action p-link" onClick={zoomIn} type="button" disabled={zoomDisabled}>
-                            <i className="pi pi-search-plus"></i>
+                        <button className="p-image-action p-link" onPointerUp={zoomIn} type="button" disabled={zoomInDisabled}>
+                            {zoomInIcon}
                         </button>
                         <button className="p-image-action p-link" type="button" aria-label={localeOption('close')}>
-                            <i className="pi pi-times"></i>
+                            {closeIcon}
                         </button>
                     </div>
                     <CSSTransition
@@ -151,7 +164,17 @@ export const Image = React.memo(
                         onExited={onExited}
                     >
                         <div ref={previewRef}>
-                            <img src={props.zoomSrc || props.src} className="p-image-preview" style={imagePreviewStyle} onClick={onPreviewImageClick} alt={props.alt} />
+                            <img
+                                src={props.zoomSrc || props.src}
+                                className="p-image-preview"
+                                style={imagePreviewStyle}
+                                onPointerUp={onPreviewImageClick}
+                                alt={alt}
+                                crossOrigin={crossOrigin}
+                                referrerPolicy={referrerPolicy}
+                                useMap={useMap}
+                                loading={loading}
+                            />
                         </div>
                     </CSSTransition>
                 </div>
@@ -166,15 +189,33 @@ export const Image = React.memo(
             getImage: () => imageRef.current
         }));
 
-        const { src, alt, width, height } = props;
+        const { src, alt, width, height, crossOrigin, referrerPolicy, useMap, loading } = props;
         const otherProps = ImageBase.getOtherProps(props);
         const containerClassName = classNames('p-image p-component', props.className, {
             'p-image-preview-container': props.preview
         });
         const element = createElement();
-        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : <i className="p-image-preview-icon pi pi-eye"></i>;
+        const iconClassName = 'p-image-preview-icon';
+        const icon = props.indicatorIcon || <EyeIcon className={iconClassName} />;
+        const indicatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : indicatorIcon;
         const preview = createPreview();
-        const image = props.src && <img ref={imageRef} src={src} className={props.imageClassName} width={width} height={height} style={props.imageStyle} alt={alt} onError={props.onError} />;
+        const image = props.src && (
+            <img
+                ref={imageRef}
+                src={src}
+                className={props.imageClassName}
+                width={width}
+                height={height}
+                crossOrigin={crossOrigin}
+                referrerPolicy={referrerPolicy}
+                useMap={useMap}
+                loading={loading}
+                alt={alt}
+                style={props.imageStyle}
+                onError={props.onError}
+            />
+        );
 
         return (
             <span ref={elementRef} className={containerClassName} {...otherProps}>

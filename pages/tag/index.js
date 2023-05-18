@@ -8,6 +8,9 @@ import { PillDoc } from '../../components/doc/tag/pilldoc';
 import { SeverityDoc } from '../../components/doc/tag/severitydoc';
 import { StyleDoc } from '../../components/doc/tag/styledoc';
 import { TemplateDoc } from '../../components/doc/tag/templatedoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/tag/pt/wireframe';
+import { PTDoc } from '../../components/doc/tag/pt/ptdoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -53,7 +56,25 @@ const TerminalDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tag.options',
+            label: 'Tag PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} ptDocs={ptDocs} />;
 };
 
 export default TerminalDemo;

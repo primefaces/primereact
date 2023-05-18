@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DockBase = {
+export const DockBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Dock',
         id: null,
@@ -12,7 +12,5 @@ export const DockBase = {
         header: null,
         footer: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DockBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DockBase.defaultProps)
-};
+    }
+});

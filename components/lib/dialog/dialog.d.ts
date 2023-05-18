@@ -9,6 +9,84 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type DialogPassThroughType<T> = PassThroughType<T, DialogPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DialogPassThroughMethodOptions {
+    props: DialogProps;
+    state: DialogState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DialogProps.pt}
+ */
+export interface DialogPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header title's DOM element.
+     */
+    headerTitle?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header icons' DOM element.
+     */
+    headerIcons?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the maximizable button's DOM element.
+     */
+    maximizableButton?: DialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the maximizable icon's DOM element.
+     */
+    maximizableIcon?: DialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the close button's component.
+     */
+    closeButton?: DialogPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the close button icon's component.
+     */
+    closeButtonIcon?: DialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Dialog component.
+ */
+export interface DialogState {
+    /**
+     * Current visible state of the container as a boolean.
+     * @defaultValue false
+     */
+    containerVisible: boolean;
+    /**
+     * Current maximized state as a boolean.
+     * @defaultValue false
+     */
+    maximized: boolean;
+}
 
 /**
  * Dialog break options
@@ -120,6 +198,10 @@ export interface DialogProps {
      */
     headerClassName?: string | undefined;
     /**
+     * Icon to display in the dialog close button.
+     */
+    closeIcon?: IconType<DialogProps> | undefined;
+    /**
      * Style of the header section.
      */
     headerStyle?: React.CSSProperties | undefined;
@@ -190,6 +272,14 @@ export interface DialogProps {
      */
     showHeader?: boolean | undefined;
     /**
+     * Icon to display in the dialog maximize button when dialog is not maximized.
+     */
+    maximizeIcon?: IconType<DialogProps> | undefined;
+    /**
+     * Icon to display in the dialog maximize button when dialog is maximized.
+     */
+    minimizeIcon?: IconType<DialogProps> | undefined;
+    /**
      * Inline style of the component.
      */
     style?: React.CSSProperties | undefined;
@@ -203,10 +293,15 @@ export interface DialogProps {
      */
     visible?: boolean | undefined;
     /**
-     * Callback to invoke when dialog is clicked.
-     * @param {React.MouseEvent<HTMLElement>} event - Browser event.
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DialogPassThroughOptions}
      */
-    onClick?(event: React.MouseEvent<HTMLElement>): void;
+    pt?: DialogPassThroughOptions;
+    /**
+     * Callback to invoke when dialog is clicked.
+     * @param {React.PointerEvent<HTMLElement>} event - Browser event.
+     */
+    onClick?(event: React.PointerEvent<HTMLElement>): void;
     /**
      * Callback to invoke when dragging dialog.
      * @param {React.DragEvent<HTMLElement>} event - Browser event.

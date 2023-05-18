@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const BlockUIBase = {
+export const BlockUIBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'BlockUI',
         autoZIndex: true,
@@ -16,7 +16,5 @@ export const BlockUIBase = {
         style: null,
         template: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, BlockUIBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, BlockUIBase.defaultProps)
-};
+    }
+});

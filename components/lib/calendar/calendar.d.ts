@@ -188,6 +188,11 @@ export interface CalendarProps {
      */
     appendTo?: 'self' | HTMLElement | undefined | null;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
     ariaLabelledBy?: string | undefined;
@@ -216,6 +221,10 @@ export interface CalendarProps {
      */
     dateFormat?: string | undefined;
     /**
+     * Icon to show in each of the decrement buttons.
+     */
+    decrementIcon?: IconType<CalendarProps> | undefined;
+    /**
      * When specified, disables the component.
      * @defaultValue false
      */
@@ -240,7 +249,6 @@ export interface CalendarProps {
     hourFormat?: '12' | '24' | undefined;
     /**
      * Icon of the calendar button.
-     * @defaultValue pi pi-calendar
      */
     icon?: IconType<CalendarProps> | undefined;
     /**
@@ -248,6 +256,10 @@ export interface CalendarProps {
      * @defaultValue right
      */
     iconPos?: 'left' | 'right' | undefined;
+    /**
+     * Icon to show in each of the increment buttons.
+     */
+    incrementIcon?: IconType<CalendarProps> | undefined;
     /**
      * When enabled, displays the calendar as inline instead of an overlay.
      * @defaultValue false
@@ -297,7 +309,6 @@ export interface CalendarProps {
     minDate?: Date | undefined;
     /**
      * Whether the month should be rendered as a dropdown instead of text.
-     * @deprecated since v6. Navigator is always on.
      * @defaultValue false
      */
     monthNavigator?: boolean | undefined;
@@ -305,6 +316,10 @@ export interface CalendarProps {
      * Name of the input element.
      */
     name?: string | undefined;
+    /**
+     * Icon to show in the next button.
+     */
+    nextIcon?: IconType<CalendarProps> | undefined;
     /**
      * Number of months to display.
      * @defaultValue 1
@@ -322,6 +337,10 @@ export interface CalendarProps {
      * Placeholder text for the input.
      */
     placeholder?: string | undefined;
+    /**
+     * Icon to show in the previous button.
+     */
+    prevIcon?: IconType<CalendarProps> | undefined;
     /**
      * When specified, prevents entering the date manually with keyboard.
      * @defaultValue false
@@ -458,7 +477,7 @@ export interface CalendarProps {
      * Type of view to display.
      * @defaultValue date
      */
-    view?: 'date' | 'month' | undefined;
+    view?: 'date' | 'month' | 'year' | undefined;
     /**
      * Date instance whose month and year are used to display the calendar.
      */
@@ -470,7 +489,6 @@ export interface CalendarProps {
     visible?: boolean | undefined;
     /**
      * Whether the year should be rendered as a dropdown instead of text.
-     * @deprecated since v6. Navigator is always on.
      * @defaultValue false
      */
     yearNavigator?: boolean | undefined;
@@ -501,7 +519,7 @@ export interface CalendarProps {
      * @param {number[]} yearValues - The values of years
      * @return {React.ReactNode}
      */
-    decadeTempate?(yearValues: number[]): React.ReactNode;
+    decadeTemplate?(yearValues: number[]): React.ReactNode;
     /**
      * Custom footer template of overlay.
      * @return {React.ReactNode}

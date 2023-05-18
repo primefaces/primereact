@@ -6,6 +6,7 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from './tooltip';
 
 /**
  * Custom tooltip event
@@ -124,6 +125,10 @@ export interface TooltipOptions {
      * @defaultValue 0
      */
     updateDelay?: number | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     */
+    pt?: TooltipPassThroughOptions;
     /**
      * Callback to invoke before the tooltip is shown.
      * @param {TooltipEvent} event - Browser event

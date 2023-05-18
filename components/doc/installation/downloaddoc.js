@@ -5,10 +5,10 @@ export function DownloadDoc(props) {
     const code = {
         basic: `
 // with npm
-npm install primereact primeicons
+npm install primereact
 
 // with yarn
-yarn add primereact primeicons
+yarn add primereact
         `
     };
 

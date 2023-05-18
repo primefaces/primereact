@@ -1,11 +1,9 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DeferredContentBase = {
+export const DeferredContentBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'DeferredContent',
         onload: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DeferredContentBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DeferredContentBase.defaultProps)
-};
+    }
+});

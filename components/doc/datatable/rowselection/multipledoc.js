@@ -92,10 +92,15 @@ export default function MultipleRowsSelectionDemo() {
     return (
         <div className="card">
             <div className="flex justify-content-center align-items-center mb-4 gap-2">
-                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value)} />
+                <InputSwitch inputId="input-metakey" checked={metaKey} onChange={(e: InputSwitchChangeEvent) => setMetaKey(e.value!)} />
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
-            <DataTable value={products} selectionMode="multiple" selection={selectedProducts} onSelectionChange={(e: DataTableSelectionChangeEvent<Product>) => setSelectedProducts(e.value)}
+            <DataTable value={products} selectionMode="multiple" selection={selectedProducts} 
+                    onSelectionChange={(e) => {
+                        if (Array.isArray(e.value)) {
+                            setSelectedProducts(e.value);
+                        }
+                    }}
                     dataKey="id" metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

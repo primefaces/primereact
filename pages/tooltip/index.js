@@ -1,3 +1,4 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tooltip/accessibilitydoc';
 import { AutoHideDoc } from '../../components/doc/tooltip/autohidedoc';
@@ -7,6 +8,8 @@ import { EventDoc } from '../../components/doc/tooltip/eventdoc';
 import { ImportDoc } from '../../components/doc/tooltip/importdoc';
 import { MouseTrackDoc } from '../../components/doc/tooltip/mousetrackdoc';
 import { PositionDoc } from '../../components/doc/tooltip/positiondoc';
+import { PTDoc } from '../../components/doc/tooltip/pt/ptdoc';
+import { Wireframe } from '../../components/doc/tooltip/pt/wireframe';
 import { ReactiveDoc } from '../../components/doc/tooltip/reactivedoc';
 import { StyleDoc } from '../../components/doc/tooltip/styledoc';
 import { TargetDoc } from '../../components/doc/tooltip/targetdoc';
@@ -76,7 +79,25 @@ const TooltipDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tooltip Component" header="Tooltip" description="Tooltip functionality is integrated within various PrimeReact components." componentDocs={docs} apiDocs={['Tooltip', 'TooltipOptions']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tooltip.options',
+            label: 'Tooltip PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Tooltip Component" header="Tooltip" description="Tooltip functionality is integrated within various PrimeReact components." componentDocs={docs} apiDocs={['Tooltip', 'TooltipOptions']} ptDocs={ptDocs} />;
 };
 
 export default TooltipDemo;

@@ -1,13 +1,13 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ChipBase = {
+export const ChipBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Chip',
         label: null,
         icon: null,
         image: null,
         removable: false,
-        removeIcon: 'pi pi-times-circle',
+        removeIcon: null,
         className: null,
         style: null,
         template: null,
@@ -15,7 +15,5 @@ export const ChipBase = {
         onImageError: null,
         onRemove: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ChipBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ChipBase.defaultProps)
-};
+    }
+});

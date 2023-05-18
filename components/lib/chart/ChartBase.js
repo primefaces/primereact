@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ChartBase = {
+export const ChartBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Chart',
         id: null,
@@ -13,7 +13,5 @@ export const ChartBase = {
         style: null,
         className: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ChartBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ChartBase.defaultProps)
-};
+    }
+});

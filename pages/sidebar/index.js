@@ -1,3 +1,4 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
@@ -7,6 +8,8 @@ import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
 import { StyleDoc } from '../../components/doc/sidebar/styledoc';
 import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
+import { Wireframe } from '../../components/doc/sidebar/pt/wireframe';
+import { PTDoc } from '../../components/doc/sidebar/pt/ptdoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -52,7 +55,25 @@ const SidebarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Sidebar Component" header="Sidebar" description="Sidebar, also known as Drawer, is a container component displayed as an overlay." componentDocs={docs} apiDocs={['Sidebar']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.sidebar.options',
+            label: 'Sidebar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React Sidebar Component" header="Sidebar" description="Sidebar, also known as Drawer, is a container component displayed as an overlay." componentDocs={docs} apiDocs={['Sidebar']} ptDocs={ptDocs} />;
 };
 
 export default SidebarDemo;

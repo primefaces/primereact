@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const StepsBase = {
+export const StepsBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Steps',
         id: null,
@@ -11,7 +11,5 @@ export const StepsBase = {
         className: null,
         onSelect: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, StepsBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, StepsBase.defaultProps)
-};
+    }
+});

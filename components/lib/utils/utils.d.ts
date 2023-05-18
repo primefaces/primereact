@@ -9,6 +9,8 @@ import * as React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 
+export declare function mergeProps(...args: object[]): object | undefined;
+
 /**
  * Use 'useOverlayScrollListener' hook instead
  * @deprecated since version 8.0.0
@@ -151,3 +153,5 @@ export interface IconOptions<ParentProps> {
 export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
 
 export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);
+
+export type PassThroughType<T, O> = T | ((options?: O) => T | void) | null | undefined;

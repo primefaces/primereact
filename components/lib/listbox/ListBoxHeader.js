@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { InputText } from '../inputtext/InputText';
-import { ObjectUtils } from '../utils/Utils';
+import { IconUtils, ObjectUtils } from '../utils/Utils';
+import { SearchIcon } from '../icons/search';
 
 export const ListBoxHeader = React.memo((props) => {
     const filterOptions = {
@@ -18,10 +19,14 @@ export const ListBoxHeader = React.memo((props) => {
     };
 
     const createHeader = () => {
+        const iconClassName = 'p-listbox-filter-icon';
+        const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
+        const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
         let content = (
             <div className="p-listbox-filter-container">
                 <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} />
-                <span className="p-listbox-filter-icon pi pi-search"></span>
+                {filterIcon}
             </div>
         );
 
@@ -31,7 +36,7 @@ export const ListBoxHeader = React.memo((props) => {
                 element: content,
                 filterOptions: filterOptions,
                 filterInputChange: onFilter,
-                filterIconClassName: 'p-dropdown-filter-icon pi pi-search',
+                filterIconClassName: 'p-dropdown-filter-icon',
                 props
             };
 

@@ -9,6 +9,56 @@
  */
 import * as React from 'react';
 import { TooltipEvent, TooltipOptions } from './tooltipoptions';
+import { PassThroughType } from '../utils/utils';
+
+export declare type TooltipPassThroughType<T> = PassThroughType<T, TooltipPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TooltipPassThroughMethodOptions {
+    props: TooltipProps;
+    state: TooltipState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TooltipProps.pt}
+ */
+export interface TooltipPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TooltipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the arrow's DOM element.
+     */
+    arrow?: TooltipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the text's DOM element.
+     */
+    text?: TooltipPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Defines current inline state in Tooltip component.
+ */
+export interface TooltipState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+    /**
+     * Current position state as a string.
+     * @defaultValue right
+     */
+    position: string;
+    /**
+     * Current className state as a string.
+     */
+    className: string;
+}
 
 /**
  * Defines valid properties in Tooltip component. In addition to these, all properties of TooltipOptions can be used in this component.
@@ -33,6 +83,11 @@ export interface TooltipProps extends TooltipOptions {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TooltipPassThroughOptions}
+     */
+    pt?: TooltipPassThroughOptions;
 }
 
 /**

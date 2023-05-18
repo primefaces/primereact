@@ -1,11 +1,20 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { AngleRightIcon } from '../icons/angleright';
 
 export const TieredMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const elementRef = React.useRef(null);
+
+    const getPTOptions = (item, key) => {
+        return props.ptm(key, {
+            context: {
+                active: activeItemState === item
+            }
+        });
+    };
 
     const [bindDocumentClickListener] = useEventListener({
         type: 'click',
@@ -179,7 +188,16 @@ export const TieredMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className="p-menu-separator" role="separator"></li>;
+        const separatorProps = mergeProps(
+            {
+                key,
+                className: 'p-menu-separator',
+                role: 'separator'
+            },
+            props.ptm('separator')
+        );
+
+        return <li {...separatorProps}></li>;
     };
 
     const createSubmenu = (item) => {
@@ -194,6 +212,8 @@ export const TieredMenuSub = React.memo((props) => {
                     parentActive={item === activeItemState}
                     isMobileMode={props.isMobileMode}
                     onItemToggle={props.onItemToggle}
+                    submenuIcon={props.submenuIcon}
+                    ptm={props.ptm}
                 />
             );
         }
@@ -212,13 +232,45 @@ export const TieredMenuSub = React.memo((props) => {
         const className = classNames('p-menuitem', { 'p-menuitem-active': active }, _className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
-        const submenuIconClassName = 'p-submenu-icon pi pi-angle-right';
-        const icon = IconUtils.getJSXIcon(_icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = _label && <span className="p-menuitem-text">{_label}</span>;
-        const submenuIcon = items && <span className={submenuIconClassName}></span>;
+        const iconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            getPTOptions(item, 'icon')
+        );
+        const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props: props.menuProps });
+        const labelProps = mergeProps(
+            {
+                className: 'p-menuitem-text'
+            },
+            getPTOptions(item, 'label')
+        );
+        const label = _label && <span {...labelProps}>{_label}</span>;
+        const submenuIconClassName = 'p-submenu-icon';
+        const submenuIconProps = mergeProps(
+            {
+                className: submenuIconClassName
+            },
+            getPTOptions(item, 'submenuIcon')
+        );
+        const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props: props.menuProps });
         const submenu = createSubmenu(item);
+        const actionProps = mergeProps(
+            {
+                href: url || '#',
+                className: linkClassName,
+                target: target,
+                role: 'menuitem',
+                'aria-haspopup': items != null,
+                onClick: (event) => onItemClick(event, item),
+                onKeyDown: (event) => onItemKeyDown(event, item),
+                'aria-disabled': disabled
+            },
+            getPTOptions(item, 'action')
+        );
+
         let content = (
-            <a href={url || '#'} className={linkClassName} target={target} role="menuitem" aria-haspopup={items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)} aria-disabled={disabled}>
+            <a {...actionProps}>
                 {icon}
                 {label}
                 {submenuIcon}
@@ -243,8 +295,20 @@ export const TieredMenuSub = React.memo((props) => {
             content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
         }
 
+        const menuitemProps = mergeProps(
+            {
+                key,
+                id: item.id,
+                className,
+                style: style,
+                onMouseEnter: (event) => onItemMouseEnter(event, item),
+                role: 'none'
+            },
+            getPTOptions(item, 'menuitem')
+        );
+
         return (
-            <li key={key} id={item} className={className} style={style} onMouseEnter={(event) => onItemMouseEnter(event, item)} role="none">
+            <li {...menuitemProps}>
                 {content}
                 {submenu}
             </li>
@@ -263,12 +327,17 @@ export const TieredMenuSub = React.memo((props) => {
         'p-submenu-list': !props.root
     });
     const submenu = createMenu();
-
-    return (
-        <ul ref={elementRef} className={className} role={props.root ? 'menubar' : 'menu'} aria-orientation="horizontal">
-            {submenu}
-        </ul>
+    const menuProps = mergeProps(
+        {
+            ref: elementRef,
+            className,
+            role: props.root ? 'menubar' : 'menu',
+            'aria-orientation': 'horizontal'
+        },
+        props.ptm('menu')
     );
+
+    return <ul {...menuProps}>{submenu}</ul>;
 });
 
 TieredMenuSub.displayName = 'TieredMenuSub';

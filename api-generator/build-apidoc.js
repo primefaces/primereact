@@ -31,6 +31,7 @@ app.bootstrap({
     searchInComments: true,
     disableSources: true,
     logLevel: 'Error',
+    sort: ['source-order'],
     exclude: ['node_modules', 'components/lib/**/*.js'],
     externalSymbolLinkMappings: {
         '@types/react': {

@@ -8,6 +8,43 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ScrollPanelThroughType<T> = PassThroughType<T, ScrollPanelThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ScrollPanelThroughMethodOptions {
+    props: ScrollPanelProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ScrollPanelProps.pt}
+ */
+export interface ScrollPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the horizontal panel's DOM element.
+     */
+    barX?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the vertical panel's DOM element.
+     */
+    barY?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in ScrollPanel component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -19,6 +56,11 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ScrollPanelPassThroughOptions}
+     */
+    pt?: ScrollPanelPassThroughOptions;
 }
 
 /**

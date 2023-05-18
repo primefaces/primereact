@@ -1,9 +1,12 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { TimesIcon } from '../icons/times';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
 
@@ -56,12 +59,15 @@ export const MultiSelect = React.memo(
             const selected = isSelected(option);
             const allowSelect = allowOptionSelect();
 
-            if (selected)
+            if (selected) {
                 updateModel(
                     originalEvent,
-                    props.value.filter((val) => !ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey))
+                    props.value.filter((val) => !ObjectUtils.equals(isUsed ? val : getOptionValue(val), optionValue, equalityKey)),
+                    option
                 );
-            else if (allowSelect) updateModel(originalEvent, [...(props.value || []), optionValue]);
+            } else if (allowSelect) {
+                updateModel(originalEvent, [...(props.value || []), optionValue], option);
+            }
         };
 
         const onOptionKeyDown = (event) => {
@@ -200,17 +206,22 @@ export const MultiSelect = React.memo(
                     }
                 }
 
-                updateModel(event.originalEvent, value);
+                updateModel(event.originalEvent, value, value);
             }
         };
 
-        const updateModel = (event, value) => {
+        const updateModel = (event, value, selectedOption) => {
             if (props.onChange) {
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    selectedOption,
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -441,7 +452,7 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
-            updateModel(event, value);
+            updateModel(event, value, item);
         };
 
         const getSelectedItemsLabel = () => {
@@ -489,7 +500,13 @@ export const MultiSelect = React.memo(
 
                     return value.map((val) => {
                         const label = getLabelByValue(val);
-                        const icon = !props.disabled && IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props });
+                        const icon =
+                            !props.disabled &&
+                            (props.removeIcon ? (
+                                IconUtils.getJSXIcon(props.removeIcon, { className: 'p-multiselect-token-icon', onClick: (e) => removeChip(e, val) }, { props })
+                            ) : (
+                                <TimesCircleIcon className="p-multiselect-token-icon" onClick={(e) => removeChip(e, val)} />
+                            ));
 
                         return (
                             <div className="p-multiselect-token" key={label}>
@@ -560,8 +577,16 @@ export const MultiSelect = React.memo(
         });
 
         const createClearIcon = () => {
+            const iconClassName = 'p-multiselect-clear-icon';
+            const icon = props.clearIcon || <TimesIcon className={iconClassName} />;
+            const clearIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
             if (!empty && props.showClear && !props.disabled) {
-                return <i className="p-multiselect-clear-icon pi pi-times" onClick={(e) => updateModel(e, null)}></i>;
+                return (
+                    <i className={iconClassName} onClick={(e) => updateModel(e, null, null)}>
+                        {clearIcon}
+                    </i>
+                );
             }
 
             return null;
@@ -599,6 +624,10 @@ export const MultiSelect = React.memo(
             },
             props.className
         );
+
+        const dropdownIconClass = 'p-multiselect-trigger-icon p-c';
+        const dropdownIcon = <div className="p-multiselect-trigger">{props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { className: dropdownIconClass }, { props }) : <ChevronDownIcon className={dropdownIconClass} />}</div>;
+
         const label = !props.inline && createLabel();
         const clearIcon = !props.inline && createClearIcon();
 
@@ -626,7 +655,7 @@ export const MultiSelect = React.memo(
                         <>
                             {label}
                             {clearIcon}
-                            <div className="p-multiselect-trigger">{IconUtils.getJSXIcon(props.dropdownIcon, { className: 'p-multiselect-trigger-icon p-c' }, { props })}</div>
+                            {dropdownIcon}
                         </>
                     )}
                     <MultiSelectPanel

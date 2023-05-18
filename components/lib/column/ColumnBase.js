@@ -64,7 +64,7 @@ export const ColumnBase = {
         resizeable: true,
         rowEditor: false,
         rowReorder: false,
-        rowReorderIcon: 'pi pi-bars',
+        rowReorderIcon: null,
         rowSpan: null,
         selectionMode: null,
         showAddButton: true,

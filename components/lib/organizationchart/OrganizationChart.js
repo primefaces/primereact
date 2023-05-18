@@ -72,7 +72,7 @@ export const OrganizationChart = React.memo(
 
         return (
             <div id={props.id} ref={elementRef} style={props.style} className={className} {...otherProps}>
-                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} />
+                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} togglerIcon={props.togglerIcon} />
             </div>
         );
     })

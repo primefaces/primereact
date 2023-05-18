@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMatchMedia, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
 
@@ -14,6 +14,13 @@ export const TieredMenu = React.memo(
 
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+        const { ptm } = TieredMenuBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                attributeSelector: attributeSelectorState
+            }
+        });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -174,6 +181,18 @@ export const TieredMenu = React.memo(
                 props.className
             );
 
+            const rootProps = mergeProps(
+                {
+                    ref: menuRef,
+                    id: props.id,
+                    className,
+                    style: props.style,
+                    onClick: onPanelClick
+                },
+                TieredMenuBase.getOtherProps(props),
+                ptm('root')
+            );
+
             return (
                 <CSSTransition
                     nodeRef={menuRef}
@@ -187,8 +206,8 @@ export const TieredMenu = React.memo(
                     onExit={onExit}
                     onExited={onExited}
                 >
-                    <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} />
+                    <div {...rootProps}>
+                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} ptm={ptm} />
                     </div>
                 </CSSTransition>
             );

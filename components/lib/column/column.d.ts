@@ -10,6 +10,7 @@
  */
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { IconType } from '../utils/utils';
 
 interface ColumnHeaderOptions {
     /**
@@ -546,6 +547,10 @@ export interface ColumnProps {
      */
     exportField?: string | undefined;
     /**
+     * Custom export header of the column to be exported.
+     */
+    exportHeader?: string | undefined;
+    /**
      * Property of a row data.
      */
     field?: string | undefined;
@@ -682,9 +687,8 @@ export interface ColumnProps {
     rowReorder?: boolean | undefined;
     /**
      * Icon of the drag handle to reorder rows.
-     * @defaultValue pi pi-bars
      */
-    rowReorderIcon?: string | undefined;
+    rowReorderIcon?: IconType<ColumnProps> | undefined;
     /**
      * Number of rows to span for grouping.
      */
@@ -765,7 +769,7 @@ export interface ColumnProps {
      */
     onBeforeCellEditHide?(event: ColumnEvent): void;
     /**
-     * Callback to invoke before the cell editor is shown.
+     * Callback to invoke before the cell editor is shown. To prevent editor from showing return false or originalEvent.preventDefault().
      * @param {ColumnEvent} event - Custom event.
      */
     onBeforeCellEditShow?(event: ColumnEvent): void;
@@ -780,7 +784,7 @@ export interface ColumnProps {
      */
     onCellEditComplete?(event: ColumnEvent): void;
     /**
-     * Callback to invoke when cell edit is initiated.
+     * Callback to invoke when cell edit is initiated. To prevent editor from showing return false or originalEvent.preventDefault().
      * @param {ColumnEvent} event - Custom event.
      */
     onCellEditInit?(event: ColumnEvent): void;

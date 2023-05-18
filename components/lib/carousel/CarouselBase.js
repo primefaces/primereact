@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const CarouselBase = {
+export const CarouselBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Carousel',
         id: null,
@@ -17,6 +17,8 @@ export const CarouselBase = {
         autoplayInterval: 0,
         numVisible: 1,
         numScroll: 1,
+        prevIcon: null,
+        nextIcon: null,
         responsiveOptions: null,
         orientation: 'horizontal',
         verticalViewPortHeight: '300px',
@@ -25,7 +27,5 @@ export const CarouselBase = {
         indicatorsContentClassName: null,
         onPageChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CarouselBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CarouselBase.defaultProps)
-};
+    }
+});

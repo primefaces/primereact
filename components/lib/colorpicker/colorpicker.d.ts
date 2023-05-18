@@ -67,6 +67,11 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     appendTo?: 'self' | HTMLElement | undefined | null;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Default color to display when value is null.
      * @defaultValue ff0000
      */
@@ -89,6 +94,14 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputClassName?: string | undefined;
     /**
      * Style class of the overlay panel.
      */

@@ -9,6 +9,51 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type OverlayPanelPassThroughType<T> = PassThroughType<T, OverlayPanelPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface OverlayPanelPassThroughMethodOptions {
+    props: OverlayPanelProps;
+    state: OverlayPanelState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link OverlayPanelProps.pt}
+ */
+export interface OverlayPanelPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in OverlayPanel component.
+ */
+export interface OverlayPanelState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+}
 
 /**
  * Custom overlay panel breakpoints
@@ -35,6 +80,10 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue false
      */
     showCloseIcon?: boolean | undefined;
+    /**
+     * Icon to display as close icon.
+     */
+    closeIcon?: IconType<OverlayPanelProps> | undefined;
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body

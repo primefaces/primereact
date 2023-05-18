@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DialogBase = {
+export const DialogBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Dialog',
         appendTo: null,
@@ -10,6 +10,7 @@ export const DialogBase = {
         breakpoints: null,
         className: null,
         closable: true,
+        closeIcon: null,
         closeOnEscape: true,
         contentClassName: null,
         contentStyle: null,
@@ -26,9 +27,11 @@ export const DialogBase = {
         maskClassName: null,
         maskStyle: null,
         maximizable: false,
+        maximizeIcon: null,
         maximized: false,
         minX: 0,
         minY: 0,
+        minimizeIcon: null,
         modal: true,
         onClick: null,
         onDrag: null,
@@ -49,7 +52,5 @@ export const DialogBase = {
         transitionOptions: null,
         visible: false,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DialogBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DialogBase.defaultProps)
-};
+    }
+});

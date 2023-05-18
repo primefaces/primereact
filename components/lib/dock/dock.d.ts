@@ -9,6 +9,67 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { PassThroughType } from '../utils/utils';
+
+export declare type DockPassThroughType<T> = PassThroughType<T, DockPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DockPassThroughMethodOptions {
+    props: DockProps;
+    state: DockState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DockProps.pt}
+ */
+export interface DockPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DockPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: DockPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DockPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DockPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: DockPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: DockPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: DockPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: DockPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Defines current inline state in Dock component.
+ */
+export interface DockState {
+    /**
+     * Current index as a number.
+     * @defaultvalue -3
+     */
+    currentIndex: number;
+}
 
 /**
  * Custom header template
@@ -59,6 +120,11 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DockPassThroughOptions}
+     */
+    pt?: DockPassThroughOptions;
 }
 
 /**

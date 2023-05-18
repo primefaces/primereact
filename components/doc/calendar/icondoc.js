@@ -29,7 +29,7 @@ import React, { useState } from "react";
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
 export default function IconDemo() {
-    const [date, setDate] = useState<Date | null>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
         <div className="card flex justify-content-center">

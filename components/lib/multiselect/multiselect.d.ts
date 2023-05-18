@@ -109,6 +109,10 @@ interface MultiSelectChangeEvent {
      */
     value: any;
     /**
+     * Selected option
+     */
+    selectedOption?: any;
+    /**
      * Stops the event from propagating.
      */
     stopPropagation(): void;
@@ -215,9 +219,17 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     children?: React.ReactNode | undefined;
     /**
+     * Icon of the checkbox when checked.
+     */
+    checkboxIcon?: IconType<MultiSelectProps> | undefined;
+    /**
      * Style class of the element.
      */
     className?: string | undefined;
+    /**
+     * Close icon of the multiselect panel header.
+     */
+    closeIcon?: IconType<MultiSelectProps> | undefined;
     /**
      * A property to uniquely match the value in options for better performance.
      */
@@ -234,7 +246,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     display?: 'comma' | 'chip' | undefined;
     /**
      * Icon class of the dropdown icon.
-     * @defaultValue pi pi-chevron-down
      */
     dropdownIcon?: IconType<MultiSelectProps>;
     /**
@@ -252,6 +263,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue label
      */
     filterBy?: string | undefined;
+    /**
+     * Icon of the filter icon.
+     */
+    filterIcon?: IconType<MultiSelect> | undefined;
     /**
      * Locale to use in filtering. The default locale is the host environment's current locale.
      * @defaultValue undefined
@@ -301,6 +316,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Style class of the items.
      */
     itemClassName?: string | undefined;
+    /**
+     * The icon displayed in the header when all checkboxes are checked.
+     */
+    itemCheckboxIcon?: IconType<MultiSelect> | undefined;
     /**
      * Function that gets the option and returns the content for it.
      */
@@ -368,7 +387,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
     placeholder?: string | undefined;
     /**
      * Icon of the remove chip element.
-     * @defaultValue pi pi-times-circle
      */
     removeIcon?: IconType<MultiSelectProps> | undefined;
     /**

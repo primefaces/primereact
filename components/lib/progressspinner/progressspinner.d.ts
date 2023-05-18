@@ -8,6 +8,35 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ProgressSpinnerPassThroughType<T> = PassThroughType<T, ProgressSpinnerPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ProgressSpinnerPassThroughMethodOptions {
+    props: ProgressSpinnerProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ProgressSpinnerProps.pt}
+ */
+export interface ProgressSpinnerPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ProgressSpinnerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the spinner's DOM element.
+     */
+    spinner?: ProgressSpinnerPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the circle's DOM element.
+     */
+    circle?: ProgressSpinnerPassThroughType<React.HTMLAttributes<SVGCircleElement>>;
+}
 
 /**
  * Defines valid properties in ProgressSpinner component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -33,6 +62,11 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ProgressSpinnerPassThroughOptions}
+     */
+    pt?: ProgressSpinnerPassThroughOptions;
 }
 
 /**

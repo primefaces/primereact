@@ -1,13 +1,13 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SplitButtonBase = {
+export const SplitButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SplitButton',
         id: null,
         label: null,
         icon: null,
         loading: false,
-        loadingIcon: 'pi pi-spinner pi-spin',
+        loadingIcon: null,
         model: null,
         disabled: null,
         style: null,
@@ -30,12 +30,10 @@ export const SplitButtonBase = {
         tooltipOptions: null,
         buttonTemplate: null,
         transitionOptions: null,
-        dropdownIcon: 'pi pi-chevron-down',
+        dropdownIcon: null,
         onClick: null,
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SplitButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SplitButtonBase.defaultProps)
-};
+    }
+});

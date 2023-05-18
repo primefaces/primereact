@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const props = ScrollPanelBase.getProps(inProps);
+
+    const { ptm } = ScrollPanelBase.setMetaData({
+        props
+    });
 
     const containerRef = React.useRef(null);
     const contentRef = React.useRef(null);
@@ -160,18 +164,59 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
         getYBar: () => yBarRef.current
     }));
 
-    const otherProps = ScrollPanelBase.getOtherProps(props);
-    const className = classNames('p-scrollpanel p-component', props.className);
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            ref: containerRef,
+            style: props.style,
+            className: classNames('p-scrollpanel p-component', props.className)
+        },
+        ScrollPanelBase.getOtherProps(props),
+        ptm('root')
+    );
+
+    const wrapperProps = mergeProps(
+        {
+            className: 'p-scrollpanel-wrapper'
+        },
+        ptm('wrapper')
+    );
+
+    const contentProps = mergeProps(
+        {
+            className: 'p-scrollpanel-content',
+            ref: contentRef,
+            onScroll: moveBar,
+            onMouseEnter: moveBar
+        },
+        ptm('content')
+    );
+
+    const barXProps = mergeProps(
+        {
+            ref: xBarRef,
+            className: 'p-scrollpanel-bar p-scrollpanel-bar-x',
+            onMouseDown: onXBarMouseDown
+        },
+        ptm('barx')
+    );
+
+    const barYProps = mergeProps(
+        {
+            ref: yBarRef,
+            className: 'p-scrollpanel-bar p-scrollpanel-bar-y',
+            onMouseDown: onYBarMouseDown
+        },
+        ptm('bary')
+    );
 
     return (
-        <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
-            <div className="p-scrollpanel-wrapper">
-                <div ref={contentRef} className="p-scrollpanel-content" onScroll={moveBar} onMouseEnter={moveBar}>
-                    {props.children}
-                </div>
+        <div {...rootProps}>
+            <div {...wrapperProps}>
+                <div {...contentProps}>{props.children}</div>
             </div>
-            <div ref={xBarRef} className="p-scrollpanel-bar p-scrollpanel-bar-x" onMouseDown={onXBarMouseDown}></div>
-            <div ref={yBarRef} className="p-scrollpanel-bar p-scrollpanel-bar-y" onMouseDown={onYBarMouseDown}></div>
+            <div {...barXProps}></div>
+            <div {...barYProps}></div>
         </div>
     );
 });

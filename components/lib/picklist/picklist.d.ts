@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom picklist event.
@@ -167,6 +168,46 @@ export interface PickListProps {
      * @defaultValue false
      */
     filter?: boolean | undefined;
+    /**
+     * Icon of the target list filter.
+     */
+    targetFilterIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the source list filter.
+     */
+    sourceFilterIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving all items to the source list.
+     */
+    moveAllToSourceIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving an item to the source list.
+     */
+    moveToSourceIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving all items to the target list.
+     */
+    moveAllToTargetIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon for moving an item to the target list.
+     */
+    moveToTargetIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move up icon.
+     */
+    moveUpIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move top icon.
+     */
+    moveTopIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move down icon.
+     */
+    moveDownIcon?: IconType<PickListProps> | undefined;
+    /**
+     * Icon of the move bottom icon.
+     */
+    moveBottomIcon?: IconType<PickListProps> | undefined;
     /**
      * When specified displays an input field to filter the items on keyup and decides which field to search (Accepts multiple fields with a comma).
      */

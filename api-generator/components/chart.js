@@ -52,6 +52,12 @@ const ChartProps = [
         type: 'string',
         default: 'null',
         description: 'Style class of the element.'
+    },
+    {
+        name: 'ariaLabel',
+        type: 'string',
+        default: 'options.plugins.title.text',
+        description: ' ARIA label for the chart canvas. Defaults to options.plugins.title.text if available.'
     }
 ];
 

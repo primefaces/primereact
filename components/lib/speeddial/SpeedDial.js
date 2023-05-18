@@ -1,15 +1,23 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SpeedDialBase.getProps(inProps);
-
         const [visibleState, setVisibleState] = React.useState(false);
+        const props = SpeedDialBase.getProps(inProps);
+        const { ptm } = SpeedDialBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState
+            }
+        });
+
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -163,9 +171,26 @@ export const SpeedDial = React.memo(
             const { disabled, icon: _icon, label, template, url, target } = item;
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-speeddial-action-icon', _icon);
-            const icon = IconUtils.getJSXIcon(_icon, { className: 'p-speeddial-action-icon' }, { props });
+            const actionIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('actionIcon')
+            );
+            const actionProps = mergeProps(
+                {
+                    href: url || '#',
+                    role: 'menuitem',
+                    className: contentClassName,
+                    target: target,
+                    'data-pr-tooltip': label,
+                    onClick: (e) => onItemClick(e, item)
+                },
+                ptm('action')
+            );
+            const icon = IconUtils.getJSXIcon(_icon, { ...actionIconProps }, { props });
             let content = (
-                <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
+                <a {...actionProps}>
                     {icon}
                     <Ripple />
                 </a>
@@ -184,11 +209,17 @@ export const SpeedDial = React.memo(
                 content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
             }
 
-            return (
-                <li key={index} className="p-speeddial-item" style={style} role="none">
-                    {content}
-                </li>
+            const menuItemProps = mergeProps(
+                {
+                    key: index,
+                    className: 'p-speeddial-item',
+                    style,
+                    role: 'none'
+                },
+                ptm('menuitem')
             );
+
+            return <li {...menuItemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -197,12 +228,16 @@ export const SpeedDial = React.memo(
 
         const createList = () => {
             const items = createItems();
-
-            return (
-                <ul ref={listRef} className="p-speeddial-list" role="menu">
-                    {items}
-                </ul>
+            const menuProps = mergeProps(
+                {
+                    ref: listRef,
+                    className: 'p-speeddial-list',
+                    role: 'menu'
+                },
+                ptm('menu')
             );
+
+            return <ul {...menuProps}>{items}</ul>;
         };
 
         const createButton = () => {
@@ -219,8 +254,19 @@ export const SpeedDial = React.memo(
                 [`${props.showIcon}`]: (!visible && !!props.showIcon) || !props.hideIcon,
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
-            const icon = IconUtils.getJSXIcon(showIconVisible ? props.showIcon : hideIconVisible ? props.hideIcon : null, undefined, { props });
-            const content = <Button type="button" style={props.buttonStyle} className={className} icon={icon} onClick={onClick} disabled={props.disabled} aria-label={props['aria-label']} />;
+            const icon = showIconVisible ? props.showIcon || <PlusIcon className={iconClassName} onClick={onClick} /> : hideIconVisible ? props.hideIcon || <MinusIcon className={iconClassName} onClick={onClick} /> : null;
+            const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, visible });
+            const buttonProps = mergeProps({
+                type: 'button',
+                style: props.buttonStyle,
+                className,
+                icon: toggleIcon,
+                onClick: (e) => onClick(e),
+                disabled: props.disabled,
+                'aria-label': props['aria-label'],
+                pt: props.pt && props.pt.button ? props.pt.button : {}
+            });
+            const content = <Button {...buttonProps} />;
 
             if (props.buttonTemplate) {
                 const defaultContentOptions = {
@@ -248,13 +294,20 @@ export const SpeedDial = React.memo(
                     props.maskClassName
                 );
 
-                return <div className={className} style={props.maskStyle}></div>;
+                const maskProps = mergeProps(
+                    {
+                        className,
+                        style: props.maskStyle
+                    },
+                    ptm('mask')
+                );
+
+                return <div {...maskProps}></div>;
             }
 
             return null;
         };
 
-        const otherProps = SpeedDialBase.getOtherProps(props);
         const className = classNames(
             `p-speeddial p-component p-speeddial-${props.type}`,
             {
@@ -267,10 +320,20 @@ export const SpeedDial = React.memo(
         const button = createButton();
         const list = createList();
         const mask = createMask();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className,
+                style: props.style
+            },
+            SpeedDialBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
             <React.Fragment>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     {button}
                     {list}
                 </div>

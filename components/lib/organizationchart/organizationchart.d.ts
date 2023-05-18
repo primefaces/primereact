@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { IconType } from '../utils/utils';
 
 /**
  * Custom node select event.
@@ -39,6 +40,22 @@ interface OrganizationChartNodeUnselectEvent {
      * Unselected node instance.
      */
     node: OrganizationChartNodeData | null | undefined;
+}
+
+/**
+ * Custom selection change event.
+ * @see {@link OrganizationChartProps.onSelectionChange}
+ * @event
+ */
+interface OrganizationChartSelectionChangeEvent {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selected node(s).
+     */
+    data: OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined;
 }
 
 /**
@@ -78,6 +95,10 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      */
     value?: OrganizationChartNodeData[] | undefined;
     /**
+     * Toggle icon of an expanded and collapsed node.
+     */
+    togglerIcon?: IconType<OrganizationChartProps> | undefined;
+    /**
      * Defines the selection mode, valid values "single" and "multiple".
      */
     selectionMode?: 'single' | 'multiple' | undefined;
@@ -92,9 +113,9 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
     nodeTemplate?(node: OrganizationChartNodeData): React.ReactNode;
     /**
      * Callback to invoke when node selection changes.
-     * @param {OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined} node - A node instance.
+     * @param {OrganizationChartSelectionChangeEvent} event - Custom selection changed event.
      */
-    selectionChange?(node: OrganizationChartNodeData | OrganizationChartNodeData[] | null | undefined): void;
+    onSelectionChange?(event: OrganizationChartSelectionChangeEvent): void;
     /**
      * Callback to invoke when a node is selected.
      * @param {OrganizationChartNodeSelectEvent} event - Custom node select event.

@@ -4,9 +4,12 @@ import { Button } from '../button/Button';
 import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
 import { Badge } from '../badge/Badge';
+import { PlusIcon } from '../icons/plus';
+import { UploadIcon } from '../icons/upload';
+import { TimesIcon } from '../icons/times';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -16,6 +19,16 @@ export const FileUpload = React.memo(
         const [progressState, setProgressState] = React.useState(0);
         const [focusedState, setFocusedState] = React.useState(false);
         const [uploadingState, setUploadingState] = React.useState(false);
+        const { ptm } = FileUploadBase.setMetaData({
+            props,
+            state: {
+                progress: progressState,
+                uploading: uploadingState,
+                uploadedFiles: uploadedFilesState,
+                files: filesState,
+                focused: focusedState
+            }
+        });
         const fileInputRef = React.useRef(null);
         const messagesRef = React.useRef(null);
         const contentRef = React.useRef(null);
@@ -369,14 +382,51 @@ export const FileUpload = React.memo(
                 className
             );
             const labelClassName = 'p-button-label p-clickable';
-            const label = iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
-            const input = <input ref={fileInputRef} type="file" onChange={onFileSelect} multiple={props.multiple} accept={props.accept} disabled={chooseDisabled} />;
-            const icon = IconUtils.getJSXIcon(_icon || 'pi pi-fw pi-plus', { className: 'p-button-icon p-button-icon-left p-clickable' }, { props });
+            const iconClassName = classNames('p-button-icon p-clickable', { 'p-button-icon-left': !iconOnly });
+            const chooseButtonLabelProps = mergeProps(
+                {
+                    className: labelClassName
+                },
+                ptm('chooseButtonLabel')
+            );
+            const label = iconOnly ? <span {...chooseButtonLabelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span {...chooseButtonLabelProps}>{chooseButtonLabel}</span>;
+            const inputProps = mergeProps(
+                {
+                    ref: fileInputRef,
+                    type: 'file',
+                    onChange: (e) => onFileSelect(e),
+                    multiple: props.multiple,
+                    accept: props.accept,
+                    disabled: chooseDisabled
+                },
+                ptm('input')
+            );
+            const input = <input {...inputProps} />;
+            const chooseIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('chooseIcon')
+            );
+            const icon = _icon || <PlusIcon {...chooseIconProps} />;
+            const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props });
+            const chooseButtonProps = mergeProps(
+                {
+                    className: chooseClassName,
+                    style,
+                    onClick: choose,
+                    onKeyDown: (e) => onKeyDown(e),
+                    onFocus,
+                    onBlur,
+                    tabIndex: 0
+                },
+                ptm('chooseButton')
+            );
 
             return (
-                <span className={chooseClassName} style={style} onClick={choose} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
+                <span {...chooseButtonProps}>
                     {input}
-                    {icon}
+                    {chooseIcon}
                     {label}
                     <Ripple />
                 </span>
@@ -390,20 +440,38 @@ export const FileUpload = React.memo(
 
         const createFile = (file, index, badgeOptions) => {
             const key = file.name + file.type + file.size;
-            const preview = isImage(file) ? <img role="presentation" className="p-fileupload-file-thumbnail" alt={file.name} src={file.objectURL} width={props.previewWidth} /> : null;
-            const fileName = <div className="p-fileupload-filename">{file.name}</div>;
-            const size = <div>{formatSize(file.size)}</div>;
+            const thumbnailProps = mergeProps(
+                {
+                    role: 'presentation',
+                    className: 'p-fileupload-file-thumbnail',
+                    src: file.objectURL,
+                    width: props.previewWidth
+                },
+                ptm('thumbnail')
+            );
+            const preview = isImage(file) ? <img {...thumbnailProps} alt={file.name} /> : null;
+            const detailsProps = mergeProps(ptm('details'));
+            const fileSizeProps = mergeProps(ptm('fileSize'));
+            const fileNameProps = mergeProps(
+                {
+                    className: 'p-fileupload-filename'
+                },
+                ptm('fileName')
+            );
+            const actionsProps = mergeProps(ptm('actions'));
+            const fileName = <div {...fileNameProps}>{file.name}</div>;
+            const size = <div {...fileSizeProps}>{formatSize(file.size)}</div>;
 
             const contentBody = (
-                <div>
-                    <div> {file.name}</div>
-                    <span>{formatSize(file.size)}</span>
-                    <Badge className="p-fileupload-file-badge" value={badgeOptions.value} severity={badgeOptions.severity} />
+                <div {...detailsProps}>
+                    <div {...fileNameProps}> {file.name}</div>
+                    <span {...fileSizeProps}>{formatSize(file.size)}</span>
+                    <Badge className="p-fileupload-file-badge" value={badgeOptions.value} severity={badgeOptions.severity} pt={ptm('badge')} />
                 </div>
             );
             const removeButton = (
-                <div>
-                    <Button type="button" icon="pi pi-times" className="p-button-danger p-button-text p-button-rounded" onClick={(e) => onRemoveClick(e, badgeOptions, index)} disabled={disabled} />
+                <div {...actionsProps}>
+                    <Button type="button" icon={props.removeIcon || <TimesIcon />} text rounded severity="danger" onClick={(e) => onRemoveClick(e, badgeOptions, index)} disabled={disabled} pt={ptm('removeButton')} />
                 </div>
             );
             let content = (
@@ -430,11 +498,15 @@ export const FileUpload = React.memo(
                 content = ObjectUtils.getJSXElement(props.itemTemplate, file, defaultContentOptions);
             }
 
-            return (
-                <div className="p-fileupload-row" key={key}>
-                    {content}
-                </div>
+            const fileProps = mergeProps(
+                {
+                    key,
+                    className: 'p-fileupload-row'
+                },
+                ptm('file')
             );
+
+            return <div {...fileProps}>{content}</div>;
         };
 
         const createFiles = () => {
@@ -466,11 +538,10 @@ export const FileUpload = React.memo(
                 return ObjectUtils.getJSXElement(props.progressBarTemplate, props);
             }
 
-            return <ProgressBar value={progressState} showValue={false} />;
+            return <ProgressBar value={progressState} showValue={false} pt={ptm('progressbar')} />;
         };
 
         const createAdvanced = () => {
-            const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-advanced p-component', props.className);
             const headerClassName = classNames('p-fileupload-buttonbar', props.headerClassName);
             const contentClassName = classNames('p-fileupload-content', props.contentClassName);
@@ -483,9 +554,25 @@ export const FileUpload = React.memo(
                 const cancelOptions = props.cancelOptions;
                 const uploadLabel = !uploadOptions.iconOnly ? uploadButtonLabel : '';
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
+                const uploadIconClassName = classNames('p-button-icon p-c', { 'p-button-icon-left': !uploadOptions.iconOnly });
+                const uploadIconProps = mergeProps(
+                    {
+                        className: uploadIconClassName
+                    },
+                    ptm('uploadIcon')
+                );
+                const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon {...uploadIconProps} />, { ...uploadIconProps }, { props });
+                const cancelIconClassName = classNames('p-button-icon p-c', { 'p-button-icon-left': !cancelOptions.iconOnly });
+                const cancelIconProps = mergeProps(
+                    {
+                        className: cancelIconClassName
+                    },
+                    ptm('cancelIcon')
+                );
+                const cancelIcon = IconUtils.getJSXIcon(cancelOptions.icon || <TimesIcon {...cancelIconProps} />, { ...cancelIconProps }, { props });
 
-                uploadButton = <Button type="button" label={uploadLabel} icon={uploadOptions.icon || 'pi pi-upload'} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} />;
-                cancelButton = <Button type="button" label={cancelLabel} icon={cancelOptions.icon || 'pi pi-times'} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} />;
+                uploadButton = <Button type="button" label={uploadLabel} icon={uploadIcon} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} pt={ptm('uploadButton')} />;
+                cancelButton = <Button type="button" label={cancelLabel} icon={cancelIcon} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} pt={ptm('cancelButton')} />;
             }
 
             if (hasFiles) {
@@ -497,8 +584,16 @@ export const FileUpload = React.memo(
                 uplaodedFilesList = createUploadedFiles();
             }
 
+            const buttonbarProps = mergeProps(
+                {
+                    className: headerClassName,
+                    style: props.headerStyle
+                },
+                ptm('buttonbar')
+            );
+
             let header = (
-                <div className={headerClassName} style={props.headerStyle}>
+                <div {...buttonbarProps}>
                     {chooseButton}
                     {uploadButton}
                     {cancelButton}
@@ -518,10 +613,33 @@ export const FileUpload = React.memo(
                 header = ObjectUtils.getJSXElement(props.headerTemplate, defaultContentOptions);
             }
 
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    className,
+                    style: props.style
+                },
+                FileUploadBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const contentProps = mergeProps(
+                {
+                    ref: contentRef,
+                    className: contentClassName,
+                    style: props.contentStyle,
+                    onDragEnter: (e) => onDragEnter(e),
+                    onDragOver: (e) => onDragOver(e),
+                    onDragLeave: (e) => onDragLeave(e),
+                    onDrop: (e) => onDrop(e)
+                },
+                ptm('content')
+            );
+
             return (
-                <div id={props.id} className={className} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     {header}
-                    <div ref={contentRef} className={contentClassName} style={props.contentStyle} onDragEnter={onDragEnter} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
+                    <div {...contentProps}>
                         {progressBar}
                         <Messages ref={messagesRef} />
                         {hasFiles ? filesList : null}
@@ -534,21 +652,55 @@ export const FileUpload = React.memo(
 
         const createBasic = () => {
             const chooseOptions = props.chooseOptions;
-            const otherProps = FileUploadBase.getOtherProps(props);
             const className = classNames('p-fileupload p-fileupload-basic p-component', props.className);
             const buttonClassName = classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, chooseOptions.className);
-            const chooseIcon = chooseOptions.icon || classNames({ 'pi pi-plus': !chooseOptions.icon && (!hasFiles || props.auto), 'pi pi-upload': !chooseOptions.icon && hasFiles && !props.auto });
             const labelClassName = 'p-button-label p-clickable';
-            const chooseLabel = chooseOptions.iconOnly ? <span className={labelClassName} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span className={labelClassName}>{chooseButtonLabel}</span>;
-            const label = props.auto ? chooseLabel : <span className={labelClassName}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
-            const icon = IconUtils.getJSXIcon(chooseIcon, { className: 'p-button-icon p-button-icon-left' }, { props, hasFiles });
+            const labelProps = mergeProps(
+                {
+                    className: labelClassName
+                },
+                ptm('label')
+            );
+            const chooseLabel = chooseOptions.iconOnly ? <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span {...labelProps}>{chooseButtonLabel}</span>;
+            const label = props.auto ? chooseLabel : <span {...labelProps}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
+            const iconClassName = classNames('p-button-icon', { 'p-button-icon-left': !chooseOptions.iconOnly });
+            const chooseIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('chooseIcon')
+            );
+            const icon = chooseOptions.icon ? chooseOptions.icon : !chooseOptions.icon && (!hasFiles || props.auto) ? <PlusIcon {...chooseIconProps} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon {...chooseIconProps} />;
+            const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props, hasFiles });
             const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
+            const rootProps = mergeProps(
+                {
+                    className,
+                    style: props.style
+                },
+                FileUploadBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const basicButtonProps = mergeProps(
+                {
+                    className: buttonClassName,
+                    style: chooseOptions.style,
+                    tabIndex: 0,
+                    onMouseUp: onSimpleUploaderClick,
+                    onKeyDown: (e) => onKeyDown(e),
+                    onFocus,
+                    onBlur
+                },
+                FileUploadBase.getOtherProps(props),
+                ptm('basicButton')
+            );
 
             return (
-                <div className={className} style={props.style} {...otherProps}>
-                    <Messages ref={messagesRef} />
-                    <span className={buttonClassName} style={chooseOptions.style} onMouseUp={onSimpleUploaderClick} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} tabIndex={0}>
-                        {icon}
+                <div {...rootProps}>
+                    <Messages ref={messagesRef} pt={ptm('message')} />
+                    <span {...basicButtonProps}>
+                        {chooseIcon}
                         {label}
                         {input}
                         <Ripple />
