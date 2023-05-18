@@ -5455,6 +5455,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -5512,6 +5520,179 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "CarouselPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CarouselProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CarouselState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CarouselPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "container",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the container's DOM element."
+                        },
+                        {
+                            "name": "previousButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the previous button's DOM element."
+                        },
+                        {
+                            "name": "previousButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous button icon's DOM element."
+                        },
+                        {
+                            "name": "itemsContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the items content's DOM element."
+                        },
+                        {
+                            "name": "itemsContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the items container's DOM element."
+                        },
+                        {
+                            "name": "itemCloned",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item cloned's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "nextButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the next button's DOM element."
+                        },
+                        {
+                            "name": "nextButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the next button icon's DOM element."
+                        },
+                        {
+                            "name": "indicators",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the indicators's DOM element."
+                        },
+                        {
+                            "name": "indicator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the indicator's DOM element."
+                        },
+                        {
+                            "name": "indicatorButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the indicator button's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CarouselState": {
+                    "description": "Defines current inline state in Carousel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "numVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Number of items per page as a number."
+                        },
+                        {
+                            "name": "numScroll",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Number of items to scroll as a number."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of the first item."
+                        },
+                        {
+                            "name": "totalShiftedItems",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total shifted items' count as a number."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "CarouselResponsiveOption": {
                     "description": "Custom responsive option",
                     "relatedProp": "responsiveOptions",
@@ -5539,6 +5720,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "CarouselPassThroughType": {
+                    "values": "PassThroughType<T, CarouselPassThroughMethodOptions>"
                 }
             }
         }
