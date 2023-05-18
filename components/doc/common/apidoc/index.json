@@ -33771,6 +33771,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -33822,6 +33830,179 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "ToastPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToastProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToastState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ToastPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "message",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the message's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "text",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the text's DOM element."
+                        },
+                        {
+                            "name": "summary",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the summary's DOM element."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the detail's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the button's DOM element."
+                        },
+                        {
+                            "name": "buttonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the button icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ToastMessageOptions": {
+                    "description": "Defines message options in Toast component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "severity",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "description": "Severity level of the message."
+                        },
+                        {
+                            "name": "summary",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Summary content of the message."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Detail content of the message."
+                        },
+                        {
+                            "name": "closable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the message can be closed manually using the close icon."
+                        },
+                        {
+                            "name": "life",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Delay in milliseconds to close the message automatically."
+                        },
+                        {
+                            "name": "group",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Key of the Toast to display the message."
+                        },
+                        {
+                            "name": "styleClass",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Style class of the message."
+                        },
+                        {
+                            "name": "contentStyleClass",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Style class of the content."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughOptions",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ToastState": {
+                    "description": "Defines current inline state in Toast component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "messages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any[]",
+                            "description": "Current messages."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ToastMessage": {
                     "description": "Message options for toast component",
                     "relatedProp": "",
@@ -33923,9 +34104,24 @@
                             "readonly": false,
                             "type": "CSSProperties",
                             "description": "Inline style of the message content."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Omit<ToastPassThroughOptions, \"message\">",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToastPassThroughType": {
+                    "values": "PassThroughType<T, ToastPassThroughMethodOptions>"
                 }
             }
         }
