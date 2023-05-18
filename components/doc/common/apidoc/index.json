@@ -27681,14 +27681,14 @@
                             "name": "menu",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
                             "name": "menuitem",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the list item's DOM element."
                         },
                         {
@@ -27709,7 +27709,7 @@
                             "name": "label",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
