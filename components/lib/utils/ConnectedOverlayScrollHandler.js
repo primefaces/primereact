@@ -1,3 +1,4 @@
+import PrimeReact from '../api/PrimeReact';
 import DomHandler from './DomHandler';
 
 export default class ConnectedOverlayScrollHandler {
@@ -7,7 +8,7 @@ export default class ConnectedOverlayScrollHandler {
     }
 
     bindScrollListener() {
-        this.scrollableParents = DomHandler.getScrollableParents(this.element);
+        this.scrollableParents = DomHandler.getScrollableParents(this.element, PrimeReact.hideOverlaysOnDocumentScrolling);
 
         for (let i = 0; i < this.scrollableParents.length; i++) {
             this.scrollableParents[i].addEventListener('scroll', this.listener);

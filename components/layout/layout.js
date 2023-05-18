@@ -13,6 +13,7 @@ import Topbar from './topbar';
 export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(true);
+    const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
@@ -52,6 +53,10 @@ export default function Layout(props) {
         setRipple(value);
     };
 
+    const onHideOverlaysOnDocumentScrolling = (value) => {
+        setHideOverlaysOnDocumentScrolling(value);
+    };
+
     const onConfigHide = () => {
         setConfigActive(false);
     };
@@ -77,7 +82,8 @@ export default function Layout(props) {
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    PrimeReact.ripple = true;
+    PrimeReact.ripple = ripple;
+    PrimeReact.hideOverlaysOnDocumentScrolling = hideOverlaysOnDocumentScrolling;
 
     return (
         <div className={wrapperClassName}>
@@ -106,9 +112,11 @@ export default function Layout(props) {
                 value={{
                     ripple: ripple,
                     inputStyle: inputStyle,
+                    hideOverlaysOnDocumentScrolling: hideOverlaysOnDocumentScrolling,
                     darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
-                    onRippleChange: onRippleChange
+                    onRippleChange: onRippleChange,
+                    onHideOverlaysOnDocumentScrolling: onHideOverlaysOnDocumentScrolling
                 }}
             >
                 <div className="layout-content">
@@ -117,7 +125,17 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} active={configActive} onHide={onConfigHide} />
+                <Config
+                    ripple={ripple}
+                    inputStyle={inputStyle}
+                    hideOverlaysOnDocumentScrolling={hideOverlaysOnDocumentScrolling}
+                    onRippleChange={onRippleChange}
+                    onHideOverlaysOnDocumentScrolling={onHideOverlaysOnDocumentScrolling}
+                    onInputStyleChange={onInputStyleChange}
+                    onThemeChange={onThemeChange}
+                    active={configActive}
+                    onHide={onConfigHide}
+                />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>
