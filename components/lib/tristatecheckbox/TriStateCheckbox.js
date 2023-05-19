@@ -78,7 +78,7 @@ export const TriStateCheckbox = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames('p-checkbox-box', {
-            'p-highlight': (props.value || !props.value) && props.value !== null,
+            'p-highlight': ObjectUtils.isNotEmpty(props.value),
             'p-disabled': props.disabled,
             'p-focus': focusedState
         });
