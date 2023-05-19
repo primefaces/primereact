@@ -25051,6 +25051,14 @@
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
                         },
                         {
+                            "name": "filterInputAutoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When the panel is opened, it specifies that the filter input should focus automatically."
+                        },
+                        {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
