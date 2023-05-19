@@ -17550,6 +17550,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -17658,6 +17666,256 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "GalleriaThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "GalleriaProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "GalleriaState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "GalleriaPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the close icon's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "itemWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item wrapper's DOM element."
+                        },
+                        {
+                            "name": "itemContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item container's DOM element."
+                        },
+                        {
+                            "name": "previousItemButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the previous item button's DOM element."
+                        },
+                        {
+                            "name": "previousItemIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous item icon's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "nextItemButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the next item button's DOM element."
+                        },
+                        {
+                            "name": "nextItemIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the next item icon's DOM element."
+                        },
+                        {
+                            "name": "caption",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the caption's DOM element."
+                        },
+                        {
+                            "name": "indicators",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the indicators's DOM element."
+                        },
+                        {
+                            "name": "indicator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the indicator's DOM element."
+                        },
+                        {
+                            "name": "thumbnailWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail wrapper's DOM element."
+                        },
+                        {
+                            "name": "thumbnailContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail container's DOM element."
+                        },
+                        {
+                            "name": "previousThumbnailButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the previous thumbnail button's DOM element."
+                        },
+                        {
+                            "name": "previousThumbnailIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous thumbnail icon's DOM element."
+                        },
+                        {
+                            "name": "thumbnailItemsContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail items container's DOM element."
+                        },
+                        {
+                            "name": "thumbnailItems",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail items' DOM element."
+                        },
+                        {
+                            "name": "thumbnailItem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail item's DOM element."
+                        },
+                        {
+                            "name": "thumbnailItemContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail item content's DOM element."
+                        },
+                        {
+                            "name": "nextThumbnailButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the next thumbnail button's DOM element."
+                        },
+                        {
+                            "name": "nextThumbnailIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the next thumbnail icon's DOM element."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the mask's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "GalleriaState": {
+                    "description": "Defines current inline state in Galleria component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current visible state as a boolean."
+                        },
+                        {
+                            "name": "numVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Number of items per page as a number."
+                        },
+                        {
+                            "name": "slideShowActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current slide show active state."
+                        },
+                        {
+                            "name": "activeIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current active item index as a number."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "GalleriaResponsiveOptions": {
                     "description": "Custom galleria responsive options",
                     "relatedProp": "",
@@ -17678,6 +17936,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "GalleriaPassThroughType": {
+                    "values": "PassThroughType<T, GalleriaThroughMethodOptions>"
                 }
             }
         }
