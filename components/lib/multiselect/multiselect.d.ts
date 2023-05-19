@@ -264,6 +264,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     filterBy?: string | undefined;
     /**
+     * When the panel is opened, it specifies that the filter input should focus automatically.
+     * @defaultValue true
+     */
+    filterInputAutoFocus?: boolean | undefined;
+    /**
      * Icon of the filter icon.
      */
     filterIcon?: IconType<MultiSelect> | undefined;
