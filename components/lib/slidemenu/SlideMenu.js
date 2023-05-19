@@ -172,7 +172,7 @@ export const SlideMenu = React.memo(
 
             const wrapperProps = mergeProps(
                 {
-                    className: "p-slidemenu-wrapper",
+                    className: 'p-slidemenu-wrapper',
                     style: wrapperStyle
                 },
                 ptm('wrapper')
@@ -181,7 +181,7 @@ export const SlideMenu = React.memo(
             const contentProps = mergeProps(
                 {
                     ref: slideMenuContent,
-                    className: "p-slidemenu-content"
+                    className: 'p-slidemenu-content'
                 },
                 ptm('content')
             );

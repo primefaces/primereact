@@ -46,7 +46,7 @@ export const SlideMenuSub = React.memo((props) => {
         const separatorProps = mergeProps(
             {
                 key,
-                className: "p-menu-separator"
+                className: 'p-menu-separator'
             },
             props.ptm('separator')
         );
@@ -105,7 +105,7 @@ export const SlideMenuSub = React.memo((props) => {
         );
         const labelProps = mergeProps(
             {
-                className: "p-menuitem-text"
+                className: 'p-menuitem-text'
             },
             getPTOptions(item, 'label')
         );
@@ -115,7 +115,7 @@ export const SlideMenuSub = React.memo((props) => {
         const actionProps = mergeProps(
             {
                 href: item.url || '#',
-                className: "p-menuitem-link",
+                className: 'p-menuitem-link',
                 target: item.target,
                 onClick: (event) => onItemClick(event, item, index),
                 'aria-disabled': item.disabled
@@ -154,7 +154,7 @@ export const SlideMenuSub = React.memo((props) => {
                 style: item.style
             },
             getPTOptions(item, 'menuitem')
-        )
+        );
 
         return (
             <li {...menuitemProps}>
@@ -191,13 +191,9 @@ export const SlideMenuSub = React.memo((props) => {
             style
         },
         props.ptm('menu')
-    )
-
-    return (
-        <ul {...menuProps}>
-            {items}
-        </ul>
     );
+
+    return <ul {...menuProps}>{items}</ul>;
 });
 
 SlideMenuSub.displayName = 'SlideMenuSub';
