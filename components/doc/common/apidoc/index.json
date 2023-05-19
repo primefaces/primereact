@@ -20395,6 +20395,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Zoomed image that may be different than \"src\" image."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -20414,6 +20422,220 @@
                             "description": "Triggered when the preview overlay is shown."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ImageThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ImageProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ImageState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ImagePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "image",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "description": "Uses to pass attributes to the image's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the button's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "toolbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the toolbar's DOM element."
+                        },
+                        {
+                            "name": "downloadButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the download button's DOM element."
+                        },
+                        {
+                            "name": "downloadIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the download icon's DOM element."
+                        },
+                        {
+                            "name": "rotateRightButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rotate right button's DOM element."
+                        },
+                        {
+                            "name": "rotateRightIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the rotate right icon's DOM element."
+                        },
+                        {
+                            "name": "rotateLeftButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the rotate left button's DOM element."
+                        },
+                        {
+                            "name": "rotateLeftIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the rotate left icon's DOM element."
+                        },
+                        {
+                            "name": "zoomOutButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the zoom out button's DOM element."
+                        },
+                        {
+                            "name": "zoomOutIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the zoom out icon's DOM element."
+                        },
+                        {
+                            "name": "zoomInButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the zoom in button's DOM element."
+                        },
+                        {
+                            "name": "zoomInIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the zoom in icon's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the close icon's DOM element."
+                        },
+                        {
+                            "name": "previewContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the preview container's DOM element."
+                        },
+                        {
+                            "name": "preview",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "description": "Uses to pass attributes to the preview's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ImageState": {
+                    "description": "Defines current inline state in Image component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "maskVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Mask visible state as a boolean."
+                        },
+                        {
+                            "name": "previewVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Preview visible state as a boolean."
+                        },
+                        {
+                            "name": "rotate",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Rotate state as a number."
+                        },
+                        {
+                            "name": "scale",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Scale state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ImagePassThroughType": {
+                    "values": "PassThroughType<T, ImageThroughMethodOptions>"
                 }
             }
         }
