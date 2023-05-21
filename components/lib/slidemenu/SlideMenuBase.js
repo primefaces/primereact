@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SlideMenuBase = {
+export const SlideMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SlideMenu',
         appendTo: null,
@@ -23,7 +23,5 @@ export const SlideMenuBase = {
         transitionOptions: null,
         viewportHeight: 175,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SlideMenuBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SlideMenuBase.defaultProps)
-};
+    }
+});

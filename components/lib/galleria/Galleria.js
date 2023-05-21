@@ -2,13 +2,13 @@ import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
-import { TimesIcon } from '../icons/times';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -23,6 +23,16 @@ export const Galleria = React.memo(
         const maskRef = React.useRef(null);
         const activeItemIndex = props.onItemChange ? props.activeIndex : activeIndexState;
         const isVertical = props.thumbnailsPosition === 'left' || props.thumbnailsPosition === 'right';
+
+        const { ptm } = GalleriaBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                numVisible: numVisibleState,
+                slideShowActive: slideShowActiveState,
+                activeIndex: activeIndexState
+            }
+        });
 
         useInterval(
             () => {
@@ -128,23 +138,36 @@ export const Galleria = React.memo(
         }));
 
         const createHeader = () => {
+            const headerProps = mergeProps(
+                {
+                    className: 'p-galleria-header'
+                },
+                ptm('header')
+            );
+
             if (props.header) {
-                return <div className="p-galleria-header">{props.header}</div>;
+                return <div {...headerProps}>{props.header}</div>;
             }
 
             return null;
         };
 
         const createFooter = () => {
+            const footerProps = mergeProps(
+                {
+                    className: 'p-galleria-footer'
+                },
+                ptm('footer')
+            );
+
             if (props.footer) {
-                return <div className="p-galleria-footer">{props.footer}</div>;
+                return <div {...footerProps}>{props.footer}</div>;
             }
 
             return null;
         };
 
         const createElement = () => {
-            const otherProps = GalleriaBase.getOtherProps(props);
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
             const galleriaClassName = classNames(
@@ -162,11 +185,27 @@ export const Galleria = React.memo(
             );
 
             const iconProps = { className: 'p-galleria-close-icon', 'aria-hidden': true };
-            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
-            const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+            const closeIconProps = mergeProps(
+                {
+                    className: iconProps
+                },
+                ptm('closeIcon')
+            );
+            const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
+
+            const closeButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-galleria-close p-link',
+                    'aria-label': localeOption('close'),
+                    onClick: hide
+                },
+                ptm('closeButton')
+            );
 
             const closeButton = props.fullScreen && (
-                <button type="button" className="p-galleria-close p-link" aria-label={localeOption('close')} onClick={hide}>
+                <button {...closeButtonProps}>
                     {closeIcon}
                     <Ripple />
                 </button>
@@ -174,11 +213,30 @@ export const Galleria = React.memo(
 
             const header = createHeader();
             const footer = createFooter();
+
+            const rootProps = mergeProps(
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: galleriaClassName,
+                    style: props.style
+                },
+                GalleriaBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const contentProps = mergeProps(
+                {
+                    className: 'p-galleria-content'
+                },
+                ptm('content')
+            );
+
             const element = (
-                <div ref={elementRef} id={props.id} className={galleriaClassName} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     {closeButton}
                     {header}
-                    <div className="p-galleria-content">
+                    <div {...contentProps}>
                         <GalleriaItem
                             ref={previewContentRef}
                             value={props.value}
@@ -197,6 +255,7 @@ export const Galleria = React.memo(
                             slideShowActive={slideShowActiveState}
                             startSlideShow={startSlideShow}
                             stopSlideShow={stopSlideShow}
+                            ptm={ptm}
                         />
 
                         {props.showThumbnails && (
@@ -216,6 +275,7 @@ export const Galleria = React.memo(
                                 autoPlay={props.autoPlay}
                                 slideShowActive={slideShowActiveState}
                                 stopSlideShow={stopSlideShow}
+                                ptm={ptm}
                             />
                         )}
                     </div>
@@ -233,9 +293,16 @@ export const Galleria = React.memo(
                 const maskClassName = classNames('p-galleria-mask', {
                     'p-galleria-visible': visibleState
                 });
+                const maskProps = mergeProps(
+                    {
+                        ref: maskRef,
+                        className: maskClassName
+                    },
+                    ptm('mask')
+                );
 
                 const galleriaWrapper = (
-                    <div ref={maskRef} className={maskClassName}>
+                    <div {...maskProps}>
                         <CSSTransition
                             nodeRef={elementRef}
                             classNames="p-galleria"
