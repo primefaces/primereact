@@ -14,11 +14,11 @@ export const AutoCompletePanel = React.memo(
 
         const createFooter = () => {
             if (props.panelFooterTemplate) {
-
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
 
                 return <div className="p-multiselect-footer">{content}</div>;
             }
+
             return null;
         };
 
@@ -107,9 +107,8 @@ export const AutoCompletePanel = React.memo(
                 return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} />;
             } else {
                 const items = createItems();
-         
+
                 return (
-           
                     <div className="p-autofocus-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
                         <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
                             {items}
@@ -124,9 +123,10 @@ export const AutoCompletePanel = React.memo(
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
             });
-            const style = {...(props.panelStyle || {}) };
+            const style = { ...(props.panelStyle || {}) };
             const content = createContent();
             const footer = createFooter();
+
             return (
                 <CSSTransition
                     nodeRef={ref}

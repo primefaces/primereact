@@ -35,13 +35,8 @@ export function TemplateDoc(props) {
         );
     };
 
-    
     const panelFooterTemplate = () => {
-        return (
-            <div className="py-2 px-3">
-                Footer Template'
-            </div>
-        );
+        return <div className="py-2 px-3">Footer Template'</div>;
     };
 
     useEffect(() => {

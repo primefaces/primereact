@@ -38,7 +38,6 @@ interface AutoCompleteSelectEvent {
     value: any;
 }
 
-
 /**
  * Custom unselect event.
  * @see {@link AutoCompleteProps.onUnselect}
