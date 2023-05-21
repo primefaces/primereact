@@ -45,6 +45,7 @@ export const AutoCompleteBase = {
         onShow: null,
         onUnselect: null,
         optionGroupChildren: null,
+        panelFooterTemplate: null,
         optionGroupLabel: null,
         optionGroupTemplate: null,
         panelClassName: null,

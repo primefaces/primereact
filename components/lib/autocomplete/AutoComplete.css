@@ -33,7 +33,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    overflow: auto;
 }
 
 .p-autocomplete-items {
@@ -94,3 +93,7 @@
 .p-fluid .p-autocomplete-dd .p-autocomplete-input {
     width: 1%;
 }
+
+.p-autofocus-items-wrapper {
+    overflow: auto;
+} 

@@ -35,6 +35,15 @@ export function TemplateDoc(props) {
         );
     };
 
+    
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                Footer Template'
+            </div>
+        );
+    };
+
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -42,7 +51,7 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate}  />
         `,
         javascript: `
 import React, { useEffect, useState } from 'react';
@@ -53,6 +62,14 @@ export default function TemplateDemo() {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [filteredCountries, setFilteredCountries] = useState(null);
+
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                Footer Template
+            </div>
+        );
+    };
 
     const search = (event) => {
         // Timeout to emulate a network connection
@@ -93,7 +110,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-                completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
         </div>
     )
 }
@@ -144,6 +161,13 @@ export default function TemplateDemo() {
             </div>
         );
     };
+    const panelFooterTemplate = () => {
+        return (
+            <div className="py-2 px-3">
+                Footer Template
+            </div>
+        );
+    };
 
     useEffect(() => {
         CountryService.getCountries().then((data) => setCountries(data));
@@ -152,7 +176,7 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-                completeMethod={search} onChange={(e: AutoCompleteChangeEvent) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                completeMethod={search} onChange={(e: AutoCompleteChangeEvent) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
         </div>
     )
 }
@@ -175,7 +199,7 @@ export default function TemplateDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} />
+                <AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
             </div>
             <DocSectionCode code={code} service={['CountryService']} />
         </>
