@@ -666,12 +666,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const targetLeft = dropHeaderOffset.left - containerOffset.left;
                 const columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
                 let dragIndex = DomHandler.index(draggedColumnElement.current);
-                let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));    
+                let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));
 
                 reorderIndicatorUpRef.current.style.top = dropHeaderOffset.top - containerOffset.top - (colReorderIconHeight.current - 1) + 'px';
                 reorderIndicatorDownRef.current.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
 
-                if (event.pageX > columnCenter && dragIndex < dropIndex ) {
+                if (event.pageX > columnCenter && dragIndex < dropIndex) {
                     reorderIndicatorUpRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     reorderIndicatorDownRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     dropPosition.current = 1;
@@ -718,16 +718,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
                 let widths = [];
                 let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
-                
+
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
                 let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
-                const reorderedWidths = [
-                    ...remainingItems.slice(0, dropColIndex),
-                    movedItem,
-                    ...remainingItems.slice(dropColIndex)
-                ];
+                const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
                 let innerHTML = '';
 
                 destroyStyleElement();
