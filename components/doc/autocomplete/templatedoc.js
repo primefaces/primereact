@@ -36,7 +36,18 @@ export function TemplateDoc(props) {
     };
 
     const panelFooterTemplate = () => {
-        return <div className="py-2 px-3">Footer Template'</div>;
+        const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
+           return (
+            <div className="py-2 px-3">
+                {isCountrySelected ? (
+                    <span>
+                        <b>{selectedCountry}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
+            </div>
+        );
     };
 
     useEffect(() => {
@@ -45,8 +56,8 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries} 
-    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate}  />
+<AutoComplete field="name" value={selectedCountry} suggestions={filteredCountries}  
+    completeMethod={search} onChange={(e) => setSelectedCountry(e.value)} itemTemplate={itemTemplate} panelFooterTemplate={panelFooterTemplate} />
         `,
         javascript: `
 import React, { useEffect, useState } from 'react';
@@ -59,9 +70,16 @@ export default function TemplateDemo() {
     const [filteredCountries, setFilteredCountries] = useState(null);
 
     const panelFooterTemplate = () => {
-        return (
+        const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
+           return (
             <div className="py-2 px-3">
-                Footer Template
+                {isCountrySelected ? (
+                    <span>
+                        <b>{selectedCountry}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
             </div>
         );
     };
@@ -156,10 +174,18 @@ export default function TemplateDemo() {
             </div>
         );
     };
+    
     const panelFooterTemplate = () => {
-        return (
+        const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
+           return (
             <div className="py-2 px-3">
-                Footer Template
+                {isCountrySelected ? (
+                    <span>
+                        <b>{selectedCountry}</b> selected.
+                    </span>
+                ) : (
+                    'No country selected.'
+                )}
             </div>
         );
     };
