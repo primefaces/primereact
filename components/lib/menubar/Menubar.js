@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
 import { BarsIcon } from '../icons/bars';
@@ -14,6 +14,12 @@ export const Menubar = React.memo(
         const elementRef = React.useRef(null);
         const rootMenuRef = React.useRef(null);
         const menuButtonRef = React.useRef(null);
+        const { ptm } = MenubarBase.setMetaData({
+            props,
+            state: {
+                mobileActive: mobileActiveState
+            }
+        });
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -64,8 +70,14 @@ export const Menubar = React.memo(
         const createStartContent = () => {
             if (props.start) {
                 const start = ObjectUtils.getJSXElement(props.start, props);
+                const startProps = mergeProps(
+                    {
+                        className: 'p-menubar-start'
+                    },
+                    ptm('start')
+                );
 
-                return <div className="p-menubar-start">{start}</div>;
+                return <div {...startProps}>{start}</div>;
             }
 
             return null;
@@ -74,8 +86,14 @@ export const Menubar = React.memo(
         const createEndContent = () => {
             if (props.end) {
                 const end = ObjectUtils.getJSXElement(props.end, props);
+                const endProps = mergeProps(
+                    {
+                        className: 'p-menubar-end'
+                    },
+                    ptm('end')
+                );
 
-                return <div className="p-menubar-end">{end}</div>;
+                return <div {...endProps}>{end}</div>;
             }
 
             return null;
@@ -86,20 +104,27 @@ export const Menubar = React.memo(
                 return null;
             }
 
-            const icon = props.menuIcon || <BarsIcon />;
-            const menuIcon = IconUtils.getJSXIcon(icon, undefined, { props });
-            /* eslint-disable */
-            const button = (
-                <a ref={menuButtonRef} href={'#'} role="button" tabIndex={0} className="p-menubar-button" onClick={toggle}>
-                    {menuIcon}
-                </a>
+            const buttonProps = mergeProps(
+                {
+                    ref: menuButtonRef,
+                    href: '#',
+                    role: 'button',
+                    tabIndex: 0,
+                    className: 'p-menubar-button',
+                    onClick: (e) => toggle(e)
+                },
+                ptm('button')
             );
+            const icon = props.menuIcon || <BarsIcon {...buttonProps} />;
+            const menuIcon = IconUtils.getJSXIcon(icon, { ...buttonProps }, { props });
+
+            /* eslint-disable */
+            const button = <a {...buttonProps}>{menuIcon}</a>;
             /* eslint-enable */
 
             return button;
         };
 
-        const otherProps = MenubarBase.getOtherProps(props);
         const className = classNames(
             'p-menubar p-component',
             {
@@ -110,10 +135,19 @@ export const Menubar = React.memo(
         const start = createStartContent();
         const end = createEndContent();
         const menuButton = createMenuButton();
-        const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} />;
+        const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} ptm={ptm} />;
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                className,
+                style: props.style
+            },
+            MenubarBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
-            <div id={props.id} className={className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 {start}
                 {menuButton}
                 {submenu}

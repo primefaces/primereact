@@ -25,9 +25,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [columnOrderState, setColumnOrderState] = React.useState([]);
     const [groupRowsSortMetaState, setGroupRowsSortMetaState] = React.useState(null);
     const [editingMetaState, setEditingMetaState] = React.useState({});
-    const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+    const attributeSelector = React.useRef('');
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
     const wrapperRef = React.useRef(null);
@@ -372,7 +372,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 createStyleElement();
 
                 let innerHTML = '';
-                let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+                let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
                 widths.forEach((width, index) => {
                     let style = `width: ${width}px !important; max-width: ${width}px !important`;
@@ -568,7 +568,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         createStyleElement();
 
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
@@ -666,12 +666,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const targetLeft = dropHeaderOffset.left - containerOffset.left;
                 const columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
                 let dragIndex = DomHandler.index(draggedColumnElement.current);
-                let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));
+                let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));    
 
                 reorderIndicatorUpRef.current.style.top = dropHeaderOffset.top - containerOffset.top - (colReorderIconHeight.current - 1) + 'px';
                 reorderIndicatorDownRef.current.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
 
-                if (event.pageX > columnCenter && dragIndex < dropIndex) {
+                if (event.pageX > columnCenter && dragIndex < dropIndex ) {
                     reorderIndicatorUpRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     reorderIndicatorDownRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     dropPosition.current = 1;
@@ -718,12 +718,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
                 let widths = [];
                 let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
-
+                
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
                 let selector = `.p-datatable[${attributeSelectorState}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
-                const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
+                const reorderedWidths = [
+                    ...remainingItems.slice(0, dropColIndex),
+                    movedItem,
+                    ...remainingItems.slice(dropColIndex)
+                ];
                 let innerHTML = '';
 
                 destroyStyleElement();
@@ -789,8 +793,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             responsiveStyleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
 
             let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
-            let selector = `.p-datatable[${attributeSelectorState}] > ${tableSelector}`;
-            let gridLinesSelector = `.p-datatable[${attributeSelectorState}].p-datatable-gridlines > ${tableSelector}`;
+            let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
+            let gridLinesSelector = `.p-datatable[${attributeSelector.current}].p-datatable-gridlines > ${tableSelector}`;
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
@@ -1346,7 +1350,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
-        !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+        attributeSelector.current = UniqueComponentId();
 
         //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
@@ -1361,18 +1365,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     });
 
     useUpdateEffect(() => {
-        if (attributeSelectorState) {
-            elementRef.current.setAttribute(attributeSelectorState, '');
+        elementRef.current.setAttribute(attributeSelector.current, '');
 
-            if (props.responsiveLayout === 'stack' && !props.scrollable) {
-                createResponsiveStyle();
-            }
+        if (props.responsiveLayout === 'stack' && !props.scrollable) {
+            createResponsiveStyle();
         }
 
         return () => {
             destroyResponsiveStyle();
         };
-    }, [attributeSelectorState, props.breakpoint]);
+    }, [props.breakpoint]);
 
     useUpdateEffect(() => {
         const filters = cloneFilters(props.filters);
@@ -1520,7 +1522,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 className="p-datatable-tbody p-datatable-frozen-tbody"
                 frozenRow
                 tableProps={props}
-                tableSelector={attributeSelectorState}
+                tableSelector={attributeSelector.current}
                 columns={columns}
                 selectionModeInColumn={selectionModeInColumn}
                 first={first}
@@ -1596,7 +1598,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 empty={empty}
                 frozenRow={false}
                 tableProps={props}
-                tableSelector={attributeSelectorState}
+                tableSelector={attributeSelector.current}
                 columns={columns}
                 selectionModeInColumn={selectionModeInColumn}
                 first={first}

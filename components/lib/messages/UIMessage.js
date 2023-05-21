@@ -8,11 +8,14 @@ import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils } from '../utils/Utils';
+import { mergeProps } from '../utils/Utils';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
         const messageInfo = props.message;
         const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon } = messageInfo.message;
+
+        const ptm = props.ptm;
 
         const [clearTimer] = useTimeout(
             () => {
@@ -39,12 +42,30 @@ export const UIMessage = React.memo(
         const createCloseIcon = () => {
             if (closable !== false) {
                 const ariaLabel = localeOption('close');
+
                 const iconProps = { className: 'p-message-close-icon', 'aria-hidden': true };
-                const icon = _closeIcon || <TimesIcon {...iconProps} />;
-                const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+                const buttonIconProps = mergeProps(
+                    {
+                        className: iconProps
+                    },
+                    ptm('buttonicon')
+                );
+
+                const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
+                const closeIcon = IconUtils.getJSXIcon(icon, { ...buttonIconProps }, { props });
+
+                const buttonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-message-close p-link',
+                        'aria-label': ariaLabel,
+                        onClick: onClose
+                    },
+                    ptm('button')
+                );
 
                 return (
-                    <button type="button" className="p-message-close p-link" aria-label={ariaLabel} onClick={onClose}>
+                    <button {...buttonProps}>
                         {closeIcon}
                         <Ripple />
                     </button>
@@ -57,35 +78,56 @@ export const UIMessage = React.memo(
         const createMessage = () => {
             if (props.message) {
                 const iconClassName = 'p-message-icon';
+                const iconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    ptm('icon')
+                );
+
                 let icon = _icon;
 
                 if (!_icon) {
                     switch (severity) {
                         case 'info':
-                            icon = <InfoCircleIcon className={iconClassName} />;
+                            icon = <InfoCircleIcon {...iconProps} />;
                             break;
                         case 'warn':
-                            icon = <ExclamationTriangleIcon className={iconClassName} />;
+                            icon = <ExclamationTriangleIcon {...iconProps} />;
                             break;
                         case 'error':
-                            icon = <TimesCircleIcon className={iconClassName} />;
+                            icon = <TimesCircleIcon {...iconProps} />;
                             break;
                         case 'success':
-                            icon = <CheckIcon className={iconClassName} />;
+                            icon = <CheckIcon {...iconProps} />;
                             break;
                         default:
                             break;
                     }
                 }
 
-                const iconContent = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const iconContent = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
+                const summaryProps = mergeProps(
+                    {
+                        className: 'p-message-summary'
+                    },
+                    ptm('summary')
+                );
+
+                const detailProps = mergeProps(
+                    {
+                        className: 'p-message-detail'
+                    },
+                    ptm('detail')
+                );
 
                 return (
                     content || (
                         <>
                             {iconContent}
-                            <span className="p-message-summary">{summary}</span>
-                            <span className="p-message-detail">{detail}</span>
+                            <span {...summaryProps}>{summary}</span>
+                            <span {...detailProps}>{detail}</span>
                         </>
                     )
                 );
@@ -105,9 +147,27 @@ export const UIMessage = React.memo(
         const closeIcon = createCloseIcon();
         const message = createMessage();
 
+        const wrapperProps = mergeProps(
+            {
+                className: contentClassName,
+                style: contentStyle
+            },
+            ptm('wrapper')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref,
+                className,
+                style,
+                onClick
+            },
+            ptm('root')
+        );
+
         return (
-            <div ref={ref} className={className} style={style} onClick={onClick}>
-                <div className={contentClassName} style={contentStyle}>
+            <div {...rootProps}>
+                <div {...wrapperProps}>
                     {message}
                     {closeIcon}
                 </div>

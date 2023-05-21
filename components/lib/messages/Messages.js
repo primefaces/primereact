@@ -13,6 +13,10 @@ export const Messages = React.memo(
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
 
+        const { ptm } = MessagesBase.setMetaData({
+            props
+        });
+
         const show = (messageInfo) => {
             if (messageInfo) {
                 setMessagesState((prev) => assignIdentifiers(prev, messageInfo, true));
@@ -85,7 +89,7 @@ export const Messages = React.memo(
 
                             return (
                                 <CSSTransition nodeRef={messageRef} key={message._pId} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} />
+                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptm={ptm} />
                                 </CSSTransition>
                             );
                         })}

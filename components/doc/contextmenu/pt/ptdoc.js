@@ -139,7 +139,7 @@ export function PTDoc(props) {
     ref={cm}
     breakpoint="767px"
     pt={{
-        action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : context.focused ? 'bg-primary-300' : undefined })
+        action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
     }}
 />
 <img src="/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current.show(e)} />
@@ -279,7 +279,14 @@ export default function PTDemo() {
 
     return (
         <div className="card flex md:justify-content-center">
-            <ContextMenu model={items} ref={cm} breakpoint="767px" />
+            <ContextMenu
+                model={items}
+                ref={cm}
+                breakpoint="767px"
+                pt={{
+                    action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
+                }}
+            />
             <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
@@ -421,7 +428,14 @@ export default function PTDemo() {
 
     return (
         <div className="card flex md:justify-content-center">
-            <ContextMenu model={items} ref={cm} breakpoint="767px" />
+            <ContextMenu
+                model={items}
+                ref={cm}
+                breakpoint="767px"
+                pt={{
+                    action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
+                }}
+            />
             <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
@@ -442,7 +456,7 @@ export default function PTDemo() {
                     ref={cm}
                     breakpoint="767px"
                     pt={{
-                        action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : context.focused ? 'bg-primary-300' : undefined })
+                        action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
                     }}
                 />
                 <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current.show(e)} />

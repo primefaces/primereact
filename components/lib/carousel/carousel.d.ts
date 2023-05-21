@@ -8,7 +8,114 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type CarouselPassThroughType<T> = PassThroughType<T, CarouselPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface CarouselPassThroughMethodOptions {
+    props: CarouselProps;
+    state: CarouselState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link CarouselProps.pt}
+ */
+export interface CarouselPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the previous button's DOM element.
+     */
+    previousButton?: CarouselPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the previous button icon's DOM element.
+     */
+    previousButtonIcon?: CarouselPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the items content's DOM element.
+     */
+    itemsContent?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the items container's DOM element.
+     */
+    itemsContainer?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item cloned's DOM element.
+     */
+    itemCloned?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the next button's DOM element.
+     */
+    nextButton?: CarouselPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the next button icon's DOM element.
+     */
+    nextButtonIcon?: CarouselPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the indicators's DOM element.
+     */
+    indicators?: CarouselPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the indicator's DOM element.
+     */
+    indicator?: CarouselPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the indicator button's DOM element.
+     */
+    indicatorButton?: CarouselPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Carousel component.
+ */
+export interface CarouselState {
+    /**
+     * Number of items per page as a number.
+     * @defaultValue 1
+     */
+    numVisible: number;
+    /**
+     * Number of items to scroll as a number.
+     * @defaultValue 1
+     */
+    numScroll: number;
+    /**
+     * Index of the first item.
+     * @defaultValue 0
+     */
+    page: number;
+    /**
+     * Total shifted items' count as a number.
+     * @defaultValue 0
+     */
+    totalShiftedItems: number;
+}
 
 /**
  * Custom responsive option
@@ -141,6 +248,11 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CarouselPassThroughOptions}
+     */
+    pt?: CarouselPassThroughOptions;
 }
 
 /**
