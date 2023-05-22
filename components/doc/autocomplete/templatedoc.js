@@ -36,8 +36,8 @@ export function TemplateDoc(props) {
     };
 
     const panelFooterTemplate = () => {
-        const isCountrySelected = (filteredCountries || []).some( country => country['name'] === selectedCountry );
-           return (
+        const isCountrySelected = (filteredCountries || []).some((country) => country['name'] === selectedCountry);
+        return (
             <div className="py-2 px-3">
                 {isCountrySelected ? (
                     <span>
