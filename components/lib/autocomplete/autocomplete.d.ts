@@ -217,6 +217,10 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     panelClassName?: string | undefined;
     /**
+     * Template of the panel footer.
+     */
+    panelFooterTemplate?: React.ReactNode | ((props: AutoCompleteProps, hide: () => void) => React.ReactNode);
+    /**
      * Inline style of the overlay panel element.
      */
     panelStyle?: React.CSSProperties | undefined;

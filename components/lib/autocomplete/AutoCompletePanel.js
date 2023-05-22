@@ -12,6 +12,16 @@ export const AutoCompletePanel = React.memo(
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
         };
 
+        const createFooter = () => {
+            if (props.panelFooterTemplate) {
+                const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
+
+                return <div className="p-autocomplete-footer">{content}</div>;
+            }
+
+            return null;
+        };
+
         const createGroupChildren = (optionGroup, i, style) => {
             const groupChildren = props.getOptionGroupChildren(optionGroup);
 
@@ -99,9 +109,11 @@ export const AutoCompletePanel = React.memo(
                 const items = createItems();
 
                 return (
-                    <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
-                        {items}
-                    </ul>
+                    <div className="p-autocomplete-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
+                        <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
+                            {items}
+                        </ul>
+                    </div>
                 );
             }
         };
@@ -111,8 +123,9 @@ export const AutoCompletePanel = React.memo(
                 'p-input-filled': PrimeReact.inputStyle === 'filled',
                 'p-ripple-disabled': PrimeReact.ripple === false
             });
-            const style = { maxHeight: props.scrollHeight, ...(props.panelStyle || {}) };
+            const style = { ...(props.panelStyle || {}) };
             const content = createContent();
+            const footer = createFooter();
 
             return (
                 <CSSTransition
@@ -130,6 +143,7 @@ export const AutoCompletePanel = React.memo(
                 >
                     <div ref={ref} className={className} style={style} onClick={props.onClick}>
                         {content}
+                        {footer}
                     </div>
                 </CSSTransition>
             );
