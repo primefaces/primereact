@@ -20643,7 +20643,7 @@
                             "readonly": false,
                             "type": "any",
                             "default": "",
-                            "description": "Changing the default icon when the image is hovered in preview mode.",
+                            "description": "Changing the default icon when the image is hovered in preview mode. Since v9, use  `indicatorIcon`  instead.",
                             "deprecated": "Since v9, use "
                         },
                         {
