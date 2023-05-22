@@ -45,7 +45,7 @@ export interface TabMenuPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: TabMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    icon?: TabMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the label's DOM element.
      */

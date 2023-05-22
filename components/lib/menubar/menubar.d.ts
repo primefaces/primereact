@@ -66,15 +66,15 @@ export interface MenubarPassThroughOptions {
     /**
      * Uses to pass attributes to the mobile popup menu button icon's DOM element.
      */
-    popupIcon?: MenubarPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    popupIcon?: MenubarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the start of the component.
      */
-    start?: MenubarPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    start?: MenubarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the end of the component.
      */
-    end?: MenubarPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    end?: MenubarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
