@@ -17,15 +17,15 @@ import { IconType } from '../utils/utils';
  */
 interface PaginatorPageChangeEvent {
     /**
-     * New page number
+     * Index of first record
      */
     first: number;
     /**
-     * Index of first record
+     * Number of rows to display in new page
      */
     rows: number;
     /**
-     * Number of rows to display in new page
+     * New page number
      */
     page: number;
     /**
