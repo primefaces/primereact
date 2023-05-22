@@ -2403,14 +2403,6 @@
                             "description": "Number of maximum options that can be selected."
                         },
                         {
-                            "name": "panelFooterTemplate",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "default": "",
-                            "description": "Template of the panel footer."
-                        },
-                        {
                             "name": "name",
                             "optional": true,
                             "readonly": false,
@@ -2449,6 +2441,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Style class of the overlay panel element."
+                        },
+                        {
+                            "name": "panelFooterTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Template of the panel footer."
                         },
                         {
                             "name": "panelStyle",
