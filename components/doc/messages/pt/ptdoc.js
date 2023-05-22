@@ -8,7 +8,12 @@ export function PTDoc(props) {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current && msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
+        msgs.current && msgs.current.show([
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
+        ]);
     });
 
     const code = {
@@ -16,7 +21,7 @@ export function PTDoc(props) {
 <Messages
     ref={msgs}
     pt={{
-        root: { className: 'bg-yellow-100' }
+        wrapper: ({ index }) => ({ className: \`bg-yellow-\${((index + 1 > 5 && 5) || index + 1 || 1) * 100} my-4\` })
     }}
 />
         `,
@@ -29,7 +34,12 @@ export default function PTDemo() {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current && msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
+        msgs.current && msgs.current.show([
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
+        ]);
     });
 
     return (
@@ -37,7 +47,7 @@ export default function PTDemo() {
             <Messages
                 ref={msgs}
                 pt={{
-                    root: { className: 'bg-yellow-100' }
+                    wrapper: ({ index }) => ({ className: \`bg-yellow-\${((index + 1 > 5 && 5) || index + 1 || 1) * 100} my-4\` })
                 }}
             />
         </div>
@@ -53,7 +63,12 @@ export default function PTDemo() {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current && msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
+        msgs.current && msgs.current.show([
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
+        ]);
     });
 
     return (
@@ -61,7 +76,7 @@ export default function PTDemo() {
             <Messages
                 ref={msgs}
                 pt={{
-                    root: { className: 'bg-yellow-100' }
+                    wrapper: ({ index }) => ({ className: \`bg-yellow-\${((index + 1 > 5 && 5) || index + 1 || 1) * 100} my-4\` })
                 }}
             />
         </div>
@@ -77,7 +92,7 @@ export default function PTDemo() {
                 <Messages
                     ref={msgs}
                     pt={{
-                        root: { className: 'bg-yellow-100' }
+                        wrapper: ({ index }) => ({ className: `bg-yellow-${((index + 1 > 5 && 5) || index + 1 || 1) * 100} my-4` })
                     }}
                 />
             </div>

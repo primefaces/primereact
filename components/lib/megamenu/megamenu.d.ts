@@ -86,7 +86,7 @@ export interface MegaMenuPassThroughOptions {
     /**
      * Uses to pass attributes to the separator's DOM element.
      */
-    separator?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    separator?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the start of the component.
      */

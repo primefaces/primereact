@@ -52,7 +52,7 @@ export interface StepsPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: StepsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    icon?: StepsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
