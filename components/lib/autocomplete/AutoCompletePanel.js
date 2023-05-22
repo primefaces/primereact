@@ -16,7 +16,7 @@ export const AutoCompletePanel = React.memo(
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
 
-                return <div className="p-multiselect-footer">{content}</div>;
+                return <div className="p-autocomplete-footer">{content}</div>;
             }
 
             return null;
