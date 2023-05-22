@@ -115,8 +115,9 @@ export const Menubar = React.memo(
                 },
                 ptm('button')
             );
-            const icon = props.menuIcon || <BarsIcon {...buttonProps} />;
-            const menuIcon = IconUtils.getJSXIcon(icon, { ...buttonProps }, { props });
+            const popupIconProps = mergeProps(ptm('popupIcon'));
+            const icon = props.menuIcon || <BarsIcon {...popupIconProps} />;
+            const menuIcon = IconUtils.getJSXIcon(icon, { ...popupIconProps }, { props });
 
             /* eslint-disable */
             const button = <a {...buttonProps}>{menuIcon}</a>;

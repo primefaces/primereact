@@ -134,12 +134,12 @@ export const Image = React.memo(
             const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
             const zoomOutDisabled = scaleState <= 0.5;
             const zoomInDisabled = scaleState >= 1.5;
-            const downloadIconProps = mergeProps({}, ptm('downloadIcon'));
-            const rotateRightIconProps = mergeProps({}, ptm('rotateRightIcon'));
-            const rotateLeftIconProps = mergeProps({}, ptm('rotateLeftIcon'));
-            const zoomOutIconProps = mergeProps({}, ptm('zoomOutIcon'));
-            const zoomInIconProps = mergeProps({}, ptm('zoomInIcon'));
-            const closeIconProps = mergeProps({}, ptm('closeIcon'));
+            const downloadIconProps = mergeProps(ptm('downloadIcon'));
+            const rotateRightIconProps = mergeProps(ptm('rotateRightIcon'));
+            const rotateLeftIconProps = mergeProps(ptm('rotateLeftIcon'));
+            const zoomOutIconProps = mergeProps(ptm('zoomOutIcon'));
+            const zoomInIconProps = mergeProps(ptm('zoomInIcon'));
+            const closeIconProps = mergeProps(ptm('closeIcon'));
             const downloadIcon = IconUtils.getJSXIcon(props.downloadIcon || <DownloadIcon />, { ...downloadIconProps }, { props });
             const rotateRightIcon = IconUtils.getJSXIcon(props.rotateRightIcon || <RefreshIcon />, { ...rotateRightIconProps }, { props });
             const rotateLeftIcon = IconUtils.getJSXIcon(props.rotateLeftIcon || <UndoIcon />, { ...rotateLeftIconProps }, { props });

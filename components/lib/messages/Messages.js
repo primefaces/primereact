@@ -3,19 +3,23 @@ import { TransitionGroup } from 'react-transition-group';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
+import { mergeProps } from '../utils/Utils';
 
 let messageIdx = 0;
 
 export const Messages = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = MessagesBase.getProps(inProps);
-
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
+        const metaData = {
+            props,
+            state: {
+                messages: messagesState
+            }
+        };
 
-        const { ptm } = MessagesBase.setMetaData({
-            props
-        });
+        const ptCallbacks = MessagesBase.setMetaData(metaData);
 
         const show = (messageInfo) => {
             if (messageInfo) {
@@ -78,18 +82,27 @@ export const Messages = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = MessagesBase.getOtherProps(props);
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className: props.className,
+                style: props.style
+            },
+            MessagesBase.getOtherProps(props),
+            ptCallbacks.ptm('root')
+        );
 
         return (
-            <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 <TransitionGroup>
                     {messagesState &&
-                        messagesState.map((message) => {
+                        messagesState.map((message, index) => {
                             const messageRef = React.createRef();
 
                             return (
                                 <CSSTransition nodeRef={messageRef} key={message._pId} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptm={ptm} />
+                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptCallbacks={ptCallbacks} metaData={metaData} index={index} />
                                 </CSSTransition>
                             );
                         })}
