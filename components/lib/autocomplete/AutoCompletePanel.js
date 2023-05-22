@@ -109,7 +109,7 @@ export const AutoCompletePanel = React.memo(
                 const items = createItems();
 
                 return (
-                    <div className="p-autofocus-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
+                    <div className="p-autocomplete-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
                         <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
                             {items}
                         </ul>
