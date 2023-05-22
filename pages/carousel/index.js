@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/carousel/pt/ptdoc';
+import { Wireframe } from '../../components/doc/carousel/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/carousel/basicdoc';
 import { CircularDoc } from '../../components/doc/carousel/circulardoc';
@@ -51,8 +54,25 @@ const CarouselDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.carousel.options',
+            label: 'Carousel PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Carousel Component" header="Carousel" description="Carousel is a content slider featuring various customization options." componentDocs={docs} apiDocs={['Carousel']} className="carousel-demo" />;
+    return <DocComponent title="React Carousel Component" header="Carousel" description="Carousel is a content slider featuring various customization options." className="carousel-demo" componentDocs={docs} apiDocs={['Carousel']} ptDocs={ptDocs} />;
 };
 
 export default CarouselDemo;

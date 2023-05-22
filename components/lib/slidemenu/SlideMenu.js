@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ZIndexUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ZIndexUtils } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -15,6 +15,13 @@ export const SlideMenu = React.memo(
 
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
+        const { ptm } = SlideMenuBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                level: levelState
+            }
+        });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const backward = React.useRef(null);
@@ -115,19 +122,33 @@ export const SlideMenu = React.memo(
             });
 
             const iconClassName = 'p-slidemenu-backward-icon';
-            const icon = props.backIcon || <ChevronLeftIcon className={iconClassName} />;
-            const backIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const previousIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('previousIcon')
+            );
+            const icon = props.backIcon || <ChevronLeftIcon {...previousIconProps} />;
+            const backIcon = IconUtils.getJSXIcon(icon, { ...previousIconProps }, { props });
+            const previousLabelProps = mergeProps(ptm('previousLabel'));
+            const previousProps = mergeProps(
+                {
+                    ref: backward,
+                    className,
+                    onClick: (e) => navigateBack(e)
+                },
+                ptm('previous')
+            );
 
             return (
-                <div ref={backward} className={className} onClick={navigateBack}>
+                <div {...previousProps}>
                     {backIcon}
-                    <span>{props.backLabel}</span>
+                    <span {...previousLabelProps}>{props.backLabel}</span>
                 </div>
             );
         };
 
         const createElement = () => {
-            const otherProps = SlideMenuBase.getOtherProps(props);
             const className = classNames(
                 'p-slidemenu p-component',
                 {
@@ -137,6 +158,33 @@ export const SlideMenu = React.memo(
             );
             const wrapperStyle = { height: props.viewportHeight + 'px' };
             const backward = createBackward();
+            const rootProps = mergeProps(
+                {
+                    ref: menuRef,
+                    id: props.id,
+                    className,
+                    style: props.style,
+                    onClick: (e) => onPanelClick(e)
+                },
+                SlideMenuBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const wrapperProps = mergeProps(
+                {
+                    className: 'p-slidemenu-wrapper',
+                    style: wrapperStyle
+                },
+                ptm('wrapper')
+            );
+
+            const contentProps = mergeProps(
+                {
+                    ref: slideMenuContent,
+                    className: 'p-slidemenu-content'
+                },
+                ptm('content')
+            );
 
             return (
                 <CSSTransition
@@ -151,9 +199,9 @@ export const SlideMenu = React.memo(
                     onExit={onExit}
                     onExited={onExited}
                 >
-                    <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <div className="p-slidemenu-wrapper" style={wrapperStyle}>
-                            <div className="p-slidemenu-content" ref={slideMenuContent}>
+                    <div {...rootProps}>
+                        <div {...wrapperProps}>
+                            <div {...contentProps}>
                                 <SlideMenuSub
                                     menuProps={props}
                                     model={props.model}
@@ -165,6 +213,7 @@ export const SlideMenu = React.memo(
                                     parentActive={levelState === 0}
                                     onForward={navigateForward}
                                     submenuIcon={props.submenuIcon}
+                                    ptm={ptm}
                                 />
                             </div>
                             {backward}

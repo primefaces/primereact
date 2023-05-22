@@ -26,7 +26,7 @@ export const MultiSelectPanel = React.memo(
 
         const onEntered = () => {
             props.onEntered(() => {
-                if (props.filter && filterInputRef.current) {
+                if (props.filter && props.filterInputAutoFocus && filterInputRef.current) {
                     DomHandler.focus(filterInputRef.current, false);
                 }
             });

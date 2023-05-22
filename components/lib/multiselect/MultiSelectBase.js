@@ -15,6 +15,7 @@ export const MultiSelectBase = {
         emptyFilterMessage: null,
         filter: false,
         filterBy: null,
+        filterInputAutoFocus: true,
         filterLocale: undefined,
         filterMatchMode: 'contains',
         filterPlaceholder: null,

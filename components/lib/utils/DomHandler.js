@@ -263,7 +263,7 @@ export default class DomHandler {
         }
     }
 
-    static absolutePosition(element, target) {
+    static absolutePosition(element, target, align = 'left') {
         if (element && target) {
             let elementDimensions = element.offsetParent ? { width: element.offsetWidth, height: element.offsetHeight } : this.getHiddenElementDimensions(element);
             let elementOuterHeight = elementDimensions.height;
@@ -289,8 +289,11 @@ export default class DomHandler {
                 element.style.transformOrigin = 'top';
             }
 
-            if (targetOffset.left + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth);
-            else left = targetOffset.left + windowScrollLeft;
+            const targetOffsetPx = targetOffset.left;
+            const alignOffset = align === 'left' ? 0 : elementOuterWidth - targetOuterWidth;
+
+            if (targetOffsetPx + targetOuterWidth + elementOuterWidth > viewport.width) left = Math.max(0, targetOffsetPx + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+            else left = targetOffsetPx - alignOffset + windowScrollLeft;
 
             element.style.top = top + 'px';
             element.style.left = left + 'px';

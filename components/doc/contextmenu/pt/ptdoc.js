@@ -445,11 +445,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>
-                    ContextMenu requires a collection of menuitems as its <i>model</i> and the <i>show</i> method needs to be called explicity using the <i>onContextMenu</i> event of the target to display the menu.
-                </p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card flex md:justify-content-center">
                 <ContextMenu
                     model={items}

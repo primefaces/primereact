@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ImageBase = {
+export const ImageBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Image',
         alt: null,
@@ -30,7 +30,5 @@ export const ImageBase = {
         zoomOutIcon: null,
         zoomSrc: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ImageBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ImageBase.defaultProps)
-};
+    }
+});

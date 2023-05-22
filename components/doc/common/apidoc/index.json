@@ -5455,6 +5455,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -5512,6 +5520,179 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "CarouselPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CarouselProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CarouselState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CarouselPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "container",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the container's DOM element."
+                        },
+                        {
+                            "name": "previousButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the previous button's DOM element."
+                        },
+                        {
+                            "name": "previousButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous button icon's DOM element."
+                        },
+                        {
+                            "name": "itemsContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the items content's DOM element."
+                        },
+                        {
+                            "name": "itemsContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the items container's DOM element."
+                        },
+                        {
+                            "name": "itemCloned",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item cloned's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "nextButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the next button's DOM element."
+                        },
+                        {
+                            "name": "nextButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the next button icon's DOM element."
+                        },
+                        {
+                            "name": "indicators",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the indicators's DOM element."
+                        },
+                        {
+                            "name": "indicator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the indicator's DOM element."
+                        },
+                        {
+                            "name": "indicatorButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the indicator button's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "CarouselState": {
+                    "description": "Defines current inline state in Carousel component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "numVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Number of items per page as a number."
+                        },
+                        {
+                            "name": "numScroll",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Number of items to scroll as a number."
+                        },
+                        {
+                            "name": "page",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Index of the first item."
+                        },
+                        {
+                            "name": "totalShiftedItems",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total shifted items' count as a number."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "CarouselResponsiveOption": {
                     "description": "Custom responsive option",
                     "relatedProp": "responsiveOptions",
@@ -5539,6 +5720,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "CarouselPassThroughType": {
+                    "values": "PassThroughType<T, CarouselPassThroughMethodOptions>"
                 }
             }
         }
@@ -17361,6 +17550,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -17469,6 +17666,256 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "GalleriaThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "GalleriaProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "GalleriaState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "GalleriaPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the close icon's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "itemWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item wrapper's DOM element."
+                        },
+                        {
+                            "name": "itemContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item container's DOM element."
+                        },
+                        {
+                            "name": "previousItemButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the previous item button's DOM element."
+                        },
+                        {
+                            "name": "previousItemIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous item icon's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "nextItemButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the next item button's DOM element."
+                        },
+                        {
+                            "name": "nextItemIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the next item icon's DOM element."
+                        },
+                        {
+                            "name": "caption",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the caption's DOM element."
+                        },
+                        {
+                            "name": "indicators",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the indicators's DOM element."
+                        },
+                        {
+                            "name": "indicator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the indicator's DOM element."
+                        },
+                        {
+                            "name": "thumbnailWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail wrapper's DOM element."
+                        },
+                        {
+                            "name": "thumbnailContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail container's DOM element."
+                        },
+                        {
+                            "name": "previousThumbnailButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the previous thumbnail button's DOM element."
+                        },
+                        {
+                            "name": "previousThumbnailIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous thumbnail icon's DOM element."
+                        },
+                        {
+                            "name": "thumbnailItemsContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail items container's DOM element."
+                        },
+                        {
+                            "name": "thumbnailItems",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail items' DOM element."
+                        },
+                        {
+                            "name": "thumbnailItem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail item's DOM element."
+                        },
+                        {
+                            "name": "thumbnailItemContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thumbnail item content's DOM element."
+                        },
+                        {
+                            "name": "nextThumbnailButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the next thumbnail button's DOM element."
+                        },
+                        {
+                            "name": "nextThumbnailIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the next thumbnail icon's DOM element."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the mask's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "GalleriaState": {
+                    "description": "Defines current inline state in Galleria component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current visible state as a boolean."
+                        },
+                        {
+                            "name": "numVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Number of items per page as a number."
+                        },
+                        {
+                            "name": "slideShowActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current slide show active state."
+                        },
+                        {
+                            "name": "activeIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current active item index as a number."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "GalleriaResponsiveOptions": {
                     "description": "Custom galleria responsive options",
                     "relatedProp": "",
@@ -17489,6 +17936,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "GalleriaPassThroughType": {
+                    "values": "PassThroughType<T, GalleriaThroughMethodOptions>"
                 }
             }
         }
@@ -20206,6 +20661,14 @@
                             "type": "string",
                             "default": "",
                             "description": "Zoomed image that may be different than \"src\" image."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -20225,6 +20688,220 @@
                             "description": "Triggered when the preview overlay is shown."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ImageThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ImageProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ImageState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ImagePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "image",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "description": "Uses to pass attributes to the image's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the button's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "mask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "toolbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the toolbar's DOM element."
+                        },
+                        {
+                            "name": "downloadButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the download button's DOM element."
+                        },
+                        {
+                            "name": "downloadIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the download icon's DOM element."
+                        },
+                        {
+                            "name": "rotateRightButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rotate right button's DOM element."
+                        },
+                        {
+                            "name": "rotateRightIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the rotate right icon's DOM element."
+                        },
+                        {
+                            "name": "rotateLeftButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the rotate left button's DOM element."
+                        },
+                        {
+                            "name": "rotateLeftIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the rotate left icon's DOM element."
+                        },
+                        {
+                            "name": "zoomOutButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the zoom out button's DOM element."
+                        },
+                        {
+                            "name": "zoomOutIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the zoom out icon's DOM element."
+                        },
+                        {
+                            "name": "zoomInButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the zoom in button's DOM element."
+                        },
+                        {
+                            "name": "zoomInIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the zoom in icon's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the close button's DOM element."
+                        },
+                        {
+                            "name": "closeIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the close icon's DOM element."
+                        },
+                        {
+                            "name": "previewContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the preview container's DOM element."
+                        },
+                        {
+                            "name": "preview",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "description": "Uses to pass attributes to the preview's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ImageState": {
+                    "description": "Defines current inline state in Image component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "maskVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Mask visible state as a boolean."
+                        },
+                        {
+                            "name": "previewVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Preview visible state as a boolean."
+                        },
+                        {
+                            "name": "rotate",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Rotate state as a number."
+                        },
+                        {
+                            "name": "scale",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Scale state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ImagePassThroughType": {
+                    "values": "PassThroughType<T, ImageThroughMethodOptions>"
                 }
             }
         }
@@ -22459,12 +23136,254 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MegaMenuPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MegaMenuProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MegaMenuState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MegaMenuContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MegaMenuPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "headerAction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the header action's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the submenu icon's DOM element."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "grid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the grid's DOM element."
+                        },
+                        {
+                            "name": "column",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the column's DOM element."
+                        },
+                        {
+                            "name": "submenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the submenu's DOM element."
+                        },
+                        {
+                            "name": "submenuItem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the submenu items's DOM element."
+                        },
+                        {
+                            "name": "submenuHeader",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the submenu header's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the start of the component."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the end of the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MegaMenuFocusedItemInfo": {
+                    "description": "Defines focused item info",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Active item index"
+                        },
+                        {
+                            "name": "level",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Active item level"
+                        },
+                        {
+                            "name": "parentKey",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Parent key info"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MegaMenuState": {
+                    "description": "Defines current inline state in MegaMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "mobileActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current mobileActive state as a boolean."
+                        },
+                        {
+                            "name": "attributeSelector",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current attributeSelector visible state as a string."
+                        },
+                        {
+                            "name": "activeItem",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuItem",
+                            "description": "Active item path."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MegaMenuContext": {
+                    "description": "Defines current options in MegaMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MegaMenuPassThroughType": {
+                    "values": "PassThroughType<T, MegaMenuPassThroughMethodOptions>"
                 }
             }
         }
@@ -22906,6 +23825,14 @@
                             "description": "Defines if menu would displayed as a popup."
                         },
                         {
+                            "name": "popupAlignment",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"left\" | \"right\"",
+                            "default": "left",
+                            "description": "In popup mode determines how the overlay is aligned with its target. Values either 'left' or 'right'."
+                        },
+                        {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
@@ -22944,6 +23871,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -22977,6 +23912,115 @@
                             "description": "Callback to invoke when a popup menu is hidden."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MenuPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenuPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "submenuHeader",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the submenu header's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenuState": {
+                    "description": "Defines current inline state in Menu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MenuPassThroughType": {
+                    "values": "PassThroughType<T, MenuPassThroughMethodOptions>"
                 }
             }
         }
@@ -23059,12 +24103,177 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "MenubarPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenubarProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenubarState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenubarContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenubarPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the submenu icon's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the mobile popup menu button's DOM element."
+                        },
+                        {
+                            "name": "popupIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the mobile popup menu button icon's DOM element."
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the start of the component."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the end of the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenubarState": {
+                    "description": "Defines current inline state in Menubar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "mobileActive",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current mobile menu active state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MenubarContext": {
+                    "description": "Defines current options in Menubar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MenubarPassThroughType": {
+                    "values": "PassThroughType<T, MenubarPassThroughMethodOptions>"
                 }
             }
         }
@@ -23840,6 +25049,14 @@
                             "type": "string",
                             "default": "label",
                             "description": "When filtering is enabled, filterBy decides which field or fields (comma separated) to search against."
+                        },
+                        {
+                            "name": "filterInputAutoFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "When the panel is opened, it specifies that the filter input should focus automatically."
                         },
                         {
                             "name": "filterIcon",
@@ -27072,12 +28289,226 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "PanelMenuPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PanelMenuProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PanelMenuState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PanelMenuContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PanelMenuPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerAction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the header action's DOM element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the submenuIcon's DOM element."
+                        },
+                        {
+                            "name": "headerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the header icon's DOM element."
+                        },
+                        {
+                            "name": "headerSubmenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the header submenu icon's DOM element."
+                        },
+                        {
+                            "name": "headerLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the header label's DOM element."
+                        },
+                        {
+                            "name": "toggleableContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the toggleable content's DOM element."
+                        },
+                        {
+                            "name": "headerToggleableContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header toggleable content's DOM element."
+                        },
+                        {
+                            "name": "menuContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the menu content's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PanelMenuState": {
+                    "description": "Defines current inline state in PanelMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "id",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current id state as a string."
+                        },
+                        {
+                            "name": "activeItem",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MenuItem[]",
+                            "description": "Active item path."
+                        },
+                        {
+                            "name": "animationDisabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the menu is visible or not."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PanelMenuContext": {
+                    "description": "Defines current options in PanelMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "PanelMenuPassThroughType": {
+                    "values": "PassThroughType<T, PanelMenuPassThroughMethodOptions>"
                 }
             }
         }
@@ -30015,6 +31446,177 @@
                     ]
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "SlideMenuPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SlideMenuProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SlideMenuState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SlideMenuContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "SlideMenuPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "SlideMenuProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "wrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the wrapper's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "previous",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the previous's DOM element."
+                        },
+                        {
+                            "name": "previousIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the previous icon's DOM element."
+                        },
+                        {
+                            "name": "previousLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the previous label's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the submenu icon's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "SlideMenuState": {
+                    "description": "Defines current inline state in SlideMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state as a boolean."
+                        },
+                        {
+                            "name": "level",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current level state as a number."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "SlideMenuContext": {
+                    "description": "Defines current options in SlideMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "SlideMenuPassThroughType": {
+                    "values": "PassThroughType<T, SlideMenuPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "slider": {
@@ -31395,7 +32997,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         }
                     ],
@@ -31697,7 +33299,7 @@
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabMenuPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "type": "TabMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
@@ -32919,6 +34521,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -32952,6 +34562,142 @@
                             "description": "Callback to invoke when a popup menu is hidden."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "TieredMenuPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TieredMenuProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TieredMenuState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TieredMenuContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TieredMenuPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "menuitem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the list item's DOM element."
+                        },
+                        {
+                            "name": "action",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the action's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "submenuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the submenu icon's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TieredMenuState": {
+                    "description": "Defines current inline state in TieredMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "attributeSelector",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current attributeSelector visible state as a string."
+                        },
+                        {
+                            "name": "visible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TieredMenuContext": {
+                    "description": "Defines current options in TieredMenu component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of menuitem as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TieredMenuPassThroughType": {
+                    "values": "PassThroughType<T, TieredMenuPassThroughMethodOptions>"
                 }
             }
         }
@@ -33148,6 +34894,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -33199,6 +34953,179 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "ToastPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToastProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ToastState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ToastPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "message",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the message's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "text",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the text's DOM element."
+                        },
+                        {
+                            "name": "summary",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the summary's DOM element."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the detail's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the button's DOM element."
+                        },
+                        {
+                            "name": "buttonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the button icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ToastMessageOptions": {
+                    "description": "Defines message options in Toast component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "severity",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"error\" | \"success\" | \"info\" | \"warn\"",
+                            "description": "Severity level of the message."
+                        },
+                        {
+                            "name": "summary",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Summary content of the message."
+                        },
+                        {
+                            "name": "detail",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Detail content of the message."
+                        },
+                        {
+                            "name": "closable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the message can be closed manually using the close icon."
+                        },
+                        {
+                            "name": "life",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Delay in milliseconds to close the message automatically."
+                        },
+                        {
+                            "name": "group",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Key of the Toast to display the message."
+                        },
+                        {
+                            "name": "styleClass",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Style class of the message."
+                        },
+                        {
+                            "name": "contentStyleClass",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Style class of the content."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughOptions",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ToastState": {
+                    "description": "Defines current inline state in Toast component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "messages",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any[]",
+                            "description": "Current messages."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ToastMessage": {
                     "description": "Message options for toast component",
                     "relatedProp": "",
@@ -33300,9 +35227,24 @@
                             "readonly": false,
                             "type": "CSSProperties",
                             "description": "Inline style of the message content."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Omit<ToastPassThroughOptions, \"message\">",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ToastPassThroughType": {
+                    "values": "PassThroughType<T, ToastPassThroughMethodOptions>"
                 }
             }
         }

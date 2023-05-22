@@ -7,7 +7,8 @@ import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function PopupDoc(props) {
-    const menu = useRef(null);
+    const menuLeft = useRef(null);
+    const menuRight = useRef(null);
     const router = useRouter();
     const toast = useRef(null);
     const items = [
@@ -51,8 +52,10 @@ export function PopupDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast}></Toast>
-<Menu model={items} popup ref={menu} />
-<Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
+<Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+<Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+<Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+<Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
 `,
         javascript: `
 import React, { useRef } from 'react';
@@ -62,7 +65,8 @@ import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function PopupDoc() {
-    const menu = useRef(null);
+    const menuLeft = useRef(null);
+    const menuRight = useRef(null);
     //const router = useRouter();
     const toast = useRef(null);
     const items = [
@@ -107,8 +111,10 @@ export default function PopupDoc() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <Menu model={items} popup ref={menu} />
-            <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
+            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+            <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+            <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+            <Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
         </div>
     )
 }
@@ -122,7 +128,8 @@ import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
 export default function PopupDoc() {
-    const menu = useRef<Menu>(null);
+    const menuLeft = useRef<Menu>(null);
+    const menuRight = useRef<Menu>(null);
     //const router = useRouter();
     const toast = useRef<Toast>(null);
     const items: MenuItem[] = [
@@ -167,8 +174,10 @@ export default function PopupDoc() {
     return (
         <div className="card flex justify-content-center">
             <Toast ref={toast}></Toast>
-            <Menu model={items} popup ref={menu} />
-            <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
+            <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+            <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+            <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+            <Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
         </div>
     )
 }
@@ -179,13 +188,15 @@ export default function PopupDoc() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target.
+                    Popup mode is enabled by adding <i>popup</i> property and calling <i>toggle</i> method with an event of the target. The <i>popupAlignment</i> property allows you to control how the overlay is aligned with its target.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
-                <Menu model={items} popup ref={menu} />
-                <Button label="Show" icon="pi pi-bars" onClick={(e) => menu.current.toggle(e)} />
+                <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+                <Button label="Show Left" icon="pi pi-align-left" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
+                <Menu model={items} popup ref={menuRight} id="popup_menu_right" popupAlignment="right" />
+                <Button label="Show Right" icon="pi pi-align-right" className="mr-2" onClick={(event) => menuRight.current.toggle(event)} aria-controls="popup_menu_right" aria-haspopup />
             </div>
             <DocSectionCode code={code} />
         </>
