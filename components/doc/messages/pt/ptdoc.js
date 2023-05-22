@@ -8,12 +8,13 @@ export function PTDoc(props) {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current && msgs.current.show([
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
-        ]);
+        msgs.current &&
+            msgs.current.show([
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
+            ]);
     });
 
     const code = {
