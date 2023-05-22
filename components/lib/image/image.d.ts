@@ -217,7 +217,7 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     src?: string | undefined;
     /**
-     * Changing the default icon when the image is hovered in preview mode.
+     * Changing the default icon when the image is hovered in preview mode. Since v9, use `indicatorIcon` instead.
      * @deprecated Since v9, use `indicatorIcon` instead.
      */
     template?: any | undefined;
