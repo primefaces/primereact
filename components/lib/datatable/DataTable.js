@@ -358,25 +358,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
-    const restoreColumnWidths = () => {
-        if (columnWidthsState.current) {
-            let widths = columnWidthsState.current.split(',');
-
-            if (props.columnResizeMode === 'expand' && tableWidthState.current) {
-                tableRef.current.style.width = tableWidthState.current;
-                tableRef.current.style.minWidth = tableWidthState.current;
-                elementRef.current.style.width = tableWidthState.current;
-            }
-
-            if (ObjectUtils.isNotEmpty(widths)) {
-                addInnerHtml(widths);
-            }
-        }
-    };
-
-    const addInnerHtml = (widths) => {
+    const addColumnWidthStyles = (widths) => {
         createStyleElement();
-
         let innerHTML = '';
         let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
@@ -393,6 +376,22 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         });
 
         styleElement.current.innerHTML = innerHTML;
+    };
+
+    const restoreColumnWidths = () => {
+        if (columnWidthsState.current) {
+            let widths = columnWidthsState.current.split(',');
+
+            if (props.columnResizeMode === 'expand' && tableWidthState.current) {
+                tableRef.current.style.width = tableWidthState.current;
+                tableRef.current.style.minWidth = tableWidthState.current;
+                elementRef.current.style.width = tableWidthState.current;
+            }
+
+            if (ObjectUtils.isNotEmpty(widths)) {
+                addColumnWidthStyles(widths);
+            }
+        }
     };
 
     const findParentHeader = (element) => {
@@ -727,7 +726,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
                 const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
-                addInnerHtml(reorderedWidths);
+
+                addColumnWidthStyles(reorderedWidths);
 
                 if (dropColIndex < dragColIndex && dropPosition.current === 1) {
                     dropColIndex++;
