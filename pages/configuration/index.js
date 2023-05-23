@@ -5,6 +5,7 @@ import { DocSections } from '../../components/doc/common/docsections';
 import { AppendToDoc } from '../../components/doc/configuration/appendtodoc';
 import { CSSTransitionDoc } from '../../components/doc/configuration/csstransitiondoc';
 import { FilterMatchModeDoc } from '../../components/doc/configuration/filtermatchmodedoc';
+import { HideOverlaysDoc } from '../../components/doc/configuration/hideoverlaysdoc';
 import { ImportDoc } from '../../components/doc/configuration/importdoc';
 import { InputStyleDoc } from '../../components/doc/configuration/inputstyledoc';
 import { LocaleDoc } from '../../components/doc/configuration/localedoc';
@@ -34,6 +35,11 @@ const InstallationPage = () => {
             id: 'filtermatchmode',
             label: 'Filter Mode',
             component: FilterMatchModeDoc
+        },
+        {
+            id: 'hideoverlays',
+            label: 'Hide Overlays on Viewport Change',
+            component: HideOverlaysDoc
         },
         {
             id: 'inputstyle',
