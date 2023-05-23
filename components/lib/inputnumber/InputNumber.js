@@ -220,7 +220,6 @@ export const InputNumber = React.memo(
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
@@ -252,8 +251,6 @@ export const InputNumber = React.memo(
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, -1);
-
-                event.preventDefault();
             }
         };
 
