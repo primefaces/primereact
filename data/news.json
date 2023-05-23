@@ -2,7 +2,7 @@
     "id": 32,
     "content": "v9.4.0 is out!",
     "linkText": "Learn More",
-    "linkHref": "https://github.com/primefaces/primereact/blob/master/CHANGELOG.md#940-2023-05-12",
+    "linkHref": "https://github.com/primefaces/primereact/blob/master/CHANGELOG.md",
     "backgroundStyle": "background-color:#07c4e8",
     "textStyle": "color:#191919;font-weight:500",
     "linkStyle": "color:#191919;font-weight:700",
