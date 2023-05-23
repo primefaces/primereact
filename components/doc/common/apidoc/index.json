@@ -3608,6 +3608,13 @@
                             "description": "Uses to pass attributes to the label's DOM element."
                         },
                         {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
                             "name": "separatorIcon",
                             "optional": true,
                             "readonly": false,
