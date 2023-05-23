@@ -600,7 +600,31 @@
                     "relatedProp": "",
                     "props": [
                         {
-                            "name": "ripple",
+                            "name": "appendTo",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AppendToType"
+                        },
+                        {
+                            "name": "autoZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "cssTransition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "filterMatchModeOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FilterMatchModeOptions"
+                        },
+                        {
+                            "name": "hideOverlaysOnViewportChange",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean"
@@ -612,31 +636,25 @@
                             "type": "InputStyleType"
                         },
                         {
-                            "name": "nonce",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string"
-                        },
-                        {
                             "name": "locale",
                             "optional": true,
                             "readonly": false,
                             "type": "string"
                         },
                         {
-                            "name": "appendTo",
+                            "name": "nonce",
                             "optional": true,
                             "readonly": false,
-                            "type": "AppendToType"
+                            "type": "string"
                         },
                         {
-                            "name": "cssTransition",
+                            "name": "nullSortOrder",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "number"
                         },
                         {
-                            "name": "autoZIndex",
+                            "name": "ripple",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean"
@@ -646,18 +664,6 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ZIndexOptions"
-                        },
-                        {
-                            "name": "filterMatchModeOptions",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "FilterMatchModeOptions"
-                        },
-                        {
-                            "name": "nullSortOrder",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number"
                         }
                     ],
                     "callbacks": [
