@@ -1,12 +1,12 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { SearchIcon } from '../icons/search';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
-import { TimesIcon } from '../icons/times';
-import { SearchIcon } from '../icons/search';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
@@ -47,7 +47,7 @@ export const DropdownPanel = React.memo(
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
 
-                return <div className="p-multiselect-footer">{content}</div>;
+                return <div className="p-dropdown-footer">{content}</div>;
             }
 
             return null;
