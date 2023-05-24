@@ -1,5 +1,40 @@
 # Changelog
 
+## [9.5.0](https://github.com/primefaces/primereact/tree/9.5.0) (2023-05-24)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.4.0...9.5.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add `hideOverlaysOnDocumentScrolling` option to PrimeReact config [\#4448](https://github.com/primefaces/primereact/issues/4448)
+- Icons: clipPath improvements  [\#4441](https://github.com/primefaces/primereact/issues/4441)
+- AutoComplete: panelFooterTemplate prop [\#4426](https://github.com/primefaces/primereact/issues/4426)
+- MultiSelect: No way to disable filter auto focus [\#4423](https://github.com/primefaces/primereact/issues/4423)
+- New passthrough\(pt\) property implementation for Media Components [\#4393](https://github.com/primefaces/primereact/issues/4393)
+- New passthrough\(pt\) property implementation for Chart & FileUpload & Message Components [\#4392](https://github.com/primefaces/primereact/issues/4392)
+- New passthrough\(pt\) property implementation for Menu Components [\#4391](https://github.com/primefaces/primereact/issues/4391)
+- Mention: suggestion panel to hide when scrolling away [\#4223](https://github.com/primefaces/primereact/issues/4223)
+- Messages-Toast: Inconsistency [\#4077](https://github.com/primefaces/primereact/issues/4077)
+- Menu: Add ability to right align [\#3753](https://github.com/primefaces/primereact/issues/3753)
+
+**Fixed bugs:**
+
+- Dropdown: Footer using incorrect style name [\#4446](https://github.com/primefaces/primereact/issues/4446)
+- InputNumber: preventing ripple on buttons [\#4443](https://github.com/primefaces/primereact/issues/4443)
+- Datatable: filterIcon and filterClearIcon not propagated [\#4439](https://github.com/primefaces/primereact/issues/4439)
+- BreadCrumb: SVG location of the DOM [\#4438](https://github.com/primefaces/primereact/issues/4438)
+- DataTable: Filter Clear icon is missing [\#4437](https://github.com/primefaces/primereact/issues/4437)
+- Datatable: Setting rowEditorInitIcon has no effect. [\#4430](https://github.com/primefaces/primereact/issues/4430)
+- MultiSelect clear icon not aligned correctly [\#4427](https://github.com/primefaces/primereact/issues/4427)
+- TriStateCheckbox: "undefined" value render checkbox highlighted but without value [\#4422](https://github.com/primefaces/primereact/issues/4422)
+- Checkbox: Toggling value by clicking the label broken [\#4402](https://github.com/primefaces/primereact/issues/4402)
+- Image: Zoom out action disabled when fully zoomed in [\#4400](https://github.com/primefaces/primereact/issues/4400)
+- ConfirmDialog: Missing dialog header [\#4397](https://github.com/primefaces/primereact/issues/4397)
+- Autocomplete: multiple + forceSelection  [\#4363](https://github.com/primefaces/primereact/issues/4363)
+- DataTable: resizableColumns with stateStorage will not adjust saved column width after refresh. [\#4211](https://github.com/primefaces/primereact/issues/4211)
+- Autocomplete clears selected values onBlur when forceSelection and multiple are true [\#4203](https://github.com/primefaces/primereact/issues/4203)
+- Dropdown: rendering problem when used in a Dialog [\#2683](https://github.com/primefaces/primereact/issues/2683)
+
 ## [9.4.0](https://github.com/primefaces/primereact/tree/9.4.0) (2023-05-12)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.3.1...9.4.0)
