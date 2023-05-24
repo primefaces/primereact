@@ -5742,6 +5742,12 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+.p-message .p-message-summary {
+  font-weight: 700;
+}
+.p-message .p-message-detail {
+  margin-left: 0.5rem;
+}
 
 .p-toast {
   opacity: 1;
