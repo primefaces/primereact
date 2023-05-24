@@ -58,11 +58,6 @@ export default function Config(props) {
                     <InputSwitch checked={props.ripple} onChange={(e) => props.onRippleChange(e.value)} />
                 </section>
 
-                <section className="mb-5">
-                    <h3>Hide Overlays OnScroll</h3>
-                    <InputSwitch checked={props.hideOverlaysOnDocumentScrolling} onChange={(e) => props.onHideOverlaysOnDocumentScrolling(e.value)} />
-                </section>
-
                 <section>
                     <h3>Themes</h3>
                     <h4>Bootstrap</h4>

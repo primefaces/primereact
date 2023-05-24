@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as React from 'react';
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { usePrevious } from './usePrevious';
 import { useUnmountEffect } from './useUnmountEffect';

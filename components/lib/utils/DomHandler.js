@@ -514,7 +514,7 @@ export default class DomHandler {
         return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
-    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = true) {
+    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
         let scrollableParents = [];
 
         if (element) {
@@ -530,9 +530,9 @@ export default class DomHandler {
             };
 
             const addScrollableParent = (node) => {
-                if (hideOverlaysOnDocumentScrolling && (node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9)) {
+                if (hideOverlaysOnDocumentScrolling) {
                     // nodeType 9 is for document element
-                    scrollableParents.push(window);
+                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
                 } else {
                     scrollableParents.push(node);
                 }

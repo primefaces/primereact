@@ -1,4 +1,4 @@
-import PrimeReact from '../api/PrimeReact';
+import PrimeReact from '../api/Api';
 import DomHandler from './DomHandler';
 
 export default class ConnectedOverlayScrollHandler {

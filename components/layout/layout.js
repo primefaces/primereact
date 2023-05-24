@@ -13,7 +13,6 @@ import Topbar from './topbar';
 export default function Layout(props) {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(true);
-    const [hideOverlaysOnDocumentScrolling, setHideOverlaysOnDocumentScrolling] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
@@ -83,7 +82,6 @@ export default function Layout(props) {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     PrimeReact.ripple = ripple;
-    PrimeReact.hideOverlaysOnDocumentScrolling = hideOverlaysOnDocumentScrolling;
 
     return (
         <div className={wrapperClassName}>
@@ -112,7 +110,6 @@ export default function Layout(props) {
                 value={{
                     ripple: ripple,
                     inputStyle: inputStyle,
-                    hideOverlaysOnDocumentScrolling: hideOverlaysOnDocumentScrolling,
                     darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
                     onRippleChange: onRippleChange,
@@ -128,7 +125,6 @@ export default function Layout(props) {
                 <Config
                     ripple={ripple}
                     inputStyle={inputStyle}
-                    hideOverlaysOnDocumentScrolling={hideOverlaysOnDocumentScrolling}
                     onRippleChange={onRippleChange}
                     onHideOverlaysOnDocumentScrolling={onHideOverlaysOnDocumentScrolling}
                     onInputStyleChange={onInputStyleChange}
