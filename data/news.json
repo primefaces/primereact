@@ -1,6 +1,6 @@
 {
-    "id": 32,
-    "content": "v9.4.0 is out!",
+    "id": 33,
+    "content": "v9.5.0 is out with new Pass Through feature!",
     "linkText": "Learn More",
     "linkHref": "https://github.com/primefaces/primereact/blob/master/CHANGELOG.md",
     "backgroundStyle": "background-color:#07c4e8",
