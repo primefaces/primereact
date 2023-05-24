@@ -97,6 +97,15 @@ export const ToggleButton = React.memo(
             ptm('label')
         );
 
+        const tooltipProps = mergeProps(
+            {
+                target: elementRef,
+                content: props.tooltip,
+                ...props.tooltipOptions
+            },
+            ptm('tooltip')
+        );
+
         const rootProps = mergeProps(
             {
                 ref: elementRef,
@@ -122,7 +131,7 @@ export const ToggleButton = React.memo(
                     <span {...labelProps}>{label}</span>
                     <Ripple />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip {...tooltipProps} />}
             </>
         );
     })

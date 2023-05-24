@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
 
@@ -37,6 +38,11 @@ export interface ToggleButtonPassThroughOptions {
      * Uses to pass attributes to the label's DOM element.
      */
     label?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 /**
  * Custom toggle button change target options

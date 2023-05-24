@@ -35495,6 +35495,13 @@
                             "readonly": false,
                             "type": "ToggleButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
                         }
                     ],
                     "callbacks": []
