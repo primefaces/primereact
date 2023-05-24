@@ -9,8 +9,35 @@
  */
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
 
+export declare type ToggleButtonPassThroughType<T> = PassThroughType<T, ToggleButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ToggleButtonPassThroughMethodOptions {
+    props: ToggleButtonProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ToggleButtonProps.pt}
+ */
+export interface ToggleButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ToggleButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
 /**
  * Custom toggle button change target options
  */
@@ -61,7 +88,7 @@ interface ToggleButtonChangeEvent {
  * Defines valid properties in ToggleButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * Specifies the on/off state of the button.
      * @defaultValue false
@@ -118,6 +145,11 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @param {React.FocusEvent<HTMLElement>} event - Browser event.
      */
     onFocus?(event: React.FocusEvent<HTMLElement>): void;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToggleButtonPassThroughOptions}
+     */
+    pt?: ToggleButtonPassThroughOptions;
 }
 
 /**
