@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/tristatecheckbox/pt/ptdoc';
+import { Wireframe } from '../../components/doc/tristatecheckbox/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tristatecheckbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
@@ -58,8 +61,34 @@ const TriStateCheckboxDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.tristatecheckbox.options',
+            label: 'TriStateCheckbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React TriStateCheckbox Component" header="TriStateCheckbox" description="TriStateCheckbox is an extension to the Checkbox component with an additional state." componentDocs={docs} apiDocs={['TriStateCheckbox']} />;
+    return (
+        <DocComponent
+            title="React TriStateCheckbox Component"
+            header="TriStateCheckbox"
+            description="TriStateCheckbox is an extension to the Checkbox component with an additional state."
+            componentDocs={docs}
+            apiDocs={['TriStateCheckbox']}
+            ptDocs={ptDocs}
+        />
+    );
 };
 
 export default TriStateCheckboxDemo;
