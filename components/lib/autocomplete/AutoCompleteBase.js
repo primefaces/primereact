@@ -48,6 +48,7 @@ export const AutoCompleteBase = {
         optionGroupLabel: null,
         optionGroupTemplate: null,
         panelClassName: null,
+        panelFooterTemplate: null,
         panelStyle: null,
         placeholder: null,
         readOnly: false,

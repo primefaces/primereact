@@ -78,7 +78,7 @@ exports[`Chip when removable is true it returns with remove icon: before remove 
       xmlns="http://www.w3.org/2000/svg"
     >
       <g
-        clip-path="url(#clip0_334_13179)"
+        clip-path="url(#pr_icon_clip_1)"
       >
         <path
           clip-rule="evenodd"
@@ -89,7 +89,7 @@ exports[`Chip when removable is true it returns with remove icon: before remove 
       </g>
       <defs>
         <clippath
-          id="clip0_334_13179"
+          id="pr_icon_clip_1"
         >
           <rect
             fill="white"
@@ -121,7 +121,7 @@ exports[`Chip when removable is true the chip is removed when ENTER is pressed: 
       xmlns="http://www.w3.org/2000/svg"
     >
       <g
-        clip-path="url(#clip0_334_13179)"
+        clip-path="url(#pr_icon_clip_2)"
       >
         <path
           clip-rule="evenodd"
@@ -132,7 +132,7 @@ exports[`Chip when removable is true the chip is removed when ENTER is pressed: 
       </g>
       <defs>
         <clippath
-          id="clip0_334_13179"
+          id="pr_icon_clip_2"
         >
           <rect
             fill="white"

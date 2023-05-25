@@ -4,7 +4,7 @@ import { useMountEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
 
 export const TriStateCheckbox = React.memo(
@@ -13,6 +13,13 @@ export const TriStateCheckbox = React.memo(
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
+
+        const { ptm } = TriStateCheckboxBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
@@ -83,32 +90,82 @@ export const TriStateCheckbox = React.memo(
             'p-focus': focusedState
         });
         const iconClassName = 'p-checkbox-icon p-c';
+        const checkIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('checkIcon')
+        );
+        const uncheckIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('uncheckIcon')
+        );
+
         let icon;
 
         if (props.value === false) {
-            icon = props.uncheckIcon || <TimesIcon className={iconClassName} />;
+            icon = props.uncheckIcon || <TimesIcon {...uncheckIconProps} />;
         } else if (props.value === true) {
-            icon = props.checkIcon || <CheckIcon className={iconClassName} />;
+            icon = props.checkIcon || <CheckIcon {...checkIconProps} />;
         }
 
-        const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const checkIcon = IconUtils.getJSXIcon(icon, { ...checkIconProps }, { props });
 
         const ariaValueLabel = props.value ? ariaLabel('trueLabel') : props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
         const ariaChecked = props.value ? 'true' : 'false';
 
+        const checkboxProps = mergeProps(
+            {
+                className: boxClassName,
+                tabIndex: props.tabIndex,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                role: 'checkbox',
+                'aria-checked': ariaChecked,
+                ...ariaProps
+            },
+            ptm('checkbox')
+        );
+
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
+        const tooltipProps = mergeProps(
+            {
+                target: elementRef,
+                content: props.tooltip,
+                ...props.tooltipOptions
+            },
+            ptm('tooltip')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: className,
+                style: props.style,
+                onClick: onClick
+            },
+            TriStateCheckboxBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
-                        {checkIcon}
-                    </div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                <div {...rootProps}>
+                    <div {...checkboxProps}>{checkIcon}</div>
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip {...tooltipProps} />}
             </>
         );
     })

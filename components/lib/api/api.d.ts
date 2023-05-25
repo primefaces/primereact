@@ -26,16 +26,17 @@ export interface FilterMatchModeOptions {
 }
 
 export interface APIOptions {
-    ripple?: boolean;
-    inputStyle?: InputStyleType;
-    nonce?: string;
-    locale?: string;
     appendTo?: AppendToType;
-    cssTransition?: boolean;
     autoZIndex?: boolean;
-    zIndex?: ZIndexOptions;
+    cssTransition?: boolean;
     filterMatchModeOptions?: FilterMatchModeOptions;
+    hideOverlaysOnViewportChange?: boolean;
+    inputStyle?: InputStyleType;
+    locale?: string;
+    nonce?: string;
     nullSortOrder?: number;
+    ripple?: boolean;
+    zIndex?: ZIndexOptions;
     changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
 }
 

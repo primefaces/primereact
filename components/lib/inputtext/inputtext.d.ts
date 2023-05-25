@@ -10,6 +10,33 @@
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+
+export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InputTextPassThroughMethodOptions {
+    props: InputTextProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InputTextProps.pt}
+ */
+export interface InputTextPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InputTextPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
 
 /**
  * Defines valid properties in InputText component. In addition to these, all properties of HTMLInputElement can be used in this component.
@@ -49,6 +76,11 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputTextPassThroughOptions}
+     */
+    pt?: InputTextPassThroughOptions;
 }
 
 /**

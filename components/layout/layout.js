@@ -52,6 +52,10 @@ export default function Layout(props) {
         setRipple(value);
     };
 
+    const onHideOverlaysOnDocumentScrolling = (value) => {
+        setHideOverlaysOnDocumentScrolling(value);
+    };
+
     const onConfigHide = () => {
         setConfigActive(false);
     };
@@ -77,7 +81,7 @@ export default function Layout(props) {
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    PrimeReact.ripple = true;
+    PrimeReact.ripple = ripple;
 
     return (
         <div className={wrapperClassName}>
@@ -108,7 +112,8 @@ export default function Layout(props) {
                     inputStyle: inputStyle,
                     darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
-                    onRippleChange: onRippleChange
+                    onRippleChange: onRippleChange,
+                    onHideOverlaysOnDocumentScrolling: onHideOverlaysOnDocumentScrolling
                 }}
             >
                 <div className="layout-content">
@@ -117,7 +122,16 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} active={configActive} onHide={onConfigHide} />
+                <Config
+                    ripple={ripple}
+                    inputStyle={inputStyle}
+                    onRippleChange={onRippleChange}
+                    onHideOverlaysOnDocumentScrolling={onHideOverlaysOnDocumentScrolling}
+                    onInputStyleChange={onInputStyleChange}
+                    onThemeChange={onThemeChange}
+                    active={configActive}
+                    onHide={onConfigHide}
+                />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>

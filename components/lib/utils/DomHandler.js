@@ -514,7 +514,7 @@ export default class DomHandler {
         return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
-    static getScrollableParents(element) {
+    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
         let scrollableParents = [];
 
         if (element) {
@@ -529,6 +529,15 @@ export default class DomHandler {
                 );
             };
 
+            const addScrollableParent = (node) => {
+                if (hideOverlaysOnDocumentScrolling) {
+                    // nodeType 9 is for document element
+                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
+                } else {
+                    scrollableParents.push(node);
+                }
+            };
+
             for (let parent of parents) {
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
 
@@ -539,15 +548,20 @@ export default class DomHandler {
                         let el = this.findSingle(parent, selector);
 
                         if (el && overflowCheck(el)) {
-                            scrollableParents.push(el);
+                            addScrollableParent(el);
                         }
                     }
                 }
 
                 if (parent.nodeType === 1 && overflowCheck(parent)) {
-                    scrollableParents.push(parent);
+                    addScrollableParent(parent);
                 }
             }
+        }
+
+        // if no parents make it the window
+        if (scrollableParents.length === 0) {
+            scrollableParents.push(window);
         }
 
         return scrollableParents;

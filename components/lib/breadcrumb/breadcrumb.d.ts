@@ -50,6 +50,10 @@ export interface BreadCrumbPassThroughOptions {
      */
     label?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
      * Uses to pass attributes to the separator icon's DOM element.
      */
     separatorIcon?: BreadCrumbPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;

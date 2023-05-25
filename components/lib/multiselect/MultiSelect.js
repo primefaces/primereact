@@ -577,16 +577,15 @@ export const MultiSelect = React.memo(
         });
 
         const createClearIcon = () => {
-            const iconClassName = 'p-icon p-multiselect-clear-icon';
-            const icon = props.clearIcon || <TimesIcon className={iconClassName} />;
-            const clearIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const clearIconProps = {
+                className: 'p-multiselect-clear-icon',
+                onClick: (e) => updateModel(e, null, null)
+            };
+            const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
+            const clearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
 
             if (!empty && props.showClear && !props.disabled) {
-                return (
-                    <i className={iconClassName} onClick={(e) => updateModel(e, null, null)}>
-                        {clearIcon}
-                    </i>
-                );
+                return clearIcon;
             }
 
             return null;
