@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const InputTextBase = {
+export const InputTextBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputText',
         keyfilter: null,
@@ -11,7 +11,5 @@ export const InputTextBase = {
         onKeyDown: null,
         onPaste: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, InputTextBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, InputTextBase.defaultProps)
-};
+    }
+});

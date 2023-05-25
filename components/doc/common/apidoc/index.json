@@ -21333,6 +21333,14 @@
                             "type": "string",
                             "default": "",
                             "description": "The value of component"
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -22258,6 +22266,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -22284,6 +22300,53 @@
                             "description": "Callback to invoke while typing value on input"
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "InputTextPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputTextProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InputTextPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes to the Tooltip component."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "InputTextPassThroughType": {
+                    "values": "PassThroughType<T, InputTextPassThroughMethodOptions>"
                 }
             }
         }
