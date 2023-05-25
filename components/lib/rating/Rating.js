@@ -3,7 +3,7 @@ import { BanIcon } from '../icons/ban';
 import { StarIcon } from '../icons/star';
 import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
 
 export const Rating = React.memo(
@@ -11,6 +11,18 @@ export const Rating = React.memo(
         const props = RatingBase.getProps(inProps);
 
         const elementRef = React.useRef(null);
+        const { ptm } = RatingBase.setMetaData({
+            props
+        });
+
+        const getPTOptions = (value, key) => {
+            return ptm(key, {
+                context: {
+                    active: value <= props.value
+                }
+            });
+        };
+
         const enabled = !props.disabled && !props.readOnly;
         const tabIndex = enabled ? 0 : null;
 
@@ -75,11 +87,34 @@ export const Rating = React.memo(
                 const active = value <= props.value;
                 const className = classNames('p-rating-item', { 'p-rating-item-active': active });
                 const iconClassName = 'p-rating-icon';
-                const icon = active ? { type: props.onIcon || <StarFillIcon className={iconClassName} /> } : { type: props.offIcon || <StarIcon className={iconClassName} /> };
-                const content = IconUtils.getJSXIcon(icon.type, { className: iconClassName, ...icon.props }, { props });
+                const onIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    getPTOptions(props.value, 'onIcon')
+                );
+                const offIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    getPTOptions(props.value, 'offIcon')
+                );
+                const icon = active ? { type: props.onIcon || <StarFillIcon {...onIconProps} /> } : { type: props.offIcon || <StarIcon {...offIconProps} /> };
+                const content = IconUtils.getJSXIcon(icon.type, { ...icon.props }, { props });
+
+                const itemProps = mergeProps(
+                    {
+                        key: value,
+                        className: className,
+                        tabIndex: tabIndex,
+                        onClick: (e) => rate(e, value),
+                        onKeyDown: (e) => onStarKeyDown(e, value)
+                    },
+                    getPTOptions(props.value, 'item')
+                );
 
                 return (
-                    <div key={value} className={className} tabIndex={tabIndex} onClick={(e) => rate(e, value)} onKeyDown={(e) => onStarKeyDown(e, value)}>
+                    <div key={value} {...itemProps}>
                         {content}
                     </div>
                 );
@@ -89,14 +124,26 @@ export const Rating = React.memo(
         const createCancelIcon = () => {
             if (props.cancel) {
                 const iconClassName = 'p-rating-icon p-rating-cancel';
-                const icon = props.cancelIcon || <BanIcon className={iconClassName} />;
-                const content = IconUtils.getJSXIcon(icon, { className: { iconClassName }, ...props.cancelIconProps }, { props });
-
-                return (
-                    <div className="p-rating-item p-rating-cancel-item" onClick={clear} tabIndex={tabIndex} onKeyDown={onCancelKeyDown}>
-                        {content}
-                    </div>
+                const cancelIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    ptm('cancelIcon')
                 );
+                const icon = props.cancelIcon || <BanIcon {...cancelIconProps} />;
+                const content = IconUtils.getJSXIcon(icon, { ...cancelIconProps, ...props.cancelIconProps }, { props });
+
+                const cancelItemProps = mergeProps(
+                    {
+                        className: 'p-rating-item p-rating-cancel-item',
+                        onClick: clear,
+                        tabIndex: tabIndex,
+                        onKeyDown: onCancelKeyDown
+                    },
+                    ptm('cancelItem')
+                );
+
+                return <div {...cancelItemProps}>{content}</div>;
             }
 
             return null;
@@ -108,7 +155,6 @@ export const Rating = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = RatingBase.getOtherProps(props);
         const className = classNames(
             'p-rating',
             {
@@ -117,16 +163,37 @@ export const Rating = React.memo(
             },
             props.className
         );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: className,
+                style: props.style
+            },
+            RatingBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const tooltipProps = mergeProps(
+            {
+                target: elementRef,
+                content: props.tooltip,
+                ...props.tooltipOptions
+            },
+            ptm('tooltip')
+        );
+
         const cancelIcon = createCancelIcon();
         const icons = createIcons();
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     {cancelIcon}
                     {icons}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip {...tooltipProps} />}
             </>
         );
     })
