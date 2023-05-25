@@ -355,9 +355,9 @@ export default function BasicFilterDemo() {
         typescript: `
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
-import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { FilterMatchMode } from 'primereact/api';
 import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
@@ -365,26 +365,31 @@ import { Tag } from 'primereact/tag';
 import { TriStateCheckbox, TriStateCheckboxChangeEvent } from 'primereact/tristatecheckbox';
 import { CustomerService } from './service/CustomerService';
 
-interface RepresentativeOption {
+interface Representative {
+  name: string;
+  image: string;
+}
+
+interface Country {
     name: string;
-    image: string;
+    code: string;
 }
 
 interface Customer {
-    id: number;
-    name: string;
-    country: Country;
-    company: string;
-    date: string;
-    status: string;
-    verified: boolean;
-    activity: number;
-    representative: Representative;
-    balance: number;
+  id: number;
+  name: string;
+  country: Country;
+  company: string;
+  date: string;
+  status: string;
+  verified: boolean;
+  activity: number;
+  representative: Representative;
+  balance: number;
 }
 
 export default function BasicFilterDemo() {
-    const [customers, setCustomers] = useState<Customer[] | null>(null);
+    const [customers, setCustomers] = useState<Customer[]>([]);
     const [filters, setFilters] = useState<DataTableFilterMeta>({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
         name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -395,7 +400,7 @@ export default function BasicFilterDemo() {
     });
     const [loading, setLoading] = useState<boolean>(true);
     const [globalFilterValue, setGlobalFilterValue] = useState<string>('');
-    const [representatives] = useState<RepresentativeOption[]>([
+    const [representatives] = useState<Representative[]>([
         { name: 'Amy Elsner', image: 'amyelsner.png' },
         { name: 'Anna Fali', image: 'annafali.png' },
         { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
@@ -407,7 +412,7 @@ export default function BasicFilterDemo() {
         { name: 'Stephen Shaw', image: 'stephenshaw.png' },
         { name: 'XuXue Feng', image: 'xuxuefeng.png' }
     ]);
-    const [statuses] = useState<string>(['unqualified', 'qualified', 'new', 'negotiation', 'renewal']);
+    const [statuses] = useState<string[]>(['unqualified', 'qualified', 'new', 'negotiation', 'renewal']);
 
     const getSeverity = (status: string) => {
         switch (status) {
@@ -437,6 +442,7 @@ export default function BasicFilterDemo() {
 
     const getCustomers = (data: Customer[]) => {
         return [...(data || [])].map((d) => {
+            // @ts-ignore
             d.date = new Date(d.date);
 
             return d;
@@ -447,6 +453,7 @@ export default function BasicFilterDemo() {
         const value = e.target.value;
         let _filters = { ...filters };
 
+        // @ts-ignore
         _filters['global'].value = value;
 
         setFilters(_filters);
@@ -484,7 +491,7 @@ export default function BasicFilterDemo() {
         );
     };
 
-    const representativesItemTemplate = (option: RepresentativeOption) => {
+    const representativesItemTemplate = (option: Representative) => {
         return (
             <div className="flex align-items-center gap-2">
                 <img alt={option.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${option.image}\`} width="32" />
