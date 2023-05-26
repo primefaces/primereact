@@ -7342,6 +7342,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipsPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -7522,7 +7530,7 @@
                 },
                 "ChipsPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "ChipsProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -16342,6 +16350,88 @@
                             "description": "Source of change. Will be either \"user\" or \"api\"."
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "EditorPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "EditorProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "EditorPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "EditorProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "toolbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the toolbar's DOM element."
+                        },
+                        {
+                            "name": "formats",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the formats's DOM element."
+                        },
+                        {
+                            "name": "select",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the select's DOM element."
+                        },
+                        {
+                            "name": "option",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the option's DOM element."
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the button's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughType<HTMLAttributes<HTMLElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "EditorPassThroughType": {
+                    "values": "PassThroughType<T, EditorPassThroughMethodOptions>"
                 }
             }
         }
