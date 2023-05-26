@@ -11,7 +11,69 @@ import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+
+export declare type ChipsPassThroughType<T> = PassThroughType<T, ChipsPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ChipsPassThroughMethodOptions {
+    props: ChipsProps;
+    state: ChipsState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ChipsProps.pt}
+ */
+export interface ChipsPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ChipsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: ChipsPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the token's DOM element.
+     */
+    token?: ChipsPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ChipsPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the remove token icon's DOM element.
+     */
+    removeTokenIcon?: ChipsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the input token's DOM element.
+     */
+    inputToken?: ChipsPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: ChipsPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in Chips component.
+ */
+export interface ChipsState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * @group Others
