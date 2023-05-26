@@ -8,8 +8,57 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type MultiStateCheckboxPassThroughType<T> = PassThroughType<T, MultiStateCheckboxPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MultiStateCheckboxPassThroughMethodOptions {
+    props: MultiStateCheckboxProps;
+    state: MultiStateCheckboxState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MultiStateCheckboxProps.pt}
+ */
+export interface MultiStateCheckboxPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox box's DOM element.
+     */
+    checkbox?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MultiStateCheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the sr only aria's DOM element.
+     */
+    srOnlyAria?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Defines current inline state in MultiStateCheckbox component.
+ */
+export interface MultiStateCheckboxState {
+    /**
+     * Focused state as a boolean.
+     */
+    focused: boolean;
+}
 
 /**
  * Custom MultiStateCheckbox option.
