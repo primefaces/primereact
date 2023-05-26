@@ -24309,6 +24309,14 @@
                             "type": "string | string[]",
                             "default": "\"@\"",
                             "description": "Set trigger keyword."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -24464,6 +24472,116 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "MentionPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MentionProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MentionState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MentionPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the InputTextarea component."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "items",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the items' DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MentionState": {
+                    "description": "Defines current inline state in Mention component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "overlayVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current overlay visible state as a boolean."
+                        },
+                        {
+                            "name": "searching",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current search state as a boolean."
+                        },
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
+                        },
+                        {
+                            "name": "trigger",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Current trigger state."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "MentionContext": {
+                    "description": "Defines current options in Mention component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "trigger",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Current trigger state."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "MentionItemTemplateOptions": {
                     "description": "",
                     "relatedProp": "",
@@ -24484,6 +24602,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "MentionPassThroughType": {
+                    "values": "PassThroughType<T, MentionPassThroughMethodOptions>"
                 }
             }
         }
