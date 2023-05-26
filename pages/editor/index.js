@@ -68,24 +68,23 @@ const EditorDemo = () => {
             component: AccessibilityDoc
         }
     ];
-const ptDocs = [
-    {
-        id: 'pt.wireframe',
-        label: 'Wireframe',
-        component: Wireframe
-    },
-    {
-        id: 'pt.editor.options',
-        label: 'Editor PT Options',
-        component: DocApiTable
-    },
-    {
-        id: 'pt.demo',
-        label: 'Example',
-        component: PTDoc
-    }
-];
-
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.editor.options',
+            label: 'Editor PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
     return <DocComponent title="React Editor Component" header="Editor" description="Editor is rich text editor component based on Quill." componentDocs={docs} apiDocs={['Editor']} ptDocs={ptDocs} />;
 };

@@ -144,7 +144,7 @@ export const Editor = React.memo(
             const toolbarProps = mergeProps(
                 {
                     ref: toolbarRef,
-                    className: "p-editor-toolbar"
+                    className: 'p-editor-toolbar'
                 },
                 ptm('toolbar')
             );
@@ -152,63 +152,52 @@ export const Editor = React.memo(
             if (props.showHeader === false) {
                 return null;
             } else if (props.headerTemplate) {
-                return (
-                    <div {...toolbarProps}>
-                        {props.headerTemplate}
-                    </div>
-                );
+                return <div {...toolbarProps}>{props.headerTemplate}</div>;
             } else {
+                const getMergeProps = (params, key) => mergeProps(params && { ...params }, ptm(key));
 
-                const getMergeProps = (params, key) => mergeProps(
-                    params && { ...params },
-                    ptm(key)
-                );
-
-                const formatsProps = mergeProps(
-                    { className: "ql-formats" },
-                    ptm('formats')
-                );
+                const formatsProps = mergeProps({ className: 'ql-formats' }, ptm('formats'));
 
                 return (
                     <div {...toolbarProps}>
                         <span {...formatsProps}>
-                            <select {...getMergeProps({ className: "ql-header", defaultValue: "0" }, 'select')}>
-                                <option {...getMergeProps({ value: "1" }, 'option')}>Heading</option>
-                                <option {...getMergeProps({ value: "2" }, 'option')}>Subheading</option>
-                                <option {...getMergeProps({ value: "0" }, 'option')}>Normal</option>
+                            <select {...getMergeProps({ className: 'ql-header', defaultValue: '0' }, 'select')}>
+                                <option {...getMergeProps({ value: '1' }, 'option')}>Heading</option>
+                                <option {...getMergeProps({ value: '2' }, 'option')}>Subheading</option>
+                                <option {...getMergeProps({ value: '0' }, 'option')}>Normal</option>
                             </select>
-                            <select {...getMergeProps({ className: "ql-font" }, 'select')}>
+                            <select {...getMergeProps({ className: 'ql-font' }, 'select')}>
                                 <option {...getMergeProps(undefined, 'option')}></option>
-                                <option {...getMergeProps({ value: "serif" }, 'option')}></option>
-                                <option {...getMergeProps({ value: "monospace" }, 'option')}></option>
+                                <option {...getMergeProps({ value: 'serif' }, 'option')}></option>
+                                <option {...getMergeProps({ value: 'monospace' }, 'option')}></option>
                             </select>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: "button", className: "ql-bold", 'aria-label': "Bold" }, 'button')}></button>
-                            <button {...getMergeProps({ type: "button", className: "ql-italic", 'aria-label': "Italic" }, 'button')}></button>
-                            <button {...getMergeProps({ type: "button", className: "ql-underline", 'aria-label': "Underline" }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-bold', 'aria-label': 'Bold' }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-italic', 'aria-label': 'Italic' }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-underline', 'aria-label': 'Underline' }, 'button')}></button>
                         </span>
                         <span {...formatsProps}>
-                            <select {...getMergeProps({ className: "ql-color" }, 'select')}></select>
-                            <select {...getMergeProps({ className: "ql-background" }, 'select')}></select>
+                            <select {...getMergeProps({ className: 'ql-color' }, 'select')}></select>
+                            <select {...getMergeProps({ className: 'ql-background' }, 'select')}></select>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: "button", className: "ql-list", value: 'ordered', 'aria-label': "Ordered List" }, 'button')}></button>
-                            <button {...getMergeProps({ type: "button", className: "ql-list", value: 'bullet', 'aria-label': "Unordered List" }, 'button')}></button>
-                            <select {...getMergeProps({ className: "ql-align" }, 'select')}>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'ordered', 'aria-label': 'Ordered List' }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'bullet', 'aria-label': 'Unordered List' }, 'button')}></button>
+                            <select {...getMergeProps({ className: 'ql-align' }, 'select')}>
                                 <option {...getMergeProps({ defaultValue: true }, 'option')}></option>
-                                <option {...getMergeProps({ value: "center" }, 'option')}></option>
-                                <option {...getMergeProps({ value: "right" }, 'option')}></option>
-                                <option {...getMergeProps({ value: "justify" }, 'option')}></option>
+                                <option {...getMergeProps({ value: 'center' }, 'option')}></option>
+                                <option {...getMergeProps({ value: 'right' }, 'option')}></option>
+                                <option {...getMergeProps({ value: 'justify' }, 'option')}></option>
                             </select>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: "button", className: "ql-link", 'aria-label': "Insert Link" }, 'button')}></button>
-                            <button {...getMergeProps({ type: "button", className: "ql-image", 'aria-label': "Insert Image" }, 'button')}></button>
-                            <button {...getMergeProps({ type: "button", className: "ql-code-block", 'aria-label': "Insert Code Block" }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-link', 'aria-label': 'Insert Link' }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-image', 'aria-label': 'Insert Image' }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-code-block', 'aria-label': 'Insert Code Block' }, 'button')}></button>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: "button", className: "ql-clean", 'aria-label': "Remove Styles" }, 'button')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-clean', 'aria-label': 'Remove Styles' }, 'button')}></button>
                         </span>
                     </div>
                 );
@@ -220,17 +209,17 @@ export const Editor = React.memo(
         const contentProps = mergeProps(
             {
                 ref: contentRef,
-                className: "p-editor-content",
+                className: 'p-editor-content',
                 style: props.style
             },
             ptm('content')
-        )
+        );
         const content = <div {...contentProps}></div>;
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className
             },
             EditorBase.getOtherProps(props),
             ptm('root')
