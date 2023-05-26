@@ -257,6 +257,11 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ChipsPassThroughOptions}
+     */
+    pt?: ChipsPassThroughOptions;
 }
 
 /**
