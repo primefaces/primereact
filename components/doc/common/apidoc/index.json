@@ -6229,7 +6229,7 @@
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
-                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "type": "CascadeSelectPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         }
