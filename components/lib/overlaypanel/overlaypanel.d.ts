@@ -115,6 +115,11 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {OverlayPanelPassThroughOptions}
+     */
+    pt?: OverlayPanelPassThroughOptions;
 }
 
 /**
