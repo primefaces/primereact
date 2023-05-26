@@ -22633,6 +22633,74 @@
                     ]
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "KnobPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "KnobProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "KnobPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "KnobProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "svg",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughType<SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the svg's DOM element."
+                        },
+                        {
+                            "name": "range",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughType<SVGProps<SVGPathElement>>",
+                            "description": "Uses to pass attributes to the range's DOM element."
+                        },
+                        {
+                            "name": "value",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughType<SVGProps<SVGPathElement>>",
+                            "description": "Uses to pass attributes to the value' DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughType<SVGProps<SVGTextElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "KnobPassThroughType": {
+                    "values": "PassThroughType<T, KnobPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "listbox": {

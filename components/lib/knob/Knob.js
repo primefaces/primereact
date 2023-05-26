@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
 
 const radius = 40;
@@ -12,7 +12,9 @@ const maxRadians = -Math.PI / 3;
 export const Knob = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = KnobBase.getProps(inProps);
-
+        const { ptm } = KnobBase.setMetaData({
+            props
+        });
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
 
@@ -159,17 +161,73 @@ export const Knob = React.memo(
             },
             props.className
         );
+        const labelProps = mergeProps(
+            {
+                x: 50,
+                y: 57,
+                textAnchor: 'middle',
+                fill: props.textColor,
+                className: 'p-knob-text',
+                name: props.name
+            },
+            ptm('label')
+        );
+
         const text = props.showValue && (
-            <text x={50} y={57} textAnchor={'middle'} fill={props.textColor} className={'p-knob-text'} name={props.name}>
+            <text {...labelProps}>
                 {valueToDisplay()}
             </text>
         );
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className,
+                style: props.style
+            },
+            ptm('root')
+        );
+
+        const svgProps = mergeProps(
+            {
+                viewBox: "0 0 100 100",
+                width: props.size,
+                height: props.size,
+                onClick: (e) => onClick(e),
+                onMouseDown: (e) => onMouseDown(e),
+                onMouseUp: (e) => onMouseUp(e),
+                onTouchStart: (e) => onTouchStart(e),
+                onTouchEnd: (e) => onTouchEnd(e)
+            },
+            ptm('svg')
+        );
+
+        const rangeProps = mergeProps(
+            {
+                d: rangePath,
+                strokeWidth: props.strokeWidth,
+                stroke: props.rangeColor,
+                className: 'p-knob-range'
+            },
+            ptm('range')
+        );
+
+        const valueProps = mergeProps(
+            {
+                d: valuePath,
+                strokeWidth: props.strokeWidth,
+                stroke: props.valueColor,
+                className: 'p-knob-value'
+            },
+            ptm('value')
+        );
+
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-                <svg viewBox="0 0 100 100" width={props.size} height={props.size} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-                    <path d={rangePath} strokeWidth={props.strokeWidth} stroke={props.rangeColor} className={'p-knob-range'}></path>
-                    <path d={valuePath} strokeWidth={props.strokeWidth} stroke={props.valueColor} className={'p-knob-value'}></path>
+            <div {...rootProps}>
+                <svg {...svgProps}>
+                    <path {...rangeProps}></path>
+                    <path {...valueProps}></path>
                     {text}
                 </svg>
             </div>
