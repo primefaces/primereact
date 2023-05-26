@@ -1,4 +1,5 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
 import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
@@ -10,6 +11,8 @@ import { HookFormDoc } from '../../components/doc/inputtextarea/form/hookformdoc
 import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
 import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
+import { PTDoc } from '../../components/doc/inputtextarea/pt/ptdoc';
+import { Wireframe } from '../../components/doc/inputtextarea/pt/wireframe';
 import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
 
 const InputTextareaDemo = () => {
@@ -77,8 +80,25 @@ const InputTextareaDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.inputtextarea.options',
+            label: 'InputTextarea PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Textarea Component" header="InputTextarea" description="InputTextarea adds styling and autoResize functionality to standard textarea element." componentDocs={docs} apiDocs={['InputTextarea']} />;
+    return <DocComponent title="React Textarea Component" header="InputTextarea" description="InputTextarea adds styling and autoResize functionality to standard textarea element." componentDocs={docs} apiDocs={['InputTextarea']} ptDocs={ptDocs} />;
 };
 
 export default InputTextareaDemo;
