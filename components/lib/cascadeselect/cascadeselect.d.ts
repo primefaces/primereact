@@ -270,7 +270,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * Uses to pass attributes to DOM elements inside the component.
      * @type {CascadeSelectPassThroughOptions}
      */
-    pt?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    pt?: CascadeSelectPassThroughOptions;
 }
 
 /**
