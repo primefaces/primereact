@@ -22593,6 +22593,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -22652,7 +22660,7 @@
                 },
                 "KnobPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "KnobProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
