@@ -1,4 +1,5 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
 import { DisabledDoc } from '../../components/doc/radiobutton/disableddoc';
@@ -8,6 +9,8 @@ import { HookFormDoc } from '../../components/doc/radiobutton/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
 import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
+import { PTDoc } from '../../components/doc/radiobutton/pt/ptdoc';
+import { Wireframe } from '../../components/doc/radiobutton/pt/wireframe';
 import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
 
 const RadioButtonDemo = () => {
@@ -65,8 +68,25 @@ const RadioButtonDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.radiobutton.options',
+            label: 'RadioButton PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React RadioButton Component" header="RadioButton" description="RadioButton is an extension to standard radio button element with theming." componentDocs={docs} apiDocs={['RadioButton']} />;
+    return <DocComponent title="React RadioButton Component" header="RadioButton" description="RadioButton is an extension to standard radio button element with theming." componentDocs={docs} apiDocs={['RadioButton']} ptDocs={ptDocs} />;
 };
 
 export default RadioButtonDemo;
