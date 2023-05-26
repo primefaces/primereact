@@ -153,6 +153,11 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {KnobPassThroughOptions}
+     */
+    pt?: KnobPassThroughOptions;
 }
 
 /**
