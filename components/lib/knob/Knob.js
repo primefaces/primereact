@@ -173,11 +173,7 @@ export const Knob = React.memo(
             ptm('label')
         );
 
-        const text = props.showValue && (
-            <text {...labelProps}>
-                {valueToDisplay()}
-            </text>
-        );
+        const text = props.showValue && <text {...labelProps}>{valueToDisplay()}</text>;
 
         const rootProps = mergeProps(
             {
@@ -191,7 +187,7 @@ export const Knob = React.memo(
 
         const svgProps = mergeProps(
             {
-                viewBox: "0 0 100 100",
+                viewBox: '0 0 100 100',
                 width: props.size,
                 height: props.size,
                 onClick: (e) => onClick(e),
