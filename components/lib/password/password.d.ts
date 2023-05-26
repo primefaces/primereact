@@ -133,7 +133,7 @@ interface PasswordIconEvent {
  * Defines valid properties in Password component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'content'> {
+export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'content' | 'pt'> {
     /**
      * Identifier of the input element.
      */
@@ -262,6 +262,11 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {PasswordPassThroughOptions}
+     */
+    pt?: PasswordPassThroughOptions;
 }
 
 /**
