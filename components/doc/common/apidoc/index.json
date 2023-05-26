@@ -28989,6 +28989,163 @@
                     ]
                 }
             }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "PasswordPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PasswordProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PasswordState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PasswordPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "PasswordProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the InputText component."
+                        },
+                        {
+                            "name": "hideIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the hide icon's DOM element."
+                        },
+                        {
+                            "name": "showIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the show icon's DOM element."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the meter's DOM element."
+                        },
+                        {
+                            "name": "meterLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the meter label's DOM element."
+                        },
+                        {
+                            "name": "info",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the info's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PasswordState": {
+                    "description": "Defines current inline state in Password component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "overlayVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current overlay visible state as a boolean."
+                        },
+                        {
+                            "name": "meter",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PasswordMeterStateOptions",
+                            "description": "Current overlay visible state as a boolean."
+                        },
+                        {
+                            "name": "infoText",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current info test state as a string."
+                        },
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
+                        },
+                        {
+                            "name": "unmasked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current unmasked state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PasswordMeterStateOptions": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "strength",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current strength of the meter state as a string."
+                        },
+                        {
+                            "name": "width",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current width of the meter state as a string."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "PasswordPassThroughType": {
+                    "values": "PassThroughType<T, PasswordPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "picklist": {
