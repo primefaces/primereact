@@ -645,7 +645,7 @@ export const VirtualScroller = React.memo(
                     {
                         ref: spacerRef,
                         style: spacerStyle.current,
-                        className: "p-virtualscroller-spacer"
+                        className: 'p-virtualscroller-spacer'
                     },
                     ptm('spacer')
                 );
@@ -680,11 +680,7 @@ export const VirtualScroller = React.memo(
                 },
                 ptm('content')
             );
-            const content = (
-                <div {...contentProps}>
-                    {items}
-                </div>
-            );
+            const content = <div {...contentProps}>{items}</div>;
 
             if (props.contentTemplate) {
                 const defaultOptions = {

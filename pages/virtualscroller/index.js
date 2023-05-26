@@ -78,7 +78,6 @@ const VirtualScrollerDemo = () => {
         }
     ];
 
-
     return (
         <DocComponent
             title="React Virtual Scroller Component"
