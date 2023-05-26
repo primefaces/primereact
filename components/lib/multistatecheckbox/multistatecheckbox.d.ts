@@ -154,7 +154,7 @@ interface MultiStateCheckboxChangeEvent {
  * Defines valid properties in MultiStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
@@ -221,6 +221,11 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MultiStateCheckboxPassThroughOptions}
+     */
+    pt?: MultiStateCheckboxPassThroughOptions;
 }
 
 /**
