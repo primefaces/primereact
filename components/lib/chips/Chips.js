@@ -241,7 +241,7 @@ export const Chips = React.memo(
             const content = props.itemTemplate ? props.itemTemplate(value) : value;
             const labelProps = mergeProps(
                 {
-                    className: "p-chips-token-label"
+                    className: 'p-chips-token-label'
                 },
                 ptm('label')
             );
@@ -250,7 +250,7 @@ export const Chips = React.memo(
             const tokenProps = mergeProps(
                 {
                     key: index,
-                    className: "p-chips-token p-highlight"
+                    className: 'p-chips-token p-highlight'
                 },
                 ptm('token')
             );
@@ -266,7 +266,7 @@ export const Chips = React.memo(
         const createInput = () => {
             const inputTokenProps = mergeProps(
                 {
-                    className: "p-chips-input-token"
+                    className: 'p-chips-input-token'
                 },
                 ptm('inputToken')
             );
@@ -276,7 +276,7 @@ export const Chips = React.memo(
                     id: props.inputId,
                     ref: inputRef,
                     placeholder: props.placeholder,
-                    type: "text",
+                    type: 'text',
                     name: props.name,
                     disabled: props.disabled || isMaxedOut(),
                     onKeyDown: (e) => onKeyDown(e),
@@ -341,16 +341,14 @@ export const Chips = React.memo(
                 id: props.id,
                 ref: elementRef,
                 className,
-                style: props.style,
+                style: props.style
             },
             ptm('root')
         );
 
         return (
             <>
-                <div {...rootProps}>
-                    {list}
-                </div>
+                <div {...rootProps}>{list}</div>
                 {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );

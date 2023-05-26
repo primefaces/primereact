@@ -147,7 +147,7 @@ export const Checkbox = React.memo(
 
         const hiddenInputWrapperProps = mergeProps(
             {
-                className: "p-hidden-accessible"
+                className: 'p-hidden-accessible'
             },
             ptm('hiddenInputWrapper')
         );
@@ -156,7 +156,7 @@ export const Checkbox = React.memo(
             {
                 id: props.inputId,
                 ref: inputRef,
-                type: "checkbox",
+                type: 'checkbox',
                 name: props.name,
                 tabIndex: props.tabIndex,
                 defaultChecked: checked,
