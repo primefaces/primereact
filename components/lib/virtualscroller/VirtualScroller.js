@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, IconUtils, mergeProps } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
 import { SpinnerIcon } from '../icons/spinner';
 
@@ -20,6 +20,18 @@ export const VirtualScroller = React.memo(
         const [numToleratedItemsState, setNumToleratedItemsState] = React.useState(props.numToleratedItems);
         const [loadingState, setLoadingState] = React.useState(props.loading || false);
         const [loaderArrState, setLoaderArrState] = React.useState([]);
+        const { ptm } = VirtualScrollerBase.setMetaData({
+            props,
+            state: {
+                first: firstState,
+                last: lastState,
+                page: pageState,
+                numItemsInViewport: numItemsInViewportState,
+                numToleratedItems: numToleratedItemsState,
+                loading: loadingState,
+                loaderArr: loaderArrState
+            }
+        });
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
         const spacerRef = React.useRef(null);
@@ -584,8 +596,14 @@ export const VirtualScroller = React.memo(
 
         const createLoader = () => {
             const iconClassName = 'p-virtualscroller-loading-icon';
-            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
-            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const loadingIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
 
             if (!props.loaderDisabled && props.showLoader && loadingState) {
                 const className = classNames('p-virtualscroller-loader', {
@@ -608,7 +626,14 @@ export const VirtualScroller = React.memo(
                     content = ObjectUtils.getJSXElement(props.loaderIconTemplate, defaultContentOptions);
                 }
 
-                return <div className={className}>{content}</div>;
+                const loaderProps = mergeProps(
+                    {
+                        className
+                    },
+                    ptm('loader')
+                );
+
+                return <div {...loaderProps}>{content}</div>;
             }
 
             return null;
@@ -616,7 +641,16 @@ export const VirtualScroller = React.memo(
 
         const createSpacer = () => {
             if (props.showSpacer) {
-                return <div ref={spacerRef} style={spacerStyle.current} className="p-virtualscroller-spacer"></div>;
+                const spacerProps = mergeProps(
+                    {
+                        ref: spacerRef,
+                        style: spacerStyle.current,
+                        className: "p-virtualscroller-spacer"
+                    },
+                    ptm('spacer')
+                );
+
+                return <div {...spacerProps}></div>;
             }
 
             return null;
@@ -638,8 +672,16 @@ export const VirtualScroller = React.memo(
         const createContent = () => {
             const items = createItems();
             const className = classNames('p-virtualscroller-content', { 'p-virtualscroller-loading': loadingState });
+            const contentProps = mergeProps(
+                {
+                    ref: contentRef,
+                    style: contentStyle.current,
+                    className
+                },
+                ptm('content')
+            );
             const content = (
-                <div ref={contentRef} style={contentStyle.current} className={className}>
+                <div {...contentProps}>
                     {items}
                 </div>
             );
@@ -684,7 +726,6 @@ export const VirtualScroller = React.memo(
                 </React.Fragment>
             );
         } else {
-            const otherProps = VirtualScrollerBase.getOtherProps(props);
             const className = classNames(
                 'p-virtualscroller',
                 {
@@ -698,9 +739,20 @@ export const VirtualScroller = React.memo(
             const loader = createLoader();
             const content = createContent();
             const spacer = createSpacer();
+            const rootProps = mergeProps(
+                {
+                    ref: elementRef,
+                    className,
+                    tabIndex: props.tabIndex,
+                    style: props.style,
+                    onScroll: (e) => onScroll(e)
+                },
+                VirtualScrollerBase.getOtherProps(props),
+                ptm('root')
+            );
 
             return (
-                <div ref={elementRef} className={className} tabIndex={props.tabIndex} style={props.style} {...otherProps} onScroll={onScroll}>
+                <div {...rootProps}>
                     {content}
                     {spacer}
                     {loader}

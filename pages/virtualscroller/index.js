@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/virtualscroller/pt/ptdoc';
+import { Wireframe } from '../../components/doc/virtualscroller/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/virtualscroller/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
@@ -57,6 +60,24 @@ const VirtualScrollerDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.virtualscroller.options',
+            label: 'VirtualScroller PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
 
     return (
         <DocComponent
@@ -65,6 +86,7 @@ const VirtualScrollerDemo = () => {
             description="VirtualScroller is a performant approach to render large amounts of data efficiently."
             componentDocs={docs}
             apiDocs={['VirtualScroller']}
+            ptDocs={ptDocs}
             className="virtualscroller-demo"
         />
     );
