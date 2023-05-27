@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const RatingBase = {
+export const RatingBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Rating',
         id: null,
@@ -21,7 +21,5 @@ export const RatingBase = {
         onIconProps: null,
         offIconProps: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, RatingBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, RatingBase.defaultProps)
-};
+    }
+});

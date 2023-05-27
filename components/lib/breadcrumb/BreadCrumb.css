@@ -21,6 +21,11 @@
     align-items: center;
 }
 
+.p-breadcrumb .p-menuitem-separator {
+    display: flex;
+    align-items: center;
+}
+
 .p-breadcrumb::-webkit-scrollbar {
     display: none;
 }

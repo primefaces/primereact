@@ -13,6 +13,8 @@ export default class PrimeReact {
 
     static autoZIndex = true;
 
+    static hideOverlaysOnDocumentScrolling = false;
+
     static nonce = null;
 
     static nullSortOrder = 1;

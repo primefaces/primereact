@@ -1785,9 +1785,9 @@ export const Calendar = React.memo(
                 if (props.minDate.getFullYear() > year) {
                     validMin = false;
                 } else if (props.minDate.getFullYear() === year) {
-                    if (props.minDate.getMonth() > month) {
+                    if (month > -1 && props.minDate.getMonth() > month) {
                         validMin = false;
-                    } else if (props.minDate.getMonth() === month) {
+                    } else if (month > -1 && props.minDate.getMonth() === month) {
                         if (day > 0 && props.minDate.getDate() > day) {
                             validMin = false;
                         }
@@ -1799,9 +1799,9 @@ export const Calendar = React.memo(
                 if (props.maxDate.getFullYear() < year) {
                     validMax = false;
                 } else if (props.maxDate.getFullYear() === year) {
-                    if (props.maxDate.getMonth() < month) {
+                    if (month > -1 && props.maxDate.getMonth() < month) {
                         validMax = false;
-                    } else if (props.maxDate.getMonth() === month) {
+                    } else if (month > -1 && props.maxDate.getMonth() === month) {
                         if (day > 0 && props.maxDate.getDate() < day) {
                             validMax = false;
                         }
@@ -2865,7 +2865,7 @@ export const Calendar = React.memo(
         };
 
         const createMonthViewMonth = (index) => {
-            const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(1, index, currentYear) });
+            const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(0, index, currentYear) });
             const monthNamesShort = localeOption('monthNamesShort', props.locale);
             const monthName = monthNamesShort[index];
 
@@ -3299,7 +3299,7 @@ export const Calendar = React.memo(
                     <div className="p-monthpicker">
                         {monthPickerValues().map((m, i) => {
                             return (
-                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(1, i, currentYear) })}>
+                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) })}>
                                     {m}
                                 </span>
                             );
@@ -3317,11 +3317,7 @@ export const Calendar = React.memo(
                     <div className="p-yearpicker">
                         {yearPickerValues().map((y, i) => {
                             return (
-                                <span
-                                    onClick={(event) => onYearSelect(event, y)}
-                                    key={`year${i + 1}`}
-                                    className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !(isSelectable(0, 0, y) || isSelectable(30, 11, y)) })}
-                                >
+                                <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, -1, y) })}>
                                     {y}
                                 </span>
                             );

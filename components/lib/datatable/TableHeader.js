@@ -69,41 +69,43 @@ export const TableHeader = React.memo((props) => {
             return (
                 isVisible && (
                     <HeaderCell
-                        key={key}
-                        value={props.value}
-                        tableProps={props.tableProps}
-                        column={col}
-                        tabIndex={props.tabIndex}
-                        empty={props.empty}
-                        resizableColumns={props.resizableColumns}
-                        groupRowsBy={props.groupRowsBy}
-                        groupRowSortField={props.groupRowSortField}
-                        sortMode={props.sortMode}
-                        sortIcon={props.sortIcon}
-                        sortField={props.sortField}
-                        sortOrder={props.sortOrder}
-                        multiSortMeta={props.multiSortMeta}
+                        allRowsSelected={props.allRowsSelected}
                         allSortableDisabled={isAllSortableDisabled}
-                        onSortableChange={onSortableChange}
-                        sortableDisabledFields={sortableDisabledFieldsState}
+                        column={col}
+                        empty={props.empty}
+                        filterClearIcon={props.filterClearIcon}
                         filterDisplay={props.filterDisplay}
+                        filterIcon={props.filterIcon}
                         filters={props.filters}
                         filtersStore={props.filtersStore}
-                        onFilterChange={props.onFilterChange}
-                        onFilterApply={props.onFilterApply}
-                        onColumnMouseDown={props.onColumnMouseDown}
-                        onColumnDragStart={props.onColumnDragStart}
-                        onColumnDragOver={props.onColumnDragOver}
+                        groupRowSortField={props.groupRowSortField}
+                        groupRowsBy={props.groupRowsBy}
+                        key={key}
+                        multiSortMeta={props.multiSortMeta}
+                        onColumnCheckboxChange={onCheckboxChange}
                         onColumnDragLeave={props.onColumnDragLeave}
+                        onColumnDragOver={props.onColumnDragOver}
+                        onColumnDragStart={props.onColumnDragStart}
                         onColumnDrop={props.onColumnDrop}
+                        onColumnMouseDown={props.onColumnMouseDown}
                         onColumnResizeStart={props.onColumnResizeStart}
                         onColumnResizerClick={props.onColumnResizerClick}
                         onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
-                        showSelectAll={props.showSelectAll}
-                        allRowsSelected={props.allRowsSelected}
-                        onColumnCheckboxChange={onCheckboxChange}
-                        reorderableColumns={props.reorderableColumns}
+                        onFilterApply={props.onFilterApply}
+                        onFilterChange={props.onFilterChange}
                         onSortChange={props.onSortChange}
+                        onSortableChange={onSortableChange}
+                        reorderableColumns={props.reorderableColumns}
+                        resizableColumns={props.resizableColumns}
+                        showSelectAll={props.showSelectAll}
+                        sortField={props.sortField}
+                        sortIcon={props.sortIcon}
+                        sortMode={props.sortMode}
+                        sortOrder={props.sortOrder}
+                        sortableDisabledFields={sortableDisabledFieldsState}
+                        tabIndex={props.tabIndex}
+                        tableProps={props.tableProps}
+                        value={props.value}
                     />
                 )
             );
