@@ -61,6 +61,7 @@ export const Calendar = React.memo(
         };
 
         const onInputFocus = (event) => {
+
             if (ignoreFocusFunctionality.current) {
                 setFocusedState(true);
                 ignoreFocusFunctionality.current = false;
@@ -2041,14 +2042,14 @@ export const Calendar = React.memo(
             let iFormat;
 
             const lookAhead = (match) => {
-                    const matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
+                const matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
 
-                    if (matches) {
-                        iFormat++;
-                    }
+                if (matches) {
+                    iFormat++;
+                }
 
-                    return matches;
-                },
+                return matches;
+            },
                 formatNumber = (match, value, len) => {
                     let num = '' + value;
 
@@ -3155,6 +3156,53 @@ export const Calendar = React.memo(
             return null;
         };
 
+        const [inputValue, setInputValue] = React.useState('DD-MM-YYYY');
+
+        const setDateFieldSelection = (e) => {
+            const cursorPosition = e.target.selectionStart;
+
+            if (cursorPosition <= 2) e.target.setSelectionRange(0, 2)
+            else if (cursorPosition <= 5) e.target.setSelectionRange(3, 5)
+            else e.target.setSelectionRange(6, 10);
+
+        }
+
+        const onInputClick = (e) => {
+            setDateFieldSelection(e);
+        }
+
+        const checkIfDateValid = (day, month, year) => {
+            return `${day}-${month}-${year}`;
+        }
+
+        const changeDateWithCursor = (e, dateFieldMethod, monthFieldMethod, yearFieldMethod) => {
+            const cursorPosition = e.target.selectionStart;
+
+            if (cursorPosition <= 2) { dateFieldMethod(); e.target.setSelectionRange(0, 2); }
+            else if (cursorPosition <= 5) { monthFieldMethod(); e.target.setSelectionRange(3, 5); }
+            else { yearFieldMethod(); e.target.setSelectionRange(6, 10); }
+        }
+
+        const onInputChange = (e) => {
+            console.log(e);
+            let dateFieldMethod, monthFieldMethod, yearFieldMethod;
+            const [day, month, year] = e.target.value.split('-');
+            let newDay = day, newMonth = month, newYear = year;
+            // for numbers
+
+            if (e.which >= 48 && e.which <= 57) {
+                dateFieldMethod = () => {
+                    if (day === 'DD') newDay = `0${e.target.value}`;
+                    else if (Number(day) < 3 || (Number(day) === 3 && e.target.value < 2)) newDay = `${Number(day) * 10 + e.target.value}`
+                    else newDay = '31'
+                };
+            }
+
+            changeDateWithCursor(e, dateFieldMethod, monthFieldMethod, yearFieldMethod);
+            setInputValue(checkIfDateValid(newDay, newMonth, newYear));
+
+        }
+
         const createInputElement = () => {
             if (!props.inline) {
                 return (
@@ -3179,6 +3227,9 @@ export const Calendar = React.memo(
                         inputMode={props.inputMode}
                         tooltip={props.tooltip}
                         tooltipOptions={props.tooltipOptions}
+                        value={inputValue}
+                        onClick={onInputClick}
+                        onChange={onInputChange}
                     />
                 );
             }
