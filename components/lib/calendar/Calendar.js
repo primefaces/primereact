@@ -950,7 +950,7 @@ export const Calendar = React.memo(
         };
 
         const setNavigationState = (newViewDate) => {
-            if (!props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
+            if (!newViewDate || !props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
                 return;
             }
 
@@ -972,7 +972,7 @@ export const Calendar = React.memo(
                     firstDayOfMonth.setMonth(11, 1);
                     firstDayOfMonth.setFullYear(firstDayOfMonth.getFullYear() - 1);
                 } else {
-                    firstDayOfMonth.setMonth(firstDayOfMonth.getMonth() - 1, 1);
+                    firstDayOfMonth.setMonth(firstDayOfMonth.getMonth(), 1);
                 }
 
                 firstDayOfMonth.setHours(0);
