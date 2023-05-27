@@ -624,7 +624,7 @@
                             "type": "FilterMatchModeOptions"
                         },
                         {
-                            "name": "hideOverlaysOnViewportChange",
+                            "name": "hideOverlaysOnDocumentScrolling",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean"
