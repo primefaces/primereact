@@ -30,7 +30,7 @@ export interface APIOptions {
     autoZIndex?: boolean;
     cssTransition?: boolean;
     filterMatchModeOptions?: FilterMatchModeOptions;
-    hideOverlaysOnViewportChange?: boolean;
+    hideOverlaysOnDocumentScrolling?: boolean;
     inputStyle?: InputStyleType;
     locale?: string;
     nonce?: string;
