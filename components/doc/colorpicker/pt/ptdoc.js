@@ -8,7 +8,14 @@ export function PTDoc(props) {
 
     const code = {
         basic: `
-<ColorPicker value={color} onChange={(e) => setColor(e.value)} />
+<ColorPicker
+    value={color}
+    onChange={(e) => setColor(e.value)}
+    inline
+    pt={{
+        colorHandler: { className: 'w-1rem h-1rem' }
+    }}
+/>
 
         `,
         javascript: `
@@ -20,7 +27,14 @@ export default function PTDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <ColorPicker value={color} onChange={(e) => setColor(e.value)} />
+            <ColorPicker
+                value={color}
+                onChange={(e) => setColor(e.value)}
+                inline
+                pt={{
+                    colorHandler: { className: 'w-1rem h-1rem' }
+                }}
+            />
         </div>
     )
 }
@@ -34,7 +48,14 @@ export default function PTDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <ColorPicker value={color} onChange={(e: ColorPickerChangeEvent) => setColor(e.value)} />
+            <ColorPicker
+                value={color}
+                onChange={(e) => setColor(e.value)}
+                inline
+                pt={{
+                    colorHandler: { className: 'w-1rem h-1rem' }
+                }}
+            />
         </div>
     )
 }
@@ -43,11 +64,7 @@ export default function PTDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>
-                    ColorPicker is used as a controlled input with <i>value</i> and <i>onChange</i> properties.
-                </p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
                 <ColorPicker
                     value={color}
