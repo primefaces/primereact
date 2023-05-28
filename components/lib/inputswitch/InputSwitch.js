@@ -11,7 +11,7 @@ export const InputSwitch = React.memo(
         const { ptm } = InputSwitchBase.setMetaData({
             props,
             state: {
-                focused: focusedState,
+                focused: focusedState
             }
         });
         const elementRef = React.useRef(null);
@@ -98,14 +98,14 @@ export const InputSwitch = React.memo(
                 className,
                 style: props.style,
                 onClick,
-                role: "checkbox",
+                role: 'checkbox',
                 'aria-checked': checked
             },
             ptm('root')
         );
         const hiddenInputWrapperProps = mergeProps(
             {
-                className: "p-hidden-accessible"
+                className: 'p-hidden-accessible'
             },
             ptm('hiddenInputWrapper')
         );
@@ -113,7 +113,7 @@ export const InputSwitch = React.memo(
         const hiddenInputProps = mergeProps(
             {
                 ref: inputRef,
-                type: "checkbox",
+                type: 'checkbox',
                 id: props.inputId,
                 name: props.name,
                 checked: checked,
@@ -121,9 +121,9 @@ export const InputSwitch = React.memo(
                 onFocus: onFocus,
                 onBlur: onBlur,
                 disabled: props.disabled,
-                role: "switch",
+                role: 'switch',
                 tabIndex: props.tabIndex,
-                "aria-checked": checked,
+                'aria-checked': checked,
                 ...ariaProps
             },
             ptm('hiddenInput')
@@ -131,7 +131,7 @@ export const InputSwitch = React.memo(
 
         const sliderProps = mergeProps(
             {
-                className: "p-inputswitch-slider"
+                className: 'p-inputswitch-slider'
             },
             ptm('slider')
         );
