@@ -5693,8 +5693,57 @@
                     "values": []
                 },
                 "props": {
-                    "description": "",
-                    "values": []
+                    "description": "Defines valid properties in Card component. In addition to these, all properties of HTMLDivElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Header of the card."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Footer of the card."
+                        },
+                        {
+                            "name": "title",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Title of the card."
+                        },
+                        {
+                            "name": "subTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Secondary title of the card."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        }
+                    ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
@@ -5773,175 +5822,6 @@
                         }
                     ],
                     "callbacks": []
-                },
-                "CardProps": {
-                    "description": "Defines valid properties in Card component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "pt",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CardPassThroughOptions",
-                            "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "header",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "Header of the card."
-                        },
-                        {
-                            "name": "footer",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "Footer of the card."
-                        },
-                        {
-                            "name": "title",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "Title of the card."
-                        },
-                        {
-                            "name": "subTitle",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "Secondary title of the card."
-                        },
-                        {
-                            "name": "children",
-                            "optional": true,
-                            "readonly": true,
-                            "type": "ReactNode",
-                            "description": "Used to get the child elements of the component."
-                        },
-                        {
-                            "name": "data-pr-tooltip",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Content to be displayed in tooltip."
-                        },
-                        {
-                            "name": "data-pr-disabled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "When present, it specifies that the tooltip should be hidden."
-                        },
-                        {
-                            "name": "data-pr-classname",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Style class of the tooltip."
-                        },
-                        {
-                            "name": "data-pr-position",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "\"left\" | \"top\" | \"bottom\" | \"right\" | \"mouse\"",
-                            "description": "Position of the tooltip."
-                        },
-                        {
-                            "name": "data-pr-my",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Defines which position on the tooltip being positioned to align with the target element."
-                        },
-                        {
-                            "name": "data-pr-at",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Defines which position on the target element to align the positioned tooltip."
-                        },
-                        {
-                            "name": "data-pr-event",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "\"both\" | \"focus\" | \"hover\"",
-                            "description": "Event to show the tooltip."
-                        },
-                        {
-                            "name": "data-pr-showevent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Event to show the tooltip if the event property is empty."
-                        },
-                        {
-                            "name": "data-pr-hideevent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Event to hide the tooltip if the event property is empty."
-                        },
-                        {
-                            "name": "data-pr-mousetrack",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether the tooltip will follow the mouse."
-                        },
-                        {
-                            "name": "data-pr-mousetracktop",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Defines top position of the tooltip in relation to the mouse when the mouseTrack is enabled."
-                        },
-                        {
-                            "name": "data-pr-mousetrackleft",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Defines left position of the tooltip in relation to the mouse when the mouseTrack is enabled."
-                        },
-                        {
-                            "name": "data-pr-showdelay",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Delay to show the tooltip in milliseconds."
-                        },
-                        {
-                            "name": "data-pr-updatedelay",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Delay to update the tooltip in milliseconds."
-                        },
-                        {
-                            "name": "data-pr-hidedelay",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Delay to hide the tooltip in milliseconds."
-                        },
-                        {
-                            "name": "data-pr-autohide",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether to hide tooltip when hovering over tooltip content."
-                        },
-                        {
-                            "name": "data-pr-showondisabled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether to show tooltip for disabled elements."
-                        }
-                    ],
-                    "callbacks": [],
-                    "extendedTypes": "Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"ref\" | \"title\">"
                 }
             }
         },
@@ -33576,6 +33456,14 @@
                             "description": "Defines if menu would displayed as a popup."
                         },
                         {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
                             "name": "submenuIcon",
                             "optional": true,
                             "readonly": false,
@@ -33695,7 +33583,7 @@
                 },
                 "SlideMenuPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "SlideMenuProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -34876,6 +34764,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitterPanelPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -34939,6 +34835,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitterPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -35058,7 +34962,7 @@
                 },
                 "SplitterPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "SplitterProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -37821,8 +37725,67 @@
                     ]
                 },
                 "props": {
-                    "description": "",
-                    "values": []
+                    "description": "Defines valid properties in Toolbar component. In addition to these, all properties of HTMLDivElement can be used in this component.",
+                    "values": [
+                        {
+                            "name": "left",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of left section.",
+                            "deprecated": "use start instead"
+                        },
+                        {
+                            "name": "right",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of right section.",
+                            "deprecated": "use end instead"
+                        },
+                        {
+                            "name": "start",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of start section."
+                        },
+                        {
+                            "name": "center",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of center section."
+                        },
+                        {
+                            "name": "end",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "The template of end section."
+                        },
+                        {
+                            "name": "children",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "ReactNode",
+                            "default": "",
+                            "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        }
+                    ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
@@ -37880,182 +37843,6 @@
                         }
                     ],
                     "callbacks": []
-                },
-                "ToolbarProps": {
-                    "description": "Defines valid properties in Toolbar component.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "pt",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ToolbarPassThroughOptions",
-                            "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "left",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "The template of left section."
-                        },
-                        {
-                            "name": "right",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "The template of right section."
-                        },
-                        {
-                            "name": "start",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "The template of start section."
-                        },
-                        {
-                            "name": "center",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "The template of center section."
-                        },
-                        {
-                            "name": "end",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "description": "The template of end section."
-                        },
-                        {
-                            "name": "children",
-                            "optional": true,
-                            "readonly": true,
-                            "type": "ReactNode",
-                            "description": "Used to get the child elements of the component."
-                        },
-                        {
-                            "name": "data-pr-tooltip",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Content to be displayed in tooltip."
-                        },
-                        {
-                            "name": "data-pr-disabled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "When present, it specifies that the tooltip should be hidden."
-                        },
-                        {
-                            "name": "data-pr-classname",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Style class of the tooltip."
-                        },
-                        {
-                            "name": "data-pr-position",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "\"left\" | \"top\" | \"bottom\" | \"right\" | \"mouse\"",
-                            "description": "Position of the tooltip."
-                        },
-                        {
-                            "name": "data-pr-my",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Defines which position on the tooltip being positioned to align with the target element."
-                        },
-                        {
-                            "name": "data-pr-at",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Defines which position on the target element to align the positioned tooltip."
-                        },
-                        {
-                            "name": "data-pr-event",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "\"both\" | \"focus\" | \"hover\"",
-                            "description": "Event to show the tooltip."
-                        },
-                        {
-                            "name": "data-pr-showevent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Event to show the tooltip if the event property is empty."
-                        },
-                        {
-                            "name": "data-pr-hideevent",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Event to hide the tooltip if the event property is empty."
-                        },
-                        {
-                            "name": "data-pr-mousetrack",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether the tooltip will follow the mouse."
-                        },
-                        {
-                            "name": "data-pr-mousetracktop",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Defines top position of the tooltip in relation to the mouse when the mouseTrack is enabled."
-                        },
-                        {
-                            "name": "data-pr-mousetrackleft",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Defines left position of the tooltip in relation to the mouse when the mouseTrack is enabled."
-                        },
-                        {
-                            "name": "data-pr-showdelay",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Delay to show the tooltip in milliseconds."
-                        },
-                        {
-                            "name": "data-pr-updatedelay",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Delay to update the tooltip in milliseconds."
-                        },
-                        {
-                            "name": "data-pr-hidedelay",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "number",
-                            "description": "Delay to hide the tooltip in milliseconds."
-                        },
-                        {
-                            "name": "data-pr-autohide",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether to hide tooltip when hovering over tooltip content."
-                        },
-                        {
-                            "name": "data-pr-showondisabled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether to show tooltip for disabled elements."
-                        }
-                    ],
-                    "callbacks": [],
-                    "extendedTypes": "Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"ref\">"
                 }
             }
         },
