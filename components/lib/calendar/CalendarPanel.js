@@ -1,9 +1,21 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
+import { mergeProps } from '../utils/utils';
 
 export const CalendarPanel = React.forwardRef((props, ref) => {
     const createElement = () => {
+        const panelProps = mergeProps(
+            {
+                ref,
+                className: props.className,
+                style: props.style,
+                onClick: props.onClick,
+                onMouseUp: props.onMouseUp
+            },
+            props.ptm('panel')
+        );
+
         return (
             <CSSTransition
                 nodeRef={ref}
@@ -17,7 +29,7 @@ export const CalendarPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div ref={ref} className={props.className} style={props.style} onClick={props.onClick} onMouseUp={props.onMouseUp}>
+                <div {...panelProps}>
                     {props.children}
                 </div>
             </CSSTransition>
