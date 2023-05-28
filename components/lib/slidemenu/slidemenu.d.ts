@@ -180,6 +180,11 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     popup?: boolean | undefined;
     /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SlideMenuPassThroughOptions}
+     */
+    pt?: SlideMenuPassThroughOptions;
+    /**
      * Icon of the submenu.
      */
     submenuIcon?: IconType<SlideMenuProps> | undefined;
