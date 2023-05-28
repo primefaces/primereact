@@ -29,9 +29,7 @@ export const CalendarPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div {...panelProps}>
-                    {props.children}
-                </div>
+                <div {...panelProps}>{props.children}</div>
             </CSSTransition>
         );
     };

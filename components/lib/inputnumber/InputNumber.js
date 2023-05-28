@@ -15,7 +15,7 @@ export const InputNumber = React.memo(
         const { ptm } = InputNumberBase.setMetaData({
             props,
             state: {
-                focused: focusedState,
+                focused: focusedState
             }
         });
         const elementRef = React.useRef(null);
@@ -1052,7 +1052,7 @@ export const InputNumber = React.memo(
             const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
             const incrementButtonProps = mergeProps(
                 {
-                    type: "button",
+                    type: 'button',
                     className,
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
@@ -1092,7 +1092,7 @@ export const InputNumber = React.memo(
             const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
             const decrementButtonProps = mergeProps(
                 {
-                    type: "button",
+                    type: 'button',
                     className,
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
@@ -1100,10 +1100,10 @@ export const InputNumber = React.memo(
                     onKeyDown: (e) => onDownButtonKeyDown(e),
                     onKeyUp: onDownButtonKeyUp,
                     disabled: props.disabled,
-                    tabIndex: -1,
+                    tabIndex: -1
                 },
                 ptm('decrementButton')
-            )
+            );
 
             return (
                 <button {...decrementButtonProps}>
@@ -1118,7 +1118,7 @@ export const InputNumber = React.memo(
             const downButton = props.showButtons && createDownButton();
             const buttonGroupProps = mergeProps(
                 {
-                    className: "p-inputnumber-button-group"
+                    className: 'p-inputnumber-button-group'
                 },
                 ptm('buttonGroup')
             );
@@ -1166,7 +1166,7 @@ export const InputNumber = React.memo(
             },
             otherProps,
             ptm('root')
-        )
+        );
 
         return (
             <>

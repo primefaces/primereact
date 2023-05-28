@@ -151,24 +151,23 @@ const CalendarDemo = () => {
             component: AccessibilityDoc
         }
     ];
-const ptDocs = [
-    {
-        id: 'pt.wireframe',
-        label: 'Wireframe',
-        component: Wireframe
-    },
-    {
-        id: 'pt.calendar.options',
-        label: 'Calendar PT Options',
-        component: DocApiTable
-    },
-    {
-        id: 'pt.demo',
-        label: 'Example',
-        component: PTDoc
-    }
-];
-
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.calendar.options',
+            label: 'Calendar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
     return <DocComponent title="React Calendar Component" header="Calendar" description="Calendar, also known as DatePicker, is a form component to work with dates." componentDocs={docs} apiDocs={['Calendar']} ptDocs={ptDocs} />;
 };

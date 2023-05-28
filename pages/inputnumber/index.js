@@ -97,24 +97,23 @@ const InputNumberDemo = () => {
             component: AccessibilityDoc
         }
     ];
-const ptDocs = [
-    {
-        id: 'pt.wireframe',
-        label: 'Wireframe',
-        component: Wireframe
-    },
-    {
-        id: 'pt.inputnumber.options',
-        label: 'InputNumber PT Options',
-        component: DocApiTable
-    },
-    {
-        id: 'pt.demo',
-        label: 'Example',
-        component: PTDoc
-    }
-];
-
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.inputnumber.options',
+            label: 'InputNumber PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
     return <DocComponent title="React InputNumber Component" header="InputNumber" description="InputNumber is an input component to provide numerical input." componentDocs={docs} apiDocs={['InputNumber']} ptDocs={ptDocs} />;
 };
