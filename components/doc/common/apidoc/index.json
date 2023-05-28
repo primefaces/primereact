@@ -8286,6 +8286,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -8359,6 +8367,116 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "ColorPickerPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColorPickerProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColorPickerState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ColorPickerPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "input",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the input's DOM element."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "selector",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the selector's DOM element."
+                        },
+                        {
+                            "name": "color",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the color's DOM element."
+                        },
+                        {
+                            "name": "colorHandler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the color handler's DOM element."
+                        },
+                        {
+                            "name": "hue",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hue's DOM element."
+                        },
+                        {
+                            "name": "hueHandler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hue handler's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ColorPickerState": {
+                    "description": "Defines current inline state in ColorPicker component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "overlayVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current overlay visible state as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ColorPickerRGBType": {
                     "description": "RGB type of value",
                     "relatedProp": "",
@@ -8414,6 +8532,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ColorPickerPassThroughType": {
+                    "values": "PassThroughType<T, ColorPickerPassThroughMethodOptions>"
                 }
             }
         }

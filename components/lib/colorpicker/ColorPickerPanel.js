@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 
 export const ColorPickerPanel = React.forwardRef((props, ref) => {
     const createElement = () => {
@@ -12,6 +12,15 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
         });
+        const panelProps = mergeProps(
+            {
+                ref,
+                className,
+                style: props.panelStyle,
+                onClick: props.onClick
+            },
+            props.ptm('panel')
+        );
 
         return (
             <CSSTransition
@@ -26,9 +35,7 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
-                    {props.children}
-                </div>
+                <div {...panelProps}>{props.children}</div>
             </CSSTransition>
         );
     };
