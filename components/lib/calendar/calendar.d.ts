@@ -853,6 +853,11 @@ export interface CalendarProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CalendarPassThroughOptions}
+     */
+    pt?: CalendarPassThroughOptions;
 }
 
 /**

@@ -4748,6 +4748,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CalendarPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -5253,7 +5261,7 @@
                 },
                 "CalendarPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "CalendarProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
