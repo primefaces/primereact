@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/inputmask/pt/ptdoc';
+import { Wireframe } from '../../components/doc/inputmask/pt/wireframe';
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
@@ -83,8 +86,34 @@ const InputMaskDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.inputmask.options',
+            label: 'InputMask PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Mask Component" header="InputMask" description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." componentDocs={docs} apiDocs={['InputMask']} />;
+    return (
+        <DocComponent
+            title="React Mask Component"
+            header="InputMask"
+            description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone."
+            componentDocs={docs}
+            apiDocs={['InputMask']}
+            ptDocs={ptDocs}
+        />
+    );
 };
 
 export default InputMaskDemo;
