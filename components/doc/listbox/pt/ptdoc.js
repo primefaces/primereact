@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
+import { ListBox } from '../../../lib/listbox/ListBox';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
-    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -15,27 +15,25 @@ export function PTDoc(props) {
 
     const code = {
         basic: `
-<MultiSelect
-    value={selectedCities}
-    onChange={(e) => setSelectedCities(e.value)}
-    showClear={true}
+<ListBox
+    value={selectedCity}
+    onChange={(e) => setSelectedCity(e.value)}
     options={cities}
     optionLabel="name"
-    placeholder="Select Cities"
-    maxSelectedLabels={3}
-    inputId="multiselect"
     pt={{
         root: { className: 'w-full md:w-14rem' },
-        item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+        item: ({ context }) => ({
+            className: context.selected ? 'bg-primary' : undefined
+        })
     }}
 />
         `,
         javascript: `
 import React, { useState } from "react";
-import { MultiSelect } from 'primereact/multiselect';
+import { ListBox } from 'primereact/listbox';
 
 export default function PTDemo() {
-    const [selectedCities, setSelectedCities] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
     const cities = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -46,35 +44,33 @@ export default function PTDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <MultiSelect
-                value={selectedCities}
-                onChange={(e) => setSelectedCities(e.value)}
-                showClear={true}
+            <ListBox
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.value)}
                 options={cities}
                 optionLabel="name"
-                placeholder="Select Cities"
-                maxSelectedLabels={3}
-                inputId="multiselect"
                 pt={{
                     root: { className: 'w-full md:w-14rem' },
-                    item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+                    item: ({ context }) => ({
+                        className: context.selected ? 'bg-primary' : undefined
+                    })
                 }}
             />
         </div>
-    );
+    )
 }
         `,
         typescript: `
 import React, { useState } from "react";
-import { MultiSelect, MultiSelectChangeEvent } from 'primereact/multiselect';
+import { ListBox, ListBoxChangeEvent } from 'primereact/listbox';
 
 interface City {
     name: string;
     code: string;
-}
+} 
 
 export default function PTDemo() {
-    const [selectedCities, setSelectedCities] = useState<City | null>(null);
+    const [selectedCity, setSelectedCity] = useState<City | null>(null);
     const cities: City[] = [
         { name: 'New York', code: 'NY' },
         { name: 'Rome', code: 'RM' },
@@ -85,22 +81,20 @@ export default function PTDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <MultiSelect
-                value={selectedCities}
-                onChange={(e: MultiSelectChangeEvent) => setSelectedCities(e.value)}
-                showClear={true}
+            <ListBox
+                value={selectedCity}
+                onChange={(e: ListBoxChangeEvent) => setSelectedCity(e.value)}
                 options={cities}
                 optionLabel="name"
-                placeholder="Select Cities"
-                maxSelectedLabels={3}
-                inputId="multiselect"
                 pt={{
                     root: { className: 'w-full md:w-14rem' },
-                    item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+                    item: ({ context }) => ({
+                        className: context.selected ? 'bg-primary' : undefined
+                    })
                 }}
             />
         </div>
-    );
+    )
 }
         `
     };
@@ -109,18 +103,16 @@ export default function PTDemo() {
         <>
             <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
-                <MultiSelect
-                    value={selectedCities}
-                    onChange={(e) => setSelectedCities(e.value)}
-                    showClear={true}
+                <ListBox
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
                     options={cities}
                     optionLabel="name"
-                    placeholder="Select Cities"
-                    maxSelectedLabels={3}
-                    inputId="multiselect"
                     pt={{
                         root: { className: 'w-full md:w-14rem' },
-                        item: ({ context }) => ({ className: context.selected ? 'bg-blue-100' : undefined })
+                        item: ({ context }) => ({
+                            className: context.selected ? 'bg-primary' : undefined
+                        })
                     }}
                 />
             </div>
