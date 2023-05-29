@@ -114,15 +114,6 @@ export const InputTextarea = React.memo(
             props.className
         );
 
-        const tooltipProps = mergeProps(
-            {
-                target: elementRef,
-                content: props.tooltip,
-                ...props.tooltipOptions
-            },
-            ptm('tooltip')
-        );
-
         const rootProps = mergeProps(
             {
                 ref: elementRef,
