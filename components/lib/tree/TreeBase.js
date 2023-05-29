@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TreeBase = {
+export const TreeBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Tree',
         id: null,
@@ -49,7 +49,5 @@ export const TreeBase = {
         onNodeClick: null,
         onNodeDoubleClick: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TreeBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TreeBase.defaultProps)
-};
+    }
+});
