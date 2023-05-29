@@ -2668,13 +2668,30 @@ export const Calendar = React.memo(
                     .map((month, index) => ((!isInMinYear(viewDate) || index >= props.minDate.getMonth()) && (!isInMaxYear(viewDate) || index <= props.maxDate.getMonth()) ? { label: month, value: index, index } : null))
                     .filter((option) => !!option);
                 const displayedMonthNames = displayedMonthOptions.map((option) => option.label);
+                const selectProps = mergeProps(
+                    {
+                        className: 'p-datepicker-month',
+                        onChange: (e) => onMonthDropdownChange(e, e.target.value),
+                        value: viewMonth
+                    },
+                    ptm('select')
+                );
                 const content = (
-                    <select className="p-datepicker-month" onChange={(e) => onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
-                        {displayedMonthOptions.map((option) => (
-                            <option key={option.label} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
+                    <select {...selectProps}>
+                        {displayedMonthOptions.map((option) => {
+                            const optionProps = mergeProps(
+                                {
+                                    value: option.value
+                                },
+                                ptm('option')
+                            );
+
+                            return (
+                                <option {...optionProps} key={option.label}>
+                                    {option.label}
+                                </option>
+                            );
+                        })}
                     </select>
                 );
 
@@ -2721,13 +2738,31 @@ export const Calendar = React.memo(
                 const viewDate = getViewDate();
                 const viewYear = viewDate.getFullYear();
                 const displayedYearNames = yearOptions.filter((year) => !(props.minDate && props.minDate.getFullYear() > year) && !(props.maxDate && props.maxDate.getFullYear() < year));
+                const selectProps = mergeProps(
+                    {
+                        className: 'p-datepicker-year',
+                        onChange: (e) => onYearDropdownChange(e, e.target.value),
+                        value: viewYear
+                    },
+                    ptm('select')
+                );
+
                 const content = (
-                    <select className="p-datepicker-year" onChange={(e) => onYearDropdownChange(e, e.target.value)} value={viewYear}>
-                        {displayedYearNames.map((year) => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
+                    <select {...selectProps}>
+                        {displayedYearNames.map((year) => {
+                            const optionProps = mergeProps(
+                                {
+                                    value: year
+                                },
+                                ptm('option')
+                            );
+
+                            return (
+                                <option {...optionProps} key={year}>
+                                    {year}
+                                </option>
+                            );
+                        })}
                     </select>
                 );
 

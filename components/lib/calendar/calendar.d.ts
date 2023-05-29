@@ -240,6 +240,14 @@ export interface CalendarPassThroughOptions {
      * @see {@link ButtonPassThroughOptions}
      */
     clearButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the select's DOM element.
+     */
+    select?: CalendarPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
+    /**
+     * Uses to pass attributes to the option's DOM element.
+     */
+    option?: CalendarPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
 }
 
 /**
