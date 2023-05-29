@@ -141,7 +141,7 @@ export const InputTextarea = React.memo(
         return (
             <>
                 <textarea {...rootProps}></textarea>
-                {hasTooltip && <Tooltip {...tooltipProps} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

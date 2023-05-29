@@ -123,19 +123,10 @@ export const SelectButton = React.memo(
             ptm('root')
         );
 
-        const tooltipProps = mergeProps(
-            {
-                target: elementRef,
-                content: props.tooltip,
-                ...props.tooltipOptions
-            },
-            ptm('tooltip')
-        );
-
         return (
             <>
                 <div {...rootProps}>{items}</div>
-                {hasTooltip && <Tooltip {...tooltipProps} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

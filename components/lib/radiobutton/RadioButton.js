@@ -183,15 +183,6 @@ export const RadioButton = React.memo(
             ptm('icon')
         );
 
-        const tooltipProps = mergeProps(
-            {
-                target: elementRef,
-                content: props.tooltip,
-                ...props.tooltipOptions
-            },
-            ptm('tooltip')
-        );
-
         return (
             <>
                 <div {...rootProps}>
@@ -202,7 +193,7 @@ export const RadioButton = React.memo(
                         <div {...iconProps}></div>
                     </div>
                 </div>
-                {hasTooltip && <Tooltip {...tooltipProps} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })
