@@ -7,6 +7,7 @@ export const TabViewBase = ComponentBase.extend({
         id: null,
         activeIndex: 0,
         className: null,
+        closeMode: 'auto',
         onBeforeTabChange: null,
         onBeforeTabClose: null,
         onTabChange: null,

@@ -74,7 +74,9 @@ export const TabView = React.forwardRef((inProps, ref) => {
             return;
         }
 
-        setHiddenTabsState([...hiddenTabsState, index]);
+        if (props.closeMode !== 'manual') {
+            setHiddenTabsState([...hiddenTabsState, index]);
+        }
 
         if (props.onTabClose) {
             props.onTabClose({ originalEvent: event, index });

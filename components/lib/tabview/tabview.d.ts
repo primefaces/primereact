@@ -324,6 +324,11 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      */
     children?: React.ReactNode | undefined;
     /**
+     * How the visibility of closable tabs is managed.
+     * @defaultValue 'auto'
+     */
+    closeMode?: 'auto' | 'manual';
+    /**
      * Style class of the panels container of the tabview.
      */
     panelContainerClassName?: string | undefined;

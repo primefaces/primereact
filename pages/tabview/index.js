@@ -4,6 +4,7 @@ import { BasicDoc } from '../../components/doc/tabview/basicdoc';
 import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
 import { ControlledDoc } from '../../components/doc/tabview/controlleddoc';
 import { DisabledDoc } from '../../components/doc/tabview/disableddoc';
+import { DynamicDoc } from '../../components/doc/tabview/dynamicdoc';
 import { HeaderIconDoc } from '../../components/doc/tabview/headericondoc';
 import { ImportDoc } from '../../components/doc/tabview/importdoc';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
@@ -49,6 +50,11 @@ const TabViewDemo = () => {
             id: 'closable',
             label: 'Closable',
             component: ClosableDoc
+        },
+        {
+            id: 'dynamic',
+            label: 'Dynamic',
+            component: DynamicDoc
         },
         {
             id: 'scrollable',

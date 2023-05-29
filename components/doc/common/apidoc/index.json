@@ -36820,6 +36820,14 @@
                             "description": "Defines if tab can be removed."
                         },
                         {
+                            "name": "closeMode",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "\"auto\" | \"manual\"",
+                            "default": "auto",
+                            "description": "How closable tabs are managed."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,

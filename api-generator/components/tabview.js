@@ -34,6 +34,12 @@ const TabViewProps = [
         type: 'boolean',
         default: 'false',
         description: 'When enabled displays buttons at each side of the tab headers to scroll the tab list.'
+    },
+    {
+        name: 'closeMode',
+        type: 'string',
+        default: 'auto',
+        description: 'Use "manual" to programmatically control dynamic tabs visibility when the close button of a closable tab is clicked.'
     }
 ];
 
