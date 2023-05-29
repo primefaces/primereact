@@ -38,23 +38,23 @@ export interface DropdownPassThroughOptions {
     /**
      * Uses to pass attributes to the input's DOM element.
      */
-    input?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    input?: DropdownPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the clear icon's DOM element.
      */
-    clearIcon?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    clearIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the trigger' DOM element.
      */
     trigger?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the loading icon's DOM element.
-     */
-    loadingIcon?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the panel's DOM element.
      */
     panel?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the header's DOM element.
      */
@@ -66,11 +66,11 @@ export interface DropdownPassThroughOptions {
     /**
      * Uses to pass attributes to the filter input's DOM element.
      */
-    filterInput?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    filterInput?: DropdownPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
     /**
      * Uses to pass attributes to the filter icon's DOM element.
      */
-    filterIcon?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    filterIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the wrapper's DOM element.
      */
@@ -83,39 +83,31 @@ export interface DropdownPassThroughOptions {
     /**
      * Uses to pass attributes to the list's DOM element.
      */
-    list?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    list?: DropdownPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Uses to pass attributes to the item group's DOM element.
      */
-    itemGroup?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    itemGroup?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the item's DOM element.
      */
-    item?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    item?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
-    emptyMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden first focusable element's DOM element.
-     */
-    hiddenFirstFocusableEl?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden filter result's DOM element.
-     */
-    hiddenFilterResult?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden empty message's DOM element.
-     */
-    hiddenEmptyMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    emptyMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
      * Uses to pass attributes to the hidden selected message's DOM element.
      */
     hiddenSelectedMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the hidden last focusable element's DOM element.
+     * Uses to pass attributes to the select's DOM element.
      */
-    hiddenLastFocusableEl?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    select?: DropdownPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
+    /**
+     * Uses to pass attributes to the option's DOM element.
+     */
+    option?: DropdownPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
 }
 
 /**

@@ -16763,14 +16763,14 @@
                             "name": "input",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the input's DOM element."
                         },
                         {
                             "name": "clearIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the clear icon's DOM element."
                         },
                         {
@@ -16781,18 +16781,18 @@
                             "description": "Uses to pass attributes to the trigger' DOM element."
                         },
                         {
-                            "name": "loadingIcon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the loading icon's DOM element."
-                        },
-                        {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
                             "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
                         },
                         {
                             "name": "header",
@@ -16812,14 +16812,14 @@
                             "name": "filterInput",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the filter input's DOM element."
                         },
                         {
                             "name": "filterIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the filter icon's DOM element."
                         },
                         {
@@ -16840,50 +16840,29 @@
                             "name": "list",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
                             "name": "itemGroup",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item group's DOM element."
                         },
                         {
                             "name": "item",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
                         },
                         {
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the empty message's DOM element."
-                        },
-                        {
-                            "name": "hiddenFirstFocusableEl",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden first focusable element's DOM element."
-                        },
-                        {
-                            "name": "hiddenFilterResult",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden filter result's DOM element."
-                        },
-                        {
-                            "name": "hiddenEmptyMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden empty message's DOM element."
                         },
                         {
                             "name": "hiddenSelectedMessage",
@@ -16893,11 +16872,18 @@
                             "description": "Uses to pass attributes to the hidden selected message's DOM element."
                         },
                         {
-                            "name": "hiddenLastFocusableEl",
+                            "name": "select",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden last focusable element's DOM element."
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLSelectElement>>",
+                            "description": "Uses to pass attributes to the select's DOM element."
+                        },
+                        {
+                            "name": "option",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLOptionElement>>",
+                            "description": "Uses to pass attributes to the option's DOM element."
                         }
                     ],
                     "callbacks": []
