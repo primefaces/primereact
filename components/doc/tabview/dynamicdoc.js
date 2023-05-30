@@ -90,7 +90,8 @@ export default function DynamicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    It is possible to have dynamic tabs by generating the children <i>TabPanel</i> components using standard React techniques. If the tabs are closable, set <i>closeMode</i> to "manual" and manage the children in the <i>onTabClose</i> event.
+                    It is possible to have dynamic tabs by generating the children <i>TabPanel</i> components using standard React techniques. If the tabs are closable, set <i>closeMode</i> to "manual" and manage the children in the <i>onTabClose</i>{' '}
+                    event.
                 </p>
             </DocSectionText>
             <div className="card">
