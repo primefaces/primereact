@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TreeSelectBase = {
+export const TreeSelectBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TreeSelect',
         appendTo: null,
@@ -49,7 +49,5 @@ export const TreeSelectBase = {
         value: null,
         valueTemplate: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TreeSelectBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TreeSelectBase.defaultProps)
-};
+    }
+});

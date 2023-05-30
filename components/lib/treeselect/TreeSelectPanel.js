@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
     const createElement = () => {
@@ -11,6 +11,24 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
             'p-input-filled': PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': PrimeReact.ripple === false
         });
+
+        const panelProps = mergeProps(
+            {
+                ref: ref,
+                className: className,
+                style: props.panelStyle,
+                onClick: props.onClick
+            },
+            props.ptm('panel')
+        );
+
+        const wrapperProps = mergeProps(
+            {
+                className: 'p-treeselect-items-wrapper',
+                style: wrapperStyle
+            },
+            props.ptm('wrapper')
+        );
 
         return (
             <CSSTransition
@@ -26,11 +44,9 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
+                <div {...panelProps}>
                     {props.header}
-                    <div className="p-treeselect-items-wrapper" style={wrapperStyle}>
-                        {props.children}
-                    </div>
+                    <div {...wrapperProps}>{props.children}</div>
                     {props.footer}
                 </div>
             </CSSTransition>

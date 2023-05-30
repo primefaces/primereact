@@ -41150,12 +41150,19 @@
                             "description": "Hint text for the input field."
                         },
                         {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
                             "name": "resetFilterOnHide",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": "false",
-                            "description": "Clears the filter value when hiding the dropdown."
+                            "default": ""
                         },
                         {
                             "name": "scrollHeight",
@@ -41407,6 +41414,200 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "TreeSelectPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeSelectProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeSelectState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TreeSelectPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "labelContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the label container's DOM element."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "token",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the token's DOM element."
+                        },
+                        {
+                            "name": "tokenLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the token label's DOM element."
+                        },
+                        {
+                            "name": "trigger",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the trigger's DOM element."
+                        },
+                        {
+                            "name": "triggerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the trigger icon's DOM element."
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the panel's DOM element."
+                        },
+                        {
+                            "name": "wrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the wrapper's DOM element."
+                        },
+                        {
+                            "name": "tree",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreePassThroughOptions",
+                            "description": "Uses to pass attributes to the trigger's DOM element."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the empty message's DOM element."
+                        },
+                        {
+                            "name": "hiddenInputWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
+                        },
+                        {
+                            "name": "hiddenInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the hidden input's DOM element."
+                        },
+                        {
+                            "name": "filterContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter container's DOM element."
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "uses to pass attributes to the filter's DOM element."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "uses to pass attributes to the filter icon's DOM element."
+                        },
+                        {
+                            "name": "headerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "uses to pass attributes to the header icon's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "closeButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<HTMLButtonElement>>",
+                            "description": "uses to pass attributes to the header's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TreeSelectState": {
+                    "description": "Defines current inline state in TreeSelect component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
+                        },
+                        {
+                            "name": "overlayVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current overlay visible state as a boolean."
+                        },
+                        {
+                            "name": "expandedKeys",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeSelectExpandedKeysType",
+                            "description": "Current expanded keys state."
+                        },
+                        {
+                            "name": "filterValue",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current selected keys state."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "TreeSelectPanelHeaderTemplateOptions": {
                     "description": "Custom panel header template options.",
                     "relatedProp": "",
@@ -41535,6 +41736,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "TreeSelectPassThroughType": {
+                    "values": "PassThroughType<T, TreeSelectPassThroughMethodOptions>"
                 }
             }
         }
