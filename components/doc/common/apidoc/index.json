@@ -41568,7 +41568,7 @@
                             "optional": true,
                             "readonly": false,
                             "type": "TreeSelectPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<HTMLButtonElement>>",
-                            "description": "uses to pass attributes to the header's DOM element."
+                            "description": "uses to pass attributes to the close button's DOM element."
                         }
                     ],
                     "callbacks": []

@@ -103,7 +103,7 @@ export interface TreeSelectPassThroughOptions {
      */
     header?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * uses to pass attributes to the header's DOM element.
+     * uses to pass attributes to the close button's DOM element.
      */
     closeButton?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLButtonElement>>;
 }
