@@ -28908,6 +28908,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -29038,6 +29046,143 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "OrganizationChartPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OrganizationChartProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OrganizationChartState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OrganizationChartContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OrganizationChartPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "table",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the table's DOM element."
+                        },
+                        {
+                            "name": "cell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the cell's DOM element."
+                        },
+                        {
+                            "name": "node",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the node's DOM element."
+                        },
+                        {
+                            "name": "nodeToggler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the nodeToggler's DOM element."
+                        },
+                        {
+                            "name": "nodeTogglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the nodeTogglerIcon's DOM element."
+                        },
+                        {
+                            "name": "lines",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableRowElement>>",
+                            "description": "Uses to pass attributes to the lines's DOM element."
+                        },
+                        {
+                            "name": "lineCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the lineCell's DOM element."
+                        },
+                        {
+                            "name": "lineDown",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the lineDown's DOM element."
+                        },
+                        {
+                            "name": "nodes",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableRowElement>>",
+                            "description": "Uses to pass attributes to the nodes's DOM element."
+                        },
+                        {
+                            "name": "nodeCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the nodeCell's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OrganizationChartState": {
+                    "description": "Defines current inline state in OrganizationChart component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "expanded",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focus expanded of the node as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OrganizationChartContext": {
+                    "description": "Defines current options in OrganizationChart component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current selection state of the node as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "OrganizationChartNodeData": {
                     "description": "Custom organizationchart node data.",
                     "relatedProp": "",
@@ -29079,6 +29224,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "OrganizationChartPassThroughType": {
+                    "values": "PassThroughType<T, OrganizationChartPassThroughMethodOptions>"
                 }
             }
         }
