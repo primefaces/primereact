@@ -3544,10 +3544,10 @@ export const Calendar = React.memo(
                         inputMode={props.inputMode}
                         tooltip={props.tooltip}
                         tooltipOptions={props.tooltipOptions}
+                        pt={ptm('input')}
                         value={inputValue}
                         onClick={onInputClick}
                         onChange={onInputChange}
-                        pt={ptm('input')}
                     />
                 );
             }
