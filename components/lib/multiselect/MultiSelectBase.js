@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MultiSelectBase = {
+export const MultiSelectBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'MultiSelect',
         appendTo: null,
@@ -69,7 +69,5 @@ export const MultiSelectBase = {
         value: null,
         virtualScrollerOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MultiSelectBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MultiSelectBase.defaultProps)
-};
+    }
+});

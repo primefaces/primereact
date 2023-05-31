@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const InputSwitchBase = {
+export const InputSwitchBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputSwitch',
         autoFocus: false,
@@ -21,7 +21,5 @@ export const InputSwitchBase = {
         tooltipOptions: null,
         trueValue: true,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, InputSwitchBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, InputSwitchBase.defaultProps)
-};
+    }
+});

@@ -1,6 +1,7 @@
+import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
-export const KnobBase = {
+export const KnobBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Knob',
         id: null,
@@ -22,7 +23,5 @@ export const KnobBase = {
         valueTemplate: '{value}',
         onChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, KnobBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, KnobBase.defaultProps)
-};
+    }
+});

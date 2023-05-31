@@ -8,7 +8,108 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { DropdownPassThroughOptions } from '../dropdown/dropdown';
+import { InputNumberPassThroughOptions } from '../inputnumber/inputnumber';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type PaginatorPassThroughType<T> = PassThroughType<T, PaginatorPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface PaginatorPassThroughMethodOptions {
+    props: PaginatorProps;
+    context: PaginatorContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link PaginatorProps.pt}
+ */
+export interface PaginatorPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the left's DOM element.
+     */
+    left?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the first page button's DOM element.
+     */
+    firstPageButton?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the first page icon's DOM element.
+     */
+    firstPageIcon?: PaginatorPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the prev page button's DOM element.
+     */
+    prevPageButton?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the prev page icon's DOM element.
+     */
+    prevPageIcon?: PaginatorPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the next page button's DOM element.
+     */
+    nextPageButton?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the next page icon's DOM element.
+     */
+    nextPageIcon?: PaginatorPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the last page button's DOM element.
+     */
+    lastPageButton?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the last page icon's DOM element.
+     */
+    lastPageIcon?: PaginatorPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the pages's DOM element.
+     */
+    pages?: PaginatorPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the page button's DOM element.
+     */
+    pageButton?: PaginatorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the current's DOM element.
+     */
+    current?: PaginatorPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the Dropdown component.
+     * @see {@link DropdownPassThroughOptions}
+     */
+    RPPDropdown?: DropdownPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Dropdown component.
+     * @see {@link InputNumberPassThroughOptions}
+     */
+    JTPInput?: InputNumberPassThroughOptions;
+    /**
+     * Uses to pass attributes to the end's DOM element.
+     */
+    end?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current options in Paginator component.
+ */
+export interface PaginatorContext {
+    /**
+     * Current active state as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+    /**
+     * Current disabled state of the button as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+}
 
 /**
  * Custom page change event.
@@ -429,7 +530,7 @@ export type PaginatorTemplate = PaginatorTemplateOptions | string | undefined;
  * Defines valid properties in Paginator component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * Number of total records.
      * @defaultValue 0
@@ -507,6 +608,11 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {PaginatorPassThroughOptions}
+     */
+    pt?: PaginatorPassThroughOptions;
 }
 
 /**

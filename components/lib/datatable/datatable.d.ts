@@ -10,8 +10,9 @@
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorTemplate } from '../paginator';
-import { IconType } from '../utils/utils';
-import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
+import { IconType, PassThroughType } from '../utils/utils';
+import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -700,6 +701,176 @@ type DataTableCellSelection<TValue extends DataTableValueArray> = {
 
 type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
 
+export declare type DataTablePassThroughType<T> = PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DataTablePassThroughMethodOptions<TValue extends DataTableValueArray> {
+    props: DataTableProps<TValue>;
+    state: DataTableState;
+}
+
+/**
+ * Defines current inline state in DataTable component.
+ */
+export interface DataTableState {
+    /**
+     * Current index of first record as a number.
+     */
+    first: number;
+    /**
+     * Current number of rows to display in new page as a number.
+     */
+    rows: number;
+    /**
+     * Current sort field.
+     */
+    sortField: string | ((item: any) => string) | undefined;
+    /**
+     * Current order to sort the data by default.
+     */
+    sortOrder: number;
+    /**
+     * Current sortmeta objects to sort the data.
+     */
+    multiSortMeta: DataTableSortMeta[];
+    /**
+     * Current filters object.
+     */
+    filters: DataTableFilterMeta;
+    /**
+     * Current order of the columns.
+     */
+    columnOrder: string[];
+    /**
+     * Current group sortmeta objects to sort the data.
+     */
+    groupRowsSortMeta: DataTableSortMeta;
+    /**
+     * Current editing meta data.
+     */
+    editingMeta: object;
+    /**
+     * Current number of rows to display in new page as a number.
+     */
+    d_rows: number;
+    /**
+     * Current filters object.
+     */
+    d_filters: object;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DataTableProps.pt}
+ */
+export interface DataTablePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading overlay's DOM element.
+     */
+    loadingOverlay?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading icon's DOM element.
+     */
+    loadingIcon?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    // /**
+    //  * Uses to pass attributes to the Paginator component.
+    //  * @see {@link PaginatorPassThroughOptions}
+    //  */
+    // paginator?: PaginatorPassThroughOptions;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the VirtualScroller component.
+     * @see {@link VirtualScrollerPassThroughOptions}
+     */
+    virtualScroller?: VirtualScrollerPassThroughOptions;
+    /**
+     * Uses to pass attributes to the table's DOM element.
+     */
+    table?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the virtual scroller spacer's DOM element.
+     */
+    virtualScrollerSpacer?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the thead's DOM element.
+     */
+    thead?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header row's DOM element.
+     */
+    headerRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the tbody's DOM element.
+     */
+    tbody?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup header's DOM element.
+     */
+    rowgroupHeader?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the row's DOM element.
+     */
+    row?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the row expansion's DOM element.
+     */
+    rowExpansion?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup footer's DOM element.
+     */
+    rowgroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the empty message's DOM element.
+     */
+    emptyMessage?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the tfoot's DOM element.
+     */
+    tfoot?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footerr ow's DOM element.
+     */
+    footerRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer cell's DOM element.
+     */
+    footerCell?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the resize helper's DOM element.
+     */
+    resizeHelper?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the reorder indicator up's DOM element.
+     */
+    reorderIndicatorUp?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the reorder indicator down's DOM element.
+     */
+    reorderIndicatorDown?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
+
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
@@ -1361,6 +1532,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DataTablePassThroughOptions}
+     */
+    pt?: DataTablePassThroughOptions;
 }
 
 /**

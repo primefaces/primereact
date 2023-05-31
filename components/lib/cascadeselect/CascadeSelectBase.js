@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const CascadeSelectBase = {
+export const CascadeSelectBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'CascadeSelect',
         appendTo: null,
@@ -35,7 +35,5 @@ export const CascadeSelectBase = {
         transitionOptions: null,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CascadeSelectBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CascadeSelectBase.defaultProps)
-};
+    }
+});

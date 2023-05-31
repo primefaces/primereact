@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const PickListBase = {
+export const PickListBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'PickList',
         id: null,
@@ -55,7 +55,5 @@ export const PickListBase = {
         onSourceFilterChange: null,
         onTargetFilterChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PickListBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PickListBase.defaultProps)
-};
+    }
+});

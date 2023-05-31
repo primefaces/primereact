@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 import { CurrentPageReportBase } from './PaginatorBase';
 
 export const CurrentPageReport = React.memo((inProps) => {
@@ -22,7 +22,14 @@ export const CurrentPageReport = React.memo((inProps) => {
         .replace('{rows}', report.rows)
         .replace('{totalRecords}', report.totalRecords);
 
-    const element = <span className="p-paginator-current">{text}</span>;
+    const currentProps = mergeProps(
+        {
+            className: 'p-paginator-current'
+        },
+        props.ptm('current')
+    );
+
+    const element = <span {...currentProps}>{text}</span>;
 
     if (props.template) {
         const defaultOptions = {

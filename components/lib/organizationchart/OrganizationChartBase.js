@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const OrganizationChartBase = {
+export const OrganizationChartBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'OrganizationChart',
         id: null,
@@ -15,7 +15,5 @@ export const OrganizationChartBase = {
         onNodeUnselect: null,
         togglerIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, OrganizationChartBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, OrganizationChartBase.defaultProps)
-};
+    }
+});

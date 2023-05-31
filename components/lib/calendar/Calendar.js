@@ -10,16 +10,23 @@ import { ChevronUpIcon } from '../icons/chevronup';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = CalendarBase.getProps(inProps);
-
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
+        const { ptm } = CalendarBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState,
+                overlayVisible: overlayVisibleState,
+                viewDate: viewDateState
+            }
+        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -951,7 +958,7 @@ export const Calendar = React.memo(
         };
 
         const setNavigationState = (newViewDate) => {
-            if (!props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
+            if (!newViewDate || !props.showMinMaxRange || props.view !== 'date' || !overlayRef.current) {
                 return;
             }
 
@@ -973,7 +980,7 @@ export const Calendar = React.memo(
                     firstDayOfMonth.setMonth(11, 1);
                     firstDayOfMonth.setFullYear(firstDayOfMonth.getFullYear() - 1);
                 } else {
-                    firstDayOfMonth.setMonth(firstDayOfMonth.getMonth() - 1, 1);
+                    firstDayOfMonth.setMonth(firstDayOfMonth.getMonth(), 1);
                 }
 
                 firstDayOfMonth.setHours(0);
@@ -2599,11 +2606,25 @@ export const Calendar = React.memo(
         const createBackwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
             const iconClassName = 'p-datepicker-prev-icon';
-            const icon = props.prevIcon || <ChevronLeftIcon className={iconClassName} />;
-            const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const previousIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('previousIcon')
+            );
+            const icon = props.prevIcon || <ChevronLeftIcon {...previousIconProps} />;
+            const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { ...previousIconProps }, { props });
+            const previousButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-datepicker-prev',
+                    ...navigatorProps
+                },
+                ptm('previousButton')
+            );
 
             return (
-                <button type="button" className="p-datepicker-prev" {...navigatorProps}>
+                <button {...previousButtonProps}>
                     {backwardNavigatorIcon}
                     <Ripple />
                 </button>
@@ -2613,11 +2634,25 @@ export const Calendar = React.memo(
         const createForwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onNextButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
             const iconClassName = 'p-datepicker-next-icon';
-            const icon = props.nextIcon || <ChevronRightIcon className={iconClassName} />;
-            const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const nextIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('nextIcon')
+            );
+            const icon = props.nextIcon || <ChevronRightIcon {...nextIconProps} />;
+            const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { ...nextIconProps }, { props });
+            const nextButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-datepicker-next',
+                    ...navigatorProps
+                },
+                ptm('nextButton')
+            );
 
             return (
-                <button type="button" className="p-datepicker-next" {...navigatorProps}>
+                <button {...nextButtonProps}>
                     {forwardNavigatorIcon}
                     <Ripple />
                 </button>
@@ -2634,13 +2669,30 @@ export const Calendar = React.memo(
                     .map((month, index) => ((!isInMinYear(viewDate) || index >= props.minDate.getMonth()) && (!isInMaxYear(viewDate) || index <= props.maxDate.getMonth()) ? { label: month, value: index, index } : null))
                     .filter((option) => !!option);
                 const displayedMonthNames = displayedMonthOptions.map((option) => option.label);
+                const selectProps = mergeProps(
+                    {
+                        className: 'p-datepicker-month',
+                        onChange: (e) => onMonthDropdownChange(e, e.target.value),
+                        value: viewMonth
+                    },
+                    ptm('select')
+                );
                 const content = (
-                    <select className="p-datepicker-month" onChange={(e) => onMonthDropdownChange(e, e.target.value)} value={viewMonth}>
-                        {displayedMonthOptions.map((option) => (
-                            <option key={option.label} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
+                    <select {...selectProps}>
+                        {displayedMonthOptions.map((option) => {
+                            const optionProps = mergeProps(
+                                {
+                                    value: option.value
+                                },
+                                ptm('option')
+                            );
+
+                            return (
+                                <option {...optionProps} key={option.label}>
+                                    {option.label}
+                                </option>
+                            );
+                        })}
                     </select>
                 );
 
@@ -2661,13 +2713,16 @@ export const Calendar = React.memo(
                 return content;
             }
 
-            return (
-                currentView === 'date' && (
-                    <button className="p-datepicker-month p-link" onClick={switchToMonthView} disabled={switchViewButtonDisabled()}>
-                        {monthNames[month]}
-                    </button>
-                )
+            const monthTitleProps = mergeProps(
+                {
+                    className: 'p-datepicker-month p-link',
+                    onClick: switchToMonthView,
+                    disabled: switchViewButtonDisabled()
+                },
+                ptm('monthTitle')
             );
+
+            return currentView === 'date' && <button {...monthTitleProps}>{monthNames[month]}</button>;
         };
 
         const createTitleYearElement = (metaYear) => {
@@ -2684,13 +2739,31 @@ export const Calendar = React.memo(
                 const viewDate = getViewDate();
                 const viewYear = viewDate.getFullYear();
                 const displayedYearNames = yearOptions.filter((year) => !(props.minDate && props.minDate.getFullYear() > year) && !(props.maxDate && props.maxDate.getFullYear() < year));
+                const selectProps = mergeProps(
+                    {
+                        className: 'p-datepicker-year',
+                        onChange: (e) => onYearDropdownChange(e, e.target.value),
+                        value: viewYear
+                    },
+                    ptm('select')
+                );
+
                 const content = (
-                    <select className="p-datepicker-year" onChange={(e) => onYearDropdownChange(e, e.target.value)} value={viewYear}>
-                        {displayedYearNames.map((year) => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
+                    <select {...selectProps}>
+                        {displayedYearNames.map((year) => {
+                            const optionProps = mergeProps(
+                                {
+                                    value: year
+                                },
+                                ptm('option')
+                            );
+
+                            return (
+                                <option {...optionProps} key={year}>
+                                    {year}
+                                </option>
+                            );
+                        })}
                     </select>
                 );
 
@@ -2713,21 +2786,31 @@ export const Calendar = React.memo(
             }
 
             const displayYear = props.numberOfMonths > 1 ? metaYear : currentYear;
-
-            return (
-                currentView !== 'year' && (
-                    <button className="p-datepicker-year p-link" onClick={switchToYearView} disabled={switchViewButtonDisabled()}>
-                        {displayYear}
-                    </button>
-                )
+            const yearTitleProps = mergeProps(
+                {
+                    className: 'p-datepicker-year p-link',
+                    onClick: (e) => switchToYearView(e),
+                    disabled: switchViewButtonDisabled()
+                },
+                ptm('yearTitle')
             );
+
+            return currentView !== 'year' && <button {...yearTitleProps}>{displayYear}</button>;
         };
 
         const createTitleDecadeElement = () => {
             const years = yearPickerValues();
+            const decadeTitleProps = mergeProps(
+                {
+                    className: 'p-datepicker-decade'
+                },
+                ptm('decadeTitle')
+            );
 
             if (currentView === 'year') {
-                return <span className="p-datepicker-decade">{props.decadeTemplate ? props.decadeTemplate(years) : <span>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
+                const decadeTitleTextProps = mergeProps(ptm('decadeTitleText'));
+
+                return <span {...decadeTitleProps}>{props.decadeTemplate ? props.decadeTemplate(years) : <span {...decadeTitleTextProps}>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
             }
 
             return null;
@@ -2737,9 +2820,15 @@ export const Calendar = React.memo(
             const month = createTitleMonthElement(monthMetaData.month);
             const year = createTitleYearElement(monthMetaData.year);
             const decade = createTitleDecadeElement();
+            const titleProps = mergeProps(
+                {
+                    className: 'p-datepicker-title'
+                },
+                ptm('title')
+            );
 
             return (
-                <div className="p-datepicker-title">
+                <div {...titleProps}>
                     {month}
                     {year}
                     {decade}
@@ -2748,16 +2837,33 @@ export const Calendar = React.memo(
         };
 
         const createDayNames = (weekDays) => {
+            const weekDayProps = mergeProps(ptm('weekDay'));
+            const tableHeaderCellProps = mergeProps(
+                {
+                    scope: 'col'
+                },
+                ptm(ptm('tableHeaderCell'))
+            );
             const dayNames = weekDays.map((weekDay, index) => (
-                <th key={`${weekDay}-${index}`} scope="col">
-                    <span>{weekDay}</span>
+                <th {...tableHeaderCellProps} key={`${weekDay}-${index}`}>
+                    <span {...weekDayProps}>{weekDay}</span>
                 </th>
             ));
 
             if (props.showWeek) {
+                const weekHeaderProps = mergeProps(
+                    {
+                        scope: 'col',
+                        classNam: 'p-datepicker-weekheader p-disabled'
+                    },
+                    ptm('weekHeader')
+                );
+
+                const weekLabel = mergeProps(ptm('weekLabel'));
+
                 const weekHeader = (
-                    <th scope="col" key="wn" className="p-datepicker-weekheader p-disabled">
-                        <span>{localeOption('weekHeader', props.locale)}</span>
+                    <th {...weekHeaderProps} key="wn">
+                        <span {...weekLabel}>{localeOption('weekHeader', props.locale)}</span>
                     </th>
                 );
 
@@ -2784,18 +2890,38 @@ export const Calendar = React.memo(
                 const cellClassName = classNames({ 'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today });
                 const dateClassName = classNames({ 'p-highlight': selected, 'p-disabled': !date.selectable });
                 const content = date.otherMonth && !props.showOtherMonths ? null : createDateCellContent(date, dateClassName, groupIndex);
+                const dayProps = mergeProps(
+                    {
+                        className: cellClassName
+                    },
+                    ptm('day')
+                );
 
                 return (
-                    <td key={date.day} className={cellClassName}>
+                    <td {...dayProps} key={date.day}>
                         {content}
                     </td>
                 );
             });
 
             if (props.showWeek) {
+                const weekNumberProps = mergeProps(
+                    {
+                        className: 'p-datepicker-weeknumber'
+                    },
+                    ptm('weekNumber')
+                );
+
+                const weekLabelContainerProps = mergeProps(
+                    {
+                        className: 'p-disabled'
+                    },
+                    ptm('weekLabelContainer')
+                );
+
                 const weekNumberCell = (
-                    <td key={'wn' + weekNumber} className="p-datepicker-weeknumber">
-                        <span className="p-disabled">{weekNumber}</span>
+                    <td {...weekNumberProps} key={'wn' + weekNumber}>
+                        <span {...weekLabelContainerProps}>{weekNumber}</span>
                     </td>
                 );
 
@@ -2806,21 +2932,42 @@ export const Calendar = React.memo(
         };
 
         const createDates = (monthMetaData, groupIndex) => {
-            return monthMetaData.dates.map((weekDates, index) => <tr key={index}>{createWeek(weekDates, monthMetaData.weekNumbers[index], groupIndex)}</tr>);
+            const tableBodyRowProps = mergeProps(ptm('tableBodyRowProps'));
+
+            return monthMetaData.dates.map((weekDates, index) => (
+                <tr {...tableBodyRowProps} key={index}>
+                    {createWeek(weekDates, monthMetaData.weekNumbers[index], groupIndex)}
+                </tr>
+            ));
         };
 
         const createDateViewGrid = (monthMetaData, weekDays, groupIndex) => {
             const dayNames = createDayNames(weekDays);
             const dates = createDates(monthMetaData, groupIndex);
+            const containerProps = mergeProps(
+                {
+                    className: 'p-datepicker-calendar-container'
+                },
+                ptm('container')
+            );
+            const tableProps = mergeProps(
+                {
+                    className: 'p-datepicker-calendar'
+                },
+                ptm('table')
+            );
+            const tableHeaderProps = mergeProps(ptm('tableHeader'));
+            const tableHeaderRowProps = mergeProps(ptm('tableHeaderRow'));
+            const tableBodyProps = mergeProps(ptm('tableBody'));
 
             return (
                 currentView === 'date' && (
-                    <div className="p-datepicker-calendar-container">
-                        <table className="p-datepicker-calendar">
-                            <thead>
-                                <tr>{dayNames}</tr>
+                    <div {...containerProps}>
+                        <table {...tableProps}>
+                            <thead {...tableHeaderProps}>
+                                <tr {...tableHeaderRowProps}>{dayNames}</tr>
                             </thead>
-                            <tbody>{dates}</tbody>
+                            <tbody {...tableBodyProps}>{dates}</tbody>
                         </table>
                     </div>
                 )
@@ -2836,10 +2983,23 @@ export const Calendar = React.memo(
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
             const monthKey = monthMetaData.month + '-' + monthMetaData.year;
+            const groupProps = mergeProps(
+                {
+                    className: 'p-datepicker-group'
+                },
+                ptm('group')
+            );
+
+            const headerProps = mergeProps(
+                {
+                    className: 'p-datepicker-header'
+                },
+                ptm('header')
+            );
 
             return (
-                <div key={monthKey} className="p-datepicker-group">
-                    <div className="p-datepicker-header">
+                <div {...groupProps} key={monthKey}>
+                    <div {...headerProps}>
                         {header}
                         {backwardNavigator}
                         {title}
@@ -2868,9 +3028,17 @@ export const Calendar = React.memo(
             const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(0, index, currentYear) });
             const monthNamesShort = localeOption('monthNamesShort', props.locale);
             const monthName = monthNamesShort[index];
+            const monthProps = mergeProps(
+                {
+                    className,
+                    onClick: (event) => onMonthSelect(event, index),
+                    onKeyDown: (event) => onMonthCellKeydown(event, index)
+                },
+                ptm('month')
+            );
 
             return (
-                <span key={monthName} className={className} onClick={(event) => onMonthSelect(event, index)} onKeyDown={(event) => onMonthCellKeydown(event, index)}>
+                <span {...monthProps} key={monthName}>
                     {monthName}
                     <Ripple />
                 </span>
@@ -2914,14 +3082,41 @@ export const Calendar = React.memo(
             const forwardNavigator = createForwardNavigator(true);
             const yearElement = createTitleYearElement(getViewDate().getFullYear());
             const decade = createTitleDecadeElement();
+            const groupContainerProps = mergeProps(
+                {
+                    className: 'p-datepicker-group-container'
+                },
+                ptm('groupContainer')
+            );
+
+            const groupProps = mergeProps(
+                {
+                    className: 'p-datepicker-group'
+                },
+                ptm('group')
+            );
+
+            const headerProps = mergeProps(
+                {
+                    className: 'p-datepicker-header'
+                },
+                ptm('header')
+            );
+
+            const titleProps = mergeProps(
+                {
+                    className: 'p-datepicker-title'
+                },
+                ptm('title')
+            );
 
             return (
                 <>
-                    <div className="p-datepicker-group-container">
-                        <div className="p-datepicker-group">
-                            <div className="p-datepicker-header">
+                    <div {...groupContainerProps}>
+                        <div {...groupProps}>
+                            <div {...headerProps}>
                                 {backwardNavigator}
-                                <div className="p-datepicker-title">
+                                <div {...titleProps}>
                                     {yearElement}
                                     {decade}
                                 </div>
@@ -2945,8 +3140,10 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const incrementIcon = IconUtils.getJSXIcon(props.incrementIcon || <ChevronUpIcon />, undefined, { props });
-        const decrementIcon = IconUtils.getJSXIcon(props.decrementIcon || <ChevronDownIcon />, undefined, { props });
+        const incrementIconProps = mergeProps(ptm('incrementIcon'));
+        const decrementIconProps = mergeProps(ptm('decrementIcon'));
+        const incrementIcon = IconUtils.getJSXIcon(props.incrementIcon || <ChevronUpIcon {...incrementIconProps} />, { ...incrementIconProps }, { props });
+        const decrementIcon = IconUtils.getJSXIcon(props.decrementIcon || <ChevronDownIcon {...decrementIconProps} />, { ...decrementIconProps }, { props });
 
         const createHourPicker = () => {
             const currentTime = getCurrentDateTime();
@@ -2961,30 +3158,47 @@ export const Calendar = React.memo(
                 else if (hour > 11 && hour !== 12) hour = hour - 12;
             }
 
+            const hourProps = mergeProps(ptm('hour'));
             const hourDisplay = hour < 10 ? '0' + hour : hour;
+            const hourPickerProps = mergeProps(
+                {
+                    className: 'p-hour-picker'
+                },
+                ptm('hourPicker')
+            );
+
+            const incrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-link',
+                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 0, 1),
+                    onMouseUp: onTimePickerElementMouseUp,
+                    onMouseLeave: onTimePickerElementMouseLeave,
+                    onKeyDown: (e) => onContainerButtonKeydown(e)
+                },
+                ptm('incrementButton')
+            );
+
+            const decrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-link',
+                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 0, -1),
+                    onMouseUp: onTimePickerElementMouseUp,
+                    onMouseLeave: onTimePickerElementMouseLeave,
+                    onKeyDown: (e) => onContainerButtonKeydown(e)
+                },
+                ptm('decrementButton')
+            );
 
             return (
-                <div className="p-hour-picker">
-                    <button
-                        type="button"
-                        className="p-link"
-                        onMouseDown={(e) => onTimePickerElementMouseDown(e, 0, 1)}
-                        onMouseUp={onTimePickerElementMouseUp}
-                        onMouseLeave={onTimePickerElementMouseLeave}
-                        onKeyDown={(e) => onContainerButtonKeydown(e)}
-                    >
+                <div {...hourPickerProps}>
+                    <button {...incrementButtonProps}>
                         {incrementIcon}
                         <Ripple />
                     </button>
-                    <span>{hourDisplay}</span>
-                    <button
-                        type="button"
-                        className="p-link"
-                        onMouseDown={(e) => onTimePickerElementMouseDown(e, 0, -1)}
-                        onMouseUp={onTimePickerElementMouseUp}
-                        onMouseLeave={onTimePickerElementMouseLeave}
-                        onKeyDown={(e) => onContainerButtonKeydown(e)}
-                    >
+                    <span {...hourProps}>{hourDisplay}</span>
+                    <button {...decrementButtonProps}>
                         {decrementIcon}
                         <Ripple />
                     </button>
@@ -2997,30 +3211,47 @@ export const Calendar = React.memo(
             let minute = doStepMinute(currentTime.getMinutes());
 
             minute = minute > 59 ? minute - 60 : minute;
+            const minuteProps = mergeProps(ptm('minute'));
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
+            const minutePickerProps = mergeProps(
+                {
+                    className: 'p-minute-picker'
+                },
+                ptm('minutePicker')
+            );
+
+            const incrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-link',
+                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 1, 1),
+                    onMouseUp: onTimePickerElementMouseUp,
+                    onMouseLeave: onTimePickerElementMouseLeave,
+                    onKeyDown: (e) => onContainerButtonKeydown(e)
+                },
+                ptm('incrementButton')
+            );
+
+            const decrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: 'p-link',
+                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 1, -1),
+                    onMouseUp: onTimePickerElementMouseUp,
+                    onMouseLeave: onTimePickerElementMouseLeave,
+                    onKeyDown: (e) => onContainerButtonKeydown(e)
+                },
+                ptm('decrementButton')
+            );
 
             return (
-                <div className="p-minute-picker">
-                    <button
-                        type="button"
-                        className="p-link"
-                        onMouseDown={(e) => onTimePickerElementMouseDown(e, 1, 1)}
-                        onMouseUp={onTimePickerElementMouseUp}
-                        onMouseLeave={onTimePickerElementMouseLeave}
-                        onKeyDown={(e) => onContainerButtonKeydown(e)}
-                    >
+                <div {...minutePickerProps}>
+                    <button {...incrementButtonProps}>
                         {incrementIcon}
                         <Ripple />
                     </button>
-                    <span>{minuteDisplay}</span>
-                    <button
-                        type="button"
-                        className="p-link"
-                        onMouseDown={(e) => onTimePickerElementMouseDown(e, 1, -1)}
-                        onMouseUp={onTimePickerElementMouseUp}
-                        onMouseLeave={onTimePickerElementMouseLeave}
-                        onKeyDown={(e) => onContainerButtonKeydown(e)}
-                    >
+                    <span {...minuteProps}>{minuteDisplay}</span>
+                    <button {...decrementButtonProps}>
                         {decrementIcon}
                         <Ripple />
                     </button>
@@ -3031,31 +3262,48 @@ export const Calendar = React.memo(
         const createSecondPicker = () => {
             if (props.showSeconds) {
                 const currentTime = getCurrentDateTime();
+                const secondProps = mergeProps(ptm('second'));
                 const second = currentTime.getSeconds();
                 const secondDisplay = second < 10 ? '0' + second : second;
+                const secondPickerProps = mergeProps(
+                    {
+                        className: 'p-second-picker'
+                    },
+                    ptm('secondPicker')
+                );
+
+                const incrementButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-link',
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 2, 1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('incrementButton')
+                );
+
+                const decrementButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-link',
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 2, -1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('decrementButton')
+                );
 
                 return (
-                    <div className="p-second-picker">
-                        <button
-                            type="button"
-                            className="p-link"
-                            onMouseDown={(e) => onTimePickerElementMouseDown(e, 2, 1)}
-                            onMouseUp={onTimePickerElementMouseUp}
-                            onMouseLeave={onTimePickerElementMouseLeave}
-                            onKeyDown={(e) => onContainerButtonKeydown(e)}
-                        >
+                    <div {...secondPickerProps}>
+                        <button {...incrementButtonProps}>
                             {incrementIcon}
                             <Ripple />
                         </button>
-                        <span>{secondDisplay}</span>
-                        <button
-                            type="button"
-                            className="p-link"
-                            onMouseDown={(e) => onTimePickerElementMouseDown(e, 2, -1)}
-                            onMouseUp={onTimePickerElementMouseUp}
-                            onMouseLeave={onTimePickerElementMouseLeave}
-                            onKeyDown={(e) => onContainerButtonKeydown(e)}
-                        >
+                        <span {...secondProps}>{secondDisplay}</span>
+                        <button {...decrementButtonProps}>
                             {decrementIcon}
                             <Ripple />
                         </button>
@@ -3069,31 +3317,48 @@ export const Calendar = React.memo(
         const createMiliSecondPicker = () => {
             if (props.showMillisec) {
                 const currentTime = getCurrentDateTime();
+                const millisecondProps = mergeProps(ptm('millisecond'));
                 const millisecond = currentTime.getMilliseconds();
                 const millisecondDisplay = millisecond < 100 ? (millisecond < 10 ? '00' : '0') + millisecond : millisecond;
+                const millisecondPickerProps = mergeProps(
+                    {
+                        className: 'p-millisecond-picker'
+                    },
+                    ptm('millisecond')
+                );
+
+                const incrementButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-link',
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 3, 1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('incrementButton')
+                );
+
+                const decrementButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-link',
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 3, -1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('decrementButton')
+                );
 
                 return (
-                    <div className="p-millisecond-picker">
-                        <button
-                            type="button"
-                            className="p-link"
-                            onMouseDown={(e) => onTimePickerElementMouseDown(e, 3, 1)}
-                            onMouseUp={onTimePickerElementMouseUp}
-                            onMouseLeave={onTimePickerElementMouseLeave}
-                            onKeyDown={(e) => onContainerButtonKeydown(e)}
-                        >
+                    <div {...millisecondPickerProps}>
+                        <button {...incrementButtonProps}>
                             {incrementIcon}
                             <Ripple />
                         </button>
-                        <span>{millisecondDisplay}</span>
-                        <button
-                            type="button"
-                            className="p-link"
-                            onMouseDown={(e) => onTimePickerElementMouseDown(e, 3, -1)}
-                            onMouseUp={onTimePickerElementMouseUp}
-                            onMouseLeave={onTimePickerElementMouseLeave}
-                            onKeyDown={(e) => onContainerButtonKeydown(e)}
-                        >
+                        <span {...millisecondProps}>{millisecondDisplay}</span>
+                        <button {...decrementButtonProps}>
                             {decrementIcon}
                             <Ripple />
                         </button>
@@ -3109,15 +3374,40 @@ export const Calendar = React.memo(
                 const currentTime = getCurrentDateTime();
                 const hour = currentTime.getHours();
                 const display = hour > 11 ? 'PM' : 'AM';
+                const ampmProps = mergeProps(ptm('ampm'));
+                const ampmPickerProps = mergeProps(
+                    {
+                        className: 'p-ampm-picker'
+                    },
+                    ptm('ampmPicker')
+                );
+
+                const incrementButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-link',
+                        onClick: (e) => toggleAmPm(e)
+                    },
+                    ptm('incrementButton')
+                );
+
+                const decrementButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        className: 'p-link',
+                        onClick: (e) => toggleAmPm(e)
+                    },
+                    ptm('decrementButton')
+                );
 
                 return (
-                    <div className="p-ampm-picker">
-                        <button type="button" className="p-link" onClick={toggleAmPm}>
+                    <div {...ampmPickerProps}>
+                        <button {...incrementButtonProps}>
                             {incrementIcon}
                             <Ripple />
                         </button>
-                        <span>{display}</span>
-                        <button type="button" className="p-link" onClick={toggleAmPm}>
+                        <span {...ampmProps}>{display}</span>
+                        <button {...decrementButtonProps}>
                             {decrementIcon}
                             <Ripple />
                         </button>
@@ -3129,17 +3419,33 @@ export const Calendar = React.memo(
         };
 
         const createSeparator = (separator) => {
+            const separatorContainerProps = mergeProps(
+                {
+                    className: 'p-separator'
+                },
+                ptm('separatorContainer')
+            );
+
+            const separatorProps = mergeProps(ptm('separator'));
+
             return (
-                <div className="p-separator">
-                    <span>{separator}</span>
+                <div {...separatorContainerProps}>
+                    <span {...separatorProps}>{separator}</span>
                 </div>
             );
         };
 
         const createTimePicker = () => {
             if ((props.showTime || props.timeOnly) && currentView === 'date') {
+                const timePickerProps = mergeProps(
+                    {
+                        className: 'p-timepicker'
+                    },
+                    ptm('timePicker')
+                );
+
                 return (
-                    <div className="p-timepicker">
+                    <div {...timePickerProps}>
                         {createHourPicker()}
                         {createSeparator(':')}
                         {createMinutePicker()}
@@ -3241,6 +3547,7 @@ export const Calendar = React.memo(
                         value={inputValue}
                         onClick={onInputClick}
                         onChange={onInputChange}
+                        pt={ptm('input')}
                     />
                 );
             }
@@ -3250,7 +3557,7 @@ export const Calendar = React.memo(
 
         const createButton = () => {
             if (props.showIcon) {
-                return <Button type="button" icon={props.icon || <CalendarIcon />} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" />;
+                return <Button type="button" icon={props.icon || <CalendarIcon />} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className="p-datepicker-trigger" pt={ptm('dropdownButton')} />;
             }
 
             return null;
@@ -3282,11 +3589,17 @@ export const Calendar = React.memo(
                 const todayClassName = classNames('p-button-text', props.todayButtonClassName);
                 const clearClassName = classNames('p-button-text', props.clearButtonClassName);
                 const { today, clear } = localeOptions(props.locale);
+                const buttonbarProps = mergeProps(
+                    {
+                        className: 'p-datepicker-buttonbar'
+                    },
+                    ptm('buttonbar')
+                );
 
                 return (
-                    <div className="p-datepicker-buttonbar">
-                        <Button type="button" label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={todayClassName} />
-                        <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={clearClassName} />
+                    <div {...buttonbarProps}>
+                        <Button type="button" label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={todayClassName} pt={ptm('todayButton')} />
+                        <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={clearClassName} pt={ptm('clearButton')} />
                     </div>
                 );
             }
@@ -3297,8 +3610,14 @@ export const Calendar = React.memo(
         const createFooter = () => {
             if (props.footerTemplate) {
                 const content = props.footerTemplate();
+                const footerProps = mergeProps(
+                    {
+                        className: 'p-datepicker-footer'
+                    },
+                    ptm('footer')
+                );
 
-                return <div className="p-datepicker-footer">{content}</div>;
+                return <div {...footerProps}>{content}</div>;
             }
 
             return null;
@@ -3306,11 +3625,26 @@ export const Calendar = React.memo(
 
         const createMonthPicker = () => {
             if (currentView === 'month') {
+                const monthPickerProps = mergeProps(
+                    {
+                        className: 'p-monthpicker'
+                    },
+                    ptm('monthPicker')
+                );
+
                 return (
-                    <div className="p-monthpicker">
+                    <div {...monthPickerProps}>
                         {monthPickerValues().map((m, i) => {
+                            const monthProps = mergeProps(
+                                {
+                                    className: classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) }),
+                                    onClick: (event) => onMonthSelect(event, i)
+                                },
+                                ptm('month')
+                            );
+
                             return (
-                                <span onClick={(event) => onMonthSelect(event, i)} key={`month${i + 1}`} className={classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) })}>
+                                <span {...monthProps} key={`month${i + 1}`}>
                                     {m}
                                 </span>
                             );
@@ -3324,11 +3658,26 @@ export const Calendar = React.memo(
 
         const createYearPicker = () => {
             if (currentView === 'year') {
+                const yearPickerProps = mergeProps(
+                    {
+                        className: 'p-yearpicker'
+                    },
+                    ptm('yearPicker')
+                );
+
                 return (
-                    <div className="p-yearpicker">
+                    <div {...yearPickerProps}>
                         {yearPickerValues().map((y, i) => {
+                            const yearProps = mergeProps(
+                                {
+                                    className: classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, -1, y) }),
+                                    onClick: (event) => onYearSelect(event, y)
+                                },
+                                ptm('year')
+                            );
+
                             return (
-                                <span onClick={(event) => onYearSelect(event, y)} key={`year${i + 1}`} className={classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, -1, y) })}>
+                                <span {...yearProps} key={`year${i + 1}`}>
                                     {y}
                                 </span>
                             );
@@ -3340,7 +3689,6 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const otherProps = CalendarBase.getOtherProps(props);
         const className = classNames('p-calendar p-component p-inputwrapper', props.className, {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
@@ -3365,9 +3713,19 @@ export const Calendar = React.memo(
         const footer = createFooter();
         const monthPicker = createMonthPicker();
         const yearPicker = createYearPicker();
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className,
+                style: props.style
+            },
+            CalendarBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
-            <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+            <span {...rootProps}>
                 {content}
                 <CalendarPanel
                     ref={overlayRef}
@@ -3383,6 +3741,7 @@ export const Calendar = React.memo(
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                     transitionOptions={props.transitionOptions}
+                    ptm={ptm}
                 >
                     {datePicker}
                     {timePicker}

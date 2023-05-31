@@ -7,7 +7,6 @@ import { InputMaskBase } from './InputMaskBase';
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = InputMaskBase.getProps(inProps);
-
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);
@@ -598,6 +597,7 @@ export const InputMask = React.memo(
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
+                pt={props.pt}
             />
         );
     })

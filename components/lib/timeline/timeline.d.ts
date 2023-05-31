@@ -8,12 +8,57 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
+
+export declare type TimelinePassThroughType<T> = PassThroughType<T, TimelinePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TimelinePassThroughMethodOptions {
+    props: Timeline;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TimelineProps.pt}
+ */
+export interface TimelinePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the event's DOM element.
+     */
+    event?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the opposite's DOM element.
+     */
+    opposite?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the marker's DOM element.
+     */
+    marker?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the connector's DOM element.
+     */
+    connector?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Timeline component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content'> {
+export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'content' | 'pt'> {
     /**
      * Position of the timeline bar relative to the content. Valid values are "left", "right for vertical layout and "top", "bottom" for horizontal layout.
      * @defaultValue left
@@ -49,6 +94,11 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * An array of events to display.
      */
     value?: any[] | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TimelinePassThroughOptions}
+     */
+    pt?: TimelinePassThroughOptions;
 }
 
 /**

@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/colorpicker/pt/ptdoc';
+import { Wireframe } from '../../components/doc/colorpicker/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/colorpicker/basicdoc';
 import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
@@ -64,8 +67,25 @@ const ColorPickerDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.colorpicker.options',
+            label: 'ColorPicker PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={['ColorPicker']} />;
+    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={['ColorPicker']} ptDocs={ptDocs} />;
 };
 
 export default ColorPickerDemo;

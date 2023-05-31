@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/checkbox/pt/ptdoc';
+import { Wireframe } from '../../components/doc/checkbox/pt/wireframe';
 import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
@@ -71,8 +74,25 @@ const CheckboxDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.checkbox.options',
+            label: 'Checkbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} />;
+    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} ptDocs={ptDocs} />;
 };
 
 export default CheckboxDemo;

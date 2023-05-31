@@ -175,15 +175,6 @@ export const Rating = React.memo(
             ptm('root')
         );
 
-        const tooltipProps = mergeProps(
-            {
-                target: elementRef,
-                content: props.tooltip,
-                ...props.tooltipOptions
-            },
-            ptm('tooltip')
-        );
-
         const cancelIcon = createCancelIcon();
         const icons = createIcons();
 
@@ -193,7 +184,7 @@ export const Rating = React.memo(
                     {cancelIcon}
                     {icons}
                 </div>
-                {hasTooltip && <Tooltip {...tooltipProps} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })
