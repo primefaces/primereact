@@ -7,9 +7,6 @@ import { InputMaskBase } from './InputMaskBase';
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {
         const props = InputMaskBase.getProps(inProps);
-        const { ptm } = InputMaskBase.setMetaData({
-            props
-        });
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);

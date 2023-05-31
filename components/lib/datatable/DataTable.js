@@ -1671,7 +1671,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 metaData={metaData}
             />
         );
-        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptm={ptm} /> : null;
+        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptm={ptCallbacks.ptm} /> : null;
 
         return (
             <>
@@ -1840,7 +1840,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 },
                 ptCallbacks.ptm('reorderIndicatorUp')
             );
-            const reorderIndicatorUpIconProps = mergeProps(ptm('reorderIndicatorUpIcon'));
+            const reorderIndicatorUpIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorUpIcon'));
             const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon {...reorderIndicatorUpIconProps} />, { ...reorderIndicatorUpIconProps }, { props });
             const reorderIndicatorDownProps = mergeProps(
                 {
@@ -1849,7 +1849,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 },
                 ptCallbacks.ptm('reorderIndicatorDown')
             );
-            const reorderIndicatorDownIconProps = mergeProps(ptm('reorderIndicatorDownIcon'));
+            const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
             const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
 
             return (

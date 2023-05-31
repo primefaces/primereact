@@ -16,16 +16,27 @@ export const TableHeader = React.memo((props) => {
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
 
     const getColumnProp = (column, name) => {
-        return ColumnBase.getCProp(column, name);
+        return ColumnBase.getCProps(column, name);
     };
 
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const getRowProps = (row) => ColumnGroupBase.getCProps(row);
+
     const getColumnPTOptions = (column, key) => {
-        return props.ptmo(getColumnProp(), key, {
-            props: this.column.props,
-            parent: {
-                props: this.$props,
-                state: this.$data
-            }
+        const cProps = getColumnProps(column);
+
+        return props.ptCallbacks.ptmo(cProps, key, {
+            props: cProps,
+            parent: props.metaData
+        });
+    }
+
+    const getRowPTOptions = (row, key) => {
+        const rProps = getRowProps(row);
+
+        return props.ptCallbacks.ptmo(rProps, key, {
+            props: rProps,
+            parent: props.metaData
         });
     }
 
@@ -118,7 +129,7 @@ export const TableHeader = React.memo((props) => {
                         tableProps={props.tableProps}
                         value={props.value}
                         ptCallbacks={props.ptCallbacks}
-                        metaData={metaData}
+                        metaData={props.metaData}
                     />
                 )
             );
@@ -159,7 +170,7 @@ export const TableHeader = React.memo((props) => {
                         style: colStyle,
                         className: colClassName
                     },
-                    props.ptm('headerCell')
+                    getColumnPTOptions(col, 'headerCell')
                 );
 
                 return (
@@ -175,22 +186,31 @@ export const TableHeader = React.memo((props) => {
     };
 
     const createContent = () => {
-        const headerRowProps = mergeProps(
-            {
-                role: 'row'
-            },
-            props.ptm('headerRow')
-        );
 
         if (props.headerColumnGroup) {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
-            return rows.map((row, i) => (
-                <tr {...headerRowProps} key={i}>
-                    {createGroupHeaderCells(row)}
-                </tr>
-            ));
+            return rows.map((row, i) => {
+                const headerRowProps = mergeProps(
+                    {
+                        role: 'row'
+                    },
+                    getRowPTOptions(row, 'headerRow')
+                );
+
+                return (
+                    <tr {...headerRowProps} key={i}>
+                        {createGroupHeaderCells(row)}
+                    </tr>
+                )
+            });
         } else {
+            const headerRowProps = mergeProps(
+                {
+                    role: 'row'
+                },
+                props.ptCallbacks.ptm('headerRow')
+            );
             const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
             const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
 
@@ -208,7 +228,7 @@ export const TableHeader = React.memo((props) => {
         {
             className: 'p-datatable-thead'
         },
-        props.ptm('thead')
+        props.ptCallbacks.ptm('thead')
     );
 
     return <thead {...threadProps}>{content}</thead>;

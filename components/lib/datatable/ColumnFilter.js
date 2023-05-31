@@ -34,6 +34,7 @@ export const ColumnFilter = React.memo((props) => {
             }
         });
     }
+
     const field = getColumnProp('filterField') || getColumnProp('field');
     const filterModel = props.filters[field];
     const filterStoreModel = props.filtersStore && props.filtersStore[field];
@@ -485,7 +486,7 @@ export const ColumnFilter = React.memo((props) => {
                 {
                     className: "p-fluid p-column-filter-element"
                 },
-                ptm('filterInput')
+                getColumnPTOptions('filterInput')
             );
 
             return <div {...filterInputProps}>{content}</div>;

@@ -24,8 +24,9 @@ export const HeaderCell = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
+
         return ptCallbacks.ptmo(getColumnProps(), key, {
-            props: props.column.props,
+            props: getColumnProps(),
             parent: parentParams
         });
     }
