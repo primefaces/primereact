@@ -47,6 +47,14 @@ export const InputTextarea = React.memo(
             }
         };
 
+        const onBeforeInput = (event) => {
+            props.onBeforeInput && props.onBeforeInput(event);
+
+            if (props.keyfilter) {
+                KeyFilter.onBeforeInput(event, props.keyfilter, props.validateOnly);
+            }
+        };
+
         const onPaste = (event) => {
             props.onPaste && props.onPaste(event);
 
@@ -122,6 +130,7 @@ export const InputTextarea = React.memo(
                 onBlur: onBlur,
                 onKeyUp: onKeyUp,
                 onKeyDown: onKeyDown,
+                onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onPaste: onPaste
             },

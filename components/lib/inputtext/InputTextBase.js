@@ -7,6 +7,7 @@ export const InputTextBase = ComponentBase.extend({
         validateOnly: false,
         tooltip: null,
         tooltipOptions: null,
+        onBeforeInput: null,
         onInput: null,
         onKeyDown: null,
         onPaste: null,

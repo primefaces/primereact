@@ -7,6 +7,7 @@ export const InputTextareaBase = ComponentBase.extend({
         keyfilter: null,
         onBlur: null,
         onFocus: null,
+        onBeforeInput: null,
         onInput: null,
         onKeyDown: null,
         onKeyUp: null,
