@@ -2048,14 +2048,14 @@ export const Calendar = React.memo(
             let iFormat;
 
             const lookAhead = (match) => {
-                    const matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
+                const matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
 
-                    if (matches) {
-                        iFormat++;
-                    }
+                if (matches) {
+                    iFormat++;
+                }
 
-                    return matches;
-                },
+                return matches;
+            },
                 formatNumber = (match, value, len) => {
                     let num = '' + value;
 
@@ -2807,7 +2807,9 @@ export const Calendar = React.memo(
             );
 
             if (currentView === 'year') {
-                return <span {...decadeTitleProps}>{props.decadeTemplate ? props.decadeTemplate(years) : <span>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
+                const decadeTitleTextProps = mergeProps(ptm('decadeTitleText'));
+
+                return <span {...decadeTitleProps}>{props.decadeTemplate ? props.decadeTemplate(years) : <span {...decadeTitleTextProps}>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
             }
 
             return null;

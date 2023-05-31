@@ -86,6 +86,10 @@ export interface CalendarPassThroughOptions {
      */
     decadeTitle?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the decade title text's DOM element.
+     */
+    decadeTitleText?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the Button component.
      * @see {@link ButtonPassThroughOptions}
      */
