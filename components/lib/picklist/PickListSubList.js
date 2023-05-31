@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
-import { PickListItem } from './PickListItem';
 import { SearchIcon } from '../icons/search';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { PickListItem } from './PickListItem';
 
 export const PickListSubList = React.memo(
     React.forwardRef((props, ref) => {
@@ -110,8 +110,15 @@ export const PickListSubList = React.memo(
         }));
 
         const createHeader = () => {
+            const headerProps = mergeProps(
+                {
+                    className: 'p-picklist-header'
+                },
+                props.ptm('header')
+            );
+
             if (props.header) {
-                return <div className="p-picklist-header">{ObjectUtils.getJSXElement(props.header, props)}</div>;
+                return <div {...headerProps}>{ObjectUtils.getJSXElement(props.header, props)}</div>;
             }
 
             return null;
@@ -123,7 +130,7 @@ export const PickListSubList = React.memo(
                     const key = JSON.stringify(item);
                     const selected = isSelected(item);
 
-                    return <PickListItem key={key} value={item} template={props.itemTemplate} selected={selected} onClick={onItemClick} onKeyDown={onItemKeyDown} tabIndex={props.tabIndex} />;
+                    return <PickListItem key={key} value={item} template={props.itemTemplate} selected={selected} onClick={onItemClick} onKeyDown={onItemKeyDown} tabIndex={props.tabIndex} ptm={props.ptm} />;
                 });
             }
 
@@ -132,13 +139,38 @@ export const PickListSubList = React.memo(
 
         const createFilter = () => {
             const iconClassName = 'p-picklist-filter-icon';
-            const icon = props.type === 'source' ? props.sourceFilterIcon || <SearchIcon className={iconClassName} /> : props.targetFilterIcon || <SearchIcon className={iconClassName} />;
-            const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const filterIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                props.ptm('filterIcon')
+            );
+            const icon = props.type === 'source' ? props.sourceFilterIcon || <SearchIcon {...filterIconProps} /> : props.targetFilterIcon || <SearchIcon {...filterIconProps} />;
+            const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
             if (props.showFilter) {
+                const filterProps = mergeProps(
+                    {
+                        className: 'p-picklist-filter'
+                    },
+                    props.ptm('filter')
+                );
+
+                const filterInputProps = mergeProps(
+                    {
+                        type: 'text',
+                        value: props.filterValue,
+                        onChange: onFilter,
+                        onKeyDown: onFilterInputKeyDown,
+                        placeholder: props.placeholder,
+                        className: 'p-picklist-filter-input p-inputtext p-component'
+                    },
+                    props.ptm('filterInput')
+                );
+
                 let content = (
-                    <div className="p-picklist-filter">
-                        <input type="text" value={props.filterValue} onChange={onFilter} onKeyDown={onFilterInputKeyDown} placeholder={props.placeholder} className="p-picklist-filter-input p-inputtext p-component" />
+                    <div {...filterProps}>
+                        <input {...filterInputProps} />
                         <span> {filterIcon} </span>
                     </div>
                 );
@@ -159,7 +191,14 @@ export const PickListSubList = React.memo(
                     content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
                 }
 
-                return <div className="p-picklist-filter-container">{content}</div>;
+                const filterContainerProps = mergeProps(
+                    {
+                        className: 'p-picklist-filter-container'
+                    },
+                    props.ptm('filterContainer')
+                );
+
+                return <div {...filterContainerProps}>{content}</div>;
             }
 
             return null;
@@ -169,11 +208,17 @@ export const PickListSubList = React.memo(
             const items = createItems();
             const className = classNames('p-picklist-list', props.listClassName);
 
-            return (
-                <ul className={className} style={props.style} role="listbox" aria-multiselectable>
-                    {items}
-                </ul>
+            const listProps = mergeProps(
+                {
+                    className: className,
+                    role: 'listbox',
+                    'aria-multiselectable': true,
+                    style: props.style
+                },
+                props.ptm('list')
             );
+
+            return <ul {...listProps}>{items}</ul>;
         };
 
         const className = classNames('p-picklist-list-wrapper', props.className);
@@ -181,8 +226,16 @@ export const PickListSubList = React.memo(
         const filter = createFilter();
         const list = createList();
 
+        const listWrapperProps = mergeProps(
+            {
+                className,
+                ref: listElementRef
+            },
+            props.ptm('listWrapper')
+        );
+
         return (
-            <div ref={listElementRef} className={className}>
+            <div {...listWrapperProps}>
                 {header}
                 {filter}
                 {list}

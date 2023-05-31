@@ -32452,6 +32452,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -32634,6 +32642,220 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "PickListPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PickListProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PickListState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PickListPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "controls",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the source controls' DOM element."
+                        },
+                        {
+                            "name": "moveUpButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveTopButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveDownButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveBottomButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "listWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the source wrapper's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the source header's DOM element."
+                        },
+                        {
+                            "name": "buttons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "moveToTargetButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveAllToTargetButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveToSourceButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveAllToSourceButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "filterInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "filterContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "list",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the buttons' DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PickListState": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "sourceSelection",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "[]",
+                            "description": "Current source selection state as a []."
+                        },
+                        {
+                            "name": "targetSelection",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "[]",
+                            "description": "Current target selection state as a []."
+                        },
+                        {
+                            "name": "sourceFilterValue",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current source filter state as a string."
+                        },
+                        {
+                            "name": "targetFilterValue",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current source target filter state as a string."
+                        },
+                        {
+                            "name": "attributeSelector",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Current attribute selector state as a any."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "PickListContext": {
+                    "description": "Defines current options in PickList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current selection state of the item as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "PickListFilterTemplateOptions": {
                     "description": "Custom filter template options.",
                     "relatedProp": "",
@@ -32716,6 +32938,14 @@
                             "description": "Callback function to be invoked when the keydown event."
                         }
                     ]
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "PickListPassThroughType": {
+                    "values": "PassThroughType<T, PickListPassThroughMethodOptions>"
                 }
             }
         }
