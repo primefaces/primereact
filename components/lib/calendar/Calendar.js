@@ -2048,14 +2048,14 @@ export const Calendar = React.memo(
             let iFormat;
 
             const lookAhead = (match) => {
-                const matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
+                    const matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
 
-                if (matches) {
-                    iFormat++;
-                }
+                    if (matches) {
+                        iFormat++;
+                    }
 
-                return matches;
-            },
+                    return matches;
+                },
                 formatNumber = (match, value, len) => {
                     let num = '' + value;
 

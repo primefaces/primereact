@@ -33,7 +33,7 @@ export const ColumnFilter = React.memo((props) => {
                 state: this.$data
             }
         });
-    }
+    };
 
     const field = getColumnProp('filterField') || getColumnProp('field');
     const filterModel = props.filters[field];
@@ -484,7 +484,7 @@ export const ColumnFilter = React.memo((props) => {
             const content = createFilterElement(filterModel, 0);
             const filterInputProps = mergeProps(
                 {
-                    className: "p-fluid p-column-filter-element"
+                    className: 'p-fluid p-column-filter-element'
                 },
                 getColumnPTOptions('filterInput')
             );
@@ -518,7 +518,7 @@ export const ColumnFilter = React.memo((props) => {
             const filterMenuButtonProps = mergeProps(
                 {
                     ref: iconRef,
-                    type: "button",
+                    type: 'button',
                     className,
                     'aria-haspopup': true,
                     'aria-expanded': overlayVisibleState,
@@ -558,7 +558,7 @@ export const ColumnFilter = React.memo((props) => {
             const filterMenuButtonProps = mergeProps(
                 {
                     className,
-                    type: "button",
+                    type: 'button',
                     onClick: (e) => clearFilter(e),
                     'aria-label': clearLabel
                 },
@@ -582,14 +582,14 @@ export const ColumnFilter = React.memo((props) => {
             const _noFilterLabel = noFilterLabel();
             const filterSeparatorProps = mergeProps(
                 {
-                    className: "p-column-filter-separator"
+                    className: 'p-column-filter-separator'
                 },
                 ptm('filterSeparator')
             );
 
             const filterRowItemProps = mergeProps(
                 {
-                    className: "p-column-filter-row-item",
+                    className: 'p-column-filter-row-item',
                     onClick: (e) => clearFilter(e),
                     onKeyDown: (e) => onRowMatchModeKeyDown(e, null, true)
                 },
@@ -598,7 +598,7 @@ export const ColumnFilter = React.memo((props) => {
 
             const filterRowItemsProps = mergeProps(
                 {
-                    className: "p-column-filter-row-items"
+                    className: 'p-column-filter-row-items'
                 },
                 ptm('filterRowItems')
             );
@@ -626,9 +626,7 @@ export const ColumnFilter = React.memo((props) => {
                         );
                     })}
                     <li {...filterSeparatorProps}></li>
-                    <li {...filterRowItemProps}>
-                        {_noFilterLabel}
-                    </li>
+                    <li {...filterRowItemProps}>{_noFilterLabel}</li>
                 </ul>
             );
         }
@@ -642,7 +640,7 @@ export const ColumnFilter = React.memo((props) => {
             const value = operator();
             const filterOperatorProps = mergeProps(
                 {
-                    className: "p-column-filter-operator"
+                    className: 'p-column-filter-operator'
                 },
                 ptm('filterOperator')
             );
@@ -671,7 +669,16 @@ export const ColumnFilter = React.memo((props) => {
         if (showRemoveIcon()) {
             const removeRuleLabel = removeRuleButtonLabel();
 
-            return <Button type="button" icon={props.filterRemoveIcon || <TrashIcon />} className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm" onClick={() => removeConstraint(index)} label={removeRuleLabel} pt={ptm('filterRemoveButton')} />;
+            return (
+                <Button
+                    type="button"
+                    icon={props.filterRemoveIcon || <TrashIcon />}
+                    className="p-column-filter-remove-button p-button-text p-button-danger p-button-sm"
+                    onClick={() => removeConstraint(index)}
+                    label={removeRuleLabel}
+                    pt={ptm('filterRemoveButton')}
+                />
+            );
         }
 
         return null;
@@ -681,14 +688,14 @@ export const ColumnFilter = React.memo((props) => {
         const _fieldConstraints = fieldConstraints();
         const filterConstraintsProps = mergeProps(
             {
-                className: "p-column-filter-constraints"
+                className: 'p-column-filter-constraints'
             },
             ptm('filterConstraints')
         );
 
         const filterConstraintProps = mergeProps(
             {
-                className: "p-column-filter-constraint"
+                className: 'p-column-filter-constraint'
             },
             ptm('filterConstraint')
         );

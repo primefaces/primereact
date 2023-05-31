@@ -1127,11 +1127,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             Object.entries(filters).forEach(([prop, value]) => {
                 cloned[prop] = value.operator
                     ? {
-                        operator: value.operator,
-                        constraints: value.constraints.map((constraint) => {
-                            return { ...constraint };
-                        })
-                    }
+                          operator: value.operator,
+                          constraints: value.constraints.map((constraint) => {
+                              return { ...constraint };
+                          })
+                      }
                     : { ...value };
             });
         } else {
@@ -1425,7 +1425,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
             const loadingOverlayProps = mergeProps(
                 {
-                    className: "p-datatable-loading-overlay p-component-overlay"
+                    className: 'p-datatable-loading-overlay p-component-overlay'
                 },
                 ptCallbacks.ptm('loadingOverlay')
             );
@@ -1696,7 +1696,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const wrapperProps = mergeProps(
             {
                 ref: wrapperRef,
-                className: "p-datatable-wrapper",
+                className: 'p-datatable-wrapper',
                 style: { maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
             },
             ptCallbacks.ptm('wrapper')
@@ -1763,7 +1763,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const content = ObjectUtils.getJSXElement(props.footer, { props });
             const footerProps = mergeProps(
                 {
-                    className: "p-datatable-footer"
+                    className: 'p-datatable-footer'
                 },
                 ptCallbacks.ptm('footer')
             );
@@ -1818,7 +1818,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const resizeHelperProps = mergeProps(
                 {
                     ref: resizeHelperRef,
-                    className: "p-column-resizer-helper",
+                    className: 'p-column-resizer-helper',
                     style: { display: 'none' }
                 },
                 ptCallbacks.ptm('resizeHelper')
@@ -1909,7 +1909,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             id: props.id,
             className: className,
             style: props.style,
-            'data-scrollselectors': ".p-datatable-wrapper"
+            'data-scrollselectors': '.p-datatable-wrapper'
         },
         DataTableBase.getOtherProps(props),
         ptCallbacks.ptm('root')

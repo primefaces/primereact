@@ -29,7 +29,7 @@ export const TableHeader = React.memo((props) => {
             props: cProps,
             parent: props.metaData
         });
-    }
+    };
 
     const getRowPTOptions = (row, key) => {
         const rProps = getRowProps(row);
@@ -38,7 +38,7 @@ export const TableHeader = React.memo((props) => {
             props: rProps,
             parent: props.metaData
         });
-    }
+    };
 
     const isColumnSorted = (column) => {
         return props.sortField !== null ? getColumnProp(column, 'field') === props.sortField || getColumnProp(column, 'sortField') === props.sortField : false;
@@ -186,7 +186,6 @@ export const TableHeader = React.memo((props) => {
     };
 
     const createContent = () => {
-
         if (props.headerColumnGroup) {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
@@ -202,7 +201,7 @@ export const TableHeader = React.memo((props) => {
                     <tr {...headerRowProps} key={i}>
                         {createGroupHeaderCells(row)}
                     </tr>
-                )
+                );
             });
         } else {
             const headerRowProps = mergeProps(

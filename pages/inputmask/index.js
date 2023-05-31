@@ -107,8 +107,8 @@ const InputMaskDemo = () => {
 
     const ptDescription = (
         <span>
-            InputMask does not have a specific API for PassThrough options, but it does support all the pass through options of
-            {' '}<Link href="/inputtext/#pt.inputtext.options" target="_blank">
+            InputMask does not have a specific API for PassThrough options, but it does support all the pass through options of{' '}
+            <Link href="/inputtext/#pt.inputtext.options" target="_blank">
                 InputText
             </Link>
         </span>

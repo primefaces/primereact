@@ -13,23 +13,18 @@ export const HeaderCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
-    const {
-        metaData: parentMetaData,
-        ptCallbacks,
-        index
-    } = props;
+    const { metaData: parentMetaData, ptCallbacks, index } = props;
 
     const params = { index };
     const parentParams = { ...parentMetaData, ...params };
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-
         return ptCallbacks.ptmo(getColumnProps(), key, {
             props: getColumnProps(),
             parent: parentParams
         });
-    }
+    };
 
     const isBadgeVisible = () => {
         return props.multiSortMeta && props.multiSortMeta.length > 1;
@@ -220,13 +215,13 @@ export const HeaderCell = React.memo((props) => {
         if (props.resizableColumns && !getColumnProp('frozen')) {
             const columnResizerProps = mergeProps(
                 {
-                    className: "p-column-resizer",
+                    className: 'p-column-resizer',
                     onMouseDown: (e) => onResizerMouseDown(e),
                     onClick: (e) => onResizerClick(e),
                     onDoubleClick: (e) => onResizerDoubleClick(e)
                 },
                 getColumnPTOptions('columnResizer')
-            )
+            );
 
             return <span {...columnResizerProps}></span>;
         }
@@ -238,7 +233,7 @@ export const HeaderCell = React.memo((props) => {
         const title = ObjectUtils.getJSXElement(getColumnProp('header'), { props: props.tableProps });
         const headerTitleProps = mergeProps(
             {
-                className: "p-column-title"
+                className: 'p-column-title'
             },
             getColumnPTOptions('headerTitle')
         );
@@ -270,7 +265,7 @@ export const HeaderCell = React.memo((props) => {
             const value = props.groupRowsBy && props.groupRowsBy === props.groupRowSortField ? metaIndex : metaIndex + 1;
             const sortBadgeProps = mergeProps(
                 {
-                    className: "p-sortable-column-badge"
+                    className: 'p-sortable-column-badge'
                 },
                 getColumnPTOptions('sortBadge')
             );
@@ -320,7 +315,7 @@ export const HeaderCell = React.memo((props) => {
         const filter = createFilter();
         const headerContentProps = mergeProps(
             {
-                className: "p-column-header-content"
+                className: 'p-column-header-content'
             },
             getColumnPTOptions('headerContent')
         );
