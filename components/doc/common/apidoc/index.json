@@ -5355,6 +5355,13 @@
                             "description": "Uses to pass attributes to the decade title's DOM element."
                         },
                         {
+                            "name": "decadeTitleText",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the decade title text's DOM element."
+                        },
+                        {
                             "name": "nextButton",
                             "optional": true,
                             "readonly": false,
