@@ -18,6 +18,7 @@ export declare type PickListPassThroughType<T> = PassThroughType<T, PickListPass
 export interface PickListPassThroughMethodOptions {
     props: PickListProps;
     state: PickListState;
+    context: PickListContext;
 }
 
 /**
