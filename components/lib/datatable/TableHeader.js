@@ -3,7 +3,7 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
@@ -18,6 +18,16 @@ export const TableHeader = React.memo((props) => {
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
     };
+
+    const getColumnPTOptions = (column, key) => {
+        return props.ptmo(getColumnProp(), key, {
+            props: this.column.props,
+            parent: {
+                props: this.$props,
+                state: this.$data
+            }
+        });
+    }
 
     const isColumnSorted = (column) => {
         return props.sortField !== null ? getColumnProp(column, 'field') === props.sortField || getColumnProp(column, 'sortField') === props.sortField : false;
@@ -72,6 +82,7 @@ export const TableHeader = React.memo((props) => {
                         allRowsSelected={props.allRowsSelected}
                         allSortableDisabled={isAllSortableDisabled}
                         column={col}
+                        index={i}
                         empty={props.empty}
                         filterClearIcon={props.filterClearIcon}
                         filterDisplay={props.filterDisplay}
@@ -106,6 +117,8 @@ export const TableHeader = React.memo((props) => {
                         tabIndex={props.tabIndex}
                         tableProps={props.tableProps}
                         value={props.value}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={metaData}
                     />
                 )
             );
@@ -116,7 +129,7 @@ export const TableHeader = React.memo((props) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} />;
+            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptm={props.ptm} />;
         }
 
         return null;
@@ -124,7 +137,7 @@ export const TableHeader = React.memo((props) => {
 
     const createFilter = (column, filter) => {
         if (filter) {
-            return <ColumnFilter display="row" column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} />;
+            return <ColumnFilter display="row" column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} ptmo={props.ptmo} />;
         }
 
         return null;
@@ -141,9 +154,16 @@ export const TableHeader = React.memo((props) => {
                 const colKey = columnKey || field || i;
                 const checkbox = createCheckbox(selectionMode);
                 const filterRow = createFilter(col, filter);
+                const headerCellProps = mergeProps(
+                    {
+                        style: colStyle,
+                        className: colClassName
+                    },
+                    props.ptm('headerCell')
+                );
 
                 return (
-                    <th key={colKey} style={colStyle} className={colClassName}>
+                    <th {...headerCellProps} key={colKey}>
                         {checkbox}
                         {filterRow}
                     </th>
@@ -155,17 +175,24 @@ export const TableHeader = React.memo((props) => {
     };
 
     const createContent = () => {
+        const headerRowProps = mergeProps(
+            {
+                role: 'row'
+            },
+            props.ptm('headerRow')
+        );
+
         if (props.headerColumnGroup) {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
             return rows.map((row, i) => (
-                <tr key={i} role="row">
+                <tr {...headerRowProps} key={i}>
                     {createGroupHeaderCells(row)}
                 </tr>
             ));
         } else {
-            const headerRow = <tr role="row">{createHeaderCells(props.columns)}</tr>;
-            const filterRow = props.filterDisplay === 'row' && <tr role="row">{createFilterCells()}</tr>;
+            const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
+            const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
 
             return (
                 <>
@@ -177,8 +204,14 @@ export const TableHeader = React.memo((props) => {
     };
 
     const content = createContent();
+    const threadProps = mergeProps(
+        {
+            className: 'p-datatable-thead'
+        },
+        props.ptm('thead')
+    );
 
-    return <thead className="p-datatable-thead">{content}</thead>;
+    return <thead {...threadProps}>{content}</thead>;
 });
 
 TableHeader.displayName = 'TableHeader';

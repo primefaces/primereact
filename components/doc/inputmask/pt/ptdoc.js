@@ -86,10 +86,8 @@ export default function PTDemo() {
                     mask="99-999999"
                     placeholder="99-999999"
                     pt={{
-                        input: {
-                            root: {
-                                className: 'border-teal-400'
-                            }
+                        root: {
+                            className: 'border-teal-400'
                         }
                     }}
                 />

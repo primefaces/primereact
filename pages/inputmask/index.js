@@ -15,6 +15,7 @@ import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
 import { StyleDoc } from '../../components/doc/inputmask/styledoc';
+import Link from 'next/link';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -104,6 +105,15 @@ const InputMaskDemo = () => {
         }
     ];
 
+    const ptDescription = (
+        <span>
+            InputMask does not have a specific API for PassThrough options, but it does support all the pass through options of
+            {' '}<Link href="/inputtext/#pt.inputtext.options" target="_blank">
+                InputText
+            </Link>
+        </span>
+    );
+
     return (
         <DocComponent
             title="React Mask Component"
@@ -112,6 +122,7 @@ const InputMaskDemo = () => {
             componentDocs={docs}
             apiDocs={['InputMask']}
             ptDocs={ptDocs}
+            ptDescription={ptDescription}
         />
     );
 };

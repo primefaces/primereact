@@ -11,28 +11,6 @@ import * as React from 'react';
 import { InputText, InputTextPassThroughOptions, InputTextProps } from '../inputtext';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { PassThroughType } from '../utils/utils';
-
-export declare type InputMaskPassThroughType<T> = PassThroughType<T, InputMaskPassThroughMethodOptions>;
-
-/**
- * Custom passthrough(pt) options.
- * @see {@link InputMaskProps.pt}
- */
-export interface InputMaskPassThroughOptions {
-    /**
-     * Uses to pass attributes to the Input component.
-     * @see {@link InputTextPassThroughOptions}
-     */
-    input?: InputTextPassThroughOptions;
-}
-
-/**
- * Custom passthrough(pt) option method.
- */
-export interface InputMaskPassThroughMethodOptions {
-    props: InputMaskProps;
-}
 
 /**
  * Custom complete event
@@ -133,9 +111,9 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange' | 'pt'> 
     children?: React.ReactNode | undefined;
     /**
      * Uses to pass attributes to DOM elements inside the component.
-     * @type {InputMaskPassThroughOptions}
+     * @type {InputTextPassThroughOptions}
      */
-    pt?: InputMaskPassThroughOptions;
+    pt?: InputTextPassThroughOptions;
 }
 
 /**

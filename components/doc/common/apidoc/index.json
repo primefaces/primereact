@@ -12850,6 +12850,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -14500,6 +14508,284 @@
                     "props": [],
                     "callbacks": [],
                     "extendedTypes": "Array<DataTableValue>"
+                },
+                "DataTablePassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableProps<TValue>"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataTableState": {
+                    "description": "Defines current inline state in DataTable component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current index of first record as a number."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current number of rows to display in new page as a number."
+                        },
+                        {
+                            "name": "sortField",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "undefined | string | Function",
+                            "description": "Current sort field."
+                        },
+                        {
+                            "name": "sortOrder",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current order to sort the data by default."
+                        },
+                        {
+                            "name": "multiSortMeta",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableSortMeta[]",
+                            "description": "Current sortmeta objects to sort the data."
+                        },
+                        {
+                            "name": "filters",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableFilterMeta",
+                            "description": "Current filters object."
+                        },
+                        {
+                            "name": "columnOrder",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "Current order of the columns."
+                        },
+                        {
+                            "name": "groupRowsSortMeta",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableSortMeta",
+                            "description": "Current group sortmeta objects to sort the data."
+                        },
+                        {
+                            "name": "editingMeta",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "object",
+                            "description": "Current editing meta data."
+                        },
+                        {
+                            "name": "d_rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current number of rows to display in new page as a number."
+                        },
+                        {
+                            "name": "d_filters",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "object",
+                            "description": "Current filters object."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataTablePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "loadingOverlay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the loading overlay's DOM element."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the loading icon's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "wrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the wrapper's DOM element."
+                        },
+                        {
+                            "name": "virtualScroller",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "VirtualScrollerPassThroughOptions",
+                            "description": "Uses to pass attributes to the VirtualScroller component."
+                        },
+                        {
+                            "name": "table",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the table's DOM element."
+                        },
+                        {
+                            "name": "virtualScrollerSpacer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the virtual scroller spacer's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "thead",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thead's DOM element."
+                        },
+                        {
+                            "name": "headerRow",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header row's DOM element."
+                        },
+                        {
+                            "name": "tbody",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the tbody's DOM element."
+                        },
+                        {
+                            "name": "rowgroupHeader",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rowgroup header's DOM element."
+                        },
+                        {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the row's DOM element."
+                        },
+                        {
+                            "name": "rowExpansion",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the row expansion's DOM element."
+                        },
+                        {
+                            "name": "rowgroupFooter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rowgroup footer's DOM element."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the empty message's DOM element."
+                        },
+                        {
+                            "name": "tfoot",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the tfoot's DOM element."
+                        },
+                        {
+                            "name": "footerRow",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footerr ow's DOM element."
+                        },
+                        {
+                            "name": "footerCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer cell's DOM element."
+                        },
+                        {
+                            "name": "resizeHelper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the resize helper's DOM element."
+                        },
+                        {
+                            "name": "reorderIndicatorUp",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the reorder indicator up's DOM element."
+                        },
+                        {
+                            "name": "reorderIndicatorDown",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the reorder indicator down's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         },
@@ -14529,6 +14815,9 @@
                 },
                 "DataTableSelection": {
                     "values": "DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>"
+                },
+                "DataTablePassThroughType": {
+                    "values": "PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>"
                 }
             }
         }
@@ -22690,7 +22979,7 @@
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputMaskPassThroughOptions",
+                            "type": "InputTextPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
@@ -22850,46 +23139,6 @@
                             "type": "FormTarget<string>"
                         }
                     ]
-                }
-            }
-        },
-        "interfaces": {
-            "description": "Defines the custom interfaces used by the module.",
-            "values": {
-                "InputMaskPassThroughOptions": {
-                    "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "pt",
-                    "props": [
-                        {
-                            "name": "input",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "InputTextPassThroughOptions",
-                            "description": "Uses to pass attributes to the Input component."
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "InputMaskPassThroughMethodOptions": {
-                    "description": "Custom passthrough(pt) option method.",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "props",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "InputMaskProps"
-                        }
-                    ],
-                    "callbacks": []
-                }
-            }
-        },
-        "types": {
-            "description": "Defines the custom types used by the module.",
-            "values": {
-                "InputMaskPassThroughType": {
-                    "values": "PassThroughType<T, InputMaskPassThroughMethodOptions>"
                 }
             }
         }

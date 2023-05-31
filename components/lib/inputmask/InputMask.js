@@ -600,7 +600,7 @@ export const InputMask = React.memo(
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
-                pt={ptm('input')}
+                pt={props.pt}
             />
         );
     })
