@@ -29020,6 +29020,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -29084,6 +29092,192 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "OrderListPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OrderListProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OrderListState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "OrderListContext"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OrderListPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "controls",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the controls' DOM element."
+                        },
+                        {
+                            "name": "moveUpButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveTopButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveDownButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "moveBottomButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "container",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the container's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "list",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "droppoint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "filterInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "filterContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OrderListState": {
+                    "description": "Defines current inline state in OrderList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "selection",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "[]",
+                            "description": "Current selection state as a boolean."
+                        },
+                        {
+                            "name": "filterValue",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current filter value as a string.s"
+                        },
+                        {
+                            "name": "attributeSelector",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current attribute selector state as a string."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "OrderListContext": {
+                    "description": "Defines current options in OrderList component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current selection state of the item as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "OrderListFilterOptions": {
                     "description": "Custom filter options.",
                     "relatedProp": "",
@@ -29102,6 +29296,14 @@
                         }
                     ],
                     "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "OrderListPassThroughType": {
+                    "values": "PassThroughType<T, OrderListPassThroughMethodOptions>"
                 }
             }
         }
@@ -32657,6 +32859,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "PickListState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PickListContext"
                         }
                     ],
                     "callbacks": []

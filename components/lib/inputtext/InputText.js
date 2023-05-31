@@ -20,6 +20,14 @@ export const InputText = React.memo(
             }
         };
 
+        const onBeforeInput = (event) => {
+            props.onBeforeInput && props.onBeforeInput(event);
+
+            if (props.keyfilter) {
+                KeyFilter.onBeforeInput(event, props.keyfilter, props.validateOnly);
+            }
+        };
+
         const onInput = (event) => {
             const target = event.target;
             let validatePattern = true;
@@ -61,9 +69,10 @@ export const InputText = React.memo(
             {
                 ref: elementRef,
                 className,
-                onInput: (e) => onInput(e),
-                onKeyDown: (e) => onKeyDown(e),
-                onPaste: (e) => onPaste(e)
+                onBeforeInput: onBeforeInput,
+                onInput: onInput,
+                onKeyDown: onKeyDown,
+                onPaste: onPaste
             },
             InputTextBase.getOtherProps(props),
             ptm('root')

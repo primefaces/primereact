@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const OrderListBase = {
+export const OrderListBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'OrderList',
         id: null,
@@ -28,7 +28,5 @@ export const OrderListBase = {
         filterTemplate: null,
         onFilter: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, OrderListBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, OrderListBase.defaultProps)
-};
+    }
+});
