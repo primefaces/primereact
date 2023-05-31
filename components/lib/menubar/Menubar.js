@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PrimeReact from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { BarsIcon } from '../icons/bars';
+import { IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
-import { BarsIcon } from '../icons/bars';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -61,7 +61,6 @@ export const Menubar = React.memo(
         React.useImperativeHandle(ref, () => ({
             props,
             toggle,
-            useCustomContent,
             getElement: () => elementRef.current,
             getRootMenu: () => rootMenuRef.current,
             getMenuButton: () => menuButtonRef.current
