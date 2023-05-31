@@ -3178,23 +3178,34 @@ export const Calendar = React.memo(
         const changeDateWithCursor = (e, dateFieldMethod, monthFieldMethod, yearFieldMethod) => {
             const cursorPosition = e.target.selectionStart;
 
-            if (cursorPosition <= 2) { dateFieldMethod(); e.target.setSelectionRange(0, 2); }
-            else if (cursorPosition <= 5) { monthFieldMethod(); e.target.setSelectionRange(3, 5); }
-            else { yearFieldMethod(); e.target.setSelectionRange(6, 10); }
+            if (cursorPosition <= 2) { dateFieldMethod(); Promise.resolve().then(() => e.target.setSelectionRange(0, 2)) }
+            else if (cursorPosition <= 5) { monthFieldMethod(); Promise.resolve().then(() => e.target.setSelectionRange(3, 5)) }
+            else { yearFieldMethod(); Promise.resolve().then(() => e.target.setSelectionRange(6, 10)) }
         }
 
         const onInputChange = (e) => {
-            console.log(e);
             let dateFieldMethod, monthFieldMethod, yearFieldMethod;
-            const [day, month, year] = e.target.value.split('-');
+            const [day, month, year] = inputValue.split('-');
             let newDay = day, newMonth = month, newYear = year;
             // for numbers
+            const keyValue = Number(e.nativeEvent.data);
 
-            if (e.which >= 48 && e.which <= 57) {
+            if (keyValue >= 0 && keyValue <= 9) {
                 dateFieldMethod = () => {
-                    if (day === 'DD') newDay = `0${e.target.value}`;
-                    else if (Number(day) < 3 || (Number(day) === 3 && e.target.value < 2)) newDay = `${Number(day) * 10 + e.target.value}`
-                    else newDay = '31'
+                    if (day === 'DD' || day > 9) newDay = ObjectUtils.normalizeNumberDigits(keyValue, 2);
+                    else if (Number(day) < 3 || (Number(day) === 3 && keyValue < 2)) newDay = `${ObjectUtils.normalizeNumberDigits(Number(day) * 10 + keyValue, 2)}`;
+                    else newDay = '31';
+                };
+
+                monthFieldMethod = () => {
+                    if (month === 'MM' || month > 9) newMonth = ObjectUtils.normalizeNumberDigits(keyValue, 2);
+                    else if (Number(month) === 0 || (Number(month) === 1 && keyValue < 3)) newMonth = `${ObjectUtils.normalizeNumberDigits(Number(month) * 10 + keyValue, 2)}`;
+                    else newMonth = '12';
+                };
+
+                yearFieldMethod = () => {
+                    if (year === 'YYYY' || year > 999) newYear = ObjectUtils.normalizeNumberDigits(keyValue, 4);
+                    else newYear = ObjectUtils.normalizeNumberDigits(Number(year) * 10 + keyValue, 4);
                 };
             }
 
