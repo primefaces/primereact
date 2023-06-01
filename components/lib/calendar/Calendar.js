@@ -1815,7 +1815,7 @@ export const Calendar = React.memo(
                 }
             }
 
-            if (props.disabledDates) {
+            if (props.disabledDates || props.enabledDates) {
                 validDate = !isDateDisabled(day, month, year);
             }
 
@@ -1962,7 +1962,15 @@ export const Calendar = React.memo(
         };
 
         const isDateDisabled = (day, month, year) => {
-            return props.disabledDates ? props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day) : false;
+            if (props.disabledDates) {
+                return props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)
+            }
+
+            if (props.enabledDates) {
+                return !props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
+            }
+
+            return false;
         };
 
         const isDayDisabled = (day, month, year) => {

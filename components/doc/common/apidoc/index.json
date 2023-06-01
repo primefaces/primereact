@@ -4294,6 +4294,14 @@
                             "description": "Array with disabled weekday numbers."
                         },
                         {
+                            "name": "enabledDates",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Date[]",
+                            "default": "",
+                            "description": "Array with dates to enable (all other dates will be disabled)."
+                        },
+                        {
                             "name": "hideOnDateTimeSelect",
                             "optional": true,
                             "readonly": false,
