@@ -1963,7 +1963,7 @@ export const Calendar = React.memo(
 
         const isDateDisabled = (day, month, year) => {
             if (props.disabledDates) {
-                return props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)
+                return props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
             }
 
             if (props.enabledDates) {
