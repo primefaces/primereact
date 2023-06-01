@@ -18,11 +18,7 @@ export const Row = (inProps) => {
         ptm('root')
     );
 
-    return (
-        <tr {...rootProps}>
-            {props.children}
-        </tr>
-    );
+    return <tr {...rootProps}>{props.children}</tr>;
 };
 
 Row.displayName = 'Row';

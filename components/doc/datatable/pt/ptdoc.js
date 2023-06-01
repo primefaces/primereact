@@ -219,7 +219,7 @@ export default function PTDemo() {
             <div className="card">
                 <DataTable
                     value={products}
-                    sortMode='multiple'
+                    sortMode="multiple"
                     pt={{
                         table: { style: { minWidth: '50rem' } }
                     }}

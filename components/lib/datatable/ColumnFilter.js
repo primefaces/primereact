@@ -705,7 +705,7 @@ export const ColumnFilter = React.memo((props) => {
                     const matchModeDropdown = createMatchModeDropdown(fieldConstraint, i);
                     const menuFilterElement = createMenuFilterElement(fieldConstraint, i);
                     const removeButton = createRemoveButton(i);
-                    const filterRemoveProps = mergeProps(getColumnPTOptions('filterRemove'))
+                    const filterRemoveProps = mergeProps(getColumnPTOptions('filterRemove'));
 
                     return (
                         <div {...filterConstraintProps} key={i}>
@@ -724,7 +724,7 @@ export const ColumnFilter = React.memo((props) => {
             const addRuleLabel = addRuleButtonLabel();
             const filterAddRuleProps = mergeProps(
                 {
-                    className: "p-column-filter-add-rule"
+                    className: 'p-column-filter-add-rule'
                 },
                 getColumnPTOptions('filterAddRule')
             );
