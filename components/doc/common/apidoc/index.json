@@ -15731,6 +15731,171 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "DataViewPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataViewProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataViewState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataViewLayoutOptionsPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataViewPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "DataViewProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "paginator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PaginatorPassThroughOptions",
+                            "description": "Uses to pass attributes to the Paginator component."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the empty message's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "loadingOverlay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the loading overlay's DOM element."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the loading icon's DOM element."
+                        },
+                        {
+                            "name": "grid",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the grid's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataViewState": {
+                    "description": "Defines current inline state in DataView component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current index of first record as a number."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current number of rows to display in new page as a number."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataViewLayoutOptionsPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "DataViewLayoutOptionsProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "listButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the list button's DOM element."
+                        },
+                        {
+                            "name": "listIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the list icon's DOM element."
+                        },
+                        {
+                            "name": "gridButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the grid button's DOM element."
+                        },
+                        {
+                            "name": "gridIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the grid icon's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "DataViewLayoutOptionsChangeEvent": {
                     "description": "Custom data view layout options event.",
                     "relatedProp": "",
@@ -15821,6 +15986,17 @@
                             "description": "Layout options change callback"
                         }
                     ]
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "DataViewPassThroughType": {
+                    "values": "PassThroughType<T, DataViewPassThroughMethodOptions>"
+                },
+                "DataViewLayoutOptionsPassThroughType": {
+                    "values": "PassThroughType<T, DataViewLayoutOptionsPassThroughMethodOptions>"
                 }
             }
         }
