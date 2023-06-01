@@ -100,7 +100,7 @@ export const Rating = React.memo(
                     getPTOptions(props.value, 'offIcon')
                 );
                 const icon = active ? { type: props.onIcon || <StarFillIcon {...onIconProps} /> } : { type: props.offIcon || <StarIcon {...offIconProps} /> };
-                const content = IconUtils.getJSXIcon(icon.type, { ...icon.props }, { props });
+                const content = IconUtils.getJSXIcon(icon.type, active ? { ...onIconProps } : { ...offIconProps }, { props });
 
                 const itemProps = mergeProps(
                     {
