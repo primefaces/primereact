@@ -8,7 +8,7 @@ export const RowCheckbox = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(getColumnProps(), key, {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             context: {

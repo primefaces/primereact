@@ -31,7 +31,7 @@ export const BodyCell = React.memo((props) => {
     const getColumnPTOptions = (key) => {
         const cProps = getColumnProps(props.column);
 
-        return props.ptCallbacks.ptmo(cProps, key, {
+        return props.ptCallbacks.ptmo(getColumnProp('pt'), key, {
             props: cProps,
             parent: props.metaData,
             state: {
@@ -788,7 +788,8 @@ export const BodyCell = React.memo((props) => {
                 onMouseDown: (e) => onMouseDown(e),
                 onMouseUp: (e) => onMouseUp(e)
             },
-            getColumnPTOptions('bodyCell')
+            getColumnPTOptions('bodyCell'),
+            getColumnPTOptions('root')
         );
 
         return (

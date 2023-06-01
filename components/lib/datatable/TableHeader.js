@@ -22,6 +22,21 @@ export const TableHeader = React.memo((props) => {
     const getColumnProps = (column) => ColumnBase.getCProps(column);
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
+    const getColumnGroupProps = () => {
+        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined; //@todo
+    }
+
+    const getColumnGroupPTOptions = (key) => {
+        return (props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.headerColumnGroup, 'pt')), key, {
+            props: getColumnGroupProps(),
+            parent: props.metaData,
+            state: {
+                sortableDisabledFields: sortableDisabledFieldsState,
+                allSortableDisabled: allSortableDisabledState
+            }
+        });
+    }
+
     const getColumnPTOptions = (column, key) => {
         const cProps = getColumnProps(column);
 
@@ -185,7 +200,8 @@ export const TableHeader = React.memo((props) => {
                         style: colStyle,
                         className: colClassName
                     },
-                    getColumnPTOptions(col, 'headerCell')
+                    getColumnPTOptions(col, 'headerCell'),
+                    getColumnPTOptions(col, 'root'),
                 );
 
                 return (
@@ -209,7 +225,7 @@ export const TableHeader = React.memo((props) => {
                     {
                         role: 'row'
                     },
-                    getRowPTOptions(row, 'headerRow')
+                    getRowPTOptions(row, 'root')
                 );
 
                 return (
@@ -242,7 +258,8 @@ export const TableHeader = React.memo((props) => {
         {
             className: 'p-datatable-thead'
         },
-        props.ptCallbacks.ptm('thead')
+        props.ptCallbacks.ptm('thead'),
+        getColumnGroupPTOptions('root')
     );
 
     return <thead {...theadProps}>{content}</thead>;

@@ -8,14 +8,25 @@ import { mergeProps } from '../utils/Utils';
 export const TableFooter = React.memo((props) => {
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
+    const getColumnGroupProps = () => {
+        return props.footerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.footerColumnGroup)) : undefined;
+    }
+
     const getRowPTOptions = (row, key) => {
         const rProps = getRowProps(row);
 
-        return props.ptCallbacks.ptmo(rProps, key, {
+        return props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(row, 'pt'), key, {
             props: rProps,
             parent: props.metaData
         });
     };
+
+    const getColumnGroupPTOptions = (key) => {
+        return (props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt')), key, {
+            props: getColumnGroupProps(),
+            parent: props.metaData
+        });
+    }
 
     const hasFooter = () => {
         return props.footerColumnGroup ? true : props.columns ? props.columns.some((col) => col && getColumnProp(col, 'footer')) : false;
@@ -45,15 +56,15 @@ export const TableFooter = React.memo((props) => {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.footerColumnGroup, 'children'));
 
             return rows.map((row, i) => {
-                const footerRowProps = mergeProps(
+                const rootProps = mergeProps(
                     {
                         role: 'row'
                     },
-                    getRowPTOptions(row, 'footerRow')
+                    getRowPTOptions(row, 'root')
                 );
 
                 return (
-                    <tr {...footerRowProps} key={i}>
+                    <tr {...rootProps} key={i}>
                         {createGroupFooterCells(row)}
                     </tr>
                 );
@@ -76,7 +87,8 @@ export const TableFooter = React.memo((props) => {
             {
                 className: 'p-datatable-tfoot'
             },
-            props.ptCallbacks.ptm('tfoot')
+            props.ptCallbacks.ptm('tfoot'),
+            getColumnGroupPTOptions('root')
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;

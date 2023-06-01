@@ -8,7 +8,7 @@ export const FooterCell = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(getColumnProps(), key, {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             state: {
@@ -81,7 +81,8 @@ export const FooterCell = React.memo((props) => {
             colSpan,
             rowSpan
         },
-        getColumnPTOptions('footerCell')
+        getColumnPTOptions('footerCell'),
+        getColumnPTOptions('root')
     );
 
     return <td {...footerCellProps}>{content}</td>;

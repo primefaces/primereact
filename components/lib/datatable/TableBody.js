@@ -831,7 +831,8 @@ export const TableBody = React.memo(
                         colSpan,
                         role: 'cell'
                     },
-                    getColumnPTOptions('bodyCell')
+                    getColumnPTOptions('bodyCell'),
+                    getColumnPTOptions('root')
                 );
 
                 return (
@@ -859,7 +860,8 @@ export const TableBody = React.memo(
                         {
                             colSpan
                         },
-                        getColumnPTOptions('bodyCell')
+                        getColumnPTOptions('bodyCell'),
+                        getColumnPTOptions('root')
                     );
 
                     const rowgroupHeaderNameProps = mergeProps(
@@ -987,7 +989,8 @@ export const TableBody = React.memo(
                             colSpan,
                             role: 'cell'
                         },
-                        getColumnPTOptions('bodyCell')
+                        getColumnPTOptions('bodyCell'),
+                        getColumnPTOptions('root')
                     );
 
                     content = <td {...bodyCellProps}>{content}</td>;
