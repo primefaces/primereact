@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
 
 export const InputTextarea = React.memo(
@@ -10,6 +10,10 @@ export const InputTextarea = React.memo(
 
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);
+
+        const { ptm } = InputTextareaBase.setMetaData({
+            props
+        });
 
         const onFocus = (event) => {
             if (props.autoResize) {
@@ -40,6 +44,14 @@ export const InputTextarea = React.memo(
 
             if (props.keyfilter) {
                 KeyFilter.onKeyPress(event, props.keyfilter, props.validateOnly);
+            }
+        };
+
+        const onBeforeInput = (event) => {
+            props.onBeforeInput && props.onBeforeInput(event);
+
+            if (props.keyfilter) {
+                KeyFilter.onBeforeInput(event, props.keyfilter, props.validateOnly);
             }
         };
 
@@ -100,7 +112,6 @@ export const InputTextarea = React.memo(
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = InputTextareaBase.getOtherProps(props);
         const className = classNames(
             'p-inputtextarea p-inputtext p-component',
             {
@@ -111,10 +122,26 @@ export const InputTextarea = React.memo(
             props.className
         );
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className: className,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyUp: onKeyUp,
+                onKeyDown: onKeyDown,
+                onBeforeInput: onBeforeInput,
+                onInput: onInput,
+                onPaste: onPaste
+            },
+            InputTextareaBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
             <>
-                <textarea ref={elementRef} {...otherProps} className={className} onFocus={onFocus} onBlur={onBlur} onKeyUp={onKeyUp} onKeyDown={onKeyDown} onInput={onInput} onPaste={onPaste}></textarea>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                <textarea {...rootProps}></textarea>
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

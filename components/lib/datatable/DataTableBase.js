@@ -1,7 +1,7 @@
 import { FilterMatchMode } from '../api/Api';
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DataTableBase = {
+export const DataTableBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'DataTable',
         alwaysShowPaginator: true,
@@ -144,7 +144,5 @@ export const DataTableBase = {
         value: null,
         virtualScrollerOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DataTableBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DataTableBase.defaultProps)
-};
+    }
+});

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleDownIcon } from '../icons/angledown';
-import { AngleDoubleUpIcon } from '../icons/angledoubleup';
-import { AngleUpIcon } from '../icons/angleup';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const OrderListControls = React.memo((props) => {
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
@@ -124,12 +124,19 @@ export const OrderListControls = React.memo((props) => {
         }
     };
 
+    const controlProps = mergeProps(
+        {
+            className: 'p-orderlist-controls'
+        },
+        props.ptm('control')
+    );
+
     return (
-        <div className="p-orderlist-controls">
-            <Button type="button" icon={moveUpIcon} onClick={moveUp}></Button>
-            <Button type="button" icon={moveTopIcon} onClick={moveTop}></Button>
-            <Button type="button" icon={moveDownIcon} onClick={moveDown}></Button>
-            <Button type="button" icon={moveBottomIcon} onClick={moveBottom}></Button>
+        <div {...controlProps}>
+            <Button type="button" icon={moveUpIcon} onClick={moveUp} pt={props.ptm('moveUpButton')}></Button>
+            <Button type="button" icon={moveTopIcon} onClick={moveTop} pt={props.ptm('moveTopButton')}></Button>
+            <Button type="button" icon={moveDownIcon} onClick={moveDown} pt={props.ptm('moveDownButton')}></Button>
+            <Button type="button" icon={moveBottomIcon} onClick={moveBottom} pt={props.ptm('moveBottomButton')}></Button>
         </div>
     );
 });

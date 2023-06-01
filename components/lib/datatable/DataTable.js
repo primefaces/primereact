@@ -6,7 +6,7 @@ import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
@@ -15,7 +15,6 @@ import { TableHeader } from './TableHeader';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const props = DataTableBase.getProps(inProps);
-
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
     const [sortFieldState, setSortFieldState] = React.useState(props.sortField);
@@ -27,6 +26,23 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [editingMetaState, setEditingMetaState] = React.useState({});
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+    const metaData = {
+        props,
+        state: {
+            first: firstState,
+            rows: rowsState,
+            sortField: sortFieldState,
+            sortOrder: sortOrderState,
+            multiSortMeta: multiSortMetaState,
+            filters: filtersState,
+            columnOrder: columnOrderState,
+            groupRowsSortMeta: groupRowsSortMetaState,
+            editingMeta: editingMetaState,
+            d_rows: d_rowsState,
+            d_filters: d_filtersState
+        }
+    };
+    const ptCallbacks = DataTableBase.setMetaData(metaData);
     const attributeSelector = React.useRef('');
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
@@ -1405,10 +1421,22 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createLoader = () => {
         if (props.loading) {
             const iconClassName = 'p-datatable-loading-icon';
-            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
-            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const loadingIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptCallbacks.ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+            const loadingOverlayProps = mergeProps(
+                {
+                    className: 'p-datatable-loading-overlay p-component-overlay'
+                },
+                ptCallbacks.ptm('loadingOverlay')
+            );
 
-            return <div className="p-datatable-loading-overlay p-component-overlay">{loadingIcon}</div>;
+            return <div {...loadingOverlayProps}>{loadingIcon}</div>;
         }
 
         return null;
@@ -1417,8 +1445,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createHeader = () => {
         if (props.header) {
             const content = ObjectUtils.getJSXElement(props.header, { props });
+            const headerProps = mergeProps(
+                {
+                    className: 'p-datatable-header'
+                },
+                ptCallbacks.ptm('header')
+            );
 
-            return <div className="p-datatable-header">{content}</div>;
+            return <div {...headerProps}>{content}</div>;
         }
 
         return null;
@@ -1475,6 +1509,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onColumnDrop={onColumnHeaderDrop}
                 rowGroupMode={props.rowGroupMode}
                 reorderableColumns={props.reorderableColumns}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
             />
         );
     };
@@ -1558,6 +1594,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 tableSelector={attributeSelector.current}
                 value={props.frozenValue}
                 virtualScrollerOptions={options}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
             />
         );
         const body = (
@@ -1635,9 +1673,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerContentRef={contentRef}
                 virtualScrollerOptions={options}
                 isVirtualScrollerDisabled={isVirtualScrollerDisabled}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
             />
         );
-        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" /> : null;
+        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
+            <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
+        ) : null;
 
         return (
             <>
@@ -1651,7 +1693,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createTableFooter = (options) => {
         const { columns } = options;
 
-        return <TableFooter tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} />;
+        return <TableFooter tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
     };
 
     const createContent = (processedData, columns, selectionModeInColumn, empty) => {
@@ -1659,9 +1701,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         const _isVirtualScrollerDisabled = isVirtualScrollerDisabled();
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
+        const wrapperProps = mergeProps(
+            {
+                ref: wrapperRef,
+                className: 'p-datatable-wrapper',
+                style: { maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
+            },
+            ptCallbacks.ptm('wrapper')
+        );
 
         return (
-            <div ref={wrapperRef} className="p-datatable-wrapper" style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
+            <div {...wrapperProps}>
                 <VirtualScroller
                     ref={virtualScrollerRef}
                     {...virtualScrollerOptions}
@@ -1673,6 +1723,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     loaderDisabled
                     inline
                     autoSize
+                    pt={ptCallbacks.ptm('virtualScroller')}
                     showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => {
@@ -1692,9 +1743,18 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         const tableHeader = createTableHeader(options, empty, _isVirtualScrollerDisabled);
                         const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
                         const tableFooter = createTableFooter(options);
+                        const tableProps = mergeProps(
+                            {
+                                ref,
+                                className: tableClassName,
+                                style: props.tableStyle,
+                                role: 'table'
+                            },
+                            ptCallbacks.ptm('table')
+                        );
 
                         return (
-                            <table ref={ref} style={props.tableStyle} className={tableClassName} role="table">
+                            <table {...tableProps}>
                                 {tableHeader}
                                 {tableBody}
                                 {tableFooter}
@@ -1709,8 +1769,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createFooter = () => {
         if (props.footer) {
             const content = ObjectUtils.getJSXElement(props.footer, { props });
+            const footerProps = mergeProps(
+                {
+                    className: 'p-datatable-footer'
+                },
+                ptCallbacks.ptm('footer')
+            );
 
-            return <div className="p-datatable-footer">{content}</div>;
+            return <div {...footerProps}>{content}</div>;
         }
 
         return null;
@@ -1734,6 +1800,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 rightContent={props.paginatorRight}
                 alwaysShow={props.alwaysShowPaginator}
                 dropdownAppendTo={props.paginatorDropdownAppendTo}
+                pt={ptCallbacks.ptm('paginator')}
             />
         );
     };
@@ -1756,7 +1823,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const createResizeHelper = () => {
         if (props.resizableColumns) {
-            return <div ref={resizeHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
+            const resizeHelperProps = mergeProps(
+                {
+                    ref: resizeHelperRef,
+                    className: 'p-column-resizer-helper',
+                    style: { display: 'none' }
+                },
+                ptCallbacks.ptm('resizeHelper')
+            );
+
+            return <div {...resizeHelperProps}></div>;
         }
 
         return null;
@@ -1765,10 +1841,24 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
-            const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
-            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
-            const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
-            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
+            const reorderIndicatorUpProps = mergeProps(
+                {
+                    className: 'p-datatable-reorder-indicator-up',
+                    style: { ...style }
+                },
+                ptCallbacks.ptm('reorderIndicatorUp')
+            );
+            const reorderIndicatorUpIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorUpIcon'));
+            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon {...reorderIndicatorUpIconProps} />, { ...reorderIndicatorUpIconProps }, { props });
+            const reorderIndicatorDownProps = mergeProps(
+                {
+                    className: 'p-datatable-reorder-indicator-down',
+                    style: { ...style }
+                },
+                ptCallbacks.ptm('reorderIndicatorDown')
+            );
+            const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
+            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
 
             return (
                 <>
@@ -1791,7 +1881,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const empty = ObjectUtils.isEmpty(data);
     const selectionModeInColumn = getSelectionModeInColumn(columns);
     const selectable = props.selectionMode || selectionModeInColumn;
-    const otherProps = DataTableBase.getOtherProps(props);
     const className = classNames(
         'p-datatable p-component',
         {
@@ -1822,9 +1911,20 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const footer = createFooter();
     const resizeHelper = createResizeHelper();
     const reorderIndicators = createReorderIndicators();
+    const rootProps = mergeProps(
+        {
+            ref: elementRef,
+            id: props.id,
+            className,
+            style: props.style,
+            'data-scrollselectors': '.p-datatable-wrapper'
+        },
+        DataTableBase.getOtherProps(props),
+        ptCallbacks.ptm('root')
+    );
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} data-scrollselectors=".p-datatable-wrapper">
+        <div {...rootProps}>
             {loader}
             {header}
             {paginatorTop}

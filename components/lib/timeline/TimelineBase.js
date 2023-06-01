@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TimelineBase = {
+export const TimelineBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Timeline',
         align: 'left',
@@ -12,7 +12,5 @@ export const TimelineBase = {
         opposite: null,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TimelineBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TimelineBase.defaultProps)
-};
+    }
+});

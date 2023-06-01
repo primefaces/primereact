@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/timeline/pt/ptdoc';
+import { Wireframe } from '../../components/doc/timeline/pt/wireframe';
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
@@ -52,8 +55,25 @@ const TimelineDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.timeline.options',
+            label: 'Timeline PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={['Timeline']} />;
+    return <DocComponent title="React Timeline Component" header="Timeline" description="Timeline visualizes a series of chained events." componentDocs={docs} apiDocs={['Timeline']} ptDocs={ptDocs} />;
 };
 
 export default TimelineDemo;

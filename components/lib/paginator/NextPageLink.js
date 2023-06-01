@@ -1,20 +1,46 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { NextPageLinkBase } from './PaginatorBase';
 import { AngleRightIcon } from '../icons/angleright';
+import { Ripple } from '../ripple/Ripple';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { NextPageLinkBase } from './PaginatorBase';
 
 export const NextPageLink = React.memo((inProps) => {
     const props = NextPageLinkBase.getProps(inProps);
+
+    const getPTOptions = (key) => {
+        return props.ptm(key, {
+            context: {
+                disabled: props.disabled
+            }
+        });
+    };
+
     const className = classNames('p-paginator-next p-paginator-element p-link', { 'p-disabled': props.disabled });
 
     const iconClassName = 'p-paginator-icon';
-    const icon = props.nextPageLinkIcon || <AngleRightIcon className={iconClassName} />;
-    const nextPageLinkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+    const nextPageIconProps = mergeProps(
+        {
+            className: iconClassName
+        },
+        getPTOptions('nextPageIcon')
+    );
+    const icon = props.nextPageLinkIcon || <AngleRightIcon {...nextPageIconProps} />;
+    const nextPageLinkIcon = IconUtils.getJSXIcon(icon, { ...nextPageIconProps }, { props });
+
+    const nextPageButtonProps = mergeProps(
+        {
+            type: 'button',
+            className,
+            onClick: props.onClick,
+            disabled: props.disabled,
+            'aria-label': ariaLabel('nextPageLabel')
+        },
+        getPTOptions('nextPageButton')
+    );
 
     const element = (
-        <button type="button" className={className} onClick={props.onClick} disabled={props.disabled} aria-label={ariaLabel('nextPageLabel')}>
+        <button {...nextPageButtonProps}>
             {nextPageLinkIcon}
             <Ripple />
         </button>

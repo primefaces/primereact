@@ -11,7 +11,268 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent, Nullable } from '../ts-helpers';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+import { ButtonPassThroughOptions } from '../button/button';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+
+export declare type CalendarPassThroughType<T> = PassThroughType<T, CalendarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface CalendarPassThroughMethodOptions {
+    props: CalendarProps;
+    state: CalendarState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link CalendarProps.pt}
+ */
+export interface CalendarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the InputText component.
+     * @see {@link InputTextPassThroughOptions}
+     */
+    input?: InputTextPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    dropdownButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the group container's DOM element.
+     */
+    groupContainer?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the group's DOM element.
+     */
+    group?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    previousButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the previous icon's DOM element.
+     */
+    previousIcon?: CalendarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the title's DOM element.
+     */
+    title?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the month title's DOM element.
+     */
+    monthTitle?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the year title's DOM element.
+     */
+    yearTitle?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the decade title's DOM element.
+     */
+    decadeTitle?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the decade title text's DOM element.
+     */
+    decadeTitleText?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    nextButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the next icon's DOM element.
+     */
+    nextIcon?: CalendarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the table's DOM element.
+     */
+    table?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableElement>>;
+    /**
+     * Uses to pass attributes to the table header's DOM element.
+     */
+    tableHeader?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
+    /**
+     * Uses to pass attributes to the table header row's DOM element.
+     */
+    tableHeaderRow?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the week header's DOM element.
+     */
+    weekHeader?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the table header cell's DOM element.
+     */
+    tableHeaderCell?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the week label's DOM element.
+     */
+    weekLabel?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the week day's DOM element.
+     */
+    weekDay?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the table body's DOM element.
+     */
+    tableBody?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
+    /**
+     * Uses to pass attributes to the table body row's DOM element.
+     */
+    tableBodyRow?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the week number's DOM element.
+     */
+    weekNumber?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the week label container's DOM element.
+     */
+    weekLabelContainer?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the day's DOM element.
+     */
+    day?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the day label's DOM element.
+     */
+    dayLabel?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the month picker's DOM element.
+     */
+    monthPicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the month's DOM element.
+     */
+    month?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the year picker's DOM element.
+     */
+    yearPicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the year's DOM element.
+     */
+    year?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the time picker's DOM element.
+     */
+    timePicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hour picker's DOM element.
+     */
+    hourPicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the increment icon's DOM element.
+     */
+    incrementIcon?: CalendarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the increment button's DOM element.
+     */
+    incrementButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the decrement button's DOM element.
+     */
+    decrementButton?: CalendarPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the increment icon's DOM element.
+     */
+    decrementIcon?: CalendarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the hour's DOM element.
+     */
+    hour?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the separatorc ontainer's DOM element.
+     */
+    separatorContainer?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the minute picker's DOM element.
+     */
+    minutePicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the minute's DOM element.
+     */
+    minute?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the second picker's DOM element.
+     */
+    secondPicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the second's DOM element.
+     */
+    second?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the ampm picker's DOM element.
+     */
+    ampmPicker?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the ampm's DOM element.
+     */
+    ampm?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the buttonbar's DOM element.
+     */
+    buttonbar?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    todayButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     * @see {@link ButtonPassThroughOptions}
+     */
+    clearButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the select's DOM element.
+     */
+    select?: CalendarPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
+    /**
+     * Uses to pass attributes to the option's DOM element.
+     */
+    option?: CalendarPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
+}
+
+/**
+ * Defines current inline state in Calendar component.
+ */
+export interface CalendarState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+    /**
+     * Current viewDate state as a string.
+     */
+    viewDate: any;
+}
 
 /**
  * Custom change event.
@@ -604,6 +865,11 @@ export interface CalendarProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CalendarPassThroughOptions}
+     */
+    pt?: CalendarPassThroughOptions;
 }
 
 /**

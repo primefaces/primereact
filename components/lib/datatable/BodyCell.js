@@ -10,7 +10,7 @@ import { PencilIcon } from '../icons/pencil';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
@@ -26,6 +26,22 @@ export const BodyCell = React.memo((props) => {
     const initFocusTimeout = React.useRef(null);
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+
+    const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps(props.column);
+
+        return props.ptCallbacks.ptmo(cProps, key, {
+            props: cProps,
+            parent: props.metaData,
+            state: {
+                styleObject: styleObjectState,
+                editing: editingState,
+                editingRowData: editingRowDataState
+            }
+        });
+    };
+
     const field = getColumnProp('field') || `field_${props.index}`;
     const editingKey = props.dataKey ? (props.rowData && props.rowData[props.dataKey]) || props.rowIndex : props.rowIndex;
 
@@ -517,8 +533,9 @@ export const BodyCell = React.memo((props) => {
             field: field
         });
         const content = ObjectUtils.getJSXElement(getVirtualScrollerOption('loadingTemplate'), options);
+        const bodyCellProps = mergeProps(getColumnPTOptions('bodyCell'));
 
-        return <td>{content}</td>;
+        return <td {...bodyCellProps}>{content}</td>;
     };
 
     const createElement = () => {
@@ -549,7 +566,14 @@ export const BodyCell = React.memo((props) => {
             [`p-align-${align}`]: !!align
         });
         const style = getStyle();
-        const title = props.responsiveLayout === 'stack' && <span className="p-column-title">{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
+        const columnTitleProps = mergeProps(
+            {
+                className: 'p-column-title'
+            },
+            getColumnProp('columnTitle')
+        );
+
+        const title = props.responsiveLayout === 'stack' && <span {...columnTitleProps}>{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
 
         if (selectionMode) {
             const showSelection = props.showSelectionElement ? props.showSelectionElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
@@ -564,20 +588,36 @@ export const BodyCell = React.memo((props) => {
 
             content = showSelection && (
                 <>
-                    {selectionMode === 'single' && <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} />}
-                    {selectionMode === 'multiple' && <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} checkIcon={props.checkIcon} />}
+                    {selectionMode === 'single' && (
+                        <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                    )}
+                    {selectionMode === 'multiple' && (
+                        <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} checkIcon={props.checkIcon} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                    )}
                 </>
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
             const rowReorderIconClassName = 'p-datatable-reorderablerow-handle';
-            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon className={rowReorderIconClassName} />;
+            const rowReorderIconProps = mergeProps(
+                {
+                    className: rowReorderIconClassName
+                },
+                getColumnProp('rowReorderIcon')
+            );
+            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
 
-            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { className: rowReorderIconClassName }, { props });
+            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props });
         } else if (expander) {
-            const iconProps = { className: 'p-row-toggler-icon', 'aria-hidden': true };
-            const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
-            const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+            const rowTogglerIconProps = mergeProps(
+                {
+                    className: 'p-row-toggler-icon',
+                    'aria-hidden': true
+                },
+                getColumnProp('rowTogglerIcon')
+            );
+            const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...rowTogglerIconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...rowTogglerIconProps} />;
+            const togglerIcon = IconUtils.getJSXIcon(icon, { ...rowTogglerIconProps }, { props });
             const ariaControls = `${props.tableSelector}_content_${props.rowIndex}_expanded`;
             const ariaLabelField = props.selectionAriaLabel || props.tableProps.dataKey;
             const ariaLabelText = ObjectUtils.resolveFieldData(props.rowData, ariaLabelField);
@@ -586,9 +626,20 @@ export const BodyCell = React.memo((props) => {
                 onClick: onRowToggle,
                 className: 'p-row-toggler p-link'
             };
+            const rowTogglerProps = mergeProps(
+                {
+                    ...expanderProps,
+                    type: 'button',
+                    'aria-expanded': props.expanded,
+                    'aria-controls': ariaControls,
+                    tabIndex: props.tabIndex,
+                    'aria-label': label
+                },
+                getColumnPTOptions('rowToggler')
+            );
 
             content = (
-                <button {...expanderProps} type="button" aria-expanded={props.expanded} aria-controls={ariaControls} tabIndex={props.tabIndex} aria-label={label}>
+                <button {...rowTogglerProps}>
                     {togglerIcon}
                     <Ripple />
                 </button>
@@ -603,9 +654,12 @@ export const BodyCell = React.memo((props) => {
             let rowEditorSaveIconClassName = 'p-row-editor-save-icon',
                 rowEditorCancelIconClassName = 'p-row-editor-cancel-icon',
                 rowEditorInitIconClassName = 'p-row-editor-init-icon';
-            const rowEditorSaveIcon = IconUtils.getJSXIcon(props.rowEditorSaveIcon || <CheckIcon className={rowEditorSaveIconClassName} />, { className: rowEditorSaveIconClassName }, { props });
-            const rowEditorCancelIcon = IconUtils.getJSXIcon(props.rowEditorCancelIcon || <TimesIcon className={rowEditorCancelIconClassName} />, { className: rowEditorCancelIconClassName }, { props });
-            const rowEditorInitIcon = IconUtils.getJSXIcon(props.rowEditorInitIcon || <PencilIcon className={rowEditorInitIconClassName} />, { className: rowEditorInitIconClassName }, { props });
+            const rowEditorSaveIconProps = mergeProps({ className: rowEditorSaveIconClassName }, getColumnProp('rowEditorSaveIconProps'));
+            const rowEditorCancelIconProps = mergeProps({ className: rowEditorCancelIconClassName }, getColumnProp('rowEditorCancelIconProps'));
+            const rowEditorInitIconProps = mergeProps({ className: rowEditorInitIconClassName }, getColumnProp('rowEditorInitIconProps'));
+            const rowEditorSaveIcon = IconUtils.getJSXIcon(props.rowEditorSaveIcon || <CheckIcon {...rowEditorSaveIconProps} />, { ...rowEditorSaveIconProps }, { props });
+            const rowEditorCancelIcon = IconUtils.getJSXIcon(props.rowEditorCancelIcon || <TimesIcon {...rowEditorCancelIconProps} />, { ...rowEditorCancelIconProps }, { props });
+            const rowEditorInitIcon = IconUtils.getJSXIcon(props.rowEditorInitIcon || <PencilIcon {...rowEditorInitIconProps} />, { ...rowEditorInitIconProps }, { props });
 
             if (editingState) {
                 rowEditorProps = {
@@ -616,13 +670,35 @@ export const BodyCell = React.memo((props) => {
                     cancelClassName: 'p-row-editor-cancel p-link'
                 };
 
+                const rowEditorEditButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        name: 'row-save',
+                        onClick: rowEditorProps.onSaveClick,
+                        className: rowEditorProps.saveClassName,
+                        tabIndex: props.tabIndex
+                    },
+                    getColumnPTOptions('rowEditorSaveButtonProps')
+                );
+
+                const rowEditorCancelButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        name: 'row-cancel',
+                        onClick: rowEditorProps.onCancelClick,
+                        className: rowEditorProps.cancelClassName,
+                        tabIndex: props.tabIndex
+                    },
+                    getColumnPTOptions('rowEditorCancelButtonProps')
+                );
+
                 content = (
                     <>
-                        <button type="button" name="row-save" onClick={rowEditorProps.onSaveClick} className={rowEditorProps.saveClassName} tabIndex={props.tabIndex}>
+                        <button {...rowEditorEditButtonProps}>
                             {rowEditorSaveIcon}
                             <Ripple />
                         </button>
-                        <button type="button" name="row-cancel" onClick={rowEditorProps.onCancelClick} className={rowEditorProps.cancelClassName} tabIndex={props.tabIndex}>
+                        <button {...rowEditorCancelButtonProps}>
                             {rowEditorCancelIcon}
                             <Ripple />
                         </button>
@@ -635,8 +711,19 @@ export const BodyCell = React.memo((props) => {
                     initClassName: 'p-row-editor-init p-link'
                 };
 
+                const rowEditorInitButtonProps = mergeProps(
+                    {
+                        type: 'button',
+                        name: 'row-edit',
+                        onClick: rowEditorProps.onInitClick,
+                        className: rowEditorProps.initClassName,
+                        tabIndex: props.tabIndex
+                    },
+                    getColumnPTOptions('rowEditorInitButtonProps')
+                );
+
                 content = (
-                    <button type="button" name="row-edit" onClick={rowEditorProps.onInitClick} className={rowEditorProps.initClassName} tabIndex={props.tabIndex}>
+                    <button {...rowEditorInitButtonProps}>
                         {rowEditorInitIcon}
                         <Ripple />
                     </button>
@@ -667,17 +754,45 @@ export const BodyCell = React.memo((props) => {
         content = typeof content == 'boolean' ? content.toString() : content;
 
         if (!isRowEditor && editor) {
+            const editorKeyHelperProps = mergeProps(
+                {
+                    tabIndex: '0',
+                    ref: keyHelperRef,
+                    className: 'p-cell-editor-key-helper p-hidden-accessible',
+                    onFocus: (e) => onEditorFocus(e)
+                },
+                getColumnPTOptions('editorKeyHelperLabel')
+            );
+
+            const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
             /* eslint-disable */
             editorKeyHelper = (
-                <a tabIndex="0" ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}>
-                    <span></span>
+                <a {...editorKeyHelperProps}>
+                    <span {...editorKeyHelperLabelProps}></span>
                 </a>
             );
             /* eslint-enable */
         }
 
+        const bodyCellProps = mergeProps(
+            {
+                ref: elementRef,
+                style,
+                className,
+                rowSpan: props.rowSpan,
+                tabIndex,
+                role: 'cell',
+                onClick: (e) => onClick(e),
+                onKeyDown: (e) => onKeyDown(e),
+                onBlur: (e) => onBlur(e),
+                onMouseDown: (e) => onMouseDown(e),
+                onMouseUp: (e) => onMouseUp(e)
+            },
+            getColumnPTOptions('bodyCell')
+        );
+
         return (
-            <td ref={elementRef} style={style} className={className} rowSpan={props.rowSpan} tabIndex={tabIndex} role="cell" onClick={onClick} onKeyDown={onKeyDown} onBlur={onBlur} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+            <td {...bodyCellProps}>
                 {editorKeyHelper}
                 {title}
                 {content}

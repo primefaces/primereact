@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
@@ -17,6 +17,15 @@ export const OrderList = React.memo(
         const elementRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
+
+        const { ptm } = OrderListBase.setMetaData({
+            props,
+            state: {
+                selection: selectionState,
+                filterValue: filterValueState,
+                attributeSelector: attributeSelectorState
+            }
+        });
 
         const onItemClick = (event) => {
             const metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
@@ -217,12 +226,22 @@ export const OrderList = React.memo(
             }
         });
 
-        const otherProps = OrderListBase.getOtherProps(props);
         const className = classNames('p-orderlist p-component', props.className);
         const visibleList = getVisibleList();
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className,
+                style: props.style
+            },
+            OrderListBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 <OrderListControls
                     value={visibleList}
                     selection={selectionState}
@@ -232,6 +251,7 @@ export const OrderList = React.memo(
                     moveTopIcon={props.moveTopIcon}
                     moveDownIcon={props.moveDownIcon}
                     moveBottomIcon={props.moveBottomIcon}
+                    ptm={ptm}
                 />
                 <OrderListSubList
                     value={visibleList}
@@ -251,6 +271,7 @@ export const OrderList = React.memo(
                     onChange={props.onChange}
                     tabIndex={props.tabIndex}
                     filterIcon={props.filterIcon}
+                    ptm={ptm}
                 />
             </div>
         );

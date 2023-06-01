@@ -55,17 +55,6 @@ export interface CardPassThroughOptions {
 }
 
 /**
- * Defines valid properties in Card component.
- */
-export interface CardProps {
-    /**
-     * Uses to pass attributes to DOM elements inside the component.
-     * @type {CardPassThroughOptions}
-     */
-    pt?: CardPassThroughOptions;
-}
-
-/**
  * Defines valid properties in Card component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -91,6 +80,11 @@ export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CardPassThroughOptions}
+     */
+    pt?: CardPassThroughOptions;
 }
 
 /**

@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ColorPickerBase = {
+export const ColorPickerBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ColorPicker',
         appendTo: null,
@@ -27,7 +27,5 @@ export const ColorPickerBase = {
         tooltipOptions: null,
         transitionOptions: null,
         value: null
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ColorPickerBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ColorPickerBase.defaultProps)
-};
+    }
+});

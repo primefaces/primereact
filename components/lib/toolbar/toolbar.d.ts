@@ -43,17 +43,6 @@ export interface ToolbarPassThroughOptions {
 }
 
 /**
- * Defines valid properties in Toolbar component.
- */
-export interface ToolbarProps {
-    /**
-     * Uses to pass attributes to DOM elements inside the component.
-     * @type {ToolbarPassThroughOptions}
-     */
-    pt?: ToolbarPassThroughOptions;
-}
-
-/**
  * Defines valid properties in Toolbar component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
@@ -85,6 +74,11 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToolbarPassThroughOptions}
+     */
+    pt?: ToolbarPassThroughOptions;
 }
 
 /**

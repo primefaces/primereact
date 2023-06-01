@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MentionBase = {
+export const MentionBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Mention',
         autoHighlight: true,
@@ -31,7 +31,5 @@ export const MentionBase = {
         onSelect: null,
         onShow: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MentionBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MentionBase.defaultProps)
-};
+    }
+});

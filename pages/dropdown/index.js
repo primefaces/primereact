@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/dropdown/pt/ptdoc';
+import { Wireframe } from '../../components/doc/dropdown/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
@@ -101,8 +104,25 @@ const DropdownDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.dropdown.options',
+            label: 'Dropdown PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Select Component" header="Dropdown" description="Dropdown also known as Select, is used to choose an item from a collection of options." componentDocs={docs} apiDocs={['Dropdown']} />;
+    return <DocComponent title="React Select Component" header="Dropdown" description="Dropdown also known as Select, is used to choose an item from a collection of options." componentDocs={docs} apiDocs={['Dropdown']} ptDocs={ptDocs} />;
 };
 
 export default DropdownDemo;

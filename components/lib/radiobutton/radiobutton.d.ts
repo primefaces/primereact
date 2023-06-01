@@ -8,8 +8,63 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+
+export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface RadioButtonPassThroughMethodOptions {
+    props: RadioButtonProps;
+    state: RadioButtonState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link RadioButtonProps.pt}
+ */
+export interface RadioButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden accessible DOM element wrapper.
+     */
+    hiddenInputWrapper?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden accessible DOM element.
+     */
+    hiddenInput?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in RadioButton component.
+ */
+export interface RadioButtonState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * Custom change event.
@@ -31,7 +86,7 @@ interface RadioButtonClickEvent extends FormEvent {}
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
+export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref' | 'pt'> {
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
@@ -91,6 +146,11 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {RadioButtonPassThroughOptions}
+     */
+    pt?: RadioButtonPassThroughOptions;
 }
 
 /**

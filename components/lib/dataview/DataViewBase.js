@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DataViewBase = {
+export const DataViewBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'DataView',
         id: null,
@@ -35,12 +35,10 @@ export const DataViewBase = {
         itemTemplate: null,
         onPage: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DataViewBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DataViewBase.defaultProps)
-};
+    }
+});
 
-export const DataViewLayoutOptionsBase = {
+export const DataViewLayoutOptionsBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'DataViewLayoutOptions',
         id: null,
@@ -51,7 +49,5 @@ export const DataViewLayoutOptionsBase = {
         gridIcon: null,
         onChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DataViewLayoutOptionsBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DataViewLayoutOptionsBase.defaultProps)
-};
+    }
+});

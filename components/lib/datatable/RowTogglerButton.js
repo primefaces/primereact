@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils } from '../utils/Utils';
+import { IconUtils, mergeProps } from '../utils/Utils';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
+import { ColumnBase } from '../column/ColumnBase';
 
 export const RowTogglerButton = React.memo((props) => {
     const onClick = (event) => {
@@ -13,13 +14,38 @@ export const RowTogglerButton = React.memo((props) => {
         });
     };
 
-    const iconProps = { className: 'p-row-toggler-icon', 'aria-hidden': true };
-    const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...iconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...iconProps} />;
-    const togglerIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+
+    const getColumnPTOptions = (key) => {
+        return props.ptCallbacks.ptmo(getColumnProps(), key, {
+            props: getColumnProps(),
+            parent: props.metaData
+        });
+    };
+
+    const rowGroupTogglerIconProps = mergeProps(
+        {
+            className: 'p-row-toggler-icon',
+            'aria-hidden': true
+        },
+        getColumnPTOptions('rowGroupTogglerIcon')
+    );
+    const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...rowGroupTogglerIconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...rowGroupTogglerIconProps} />;
+    const togglerIcon = IconUtils.getJSXIcon(icon, { ...rowGroupTogglerIconProps }, { props });
     const label = props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
+    const rowGroupTogglerProps = mergeProps(
+        {
+            type: 'button',
+            onClick: (e) => onClick(e),
+            className: 'p-row-toggler p-link',
+            tabIndex: props.tabIndex,
+            'aria-label': label
+        },
+        getColumnPTOptions('rowGroupToggler')
+    );
 
     return (
-        <button type="button" onClick={onClick} className="p-row-toggler p-link" tabIndex={props.tabIndex} aria-label={label}>
+        <button {...rowGroupTogglerProps}>
             {togglerIcon}
             <Ripple />
         </button>

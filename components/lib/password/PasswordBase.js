@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const PasswordBase = {
+export const PasswordBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Password',
         id: null,
@@ -34,7 +34,5 @@ export const PasswordBase = {
         onShow: null,
         onHide: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PasswordBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PasswordBase.defaultProps)
-};
+    }
+});

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
-import { AngleLeftIcon } from '../icons/angleleft';
+import { useMatchMedia } from '../hooks/Hooks';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
 import { AngleDoubleRightIcon } from '../icons/angledoubleright';
-import { AngleRightIcon } from '../icons/angleright';
-import { useMatchMedia } from '../hooks/Hooks';
-import { AngleDownIcon } from '../icons/angledown';
-import { AngleDoubleDownIcon } from '../icons/angledoubledown';
-import { AngleUpIcon } from '../icons/angleup';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleLeftIcon } from '../icons/angleleft';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleUpIcon } from '../icons/angleup';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
@@ -125,12 +125,19 @@ export const PickListTransferControls = React.memo((props) => {
 
     const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
 
+    const buttonsProps = mergeProps(
+        {
+            className: className
+        },
+        props.ptm('buttons')
+    );
+
     return (
-        <div className={className}>
-            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft}></Button>
+        <div {...buttonsProps}>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={props.ptm('moveToTargetButton')}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={props.ptm('moveAllToTargetButton')}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={props.ptm('moveToSourceButton')}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={props.ptm('moveAllToSourceButton')}></Button>
         </div>
     );
 });

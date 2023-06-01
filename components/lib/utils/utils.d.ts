@@ -50,7 +50,7 @@ export declare class DomHandler {
     static flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
     static findCollisionPosition(position: string): void;
     static getParents(el: HTMLElement, parents?: any[]): any[];
-    static getScrollableParents(el: HTMLElement, hideOverlaysOnViewportChange?: boolean): any[];
+    static getScrollableParents(el: HTMLElement, hideOverlaysOnDocumentScrolling?: boolean): any[];
     static getHiddenElementOuterHeight(el: HTMLElement): number;
     static getHiddenElementOuterWidth(el: HTMLElement): number;
     static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number };
