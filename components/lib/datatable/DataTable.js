@@ -1421,8 +1421,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createLoader = () => {
         if (props.loading) {
             const iconClassName = 'p-datatable-loading-icon';
-            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
-            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const loadingIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptCallbacks.ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
             const loadingOverlayProps = mergeProps(
                 {
                     className: 'p-datatable-loading-overlay p-component-overlay'
@@ -1671,7 +1677,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 metaData={metaData}
             />
         );
-        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptm={ptCallbacks.ptm} /> : null;
+        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
+            <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
+        ) : null;
 
         return (
             <>
@@ -1907,7 +1915,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         {
             ref: elementRef,
             id: props.id,
-            className: className,
+            className,
             style: props.style,
             'data-scrollselectors': '.p-datatable-wrapper'
         },

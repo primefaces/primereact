@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
-import { PaginatorTemplate } from '../paginator';
+import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
@@ -777,16 +777,16 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the loading icon's DOM element.
      */
-    loadingIcon?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    loadingIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the header's DOM element.
      */
     header?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    // /**
-    //  * Uses to pass attributes to the Paginator component.
-    //  * @see {@link PaginatorPassThroughOptions}
-    //  */
-    // paginator?: PaginatorPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Paginator component.
+     * @see {@link PaginatorPassThroughOptions}
+     */
+    paginator?: PaginatorPassThroughOptions;
     /**
      * Uses to pass attributes to the wrapper's DOM element.
      */
@@ -799,11 +799,11 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the table's DOM element.
      */
-    table?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    table?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableElement>>;
     /**
      * Uses to pass attributes to the virtual scroller spacer's DOM element.
      */
-    virtualScrollerSpacer?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    virtualScrollerSpacer?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * Uses to pass attributes to the footer's DOM element.
      */
@@ -811,47 +811,51 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the thead's DOM element.
      */
-    thead?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    thead?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * Uses to pass attributes to the header row's DOM element.
      */
-    headerRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the tbody's DOM element.
      */
-    tbody?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    tbody?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * Uses to pass attributes to the rowgroup header's DOM element.
      */
-    rowgroupHeader?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowgroupHeader?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the rowgroup header name's DOM element.
+     */
+    rowgroupHeaderName?: DataTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the row's DOM element.
      */
-    row?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    row?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the row expansion's DOM element.
      */
-    rowExpansion?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowExpansion?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the rowgroup footer's DOM element.
      */
-    rowgroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    rowgroupFooter?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
-    emptyMessage?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    emptyMessage?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the tfoot's DOM element.
      */
-    tfoot?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    tfoot?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * Uses to pass attributes to the footerr ow's DOM element.
      */
-    footerRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    footerRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the footer cell's DOM element.
      */
-    footerCell?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    footerCell?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the resize helper's DOM element.
      */
@@ -859,11 +863,19 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the reorder indicator up's DOM element.
      */
-    reorderIndicatorUp?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    reorderIndicatorUp?: DataTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the reorder indicator up icon's DOM element.
+     */
+    reorderIndicatorUpIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the reorder indicator down's DOM element.
      */
-    reorderIndicatorDown?: DataTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    reorderIndicatorDown?: DataTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the reorder indicator down icon's DOM element.
+     */
+    reorderIndicatorDownIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}

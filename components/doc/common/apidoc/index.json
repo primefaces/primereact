@@ -8642,6 +8642,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
                             "name": "className",
                             "optional": true,
                             "readonly": false,
@@ -9544,6 +9552,492 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "ColumnPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColumnProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColumnState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColumnContext"
+                        },
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTablePassThroughOptions"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ColumnContext": {
+                    "description": "Defines current options in Column component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current checked state of row as a boolean."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of row as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ColumnState": {
+                    "description": "Defines current inline state in Column component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "editing",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current editing state of the body cell."
+                        },
+                        {
+                            "name": "editingRowData",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Current editing row data of the body cell."
+                        },
+                        {
+                            "name": "styleObject",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "object",
+                            "description": "Current style of the body cell."
+                        },
+                        {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state as a boolean."
+                        },
+                        {
+                            "name": "rowGroupHeaderStyleObject",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "object",
+                            "description": "Current style of the rowgroup header."
+                        },
+                        {
+                            "name": "sortableDisabledFields",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any[]",
+                            "description": "Current sortable disabled fields of the table header."
+                        },
+                        {
+                            "name": "allSortableDisabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current style of the table header."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ColumnPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "headerCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLTableHeaderCellElement>>",
+                            "description": "Uses to pass attributes to the header cell's DOM element."
+                        },
+                        {
+                            "name": "columnResizer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the column resizer's DOM element."
+                        },
+                        {
+                            "name": "headerContent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header content's DOM element."
+                        },
+                        {
+                            "name": "headerTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the header title's DOM element."
+                        },
+                        {
+                            "name": "sort",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the sort's DOM element."
+                        },
+                        {
+                            "name": "sortIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the sort's DOM element."
+                        },
+                        {
+                            "name": "sortBadge",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the sort badge's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the checkbox wrapper's DOM element."
+                        },
+                        {
+                            "name": "headerCheckbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the header checkbox icon's DOM element."
+                        },
+                        {
+                            "name": "columnFilter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the column filter's DOM element."
+                        },
+                        {
+                            "name": "filterInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter input's DOM element."
+                        },
+                        {
+                            "name": "filterMenuButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the filter menu button's DOM element."
+                        },
+                        {
+                            "name": "headerFilterClearButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the header filter clear button's DOM element."
+                        },
+                        {
+                            "name": "filterClearIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the filter clear icon's DOM element."
+                        },
+                        {
+                            "name": "filterOverlay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter overlay's DOM element."
+                        },
+                        {
+                            "name": "filterRowItems",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the filter row items' DOM element."
+                        },
+                        {
+                            "name": "filterRowItem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the filter row item's DOM element."
+                        },
+                        {
+                            "name": "filterSeparator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the filter separator's DOM element."
+                        },
+                        {
+                            "name": "filterOperator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter operator's DOM element."
+                        },
+                        {
+                            "name": "filterOperatorDropdown",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughOptions",
+                            "description": "Uses to pass attributes to the Dropdown component."
+                        },
+                        {
+                            "name": "filterConstraints",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter constraints' DOM element."
+                        },
+                        {
+                            "name": "filterConstraint",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter constraint's DOM element."
+                        },
+                        {
+                            "name": "filterMatchModeDropdown",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughOptions",
+                            "description": "Uses to pass attributes to the Dropdown component."
+                        },
+                        {
+                            "name": "filterRemove",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter remove button container's DOM element."
+                        },
+                        {
+                            "name": "filterRemoveButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "filterAddRule",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter add rule's DOM element."
+                        },
+                        {
+                            "name": "filterAddRuleButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "filterButtonbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the filter buttonbar's DOM element."
+                        },
+                        {
+                            "name": "filterClearButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "filterApplyButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "bodyCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the body cell's DOM element."
+                        },
+                        {
+                            "name": "rowGroupToggler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rowgroup toggler's DOM element."
+                        },
+                        {
+                            "name": "rowGroupTogglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rowgroup toggler icon's DOM element."
+                        },
+                        {
+                            "name": "columnTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the column title's DOM element."
+                        },
+                        {
+                            "name": "radiobuttonWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the radiobutton wrapper's DOM element."
+                        },
+                        {
+                            "name": "radiobutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the radiobutton's DOM element."
+                        },
+                        {
+                            "name": "radiobuttonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the radiobutton icon's DOM element."
+                        },
+                        {
+                            "name": "checkboxWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the checkbox wrapper's DOM element."
+                        },
+                        {
+                            "name": "checkbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the checkbox's DOM element."
+                        },
+                        {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the checkbox icon's DOM element."
+                        },
+                        {
+                            "name": "rowToggler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the rowtoggler's DOM element."
+                        },
+                        {
+                            "name": "rowTogglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the rowtoggler icon's DOM element."
+                        },
+                        {
+                            "name": "rowEditorInitButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the row editor init button's DOM element."
+                        },
+                        {
+                            "name": "rowEditorInitIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the row editor init icon's DOM element."
+                        },
+                        {
+                            "name": "rowEditorEditButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the row editor edit button's DOM element."
+                        },
+                        {
+                            "name": "rowEditorEditIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the row editor edit icon's DOM element."
+                        },
+                        {
+                            "name": "rowEditorCancelButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the row editor cancel button's DOM element."
+                        },
+                        {
+                            "name": "rowEditorCancelIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the row editor cancel icon's DOM element."
+                        },
+                        {
+                            "name": "hiddenHeaderInputWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
+                        },
+                        {
+                            "name": "hiddenInputWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
+                        },
+                        {
+                            "name": "hiddenInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the hidden input's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "ColumnHeaderOptions": {
                     "relatedProp": "",
                     "props": [
@@ -10170,6 +10664,14 @@
                     "callbacks": []
                 }
             }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ColumnPassThroughType": {
+                    "values": "PassThroughType<T, ColumnPassThroughMethodOptions>"
+                }
+            }
         }
     },
     "columngroup": {
@@ -10191,12 +10693,66 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnGroupPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "ColumnGroupPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColumnGroupProps"
+                        },
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTablePassThroughOptions"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "ColumnGroupPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "ColumnGroupPassThroughType": {
+                    "values": "PassThroughType<T, ColumnGroupPassThroughMethodOptions>"
                 }
             }
         }
@@ -12006,7 +12562,7 @@
                                 },
                                 {
                                     "name": "mode",
-                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                                     "description": "Filter match mode"
                                 },
                                 {
@@ -14160,7 +14716,7 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "description": "Type of filter match."
                         }
                     ],
@@ -14641,7 +15197,7 @@
                             "name": "loadingIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the loading icon's DOM element."
                         },
                         {
@@ -14650,6 +15206,13 @@
                             "readonly": false,
                             "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "paginator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PaginatorPassThroughOptions",
+                            "description": "Uses to pass attributes to the Paginator component."
                         },
                         {
                             "name": "wrapper",
@@ -14669,14 +15232,14 @@
                             "name": "table",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableElement>>",
                             "description": "Uses to pass attributes to the table's DOM element."
                         },
                         {
                             "name": "virtualScrollerSpacer",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableSectionElement>>",
                             "description": "Uses to pass attributes to the virtual scroller spacer's DOM element."
                         },
                         {
@@ -14690,77 +15253,84 @@
                             "name": "thead",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableSectionElement>>",
                             "description": "Uses to pass attributes to the thead's DOM element."
                         },
                         {
                             "name": "headerRow",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the header row's DOM element."
                         },
                         {
                             "name": "tbody",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableSectionElement>>",
                             "description": "Uses to pass attributes to the tbody's DOM element."
                         },
                         {
                             "name": "rowgroupHeader",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the rowgroup header's DOM element."
+                        },
+                        {
+                            "name": "rowgroupHeaderName",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the rowgroup header name's DOM element."
                         },
                         {
                             "name": "row",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the row's DOM element."
                         },
                         {
                             "name": "rowExpansion",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the row expansion's DOM element."
                         },
                         {
                             "name": "rowgroupFooter",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the rowgroup footer's DOM element."
                         },
                         {
                             "name": "emptyMessage",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the empty message's DOM element."
                         },
                         {
                             "name": "tfoot",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableSectionElement>>",
                             "description": "Uses to pass attributes to the tfoot's DOM element."
                         },
                         {
                             "name": "footerRow",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the footerr ow's DOM element."
                         },
                         {
                             "name": "footerCell",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableCellElement>>",
                             "description": "Uses to pass attributes to the footer cell's DOM element."
                         },
                         {
@@ -14774,15 +15344,29 @@
                             "name": "reorderIndicatorUp",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the reorder indicator up's DOM element."
+                        },
+                        {
+                            "name": "reorderIndicatorUpIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the reorder indicator up icon's DOM element."
                         },
                         {
                             "name": "reorderIndicatorDown",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the reorder indicator down's DOM element."
+                        },
+                        {
+                            "name": "reorderIndicatorDownIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the reorder indicator down icon's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -34136,12 +34720,66 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
                 "callbacks": {
                     "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
                     "values": []
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "RowPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RowProps"
+                        },
+                        {
+                            "name": "parent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ColumnGroupPassThroughOptions"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "RowPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "RowPassThroughType": {
+                    "values": "PassThroughType<T, RowPassThroughMethodOptions>"
                 }
             }
         }
@@ -42978,7 +43616,7 @@
                             "name": "globalFilterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "default": "contains",
                             "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },

@@ -2,13 +2,27 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
+        const getColumnProps = (column) => ColumnBase.getCProps(column);
+
+        const getColumnPTOptions = (key) => {
+            const cProps = getColumnProps(props.column);
+
+            return props.ptCallbacks.ptmo(cProps, key, {
+                props: cProps,
+                parent: props.metaData,
+                state: {
+                    rowGroupHeaderStyleObject: rowGroupHeaderStyleObjectState
+                }
+            });
+        };
+
         const elementRef = React.useRef(null);
         const refCallback = React.useCallback(
             (el) => {
@@ -804,12 +818,25 @@ export const TableBody = React.memo(
             if (!props.loading) {
                 const colSpan = getColumnsLength();
                 const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps, frozen: props.frozenRow }) || localeOption('emptyMessage');
+                const emptyMessageProps = mergeProps(
+                    {
+                        className: 'p-datatable-emptymessage',
+                        role: 'row'
+                    },
+                    getColumnPTOptions('emptyMessage')
+                );
+
+                const bodyCellProps = mergeProps(
+                    {
+                        colSpan,
+                        role: 'cell'
+                    },
+                    getColumnPTOptions('bodyCell')
+                );
 
                 return (
-                    <tr className="p-datatable-emptymessage" role="row">
-                        <td colSpan={colSpan} role="cell">
-                            {content}
-                        </td>
+                    <tr {...emptyMessageProps}>
+                        <td {...bodyCellProps}>{content}</td>
                     </tr>
                 );
             }
@@ -820,25 +847,46 @@ export const TableBody = React.memo(
         const createGroupHeader = (rowData, rowIndex, expanded, colSpan) => {
             if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, rowIndex - props.first)) {
                 const style = rowGroupHeaderStyle();
-                const toggler = props.expandableRowGroups && <RowTogglerButton onClick={onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} />;
+                const toggler = props.expandableRowGroups && (
+                    <RowTogglerButton onClick={onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                );
                 const options = { index: rowIndex, props: props.tableProps, customRendering: false };
                 let content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, options);
 
                 // check if the user wants complete control of the rendering
                 if (!options.customRendering) {
+                    const bodyCellProps = mergeProps(
+                        {
+                            colSpan
+                        },
+                        getColumnPTOptions('bodyCell')
+                    );
+
+                    const rowgroupHeaderNameProps = mergeProps(
+                        {
+                            className: 'p-rowgroup-header-name'
+                        },
+                        getColumnPTOptions('rowgroupHeaderName')
+                    );
+
                     content = (
-                        <td colSpan={colSpan}>
+                        <td {...bodyCellProps}>
                             {toggler}
-                            <span className="p-rowgroup-header-name">{content}</span>
+                            <span {...rowgroupHeaderNameProps}>{content}</span>
                         </td>
                     );
                 }
 
-                return (
-                    <tr className="p-rowgroup-header" style={style} role="row">
-                        {content}
-                    </tr>
+                const rowgroupHeaderProps = mergeProps(
+                    {
+                        className: 'p-rowgroup-header',
+                        style,
+                        role: 'row'
+                    },
+                    getColumnPTOptions('rowgroupHeader')
                 );
+
+                return <tr {...rowgroupHeaderProps}>{content}</tr>;
             }
 
             return null;
@@ -919,6 +967,8 @@ export const TableBody = React.memo(
                         tableSelector={props.tableSelector}
                         value={props.value}
                         virtualScrollerOptions={props.virtualScrollerOptions}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={props.metaData}
                     />
                 );
             }
@@ -932,18 +982,27 @@ export const TableBody = React.memo(
 
                 // check if the user wants complete control of the rendering
                 if (!options.customRendering) {
-                    content = (
-                        <td role="cell" colSpan={colSpan}>
-                            {content}
-                        </td>
+                    const bodyCellProps = mergeProps(
+                        {
+                            colSpan,
+                            role: 'cell'
+                        },
+                        getColumnPTOptions('bodyCell')
                     );
+
+                    content = <td {...bodyCellProps}>{content}</td>;
                 }
 
-                return (
-                    <tr id={id} className="p-datatable-row-expansion" role="row">
-                        {content}
-                    </tr>
+                const rowExpansionProps = mergeProps(
+                    {
+                        id,
+                        className: 'p-datatable-row-expansion',
+                        role: 'row'
+                    },
+                    getColumnPTOptions('rowExpansion')
                 );
+
+                return <tr {...rowExpansionProps}>{content}</tr>;
             }
 
             return null;
@@ -952,12 +1011,15 @@ export const TableBody = React.memo(
         const createGroupFooter = (rowData, rowIndex, expanded, colSpan) => {
             if (isSubheaderGrouping && shouldRenderRowGroupFooter(props.value, rowData, rowIndex - props.first, expanded)) {
                 const content = ObjectUtils.getJSXElement(props.rowGroupFooterTemplate, rowData, { index: rowIndex, colSpan, props: props.tableProps });
-
-                return (
-                    <tr className="p-rowgroup-footer" role="row">
-                        {content}
-                    </tr>
+                const rowgroupFooterProps = mergeProps(
+                    {
+                        className: 'p-rowgroup-footer',
+                        role: 'row'
+                    },
+                    getColumnPTOptions('rowgroupFooter')
                 );
+
+                return <tr {...rowgroupFooterProps}>{content}</tr>;
             }
 
             return null;
@@ -990,12 +1052,17 @@ export const TableBody = React.memo(
         };
 
         const content = props.empty ? createEmptyContent() : createContent();
-
-        return (
-            <tbody ref={refCallback} style={props.style} className={props.className}>
-                {content}
-            </tbody>
+        const ptKey = props.className === 'p-datatable-virtualscroller-spacer' ? 'virtualScrollerSpacer' : 'tbody';
+        const tbodyProps = mergeProps(
+            {
+                ref: refCallback,
+                style: props.style,
+                className: props.className
+            },
+            getColumnPTOptions(ptKey)
         );
+
+        return <tbody {...tbodyProps}>{content}</tbody>;
     })
 );
 

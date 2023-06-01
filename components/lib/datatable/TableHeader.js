@@ -16,7 +16,7 @@ export const TableHeader = React.memo((props) => {
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
 
     const getColumnProp = (column, name) => {
-        return ColumnBase.getCProps(column, name);
+        return ColumnBase.getCProp(column, name);
     };
 
     const getColumnProps = (column) => ColumnBase.getCProps(column);
@@ -27,7 +27,11 @@ export const TableHeader = React.memo((props) => {
 
         return props.ptCallbacks.ptmo(cProps, key, {
             props: cProps,
-            parent: props.metaData
+            parent: props.metaData,
+            state: {
+                sortableDisabledFields: sortableDisabledFieldsState,
+                allSortableDisabled: allSortableDisabledState
+            }
         });
     };
 
@@ -140,7 +144,7 @@ export const TableHeader = React.memo((props) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptm={props.ptm} />;
+            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
         }
 
         return null;
@@ -148,7 +152,18 @@ export const TableHeader = React.memo((props) => {
 
     const createFilter = (column, filter) => {
         if (filter) {
-            return <ColumnFilter display="row" column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} ptmo={props.ptmo} />;
+            return (
+                <ColumnFilter
+                    display="row"
+                    column={column}
+                    filters={props.filters}
+                    filtersStore={props.filtersStore}
+                    onFilterChange={props.onFilterChange}
+                    onFilterApply={props.onFilterApply}
+                    ptCallbacks={props.ptCallbacks}
+                    metaData={props.metaData}
+                />
+            );
         }
 
         return null;
@@ -174,7 +189,7 @@ export const TableHeader = React.memo((props) => {
                 );
 
                 return (
-                    <th {...headerCellProps} key={colKey}>
+                    <th {...headerCellProps} key={colKey + i}>
                         {checkbox}
                         {filterRow}
                     </th>
@@ -223,14 +238,14 @@ export const TableHeader = React.memo((props) => {
     };
 
     const content = createContent();
-    const threadProps = mergeProps(
+    const theadProps = mergeProps(
         {
             className: 'p-datatable-thead'
         },
         props.ptCallbacks.ptm('thead')
     );
 
-    return <thead {...threadProps}>{content}</thead>;
+    return <thead {...theadProps}>{content}</thead>;
 });
 
 TableHeader.displayName = 'TableHeader';

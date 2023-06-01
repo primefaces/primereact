@@ -1,9 +1,25 @@
 import * as React from 'react';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps } from '../utils/Utils';
+import { ColumnBase } from '../column/ColumnBase';
 
 export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const inputRef = React.useRef(null);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+
+    const getColumnPTOptions = (key) => {
+        return props.ptCallbacks.ptmo(getColumnProps(), key, {
+            props: getColumnProps(),
+            parent: props.metaData,
+            context: {
+                checked: props.checked,
+                disabled: props.disabled
+            },
+            state: {
+                focused: focusedState
+            }
+        });
+    };
 
     const onFocus = () => {
         setFocusedState(true);
@@ -36,14 +52,58 @@ export const RowRadioButton = React.memo((props) => {
     const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState });
     const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState, 'p-disabled': props.disabled });
     const name = `${props.tableSelector}_dt_radio`;
+    const radiobuttonWrapperProps = mergeProps(
+        {
+            className
+        },
+        getColumnPTOptions('radiobuttonWrapper')
+    );
+    const hiddenInputWrapperProps = mergeProps(
+        {
+            className: 'p-hidden-accessible'
+        },
+        getColumnPTOptions('hiddenInputWrapper')
+    );
+
+    const hiddenInputProps = mergeProps(
+        {
+            name,
+            ref: inputRef,
+            type: 'radio',
+            checked: props.checked,
+            onFocus: (e) => onFocus(e),
+            onBlur: (e) => onBlur(e),
+            onChange: (e) => onChange(e),
+            onKeyDown: (e) => onKeyDown(e),
+            'aria-label': props.ariaLabel
+        },
+        getColumnPTOptions('hiddenInput')
+    );
+
+    const radiobuttonProps = mergeProps(
+        {
+            className: boxClassName,
+            onClick: (e) => onClick(e),
+            role: 'radio',
+            'aria-checked': props.checked
+        },
+        getColumnPTOptions('radiobutton')
+    );
+
+    const radiobuttonIconProps = mergeProps(
+        {
+            className: 'p-radiobutton-icon'
+        },
+        getColumnPTOptions('radiobuttonIcon')
+    );
 
     return (
-        <div className={className}>
-            <div className="p-hidden-accessible">
-                <input name={name} ref={inputRef} type="radio" checked={props.checked} onFocus={onFocus} onBlur={onBlur} onChange={onChange} onKeyDown={onKeyDown} aria-label={props.ariaLabel} />
+        <div {...radiobuttonWrapperProps}>
+            <div {...hiddenInputWrapperProps}>
+                <input {...hiddenInputProps} />
             </div>
-            <div className={boxClassName} onClick={onClick} role="radio" aria-checked={props.checked}>
-                <div className="p-radiobutton-icon"></div>
+            <div {...radiobuttonProps}>
+                <div {...radiobuttonIconProps}></div>
             </div>
         </div>
     );

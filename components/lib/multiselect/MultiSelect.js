@@ -203,12 +203,12 @@ export const MultiSelect = React.memo(
                         value = [];
                         options.forEach(
                             (optionGroup) =>
-                                (value = [
-                                    ...value,
-                                    ...getOptionGroupChildren(optionGroup)
-                                        .filter((option) => !isOptionDisabled(option))
-                                        .map((option) => getOptionValue(option))
-                                ])
+                            (value = [
+                                ...value,
+                                ...getOptionGroupChildren(optionGroup)
+                                    .filter((option) => !isOptionDisabled(option))
+                                    .map((option) => getOptionValue(option))
+                            ])
                         );
                     } else {
                         value = options.map((option) => getOptionValue(option));
