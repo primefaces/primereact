@@ -9675,7 +9675,7 @@
                             "name": "headerCell",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLTableHeaderCellElement>>",
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
                             "description": "Uses to pass attributes to the header cell's DOM element."
                         },
                         {
