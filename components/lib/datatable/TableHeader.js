@@ -24,18 +24,22 @@ export const TableHeader = React.memo((props) => {
 
     const getColumnGroupProps = () => {
         return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined; //@todo
-    }
+    };
 
     const getColumnGroupPTOptions = (key) => {
-        return (props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.headerColumnGroup, 'pt')), key, {
-            props: getColumnGroupProps(),
-            parent: props.metaData,
-            state: {
-                sortableDisabledFields: sortableDisabledFieldsState,
-                allSortableDisabled: allSortableDisabledState
+        return (
+            props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.headerColumnGroup, 'pt')),
+            key,
+            {
+                props: getColumnGroupProps(),
+                parent: props.metaData,
+                state: {
+                    sortableDisabledFields: sortableDisabledFieldsState,
+                    allSortableDisabled: allSortableDisabledState
+                }
             }
-        });
-    }
+        );
+    };
 
     const getColumnPTOptions = (column, key) => {
         const cProps = getColumnProps(column);
@@ -201,7 +205,7 @@ export const TableHeader = React.memo((props) => {
                         className: colClassName
                     },
                     getColumnPTOptions(col, 'headerCell'),
-                    getColumnPTOptions(col, 'root'),
+                    getColumnPTOptions(col, 'root')
                 );
 
                 return (

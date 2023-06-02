@@ -10,7 +10,7 @@ export const TableFooter = React.memo((props) => {
 
     const getColumnGroupProps = () => {
         return props.footerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.footerColumnGroup)) : undefined;
-    }
+    };
 
     const getRowPTOptions = (row, key) => {
         const rProps = getRowProps(row);
@@ -22,11 +22,15 @@ export const TableFooter = React.memo((props) => {
     };
 
     const getColumnGroupPTOptions = (key) => {
-        return (props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt')), key, {
-            props: getColumnGroupProps(),
-            parent: props.metaData
-        });
-    }
+        return (
+            props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt')),
+            key,
+            {
+                props: getColumnGroupProps(),
+                parent: props.metaData
+            }
+        );
+    };
 
     const hasFooter = () => {
         return props.footerColumnGroup ? true : props.columns ? props.columns.some((col) => col && getColumnProp(col, 'footer')) : false;
