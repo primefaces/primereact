@@ -4096,6 +4096,13 @@
                             "readonly": false,
                             "type": "ButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the badge's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes to the Tooltip component."
                         }
                     ],
                     "callbacks": []
