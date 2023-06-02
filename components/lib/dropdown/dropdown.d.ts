@@ -10,6 +10,7 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
@@ -108,6 +109,11 @@ export interface DropdownPassThroughOptions {
      * Uses to pass attributes to the option's DOM element.
      */
     option?: DropdownPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**

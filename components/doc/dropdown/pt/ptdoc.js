@@ -21,7 +21,6 @@ export function PTDoc(props) {
     options={cities}
     optionLabel="name"
     placeholder="Select a City"
-    className="w-full md:w-14rem"
     pt={{
         root: { className: 'w-full md:w-14rem' },
         item: ({ context }) => ({
@@ -52,7 +51,6 @@ export default function PTDemo() {
                 options={cities}
                 optionLabel="name"
                 placeholder="Select a City"
-                className="w-full md:w-14rem"
                 pt={{
                     root: { className: 'w-full md:w-14rem' },
                     item: ({ context }) => ({
@@ -91,7 +89,6 @@ export default function PTDemo() {
                 options={cities}
                 optionLabel="name"
                 placeholder="Select a City"
-                className="w-full md:w-14rem"
                 pt={{
                     root: { className: 'w-full md:w-14rem' },
                     item: ({ context }) => ({
@@ -115,7 +112,6 @@ export default function PTDemo() {
                     options={cities}
                     optionLabel="name"
                     placeholder="Select a City"
-                    className="w-full md:w-14rem"
                     pt={{
                         root: { className: 'w-full md:w-14rem' },
                         item: ({ context }) => ({
