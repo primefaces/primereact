@@ -24486,6 +24486,13 @@
                             "readonly": false,
                             "type": "InputNumberPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the decrement button's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
                         }
                     ],
                     "callbacks": []
