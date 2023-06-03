@@ -69,31 +69,31 @@ export interface TreeTablePassThroughOptions {
     /**
      * Uses to pass attributes to the header row's DOM element.
      */
-    headerRow?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerRow?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the header cell's DOM element.
      */
-    headerCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the tbody's DOM element.
      */
-    tbody?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    tbody?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * Uses to pass attributes to the empty message's DOM element.
      */
-    emptyMessage?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    emptyMessage?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the body cell's DOM element.
      */
-    bodyCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    bodyCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the tfoot's DOM element.
      */
-    tfoot?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    tfoot?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * Uses to pass attributes to the footer row's DOM element.
      */
-    footerRow?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    footerRow?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the footer's DOM element.
      */
@@ -113,15 +113,15 @@ export interface TreeTablePassThroughOptions {
     /**
      * Uses to pass attributes to the column resizer's DOM element.
      */
-    columnResizer?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    columnResizer?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the sort badge's DOM element.
      */
-    sortBadge?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    sortBadge?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the header title's DOM element.
      */
-    headerTitle?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    headerTitle?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the checkbox wrapper's DOM element.
      */
