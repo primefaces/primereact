@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/treetable/pt/ptdoc';
+import { Wireframe } from '../../components/doc/treetable/pt/wireframe';
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
@@ -202,8 +205,30 @@ const TreeTableDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.treetable.options',
+            label: 'TreeTable PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.column.options',
+            label: 'Column PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React TreeTable Component" header="TreeTable" description="TreeTable is used to display hierarchical data in tabular format." componentDocs={docs} apiDocs={['TreeTable', 'Column', 'TreeNode']} />;
+    return <DocComponent title="React TreeTable Component" header="TreeTable" description="TreeTable is used to display hierarchical data in tabular format." componentDocs={docs} apiDocs={['TreeTable', 'Column', 'TreeNode']} ptDocs={ptDocs} />;
 };
 
 export default TreeTableDemo;

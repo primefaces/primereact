@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, mergeProps } from '../utils/Utils';
 import { TreeTableRow } from './TreeTableRow';
 
 export const TreeTableBody = React.memo((props) => {
@@ -186,6 +186,8 @@ export const TreeTableBody = React.memo((props) => {
                 contextMenuSelectionKey={props.contextMenuSelectionKey}
                 onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                 onContextMenu={props.onContextMenu}
+                ptCallbacks={props.ptCallbacks}
+                metaData={props.metaData}
             />
         );
     };
@@ -216,20 +218,36 @@ export const TreeTableBody = React.memo((props) => {
         } else {
             const colSpan = props.columns ? props.columns.length : null;
             const content = props.emptyMessage || localeOption('emptyMessage');
+            const emptyMessageProps = mergeProps(
+                {
+                    className: 'p-treetable-emptymessage'
+                },
+                props.ptCallbacks.ptm('emptyMessage')
+            );
+            const bodyCellProps = mergeProps(
+                {
+                    colSpan
+                },
+                props.ptCallbacks.ptm('bodyCell')
+            );
 
             return (
-                <tr>
-                    <td className="p-treetable-emptymessage" colSpan={colSpan}>
-                        {content}
-                    </td>
+                <tr {...emptyMessageProps}>
+                    <td {...bodyCellProps}>{content}</td>
                 </tr>
             );
         }
     };
 
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
+    const tbodyProps = mergeProps(
+        {
+            className: 'p-treetable-tbody'
+        },
+        props.ptCallbacks.ptm('tbody')
+    );
 
-    return <tbody className="p-treetable-tbody">{content}</tbody>;
+    return <tbody {...tbodyProps}>{content}</tbody>;
 });
 
 TreeTableBody.displayName = 'TreeTableBody';

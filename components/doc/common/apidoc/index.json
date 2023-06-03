@@ -44555,6 +44555,396 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
+                "TreeTablePassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeTableProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeTableState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TreeTablePassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "TreeTableProps.pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "loadingWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the loading wrapper's DOM element."
+                        },
+                        {
+                            "name": "loadingOverlay",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the loading overlay's DOM element."
+                        },
+                        {
+                            "name": "loadingIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the loading icon's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "paginator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PaginatorPassThroughOptions",
+                            "description": "Uses to pass attributes to the Paginator component."
+                        },
+                        {
+                            "name": "wrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the wrapper's DOM element."
+                        },
+                        {
+                            "name": "table",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLTableElement>>",
+                            "description": "Uses to pass attributes to the table's DOM element."
+                        },
+                        {
+                            "name": "thead",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the thead's DOM element."
+                        },
+                        {
+                            "name": "headerRow",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header row's DOM element."
+                        },
+                        {
+                            "name": "headerCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header cell's DOM element."
+                        },
+                        {
+                            "name": "tbody",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the tbody's DOM element."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the empty message's DOM element."
+                        },
+                        {
+                            "name": "bodyCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the body cell's DOM element."
+                        },
+                        {
+                            "name": "tfoot",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the tfoot's DOM element."
+                        },
+                        {
+                            "name": "footerRow",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer row's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "resizeHelper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the resize helper's DOM element."
+                        },
+                        {
+                            "name": "rowToggler",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the row toggler's DOM element."
+                        },
+                        {
+                            "name": "rowTogglerIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the row toggler icon's DOM element."
+                        },
+                        {
+                            "name": "columnResizer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the column resizer's DOM element."
+                        },
+                        {
+                            "name": "sortBadge",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the sort badge's DOM element."
+                        },
+                        {
+                            "name": "headerTitle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header title's DOM element."
+                        },
+                        {
+                            "name": "checkboxWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the checkbox wrapper's DOM element."
+                        },
+                        {
+                            "name": "checkbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the checkbox's DOM element."
+                        },
+                        {
+                            "name": "checkboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the checkbox icon's DOM element."
+                        },
+                        {
+                            "name": "filterInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextPassThroughOptions",
+                            "description": "Uses to pass attributes to the resize helper's DOM element."
+                        },
+                        {
+                            "name": "sortIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the sort icon label's DOM element."
+                        },
+                        {
+                            "name": "scrollableWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable wrapper's DOM element."
+                        },
+                        {
+                            "name": "scrollable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable's DOM element."
+                        },
+                        {
+                            "name": "scrollableHeader",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable header's DOM element."
+                        },
+                        {
+                            "name": "scrollableHeaderBox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable header box's DOM element."
+                        },
+                        {
+                            "name": "scrollableHeaderTable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLTableElement>>",
+                            "description": "Uses to pass attributes to the scrollable header table's DOM element."
+                        },
+                        {
+                            "name": "scrollableBody",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable body's DOM element."
+                        },
+                        {
+                            "name": "scrollableBodyBox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable body box's DOM element."
+                        },
+                        {
+                            "name": "scrollableBodyTable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLTableElement>>",
+                            "description": "Uses to pass attributes to the scrollable body table's DOM element."
+                        },
+                        {
+                            "name": "scrollableFooter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable footer's DOM element."
+                        },
+                        {
+                            "name": "scrollableFooterBox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the scrollable footer box's DOM element."
+                        },
+                        {
+                            "name": "scrollableFooterTable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLTableElement>>",
+                            "description": "Uses to pass attributes to the scrollable footer table's DOM element."
+                        },
+                        {
+                            "name": "editorKeyHelper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the editor key helper's DOM element."
+                        },
+                        {
+                            "name": "editorKeyHelperLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the editor key helper label's DOM element."
+                        },
+                        {
+                            "name": "hiddenInputWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
+                        },
+                        {
+                            "name": "hiddenInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the hidden input's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TreeTableState": {
+                    "description": "Defines current inline state in TreeTable component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current index of first record as a number."
+                        },
+                        {
+                            "name": "rows",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current number of rows to display in new page as a number."
+                        },
+                        {
+                            "name": "sortField",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "undefined | string | Function",
+                            "description": "Current sort field."
+                        },
+                        {
+                            "name": "sortOrder",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current order to sort the data by default."
+                        },
+                        {
+                            "name": "multiSortMeta",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeTableSortMeta[]",
+                            "description": "Current sortmeta objects to sort the data."
+                        },
+                        {
+                            "name": "columnOrder",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "Current order of the columns."
+                        },
+                        {
+                            "name": "filters",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeTableFilterMeta",
+                            "description": "Current filters object."
+                        },
+                        {
+                            "name": "editing",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current editing as a boolean."
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "TreeTableSelectionKeysType": {
                     "description": "Custom selection keys type.",
                     "relatedProp": "",
@@ -44649,6 +45039,9 @@
         "types": {
             "description": "Defines the custom types used by the module.",
             "values": {
+                "TreeTablePassThroughType": {
+                    "values": "PassThroughType<T, TreeTablePassThroughMethodOptions>"
+                },
                 "TreeTableExpandedKeysType": {
                     "values": "{}",
                     "description": "Custom expanded keys type."
