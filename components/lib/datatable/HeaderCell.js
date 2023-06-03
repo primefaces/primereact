@@ -20,9 +20,12 @@ export const HeaderCell = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return ptCallbacks.ptmo(getColumnProps(), key, {
+        return ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
-            parent: parentParams
+            parent: parentParams,
+            state: {
+                styleObject: styleObjectState
+            }
         });
     };
 
@@ -251,10 +254,12 @@ export const HeaderCell = React.memo((props) => {
                 getColumnPTOptions('sortIcon')
             );
 
+            const sortProps = mergeProps(getColumnPTOptions('sort'));
+
             let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon {...sortIconProps} /> : <SortAmountUpAltIcon {...sortIconProps} /> : <SortAltIcon {...sortIconProps} />;
             let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { ...sortIconProps }, { props, sorted, sortOrder });
 
-            return sortIcon;
+            return <span {...sortProps}>{sortIcon}</span>;
         }
 
         return null;
@@ -267,7 +272,8 @@ export const HeaderCell = React.memo((props) => {
                 {
                     className: 'p-sortable-column-badge'
                 },
-                getColumnPTOptions('sortBadge')
+                getColumnPTOptions('sortBadge'),
+                getColumnPTOptions('root')
             );
 
             return <span {...sortBadgeProps}>{value}</span>;
@@ -280,7 +286,7 @@ export const HeaderCell = React.memo((props) => {
         if (props.showSelectAll && getColumnProp('selectionMode') === 'multiple' && props.filterDisplay !== 'row') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptm={props.ptm} />;
+            return <HeaderCheckbox checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} />;
         }
 
         return null;
@@ -375,7 +381,8 @@ export const HeaderCell = React.memo((props) => {
                 rowSpan,
                 'aria-sort': ariaSort
             },
-            getColumnPTOptions('headerCell')
+            getColumnPTOptions('headerCell'),
+            getColumnPTOptions('root')
         );
 
         return (
@@ -384,7 +391,7 @@ export const HeaderCell = React.memo((props) => {
                     {resizer}
                     {header}
                 </th>
-                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} pt={getColumnPTOptions('tooltip')} />}
             </>
         );
     };

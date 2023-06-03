@@ -1,9 +1,25 @@
 import * as React from 'react';
-import { IconUtils, classNames } from '../utils/Utils';
+import { IconUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckIcon } from '../icons/check';
+import { ColumnBase } from '../column/ColumnBase';
 
 export const RowCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+
+    const getColumnPTOptions = (key) => {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+            props: getColumnProps(),
+            parent: props.metaData,
+            context: {
+                checked: props.checked,
+                disabled: props.disabled
+            },
+            state: {
+                focused: focusedState
+            }
+        });
+    };
 
     const onFocus = () => {
         setFocusedState(true);
@@ -32,15 +48,40 @@ export const RowCheckbox = React.memo((props) => {
     const className = classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState });
     const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-disabled': props.disabled, 'p-focus': focusedState });
     const iconClassName = 'p-checkbox-icon';
-    const icon = props.checked ? props.checkIcon || <CheckIcon className={iconClassName} /> : null;
-    const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+    const checkboxIconProps = mergeProps(
+        {
+            className: iconClassName
+        },
+        getColumnPTOptions('checkboxIcon')
+    );
+    const icon = props.checked ? props.checkIcon || <CheckIcon {...checkboxIconProps} /> : null;
+    const checkIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { props });
     const tabIndex = props.disabled ? null : '0';
+    const checkboxWrapperProps = mergeProps(
+        {
+            className,
+            onClick: (e) => onClick(e)
+        },
+        getColumnPTOptions('checkboxWrapper')
+    );
+
+    const checkboxProps = mergeProps(
+        {
+            className: boxClassName,
+            role: 'checkbox',
+            'aria-checked': props.checked,
+            tabIndex: tabIndex,
+            onKeyDown: (e) => onKeyDown(e),
+            onFocus: (e) => onFocus(e),
+            onBlur: (e) => onBlur(e),
+            'aria-label': props.ariaLabel
+        },
+        getColumnPTOptions('checkbox')
+    );
 
     return (
-        <div className={className} onClick={onClick}>
-            <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} aria-label={props.ariaLabel}>
-                {checkIcon}
-            </div>
+        <div {...checkboxWrapperProps}>
+            <div {...checkboxProps}>{checkIcon}</div>
         </div>
     );
 });

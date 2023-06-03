@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/datatable/pt/ptdoc';
+import { Wireframe } from '../../components/doc/datatable/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
@@ -381,8 +384,40 @@ const DataTableDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.datatable.options',
+            label: 'DataTable PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.column.options',
+            label: 'Column PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.columngroup.options',
+            label: 'ColumnGroup PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.row.options',
+            label: 'Row PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} />;
+    return <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} ptDocs={ptDocs} />;
 };
 
 export default DataTableDemo;

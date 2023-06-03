@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { PassThroughType } from '../utils/utils';
@@ -49,6 +50,11 @@ export interface InputNumberPassThroughOptions {
      * Uses to pass attributes to the decrement button's DOM element.
      */
     decrementButton?: InputNumberPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**

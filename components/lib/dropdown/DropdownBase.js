@@ -1,5 +1,4 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils } from '../utils/Utils';
 
 export const DropdownBase = ComponentBase.extend({
     defaultProps: {

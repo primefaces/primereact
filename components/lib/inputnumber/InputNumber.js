@@ -1174,7 +1174,7 @@ export const InputNumber = React.memo(
                     {inputElement}
                     {buttonGroup}
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

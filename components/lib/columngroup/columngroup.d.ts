@@ -9,6 +9,29 @@
  *
  */
 import * as React from 'react';
+import { DataTablePassThroughOptions } from '../datatable/datatable';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ColumnGroupPassThroughType<T> = PassThroughType<T, ColumnGroupPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ColumnGroupPassThroughMethodOptions {
+    props: ColumnGroupProps;
+    parent: DataTablePassThroughOptions;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ColumnGroupProps.pt}
+ */
+export interface ColumnGroupPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ColumnGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in ColumnGroup component.
@@ -21,6 +44,11 @@ export interface ColumnGroupProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ColumnGroupPassThroughOptions}
+     */
+    pt?: ColumnGroupPassThroughOptions;
 }
 
 /**
