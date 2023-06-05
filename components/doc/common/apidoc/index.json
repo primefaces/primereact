@@ -166,7 +166,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -2564,7 +2564,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -3958,7 +3958,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"help\" | \"warning\" | \"info\" | \"secondary\" | \"danger\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
                             "default": "",
                             "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"help\"."
                         },
@@ -4696,7 +4696,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -6532,7 +6532,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -8295,7 +8295,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -11169,7 +11169,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         }
@@ -11733,7 +11733,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -12114,7 +12114,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -12569,7 +12569,7 @@
                                 },
                                 {
                                     "name": "mode",
-                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notContains\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                                     "description": "Filter match mode"
                                 },
                                 {
@@ -14723,7 +14723,7 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notContains\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "description": "Type of filter match."
                         }
                     ],
@@ -16473,7 +16473,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -17585,7 +17585,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -18425,7 +18425,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -20006,7 +20006,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -26584,7 +26584,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -27013,7 +27013,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -27837,7 +27837,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -28559,7 +28559,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -30586,7 +30586,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -31965,7 +31965,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -32355,7 +32355,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -32823,7 +32823,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -35182,7 +35182,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -35755,7 +35755,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -36211,7 +36211,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -37168,7 +37168,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"info\" | \"secondary\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
                             "default": "",
                             "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
                         },
@@ -37304,7 +37304,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -37394,13 +37394,6 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "button",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the button's DOM element."
-                        },
-                        {
                             "name": "icon",
                             "optional": true,
                             "readonly": false,
@@ -37408,11 +37401,74 @@
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
                             "name": "menuButton",
                             "optional": true,
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the menu's DOM element."
+                        },
+                        {
+                            "name": "menuList",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the menu list's DOM element."
+                        },
+                        {
+                            "name": "separator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "menuIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the menu icon's DOM element."
+                        },
+                        {
+                            "name": "menuLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the menu label's DOM element."
+                        },
+                        {
+                            "name": "anchor",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the anchor's DOM element."
+                        },
+                        {
+                            "name": "menuItem",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the menu item's DOM element."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -39422,7 +39478,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -39885,7 +39941,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -43036,7 +43092,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps",
+                            "type": "CSSTransitionProps<undefined>",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -43821,7 +43877,7 @@
                             "name": "globalFilterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notContains\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "default": "contains",
                             "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },
