@@ -2853,7 +2853,7 @@ export const Calendar = React.memo(
                 const weekHeaderProps = mergeProps(
                     {
                         scope: 'col',
-                        classNam: 'p-datepicker-weekheader p-disabled'
+                        className: 'p-datepicker-weekheader p-disabled'
                     },
                     ptm('weekHeader')
                 );
