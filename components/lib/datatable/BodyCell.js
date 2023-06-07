@@ -589,10 +589,30 @@ export const BodyCell = React.memo((props) => {
             content = showSelection && (
                 <>
                     {selectionMode === 'single' && (
-                        <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                        <RowRadioButton
+                            column={props.column}
+                            checked={props.selected}
+                            disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
+                            onChange={onRadioChange}
+                            tabIndex={props.tabIndex}
+                            tableSelector={props.tableSelector}
+                            ariaLabel={label}
+                            ptCallbacks={props.ptCallbacks}
+                            metaData={props.metaData}
+                        />
                     )}
                     {selectionMode === 'multiple' && (
-                        <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} checkIcon={props.checkIcon} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                        <RowCheckbox
+                            column={props.column}
+                            checked={props.selected}
+                            disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
+                            onChange={onCheckboxChange}
+                            tabIndex={props.tabIndex}
+                            ariaLabel={label}
+                            checkIcon={props.checkIcon}
+                            ptCallbacks={props.ptCallbacks}
+                            metaData={props.metaData}
+                        />
                     )}
                 </>
             );
