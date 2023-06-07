@@ -14,7 +14,7 @@ import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
-import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
 
 export declare type DropdownPassThroughType<T> = PassThroughType<T, DropdownPassThroughMethodOptions>;
 
@@ -523,4 +523,9 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
      * @return {HTMLElement} Overlay element
      */
     public getOverlay(): HTMLElement;
+    /**
+     * Used to get the options of inline virtualScroller component.
+     * @return {VirtualScroller} VirtualScroller component
+     */
+    public getVirtualScroller(): VirtualScroller;
 }
