@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { IconUtils, classNames, mergeProps } from '../utils/Utils';
-import { CheckIcon } from '../icons/check';
 import { ColumnBase } from '../column/ColumnBase';
+import { CheckIcon } from '../icons/check';
+import { IconUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const RowCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -45,8 +45,8 @@ export const RowCheckbox = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState });
-    const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-disabled': props.disabled, 'p-focus': focusedState });
+    const className = classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState, 'p-disabled': props.disabled });
+    const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState });
     const iconClassName = 'p-checkbox-icon';
     const checkboxIconProps = mergeProps(
         {

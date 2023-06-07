@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { ColumnBase } from '../column/ColumnBase';
+import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -49,8 +49,8 @@ export const RowRadioButton = React.memo((props) => {
         onClick(event);
     };
 
-    const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState });
-    const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState, 'p-disabled': props.disabled });
+    const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState, 'p-disabled': props.disabled });
+    const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState });
     const name = `${props.tableSelector}_dt_radio`;
     const radiobuttonWrapperProps = mergeProps(
         {
