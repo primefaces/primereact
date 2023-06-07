@@ -27,6 +27,7 @@ export const Dropdown = React.memo(
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const focusInputRef = React.useRef(props.focusInputRef);
+        const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
         const currentSearchChar = React.useRef(null);
@@ -621,7 +622,8 @@ export const Dropdown = React.memo(
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
-            getFocusInput: () => focusInputRef.current
+            getFocusInput: () => focusInputRef.current,
+            getVirtualScroller: () => virtualScrollerRef.current
         }));
 
         React.useEffect(() => {
@@ -875,6 +877,7 @@ export const Dropdown = React.memo(
                     <DropdownPanel
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
+                        virtualScrollerRef={virtualScrollerRef}
                         {...props}
                         appendTo={appendTo}
                         onClick={onPanelClick}
