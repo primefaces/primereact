@@ -17182,6 +17182,12 @@
                             "parameters": [],
                             "returnType": "HTMLElement",
                             "description": "Used to get overlay element."
+                        },
+                        {
+                            "name": "getVirtualScroller",
+                            "parameters": [],
+                            "returnType": "VirtualScroller",
+                            "description": "Used to get the options of inline virtualScroller component."
                         }
                     ]
                 },
