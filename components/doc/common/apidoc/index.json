@@ -3320,7 +3320,7 @@
                             "name": "image",
                             "optional": true,
                             "readonly": false,
-                            "type": "AvatarPassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "type": "AvatarPassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the image's DOM element."
                         }
                     ],
@@ -7609,7 +7609,7 @@
                             "name": "image",
                             "optional": true,
                             "readonly": false,
-                            "type": "ChipPassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "type": "ChipPassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the image's DOM element."
                         },
                         {
@@ -19426,7 +19426,7 @@
                             "name": "thumbnail",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "type": "FileUploadPassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the thumbnail's DOM element."
                         },
                         {
@@ -23201,7 +23201,7 @@
                             "name": "image",
                             "optional": true,
                             "readonly": false,
-                            "type": "ImagePassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "type": "ImagePassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the image's DOM element."
                         },
                         {
@@ -23327,7 +23327,7 @@
                             "name": "preview",
                             "optional": true,
                             "readonly": false,
-                            "type": "ImagePassThroughType<HTMLAttributes<HTMLImageElement>>",
+                            "type": "ImagePassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the preview's DOM element."
                         }
                     ],
