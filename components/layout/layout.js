@@ -66,21 +66,6 @@ export default function Layout(props) {
     useEffect(() => {
         setRipple(true);
         setInputStyle('outlined');
-        setPt({
-            panel: {
-                header: {
-                    className: 'bg-green-500'
-                },
-                footer: {
-                    className: 'bg-red-500'
-                }
-            },
-            autocomplete: {
-                root: {
-                    className: 'bg-red-500'
-                }
-            }
-        });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
