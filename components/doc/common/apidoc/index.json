@@ -664,6 +664,12 @@
                             "optional": true,
                             "readonly": false,
                             "type": "ZIndexOptions"
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PrimeReactPTOptions"
                         }
                     ],
                     "callbacks": [
@@ -694,6 +700,558 @@
                             "returnType": "void"
                         }
                     ]
+                },
+                "PrimeReactPTOptions": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "accordion",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AccordionPassThroughOptions"
+                        },
+                        {
+                            "name": "accordiontab",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AccordionTabPassThroughOptions"
+                        },
+                        {
+                            "name": "autocomplete",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AutoCompletePassThroughOptions"
+                        },
+                        {
+                            "name": "avatar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AvatarPassThroughOptions"
+                        },
+                        {
+                            "name": "avatargroup",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AvatarGroupPassThroughOptions"
+                        },
+                        {
+                            "name": "badge",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BadgePassThroughOptions"
+                        },
+                        {
+                            "name": "blockui",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BlockUIPassThroughOptions"
+                        },
+                        {
+                            "name": "breadcrumb",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "BreadCrumbPassThroughOptions"
+                        },
+                        {
+                            "name": "button",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ButtonPassThroughOptions"
+                        },
+                        {
+                            "name": "calendar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CalendarPassThroughOptions"
+                        },
+                        {
+                            "name": "card",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CardPassThroughOptions"
+                        },
+                        {
+                            "name": "carousel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CarouselPassThroughOptions"
+                        },
+                        {
+                            "name": "cascadeselect",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CascadeSelectPassThroughOptions"
+                        },
+                        {
+                            "name": "chart",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChartPassThroughOptions"
+                        },
+                        {
+                            "name": "checkbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughOptions"
+                        },
+                        {
+                            "name": "chip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipPassThroughOptions"
+                        },
+                        {
+                            "name": "chips",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChipsPassThroughOptions"
+                        },
+                        {
+                            "name": "colorpicker",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughOptions"
+                        },
+                        {
+                            "name": "column",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughOptions"
+                        },
+                        {
+                            "name": "columngroup",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnGroupPassThroughOptions"
+                        },
+                        {
+                            "name": "confirmdialog",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughOptions"
+                        },
+                        {
+                            "name": "confirmpopup",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmPopupPassThroughOptions"
+                        },
+                        {
+                            "name": "contextmenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ContextMenuPassThroughOptions"
+                        },
+                        {
+                            "name": "datatable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataTablePassThroughOptions"
+                        },
+                        {
+                            "name": "dataview",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewPassThroughOptions"
+                        },
+                        {
+                            "name": "dataviewlayoutoptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataViewLayoutOptionsPassThroughOptions"
+                        },
+                        {
+                            "name": "deferredcontent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DeferredContentPassThroughOptions"
+                        },
+                        {
+                            "name": "dialog",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughOptions"
+                        },
+                        {
+                            "name": "divider",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DividerPassThroughOptions"
+                        },
+                        {
+                            "name": "dock",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DockPassThroughOptions"
+                        },
+                        {
+                            "name": "dropdown",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughOptions"
+                        },
+                        {
+                            "name": "editor",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "EditorPassThroughOptions"
+                        },
+                        {
+                            "name": "fieldset",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughOptions"
+                        },
+                        {
+                            "name": "fileupload",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FileUploadPassThroughOptions"
+                        },
+                        {
+                            "name": "galleria",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughOptions"
+                        },
+                        {
+                            "name": "image",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughOptions"
+                        },
+                        {
+                            "name": "inplace",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InplacePassThroughOptions"
+                        },
+                        {
+                            "name": "inputmask",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextPassThroughOptions"
+                        },
+                        {
+                            "name": "inputnumber",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputNumberPassThroughOptions"
+                        },
+                        {
+                            "name": "inputswitch",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputSwitchPassThroughOptions"
+                        },
+                        {
+                            "name": "inputtext",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextPassThroughOptions"
+                        },
+                        {
+                            "name": "inputtextarea",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputTextareaPassThroughOptions"
+                        },
+                        {
+                            "name": "knob",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "KnobPassThroughOptions"
+                        },
+                        {
+                            "name": "listbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ListboxPassThroughOptions"
+                        },
+                        {
+                            "name": "megamenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughOptions"
+                        },
+                        {
+                            "name": "mention",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughOptions"
+                        },
+                        {
+                            "name": "menu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughOptions"
+                        },
+                        {
+                            "name": "menubar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenubarPassThroughOptions"
+                        },
+                        {
+                            "name": "message",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagePassThroughOptions"
+                        },
+                        {
+                            "name": "messages",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughOptions"
+                        },
+                        {
+                            "name": "multiselect",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughOptions"
+                        },
+                        {
+                            "name": "multisatecheckbox",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiStateCheckboxPassThroughOptions"
+                        },
+                        {
+                            "name": "orderlist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrderListPassThroughOptions"
+                        },
+                        {
+                            "name": "organizationchart",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughOptions"
+                        },
+                        {
+                            "name": "overlaypanel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OverlayPanelPassThroughOptions"
+                        },
+                        {
+                            "name": "paginator",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PaginatorPassThroughOptions"
+                        },
+                        {
+                            "name": "panel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughOptions"
+                        },
+                        {
+                            "name": "panelmenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughOptions"
+                        },
+                        {
+                            "name": "password",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughOptions"
+                        },
+                        {
+                            "name": "picklist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PickListPassThroughOptions"
+                        },
+                        {
+                            "name": "progressbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressBarPassThroughOptions"
+                        },
+                        {
+                            "name": "progressspinner",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ProgressSpinnerPassThroughOptions"
+                        },
+                        {
+                            "name": "radiobutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RadioButtonPassThroughOptions"
+                        },
+                        {
+                            "name": "rating",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RatingPassThroughOptions"
+                        },
+                        {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughOptions"
+                        },
+                        {
+                            "name": "scrollpanel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollPanelPassThroughOptions"
+                        },
+                        {
+                            "name": "scrolltop",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollTopPassThroughOptions"
+                        },
+                        {
+                            "name": "selectbutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SelectButtonPassThroughOptions"
+                        },
+                        {
+                            "name": "sidebar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughOptions"
+                        },
+                        {
+                            "name": "skeleton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SkeletonPassThroughOptions"
+                        },
+                        {
+                            "name": "slidemenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughOptions"
+                        },
+                        {
+                            "name": "slider",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SliderPassThroughOptions"
+                        },
+                        {
+                            "name": "speeddial",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SpeedDialPassThroughOptions"
+                        },
+                        {
+                            "name": "splitbutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughOptions"
+                        },
+                        {
+                            "name": "splitter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitterPassThroughOptions"
+                        },
+                        {
+                            "name": "steps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "StepsPassThroughOptions"
+                        },
+                        {
+                            "name": "tabmenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabMenuPassThroughOptions"
+                        },
+                        {
+                            "name": "tabpanel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabPanelPassThroughOptions"
+                        },
+                        {
+                            "name": "tabview",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TabViewPassThroughOptions"
+                        },
+                        {
+                            "name": "tag",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TagPassThroughOptions"
+                        },
+                        {
+                            "name": "terminal",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TerminalPassThroughOptions"
+                        },
+                        {
+                            "name": "tieredmenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughOptions"
+                        },
+                        {
+                            "name": "timeline",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TimelinePassThroughOptions"
+                        },
+                        {
+                            "name": "toast",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughOptions"
+                        },
+                        {
+                            "name": "togglebutton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToggleButtonPassThroughOptions"
+                        },
+                        {
+                            "name": "toolbar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToolbarPassThroughOptions"
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions"
+                        },
+                        {
+                            "name": "tree",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreePassThroughOptions"
+                        },
+                        {
+                            "name": "treeselect",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughOptions"
+                        },
+                        {
+                            "name": "treetable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughOptions"
+                        },
+                        {
+                            "name": "virtualscroller",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "VirtualScrollerPassThroughOptions"
+                        }
+                    ],
+                    "callbacks": []
                 },
                 "PrimeIconsOptions": {
                     "relatedProp": "",
@@ -3958,7 +4516,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"help\" | \"warning\" | \"info\" | \"secondary\" | \"danger\"",
+                            "type": "\"success\" | \"help\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
                             "default": "",
                             "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\", \"help\"."
                         },
@@ -12569,7 +13127,7 @@
                                 },
                                 {
                                     "name": "mode",
-                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notContains\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                                     "description": "Filter match mode"
                                 },
                                 {
@@ -14723,7 +15281,7 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notContains\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "description": "Type of filter match."
                         }
                     ],
@@ -37174,7 +37732,7 @@
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"success\" | \"warning\" | \"info\" | \"secondary\" | \"danger\"",
+                            "type": "\"success\" | \"warning\" | \"secondary\" | \"info\" | \"danger\"",
                             "default": "",
                             "description": "Defines the style of the button, valid values are \"secondary\", \"success\", \"info\", \"warning\", \"danger\"."
                         },
@@ -43883,7 +44441,7 @@
                             "name": "globalFilterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notContains\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "default": "contains",
                             "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },
