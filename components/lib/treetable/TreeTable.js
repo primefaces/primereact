@@ -12,9 +12,11 @@ import { TreeTableScrollableView } from './TreeTableScrollableView';
 import { SpinnerIcon } from '../icons/spinner';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
+import { PrimeReactContext } from '../api/context';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
-    const props = TreeTableBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = TreeTableBase.getProps(inProps, context);
     const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
@@ -245,7 +247,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
+        if (ObjectUtils.compare(value1, value2, context.locale) === 0) {
             return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
         }
 
@@ -253,7 +255,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
+        return ObjectUtils.sort(value1, value2, order, context.locale, context.nullSortOrder);
     };
 
     const filter = (value, field, mode) => {

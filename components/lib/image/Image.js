@@ -12,10 +12,12 @@ import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ImageBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ImageBase.getProps(inProps, context);
 
         const [maskVisibleState, setMaskVisibleState] = React.useState(false);
         const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
@@ -88,7 +90,7 @@ export const Image = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, context.zIndex['modal']);
         };
 
         const onEntered = () => {

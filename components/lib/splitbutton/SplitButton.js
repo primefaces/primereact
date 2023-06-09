@@ -9,10 +9,12 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, cla
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
+import { PrimeReactContext } from '../api/context';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SplitButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SplitButtonBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -61,7 +63,7 @@ export const SplitButton = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -82,7 +84,7 @@ export const SplitButton = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || context.appendTo);
         };
 
         useMountEffect(() => {

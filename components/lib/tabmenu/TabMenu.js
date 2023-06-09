@@ -2,10 +2,12 @@ import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { TabMenuBase } from './TabMenuBase';
+import { PrimeReactContext } from '../api/context';
 
 export const TabMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TabMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TabMenuBase.getProps(inProps, context);
 
         const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);

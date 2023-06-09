@@ -4,9 +4,12 @@ import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
+import { PrimeReactContext } from '../api/context';
+
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = CheckboxBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = CheckboxBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
         const { ptm } = CheckboxBase.setMetaData({
             props,

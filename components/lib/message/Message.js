@@ -5,10 +5,12 @@ import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { CheckIcon } from '../icons/check';
+import { PrimeReactContext } from '../api/context';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MessageBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MessageBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
 

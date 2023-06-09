@@ -3,10 +3,12 @@ import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
+import { PrimeReactContext } from '../api/context';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = RadioButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = RadioButtonBase.getProps(inProps, context);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);

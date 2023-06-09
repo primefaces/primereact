@@ -14,6 +14,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/context';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -23,6 +24,7 @@ export const ColumnFilter = React.memo((props) => {
     const overlayEventListener = React.useRef(null);
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const { filterMatchModeOptions, zIndex, appendTo, autoZIndex, inputStyle, ripple } = React.useContext(PrimeReactContext);
 
     const getColumnPTOptions = (key) => {
         return props.ptCallbacks.ptmo(getColumnProps(), key, {
@@ -74,7 +76,7 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const matchModes = () => {
-        return getColumnProp('filterMatchModeOptions') || PrimeReact.filterMatchModeOptions[findDataType()].map((key) => ({ label: localeOption(key), value: key }));
+        return getColumnProp('filterMatchModeOptions') || filterMatchModeOptions[findDataType()].map((key) => ({ label: localeOption(key), value: key }));
     };
 
     const isShowMatchModes = () => {
@@ -119,14 +121,14 @@ export const ColumnFilter = React.memo((props) => {
     const findDataType = () => {
         const dataType = getColumnProp('dataType');
         const matchMode = getColumnProp('filterMatchMode');
-        const hasMatchMode = (key) => PrimeReact.filterMatchModeOptions[key].some((mode) => mode === matchMode);
+        const hasMatchMode = (key) => filterMatchModeOptions[key].some((mode) => mode === matchMode);
 
         if (matchMode === 'custom' && !hasMatchMode(dataType)) {
-            PrimeReact.filterMatchModeOptions[dataType].push(FilterMatchMode.CUSTOM);
+            filterMatchModeOptions[dataType].push(FilterMatchMode.CUSTOM);
 
             return dataType;
         } else if (matchMode) {
-            return Object.keys(PrimeReact.filterMatchModeOptions).find((key) => hasMatchMode(key)) || dataType;
+            return Object.keys(filterMatchModeOptions).find((key) => hasMatchMode(key)) || dataType;
         }
 
         return dataType;
@@ -358,8 +360,8 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const onOverlayEnter = () => {
-        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
-        DomHandler.alignOverlay(overlayRef.current, iconRef.current, PrimeReact.appendTo, false);
+        ZIndexUtils.set('overlay', overlayRef.current, autoZIndex, zIndex['overlay']);
+        DomHandler.alignOverlay(overlayRef.current, iconRef.current, appendTo, false);
 
         overlayEventListener.current = (e) => {
             if (!isOutsideClicked(e.target)) {
@@ -444,7 +446,7 @@ export const ColumnFilter = React.memo((props) => {
 
     useUpdateEffect(() => {
         if (props.display === 'menu' && overlayVisibleState) {
-            DomHandler.alignOverlay(overlayRef.current, iconRef.current, PrimeReact.appendTo, false);
+            DomHandler.alignOverlay(overlayRef.current, iconRef.current, appendTo, false);
         }
     });
 
@@ -805,8 +807,8 @@ export const ColumnFilter = React.memo((props) => {
         const style = getColumnProp('filterMenuStyle');
         const className = classNames('p-column-filter-overlay p-component p-fluid', getColumnProp('filterMenuClassName'), {
             'p-column-filter-overlay-menu': props.display === 'menu',
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': inputStyle === 'filled',
+            'p-ripple-disabled': ripple === false
         });
         const filterHeader = ObjectUtils.getJSXElement(getColumnProp('filterHeader'), { field, filterModel, filterApplyCallback });
         const filterFooter = ObjectUtils.getJSXElement(getColumnProp('filterFooter'), { field, filterModel, filterApplyCallback });

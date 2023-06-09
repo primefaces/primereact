@@ -7,12 +7,14 @@ import { Portal } from '../portal/Portal';
 import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
+import { PrimeReactContext } from '../api/context';
 
 let messageIdx = 0;
 
 export const Toast = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ToastBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ToastBase.getProps(inProps, context);
 
         const [messagesState, setMessagesState] = React.useState([]);
         const containerRef = React.useRef(null);
@@ -90,7 +92,7 @@ export const Toast = React.memo(
         };
 
         useUpdateEffect(() => {
-            ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
+            ZIndexUtils.set('toast', containerRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['toast']);
         }, [messagesState, props.baseZIndex]);
 
         useUnmountEffect(() => {
@@ -108,8 +110,8 @@ export const Toast = React.memo(
 
         const createElement = () => {
             const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': context.inputStyle === 'filled',
+                'p-ripple-disabled': context.ripple === false
             });
 
             const rootProps = mergeProps(

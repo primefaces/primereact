@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SliderBase } from './SliderBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Slider = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SliderBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SliderBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const handleIndex = React.useRef(0);

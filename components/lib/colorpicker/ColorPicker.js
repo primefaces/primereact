@@ -6,10 +6,12 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
+import { PrimeReactContext } from '../api/context';
 
 export const ColorPicker = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ColorPickerBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ColorPickerBase.getProps(inProps, context);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const { ptm } = ColorPickerBase.setMetaData({
             props,
@@ -222,8 +224,8 @@ export const ColorPicker = React.memo(
             if (props.onChange) {
                 props.onChange({
                     value: value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => { },
+                    preventDefault: () => { },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -273,7 +275,7 @@ export const ColorPicker = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -482,7 +484,7 @@ export const ColorPicker = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || context.appendTo);
             }
         };
 

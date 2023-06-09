@@ -8,10 +8,12 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MentionBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MentionBase.getProps(inProps, context);
 
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -61,7 +63,7 @@ export const Mention = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 

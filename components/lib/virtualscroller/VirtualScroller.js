@@ -3,10 +3,12 @@ import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUp
 import { classNames, DomHandler, ObjectUtils, IconUtils, mergeProps } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
 import { SpinnerIcon } from '../icons/spinner';
+import { PrimeReactContext } from '../api/context';
 
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = VirtualScrollerBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = VirtualScrollerBase.getProps(inProps, context);
         const prevProps = usePrevious(inProps) || {};
 
         const vertical = props.orientation === 'vertical';

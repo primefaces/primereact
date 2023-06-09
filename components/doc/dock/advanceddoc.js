@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { PhotoService } from '../../../service/PhotoService';
-import PrimeReact from '../../lib/api/Api';
 import { Dialog } from '../../lib/dialog/Dialog';
 import { Dock } from '../../lib/dock/Dock';
 import { Galleria } from '../../lib/galleria/Galleria';
@@ -13,6 +12,7 @@ import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { PrimeReactContext } from '../../lib/api/context';
 
 export function AdvancedDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -22,6 +22,7 @@ export function AdvancedDoc(props) {
     const toast = useRef(null);
     const toast2 = useRef(null);
     const galleria = useRef(null);
+    const { setAppendTo } = useContext(PrimeReactContext);
 
     const dockItems = [
         {
@@ -254,13 +255,13 @@ export function AdvancedDoc(props) {
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
-        PrimeReact.appendTo = 'self';
+        setAppendTo('self');
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            PrimeReact.appendTo = null;
+            setAppendTo(null);
         };
     }, []);
 
@@ -548,13 +549,13 @@ export default function AdvanceDemo() {
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
-        PrimeReact.appendTo = 'self';
+        setAppendTo('self');
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            PrimeReact.appendTo = null;
+            setAppendTo(null);
         };
     }, []);
 
@@ -847,13 +848,13 @@ export default function AdvanceDemo() {
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
-        PrimeReact.appendTo = 'self';
+        setAppendTo('self');
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            PrimeReact.appendTo = null;
+            setAppendTo(null);
         };
     }, []);
 

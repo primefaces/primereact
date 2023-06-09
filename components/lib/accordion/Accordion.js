@@ -6,12 +6,13 @@ import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } fro
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { PrimeReactContext } from '../api/context';
 
-export const AccordionTab = () => {};
+export const AccordionTab = () => { };
 
 export const Accordion = React.forwardRef((inProps, ref) => {
-    const props = AccordionBase.getProps(inProps);
-
+    const context = React.useContext(PrimeReactContext);
+    const props = AccordionBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const elementRef = React.useRef(null);

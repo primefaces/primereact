@@ -7,10 +7,12 @@ import { BarsIcon } from '../icons/bars';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
+import { PrimeReactContext } from '../api/context';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MegaMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MegaMenuBase.getProps(inProps, context);
 
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
@@ -242,7 +244,7 @@ export const MegaMenu = React.memo(
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
             if (activeItemState && !isMobileMode) {
-                ZIndexUtils.set('menu', currentPanel, PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', currentPanel, context.autoZIndex, context.zIndex['menu']);
             }
 
             if (isMobileMode) {
@@ -456,7 +458,7 @@ export const MegaMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -477,9 +479,8 @@ export const MegaMenu = React.memo(
         flex-wrap: wrap;
     }
 
-    ${
-        horizontal
-            ? `
+    ${horizontal
+                        ? `
 .p-megamenu[${selector}] .p-megamenu-button {
     display: flex;
 }
@@ -508,12 +509,11 @@ export const MegaMenu = React.memo(
     z-index: 1;
 }
         `
-            : ''
-    }
+                        : ''
+                    }
 
-    ${
-        vertical
-            ? `
+    ${vertical
+                        ? `
 .p-megamenu-vertical[${selector}] {
     width: 100%;
 }
@@ -539,8 +539,8 @@ export const MegaMenu = React.memo(
     content: "\\e930";
 }
         `
-            : ''
-    }
+                        : ''
+                    }
 }
 `;
 

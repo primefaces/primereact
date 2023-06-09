@@ -7,9 +7,11 @@ import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
 import { BarsIcon } from '../icons/bars';
 import { ThLargeIcon } from '../icons/thlarge';
 import { SpinnerIcon } from '../icons/spinner';
+import { PrimeReactContext } from '../api/context';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
-    const props = DataViewLayoutOptionsBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = DataViewLayoutOptionsBase.getProps(inProps, context);
     const { ptm } = DataViewLayoutOptionsBase.setMetaData({
         props
     });
@@ -77,7 +79,8 @@ export const DataViewItem = React.memo((props) => {
 
 export const DataView = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = DataViewBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = DataViewBase.getProps(inProps, context);
         const [firstState, setFirstState] = React.useState(props.first);
         const [rowsState, setRowsState] = React.useState(props.rows);
         const { ptm } = DataViewBase.setMetaData({
@@ -140,7 +143,7 @@ export const DataView = React.memo(
                     let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
                     let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
 
-                    return ObjectUtils.sort(value1, value2, props.sortOrder, PrimeReact.locale, PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, props.sortOrder, context.locale, context.nullSortOrder);
                 });
 
                 return value;

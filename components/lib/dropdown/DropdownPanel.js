@@ -7,10 +7,13 @@ import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
+import { PrimeReactContext } from '../api/context';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
         const ptm = props.ptm;
+        const { inputStyle, ripple } = React.useContext(PrimeReactContext);
+        const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
         const filterOptions = {
@@ -270,8 +273,8 @@ export const DropdownPanel = React.memo(
 
         const createElement = () => {
             const className = classNames('p-dropdown-panel p-component', props.panelClassName, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': inputStyle === 'filled',
+                'p-ripple-disabled': ripple === false
             });
             const filter = createFilter();
             const content = createContent();

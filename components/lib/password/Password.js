@@ -9,10 +9,12 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = PasswordBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = PasswordBase.getProps(inProps, context);
 
         const promptLabel = props.promptLabel || localeOption('passwordPrompt');
         const weakLabel = props.weakLabel || localeOption('weak');
@@ -109,12 +111,12 @@ export const Password = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || context.appendTo);
             }
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -288,8 +290,8 @@ export const Password = React.memo(
 
         const createPanel = () => {
             const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': context.inputStyle === 'filled',
+                'p-ripple-disabled': context.ripple === false
             });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);

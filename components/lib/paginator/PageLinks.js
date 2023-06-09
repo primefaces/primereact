@@ -3,9 +3,11 @@ import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
+import { PrimeReactContext } from '../api/context';
 
 export const PageLinks = React.memo((inProps) => {
-    const props = PageLinksBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = PageLinksBase.getProps(inProps, context);
 
     const getPTOptions = (pageLink, key) => {
         return props.ptm(key, {

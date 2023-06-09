@@ -5,10 +5,12 @@ import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = RatingBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = RatingBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const { ptm } = RatingBase.setMetaData({

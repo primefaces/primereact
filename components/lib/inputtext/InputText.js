@@ -3,10 +3,12 @@ import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
+import { PrimeReactContext } from '../api/context';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputTextBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = InputTextBase.getProps(inProps, context);
         const { ptm } = InputTextBase.setMetaData({
             props
         });

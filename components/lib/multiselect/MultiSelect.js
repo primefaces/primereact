@@ -9,10 +9,12 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
+import { PrimeReactContext } from '../api/context';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MultiSelectBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MultiSelectBase.getProps(inProps, context);
 
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
@@ -203,12 +205,12 @@ export const MultiSelect = React.memo(
                         value = [];
                         options.forEach(
                             (optionGroup) =>
-                                (value = [
-                                    ...value,
-                                    ...getOptionGroupChildren(optionGroup)
-                                        .filter((option) => !isOptionDisabled(option))
-                                        .map((option) => getOptionValue(option))
-                                ])
+                            (value = [
+                                ...value,
+                                ...getOptionGroupChildren(optionGroup)
+                                    .filter((option) => !isOptionDisabled(option))
+                                    .map((option) => getOptionValue(option))
+                            ])
                         );
                     } else {
                         value = options.map((option) => getOptionValue(option));
@@ -275,7 +277,7 @@ export const MultiSelect = React.memo(
         };
 
         const onOverlayEnter = (callback) => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
             scrollInView();
             callback && callback();
@@ -302,7 +304,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || context.appendTo);
         };
 
         const isClearClicked = (event) => {

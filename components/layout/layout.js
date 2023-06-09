@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import PrimeReact from '../lib/api/PrimeReact';
+import { useContext, useEffect, useState } from 'react';
 import { classNames } from '../lib/utils/ClassNames';
 import NewsSection from '../news/newssection';
 import AppContentContext from './appcontentcontext';
@@ -9,13 +8,13 @@ import Config from './config';
 import Footer from './footer';
 import Menu from './menu';
 import Topbar from './topbar';
+import { PrimeReactContext } from '../lib/api/context';
 
 export default function Layout(props) {
-    const [inputStyle, setInputStyle] = useState('outlined');
-    const [ripple, setRipple] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
+    const { ripple, setRipple, inputStyle, setInputStyle, setPt } = useContext(PrimeReactContext);
 
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': props.newsActive,
@@ -65,6 +64,26 @@ export default function Layout(props) {
     };
 
     useEffect(() => {
+        setRipple(true);
+        setInputStyle('outlined');
+        setPt({
+            panel: {
+                header: {
+                    className: 'bg-green-500'
+                },
+                footer: {
+                    className: 'bg-red-500'
+                }
+            },
+            autocomplete: {
+                root: {
+                    className: 'bg-red-500'
+                }
+            }
+        });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
         if (sidebarActive) document.body.classList.add('blocked-scroll');
         else document.body.classList.remove('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -81,7 +100,6 @@ export default function Layout(props) {
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    PrimeReact.ripple = ripple;
 
     return (
         <div className={wrapperClassName}>

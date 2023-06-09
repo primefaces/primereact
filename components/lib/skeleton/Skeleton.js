@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { SkeletonBase } from './SkeletonBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Skeleton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SkeletonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SkeletonBase.getProps(inProps, context);
         const { ptm } = SkeletonBase.setMetaData({
             props
         });

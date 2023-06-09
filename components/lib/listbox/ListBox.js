@@ -7,10 +7,12 @@ import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
+import { PrimeReactContext } from '../api/context';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ListBoxBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ListBoxBase.getProps(inProps, context);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);

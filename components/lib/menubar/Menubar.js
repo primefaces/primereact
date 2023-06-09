@@ -5,10 +5,12 @@ import { BarsIcon } from '../icons/bars';
 import { IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
+import { PrimeReactContext } from '../api/context';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MenubarBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MenubarBase.getProps(inProps, context);
 
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -46,7 +48,7 @@ export const Menubar = React.memo(
 
         useUpdateEffect(() => {
             if (mobileActiveState) {
-                ZIndexUtils.set('menu', rootMenuRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', rootMenuRef.current, context.autoZIndex, context.zIndex['menu']);
                 bindDocumentClickListener();
             } else {
                 unbindDocumentClickListener();
