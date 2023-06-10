@@ -4,17 +4,14 @@ exports[`Ripple when Ripple is enabled, button should have ripple effect on desk
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
     >
        
     </span>
-    <span
-      class="p-ink p-ink-active"
-      role="presentation"
-      style="height: 0px; width: 0px;"
-    />
   </button>
 </div>
 `;
@@ -23,17 +20,14 @@ exports[`Ripple when Ripple is enabled, button should have ripple effect on touc
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
     >
        
     </span>
-    <span
-      class="p-ink p-ink-active"
-      role="presentation"
-      style="height: 0px; width: 0px;"
-    />
   </button>
 </div>
 `;

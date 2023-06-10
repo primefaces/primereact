@@ -85,7 +85,6 @@ export default function Layout(props) {
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-
     return (
         <div className={wrapperClassName}>
             <Head>

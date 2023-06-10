@@ -7,6 +7,8 @@ exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1
   <div>
     <div
       class="p-blockui-container"
+      data-pc-name="blockui"
+      data-pc-section="root"
     />
   </div>
   <div
@@ -23,6 +25,8 @@ exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen
   <div>
     <div
       class="p-blockui-container"
+      data-pc-name="blockui"
+      data-pc-section="root"
     />
   </div>
   <div
@@ -36,20 +40,26 @@ exports[`BlockUI block and unblock panel events: blocked-event 1`] = `
 <div>
   <div
     class="p-blockui-container"
+    data-pc-name="blockui"
+    data-pc-section="root"
   >
     <div
       class="p-panel p-component"
+      data-pc-name="panel"
+      data-pc-section="root"
       id="pr_id_3"
     >
       <div
         aria-hidden="false"
         aria-labelledby="pr_id_3_header"
         class="p-toggleable-content"
+        data-pc-section="toggleablecontent"
         id="pr_id_3_content"
         role="region"
       >
         <div
           class="p-panel-content"
+          data-pc-section="content"
         >
           unblocked
         </div>
@@ -67,20 +77,26 @@ exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
 <div>
   <div
     class="p-blockui-container"
+    data-pc-name="blockui"
+    data-pc-section="root"
   >
     <div
       class="p-panel p-component"
+      data-pc-name="panel"
+      data-pc-section="root"
       id="pr_id_3"
     >
       <div
         aria-hidden="false"
         aria-labelledby="pr_id_3_header"
         class="p-toggleable-content"
+        data-pc-section="toggleablecontent"
         id="pr_id_3_content"
         role="region"
       >
         <div
           class="p-panel-content"
+          data-pc-section="content"
         >
           unblocked
         </div>
@@ -101,6 +117,8 @@ exports[`BlockUI block fullscreen 1`] = `
   <div>
     <div
       class="p-blockui-container"
+      data-pc-name="blockui"
+      data-pc-section="root"
     />
   </div>
   <div
@@ -117,20 +135,26 @@ exports[`BlockUI block panel 1`] = `
   <div>
     <div
       class="p-blockui-container"
+      data-pc-name="blockui"
+      data-pc-section="root"
     >
       <div
         class="p-panel p-component"
+        data-pc-name="panel"
+        data-pc-section="root"
         id="pr_id_1"
       >
         <div
           aria-hidden="false"
           aria-labelledby="pr_id_1_header"
           class="p-toggleable-content"
+          data-pc-section="toggleablecontent"
           id="pr_id_1_content"
           role="region"
         >
           <div
             class="p-panel-content"
+            data-pc-section="content"
           >
             blocked
           </div>
@@ -152,21 +176,27 @@ exports[`BlockUI container style and className 1`] = `
   <div>
     <div
       class="p-blockui-container container-jest"
+      data-pc-name="blockui"
+      data-pc-section="root"
       style="cursor: pointer;"
     >
       <div
         class="p-panel p-component"
+        data-pc-name="panel"
+        data-pc-section="root"
         id="pr_id_4"
       >
         <div
           aria-hidden="false"
           aria-labelledby="pr_id_4_header"
           class="p-toggleable-content"
+          data-pc-section="toggleablecontent"
           id="pr_id_4_content"
           role="region"
         >
           <div
             class="p-panel-content"
+            data-pc-section="content"
           >
             style + class
           </div>
@@ -188,20 +218,26 @@ exports[`BlockUI unblock panel 1`] = `
   <div>
     <div
       class="p-blockui-container"
+      data-pc-name="blockui"
+      data-pc-section="root"
     >
       <div
         class="p-panel p-component"
+        data-pc-name="panel"
+        data-pc-section="root"
         id="pr_id_2"
       >
         <div
           aria-hidden="false"
           aria-labelledby="pr_id_2_header"
           class="p-toggleable-content"
+          data-pc-section="toggleablecontent"
           id="pr_id_2_content"
           role="region"
         >
           <div
             class="p-panel-content"
+            data-pc-section="content"
           >
             unblocked
           </div>

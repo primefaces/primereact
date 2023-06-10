@@ -8,7 +8,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { PrimeReactContext } from '../api/context';
 
-export const AccordionTab = () => { };
+export const AccordionTab = () => {};
 
 export const Accordion = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

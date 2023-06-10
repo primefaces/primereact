@@ -5,6 +5,8 @@ exports[`Message content 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <span>
@@ -19,11 +21,14 @@ exports[`Message default 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <svg
       aria-hidden="true"
       class="p-icon p-inline-message-icon"
+      data-pc-section="icon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -54,6 +59,7 @@ exports[`Message default 1`] = `
     </svg>
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     />
   </div>
 </div>
@@ -64,13 +70,17 @@ exports[`Message icon 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <span
       class="p-inline-message-icon pi pi-check"
+      data-pc-section="icon"
     />
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     />
   </div>
 </div>
@@ -81,11 +91,14 @@ exports[`Message severity error 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-error"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <svg
       aria-hidden="true"
       class="p-icon p-inline-message-icon"
+      data-pc-section="icon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -116,6 +129,7 @@ exports[`Message severity error 1`] = `
     </svg>
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     >
       Jest
     </span>
@@ -128,11 +142,14 @@ exports[`Message severity info 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <svg
       aria-hidden="true"
       class="p-icon p-inline-message-icon"
+      data-pc-section="icon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -163,6 +180,7 @@ exports[`Message severity info 1`] = `
     </svg>
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     >
       Jest
     </span>
@@ -175,11 +193,14 @@ exports[`Message severity success 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-success"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <svg
       aria-hidden="true"
       class="p-icon p-inline-message-icon"
+      data-pc-section="icon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -193,6 +214,7 @@ exports[`Message severity success 1`] = `
     </svg>
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     >
       Jest
     </span>
@@ -205,11 +227,14 @@ exports[`Message severity warn 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-warn"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <svg
       aria-hidden="true"
       class="p-icon p-inline-message-icon"
+      data-pc-section="icon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -246,6 +271,7 @@ exports[`Message severity warn 1`] = `
     </svg>
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     >
       Jest
     </span>
@@ -258,11 +284,14 @@ exports[`Message templating 1`] = `
   <div
     aria-live="polite"
     class="p-inline-message p-component p-inline-message-info p-inline-message-icon-only"
+    data-pc-name="message"
+    data-pc-section="root"
     role="alert"
   >
     <svg
       aria-hidden="true"
       class="p-icon p-inline-message-icon"
+      data-pc-section="icon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -293,6 +322,7 @@ exports[`Message templating 1`] = `
     </svg>
     <span
       class="p-inline-message-text"
+      data-pc-section="text"
     />
   </div>
 </div>

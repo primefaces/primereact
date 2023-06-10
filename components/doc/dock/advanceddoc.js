@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { PhotoService } from '../../../service/PhotoService';
+import { PrimeReactContext } from '../../lib/api/context';
 import { Dialog } from '../../lib/dialog/Dialog';
 import { Dock } from '../../lib/dock/Dock';
 import { Galleria } from '../../lib/galleria/Galleria';
@@ -12,7 +13,6 @@ import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { PrimeReactContext } from '../../lib/api/context';
 
 export function AdvancedDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -263,7 +263,7 @@ export function AdvancedDoc(props) {
             // reset
             setAppendTo(null);
         };
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const start = <i className="pi pi-apple"></i>;
     const end = (

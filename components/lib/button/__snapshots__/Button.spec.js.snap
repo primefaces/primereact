@@ -4,17 +4,14 @@ exports[`Button when Ripple is enabled button should have ripple effect 1`] = `
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
     >
        
     </span>
-    <span
-      class="p-ink p-ink-active"
-      role="presentation"
-      style="height: 0px; width: 0px;"
-    />
   </button>
 </div>
 `;
@@ -24,9 +21,12 @@ exports[`Button when aria-label prop is not exist aria-label prop should be equa
   <button
     aria-label="test"
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
+      data-pc-section="label"
     >
       test
     </span>
@@ -38,6 +38,8 @@ exports[`Button when badge is null it renders Button without badge 1`] = `
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
@@ -52,6 +54,8 @@ exports[`Button when badge is true it renders Button with badge 1`] = `
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
@@ -60,6 +64,7 @@ exports[`Button when badge is true it renders Button with badge 1`] = `
     </span>
     <span
       class="p-badge"
+      data-pc-section="badge"
     >
       test
     </span>
@@ -71,6 +76,8 @@ exports[`Button when click the button if loading is false it renders Button with
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
@@ -85,11 +92,14 @@ exports[`Button when click the button if loading is true it renders Button with 
 <div>
   <button
     class="p-button p-component p-button-icon-only p-disabled p-button-loading"
+    data-pc-name="button"
+    data-pc-section="root"
     disabled=""
   >
     <svg
       aria-hidden="true"
       class="p-icon p-icon-spin p-button-icon p-c p-button-loading-icon"
+      data-pc-section="loadingicon"
       fill="none"
       height="14"
       viewBox="0 0 14 14"
@@ -130,9 +140,12 @@ exports[`Button when iconPos is bottom Button is vertical 1`] = `
   <button
     aria-label="test"
     class="p-button p-component p-button-vertical"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
+      data-pc-section="label"
     >
       test
     </span>
@@ -144,6 +157,8 @@ exports[`Button when label is empty it returns empty button 1`] = `
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
@@ -158,6 +173,8 @@ exports[`Button when label is true it renders Button with default aria label 1`]
 <div>
   <button
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
@@ -173,6 +190,8 @@ exports[`Button when label prop is not exist label prop should be equal to aria-
   <button
     aria-label="test"
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
@@ -188,14 +207,18 @@ exports[`Button when using badge and label the aria-label should contain both va
   <button
     aria-label="test lost"
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
+      data-pc-section="label"
     >
       test
     </span>
     <span
       class="p-badge"
+      data-pc-section="badge"
     >
       lost
     </span>
@@ -208,14 +231,18 @@ exports[`Button when using badge and label the aria-label should contain both va
   <button
     aria-label="test lost"
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
+      data-pc-section="label"
     >
       test
     </span>
     <span
       class="p-badge"
+      data-pc-section="badge"
     >
       lost
     </span>
@@ -230,9 +257,12 @@ exports[`Button when visible is true Button render correctly 1`] = `
   <button
     aria-label="test"
     class="p-button p-component"
+    data-pc-name="button"
+    data-pc-section="root"
   >
     <span
       class="p-button-label p-c"
+      data-pc-section="label"
     >
       test
     </span>

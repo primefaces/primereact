@@ -11,7 +11,7 @@ export const ComponentBase = {
         const getProps = (props, context = {}) => {
             ComponentBase.context = context;
 
-            return ObjectUtils.getMergedProps(props, defaultProps)
+            return ObjectUtils.getMergedProps(props, defaultProps);
         };
 
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
@@ -19,19 +19,14 @@ export const ComponentBase = {
         const getOptionValue = (obj = {}, key = '', params = {}) => {
             const fKeys = String(ObjectUtils.convertToFlatCase(key)).split('.');
             const fKey = fKeys.shift();
-            const matchedPTOption = Object.keys(obj).find(k => ObjectUtils.convertToFlatCase(k) === fKey) || '';
+            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.convertToFlatCase(k) === fKey) || '';
 
-            return fKey
-                ? ObjectUtils.isObject(obj)
-                    ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params)
-                    : undefined
-                : ObjectUtils.getJSXElement(obj, params);
-
+            return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
         };
 
         const getPTValue = (obj = {}, key = '', params = {}) => {
             const datasetPrefix = 'data-pc-';
-            const componentName = params.props && params.props.__TYPE && ObjectUtils.convertToFlatCase(params.props.__TYPE) || '';
+            const componentName = (params.props && params.props.__TYPE && ObjectUtils.convertToFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || {};
 
             const defaultPT = (key) => pt && getOptionValue(pt[componentName], key);
@@ -54,7 +49,6 @@ export const ComponentBase = {
             }
 
             return merged;
-
         };
 
         const setMetaData = (metadata = {}) => {

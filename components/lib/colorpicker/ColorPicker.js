@@ -224,8 +224,8 @@ export const ColorPicker = React.memo(
             if (props.onChange) {
                 props.onChange({
                     value: value,
-                    stopPropagation: () => { },
-                    preventDefault: () => { },
+                    stopPropagation: () => {},
+                    preventDefault: () => {},
                     target: {
                         name: props.name,
                         id: props.id,

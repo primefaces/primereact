@@ -4,6 +4,8 @@ exports[`Skeleton animation none 1`] = `
 <div>
   <div
     class="p-skeleton p-component p-skeleton-none"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem;"
   />
 </div>
@@ -13,6 +15,8 @@ exports[`Skeleton animation wave 1`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem;"
   />
 </div>
@@ -22,6 +26,8 @@ exports[`Skeleton border radius 1`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem; border-radius: 16px;"
   />
 </div>
@@ -31,6 +37,8 @@ exports[`Skeleton border radius 2`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem; border-radius: 16px;"
   />
 </div>
@@ -40,6 +48,8 @@ exports[`Skeleton default 1`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem;"
   />
 </div>
@@ -49,6 +59,8 @@ exports[`Skeleton shape circle 1`] = `
 <div>
   <div
     class="p-skeleton p-component p-skeleton-circle"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem;"
   />
 </div>
@@ -58,6 +70,8 @@ exports[`Skeleton shape rectangle 1`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 1rem;"
   />
 </div>
@@ -67,6 +81,8 @@ exports[`Skeleton size in pixels 1`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 50px; height: 50px;"
   />
 </div>
@@ -76,6 +92,8 @@ exports[`Skeleton size width and height 1`] = `
 <div>
   <div
     class="p-skeleton p-component"
+    data-pc-name="skeleton"
+    data-pc-section="root"
     style="width: 100%; height: 2rem;"
   />
 </div>

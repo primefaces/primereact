@@ -4,7 +4,7 @@ import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils'
 import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 import { PrimeReactContext } from '../api/context';
 
-export const SplitterPanel = () => { };
+export const SplitterPanel = () => {};
 
 export const Splitter = React.memo(
     React.forwardRef((inProps, ref) => {
