@@ -9,7 +9,7 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, merg
 import { TabPanelBase, TabViewBase } from './TabViewBase';
 import { PrimeReactContext } from '../api/context';
 
-export const TabPanel = () => { };
+export const TabPanel = () => {};
 
 export const TabView = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

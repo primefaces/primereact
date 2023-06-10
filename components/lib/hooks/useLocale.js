@@ -75,21 +75,21 @@ export const useLocale = () => {
             locale: localeContext,
             options: locales[localeContext]
         };
-    }
+    };
 
     const addLocale = (locale, options) => {
         locales[locale] = { ...locales['en'], ...options };
-    }
+    };
 
     const updateLocaleOption = (key, value, locale) => {
         localeOptions(locale)[key] = value;
-    }
+    };
 
     const updateLocaleOptions = (options, locale) => {
         const _locale = locale || localeContext;
 
         locales[_locale] = { ...locales[_locale], ...options };
-    }
+    };
 
     const localeOption = (key, locale) => {
         const _locale = locale || localeContext;
@@ -99,7 +99,7 @@ export const useLocale = () => {
         } catch (error) {
             throw new Error(`The ${key} option is not found in the current locale('${_locale}').`);
         }
-    }
+    };
 
     const ariaLabel = (key) => {
         const _locale = localeContext;
@@ -109,15 +109,14 @@ export const useLocale = () => {
         } catch (error) {
             throw new Error(`The ${key} option is not found in the current locale('${_locale}').`);
         }
-    }
+    };
 
     const localeOptions = (locale) => {
         const _locale = locale || localeContext;
 
         return locales[_locale];
-    }
+    };
 
     return { locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOption, localeOptions, ariaLabel };
-
 };
 /* eslint-enable */

@@ -77,7 +77,11 @@ export default function MyApp({ Component }) {
     };
 
     if (Component.getLayout) {
-        return Component.getLayout(<PrimeReactProvider><Component {...props} /></PrimeReactProvider>);
+        return Component.getLayout(
+            <PrimeReactProvider>
+                <Component {...props} />
+            </PrimeReactProvider>
+        );
     } else {
         return (
             <PrimeReactProvider>

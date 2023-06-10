@@ -17,7 +17,7 @@ export default class ObjectUtils {
             if (arrA && arrB) {
                 length = a.length;
                 if (length !== b.length) return false;
-                for (i = length; i-- !== 0;) if (!this.deepEquals(a[i], b[i])) return false;
+                for (i = length; i-- !== 0; ) if (!this.deepEquals(a[i], b[i])) return false;
 
                 return true;
             }
@@ -42,9 +42,9 @@ export default class ObjectUtils {
 
             if (length !== Object.keys(b).length) return false;
 
-            for (i = length; i-- !== 0;) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+            for (i = length; i-- !== 0; ) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
 
-            for (i = length; i-- !== 0;) {
+            for (i = length; i-- !== 0; ) {
                 key = keys[i];
                 if (!this.deepEquals(a[key], b[key])) return false;
             }

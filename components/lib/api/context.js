@@ -45,7 +45,6 @@ export const PrimeReactProvider = (props) => {
         linkElement.parentNode?.insertBefore(cloneLinkElement, linkElement.nextSibling);
     };
 
-
     const value = {
         changeTheme,
         ripple,
@@ -74,9 +73,5 @@ export const PrimeReactProvider = (props) => {
         setFilterMatchModeOptions
     };
 
-    return (
-        <PrimeReactContext.Provider value={value}>
-            {props.children}
-        </PrimeReactContext.Provider>
-    );
+    return <PrimeReactContext.Provider value={value}>{props.children}</PrimeReactContext.Provider>;
 };

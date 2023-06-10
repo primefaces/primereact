@@ -4,17 +4,21 @@ exports[`Fieldset default 1`] = `
 <div>
   <fieldset
     class="p-fieldset p-component"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="pr_id_1"
   >
     <div
       aria-hidden="false"
       aria-labelledby="pr_id_1_header"
       class="p-toggleable-content"
+      data-pc-section="toggleablecontent"
       id="pr_id_1_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       />
     </div>
   </fieldset>
@@ -25,13 +29,17 @@ exports[`Fieldset legend 1`] = `
 <div>
   <fieldset
     class="p-fieldset p-component"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="fieldset"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
+      data-pc-section="legend"
     >
       <span
         class="p-fieldset-legend-text"
+        data-pc-section="legendtitle"
         id="fieldset_header"
       >
         Simple Fieldset
@@ -41,11 +49,13 @@ exports[`Fieldset legend 1`] = `
       aria-hidden="false"
       aria-labelledby="fieldset_header"
       class="p-toggleable-content"
+      data-pc-section="toggleablecontent"
       id="fieldset_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       >
         Content
       </div>
@@ -58,20 +68,25 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
 <div>
   <fieldset
     class="p-fieldset p-component p-fieldset-toggleable"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="pr_id_3"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
+      data-pc-section="legend"
     >
       <a
         aria-controls="pr_id_3_content"
         aria-expanded="false"
+        data-pc-section="toggler"
         href="#pr_id_3_content"
         id="pr_id_3_header"
       >
         <svg
           aria-hidden="true"
           class="p-icon p-fieldset-toggler"
+          data-pc-section="togglericon"
           fill="none"
           height="14"
           viewBox="0 0 14 14"
@@ -98,6 +113,7 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
         </svg>
         <span
           class="p-fieldset-legend-text"
+          data-pc-section="legendtitle"
         >
           Expand/Collapse
         </span>
@@ -107,11 +123,13 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
       aria-hidden="true"
       aria-labelledby="pr_id_3_header"
       class="p-toggleable-content p-toggleable-content-exit p-toggleable-content-exit-active"
+      data-pc-section="toggleablecontent"
       id="pr_id_3_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       >
         <p>
           Lorem ipsum dolor sit amet
@@ -126,20 +144,25 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
 <div>
   <fieldset
     class="p-fieldset p-component p-fieldset-toggleable"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="pr_id_3"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
+      data-pc-section="legend"
     >
       <a
         aria-controls="pr_id_3_content"
         aria-expanded="true"
+        data-pc-section="toggler"
         href="#pr_id_3_content"
         id="pr_id_3_header"
       >
         <svg
           aria-hidden="true"
           class="p-icon p-fieldset-toggler"
+          data-pc-section="togglericon"
           fill="none"
           height="14"
           viewBox="0 0 14 14"
@@ -153,6 +176,7 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
         </svg>
         <span
           class="p-fieldset-legend-text"
+          data-pc-section="legendtitle"
         >
           Expand/Collapse
         </span>
@@ -161,11 +185,13 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
     <div
       aria-labelledby="pr_id_3_header"
       class="p-toggleable-content"
+      data-pc-section="toggleablecontent"
       id="pr_id_3_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       >
         <p>
           Lorem ipsum dolor sit amet
@@ -180,20 +206,25 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
 <div>
   <fieldset
     class="p-fieldset p-component p-fieldset-toggleable"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="pr_id_3"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
+      data-pc-section="legend"
     >
       <a
         aria-controls="pr_id_3_content"
         aria-expanded="true"
+        data-pc-section="toggler"
         href="#pr_id_3_content"
         id="pr_id_3_header"
       >
         <svg
           aria-hidden="true"
           class="p-icon p-fieldset-toggler"
+          data-pc-section="togglericon"
           fill="none"
           height="14"
           viewBox="0 0 14 14"
@@ -207,6 +238,7 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
         </svg>
         <span
           class="p-fieldset-legend-text"
+          data-pc-section="legendtitle"
         >
           Expand/Collapse
         </span>
@@ -216,11 +248,13 @@ exports[`Fieldset when Fieldset is toggleable it must expand and collapse: expan
       aria-hidden="false"
       aria-labelledby="pr_id_3_header"
       class="p-toggleable-content p-toggleable-content-enter p-toggleable-content-enter-active"
+      data-pc-section="toggleablecontent"
       id="pr_id_3_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       >
         <p>
           Lorem ipsum dolor sit amet
@@ -235,20 +269,25 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
 <div>
   <fieldset
     class="p-fieldset p-component p-fieldset-toggleable"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="pr_id_2"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
+      data-pc-section="legend"
     >
       <a
         aria-controls="pr_id_2_content"
         aria-expanded="true"
+        data-pc-section="toggler"
         href="#pr_id_2_content"
         id="pr_id_2_header"
       >
         <svg
           aria-hidden="true"
           class="p-icon p-fieldset-toggler"
+          data-pc-section="togglericon"
           fill="none"
           height="14"
           viewBox="0 0 14 14"
@@ -262,6 +301,7 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
         </svg>
         <span
           class="p-fieldset-legend-text"
+          data-pc-section="legendtitle"
         >
           Toggleable
         </span>
@@ -270,11 +310,13 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
     <div
       aria-labelledby="pr_id_2_header"
       class="p-toggleable-content"
+      data-pc-section="toggleablecontent"
       id="pr_id_2_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       >
         <p>
           Lorem ipsum dolor sit amet
@@ -289,20 +331,25 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
 <div>
   <fieldset
     class="p-fieldset p-component p-fieldset-toggleable"
+    data-pc-name="fieldset"
+    data-pc-section="root"
     id="pr_id_2"
   >
     <legend
       class="p-fieldset-legend p-unselectable-text"
+      data-pc-section="legend"
     >
       <a
         aria-controls="pr_id_2_content"
         aria-expanded="true"
+        data-pc-section="toggler"
         href="#pr_id_2_content"
         id="pr_id_2_header"
       >
         <svg
           aria-hidden="true"
           class="p-icon p-fieldset-toggler"
+          data-pc-section="togglericon"
           fill="none"
           height="14"
           viewBox="0 0 14 14"
@@ -316,6 +363,7 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
         </svg>
         <span
           class="p-fieldset-legend-text"
+          data-pc-section="legendtitle"
         >
           Toggleable
         </span>
@@ -324,11 +372,13 @@ exports[`Fieldset when Fieldset is toggleable it will toggle when clicked: toggl
     <div
       aria-labelledby="pr_id_2_header"
       class="p-toggleable-content"
+      data-pc-section="toggleablecontent"
       id="pr_id_2_content"
       role="region"
     >
       <div
         class="p-fieldset-content"
+        data-pc-section="content"
       >
         <p>
           Lorem ipsum dolor sit amet
