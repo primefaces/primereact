@@ -5,10 +5,12 @@ import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Chips = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ChipsBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ChipsBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
         const { ptm } = ChipsBase.setMetaData({
             props,

@@ -10,10 +10,12 @@ import { Badge } from '../badge/Badge';
 import { PlusIcon } from '../icons/plus';
 import { UploadIcon } from '../icons/upload';
 import { TimesIcon } from '../icons/times';
+import { PrimeReactContext } from '../api/context';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = FileUploadBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = FileUploadBase.getProps(inProps, context);
         const [uploadedFilesState, setUploadedFilesState] = React.useState([]);
         const [filesState, setFilesState] = React.useState([]);
         const [progressState, setProgressState] = React.useState(0);

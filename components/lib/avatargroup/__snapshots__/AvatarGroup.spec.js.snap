@@ -4,6 +4,8 @@ exports[`AvatarGroup default 1`] = `
 <div>
   <div
     class="p-avatar-group p-component"
+    data-pc-name="avatargroup"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -12,36 +14,50 @@ exports[`AvatarGroup group 1`] = `
 <div>
   <div
     class="p-avatar-group p-component"
+    data-pc-name="avatargroup"
+    data-pc-section="root"
   >
     <div
       class="p-avatar p-component"
+      data-pc-name="avatar"
+      data-pc-section="root"
     >
       <span
         class="p-avatar-text"
+        data-pc-section="label"
       >
         P
       </span>
     </div>
     <div
       class="p-avatar p-component"
+      data-pc-name="avatar"
+      data-pc-section="root"
     >
       <span
         class="p-avatar-icon pi pi-search"
+        data-pc-section="icon"
       />
     </div>
     <div
       class="p-avatar p-component p-avatar-image"
+      data-pc-name="avatar"
+      data-pc-section="root"
     >
       <img
         alt="avatar"
+        data-pc-section="image"
         src="user.png"
       />
     </div>
     <div
       class="p-avatar p-component"
+      data-pc-name="avatar"
+      data-pc-section="root"
     >
       <span
         class="p-avatar-text"
+        data-pc-section="label"
       >
         +2
       </span>

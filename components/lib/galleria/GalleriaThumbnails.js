@@ -7,6 +7,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/context';
 
 const GalleriaThumbnailItem = React.memo((props) => {
     const onItemClick = (event) => {
@@ -73,6 +74,7 @@ export const GalleriaThumbnails = React.memo(
         const responsiveOptions = React.useRef(null);
         const prevNumVisible = usePrevious(numVisibleState);
         const prevActiveItemIndex = usePrevious(props.activeItemIndex);
+        const { nonce, nullSortOrder, locale } = React.useContext(PrimeReactContext);
 
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
@@ -233,7 +235,7 @@ export const GalleriaThumbnails = React.memo(
 
         const createStyle = () => {
             if (!thumbnailsStyle.current) {
-                thumbnailsStyle.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                thumbnailsStyle.current = DomHandler.createInlineStyle(nonce);
             }
 
             let innerHTML = `
@@ -248,7 +250,7 @@ export const GalleriaThumbnails = React.memo(
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
 
-                    return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, -1, locale, nullSortOrder);
                 });
 
                 for (let i = 0; i < responsiveOptions.current.length; i++) {

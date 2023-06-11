@@ -6,10 +6,12 @@ import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
+import { PrimeReactContext } from '../api/context';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TriStateCheckboxBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TriStateCheckboxBase.getProps(inProps, context);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);

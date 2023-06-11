@@ -1,7 +1,7 @@
+import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { PTDoc } from '../../components/doc/checkbox/pt/ptdoc';
 import { Wireframe } from '../../components/doc/checkbox/pt/wireframe';
-import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
 import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';

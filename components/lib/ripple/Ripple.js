@@ -1,12 +1,13 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler } from '../utils/Utils';
+import { PrimeReactContext } from '../api/context';
 
 export const Ripple = React.memo(
     React.forwardRef(() => {
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
+        const { ripple } = React.useContext(PrimeReactContext);
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -97,7 +98,7 @@ export const Ripple = React.memo(
             }
         });
 
-        return PrimeReact.ripple ? <span role="presentation" ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span> : null;
+        return ripple ? <span role="presentation" ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span> : null;
     })
 );
 

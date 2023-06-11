@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { DividerBase } from './DividerBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Divider = React.forwardRef((inProps, ref) => {
-    const props = DividerBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = DividerBase.getProps(inProps, context);
 
     const { ptm } = DividerBase.setMetaData({
         props

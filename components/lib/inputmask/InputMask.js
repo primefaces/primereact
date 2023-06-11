@@ -3,10 +3,12 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputMaskBase } from './InputMaskBase';
+import { PrimeReactContext } from '../api/context';
 
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputMaskBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = InputMaskBase.getProps(inProps, context);
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);

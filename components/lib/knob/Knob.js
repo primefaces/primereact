@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, mergeProps } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
+import { PrimeReactContext } from '../api/context';
 
 const radius = 40;
 const midX = 50;
@@ -11,7 +12,8 @@ const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = KnobBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = KnobBase.getProps(inProps, context);
         const { ptm } = KnobBase.setMetaData({
             props
         });

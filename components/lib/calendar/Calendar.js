@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption, localeOptions } from '../api/Api';
+import { localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
@@ -13,9 +13,12 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
+import { PrimeReactContext } from '../api/context';
+
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = CalendarBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = CalendarBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
@@ -1486,7 +1489,7 @@ export const Calendar = React.memo(
             if (props.autoZIndex) {
                 const key = props.touchUI ? 'modal' : 'overlay';
 
-                ZIndexUtils.set(key, overlayRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
+                ZIndexUtils.set(key, overlayRef.current, context.autoZIndex, props.baseZIndex || context.zIndex[key]);
             }
 
             alignOverlay();
@@ -1515,7 +1518,7 @@ export const Calendar = React.memo(
             if (props.touchUI) {
                 enableModality();
             } else if (overlayRef && overlayRef.current && inputRef && inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || PrimeReact.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || context.appendTo);
 
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
@@ -2854,7 +2857,7 @@ export const Calendar = React.memo(
                 const weekHeaderProps = mergeProps(
                     {
                         scope: 'col',
-                        classNam: 'p-datepicker-weekheader p-disabled'
+                        className: 'p-datepicker-weekheader p-disabled'
                     },
                     ptm('weekHeader')
                 );
@@ -3703,8 +3706,8 @@ export const Calendar = React.memo(
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
             'p-datepicker-touch-ui': props.touchUI,
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': context.inputStyle === 'filled',
+            'p-ripple-disabled': context.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();

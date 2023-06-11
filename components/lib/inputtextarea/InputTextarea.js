@@ -3,10 +3,12 @@ import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
+import { PrimeReactContext } from '../api/context';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputTextareaBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = InputTextareaBase.getProps(inProps, context);
 
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);

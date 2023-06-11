@@ -23,7 +23,7 @@ export const TableHeader = React.memo((props) => {
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
     const getColumnGroupProps = () => {
-        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined; //@todo
+        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined;
     };
 
     const getColumnGroupPTOptions = (key) => {

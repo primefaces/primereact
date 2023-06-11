@@ -11,10 +11,12 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
+import { PrimeReactContext } from '../api/context';
 
 export const AutoComplete = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = AutoCompleteBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = AutoCompleteBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);
         const [searchingState, setSearchingState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -35,7 +37,6 @@ export const AutoComplete = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const timeout = React.useRef(null);
         const selectedItem = React.useRef(null);
-
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
@@ -188,7 +189,7 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -218,7 +219,7 @@ export const AutoComplete = React.memo(
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
 
-            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || context.appendTo);
         };
 
         const onPanelClick = (event) => {

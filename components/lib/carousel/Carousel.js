@@ -8,6 +8,7 @@ import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { CarouselBase } from './CarouselBase';
+import { PrimeReactContext } from '../api/context';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
@@ -29,7 +30,8 @@ const CarouselItem = React.memo((props) => {
 
 export const Carousel = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = CarouselBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = CarouselBase.getProps(inProps, context);
 
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
@@ -252,7 +254,7 @@ export const Carousel = React.memo(
 
         const createStyle = () => {
             if (!carouselStyle.current) {
-                carouselStyle.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                carouselStyle.current = DomHandler.createInlineStyle(context.nonce);
             }
 
             let innerHTML = `
@@ -267,7 +269,7 @@ export const Carousel = React.memo(
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
 
-                    return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, -1, context.locale, context.nullSortOrder);
                 });
 
                 for (let i = 0; i < responsiveOptions.current.length; i++) {

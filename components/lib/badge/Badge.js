@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
 import { BadgeBase } from './BadgeBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Badge = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = BadgeBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = BadgeBase.getProps(inProps, context);
 
         const { ptm } = BadgeBase.setMetaData({
             props

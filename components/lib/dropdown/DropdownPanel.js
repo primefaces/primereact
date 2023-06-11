@@ -7,10 +7,12 @@ import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
+import { PrimeReactContext } from '../api/context';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
         const ptm = props.ptm;
+        const { inputStyle, ripple } = React.useContext(PrimeReactContext);
         const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
@@ -21,11 +23,11 @@ export const DropdownPanel = React.memo(
 
         const onEnter = () => {
             props.onEnter(() => {
-                if (virtualScrollerRef.current) {
+                if (props.virtualScrollerRef.current) {
                     const selectedIndex = props.getSelectedOptionIndex();
 
                     if (selectedIndex !== -1) {
-                        setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+                        setTimeout(() => props.virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                     }
                 }
             });
@@ -40,7 +42,7 @@ export const DropdownPanel = React.memo(
         };
 
         const onFilterInputChange = (event) => {
-            virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
+            props.virtualScrollerRef.current && props.virtualScrollerRef.current.scrollToIndex(0);
             props.onFilterInputChange && props.onFilterInputChange(event);
         };
 
@@ -242,7 +244,7 @@ export const DropdownPanel = React.memo(
                     }
                 };
 
-                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
+                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
             } else {
                 const items = createItems();
                 const wrapperProps = mergeProps(
@@ -271,8 +273,8 @@ export const DropdownPanel = React.memo(
 
         const createElement = () => {
             const className = classNames('p-dropdown-panel p-component', props.panelClassName, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': inputStyle === 'filled',
+                'p-ripple-disabled': ripple === false
             });
             const filter = createFilter();
             const content = createContent();

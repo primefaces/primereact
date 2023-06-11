@@ -8,10 +8,12 @@ import { classNames, DomHandler, IconUtils, mergeProps, ZIndexUtils } from '../u
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 import { ChevronLeftIcon } from '../icons/chevronleft';
+import { PrimeReactContext } from '../api/context';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SlideMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SlideMenuBase.getProps(inProps, context);
 
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
@@ -73,7 +75,7 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
             }
 
             DomHandler.absolutePosition(menuRef.current, targetRef.current);

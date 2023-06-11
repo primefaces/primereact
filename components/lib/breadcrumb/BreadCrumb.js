@@ -2,10 +2,12 @@ import * as React from 'react';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 import { ChevronRightIcon } from '../icons/chevronright';
+import { PrimeReactContext } from '../api/context';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = BreadCrumbBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = BreadCrumbBase.getProps(inProps, context);
         const { ptm } = BreadCrumbBase.setMetaData({
             props
         });

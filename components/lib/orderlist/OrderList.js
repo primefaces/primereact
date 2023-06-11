@@ -5,10 +5,12 @@ import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } fr
 import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
+import { PrimeReactContext } from '../api/context';
 
 export const OrderList = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = OrderListBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = OrderListBase.getProps(inProps, context);
 
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
@@ -167,7 +169,7 @@ export const OrderList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {

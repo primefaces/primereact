@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
+import { PrimeReactContext } from '../api/context';
 
 const QuillJS = (function () {
     try {
@@ -13,7 +14,8 @@ const QuillJS = (function () {
 
 export const Editor = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = EditorBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = EditorBase.getProps(inProps, context);
         const { ptm } = EditorBase.setMetaData({
             props
         });

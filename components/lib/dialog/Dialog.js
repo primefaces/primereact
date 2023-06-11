@@ -9,9 +9,11 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
-    const props = DialogBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = DialogBase.getProps(inProps, context);
 
     const uniqueId = props.id ? props.id : UniqueComponentId();
     const [idState, setIdState] = React.useState(uniqueId);
@@ -355,7 +357,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createStyle = () => {
-        styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle(context.nonce);
 
         let innerHTML = '';
 
@@ -402,7 +404,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -597,8 +599,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
             'p-dialog-default': !maximized,
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': context.inputStyle === 'filled',
+            'p-ripple-disabled': context.ripple === false
         });
         const maskClassName = classNames(
             'p-dialog-mask',

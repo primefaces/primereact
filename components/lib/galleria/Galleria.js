@@ -9,10 +9,12 @@ import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps
 import { GalleriaBase } from './GalleriaBase';
 import { GalleriaItem } from './GalleriaItem';
 import { GalleriaThumbnails } from './GalleriaThumbnails';
+import { PrimeReactContext } from '../api/context';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = GalleriaBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = GalleriaBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
@@ -70,7 +72,7 @@ export const Galleria = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
             DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
@@ -177,8 +179,8 @@ export const Galleria = React.memo(
                     'p-galleria-fullscreen': props.fullScreen,
                     'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
                     'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
-                    'p-input-filled': PrimeReact.inputStyle === 'filled',
-                    'p-ripple-disabled': PrimeReact.ripple === false
+                    'p-input-filled': context.inputStyle === 'filled',
+                    'p-ripple-disabled': context.ripple === false
                 },
                 thumbnailsPosClassName,
                 indicatorPosClassName

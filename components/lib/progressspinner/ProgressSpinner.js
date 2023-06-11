@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ProgressSpinnerBase } from './ProgressSpinnerBase';
+import { PrimeReactContext } from '../api/context';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ProgressSpinnerBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ProgressSpinnerBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const className = classNames('p-progress-spinner', props.className);

@@ -7,6 +7,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
+import { PrimeReactContext } from '../api/context';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -25,7 +26,8 @@ export const confirmPopup = (props = {}) => {
 
 export const ConfirmPopup = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ConfirmPopupBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ConfirmPopupBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
@@ -111,7 +113,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             align();
         };
 
@@ -305,8 +307,8 @@ export const ConfirmPopup = React.memo(
 
         const createElement = () => {
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': context.inputStyle === 'filled',
+                'p-ripple-disabled': context.ripple === false
             });
             const content = createContent();
             const footer = createFooter();

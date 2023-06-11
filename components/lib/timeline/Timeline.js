@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TimelineBase } from './TimelineBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TimelineBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TimelineBase.getProps(inProps, context);
         const { ptm } = TimelineBase.setMetaData({
             props
         });

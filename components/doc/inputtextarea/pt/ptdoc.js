@@ -52,15 +52,15 @@ export default function PTDemo() {
     return (
         <div className="card flex justify-content-center">
             <InputTextarea
-            value={value}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)}
-            pt={{
-                root: {
-                    rows: 5,
-                    cols: 30
-                }
-            }}
-        />
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValue(e.target.value)}
+                pt={{
+                    root: {
+                        rows: 5,
+                        cols: 30
+                    }
+                }}
+            />
         </div>
     )
 }

@@ -3,10 +3,12 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
+import { PrimeReactContext } from '../api/context';
 
 export const SelectButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SelectButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SelectButtonBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
 

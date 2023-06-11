@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { ColumnBase } from '../column/ColumnBase';
 
 export const TreeTableBodyCell = (props) => {
     const [editingState, setEditingState] = React.useState(false);
@@ -10,6 +11,20 @@ export const TreeTableBodyCell = (props) => {
     const selfClick = React.useRef(false);
     const overlayEventListener = React.useRef(null);
     const tabIndexTimeout = React.useRef(null);
+    const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+
+    const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps(props.column);
+
+        return props.ptCallbacks.ptmo(getColumnProp('pt'), key, {
+            props: cProps,
+            parent: props.metaData,
+            state: {
+                editing: editingState
+            }
+        });
+    };
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
         type: 'click',
@@ -125,16 +140,38 @@ export const TreeTableBodyCell = (props) => {
         else content = ObjectUtils.resolveFieldData(props.node.data, props.field);
     }
 
+    const editorKeyHelperProps = mergeProps(
+        {
+            tabIndex: 0,
+            ref: keyHelperRef,
+            className: 'p-cell-editor-key-helper p-hidden-accessible',
+            onFocus: (e) => onEditorFocus(e)
+        },
+        getColumnPTOptions('editorKeyHelperLabel')
+    );
+
+    const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
     /* eslint-disable */
     const editorKeyHelper = props.editor && (
-        <a tabIndex={0} ref={keyHelperRef} className="p-cell-editor-key-helper p-hidden-accessible" onFocus={onEditorFocus}>
-            <span></span>
+        <a {...editorKeyHelperProps}>
+            <span {...editorKeyHelperLabelProps}></span>
         </a>
     );
     /* eslint-enable */
+    const bodyCellProps = mergeProps(
+        {
+            ref: elementRef,
+            className,
+            style,
+            onClick: (e) => onClick(e),
+            onKeyDown: (e) => onKeyDown(e)
+        },
+        getColumnPTOptions('bodyCell'),
+        getColumnPTOptions('root')
+    );
 
     return (
-        <td ref={elementRef} className={className} style={style} onClick={onClick} onKeyDown={onKeyDown}>
+        <td {...bodyCellProps}>
             {props.children}
             {editorKeyHelper}
             {content}

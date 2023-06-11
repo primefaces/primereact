@@ -1,7 +1,7 @@
+import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { PTDoc } from '../../components/doc/cascadeselect/pt/ptdoc';
 import { Wireframe } from '../../components/doc/cascadeselect/pt/wireframe';
-import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';

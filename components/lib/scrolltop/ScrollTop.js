@@ -6,11 +6,13 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, mergeProps, ZIndexUtils } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
 import { ChevronUpIcon } from '../icons/chevronup';
+import { PrimeReactContext } from '../api/context';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
-        const props = ScrollTopBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ScrollTopBase.getProps(inProps, context);
         const { ptm } = ScrollTopBase.setMetaData({
             props,
             state: {
@@ -52,7 +54,7 @@ export const ScrollTop = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', scrollElementRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', scrollElementRef.current, context.autoZIndex, context.zIndex['overlay']);
         };
 
         const onEntered = () => {

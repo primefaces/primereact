@@ -7,6 +7,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
+import { PrimeReactContext } from '../api/context';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -25,7 +26,8 @@ export const confirmDialog = (props = {}) => {
 
 export const ConfirmDialog = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ConfirmDialogBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ConfirmDialogBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);

@@ -4,12 +4,14 @@ import { Button } from '../button/Button';
 import { TimesIcon } from '../icons/times';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InplaceBase } from './InplaceBase';
+import { PrimeReactContext } from '../api/context';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
 export const Inplace = React.forwardRef((inProps, ref) => {
-    const props = InplaceBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = InplaceBase.getProps(inProps, context);
 
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);

@@ -10,6 +10,7 @@ import '../styles/primereact.css';
 import PrimeReact from '../components/lib/api/PrimeReact';
 import '../styles/demo/demo.scss';
 import AnnouncementData from '../data/news.json';
+import { PrimeReactProvider } from '../components/lib/api/context';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
@@ -76,12 +77,18 @@ export default function MyApp({ Component }) {
     };
 
     if (Component.getLayout) {
-        return Component.getLayout(<Component {...props} />);
+        return Component.getLayout(
+            <PrimeReactProvider>
+                <Component {...props} />
+            </PrimeReactProvider>
+        );
     } else {
         return (
-            <Layout {...props}>
-                <Component {...props} />
-            </Layout>
+            <PrimeReactProvider>
+                <Layout {...props}>
+                    <Component {...props} />
+                </Layout>
+            </PrimeReactProvider>
         );
     }
 }

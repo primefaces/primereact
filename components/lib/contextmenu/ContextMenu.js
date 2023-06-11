@@ -6,10 +6,12 @@ import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, mergeProps, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
+import { PrimeReactContext } from '../api/context';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ContextMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ContextMenuBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [reshowState, setReshowState] = React.useState(false);
@@ -56,7 +58,7 @@ export const ContextMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -127,7 +129,7 @@ export const ContextMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
             }
 
             position(currentEvent.current);
@@ -250,8 +252,8 @@ export const ContextMenu = React.memo(
 
         const createContextMenu = () => {
             const className = classNames('p-contextmenu p-component', props.className, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': context.inputStyle === 'filled',
+                'p-ripple-disabled': context.ripple === false
             });
 
             const rootProps = mergeProps(

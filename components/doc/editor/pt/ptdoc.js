@@ -11,7 +11,6 @@ export function PTDoc(props) {
 <Editor
     value={text}
     onTextChange={(e) => setText(e.htmlValue)}
-    style={{ height: '320px' }}
     pt={{
         content: { style: { height: '320px' } },
         toolbar: { className: 'surface-ground' }
@@ -30,7 +29,6 @@ export default function PTDemo() {
             <Editor
                 value={text}
                 onTextChange={(e) => setText(e.htmlValue)}
-                style={{ height: '320px' }}
                 pt={{
                     content: { style: { height: '320px' } },
                     toolbar: { className: 'surface-ground' }
@@ -52,7 +50,6 @@ export default function PTDemo() {
             <Editor
                 value={text}
                 onTextChange={(e) => setText(e.htmlValue)}
-                style={{ height: '320px' }}
                 pt={{
                     content: { style: { height: '320px' } },
                     toolbar: { className: 'surface-ground' }
@@ -71,7 +68,6 @@ export default function PTDemo() {
                 <Editor
                     value={text}
                     onTextChange={(e) => setText(e.htmlValue)}
-                    style={{ height: '320px' }}
                     pt={{
                         content: { style: { height: '320px' } },
                         toolbar: { className: 'surface-ground' }

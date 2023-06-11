@@ -6,10 +6,12 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MenuBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const { ptm } = MenuBase.setMetaData({
             props,
@@ -117,7 +119,7 @@ export const Menu = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+            ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
 
@@ -275,8 +277,8 @@ export const Menu = React.memo(
                     'p-menu p-component',
                     {
                         'p-menu-overlay': props.popup,
-                        'p-input-filled': PrimeReact.inputStyle === 'filled',
-                        'p-ripple-disabled': PrimeReact.ripple === false
+                        'p-input-filled': context.inputStyle === 'filled',
+                        'p-ripple-disabled': context.ripple === false
                     },
                     props.className
                 );

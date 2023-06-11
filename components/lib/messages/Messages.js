@@ -4,12 +4,14 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 import { mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/context';
 
 let messageIdx = 0;
 
 export const Messages = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MessagesBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MessagesBase.getProps(inProps, context);
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
         const metaData = {
