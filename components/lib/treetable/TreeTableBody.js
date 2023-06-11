@@ -171,6 +171,7 @@ export const TreeTableBody = React.memo((props) => {
                 columns={props.columns}
                 expandedKeys={props.expandedKeys}
                 onToggle={props.onToggle}
+                togglerTemplate={props.togglerTemplate}
                 onExpand={props.onExpand}
                 onCollapse={props.onCollapse}
                 selectionMode={props.selectionMode}
