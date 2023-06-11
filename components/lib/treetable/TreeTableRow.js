@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
@@ -319,12 +319,27 @@ export const TreeTableRow = React.memo((props) => {
             getColumnPTOptions(column, 'rowToggler')
         );
 
-        return (
+        let content = (
             <button {...rowTogglerProps}>
                 {togglerIcon}
                 <Ripple />
             </button>
         );
+
+        if (props.togglerTemplate) {
+            const defaultContentOptions = {
+                onClick: onTogglerClick,
+                containerClassName: 'p-treetable-toggler p-link',
+                iconClassName: 'p-treetable-toggler-icon',
+                element: content,
+                props,
+                expanded
+            };
+
+            content = ObjectUtils.getJSXElement(props.togglerTemplate, props.node, defaultContentOptions);
+        }
+
+        return content;
     };
 
     const createCheckbox = (column) => {
@@ -428,6 +443,7 @@ export const TreeTableRow = React.memo((props) => {
                         expandedKeys={props.expandedKeys}
                         selectOnEdit={props.selectOnEdit}
                         onToggle={props.onToggle}
+                        togglerTemplate={props.togglerTemplate}
                         onExpand={props.onExpand}
                         onCollapse={props.onCollapse}
                         selectionMode={props.selectionMode}

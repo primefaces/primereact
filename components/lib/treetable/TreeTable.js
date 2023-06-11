@@ -878,6 +878,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 expandedKeys={getExpandedKeys()}
                 selectOnEdit={props.selectOnEdit}
                 onToggle={onToggle}
+                togglerTemplate={props.togglerTemplate}
                 onExpand={props.onExpand}
                 onCollapse={props.onCollapse}
                 paginator={props.paginator}

@@ -245,6 +245,37 @@ export interface TreeTableState {
 }
 
 /**
+ * Custom treetable toggler template options
+ */
+interface TreeTableTogglerTemplateOptions {
+    /**
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onClick(event: React.SyntheticEvent): void;
+    /**
+     * Style class of the panels container.
+     */
+    containerClassName: string;
+    /**
+     * Icon classname.
+     */
+    iconClassName: string;
+    /**
+     * JSX element to be used as the template options.
+     */
+    element: Element;
+    /**
+     * The props of Tree component
+     */
+    props: TreeTableProps;
+    /**
+     * Whether the tree node is expanded or not.
+     */
+    expanded: boolean;
+}
+
+/**
  * Custom selection keys type.
  */
 interface TreeTableSelectionKeysType {
@@ -745,6 +776,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     tableStyle?: React.CSSProperties | undefined;
     /**
+     * Template of toggler element.
+     */
+    togglerTemplate?: React.ReactNode | ((node: TreeNode, options: TreeTableTogglerTemplateOptions) => React.ReactNode);
+    /**
+     *
      * Number of total records, defaults to length of value when not defined.
      */
     totalRecords?: number | undefined;
