@@ -44774,6 +44774,14 @@
                             "description": "Inline style of the table element."
                         },
                         {
+                            "name": "togglerTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Template of toggler element."
+                        },
+                        {
                             "name": "totalRecords",
                             "optional": true,
                             "readonly": false,
@@ -45572,6 +45580,69 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "TreeTableTogglerTemplateOptions": {
+                    "description": "Custom treetable toggler template options",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "containerClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the panels container."
+                        },
+                        {
+                            "name": "iconClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Icon classname."
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Element",
+                            "description": "JSX element to be used as the template options."
+                        },
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeTableProps",
+                            "description": "The props of Tree component"
+                        },
+                        {
+                            "name": "expanded",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the tree node is expanded or not."
+                        },
+                        {
+                            "name": "buttonStyle",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CSSProperties",
+                            "description": "Button style for tree indentation"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "onClick",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke on click."
+                        }
+                    ]
                 },
                 "TreeTableSelectionKeysType": {
                     "description": "Custom selection keys type.",
