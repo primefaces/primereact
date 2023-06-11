@@ -90,6 +90,7 @@ export const Calendar = React.memo(
 
         const onInputKeyDown = (event) => {
             isKeydown.current = true;
+            onInputKeyup(event);
 
             switch (event.which) {
                 //escape
@@ -3478,46 +3479,106 @@ export const Calendar = React.memo(
         }
 
         const checkIfDateValid = (day, month, year) => {
-            return `${day}-${month}-${year}`;
+            const maxDay = new Date(isNaN(year) ? 2000 : Number(year), isNaN(month) ? 1 : Number(month), 0).getDate();
+
+            if (!isNaN(day) && Number(day) > maxDay) day = maxDay.toString();
+
+            return `${day}-${month}-${year}`
         }
 
         const changeDateWithCursor = (e, dateFieldMethod, monthFieldMethod, yearFieldMethod) => {
             const cursorPosition = e.target.selectionStart;
 
-            if (cursorPosition <= 2) { dateFieldMethod(); Promise.resolve().then(() => e.target.setSelectionRange(0, 2)) }
-            else if (cursorPosition <= 5) { monthFieldMethod(); Promise.resolve().then(() => e.target.setSelectionRange(3, 5)) }
-            else { yearFieldMethod(); Promise.resolve().then(() => e.target.setSelectionRange(6, 10)) }
+            if (cursorPosition <= 2) dateFieldMethod && dateFieldMethod();
+            else if (cursorPosition <= 5) monthFieldMethod && monthFieldMethod();
+            else yearFieldMethod && yearFieldMethod();
         }
 
         const onInputChange = (e) => {
+            console.log(e);
             let dateFieldMethod, monthFieldMethod, yearFieldMethod;
             const [day, month, year] = inputValue.split('-');
             let newDay = day, newMonth = month, newYear = year;
             // for numbers
-            const keyValue = Number(e.nativeEvent.data);
 
-            if (keyValue >= 0 && keyValue <= 9) {
+            if (e.nativeEvent.inputType === 'insertText') {
+                const keyValue = Number(e.nativeEvent.data);
+
+                if (keyValue >= 0 && keyValue <= 9) {
+                    dateFieldMethod = () => {
+                        if (day === 'DD' || Number(day) === 0 || day > 9) {
+                            newDay = ObjectUtils.normalizeNumberDigits(keyValue, 2);
+                            if (keyValue > 3) Promise.resolve().then(() => e.target.setSelectionRange(3, 5));
+                            else Promise.resolve().then(() => e.target.setSelectionRange(0, 2));
+                        }
+                        else if (Number(day) < 3 || (Number(day) === 3 && keyValue < 2)) {
+                            newDay = `${ObjectUtils.normalizeNumberDigits(Number(day) * 10 + keyValue, 2)}`;
+                            Promise.resolve().then(() => e.target.setSelectionRange(3, 5));
+                        }
+                        else {
+                            newDay = '31';
+                            Promise.resolve().then(() => e.target.setSelectionRange(3, 5));
+                        }
+
+                    };
+
+                    monthFieldMethod = () => {
+                        if (Number(month) === 0 || month === 'MM' || month > 9) {
+                            newMonth = ObjectUtils.normalizeNumberDigits(keyValue, 2);
+                            if (keyValue > 1) Promise.resolve().then(() => e.target.setSelectionRange(6, 10));
+                            else Promise.resolve().then(() => e.target.setSelectionRange(3, 5));
+                        }
+                        else if ((Number(month) === 1 && keyValue < 3)) {
+                            newMonth = `${ObjectUtils.normalizeNumberDigits(Number(month) * 10 + keyValue, 2)}`;
+                            Promise.resolve().then(() => e.target.setSelectionRange(6, 10))
+                        }
+                        else {
+                            newMonth = '12';
+                            Promise.resolve().then(() => e.target.setSelectionRange(6, 10))
+                        }
+                    };
+
+                    yearFieldMethod = () => {
+                        if (year === 'YYYY' || year > 999) newYear = ObjectUtils.normalizeNumberDigits(keyValue, 4);
+                        else newYear = ObjectUtils.normalizeNumberDigits(Number(year) * 10 + keyValue, 4);
+                        Promise.resolve().then(() => e.target.setSelectionRange(6, 10));
+                    };
+                }
+            }
+            else if (e.nativeEvent.inputType === 'deleteContentBackward') { 
                 dateFieldMethod = () => {
-                    if (day === 'DD' || day > 9) newDay = ObjectUtils.normalizeNumberDigits(keyValue, 2);
-                    else if (Number(day) < 3 || (Number(day) === 3 && keyValue < 2)) newDay = `${ObjectUtils.normalizeNumberDigits(Number(day) * 10 + keyValue, 2)}`;
-                    else newDay = '31';
+                    newDay = 'DD'
+                    Promise.resolve().then(() => e.target.setSelectionRange(0, 2));
                 };
 
                 monthFieldMethod = () => {
-                    if (month === 'MM' || month > 9) newMonth = ObjectUtils.normalizeNumberDigits(keyValue, 2);
-                    else if (Number(month) === 0 || (Number(month) === 1 && keyValue < 3)) newMonth = `${ObjectUtils.normalizeNumberDigits(Number(month) * 10 + keyValue, 2)}`;
-                    else newMonth = '12';
+                    newMonth = 'MM';
+                    Promise.resolve().then(() => e.target.setSelectionRange(3, 5));
                 };
-
+                
                 yearFieldMethod = () => {
-                    if (year === 'YYYY' || year > 999) newYear = ObjectUtils.normalizeNumberDigits(keyValue, 4);
-                    else newYear = ObjectUtils.normalizeNumberDigits(Number(year) * 10 + keyValue, 4);
+                    newYear = 'YYYY';
+                    Promise.resolve().then(() => e.target.setSelectionRange(6, 10));
                 };
             }
 
             changeDateWithCursor(e, dateFieldMethod, monthFieldMethod, yearFieldMethod);
             setInputValue(checkIfDateValid(newDay, newMonth, newYear));
 
+        };
+
+        const onInputKeyup = (e) => {
+            const cursorPosition = e.target.selectionEnd;
+
+            if (e.key === 'ArrowRight') {
+                if (cursorPosition < 3) e.target.setSelectionRange(3, 5);
+                else if (cursorPosition < 6) e.target.setSelectionRange(6, 10);
+                e.preventDefault();
+            } else if (e.key === 'ArrowLeft') {
+                if (cursorPosition > 5) e.target.setSelectionRange(3, 5);
+                else if (cursorPosition > 2) e.target.setSelectionRange(0, 2);
+                e.preventDefault();
+            }
         }
 
         const createInputElement = () => {
