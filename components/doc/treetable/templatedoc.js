@@ -35,7 +35,7 @@ export function TemplateDoc(props) {
         });
 
         return (
-            <button type="button" className="p-treetable-toggler p-link" tabIndex={-1} onClick={options.onClick}>
+            <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
                 <span className={iconClassName} aria-hidden="true"></span>
             </button>
         );
@@ -92,7 +92,7 @@ export default function TemplateDemo() {
         });
 
         return (
-            <button type="button" className="p-treetable-toggler p-link" tabIndex={-1} onClick={options.onClick}>
+            <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
                 <span className={iconClassName} aria-hidden="true"></span>
             </button>
         );
@@ -153,7 +153,7 @@ export default function TemplateDemo() {
         });
 
         return (
-            <button type="button" className="p-treetable-toggler p-link" tabIndex={-1} onClick={options.onClick}>
+            <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
                 <span className={iconClassName} aria-hidden="true"></span>
             </button>
         );

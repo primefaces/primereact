@@ -333,7 +333,8 @@ export const TreeTableRow = React.memo((props) => {
                 iconClassName: 'p-treetable-toggler-icon',
                 element: content,
                 props,
-                expanded
+                expanded,
+                buttonStyle: style
             };
 
             content = ObjectUtils.getJSXElement(props.togglerTemplate, props.node, defaultContentOptions);

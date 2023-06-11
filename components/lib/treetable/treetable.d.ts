@@ -13,6 +13,7 @@ import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { CSSProperties } from 'react';
 
 export declare type TreeTablePassThroughType<T> = PassThroughType<T, TreeTablePassThroughMethodOptions>;
 
@@ -273,6 +274,10 @@ interface TreeTableTogglerTemplateOptions {
      * Whether the tree node is expanded or not.
      */
     expanded: boolean;
+    /**
+     * Button style for tree indentation
+     */
+    buttonStyle: CSSProperties;
 }
 
 /**
