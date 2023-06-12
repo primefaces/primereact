@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SliderBase } from './SliderBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Slider = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SliderBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SliderBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const handleIndex = React.useRef(0);
@@ -23,6 +25,10 @@ export const Slider = React.memo(
         const [bindDocumentMouseUpListener, unbindDocumentMouseUpListener] = useEventListener({ type: 'mouseup', listener: (event) => onDragEnd(event) });
         const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({ type: 'touchmove', listener: (event) => onDrag(event) });
         const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({ type: 'touchend', listener: (event) => onDragEnd(event) });
+
+        const { ptm } = SliderBase.setMetaData({
+            props
+        });
 
         const spin = (event, dir) => {
             const val = props.range ? value[handleIndex.current] : value;
@@ -189,22 +195,25 @@ export const Slider = React.memo(
                 'p-slider-handle-active': handleIndex.current === index
             });
 
-            return (
-                <span
-                    className={className}
-                    style={style}
-                    tabIndex={props.tabIndex}
-                    role="slider"
-                    onMouseDown={(event) => onMouseDown(event, index)}
-                    onTouchStart={(event) => onTouchStart(event, index)}
-                    onKeyDown={(event) => onKeyDown(event, index)}
-                    aria-valuemin={props.min}
-                    aria-valuemax={props.max}
-                    aria-valuenow={leftValue || bottomValue}
-                    aria-orientation={props.orientation}
-                    {...ariaProps}
-                ></span>
+            const handleProps = mergeProps(
+                {
+                    className: className,
+                    style: style,
+                    tabIndex: props.tabIndex,
+                    role: 'slider',
+                    onMouseDown: (event) => onMouseDown(event, index),
+                    onTouchStart: (event) => onTouchStart(event, index),
+                    onKeyDown: (event) => onKeyDown(event, index),
+                    'aria-valuemin': props.min,
+                    'aria-valuemax': props.max,
+                    'aria-valuenow': leftValue || bottomValue,
+                    'aria-orientation': props.orientation,
+                    ...ariaProps
+                },
+                ptm('handle')
             );
+
+            return <span {...handleProps}></span>;
         };
 
         const createRangeSlider = () => {
@@ -218,9 +227,17 @@ export const Slider = React.memo(
 
             const rangeStyle = horizontal ? { left: rangeSliderPosition + '%', width: rangeSliderWidth + '%' } : { bottom: rangeSliderPosition + '%', height: rangeSliderWidth + '%' };
 
+            const rangeProps = mergeProps(
+                {
+                    className: 'p-slider-range',
+                    style: rangeStyle
+                },
+                ptm('range')
+            );
+
             return (
                 <>
-                    <span className="p-slider-range" style={rangeStyle}></span>
+                    <span {...rangeProps}></span>
                     {rangeStartHandle}
                     {rangeEndHandle}
                 </>
@@ -237,9 +254,17 @@ export const Slider = React.memo(
             const rangeStyle = horizontal ? { width: handleValue + '%' } : { height: handleValue + '%' };
             const handle = horizontal ? createHandle(handleValue, null, null) : createHandle(null, handleValue, null);
 
+            const rangeProps = mergeProps(
+                {
+                    className: 'p-slider-range',
+                    style: rangeStyle
+                },
+                ptm('range')
+            );
+
             return (
                 <>
-                    <span className="p-slider-range" style={rangeStyle}></span>
+                    <span {...rangeProps}></span>
                     {handle}
                 </>
             );
@@ -258,12 +283,19 @@ export const Slider = React.memo(
             'p-slider-vertical': vertical
         });
         const content = props.range ? createRangeSlider() : createSingleSlider();
-
-        return (
-            <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps} onClick={onBarClick}>
-                {content}
-            </div>
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                style: props.style,
+                className: className,
+                onClick: onBarClick
+            },
+            SliderBase.getOtherProps(props),
+            ptm('root')
         );
+
+        return <div {...rootProps}>{content}</div>;
     })
 );
 

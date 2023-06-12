@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/dataview/pt/ptdoc';
+import { Wireframe } from '../../components/doc/dataview/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dataview/basicdoc';
@@ -57,8 +60,40 @@ const DataViewDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.dataview.options',
+            label: 'DataView PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.dataviewlayoutoptions.options',
+            label: 'DataViewLayoutOptions PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React DataView Component" header="DataView" description="DataView displays data in grid or list layout with pagination and sorting features." componentDocs={docs} apiDocs={['DataView']} className="dataview-demo" />;
+    return (
+        <DocComponent
+            title="React DataView Component"
+            header="DataView"
+            description="DataView displays data in grid or list layout with pagination and sorting features."
+            componentDocs={docs}
+            apiDocs={['DataView']}
+            className="dataview-demo"
+            ptDocs={ptDocs}
+        />
+    );
 };
 
 export default DataViewDemo;

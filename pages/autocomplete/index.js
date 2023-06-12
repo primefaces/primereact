@@ -1,4 +1,7 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/autocomplete/pt/ptdoc';
+import { Wireframe } from '../../components/doc/autocomplete/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';
@@ -107,8 +110,27 @@ const AutoCompleteDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.autocomplete.options',
+            label: 'AutoComplete PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React AutoComplete Component" header="AutoComplete" description="AutoComplete is an input component that provides real-time suggestions while being typed" componentDocs={docs} apiDocs={['AutoComplete']} />;
+    return (
+        <DocComponent title="React AutoComplete Component" header="AutoComplete" description="AutoComplete is an input component that provides real-time suggestions while being typed" componentDocs={docs} apiDocs={['AutoComplete']} ptDocs={ptDocs} />
+    );
 };
 
 export default AutoCompleteDemo;

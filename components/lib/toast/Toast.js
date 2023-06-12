@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils, classNames } from '../utils/Utils';
+import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 
@@ -12,10 +12,20 @@ let messageIdx = 0;
 
 export const Toast = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ToastBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ToastBase.getProps(inProps, context);
 
         const [messagesState, setMessagesState] = React.useState([]);
         const containerRef = React.useRef(null);
+
+        const metaData = {
+            props,
+            state: {
+                messages: messagesState
+            }
+        };
+
+        const ptCallbacks = ToastBase.setMetaData(metaData);
 
         const show = (messageInfo) => {
             if (messageInfo) {
@@ -81,7 +91,7 @@ export const Toast = React.memo(
         };
 
         useUpdateEffect(() => {
-            ZIndexUtils.set('toast', containerRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['toast']);
+            ZIndexUtils.set('toast', containerRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['toast']);
         }, [messagesState, props.baseZIndex]);
 
         useUnmountEffect(() => {
@@ -98,22 +108,43 @@ export const Toast = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = ToastBase.getOtherProps(props);
             const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': context.inputStyle === 'filled',
+                'p-ripple-disabled': context.ripple === false
             });
 
+            const rootProps = mergeProps(
+                {
+                    ref: containerRef,
+                    id: props.id,
+                    className,
+                    style: props.style
+                },
+                ToastBase.getOtherProps(props),
+                ptCallbacks.ptm('root')
+            );
+
             return (
-                <div ref={containerRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     <TransitionGroup>
                         {messagesState &&
-                            messagesState.map((messageInfo) => {
+                            messagesState.map((messageInfo, index) => {
                                 const messageRef = React.createRef();
 
                                 return (
                                     <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
-                                        <ToastMessage ref={messageRef} messageInfo={messageInfo} onClick={props.onClick} onClose={onClose} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} closeIcon={props.closeIcon} />
+                                        <ToastMessage
+                                            ref={messageRef}
+                                            messageInfo={messageInfo}
+                                            index={index}
+                                            onClick={props.onClick}
+                                            onClose={onClose}
+                                            onMouseEnter={props.onMouseEnter}
+                                            onMouseLeave={props.onMouseLeave}
+                                            closeIcon={props.closeIcon}
+                                            ptCallbacks={ptCallbacks}
+                                            metaData={metaData}
+                                        />
                                     </CSSTransition>
                                 );
                             })}

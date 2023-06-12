@@ -3,7 +3,7 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
@@ -17,6 +17,50 @@ export const TableHeader = React.memo((props) => {
 
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
+    };
+
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const getRowProps = (row) => ColumnGroupBase.getCProps(row);
+
+    const getColumnGroupProps = () => {
+        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined;
+    };
+
+    const getColumnGroupPTOptions = (key) => {
+        return (
+            props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.headerColumnGroup, 'pt')),
+            key,
+            {
+                props: getColumnGroupProps(),
+                parent: props.metaData,
+                state: {
+                    sortableDisabledFields: sortableDisabledFieldsState,
+                    allSortableDisabled: allSortableDisabledState
+                }
+            }
+        );
+    };
+
+    const getColumnPTOptions = (column, key) => {
+        const cProps = getColumnProps(column);
+
+        return props.ptCallbacks.ptmo(cProps, key, {
+            props: cProps,
+            parent: props.metaData,
+            state: {
+                sortableDisabledFields: sortableDisabledFieldsState,
+                allSortableDisabled: allSortableDisabledState
+            }
+        });
+    };
+
+    const getRowPTOptions = (row, key) => {
+        const rProps = getRowProps(row);
+
+        return props.ptCallbacks.ptmo(rProps, key, {
+            props: rProps,
+            parent: props.metaData
+        });
     };
 
     const isColumnSorted = (column) => {
@@ -69,41 +113,46 @@ export const TableHeader = React.memo((props) => {
             return (
                 isVisible && (
                     <HeaderCell
-                        key={key}
-                        value={props.value}
-                        tableProps={props.tableProps}
-                        column={col}
-                        tabIndex={props.tabIndex}
-                        empty={props.empty}
-                        resizableColumns={props.resizableColumns}
-                        groupRowsBy={props.groupRowsBy}
-                        groupRowSortField={props.groupRowSortField}
-                        sortMode={props.sortMode}
-                        sortIcon={props.sortIcon}
-                        sortField={props.sortField}
-                        sortOrder={props.sortOrder}
-                        multiSortMeta={props.multiSortMeta}
+                        allRowsSelected={props.allRowsSelected}
                         allSortableDisabled={isAllSortableDisabled}
-                        onSortableChange={onSortableChange}
-                        sortableDisabledFields={sortableDisabledFieldsState}
+                        column={col}
+                        index={i}
+                        empty={props.empty}
+                        filterClearIcon={props.filterClearIcon}
                         filterDisplay={props.filterDisplay}
+                        filterIcon={props.filterIcon}
                         filters={props.filters}
                         filtersStore={props.filtersStore}
-                        onFilterChange={props.onFilterChange}
-                        onFilterApply={props.onFilterApply}
-                        onColumnMouseDown={props.onColumnMouseDown}
-                        onColumnDragStart={props.onColumnDragStart}
-                        onColumnDragOver={props.onColumnDragOver}
+                        groupRowSortField={props.groupRowSortField}
+                        groupRowsBy={props.groupRowsBy}
+                        key={key}
+                        multiSortMeta={props.multiSortMeta}
+                        onColumnCheckboxChange={onCheckboxChange}
                         onColumnDragLeave={props.onColumnDragLeave}
+                        onColumnDragOver={props.onColumnDragOver}
+                        onColumnDragStart={props.onColumnDragStart}
                         onColumnDrop={props.onColumnDrop}
+                        onColumnMouseDown={props.onColumnMouseDown}
                         onColumnResizeStart={props.onColumnResizeStart}
                         onColumnResizerClick={props.onColumnResizerClick}
                         onColumnResizerDoubleClick={props.onColumnResizerDoubleClick}
-                        showSelectAll={props.showSelectAll}
-                        allRowsSelected={props.allRowsSelected}
-                        onColumnCheckboxChange={onCheckboxChange}
-                        reorderableColumns={props.reorderableColumns}
+                        onFilterApply={props.onFilterApply}
+                        onFilterChange={props.onFilterChange}
                         onSortChange={props.onSortChange}
+                        onSortableChange={onSortableChange}
+                        reorderableColumns={props.reorderableColumns}
+                        resizableColumns={props.resizableColumns}
+                        showSelectAll={props.showSelectAll}
+                        sortField={props.sortField}
+                        sortIcon={props.sortIcon}
+                        sortMode={props.sortMode}
+                        sortOrder={props.sortOrder}
+                        sortableDisabledFields={sortableDisabledFieldsState}
+                        tabIndex={props.tabIndex}
+                        tableProps={props.tableProps}
+                        value={props.value}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={props.metaData}
                     />
                 )
             );
@@ -114,7 +163,7 @@ export const TableHeader = React.memo((props) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} />;
+            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
         }
 
         return null;
@@ -122,7 +171,18 @@ export const TableHeader = React.memo((props) => {
 
     const createFilter = (column, filter) => {
         if (filter) {
-            return <ColumnFilter display="row" column={column} filters={props.filters} filtersStore={props.filtersStore} onFilterChange={props.onFilterChange} onFilterApply={props.onFilterApply} />;
+            return (
+                <ColumnFilter
+                    display="row"
+                    column={column}
+                    filters={props.filters}
+                    filtersStore={props.filtersStore}
+                    onFilterChange={props.onFilterChange}
+                    onFilterApply={props.onFilterApply}
+                    ptCallbacks={props.ptCallbacks}
+                    metaData={props.metaData}
+                />
+            );
         }
 
         return null;
@@ -139,9 +199,17 @@ export const TableHeader = React.memo((props) => {
                 const colKey = columnKey || field || i;
                 const checkbox = createCheckbox(selectionMode);
                 const filterRow = createFilter(col, filter);
+                const headerCellProps = mergeProps(
+                    {
+                        style: colStyle,
+                        className: colClassName
+                    },
+                    getColumnPTOptions(col, 'headerCell'),
+                    getColumnPTOptions(col, 'root')
+                );
 
                 return (
-                    <th key={colKey} style={colStyle} className={colClassName}>
+                    <th {...headerCellProps} key={colKey + i}>
                         {checkbox}
                         {filterRow}
                     </th>
@@ -156,14 +224,29 @@ export const TableHeader = React.memo((props) => {
         if (props.headerColumnGroup) {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.headerColumnGroup, 'children'));
 
-            return rows.map((row, i) => (
-                <tr key={i} role="row">
-                    {createGroupHeaderCells(row)}
-                </tr>
-            ));
+            return rows.map((row, i) => {
+                const headerRowProps = mergeProps(
+                    {
+                        role: 'row'
+                    },
+                    getRowPTOptions(row, 'root')
+                );
+
+                return (
+                    <tr {...headerRowProps} key={i}>
+                        {createGroupHeaderCells(row)}
+                    </tr>
+                );
+            });
         } else {
-            const headerRow = <tr role="row">{createHeaderCells(props.columns)}</tr>;
-            const filterRow = props.filterDisplay === 'row' && <tr role="row">{createFilterCells()}</tr>;
+            const headerRowProps = mergeProps(
+                {
+                    role: 'row'
+                },
+                props.ptCallbacks.ptm('headerRow')
+            );
+            const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
+            const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
 
             return (
                 <>
@@ -175,8 +258,15 @@ export const TableHeader = React.memo((props) => {
     };
 
     const content = createContent();
+    const theadProps = mergeProps(
+        {
+            className: 'p-datatable-thead'
+        },
+        props.ptCallbacks.ptm('thead'),
+        getColumnGroupPTOptions('root')
+    );
 
-    return <thead className="p-datatable-thead">{content}</thead>;
+    return <thead {...theadProps}>{content}</thead>;
 });
 
 TableHeader.displayName = 'TableHeader';

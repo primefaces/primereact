@@ -1,4 +1,7 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/cascadeselect/pt/ptdoc';
+import { Wireframe } from '../../components/doc/cascadeselect/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
@@ -71,8 +74,34 @@ const CascadeSelectDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.cascadeselect.options',
+            label: 'CascadeSelect PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React CascadeSelect Component" header="CascadeSelect" description="CascadeSelect is a form component to select a value from a nested structure of options." componentDocs={docs} apiDocs={['CascadeSelect']} />;
+    return (
+        <DocComponent
+            title="React CascadeSelect Component"
+            header="CascadeSelect"
+            description="CascadeSelect is a form component to select a value from a nested structure of options."
+            componentDocs={docs}
+            apiDocs={['CascadeSelect']}
+            ptDocs={ptDocs}
+        />
+    );
 };
 
 export default CascadeSelectDemo;

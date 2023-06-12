@@ -1,4 +1,7 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/inputtext/pt/ptdoc';
+import { Wireframe } from '../../components/doc/inputtext/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
@@ -89,8 +92,25 @@ const InputTextDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.inputtext.options',
+            label: 'InputText PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Input Component" header="InputText" description="InputText is an extension to standard input element with theming and keyfiltering." componentDocs={docs} apiDocs={['InputText']} />;
+    return <DocComponent title="React Input Component" header="InputText" description="InputText is an extension to standard input element with theming and keyfiltering." componentDocs={docs} apiDocs={['InputText']} ptDocs={ptDocs} />;
 };
 
 export default InputTextDemo;

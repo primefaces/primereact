@@ -1,15 +1,42 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export const AutoCompletePanel = React.memo(
     React.forwardRef((props, ref) => {
+        const { inputStyle, ripple } = React.useContext(PrimeReactContext);
+
+        const getPTOptions = (item, key) => {
+            return props.ptm(key, {
+                context: {
+                    selected: props.selectedItem.current === item
+                }
+            });
+        };
+
         const getOptionGroupRenderKey = (optionGroup) => {
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupLabel);
+        };
+
+        const createFooter = () => {
+            if (props.panelFooterTemplate) {
+                const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
+                const footerProps = mergeProps(
+                    {
+                        className: 'p-autocomplete-footer'
+                    },
+                    props.ptm('footer')
+                );
+
+                return <div {...footerProps}>{content}</div>;
+            }
+
+            return null;
         };
 
         const createGroupChildren = (optionGroup, i, style) => {
@@ -20,9 +47,21 @@ export const AutoCompletePanel = React.memo(
                 const selected = props.selectedItem === item;
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
                 const className = classNames('p-autocomplete-item', { 'p-disabled': item.disabled });
+                const itemProps = mergeProps(
+                    {
+                        role: 'option',
+                        'aria-selected': selected,
+                        className,
+                        style,
+                        onClick: (e) => props.onItemClick(e, item),
+                        'data-group': i,
+                        'data-index': j
+                    },
+                    getPTOptions(item, 'item')
+                );
 
                 return (
-                    <li key={key} role="option" aria-selected={selected} className={className} style={style} onClick={(e) => props.onItemClick(e, item)} data-group={i} data-index={j}>
+                    <li key={key} {...itemProps}>
                         {content}
                         <Ripple />
                     </li>
@@ -37,21 +76,36 @@ export const AutoCompletePanel = React.memo(
                 const content = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, suggestion, index) : props.getOptionGroupLabel(suggestion);
                 const childrenContent = createGroupChildren(suggestion, index, style);
                 const key = index + '_' + getOptionGroupRenderKey(suggestion);
+                const itemGroupProps = mergeProps(
+                    {
+                        className: 'p-autocomplete-item-group',
+                        style
+                    },
+                    props.ptm('itemGroup')
+                );
 
                 return (
                     <React.Fragment key={key}>
-                        <li className="p-autocomplete-item-group" style={style}>
-                            {content}
-                        </li>
+                        <li {...itemGroupProps}>{content}</li>
                         {childrenContent}
                     </React.Fragment>
                 );
             } else {
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
                 const className = classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled });
+                const itemProps = mergeProps(
+                    {
+                        role: 'option',
+                        'aria-selected': props.selectedItem === suggestion,
+                        className,
+                        style,
+                        onClick: (e) => props.onItemClick(e, suggestion)
+                    },
+                    getPTOptions(suggestion, 'item')
+                );
 
                 return (
-                    <li key={index} role="option" aria-selected={props.selectedItem === suggestion} className={className} style={style} onClick={(e) => props.onItemClick(e, suggestion)}>
+                    <li key={index} {...itemProps}>
                         {content}
                         <Ripple />
                     </li>
@@ -66,10 +120,23 @@ export const AutoCompletePanel = React.memo(
         const createContent = () => {
             if (props.showEmptyMessage && ObjectUtils.isEmpty(props.suggestions)) {
                 const emptyMessage = props.emptyMessage || localeOption('emptyMessage');
+                const emptyMessageProps = mergeProps(
+                    {
+                        className: 'p-autocomplete-item'
+                    },
+                    props.ptm('emptyMesage')
+                );
+
+                const listProps = mergeProps(
+                    {
+                        className: 'p-autocomplete-items'
+                    },
+                    props.ptm('list')
+                );
 
                 return (
-                    <ul className="p-autocomplete-items">
-                        <li className="p-autocomplete-item">{emptyMessage}</li>
+                    <ul {...listProps}>
+                        <li {...emptyMessageProps}>{emptyMessage}</li>
                     </ul>
                 );
             }
@@ -84,35 +151,67 @@ export const AutoCompletePanel = React.memo(
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
                             const className = classNames('p-autocomplete-items', options.className);
-
-                            return (
-                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox" id={props.listId}>
-                                    {options.children}
-                                </ul>
+                            const listProps = mergeProps(
+                                {
+                                    id: props.listId,
+                                    ref: options.contentRef,
+                                    style: options.style,
+                                    className,
+                                    role: 'listbox'
+                                },
+                                props.ptm('list')
                             );
+
+                            return <ul {...listProps}>{options.children}</ul>;
                         }
                     }
                 };
 
-                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} />;
+                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={props.ptm('virtualScroller')} />;
             } else {
                 const items = createItems();
+                const listProps = mergeProps(
+                    {
+                        id: props.listId,
+                        className: 'p-autocomplete-items',
+                        role: 'listbox'
+                    },
+                    props.ptm('list')
+                );
+
+                const listWrapperProps = mergeProps(
+                    {
+                        className: 'p-autocomplete-items-wrapper',
+                        style: { maxHeight: props.scrollHeight || 'auto' }
+                    },
+                    props.ptm('listWrapper')
+                );
 
                 return (
-                    <ul className="p-autocomplete-items" role="listbox" id={props.listId}>
-                        {items}
-                    </ul>
+                    <div {...listWrapperProps}>
+                        <ul {...listProps}>{items}</ul>
+                    </div>
                 );
             }
         };
 
         const createElement = () => {
             const className = classNames('p-autocomplete-panel p-component', props.panelClassName, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': inputStyle === 'filled',
+                'p-ripple-disabled': ripple === false
             });
-            const style = { maxHeight: props.scrollHeight, ...(props.panelStyle || {}) };
+            const style = { ...(props.panelStyle || {}) };
             const content = createContent();
+            const footer = createFooter();
+            const panelProps = mergeProps(
+                {
+                    ref,
+                    className,
+                    style,
+                    onClick: (e) => props.onClick(e)
+                },
+                props.ptm('panel')
+            );
 
             return (
                 <CSSTransition
@@ -128,8 +227,9 @@ export const AutoCompletePanel = React.memo(
                     onExit={props.onExit}
                     onExited={props.onExited}
                 >
-                    <div ref={ref} className={className} style={style} onClick={props.onClick}>
+                    <div {...panelProps}>
                         {content}
+                        {footer}
                     </div>
                 </CSSTransition>
             );

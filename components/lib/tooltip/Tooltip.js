@@ -1,13 +1,14 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TooltipBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TooltipBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
@@ -127,7 +128,7 @@ export const Tooltip = React.memo(
                 const { pageX: x, pageY: y } = currentMouseEvent.current;
 
                 if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
-                    ZIndexUtils.set('tooltip', elementRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['tooltip']);
+                    ZIndexUtils.set('tooltip', elementRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['tooltip']);
                 }
 
                 elementRef.current.style.left = '';

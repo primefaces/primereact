@@ -1,12 +1,12 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
-import { ChevronLeftIcon } from '../icons/chevronleft';
-import { ChevronUpIcon } from '../icons/chevronup';
-import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 
 const GalleriaThumbnailItem = React.memo((props) => {
     const onItemClick = (event) => {
@@ -38,11 +38,26 @@ const GalleriaThumbnailItem = React.memo((props) => {
         props.className
     );
 
+    const thumbnailItemProps = mergeProps(
+        {
+            className: className
+        },
+        props.ptm('thumbnailItem')
+    );
+
+    const thumbnailItemContentProps = mergeProps(
+        {
+            className: 'p-galleria-thumbnail-item-content',
+            tabIndex: tabIndex,
+            onClick: onItemClick,
+            onKeyDown: onItemKeyDown
+        },
+        props.ptm('thumbnailItemContent')
+    );
+
     return (
-        <div className={className}>
-            <div className="p-galleria-thumbnail-item-content" tabIndex={tabIndex} onClick={onItemClick} onKeyDown={onItemKeyDown}>
-                {content}
-            </div>
+        <div {...thumbnailItemProps}>
+            <div {...thumbnailItemContentProps}>{content}</div>
         </div>
     );
 });
@@ -58,6 +73,7 @@ export const GalleriaThumbnails = React.memo(
         const responsiveOptions = React.useRef(null);
         const prevNumVisible = usePrevious(numVisibleState);
         const prevActiveItemIndex = usePrevious(props.activeItemIndex);
+        const { nonce, nullSortOrder, locale } = React.useContext(PrimeReactContext);
 
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
@@ -218,7 +234,7 @@ export const GalleriaThumbnails = React.memo(
 
         const createStyle = () => {
             if (!thumbnailsStyle.current) {
-                thumbnailsStyle.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                thumbnailsStyle.current = DomHandler.createInlineStyle(nonce);
             }
 
             let innerHTML = `
@@ -233,7 +249,7 @@ export const GalleriaThumbnails = React.memo(
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
 
-                    return ObjectUtils.sort(value1, value2, -1, PrimeReact.locale, PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, -1, locale, nullSortOrder);
                 });
 
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
@@ -320,7 +336,7 @@ export const GalleriaThumbnails = React.memo(
                 const end = lastIndex === index;
                 const current = props.activeItemIndex === index;
 
-                return <GalleriaThumbnailItem key={index} index={index} template={props.itemTemplate} item={item} active={isActive} start={start} end={end} onItemClick={onItemClick} current={current} />;
+                return <GalleriaThumbnailItem key={index} index={index} template={props.itemTemplate} item={item} active={isActive} start={start} end={end} onItemClick={onItemClick} current={current} ptm={props.ptm} />;
             });
         };
 
@@ -332,11 +348,25 @@ export const GalleriaThumbnails = React.memo(
                 });
 
                 const iconClassName = 'p-galleria-thumbnail-prev-icon';
-                const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon className={iconClassName} /> : props.prevThumbnailIcon || <ChevronLeftIcon className={iconClassName} />;
-                const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const previousThumbnailIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    props.ptm('previousThumbnailIcon')
+                );
+                const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon {...previousThumbnailIconProps} /> : props.prevThumbnailIcon || <ChevronLeftIcon {...previousThumbnailIconProps} />;
+                const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { ...previousThumbnailIconProps }, { props });
+                const previousThumbnailButtonProps = mergeProps(
+                    {
+                        className: buttonClassName,
+                        onClick: navBackward,
+                        disabled: isDisabled
+                    },
+                    props.ptm('previousThumbnailButton')
+                );
 
                 return (
-                    <button className={buttonClassName} onClick={navBackward} disabled={isDisabled}>
+                    <button {...previousThumbnailButtonProps}>
                         {prevThumbnailIcon}
                         <Ripple />
                     </button>
@@ -354,11 +384,27 @@ export const GalleriaThumbnails = React.memo(
                 });
 
                 const iconClassName = 'p-galleria-thumbnail-next-icon';
-                const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon className={iconClassName} /> : props.nextThumbnailIcon || <ChevronRightIcon className={iconClassName} />;
-                const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+
+                const nextThumbnailIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    props.ptm('nextThumbnailIcon')
+                );
+                const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon {...nextThumbnailIconProps} /> : props.nextThumbnailIcon || <ChevronRightIcon {...nextThumbnailIconProps} />;
+                const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { ...nextThumbnailIconProps }, { props });
+
+                const nextThumbnailButtonProps = mergeProps(
+                    {
+                        className: buttonClassName,
+                        onClick: navForward,
+                        disabled: isDisabled
+                    },
+                    props.ptm('nextThumbnailButton')
+                );
 
                 return (
-                    <button className={buttonClassName} onClick={navForward} disabled={isDisabled}>
+                    <button {...nextThumbnailButtonProps}>
                         {nextThumbnailIcon}
                         <Ripple />
                     </button>
@@ -374,13 +420,38 @@ export const GalleriaThumbnails = React.memo(
             const backwardNavigator = createBackwardNavigator();
             const forwardNavigator = createForwardNavigator();
 
+            const thumbnailContainerProps = mergeProps(
+                {
+                    className: 'p-galleria-thumbnail-container'
+                },
+                props.ptm('thumbnailContainer')
+            );
+
+            const thumbnailItemsContainerProps = mergeProps(
+                {
+                    className: 'p-galleria-thumbnail-items-container',
+                    style: { height: height }
+                },
+                props.ptm('thumbnailItemsContainer')
+            );
+
+            const thumbnailItemsProps = mergeProps(
+                {
+                    ref: itemsContainerRef,
+                    className: 'p-galleria-thumbnail-items',
+                    onTransitionEnd: onTransitionEnd,
+                    onTouchStart: onTouchStart,
+                    onTouchMove: onTouchMove,
+                    onTouchEnd: onTouchEnd
+                },
+                props.ptm('thumbnailItems')
+            );
+
             return (
-                <div className="p-galleria-thumbnail-container">
+                <div {...thumbnailContainerProps}>
                     {backwardNavigator}
-                    <div className="p-galleria-thumbnail-items-container" style={{ height: height }}>
-                        <div ref={itemsContainerRef} className="p-galleria-thumbnail-items" onTransitionEnd={onTransitionEnd} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-                            {items}
-                        </div>
+                    <div {...thumbnailItemsContainerProps}>
+                        <div {...thumbnailItemsProps}>{items}</div>
                     </div>
                     {forwardNavigator}
                 </div>
@@ -389,7 +460,14 @@ export const GalleriaThumbnails = React.memo(
 
         const content = createContent();
 
-        return <div className="p-galleria-thumbnail-wrapper">{content}</div>;
+        const thumbnailWrapperProps = mergeProps(
+            {
+                className: 'p-galleria-thumbnail-wrapper'
+            },
+            props.ptm('thumbnailWrapper')
+        );
+
+        return <div {...thumbnailWrapperProps}>{content}</div>;
     })
 );
 

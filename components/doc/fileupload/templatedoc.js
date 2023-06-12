@@ -17,9 +17,9 @@ export function TemplateDoc(props) {
         let _totalSize = totalSize;
         let files = e.files;
 
-        Object.keys(files).forEach((key) => {
-            _totalSize += files[key].size || 0;
-        });
+        for (let i = 0; i < e.files.length; i++) {
+            _totalSize += files[i].size || 0;
+        }
 
         setTotalSize(_totalSize);
     };
@@ -219,29 +219,29 @@ export default function TemplateDemo() {
         typescript: `
 import React, { useRef, useState } from 'react';
 import { Toast } from 'primereact/toast';
-import { FileUpload } from 'primereact/fileupload';
+import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
 import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import { Tag } from 'primereact/tag';
 
 export default function TemplateDemo() {
-    const toast = useRef(null);
+    const toast = useRef<Toast>(null);
     const [totalSize, setTotalSize] = useState(0);
-    const fileUploadRef = useRef(null);
+    const fileUploadRef = useRef<FileUpload>(null);
 
-    const onTemplateSelect = (e) => {
+    const onTemplateSelect = (e: FileUploadUploadEvent) => {
         let _totalSize = totalSize;
         let files = e.files;
 
-        Object.keys(files).forEach((key) => {
-            _totalSize += files[key].size || 0;
-        });
+        for (let i = 0; i < files.length; i++) {
+            _totalSize += files[i].size || 0;
+        }
 
         setTotalSize(_totalSize);
     };
 
-    const onTemplateUpload = (e) => {
+    const onTemplateUpload = (e: FileUploadUploadEvent) => {
         let _totalSize = 0;
 
         e.files.forEach((file) => {
@@ -249,10 +249,10 @@ export default function TemplateDemo() {
         });
 
         setTotalSize(_totalSize);
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        toast.current?.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
     };
 
-    const onTemplateRemove = (file, callback) => {
+    const onTemplateRemove = (file: File, callback: Function) => {
         setTotalSize(totalSize - file.size);
         callback();
     };
@@ -261,7 +261,7 @@ export default function TemplateDemo() {
         setTotalSize(0);
     };
 
-    const headerTemplate = (options) => {
+    const headerTemplate = (options: FileUploadHeaderTemplateOptions) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
         const value = totalSize / 10000;
         const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
@@ -279,10 +279,12 @@ export default function TemplateDemo() {
         );
     };
 
-    const itemTemplate = (file, props) => {
+    const itemTemplate = (inFile: object, props: ItemTemplateOptions) => {
+        const file = inFile as File;
         return (
             <div className="flex align-items-center flex-wrap">
                 <div className="flex align-items-center" style={{ width: '40%' }}>
+                    // @ts-ignore
                     <img alt={file.name} role="presentation" src={file.objectURL} width={100} />
                     <span className="flex flex-column text-left ml-3">
                         {file.name}

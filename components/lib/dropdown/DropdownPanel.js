@@ -1,15 +1,18 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { SearchIcon } from '../icons/search';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DropdownItem } from './DropdownItem';
-import { TimesIcon } from '../icons/times';
-import { SearchIcon } from '../icons/search';
 
 export const DropdownPanel = React.memo(
     React.forwardRef((props, ref) => {
+        const ptm = props.ptm;
+        const { inputStyle, ripple } = React.useContext(PrimeReactContext);
         const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
         const isEmptyFilter = !(props.visibleOptions && props.visibleOptions.length) && props.hasFilter;
@@ -20,11 +23,11 @@ export const DropdownPanel = React.memo(
 
         const onEnter = () => {
             props.onEnter(() => {
-                if (virtualScrollerRef.current) {
+                if (props.virtualScrollerRef.current) {
                     const selectedIndex = props.getSelectedOptionIndex();
 
                     if (selectedIndex !== -1) {
-                        setTimeout(() => virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
+                        setTimeout(() => props.virtualScrollerRef.current.scrollToIndex(selectedIndex), 0);
                     }
                 }
             });
@@ -39,15 +42,21 @@ export const DropdownPanel = React.memo(
         };
 
         const onFilterInputChange = (event) => {
-            virtualScrollerRef.current && virtualScrollerRef.current.scrollToIndex(0);
+            props.virtualScrollerRef.current && props.virtualScrollerRef.current.scrollToIndex(0);
             props.onFilterInputChange && props.onFilterInputChange(event);
         };
 
         const createFooter = () => {
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
+                const footerProps = mergeProps(
+                    {
+                        className: 'p-dropdown-footer'
+                    },
+                    ptm('footer')
+                );
 
-                return <div className="p-multiselect-footer">{content}</div>;
+                return <div {...footerProps}>{content}</div>;
             }
 
             return null;
@@ -61,14 +70,20 @@ export const DropdownPanel = React.memo(
                 const optionKey = j + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />;
+                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} />;
             });
         };
 
         const createEmptyMessage = (emptyMessage, isFilter) => {
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
+            const emptyMessageProps = mergeProps(
+                {
+                    className: 'p-dropdown-empty-message'
+                },
+                ptm('emptyMessage')
+            );
 
-            return <li className="p-dropdown-empty-message">{message}</li>;
+            return <li {...emptyMessageProps}>{message}</li>;
         };
 
         const createItem = (option, index, scrollerOptions = {}) => {
@@ -78,12 +93,17 @@ export const DropdownPanel = React.memo(
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
+                const itemGroupProps = mergeProps(
+                    {
+                        className: 'p-dropdown-item-group',
+                        style
+                    },
+                    ptm('itemGroup')
+                );
 
                 return (
                     <React.Fragment key={key}>
-                        <li className="p-dropdown-item-group" style={style}>
-                            {groupContent}
-                        </li>
+                        <li {...itemGroupProps}>{groupContent}</li>
                         {groupChildrenContent}
                     </React.Fragment>
                 );
@@ -92,7 +112,7 @@ export const DropdownPanel = React.memo(
                 const optionKey = index + '_' + props.getOptionRenderKey(option);
                 const disabled = props.isOptionDisabled(option);
 
-                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} />;
+                return <DropdownItem key={optionKey} label={optionLabel} option={option} style={style} template={props.itemTemplate} selected={props.isSelected(option)} disabled={disabled} onClick={props.onOptionClick} ptm={ptm} />;
             }
         };
 
@@ -109,9 +129,16 @@ export const DropdownPanel = React.memo(
         const createFilterClearIcon = () => {
             if (props.showFilterClear && props.filterValue) {
                 const ariaLabel = localeOption('clear');
-                const iconProps = { className: 'p-dropdown-filter-clear-icon', 'aria-label': ariaLabel, onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current)) };
-                const icon = props.filterClearIcon || <TimesIcon {...iconProps} />;
-                const filterClearIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+                const clearIconProps = mergeProps(
+                    {
+                        className: 'p-dropdown-filter-clear-icon',
+                        'aria-label': ariaLabel,
+                        onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
+                    },
+                    ptm('clearIcon')
+                );
+                const icon = props.filterClearIcon || <TimesIcon {...clearIconProps} />;
+                const filterClearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
 
                 return filterClearIcon;
             }
@@ -124,20 +151,36 @@ export const DropdownPanel = React.memo(
                 const clearIcon = createFilterClearIcon();
                 const containerClassName = classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon });
                 const iconClassName = 'p-dropdown-filter-icon';
-                const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
-                const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const filterIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    ptm('filterIcon')
+                );
+                const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
+                const filterContainerProps = mergeProps(
+                    {
+                        className: containerClassName
+                    },
+                    ptm('filterContainer')
+                );
+                const filterInputProps = mergeProps(
+                    {
+                        ref: filterInputRef,
+                        type: 'text',
+                        autoComplete: 'off',
+                        className: 'p-dropdown-filter p-inputtext p-component',
+                        placeholder: props.filterPlaceholder,
+                        onKeyDown: props.onFilterInputKeyDown,
+                        onChange: (e) => onFilterInputChange(e),
+                        value: props.filterValue
+                    },
+                    ptm('filterInput')
+                );
                 let content = (
-                    <div className={containerClassName}>
-                        <input
-                            ref={filterInputRef}
-                            type="text"
-                            autoComplete="off"
-                            className="p-dropdown-filter p-inputtext p-component"
-                            placeholder={props.filterPlaceholder}
-                            onKeyDown={props.onFilterInputKeyDown}
-                            onChange={onFilterInputChange}
-                            value={props.filterValue}
-                        />
+                    <div {...filterContainerProps}>
+                        <input {...filterInputProps} />
                         {clearIcon}
                         {filterIcon}
                     </div>
@@ -158,7 +201,14 @@ export const DropdownPanel = React.memo(
                     content = ObjectUtils.getJSXElement(props.filterTemplate, defaultContentOptions);
                 }
 
-                return <div className="p-dropdown-header">{content}</div>;
+                const headerProps = mergeProps(
+                    {
+                        className: 'p-dropdown-header'
+                    },
+                    ptm('header')
+                );
+
+                return <div {...headerProps}>{content}</div>;
             }
 
             return null;
@@ -179,25 +229,43 @@ export const DropdownPanel = React.memo(
                             const className = classNames('p-dropdown-items', options.className);
                             const emptyMessage = props.hasFilter ? props.emptyFilterMessage : props.emptyMessage;
                             const content = isEmptyFilter ? createEmptyMessage(emptyMessage) : options.children;
-
-                            return (
-                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox">
-                                    {content}
-                                </ul>
+                            const listProps = mergeProps(
+                                {
+                                    ref: options.contentRef,
+                                    style: options.style,
+                                    className,
+                                    role: 'listbox'
+                                },
+                                ptm('list')
                             );
+
+                            return <ul {...listProps}>{content}</ul>;
                         }
                     }
                 };
 
-                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} />;
+                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
             } else {
                 const items = createItems();
+                const wrapperProps = mergeProps(
+                    {
+                        className: 'p-dropdown-items-wrapper',
+                        style: { maxHeight: props.scrollHeight || 'auto' }
+                    },
+                    ptm('wrapper')
+                );
+
+                const listProps = mergeProps(
+                    {
+                        className: 'p-dropdown-items',
+                        role: 'listbox'
+                    },
+                    ptm('list')
+                );
 
                 return (
-                    <div className="p-dropdown-items-wrapper" style={{ maxHeight: props.scrollHeight || 'auto' }}>
-                        <ul className="p-dropdown-items" role="listbox">
-                            {items}
-                        </ul>
+                    <div {...wrapperProps}>
+                        <ul {...listProps}>{items}</ul>
                     </div>
                 );
             }
@@ -205,12 +273,21 @@ export const DropdownPanel = React.memo(
 
         const createElement = () => {
             const className = classNames('p-dropdown-panel p-component', props.panelClassName, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': inputStyle === 'filled',
+                'p-ripple-disabled': ripple === false
             });
             const filter = createFilter();
             const content = createContent();
             const footer = createFooter();
+            const panelProps = mergeProps(
+                {
+                    ref,
+                    className,
+                    style: props.panelStyle,
+                    onClick: props.onClick
+                },
+                ptm('panel')
+            );
 
             return (
                 <CSSTransition
@@ -226,7 +303,7 @@ export const DropdownPanel = React.memo(
                     onExit={props.onExit}
                     onExited={props.onExited}
                 >
-                    <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
+                    <div {...panelProps}>
                         {filter}
                         {content}
                         {footer}

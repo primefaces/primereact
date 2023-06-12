@@ -2,9 +2,12 @@ import * as React from 'react';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
 import { TimesCircleIcon } from '../icons/timescircle';
+import { PrimeReactContext } from '../api/context';
+
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ChipBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ChipBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);

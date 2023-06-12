@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import PrimeReact from '../lib/api/PrimeReact';
+import { useContext, useEffect, useState } from 'react';
 import { classNames } from '../lib/utils/ClassNames';
 import NewsSection from '../news/newssection';
 import AppContentContext from './appcontentcontext';
@@ -9,13 +8,13 @@ import Config from './config';
 import Footer from './footer';
 import Menu from './menu';
 import Topbar from './topbar';
+import { PrimeReactContext } from '../lib/api/context';
 
 export default function Layout(props) {
-    const [inputStyle, setInputStyle] = useState('outlined');
-    const [ripple, setRipple] = useState(true);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
+    const { ripple, setRipple, inputStyle, setInputStyle, setPt } = useContext(PrimeReactContext);
 
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': props.newsActive,
@@ -52,6 +51,10 @@ export default function Layout(props) {
         setRipple(value);
     };
 
+    const onHideOverlaysOnDocumentScrolling = (value) => {
+        setHideOverlaysOnDocumentScrolling(value);
+    };
+
     const onConfigHide = () => {
         setConfigActive(false);
     };
@@ -59,6 +62,11 @@ export default function Layout(props) {
     const onConfigButtonClick = () => {
         setConfigActive(true);
     };
+
+    useEffect(() => {
+        setRipple(true);
+        setInputStyle('outlined');
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (sidebarActive) document.body.classList.add('blocked-scroll');
@@ -76,8 +84,6 @@ export default function Layout(props) {
             router.events.off('routeChangeComplete', handleRouteChange);
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    PrimeReact.ripple = true;
 
     return (
         <div className={wrapperClassName}>
@@ -108,7 +114,8 @@ export default function Layout(props) {
                     inputStyle: inputStyle,
                     darkTheme: props.dark,
                     onInputStyleChange: onInputStyleChange,
-                    onRippleChange: onRippleChange
+                    onRippleChange: onRippleChange,
+                    onHideOverlaysOnDocumentScrolling: onHideOverlaysOnDocumentScrolling
                 }}
             >
                 <div className="layout-content">
@@ -117,7 +124,16 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} active={configActive} onHide={onConfigHide} />
+                <Config
+                    ripple={ripple}
+                    inputStyle={inputStyle}
+                    onRippleChange={onRippleChange}
+                    onHideOverlaysOnDocumentScrolling={onHideOverlaysOnDocumentScrolling}
+                    onInputStyleChange={onInputStyleChange}
+                    onThemeChange={onThemeChange}
+                    active={configActive}
+                    onHide={onConfigHide}
+                />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>

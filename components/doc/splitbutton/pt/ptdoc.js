@@ -27,8 +27,8 @@ export function PTDoc(props) {
         basic: `
 <SplitButton
     pt={{
-        menuButton: {
-            root: { className: 'surface-ground text-primary' }
+        menu: {
+            className: 'surface-ground'
         }
     }}
     label="Save"
@@ -64,8 +64,8 @@ export default function PTDemo() {
         <div className="card flex justify-content-center">
             <SplitButton
                 pt={{
-                    menuButton: {
-                        root: { className: 'surface-ground text-primary' }
+                    menu: {
+                        className: 'surface-ground'
                     }
                 }}
                 label="Save"
@@ -105,8 +105,8 @@ export default function PTDemo() {
         <div className="card flex justify-content-center">
             <SplitButton
                 pt={{
-                    menuButton: {
-                        root: { className: 'surface-ground text-primary' }
+                    menu: {
+                        className: 'surface-ground'
                     }
                 }}
                 label="Save"
@@ -125,8 +125,8 @@ export default function PTDemo() {
             <div className="card flex justify-content-center">
                 <SplitButton
                     pt={{
-                        menuButton: {
-                            root: { className: 'surface-ground text-primary' }
+                        menu: {
+                            className: 'surface-ground'
                         }
                     }}
                     label="Save"
@@ -134,7 +134,6 @@ export default function PTDemo() {
                     model={items}
                 />
             </div>
-
             <DocSectionCode code={code} />
         </>
     );

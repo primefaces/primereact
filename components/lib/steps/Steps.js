@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Steps = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = StepsBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = StepsBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
 

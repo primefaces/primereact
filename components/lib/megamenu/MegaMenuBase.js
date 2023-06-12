@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MegaMenuBase = {
+export const MegaMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'MegaMenu',
         id: null,
@@ -15,7 +15,5 @@ export const MegaMenuBase = {
         menuIcon: null,
         end: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MegaMenuBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MegaMenuBase.defaultProps)
-};
+    }
+});

@@ -31,7 +31,7 @@ export interface ChipPassThroughOptions {
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: ChipPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: ChipPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */

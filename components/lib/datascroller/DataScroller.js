@@ -3,10 +3,12 @@ import { localeOption } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, ObjectUtils } from '../utils/Utils';
 import { DataScrollerBase } from './DataScrollerBase';
+import { PrimeReactContext } from '../api/context';
 
 export const DataScroller = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = DataScrollerBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = DataScrollerBase.getProps(inProps, context);
 
         const [dataToRenderState, setDataToRenderState] = React.useState([]);
         const elementRef = React.useRef(null);

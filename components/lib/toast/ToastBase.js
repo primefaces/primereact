@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ToastBase = {
+export const ToastBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Toast',
         id: null,
@@ -17,7 +17,5 @@ export const ToastBase = {
         onMouseEnter: null,
         onMouseLeave: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ToastBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ToastBase.defaultProps)
-};
+    }
+});

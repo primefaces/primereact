@@ -1,16 +1,17 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
-import { MegaMenuBase } from './MegaMenuBase';
-import { AngleRightIcon } from '../icons/angleright';
 import { AngleDownIcon } from '../icons/angledown';
+import { AngleRightIcon } from '../icons/angleright';
 import { BarsIcon } from '../icons/bars';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { MegaMenuBase } from './MegaMenuBase';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MegaMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MegaMenuBase.getProps(inProps, context);
 
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
@@ -21,6 +22,23 @@ export const MegaMenu = React.memo(
         const horizontal = props.orientation === 'horizontal';
         const vertical = props.orientation === 'vertical';
         const isMobileMode = useMatchMedia(`screen and (max-width: ${props.breakpoint})`, !!props.breakpoint);
+
+        const { ptm } = MegaMenuBase.setMetaData({
+            props,
+            state: {
+                activeItem: activeItemState,
+                attributeSelector: attributeSelectorState,
+                mobileActive: mobileActiveState
+            }
+        });
+
+        const getPTOptions = (item, key) => {
+            return ptm(key, {
+                context: {
+                    active: activeItemState === item
+                }
+            });
+        };
 
         const [bindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -225,7 +243,7 @@ export const MegaMenu = React.memo(
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
             if (activeItemState && !isMobileMode) {
-                ZIndexUtils.set('menu', currentPanel, PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', currentPanel, context.autoZIndex, context.zIndex['menu']);
             }
 
             if (isMobileMode) {
@@ -240,14 +258,30 @@ export const MegaMenu = React.memo(
         const createSeparator = (index) => {
             const key = 'separator_' + index;
 
-            return <li key={key} className="p-menu-separator" role="separator"></li>;
+            const separatorProps = mergeProps(
+                {
+                    key,
+                    className: 'p-menu-separator',
+                    role: 'separator'
+                },
+                ptm('separator')
+            );
+
+            return <li {...separatorProps}></li>;
         };
 
         const createSubmenuIcon = (item) => {
             if (item.items) {
                 const iconClassName = 'p-submenu-icon';
-                const icon = vertical ? props.submenuIcon || <AngleRightIcon className={iconClassName} /> : props.submenuIcon || <AngleDownIcon className={iconClassName} />;
-                const submenuIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const submenuIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    ptm('submenuIcon')
+                );
+
+                const icon = vertical ? props.submenuIcon || <AngleRightIcon {...submenuIconProps} /> : props.submenuIcon || <AngleDownIcon {...submenuIconProps} />;
+                const submenuIcon = IconUtils.getJSXIcon(icon, { ...submenuIconProps }, { props });
 
                 return submenuIcon;
             }
@@ -269,8 +303,32 @@ export const MegaMenu = React.memo(
                 const iconClassName = classNames(item.icon, 'p-menuitem-icon');
                 const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props });
                 const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+
+                const actionProps = mergeProps(
+                    {
+                        href: item.url || '#',
+                        className: linkClassName,
+                        target: item.target,
+                        onClick: (event) => onLeafClick(event, item),
+                        role: 'menuitem',
+                        'aria-disabled': item.disabled
+                    },
+                    getPTOptions(item, 'action')
+                );
+
+                const submenuItemProps = mergeProps(
+                    {
+                        key: key,
+                        id: item.id,
+                        className: className,
+                        style: item.style,
+                        role: 'none'
+                    },
+                    getPTOptions(item, 'submenuItem')
+                );
+
                 let content = (
-                    <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onLeafClick(event, item)} role="menuitem" aria-disabled={item.disabled}>
+                    <a {...actionProps}>
                         {icon}
                         {label}
                         <Ripple />
@@ -290,11 +348,7 @@ export const MegaMenu = React.memo(
                     content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
                 }
 
-                return (
-                    <li key={key} id={item.id} className={className} style={item.style} role="none">
-                        {content}
-                    </li>
-                );
+                return <li {...submenuItemProps}>{content}</li>;
             }
         };
 
@@ -312,11 +366,19 @@ export const MegaMenu = React.memo(
             );
             const items = submenu.items.map(createSubmenuItem);
 
+            const submenuHeaderProps = mergeProps(
+                {
+                    id: submenu.id,
+                    className,
+                    style: submenu.style,
+                    role: 'presentation'
+                },
+                ptm('submenuHeader')
+            );
+
             return (
                 <React.Fragment key={submenu.label}>
-                    <li id={submenu.id} className={className} style={submenu.style} role="presentation">
-                        {submenu.label}
-                    </li>
+                    <li {...submenuHeaderProps}>{submenu.label}</li>
                     {items}
                 </React.Fragment>
             );
@@ -330,11 +392,25 @@ export const MegaMenu = React.memo(
             const key = category.label + '_column_' + index;
             const submenus = createSubmenus(column);
 
+            const columnProps = mergeProps(
+                {
+                    key: key,
+                    className: columnClassName
+                },
+                ptm('column')
+            );
+
+            const submenuProps = mergeProps(
+                {
+                    className: 'p-megamenu-submenu',
+                    role: 'menu'
+                },
+                ptm('submenu')
+            );
+
             return (
-                <div key={key} className={columnClassName}>
-                    <ul className="p-megamenu-submenu" role="menu">
-                        {submenus}
-                    </ul>
+                <div {...columnProps}>
+                    <ul {...submenuProps}>{submenus}</ul>
                 </div>
             );
         };
@@ -355,9 +431,23 @@ export const MegaMenu = React.memo(
             if (category.items) {
                 const columns = createColumns(category);
 
+                const panelProps = mergeProps(
+                    {
+                        className: 'p-megamenu-panel'
+                    },
+                    ptm('panel')
+                );
+
+                const gridProps = mergeProps(
+                    {
+                        className: 'p-megamenu-grid'
+                    },
+                    ptm('grid')
+                );
+
                 return (
-                    <div className="p-megamenu-panel">
-                        <div className="p-megamenu-grid">{columns}</div>
+                    <div {...panelProps}>
+                        <div {...gridProps}>{columns}</div>
                     </div>
                 );
             }
@@ -367,7 +457,7 @@ export const MegaMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -477,23 +567,53 @@ export const MegaMenu = React.memo(
         const createCategory = (category, index) => {
             const className = classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': category.disabled });
-            const icon = IconUtils.getJSXIcon(category.icon, { className: 'p-menuitem-icon' }, { props });
-            const label = category.label && <span className="p-menuitem-text">{category.label}</span>;
+            const iconProps = mergeProps(
+                {
+                    className: 'p-menuitem-icon'
+                },
+                getPTOptions(category, 'icon')
+            );
+            const icon = IconUtils.getJSXIcon(category.icon, { ...iconProps }, { props });
+
+            const labelProps = mergeProps(
+                {
+                    className: 'p-menuitem-text'
+                },
+                getPTOptions(category, 'label')
+            );
+            const label = category.label && <span {...labelProps}>{category.label}</span>;
             const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
             const submenuIcon = createSubmenuIcon(category);
             const panel = createCategoryPanel(category);
 
+            const headerActionProps = mergeProps(
+                {
+                    href: category.url || '#',
+                    className: linkClassName,
+                    target: category.target,
+                    onClick: (e) => onCategoryClick(e, category),
+                    onKeyDown: (e) => onCategoryKeyDown(e, category),
+                    role: 'menuitem',
+                    'aria-haspopup': category.items != null
+                },
+                getPTOptions(category, 'headerAction')
+            );
+
+            const menuItemProps = mergeProps(
+                {
+                    key: category.label + '_' + index,
+                    id: category.id,
+                    className: className,
+                    style: category.style,
+                    onMouseEnter: (e) => onCategoryMouseEnter(e, category),
+                    role: 'none'
+                },
+                getPTOptions(category, 'menuitem')
+            );
+
             return (
-                <li key={category.label + '_' + index} id={category.id} className={className} style={category.style} onMouseEnter={(e) => onCategoryMouseEnter(e, category)} role="none">
-                    <a
-                        href={category.url || '#'}
-                        className={linkClassName}
-                        target={category.target}
-                        onClick={(e) => onCategoryClick(e, category)}
-                        onKeyDown={(e) => onCategoryKeyDown(e, category)}
-                        role="menuitem"
-                        aria-haspopup={category.items != null}
-                    >
+                <li {...menuItemProps}>
+                    <a {...headerActionProps}>
                         {icon}
                         {label}
                         {itemContent}
@@ -506,9 +626,17 @@ export const MegaMenu = React.memo(
         };
 
         const createMenu = () => {
+            const menuProps = mergeProps(
+                {
+                    className: 'p-megamenu-root-list',
+                    role: 'menubar'
+                },
+                ptm('menu')
+            );
+
             if (props.model) {
                 return (
-                    <ul className="p-megamenu-root-list" role="menubar">
+                    <ul {...menuProps}>
                         {props.model.map((item, index) => {
                             return createCategory(item, index, true);
                         })}
@@ -520,20 +648,34 @@ export const MegaMenu = React.memo(
         };
 
         const createStartContent = () => {
+            const startProps = mergeProps(
+                {
+                    className: 'p-megamenu-start'
+                },
+                ptm('start')
+            );
+
             if (props.start) {
                 const start = ObjectUtils.getJSXElement(props.start, props);
 
-                return <div className="p-megamenu-start">{start}</div>;
+                return <div {...startProps}>{start}</div>;
             }
 
             return null;
         };
 
         const createEndContent = () => {
+            const endProps = mergeProps(
+                {
+                    className: 'p-megamenu-end'
+                },
+                ptm('end')
+            );
+
             if (props.end) {
                 const end = ObjectUtils.getJSXElement(props.end, props);
 
-                return <div className="p-megamenu-end">{end}</div>;
+                return <div {...endProps}>{end}</div>;
             }
 
             return null;
@@ -557,7 +699,6 @@ export const MegaMenu = React.memo(
             return button;
         };
 
-        const otherProps = MegaMenuBase.getOtherProps(props);
         const className = classNames(
             'p-megamenu p-component',
             {
@@ -567,13 +708,25 @@ export const MegaMenu = React.memo(
             },
             props.className
         );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className,
+                style: props.style
+            },
+            MegaMenuBase.getOtherProps(props),
+            ptm('root')
+        );
+
         const menu = createMenu();
         const start = createStartContent();
         const end = createEndContent();
         const menuButton = createMenuButton();
 
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 {start}
                 {menuButton}
                 {menu}

@@ -1,4 +1,5 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/password/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/password/basicdoc';
@@ -10,6 +11,8 @@ import { ImportDoc } from '../../components/doc/password/importdoc';
 import { InvalidDoc } from '../../components/doc/password/invaliddoc';
 import { LocaleDoc } from '../../components/doc/password/localedoc';
 import { MeterDoc } from '../../components/doc/password/meterdoc';
+import { PTDoc } from '../../components/doc/password/pt/ptdoc';
+import { Wireframe } from '../../components/doc/password/pt/wireframe';
 import { StyleDoc } from '../../components/doc/password/styledoc';
 import { TemplateDoc } from '../../components/doc/password/templatedoc';
 import { ToggleMaskDoc } from '../../components/doc/password/togglemaskdoc';
@@ -89,8 +92,25 @@ const PasswordDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.password.options',
+            label: 'Password PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={['Password']} />;
+    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={['Password']} ptDocs={ptDocs} />;
 };
 
 export default PasswordDemo;

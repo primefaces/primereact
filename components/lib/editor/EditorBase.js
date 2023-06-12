@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const EditorBase = {
+export const EditorBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Editor',
         id: null,
@@ -19,7 +19,5 @@ export const EditorBase = {
         onLoad: null,
         maxLength: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, EditorBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, EditorBase.defaultProps)
-};
+    }
+});

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
@@ -11,7 +12,8 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, cla
 import { DialogBase } from './DialogBase';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
-    const props = DialogBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = DialogBase.getProps(inProps, context);
 
     const uniqueId = props.id ? props.id : UniqueComponentId();
     const [idState, setIdState] = React.useState(uniqueId);
@@ -355,7 +357,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createStyle = () => {
-        styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle(context.nonce);
 
         let innerHTML = '';
 
@@ -402,7 +404,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -597,8 +599,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
             'p-dialog-default': !maximized,
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': context.inputStyle === 'filled',
+            'p-ripple-disabled': context.ripple === false
         });
         const maskClassName = classNames(
             'p-dialog-mask',

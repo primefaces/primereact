@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ChartBase } from './ChartBase';
+import { PrimeReactContext } from '../api/context';
 
 // GitHub #3059 wrapper if loaded by script tag
 const ChartJS = (function () {
@@ -14,7 +15,8 @@ const ChartJS = (function () {
 
 const PrimeReactChart = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ChartBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ChartBase.getProps(inProps, context);
         const { ptm } = ChartBase.setMetaData({
             props
         });

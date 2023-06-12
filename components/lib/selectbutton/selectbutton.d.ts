@@ -9,8 +9,54 @@
  */
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+
+export declare type SelectButtonPassThroughType<T> = PassThroughType<T, SelectButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SelectButtonPassThroughMethodOptions {
+    props: SelectButtonProps;
+    context: SelectButtonContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SelectButtonProps.pt}
+ */
+export interface SelectButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SelectButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the button's DOM element.
+     */
+    button?: SelectButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: SelectButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current options in SelectButton component.
+ */
+export interface SelectButtonContext {
+    /**
+     * Current selected value.
+     */
+    selected: any;
+}
 
 /**
  * Custom change event.
@@ -24,7 +70,7 @@ interface SelectButtonChangeEvent extends FormEvent {}
  * Defines valid properties in SelectButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref'> {
+export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'unselectable' | 'onChange' | 'ref' | 'pt'> {
     /**
      * Value of the component.
      */
@@ -95,6 +141,11 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SelectButtonPassThroughOptions}
+     */
+    pt?: SelectButtonPassThroughOptions;
 }
 
 /**

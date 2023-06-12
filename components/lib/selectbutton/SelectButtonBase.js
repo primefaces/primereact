@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SelectButtonBase = {
+export const SelectButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SelectButton',
         id: null,
@@ -21,7 +21,5 @@ export const SelectButtonBase = {
         itemTemplate: null,
         onChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SelectButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SelectButtonBase.defaultProps)
-};
+    }
+});

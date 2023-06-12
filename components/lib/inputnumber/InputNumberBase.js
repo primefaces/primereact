@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const InputNumberBase = {
+export const InputNumberBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputNumber',
         allowEmpty: true,
@@ -53,7 +53,5 @@ export const InputNumberBase = {
         useGrouping: true,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, InputNumberBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, InputNumberBase.defaultProps)
-};
+    }
+});

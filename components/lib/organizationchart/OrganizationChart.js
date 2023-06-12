@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { classNames, DomHandler } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { OrganizationChartBase } from './OrganizationChartBase';
 import { OrganizationChartNode } from './OrganizationChartNode';
+import { PrimeReactContext } from '../api/context';
 
 export const OrganizationChart = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = OrganizationChartBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = OrganizationChartBase.getProps(inProps, context);
+        const { ptm } = OrganizationChartBase.setMetaData({
+            props
+        });
         const elementRef = React.useRef(null);
         const root = props.value && props.value.length ? props.value[0] : null;
 
@@ -67,12 +71,22 @@ export const OrganizationChart = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = OrganizationChartBase.getOtherProps(props);
         const className = classNames('p-organizationchart p-component', props.className);
 
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style: props.style,
+                className
+            },
+            OrganizationChartBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} style={props.style} className={className} {...otherProps}>
-                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} togglerIcon={props.togglerIcon} />
+            <div {...rootProps}>
+                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} togglerIcon={props.togglerIcon} ptm={ptm} />
             </div>
         );
     })

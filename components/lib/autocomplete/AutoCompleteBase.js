@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const AutoCompleteBase = {
+export const AutoCompleteBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'AutoComplete',
         id: null,
@@ -48,6 +48,7 @@ export const AutoCompleteBase = {
         optionGroupLabel: null,
         optionGroupTemplate: null,
         panelClassName: null,
+        panelFooterTemplate: null,
         panelStyle: null,
         placeholder: null,
         readOnly: false,
@@ -67,7 +68,5 @@ export const AutoCompleteBase = {
         value: null,
         virtualScrollerOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, AutoCompleteBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, AutoCompleteBase.defaultProps)
-};
+    }
+});

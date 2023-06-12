@@ -1,15 +1,17 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
-import { TimesIcon } from '../icons/times';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
-    const props = SidebarBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = SidebarBase.getProps(inProps, context);
 
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
@@ -27,7 +29,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         type: 'keydown',
         listener: (event) => {
             if (event.key === 'Escape') {
-                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', PrimeReact.autoZIndex)) {
+                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', context.autoZIndex)) {
                     onClose(event);
                 }
             }
@@ -145,7 +147,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -208,8 +210,8 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const createElement = () => {
         const className = classNames('p-sidebar p-component', props.className, {
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': context.inputStyle === 'filled',
+            'p-ripple-disabled': context.ripple === false
         });
         const maskClassName = classNames(
             'p-sidebar-mask',

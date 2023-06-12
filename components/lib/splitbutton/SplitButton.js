@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -12,7 +12,8 @@ import { SplitButtonPanel } from './SplitButtonPanel';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SplitButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SplitButtonBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -61,7 +62,7 @@ export const SplitButton = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -82,7 +83,7 @@ export const SplitButton = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || context.appendTo);
         };
 
         useMountEffect(() => {
@@ -105,7 +106,7 @@ export const SplitButton = React.memo(
         const createItems = () => {
             if (props.model) {
                 return props.model.map((menuitem, index) => {
-                    return <SplitButtonItem splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} />;
+                    return <SplitButtonItem splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} ptm={ptm} />;
                 });
             }
 
@@ -152,52 +153,6 @@ export const SplitButton = React.memo(
             return dropdownIcon;
         };
 
-        const menuButtonProps = mergeProps({
-            type: 'button',
-            className: menuButtonClassName,
-            icon: dropdownIcon,
-            onClick: onDropdownButtonClick,
-            disabled: props.disabled,
-            'aria-expanded': overlayVisibleState,
-            'aria-haspopup': true,
-            'aria-controls': overlayVisibleState ? menuId : null,
-            ...props.menuButtonProps,
-            pt: ptm('menuButton')
-        });
-
-        const menuProps = mergeProps(
-            {
-                ref: overlayRef,
-                appendTo: props.appendTo,
-                menuId: menuId,
-                menuStyle: props.menuStyle,
-                menuClassName: props.menuClassName,
-                onClick: onPanelClick,
-                in: overlayVisibleState,
-                onEnter: onOverlayEnter,
-                onEntered: onOverlayEntered,
-                onExit: onOverlayExit,
-                onExited: onOverlayExited,
-                transitionOptions: props.transitionOptions
-            },
-            ptm('menu')
-        );
-
-        const splitButtonProps = mergeProps({
-            ref: defaultButtonRef,
-            type: 'button',
-            className: buttonClassName,
-            icon: props.icon,
-            loading: props.loading,
-            loadingIcon: props.loadingIcon,
-            label: props.label,
-            onClick: props.onClick,
-            disabled: props.disabled,
-            tabIndex: props.tabIndex,
-            ...props.buttonProps,
-            pt: ptm('button')
-        });
-
         const rootProps = mergeProps(
             {
                 ref: elementRef,
@@ -212,11 +167,53 @@ export const SplitButton = React.memo(
         return (
             <>
                 <div {...rootProps}>
-                    <Button {...splitButtonProps}>{buttonContent}</Button>
-                    <Button {...menuButtonProps} />
-                    <SplitButtonPanel {...menuProps}>{items}</SplitButtonPanel>
+                    <Button
+                        ref={defaultButtonRef}
+                        type="button"
+                        className={buttonClassName}
+                        icon={props.icon}
+                        loading={props.loading}
+                        loadingIcon={props.loadingIcon}
+                        label={props.label}
+                        onClick={props.onClick}
+                        disabled={props.disabled}
+                        tabIndex={props.tabIndex}
+                        {...props.buttonProps}
+                        pt={ptm('button')}
+                    >
+                        {buttonContent}
+                    </Button>
+                    <Button
+                        type="button"
+                        className={menuButtonClassName}
+                        icon={dropdownIcon}
+                        onClick={onDropdownButtonClick}
+                        disabled={props.disabled}
+                        aria-expanded={overlayVisibleState}
+                        aria-haspopup="true"
+                        aria-controls={overlayVisibleState ? menuId : null}
+                        {...props.menuButtonProps}
+                        pt={ptm('menuButton')}
+                    />
+                    <SplitButtonPanel
+                        ref={overlayRef}
+                        appendTo={props.appendTo}
+                        menuId={menuId}
+                        menuStyle={props.menuStyle}
+                        menuClassName={props.menuClassName}
+                        onClick={onPanelClick}
+                        in={overlayVisibleState}
+                        onEnter={onOverlayEnter}
+                        onEntered={onOverlayEntered}
+                        onExit={onOverlayExit}
+                        onExited={onOverlayExited}
+                        transitionOptions={props.transitionOptions}
+                        ptm={ptm}
+                    >
+                        {items}
+                    </SplitButtonPanel>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

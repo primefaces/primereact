@@ -1,14 +1,21 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
+import { PrimeReactContext } from '../api/context';
 
 export const InputSwitch = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputSwitchBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = InputSwitchBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const { ptm } = InputSwitchBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const checked = props.checked === props.trueValue;
@@ -86,29 +93,60 @@ export const InputSwitch = React.memo(
             props.className
         );
 
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className,
+                style: props.style,
+                onClick,
+                role: 'checkbox',
+                'aria-checked': checked
+            },
+            ptm('root')
+        );
+        const hiddenInputWrapperProps = mergeProps(
+            {
+                className: 'p-hidden-accessible'
+            },
+            ptm('hiddenInputWrapper')
+        );
+
+        const hiddenInputProps = mergeProps(
+            {
+                ref: inputRef,
+                type: 'checkbox',
+                id: props.inputId,
+                name: props.name,
+                checked: checked,
+                onChange: toggle,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                disabled: props.disabled,
+                role: 'switch',
+                tabIndex: props.tabIndex,
+                'aria-checked': checked,
+                ...ariaProps
+            },
+            ptm('hiddenInput')
+        );
+
+        const sliderProps = mergeProps(
+            {
+                className: 'p-inputswitch-slider'
+            },
+            ptm('slider')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role="checkbox" aria-checked={checked}>
-                    <div className="p-hidden-accessible">
-                        <input
-                            ref={inputRef}
-                            type="checkbox"
-                            id={props.inputId}
-                            name={props.name}
-                            checked={checked}
-                            onChange={toggle}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            disabled={props.disabled}
-                            role="switch"
-                            tabIndex={props.tabIndex}
-                            aria-checked={checked}
-                            {...ariaProps}
-                        />
+                <div {...rootProps}>
+                    <div {...hiddenInputWrapperProps}>
+                        <input {...hiddenInputProps} />
                     </div>
-                    <span className="p-inputswitch-slider"></span>
+                    <span {...sliderProps}></span>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

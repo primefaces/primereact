@@ -6,10 +6,11 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Panel = React.forwardRef((inProps, ref) => {
-    const props = PanelBase.getProps(inProps);
-
+    const context = React.useContext(PrimeReactContext);
+    const props = PanelBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const elementRef = React.useRef(ref);

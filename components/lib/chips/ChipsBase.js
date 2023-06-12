@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ChipsBase = {
+export const ChipsBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Chips',
         addOnBlur: null,
@@ -32,7 +32,5 @@ export const ChipsBase = {
         tooltipOptions: null,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ChipsBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ChipsBase.defaultProps)
-};
+    }
+});

@@ -1,16 +1,36 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/context';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
+    const { inputStyle, ripple } = React.useContext(PrimeReactContext);
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
         const className = classNames('p-treeselect-panel p-component', props.panelClassName, {
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': inputStyle === 'filled',
+            'p-ripple-disabled': ripple === false
         });
+
+        const panelProps = mergeProps(
+            {
+                ref: ref,
+                className: className,
+                style: props.panelStyle,
+                onClick: props.onClick
+            },
+            props.ptm('panel')
+        );
+
+        const wrapperProps = mergeProps(
+            {
+                className: 'p-treeselect-items-wrapper',
+                style: wrapperStyle
+            },
+            props.ptm('wrapper')
+        );
 
         return (
             <CSSTransition
@@ -26,11 +46,9 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div ref={ref} className={className} style={props.panelStyle} onClick={props.onClick}>
+                <div {...panelProps}>
                     {props.header}
-                    <div className="p-treeselect-items-wrapper" style={wrapperStyle}>
-                        {props.children}
-                    </div>
+                    <div {...wrapperProps}>{props.children}</div>
                     {props.footer}
                 </div>
             </CSSTransition>

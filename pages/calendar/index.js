@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/calendar/pt/ptdoc';
+import { Wireframe } from '../../components/doc/calendar/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
@@ -148,8 +151,25 @@ const CalendarDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.calendar.options',
+            label: 'Calendar PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Calendar Component" header="Calendar" description="Calendar, also known as DatePicker, is a form component to work with dates." componentDocs={docs} apiDocs={['Calendar']} />;
+    return <DocComponent title="React Calendar Component" header="Calendar" description="Calendar, also known as DatePicker, is a form component to work with dates." componentDocs={docs} apiDocs={['Calendar']} ptDocs={ptDocs} />;
 };
 
 export default CalendarDemo;

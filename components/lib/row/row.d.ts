@@ -8,6 +8,29 @@
  *
  */
 import * as React from 'react';
+import { ColumnGroupPassThroughOptions } from '../columngroup/columngroup';
+import { PassThroughType } from '../utils/utils';
+
+export declare type RowPassThroughType<T> = PassThroughType<T, RowPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface RowPassThroughMethodOptions {
+    props: RowProps;
+    parent: ColumnGroupPassThroughOptions;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link RowProps.pt}
+ */
+export interface RowPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: RowPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
 
 /**
  * Defines valid properties in Row component.
@@ -27,6 +50,11 @@ export interface RowProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {RowPassThroughOptions}
+     */
+    pt?: RowPassThroughOptions;
 }
 
 /**

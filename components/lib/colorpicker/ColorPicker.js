@@ -1,17 +1,23 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
 
 export const ColorPicker = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ColorPickerBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = ColorPickerBase.getProps(inProps, context);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+        const { ptm } = ColorPickerBase.setMetaData({
+            props,
+            state: {
+                overlayVisible: overlayVisibleState
+            }
+        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -268,7 +274,7 @@ export const ColorPicker = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -477,7 +483,7 @@ export const ColorPicker = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || context.appendTo);
             }
         };
 
@@ -519,19 +525,66 @@ export const ColorPicker = React.memo(
         });
 
         const createColorSelector = () => {
+            const selectorProps = mergeProps(
+                {
+                    ref: colorSelectorRef,
+                    className: 'p-colorpicker-color-selector',
+                    onMouseDown: (e) => onColorMousedown(e),
+                    onTouchStart: (e) => onColorDragStart(e),
+                    onTouchMove: (e) => onDrag(e),
+                    onTouchEnd: onDragEnd
+                },
+                ptm('selector')
+            );
+
+            const colorProps = mergeProps(
+                {
+                    className: 'p-colorpicker-color'
+                },
+                ptm('color')
+            );
+
+            const colorHandlerProps = mergeProps(
+                {
+                    ref: colorHandleRef,
+                    className: 'p-colorpicker-color-handle'
+                },
+                ptm('colorHandler')
+            );
+
             return (
-                <div ref={colorSelectorRef} className="p-colorpicker-color-selector" onMouseDown={onColorMousedown} onTouchStart={onColorDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
-                    <div className="p-colorpicker-color">
-                        <div ref={colorHandleRef} className="p-colorpicker-color-handle"></div>
+                <div {...selectorProps}>
+                    <div {...colorProps}>
+                        <div {...colorHandlerProps}></div>
                     </div>
                 </div>
             );
         };
 
         const createHue = () => {
+            const hueProps = mergeProps(
+                {
+                    ref: hueViewRef,
+                    className: 'p-colorpicker-hue',
+                    onMouseDown: (e) => onHueMousedown(e),
+                    onTouchStart: (e) => onHueDragStart(e),
+                    onTouchMove: (e) => onDrag(e),
+                    onTouchEnd: onDragEnd
+                },
+                ptm('hue')
+            );
+
+            const hueHandlerProps = mergeProps(
+                {
+                    ref: hueHandleRef,
+                    className: 'p-colorpicker-hue-handle'
+                },
+                ptm('hueHandler')
+            );
+
             return (
-                <div ref={hueViewRef} className="p-colorpicker-hue" onMouseDown={onHueMousedown} onTouchStart={onHueDragStart} onTouchMove={onDrag} onTouchEnd={onDragEnd}>
-                    <div ref={hueHandleRef} className="p-colorpicker-hue-handle"></div>
+                <div {...hueProps}>
+                    <div {...hueHandlerProps}></div>
                 </div>
             );
         };
@@ -539,9 +592,15 @@ export const ColorPicker = React.memo(
         const createContent = () => {
             const colorSelector = createColorSelector();
             const hue = createHue();
+            const contentProps = mergeProps(
+                {
+                    className: 'p-colorpicker-content'
+                },
+                ptm('content')
+            );
 
             return (
-                <div className="p-colorpicker-content">
+                <div {...contentProps}>
                     {colorSelector}
                     {hue}
                 </div>
@@ -555,29 +614,30 @@ export const ColorPicker = React.memo(
                 });
 
                 const inputProps = ColorPickerBase.getOtherProps(props);
-
-                return (
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        readOnly
-                        className={inputClassName}
-                        style={props.inputStyle}
-                        id={props.inputId}
-                        tabIndex={props.tabIndex}
-                        disabled={props.disabled}
-                        onClick={onInputClick}
-                        onKeyDown={onInputKeydown}
-                        {...inputProps}
-                    />
+                const _inputProps = mergeProps(
+                    {
+                        ref: inputRef,
+                        type: 'text',
+                        readOnly: true,
+                        className: inputClassName,
+                        style: props.inputStyle,
+                        id: props.inputId,
+                        tabIndex: props.tabIndex,
+                        disabled: props.disabled,
+                        onClick: onInputClick,
+                        onKeyDown: onInputKeydown,
+                        ...inputProps
+                    },
+                    ptm('input')
                 );
+
+                return <input {..._inputProps} />;
             }
 
             return null;
         };
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const otherProps = ColorPickerBase.getOtherProps(props);
         const className = classNames(
             'p-colorpicker p-component',
             {
@@ -587,10 +647,20 @@ export const ColorPicker = React.memo(
         );
         const content = createContent();
         const input = createInput();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                style: props.style,
+                className
+            },
+            ColorPickerBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} style={props.style} className={className} {...otherProps}>
+                <div {...rootProps}>
                     {input}
                     <ColorPickerPanel
                         ref={overlayRef}
@@ -606,11 +676,12 @@ export const ColorPicker = React.memo(
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
                         transitionOptions={props.transitionOptions}
+                        ptm={ptm}
                     >
                         {content}
                     </ColorPickerPanel>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

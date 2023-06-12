@@ -5,10 +5,12 @@ exports[`ProgressSpinner animationDuration 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
+      data-pc-section="spinner"
       style="animation-duration: 5s;"
       viewBox="25 25 50 50"
     >
@@ -16,6 +18,7 @@ exports[`ProgressSpinner animationDuration 1`] = `
         class="p-progress-spinner-circle"
         cx="50"
         cy="50"
+        data-pc-section="circle"
         fill="none"
         r="20"
         stroke-miterlimit="10"
@@ -31,10 +34,12 @@ exports[`ProgressSpinner default 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
+      data-pc-section="spinner"
       style="animation-duration: 2s;"
       viewBox="25 25 50 50"
     >
@@ -42,6 +47,7 @@ exports[`ProgressSpinner default 1`] = `
         class="p-progress-spinner-circle"
         cx="50"
         cy="50"
+        data-pc-section="circle"
         fill="none"
         r="20"
         stroke-miterlimit="10"
@@ -57,10 +63,12 @@ exports[`ProgressSpinner fill 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
+      data-pc-section="spinner"
       style="animation-duration: 2s;"
       viewBox="25 25 50 50"
     >
@@ -68,6 +76,7 @@ exports[`ProgressSpinner fill 1`] = `
         class="p-progress-spinner-circle"
         cx="50"
         cy="50"
+        data-pc-section="circle"
         fill="green"
         r="20"
         stroke-miterlimit="10"
@@ -83,10 +92,12 @@ exports[`ProgressSpinner strokeWidth 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
       class="p-progress-spinner-svg"
+      data-pc-section="spinner"
       style="animation-duration: 2s;"
       viewBox="25 25 50 50"
     >
@@ -94,6 +105,7 @@ exports[`ProgressSpinner strokeWidth 1`] = `
         class="p-progress-spinner-circle"
         cx="50"
         cy="50"
+        data-pc-section="circle"
         fill="none"
         r="20"
         stroke-miterlimit="10"
