@@ -1,12 +1,11 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ZIndexUtils } from '../utils/Utils';
-import { ScrollTopBase } from './ScrollTopBase';
 import { ChevronUpIcon } from '../icons/chevronup';
-import { PrimeReactContext } from '../api/context';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { ScrollTopBase } from './ScrollTopBase';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {

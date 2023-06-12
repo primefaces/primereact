@@ -1,9 +1,8 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, mergeProps } from '../utils/Utils';
-import { PrimeReactContext } from '../api/context';
 
 export const ColorPickerPanel = React.forwardRef((props, ref) => {
     const { inputStyle, ripple } = React.useContext(PrimeReactContext);

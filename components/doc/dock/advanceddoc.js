@@ -296,7 +296,6 @@ export function AdvancedDoc(props) {
 `,
         javascript: `
 import React, { useRef, useState, useEffect } from 'react';
-import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
 import { Tooltip } from 'primereact/tooltip';
 import { Dialog } from 'primereact/dialog';
@@ -594,7 +593,6 @@ export default function AdvanceDemo() {
         `,
         typescript: `
 import React, { useRef, useState, useEffect } from 'react';
-import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
 import { Tooltip } from 'primereact/tooltip';
 import { Dialog } from 'primereact/dialog';

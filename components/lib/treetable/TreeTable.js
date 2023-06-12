@@ -1,7 +1,11 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
+import { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener } from '../hooks/Hooks';
+import { ArrowDownIcon } from '../icons/arrowdown';
+import { ArrowUpIcon } from '../icons/arrowup';
+import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeTableBase } from './TreeTableBase';
@@ -9,10 +13,6 @@ import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
-import { SpinnerIcon } from '../icons/spinner';
-import { ArrowDownIcon } from '../icons/arrowdown';
-import { ArrowUpIcon } from '../icons/arrowup';
-import { PrimeReactContext } from '../api/context';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

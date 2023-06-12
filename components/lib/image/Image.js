@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
@@ -12,7 +13,6 @@ import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
-import { PrimeReactContext } from '../api/context';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {

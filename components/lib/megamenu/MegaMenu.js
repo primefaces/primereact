@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
@@ -7,7 +7,6 @@ import { BarsIcon } from '../icons/bars';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
-import { PrimeReactContext } from '../api/context';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {

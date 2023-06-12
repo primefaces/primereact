@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
+import { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -9,7 +10,6 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {

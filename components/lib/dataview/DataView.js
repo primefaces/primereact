@@ -1,13 +1,13 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
+import { BarsIcon } from '../icons/bars';
+import { SpinnerIcon } from '../icons/spinner';
+import { ThLargeIcon } from '../icons/thlarge';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
-import { BarsIcon } from '../icons/bars';
-import { ThLargeIcon } from '../icons/thlarge';
-import { SpinnerIcon } from '../icons/spinner';
-import { PrimeReactContext } from '../api/context';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

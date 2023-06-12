@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
+import { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -8,7 +9,6 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {

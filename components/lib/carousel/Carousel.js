@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { ariaLabel } from '../api/Api';
+import { ariaLabel } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -8,7 +9,6 @@ import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { CarouselBase } from './CarouselBase';
-import { PrimeReactContext } from '../api/context';
 
 const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);

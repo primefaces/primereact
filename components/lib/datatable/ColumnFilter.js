@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
+import { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -14,7 +15,6 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
-import { PrimeReactContext } from '../api/context';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);

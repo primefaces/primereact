@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
+import { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
@@ -12,7 +13,6 @@ import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { PrimeReactContext } from '../api/context';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

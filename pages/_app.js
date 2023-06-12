@@ -8,9 +8,9 @@ import '../styles/layout/layout.scss';
 import '../styles/primereact.css';
 // prettier-ignore
 import PrimeReact from '../components/lib/api/PrimeReact';
-import '../styles/demo/demo.scss';
-import AnnouncementData from '../data/news.json';
 import { PrimeReactProvider } from '../components/lib/api/context';
+import AnnouncementData from '../data/news.json';
+import '../styles/demo/demo.scss';
 
 export default function MyApp({ Component }) {
     const [dark, setDark] = useState(false);
