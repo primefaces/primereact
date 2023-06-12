@@ -4,7 +4,9 @@ import { DocSectionText } from '../common/docsectiontext';
 export function MaterialDoc(props) {
     const code = {
         basic: `
-<Dropdown dropdownIcon={(options) => <img alt="dropdown icon" src="/icons/arrow_down.png" {...options.iconProps} />} />
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+<Dropdown dropdownIcon={(options) => <ArrowDropDownIcon {...options.iconProps} />} />
         `
     };
 
