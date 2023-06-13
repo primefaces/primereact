@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/context';
+import { ChevronRightIcon } from '../icons/chevronright';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
-import { ChevronRightIcon } from '../icons/chevronright';
-import { PrimeReactContext } from '../api/context';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -40,7 +40,7 @@ export const BreadCrumb = React.memo(
                     return null;
                 }
 
-                const { icon: _icon, target, url, disabled, style, className: _className, template } = home;
+                const { icon: _icon, target, url, disabled, style, className: _className, template, label: _label } = home;
                 const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
                 const iconProps = mergeProps(
                     {
@@ -60,7 +60,19 @@ export const BreadCrumb = React.memo(
                     ptm('action')
                 );
 
-                let content = <a {...actionProps}>{icon}</a>;
+                const labelProps = mergeProps(
+                    {
+                        className: 'p-menuitem-text'
+                    },
+                    ptm('label')
+                );
+                const label = _label && <span {...labelProps}>{_label}</span>;
+                let content = (
+                    <a {...actionProps}>
+                        {icon}
+                        {label}
+                    </a>
+                );
 
                 if (template) {
                     const defaultContentOptions = {
