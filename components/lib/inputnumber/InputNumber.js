@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -7,7 +8,6 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import { PrimeReactContext } from '../api/context';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -39,6 +39,7 @@ export const InputNumber = React.memo(
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
 
+        const _locale = props.locale || context.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
         const vertical = props.showButtons && props.buttonLayout === 'vertical';
@@ -57,8 +58,8 @@ export const InputNumber = React.memo(
         };
 
         const constructParser = () => {
-            numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
-            const numerals = [...new Intl.NumberFormat(props.locale, { useGrouping: false }).format(9876543210)].reverse();
+            numberFormat.current = new Intl.NumberFormat(_locale, getOptions());
+            const numerals = [...new Intl.NumberFormat(_locale, { useGrouping: false }).format(9876543210)].reverse();
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
@@ -76,13 +77,13 @@ export const InputNumber = React.memo(
         };
 
         const getDecimalExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { ...getOptions(), useGrouping: false });
 
             return new RegExp(`[${formatter.format(1.1).replace(_currency.current, '').trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getGroupingExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: true });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: true });
 
             groupChar.current = formatter.format(1000000).trim().replace(_numeral.current, '').charAt(0);
 
@@ -90,14 +91,14 @@ export const InputNumber = React.memo(
         };
 
         const getMinusSignExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: false });
 
             return new RegExp(`[${formatter.format(-1).trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getCurrencyExpression = () => {
             if (props.currency) {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: 'currency',
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
@@ -115,7 +116,7 @@ export const InputNumber = React.memo(
             if (props.prefix) {
                 prefixChar.current = props.prefix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
+                const formatter = new Intl.NumberFormat(_locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
 
                 prefixChar.current = formatter.format(1).split('1')[0];
             }
@@ -127,7 +128,7 @@ export const InputNumber = React.memo(
             if (props.suffix) {
                 suffixChar.current = props.suffix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: props.mode,
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
@@ -149,7 +150,7 @@ export const InputNumber = React.memo(
                 }
 
                 if (props.format) {
-                    let formatter = new Intl.NumberFormat(props.locale, getOptions());
+                    let formatter = new Intl.NumberFormat(_locale, getOptions());
                     let _formattedValue = formatter.format(value);
 
                     if (props.prefix) {
