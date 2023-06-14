@@ -307,8 +307,8 @@ export const ConfirmPopup = React.memo(
 
         const createElement = () => {
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
-                'p-input-filled': context.inputStyle === 'filled',
-                'p-ripple-disabled': context.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
             const content = createContent();
             const footer = createFooter();

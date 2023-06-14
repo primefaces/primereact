@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
@@ -169,7 +169,7 @@ export const OrderList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {

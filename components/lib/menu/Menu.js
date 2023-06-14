@@ -277,8 +277,8 @@ export const Menu = React.memo(
                     'p-menu p-component',
                     {
                         'p-menu-overlay': props.popup,
-                        'p-input-filled': context.inputStyle === 'filled',
-                        'p-ripple-disabled': context.ripple === false
+                        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                     },
                     props.className
                 );
