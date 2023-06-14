@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { BarsIcon } from '../icons/bars';
 import { SpinnerIcon } from '../icons/spinner';
@@ -143,7 +143,7 @@ export const DataView = React.memo(
                     let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
                     let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
 
-                    return ObjectUtils.sort(value1, value2, props.sortOrder, context.locale, context.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, props.sortOrder, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 return value;

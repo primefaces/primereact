@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
@@ -72,7 +72,7 @@ export const Galleria = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
@@ -179,8 +179,8 @@ export const Galleria = React.memo(
                     'p-galleria-fullscreen': props.fullScreen,
                     'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
                     'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
-                    'p-input-filled': context.inputStyle === 'filled',
-                    'p-ripple-disabled': context.ripple === false
+                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                 },
                 thumbnailsPosClassName,
                 indicatorPosClassName

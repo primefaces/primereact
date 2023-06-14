@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
@@ -108,7 +108,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
-        ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
         align();
     };
 
@@ -150,7 +150,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const createStyle = () => {
         if (!styleElement.current) {
-            styleElement.current = DomHandler.createInlineStyle(context.nonce);
+            styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
             let innerHTML = '';
 
@@ -230,8 +230,8 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const createElement = () => {
         const className = classNames('p-overlaypanel p-component', props.className, {
-            'p-input-filled': context.inputStyle === 'filled',
-            'p-ripple-disabled': context.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const closeIcon = createCloseIcon();
         const rootProps = mergeProps(

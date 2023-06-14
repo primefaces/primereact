@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
@@ -90,7 +90,7 @@ export const Image = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, context.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
         };
 
         const onEntered = () => {

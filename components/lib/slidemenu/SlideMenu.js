@@ -8,6 +8,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
+import PrimeReact from '../api/Api';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -74,7 +75,7 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             DomHandler.absolutePosition(menuRef.current, targetRef.current);

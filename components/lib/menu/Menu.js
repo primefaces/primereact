@@ -6,6 +6,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
+import PrimeReact from '../api/Api';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -118,7 +119,7 @@ export const Menu = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
+            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
 

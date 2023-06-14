@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -113,7 +113,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             align();
         };
 

@@ -9,6 +9,7 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, cla
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
+import PrimeReact from '../api/Api';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -62,7 +63,7 @@ export const SplitButton = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -83,7 +84,7 @@ export const SplitButton = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || context.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         useMountEffect(() => {

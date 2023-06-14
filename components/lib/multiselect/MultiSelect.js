@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -277,7 +277,7 @@ export const MultiSelect = React.memo(
         };
 
         const onOverlayEnter = (callback) => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
             scrollInView();
             callback && callback();
@@ -304,7 +304,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || context.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const isClearClicked = (event) => {

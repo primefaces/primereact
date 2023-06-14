@@ -6,6 +6,7 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
+import PrimeReact from '../api/Api';
 
 export const ColorPicker = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -274,7 +275,7 @@ export const ColorPicker = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -483,7 +484,7 @@ export const ColorPicker = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || context.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
             }
         };
 

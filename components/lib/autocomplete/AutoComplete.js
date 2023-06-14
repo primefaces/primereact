@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -189,7 +189,7 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -219,7 +219,7 @@ export const AutoComplete = React.memo(
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
 
-            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || context.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const onPanelClick = (event) => {

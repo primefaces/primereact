@@ -6,6 +6,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
+import PrimeReact from '../api/Api';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -57,7 +58,7 @@ export const ContextMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -128,7 +129,7 @@ export const ContextMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             position(currentEvent.current);
@@ -251,8 +252,8 @@ export const ContextMenu = React.memo(
 
         const createContextMenu = () => {
             const className = classNames('p-contextmenu p-component', props.className, {
-                'p-input-filled': context.inputStyle === 'filled',
-                'p-ripple-disabled': context.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
 
             const rootProps = mergeProps(

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
+import PrimeReact, { FilterService } from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener } from '../hooks/Hooks';
@@ -247,7 +247,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, context.locale) === 0) {
+        if (ObjectUtils.compare(value1, value2, (context && context.locale) || PrimeReact.locale) === 0) {
             return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
         }
 
@@ -255,7 +255,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, context.locale, context.nullSortOrder);
+        return ObjectUtils.sort(value1, value2, order, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const filter = (value, field, mode) => {

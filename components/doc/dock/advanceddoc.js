@@ -13,6 +13,7 @@ import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import PrimeReact from '../../lib/api/Api';
 
 export function AdvancedDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -22,7 +23,7 @@ export function AdvancedDoc(props) {
     const toast = useRef(null);
     const toast2 = useRef(null);
     const galleria = useRef(null);
-    const { setAppendTo } = useContext(PrimeReactContext);
+    const context = useContext(PrimeReactContext);
 
     const dockItems = [
         {
@@ -254,14 +255,15 @@ export function AdvancedDoc(props) {
 
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
-
-        setAppendTo('self');
+        if (context) context.setAppendTo('self');
+        else PrimeReact.appendTo = 'self';
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            setAppendTo(null);
+            if (context) context.setAppendTo(null);
+            else PrimeReact.appendTo = null;
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
