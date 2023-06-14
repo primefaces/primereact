@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
@@ -131,12 +132,52 @@ export const OrderListControls = React.memo((props) => {
         props.ptm('control')
     );
 
+    const moveUpButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveUpIcon,
+            onClick: moveUp,
+            'aria-label': ariaLabel('moveUp')
+        },
+        props.ptm('moveUpButton')
+    );
+
+    const moveTopButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveTopIcon,
+            onClick: moveTop,
+            'aria-label': ariaLabel('moveTop')
+        },
+        props.ptm('moveTopButton')
+    );
+
+    const moveDownButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveDownIcon,
+            onClick: moveDown,
+            'aria-label': ariaLabel('moveDown')
+        },
+        props.ptm('moveDownButton')
+    );
+
+    const moveBottomButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveBottomIcon,
+            onClick: moveBottom,
+            'aria-label': ariaLabel('moveBottom')
+        },
+        props.ptm('moveBottomButton')
+    );
+
     return (
         <div {...controlProps}>
-            <Button type="button" icon={moveUpIcon} onClick={moveUp} pt={props.ptm('moveUpButton')}></Button>
-            <Button type="button" icon={moveTopIcon} onClick={moveTop} pt={props.ptm('moveTopButton')}></Button>
-            <Button type="button" icon={moveDownIcon} onClick={moveDown} pt={props.ptm('moveDownButton')}></Button>
-            <Button type="button" icon={moveBottomIcon} onClick={moveBottom} pt={props.ptm('moveBottomButton')}></Button>
+            <Button {...moveUpButtonProps}></Button>
+            <Button {...moveTopButtonProps}></Button>
+            <Button {...moveDownButtonProps}></Button>
+            <Button {...moveBottomButtonProps}></Button>
         </div>
     );
 });
