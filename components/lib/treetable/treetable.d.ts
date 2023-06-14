@@ -369,6 +369,22 @@ interface TreeTableEvent {
 }
 
 /**
+ * Custom row mouse event.
+ * @see {@link TreeTableProps.onRowMouseEnter}, {@link TreeTableProps.onRowMouseLeave}
+ * @extends TreeTableEvent
+ */
+interface TreeTableRowMouseEvent extends Omit<TreeTableEvent, 'originalEvent'> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.MouseEvent<HTMLElement>;
+    /**
+     * Clicked row data index
+     */
+    index: number;
+}
+
+/**
  * Custom toggle event.
  * @see {@link TreeTableProps.onToggle}
  * @event
@@ -838,6 +854,16 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @param {TreeTableEvent} event - Custom treetable event.
      */
     onRowClick?(event: TreeTableEvent): void;
+    /**
+     * Callback to invoke when a row is hovered with mouse.
+     * @param {TreeTableRowMouseEvent} event - Custom row mouse event.
+     */
+    onRowMouseEnter?(event: TreeTableRowMouseEvent): void;
+    /**
+     * Callback to invoke when a row is navigated away from with mouse.
+     * @param {TreeTableRowMouseEvent} event - Custom row mouse event.
+     */
+    onRowMouseLeave?(event: TreeTableRowMouseEvent): void;
     /**
      * Callback to invoke when a node is selected.
      * @param {TreeTableEvent} event - Custom treetable event.
