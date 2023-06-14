@@ -44920,6 +44920,32 @@
                             "description": "Callback to invoke when a row is clicked."
                         },
                         {
+                            "name": "onRowMouseEnter",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TreeTableRowMouseEvent",
+                                    "description": "Custom row mouse event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row is hovered with mouse."
+                        },
+                        {
+                            "name": "onRowMouseLeave",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TreeTableRowMouseEvent",
+                                    "description": "Custom row mouse event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row is navigated away from with mouse."
+                        },
+                        {
                             "name": "onSelect",
                             "parameters": [
                                 {
@@ -45732,6 +45758,35 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "TreeTableRowMouseEvent": {
+                    "description": "Custom row mouse event.",
+                    "relatedProp": "onRowMouseEnter",
+                    "props": [
+                        {
+                            "name": "node",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeNode",
+                            "description": "Expanded node instance."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MouseEvent<HTMLElement, MouseEvent>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Clicked row data index"
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedTypes": "Omit<TreeTableEvent, \"originalEvent\">"
                 }
             }
         },
