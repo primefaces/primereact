@@ -106,6 +106,18 @@ export const TreeTableRow = React.memo((props) => {
         nodeTouched.current = true;
     };
 
+    const onMouseEnter = (event) => {
+        if (props.onRowMouseEnter) {
+            props.onRowMouseEnter({ originalEvent: event, node: props.node, index: props.rowIndex });
+        }
+    };
+
+    const onMouseLeave = (event) => {
+        if (props.onRowMouseLeave) {
+            props.onRowMouseLeave({ originalEvent: event, node: props.node, index: props.rowIndex });
+        }
+    };
+
     const onCheckboxChange = (event) => {
         const checked = isChecked();
         let selectionKeys = props.selectionKeys ? { ...props.selectionKeys } : {};
@@ -452,6 +464,8 @@ export const TreeTableRow = React.memo((props) => {
                         onSelectionChange={props.onSelectionChange}
                         metaKeySelection={props.metaKeySelection}
                         onRowClick={props.onRowClick}
+                        onRowMouseEnter={props.onRowMouseEnter}
+                        onRowMouseLeave={props.onRowMouseLeave}
                         onSelect={props.onSelect}
                         onUnselect={props.onUnselect}
                         propagateSelectionUp={props.propagateSelectionUp}
@@ -494,7 +508,9 @@ export const TreeTableRow = React.memo((props) => {
             onClick: (e) => onClick(e),
             onTouchEnd: (e) => onTouchEnd(e),
             onContextMenu: (e) => onRightClick(e),
-            onKeyDown: (e) => onKeyDown(e)
+            onKeyDown: (e) => onKeyDown(e),
+            onMouseEnter: (e) => onMouseEnter(e),
+            onMouseLeave: (e) => onMouseLeave(e)
         },
         props.ptCallbacks.ptm('row')
     );

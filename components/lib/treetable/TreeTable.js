@@ -889,6 +889,8 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 onSelectionChange={props.onSelectionChange}
                 metaKeySelection={props.metaKeySelection}
                 onRowClick={props.onRowClick}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
                 onSelect={props.onSelect}
                 onUnselect={props.onUnselect}
                 propagateSelectionUp={props.propagateSelectionUp}

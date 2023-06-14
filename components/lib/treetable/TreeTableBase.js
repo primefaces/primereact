@@ -42,6 +42,8 @@ export const TreeTableBase = ComponentBase.extend({
         onFilter: null,
         onPage: null,
         onRowClick: null,
+        onRowMouseEnter: null,
+        onRowMouseLeave: null,
         onSelect: null,
         onSelectionChange: null,
         onSort: null,
