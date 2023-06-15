@@ -237,13 +237,15 @@ export const Carousel = React.memo(
         };
 
         const startAutoplay = () => {
-            interval.current = setInterval(() => {
-                if (pageState === totalIndicators - 1) {
-                    step(-1, 0);
-                } else {
-                    step(-1, pageState + 1);
-                }
-            }, props.autoplayInterval);
+            if (props.autoplayInterval > 0) {
+                interval.current = setInterval(() => {
+                    if (pageState === totalIndicators - 1) {
+                        step(-1, 0);
+                    } else {
+                        step(-1, pageState + 1);
+                    }
+                }, props.autoplayInterval);
+            }
         };
 
         const stopAutoplay = () => {
@@ -288,6 +290,10 @@ export const Carousel = React.memo(
             carouselStyle.current.innerHTML = innerHTML;
         };
 
+        const destroyStyle = () => {
+            carouselStyle.current = DomHandler.removeInlineStyle(carouselStyle.current);
+        };
+
         const changePosition = (totalShiftedItems) => {
             if (itemsContainerRef.current) {
                 itemsContainerRef.current.style.transform = isVertical ? `translate3d(0, ${totalShiftedItems * (100 / numVisibleState)}%, 0)` : `translate3d(${totalShiftedItems * (100 / numVisibleState)}%, 0, 0)`;
@@ -301,6 +307,8 @@ export const Carousel = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            startAutoplay,
+            stopAutoplay,
             getElement: () => elementRef.current
         }));
 
@@ -392,6 +400,8 @@ export const Carousel = React.memo(
             if (props.autoplayInterval) {
                 stopAutoplay();
             }
+
+            destroyStyle();
         });
 
         const createItems = () => {
