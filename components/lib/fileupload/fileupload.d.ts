@@ -647,4 +647,14 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
      * @param {File[]} files - Current files.
      */
     public setFiles(files: File[]): void;
+    /**
+     * Gets the current uploaded files list.
+     * @return {File[]} Current uploaded files.
+     */
+    public getUploadedFiles(): File[];
+    /**
+     * Sets the current uploaded files list.
+     * @param {File[]} files - Current uploaded files.
+     */
+    public setUploadedFiles(files: File[]): void;
 }
