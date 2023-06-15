@@ -6429,6 +6429,18 @@
                     "description": "Defines methods that can be accessed by the component's reference.",
                     "values": [
                         {
+                            "name": "startAutoplay",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to start the autoplay if it is currently stopped."
+                        },
+                        {
+                            "name": "stopAutoplay",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to stop the autoplay if it is currently started."
+                        },
+                        {
                             "name": "getElement",
                             "parameters": [],
                             "returnType": "HTMLDivElement",
