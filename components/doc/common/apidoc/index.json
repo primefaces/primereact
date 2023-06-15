@@ -19377,6 +19377,24 @@
                             ],
                             "returnType": "void",
                             "description": "Sets the current files list."
+                        },
+                        {
+                            "name": "getUploadedFiles",
+                            "parameters": [],
+                            "returnType": "File[]",
+                            "description": "Gets the current uploaded files list."
+                        },
+                        {
+                            "name": "setUploadedFiles",
+                            "parameters": [
+                                {
+                                    "name": "files",
+                                    "type": "File[]",
+                                    "description": "Current uploaded files."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Sets the current uploaded files list."
                         }
                     ]
                 },
