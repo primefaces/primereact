@@ -38,13 +38,14 @@ export const DropdownItem = React.memo((props) => {
             onClick: (e) => onClick(e),
             'aria-label': props.label,
             role: 'option',
-            'aria-selected': props.selected
+            'aria-selected': props.selected,
+            key: props.label
         },
         getPTOptions('item')
     );
 
     return (
-        <li {...itemProps} key={props.label}>
+        <li {...itemProps}>
             {content}
             <Ripple />
         </li>
