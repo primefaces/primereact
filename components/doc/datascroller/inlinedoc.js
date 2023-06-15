@@ -3,7 +3,7 @@ import { ProductService } from '../../../service/ProductService';
 import { Button } from '../../lib/button/Button';
 import { DataScroller } from '../../lib/datascroller/DataScroller';
 import { Rating } from '../../lib/rating/Rating';
-import { Tag } from '../../lib/tag/tag';
+import { Tag } from '../../lib/tag/Tag';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
