@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption, localeOptions } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
@@ -13,7 +14,6 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -2948,7 +2948,8 @@ export const Calendar = React.memo(
             const dates = createDates(monthMetaData, groupIndex);
             const containerProps = mergeProps(
                 {
-                    className: 'p-datepicker-calendar-container'
+                    className: 'p-datepicker-calendar-container',
+                    key: UniqueComponentId()
                 },
                 ptm('container')
             );
@@ -2994,7 +2995,8 @@ export const Calendar = React.memo(
 
             const headerProps = mergeProps(
                 {
-                    className: 'p-datepicker-header'
+                    className: 'p-datepicker-header',
+                    key: UniqueComponentId()
                 },
                 ptm('header')
             );
