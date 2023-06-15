@@ -10,7 +10,6 @@ export const SkeletonBase = ComponentBase.extend({
         borderRadius: null,
         animation: 'wave',
         style: null,
-        className: null,
-        children: undefined
+        className: null
     }
 });
