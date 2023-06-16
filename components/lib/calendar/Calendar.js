@@ -2949,7 +2949,7 @@ export const Calendar = React.memo(
             const containerProps = mergeProps(
                 {
                     className: 'p-datepicker-calendar-container',
-                    key: UniqueComponentId()
+                    key: UniqueComponentId('calendar_container_')
                 },
                 ptm('container')
             );
@@ -2996,7 +2996,7 @@ export const Calendar = React.memo(
             const headerProps = mergeProps(
                 {
                     className: 'p-datepicker-header',
-                    key: UniqueComponentId()
+                    key: index
                 },
                 ptm('header')
             );
