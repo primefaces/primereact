@@ -509,10 +509,11 @@ export const MultiSelect = React.memo(
                 if (props.display === 'chip' && !empty) {
                     const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
 
-                    return value.map((val) => {
+                    return value.map((val, i) => {
                         const label = getLabelByValue(val);
                         const iconProps = mergeProps(
                             {
+                                key: i,
                                 className: 'p-multiselect-token-icon',
                                 onClick: (e) => removeChip(e, val)
                             },
@@ -529,6 +530,7 @@ export const MultiSelect = React.memo(
 
                         const tokenLabelProps = mergeProps(
                             {
+                                key: label + i,
                                 className: 'p-multiselect-token-label'
                             },
                             ptm('tokenLabel')
