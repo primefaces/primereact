@@ -645,10 +645,10 @@ export const AutoComplete = React.memo(
                 {
                     ref: multiContainerRef,
                     className,
-                    onContextMenu: (e) => props.onContextMenu(e),
-                    onMouseDown: (e) => props.onMouseDown(e),
-                    onClick: (e) => onMultiContainerClick(e),
-                    onDoubleClick: (e) => props.onDblClick(e)
+                    onClick: onMultiContainerClick,
+                    onContextMenu: props.onContextMenu,
+                    onMouseDown: props.onMouseDown,
+                    onDoubleClick: props.onDblClick
                 },
                 ptm('container')
             );
