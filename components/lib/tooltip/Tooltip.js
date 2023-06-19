@@ -1,10 +1,10 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact from '../api/Api';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -129,7 +129,7 @@ export const Tooltip = React.memo(
                 const { pageX: x, pageY: y } = currentMouseEvent.current;
 
                 if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
-                    ZIndexUtils.set('tooltip', elementRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['tooltip']);
+                    ZIndexUtils.set('tooltip', elementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['tooltip']) || PrimeReact.zIndex['tooltip']);
                 }
 
                 elementRef.current.style.left = '';

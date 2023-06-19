@@ -1,12 +1,12 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact from '../api/Api';
 
 export const ColorPicker = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -275,7 +275,7 @@ export const ColorPicker = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -484,7 +484,7 @@ export const ColorPicker = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || context.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
             }
         };
 

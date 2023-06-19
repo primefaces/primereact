@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils, IconUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
-import { TimesIcon } from '../icons/times';
-import { PrimeReactContext } from '../api/context';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -29,7 +29,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         type: 'keydown',
         listener: (event) => {
             if (event.key === 'Escape') {
-                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', context.autoZIndex)) {
+                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', (context && context.autoZIndex) || PrimeReact.autoZIndex)) {
                     onClose(event);
                 }
             }
@@ -147,7 +147,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -210,8 +210,8 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const createElement = () => {
         const className = classNames('p-sidebar p-component', props.className, {
-            'p-input-filled': context.inputStyle === 'filled',
-            'p-ripple-disabled': context.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const maskClassName = classNames(
             'p-sidebar-mask',

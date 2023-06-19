@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { ProductService } from '../../../service/ProductService';
-import { Button } from '../../lib/button/Button';
-import { DataScroller } from '../../lib/datascroller/DataScroller';
-import { Rating } from '../../lib/rating/Rating';
-import { Tag } from '../../lib/tag/Tag';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { ProductService } from '../../../../service/ProductService';
+import { Button } from '../../../lib/button/Button';
+import { DataScroller } from '../../../lib/datascroller/DataScroller';
+import { Rating } from '../../../lib/rating/Rating';
+import { Tag } from '../../../lib/tag/Tag';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function InlineDataScrollerDoc(props) {
+export function PTDoc(props) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -62,17 +62,26 @@ export function InlineDataScrollerDoc(props) {
 
     const code = {
         basic: `
-<DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
-        `,
+<DataScroller
+    value={products}
+    itemTemplate={itemTemplate}
+    rows={5}
+    buffer={0.4}
+    header="List of Products"
+    pt={{
+        content: { className: 'surface-ground' }
+    }}
+/>
+`,
         javascript: `
 import React, { useState, useEffect } from 'react';
+import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataScroller } from 'primereact/datascroller';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
-import { ProductService } from './service/ProductService';
 
-export default function InlineDataScrollerDemo() {
+export default function PTDemo() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -127,18 +136,27 @@ export default function InlineDataScrollerDemo() {
 
     return (
         <div className="card">
-            <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+            <DataScroller
+                value={products}
+                itemTemplate={itemTemplate}
+                rows={5}
+                buffer={0.4}
+                header="List of Products"
+                pt={{
+                    content: { className: 'surface-ground' }
+                }}
+            />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
+import { ProductService } from './service/ProductService';
 import { Button } from 'primereact/button';
 import { DataScroller } from 'primereact/datascroller';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
-import { ProductService } from './service/ProductService';
 
 interface Product {
     id: string;
@@ -153,7 +171,7 @@ interface Product {
     rating: number;
 }
 
-export default function InlineDataScrollerDemo() {
+export default function BasicDemo() {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
@@ -208,39 +226,38 @@ export default function InlineDataScrollerDemo() {
 
     return (
         <div className="card">
-            <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+            <DataScroller
+                value={products}
+                itemTemplate={itemTemplate}
+                rows={5}
+                buffer={0.4}
+                header="List of Products"
+                pt={{
+                    content: { className: 'surface-ground' }
+                }}
+            />
         </div>
     )
 }
-        `,
-
-        data: `
-/* ProductService */        
-{
-    id: '1000',
-    code: 'f230fh0g3',
-    name: 'Bamboo Watch',
-    description: 'Product Description',
-    image: 'bamboo-watch.jpg',
-    price: 65,
-    category: 'Accessories',
-    quantity: 24,
-    inventoryStatus: 'INSTOCK',
-    rating: 5
-},
-...
         `
     };
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>DataScroller can listen scroll event of itself rather than document in inline mode.</p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card">
-                <DataScroller value={products} itemTemplate={itemTemplate} rows={5} inline scrollHeight="500px" header="Scroll Down to Load More" />
+                <DataScroller
+                    value={products}
+                    itemTemplate={itemTemplate}
+                    rows={5}
+                    buffer={0.4}
+                    header="List of Products"
+                    pt={{
+                        content: { className: 'surface-ground' }
+                    }}
+                />
             </div>
-            <DocSectionCode code={code} service={['ProductService']} />
+            <DocSectionCode code={code} />
         </>
     );
 }

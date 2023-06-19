@@ -179,6 +179,8 @@ export const TreeTableBody = React.memo((props) => {
                 onSelectionChange={props.onSelectionChange}
                 metaKeySelection={props.metaKeySelection}
                 onRowClick={onRowClick}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
                 onSelect={props.onSelect}
                 onUnselect={props.onUnselect}
                 propagateSelectionUp={props.propagateSelectionUp}

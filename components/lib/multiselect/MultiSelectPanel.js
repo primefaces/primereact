@@ -1,18 +1,18 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
-import { PrimeReactContext } from '../api/context';
 
 export const MultiSelectPanel = React.memo(
     React.forwardRef((props, ref) => {
         const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
-        const { inputStyle, ripple } = React.useContext(PrimeReactContext);
+        const context = React.useContext(PrimeReactContext);
 
         const onEnter = () => {
             props.onEnter(() => {
@@ -248,8 +248,8 @@ export const MultiSelectPanel = React.memo(
                     'p-multiselect-inline': props.inline,
                     'p-multiselect-flex': props.flex,
                     'p-multiselect-limited': !allowOptionSelect,
-                    'p-input-filled': inputStyle === 'filled',
-                    'p-ripple-disabled': ripple === false
+                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                 },
                 props.panelClassName
             );

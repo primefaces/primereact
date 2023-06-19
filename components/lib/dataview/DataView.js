@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
+import { BarsIcon } from '../icons/bars';
+import { SpinnerIcon } from '../icons/spinner';
+import { ThLargeIcon } from '../icons/thlarge';
 import { Paginator } from '../paginator/Paginator';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
-import { BarsIcon } from '../icons/bars';
-import { ThLargeIcon } from '../icons/thlarge';
-import { SpinnerIcon } from '../icons/spinner';
-import { PrimeReactContext } from '../api/context';
 
 export const DataViewLayoutOptions = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
@@ -143,7 +143,7 @@ export const DataView = React.memo(
                     let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
                     let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
 
-                    return ObjectUtils.sort(value1, value2, props.sortOrder, context.locale, context.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, props.sortOrder, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 return value;

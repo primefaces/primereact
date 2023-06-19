@@ -1,13 +1,13 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMatchMedia, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact from '../api/Api';
 
 export const TieredMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -74,7 +74,7 @@ export const TieredMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -117,7 +117,7 @@ export const TieredMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
@@ -177,8 +177,8 @@ export const TieredMenu = React.memo(
                 'p-tieredmenu p-component',
                 {
                     'p-tieredmenu-overlay': props.popup,
-                    'p-input-filled': context.inputStyle === 'filled',
-                    'p-ripple-disabled': context.ripple === false
+                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                 },
                 props.className
             );

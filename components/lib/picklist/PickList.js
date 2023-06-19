@@ -1,12 +1,12 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PickListBase } from './PickListBase';
 import { PickListControls } from './PickListControls';
 import { PickListSubList } from './PickListSubList';
 import { PickListTransferControls } from './PickListTransferControls';
-import { PrimeReactContext } from '../api/context';
 
 export const PickList = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -215,7 +215,7 @@ export const PickList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {

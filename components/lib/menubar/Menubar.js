@@ -1,11 +1,11 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
 import { IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact from '../api/Api';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -48,7 +48,7 @@ export const Menubar = React.memo(
 
         useUpdateEffect(() => {
             if (mobileActiveState) {
-                ZIndexUtils.set('menu', rootMenuRef.current, context.autoZIndex, context.zIndex['menu']);
+                ZIndexUtils.set('menu', rootMenuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
                 bindDocumentClickListener();
             } else {
                 unbindDocumentClickListener();

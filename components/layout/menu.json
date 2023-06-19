@@ -172,6 +172,10 @@
                             "to": "/dataview"
                         },
                         {
+                            "name": "DataScroller",
+                            "to": "/datascroller"
+                        },
+                        {
                             "name": "OrderList",
                             "to": "/orderlist"
                         },

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { localeOption, localeOptions } from '../api/Api';
+import PrimeReact, { localeOption, localeOptions } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
@@ -13,7 +14,6 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -1489,7 +1489,7 @@ export const Calendar = React.memo(
             if (props.autoZIndex) {
                 const key = props.touchUI ? 'modal' : 'overlay';
 
-                ZIndexUtils.set(key, overlayRef.current, context.autoZIndex, props.baseZIndex || context.zIndex[key]);
+                ZIndexUtils.set(key, overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
             }
 
             alignOverlay();
@@ -1518,7 +1518,7 @@ export const Calendar = React.memo(
             if (props.touchUI) {
                 enableModality();
             } else if (overlayRef && overlayRef.current && inputRef && inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || context.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
 
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
@@ -2949,7 +2949,8 @@ export const Calendar = React.memo(
             const dates = createDates(monthMetaData, groupIndex);
             const containerProps = mergeProps(
                 {
-                    className: 'p-datepicker-calendar-container'
+                    className: 'p-datepicker-calendar-container',
+                    key: UniqueComponentId('calendar_container_')
                 },
                 ptm('container')
             );
@@ -2995,7 +2996,8 @@ export const Calendar = React.memo(
 
             const headerProps = mergeProps(
                 {
-                    className: 'p-datepicker-header'
+                    className: 'p-datepicker-header',
+                    key: index
                 },
                 ptm('header')
             );
@@ -3706,8 +3708,8 @@ export const Calendar = React.memo(
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
             'p-datepicker-touch-ui': props.touchUI,
-            'p-input-filled': context.inputStyle === 'filled',
-            'p-ripple-disabled': context.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();

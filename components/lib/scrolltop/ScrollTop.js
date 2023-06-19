@@ -1,12 +1,12 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ZIndexUtils } from '../utils/Utils';
-import { ScrollTopBase } from './ScrollTopBase';
-import { ChevronUpIcon } from '../icons/chevronup';
 import { PrimeReactContext } from '../api/context';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
+import { ChevronUpIcon } from '../icons/chevronup';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { ScrollTopBase } from './ScrollTopBase';
+import PrimeReact from '../api/Api';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -35,8 +35,8 @@ export const ScrollTop = React.memo(
         const [bindDocumentScrollListener] = useEventListener({
             target: 'window',
             type: 'scroll',
-            listener: () => {
-                checkVisibility(DomHandler.getWindowScrollTop());
+            listener: (event) => {
+                event && checkVisibility(DomHandler.getWindowScrollTop());
             }
         });
 
@@ -54,7 +54,7 @@ export const ScrollTop = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', scrollElementRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', scrollElementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
         };
 
         const onEntered = () => {
@@ -72,10 +72,10 @@ export const ScrollTop = React.memo(
             getElement: () => elementRef.current
         }));
 
-        useMountEffect(() => {
+        React.useEffect(() => {
             if (props.target === 'window') bindDocumentScrollListener();
             else if (props.target === 'parent') bindParentScrollListener();
-        });
+        }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(scrollElementRef.current);

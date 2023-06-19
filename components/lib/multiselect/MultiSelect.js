@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -9,7 +10,6 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -277,7 +277,7 @@ export const MultiSelect = React.memo(
         };
 
         const onOverlayEnter = (callback) => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
             scrollInView();
             callback && callback();
@@ -304,7 +304,7 @@ export const MultiSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || context.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const isClearClicked = (event) => {
@@ -509,10 +509,11 @@ export const MultiSelect = React.memo(
                 if (props.display === 'chip' && !empty) {
                     const value = props.value.slice(0, props.maxSelectedLabels || props.value.length);
 
-                    return value.map((val) => {
+                    return value.map((val, i) => {
                         const label = getLabelByValue(val);
                         const iconProps = mergeProps(
                             {
+                                key: i,
                                 className: 'p-multiselect-token-icon',
                                 onClick: (e) => removeChip(e, val)
                             },
@@ -529,6 +530,7 @@ export const MultiSelect = React.memo(
 
                         const tokenLabelProps = mergeProps(
                             {
+                                key: label + i,
                                 className: 'p-multiselect-token-label'
                             },
                             ptm('tokenLabel')

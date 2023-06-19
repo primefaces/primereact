@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact from '../api/Api';
 
 let messageIdx = 0;
 
@@ -92,7 +92,7 @@ export const Toast = React.memo(
         };
 
         useUpdateEffect(() => {
-            ZIndexUtils.set('toast', containerRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['toast']);
+            ZIndexUtils.set('toast', containerRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['toast']) || PrimeReact.zIndex['toast']);
         }, [messagesState, props.baseZIndex]);
 
         useUnmountEffect(() => {
@@ -110,8 +110,8 @@ export const Toast = React.memo(
 
         const createElement = () => {
             const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
-                'p-input-filled': context.inputStyle === 'filled',
-                'p-ripple-disabled': context.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
 
             const rootProps = mergeProps(

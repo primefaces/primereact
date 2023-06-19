@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -7,7 +8,6 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
-import { PrimeReactContext } from '../api/context';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -113,7 +113,7 @@ export const ConfirmPopup = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             align();
         };
 
@@ -307,8 +307,8 @@ export const ConfirmPopup = React.memo(
 
         const createElement = () => {
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
-                'p-input-filled': context.inputStyle === 'filled',
-                'p-ripple-disabled': context.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
             const content = createContent();
             const footer = createFooter();
