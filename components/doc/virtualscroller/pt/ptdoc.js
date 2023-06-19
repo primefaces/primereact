@@ -25,7 +25,6 @@ export function PTDoc(props) {
     items={items}
     itemSize={50}
     itemTemplate={itemTemplate}
-    style={{ width: '200px', height: '200px' }}
     pt={{
         root: {
             className: 'border-1 surface-border border-round',
@@ -60,7 +59,6 @@ export default function PTDemo() {
                 items={items}
                 itemSize={50}
                 itemTemplate={itemTemplate}
-                style={{ width: '200px', height: '200px' }}
                 pt={{
                     root: {
                         className: 'border-1 surface-border border-round',
@@ -98,7 +96,6 @@ export default function PTDemo() {
                 items={items}
                 itemSize={50}
                 itemTemplate={itemTemplate}
-                style={{ width: '200px', height: '200px' }}
                 pt={{
                     root: {
                         className: 'border-1 surface-border border-round',
@@ -120,7 +117,6 @@ export default function PTDemo() {
                     items={items}
                     itemSize={50}
                     itemTemplate={itemTemplate}
-                    style={{ width: '200px', height: '200px' }}
                     pt={{
                         root: {
                             className: 'border-1 surface-border border-round',

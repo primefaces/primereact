@@ -1,15 +1,18 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/context';
+import PrimeReact from '../api/Api';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
+    const context = React.useContext(PrimeReactContext);
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
         const className = classNames('p-treeselect-panel p-component', props.panelClassName, {
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
 
         const panelProps = mergeProps(

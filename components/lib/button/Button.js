@@ -4,10 +4,12 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
+import { PrimeReactContext } from '../api/context';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ButtonBase.getProps(inProps, context);
 
         const { ptm } = ButtonBase.setMetaData({
             props

@@ -1,17 +1,19 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, mergeProps, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
-import { ChevronLeftIcon } from '../icons/chevronleft';
+import PrimeReact from '../api/Api';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SlideMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SlideMenuBase.getProps(inProps, context);
 
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
@@ -73,7 +75,7 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             DomHandler.absolutePosition(menuRef.current, targetRef.current);

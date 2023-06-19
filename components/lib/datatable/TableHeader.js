@@ -23,7 +23,7 @@ export const TableHeader = React.memo((props) => {
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
     const getColumnGroupProps = () => {
-        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined; //@todo
+        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined;
     };
 
     const getColumnGroupPTOptions = (key) => {
@@ -202,14 +202,15 @@ export const TableHeader = React.memo((props) => {
                 const headerCellProps = mergeProps(
                     {
                         style: colStyle,
-                        className: colClassName
+                        className: colClassName,
+                        key: colKey
                     },
                     getColumnPTOptions(col, 'headerCell'),
                     getColumnPTOptions(col, 'root')
                 );
 
                 return (
-                    <th {...headerCellProps} key={colKey + i}>
+                    <th {...headerCellProps}>
                         {checkbox}
                         {filterRow}
                     </th>

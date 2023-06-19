@@ -4,10 +4,12 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
+import { PrimeReactContext } from '../api/context';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ToggleButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ToggleButtonBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const { ptm } = ToggleButtonBase.setMetaData({

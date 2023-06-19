@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
@@ -8,10 +8,12 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
+import PrimeReact from '../api/Api';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MentionBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MentionBase.getProps(inProps, context);
 
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -61,7 +63,7 @@ export const Mention = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 

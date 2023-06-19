@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -11,7 +12,8 @@ import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = DropdownBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = DropdownBase.getProps(inProps, context);
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -27,12 +29,13 @@ export const Dropdown = React.memo(
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const focusInputRef = React.useRef(props.focusInputRef);
+        const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
         const currentSearchChar = React.useRef(null);
         const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
         const hasFilter = ObjectUtils.isNotEmpty(filterState);
-        const appendTo = props.appendTo || PrimeReact.appendTo;
+        const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -522,7 +525,7 @@ export const Dropdown = React.memo(
         };
 
         const onOverlayEnter = (callback) => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
             callback && callback();
         };
@@ -549,7 +552,7 @@ export const Dropdown = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const scrollInView = () => {
@@ -621,7 +624,8 @@ export const Dropdown = React.memo(
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
-            getFocusInput: () => focusInputRef.current
+            getFocusInput: () => focusInputRef.current,
+            getVirtualScroller: () => virtualScrollerRef.current
         }));
 
         React.useEffect(() => {
@@ -875,6 +879,7 @@ export const Dropdown = React.memo(
                     <DropdownPanel
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
+                        virtualScrollerRef={virtualScrollerRef}
                         {...props}
                         appendTo={appendTo}
                         onClick={onPanelClick}

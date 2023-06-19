@@ -1,13 +1,15 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { AngleRightIcon } from '../icons/angleright';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import PrimeReact from '../api/Api';
 export const CascadeSelectSub = React.memo((props) => {
     const [activeOptionState, setActiveOptionState] = React.useState(null);
     const elementRef = React.useRef(null);
     const ptm = props.ptm;
+    const context = React.useContext(PrimeReactContext);
 
     const position = () => {
         const parentItem = elementRef.current.parentElement;
@@ -262,8 +264,8 @@ export const CascadeSelectSub = React.memo((props) => {
     };
 
     const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className, {
-        'p-input-filled': PrimeReact.inputStyle === 'filled',
-        'p-ripple-disabled': PrimeReact.ripple === false
+        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
     });
     const submenu = createMenu();
     const listProps = mergeProps(

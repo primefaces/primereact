@@ -1,16 +1,18 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
-import { TimesIcon } from '../icons/times';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
-    const props = OverlayPanelBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = OverlayPanelBase.getProps(inProps, context);
     const [visibleState, setVisibleState] = React.useState(false);
     const { ptm } = OverlayPanelBase.setMetaData({
         props,
@@ -106,7 +108,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
-        ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+        ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
         align();
     };
 
@@ -148,7 +150,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const createStyle = () => {
         if (!styleElement.current) {
-            styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+            styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
             let innerHTML = '';
 
@@ -228,8 +230,8 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const createElement = () => {
         const className = classNames('p-overlaypanel p-component', props.className, {
-            'p-input-filled': PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': PrimeReact.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const closeIcon = createCloseIcon();
         const rootProps = mergeProps(

@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
+import { PrimeReactContext } from '../api/context';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
-    const props = ScrollPanelBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = ScrollPanelBase.getProps(inProps, context);
 
     const { ptm } = ScrollPanelBase.setMetaData({
         props

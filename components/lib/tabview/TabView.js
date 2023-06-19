@@ -7,11 +7,13 @@ import { TimesIcon } from '../icons/times';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
+import { PrimeReactContext } from '../api/context';
 
 export const TabPanel = () => {};
 
 export const TabView = React.forwardRef((inProps, ref) => {
-    const props = TabViewBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = TabViewBase.getProps(inProps, context);
 
     const [idState, setIdState] = React.useState(props.id);
     const [backwardIsDisabledState, setBackwardIsDisabledState] = React.useState(true);

@@ -1,19 +1,21 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/context';
+import { Badge } from '../badge/Badge';
 import { Button } from '../button/Button';
+import { PlusIcon } from '../icons/plus';
+import { TimesIcon } from '../icons/times';
+import { UploadIcon } from '../icons/upload';
 import { Messages } from '../messages/Messages';
 import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
-import { Badge } from '../badge/Badge';
-import { PlusIcon } from '../icons/plus';
-import { UploadIcon } from '../icons/upload';
-import { TimesIcon } from '../icons/times';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = FileUploadBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = FileUploadBase.getProps(inProps, context);
         const [uploadedFilesState, setUploadedFilesState] = React.useState([]);
         const [filesState, setFilesState] = React.useState([]);
         const [progressState, setProgressState] = React.useState(0);
@@ -286,6 +288,7 @@ export const FileUpload = React.memo(
 
         const clear = () => {
             setFilesState([]);
+            setUploadedFilesState([]);
             setUploadingState(false);
             props.onClear && props.onClear();
             clearInput();
@@ -367,7 +370,9 @@ export const FileUpload = React.memo(
             getInput: () => fileInputRef.current,
             getContent: () => contentRef.current,
             getFiles: () => filesState,
-            setFiles: (files) => setFilesState(files || [])
+            setFiles: (files) => setFilesState(files || []),
+            getUploadedFiles: () => uploadedFilesState,
+            setUploadedFiles: (files) => setUploadedFilesState(files || [])
         }));
 
         const createChooseButton = () => {

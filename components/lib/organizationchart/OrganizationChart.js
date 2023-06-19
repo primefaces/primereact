@@ -2,10 +2,12 @@ import * as React from 'react';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { OrganizationChartBase } from './OrganizationChartBase';
 import { OrganizationChartNode } from './OrganizationChartNode';
+import { PrimeReactContext } from '../api/context';
 
 export const OrganizationChart = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = OrganizationChartBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = OrganizationChartBase.getProps(inProps, context);
         const { ptm } = OrganizationChartBase.setMetaData({
             props
         });

@@ -1,15 +1,17 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/context';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
+import PrimeReact from '../api/Api';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MenuBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const { ptm } = MenuBase.setMetaData({
             props,
@@ -117,7 +119,7 @@ export const Menu = React.memo(
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+            ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
 
@@ -275,8 +277,8 @@ export const Menu = React.memo(
                     'p-menu p-component',
                     {
                         'p-menu-overlay': props.popup,
-                        'p-input-filled': PrimeReact.inputStyle === 'filled',
-                        'p-ripple-disabled': PrimeReact.ripple === false
+                        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                     },
                     props.className
                 );

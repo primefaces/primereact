@@ -1,9 +1,6 @@
 import DocApiTable from '../../components/doc/common/docapitable';
 import { PTDoc } from '../../components/doc/slidemenu/pt/ptdoc';
 import { Wireframe } from '../../components/doc/slidemenu/pt/wireframe';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/slidemenu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/slidemenu/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
@@ -39,6 +36,7 @@ const SlideMenuDemo = () => {
             component: AccessibilityDoc
         }
     ];
+
     const ptDocs = [
         {
             id: 'pt.wireframe',
