@@ -43795,6 +43795,14 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of selected values."
+                        },
+                        {
+                            "name": "nodeTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "false",
+                            "description": "Template of internally used tree component node element."
                         }
                     ]
                 },
