@@ -43694,6 +43694,14 @@
                             "description": "Name of the input element."
                         },
                         {
+                            "name": "nodeTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "false",
+                            "description": "Template of internally used tree component node element."
+                        },
+                        {
                             "name": "options",
                             "optional": true,
                             "readonly": false,
@@ -43754,7 +43762,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": ""
+                            "default": "",
+                            "description": "Resets the filter when the overlay is hidden."
                         },
                         {
                             "name": "scrollHeight",
@@ -43781,6 +43790,14 @@
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
                         {
+                            "name": "togglerTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Template of toggler element."
+                        },
+                        {
                             "name": "value",
                             "optional": true,
                             "readonly": false,
@@ -43795,14 +43812,6 @@
                             "type": "ReactNode | Function",
                             "default": "",
                             "description": "The template of selected values."
-                        },
-                        {
-                            "name": "nodeTemplate",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "default": "false",
-                            "description": "Template of internally used tree component node element."
                         }
                     ]
                 },
