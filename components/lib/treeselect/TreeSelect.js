@@ -517,6 +517,7 @@ export const TreeSelect = React.memo(
                         filterLocale={props.filterLocale}
                         showHeader={false}
                         onFilterValueChange={onFilterValueChange}
+                        nodeTemplate={props.nodeTemplate}
                         pt={ptm('tree')}
                     ></Tree>
 

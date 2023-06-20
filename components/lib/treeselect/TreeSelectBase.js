@@ -48,6 +48,7 @@ export const TreeSelectBase = ComponentBase.extend({
         transitionOptions: null,
         value: null,
         valueTemplate: null,
+        nodeTemplate: false,
         children: undefined
     }
 });
