@@ -26,6 +26,7 @@ export const TreeSelectBase = ComponentBase.extend({
         inputRef: null,
         metaKeySelection: true,
         name: null,
+        nodeTemplate: null,
         onChange: null,
         onFilterValueChange: null,
         onHide: null,
@@ -45,10 +46,10 @@ export const TreeSelectBase = ComponentBase.extend({
         selectionMode: 'single',
         style: null,
         tabIndex: null,
+        togglerTemplate: null,
         transitionOptions: null,
         value: null,
         valueTemplate: null,
-        nodeTemplate: false,
         children: undefined
     }
 });

@@ -9,7 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { TreeNodeTemplateOptions, TreePassThroughOptions } from '../tree/tree';
+import { TreeNodeTemplateOptions, TreePassThroughOptions, TreeTogglerTemplateOptions } from '../tree/tree';
 import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
@@ -388,6 +388,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     name?: string | undefined;
     /**
+     * Template of internally used tree component node element.
+     * @defaultValue false
+     */
+    nodeTemplate?: React.ReactNode | ((node: TreeNode, options: TreeNodeTemplateOptions) => React.ReactNode);
+    /**
      * An array of options to display.
      */
     options?: TreeNode[] | undefined;
@@ -420,6 +425,9 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @type {TreeSelectPassThroughOptions}
      */
     pt?: TreeSelectPassThroughOptions;
+    /**
+     * Resets the filter when the overlay is hidden.
+     */
     resetFilterOnHide?: boolean | undefined;
     /**
      * Maximum height of the options panel.
@@ -435,6 +443,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
+     * Template of toggler element.
+     */
+    togglerTemplate?: React.ReactNode | ((node: TreeNode, options: TreeTogglerTemplateOptions) => React.ReactNode);
+    /**
      * A single or an object of keys to control the selection state.
      */
     value?: string | TreeSelectSelectionKeysType | TreeSelectSelectionKeysType[] | undefined | null;
@@ -442,11 +454,6 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * The template of selected values.
      */
     valueTemplate?: React.ReactNode | ((selectedNodes: TreeNode | TreeNode[], props: TreeSelectProps) => React.ReactNode);
-    /**
-     * Template of internally used tree component node element.
-     * @defaultValue false
-     */
-    nodeTemplate?: React.ReactNode | ((node: TreeNode, options: TreeNodeTemplateOptions) => React.ReactNode);
     /**
      * Callback to invoke when selection changes.
      * @param {TreeSelectChangeEvent} event - Custom change event.
