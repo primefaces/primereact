@@ -40617,9 +40617,9 @@
                             "name": "position",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"center\" | \"left\" | \"top\" | \"bottom\" | \"right\" | \"bottom-right\" | \"bottom-left\" | \"top-right\" | \"top-left\" | \"top-center\" | \"bottom-center\"",
+                            "type": "\"center\" | \"bottom-right\" | \"bottom-left\" | \"top-right\" | \"top-left\" | \"top-center\" | \"bottom-center\"",
                             "default": "top-right",
-                            "description": "Position of the toast in viewport, valid values are \"top-right\", \"top-left\", \"bottom-left\" and \"bottom-right\"."
+                            "description": "Position of the toast in viewport, valid values are 'center', 'top-center', 'top-left', 'top-right', 'bottom-center', 'bottom-left', 'bottom-right'."
                         },
                         {
                             "name": "transitionOptions",
