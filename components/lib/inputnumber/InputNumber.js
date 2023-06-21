@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PrimeReact from '../api/Api';
 import { PrimeReactContext } from '../api/context';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
@@ -8,7 +9,6 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import PrimeReact from '../api/Api';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -304,6 +304,15 @@ export const InputNumber = React.memo(
                 return;
             }
 
+            if (props.onKeyDown) {
+                props.onKeyDown(event);
+
+                // do not continue if the user defined click wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
+            }
+
             lastValue.current = event.target.value;
 
             if (event.shiftKey || event.altKey) {
@@ -446,27 +455,31 @@ export const InputNumber = React.memo(
                 default:
                     break;
             }
-
-            if (props.onKeyDown) {
-                props.onKeyDown(event);
-            }
         };
 
-        const onInputKeyPress = (event) => {
+        const onInputKeyUp = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
             }
 
-            const code = event.which || event.keyCode;
+            if (props.onKeyUp) {
+                props.onKeyUp(event);
 
-            if (code !== 13) {
+                // do not continue if the user defined click wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
+            }
+
+            const key = event.key;
+
+            if (key != 'Enter') {
                 // to submit a form
                 event.preventDefault();
             }
 
-            const char = String.fromCharCode(code);
-            const _isDecimalSign = isDecimalSign(char);
-            const _isMinusSign = isMinusSign(char);
+            const _isDecimalSign = isDecimalSign(key);
+            const _isMinusSign = isMinusSign(key);
 
             if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
                 insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
@@ -1019,7 +1032,7 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyPress={onInputKeyPress}
+                    onKeyUp={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
                     onBlur={onInputBlur}
