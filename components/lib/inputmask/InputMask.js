@@ -3,7 +3,7 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputMaskBase } from './InputMaskBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {

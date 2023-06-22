@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ChartBase } from './ChartBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 // GitHub #3059 wrapper if loaded by script tag
 const ChartJS = (function () {

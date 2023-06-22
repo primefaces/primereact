@@ -462,6 +462,10 @@
                 {
                     "name": "SASS API",
                     "href": "https://www.primefaces.org/designer/api/primereact/9.0.0"
+                },
+                {
+                    "name": "PassThrough",
+                    "to": "/passthrough"
                 }
             ]
         },

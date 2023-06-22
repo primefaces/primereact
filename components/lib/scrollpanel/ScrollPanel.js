@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

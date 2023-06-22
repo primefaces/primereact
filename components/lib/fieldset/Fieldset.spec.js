@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
-import { PrimeReactProvider } from '../api/context';
+import { PrimeReactProvider } from '../api/Api';
 import { Fieldset } from './Fieldset';
 
 describe('Fieldset', () => {

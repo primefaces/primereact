@@ -10,7 +10,7 @@ import { PageLinks } from './PageLinks';
 import { PaginatorBase } from './PaginatorBase';
 import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {

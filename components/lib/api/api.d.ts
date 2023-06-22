@@ -93,6 +93,7 @@ import { SliderPassThroughOptions } from '../slider/slider';
 import { StepsPassThroughOptions } from '../steps/steps';
 import { ToggleButtonPassThroughOptions } from '../togglebutton/togglebutton';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+import { Dispatch, SetStateAction } from 'react';
 
 // Config
 export interface ZIndexOptions {
@@ -127,6 +128,21 @@ export interface APIOptions {
     zIndex?: ZIndexOptions;
     pt?: PrimeReactPTOptions;
     changeTheme?(theme?: string, newTheme?: string, linkElementId?: string, callback?: () => void): void;
+}
+
+export interface ContextAPIOptions extends APIOptions {
+    setAppendTo: Dispatch<SetStateAction<AppendToType>>;
+    setAutoZIndex: Dispatch<SetStateAction<boolean>>;
+    setCssTransition: Dispatch<SetStateAction<boolean>>;
+    setFilterMatchModeOptions: Dispatch<SetStateAction<FilterMatchModeOptions>>;
+    setHideOverlaysOnDocumentScrolling: Dispatch<SetStateAction<boolean>>;
+    setInputStyle: Dispatch<SetStateAction<InputStyleType>>;
+    setLocale: Dispatch<SetStateAction<string>>;
+    setNonce: Dispatch<SetStateAction<string>>;
+    setNullSortOrder: Dispatch<SetStateAction<number>>;
+    setRipple: Dispatch<SetStateAction<boolean>>;
+    setZIndex: Dispatch<SetStateAction<ZIndexOptions>>;
+    setPt: Dispatch<SetStateAction<PrimeReactPTOptions>>;
 }
 
 export interface PrimeReactPTOptions {
@@ -226,6 +242,15 @@ export interface PrimeReactPTOptions {
 declare const PrimeReact: APIOptions;
 
 export default PrimeReact;
+
+type PrimeReactProviderProps = {
+    children: React.ReactNode;
+};
+
+declare const PrimeReactProvider: React.FC<PrimeReactProviderProps>;
+declare const PrimeReactContext: React.Context<ContextAPIOptions>;
+
+export { PrimeReactProvider, PrimeReactContext };
 
 // Locale
 export declare function locale(locale: string): { locale: string; options: object };

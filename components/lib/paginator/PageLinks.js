@@ -3,7 +3,7 @@ import { ariaLabel } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const PageLinks = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

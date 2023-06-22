@@ -3,7 +3,7 @@ import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hook
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import PrimeReact from '../api/Api';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {

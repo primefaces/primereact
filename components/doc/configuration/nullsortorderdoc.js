@@ -4,7 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function NullSortOrderDoc(props) {
     const code = {
         basic: `
-PrimeReact.nullSortOrder = 1;
+import { PrimeReactContext } from 'primereact/api';
+
+//use in a component
+const { setNullSortOrder } = useContext(PrimeReactContext);
+
+setNullSortOrder(1);
         `
     };
 

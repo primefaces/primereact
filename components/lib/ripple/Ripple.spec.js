@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { userAgent } from '../../test';
-import { PrimeReactProvider } from '../api/context';
+import { PrimeReactProvider } from '../api/Api';
 import { Button } from '../button/Button';
 
 describe('Ripple', () => {

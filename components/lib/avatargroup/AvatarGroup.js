@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { AvatarGroupBase } from './AvatarGroupBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const AvatarGroup = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

@@ -4,7 +4,7 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {

@@ -4,7 +4,22 @@ import { DocSectionText } from '../common/docsectiontext';
 export function ImportDoc(props) {
     const code = {
         basic: `
-import PrimeReact from 'primereact/api';
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+        `
+    };
+
+    const code2 = {
+        basic: `
+// _app.js
+import { PrimeReactProvider } from 'primereact/context';
+
+export default function MyApp({ Component, pageProps }) {
+    return (
+        <PrimeReactProvider>
+            <Component {...pageProps} />
+        </PrimeReactProvider>
+    );
+}        
         `
     };
 
@@ -12,10 +27,16 @@ import PrimeReact from 'primereact/api';
         <>
             <DocSectionText {...props}>
                 <p>
-                    Configuration is managed by the <i>PrimeReact</i> instance imported from <i>primereact/api</i>.
+                    Configuration is managed by the <i>PrimeReactProvider</i> and <i>PrimeReactContext</i> imported from <i>primereact/api</i>.
                 </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <div className="doc-section-description">
+                <p>
+                    The <i>PrimeReactProvider</i> component is used to wrap the application and the <i>PrimeReactContext</i> is used to access the configuration options.
+                </p>
+            </div>
+            <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

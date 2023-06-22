@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { PhotoService } from '../../../service/PhotoService';
-import { PrimeReactContext } from '../../lib/api/context';
+import { PrimeReactContext } from '../../lib/api/Api';
 import { Dialog } from '../../lib/dialog/Dialog';
 import { Dock } from '../../lib/dock/Dock';
 import { Galleria } from '../../lib/galleria/Galleria';

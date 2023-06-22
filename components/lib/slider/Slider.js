@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SliderBase } from './SliderBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Slider = React.memo(
     React.forwardRef((inProps, ref) => {

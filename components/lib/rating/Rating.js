@@ -5,7 +5,7 @@ import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {

@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { act, render } from '@testing-library/react';
 import * as React from 'react';
 import { snapshotParent } from '../../test';
-import { PrimeReactProvider } from '../api/context';
+import { PrimeReactProvider } from '../api/Api';
 import { Panel } from '../panel/Panel';
 import { BlockUI } from './BlockUI';
 

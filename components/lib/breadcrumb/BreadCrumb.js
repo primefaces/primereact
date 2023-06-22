@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
