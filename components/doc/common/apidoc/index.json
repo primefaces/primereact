@@ -166,7 +166,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -3315,7 +3315,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -5447,7 +5447,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -7295,7 +7295,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -9058,7 +9058,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -11932,7 +11932,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         }
@@ -12496,7 +12496,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -12877,7 +12877,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -17326,7 +17326,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -18444,7 +18444,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -19284,7 +19284,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -20883,7 +20883,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -27461,7 +27461,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -27890,7 +27890,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -28714,7 +28714,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -29436,7 +29436,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -31463,7 +31463,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -32842,7 +32842,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -33232,7 +33232,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -33700,7 +33700,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -36059,7 +36059,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -36632,7 +36632,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -37088,7 +37088,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -38181,7 +38181,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -40355,7 +40355,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -40818,7 +40818,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
@@ -43978,7 +43978,7 @@
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "CSSTransitionProps<undefined>",
+                            "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
                         },
