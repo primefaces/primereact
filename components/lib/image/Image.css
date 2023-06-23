@@ -53,6 +53,8 @@
     transition: transform .15s;
     max-width: 100vw;
     max-height: 100vh;
+    width: 100%;
+    height: 100%;
     /* Show tiled background for images with transparency. */
     background: #eee
         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" fill-opacity=".25" ><rect x="200" width="200" height="200" /><rect y="200" width="200" height="200" /></svg>');
