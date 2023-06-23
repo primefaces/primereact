@@ -239,6 +239,9 @@ export interface PrimeReactPTOptions {
     virtualscroller?: VirtualScrollerPassThroughOptions;
 }
 
+/**
+ * @deprecated since version 9.6.0. Use PrimeReactContext instead.
+ */
 declare const PrimeReact: APIOptions;
 
 export default PrimeReact;
