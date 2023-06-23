@@ -24,7 +24,7 @@ const PassThroughDemo = () => {
             description="The Pass Through feature enables direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
             componentDocs={docs}
             apiDocs={['API']}
-            apiExclude={{ interfaces: ['PrimeIconsOptions', 'APIOptions', 'ContextAPIOptions', 'FilterMatchModeOptions', 'ZIndexOptions'], types: 'excludeAll' }}
+            apiExclude={{ interfaces: ['PrimeIconsOptions', 'APIOptions', 'ContextAPIOptions', 'FilterMatchModeOptions', 'ZIndexOptions', 'LocaleOptions'], types: 'excludeAll' }}
         />
     );
 };
