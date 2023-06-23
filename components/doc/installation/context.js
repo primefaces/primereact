@@ -1,7 +1,7 @@
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
-export function ImportDoc(props) {
+export function ContextDoc(props) {
     const code = {
         basic: `
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
