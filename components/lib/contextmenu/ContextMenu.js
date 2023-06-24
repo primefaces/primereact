@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
-import PrimeReact from '../api/Api';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -43,6 +42,7 @@ export const ContextMenu = React.memo(
 
         const [bindDocumentContextMenuListener] = useEventListener({
             type: 'contextmenu',
+            when: props.global,
             listener: (event) => {
                 show(event);
             }
@@ -209,14 +209,14 @@ export const ContextMenu = React.memo(
         };
 
         useMountEffect(() => {
-            if (props.global) {
-                bindDocumentContextMenuListener();
-            }
-
             if (props.breakpoint) {
                 !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
             }
         });
+
+        useUpdateEffect(() => {
+            props.global && bindDocumentContextMenuListener();
+        }, [props.global]);
 
         useUpdateEffect(() => {
             if (attributeSelectorState && menuRef.current) {
