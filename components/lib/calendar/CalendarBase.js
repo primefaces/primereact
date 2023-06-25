@@ -93,6 +93,7 @@ export const CalendarBase = ComponentBase.extend({
         yearNavigator: false,
         yearNavigatorTemplate: null,
         yearRange: null,
-        children: undefined
+        children: undefined,
+        allowTyping: false
     }
 });

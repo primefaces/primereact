@@ -94,7 +94,7 @@ export const Calendar = React.memo(
         const onInputKeyDown = (event) => {
             isKeydown.current = true;
             hide();
-            handlearr(event);
+            handleArrowInput(event);
 
             switch (event.which) {
                 //escape
@@ -3481,6 +3481,7 @@ export const Calendar = React.memo(
         }
 
         const onInputClick = (e) => {
+            if (!props.allowTyping) return;
             setDateFieldSelection(e);
         }
 
@@ -3508,6 +3509,7 @@ export const Calendar = React.memo(
         }
 
         const onInputChange = (e) => {
+            if (!props.allowTyping) return;
             let dateFieldMethod, monthFieldMethod, yearFieldMethod;
             const [day, month, year] = inputValue.split('-');
             let newDay = day, newMonth = month, newYear = year;
@@ -3624,7 +3626,7 @@ export const Calendar = React.memo(
                         tooltip={props.tooltip}
                         tooltipOptions={props.tooltipOptions}
                         pt={ptm('input')}
-                        value={inputValue}
+                        value={props.allowTyping ? inputValue : ''}
                         onClick={onInputClick}
                         onChange={onInputChange}
                     />
