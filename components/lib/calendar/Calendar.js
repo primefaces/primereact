@@ -93,7 +93,8 @@ export const Calendar = React.memo(
 
         const onInputKeyDown = (event) => {
             isKeydown.current = true;
-            onInputKeyup(event);
+            hide();
+            handlearr(event);
 
             switch (event.which) {
                 //escape
@@ -3483,7 +3484,14 @@ export const Calendar = React.memo(
             setDateFieldSelection(e);
         }
 
-        const checkIfDateValid = (day, month, year) => {
+        const checkDateUpdate = (e, value) => {
+            const [date, month, year] = value.split('-');
+            const newDate = new Date(year, month - 1, date);
+
+            if (!isNaN(date) && !isNaN(month) && !isNaN(year) && Number(date) && Number(month) && Number(year) > 99) updateModel(e, newDate);
+        }
+
+        const getValidDate = (day, month, year) => {
             const maxDay = new Date(isNaN(year) ? 2000 : Number(year), isNaN(month) ? 1 : Number(month), 0).getDate();
 
             if (!isNaN(day) && Number(day) > maxDay) day = maxDay.toString();
@@ -3500,7 +3508,6 @@ export const Calendar = React.memo(
         }
 
         const onInputChange = (e) => {
-            console.log(e);
             let dateFieldMethod, monthFieldMethod, yearFieldMethod;
             const [day, month, year] = inputValue.split('-');
             let newDay = day, newMonth = month, newYear = year;
@@ -3568,11 +3575,17 @@ export const Calendar = React.memo(
             }
 
             changeDateWithCursor(e, dateFieldMethod, monthFieldMethod, yearFieldMethod);
-            setInputValue(checkIfDateValid(newDay, newMonth, newYear));
+            setInputValue(() => {
+                const newValue = getValidDate(newDay, newMonth, newYear);
+
+                checkDateUpdate(e, newValue);
+                
+                return newValue;
+            });
 
         };
 
-        const onInputKeyup = (e) => {
+        const handleArrowInput = (e) => {
             const cursorPosition = e.target.selectionEnd;
 
             if (e.key === 'ArrowRight') {
