@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';

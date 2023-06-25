@@ -4,7 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function HideOverlaysDoc(props) {
     const code = {
         basic: `
-PrimeReact.hideOverlaysOnDocumentScrolling = true;
+import { PrimeReactContext } from 'primereact/api';
+
+//use in a component
+const { setHideOverlayOnScroll } = useContext(PrimeReactContext);
+
+setHideOverlayOnScroll(true);
         `
     };
 

@@ -6,7 +6,7 @@ import { classNames, IconUtils, mergeProps, UniqueComponentId } from '../utils/U
 import { FieldsetBase } from './FieldsetBase';
 import { PlusIcon } from '../icons/plus';
 import { MinusIcon } from '../icons/minus';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

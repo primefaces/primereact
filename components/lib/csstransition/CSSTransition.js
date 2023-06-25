@@ -3,7 +3,7 @@ import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
 import { CSSTransitionBase } from './CSSTransitionBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import PrimeReact from '../api/Api';
 
 export const CSSTransition = React.forwardRef((inProps, ref) => {

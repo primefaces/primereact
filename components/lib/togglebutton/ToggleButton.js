@@ -4,7 +4,7 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {

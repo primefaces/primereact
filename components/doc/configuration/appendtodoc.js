@@ -4,7 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function AppendToDoc(props) {
     const code = {
         basic: `
-PrimeReact.appendTo = 'self';
+import { PrimeReactContext } from 'primereact/api';
+
+//use in a component
+const { setAppendTo } = useContext(PrimeReactContext);
+
+setAppendTo('self');
         `
     };
 

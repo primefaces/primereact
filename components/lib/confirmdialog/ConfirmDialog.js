@@ -7,7 +7,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };

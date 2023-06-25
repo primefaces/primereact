@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, mergeProps } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 const radius = 40;
 const midX = 50;

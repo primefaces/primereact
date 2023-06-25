@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
 import { CardBase } from './CardBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Card = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

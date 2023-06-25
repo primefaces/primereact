@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { Badge } from '../badge/Badge';
 import { Button } from '../button/Button';
 import { PlusIcon } from '../icons/plus';
@@ -677,7 +677,18 @@ export const FileUpload = React.memo(
             );
             const icon = chooseOptions.icon ? chooseOptions.icon : !chooseOptions.icon && (!hasFiles || props.auto) ? <PlusIcon {...chooseIconProps} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon {...chooseIconProps} />;
             const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props, hasFiles });
-            const input = !hasFiles && <input ref={fileInputRef} type="file" accept={props.accept} multiple={props.multiple} disabled={disabled} onChange={onFileSelect} />;
+            const inputProps = mergeProps(
+                {
+                    ref: fileInputRef,
+                    type: 'file',
+                    onChange: (e) => onFileSelect(e),
+                    multiple: props.multiple,
+                    accept: props.accept,
+                    disabled: disabled
+                },
+                ptm('input')
+            );
+            const input = !hasFiles && <input {...inputProps} />;
             const rootProps = mergeProps(
                 {
                     className,

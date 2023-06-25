@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { DataScrollerBase } from './DataScrollerBase';

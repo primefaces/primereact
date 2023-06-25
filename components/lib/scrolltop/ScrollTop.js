@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronUpIcon } from '../icons/chevronup';

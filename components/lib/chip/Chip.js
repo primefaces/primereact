@@ -2,7 +2,7 @@ import * as React from 'react';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {

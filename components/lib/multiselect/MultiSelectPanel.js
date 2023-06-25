@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, mergeProps } from '../utils/Utils';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import PrimeReact from '../api/Api';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TimelineBase } from './TimelineBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {

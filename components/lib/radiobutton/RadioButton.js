@@ -3,7 +3,7 @@ import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {

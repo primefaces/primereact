@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { AngleRightIcon } from '../icons/angleright';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SlideMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -46,7 +46,7 @@ export const SlideMenuSub = React.memo((props) => {
         const separatorProps = mergeProps(
             {
                 key,
-                className: 'p-menu-separator'
+                className: 'p-slidemenu-separator'
             },
             props.ptm('separator')
         );

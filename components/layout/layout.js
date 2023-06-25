@@ -8,7 +8,7 @@ import Config from './config';
 import Footer from './footer';
 import Menu from './menu';
 import Topbar from './topbar';
-import { PrimeReactContext } from '../lib/api/context';
+import { PrimeReactContext } from '../lib/api/PrimeReactContext';
 import PrimeReact from '../lib/api/Api';
 
 export default function Layout(props) {

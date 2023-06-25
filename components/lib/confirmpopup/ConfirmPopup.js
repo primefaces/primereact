@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';

@@ -6,7 +6,7 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {

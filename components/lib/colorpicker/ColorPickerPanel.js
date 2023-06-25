@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, mergeProps } from '../utils/Utils';

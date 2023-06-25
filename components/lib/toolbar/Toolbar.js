@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
 import { ToolbarBase } from './ToolbarBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Toolbar = React.memo(
     React.forwardRef((inProps, ref) => {

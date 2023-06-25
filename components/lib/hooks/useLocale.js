@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as React from 'react';
-import { PrimeReactContext } from '../../lib/api/context';
+import { PrimeReactContext } from '../../lib/api/Api';
 import PrimeReact from '../api/Api';
 
 let locales = {

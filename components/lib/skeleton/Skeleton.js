@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { SkeletonBase } from './SkeletonBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Skeleton = React.memo(
     React.forwardRef((inProps, ref) => {

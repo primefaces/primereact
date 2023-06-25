@@ -3,7 +3,7 @@ import { localeOption } from '../api/Api';
 import { Dropdown } from '../dropdown/Dropdown';
 import { ObjectUtils } from '../utils/Utils';
 import { RowsPerPageDropdownBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const RowsPerPageDropdown = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

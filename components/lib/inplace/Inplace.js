@@ -4,7 +4,7 @@ import { Button } from '../button/Button';
 import { TimesIcon } from '../icons/times';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InplaceBase } from './InplaceBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;

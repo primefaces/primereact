@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { snapshot } from '../../test';
-import { PrimeReactProvider } from '../api/context';
+import { PrimeReactProvider } from '../api/Api';
 import { Button } from '../button/Button';
 import { Card } from './Card';
 

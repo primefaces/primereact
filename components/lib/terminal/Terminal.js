@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TerminalService } from '../terminalservice/TerminalService';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { TerminalBase } from './TerminalBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Terminal = React.memo(
     React.forwardRef((inProps, ref) => {

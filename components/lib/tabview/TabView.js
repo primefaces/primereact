@@ -7,7 +7,7 @@ import { TimesIcon } from '../icons/times';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const TabPanel = () => {};
 

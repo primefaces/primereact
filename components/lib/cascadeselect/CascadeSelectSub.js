@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';

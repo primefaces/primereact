@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SearchIcon } from '../icons/search';
@@ -10,7 +11,6 @@ import { Tree } from '../tree/Tree';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -498,25 +498,27 @@ export const TreeSelect = React.memo(
             return (
                 <>
                     <Tree
-                        value={props.options}
-                        selectionMode={props.selectionMode}
-                        selectionKeys={props.value}
-                        metaKeySelection={props.metaKeySelection}
-                        onSelectionChange={onSelectionChange}
-                        onSelect={onNodeSelect}
-                        onUnselect={onNodeUnselect}
                         expandedKeys={expandedKeys}
-                        onToggle={onNodeToggle}
-                        onExpand={props.onNodeExpand}
-                        onCollapse={props.onNodeCollapse}
                         filter={props.filter}
-                        filterValue={filteredValue}
                         filterBy={props.filterBy}
+                        filterLocale={props.filterLocale}
                         filterMode={props.filterMode}
                         filterPlaceholder={props.filterPlaceholder}
-                        filterLocale={props.filterLocale}
-                        showHeader={false}
+                        filterValue={filteredValue}
+                        metaKeySelection={props.metaKeySelection}
+                        nodeTemplate={props.nodeTemplate}
+                        onCollapse={props.onNodeCollapse}
+                        onExpand={props.onNodeExpand}
                         onFilterValueChange={onFilterValueChange}
+                        onSelect={onNodeSelect}
+                        onSelectionChange={onSelectionChange}
+                        onToggle={onNodeToggle}
+                        onUnselect={onNodeUnselect}
+                        selectionKeys={props.value}
+                        selectionMode={props.selectionMode}
+                        showHeader={false}
+                        togglerTemplate={props.togglerTemplate}
+                        value={props.options}
                         pt={ptm('tree')}
                     ></Tree>
 

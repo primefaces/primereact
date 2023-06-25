@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler } from '../utils/Utils';
 import { PortalBase } from './PortalBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import PrimeReact from '../api/Api';
 
 export const Portal = React.memo((inProps) => {
