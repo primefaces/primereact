@@ -397,16 +397,16 @@ export const MultiSelect = React.memo(
                 const options = visibleOptions.filter((option) => !isOptionDisabled(option));
 
                 if (props.optionGroupLabel) {
-                    let anyOptionLeftUnchecked = false;
+                    let areAllSelected = true;
                     for (let optionGroup of options) {
                         const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
                         
                         if(visibleOptionsGroupChildren.some((option) => !isSelected(option)) === true) {
-                            anyOptionLeftUnchecked = true;
+                            areAllSelected = false;
                         }
                     }
 
-                    return !anyOptionLeftUnchecked;
+                    return areAllSelected;
                 } else {
 
                     return !options.some((option) => !isSelected(option));
