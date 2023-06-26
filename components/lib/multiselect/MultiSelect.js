@@ -398,6 +398,7 @@ export const MultiSelect = React.memo(
 
                 if (props.optionGroupLabel) {
                     let areAllSelected = true;
+
                     for (let optionGroup of options) {
                         const visibleOptionsGroupChildren = getOptionGroupChildren(optionGroup).filter((option) => !isOptionDisabled(option));
                         
