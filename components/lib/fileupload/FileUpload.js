@@ -147,7 +147,7 @@ export const FileUpload = React.memo(
             }
 
             if (props.onSelect) {
-                props.onSelect({ originalEvent: event, files: selectedFiles });
+                props.onSelect({ originalEvent: event, files: currentFiles });
             }
 
             if (event.type !== 'drop' && isIE11()) {
