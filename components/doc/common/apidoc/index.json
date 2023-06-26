@@ -8862,7 +8862,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "string[]",
                             "default": "",
                             "description": "Value of the component."
                         },
@@ -9096,7 +9096,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "string",
                             "description": "Removed item value"
                         }
                     ]
@@ -9115,7 +9115,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "Nullable<any[]>"
+                            "type": "Nullable<string[]>"
                         },
                         {
                             "name": "checked",
@@ -9127,7 +9127,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any[]>"
+                            "type": "FormTarget<string[]>"
                         }
                     ]
                 }
@@ -9247,7 +9247,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "string",
                             "description": "Added item value"
                         }
                     ],
