@@ -8,8 +8,8 @@
  *
  */
 import * as React from 'react';
-import { TooltipEvent, TooltipOptions } from './tooltipoptions';
 import { PassThroughType } from '../utils/utils';
+import { TooltipEvent, TooltipOptions } from './tooltipoptions';
 
 export declare type TooltipPassThroughType<T> = PassThroughType<T, TooltipPassThroughMethodOptions>;
 
@@ -104,19 +104,19 @@ export interface TooltipProps extends TooltipOptions {
 export declare class Tooltip extends React.Component<TooltipProps, any> {
     /**
      * Used to reload target events. In some cases, the target element can be hidden initially. Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.
-     * @param {HTMLElement} target - Target element.
+     * @param {HTMLElement| undefined} target - Target element or if undefined will use current target.
      */
-    public updateTargetEvents(target: HTMLElement): void;
+    public updateTargetEvents(target: HTMLElement | undefined): void;
     /**
      * Used to load target events.
-     * @param {HTMLElement} target - Target element.
+     * @param {HTMLElement} target - Target element or if undefined will use current target.
      */
-    public loadTargetEvents(target: HTMLElement): void;
+    public loadTargetEvents(target: HTMLElement | undefined): void;
     /**
      * Used to unload target events.
-     * @param {HTMLElement} target - Target element.
+     * @param {HTMLElement | undefined} target - Target element or if undefined will use current target.
      */
-    public unloadTargetEvents(target: HTMLElement): void;
+    public unloadTargetEvents(target: HTMLElement | undefined): void;
     /**
      * Used to get container element.
      * @return {HTMLElement} Container element
