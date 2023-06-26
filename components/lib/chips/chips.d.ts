@@ -83,7 +83,7 @@ interface ChipsRemovableOptions {
     /**
      * Current value
      */
-    value: any;
+    value: string;
     /**
      * Current index
      */
@@ -106,7 +106,7 @@ interface ChipsAddEvent {
     /**
      * Added item value
      */
-    value: any;
+    value: string;
 }
 
 /**
@@ -121,7 +121,7 @@ interface ChipsRemoveEvent {
     /**
      * Removed item value
      */
-    value: any;
+    value: string;
 }
 
 /**
@@ -130,7 +130,7 @@ interface ChipsRemoveEvent {
  * @extends {FormEvent}
  * @event
  */
-interface ChipsChangeEvent extends FormEvent<any[]> {}
+interface ChipsChangeEvent extends FormEvent<string[]> { }
 
 /**
  * Defines valid properties in Chips component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -161,7 +161,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
     /**
      * Value of the component.
      */
-    value?: any[] | undefined;
+    value?: string[] | undefined;
     /**
      * Maximum number of entries allowed.
      */
