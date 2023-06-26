@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption, localeOptions } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
@@ -2459,7 +2458,6 @@ export const Calendar = React.memo(
         }, [inputRef, props.inputRef]);
 
         useMountEffect(() => {
-            let unbindMaskEvents = null;
             let viewDate = getViewDate(props.viewDate);
 
             validateDate(viewDate);
@@ -2479,7 +2477,23 @@ export const Calendar = React.memo(
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                     }
                 }
-            } else if (props.mask) {
+            }
+
+            if (props.value) {
+                updateInputfield(props.value);
+                setValue(props.value);
+            }
+
+            if (props.autoFocus) {
+                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
+                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
+            }
+        });
+
+        useUpdateEffect(() => {
+            let unbindMaskEvents = null;
+
+            if (props.mask) {
                 unbindMaskEvents = mask(inputRef.current, {
                     mask: props.mask,
                     readOnly: props.readOnlyInput || props.disabled,
@@ -2493,20 +2507,10 @@ export const Calendar = React.memo(
                 }).unbindEvents;
             }
 
-            if (props.value) {
-                updateInputfield(props.value);
-                setValue(props.value);
-            }
-
-            if (props.autoFocus) {
-                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
-                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
-            }
-
             return () => {
                 props.mask && unbindMaskEvents && unbindMaskEvents();
             };
-        });
+        }, [props.mask]);
 
         useUpdateEffect(() => {
             setCurrentView(props.view);
