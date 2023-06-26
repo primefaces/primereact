@@ -130,7 +130,7 @@ interface ChipsRemoveEvent {
  * @extends {FormEvent}
  * @event
  */
-interface ChipsChangeEvent extends FormEvent<string[]> { }
+interface ChipsChangeEvent extends FormEvent<string[]> {}
 
 /**
  * Defines valid properties in Chips component. In addition to these, all properties of HTMLDivElement can be used in this component.
