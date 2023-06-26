@@ -41990,8 +41990,8 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "HTMLElement",
-                                    "description": "Target element."
+                                    "type": "undefined | HTMLElement",
+                                    "description": "Target element or if undefined will use current target."
                                 }
                             ],
                             "returnType": "void",
@@ -42002,8 +42002,8 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "HTMLElement",
-                                    "description": "Target element."
+                                    "type": "undefined | HTMLElement",
+                                    "description": "Target element or if undefined will use current target."
                                 }
                             ],
                             "returnType": "void",
@@ -42014,8 +42014,8 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "HTMLElement",
-                                    "description": "Target element."
+                                    "type": "undefined | HTMLElement",
+                                    "description": "Target element or if undefined will use current target."
                                 }
                             ],
                             "returnType": "void",
