@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { Button } from '../../../lib/button/Button';
 import { Chips } from '../../../lib/chips/Chips';
 import { Toast } from '../../../lib/toast/Toast';
+import { classNames } from '../../../lib/utils/Utils';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import { classNames } from '../../../lib/utils/Utils';
 
 export function FormikDoc(props) {
     const toast = useRef(null);
@@ -49,6 +49,9 @@ export function FormikDoc(props) {
     className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
     onChange={(e) => {
         formik.setFieldValue('chipArray', e.value);
+    }}
+    pt={{
+        input: { autoComplete: 'off' }
     }}
 />
 {getFormErrorMessage('chipArray')}
@@ -105,6 +108,9 @@ export default function FormikDoc() {
                     className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
                     onChange={(e) => {
                         formik.setFieldValue('chipArray', e.value);
+                    }}
+                    pt={{
+                        input: { autoComplete: 'off' }
                     }}
                 />
                 {getFormErrorMessage('chipArray')}
@@ -166,6 +172,9 @@ export default function FormikDoc() {
                     onChange={(e) => {
                         formik.setFieldValue('chipArray', e.value);
                     }}
+                    pt={{
+                        input: { autoComplete: 'off' }
+                    }}
                 />
                 {getFormErrorMessage('chipArray')}
                 <Button type="submit" label="Submit" className='w-7rem' />
@@ -193,6 +202,9 @@ export default function FormikDoc() {
                         className={classNames({ 'p-invalid': isFormFieldInvalid('chipArray') })}
                         onChange={(e) => {
                             formik.setFieldValue('chipArray', e.value);
+                        }}
+                        pt={{
+                            input: { autoComplete: 'off' }
                         }}
                     />
                     {getFormErrorMessage('chipArray')}
