@@ -23,7 +23,7 @@ setPT({
         <>
             <DocSectionText {...props}>
                 <p>
-                    PrimeReact components can be globally managed through a single location using the global <i>pt</i> object. Before using the pt state from <i>PrimeReactContext</i>, it is essential to encapsulate your application with{' '}
+                    PrimeReact components can be globally managed through a single source using the global <i>pt</i> object. Before using the pt state from <i>PrimeReactContext</i>, it is essential to encapsulate your application with{' '}
                     <i>PrimeReactProvider</i>. For more details, <Link href="/installation/#context">click</Link> here.
                 </p>
             </DocSectionText>

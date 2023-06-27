@@ -12,7 +12,7 @@ const PassThroughDemo = () => {
         },
         {
             id: 'globalpt',
-            label: 'Global PassThrough Options',
+            label: 'Global',
             component: GlobalPTDoc
         }
     ];
@@ -20,8 +20,8 @@ const PassThroughDemo = () => {
     return (
         <DocComponent
             title="PrimeReact - PassThrough"
-            header="PassThrough"
-            description="The Pass Through feature enables direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
+            header="Pass Through"
+            description="The Pass Through props is an API to access the internal DOM Structure of the components."
             componentDocs={docs}
             apiDocs={['API']}
             apiExclude={{ interfaces: ['PrimeIconsOptions', 'APIOptions', 'ContextAPIOptions', 'FilterMatchModeOptions', 'ZIndexOptions', 'LocaleOptions'], types: 'excludeAll' }}

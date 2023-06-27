@@ -19,7 +19,7 @@ const InstallationPage = () => {
         },
         {
             id: 'context',
-            label: 'PrimeReact Context',
+            label: 'Context',
             component: ContextDoc
         },
         {

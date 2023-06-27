@@ -1,6 +1,6 @@
 import { Panel } from '../../lib/panel/Panel';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const code = {
@@ -71,7 +71,13 @@ export default function BasicDemo() {
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
+            <DocSectionText {...props}>
+                <p>
+                    Each component has a special <i>pt</i> property to define an object with keys corresponding to the available DOM elements. Each value is also an object to define the arbitrary properties to apply to the element such as styling,
+                    aria, data-* or custom attributes. Every component documentation has a dedicated section to document the available section names exposed via PT.
+                </p>
+                <p>Example below styles a Panel component with PrimeFlex CSS library.</p>
+            </DocSectionText>
             <div className="card">
                 <Panel
                     header="Header"

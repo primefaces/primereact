@@ -466,7 +466,7 @@
             ]
         },
         {
-            "name": "PassThrough",
+            "name": "Pass Through",
             "icon": "pi pi-directions",
             "to": "/passthrough"
         },
