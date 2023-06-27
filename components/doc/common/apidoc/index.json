@@ -19150,13 +19150,6 @@
                             "description": "Uses to pass attributes to the empty message's DOM element."
                         },
                         {
-                            "name": "hiddenSelectedMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden selected message's DOM element."
-                        },
-                        {
                             "name": "select",
                             "optional": true,
                             "readonly": false,
@@ -19176,6 +19169,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hiddenSelectedMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden selected message's DOM element."
                         }
                     ],
                     "callbacks": []
