@@ -35,10 +35,6 @@ export interface VirtualScrollerPassThroughOptions {
      */
     content?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the spacer's DOM element.
-     */
-    spacer?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the loader's DOM element.
      */
     loader?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -46,6 +42,10 @@ export interface VirtualScrollerPassThroughOptions {
      * Uses to pass attributes to the loading icon's DOM element.
      */
     loadingIcon?: VirtualScrollerPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the spacer's DOM element.
+     */
+    spacer?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
