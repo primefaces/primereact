@@ -8524,6 +8524,13 @@
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
                             "name": "hiddenInputWrapper",
                             "optional": true,
                             "readonly": false,
@@ -8536,13 +8543,6 @@
                             "readonly": false,
                             "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
-                        },
-                        {
-                            "name": "tooltip",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TooltipPassThroughOptions",
-                            "description": "Uses to pass attributes tooltip's DOM element."
                         }
                     ],
                     "callbacks": []
