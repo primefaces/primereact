@@ -47411,13 +47411,6 @@
                             "description": "Uses to pass attributes to the content's DOM element."
                         },
                         {
-                            "name": "spacer",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the spacer's DOM element."
-                        },
-                        {
                             "name": "loader",
                             "optional": true,
                             "readonly": false,
@@ -47430,6 +47423,13 @@
                             "readonly": false,
                             "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the loading icon's DOM element."
+                        },
+                        {
+                            "name": "spacer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the spacer's DOM element."
                         }
                     ],
                     "callbacks": []
