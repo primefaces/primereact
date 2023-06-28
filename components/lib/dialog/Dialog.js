@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
@@ -33,6 +32,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const lastPageY = React.useRef(null);
     const styleElement = React.useRef(null);
     const attributeSelector = React.useRef(uniqueId);
+    const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
 
     const { ptm } = DialogBase.setMetaData({
@@ -303,6 +303,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         ZIndexUtils.clear(maskRef.current);
         setMaskVisibleState(false);
         disableDocumentSettings();
+
+        // return focus to element before dialog was open
+        DomHandler.focus(focusElementOnHide.current);
+        focusElementOnHide.current = null;
     };
 
     const enableDocumentSettings = () => {
@@ -400,7 +404,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         if (props.visible !== visibleState && maskVisibleState) {
             setVisibleState(props.visible);
         }
-    });
+
+        if (props.visible) {
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
+        }
+    }, [props.visible, maskVisibleState]);
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
