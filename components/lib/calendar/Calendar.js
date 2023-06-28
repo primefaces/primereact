@@ -18,13 +18,11 @@ export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = CalendarBase.getProps(inProps, context);
-        const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
         const { ptm } = CalendarBase.setMetaData({
             props,
             state: {
-                focused: focusedState,
                 overlayVisible: overlayVisibleState,
                 viewDate: viewDateState
             }
@@ -71,20 +69,17 @@ export const Calendar = React.memo(
 
         const onInputFocus = (event) => {
             if (ignoreFocusFunctionality.current) {
-                setFocusedState(true);
                 ignoreFocusFunctionality.current = false;
             } else {
                 if (props.showOnFocus && !visible) {
                     show();
                 }
 
-                setFocusedState(true);
                 props.onFocus && props.onFocus(event);
             }
         };
 
         const onInputBlur = (event) => {
-            setFocusedState(false);
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
         };
@@ -3611,8 +3606,7 @@ export const Calendar = React.memo(
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
             'p-calendar-timeonly': props.timeOnly,
-            'p-inputwrapper-filled': props.value || (DomHandler.hasClass(inputRef.current, 'p-filled') && inputRef.current.value !== ''),
-            'p-inputwrapper-focus': focusedState
+            'p-inputwrapper-filled': props.value || (DomHandler.hasClass(inputRef.current, 'p-filled') && inputRef.current.value !== '')
         });
         const panelClassName = classNames('p-datepicker p-component', props.panelClassName, {
             'p-datepicker-inline': props.inline,
