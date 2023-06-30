@@ -553,14 +553,15 @@ export default class DomHandler {
                     }
                 }
 
+                // BODY
                 if (parent.nodeType === 1 && overflowCheck(parent)) {
                     addScrollableParent(parent);
                 }
             }
         }
 
-        // if no parents make it the window
-        if (scrollableParents.length === 0) {
+        // we should always at least have the body or window
+        if (!scrollableParents.some((node) => node === document.body || node === window)) {
             scrollableParents.push(window);
         }
 
