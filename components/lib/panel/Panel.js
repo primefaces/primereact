@@ -13,7 +13,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const props = PanelBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
-    const elementRef = React.useRef(ref);
+    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
@@ -70,10 +70,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current,
         getContent: () => contentRef.current
     }));
-
-    React.useEffect(() => {
-        ObjectUtils.combinedRefs(elementRef, ref);
-    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (!idState) {
