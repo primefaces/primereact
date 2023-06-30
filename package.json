@@ -21,7 +21,7 @@
         "apidoc": "node ./api-generator/build-apidoc.js"
     },
     "dependencies": {
-        "@docsearch/react": "3.3.4",
+        "@docsearch/react": "3.5.1",
         "chart.js": "4.3.0",
         "file-saver": "2.0.5",
         "final-form": "^4.20.9",
