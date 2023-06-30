@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
@@ -6,7 +7,6 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -28,18 +28,22 @@ export const Panel = React.forwardRef((inProps, ref) => {
     });
 
     const toggle = (event) => {
-        if (props.toggleable) {
-            collapsed ? expand(event) : collapse(event);
+        if (!props.toggleable) {
+            return;
+        }
 
+        collapsed ? expand(event) : collapse(event);
+
+        if (event) {
             if (props.onToggle) {
                 props.onToggle({
                     originalEvent: event,
                     value: !collapsed
                 });
             }
-        }
 
-        event.preventDefault();
+            event.preventDefault();
+        }
     };
 
     const expand = (event) => {
@@ -47,7 +51,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
             setCollapsedState(false);
         }
 
-        props.onExpand && props.onExpand(event);
+        props.onExpand && event && props.onExpand(event);
     };
 
     const collapse = (event) => {
@@ -55,11 +59,14 @@ export const Panel = React.forwardRef((inProps, ref) => {
             setCollapsedState(true);
         }
 
-        props.onCollapse && props.onCollapse(event);
+        props.onCollapse && event && props.onCollapse(event);
     };
 
     React.useImperativeHandle(ref, () => ({
         props,
+        toggle,
+        expand,
+        collapse,
         getElement: () => elementRef.current,
         getContent: () => contentRef.current
     }));
