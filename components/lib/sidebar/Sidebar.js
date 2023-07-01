@@ -204,6 +204,10 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         return null;
     };
 
+    const createHeader = () => {
+        return props.header ? ObjectUtils.getJSXElement(props.header, props) : null;
+    };
+
     const createIcons = () => {
         return props.icons ? ObjectUtils.getJSXElement(props.icons, props) : null;
     };
@@ -227,6 +231,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         const closeIcon = createCloseIcon();
         const icons = createIcons();
+        const header = createHeader();
 
         const transitionTimeout = {
             enter: props.fullScreen ? 150 : 300,
@@ -259,6 +264,9 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             {
                 className: 'p-sidebar-header'
             },
+            props.header && {
+                className: 'p-sidebar-custom-header'
+            },
             ptm('header')
         );
 
@@ -269,13 +277,23 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             ptm('content')
         );
 
+        const iconsProps = mergeProps(
+            {
+                className: 'p-sidebar-icons'
+            },
+            ptm('icons')
+        );
+
         return (
             <div {...maskProps}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
                     <div {...rootProps}>
                         <div {...headerProps}>
-                            {icons}
-                            {closeIcon}
+                            {header}
+                            <div {...iconsProps}>
+                                {icons}
+                                {closeIcon}
+                            </div>
                         </div>
                         <div {...contentProps}>{props.children}</div>
                     </div>

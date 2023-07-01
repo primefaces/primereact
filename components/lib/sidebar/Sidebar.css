@@ -37,6 +37,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+.p-sidebar-custom-header {
+    justify-content: space-between;
+}
+
+.p-sidebar-icons {
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
 }
 
