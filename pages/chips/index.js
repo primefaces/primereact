@@ -9,6 +9,7 @@ import { FloatLabelDoc } from '../../components/doc/chips/floatlabeldoc';
 import { FormikDoc } from '../../components/doc/chips/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/chips/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/chips/importdoc';
+import { IconDoc } from '../../components/doc/chips/icondoc';
 import { InvalidDoc } from '../../components/doc/chips/invaliddoc';
 import { KeyFilterDoc } from '../../components/doc/chips/keyfilterdoc';
 import { SeparatorDoc } from '../../components/doc/chips/separatordoc';
@@ -44,9 +45,14 @@ const ChipsDemo = () => {
             component: KeyFilterDoc
         },
         {
-            id: 'floatlabel',
+            id: 'float',
             label: 'Float Label',
             component: FloatLabelDoc
+        },
+        {
+            id: 'icon',
+            label: 'Icon',
+            component: IconDoc
         },
         {
             id: 'invalid',
