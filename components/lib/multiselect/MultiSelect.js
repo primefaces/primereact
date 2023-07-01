@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -41,7 +40,11 @@ export const MultiSelect = React.memo(
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    type === 'outside' ? !isClearClicked(event) && hide() : hide();
+                    if (type === 'outside') {
+                        !isClearClicked(event) && !isSelectAllClicked(event) && hide();
+                    } else {
+                        hide();
+                    }
                 }
             },
             when: overlayVisibleState
@@ -199,7 +202,7 @@ export const MultiSelect = React.memo(
                         value = selectedOptions.map((option) => getOptionValue(option));
                     }
                 } else if (visibleOptions) {
-                    const options = visibleOptions.filter((option) => !isOptionDisabled(option));
+                    const options = visibleOptions.filter((option) => !isOptionDisabled(option) || isSelected(option));
 
                     if (props.optionGroupLabel) {
                         value = [];
@@ -309,6 +312,10 @@ export const MultiSelect = React.memo(
 
         const isClearClicked = (event) => {
             return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon');
+        };
+
+        const isSelectAllClicked = (event) => {
+            return DomHandler.hasClass(event.target, 'p-multiselect-select-all');
         };
 
         const isPanelClicked = (event) => {
