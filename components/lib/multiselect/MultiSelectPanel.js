@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
@@ -49,6 +48,7 @@ export const MultiSelectPanel = React.memo(
         const createHeader = () => {
             return (
                 <MultiSelectHeader
+                    id={props.id}
                     filter={props.filter}
                     filterRef={filterInputRef}
                     filterValue={props.filterValue}
@@ -58,6 +58,7 @@ export const MultiSelectPanel = React.memo(
                     onClose={props.onCloseClick}
                     showSelectAll={props.showSelectAll}
                     selectAll={props.isAllSelected()}
+                    selectAllLabel={props.selectAllLabel}
                     onSelectAll={props.onSelectAll}
                     template={props.panelHeaderTemplate}
                     resetFilter={props.resetFilter}
