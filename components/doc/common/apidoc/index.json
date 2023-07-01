@@ -30149,6 +30149,13 @@
                             "description": "Uses to pass attributes to the header checkbox's DOM element."
                         },
                         {
+                            "name": "headerSelectAllLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLLabelElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
                             "name": "filterContainer",
                             "optional": true,
                             "readonly": false,
