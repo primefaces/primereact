@@ -1474,7 +1474,7 @@ export const Calendar = React.memo(
 
             if (props.onVisibleChange) {
                 props.onVisibleChange({
-                    visible: false,
+                    visible: type !== 'dateselect', // false only if selecting a value to close panel
                     type,
                     callback: _hideCallback
                 });
