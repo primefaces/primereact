@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Checkbox } from '../checkbox/Checkbox';
+import { CheckIcon } from '../icons/check';
+import { SearchIcon } from '../icons/search';
+import { TimesIcon } from '../icons/times';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { TimesIcon } from '../icons/times';
-import { SearchIcon } from '../icons/search';
-import { CheckIcon } from '../icons/check';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
     const filterOptions = {
@@ -36,14 +36,28 @@ export const MultiSelectHeader = React.memo((props) => {
 
     const createFilterElement = () => {
         const filterIconClassName = 'p-multiselect-filter-icon';
-        const icon = props.filterIcon || <SearchIcon className={filterIconClassName} />;
-        const filterIcon = IconUtils.getJSXIcon(icon, { className: filterIconClassName }, { props });
+        const filterIconProps = mergeProps(
+            {
+                className: filterIconClassName
+            },
+            props.ptm('filterIcon')
+        );
+
+        const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
+        const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
         if (props.filter) {
             const containerClassName = classNames('p-multiselect-filter-container');
+            const filterContainerProps = mergeProps(
+                {
+                    className: containerClassName
+                },
+                props.ptm('filterContainer')
+            );
+
             let content = (
-                <div className={containerClassName}>
-                    <InputText ref={props.filterRef} type="text" role="textbox" value={props.filterValue} onChange={onFilter} className="p-multiselect-filter" placeholder={props.filterPlaceholder} />
+                <div {...filterContainerProps}>
+                    <InputText ref={props.filterRef} type="text" role="textbox" value={props.filterValue} onChange={onFilter} className="p-multiselect-filter" placeholder={props.filterPlaceholder} pt={props.ptm('filterInput')} />
                     {filterIcon}
                 </div>
             );
@@ -69,34 +83,68 @@ export const MultiSelectHeader = React.memo((props) => {
 
     const filterElement = createFilterElement();
     const selectAllId = props.id ? props.id + '_selectall' : UniqueComponentId();
-    const checkboxIconClassName = 'p-checkbox-icon p-c';
-    const checkedIcon = props.itemCheckboxIcon || <CheckIcon className={checkboxIconClassName} />;
-    const itemCheckboxIcon = IconUtils.getJSXIcon(checkedIcon, { className: checkboxIconClassName }, { selected: props.selected });
+
+    const headerCheckboxProps = mergeProps(
+        {
+            className: 'p-multiselect-select-all p-checkbox-icon p-c'
+        },
+        props.ptm('headerCheckbox')
+    );
+
+    const headerSelectAllLabelProps = mergeProps(
+        {
+            for: selectAllId,
+            className: 'p-multiselect-select-all-label'
+        },
+        props.ptm('headerSelectAllLabel')
+    );
+
+    const checkedIcon = props.itemCheckboxIcon || <CheckIcon {...headerCheckboxProps} />;
+    const itemCheckboxIcon = IconUtils.getJSXIcon(checkedIcon, { ...headerCheckboxProps }, { selected: props.selected });
 
     const checkboxElement = props.showSelectAll && (
-        <div>
+        <div className="p-multiselect-select-all">
             <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} />
-            {!props.filter && (
-                <label for={selectAllId} className="p-multiselect-select-all-label">
-                    {props.selectAllLabel}
-                </label>
-            )}
+            {!props.filter && <label {...headerSelectAllLabelProps}>{props.selectAllLabel}</label>}
         </div>
     );
 
-    const iconProps = { className: 'p-multiselect-close-icon', 'aria-hidden': true };
+    const iconProps = mergeProps(
+        {
+            className: 'p-multiselect-close-icon',
+            'aria-hidden': true
+        },
+        props.ptm('closeIcon')
+    );
     const icon = props.closeIcon || <TimesIcon {...iconProps} />;
     const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
+    const headerProps = mergeProps(
+        {
+            className: 'p-multiselect-header'
+        },
+        props.ptm('header')
+    );
+
+    const closeButtonProps = mergeProps(
+        {
+            type: 'button',
+            className: 'p-multiselect-close p-link',
+            'aria-label': localeOption('close'),
+            onClick: props.onClose
+        },
+        props.ptm('closeButton')
+    );
+
     const closeElement = (
-        <button type="button" className="p-multiselect-close p-link" aria-label={localeOption('close')} onClick={props.onClose}>
+        <button {...closeButtonProps}>
             {closeIcon}
             <Ripple />
         </button>
     );
 
     const element = (
-        <div className="p-multiselect-header">
+        <div {...headerProps}>
             {checkboxElement}
             {filterElement}
             {closeElement}
