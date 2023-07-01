@@ -8,11 +8,12 @@
  *
  */
 import * as React from 'react';
+import { ButtonPassThroughOptions } from '../button/button';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType, TemplateType } from '../utils';
-import { ButtonPassThroughOptions } from '../button/button';
 
 export declare type SplitButtonPassThroughType<T> = PassThroughType<T, SplitButtonPassThroughMethodOptions>;
 
@@ -33,23 +34,50 @@ export interface SplitButtonPassThroughOptions {
      */
     root?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the button's DOM element.
-     */
-    button?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     */
+    button?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
      */
     menuButton?: ButtonPassThroughOptions;
-    // /**
-    //  * Uses to pass attributes to the TieredMenu component.
-    //  * @see {@link TieredMenuPassThroughOptions}
-    //  */
-    //  menu?: TieredMenuPassThroughOptions; @TODO
+    /**
+     * Uses to pass attributes to the menu's DOM element.
+     */
+    menu?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the menu list's DOM element.
+     */
+    menuList?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the menu icon's DOM element.
+     */
+    menuIcon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the menu label's DOM element.
+     */
+    menuLabel?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the anchor's DOM element.
+     */
+    anchor?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the menu item's DOM element.
+     */
+    menuItem?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**
@@ -183,6 +211,25 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SplitButtonPassThroughOptions}
+     */
+    pt?: SplitButtonPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in SplitButton component.
+ */
+export interface SplitButtonState {
+    /**
+     * Current id state as a boolean.
+     */
+    id: string;
+    /**
+     * Current overlay visible state as a boolean.
+     */
+    overlayVisible: boolean;
 }
 
 /**

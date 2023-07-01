@@ -99,6 +99,13 @@ export const MultiSelectHeader = React.memo((props) => {
         props.ptm('headerSelectAllLabel')
     );
 
+    const headerCheckboxProps = mergeProps(
+        {
+            className: 'p-multiselect-select-all p-checkbox-icon p-c'
+        },
+        props.ptm('headerCheckbox')
+    );
+
     const checkedIcon = props.itemCheckboxIcon || <CheckIcon {...headerCheckboxProps} />;
     const itemCheckboxIcon = IconUtils.getJSXIcon(checkedIcon, { ...headerCheckboxProps }, { selected: props.selected });
 

@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Button } from '../button/Button';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { InplaceBase, InplaceContentBase, InplaceDisplayBase } from './InplaceBase';
 import { TimesIcon } from '../icons/times';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { InplaceBase } from './InplaceBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
 export const Inplace = React.forwardRef((inProps, ref) => {
-    const props = InplaceBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = InplaceBase.getProps(inProps, context);
 
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);
@@ -72,7 +74,6 @@ export const Inplace = React.forwardRef((inProps, ref) => {
                 tabIndex: props.tabIndex,
                 'aria-label': props.ariaLabel
             },
-            InplaceDisplayBase.getOtherProps(props),
             ptm('display')
         );
 
@@ -85,16 +86,14 @@ export const Inplace = React.forwardRef((inProps, ref) => {
         const ariaLabel = localeOption('close');
 
         if (props.closable) {
-            const closeButtonProps = mergeProps(
-                {
-                    className: 'p-inplace-content-close',
-                    icon: closeIcon,
-                    type: 'button',
-                    onClick: close,
-                    'aria-label': ariaLabel
-                },
-                ptm('closeButton')
-            );
+            const closeButtonProps = mergeProps({
+                className: 'p-inplace-content-close',
+                icon: closeIcon,
+                type: 'button',
+                onClick: close,
+                'aria-label': ariaLabel,
+                pt: ptm('closeButton')
+            });
 
             return <Button {...closeButtonProps}></Button>;
         }
@@ -109,7 +108,6 @@ export const Inplace = React.forwardRef((inProps, ref) => {
             {
                 className: 'p-inplace-content'
             },
-            InplaceContentBase.getOtherProps(props),
             ptm('content')
         );
 

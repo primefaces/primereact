@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ListBoxBase = {
+export const ListBoxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ListBox',
         className: null,
@@ -39,7 +39,5 @@ export const ListBoxBase = {
         value: null,
         virtualScrollerOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ListBoxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ListBoxBase.defaultProps)
-};
+    }
+});

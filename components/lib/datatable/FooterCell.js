@@ -1,10 +1,21 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const FooterCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+
+    const getColumnPTOptions = (key) => {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+            props: getColumnProps(),
+            parent: props.metaData,
+            state: {
+                styleObject: styleObjectState
+            }
+        });
+    };
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
 
@@ -61,12 +72,20 @@ export const FooterCell = React.memo((props) => {
         [`p-align-${align}`]: !!align
     });
     const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
-
-    return (
-        <td ref={elementRef} style={style} className={className} role="cell" colSpan={colSpan} rowSpan={rowSpan}>
-            {content}
-        </td>
+    const footerCellProps = mergeProps(
+        {
+            ref: elementRef,
+            style,
+            className,
+            role: 'cell',
+            colSpan,
+            rowSpan
+        },
+        getColumnPTOptions('footerCell'),
+        getColumnPTOptions('root')
     );
+
+    return <td {...footerCellProps}>{content}</td>;
 });
 
 FooterCell.displayName = 'FooterCell';

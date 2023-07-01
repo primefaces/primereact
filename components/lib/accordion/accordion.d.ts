@@ -46,7 +46,7 @@ export interface AccordionTabPassThroughOptions {
     /**
      * Uses to pass attributes to the headericon's DOM element.
      */
-    headerIcon?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    headerIcon?: AccordionTabPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the headertitle's DOM element.
      */

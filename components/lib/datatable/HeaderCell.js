@@ -5,7 +5,7 @@ import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
@@ -13,6 +13,21 @@ export const HeaderCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
+    const { metaData: parentMetaData, ptCallbacks, index } = props;
+
+    const params = { index };
+    const parentParams = { ...parentMetaData, ...params };
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+
+    const getColumnPTOptions = (key) => {
+        return ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+            props: getColumnProps(),
+            parent: parentParams,
+            state: {
+                styleObject: styleObjectState
+            }
+        });
+    };
 
     const isBadgeVisible = () => {
         return props.multiSortMeta && props.multiSortMeta.length > 1;
@@ -201,7 +216,17 @@ export const HeaderCell = React.memo((props) => {
 
     const createResizer = () => {
         if (props.resizableColumns && !getColumnProp('frozen')) {
-            return <span className="p-column-resizer" onMouseDown={onResizerMouseDown} onClick={onResizerClick} onDoubleClick={onResizerDoubleClick}></span>;
+            const columnResizerProps = mergeProps(
+                {
+                    className: 'p-column-resizer',
+                    onMouseDown: (e) => onResizerMouseDown(e),
+                    onClick: (e) => onResizerClick(e),
+                    onDoubleClick: (e) => onResizerDoubleClick(e)
+                },
+                getColumnPTOptions('columnResizer')
+            );
+
+            return <span {...columnResizerProps}></span>;
         }
 
         return null;
@@ -209,17 +234,32 @@ export const HeaderCell = React.memo((props) => {
 
     const createTitle = () => {
         const title = ObjectUtils.getJSXElement(getColumnProp('header'), { props: props.tableProps });
+        const headerTitleProps = mergeProps(
+            {
+                className: 'p-column-title'
+            },
+            getColumnPTOptions('headerTitle')
+        );
 
-        return <span className="p-column-title">{title}</span>;
+        return <span {...headerTitleProps}>{title}</span>;
     };
 
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
             let iconClassName = 'p-sortable-column-icon';
-            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon /> : <SortAmountUpAltIcon /> : <SortAltIcon />;
-            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, undefined, { props, sorted, sortOrder });
+            const sortIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                getColumnPTOptions('sortIcon')
+            );
 
-            return <span className={iconClassName}>{sortIcon}</span>;
+            const sortProps = mergeProps(getColumnPTOptions('sort'));
+
+            let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon {...sortIconProps} /> : <SortAmountUpAltIcon {...sortIconProps} /> : <SortAltIcon {...sortIconProps} />;
+            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { ...sortIconProps }, { props, sorted, sortOrder });
+
+            return <span {...sortProps}>{sortIcon}</span>;
         }
 
         return null;
@@ -228,8 +268,15 @@ export const HeaderCell = React.memo((props) => {
     const createBadge = ({ metaIndex }) => {
         if (metaIndex !== -1 && isBadgeVisible()) {
             const value = props.groupRowsBy && props.groupRowsBy === props.groupRowSortField ? metaIndex : metaIndex + 1;
+            const sortBadgeProps = mergeProps(
+                {
+                    className: 'p-sortable-column-badge'
+                },
+                getColumnPTOptions('sortBadge'),
+                getColumnPTOptions('root')
+            );
 
-            return <span className="p-sortable-column-badge">{value}</span>;
+            return <span {...sortBadgeProps}>{value}</span>;
         }
 
         return null;
@@ -239,7 +286,7 @@ export const HeaderCell = React.memo((props) => {
         if (props.showSelectAll && getColumnProp('selectionMode') === 'multiple' && props.filterDisplay !== 'row') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} />;
+            return <HeaderCheckbox checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} />;
         }
 
         return null;
@@ -257,6 +304,8 @@ export const HeaderCell = React.memo((props) => {
                     filtersStore={props.filtersStore}
                     filterIcon={props.filterIcon}
                     filterClearIcon={props.filterClearIcon}
+                    ptCallbacks={ptCallbacks}
+                    metaData={parentMetaData}
                 />
             );
         }
@@ -270,9 +319,15 @@ export const HeaderCell = React.memo((props) => {
         const badge = createBadge(sortMeta);
         const checkbox = createCheckbox();
         const filter = createFilter();
+        const headerContentProps = mergeProps(
+            {
+                className: 'p-column-header-content'
+            },
+            getColumnPTOptions('headerContent')
+        );
 
         return (
-            <div className="p-column-header-content">
+            <div {...headerContentProps}>
                 {title}
                 {sortIcon}
                 {badge}
@@ -308,30 +363,35 @@ export const HeaderCell = React.memo((props) => {
 
         const resizer = createResizer();
         const header = createHeader(sortMeta);
+        const headerCellProps = mergeProps(
+            {
+                ref: elementRef,
+                className,
+                style,
+                role: 'columnheader',
+                onClick: (e) => onClick(e),
+                onKeyDown: (e) => onKeyDown(e),
+                onMouseDown: (e) => onMouseDown(e),
+                onDragStart: (e) => onDragStart(e),
+                onDragOver: (e) => onDragOver(e),
+                onDragLeave: (e) => onDragLeave(e),
+                onDrop: (e) => onDrop(e),
+                tabIndex,
+                colSpan,
+                rowSpan,
+                'aria-sort': ariaSort
+            },
+            getColumnPTOptions('headerCell'),
+            getColumnPTOptions('root')
+        );
 
         return (
             <>
-                <th
-                    ref={elementRef}
-                    style={style}
-                    className={className}
-                    tabIndex={tabIndex}
-                    role="columnheader"
-                    onClick={onClick}
-                    onKeyDown={onKeyDown}
-                    onMouseDown={onMouseDown}
-                    onDragStart={onDragStart}
-                    onDragOver={onDragOver}
-                    onDragLeave={onDragLeave}
-                    onDrop={onDrop}
-                    colSpan={colSpan}
-                    rowSpan={rowSpan}
-                    aria-sort={ariaSort}
-                >
+                <th {...headerCellProps}>
                     {resizer}
                     {header}
                 </th>
-                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} pt={getColumnPTOptions('tooltip')} />}
             </>
         );
     };

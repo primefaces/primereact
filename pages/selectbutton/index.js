@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/selectbutton/pt/ptdoc';
+import { Wireframe } from '../../components/doc/selectbutton/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
@@ -64,8 +67,25 @@ const SelectButtonDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.selectbutton.options',
+            label: 'SelectButton PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React SelectButton Component" header="SelectButton" description="SelectButton is used to choose single or multiple items from a list using buttons." componentDocs={docs} apiDocs={['SelectButton']} />;
+    return <DocComponent title="React SelectButton Component" header="SelectButton" description="SelectButton is used to choose single or multiple items from a list using buttons." componentDocs={docs} apiDocs={['SelectButton']} ptDocs={ptDocs} />;
 };
 
 export default SelectButtonDemo;

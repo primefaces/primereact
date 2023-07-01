@@ -9,13 +9,40 @@
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { PassThroughType } from '../utils/utils';
+
+export declare type InputTextareaPassThroughType<T> = PassThroughType<T, InputTextareaPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InputTextareaPassThroughMethodOptions {
+    props: InputTextareaProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InputTextareaProps.pt}
+ */
+export interface InputTextareaPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InputTextareaPassThroughType<React.HTMLAttributes<HTMLTextAreaElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
 
 /**
  * Defines valid properties in InputTextarea component. In addition to these, all properties of HTMLTextAreaElement can be used in this component.
  * @group Properties
  */
-export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'ref' | 'value'> {
+export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'ref' | 'value' | 'pt'> {
     /**
      * When present, height of textarea changes as being typed.
      * @defaultValue false
@@ -43,6 +70,11 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputTextareaPassThroughOptions}
+     */
+    pt?: InputTextareaPassThroughOptions;
 }
 
 /**

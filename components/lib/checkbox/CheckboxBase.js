@@ -1,30 +1,30 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const CheckboxBase = {
+export const CheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Checkbox',
-        id: null,
-        inputRef: null,
-        inputId: null,
-        value: null,
-        name: null,
+        autoFocus: false,
         checked: false,
-        trueValue: true,
-        falseValue: false,
-        style: null,
         className: null,
         disabled: false,
-        required: false,
-        readOnly: false,
-        tabIndex: null,
+        falseValue: false,
         icon: null,
+        id: null,
+        inputId: null,
+        inputRef: null,
+        name: null,
+        onChange: null,
+        onClick: null,
+        onContextMenu: null,
+        onMouseDown: null,
+        readOnly: false,
+        required: false,
+        style: null,
+        tabIndex: null,
         tooltip: null,
         tooltipOptions: null,
-        onChange: null,
-        onMouseDown: null,
-        onContextMenu: null,
+        trueValue: true,
+        value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CheckboxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CheckboxBase.defaultProps)
-};
+    }
+});

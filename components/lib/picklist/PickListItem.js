@@ -1,8 +1,16 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 
 export const PickListItem = React.memo((props) => {
+    const getPTOptions = (key) => {
+        return props.ptm(key, {
+            context: {
+                selected: props.selected
+            }
+        });
+    };
+
     const onClick = (event) => {
         if (props.onClick) {
             props.onClick({
@@ -30,8 +38,20 @@ export const PickListItem = React.memo((props) => {
         props.className
     );
 
+    const itemProps = mergeProps(
+        {
+            className,
+            onClick,
+            onKeyDown,
+            tabIndex: props.tabIndex,
+            role: 'option',
+            'aria-selected': props.selected
+        },
+        getPTOptions('item')
+    );
+
     return (
-        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role="option" aria-selected={props.selected}>
+        <li {...itemProps}>
             {content}
             <Ripple />
         </li>

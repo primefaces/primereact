@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/slidemenu/pt/ptdoc';
+import { Wireframe } from '../../components/doc/slidemenu/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/slidemenu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/slidemenu/basicdoc';
@@ -34,7 +37,25 @@ const SlideMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React SlideMenu Component" header="SlideMenu" description="SlideMenu displays submenus with a slide animation." componentDocs={docs} apiDocs={['SlideMenu', 'MenuItem']} />;
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.slidemenu.options',
+            label: 'SlideMenu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
+    return <DocComponent title="React SlideMenu Component" header="SlideMenu" description="SlideMenu displays submenus with a slide animation." componentDocs={docs} apiDocs={['SlideMenu', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default SlideMenuDemo;

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import { DocSectionNav } from '../../components/doc/common/docsectionnav';
 import { DocSections } from '../../components/doc/common/docsections';
+import { ContextDoc } from '../../components/doc/installation/context';
 import { DownloadDoc } from '../../components/doc/installation/downloaddoc';
 import { ExamplesDoc } from '../../components/doc/installation/examplesdoc';
 import { StylesDoc } from '../../components/doc/installation/stylesdoc';
@@ -15,6 +16,11 @@ const InstallationPage = () => {
             id: 'download',
             label: 'Download',
             component: DownloadDoc
+        },
+        {
+            id: 'context',
+            label: 'Context',
+            component: ContextDoc
         },
         {
             id: 'styles',

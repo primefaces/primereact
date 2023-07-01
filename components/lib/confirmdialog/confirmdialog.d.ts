@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import { DialogPassThroughOptions, DialogProps } from '../dialog';
+import { DialogProps } from '../dialog';
 import { IconType, PassThroughType } from '../utils';
 import { ButtonPassThroughOptions } from '../button/button';
 
@@ -42,7 +42,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Uses to pass attributes to the header icons' DOM element.
      */
-    headerIcons?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    headerIcons?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the close button's component.
      */
@@ -50,7 +50,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Uses to pass attributes to the close button icon's component.
      */
-    closeButtonIcon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    closeButtonIcon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
@@ -58,7 +58,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: ConfirmDialogPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the message's DOM element.
      */
@@ -143,7 +143,7 @@ interface ConfirmDialogOptions {
  * Defines valid properties in ConfirmDialog component. In addition to these, all properties of {@link dialog} can be used in this component.
  * @group Properties
  */
-export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer'> {
+export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer' | 'pt'> {
     /**
      * Unique tag key used to separate the confirmDialog components in the page.
      */
@@ -217,6 +217,11 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ConfirmDialogPassThroughOptions}
+     */
+    pt?: ConfirmDialogPassThroughOptions;
 }
 
 /**

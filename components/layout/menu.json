@@ -172,6 +172,10 @@
                             "to": "/dataview"
                         },
                         {
+                            "name": "DataScroller",
+                            "to": "/datascroller"
+                        },
+                        {
                             "name": "OrderList",
                             "to": "/orderlist"
                         },
@@ -462,6 +466,11 @@
             ]
         },
         {
+            "name": "Pass Through",
+            "icon": "pi pi-directions",
+            "to": "/passthrough"
+        },
+        {
             "name": "Figma UI Kit",
             "icon": "pi pi-pencil",
             "to": "/uikit"
@@ -597,7 +606,7 @@
         {
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
-            "href": "https://www.primefaces.org/primeflex"
+            "href": "https://primeflex.org"
         },
         {
             "name": "Support",

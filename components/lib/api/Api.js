@@ -6,7 +6,8 @@ import { MessageSeverity } from './MessageSeverity';
 import { PrimeIcons } from './PrimeIcons';
 import PrimeReact from './PrimeReact';
 import { SortOrder } from './SortOrder';
+import { PrimeReactContext, PrimeReactProvider } from './PrimeReactContext';
 
 export default PrimeReact;
 
-export { locale, addLocale, ariaLabel, localeOption, localeOptions, updateLocaleOption, updateLocaleOptions, PrimeIcons, MessageSeverity, FilterMatchMode, FilterOperator, FilterService, SortOrder };
+export { locale, addLocale, ariaLabel, localeOption, localeOptions, updateLocaleOption, updateLocaleOptions, PrimeIcons, MessageSeverity, FilterMatchMode, FilterOperator, FilterService, SortOrder, PrimeReactProvider, PrimeReactContext };

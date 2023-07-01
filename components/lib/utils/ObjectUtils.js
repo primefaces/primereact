@@ -87,6 +87,10 @@ export default class ObjectUtils {
         return !!(obj && obj.constructor && obj.call && obj.apply);
     }
 
+    static isObject(obj) {
+        return obj !== null && obj instanceof Object && obj.constructor === Object;
+    }
+
     static isLetter(char) {
         return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
     }
@@ -262,7 +266,7 @@ export default class ObjectUtils {
 
     static convertToFlatCase(str) {
         // convert snake, kebab, camel and pascal cases to flat case
-        return this.isNotEmpty(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
+        return this.isNotEmpty(str) && typeof str === 'string' ? str.replace(/(-|_)/g, '').toLowerCase() : str;
     }
 
     static isEmpty(value) {

@@ -4,7 +4,11 @@ import { DocSectionText } from '../common/docsectiontext';
 export function FontAwesomeDoc(props) {
     const code = {
         basic: `
-<Dropdown dropdownIcon={<i class="fa-light fa-chevron-down"></i>} />
+// use the CSS style directly
+<Dropdown dropdownIcon="fa-light fa-chevron-down" />
+
+// use the pre-built icons
+<Dropdown dropdownIcon={(options) => <FontAwesomeIcon icon={["fal", "chevron-down"]}  {...options.iconProps} /> } />
         `
     };
 

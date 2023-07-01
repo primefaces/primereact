@@ -1,27 +1,26 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MultiStateCheckboxBase = {
+export const MultiStateCheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'MultiStateCheckbox',
-        id: null,
-        value: null,
-        options: null,
-        optionValue: null,
-        optionLabel: null,
-        optionIcon: null,
-        iconTemplate: null,
-        dataKey: null,
-        style: null,
+        autoFocus: false,
         className: null,
+        dataKey: null,
         disabled: false,
-        readOnly: false,
         empty: true,
+        iconTemplate: null,
+        id: null,
+        onChange: null,
+        optionIcon: null,
+        optionLabel: null,
+        optionValue: null,
+        options: null,
+        readOnly: false,
+        style: null,
         tabIndex: '0',
         tooltip: null,
         tooltipOptions: null,
-        onChange: null,
+        value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MultiStateCheckboxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MultiStateCheckboxBase.defaultProps)
-};
+    }
+});

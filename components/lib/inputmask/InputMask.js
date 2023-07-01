@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
 import { InputMaskBase } from './InputMaskBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputMaskBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = InputMaskBase.getProps(inProps, context);
         const elementRef = React.useRef(ref);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);
@@ -437,8 +438,12 @@ export const InputMask = React.memo(
                 props.onChange({
                     originalEvent: e,
                     value: defaultBuffer.current !== val ? val : '',
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        e.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        e.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -572,6 +577,7 @@ export const InputMask = React.memo(
         return (
             <InputText
                 ref={elementRef}
+                autoFocus={props.autoFocus}
                 id={props.id}
                 type={props.type}
                 name={props.name}
@@ -593,6 +599,7 @@ export const InputMask = React.memo(
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
+                pt={props.pt}
             />
         );
     })

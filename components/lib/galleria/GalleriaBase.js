@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const GalleriaBase = {
+export const GalleriaBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Galleria',
         id: null,
@@ -39,7 +39,5 @@ export const GalleriaBase = {
         transitionOptions: null,
         onItemChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, GalleriaBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, GalleriaBase.defaultProps)
-};
+    }
+});

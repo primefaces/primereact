@@ -1,16 +1,22 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { CheckIcon } from '../icons/check';
+import { PrimeReactContext } from '../api/Api';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MessageBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MessageBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
+
+        const { ptm } = MessageBase.setMetaData({
+            props
+        });
 
         const createContent = () => {
             if (props.content) {
@@ -19,33 +25,48 @@ export const Message = React.memo(
 
             const text = ObjectUtils.getJSXElement(props.text, props);
             let iconClassName = 'p-inline-message-icon';
+
+            const iconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('icon')
+            );
+
             let icon = props.icon;
 
             if (!icon) {
                 switch (props.severity) {
                     case 'info':
-                        icon = <InfoCircleIcon className={iconClassName} />;
+                        icon = <InfoCircleIcon {...iconProps} />;
                         break;
                     case 'warn':
-                        icon = <ExclamationTriangleIcon className={iconClassName} />;
+                        icon = <ExclamationTriangleIcon {...iconProps} />;
                         break;
                     case 'error':
-                        icon = <TimesCircleIcon className={iconClassName} />;
+                        icon = <TimesCircleIcon {...iconProps} />;
                         break;
                     case 'success':
-                        icon = <CheckIcon className={iconClassName} />;
+                        icon = <CheckIcon {...iconProps} />;
                         break;
                     default:
                         break;
                 }
             }
 
-            const messageIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const messageIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+
+            const textProps = mergeProps(
+                {
+                    className: 'p-inline-message-text'
+                },
+                ptm('text')
+            );
 
             return (
                 <>
                     {messageIcon}
-                    <span className="p-inline-message-text">{text}</span>
+                    <span {...textProps}>{text}</span>
                 </>
             );
         };
@@ -55,7 +76,6 @@ export const Message = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = MessageBase.getOtherProps(props);
         const className = classNames(
             'p-inline-message p-component',
             {
@@ -69,11 +89,20 @@ export const Message = React.memo(
         );
         const content = createContent();
 
-        return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps} role="alert" aria-live="polite">
-                {content}
-            </div>
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className,
+                style: props.style,
+                role: 'alert',
+                'aria-live': 'polite'
+            },
+            MessageBase.getOtherProps(props),
+            ptm('root')
         );
+
+        return <div {...rootProps}>{content}</div>;
     })
 );
 

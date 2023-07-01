@@ -1,22 +1,21 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TriStateCheckboxBase = {
+export const TriStateCheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TriStateCheckbox',
-        id: null,
-        value: null,
-        style: null,
+        autoFocus: false,
+        checkIcon: null,
         className: null,
         disabled: false,
+        id: null,
+        onChange: null,
         readOnly: false,
+        style: null,
         tabIndex: '0',
         tooltip: null,
-        checkIcon: null,
-        uncheckIcon: null,
         tooltipOptions: null,
-        onChange: null,
+        uncheckIcon: null,
+        value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TriStateCheckboxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TriStateCheckboxBase.defaultProps)
-};
+    }
+});

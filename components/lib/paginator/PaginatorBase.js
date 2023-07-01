@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const PaginatorBase = {
+export const PaginatorBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Paginator',
         totalRecords: 0,
@@ -18,12 +18,10 @@ export const PaginatorBase = {
         dropdownAppendTo: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PaginatorBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PaginatorBase.defaultProps)
-};
+    }
+});
 
-export const CurrentPageReportBase = {
+export const CurrentPageReportBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'CurrentPageReport',
         pageCount: null,
@@ -34,12 +32,10 @@ export const CurrentPageReportBase = {
         reportTemplate: '({currentPage} of {totalPages})',
         template: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CurrentPageReportBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CurrentPageReportBase.defaultProps)
-};
+    }
+});
 
-export const FirstPageLinkBase = {
+export const FirstPageLinkBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'FirstPageLink',
         disabled: false,
@@ -47,12 +43,10 @@ export const FirstPageLinkBase = {
         template: null,
         firstPageLinkIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, FirstPageLinkBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, FirstPageLinkBase.defaultProps)
-};
+    }
+});
 
-export const JumpToPageInputBase = {
+export const JumpToPageInputBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'JumpToPageInput',
         page: null,
@@ -62,12 +56,10 @@ export const JumpToPageInputBase = {
         template: null,
         onChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, JumpToPageInputBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, JumpToPageInputBase.defaultProps)
-};
+    }
+});
 
-export const LastPageLinkBase = {
+export const LastPageLinkBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'LastPageLink',
         disabled: false,
@@ -75,12 +67,10 @@ export const LastPageLinkBase = {
         template: null,
         lastPageLinkIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, LastPageLinkBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, LastPageLinkBase.defaultProps)
-};
+    }
+});
 
-export const NextPageLinkBase = {
+export const NextPageLinkBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'NextPageLink',
         disabled: false,
@@ -88,12 +78,10 @@ export const NextPageLinkBase = {
         template: null,
         nextPageLinkIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, NextPageLinkBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, NextPageLinkBase.defaultProps)
-};
+    }
+});
 
-export const PageLinksBase = {
+export const PageLinksBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'PageLinks',
         value: null,
@@ -103,12 +91,10 @@ export const PageLinksBase = {
         links: null,
         template: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PageLinksBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PageLinksBase.defaultProps)
-};
+    }
+});
 
-export const PrevPageLinkBase = {
+export const PrevPageLinkBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'PrevPageLink',
         disabled: false,
@@ -116,12 +102,10 @@ export const PrevPageLinkBase = {
         template: null,
         prevPageLinkIcon: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, PrevPageLinkBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, PrevPageLinkBase.defaultProps)
-};
+    }
+});
 
-export const RowsPerPageDropdownBase = {
+export const RowsPerPageDropdownBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'RowsPerPageDropdown',
         options: null,
@@ -134,7 +118,5 @@ export const RowsPerPageDropdownBase = {
         template: null,
         disabled: false,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, RowsPerPageDropdownBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, RowsPerPageDropdownBase.defaultProps)
-};
+    }
+});

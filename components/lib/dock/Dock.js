@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DockBase } from './DockBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = DockBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = DockBase.getProps(inProps, context);
 
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
+        const { ptm } = DockBase.setMetaData({
+            props,
+            state: {
+                currentIndex: currentIndexState
+            }
+        });
         const elementRef = React.useRef(null);
 
         const onListMouseLeave = () => {
@@ -41,10 +49,27 @@ export const Dock = React.memo(
             });
             const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-dock-action-icon', _icon);
-            const icon = IconUtils.getJSXIcon(_icon, { className: 'p-dock-action-icon' }, { props });
+            const iconProps = mergeProps(
+                {
+                    className: 'p-dock-action-icon'
+                },
+                ptm('icon')
+            );
+            const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
+            const actionProps = mergeProps(
+                {
+                    href: url || '#',
+                    role: 'menuitem',
+                    className: contentClassName,
+                    target,
+                    'data-pr-tooltip': label,
+                    onClick: (e) => onItemClick(e, item)
+                },
+                ptm('action')
+            );
 
             let content = (
-                <a href={url || '#'} role="menuitem" className={contentClassName} target={target} data-pr-tooltip={label} onClick={(e) => onItemClick(e, item)}>
+                <a {...actionProps}>
                     {icon}
                     <Ripple />
                 </a>
@@ -63,11 +88,17 @@ export const Dock = React.memo(
                 content = ObjectUtils.getJSXElement(template, item, defaultContentOptions);
             }
 
-            return (
-                <li key={index} className={className} role="none" onMouseEnter={() => onItemMouseEnter(index)}>
-                    {content}
-                </li>
+            const menuitemProps = mergeProps(
+                {
+                    key: index,
+                    className,
+                    role: 'none',
+                    onMouseEnter: () => onItemMouseEnter(index)
+                },
+                ptm('menuitem')
             );
+
+            return <li {...menuitemProps}>{content}</li>;
         };
 
         const createItems = () => {
@@ -77,8 +108,14 @@ export const Dock = React.memo(
         const createHeader = () => {
             if (props.header) {
                 const header = ObjectUtils.getJSXElement(props.header, { props });
+                const headerProps = mergeProps(
+                    {
+                        className: 'p-dock-header'
+                    },
+                    ptm('header')
+                );
 
-                return <div className="p-dock-header">{header}</div>;
+                return <div {...headerProps}>{header}</div>;
             }
 
             return null;
@@ -86,19 +123,29 @@ export const Dock = React.memo(
 
         const createList = () => {
             const items = createItems();
-
-            return (
-                <ul className="p-dock-list" role="menu" onMouseLeave={onListMouseLeave}>
-                    {items}
-                </ul>
+            const menuProps = mergeProps(
+                {
+                    className: 'p-dock-list',
+                    role: 'menu',
+                    onMouseLeave: onListMouseLeave
+                },
+                ptm('menu')
             );
+
+            return <ul {...menuProps}>{items}</ul>;
         };
 
         const createFooter = () => {
             if (props.footer) {
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
+                const footerProps = mergeProps(
+                    {
+                        className: 'p-dock-footer'
+                    },
+                    ptm('footer')
+                );
 
-                return <div className="p-dock-footer">{footer}</div>;
+                return <div {...footerProps}>{footer}</div>;
             }
 
             return null;
@@ -109,7 +156,6 @@ export const Dock = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = DockBase.getOtherProps(props);
         const className = classNames(
             `p-dock p-component p-dock-${props.position}`,
             {
@@ -120,10 +166,27 @@ export const Dock = React.memo(
         const header = createHeader();
         const list = createList();
         const footer = createFooter();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className,
+                style: props.style
+            },
+            DockBase.getOtherProps(props),
+            ptm('root')
+        );
+
+        const containerProps = mergeProps(
+            {
+                className: 'p-dock-container'
+            },
+            ptm('container')
+        );
 
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
-                <div className="p-dock-container">
+            <div {...rootProps}>
+                <div {...containerProps}>
                     {header}
                     {list}
                     {footer}

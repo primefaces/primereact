@@ -47,8 +47,6 @@ export function PTDoc(props) {
     const code = {
         basic: `
 <Terminal
-    welcomeMessage="Welcome to PrimeReact"
-    prompt="primereact $"
     pt={{
         root: { className: 'surface-900 text-white' },
         command: { className: 'text-blue-500' },

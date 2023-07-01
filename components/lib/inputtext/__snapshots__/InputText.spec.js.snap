@@ -4,6 +4,8 @@ exports[`InputText when input is blank it should not have filled state 1`] = `
 <div>
   <input
     class="p-inputtext p-component"
+    data-pc-name="inputtext"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -12,6 +14,8 @@ exports[`InputText when input is disabled it should render as disabled 1`] = `
 <div>
   <input
     class="p-inputtext p-component p-disabled"
+    data-pc-name="inputtext"
+    data-pc-section="root"
     disabled=""
   />
 </div>
@@ -21,6 +25,8 @@ exports[`InputText when input is enabled then input accepts data entry and have 
 <div>
   <input
     class="p-inputtext p-component p-filled"
+    data-pc-name="inputtext"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -29,6 +35,8 @@ exports[`InputText when input is is set for validation only 1`] = `
 <div>
   <input
     class="p-inputtext p-component p-filled"
+    data-pc-name="inputtext"
+    data-pc-section="root"
   />
 </div>
 `;

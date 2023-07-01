@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const FileUploadBase = {
+export const FileUploadBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'FileUpload',
         id: null,
@@ -65,7 +65,5 @@ export const FileUploadBase = {
         uploadHandler: null,
         onRemove: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, FileUploadBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, FileUploadBase.defaultProps)
-};
+    }
+});

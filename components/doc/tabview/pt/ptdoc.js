@@ -134,5 +134,3 @@ export default function PTDemo() {
         </>
     );
 }
-
-export default PTDoc;

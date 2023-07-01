@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const MultiSelectBase = {
+export const MultiSelectBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'MultiSelect',
         appendTo: null,
@@ -15,6 +15,7 @@ export const MultiSelectBase = {
         emptyFilterMessage: null,
         filter: false,
         filterBy: null,
+        filterInputAutoFocus: true,
         filterLocale: undefined,
         filterMatchMode: 'contains',
         filterPlaceholder: null,
@@ -30,6 +31,7 @@ export const MultiSelectBase = {
         itemTemplate: null,
         maxSelectedLabels: null,
         name: null,
+        onClick: null,
         onBlur: null,
         onChange: null,
         onFilter: null,
@@ -68,7 +70,5 @@ export const MultiSelectBase = {
         value: null,
         virtualScrollerOptions: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MultiSelectBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MultiSelectBase.defaultProps)
-};
+    }
+});

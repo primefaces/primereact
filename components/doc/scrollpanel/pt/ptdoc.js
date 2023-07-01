@@ -1,11 +1,18 @@
 import { ScrollPanel } from '../../../lib/scrollpanel/ScrollPanel';
-import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const code = {
         basic: `
-<ScrollPanel pt={{ root: { style: { width: '100%', height: '200px' } }, bary: { className: 'bg-primary' } }}>
+<ScrollPanel pt={{
+    root: {
+        style: { width: '100%', height: '200px' }
+    },
+    barY: {
+        className: 'bg-primary'
+    }
+}}>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -21,13 +28,20 @@ export function PTDoc(props) {
 </ScrollPanel>
         `,
         javascript: `
-import React from 'react'; 
+import React from 'react';
 import { ScrollPanel } from 'primereact/scrollpanel';
 
 export default function PTDemo() {
     return (
         <div className="card">
-            <ScrollPanel pt={{ root: { style: { width: '100%', height: '200px' } }, bary: { className: 'bg-primary' } }}>
+            <ScrollPanel pt={{
+                root: {
+                    style: { width: '100%', height: '200px' }
+                },
+                barY: {
+                    className: 'bg-primary'
+                }
+            }}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -46,13 +60,20 @@ export default function PTDemo() {
 }
         `,
         typescript: `
-import React from 'react'; 
+import React from 'react';
 import { ScrollPanel } from 'primereact/scrollpanel';
 
 export default function PTDemo() {
     return (
         <div className="card">
-            <ScrollPanel pt={{ root: { style: { width: '100%', height: '200px' } }, bary: { className: 'bg-primary' } }}>
+            <ScrollPanel pt={{
+                root: {
+                    style: { width: '100%', height: '200px' }
+                },
+                barY: {
+                    className: 'bg-primary'
+                }
+            }}>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

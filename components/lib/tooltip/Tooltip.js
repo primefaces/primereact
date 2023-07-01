@@ -1,17 +1,26 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
+import PrimeReact from '../api/Api';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TooltipBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = TooltipBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
+        const { ptm } = TooltipBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                position: positionState,
+                className: classNameState
+            }
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -120,7 +129,7 @@ export const Tooltip = React.memo(
                 const { pageX: x, pageY: y } = currentMouseEvent.current;
 
                 if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
-                    ZIndexUtils.set('tooltip', elementRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['tooltip']);
+                    ZIndexUtils.set('tooltip', elementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['tooltip']) || PrimeReact.zIndex['tooltip']);
                 }
 
                 elementRef.current.style.left = '';
@@ -462,7 +471,6 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
-            const otherProps = TooltipBase.getOtherProps(props);
             const tooltipClassName = classNames(
                 'p-tooltip p-component',
                 {
@@ -472,13 +480,40 @@ export const Tooltip = React.memo(
                 classNameState
             );
             const empty = isTargetContentEmpty(currentTargetRef.current);
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: tooltipClassName,
+                    style: props.style,
+                    role: 'tooltip',
+                    'aria-hidden': visibleState,
+                    onMouseEnter: (e) => onMouseEnter(e),
+                    onMouseLeave: (e) => onMouseLeave
+                },
+                TooltipBase.getOtherProps(props),
+                ptm('root')
+            );
+
+            const arrowProps = mergeProps(
+                {
+                    className: 'p-tooltip-arrow'
+                },
+                ptm('arrow')
+            );
+
+            const textProps = mergeProps(
+                {
+                    ref: textRef,
+                    className: 'p-tooltip-text'
+                },
+                ptm('text')
+            );
 
             return (
-                <div id={props.id} ref={elementRef} className={tooltipClassName} style={props.style} role="tooltip" aria-hidden={visibleState} {...otherProps} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                    <div className="p-tooltip-arrow"></div>
-                    <div ref={textRef} className="p-tooltip-text">
-                        {empty && props.children}
-                    </div>
+                <div {...rootProps}>
+                    <div {...arrowProps}></div>
+                    <div {...textProps}>{empty && props.children}</div>
                 </div>
             );
         };

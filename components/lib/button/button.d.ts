@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
 
@@ -32,11 +33,11 @@ export interface ButtonPassThroughOptions {
     /**
      * Uses to pass attributes to the loading icon's DOM element.
      */
-    loadingIcon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    loadingIcon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    icon?: ButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the label's DOM element.
      */
@@ -45,6 +46,11 @@ export interface ButtonPassThroughOptions {
      * Uses to pass attributes to the badge's DOM element.
      */
     badge?: ButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**
@@ -138,6 +144,11 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      * @defaultValue true
      */
     visible?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ButtonPassThroughOptions}
+     */
+    pt?: ButtonPassThroughOptions;
 }
 
 /**

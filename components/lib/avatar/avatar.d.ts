@@ -34,11 +34,11 @@ export interface AvatarPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: AvatarPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    icon?: AvatarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: AvatarPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: AvatarPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
 }
 
 /**
@@ -97,6 +97,11 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {AvatarPassThroughOptions}
+     */
+    pt?: AvatarPassThroughOptions;
 }
 
 /**

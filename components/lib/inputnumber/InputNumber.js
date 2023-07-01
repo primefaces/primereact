@@ -1,18 +1,26 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils, IconUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import { AngleUpIcon } from '../icons/angleup';
-import { AngleDownIcon } from '../icons/angledown';
+import PrimeReact from '../api/Api';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputNumberBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const { ptm } = InputNumberBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
@@ -32,6 +40,7 @@ export const InputNumber = React.memo(
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
 
+        const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
         const vertical = props.showButtons && props.buttonLayout === 'vertical';
@@ -50,8 +59,8 @@ export const InputNumber = React.memo(
         };
 
         const constructParser = () => {
-            numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
-            const numerals = [...new Intl.NumberFormat(props.locale, { useGrouping: false }).format(9876543210)].reverse();
+            numberFormat.current = new Intl.NumberFormat(_locale, getOptions());
+            const numerals = [...new Intl.NumberFormat(_locale, { useGrouping: false }).format(9876543210)].reverse();
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
@@ -69,13 +78,13 @@ export const InputNumber = React.memo(
         };
 
         const getDecimalExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { ...getOptions(), useGrouping: false });
 
             return new RegExp(`[${formatter.format(1.1).replace(_currency.current, '').trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getGroupingExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: true });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: true });
 
             groupChar.current = formatter.format(1000000).trim().replace(_numeral.current, '').charAt(0);
 
@@ -83,14 +92,14 @@ export const InputNumber = React.memo(
         };
 
         const getMinusSignExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: false });
 
             return new RegExp(`[${formatter.format(-1).trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getCurrencyExpression = () => {
             if (props.currency) {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: 'currency',
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
@@ -108,7 +117,7 @@ export const InputNumber = React.memo(
             if (props.prefix) {
                 prefixChar.current = props.prefix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
+                const formatter = new Intl.NumberFormat(_locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
 
                 prefixChar.current = formatter.format(1).split('1')[0];
             }
@@ -120,7 +129,7 @@ export const InputNumber = React.memo(
             if (props.suffix) {
                 suffixChar.current = props.suffix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: props.mode,
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
@@ -142,7 +151,7 @@ export const InputNumber = React.memo(
                 }
 
                 if (props.format) {
-                    let formatter = new Intl.NumberFormat(props.locale, getOptions());
+                    let formatter = new Intl.NumberFormat(_locale, getOptions());
                     let _formattedValue = formatter.format(value);
 
                     if (props.prefix) {
@@ -220,7 +229,6 @@ export const InputNumber = React.memo(
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
@@ -252,8 +260,6 @@ export const InputNumber = React.memo(
             if (!props.disabled && !props.readOnly) {
                 props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, -1);
-
-                event.preventDefault();
             }
         };
 
@@ -893,8 +899,12 @@ export const InputNumber = React.memo(
                 props.onValueChange({
                     originalEvent: event,
                     value: value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -1022,6 +1032,7 @@ export const InputNumber = React.memo(
                     aria-valuenow={props.value}
                     {...ariaProps}
                     {...dataProps}
+                    pt={ptm('input')}
                 />
             );
         };
@@ -1035,21 +1046,31 @@ export const InputNumber = React.memo(
                 props.incrementButtonClassName
             );
             const iconsClassName = 'p-button-icon';
-            const icon = props.incrementButtonIcon || <AngleUpIcon className={iconsClassName} />;
-            const upButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
+            const incrementIconProps = mergeProps(
+                {
+                    className: iconsClassName
+                },
+                ptm('incrementIconProps')
+            );
+            const icon = props.incrementButtonIcon || <AngleUpIcon {...incrementIconProps} />;
+            const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
+            const incrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className,
+                    onPointerLeave: onUpButtonMouseLeave,
+                    onPointerDown: (e) => onUpButtonMouseDown(e),
+                    onPointerUp: onUpButtonMouseUp,
+                    onKeyDown: (e) => onUpButtonKeyDown(e),
+                    onKeyUp: onUpButtonKeyUp,
+                    disabled: props.disabled,
+                    tabIndex: -1
+                },
+                ptm('incrementButton')
+            );
 
             return (
-                <button
-                    type="button"
-                    className={className}
-                    onPointerLeave={onUpButtonMouseLeave}
-                    onPointerDown={onUpButtonMouseDown}
-                    onPointerUp={onUpButtonMouseUp}
-                    onKeyDown={onUpButtonKeyDown}
-                    onKeyUp={onUpButtonKeyUp}
-                    disabled={props.disabled}
-                    tabIndex={-1}
-                >
+                <button {...incrementButtonProps}>
                     {upButton}
                     <Ripple />
                 </button>
@@ -1065,21 +1086,31 @@ export const InputNumber = React.memo(
                 props.decrementButtonClassName
             );
             const iconsClassName = 'p-button-icon';
-            const icon = props.decrementButtonIcon || <AngleDownIcon className={iconsClassName} />;
-            const downButton = IconUtils.getJSXIcon(icon, { className: iconsClassName }, { props });
+            const decrementIconProps = mergeProps(
+                {
+                    className: iconsClassName
+                },
+                ptm('decrementIconProps')
+            );
+            const icon = props.decrementButtonIcon || <AngleDownIcon {...decrementIconProps} />;
+            const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
+            const decrementButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className,
+                    onPointerLeave: onDownButtonMouseLeave,
+                    onPointerDown: (e) => onDownButtonMouseDown(e),
+                    onPointerUp: onDownButtonMouseUp,
+                    onKeyDown: (e) => onDownButtonKeyDown(e),
+                    onKeyUp: onDownButtonKeyUp,
+                    disabled: props.disabled,
+                    tabIndex: -1
+                },
+                ptm('decrementButton')
+            );
 
             return (
-                <button
-                    type="button"
-                    className={className}
-                    onPointerLeave={onDownButtonMouseLeave}
-                    onPointerDown={onDownButtonMouseDown}
-                    onPointerUp={onDownButtonMouseUp}
-                    onKeyDown={onDownButtonKeyDown}
-                    onKeyUp={onDownButtonKeyUp}
-                    disabled={props.disabled}
-                    tabIndex={-1}
-                >
+                <button {...decrementButtonProps}>
                     {downButton}
                     <Ripple />
                 </button>
@@ -1089,10 +1120,16 @@ export const InputNumber = React.memo(
         const createButtonGroup = () => {
             const upButton = props.showButtons && createUpButton();
             const downButton = props.showButtons && createDownButton();
+            const buttonGroupProps = mergeProps(
+                {
+                    className: 'p-inputnumber-button-group'
+                },
+                ptm('buttonGroup')
+            );
 
             if (stacked) {
                 return (
-                    <span className="p-inputnumber-button-group">
+                    <span {...buttonGroupProps}>
                         {upButton}
                         {downButton}
                     </span>
@@ -1124,14 +1161,24 @@ export const InputNumber = React.memo(
         );
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className,
+                style: props.style
+            },
+            otherProps,
+            ptm('root')
+        );
 
         return (
             <>
-                <span ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <span {...rootProps}>
                     {inputElement}
                     {buttonGroup}
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

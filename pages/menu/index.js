@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/menu/pt/ptdoc';
+import { Wireframe } from '../../components/doc/menu/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
@@ -45,8 +48,25 @@ const MenuDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.menu.options',
+            label: 'Menu PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu', 'MenuItem']} />;
+    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default MenuDemo;

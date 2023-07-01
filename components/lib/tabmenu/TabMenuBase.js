@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TabMenuBase = {
+export const TabMenuBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TabMenu',
         id: null,
@@ -10,7 +10,5 @@ export const TabMenuBase = {
         className: null,
         onTabChange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TabMenuBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TabMenuBase.defaultProps)
-};
+    }
+});

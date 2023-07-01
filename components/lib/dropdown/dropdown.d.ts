@@ -10,10 +10,152 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { IconType } from '../utils';
-import { VirtualScrollerProps } from '../virtualscroller';
+import { IconType, PassThroughType } from '../utils';
+import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+
+export declare type DropdownPassThroughType<T> = PassThroughType<T, DropdownPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DropdownPassThroughMethodOptions {
+    props: DropdownProps;
+    state: DropdownState;
+    context: DropdownContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DropdownProps.pt}
+ */
+export interface DropdownPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: DropdownPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the clear icon's DOM element.
+     */
+    clearIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the trigger' DOM element.
+     */
+    trigger?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the filter container's DOM element.
+     */
+    filterContainer?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the filter input's DOM element.
+     */
+    filterInput?: DropdownPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the filter icon's DOM element.
+     */
+    filterIcon?: DropdownPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the VirtualScroller component.
+     * @see {@link VirtualScrollerPassThroughOptions}
+     */
+    virtualScroller?: VirtualScrollerPassThroughOptions;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    list?: DropdownPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the item group's DOM element.
+     */
+    itemGroup?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the empty message's DOM element.
+     */
+    emptyMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the select's DOM element.
+     */
+    select?: DropdownPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
+    /**
+     * Uses to pass attributes to the option's DOM element.
+     */
+    option?: DropdownPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Uses to pass attributes to the hidden selected message's DOM element.
+     */
+    hiddenSelectedMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in Dropdown component.
+ */
+export interface DropdownState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current filter state as a string.
+     */
+    filter: string;
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+}
+
+/**
+ * Defines current options in Dropdown component.
+ */
+export interface DropdownContext {
+    /**
+     * Current selection state of the item as a boolean.
+     * @defaultValue false
+     */
+    selected: boolean;
+    /**
+     * Current focus state of the item as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current disabled state of the item as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+}
 
 /**
  * Custom change event.
@@ -338,6 +480,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DropdownPassThroughOptions}
+     */
+    pt?: DropdownPassThroughOptions;
 }
 
 /**
@@ -376,4 +523,9 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
      * @return {HTMLElement} Overlay element
      */
     public getOverlay(): HTMLElement;
+    /**
+     * Used to get the options of inline virtualScroller component.
+     * @return {VirtualScroller} VirtualScroller component
+     */
+    public getVirtualScroller(): VirtualScroller;
 }

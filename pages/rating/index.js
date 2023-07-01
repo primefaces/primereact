@@ -1,4 +1,7 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/rating/pt/ptdoc';
+import { Wireframe } from '../../components/doc/rating/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/rating/basicdoc';
@@ -58,8 +61,25 @@ const RatingDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.rating.options',
+            label: 'Rating PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Rating Component" header="Rating" description="Rating component is a star based selection input." componentDocs={docs} apiDocs={['Rating']} />;
+    return <DocComponent title="React Rating Component" header="Rating" description="Rating component is a star based selection input." componentDocs={docs} apiDocs={['Rating']} ptDocs={ptDocs} />;
 };
 
 export default RatingDemo;

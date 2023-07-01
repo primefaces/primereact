@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DataScrollerBase = {
+export const DataScrollerBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'DataScroller',
         id: null,
@@ -19,7 +19,5 @@ export const DataScrollerBase = {
         footer: null,
         lazy: false,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DataScrollerBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DataScrollerBase.defaultProps)
-};
+    }
+});

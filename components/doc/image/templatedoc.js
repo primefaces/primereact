@@ -7,7 +7,7 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<Image src="/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+<Image src="/images/galleria/galleria12.jpg" indicatorIcon={icon} alt="Image" preview width="250" />
         `,
         javascript: `
 import React from 'react'; 
@@ -18,7 +18,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" indicatorIcon={icon} alt="Image" preview width="250" />
         </div>
     )
 }
@@ -32,7 +32,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+            <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" indicatorIcon={icon} alt="Image" preview width="250" />
         </div>
     )
 }
@@ -43,11 +43,11 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    An eye icon is displayed by default when the image is hovered in preview mode. Use the <i>template</i> prop for custom content.
+                    An eye icon is displayed by default when the image is hovered in preview mode. Use the <i>indicatorIcon</i> prop for custom content.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" template={icon} alt="Image" preview width="250" />
+                <Image src="https://primefaces.org/cdn/primereact/images/galleria/galleria12.jpg" indicatorIcon={icon} alt="Image" preview width="250" />
             </div>
             <DocSectionCode code={code} />
         </>

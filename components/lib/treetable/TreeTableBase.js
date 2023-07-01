@@ -1,7 +1,7 @@
 import { FilterMatchMode } from '../api/Api';
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const TreeTableBase = {
+export const TreeTableBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TreeTable',
         alwaysShowPaginator: true,
@@ -42,6 +42,8 @@ export const TreeTableBase = {
         onFilter: null,
         onPage: null,
         onRowClick: null,
+        onRowMouseEnter: null,
+        onRowMouseLeave: null,
         onSelect: null,
         onSelectionChange: null,
         onSort: null,
@@ -84,7 +86,5 @@ export const TreeTableBase = {
         totalRecords: null,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TreeTableBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TreeTableBase.defaultProps)
-};
+    }
+});

@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { StyleClassBase } from './StyleClassBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const StyleClass = React.forwardRef((inProps, ref) => {
-    const props = StyleClassBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = StyleClassBase.getProps(inProps, context);
 
     const targetRef = React.useRef(null);
     const animating = React.useRef(false);
@@ -137,16 +139,16 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
 
         switch (props.selector) {
             case '@next':
-                return elementRef.current.nextElementSibling;
+                return elementRef.current && elementRef.current.nextElementSibling;
 
             case '@prev':
-                return elementRef.current.previousElementSibling;
+                return elementRef.current && elementRef.current.previousElementSibling;
 
             case '@parent':
-                return elementRef.current.parentElement;
+                return elementRef.current && elementRef.current.parentElement;
 
             case '@grandparent':
-                return elementRef.current.parentElement.parentElement;
+                return elementRef.current && elementRef.current.parentElement.parentElement;
 
             default:
                 return document.querySelector(props.selector);
@@ -154,8 +156,10 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
     };
 
     const init = () => {
-        elementRef.current = ObjectUtils.getRefElement(props.nodeRef);
-        bindClickListener({ target: elementRef.current });
+        Promise.resolve().then(() => {
+            elementRef.current = ObjectUtils.getRefElement(props.nodeRef);
+            bindClickListener({ target: elementRef.current });
+        });
     };
 
     const destroy = () => {

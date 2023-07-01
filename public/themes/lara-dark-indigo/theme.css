@@ -2330,6 +2330,9 @@
   font-size: 1.25rem;
   padding: 0.9375rem 1.5625rem;
 }
+.p-splitbutton.p-button-lg > .p-button.p-button-icon-only {
+  width: auto;
+}
 .p-splitbutton.p-button-lg > .p-button .p-button-icon {
   font-size: 1.25rem;
 }
@@ -3881,7 +3884,7 @@
   width: 2rem;
   height: 2rem;
 }
-.p-treetable.p-treetable-gridlines .p-datatable-header {
+.p-treetable.p-treetable-gridlines .p-treetable-header {
   border-width: 1px 1px 0 1px;
 }
 .p-treetable.p-treetable-gridlines .p-treetable-footer {
@@ -3901,6 +3904,22 @@
 }
 .p-treetable.p-treetable-gridlines .p-treetable-tfoot > tr > td {
   border-width: 1px;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd {
+  background: #0d1a2c;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight {
+  background: rgba(165, 180, 252, 0.16);
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight .p-row-toggler {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight .p-row-toggler:hover {
+  color: rgba(255, 255, 255, 0.87);
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd + .p-row-expanded {
+  background: #0d1a2c;
 }
 .p-treetable.p-treetable-sm .p-treetable-header {
   padding: 0.875rem 0.875rem;
@@ -4502,29 +4521,29 @@
   border-radius: 6px;
   padding: 1rem;
 }
-.p-breadcrumb ul li .p-menuitem-link {
+.p-breadcrumb .p-breadcrumb-list li .p-menuitem-link {
   transition: box-shadow 0.2s;
   border-radius: 6px;
 }
-.p-breadcrumb ul li .p-menuitem-link:focus {
+.p-breadcrumb .p-breadcrumb-list li .p-menuitem-link:focus {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 0.2rem rgba(165, 180, 252, 0.5);
 }
-.p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+.p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-text {
   color: rgba(255, 255, 255, 0.87);
 }
-.p-breadcrumb ul li .p-menuitem-link .p-menuitem-icon {
+.p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-icon {
   color: rgba(255, 255, 255, 0.6);
 }
-.p-breadcrumb ul li.p-breadcrumb-chevron {
+.p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
   margin: 0 0.5rem 0 0.5rem;
   color: rgba(255, 255, 255, 0.87);
 }
-.p-breadcrumb ul li:last-child .p-menuitem-text {
+.p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-text {
   color: rgba(255, 255, 255, 0.87);
 }
-.p-breadcrumb ul li:last-child .p-menuitem-icon {
+.p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-icon {
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -5680,6 +5699,12 @@
 .p-message .p-message-icon.p-icon {
   width: 1.5rem;
   height: 1.5rem;
+}
+.p-message .p-message-summary {
+  font-weight: 700;
+}
+.p-message .p-message-detail {
+  margin-left: 0.5rem;
 }
 
 .p-toast {

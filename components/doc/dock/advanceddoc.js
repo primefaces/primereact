@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { PhotoService } from '../../../service/PhotoService';
-import PrimeReact from '../../lib/api/Api';
+import { PrimeReactContext } from '../../lib/api/Api';
 import { Dialog } from '../../lib/dialog/Dialog';
 import { Dock } from '../../lib/dock/Dock';
 import { Galleria } from '../../lib/galleria/Galleria';
@@ -13,6 +13,7 @@ import { Tooltip } from '../../lib/tooltip/Tooltip';
 import { Tree } from '../../lib/tree/Tree';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import PrimeReact from '../../lib/api/Api';
 
 export function AdvancedDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);
@@ -22,6 +23,7 @@ export function AdvancedDoc(props) {
     const toast = useRef(null);
     const toast2 = useRef(null);
     const galleria = useRef(null);
+    const context = useContext(PrimeReactContext);
 
     const dockItems = [
         {
@@ -253,16 +255,17 @@ export function AdvancedDoc(props) {
 
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
-
-        PrimeReact.appendTo = 'self';
+        if (context) context.setAppendTo('self');
+        else PrimeReact.appendTo = 'self';
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            PrimeReact.appendTo = null;
+            if (context) context.setAppendTo(null);
+            else PrimeReact.appendTo = null;
         };
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const start = <i className="pi pi-apple"></i>;
     const end = (
@@ -295,7 +298,6 @@ export function AdvancedDoc(props) {
 `,
         javascript: `
 import React, { useRef, useState, useEffect } from 'react';
-import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
 import { Tooltip } from 'primereact/tooltip';
 import { Dialog } from 'primereact/dialog';
@@ -548,13 +550,13 @@ export default function AdvanceDemo() {
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
-        PrimeReact.appendTo = 'self';
+        setAppendTo('self');
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            PrimeReact.appendTo = null;
+            setAppendTo(null);
         };
     }, []);
 
@@ -593,7 +595,6 @@ export default function AdvanceDemo() {
         `,
         typescript: `
 import React, { useRef, useState, useEffect } from 'react';
-import PrimeReact from 'primereact/api';
 import { Dock } from 'primereact/dock';
 import { Tooltip } from 'primereact/tooltip';
 import { Dialog } from 'primereact/dialog';
@@ -847,13 +848,13 @@ export default function AdvanceDemo() {
         PhotoService.getImages().then((data) => setImages(data));
         NodeService.getTreeNodes().then((data) => setNodes(data));
 
-        PrimeReact.appendTo = 'self';
+        setAppendTo('self');
 
         return () => {
             TerminalService.off('command', commandHandler);
 
             // reset
-            PrimeReact.appendTo = null;
+            setAppendTo(null);
         };
     }, []);
 

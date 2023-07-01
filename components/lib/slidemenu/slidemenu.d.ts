@@ -10,7 +10,104 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type SlideMenuPassThroughType<T> = PassThroughType<T, SlideMenuPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SlideMenuPassThroughMethodOptions {
+    props: SlideMenuProps;
+    state: SlideMenuState;
+    context: SlideMenuContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SlideMenuProps.pt}
+ */
+export interface SlideMenuPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: SlideMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the previous's DOM element.
+     */
+    previous?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the previous icon's DOM element.
+     */
+    previousIcon?: SlideMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the previous label's DOM element.
+     */
+    previousLabel?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the submenu icon's DOM element.
+     */
+    submenuIcon?: SlideMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: SlideMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Defines current inline state in SlideMenu component.
+ */
+export interface SlideMenuState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+    /**
+     * Current level state as a number.
+     * @defaultValue 0
+     */
+    level: number;
+}
+
+/**
+ * Defines current options in SlideMenu component.
+ */
+export interface SlideMenuContext {
+    /**
+     * Current active state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Custom navigate event
@@ -82,6 +179,11 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @defaultValue false
      */
     popup?: boolean | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SlideMenuPassThroughOptions}
+     */
+    pt?: SlideMenuPassThroughOptions;
     /**
      * Icon of the submenu.
      */

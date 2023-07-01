@@ -87,7 +87,7 @@ const TemplatesPage = () => {
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
                         <a href="https://www.primefaces.org/ultima-react" rel="noopener noreferrer" target="_blank">
-                            <img alt="Ultima" src="https://primefaces.org/cdn/primereact/images/layouts/atlantis-react.jpg" className="w-full" />
+                            <img alt="Ultima" src="https://primefaces.org/cdn/primereact/images/layouts/ultima-react.jpg" className="w-full" />
                         </a>
                         <div className="flex gap-3 mt-3">
                             <a href="https://www.primefaces.org/ultima-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">

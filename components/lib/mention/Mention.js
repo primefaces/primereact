@@ -1,17 +1,19 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
+import PrimeReact from '../api/Api';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MentionBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MentionBase.getProps(inProps, context);
 
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
@@ -22,6 +24,24 @@ export const Mention = React.memo(
         const inputRef = React.useRef(props.inputRef);
         const listRef = React.useRef(null);
         const timeout = React.useRef(null);
+
+        const { ptm } = MentionBase.setMetaData({
+            props,
+            state: {
+                overlayVisible: overlayVisibleState,
+                focused: focusedState,
+                searching: searchingState,
+                trigger: triggerState
+            }
+        });
+
+        const getPTOptions = (item, suggestion) => {
+            return ptm(suggestion, {
+                context: {
+                    trigger: triggerState ? triggerState.key : ''
+                }
+            });
+        };
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -43,7 +63,7 @@ export const Mention = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -351,8 +371,17 @@ export const Mention = React.memo(
             const key = index + '_item';
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, { trigger: triggerState ? triggerState.key : '', index }) : formatValue(suggestion);
 
+            const itemProps = mergeProps(
+                {
+                    key: key,
+                    className: 'p-mention-item',
+                    onClick: (e) => onItemClick(e, suggestion)
+                },
+                getPTOptions(suggestion, 'item')
+            );
+
             return (
-                <li key={key} className="p-mention-item" onClick={(e) => onItemClick(e, suggestion)}>
+                <li {...itemProps}>
                     {content}
                     <Ripple />
                 </li>
@@ -360,14 +389,18 @@ export const Mention = React.memo(
         };
 
         const createList = () => {
+            const itemsProps = mergeProps(
+                {
+                    ref: listRef,
+                    className: 'p-mention-items'
+                },
+                ptm('items')
+            );
+
             if (props.suggestions) {
                 const items = props.suggestions.map(createItem);
 
-                return (
-                    <ul ref={listRef} className="p-mention-items">
-                        {items}
-                    </ul>
-                );
+                return <ul {...itemsProps}>{items}</ul>;
             }
 
             return null;
@@ -379,6 +412,16 @@ export const Mention = React.memo(
             const header = ObjectUtils.getJSXElement(props.headerTemplate, props);
             const footer = ObjectUtils.getJSXElement(props.footerTemplate, props);
             const list = createList();
+
+            const panelProps = mergeProps(
+                {
+                    ref: overlayRef,
+                    className: panelClassName,
+                    style: panelStyle,
+                    onClick: onPanelClick
+                },
+                ptm('panel')
+            );
 
             const panel = (
                 <CSSTransition
@@ -394,7 +437,7 @@ export const Mention = React.memo(
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                 >
-                    <div ref={overlayRef} className={panelClassName} style={panelStyle} onClick={onPanelClick}>
+                    <div {...panelProps}>
                         {header}
                         {list}
                         {footer}
@@ -417,9 +460,37 @@ export const Mention = React.memo(
         const inputProps = MentionBase.getOtherProps(props);
         const panel = createPanel();
 
+        const inputMentionProps = mergeProps(
+            {
+                ref: inputRef,
+                id: props.inputId,
+                className: inputClassName,
+                style: props.inputStyle,
+                ...inputProps,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                onInput: onInput,
+                onKeyUp: onKeyUp,
+                onChange: onChange
+            },
+            ptm('input')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: className,
+                style: props.style
+            },
+            MentionBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style}>
-                <InputTextarea ref={inputRef} id={props.inputId} className={inputClassName} style={props.inputStyle} {...inputProps} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} onInput={onInput} onKeyUp={onKeyUp} onChange={onChange} />
+            <div {...rootProps}>
+                <InputTextarea {...inputMentionProps} />
                 {panel}
             </div>
         );

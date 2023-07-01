@@ -10,6 +10,57 @@
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+
+export declare type InputSwitchPassThroughType<T> = PassThroughType<T, InputSwitchPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InputSwitchPassThroughMethodOptions {
+    props: InputSwitchProps;
+    state: InputSwitchState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InputSwitchProps.pt}
+ */
+export interface InputSwitchPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the slider's DOM element.
+     */
+    slider?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     */
+    hiddenInputWrapper?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden input's DOM element.
+     */
+    hiddenInput?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in InputSwitch component.
+ */
+export interface InputSwitchState {
+    /**
+     * Current focus state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * Custom change event.
@@ -28,6 +79,11 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Unique identifier of the element.
      */
     id?: string | undefined;
+    /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
     /**
      * Reference of the input element.
      */
@@ -101,6 +157,11 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputSwitchPassThroughOptions}
+     */
+    pt?: InputSwitchPassThroughOptions;
 }
 
 /**

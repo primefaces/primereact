@@ -43,7 +43,7 @@ export function FormikDoc(props) {
         basic: `
 Toast ref={toast} />
 <InputTextarea
-    inputId="description"
+    inputid="description"
     name="description"
     rows={4}
     cols={30}
@@ -102,7 +102,7 @@ export default function FormikDoc() {
                 <label htmlFor="description">Description</label>
                 <Toast ref={toast} />
                 <InputTextarea
-                    inputId="description"
+                    inputid="description"
                     name="description"
                     rows={4}
                     cols={30}
@@ -165,7 +165,7 @@ export default function FormikDoc() {
                 <label htmlFor="description">Description</label>
                 <Toast ref={toast} />
                 <InputTextarea
-                    inputId="description"
+                    inputid="description"
                     name="description"
                     rows={4}
                     cols={30}
@@ -196,7 +196,7 @@ export default function FormikDoc() {
                     <label htmlFor="description">Description</label>
                     <Toast ref={toast} />
                     <InputTextarea
-                        inputId="description"
+                        inputid="description"
                         name="description"
                         rows={4}
                         cols={30}

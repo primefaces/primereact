@@ -4,10 +4,12 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ButtonBase.getProps(inProps, context);
 
         const { ptm } = ButtonBase.setMetaData({
             props
@@ -48,7 +50,7 @@ export const Button = React.memo(
 
             const icon = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
 
-            return IconUtils.getJSXIcon(icon, iconsProps, { props });
+            return IconUtils.getJSXIcon(icon, { ...iconsProps }, { props });
         };
 
         const createLabel = () => {
@@ -92,7 +94,7 @@ export const Button = React.memo(
         };
         const size = sizeMapping[props.size];
         const className = classNames('p-button p-component', props.className, {
-            'p-button-icon-only': (props.icon || (props.loading && props.loadingIcon)) && !props.label && !props.children,
+            'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
             'p-disabled': disabled,
             'p-button-loading': props.loading,
@@ -102,7 +104,7 @@ export const Button = React.memo(
             'p-button-text': props.text,
             'p-button-rounded': props.rounded,
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-loading-${props.iconPos}`]: props.loading && props.loadingIcon && props.label,
+            [`p-button-loading-${props.iconPos}`]: props.loading && props.label,
             [`p-button-${size}`]: size,
             [`p-button-${props.severity}`]: props.severity
         });
@@ -132,7 +134,7 @@ export const Button = React.memo(
                     {badge}
                     <Ripple />
                 </button>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

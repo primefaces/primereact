@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const SliderBase = {
+export const SliderBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Slider',
         id: null,
@@ -17,7 +17,5 @@ export const SliderBase = {
         onChange: null,
         onSlideEnd: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SliderBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SliderBase.defaultProps)
-};
+    }
+});

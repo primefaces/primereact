@@ -68,6 +68,7 @@ const ALIAS_ICON_COMPONENT_ENTRIES = [
 const ALIAS_COMPONENT_ENTRIES = [
     { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
+    { find: '../componentbase/ComponentBase', replacement: 'primereact/componentbase' },
     { find: '../hooks/Hooks', replacement: 'primereact/hooks' },
     { find: '../ripple/Ripple', replacement: 'primereact/ripple' },
     { find: '../csstransition/CSSTransition', replacement: 'primereact/csstransition' },

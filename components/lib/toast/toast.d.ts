@@ -9,7 +9,115 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type ToastPassThroughType<T> = PassThroughType<T, ToastPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ToastPassThroughMethodOptions {
+    props: ToastProps;
+    state: ToastState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ToastProps.pt}
+ */
+export interface ToastPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the message's DOM element.
+     */
+    message?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ToastPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the text's DOM element.
+     */
+    text?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the summary's DOM element.
+     */
+    summary?: ToastPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the detail's DOM element.
+     */
+    detail?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the button's DOM element.
+     */
+    button?: ToastPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the button icon's DOM element.
+     */
+    buttonIcon?: ToastPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+}
+
+/**
+ * Defines message options in Toast component.
+ */
+export interface ToastMessageOptions {
+    /**
+     * Severity level of the message.
+     * @defaultValue info
+     */
+    severity?: 'success' | 'info' | 'warn' | 'error' | undefined;
+    /**
+     * Summary content of the message.
+     */
+    summary?: string | undefined;
+    /**
+     * Detail content of the message.
+     */
+    detail?: any | undefined;
+    /**
+     * Whether the message can be closed manually using the close icon.
+     * @defaultValue true
+     */
+    closable?: boolean | undefined;
+    /**
+     * Delay in milliseconds to close the message automatically.
+     */
+    life?: number | undefined;
+    /**
+     * Key of the Toast to display the message.
+     */
+    group?: string | undefined;
+    /**
+     * Style class of the message.
+     */
+    styleClass?: any;
+    /**
+     * Style class of the content.
+     */
+    contentStyleClass?: any;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToastPassThroughOptions}
+     */
+    pt?: ToastPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in Toast component.
+ */
+export interface ToastState {
+    /**
+     * Current messages.
+     */
+    messages: any[];
+}
 
 /**
  * Message options for toast component
@@ -73,23 +181,28 @@ export interface ToastMessage {
      * Inline style of the message content.
      */
     contentStyle?: React.CSSProperties | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {Omit<ToastPassThroughOptions, 'message'>}
+     */
+    pt?: Omit<ToastPassThroughOptions, 'message'>;
 }
 
 /**
  * Defines valid properties in Toast component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * Base zIndex value to add to initial layering of PrimeReact components which start from 1000.
      * @defaultValue 0
      */
     baseZIndex?: number | undefined;
     /**
-     * Position of the toast in viewport, valid values are "top-right", "top-left", "bottom-left" and "bottom-right".
+     * Position of the toast in viewport, valid values are 'center', 'top-center', 'top-left', 'top-right', 'bottom-center', 'bottom-left', 'bottom-right'.
      * @defaultValue top-right
      */
-    position?: 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right' | undefined;
+    position?: 'center' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right' | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
@@ -122,6 +235,11 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToastPassThroughOptions}
+     */
+    pt?: ToastPassThroughOptions;
 }
 
 /**

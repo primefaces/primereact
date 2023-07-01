@@ -9,6 +9,51 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
+import { PassThroughType } from '../utils/utils';
+
+export declare type StepsPassThroughType<T> = PassThroughType<T, StepsThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface StepsThroughMethodOptions {
+    props: StepsProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link StepsProps.pt}
+ */
+export interface StepsPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: StepsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: StepsPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: StepsPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: StepsPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the step's DOM element.
+     */
+    step?: StepsPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: StepsPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: StepsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Custom select event
@@ -59,6 +104,11 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {StepsPassThroughOptions}
+     */
+    pt?: StepsPassThroughOptions;
 }
 
 /**

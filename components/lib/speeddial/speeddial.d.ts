@@ -9,7 +9,65 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+import { ButtonPassThroughOptions } from '../button/button';
+
+export declare type SpeedDialPassThroughType<T> = PassThroughType<T, SpeedDialPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SpeedDialPassThroughMethodOptions {
+    props: SpeedDialProps;
+    state: SpeedDialState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SpeedDialProps.pt}
+ */
+export interface SpeedDialPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     *  @see {@link ButtonPassThroughOptions}
+     */
+    button?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the menu's DOM element.
+     */
+    menu?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the menu item's DOM element.
+     */
+    menuitem?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the action icon's DOM element.
+     */
+    actionIcon?: SpeedDialPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+}
+
+/**
+ * Defines current inline state in SpeedDial component.
+ */
+export interface SpeedDialState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+}
 
 /**
  */
@@ -146,6 +204,11 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SpeedDialPassThroughOptions}
+     */
+    pt?: SpeedDialPassThroughOptions;
 }
 
 /**

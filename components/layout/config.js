@@ -55,7 +55,7 @@ export default function Config(props) {
 
                 <section className="mb-5">
                     <h3>Ripple Effect</h3>
-                    <InputSwitch checked={props.ripple} onChange={(e) => props.onRippleChange(e.value)} />
+                    <InputSwitch checked={props.ripple} disabled={props.disabled} onChange={(e) => props.onRippleChange(e.value)} />
                 </section>
 
                 <section>

@@ -8,7 +8,57 @@
  *
  */
 import * as React from 'react';
+import { PassThroughType } from '../utils/utils';
 import { TooltipEvent, TooltipOptions } from './tooltipoptions';
+
+export declare type TooltipPassThroughType<T> = PassThroughType<T, TooltipPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TooltipPassThroughMethodOptions {
+    props: TooltipProps;
+    state: TooltipState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TooltipProps.pt}
+ */
+export interface TooltipPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TooltipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the arrow's DOM element.
+     */
+    arrow?: TooltipPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the text's DOM element.
+     */
+    text?: TooltipPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+}
+
+/**
+ * Defines current inline state in Tooltip component.
+ */
+export interface TooltipState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue false
+     */
+    visible: boolean;
+    /**
+     * Current position state as a string.
+     * @defaultValue right
+     */
+    position: string;
+    /**
+     * Current className state as a string.
+     */
+    className: string;
+}
 
 /**
  * Defines valid properties in Tooltip component. In addition to these, all properties of TooltipOptions can be used in this component.
@@ -33,6 +83,11 @@ export interface TooltipProps extends TooltipOptions {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TooltipPassThroughOptions}
+     */
+    pt?: TooltipPassThroughOptions;
 }
 
 /**
@@ -49,19 +104,19 @@ export interface TooltipProps extends TooltipOptions {
 export declare class Tooltip extends React.Component<TooltipProps, any> {
     /**
      * Used to reload target events. In some cases, the target element can be hidden initially. Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.
-     * @param {HTMLElement} target - Target element.
+     * @param {HTMLElement| undefined} target - Target element or if undefined will use current target.
      */
-    public updateTargetEvents(target: HTMLElement): void;
+    public updateTargetEvents(target: HTMLElement | undefined): void;
     /**
      * Used to load target events.
-     * @param {HTMLElement} target - Target element.
+     * @param {HTMLElement} target - Target element or if undefined will use current target.
      */
-    public loadTargetEvents(target: HTMLElement): void;
+    public loadTargetEvents(target: HTMLElement | undefined): void;
     /**
      * Used to unload target events.
-     * @param {HTMLElement} target - Target element.
+     * @param {HTMLElement | undefined} target - Target element or if undefined will use current target.
      */
-    public unloadTargetEvents(target: HTMLElement): void;
+    public unloadTargetEvents(target: HTMLElement | undefined): void;
     /**
      * Used to get container element.
      * @return {HTMLElement} Container element

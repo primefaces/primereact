@@ -31,11 +31,11 @@ export interface ChipPassThroughOptions {
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: ChipPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: ChipPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: ChipPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    icon?: ChipPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the label' DOM element.
      */
@@ -43,7 +43,7 @@ export interface ChipPassThroughOptions {
     /**
      * Uses to pass attributes to the removeIcon's DOM element.
      */
-    removeIcon?: ChipPassThroughType<React.HTMLAttributes<SVGSVGElement>>;
+    removeIcon?: ChipPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -106,6 +106,11 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ChipPassThroughOptions}
+     */
+    pt?: ChipPassThroughOptions;
 }
 
 /**

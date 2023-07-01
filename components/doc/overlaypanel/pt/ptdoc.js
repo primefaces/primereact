@@ -9,7 +9,6 @@ export function PTDoc(props) {
 
     const code = {
         basic: `
-<Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
 <OverlayPanel ref={op}
     pt={{
         root: { className: 'surface-ground' }
@@ -21,6 +20,7 @@ export function PTDoc(props) {
         javascript: `
 import React, { useRef } from 'react';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import { Button } from 'primereact/button';
 
 export default function PTDemo() {
     const op = useRef(null);
@@ -43,6 +43,7 @@ export default function PTDemo() {
         typescript: `
 import React, { useRef } from 'react';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import { Button } from 'primereact/button';
 
 export default function PTDemo() {
     const op = useRef(null);

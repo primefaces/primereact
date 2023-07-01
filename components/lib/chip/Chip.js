@@ -2,9 +2,12 @@ import * as React from 'react';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
 import { TimesCircleIcon } from '../icons/timescircle';
+import { PrimeReactContext } from '../api/Api';
+
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ChipBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ChipBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
@@ -42,8 +45,7 @@ export const Chip = React.memo(
                 ptm('removeIcon')
             );
 
-            const iconProps = { ...removeIconProps };
-            const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
+            const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} />;
 
             if (props.image) {
                 const imageProps = mergeProps(
@@ -81,7 +83,7 @@ export const Chip = React.memo(
             }
 
             if (props.removable) {
-                content.push(IconUtils.getJSXIcon(icon, { ...iconProps }, { props }));
+                content.push(IconUtils.getJSXIcon(icon, { ...removeIconProps }, { props }));
             }
 
             return content;

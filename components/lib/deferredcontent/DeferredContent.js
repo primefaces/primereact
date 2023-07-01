@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useEventListener, useMountEffect } from '../hooks/Hooks';
 import { DeferredContentBase } from './DeferredContentBase';
 import { mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
 
 export const DeferredContent = React.forwardRef((inProps, ref) => {
-    const props = DeferredContentBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = DeferredContentBase.getProps(inProps, context);
 
     const [loadedState, setLoadedState] = React.useState(false);
     const elementRef = React.useRef(null);

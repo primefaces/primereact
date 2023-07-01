@@ -4,7 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function NonceDoc(props) {
     const code = {
         basic: `
-PrimeReact.nonce = '.........';
+import { PrimeReactContext } from 'primereact/api';
+
+//use in a component
+const { setNonce } = useContext(PrimeReactContext);
+
+setNonce('.........');
         `
     };
 

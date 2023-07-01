@@ -1,19 +1,28 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMatchMedia, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
+import PrimeReact from '../api/Api';
 
 export const TieredMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TieredMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TieredMenuBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+        const { ptm } = TieredMenuBase.setMetaData({
+            props,
+            state: {
+                visible: visibleState,
+                attributeSelector: attributeSelectorState
+            }
+        });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -65,7 +74,7 @@ export const TieredMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -108,7 +117,7 @@ export const TieredMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
@@ -168,10 +177,22 @@ export const TieredMenu = React.memo(
                 'p-tieredmenu p-component',
                 {
                     'p-tieredmenu-overlay': props.popup,
-                    'p-input-filled': PrimeReact.inputStyle === 'filled',
-                    'p-ripple-disabled': PrimeReact.ripple === false
+                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                 },
                 props.className
+            );
+
+            const rootProps = mergeProps(
+                {
+                    ref: menuRef,
+                    id: props.id,
+                    className,
+                    style: props.style,
+                    onClick: onPanelClick
+                },
+                TieredMenuBase.getOtherProps(props),
+                ptm('root')
             );
 
             return (
@@ -187,8 +208,8 @@ export const TieredMenu = React.memo(
                     onExit={onExit}
                     onExited={onExited}
                 >
-                    <div ref={menuRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onPanelClick}>
-                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} />
+                    <div {...rootProps}>
+                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} ptm={ptm} />
                     </div>
                 </CSSTransition>
             );

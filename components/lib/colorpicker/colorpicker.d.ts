@@ -11,6 +11,77 @@ import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+
+export declare type ColorPickerPassThroughType<T> = PassThroughType<T, ColorPickerPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ColorPickerPassThroughMethodOptions {
+    props: ColorPickerProps;
+    state: ColorPickerState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ColorPickerProps.pt}
+ */
+export interface ColorPickerPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the selector's DOM element.
+     */
+    selector?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the color's DOM element.
+     */
+    color?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the color handler's DOM element.
+     */
+    colorHandler?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hue's DOM element.
+     */
+    hue?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hue handler's DOM element.
+     */
+    hueHandler?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current inline state in ColorPicker component.
+ */
+export interface ColorPickerState {
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+}
 
 /**
  * RGB type of value
@@ -67,6 +138,11 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     appendTo?: 'self' | HTMLElement | undefined | null;
     /**
+     * When present, it specifies that the component should automatically get focus on load.
+     * @defaultValue false
+     */
+    autoFocus?: boolean | undefined;
+    /**
      * Default color to display when value is null.
      * @defaultValue ff0000
      */
@@ -89,6 +165,14 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Reference of the input element.
      */
     inputRef?: React.Ref<HTMLInputElement> | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputStyle?: React.CSSProperties | undefined;
+    /**
+     * Inline style of the input field.
+     */
+    inputClassName?: string | undefined;
     /**
      * Style class of the overlay panel.
      */
@@ -134,6 +218,11 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ColorPickerPassThroughOptions}
+     */
+    pt?: ColorPickerPassThroughOptions;
 }
 
 /**

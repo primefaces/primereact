@@ -1,25 +1,35 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { SpinnerIcon } from '../icons/spinner';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
-import { ChevronDownIcon } from '../icons/chevrondown';
-import { TimesCircleIcon } from '../icons/timescircle';
-import { SpinnerIcon } from '../icons/spinner';
 
 export const AutoComplete = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = AutoCompleteBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = AutoCompleteBase.getProps(inProps, context);
         const [idState, setIdState] = React.useState(props.id);
         const [searchingState, setSearchingState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
+        const { ptm } = AutoCompleteBase.setMetaData({
+            props,
+            state: {
+                id: idState,
+                searching: searchingState,
+                focused: focusedState,
+                overlayVisible: overlayVisibleState
+            }
+        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -27,7 +37,6 @@ export const AutoComplete = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const timeout = React.useRef(null);
         const selectedItem = React.useRef(null);
-
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
@@ -129,8 +138,12 @@ export const AutoComplete = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: idState,
@@ -176,7 +189,7 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -206,7 +219,7 @@ export const AutoComplete = React.memo(
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
 
-            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const onPanelClick = (event) => {
@@ -375,6 +388,12 @@ export const AutoComplete = React.memo(
         };
 
         const forceItemSelection = (event) => {
+            if (props.multiple) {
+                inputRef.current.value = '';
+
+                return;
+            }
+
             const inputValue = event.target.value.trim();
             const item = (props.suggestions || []).find((it) => {
                 const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
@@ -527,6 +546,7 @@ export const AutoComplete = React.memo(
                     onContextMenu={props.onContextMenu}
                     onClick={props.onClick}
                     onDoubleClick={props.onDblClick}
+                    pt={ptm('input')}
                     {...ariaProps}
                 />
             );
@@ -536,13 +556,31 @@ export const AutoComplete = React.memo(
             if (ObjectUtils.isNotEmpty(props.value)) {
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
-                    const iconProps = { className: 'p-autocomplete-token-icon', onClick: (e) => removeItem(e, index) };
-                    const icon = props.removeTokenIcon || <TimesCircleIcon {...iconProps} />;
-                    const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+                    const removeTokenIconProps = mergeProps(
+                        {
+                            className: 'p-autocomplete-token-icon',
+                            onClick: (e) => removeItem(e, index)
+                        },
+                        ptm('removeTokenIcon')
+                    );
+                    const icon = props.removeTokenIcon || <TimesCircleIcon {...removeTokenIconProps} />;
+                    const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...removeTokenIconProps }, { props });
+                    const tokenProps = mergeProps(
+                        {
+                            className: 'p-autocomplete-token p-highlight'
+                        },
+                        ptm('token')
+                    );
+                    const tokenLabelProps = mergeProps(
+                        {
+                            className: 'p-autocomplete-token-label'
+                        },
+                        ptm('tokenLabel')
+                    );
 
                     return (
-                        <li key={key} className="p-autocomplete-token p-highlight">
-                            <span className="p-autocomplete-token-label">{formatValue(val)}</span>
+                        <li key={key} {...tokenProps}>
+                            <span {...tokenLabelProps}>{formatValue(val)}</span>
                             {removeTokenIcon}
                         </li>
                     );
@@ -554,35 +592,45 @@ export const AutoComplete = React.memo(
 
         const createMultiInput = () => {
             const ariaControls = overlayVisibleState ? idState + '_list' : null;
+            const inputTokenProps = mergeProps(
+                {
+                    className: 'p-autocomplete-input-token'
+                },
+                ptm('inputToken')
+            );
+            const inputProps = mergeProps(
+                {
+                    id: props.inputId,
+                    ref: inputRef,
+                    type: props.type,
+                    disabled: props.disabled,
+                    placeholder: props.placeholder,
+                    role: 'combobox',
+                    'aria-autocomplete': 'list',
+                    'aria-controls': ariaControls,
+                    'aria-haspopup': 'listbox',
+                    'aria-expanded': overlayVisibleState,
+                    autoComplete: 'off',
+                    readOnly: props.readOnly,
+                    tabIndex: props.tabIndex,
+                    onChange: onInputChange,
+                    name: props.name,
+                    style: props.inputStyle,
+                    className: props.inputClassName,
+                    maxLength: props.maxLength,
+                    onKeyUp: props.onKeyUp,
+                    onKeyDown: onInputKeyDown,
+                    onKeyPress: props.onKeyPress,
+                    onFocus: onMultiInputFocus,
+                    onBlur: onMultiInputBlur,
+                    ...ariaProps
+                },
+                ptm('input')
+            );
 
             return (
-                <li className="p-autocomplete-input-token">
-                    <input
-                        ref={inputRef}
-                        type={props.type}
-                        disabled={props.disabled}
-                        placeholder={props.placeholder}
-                        role="combobox"
-                        aria-autocomplete="list"
-                        aria-controls={ariaControls}
-                        aria-haspopup="listbox"
-                        aria-expanded={overlayVisibleState}
-                        autoComplete="off"
-                        readOnly={props.readOnly}
-                        tabIndex={props.tabIndex}
-                        onChange={onInputChange}
-                        id={props.inputId}
-                        name={props.name}
-                        style={props.inputStyle}
-                        className={props.inputClassName}
-                        maxLength={props.maxLength}
-                        onKeyUp={props.onKeyUp}
-                        onKeyDown={onInputKeyDown}
-                        onKeyPress={props.onKeyPress}
-                        onFocus={onMultiInputFocus}
-                        onBlur={onMultiInputBlur}
-                        {...ariaProps}
-                    />
+                <li {...inputTokenProps}>
+                    <input {...inputProps} />
                 </li>
             );
         };
@@ -593,9 +641,20 @@ export const AutoComplete = React.memo(
             });
             const tokens = createChips();
             const input = createMultiInput();
+            const containerProps = mergeProps(
+                {
+                    ref: multiContainerRef,
+                    className,
+                    onClick: onMultiContainerClick,
+                    onContextMenu: props.onContextMenu,
+                    onMouseDown: props.onMouseDown,
+                    onDoubleClick: props.onDblClick
+                },
+                ptm('container')
+            );
 
             return (
-                <ul ref={multiContainerRef} className={className} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown} onClick={onMultiContainerClick} onDoubleClick={props.onDblClick}>
+                <ul {...containerProps}>
                     {tokens}
                     {input}
                 </ul>
@@ -606,7 +665,7 @@ export const AutoComplete = React.memo(
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
-                return <Button type="button" icon={props.dropdownIcon || <ChevronDownIcon />} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} />;
+                return <Button type="button" icon={props.dropdownIcon || <ChevronDownIcon />} className="p-autocomplete-dropdown" disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} pt={ptm('dropdownButton')} />;
             }
 
             return null;
@@ -615,8 +674,14 @@ export const AutoComplete = React.memo(
         const createLoader = () => {
             if (searchingState) {
                 const iconClassName = 'p-autocomplete-loader p-icon-spin';
-                const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} />;
-                const loaderIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const loadingIconProps = mergeProps(
+                    {
+                        className: iconClassName
+                    },
+                    ptm('loadingIcon')
+                );
+                const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} />;
+                const loaderIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
 
                 return loaderIcon;
             }
@@ -645,10 +710,20 @@ export const AutoComplete = React.memo(
         const loader = createLoader();
         const input = createInput();
         const dropdown = createDropdown();
+        const rootProps = mergeProps(
+            {
+                id: idState,
+                ref: elementRef,
+                style: props.style,
+                className
+            },
+            otherProps,
+            ptm('root')
+        );
 
         return (
             <>
-                <span ref={elementRef} id={idState} style={props.style} className={className} {...otherProps}>
+                <span {...rootProps}>
                     {input}
                     {loader}
                     {dropdown}
@@ -668,9 +743,10 @@ export const AutoComplete = React.memo(
                         onEntered={onOverlayEntered}
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
+                        ptm={ptm}
                     />
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

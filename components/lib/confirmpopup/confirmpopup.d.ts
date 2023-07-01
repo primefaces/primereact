@@ -68,6 +68,11 @@ export interface ConfirmPopupState {
      * @defaultValue false
      */
     visible: boolean;
+    /**
+     * Current reshow state as a boolean.
+     * @defaultValue false
+     */
+    reshow: boolean;
 }
 
 /**
@@ -218,6 +223,11 @@ export interface ConfirmPopupProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ConfirmPopupPassThroughOptions}
+     */
+    pt?: ConfirmPopupPassThroughOptions;
 }
 
 /**

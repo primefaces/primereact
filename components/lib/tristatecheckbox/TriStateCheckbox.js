@@ -1,17 +1,27 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
-import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { TriStateCheckboxBase } from './TriStateCheckboxBase';
-import { TimesIcon } from '../icons/times';
+import { useMountEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
+import { TimesIcon } from '../icons/times';
+import { Tooltip } from '../tooltip/Tooltip';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { TriStateCheckboxBase } from './TriStateCheckboxBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TriStateCheckboxBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TriStateCheckboxBase.getProps(inProps, context);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
+
+        const { ptm } = TriStateCheckboxBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
@@ -30,8 +40,12 @@ export const TriStateCheckbox = React.memo(
                 props.onChange({
                     originalEvent: event,
                     value: newValue,
-                    stopPropagation: () => {},
-                    preventDefault: () => {},
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
                     target: {
                         name: props.name,
                         id: props.id,
@@ -62,42 +76,89 @@ export const TriStateCheckbox = React.memo(
             getElement: () => elementRef.current
         }));
 
+        useMountEffect(() => {
+            if (props.autoFocus) {
+                DomHandler.focusFirstElement(elementRef.current);
+            }
+        });
+
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = TriStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
         const boxClassName = classNames('p-checkbox-box', {
-            'p-highlight': (props.value || !props.value) && props.value !== null,
+            'p-highlight': ObjectUtils.isNotEmpty(props.value),
             'p-disabled': props.disabled,
             'p-focus': focusedState
         });
         const iconClassName = 'p-checkbox-icon p-c';
+        const checkIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('checkIcon')
+        );
+        const uncheckIconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('uncheckIcon')
+        );
+
         let icon;
 
         if (props.value === false) {
-            icon = props.uncheckIcon || <TimesIcon className={iconClassName} />;
+            icon = props.uncheckIcon || <TimesIcon {...uncheckIconProps} />;
         } else if (props.value === true) {
-            icon = props.checkIcon || <CheckIcon className={iconClassName} />;
+            icon = props.checkIcon || <CheckIcon {...checkIconProps} />;
         }
 
-        const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+        const checkIcon = IconUtils.getJSXIcon(icon, { ...checkIconProps }, { props });
 
         const ariaValueLabel = props.value ? ariaLabel('trueLabel') : props.value === false ? ariaLabel('falseLabel') : ariaLabel('nullLabel');
         const ariaChecked = props.value ? 'true' : 'false';
 
+        const checkboxProps = mergeProps(
+            {
+                className: boxClassName,
+                tabIndex: props.tabIndex,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                role: 'checkbox',
+                'aria-checked': ariaChecked,
+                ...ariaProps
+            },
+            ptm('checkbox')
+        );
+
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: className,
+                style: props.style,
+                onClick: onClick
+            },
+            TriStateCheckboxBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div className={boxClassName} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown} role="checkbox" aria-checked={ariaChecked} {...ariaProps}>
-                        {checkIcon}
-                    </div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                <div {...rootProps}>
+                    <div {...checkboxProps}>{checkIcon}</div>
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

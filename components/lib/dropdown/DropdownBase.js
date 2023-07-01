@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const DropdownBase = {
+export const DropdownBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Dropdown',
         appendTo: null,
@@ -65,7 +65,5 @@ export const DropdownBase = {
         value: null,
         valueTemplate: null,
         virtualScrollerOptions: null
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, DropdownBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, DropdownBase.defaultProps)
-};
+    }
+});

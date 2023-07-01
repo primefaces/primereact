@@ -1,8 +1,11 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/steps/basicdoc';
 import { ImportDoc } from '../../components/doc/steps/importdoc';
 import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
+import { PTDoc } from '../../components/doc/steps/pt/ptdoc';
+import { Wireframe } from '../../components/doc/steps/pt/wireframe';
 import { StyleDoc } from '../../components/doc/steps/styledoc';
 
 const StepsDemo = () => {
@@ -34,6 +37,24 @@ const StepsDemo = () => {
         }
     ];
 
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.steps.options',
+            label: 'Steps PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
+
     return (
         <DocComponent
             title="React Stepper Component"
@@ -42,6 +63,7 @@ const StepsDemo = () => {
             componentDocs={docs}
             apiDocs={['Steps', 'MenuItem']}
             className="steps-demo"
+            ptDocs={ptDocs}
         />
     );
 };

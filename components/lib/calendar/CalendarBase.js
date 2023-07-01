@@ -1,11 +1,12 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const CalendarBase = {
+export const CalendarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Calendar',
         appendTo: null,
         ariaLabelledBy: null,
         autoZIndex: true,
+        autoFocus: false,
         baseZIndex: 0,
         className: null,
         clearButtonClassName: 'p-button-secondary',
@@ -93,7 +94,5 @@ export const CalendarBase = {
         yearNavigatorTemplate: null,
         yearRange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CalendarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CalendarBase.defaultProps)
-};
+    }
+});

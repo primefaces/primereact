@@ -2,10 +2,12 @@ import * as React from 'react';
 import { TerminalService } from '../terminalservice/TerminalService';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { TerminalBase } from './TerminalBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Terminal = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TerminalBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TerminalBase.getProps(inProps, context);
 
         const [commandTextState, setCommandTextState] = React.useState('');
         const [commandsState, setCommandsState] = React.useState([]);

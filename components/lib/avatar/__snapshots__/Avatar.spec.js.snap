@@ -4,13 +4,18 @@ exports[`Avatar badge 1`] = `
 <div>
   <div
     class="p-avatar p-component p-avatar-image p-avatar-xl"
+    data-pc-name="avatar"
+    data-pc-section="root"
   >
     <img
       alt="avatar"
+      data-pc-section="image"
       src="user.png"
     />
     <span
       class="p-badge p-component p-badge-no-gutter p-badge-danger"
+      data-pc-name="badge"
+      data-pc-section="root"
     >
       4
     </span>
@@ -22,6 +27,8 @@ exports[`Avatar default 1`] = `
 <div>
   <div
     class="p-avatar p-component"
+    data-pc-name="avatar"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -30,9 +37,12 @@ exports[`Avatar icon 1`] = `
 <div>
   <div
     class="p-avatar p-component"
+    data-pc-name="avatar"
+    data-pc-section="root"
   >
     <span
       class="p-avatar-icon pi pi-search"
+      data-pc-section="icon"
     />
   </div>
 </div>
@@ -42,9 +52,12 @@ exports[`Avatar image 1`] = `
 <div>
   <div
     class="p-avatar p-component p-avatar-image"
+    data-pc-name="avatar"
+    data-pc-section="root"
   >
     <img
       alt="avatar"
+      data-pc-section="image"
       src="user.png"
     />
   </div>
@@ -55,9 +68,12 @@ exports[`Avatar label 1`] = `
 <div>
   <div
     class="p-avatar p-component"
+    data-pc-name="avatar"
+    data-pc-section="root"
   >
     <span
       class="p-avatar-text"
+      data-pc-section="label"
     >
       P
     </span>
@@ -69,6 +85,8 @@ exports[`Avatar shape cirle 1`] = `
 <div>
   <div
     class="p-avatar p-component"
+    data-pc-name="avatar"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -77,6 +95,8 @@ exports[`Avatar shape square 1`] = `
 <div>
   <div
     class="p-avatar p-component"
+    data-pc-name="avatar"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -85,6 +105,8 @@ exports[`Avatar size large 1`] = `
 <div>
   <div
     class="p-avatar p-component p-avatar-lg"
+    data-pc-name="avatar"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -93,6 +115,8 @@ exports[`Avatar size xlarge 1`] = `
 <div>
   <div
     class="p-avatar p-component p-avatar-xl"
+    data-pc-name="avatar"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -101,6 +125,8 @@ exports[`Avatar templating 1`] = `
 <div>
   <div
     class="p-avatar p-component"
+    data-pc-name="avatar"
+    data-pc-section="root"
   >
     Content
   </div>

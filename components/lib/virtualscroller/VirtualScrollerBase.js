@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const VirtualScrollerBase = {
+export const VirtualScrollerBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'VirtualScroller',
         id: null,
@@ -35,7 +35,5 @@ export const VirtualScrollerBase = {
         onScrollIndexChange: null,
         onLazyLoad: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, VirtualScrollerBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, VirtualScrollerBase.defaultProps)
-};
+    }
+});
