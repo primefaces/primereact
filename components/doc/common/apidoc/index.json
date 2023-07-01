@@ -29764,6 +29764,14 @@
                             "description": "Whether to show the select all checkbox inside the panel's header."
                         },
                         {
+                            "name": "selectAllLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Label to display if showSelectAll is true"
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -33123,6 +33131,42 @@
                             "parameters": [],
                             "returnType": "HTMLDivElement",
                             "description": "Used to get content of the panel."
+                        },
+                        {
+                            "name": "toggle",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "type": "undefined | SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Toggle the panel if toggleable."
+                        },
+                        {
+                            "name": "expand",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "type": "undefined | SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Expand the panel if toggleable."
+                        },
+                        {
+                            "name": "collapse",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "type": "undefined | SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Collapse the panel if toggleable."
                         }
                     ]
                 },
