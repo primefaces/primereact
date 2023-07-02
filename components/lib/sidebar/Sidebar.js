@@ -228,6 +228,9 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             getPositionClass(),
             props.maskClassName
         );
+        const headerClassName = classNames('p-sidebar-header', {
+            'p-sidebar-custom-header': props.header
+        });
 
         const closeIcon = createCloseIcon();
         const icons = createIcons();
@@ -262,10 +265,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         const headerProps = mergeProps(
             {
-                className: 'p-sidebar-header'
-            },
-            props.header && {
-                className: 'p-sidebar-custom-header'
+                className: headerClassName
             },
             ptm('header')
         );
