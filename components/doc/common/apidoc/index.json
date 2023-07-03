@@ -37019,6 +37019,14 @@
                             "description": "Specifies if pressing escape key should hide the sidebar."
                         },
                         {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "true",
+                            "description": "Custom template for the header."
+                        },
+                        {
                             "name": "icons",
                             "optional": true,
                             "readonly": false,
@@ -37147,6 +37155,13 @@
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "icons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the custom icons content's DOM element."
                         },
                         {
                             "name": "mask",
