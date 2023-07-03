@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
-import PrimeReact from '../api/Api';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -489,7 +488,7 @@ export const Tooltip = React.memo(
                     role: 'tooltip',
                     'aria-hidden': visibleState,
                     onMouseEnter: (e) => onMouseEnter(e),
-                    onMouseLeave: (e) => onMouseLeave
+                    onMouseLeave: (e) => onMouseLeave(e)
                 },
                 TooltipBase.getOtherProps(props),
                 ptm('root')
