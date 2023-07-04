@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { DomHandler, ObjectUtils } from "../utils/Utils";
+import { DomHandler, ObjectUtils } from '../utils/Utils';
 
 let _id = 0;
 
@@ -56,4 +56,4 @@ export const useStyle = (css = {}, options = {}) => {
         load,
         isLoaded
     };
-}
+};

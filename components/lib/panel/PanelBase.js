@@ -2,44 +2,42 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 export const PanelBase = ComponentBase.extend({
-  defaultProps: {
-    __TYPE: 'Panel',
-    id: null,
-    header: null,
-    headerTemplate: null,
-    footer: null,
-    footerTemplate: null,
-    toggleable: null,
-    style: null,
-    className: null,
-    collapsed: null,
-    expandIcon: null,
-    collapseIcon: null,
-    icons: null,
-    transitionOptions: null,
-    onExpand: null,
-    onCollapse: null,
-    onToggle: null,
-    children: undefined
-  },
-  css: {
-    classes: {
-      root: ({ props }) => classNames(
-        'p-panel p-component',
-        {
-          'p-panel-toggleable': props.toggleable
-        }
-      ),
-      header: 'p-panel-header',
-      title: 'p-panel-title',
-      icons: 'p-panel-icons',
-      toggler: 'p-panel-header-icon p-panel-toggler p-link',
-      togglerIcon: 'p-panel-header-icon p-panel-toggler p-link',
-      toggleableContent: 'p-toggleable-content',
-      content: 'p-panel-content',
-      footer: 'p-panel-footer'
+    defaultProps: {
+        __TYPE: 'Panel',
+        id: null,
+        header: null,
+        headerTemplate: null,
+        footer: null,
+        footerTemplate: null,
+        toggleable: null,
+        style: null,
+        className: null,
+        collapsed: null,
+        expandIcon: null,
+        collapseIcon: null,
+        icons: null,
+        transitionOptions: null,
+        onExpand: null,
+        onCollapse: null,
+        onToggle: null,
+        children: undefined
     },
-    styles: `
+    css: {
+        classes: {
+            root: ({ props }) =>
+                classNames('p-panel p-component', {
+                    'p-panel-toggleable': props.toggleable
+                }),
+            header: 'p-panel-header',
+            title: 'p-panel-title',
+            icons: 'p-panel-icons',
+            toggler: 'p-panel-header-icon p-panel-toggler p-link',
+            togglerIcon: 'p-panel-header-icon p-panel-toggler p-link',
+            toggleableContent: 'p-toggleable-content',
+            content: 'p-panel-content',
+            footer: 'p-panel-footer'
+        },
+        styles: `
         .p-panel-header {
           display: flex;
           justify-content: space-between;
@@ -60,5 +58,5 @@ export const PanelBase = ComponentBase.extend({
           position: relative;
         }
         `
-  }
+    }
 });

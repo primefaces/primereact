@@ -8,7 +8,7 @@ export const ComponentBase = {
     },
     context: undefined,
     classes: {},
-    styles: "",
+    styles: '',
     extend: (props = {}) => {
         const css = props.css;
         const defaultProps = { ...props.defaultProps, ...ComponentBase.defaultProps };
@@ -92,7 +92,7 @@ export const ComponentBase = {
                 }
 
                 return undefined;
-            }
+            };
 
             return { ptm, ptmo, sx, cx };
         };
