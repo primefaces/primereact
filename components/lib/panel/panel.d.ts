@@ -242,6 +242,11 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {PanelPassThroughOptions}
      */
     pt?: PanelPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
