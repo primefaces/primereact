@@ -669,6 +669,10 @@ export default class DomHandler {
         return /(chrome)/i.test(navigator.userAgent);
     }
 
+    static isClient() {
+        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+    }
+
     static isTouchDevice() {
         return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }

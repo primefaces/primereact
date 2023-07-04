@@ -21,6 +21,7 @@ export const PrimeReactProvider = (props) => {
         toast: 1200
     });
     const [pt, setPt] = useState(undefined);
+    const [unstyled, setUnstyled] = useState(false);
     const [filterMatchModeOptions, setFilterMatchModeOptions] = useState({
         text: [FilterMatchMode.STARTS_WITH, FilterMatchMode.CONTAINS, FilterMatchMode.NOT_CONTAINS, FilterMatchMode.ENDS_WITH, FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS],
         numeric: [FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS, FilterMatchMode.LESS_THAN, FilterMatchMode.LESS_THAN_OR_EQUAL_TO, FilterMatchMode.GREATER_THAN, FilterMatchMode.GREATER_THAN_OR_EQUAL_TO],
@@ -70,7 +71,9 @@ export const PrimeReactProvider = (props) => {
         pt,
         setPt,
         filterMatchModeOptions,
-        setFilterMatchModeOptions
+        setFilterMatchModeOptions,
+        unstyled,
+        setUnstyled
     };
 
     return <PrimeReactContext.Provider value={value}>{props.children}</PrimeReactContext.Provider>;

@@ -59,6 +59,7 @@ export declare class DomHandler {
     static getUserAgent(): string;
     static isIOS(): boolean;
     static isAndroid(): boolean;
+    static isClient(): boolean;
     static isTouchDevice(): boolean;
     static isFunction(obj: any): boolean;
     static appendChild(el: HTMLElement, target: HTMLElement): void;
