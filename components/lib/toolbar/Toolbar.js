@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
-import { ToolbarBase } from './ToolbarBase';
 import { PrimeReactContext } from '../api/Api';
+import { useStyle } from '../hooks/Hooks';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
+import { ToolbarBase } from './ToolbarBase';
 
 export const Toolbar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -14,7 +15,9 @@ export const Toolbar = React.memo(
         const center = ObjectUtils.getJSXElement(props.center, props);
         const end = ObjectUtils.getJSXElement(props.right || props.end, props);
 
-        const { ptm } = ToolbarBase.setMetaData({
+        useStyle(ToolbarBase.css.styles, { name: 'primereact_toolbar_style' });
+
+        const { ptm, cx } = ToolbarBase.setMetaData({
             props
         });
 
@@ -25,21 +28,21 @@ export const Toolbar = React.memo(
 
         const startProps = mergeProps(
             {
-                className: 'p-toolbar-group-start p-toolbar-group-left'
+                className: cx('start')
             },
             ptm('start')
         );
 
         const centerProps = mergeProps(
             {
-                className: 'p-toolbar-group-center'
+                className: cx('center')
             },
             ptm('center')
         );
 
         const endProps = mergeProps(
             {
-                className: 'p-toolbar-group-end p-toolbar-group-right'
+                className: cx('end')
             },
             ptm('end')
         );
@@ -49,7 +52,7 @@ export const Toolbar = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: classNames('p-toolbar p-component', props.className),
+                className: cx('root'),
                 role: 'toolbar'
             },
             ToolbarBase.getOtherProps(props),
