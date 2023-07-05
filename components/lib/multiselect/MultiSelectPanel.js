@@ -188,11 +188,7 @@ export const MultiSelectPanel = React.memo(
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
                 return props.visibleOptions.map(createItem);
             } else {
-                if (props.hasFilter) {
-                    return createEmptyFilter();
-                } else {
-                    return createEmptyContent();
-                }
+                 return props.hasFilter ? createEmptyFilter() : createEmptyContent();
             }
         };
 
