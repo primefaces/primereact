@@ -26,6 +26,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
         return () => {
             unloadStyle();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { ptm, cx } = PanelBase.setMetaData({
