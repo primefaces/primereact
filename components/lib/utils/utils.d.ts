@@ -11,17 +11,6 @@ export declare function classNames(...args: any[]): string | undefined;
 
 export declare function mergeProps(...args: object[]): object | undefined;
 
-/**
- * Use 'useOverlayScrollListener' hook instead
- * @deprecated since version 8.0.0
- */
-export declare class ConnectedOverlayScrollHandler {
-    constructor(element: any, listener?: () => void);
-    bindScrollListener(): void;
-    unbindScrollListener(): void;
-    destroy(): void;
-}
-
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
     static width(el: HTMLElement): number;
