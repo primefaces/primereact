@@ -123,6 +123,19 @@ export const MultiSelectPanel = React.memo(
             return <li {...emptyMessageProps}>{emptyFilterMessage}</li>;
         };
 
+        const createEmptyContent = () => {
+            const emptyMessage = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
+
+            const emptyMessageProps = mergeProps(
+                {
+                    className: 'p-multiselect-empty-message'
+                },
+                props.ptm('emptyMessage')
+            );
+
+            return <li {...emptyMessageProps}>{emptyMessage}</li>;
+        };
+
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
@@ -174,11 +187,9 @@ export const MultiSelectPanel = React.memo(
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
                 return props.visibleOptions.map(createItem);
-            } else if (props.hasFilter) {
-                return createEmptyFilter();
+            } else {
+                return props.hasFilter ? createEmptyFilter() : createEmptyContent();
             }
-
-            return null;
         };
 
         const createContent = () => {
