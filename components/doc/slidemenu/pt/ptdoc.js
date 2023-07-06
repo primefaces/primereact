@@ -137,7 +137,7 @@ export function PTDoc(props) {
     viewportHeight={220}
     menuWidth={175}
     pt={{
-        action: ({ context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
+        submenuIcon: { className: 'text-primary-200' }
     }}
 ></SlideMenu>
 `,
@@ -284,7 +284,7 @@ export default function PTDemo() {
                 viewportHeight={220}
                 menuWidth={175}
                 pt={{
-                    action: ({ context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
+                    submenuIcon: { className: 'text-primary-200' }
                 }}
             ></SlideMenu>
         </div>
@@ -435,7 +435,7 @@ export default function PTDemo() {
                 viewportHeight={220}
                 menuWidth={175}
                 pt={{
-                    action: ({ context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
+                    submenuIcon: { className: 'text-primary-200' }
                 }}
             ></SlideMenu>
         </div>
@@ -453,7 +453,7 @@ export default function PTDemo() {
                     viewportHeight={220}
                     menuWidth={175}
                     pt={{
-                        action: ({ context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
+                        submenuIcon: { className: 'text-primary-200' }
                     }}
                 ></SlideMenu>
             </div>

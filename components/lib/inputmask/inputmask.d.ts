@@ -8,7 +8,7 @@
  *
  */
 import * as React from 'react';
-import { InputText, InputTextProps } from '../inputtext';
+import { InputText, InputTextPassThroughOptions, InputTextProps } from '../inputtext';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 
@@ -40,7 +40,7 @@ interface InputMaskChangeEvent extends FormEvent<string> {}
  * Defines valid properties in InputMask component. In addition to these, all properties of {@link inputtext} can be used in this component.
  * @group Properties
  */
-export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
+export interface InputMaskProps extends Omit<InputTextProps, 'onChange' | 'pt'> {
     /**
      * Mask pattern.
      */
@@ -109,6 +109,11 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange'> {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputTextPassThroughOptions}
+     */
+    pt?: InputTextPassThroughOptions;
 }
 
 /**

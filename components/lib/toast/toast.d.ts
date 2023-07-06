@@ -199,10 +199,10 @@ export interface ToastProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     baseZIndex?: number | undefined;
     /**
-     * Position of the toast in viewport, valid values are "top-right", "top-left", "bottom-left" and "bottom-right".
+     * Position of the toast in viewport, valid values are 'center', 'top-center', 'top-left', 'top-right', 'bottom-center', 'bottom-left', 'bottom-right'.
      * @defaultValue top-right
      */
-    position?: 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right' | undefined;
+    position?: 'center' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right' | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */

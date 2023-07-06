@@ -2,23 +2,33 @@ import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
+import { PrimeReactProvider } from '../api/Api';
 import { Fieldset } from './Fieldset';
 
 describe('Fieldset', () => {
-    snapshot(<Fieldset />, 'default');
     snapshot(
-        <Fieldset id="fieldset" legend="Simple Fieldset">
-            Content
-        </Fieldset>,
+        <PrimeReactProvider>
+            <Fieldset />
+        </PrimeReactProvider>,
+        'default'
+    );
+    snapshot(
+        <PrimeReactProvider>
+            <Fieldset id="fieldset" legend="Simple Fieldset">
+                Content
+            </Fieldset>
+        </PrimeReactProvider>,
         'legend'
     );
     test('when Fieldset is toggleable it will toggle when clicked', async () => {
         // Arrange
         const toggleOn = jest.fn();
         const { container } = render(
-            <Fieldset legend="Toggleable" toggleable onToggle={toggleOn}>
-                <p>Lorem ipsum dolor sit amet</p>
-            </Fieldset>
+            <PrimeReactProvider>
+                <Fieldset legend="Toggleable" toggleable onToggle={toggleOn}>
+                    <p>Lorem ipsum dolor sit amet</p>
+                </Fieldset>
+            </PrimeReactProvider>
         );
         const legend = container.getElementsByClassName('p-fieldset-legend')[0];
 
@@ -38,9 +48,11 @@ describe('Fieldset', () => {
         const expandOn = jest.fn();
         const collapseOn = jest.fn();
         const { container } = render(
-            <Fieldset legend="Expand/Collapse" toggleable onExpand={expandOn} onCollapse={collapseOn}>
-                <p>Lorem ipsum dolor sit amet</p>
-            </Fieldset>
+            <PrimeReactProvider>
+                <Fieldset legend="Expand/Collapse" toggleable onExpand={expandOn} onCollapse={collapseOn}>
+                    <p>Lorem ipsum dolor sit amet</p>
+                </Fieldset>
+            </PrimeReactProvider>
         );
         const legend = container.getElementsByClassName('p-fieldset-legend')[0];
 

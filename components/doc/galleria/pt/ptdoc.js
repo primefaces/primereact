@@ -83,7 +83,7 @@ export default function PTDemo() {
     }
 
     return (
-        <div className="card md:flex md:justify-content-center">
+        <div className="card">
             <Galleria
                 value={images}
                 responsiveOptions={responsiveOptions}
@@ -134,7 +134,7 @@ export default function PTDemo() {
     }
 
     return (
-        <div className="card md:flex md:justify-content-center">
+        <div className="card">
             <Galleria
                 value={images}
                 responsiveOptions={responsiveOptions}
@@ -165,7 +165,7 @@ export default function PTDemo() {
     return (
         <>
             <DocSectionText {...props}></DocSectionText>
-            <div className="card md:flex md:justify-content-center">
+            <div className="card">
                 <Galleria
                     value={images}
                     responsiveOptions={responsiveOptions}

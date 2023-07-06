@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ProgressBarBase } from './ProgressBarBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ProgressBarBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ProgressBarBase.getProps(inProps, context);
         const { ptm } = ProgressBarBase.setMetaData({
             props
         });

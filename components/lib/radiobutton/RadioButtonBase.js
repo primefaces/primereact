@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const RadioButtonBase = {
+export const RadioButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'RadioButton',
         autoFocus: false,
@@ -20,7 +20,5 @@ export const RadioButtonBase = {
         tooltipOptions: null,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, RadioButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, RadioButtonBase.defaultProps)
-};
+    }
+});

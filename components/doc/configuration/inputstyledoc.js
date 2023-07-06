@@ -4,7 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function InputStyleDoc(props) {
     const code = {
         basic: `
-PrimeReact.inputStyle = 'filled';
+import { PrimeReactContext } from 'primereact/api';
+
+//use in a component
+const { setInputStyle } = useContext(PrimeReactContext);
+
+setInputStyle('filled');
         `
     };
 

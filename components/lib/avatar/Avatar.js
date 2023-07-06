@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { AvatarBase } from './AvatarBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
-    const props = AvatarBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = AvatarBase.getProps(inProps, context);
 
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);

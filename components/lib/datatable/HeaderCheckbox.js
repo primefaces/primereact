@@ -1,9 +1,25 @@
 import * as React from 'react';
-import { IconUtils, classNames } from '../utils/Utils';
+import { IconUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckIcon } from '../icons/check';
+import { ColumnBase } from '../column/ColumnBase';
 
 export const HeaderCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
+
+    const getColumnPTOptions = (key) => {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+            props: getColumnProps(),
+            parent: props.metaData,
+            context: {
+                checked: props.checked,
+                disabled: props.disabled
+            },
+            state: {
+                focused: focusedState
+            }
+        });
+    };
 
     const onFocus = () => {
         setFocusedState(true);
@@ -38,15 +54,39 @@ export const HeaderCheckbox = React.memo((props) => {
         'p-focus': focusedState
     });
     const iconClassName = 'p-checkbox-icon';
-    const icon = props.checked ? props.checkIcon || <CheckIcon className={iconClassName} /> : null;
-    const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+    const headerCheckboxIconProps = mergeProps(
+        {
+            className: iconClassName
+        },
+        getColumnPTOptions('headerCheckboxIcon')
+    );
+    const icon = props.checked ? props.checkIcon || <CheckIcon {...headerCheckboxIconProps} /> : null;
+    const checkIcon = IconUtils.getJSXIcon(icon, { ...headerCheckboxIconProps }, { props });
     const tabIndex = props.disabled ? null : 0;
+    const headerCheckboxWrapperProps = mergeProps(
+        {
+            className: 'p-checkbox p-component',
+            onClick: (e) => onClick(e)
+        },
+        getColumnPTOptions('headerCheckboxWrapper')
+    );
+
+    const headerCheckboxProps = mergeProps(
+        {
+            className: boxClassName,
+            role: 'checkbox',
+            'aria-checked': props.checked,
+            tabIndex: tabIndex,
+            onFocus: (e) => onFocus(e),
+            onBlur: (e) => onBlur(e),
+            onKeyDown: (e) => onKeyDown(e)
+        },
+        getColumnPTOptions('headerCheckbox')
+    );
 
     return (
-        <div className="p-checkbox p-component" onClick={onClick}>
-            <div className={boxClassName} role="checkbox" aria-checked={props.checked} tabIndex={tabIndex} onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}>
-                {checkIcon}
-            </div>
+        <div {...headerCheckboxWrapperProps}>
+            <div {...headerCheckboxProps}>{checkIcon}</div>
         </div>
     );
 });

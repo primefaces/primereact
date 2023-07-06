@@ -2,13 +2,21 @@ import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
+import { PrimeReactContext } from '../api/Api';
+
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = CheckboxBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = CheckboxBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const { ptm } = CheckboxBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
@@ -118,32 +126,70 @@ export const Checkbox = React.memo(
             'p-focus': focusedState
         });
         const iconClassName = 'p-checkbox-icon p-c';
-        const icon = checked ? props.icon || <CheckIcon className={iconClassName} /> : null;
-        const checkboxIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, checked });
+        const iconProps = mergeProps(
+            {
+                className: iconClassName
+            },
+            ptm('icon')
+        );
+        const icon = checked ? props.icon || <CheckIcon {...iconProps} /> : null;
+        const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className,
+                style: props.style,
+                onClick: (e) => onClick(e),
+                onContextMenu: props.onContextMenu,
+                onMouseDown: props.onMouseDown
+            },
+            otherProps,
+            ptm('root')
+        );
+
+        const hiddenInputWrapperProps = mergeProps(
+            {
+                className: 'p-hidden-accessible'
+            },
+            ptm('hiddenInputWrapper')
+        );
+
+        const hiddenInputProps = mergeProps(
+            {
+                id: props.inputId,
+                ref: inputRef,
+                type: 'checkbox',
+                name: props.name,
+                tabIndex: props.tabIndex,
+                defaultChecked: checked,
+                onFocus: (e) => onFocus(e),
+                onBlur: (e) => onBlur(e),
+                onKeyDown: (e) => onKeyDown(e),
+                disabled: props.disabled,
+                readOnly: props.readOnly,
+                required: props.required,
+                ...ariaProps
+            },
+            ptm('hiddenInput')
+        );
+
+        const inputProps = mergeProps(
+            {
+                className: boxClass
+            },
+            ptm('input')
+        );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onContextMenu={props.onContextMenu} onMouseDown={props.onMouseDown}>
-                    <div className="p-hidden-accessible">
-                        <input
-                            ref={inputRef}
-                            type="checkbox"
-                            id={props.inputId}
-                            name={props.name}
-                            tabIndex={props.tabIndex}
-                            defaultChecked={checked}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            onKeyDown={onKeyDown}
-                            disabled={props.disabled}
-                            readOnly={props.readOnly}
-                            required={props.required}
-                            {...ariaProps}
-                        />
+                <div {...rootProps}>
+                    <div {...hiddenInputWrapperProps}>
+                        <input {...hiddenInputProps} />
                     </div>
-                    <div className={boxClass}>{checkboxIcon}</div>
+                    <div {...inputProps}>{checkboxIcon}</div>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const CalendarBase = {
+export const CalendarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Calendar',
         appendTo: null,
@@ -94,7 +94,5 @@ export const CalendarBase = {
         yearNavigatorTemplate: null,
         yearRange: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CalendarBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CalendarBase.defaultProps)
-};
+    }
+});

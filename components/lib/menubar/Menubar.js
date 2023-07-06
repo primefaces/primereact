@@ -1,14 +1,16 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, mergeProps, ObjectUtils, ZIndexUtils } from '../utils/Utils';
+import { BarsIcon } from '../icons/bars';
+import { IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
-import { BarsIcon } from '../icons/bars';
+import PrimeReact from '../api/Api';
 
 export const Menubar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MenubarBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MenubarBase.getProps(inProps, context);
 
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
         const elementRef = React.useRef(null);
@@ -46,7 +48,7 @@ export const Menubar = React.memo(
 
         useUpdateEffect(() => {
             if (mobileActiveState) {
-                ZIndexUtils.set('menu', rootMenuRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', rootMenuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
                 bindDocumentClickListener();
             } else {
                 unbindDocumentClickListener();
@@ -61,7 +63,6 @@ export const Menubar = React.memo(
         React.useImperativeHandle(ref, () => ({
             props,
             toggle,
-            useCustomContent,
             getElement: () => elementRef.current,
             getRootMenu: () => rootMenuRef.current,
             getMenuButton: () => menuButtonRef.current

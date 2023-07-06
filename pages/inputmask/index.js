@@ -1,4 +1,7 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/inputmask/pt/ptdoc';
+import { Wireframe } from '../../components/doc/inputmask/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
@@ -12,6 +15,7 @@ import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
 import { StyleDoc } from '../../components/doc/inputmask/styledoc';
+import Link from 'next/link';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -83,8 +87,44 @@ const InputMaskDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.inputmask.options',
+            label: 'InputMask PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Mask Component" header="InputMask" description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone." componentDocs={docs} apiDocs={['InputMask']} />;
+    const ptDescription = (
+        <span>
+            InputMask does not have a specific API for PassThrough options, but it does support all the pass through options of{' '}
+            <Link href="/inputtext/#pt.inputtext.options" target="_blank">
+                InputText
+            </Link>
+        </span>
+    );
+
+    return (
+        <DocComponent
+            title="React Mask Component"
+            header="InputMask"
+            description="InputMask component is used to enter input in a certain format such as numeric, date, currency, email and phone."
+            componentDocs={docs}
+            apiDocs={['InputMask']}
+            ptDocs={ptDocs}
+            ptDescription={ptDescription}
+        />
+    );
 };
 
 export default InputMaskDemo;

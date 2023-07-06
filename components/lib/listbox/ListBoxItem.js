@@ -1,8 +1,17 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
+    const getPTOptions = (key) => {
+        return props.ptm(key, {
+            context: {
+                selected: props.selected,
+                disabled: props.disabled
+            }
+        });
+    };
+
     const onClick = (event) => {
         if (props.onClick) {
             props.onClick({
@@ -78,20 +87,25 @@ export const ListBoxItem = React.memo((props) => {
     );
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
+    const itemProps = mergeProps(
+        {
+            className: className,
+            style: props.style,
+            onClick: onClick,
+            onTouchEnd: onTouchEnd,
+            onKeyDown: onKeyDown,
+            tabIndex: '-1',
+            'aria-label': props.label,
+            key: props.label,
+            role: 'option',
+            'aria-selected': props.selected,
+            'aria-disabled': props.disabled
+        },
+        getPTOptions('item')
+    );
+
     return (
-        <li
-            className={className}
-            style={props.style}
-            onClick={onClick}
-            onTouchEnd={onTouchEnd}
-            onKeyDown={onKeyDown}
-            tabIndex="-1"
-            aria-label={props.label}
-            key={props.label}
-            role="option"
-            aria-selected={props.selected}
-            aria-disabled={props.disabled}
-        >
+        <li {...itemProps}>
             {content}
             <Ripple />
         </li>

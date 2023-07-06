@@ -6,11 +6,13 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
-        const props = SpeedDialBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SpeedDialBase.getProps(inProps, context);
         const { ptm } = SpeedDialBase.setMetaData({
             props,
             state: {

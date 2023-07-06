@@ -11,17 +11,6 @@ export declare function classNames(...args: any[]): string | undefined;
 
 export declare function mergeProps(...args: object[]): object | undefined;
 
-/**
- * Use 'useOverlayScrollListener' hook instead
- * @deprecated since version 8.0.0
- */
-export declare class ConnectedOverlayScrollHandler {
-    constructor(element: any, listener?: () => void);
-    bindScrollListener(): void;
-    unbindScrollListener(): void;
-    destroy(): void;
-}
-
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
     static width(el: HTMLElement): number;
@@ -50,7 +39,7 @@ export declare class DomHandler {
     static flipfitCollision(el: HTMLElement, target: HTMLElement, my?: string, at?: string, callback?: any): void;
     static findCollisionPosition(position: string): void;
     static getParents(el: HTMLElement, parents?: any[]): any[];
-    static getScrollableParents(el: HTMLElement): any[];
+    static getScrollableParents(el: HTMLElement, hideOverlaysOnDocumentScrolling?: boolean): any[];
     static getHiddenElementOuterHeight(el: HTMLElement): number;
     static getHiddenElementOuterWidth(el: HTMLElement): number;
     static getHiddenElementDimensions(el: HTMLElement): { width?: number; height?: number };
@@ -59,6 +48,7 @@ export declare class DomHandler {
     static getUserAgent(): string;
     static isIOS(): boolean;
     static isAndroid(): boolean;
+    static isClient(): boolean;
     static isTouchDevice(): boolean;
     static isFunction(obj: any): boolean;
     static appendChild(el: HTMLElement, target: HTMLElement): void;

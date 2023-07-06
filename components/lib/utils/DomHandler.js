@@ -514,7 +514,7 @@ export default class DomHandler {
         return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
-    static getScrollableParents(element) {
+    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
         let scrollableParents = [];
 
         if (element) {
@@ -529,6 +529,15 @@ export default class DomHandler {
                 );
             };
 
+            const addScrollableParent = (node) => {
+                if (hideOverlaysOnDocumentScrolling) {
+                    // nodeType 9 is for document element
+                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
+                } else {
+                    scrollableParents.push(node);
+                }
+            };
+
             for (let parent of parents) {
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
 
@@ -539,15 +548,21 @@ export default class DomHandler {
                         let el = this.findSingle(parent, selector);
 
                         if (el && overflowCheck(el)) {
-                            scrollableParents.push(el);
+                            addScrollableParent(el);
                         }
                     }
                 }
 
+                // BODY
                 if (parent.nodeType === 1 && overflowCheck(parent)) {
-                    scrollableParents.push(parent);
+                    addScrollableParent(parent);
                 }
             }
+        }
+
+        // we should always at least have the body or window
+        if (!scrollableParents.some((node) => node === document.body || node === window)) {
+            scrollableParents.push(window);
         }
 
         return scrollableParents;
@@ -652,6 +667,10 @@ export default class DomHandler {
 
     static isChrome() {
         return /(chrome)/i.test(navigator.userAgent);
+    }
+
+    static isClient() {
+        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
     }
 
     static isTouchDevice() {

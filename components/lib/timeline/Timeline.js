@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TimelineBase } from './TimelineBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TimelineBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = TimelineBase.getProps(inProps, context);
+        const { ptm } = TimelineBase.setMetaData({
+            props
+        });
         const elementRef = React.useRef(null);
 
         const getKey = (item, index) => {
@@ -17,18 +21,55 @@ export const Timeline = React.memo(
                 props.value &&
                 props.value.map((item, index) => {
                     const opposite = ObjectUtils.getJSXElement(props.opposite, item, index);
-                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div className="p-timeline-event-marker"></div>;
-                    const connector = index !== props.value.length - 1 && <div className="p-timeline-event-connector"></div>;
+                    const markerProps = mergeProps(
+                        {
+                            className: 'p-timeline-event-marker'
+                        },
+                        ptm('marker')
+                    );
+                    const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div {...markerProps}></div>;
+                    const connectorProps = mergeProps(
+                        {
+                            className: 'p-timeline-event-connector'
+                        },
+                        ptm('connector')
+                    );
+                    const connector = index !== props.value.length - 1 && <div {...connectorProps}></div>;
                     const content = ObjectUtils.getJSXElement(props.content, item, index);
 
+                    const eventProps = mergeProps(
+                        {
+                            className: 'p-timeline-event'
+                        },
+                        ptm('event')
+                    );
+                    const oppositeProps = mergeProps(
+                        {
+                            className: 'p-timeline-event-opposite'
+                        },
+                        ptm('opposite')
+                    );
+                    const separatorProps = mergeProps(
+                        {
+                            className: 'p-timeline-event-separator'
+                        },
+                        ptm('separator')
+                    );
+                    const contentProps = mergeProps(
+                        {
+                            className: 'p-timeline-event-content'
+                        },
+                        ptm('content')
+                    );
+
                     return (
-                        <div key={getKey(item, index)} className="p-timeline-event">
-                            <div className="p-timeline-event-opposite">{opposite}</div>
-                            <div className="p-timeline-event-separator">
+                        <div key={getKey(item, index)} {...eventProps}>
+                            <div {...oppositeProps}>{opposite}</div>
+                            <div {...separatorProps}>
                                 {marker}
                                 {connector}
                             </div>
-                            <div className="p-timeline-event-content">{content}</div>
+                            <div {...contentProps}>{content}</div>
                         </div>
                     );
                 })
@@ -40,7 +81,6 @@ export const Timeline = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = TimelineBase.getOtherProps(props);
         const className = classNames(
             'p-timeline p-component',
             {
@@ -52,11 +92,16 @@ export const Timeline = React.memo(
 
         const events = createEvents();
 
-        return (
-            <div ref={elementRef} className={className} {...otherProps}>
-                {events}
-            </div>
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className
+            },
+            TimelineBase.getOtherProps(props),
+            ptm('root')
         );
+
+        return <div {...rootProps}>{events}</div>;
     })
 );
 

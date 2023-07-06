@@ -36,6 +36,7 @@ const SlideMenuDemo = () => {
             component: AccessibilityDoc
         }
     ];
+
     const ptDocs = [
         {
             id: 'pt.wireframe',

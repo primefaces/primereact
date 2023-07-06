@@ -2,12 +2,14 @@ import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { SplitterBase, SplitterPanelBase } from './SplitterBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const SplitterPanel = () => {};
 
 export const Splitter = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SplitterBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SplitterBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
         const gutterRef = React.useRef();

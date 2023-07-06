@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { Dialog } from '../dialog/Dialog';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
@@ -25,12 +25,14 @@ export const confirmDialog = (props = {}) => {
 
 export const ConfirmDialog = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ConfirmDialogBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ConfirmDialogBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const confirmProps = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
+        const focusElementOnHide = React.useRef(null);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -64,11 +66,17 @@ export const ConfirmDialog = React.memo(
         const show = () => {
             setVisibleState(true);
             isCallbackExecuting.current = false;
+
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
         };
 
         const hide = (result = 'cancel') => {
             setVisibleState(false);
             callbackFromProp('onHide', { result });
+            DomHandler.focus(focusElementOnHide.current);
+            focusElementOnHide.current = null;
         };
 
         const confirm = (updatedProps) => {

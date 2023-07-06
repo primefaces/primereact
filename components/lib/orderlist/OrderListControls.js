@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
-import { IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleDownIcon } from '../icons/angledown';
-import { AngleDoubleUpIcon } from '../icons/angledoubleup';
-import { AngleUpIcon } from '../icons/angleup';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const OrderListControls = React.memo((props) => {
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
@@ -124,12 +125,59 @@ export const OrderListControls = React.memo((props) => {
         }
     };
 
+    const controlProps = mergeProps(
+        {
+            className: 'p-orderlist-controls'
+        },
+        props.ptm('control')
+    );
+
+    const moveUpButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveUpIcon,
+            onClick: moveUp,
+            'aria-label': ariaLabel('moveUp')
+        },
+        props.ptm('moveUpButton')
+    );
+
+    const moveTopButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveTopIcon,
+            onClick: moveTop,
+            'aria-label': ariaLabel('moveTop')
+        },
+        props.ptm('moveTopButton')
+    );
+
+    const moveDownButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveDownIcon,
+            onClick: moveDown,
+            'aria-label': ariaLabel('moveDown')
+        },
+        props.ptm('moveDownButton')
+    );
+
+    const moveBottomButtonProps = mergeProps(
+        {
+            type: 'button',
+            icon: moveBottomIcon,
+            onClick: moveBottom,
+            'aria-label': ariaLabel('moveBottom')
+        },
+        props.ptm('moveBottomButton')
+    );
+
     return (
-        <div className="p-orderlist-controls">
-            <Button type="button" icon={moveUpIcon} onClick={moveUp}></Button>
-            <Button type="button" icon={moveTopIcon} onClick={moveTop}></Button>
-            <Button type="button" icon={moveDownIcon} onClick={moveDown}></Button>
-            <Button type="button" icon={moveBottomIcon} onClick={moveBottom}></Button>
+        <div {...controlProps}>
+            <Button {...moveUpButtonProps}></Button>
+            <Button {...moveTopButtonProps}></Button>
+            <Button {...moveDownButtonProps}></Button>
+            <Button {...moveBottomButtonProps}></Button>
         </div>
     );
 });

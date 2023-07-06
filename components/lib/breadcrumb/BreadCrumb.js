@@ -1,11 +1,13 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { ChevronRightIcon } from '../icons/chevronright';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
-import { ChevronRightIcon } from '../icons/chevronright';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = BreadCrumbBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = BreadCrumbBase.getProps(inProps, context);
         const { ptm } = BreadCrumbBase.setMetaData({
             props
         });
@@ -38,7 +40,7 @@ export const BreadCrumb = React.memo(
                     return null;
                 }
 
-                const { icon: _icon, target, url, disabled, style, className: _className, template } = home;
+                const { icon: _icon, target, url, disabled, style, className: _className, template, label: _label } = home;
                 const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
                 const iconProps = mergeProps(
                     {
@@ -58,7 +60,19 @@ export const BreadCrumb = React.memo(
                     ptm('action')
                 );
 
-                let content = <a {...actionProps}>{icon}</a>;
+                const labelProps = mergeProps(
+                    {
+                        className: 'p-menuitem-text'
+                    },
+                    ptm('label')
+                );
+                const label = _label && <span {...labelProps}>{_label}</span>;
+                let content = (
+                    <a {...actionProps}>
+                        {icon}
+                        {label}
+                    </a>
+                );
 
                 if (template) {
                     const defaultContentOptions = {
@@ -96,8 +110,14 @@ export const BreadCrumb = React.memo(
             );
             const icon = props.separatorIcon || <ChevronRightIcon {...separatorIconProps} />;
             const separatorIcon = IconUtils.getJSXIcon(icon, { ...separatorIconProps }, { props });
+            const separatorProps = mergeProps(
+                {
+                    className: 'p-menuitem-separator'
+                },
+                ptm('separator')
+            );
 
-            return separatorIcon;
+            return <li {...separatorProps}>{separatorIcon}</li>;
         };
 
         const createMenuitem = (item) => {
@@ -105,7 +125,7 @@ export const BreadCrumb = React.memo(
                 return null;
             }
 
-            const className = classNames(item.className, { 'p-disabled': item.disabled });
+            const className = classNames('p-menuitem', item.className, { 'p-disabled': item.disabled });
             const labelProps = mergeProps(
                 {
                     className: 'p-menuitem-text'
@@ -182,7 +202,12 @@ export const BreadCrumb = React.memo(
         const home = createHome();
         const items = createMenuitems();
         const separator = createSeparator();
-        const menuProps = mergeProps(ptm('menu'));
+        const menuProps = mergeProps(
+            {
+                className: 'p-breadcrumb-list'
+            },
+            ptm('menu')
+        );
         const rootProps = mergeProps(
             {
                 id: props.id,

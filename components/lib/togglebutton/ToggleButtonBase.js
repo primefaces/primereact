@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const ToggleButtonBase = {
+export const ToggleButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ToggleButton',
         id: null,
@@ -19,7 +19,5 @@ export const ToggleButtonBase = {
         onFocus: null,
         onBlur: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, ToggleButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, ToggleButtonBase.defaultProps)
-};
+    }
+});

@@ -1,20 +1,30 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
+import PrimeReact from '../api/Api';
+
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = CascadeSelectBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = CascadeSelectBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
+        const { ptm } = CascadeSelectBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState,
+                overlayVisible: overlayVisibleState,
+                attributeSelector: attributeSelectorState
+            }
+        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(null);
@@ -172,7 +182,7 @@ export const CascadeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
 
             if (attributeSelectorState && props.breakpoint) {
@@ -199,12 +209,12 @@ export const CascadeSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}_panel`;
                 const innerHTML = `
@@ -272,24 +282,35 @@ export const CascadeSelect = React.memo(
 
         const createKeyboardHelper = () => {
             const value = props.value ? getOptionLabel(props.value) : undefined;
+            const hiddenSelectedMessageProps = mergeProps(
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenSelectedMessage')
+            );
+
+            const inputProps = mergeProps(
+                {
+                    ref: inputRef,
+                    type: 'text',
+                    id: props.inputId,
+                    name: props.name,
+                    defaultValue: value,
+                    readOnly: true,
+                    disabled: props.disabled,
+                    onFocus: onInputFocus,
+                    onBlur: onInputBlur,
+                    onKeyDown: (e) => onInputKeyDown(e),
+                    tabIndex: props.tabIndex,
+                    'aria-haspopup': 'listbox',
+                    ...ariaProps
+                },
+                ptm('input')
+            );
 
             return (
-                <div className="p-hidden-accessible">
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        id={props.inputId}
-                        name={props.name}
-                        defaultValue={value}
-                        readOnly
-                        disabled={props.disabled}
-                        onFocus={onInputFocus}
-                        onBlur={onInputBlur}
-                        onKeyDown={onInputKeyDown}
-                        tabIndex={props.tabIndex}
-                        aria-haspopup="listbox"
-                        {...ariaProps}
-                    />
+                <div {...hiddenSelectedMessageProps}>
+                    <input {...inputProps} />
                 </div>
             );
         };
@@ -301,24 +322,55 @@ export const CascadeSelect = React.memo(
                 'p-cascadeselect-label-empty': !props.value && label === 'p-emptylabel'
             });
 
-            return (
-                <span ref={labelRef} className={labelClassName}>
-                    {label}
-                </span>
+            const labelProps = mergeProps(
+                {
+                    ref: labelRef,
+                    className: labelClassName
+                },
+                ptm('label')
             );
+
+            return <span {...labelProps}>{label}</span>;
         };
 
         const createDropdownIcon = () => {
             const iconClassName = 'p-cascadeselect-trigger-icon';
-            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
-            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
-
-            return (
-                <div className="p-cascadeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
-                    {dropdownIcon}
-                </div>
+            const dropdownIconProps = mergeProps(
+                {
+                    className: iconClassName
+                },
+                ptm('dropdownIcon')
             );
+            const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
+            const dropdownButtonProps = mergeProps(
+                {
+                    className: 'p-cascadeselect-trigger',
+                    role: 'button',
+                    'aria-haspopup': 'listbox',
+                    'aria-expanded': overlayVisibleState
+                },
+                ptm('dropdownButton')
+            );
+
+            return <div {...dropdownButtonProps}>{dropdownIcon}</div>;
         };
+
+        const wrapperProps = mergeProps(
+            {
+                className: 'p-cascadeselect-items-wrapper'
+            },
+            ptm('wrapper')
+        );
+
+        const panelProps = mergeProps(
+            {
+                ref: overlayRef,
+                className: 'p-cascadeselect-panel p-component',
+                onClick: (e) => onPanelClick(e)
+            },
+            ptm('panel')
+        );
 
         const createOverlay = () => {
             const overlay = (
@@ -334,8 +386,8 @@ export const CascadeSelect = React.memo(
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                 >
-                    <div ref={overlayRef} className="p-cascadeselect-panel p-component" onClick={onPanelClick}>
-                        <div className="p-cascadeselect-items-wrapper">
+                    <div {...panelProps}>
+                        <div {...wrapperProps}>
                             <CascadeSelectSub
                                 options={props.options}
                                 selectionPath={selectionPath.current}
@@ -351,6 +403,7 @@ export const CascadeSelect = React.memo(
                                 root
                                 template={props.itemTemplate}
                                 onPanelHide={hide}
+                                ptm={ptm}
                             />
                         </div>
                     </div>
@@ -376,9 +429,20 @@ export const CascadeSelect = React.memo(
             const labelElement = createLabel();
             const dropdownIcon = createDropdownIcon();
             const overlay = createOverlay();
+            const rootProps = mergeProps(
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className,
+                    style: props.style,
+                    onClick: (e) => onClick(e)
+                },
+                otherProps,
+                ptm('root')
+            );
 
             return (
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
+                <div {...rootProps}>
                     {keyboardHelper}
                     {labelElement}
                     {dropdownIcon}

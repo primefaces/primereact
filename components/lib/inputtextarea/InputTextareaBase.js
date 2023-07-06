@@ -1,12 +1,13 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const InputTextareaBase = {
+export const InputTextareaBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputTextarea',
         autoResize: false,
         keyfilter: null,
         onBlur: null,
         onFocus: null,
+        onBeforeInput: null,
         onInput: null,
         onKeyDown: null,
         onKeyUp: null,
@@ -15,7 +16,5 @@ export const InputTextareaBase = {
         tooltipOptions: null,
         validateOnly: false,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, InputTextareaBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, InputTextareaBase.defaultProps)
-};
+    }
+});

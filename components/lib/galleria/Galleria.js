@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
@@ -12,7 +13,8 @@ import { GalleriaThumbnails } from './GalleriaThumbnails';
 
 export const Galleria = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = GalleriaBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = GalleriaBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
@@ -70,7 +72,7 @@ export const Galleria = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
@@ -177,8 +179,8 @@ export const Galleria = React.memo(
                     'p-galleria-fullscreen': props.fullScreen,
                     'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
                     'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
-                    'p-input-filled': PrimeReact.inputStyle === 'filled',
-                    'p-ripple-disabled': PrimeReact.ripple === false
+                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
                 },
                 thumbnailsPosClassName,
                 indicatorPosClassName

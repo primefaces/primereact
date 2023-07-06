@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { AvatarGroupBase } from './AvatarGroupBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const AvatarGroup = React.forwardRef((inProps, ref) => {
-    const props = AvatarGroupBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = AvatarGroupBase.getProps(inProps, context);
 
     const { ptm } = AvatarGroupBase.setMetaData({
         props

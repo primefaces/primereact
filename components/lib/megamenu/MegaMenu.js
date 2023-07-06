@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
@@ -7,10 +7,12 @@ import { BarsIcon } from '../icons/bars';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
+import PrimeReact from '../api/Api';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MegaMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = MegaMenuBase.getProps(inProps, context);
 
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
@@ -242,7 +244,7 @@ export const MegaMenu = React.memo(
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
             if (activeItemState && !isMobileMode) {
-                ZIndexUtils.set('menu', currentPanel, PrimeReact.autoZIndex, PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             if (isMobileMode) {
@@ -456,7 +458,7 @@ export const MegaMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `

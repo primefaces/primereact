@@ -1,11 +1,24 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
 
 export const BodyRow = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+
+    const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps(props.column);
+
+        return props.ptCallbacks.ptmo(cProps, key, {
+            props: cProps,
+            parent: props.metaData,
+            state: {
+                editing: editingState
+            }
+        });
+    };
 
     const getColumnProp = (column, name) => ColumnBase.getCProp(column, name);
 
@@ -347,6 +360,8 @@ export const BodyRow = React.memo((props) => {
                         tableSelector={props.tableSelector}
                         value={props.value}
                         virtualScrollerOptions={props.virtualScrollerOptions}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={props.metaData}
                     />
                 );
             }
@@ -365,31 +380,31 @@ export const BodyRow = React.memo((props) => {
     const style = { height: props.virtualScrollerOptions ? props.virtualScrollerOptions.itemSize : undefined };
     const content = createContent();
     const tabIndex = getTabIndex();
-
-    return (
-        <tr
-            role="row"
-            tabIndex={tabIndex}
-            className={className}
-            style={style}
-            onMouseDown={onMouseDown}
-            onMouseUp={onMouseUp}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={onClick}
-            onDoubleClick={onDoubleClick}
-            onContextMenu={onRightClick}
-            onTouchEnd={onTouchEnd}
-            onKeyDown={onKeyDown}
-            onDragStart={onDragStart}
-            onDragOver={onDragOver}
-            onDragLeave={onDragLeave}
-            onDragEnd={onDragEnd}
-            onDrop={onDrop}
-        >
-            {content}
-        </tr>
+    const rowProps = mergeProps(
+        {
+            role: 'row',
+            tabIndex: tabIndex,
+            className: className,
+            style: style,
+            onMouseDown: (e) => onMouseDown(e),
+            onMouseUp: (e) => onMouseUp(e),
+            onMouseEnter: (e) => onMouseEnter(e),
+            onMouseLeave: (e) => onMouseLeave(e),
+            onClick: (e) => onClick(e),
+            onDoubleClick: (e) => onDoubleClick(e),
+            onContextMenu: (e) => onRightClick(e),
+            onTouchEnd: (e) => onTouchEnd(e),
+            onKeyDown: (e) => onKeyDown(e),
+            onDragStart: (e) => onDragStart(e),
+            onDragOver: (e) => onDragOver(e),
+            onDragLeave: (e) => onDragLeave(e),
+            onDragEnd: (e) => onDragEnd(e),
+            onDrop: (e) => onDrop(e)
+        },
+        getColumnPTOptions('row')
     );
+
+    return <tr {...rowProps}>{content}</tr>;
 });
 
 BodyRow.displayName = 'BodyRow';

@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/treeselect/pt/ptdoc';
+import { Wireframe } from '../../components/doc/treeselect/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
@@ -88,8 +91,25 @@ const TreeSelectDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.treeselect.options',
+            label: 'TreeSelect PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect', 'TreeNode']} />;
+    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect', 'TreeNode']} ptDocs={ptDocs} />;
 };
 
 export default TreeSelectDemo;

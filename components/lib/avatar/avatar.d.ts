@@ -38,7 +38,7 @@ export interface AvatarPassThroughOptions {
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: AvatarPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: AvatarPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
 }
 
 /**

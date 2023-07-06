@@ -10,7 +10,61 @@
 import * as React from 'react';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+
+export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface CheckboxPassThroughMethodOptions {
+    props: CheckboxProps;
+    state: CheckboxState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link CheckboxProps.pt}
+ */
+export interface CheckboxPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: CheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     */
+    hiddenInputWrapper?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden input's DOM element.
+     */
+    hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+}
+
+/**
+ * Defines current inline state in Checkbox component.
+ */
+export interface CheckboxState {
+    /**
+     * Current focus state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * Custom change event.
@@ -139,6 +193,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CheckboxPassThroughOptions}
+     */
+    pt?: CheckboxPassThroughOptions;
 }
 
 /**

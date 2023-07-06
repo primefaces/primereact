@@ -47,6 +47,10 @@ export interface SidebarPassThroughOptions {
      */
     content?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
+     * Uses to pass attributes to the custom icons content's DOM element.
+     */
+    icons?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
      * Uses to pass attributes to the mask's DOM element.
      */
     mask?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -125,6 +129,11 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @defaultValue true
      */
     closeOnEscape?: boolean | undefined;
+    /**
+     * Custom template for the header.
+     * @defaultValue true
+     */
+    header?: React.ReactNode | ((props: SidebarProps) => React.ReactNode);
     /**
      * Custom icons template for the header.
      * @defaultValue true

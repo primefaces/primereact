@@ -56,10 +56,10 @@ export default function TemplateDemo() {
         typescript: `
 import React from 'react';
 import { BreadCrumb } from 'primereact/breadcrumb';
-import { MenuItem } from 'primereact/menuitem';
+import { MenuItem, MenuItemOptions } from 'primereact/menuitem';
 
 export default function TemplateDoc() {
-    const iconItemTemplate = (item, options) => {
+    const iconItemTemplate = (item: MenuItem, options: MenuItemOptions) => {
         return (
             <a className={options.className}>
                 <span className={item.icon}></span>

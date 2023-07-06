@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, DomHandler, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
-import { TabPanelBase, TabViewBase } from './TabViewBase';
-import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronLeftIcon } from '../icons/chevronleft';
+import { ChevronRightIcon } from '../icons/chevronright';
 import { TimesIcon } from '../icons/times';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { TabPanelBase, TabViewBase } from './TabViewBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const TabPanel = () => {};
 
 export const TabView = React.forwardRef((inProps, ref) => {
-    const props = TabViewBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = TabViewBase.getProps(inProps, context);
 
     const [idState, setIdState] = React.useState(props.id);
     const [backwardIsDisabledState, setBackwardIsDisabledState] = React.useState(true);
@@ -180,7 +182,9 @@ export const TabView = React.forwardRef((inProps, ref) => {
     }, [hiddenTabsState]);
 
     useUpdateEffect(() => {
-        updateScrollBar(props.activeIndex);
+        if (props.activeIndex !== activeIndexState) {
+            updateScrollBar(props.activeIndex);
+        }
     }, [props.activeIndex]);
 
     React.useImperativeHandle(ref, () => ({
