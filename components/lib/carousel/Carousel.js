@@ -312,7 +312,7 @@ export const Carousel = React.memo(
         }));
 
         useMountEffect(() => {
-            if (elementRef.current && !attributeSelector.current) {
+            if (elementRef.current) {
                 attributeSelector.current = UniqueComponentId();
                 elementRef.current.setAttribute(attributeSelector.current, '');
             }
