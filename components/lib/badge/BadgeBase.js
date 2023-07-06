@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 export const BadgeBase = ComponentBase.extend({
     defaultProps: {
