@@ -29576,6 +29576,14 @@
                             "description": "Template to display when filtering does not return any results."
                         },
                         {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Text to display when there are no options available. Defaults to global value in Locale configuration."
+                        },
+                        {
                             "name": "filter",
                             "optional": true,
                             "readonly": false,
