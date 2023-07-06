@@ -21,12 +21,10 @@
 @import "../components/lib/editor/Editor.css";
 @import "../components/lib/fileupload/FileUpload.css";
 @import "../components/lib/toast/Toast.css";
-@import "../components/lib/inplace/Inplace.css";
 @import "../components/lib/inputnumber/InputNumber.css";
 @import "../components/lib/inputswitch/InputSwitch.css";
 @import "../components/lib/inputtext/InputText.css";
 @import "../components/lib/inputtextarea/InputTextarea.css";
-@import "../components/lib/inplace/Inplace.css";
 @import "../components/lib/listbox/ListBox.css";
 @import "../components/lib/menu/Menu.css";
 @import "../components/lib/megamenu/MegaMenu.css";
