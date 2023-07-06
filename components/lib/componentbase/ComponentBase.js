@@ -42,15 +42,17 @@ export const ComponentBase = {
         };
 
         const getPTValue = (obj = {}, key = '', params = {}) => {
+            const fkey = ObjectUtils.convertToFlatCase(key);
             const datasetPrefix = 'data-pc-';
             const componentName = (params.props && params.props.__TYPE && ObjectUtils.convertToFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
             const defaultPT = (key) => pt && getOptionValue(pt[componentName], key);
-            const self = ObjectUtils.getPropValue(obj, key, params)[key];
-            const globalPT = defaultPT(key);
+            const self = ObjectUtils.getPropValue(obj[fkey], params);
+
+            const globalPT = defaultPT(fkey);
             const datasetProps = {
-                ...(key === 'root' && { [`${datasetPrefix}name`]: componentName }),
-                [`${datasetPrefix}section`]: ObjectUtils.convertToFlatCase(key)
+                ...(fkey === 'root' && { [`${datasetPrefix}name`]: componentName }),
+                [`${datasetPrefix}section`]: fkey
             };
 
             let merged = {
