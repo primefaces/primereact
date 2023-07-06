@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ProgressBarBase } from './ProgressBarBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
@@ -128,7 +128,7 @@ export const Tooltip = React.memo(
                 const { pageX: x, pageY: y } = currentMouseEvent.current;
 
                 if (props.autoZIndex && !ZIndexUtils.get(elementRef.current)) {
-                    ZIndexUtils.set('tooltip', elementRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['tooltip']);
+                    ZIndexUtils.set('tooltip', elementRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['tooltip']) || PrimeReact.zIndex['tooltip']);
                 }
 
                 elementRef.current.style.left = '';
@@ -488,7 +488,7 @@ export const Tooltip = React.memo(
                     role: 'tooltip',
                     'aria-hidden': visibleState,
                     onMouseEnter: (e) => onMouseEnter(e),
-                    onMouseLeave: (e) => onMouseLeave
+                    onMouseLeave: (e) => onMouseLeave(e)
                 },
                 TooltipBase.getOtherProps(props),
                 ptm('root')

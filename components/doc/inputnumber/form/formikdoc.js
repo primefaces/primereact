@@ -59,6 +59,11 @@ export function FormikDoc(props) {
     }}
     useGrouping={false}
     inputClassName={classNames({ 'p-invalid': isFormFieldInvalid('year') })}
+    pt={{
+        input: {
+            root: { autoComplete: 'off' }
+        }
+    }}
 />
 {getFormErrorMessage('year')}
 <Button label="Submit" type="submit" icon="pi pi-check" />
@@ -125,6 +130,11 @@ export default function FormikDoc() {
                     }}
                     useGrouping={false}
                     inputClassName={classNames({ 'p-invalid': isFormFieldInvalid('year') })}
+                    pt={{
+                        input: {
+                            root: { autoComplete: 'off' }
+                        }
+                    }}
                 />
                 {getFormErrorMessage('year')}
                 <Button label="Submit" type="submit" icon="pi pi-check" />
@@ -195,6 +205,11 @@ export default function FormikDoc() {
                     }}
                     useGrouping={false}
                     inputClassName={classNames({ 'p-invalid': isFormFieldInvalid('year') })}
+                    pt={{
+                        input: {
+                            root: { autoComplete: 'off' }
+                        }
+                    }}
                 />
                 {getFormErrorMessage('year')}
                 <Button label="Submit" type="submit" icon="pi pi-check" />
@@ -225,6 +240,11 @@ export default function FormikDoc() {
                         }}
                         useGrouping={false}
                         inputClassName={classNames({ 'p-invalid': isFormFieldInvalid('year') })}
+                        pt={{
+                            input: {
+                                root: { autoComplete: 'off' }
+                            }
+                        }}
                     />
                     {getFormErrorMessage('year')}
                     <Button label="Submit" type="submit" icon="pi pi-check" />

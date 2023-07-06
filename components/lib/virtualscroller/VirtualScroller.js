@@ -3,7 +3,7 @@ import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUp
 import { classNames, DomHandler, ObjectUtils, IconUtils, mergeProps } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
 import { SpinnerIcon } from '../icons/spinner';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {

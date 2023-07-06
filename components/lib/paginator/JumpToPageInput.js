@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 import { JumpToPageInputBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const JumpToPageInput = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEventListener } from '../hooks/Hooks';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { SplitterBase, SplitterPanelBase } from './SplitterBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const SplitterPanel = () => {};
 

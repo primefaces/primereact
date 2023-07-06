@@ -4,7 +4,7 @@ import { AngleDoubleRightIcon } from '../icons/angledoubleright';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { LastPageLinkBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const LastPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
@@ -7,6 +7,7 @@ import { BarsIcon } from '../icons/bars';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MegaMenuBase } from './MegaMenuBase';
+import PrimeReact from '../api/Api';
 
 export const MegaMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -243,7 +244,7 @@ export const MegaMenu = React.memo(
             const currentPanel = DomHandler.findSingle(elementRef.current, '.p-menuitem-active > .p-megamenu-panel');
 
             if (activeItemState && !isMobileMode) {
-                ZIndexUtils.set('menu', currentPanel, context.autoZIndex, context.zIndex['menu']);
+                ZIndexUtils.set('menu', currentPanel, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             if (isMobileMode) {
@@ -457,7 +458,7 @@ export const MegaMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `

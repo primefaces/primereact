@@ -4,7 +4,7 @@ import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { NextPageLinkBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const NextPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

@@ -3,7 +3,8 @@ import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hook
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
+import PrimeReact from '../api/Api';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -49,7 +50,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
         if (props.autoZIndex) {
             const key = props.fullScreen ? 'modal' : 'overlay';
 
-            ZIndexUtils.set(key, maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex[key]);
+            ZIndexUtils.set(key, maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
         }
 
         props.onBlocked && props.onBlocked();

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, mergeProps } from '../utils/Utils';
 import { DividerBase } from './DividerBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Divider = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);

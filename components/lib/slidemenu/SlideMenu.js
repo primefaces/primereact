@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -74,7 +74,7 @@ export const SlideMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
@@ -119,7 +119,8 @@ export const SlideMenu = React.memo(
 
         const createBackward = () => {
             const className = classNames('p-slidemenu-backward', {
-                'p-hidden': levelState === 0
+                'p-hidden-space': levelState === 0,
+                'p-slidemenu-separator': levelState > 0
             });
 
             const iconClassName = 'p-slidemenu-backward-icon';
@@ -217,8 +218,8 @@ export const SlideMenu = React.memo(
                                     ptm={ptm}
                                 />
                             </div>
-                            {backward}
                         </div>
+                        {backward}
                     </div>
                 </CSSTransition>
             );

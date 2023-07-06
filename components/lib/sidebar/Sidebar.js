@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
@@ -29,7 +29,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         type: 'keydown',
         listener: (event) => {
             if (event.key === 'Escape') {
-                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', context.autoZIndex)) {
+                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', (context && context.autoZIndex) || PrimeReact.autoZIndex)) {
                     onClose(event);
                 }
             }
@@ -147,7 +147,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -204,14 +204,18 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         return null;
     };
 
+    const createHeader = () => {
+        return props.header ? ObjectUtils.getJSXElement(props.header, props) : null;
+    };
+
     const createIcons = () => {
         return props.icons ? ObjectUtils.getJSXElement(props.icons, props) : null;
     };
 
     const createElement = () => {
         const className = classNames('p-sidebar p-component', props.className, {
-            'p-input-filled': context.inputStyle === 'filled',
-            'p-ripple-disabled': context.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const maskClassName = classNames(
             'p-sidebar-mask',
@@ -224,9 +228,13 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             getPositionClass(),
             props.maskClassName
         );
+        const headerClassName = classNames('p-sidebar-header', {
+            'p-sidebar-custom-header': props.header
+        });
 
         const closeIcon = createCloseIcon();
         const icons = createIcons();
+        const header = createHeader();
 
         const transitionTimeout = {
             enter: props.fullScreen ? 150 : 300,
@@ -257,7 +265,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         const headerProps = mergeProps(
             {
-                className: 'p-sidebar-header'
+                className: headerClassName
             },
             ptm('header')
         );
@@ -269,13 +277,23 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             ptm('content')
         );
 
+        const iconsProps = mergeProps(
+            {
+                className: 'p-sidebar-icons'
+            },
+            ptm('icons')
+        );
+
         return (
             <div {...maskProps}>
                 <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
                     <div {...rootProps}>
                         <div {...headerProps}>
-                            {icons}
-                            {closeIcon}
+                            {header}
+                            <div {...iconsProps}>
+                                {icons}
+                                {closeIcon}
+                            </div>
                         </div>
                         <div {...contentProps}>{props.children}</div>
                     </div>

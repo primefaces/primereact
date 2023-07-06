@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DockBase } from './DockBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {

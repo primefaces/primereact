@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
@@ -111,12 +111,12 @@ export const Password = React.memo(
 
         const alignOverlay = () => {
             if (inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || context.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
             }
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -290,8 +290,8 @@ export const Password = React.memo(
 
         const createPanel = () => {
             const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
-                'p-input-filled': context.inputStyle === 'filled',
-                'p-ripple-disabled': context.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);

@@ -98,10 +98,6 @@ export interface DropdownPassThroughOptions {
      */
     emptyMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
-     * Uses to pass attributes to the hidden selected message's DOM element.
-     */
-    hiddenSelectedMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the select's DOM element.
      */
     select?: DropdownPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
@@ -114,6 +110,10 @@ export interface DropdownPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Uses to pass attributes to the hidden selected message's DOM element.
+     */
+    hiddenSelectedMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**

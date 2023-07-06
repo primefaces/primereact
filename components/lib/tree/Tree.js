@@ -4,7 +4,7 @@ import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {

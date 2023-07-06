@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/ripple/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/ripple/basicdoc';
@@ -37,7 +37,16 @@ const RippleDemo = () => {
     ];
     const appContentContext = useContext(AppContentContext);
 
-    appContentContext.onRippleChange(true);
+    useEffect(() => {
+        appContentContext.setDisabled(true);
+        appContentContext.onRippleChange(true);
+
+        return () => {
+            appContentContext.setDisabled(false);
+            appContentContext.onRippleChange(false);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return <DocComponent title="React Ripple Component" header="Ripple" description="Ripple component adds ripple effect to the host element." componentDocs={docs} apiDocs={['Ripple']} />;
 };

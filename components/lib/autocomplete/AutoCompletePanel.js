@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
+import PrimeReact from '../api/Api';
 
 export const AutoCompletePanel = React.memo(
     React.forwardRef((props, ref) => {
-        const { inputStyle, ripple } = React.useContext(PrimeReactContext);
+        const context = React.useContext(PrimeReactContext);
 
         const getPTOptions = (item, key) => {
             return props.ptm(key, {
@@ -197,8 +198,8 @@ export const AutoCompletePanel = React.memo(
 
         const createElement = () => {
             const className = classNames('p-autocomplete-panel p-component', props.panelClassName, {
-                'p-input-filled': inputStyle === 'filled',
-                'p-ripple-disabled': ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
             const style = { ...(props.panelStyle || {}) };
             const content = createContent();

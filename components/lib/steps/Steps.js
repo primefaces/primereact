@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Steps = React.memo(
     React.forwardRef((inProps, ref) => {

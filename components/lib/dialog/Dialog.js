@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
@@ -33,6 +32,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const lastPageY = React.useRef(null);
     const styleElement = React.useRef(null);
     const attributeSelector = React.useRef(uniqueId);
+    const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
 
     const { ptm } = DialogBase.setMetaData({
@@ -303,6 +303,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         ZIndexUtils.clear(maskRef.current);
         setMaskVisibleState(false);
         disableDocumentSettings();
+
+        // return focus to element before dialog was open
+        DomHandler.focus(focusElementOnHide.current);
+        focusElementOnHide.current = null;
     };
 
     const enableDocumentSettings = () => {
@@ -357,7 +361,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const createStyle = () => {
-        styleElement.current = DomHandler.createInlineStyle(context.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
         let innerHTML = '';
 
@@ -400,11 +404,17 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         if (props.visible !== visibleState && maskVisibleState) {
             setVisibleState(props.visible);
         }
-    });
+
+        if (props.visible) {
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
+        }
+    }, [props.visible, maskVisibleState]);
 
     useUpdateEffect(() => {
         if (maskVisibleState) {
-            ZIndexUtils.set('modal', maskRef.current, context.autoZIndex, props.baseZIndex || context.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
             setVisibleState(true);
         }
     }, [maskVisibleState]);
@@ -599,8 +609,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             'p-dialog-rtl': props.rtl,
             'p-dialog-maximized': maximized,
             'p-dialog-default': !maximized,
-            'p-input-filled': context.inputStyle === 'filled',
-            'p-ripple-disabled': context.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const maskClassName = classNames(
             'p-dialog-mask',

@@ -268,6 +268,14 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
  */
 export declare class Carousel extends React.Component<CarouselProps, any> {
     /**
+     * Used to start the autoplay if it is currently stopped.
+     */
+    public startAutoplay(): void;
+    /**
+     * Used to stop the autoplay if it is currently started.
+     */
+    public stopAutoplay(): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */

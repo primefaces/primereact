@@ -447,89 +447,120 @@
         }
     },
     "api": {
-        "description": "",
+        "description": "API for PrimeReact components.",
         "functions": {
             "description": "Defines the custom functions used by the module.",
             "values": {
+                "PrimeReactProvider": {
+                    "name": "PrimeReactProvider",
+                    "parameters": [
+                        {
+                            "name": "props",
+                            "type": "PrimeReactProviderProps"
+                        },
+                        {
+                            "name": "context",
+                            "type": "any"
+                        }
+                    ],
+                    "returnType": "null | ReactElement<any, any>"
+                },
                 "locale": {
                     "name": "locale",
                     "parameters": [
                         {
                             "name": "locale",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Locale string."
                         }
                     ],
-                    "returnType": "Object"
+                    "returnType": "Object",
+                    "description": "Sets the current locale if installed."
                 },
                 "addLocale": {
                     "name": "addLocale",
                     "parameters": [
                         {
                             "name": "locale",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Locale string."
                         },
                         {
                             "name": "options",
-                            "type": "object"
+                            "type": "LocaleOptions",
+                            "description": "Locale options. See [PrimeLocale](https://github.com/primefaces/primelocale) on GitHub for possible options."
                         }
                     ],
-                    "returnType": "void"
+                    "returnType": "void",
+                    "description": "Installs a new locale."
                 },
                 "updateLocaleOption": {
                     "name": "updateLocaleOption",
                     "parameters": [
                         {
                             "name": "key",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Option key."
                         },
                         {
                             "name": "value",
-                            "type": "any"
+                            "type": "any",
+                            "description": "Option value."
                         },
                         {
                             "name": "locale",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Locale string."
                         }
                     ],
-                    "returnType": "void"
+                    "returnType": "void",
+                    "description": "Changes the specific option value of a locale."
                 },
                 "updateLocaleOptions": {
                     "name": "updateLocaleOptions",
                     "parameters": [
                         {
                             "name": "options",
-                            "type": "object"
+                            "type": "object",
+                            "description": "Locale options."
                         },
                         {
                             "name": "locale",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Locale string."
                         }
                     ],
-                    "returnType": "void"
+                    "returnType": "void",
+                    "description": "Changes the option values of a locale."
                 },
                 "localeOption": {
                     "name": "localeOption",
                     "parameters": [
                         {
                             "name": "key",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Option key."
                         },
                         {
                             "name": "locale",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Locale string."
                         }
                     ],
-                    "returnType": "any"
+                    "returnType": "any",
+                    "description": "Return the value of a specific locale option."
                 },
                 "localeOptions": {
                     "name": "localeOptions",
                     "parameters": [
                         {
                             "name": "locale",
-                            "type": "string"
+                            "type": "string",
+                            "description": "Locale string."
                         }
                     ],
-                    "returnType": "object"
+                    "returnType": "object",
+                    "description": "Returns the values of locale options."
                 }
             }
         },
@@ -537,139 +568,252 @@
             "description": "Defines the custom interfaces used by the module.",
             "values": {
                 "ZIndexOptions": {
+                    "description": "ZIndex configuration options.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "modal",
                             "optional": false,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Sets the base index value for Dialog and Sidebar components."
                         },
                         {
                             "name": "overlay",
                             "optional": false,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Sets the base index value for Overlay components such as Dropdown and OverlayPanel."
                         },
                         {
                             "name": "menu",
                             "optional": false,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Sets the base index value for Overlay menus."
                         },
                         {
                             "name": "tooltip",
                             "optional": false,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Sets the base index value for Tooltip."
                         },
                         {
                             "name": "toast",
                             "optional": false,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Sets the base index value for Toast."
                         }
                     ],
                     "callbacks": []
                 },
                 "FilterMatchModeOptions": {
+                    "description": "Filter match modes for DataTable filter menus.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "text",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]"
+                            "type": "any[]",
+                            "description": "Array of filter match modes for text filtering."
                         },
                         {
                             "name": "numeric",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]"
+                            "type": "any[]",
+                            "description": "Array of filter match modes for numeric filtering."
                         },
                         {
                             "name": "date",
                             "optional": false,
                             "readonly": false,
-                            "type": "any[]"
+                            "type": "any[]",
+                            "description": "Array of filter match modes for date filtering."
                         }
                     ],
                     "callbacks": []
                 },
                 "APIOptions": {
+                    "description": "Configuration options for the PrimeReact components.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
-                            "type": "AppendToType"
+                            "type": "AppendToType",
+                            "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
                         },
                         {
                             "name": "autoZIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
                         },
                         {
                             "name": "cssTransition",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "PrimeReact components utilize \"react-transition-group\" internally to implement animations. Setting \"cssTransition\" to \"false\" disables all animations."
                         },
                         {
                             "name": "filterMatchModeOptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "FilterMatchModeOptions"
+                            "type": "FilterMatchModeOptions",
+                            "description": "Default filter modes to display on DataTable filter menus."
                         },
                         {
                             "name": "hideOverlaysOnDocumentScrolling",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Define behavior if the browser window is scrolled while displaying an overlay panel like a Dropdown or Calendar. Depending on your organization's accessibility needs some prefer panels to be closed on scrolling and some prefer the overlay follow the scroll."
                         },
                         {
                             "name": "inputStyle",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputStyleType"
+                            "type": "InputStyleType",
+                            "description": "Input fields have two styles: default (outlined with borders) and filled (background-colored). Applying 'p-input-filled' to an input's ancestor enables the filled style."
                         },
                         {
                             "name": "locale",
                             "optional": true,
                             "readonly": false,
-                            "type": "string"
+                            "type": "string",
+                            "description": "The locale configuration sets up the language and region specific preferences."
                         },
                         {
                             "name": "nonce",
                             "optional": true,
                             "readonly": false,
-                            "type": "string"
+                            "type": "string",
+                            "description": "The nonce value to use on dynamically generated style elements."
                         },
                         {
                             "name": "nullSortOrder",
                             "optional": true,
                             "readonly": false,
-                            "type": "number"
+                            "type": "number",
+                            "description": "Determines how null values are sorted."
                         },
                         {
                             "name": "ripple",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Ripple is an optional animation for the supported components such as buttons."
                         },
                         {
                             "name": "zIndex",
                             "optional": true,
                             "readonly": false,
-                            "type": "ZIndexOptions"
+                            "type": "ZIndexOptions",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
                         },
                         {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
-                            "type": "PrimeReactPTOptions"
+                            "type": "PrimeReactPTOptions",
+                            "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "setAppendTo",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<AppendToType>>",
+                            "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setAutoZIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"autoZIndex\" state of the context."
+                        },
+                        {
+                            "name": "setCssTransition",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"cssTransition\" state of the context."
+                        },
+                        {
+                            "name": "setFilterMatchModeOptions",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<FilterMatchModeOptions>>",
+                            "description": "Sets the \"filterMatchModeOptions\" state of the context."
+                        },
+                        {
+                            "name": "setHideOverlaysOnDocumentScrolling",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"hideOverlaysOnDocumentScrolling\" state of the context."
+                        },
+                        {
+                            "name": "setInputStyle",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<InputStyleType>>",
+                            "description": "Sets the \"inputStyle\" state of the context."
+                        },
+                        {
+                            "name": "setLocale",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<string>>",
+                            "description": "Sets the \"locale\" state of the context."
+                        },
+                        {
+                            "name": "setNonce",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<string>>",
+                            "description": "Sets the \"nonce\" state of the context."
+                        },
+                        {
+                            "name": "setNullSortOrder",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<number>>",
+                            "description": "Sets the \"nullSortOrder\" state of the context."
+                        },
+                        {
+                            "name": "setRipple",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"ripple\" state of the context."
+                        },
+                        {
+                            "name": "setZIndex",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<ZIndexOptions>>",
+                            "description": "Sets the \"zIndex\" state of the context."
+                        },
+                        {
+                            "name": "setPt",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<PrimeReactPTOptions>>",
+                            "description": "Sets the \"pt\" state of the context."
                         }
                     ],
                     "callbacks": [
@@ -679,576 +823,994 @@
                                 {
                                     "name": "theme",
                                     "optional": true,
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "The name of the theme to be applied."
                                 },
                                 {
                                     "name": "newTheme",
                                     "optional": true,
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "The name of the new theme to be applied."
                                 },
                                 {
                                     "name": "linkElementId",
                                     "optional": true,
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "The id of the link element to be updated."
                                 },
                                 {
                                     "name": "callback",
                                     "optional": true,
-                                    "type": "Function"
+                                    "type": "Function",
+                                    "description": "Callback to invoke when the theme change is completed."
                                 }
                             ],
-                            "returnType": "void"
+                            "returnType": "void",
+                            "description": "This method is used to change the theme dynamically."
                         }
                     ]
                 },
                 "PrimeReactPTOptions": {
+                    "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag globally for all components.",
                     "relatedProp": "",
                     "props": [
                         {
                             "name": "accordion",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionPassThroughOptions"
+                            "type": "AccordionPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Accordion."
                         },
                         {
                             "name": "accordiontab",
                             "optional": true,
                             "readonly": false,
-                            "type": "AccordionTabPassThroughOptions"
+                            "type": "AccordionTabPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for AccordionTab."
                         },
                         {
                             "name": "autocomplete",
                             "optional": true,
                             "readonly": false,
-                            "type": "AutoCompletePassThroughOptions"
+                            "type": "AutoCompletePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for AutoComplete."
                         },
                         {
                             "name": "avatar",
                             "optional": true,
                             "readonly": false,
-                            "type": "AvatarPassThroughOptions"
+                            "type": "AvatarPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Avatar."
                         },
                         {
                             "name": "avatargroup",
                             "optional": true,
                             "readonly": false,
-                            "type": "AvatarGroupPassThroughOptions"
+                            "type": "AvatarGroupPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for AvatarGroup."
                         },
                         {
                             "name": "badge",
                             "optional": true,
                             "readonly": false,
-                            "type": "BadgePassThroughOptions"
+                            "type": "BadgePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Badge."
                         },
                         {
                             "name": "blockui",
                             "optional": true,
                             "readonly": false,
-                            "type": "BlockUIPassThroughOptions"
+                            "type": "BlockUIPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for BlockUI."
                         },
                         {
                             "name": "breadcrumb",
                             "optional": true,
                             "readonly": false,
-                            "type": "BreadCrumbPassThroughOptions"
+                            "type": "BreadCrumbPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Breadcrumb."
                         },
                         {
                             "name": "button",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions"
+                            "type": "ButtonPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Button."
                         },
                         {
                             "name": "calendar",
                             "optional": true,
                             "readonly": false,
-                            "type": "CalendarPassThroughOptions"
+                            "type": "CalendarPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Calendar."
                         },
                         {
                             "name": "card",
                             "optional": true,
                             "readonly": false,
-                            "type": "CardPassThroughOptions"
+                            "type": "CardPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Card."
                         },
                         {
                             "name": "carousel",
                             "optional": true,
                             "readonly": false,
-                            "type": "CarouselPassThroughOptions"
+                            "type": "CarouselPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Carousel."
                         },
                         {
                             "name": "cascadeselect",
                             "optional": true,
                             "readonly": false,
-                            "type": "CascadeSelectPassThroughOptions"
+                            "type": "CascadeSelectPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for CascadeSelect."
                         },
                         {
                             "name": "chart",
                             "optional": true,
                             "readonly": false,
-                            "type": "ChartPassThroughOptions"
+                            "type": "ChartPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Chart."
                         },
                         {
                             "name": "checkbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "CheckboxPassThroughOptions"
+                            "type": "CheckboxPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Checkbox."
                         },
                         {
                             "name": "chip",
                             "optional": true,
                             "readonly": false,
-                            "type": "ChipPassThroughOptions"
+                            "type": "ChipPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Chip."
                         },
                         {
                             "name": "chips",
                             "optional": true,
                             "readonly": false,
-                            "type": "ChipsPassThroughOptions"
+                            "type": "ChipsPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Chips."
                         },
                         {
                             "name": "colorpicker",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColorPickerPassThroughOptions"
+                            "type": "ColorPickerPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ColorPicker."
                         },
                         {
                             "name": "column",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColumnPassThroughOptions"
+                            "type": "ColumnPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Column."
                         },
                         {
                             "name": "columngroup",
                             "optional": true,
                             "readonly": false,
-                            "type": "ColumnGroupPassThroughOptions"
+                            "type": "ColumnGroupPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ColumnGroup."
                         },
                         {
                             "name": "confirmdialog",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmDialogPassThroughOptions"
+                            "type": "ConfirmDialogPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ConfirmDialog."
                         },
                         {
                             "name": "confirmpopup",
                             "optional": true,
                             "readonly": false,
-                            "type": "ConfirmPopupPassThroughOptions"
+                            "type": "ConfirmPopupPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ConfirmPopup."
                         },
                         {
                             "name": "contextmenu",
                             "optional": true,
                             "readonly": false,
-                            "type": "ContextMenuPassThroughOptions"
+                            "type": "ContextMenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ContextMenu."
                         },
                         {
                             "name": "datatable",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataTablePassThroughOptions"
+                            "type": "DataTablePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for DataTable."
                         },
                         {
                             "name": "dataview",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataViewPassThroughOptions"
+                            "type": "DataViewPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for DataView."
                         },
                         {
                             "name": "dataviewlayoutoptions",
                             "optional": true,
                             "readonly": false,
-                            "type": "DataViewLayoutOptionsPassThroughOptions"
+                            "type": "DataViewLayoutOptionsPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for DataViewLayoutOptions."
                         },
                         {
                             "name": "deferredcontent",
                             "optional": true,
                             "readonly": false,
-                            "type": "DeferredContentPassThroughOptions"
+                            "type": "DeferredContentPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for DeferredContent."
                         },
                         {
                             "name": "dialog",
                             "optional": true,
                             "readonly": false,
-                            "type": "DialogPassThroughOptions"
+                            "type": "DialogPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Dialog."
                         },
                         {
                             "name": "divider",
                             "optional": true,
                             "readonly": false,
-                            "type": "DividerPassThroughOptions"
+                            "type": "DividerPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Divider."
                         },
                         {
                             "name": "dock",
                             "optional": true,
                             "readonly": false,
-                            "type": "DockPassThroughOptions"
+                            "type": "DockPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Dock."
                         },
                         {
                             "name": "dropdown",
                             "optional": true,
                             "readonly": false,
-                            "type": "DropdownPassThroughOptions"
+                            "type": "DropdownPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Dropdown."
                         },
                         {
                             "name": "editor",
                             "optional": true,
                             "readonly": false,
-                            "type": "EditorPassThroughOptions"
+                            "type": "EditorPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Editor."
                         },
                         {
                             "name": "fieldset",
                             "optional": true,
                             "readonly": false,
-                            "type": "FieldsetPassThroughOptions"
+                            "type": "FieldsetPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Fieldset."
                         },
                         {
                             "name": "fileupload",
                             "optional": true,
                             "readonly": false,
-                            "type": "FileUploadPassThroughOptions"
+                            "type": "FileUploadPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for FileUpload."
                         },
                         {
                             "name": "galleria",
                             "optional": true,
                             "readonly": false,
-                            "type": "GalleriaPassThroughOptions"
+                            "type": "GalleriaPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for FullCalendar."
                         },
                         {
                             "name": "image",
                             "optional": true,
                             "readonly": false,
-                            "type": "ImagePassThroughOptions"
+                            "type": "ImagePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Galleria."
                         },
                         {
                             "name": "inplace",
                             "optional": true,
                             "readonly": false,
-                            "type": "InplacePassThroughOptions"
+                            "type": "InplacePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Inplace."
                         },
                         {
                             "name": "inputmask",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions"
+                            "type": "InputTextPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputMask."
                         },
                         {
                             "name": "inputnumber",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputNumberPassThroughOptions"
+                            "type": "InputNumberPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputNumber."
                         },
                         {
                             "name": "inputswitch",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputSwitchPassThroughOptions"
+                            "type": "InputSwitchPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputSwitch."
                         },
                         {
                             "name": "inputtext",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextPassThroughOptions"
+                            "type": "InputTextPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputText."
                         },
                         {
                             "name": "inputtextarea",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputTextareaPassThroughOptions"
+                            "type": "InputTextareaPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for InputTextarea."
                         },
                         {
                             "name": "knob",
                             "optional": true,
                             "readonly": false,
-                            "type": "KnobPassThroughOptions"
+                            "type": "KnobPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Knob."
                         },
                         {
                             "name": "listbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "ListboxPassThroughOptions"
+                            "type": "ListboxPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Listbox."
                         },
                         {
                             "name": "megamenu",
                             "optional": true,
                             "readonly": false,
-                            "type": "MegaMenuPassThroughOptions"
+                            "type": "MegaMenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for MegaMenu."
                         },
                         {
                             "name": "mention",
                             "optional": true,
                             "readonly": false,
-                            "type": "MentionPassThroughOptions"
+                            "type": "MentionPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Mention."
                         },
                         {
                             "name": "menu",
                             "optional": true,
                             "readonly": false,
-                            "type": "MenuPassThroughOptions"
+                            "type": "MenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Menu."
                         },
                         {
                             "name": "menubar",
                             "optional": true,
                             "readonly": false,
-                            "type": "MenubarPassThroughOptions"
+                            "type": "MenubarPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Menubar."
                         },
                         {
                             "name": "message",
                             "optional": true,
                             "readonly": false,
-                            "type": "MessagePassThroughOptions"
+                            "type": "MessagePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Message."
                         },
                         {
                             "name": "messages",
                             "optional": true,
                             "readonly": false,
-                            "type": "MessagesPassThroughOptions"
+                            "type": "MessagesPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Messages."
                         },
                         {
                             "name": "multiselect",
                             "optional": true,
                             "readonly": false,
-                            "type": "MultiSelectPassThroughOptions"
+                            "type": "MultiSelectPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for MultiSelect."
                         },
                         {
                             "name": "multisatecheckbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "MultiStateCheckboxPassThroughOptions"
+                            "type": "MultiStateCheckboxPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for MultiStateCheckbox."
                         },
                         {
                             "name": "orderlist",
                             "optional": true,
                             "readonly": false,
-                            "type": "OrderListPassThroughOptions"
+                            "type": "OrderListPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for OrderList."
                         },
                         {
                             "name": "organizationchart",
                             "optional": true,
                             "readonly": false,
-                            "type": "OrganizationChartPassThroughOptions"
+                            "type": "OrganizationChartPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for OrganizationChart."
                         },
                         {
                             "name": "overlaypanel",
                             "optional": true,
                             "readonly": false,
-                            "type": "OverlayPanelPassThroughOptions"
+                            "type": "OverlayPanelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for OverlayPanel."
                         },
                         {
                             "name": "paginator",
                             "optional": true,
                             "readonly": false,
-                            "type": "PaginatorPassThroughOptions"
+                            "type": "PaginatorPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Paginator."
                         },
                         {
                             "name": "panel",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelPassThroughOptions"
+                            "type": "PanelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Panel."
                         },
                         {
                             "name": "panelmenu",
                             "optional": true,
                             "readonly": false,
-                            "type": "PanelMenuPassThroughOptions"
+                            "type": "PanelMenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for PanelMenu."
                         },
                         {
                             "name": "password",
                             "optional": true,
                             "readonly": false,
-                            "type": "PasswordPassThroughOptions"
+                            "type": "PasswordPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Password."
                         },
                         {
                             "name": "picklist",
                             "optional": true,
                             "readonly": false,
-                            "type": "PickListPassThroughOptions"
+                            "type": "PickListPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for PickList."
                         },
                         {
                             "name": "progressbar",
                             "optional": true,
                             "readonly": false,
-                            "type": "ProgressBarPassThroughOptions"
+                            "type": "ProgressBarPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ProgressBar."
                         },
                         {
                             "name": "progressspinner",
                             "optional": true,
                             "readonly": false,
-                            "type": "ProgressSpinnerPassThroughOptions"
+                            "type": "ProgressSpinnerPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ProgressSpinner."
                         },
                         {
                             "name": "radiobutton",
                             "optional": true,
                             "readonly": false,
-                            "type": "RadioButtonPassThroughOptions"
+                            "type": "RadioButtonPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for RadioButton."
                         },
                         {
                             "name": "rating",
                             "optional": true,
                             "readonly": false,
-                            "type": "RatingPassThroughOptions"
+                            "type": "RatingPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Rating."
                         },
                         {
                             "name": "row",
                             "optional": true,
                             "readonly": false,
-                            "type": "RowPassThroughOptions"
+                            "type": "RowPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Row."
                         },
                         {
                             "name": "scrollpanel",
                             "optional": true,
                             "readonly": false,
-                            "type": "ScrollPanelPassThroughOptions"
+                            "type": "ScrollPanelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ScrollPanel."
                         },
                         {
                             "name": "scrolltop",
                             "optional": true,
                             "readonly": false,
-                            "type": "ScrollTopPassThroughOptions"
+                            "type": "ScrollTopPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ScrollTop."
                         },
                         {
                             "name": "selectbutton",
                             "optional": true,
                             "readonly": false,
-                            "type": "SelectButtonPassThroughOptions"
+                            "type": "SelectButtonPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for SelectButton."
                         },
                         {
                             "name": "sidebar",
                             "optional": true,
                             "readonly": false,
-                            "type": "SidebarPassThroughOptions"
+                            "type": "SidebarPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Sidebar."
                         },
                         {
                             "name": "skeleton",
                             "optional": true,
                             "readonly": false,
-                            "type": "SkeletonPassThroughOptions"
+                            "type": "SkeletonPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Skeleton."
                         },
                         {
                             "name": "slidemenu",
                             "optional": true,
                             "readonly": false,
-                            "type": "SlideMenuPassThroughOptions"
+                            "type": "SlideMenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for SliderMenu."
                         },
                         {
                             "name": "slider",
                             "optional": true,
                             "readonly": false,
-                            "type": "SliderPassThroughOptions"
+                            "type": "SliderPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Slider."
                         },
                         {
                             "name": "speeddial",
                             "optional": true,
                             "readonly": false,
-                            "type": "SpeedDialPassThroughOptions"
+                            "type": "SpeedDialPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for SpeedDial."
                         },
                         {
                             "name": "splitbutton",
                             "optional": true,
                             "readonly": false,
-                            "type": "SplitButtonPassThroughOptions"
+                            "type": "SplitButtonPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for SplitButton."
                         },
                         {
                             "name": "splitter",
                             "optional": true,
                             "readonly": false,
-                            "type": "SplitterPassThroughOptions"
+                            "type": "SplitterPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Splitter."
                         },
                         {
                             "name": "steps",
                             "optional": true,
                             "readonly": false,
-                            "type": "StepsPassThroughOptions"
+                            "type": "StepsPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Steps."
                         },
                         {
                             "name": "tabmenu",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabMenuPassThroughOptions"
+                            "type": "TabMenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for TabMenu."
                         },
                         {
                             "name": "tabpanel",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabPanelPassThroughOptions"
+                            "type": "TabPanelPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for TabPanel."
                         },
                         {
                             "name": "tabview",
                             "optional": true,
                             "readonly": false,
-                            "type": "TabViewPassThroughOptions"
+                            "type": "TabViewPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for TabView."
                         },
                         {
                             "name": "tag",
                             "optional": true,
                             "readonly": false,
-                            "type": "TagPassThroughOptions"
+                            "type": "TagPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Tag."
                         },
                         {
                             "name": "terminal",
                             "optional": true,
                             "readonly": false,
-                            "type": "TerminalPassThroughOptions"
+                            "type": "TerminalPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Terminal."
                         },
                         {
                             "name": "tieredmenu",
                             "optional": true,
                             "readonly": false,
-                            "type": "TieredMenuPassThroughOptions"
+                            "type": "TieredMenuPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for TieredMenu."
                         },
                         {
                             "name": "timeline",
                             "optional": true,
                             "readonly": false,
-                            "type": "TimelinePassThroughOptions"
+                            "type": "TimelinePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Timeline."
                         },
                         {
                             "name": "toast",
                             "optional": true,
                             "readonly": false,
-                            "type": "ToastPassThroughOptions"
+                            "type": "ToastPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Toast."
                         },
                         {
                             "name": "togglebutton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ToggleButtonPassThroughOptions"
+                            "type": "ToggleButtonPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for ToffleButton."
                         },
                         {
                             "name": "toolbar",
                             "optional": true,
                             "readonly": false,
-                            "type": "ToolbarPassThroughOptions"
+                            "type": "ToolbarPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Toolbar."
                         },
                         {
                             "name": "tooltip",
                             "optional": true,
                             "readonly": false,
-                            "type": "TooltipPassThroughOptions"
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Tooltip."
                         },
                         {
                             "name": "tree",
                             "optional": true,
                             "readonly": false,
-                            "type": "TreePassThroughOptions"
+                            "type": "TreePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for Tree."
                         },
                         {
                             "name": "treeselect",
                             "optional": true,
                             "readonly": false,
-                            "type": "TreeSelectPassThroughOptions"
+                            "type": "TreeSelectPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for TreeSelect."
                         },
                         {
                             "name": "treetable",
                             "optional": true,
                             "readonly": false,
-                            "type": "TreeTablePassThroughOptions"
+                            "type": "TreeTablePassThroughOptions",
+                            "description": "Custom passthrough(pt) options for TreeTable."
                         },
                         {
                             "name": "virtualscroller",
                             "optional": true,
                             "readonly": false,
-                            "type": "VirtualScrollerPassThroughOptions"
+                            "type": "VirtualScrollerPassThroughOptions",
+                            "description": "Custom passthrough(pt) options for VirtualScroller."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "LocaleOptions": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "startsWith",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Starts with"
+                        },
+                        {
+                            "name": "contains",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Contains"
+                        },
+                        {
+                            "name": "notContains",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Not contains"
+                        },
+                        {
+                            "name": "endsWith",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Ends with"
+                        },
+                        {
+                            "name": "equals",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Equals"
+                        },
+                        {
+                            "name": "notEquals",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Not equals"
+                        },
+                        {
+                            "name": "noFilter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No Filter"
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Filter"
+                        },
+                        {
+                            "name": "lt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Less than"
+                        },
+                        {
+                            "name": "lte",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Less than or equal to"
+                        },
+                        {
+                            "name": "gt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Greater than"
+                        },
+                        {
+                            "name": "gte",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Greater than or equal to"
+                        },
+                        {
+                            "name": "dateIs",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Date is"
+                        },
+                        {
+                            "name": "dateIsNot",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Date is not"
+                        },
+                        {
+                            "name": "dateBefore",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Date is before"
+                        },
+                        {
+                            "name": "dateAfter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Date is after"
+                        },
+                        {
+                            "name": "custom",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Custom"
+                        },
+                        {
+                            "name": "clear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Clear"
+                        },
+                        {
+                            "name": "apply",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Apply"
+                        },
+                        {
+                            "name": "matchAll",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Match All"
+                        },
+                        {
+                            "name": "matchAny",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Match Any"
+                        },
+                        {
+                            "name": "addRule",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Add Rule"
+                        },
+                        {
+                            "name": "removeRule",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Remove Rule"
+                        },
+                        {
+                            "name": "accept",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Yes"
+                        },
+                        {
+                            "name": "reject",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No"
+                        },
+                        {
+                            "name": "choose",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose"
+                        },
+                        {
+                            "name": "upload",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Upload"
+                        },
+                        {
+                            "name": "cancel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Cancel"
+                        },
+                        {
+                            "name": "close",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Close"
+                        },
+                        {
+                            "name": "dayNames",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']"
+                        },
+                        {
+                            "name": "dayNamesShort",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+                        },
+                        {
+                            "name": "dayNamesMin",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']"
+                        },
+                        {
+                            "name": "monthNames",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                        },
+                        {
+                            "name": "monthNamesShort",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
+                        },
+                        {
+                            "name": "today",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Today"
+                        },
+                        {
+                            "name": "weekHeader",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Wk"
+                        },
+                        {
+                            "name": "firstDayOfWeek",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "0"
+                        },
+                        {
+                            "name": "dateFormat",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "mm/dd/yy"
+                        },
+                        {
+                            "name": "weak",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Weak"
+                        },
+                        {
+                            "name": "medium",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Medium"
+                        },
+                        {
+                            "name": "strong",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Strong"
+                        },
+                        {
+                            "name": "passwordPrompt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Enter a password"
+                        },
+                        {
+                            "name": "emptyFilterMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No available options"
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No results found"
+                        },
+                        {
+                            "name": "aria",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Object",
+                            "description": "True"
                         }
                     ],
                     "callbacks": []
@@ -4030,6 +4592,14 @@
                             "type": "BadgePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -6429,6 +6999,18 @@
                     "description": "Defines methods that can be accessed by the component's reference.",
                     "values": [
                         {
+                            "name": "startAutoplay",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to start the autoplay if it is currently stopped."
+                        },
+                        {
+                            "name": "stopAutoplay",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Used to stop the autoplay if it is currently started."
+                        },
+                        {
                             "name": "getElement",
                             "parameters": [],
                             "returnType": "HTMLDivElement",
@@ -7534,6 +8116,14 @@
                             "type": "ChartPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -7956,6 +8546,13 @@
                             "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
                             "name": "hiddenInputWrapper",
                             "optional": true,
                             "readonly": false,
@@ -7968,13 +8565,6 @@
                             "readonly": false,
                             "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
-                        },
-                        {
-                            "name": "tooltip",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TooltipPassThroughOptions",
-                            "description": "Uses to pass attributes tooltip's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -8094,6 +8684,14 @@
                             "type": "ChipPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -8294,7 +8892,7 @@
                             "name": "value",
                             "optional": true,
                             "readonly": false,
-                            "type": "any[]",
+                            "type": "string[]",
                             "default": "",
                             "description": "Value of the component."
                         },
@@ -8528,7 +9126,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "string",
                             "description": "Removed item value"
                         }
                     ]
@@ -8547,7 +9145,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "Nullable<any[]>"
+                            "type": "Nullable<string[]>"
                         },
                         {
                             "name": "checked",
@@ -8559,7 +9157,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any[]>"
+                            "type": "FormTarget<string[]>"
                         }
                     ]
                 }
@@ -8679,7 +9277,7 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any",
+                            "type": "string",
                             "description": "Added item value"
                         }
                     ],
@@ -13018,6 +13616,14 @@
                             "type": "any[]",
                             "default": "",
                             "description": "An array of objects to display."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -13076,6 +13682,88 @@
                             "description": "Number of rows per page"
                         }
                     ]
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "DataScrollerPassThroughMethodOptions": {
+                    "description": "Custom passthrough(pt) option method.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "props",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataScrollerProps"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataScrollerPassThroughOptions": {
+                    "description": "Custom passthrough(pt) options.",
+                    "relatedProp": "pt",
+                    "props": [
+                        {
+                            "name": "root",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "footer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "item",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLLIElement>>",
+                            "description": "Uses to pass attributes to the emptyMessage's DOM element."
+                        },
+                        {
+                            "name": "list",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "content",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the list's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                }
+            }
+        },
+        "types": {
+            "description": "Defines the custom types used by the module.",
+            "values": {
+                "DataScrollerPassThroughType": {
+                    "values": "PassThroughType<T, DataScrollerPassThroughMethodOptions>"
                 }
             }
         }
@@ -18492,13 +19180,6 @@
                             "description": "Uses to pass attributes to the empty message's DOM element."
                         },
                         {
-                            "name": "hiddenSelectedMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden selected message's DOM element."
-                        },
-                        {
                             "name": "select",
                             "optional": true,
                             "readonly": false,
@@ -18518,6 +19199,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hiddenSelectedMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden selected message's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -19016,6 +19704,14 @@
                             "type": "FieldsetPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -19275,6 +19971,24 @@
                             ],
                             "returnType": "void",
                             "description": "Sets the current files list."
+                        },
+                        {
+                            "name": "getUploadedFiles",
+                            "parameters": [],
+                            "returnType": "File[]",
+                            "description": "Gets the current uploaded files list."
+                        },
+                        {
+                            "name": "setUploadedFiles",
+                            "parameters": [
+                                {
+                                    "name": "files",
+                                    "type": "File[]",
+                                    "description": "Current uploaded files."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Sets the current uploaded files list."
                         }
                     ]
                 },
@@ -21241,6 +21955,23 @@
                     "returnType": "MouseMoveOptions",
                     "description": "Custom hook to handles move behavior over any element."
                 },
+                "useStyle": {
+                    "name": "useStyle",
+                    "parameters": [
+                        {
+                            "name": "css",
+                            "type": "string",
+                            "description": "The style text content."
+                        },
+                        {
+                            "name": "options",
+                            "type": "UseStyleOptions",
+                            "description": "The options of the style."
+                        }
+                    ],
+                    "returnType": "StyleOptions",
+                    "description": "Custom hook to use to get style options."
+                },
                 "useFavicon": {
                     "name": "useFavicon",
                     "parameters": [
@@ -21335,6 +22066,83 @@
                     ],
                     "callbacks": [],
                     "extendedBy": "MouseDataOptions"
+                },
+                "UseStyleOptions": {
+                    "description": "Custom UseStyleOptions",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "document",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Document"
+                        },
+                        {
+                            "name": "immediate",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "manual",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "name",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "media",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "StyleOptions": {
+                    "description": "Custom StyleOptions",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "name",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Defines data-pc-name attribute of the style tag."
+                        },
+                        {
+                            "name": "css",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "RefObject<string>",
+                            "description": "The css object."
+                        },
+                        {
+                            "name": "load",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Function"
+                        },
+                        {
+                            "name": "unload",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "Function"
+                        },
+                        {
+                            "name": "isLoaded",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the style is loaded or not."
+                        }
+                    ],
+                    "callbacks": []
                 },
                 "MouseDataOptions": {
                     "description": "Custom MouseDataOptions",
@@ -24011,6 +24819,14 @@
                             "type": "InplacePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -28272,6 +29088,14 @@
                             "type": "MessagePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -29088,6 +29912,14 @@
                             "description": "Whether to show the select all checkbox inside the panel's header."
                         },
                         {
+                            "name": "selectAllLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Label to display if showSelectAll is true"
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -29462,6 +30294,13 @@
                             "optional": true,
                             "readonly": false,
                             "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
+                            "name": "headerSelectAllLabel",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLLabelElement>>",
                             "description": "Uses to pass attributes to the header checkbox's DOM element."
                         },
                         {
@@ -32447,6 +33286,42 @@
                             "parameters": [],
                             "returnType": "HTMLDivElement",
                             "description": "Used to get content of the panel."
+                        },
+                        {
+                            "name": "toggle",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "type": "undefined | SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Toggle the panel if toggleable."
+                        },
+                        {
+                            "name": "expand",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "type": "undefined | SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Expand the panel if toggleable."
+                        },
+                        {
+                            "name": "collapse",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "type": "undefined | SyntheticEvent<Element, Event>",
+                                    "description": "Browser event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Collapse the panel if toggleable."
                         }
                     ]
                 },
@@ -32548,6 +33423,14 @@
                             "type": "PanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -35597,6 +36480,14 @@
                             "type": "ScrollPanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -35765,6 +36656,14 @@
                             "type": "ScrollTopPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -36292,6 +37191,14 @@
                             "description": "Specifies if pressing escape key should hide the sidebar."
                         },
                         {
+                            "name": "header",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "true",
+                            "description": "Custom template for the header."
+                        },
+                        {
                             "name": "icons",
                             "optional": true,
                             "readonly": false,
@@ -36422,6 +37329,13 @@
                             "description": "Uses to pass attributes to the content's DOM element."
                         },
                         {
+                            "name": "icons",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the custom icons content's DOM element."
+                        },
+                        {
                             "name": "mask",
                             "optional": true,
                             "readonly": false,
@@ -36538,6 +37452,14 @@
                             "type": "SkeletonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -40497,9 +41419,9 @@
                             "name": "position",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"center\" | \"left\" | \"top\" | \"bottom\" | \"right\" | \"bottom-right\" | \"bottom-left\" | \"top-right\" | \"top-left\" | \"top-center\" | \"bottom-center\"",
+                            "type": "\"center\" | \"bottom-right\" | \"bottom-left\" | \"top-right\" | \"top-left\" | \"top-center\" | \"bottom-center\"",
                             "default": "top-right",
-                            "description": "Position of the toast in viewport, valid values are \"top-right\", \"top-left\", \"bottom-left\" and \"bottom-right\"."
+                            "description": "Position of the toast in viewport, valid values are 'center', 'top-center', 'top-left', 'top-right', 'bottom-center', 'bottom-left', 'bottom-right'."
                         },
                         {
                             "name": "transitionOptions",
@@ -41230,6 +42152,14 @@
                             "type": "ToolbarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -41314,8 +42244,8 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "HTMLElement",
-                                    "description": "Target element."
+                                    "type": "undefined | HTMLElement",
+                                    "description": "Target element or if undefined will use current target."
                                 }
                             ],
                             "returnType": "void",
@@ -41326,8 +42256,8 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "HTMLElement",
-                                    "description": "Target element."
+                                    "type": "undefined | HTMLElement",
+                                    "description": "Target element or if undefined will use current target."
                                 }
                             ],
                             "returnType": "void",
@@ -41338,8 +42268,8 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "HTMLElement",
-                                    "description": "Target element."
+                                    "type": "undefined | HTMLElement",
+                                    "description": "Target element or if undefined will use current target."
                                 }
                             ],
                             "returnType": "void",
@@ -43574,6 +44504,14 @@
                             "description": "Name of the input element."
                         },
                         {
+                            "name": "nodeTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "false",
+                            "description": "Template of internally used tree component node element."
+                        },
+                        {
                             "name": "options",
                             "optional": true,
                             "readonly": false,
@@ -43634,7 +44572,8 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
-                            "default": ""
+                            "default": "",
+                            "description": "Resets the filter when the overlay is hidden."
                         },
                         {
                             "name": "scrollHeight",
@@ -43659,6 +44598,14 @@
                             "type": "CSSTransitionProps",
                             "default": "",
                             "description": "The properties of CSSTransition can be customized, except for \"nodeRef\" and \"in\" properties."
+                        },
+                        {
+                            "name": "togglerTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "default": "",
+                            "description": "Template of toggler element."
                         },
                         {
                             "name": "value",
@@ -44920,6 +45867,32 @@
                             "description": "Callback to invoke when a row is clicked."
                         },
                         {
+                            "name": "onRowMouseEnter",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TreeTableRowMouseEvent",
+                                    "description": "Custom row mouse event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row is hovered with mouse."
+                        },
+                        {
+                            "name": "onRowMouseLeave",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TreeTableRowMouseEvent",
+                                    "description": "Custom row mouse event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row is navigated away from with mouse."
+                        },
+                        {
                             "name": "onSelect",
                             "parameters": [
                                 {
@@ -45732,6 +46705,35 @@
                         }
                     ],
                     "callbacks": []
+                },
+                "TreeTableRowMouseEvent": {
+                    "description": "Custom row mouse event.",
+                    "relatedProp": "onRowMouseEnter",
+                    "props": [
+                        {
+                            "name": "node",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TreeNode",
+                            "description": "Expanded node instance."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "MouseEvent<HTMLElement, MouseEvent>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Clicked row data index"
+                        }
+                    ],
+                    "callbacks": [],
+                    "extendedTypes": "Omit<TreeTableEvent, \"originalEvent\">"
                 }
             }
         },
@@ -46663,13 +47665,6 @@
                             "description": "Uses to pass attributes to the content's DOM element."
                         },
                         {
-                            "name": "spacer",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the spacer's DOM element."
-                        },
-                        {
                             "name": "loader",
                             "optional": true,
                             "readonly": false,
@@ -46682,6 +47677,13 @@
                             "readonly": false,
                             "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the loading icon's DOM element."
+                        },
+                        {
+                            "name": "spacer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the spacer's DOM element."
                         }
                     ],
                     "callbacks": []

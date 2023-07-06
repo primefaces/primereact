@@ -17,6 +17,7 @@ import { useLocalStorage, useSessionStorage, useStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
 import { useUnmountEffect } from './useUnmountEffect';
 import { useUpdateEffect } from './useUpdateEffect';
+import { useStyle } from './useStyle';
 
 export {
     usePrevious,
@@ -30,6 +31,7 @@ export {
     useIntersectionObserver,
     useInterval,
     useStorage,
+    useStyle,
     useLocalStorage,
     useSessionStorage,
     useTimeout,

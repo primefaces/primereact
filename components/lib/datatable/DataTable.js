@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
@@ -771,12 +770,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const createStyleElement = () => {
-        styleElement.current = DomHandler.createInlineStyle(context.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
     };
 
     const createResponsiveStyle = () => {
         if (!responsiveStyleElement.current) {
-            responsiveStyleElement.current = DomHandler.createInlineStyle(context.nonce);
+            responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
             let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
             let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
@@ -911,7 +910,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, context.locale, context.nullSortOrder);
+        return ObjectUtils.sort(value1, value2, order, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const addSortMeta = (meta, multiSortMeta) => {
@@ -997,7 +996,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, context.locale) === 0) {
+        if (ObjectUtils.compare(value1, value2, (context && context.locale) || PrimeReact.locale) === 0) {
             return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1) : 0;
         }
 
@@ -1143,7 +1142,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const field = getColumnProp(col, 'filterField') || getColumnProp(col, 'field');
                 const filterFunction = getColumnProp(col, 'filterFunction');
                 const dataType = getColumnProp(col, 'dataType');
-                const matchMode = getColumnProp(col, 'filterMatchMode') || (context.filterMatchModeOptions[dataType] ? context.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
+                const matchMode =
+                    getColumnProp(col, 'filterMatchMode') ||
+                    ((context && context.filterMatchModeOptions[dataType]) || PrimeReact.filterMatchModeOptions[dataType]
+                        ? (context && context.filterMatchModeOptions[dataType][0]) || PrimeReact.filterMatchModeOptions[dataType][0]
+                        : FilterMatchMode.STARTS_WITH);
                 let constraint = { value: null, matchMode };
 
                 if (filterFunction) {
@@ -1336,7 +1339,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
-        attributeSelector.current = UniqueComponentId();
+        if (elementRef.current) {
+            attributeSelector.current = UniqueComponentId();
+            elementRef.current.setAttribute(attributeSelector.current, '');
+        }
 
         //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
@@ -1351,8 +1357,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     });
 
     useUpdateEffect(() => {
-        elementRef.current.setAttribute(attributeSelector.current, '');
-
         if (props.responsiveLayout === 'stack' && !props.scrollable) {
             createResponsiveStyle();
         }

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -237,13 +236,15 @@ export const Carousel = React.memo(
         };
 
         const startAutoplay = () => {
-            interval.current = setInterval(() => {
-                if (pageState === totalIndicators - 1) {
-                    step(-1, 0);
-                } else {
-                    step(-1, pageState + 1);
-                }
-            }, props.autoplayInterval);
+            if (props.autoplayInterval > 0) {
+                interval.current = setInterval(() => {
+                    if (pageState === totalIndicators - 1) {
+                        step(-1, 0);
+                    } else {
+                        step(-1, pageState + 1);
+                    }
+                }, props.autoplayInterval);
+            }
         };
 
         const stopAutoplay = () => {
@@ -254,7 +255,7 @@ export const Carousel = React.memo(
 
         const createStyle = () => {
             if (!carouselStyle.current) {
-                carouselStyle.current = DomHandler.createInlineStyle(context.nonce);
+                carouselStyle.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
             }
 
             let innerHTML = `
@@ -269,7 +270,7 @@ export const Carousel = React.memo(
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
 
-                    return ObjectUtils.sort(value1, value2, -1, context.locale, context.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, -1, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
@@ -288,6 +289,10 @@ export const Carousel = React.memo(
             carouselStyle.current.innerHTML = innerHTML;
         };
 
+        const destroyStyle = () => {
+            carouselStyle.current = DomHandler.removeInlineStyle(carouselStyle.current);
+        };
+
         const changePosition = (totalShiftedItems) => {
             if (itemsContainerRef.current) {
                 itemsContainerRef.current.style.transform = isVertical ? `translate3d(0, ${totalShiftedItems * (100 / numVisibleState)}%, 0)` : `translate3d(${totalShiftedItems * (100 / numVisibleState)}%, 0, 0)`;
@@ -301,6 +306,8 @@ export const Carousel = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            startAutoplay,
+            stopAutoplay,
             getElement: () => elementRef.current
         }));
 
@@ -310,10 +317,12 @@ export const Carousel = React.memo(
                 elementRef.current.setAttribute(attributeSelector.current, '');
             }
 
-            createStyle();
-            calculatePosition();
-            changePosition(totalShiftedItemsState);
-            bindWindowResizeListener();
+            if (!carouselStyle.current) {
+                createStyle();
+                calculatePosition();
+                changePosition(totalShiftedItemsState);
+                bindWindowResizeListener();
+            }
         });
 
         useUpdateEffect(() => {
@@ -392,6 +401,8 @@ export const Carousel = React.memo(
             if (props.autoplayInterval) {
                 stopAutoplay();
             }
+
+            destroyStyle();
         });
 
         const createItems = () => {

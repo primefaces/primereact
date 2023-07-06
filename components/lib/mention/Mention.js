@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
@@ -8,6 +8,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
+import PrimeReact from '../api/Api';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -62,7 +63,7 @@ export const Mention = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 

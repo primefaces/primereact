@@ -2,7 +2,7 @@ import * as React from 'react';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { OrganizationChartBase } from './OrganizationChartBase';
 import { OrganizationChartNode } from './OrganizationChartNode';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const OrganizationChart = React.memo(
     React.forwardRef((inProps, ref) => {

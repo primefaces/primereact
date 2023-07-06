@@ -6,7 +6,7 @@ import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {

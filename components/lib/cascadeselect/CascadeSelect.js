@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -8,6 +8,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
+import PrimeReact from '../api/Api';
 
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -181,7 +182,7 @@ export const CascadeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
 
             if (attributeSelectorState && props.breakpoint) {
@@ -208,12 +209,12 @@ export const CascadeSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || context.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}_panel`;
                 const innerHTML = `

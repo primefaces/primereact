@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption, localeOptions } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
@@ -13,7 +13,6 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { PrimeReactContext } from '../api/context';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -85,7 +84,6 @@ export const Calendar = React.memo(
         };
 
         const onInputBlur = (event) => {
-            setFocusedState(false);
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
         };
@@ -1440,6 +1438,8 @@ export const Calendar = React.memo(
         };
 
         const show = (type) => {
+            setFocusedState(false);
+
             if (props.onVisibleChange) {
                 props.onVisibleChange({
                     visible: true,
@@ -1474,7 +1474,7 @@ export const Calendar = React.memo(
 
             if (props.onVisibleChange) {
                 props.onVisibleChange({
-                    visible: false,
+                    visible: type !== 'dateselect', // false only if selecting a value to close panel
                     type,
                     callback: _hideCallback
                 });
@@ -1488,7 +1488,7 @@ export const Calendar = React.memo(
             if (props.autoZIndex) {
                 const key = props.touchUI ? 'modal' : 'overlay';
 
-                ZIndexUtils.set(key, overlayRef.current, context.autoZIndex, props.baseZIndex || context.zIndex[key]);
+                ZIndexUtils.set(key, overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
             }
 
             alignOverlay();
@@ -1517,12 +1517,12 @@ export const Calendar = React.memo(
             if (props.touchUI) {
                 enableModality();
             } else if (overlayRef && overlayRef.current && inputRef && inputRef.current) {
-                DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || context.appendTo);
+                DomHandler.alignOverlay(overlayRef.current, inputRef.current, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
 
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
                 } else {
-                    if (currentView === 'date') {
+                    if (props.view === 'date') {
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                         overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
                     } else {
@@ -2459,7 +2459,6 @@ export const Calendar = React.memo(
         }, [inputRef, props.inputRef]);
 
         useMountEffect(() => {
-            let unbindMaskEvents = null;
             let viewDate = getViewDate(props.viewDate);
 
             validateDate(viewDate);
@@ -2479,7 +2478,23 @@ export const Calendar = React.memo(
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                     }
                 }
-            } else if (props.mask) {
+            }
+
+            if (props.value) {
+                updateInputfield(props.value);
+                setValue(props.value);
+            }
+
+            if (props.autoFocus) {
+                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
+                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
+            }
+        });
+
+        React.useEffect(() => {
+            let unbindMaskEvents = null;
+
+            if (props.mask) {
                 unbindMaskEvents = mask(inputRef.current, {
                     mask: props.mask,
                     readOnly: props.readOnlyInput || props.disabled,
@@ -2493,20 +2508,11 @@ export const Calendar = React.memo(
                 }).unbindEvents;
             }
 
-            if (props.value) {
-                updateInputfield(props.value);
-                setValue(props.value);
-            }
-
-            if (props.autoFocus) {
-                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
-                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
-            }
-
             return () => {
                 props.mask && unbindMaskEvents && unbindMaskEvents();
             };
-        });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props.disabled, props.mask, props.readOnlyInput]);
 
         useUpdateEffect(() => {
             setCurrentView(props.view);
@@ -2948,7 +2954,8 @@ export const Calendar = React.memo(
             const dates = createDates(monthMetaData, groupIndex);
             const containerProps = mergeProps(
                 {
-                    className: 'p-datepicker-calendar-container'
+                    className: 'p-datepicker-calendar-container',
+                    key: UniqueComponentId('calendar_container_')
                 },
                 ptm('container')
             );
@@ -2994,7 +3001,8 @@ export const Calendar = React.memo(
 
             const headerProps = mergeProps(
                 {
-                    className: 'p-datepicker-header'
+                    className: 'p-datepicker-header',
+                    key: index
                 },
                 ptm('header')
             );
@@ -3022,37 +3030,6 @@ export const Calendar = React.memo(
             const viewDate = getViewDate();
             const monthsMetaData = createMonthsMeta(viewDate.getMonth(), viewDate.getFullYear());
             const months = createMonths(monthsMetaData);
-
-            return months;
-        };
-
-        const createMonthViewMonth = (index) => {
-            const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(0, index, currentYear) });
-            const monthNamesShort = localeOption('monthNamesShort', props.locale);
-            const monthName = monthNamesShort[index];
-            const monthProps = mergeProps(
-                {
-                    className,
-                    onClick: (event) => onMonthSelect(event, index),
-                    onKeyDown: (event) => onMonthCellKeydown(event, index)
-                },
-                ptm('month')
-            );
-
-            return (
-                <span {...monthProps} key={monthName}>
-                    {monthName}
-                    <Ripple />
-                </span>
-            );
-        };
-
-        const createMonthViewMonths = () => {
-            let months = [];
-
-            for (let i = 0; i <= 11; i++) {
-                months.push(createMonthViewMonth(i));
-            }
 
             return months;
         };
@@ -3579,7 +3556,8 @@ export const Calendar = React.memo(
                             const monthProps = mergeProps(
                                 {
                                     className: classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) }),
-                                    onClick: (event) => onMonthSelect(event, i)
+                                    onClick: (event) => onMonthSelect(event, i),
+                                    onKeyDown: (event) => onMonthCellKeydown(event, i)
                                 },
                                 ptm('month')
                             );
@@ -3644,8 +3622,8 @@ export const Calendar = React.memo(
             'p-datepicker-multiple-month': props.numberOfMonths > 1,
             'p-datepicker-monthpicker': currentView === 'month',
             'p-datepicker-touch-ui': props.touchUI,
-            'p-input-filled': context.inputStyle === 'filled',
-            'p-ripple-disabled': context.ripple === false
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         });
         const content = createContent();
         const datePicker = createDatePicker();

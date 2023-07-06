@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PickListBase } from './PickListBase';
@@ -120,6 +119,8 @@ export const PickList = React.memo(
                         });
                     }
 
+                    selectedValue = [];
+
                     break;
 
                 case 'toSource':
@@ -143,6 +144,8 @@ export const PickList = React.memo(
                             value: selectedValue
                         });
                     }
+
+                    selectedValue = [];
 
                     break;
 
@@ -215,7 +218,7 @@ export const PickList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(context.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {

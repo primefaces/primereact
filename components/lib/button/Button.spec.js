@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
-import { PrimeReactProvider } from '../api/context';
+import { PrimeReactProvider } from '../api/Api';
 import { Button } from './Button';
 
 describe('Button', () => {

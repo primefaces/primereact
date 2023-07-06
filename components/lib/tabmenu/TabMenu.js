@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { TabMenuBase } from './TabMenuBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const TabMenu = React.memo(
     React.forwardRef((inProps, ref) => {

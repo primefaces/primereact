@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -189,7 +189,7 @@ export const AutoComplete = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, context.autoZIndex, context.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             alignOverlay();
         };
 
@@ -219,7 +219,7 @@ export const AutoComplete = React.memo(
         const alignOverlay = () => {
             const target = props.multiple ? multiContainerRef.current : inputRef.current;
 
-            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || context.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, target, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const onPanelClick = (event) => {
@@ -645,10 +645,10 @@ export const AutoComplete = React.memo(
                 {
                     ref: multiContainerRef,
                     className,
-                    onContextMenu: (e) => props.onContextMenu(e),
-                    onMouseDown: (e) => props.onMouseDown(e),
-                    onClick: (e) => onMultiContainerClick(e),
-                    onDoubleClick: (e) => props.onDblClick(e)
+                    onClick: onMultiContainerClick,
+                    onContextMenu: props.onContextMenu,
+                    onMouseDown: props.onMouseDown,
+                    onDoubleClick: props.onDblClick
                 },
                 ptm('container')
             );

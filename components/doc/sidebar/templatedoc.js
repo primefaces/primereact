@@ -18,6 +18,12 @@ export function TemplateDoc(props) {
         </React.Fragment>
     );
 
+    const customHeader = (
+        <React.Fragment>
+            <h2 style={{ marginBottom: 0 }}>Sidebar</h2>
+        </React.Fragment>
+    );
+
     const code = {
         basic: `
 <Sidebar visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
@@ -47,14 +53,19 @@ export default function TemplateDemo() {
             </button>
         </React.Fragment>
     );
+
+    const customHeader = (
+        <React.Fragment>
+            <h2 style={{ marginBottom: 0 }}>Sidebar</h2>
+        </React.Fragment>
+    );
     
     return (
         <div className="card flex justify-content-center">
-            <Sidebar visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
-                <h2>Sidebar</h2>
+            <Sidebar header={customHeader} visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.
                 </p>
             </Sidebar>
             <Button icon="pi pi-plus" onClick={() => setVisible(true)} />
@@ -81,13 +92,18 @@ export default function TemplateDemo() {
         </React.Fragment>
     );
 
+    const customHeader = (
+        <React.Fragment>
+            <h2 style={{ marginBottom: 0 }}>Sidebar</h2>
+        </React.Fragment>
+    );
+
     return (
         <div className="card flex justify-content-center">
-            <Sidebar visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
-                <h2>Sidebar</h2>
+            <Sidebar header={customHeader} visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.
                 </p>
             </Sidebar>
             <Button icon="pi pi-plus" onClick={() => setVisible(true)} />
@@ -101,12 +117,11 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Additional content at the header section is provided using the <i>icons</i> property.
+                    Additional content at the header section is provided using the <i>icons</i> and <i>header</i> property.
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Sidebar visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
-                    <h2>Sidebar</h2>
+                <Sidebar header={customHeader} visible={visible} onHide={() => setVisible(false)} icons={customIcons}>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat.

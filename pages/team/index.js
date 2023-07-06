@@ -47,6 +47,11 @@ const TemplatesPage = () => {
                         <span>Design Lead</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/yigit.jpg" className="border-circle mb-4" alt="Yiğit Fındıklı" />
+                        <span className="mb-2 text-xl font-bold">Yiğit Fındıklı</span>
+                        <span>Technical Lead</span>
+                    </div>
+                    <div className="flex flex-column align-items-center flex-auto">
                         <img src="https://primefaces.org/cdn/primereact/images/team/dilara.jpg" className="border-circle mb-4" alt="Dilara Can" />
                         <span className="mb-2 text-xl font-bold">Dilara Güngenci</span>
                         <span>Business Administration</span>
@@ -95,6 +100,16 @@ const TemplatesPage = () => {
                         <img src="https://primefaces.org/cdn/primereact/images/team/olgu.jpg" className="border-circle mb-4" alt="Olgu Başak" />
                         <span className="mb-2 text-xl font-bold">Olgu Başak</span>
                         <span>Java Web Developer</span>
+                    </div>
+                    <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/furkan.jpg" className="border-circle mb-4" alt="Furkan Seziş" />
+                        <span className="mb-2 text-xl font-bold">Furkan Seziş</span>
+                        <span>Front-End Developer</span>
+                    </div>
+                    <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/burak.jpg" className="border-circle mb-4" alt="Burak Sağlam" />
+                        <span className="mb-2 text-xl font-bold">Burak Sağlam</span>
+                        <span>Front-End Developer</span>
                     </div>
                 </div>
             </div>
