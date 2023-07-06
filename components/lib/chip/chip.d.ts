@@ -111,6 +111,11 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {ChipPassThroughOptions}
      */
     pt?: ChipPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
