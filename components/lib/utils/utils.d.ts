@@ -104,6 +104,7 @@ export declare class ObjectUtils {
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
     static getJSXElement(obj: any, ...params: any[]): any;
     static getProp(props: object, prop: string, defaultProps?: object): any;
+    static getPropCaseInsensitive(props: object, prop: string, defaultProps?: object): any;
     static getMergedProps(props: object, defaultProps: object): object;
     static getDiffProps(props: object, defaultProps: object): object;
     static getPropValue(obj: any, ...params: any[]): any;
