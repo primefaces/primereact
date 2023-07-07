@@ -190,7 +190,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 id: contentId,
                 'aria-labelledby': headerId
             },
-            ptm('toggleablecontent')
+            ptm('toggleableContent')
         );
         const contentProps = mergeProps(
             {
