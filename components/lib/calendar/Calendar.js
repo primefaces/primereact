@@ -2834,11 +2834,12 @@ export const Calendar = React.memo(
                 },
                 ptm('title')
             );
+            const showMonthAfterYear = localeOption('showMonthAfterYear', props.locale);
 
             return (
                 <div {...titleProps}>
-                    {month}
-                    {year}
+                    {showMonthAfterYear ? year : month}
+                    {showMonthAfterYear ? month : year}
                     {decade}
                 </div>
             );
