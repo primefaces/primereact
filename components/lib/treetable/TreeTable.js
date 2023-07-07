@@ -1,13 +1,12 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { TreeTableBase } from './TreeTableBase';
 import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
@@ -451,10 +450,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const onColumnDragOver = (e) => {
-        const event = e.originalEvent;
+        const { originalEvent: event, column } = e;
         const dropHeader = findParentHeader(event.currentTarget);
 
-        if (props.reorderableColumns && draggedColumnEl.current && dropHeader) {
+        if (props.reorderableColumns && draggedColumnEl.current && dropHeader && !getColumnProp(column, 'frozen')) {
             event.preventDefault();
             let containerOffset = DomHandler.getOffset(elementRef.current);
             let dropHeaderOffset = DomHandler.getOffset(dropHeader);

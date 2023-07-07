@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { SortAltIcon } from '../icons/sortalt';
-import { SortAmountDownIcon } from '../icons/sortamountdown';
-import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 
 export const TreeTableHeader = React.memo((props) => {
     const filterTimeout = React.useRef(null);
@@ -261,6 +261,7 @@ export const TreeTableHeader = React.memo((props) => {
             const singleSorted = getColumnProp(column, 'field') === props.sortField;
             const multipleSorted = multiSortMetaData !== null;
             const sorted = getColumnProp(column, 'sortable') && (singleSorted || multipleSorted);
+            const frozen = getColumnProp(column, 'frozen');
             let sortOrder = 0;
 
             if (singleSorted) sortOrder = props.sortOrder;
@@ -273,7 +274,9 @@ export const TreeTableHeader = React.memo((props) => {
             const className = classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), {
                 'p-sortable-column': getColumnProp(column, 'sortable'),
                 'p-highlight': sorted,
-                'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable')
+                'p-frozen-column': frozen,
+                'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable'),
+                'p-reorderable-column': props.reorderableColumns && getColumnProp(column, 'reorderable') && !frozen
             });
 
             const headerTooltip = getColumnProp(column, 'headerTooltip');
