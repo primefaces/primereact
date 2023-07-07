@@ -162,6 +162,24 @@ export default class ObjectUtils {
         return value === undefined ? defaultProps[prop] : value;
     }
 
+    static getPropCaseInsensitive(props, prop, defaultProps = {}) {
+        const fkey = ObjectUtils.convertToFlatCase(prop);
+
+        for (let key in props) {
+            if (props.hasOwnProperty(key) && ObjectUtils.convertToFlatCase(key) === fkey) {
+                return props[key];
+            }
+        }
+
+        for (let key in defaultProps) {
+            if (defaultProps.hasOwnProperty(key) && ObjectUtils.convertToFlatCase(key) === fkey) {
+                return defaultProps[key];
+            }
+        }
+
+        return undefined; // Property not found
+    }
+
     static getMergedProps(props, defaultProps) {
         return Object.assign({}, defaultProps, props);
     }

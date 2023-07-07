@@ -5,7 +5,7 @@ import { useMountEffect, useStyle } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
@@ -190,7 +190,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 id: contentId,
                 'aria-labelledby': headerId
             },
-            ptm('toggleableContent')
+            ptm('toggleablecontent')
         );
         const contentProps = mergeProps(
             {
