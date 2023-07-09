@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -307,7 +306,7 @@ export const InputNumber = React.memo(
             if (props.onKeyDown) {
                 props.onKeyDown(event);
 
-                // do not continue if the user defined click wants to prevent
+                // do not continue if the user defined event wants to prevent
                 if (event.defaultPrevented) {
                     return;
                 }
@@ -465,7 +464,7 @@ export const InputNumber = React.memo(
             if (props.onKeyUp) {
                 props.onKeyUp(event);
 
-                // do not continue if the user defined click wants to prevent
+                // do not continue if the user defined event wants to prevent
                 if (event.defaultPrevented) {
                     return;
                 }
