@@ -466,6 +466,11 @@
             ]
         },
         {
+            "name": "Pass Through",
+            "icon": "pi pi-directions",
+            "to": "/passthrough"
+        },
+        {
             "name": "Figma UI Kit",
             "icon": "pi pi-pencil",
             "to": "/uikit"

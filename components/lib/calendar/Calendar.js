@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption, localeOptions } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
@@ -85,7 +84,6 @@ export const Calendar = React.memo(
         };
 
         const onInputBlur = (event) => {
-            setFocusedState(false);
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
         };
@@ -1440,6 +1438,8 @@ export const Calendar = React.memo(
         };
 
         const show = (type) => {
+            setFocusedState(false);
+
             if (props.onVisibleChange) {
                 props.onVisibleChange({
                     visible: true,
@@ -1474,7 +1474,7 @@ export const Calendar = React.memo(
 
             if (props.onVisibleChange) {
                 props.onVisibleChange({
-                    visible: false,
+                    visible: type !== 'dateselect', // false only if selecting a value to close panel
                     type,
                     callback: _hideCallback
                 });
@@ -1522,7 +1522,7 @@ export const Calendar = React.memo(
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
                 } else {
-                    if (currentView === 'date') {
+                    if (props.view === 'date') {
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                         overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
                     } else {
@@ -2459,7 +2459,6 @@ export const Calendar = React.memo(
         }, [inputRef, props.inputRef]);
 
         useMountEffect(() => {
-            let unbindMaskEvents = null;
             let viewDate = getViewDate(props.viewDate);
 
             validateDate(viewDate);
@@ -2479,7 +2478,23 @@ export const Calendar = React.memo(
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                     }
                 }
-            } else if (props.mask) {
+            }
+
+            if (props.value) {
+                updateInputfield(props.value);
+                setValue(props.value);
+            }
+
+            if (props.autoFocus) {
+                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
+                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
+            }
+        });
+
+        React.useEffect(() => {
+            let unbindMaskEvents = null;
+
+            if (props.mask) {
                 unbindMaskEvents = mask(inputRef.current, {
                     mask: props.mask,
                     readOnly: props.readOnlyInput || props.disabled,
@@ -2493,20 +2508,11 @@ export const Calendar = React.memo(
                 }).unbindEvents;
             }
 
-            if (props.value) {
-                updateInputfield(props.value);
-                setValue(props.value);
-            }
-
-            if (props.autoFocus) {
-                // delay showing until rendered so `alignPanel()` method aligns the popup in the right location
-                setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
-            }
-
             return () => {
                 props.mask && unbindMaskEvents && unbindMaskEvents();
             };
-        });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props.disabled, props.mask, props.readOnlyInput]);
 
         useUpdateEffect(() => {
             setCurrentView(props.view);
@@ -2828,11 +2834,12 @@ export const Calendar = React.memo(
                 },
                 ptm('title')
             );
+            const showMonthAfterYear = localeOption('showMonthAfterYear', props.locale);
 
             return (
                 <div {...titleProps}>
-                    {month}
-                    {year}
+                    {showMonthAfterYear ? year : month}
+                    {showMonthAfterYear ? month : year}
                     {decade}
                 </div>
             );
@@ -3024,37 +3031,6 @@ export const Calendar = React.memo(
             const viewDate = getViewDate();
             const monthsMetaData = createMonthsMeta(viewDate.getMonth(), viewDate.getFullYear());
             const months = createMonths(monthsMetaData);
-
-            return months;
-        };
-
-        const createMonthViewMonth = (index) => {
-            const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(0, index, currentYear) });
-            const monthNamesShort = localeOption('monthNamesShort', props.locale);
-            const monthName = monthNamesShort[index];
-            const monthProps = mergeProps(
-                {
-                    className,
-                    onClick: (event) => onMonthSelect(event, index),
-                    onKeyDown: (event) => onMonthCellKeydown(event, index)
-                },
-                ptm('month')
-            );
-
-            return (
-                <span {...monthProps} key={monthName}>
-                    {monthName}
-                    <Ripple />
-                </span>
-            );
-        };
-
-        const createMonthViewMonths = () => {
-            let months = [];
-
-            for (let i = 0; i <= 11; i++) {
-                months.push(createMonthViewMonth(i));
-            }
 
             return months;
         };
@@ -3581,7 +3557,8 @@ export const Calendar = React.memo(
                             const monthProps = mergeProps(
                                 {
                                     className: classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) }),
-                                    onClick: (event) => onMonthSelect(event, i)
+                                    onClick: (event) => onMonthSelect(event, i),
+                                    onKeyDown: (event) => onMonthCellKeydown(event, i)
                                 },
                                 ptm('month')
                             );

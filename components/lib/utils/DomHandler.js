@@ -553,14 +553,15 @@ export default class DomHandler {
                     }
                 }
 
+                // BODY
                 if (parent.nodeType === 1 && overflowCheck(parent)) {
                     addScrollableParent(parent);
                 }
             }
         }
 
-        // if no parents make it the window
-        if (scrollableParents.length === 0) {
+        // we should always at least have the body or window
+        if (!scrollableParents.some((node) => node === document.body || node === window)) {
             scrollableParents.push(window);
         }
 
@@ -666,6 +667,10 @@ export default class DomHandler {
 
     static isChrome() {
         return /(chrome)/i.test(navigator.userAgent);
+    }
+
+    static isClient() {
+        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
     }
 
     static isTouchDevice() {

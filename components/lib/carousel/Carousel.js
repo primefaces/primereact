@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { ariaLabel } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -318,10 +317,12 @@ export const Carousel = React.memo(
                 elementRef.current.setAttribute(attributeSelector.current, '');
             }
 
-            createStyle();
-            calculatePosition();
-            changePosition(totalShiftedItemsState);
-            bindWindowResizeListener();
+            if (!carouselStyle.current) {
+                createStyle();
+                calculatePosition();
+                changePosition(totalShiftedItemsState);
+                bindWindowResizeListener();
+            }
         });
 
         useUpdateEffect(() => {

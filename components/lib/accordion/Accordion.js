@@ -6,7 +6,7 @@ import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } fro
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const AccordionTab = () => {};
 

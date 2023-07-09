@@ -489,7 +489,8 @@ export const TreeTableRow = React.memo((props) => {
     const children = createChildren();
     let className = {
         'p-highlight': isSelected(),
-        'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key
+        'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
+        'p-row-odd': props.rowIndex % 2 !== 0
     };
 
     if (props.rowClassName) {

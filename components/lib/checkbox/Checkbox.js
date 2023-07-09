@@ -4,7 +4,7 @@ import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {

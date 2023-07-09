@@ -7,7 +7,7 @@ import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
 import { ListBoxItem } from './ListBoxItem';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {

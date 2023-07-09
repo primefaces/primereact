@@ -11,17 +11,6 @@ export declare function classNames(...args: any[]): string | undefined;
 
 export declare function mergeProps(...args: object[]): object | undefined;
 
-/**
- * Use 'useOverlayScrollListener' hook instead
- * @deprecated since version 8.0.0
- */
-export declare class ConnectedOverlayScrollHandler {
-    constructor(element: any, listener?: () => void);
-    bindScrollListener(): void;
-    unbindScrollListener(): void;
-    destroy(): void;
-}
-
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;
     static width(el: HTMLElement): number;
@@ -59,6 +48,7 @@ export declare class DomHandler {
     static getUserAgent(): string;
     static isIOS(): boolean;
     static isAndroid(): boolean;
+    static isClient(): boolean;
     static isTouchDevice(): boolean;
     static isFunction(obj: any): boolean;
     static appendChild(el: HTMLElement, target: HTMLElement): void;
@@ -114,6 +104,7 @@ export declare class ObjectUtils {
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
     static getJSXElement(obj: any, ...params: any[]): any;
     static getProp(props: object, prop: string, defaultProps?: object): any;
+    static getPropCaseInsensitive(props: object, prop: string, defaultProps?: object): any;
     static getMergedProps(props: object, defaultProps: object): object;
     static getDiffProps(props: object, defaultProps: object): object;
     static getPropValue(obj: any, ...params: any[]): any;

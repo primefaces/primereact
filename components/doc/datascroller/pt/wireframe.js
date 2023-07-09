@@ -6,7 +6,7 @@ export const Wireframe = (props) => {
         <>
             <DocSectionText {...props} />
             <div>
-                <img className="w-full" src="https://primefaces.org/cdn/primereact/images/pt/wireframe-placeholder.jpg" alt="datascroller" />
+                <img className="w-full" src="https://primefaces.org/cdn/primereact/images/pt/datascroller.jpg" alt="datascroller" />
             </div>
         </>
     );

@@ -41,6 +41,11 @@ export interface CheckboxPassThroughOptions {
      */
     icon?: CheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
      * Uses to pass attributes to the hidden input wrapper's DOM element.
      */
     hiddenInputWrapper?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -48,11 +53,6 @@ export interface CheckboxPassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Uses to pass attributes tooltip's DOM element.
-     * @type {TooltipPassThroughOptions}
-     */
-    tooltip?: TooltipPassThroughOptions;
 }
 
 /**

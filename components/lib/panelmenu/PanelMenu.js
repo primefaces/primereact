@@ -6,7 +6,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PanelMenuBase } from './PanelMenuBase';
 import { PanelMenuSub } from './PanelMenuSub';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const PanelMenu = React.memo(
     React.forwardRef((inProps, ref) => {

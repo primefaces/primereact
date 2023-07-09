@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ObjectUtils, mergeProps } from '../utils/Utils';
 import { CurrentPageReportBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 export const CurrentPageReport = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);

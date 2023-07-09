@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/context';
 
 export const PageLinks = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
@@ -47,7 +46,7 @@ export const PageLinks = React.memo((inProps) => {
                     onClick: (e) => onPageLinkClick(e, pageLink),
                     className,
                     disabled: props.disabled,
-                    'aria-label': ariaLabel('pageLabel', { page: pageLink + 1 })
+                    'aria-label': ariaLabel('pageLabel', { page: pageLink })
                 },
                 getPTOptions(pageLink, 'pageButton')
             );

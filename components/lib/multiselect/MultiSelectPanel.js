@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import PrimeReact, { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
@@ -49,6 +48,7 @@ export const MultiSelectPanel = React.memo(
         const createHeader = () => {
             return (
                 <MultiSelectHeader
+                    id={props.id}
                     filter={props.filter}
                     filterRef={filterInputRef}
                     filterValue={props.filterValue}
@@ -58,6 +58,7 @@ export const MultiSelectPanel = React.memo(
                     onClose={props.onCloseClick}
                     showSelectAll={props.showSelectAll}
                     selectAll={props.isAllSelected()}
+                    selectAllLabel={props.selectAllLabel}
                     onSelectAll={props.onSelectAll}
                     template={props.panelHeaderTemplate}
                     resetFilter={props.resetFilter}
@@ -122,6 +123,19 @@ export const MultiSelectPanel = React.memo(
             return <li {...emptyMessageProps}>{emptyFilterMessage}</li>;
         };
 
+        const createEmptyContent = () => {
+            const emptyMessage = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
+
+            const emptyMessageProps = mergeProps(
+                {
+                    className: 'p-multiselect-empty-message'
+                },
+                props.ptm('emptyMessage')
+            );
+
+            return <li {...emptyMessageProps}>{emptyMessage}</li>;
+        };
+
         const createItem = (option, index, scrollerOptions = {}) => {
             const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
 
@@ -173,11 +187,9 @@ export const MultiSelectPanel = React.memo(
         const createItems = () => {
             if (ObjectUtils.isNotEmpty(props.visibleOptions)) {
                 return props.visibleOptions.map(createItem);
-            } else if (props.hasFilter) {
-                return createEmptyFilter();
+            } else {
+                return props.hasFilter ? createEmptyFilter() : createEmptyContent();
             }
-
-            return null;
         };
 
         const createContent = () => {

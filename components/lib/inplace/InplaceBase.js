@@ -1,4 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
 export const InplaceDisplayBase = ComponentBase.extend({
     defaultProps: {
@@ -29,5 +30,46 @@ export const InplaceBase = ComponentBase.extend({
         onClose: null,
         onToggle: null,
         children: undefined
+    },
+    css: {
+        classes: {
+            display: ({ props }) =>
+                classNames('p-inplace-display', {
+                    'p-disabled': props.disabled
+                }),
+            root: ({ props }) =>
+                classNames(
+                    'p-inplace p-component',
+                    {
+                        'p-inplace-closable': props.closable
+                    },
+                    props.className
+                ),
+            closeButton: 'p-inplace-content-close',
+            content: 'p-inplace-content'
+        },
+        styles: `
+        .p-inplace .p-inplace-display {
+            display: inline;
+            cursor: pointer;
+        }
+        
+        .p-inplace .p-inplace-content {
+            display: inline;
+        }
+        
+        .p-fluid .p-inplace.p-inplace-closable .p-inplace-content {
+            display: flex;
+        }
+        
+        .p-fluid .p-inplace.p-inplace-closable .p-inplace-content > .p-inputtext {
+            flex: 1 1 auto;
+            width: 1%;
+        }
+        
+        .p-inplace-content-close {
+            margin-left: .25rem;
+        }
+        `
     }
 });

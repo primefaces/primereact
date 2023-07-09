@@ -6,7 +6,7 @@ import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
     const filterOptions = {
@@ -82,10 +82,19 @@ export const MultiSelectHeader = React.memo((props) => {
     };
 
     const filterElement = createFilterElement();
+    const selectAllId = props.id ? props.id + '_selectall' : UniqueComponentId();
+
+    const headerSelectAllLabelProps = mergeProps(
+        {
+            for: selectAllId,
+            className: 'p-multiselect-select-all-label'
+        },
+        props.ptm('headerSelectAllLabel')
+    );
 
     const headerCheckboxProps = mergeProps(
         {
-            className: 'p-checkbox-icon p-c'
+            className: 'p-multiselect-select-all p-checkbox-icon p-c'
         },
         props.ptm('headerCheckbox')
     );
@@ -93,7 +102,12 @@ export const MultiSelectHeader = React.memo((props) => {
     const checkedIcon = props.itemCheckboxIcon || <CheckIcon {...headerCheckboxProps} />;
     const itemCheckboxIcon = IconUtils.getJSXIcon(checkedIcon, { ...headerCheckboxProps }, { selected: props.selected });
 
-    const checkboxElement = props.showSelectAll ? <Checkbox checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} /> : null;
+    const checkboxElement = props.showSelectAll && (
+        <div className="p-multiselect-select-all">
+            <Checkbox id={selectAllId} checked={props.selectAll} onChange={onSelectAll} role="checkbox" aria-checked={props.selectAll} icon={itemCheckboxIcon} />
+            {!props.filter && <label {...headerSelectAllLabelProps}>{props.selectAllLabel}</label>}
+        </div>
+    );
 
     const iconProps = mergeProps(
         {

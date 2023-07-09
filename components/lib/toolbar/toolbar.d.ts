@@ -79,6 +79,11 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {ToolbarPassThroughOptions}
      */
     pt?: ToolbarPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

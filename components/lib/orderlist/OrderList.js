@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';

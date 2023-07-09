@@ -4,7 +4,7 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 import { mergeProps } from '../utils/Utils';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 let messageIdx = 0;
 

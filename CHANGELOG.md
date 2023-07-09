@@ -1,5 +1,41 @@
 # Changelog
 
+## [9.6.0](https://github.com/primefaces/primereact/tree/9.6.0) (2023-06-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.5.0...9.6.0)
+
+**Implemented New Features and Enhancements:**
+
+- TreeSelect: Support custom expand/collapse icons [\#4525](https://github.com/primefaces/primereact/issues/4525)
+- FileUpload: Uploaded files ref methods [\#4516](https://github.com/primefaces/primereact/issues/4516)
+- Carousel: Add start/stop autoplay to exposed methods [\#4513](https://github.com/primefaces/primereact/issues/4513)
+- TreeTable: Row hover event [\#4502](https://github.com/primefaces/primereact/issues/4502)
+- TreeTable: Add toggler template \(same as Tree component\) [\#4499](https://github.com/primefaces/primereact/issues/4499)
+- Dropdown: VirtualScrollerRef access for scrollToIndex [\#4489](https://github.com/primefaces/primereact/issues/4489)
+- New passthrough\(pt\) property implementation for Data Components [\#4432](https://github.com/primefaces/primereact/issues/4432)
+- New passthrough\(pt\) property implementation for Form Components [\#4431](https://github.com/primefaces/primereact/issues/4431)
+- InputNumber should support global locale [\#4291](https://github.com/primefaces/primereact/issues/4291)
+- TreeSelect: `nodeTemplate` property [\#3678](https://github.com/primefaces/primereact/issues/3678)
+
+**Fixed bugs:**
+
+- FileUpload component does not pass file information in the onSelect event [\#4557](https://github.com/primefaces/primereact/issues/4557)
+- Calendar: Mask prop does not work [\#4548](https://github.com/primefaces/primereact/issues/4548)
+- ContextMenu: Global not working in Strict Mode [\#4543](https://github.com/primefaces/primereact/issues/4543)
+- PickList: Error when Transferring Unselected Values in Pick List Functionality [\#4540](https://github.com/primefaces/primereact/issues/4540)
+- MultiSelect \(group\) SelectAll checked when all items in first group are selected [\#4535](https://github.com/primefaces/primereact/issues/4535)
+- FileUpload: input passthrough not working when mode="basic" [\#4533](https://github.com/primefaces/primereact/issues/4533)
+- MultiSelect: Dropdown closes on deselect [\#4523](https://github.com/primefaces/primereact/issues/4523)
+- Skeleton: children prop not rendering [\#4512](https://github.com/primefaces/primereact/issues/4512)
+- ScrollTop: doesn't work [\#4505](https://github.com/primefaces/primereact/issues/4505)
+- BreadCrumb: label home prop doesn't work [\#4504](https://github.com/primefaces/primereact/issues/4504)
+- DataTable: Checkbox/Radio not respecting isDataSelectable [\#4492](https://github.com/primefaces/primereact/issues/4492)
+- SplitButton: menu icon not visible in large size [\#4483](https://github.com/primefaces/primereact/issues/4483)
+- Menubar: Cannot use useRef [\#4467](https://github.com/primefaces/primereact/issues/4467)
+- TabView: On initial load, the page will scroll down to the Tab if it's below the scroll window [\#4462](https://github.com/primefaces/primereact/issues/4462)
+- Calendar: showMinMaxRange property is broken in multiple ways [\#4456](https://github.com/primefaces/primereact/issues/4456)
+- Calendar: Navigation broken when defining min and max values [\#4449](https://github.com/primefaces/primereact/issues/4449)
+
 ## [9.5.0](https://github.com/primefaces/primereact/tree/9.5.0) (2023-05-24)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.4.0...9.5.0)

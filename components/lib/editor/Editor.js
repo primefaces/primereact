@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 
 const QuillJS = (function () {
     try {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler } from '../utils/Utils';
-import { PrimeReactContext } from '../api/context';
+import { PrimeReactContext } from '../api/Api';
 import PrimeReact from '../api/Api';
 
 export const Ripple = React.memo(
