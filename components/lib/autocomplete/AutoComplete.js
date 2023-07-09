@@ -446,7 +446,7 @@ export const AutoComplete = React.memo(
         };
 
         const getScrollableElement = () => {
-            return virtualScrollerRef.current ? overlayRef.current.firstChild : overlayRef.current;
+            return overlayRef.current.firstChild;
         };
 
         const getOptionGroupLabel = (optionGroup) => {
