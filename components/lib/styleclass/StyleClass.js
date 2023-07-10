@@ -169,7 +169,7 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
     };
 
     const isVisible = (target) => {
-        return target.offsetParent !== null;
+        return target && target.offsetParent !== null;
     };
 
     const isOutsideClick = (event) => {
