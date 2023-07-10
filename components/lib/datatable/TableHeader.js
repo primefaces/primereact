@@ -175,12 +175,14 @@ export const TableHeader = React.memo((props) => {
                 <ColumnFilter
                     display="row"
                     column={column}
+                    filterClearIcon={props.filterClearIcon}
+                    filterIcon={props.filterIcon}
                     filters={props.filters}
                     filtersStore={props.filtersStore}
-                    onFilterChange={props.onFilterChange}
-                    onFilterApply={props.onFilterApply}
-                    ptCallbacks={props.ptCallbacks}
                     metaData={props.metaData}
+                    onFilterApply={props.onFilterApply}
+                    onFilterChange={props.onFilterChange}
+                    ptCallbacks={props.ptCallbacks}
                 />
             );
         }
