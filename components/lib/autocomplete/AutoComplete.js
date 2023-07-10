@@ -366,7 +366,7 @@ export const AutoComplete = React.memo(
 
                 selectItem(event, getOptionGroupChildren(optionGroup)[item.dataset.index]);
             } else {
-                selectItem(event, props.suggestions[DomHandler.index(item)]);
+                selectItem(event, props.suggestions[item.getAttribute('index')]);
             }
         };
 

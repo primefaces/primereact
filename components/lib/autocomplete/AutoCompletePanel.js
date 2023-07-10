@@ -100,7 +100,8 @@ export const AutoCompletePanel = React.memo(
                         'aria-selected': props.selectedItem === suggestion,
                         className,
                         style,
-                        onClick: (e) => props.onItemClick(e, suggestion)
+                        onClick: (e) => props.onItemClick(e, suggestion),
+                        index
                     },
                     getPTOptions(suggestion, 'item')
                 );
