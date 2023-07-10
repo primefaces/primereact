@@ -1,28 +1,24 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useStyle } from '../hooks/Hooks';
 import { classNames, IconUtils, mergeProps } from '../utils/Utils';
 import { TagBase } from './TagBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const Tag = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = TagBase.getProps(inProps, context);
-    const { ptm } = TagBase.setMetaData({
+
+    useStyle(TagBase.css.styles, { name: 'primereact_tag_style' });
+
+    const { ptm, cx } = TagBase.setMetaData({
         props
     });
 
     const elementRef = React.useRef(null);
-    const className = classNames(
-        'p-tag p-component',
-        {
-            [`p-tag-${props.severity}`]: props.severity !== null,
-            'p-tag-rounded': props.rounded
-        },
-        props.className
-    );
 
     const iconProps = mergeProps(
         {
-            className: 'p-tag-icon'
+            className: cx('icon')
         },
         ptm('icon')
     );
@@ -37,7 +33,7 @@ export const Tag = React.forwardRef((inProps, ref) => {
     const rootProps = mergeProps(
         {
             ref: elementRef,
-            className,
+            className: cx('root'),
             style: props.style
         },
         TagBase.getOtherProps(props),
@@ -46,7 +42,7 @@ export const Tag = React.forwardRef((inProps, ref) => {
 
     const valueProps = mergeProps(
         {
-            className: 'p-tag-value'
+            className: cx('value')
         },
         ptm('value')
     );
