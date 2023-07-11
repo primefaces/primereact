@@ -120,12 +120,22 @@ export declare class ObjectUtils {
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
 }
 
+/**
+ * Icon utlities for managing icon tasks.
+ */
 export declare class IconUtils {
     static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, options: any): any;
 }
 
+/**
+ * Generate a unique id for components for a page.
+ * @param prefix the optional string prefix of the id
+ */
 export declare function UniqueComponentId(prefix?: string): string;
 
+/**
+ * ZIndex utlities for managing zindex states of different types.
+ */
 export declare namespace ZIndexUtils {
     export function get(el?: HTMLElement): number;
     export function set(key: string, el: HTMLElement, autoZIndex?: boolean, baseZIndex?: number): void;
@@ -134,15 +144,29 @@ export declare namespace ZIndexUtils {
     export function getCurrent(key: string): number;
 }
 
-export interface IconOptions<ParentProps> {
+/**
+ * Icon options passed to any icon.
+ * ComponentProps are props from the owning component.
+ * AdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example.
+ */
+export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
+    /**
+     * Icon specific properties.
+     */
     iconProps: React.HTMLProps<HTMLElement>;
+    /**
+     * The element representing the icon.
+     */
     element: React.ReactNode;
-    props?: ParentProps;
+    /**
+     * Properties of the owning component.
+     */
+    props?: ComponentProps;
     [key: string]: any;
-}
+};
 
-export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
+export type IconType<ComponentProps, AdditionalProps = NonNullable<unknown>> = React.ReactNode | ((options: IconOptions<ComponentProps, AdditionalProps>) => React.ReactNode);
 
-export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);
+export type TemplateType<ComponentProps> = React.ReactNode | ((props: ComponentProps) => React.ReactNode);
 
 export type PassThroughType<T, O> = T | ((options?: O) => T | void) | null | undefined;
