@@ -14575,7 +14575,7 @@
                             "name": "sortIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<DataTable<TValue>>",
+                            "type": "IconType<DataTable<TValue>, Object>",
                             "default": "",
                             "description": "Icon to display the current sorting status."
                         },
@@ -14583,7 +14583,7 @@
                             "name": "sortOrder",
                             "optional": true,
                             "readonly": false,
-                            "type": "null | 0 | 1 | -1",
+                            "type": "SortOrder",
                             "default": "",
                             "description": "Order to sort the data by default."
                         },
@@ -16662,6 +16662,9 @@
                 },
                 "DataTablePassThroughType": {
                     "values": "PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>"
+                },
+                "SortOrder": {
+                    "values": "1 | 0 | -1 | null | undefined"
                 }
             }
         }
@@ -47188,51 +47191,22 @@
                     "parameters": [
                         {
                             "name": "prefix",
-                            "type": "string"
+                            "type": "string",
+                            "description": "the optional string prefix of the id"
                         }
                     ],
-                    "returnType": "string"
-                }
-            }
-        },
-        "interfaces": {
-            "description": "Defines the custom interfaces used by the module.",
-            "values": {
-                "IconOptions": {
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "iconProps",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "HTMLProps<HTMLElement>"
-                        },
-                        {
-                            "name": "element",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "ReactNode"
-                        },
-                        {
-                            "name": "props",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ParentProps"
-                        },
-                        {
-                            "name": "[key: string]",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "any"
-                        }
-                    ],
-                    "callbacks": []
+                    "returnType": "string",
+                    "description": "Generate a unique id for components for a page."
                 }
             }
         },
         "types": {
             "description": "Defines the custom types used by the module.",
             "values": {
+                "IconOptions": {
+                    "values": "AdditionalProps & Object",
+                    "description": "Icon options passed to any icon.\nComponentProps are props from the owning component.\nAdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example."
+                },
                 "IconType": {
                     "values": "React.ReactNode | Function"
                 },
