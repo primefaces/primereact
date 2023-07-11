@@ -134,14 +134,14 @@ export declare namespace ZIndexUtils {
     export function getCurrent(key: string): number;
 }
 
-export interface IconOptions<ParentProps> {
+export type IconOptions<ParentProps, AdditionalProps> = AdditionalProps & {
     iconProps: React.HTMLProps<HTMLElement>;
     element: React.ReactNode;
     props?: ParentProps;
     [key: string]: any;
-}
+};
 
-export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
+export type IconType<ParentProps, AdditionalProps = NonNullable<unknown>> = React.ReactNode | ((options: IconOptions<ParentProps, AdditionalProps>) => React.ReactNode);
 
 export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);
 

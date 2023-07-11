@@ -1271,7 +1271,7 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     /**
      * Icon to display the current sorting status.
      */
-    sortIcon?: IconType<DataTable<TValue & { sortOrder: Omit<SortOrder, 'null' | 'undefined'>; sorted: boolean }>> | undefined;
+    sortIcon?: IconType<DataTable<TValue>, { sortOrder: Omit<SortOrder, 'null' | 'undefined'>; sorted: boolean }> | undefined;
     /**
      * Order to sort the data by default.
      */
