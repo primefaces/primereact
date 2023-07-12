@@ -46,8 +46,16 @@ export const ComponentBase = {
             const datasetPrefix = 'data-pc-';
             const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
-            const defaultPT = (ptKey) => pt && getOptionValue(pt[componentName], ptKey);
-            const self = ObjectUtils.getPropValue(ObjectUtils.getPropCaseInsensitive(obj, fkey), params);
+
+            const getValue = (...args) => {
+                const value = getOptionValue(ObjectUtils.getPropCaseInsensitive(...args));
+
+                return ObjectUtils.isString(value) ? { className: value } : value;
+            };
+
+            const defaultPT = (ptKey) => pt && getValue(pt[componentName], ptKey);
+
+            const self = getValue(obj, fkey, params);
 
             const globalPT = defaultPT(fkey);
             const datasetProps = {
