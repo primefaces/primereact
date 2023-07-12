@@ -1,19 +1,18 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler } from '../utils/Utils';
 import { PortalBase } from './PortalBase';
-import { PrimeReactContext } from '../api/Api';
-import PrimeReact from '../api/Api';
 
 export const Portal = React.memo((inProps) => {
     const props = PortalBase.getProps(inProps);
     const context = React.useContext(PrimeReactContext);
 
-    const [mountedState, setMountedState] = React.useState(props.visible && DomHandler.hasDOM());
+    const [mountedState, setMountedState] = React.useState(props.visible && DomHandler.isClient());
 
     useMountEffect(() => {
-        if (DomHandler.hasDOM() && !mountedState) {
+        if (DomHandler.isClient() && !mountedState) {
             setMountedState(true);
             props.onMounted && props.onMounted();
         }

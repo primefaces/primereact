@@ -33,11 +33,11 @@
     flex-wrap: wrap;
 }
 
-.p-button.p-fileupload-choose input[type=file] {
+.p-button.p-fileupload-choose input[type='file'] {
     display: none;
 }
 
-.p-fileupload-choose.p-fileupload-choose-selected input[type=file] {
+.p-fileupload-choose.p-fileupload-choose-selected input[type='file'] {
     display: none;
 }
 

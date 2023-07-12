@@ -25,6 +25,7 @@ export const useStyle = (css, options = {}) => {
             styleRef.current.type = 'text/css';
             id && (styleRef.current.id = id);
             media && (styleRef.current.media = media);
+
             DomHandler.addNonce(styleRef.current, (context && context.nonce) || PrimeReact.nonce);
             document.head.appendChild(styleRef.current);
             name && styleRef.current.setAttribute('data-primereact-style-id', name);

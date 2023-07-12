@@ -31,6 +31,11 @@ export declare class DomHandler {
     static hasClass(el: HTMLElement, className: string): boolean;
     static find(el: HTMLElement, selector: string): any[];
     static findSingle(el: HTMLElement, selector: string): any;
+    static createElement(type: string, attributes: object, ...children: any): HTMLElement;
+    static setAttributes(el: HTMLElement, attributes: object): void;
+    static getAttribute(el: HTMLElement, name: string): any;
+    static isAttributeEquals(el: HTMLElement, name: string, value: any): boolean;
+    static isAttributeNotEquals(el: HTMLElement, name: string, value: any): boolean;
     static getHeight(el: HTMLElement): number;
     static getWidth(el: HTMLElement): number;
     static alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string, calculateMinWidth?: boolean): void;
@@ -61,7 +66,6 @@ export declare class DomHandler {
     static resolveUserAgent(): { browser: string; version: string };
     static isVisible(el: HTMLElement): boolean;
     static isExist(el: HTMLElement): boolean;
-    static hasDOM(): boolean;
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
@@ -98,7 +102,6 @@ export declare class ObjectUtils {
     static equals(obj1: any, obj2: any, field: string): boolean;
     static deepEquals(a: any, b: any): boolean;
     static resolveFieldData(data: any, field: string): any;
-    static isFunction(obj: any): boolean;
     static findDiffKeys(obj1: any, obj2: any): object;
     static reorderArray(value: any, from: number, to: number): void;
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
@@ -115,8 +118,19 @@ export declare class ObjectUtils {
     static getRefElement(ref: any): any;
     static combinedRefs(innerRef: any, forwardRef: any): void;
     static removeAccents(str: any): string;
+    static toFlatCase(str: string): string;
+    static toCapitalCase(str: string): string;
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
+    static isFunction(value: any): boolean;
+    static isObject(value: any): boolean;
+    static isDate(value: any): boolean;
+    static isArray(value: any): boolean;
+    static isString(value: any): boolean;
+    static isPrintableCharacter(char: string): boolean;
+    static isLetter(char: string): boolean;
+    static findLast(value: any[], callback: () => any): any;
+    static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
 }
 
