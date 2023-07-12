@@ -276,7 +276,7 @@ export default class ObjectUtils {
     }
 
     static toCapitalCase(str) {
-        return this.isNotEmpty(str) ? str[0].toUpperCase() + str.slice(1) : str;
+        return this.isNotEmpty(str) && this.isString(str) ? str[0].toUpperCase() + str.slice(1) : str;
     }
 
     static isEmpty(value) {
