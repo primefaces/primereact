@@ -795,10 +795,6 @@ export default class DomHandler {
         return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
     }
 
-    static hasDOM() {
-        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-    }
-
     static getFocusableElements(element, selector = '') {
         let focusableElements = DomHandler.find(
             element,
