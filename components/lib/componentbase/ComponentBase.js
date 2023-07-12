@@ -34,17 +34,17 @@ export const ComponentBase = {
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
 
         const getOptionValue = (obj = {}, key = '', params = {}) => {
-            const fKeys = String(ObjectUtils.convertToFlatCase(key)).split('.');
+            const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
             const fKey = fKeys.shift();
-            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.convertToFlatCase(k) === fKey) || '';
+            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) || '';
 
             return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
         };
 
         const getPTValue = (obj = {}, key = '', params = {}) => {
-            const fkey = ObjectUtils.convertToFlatCase(key);
+            const fkey = ObjectUtils.toFlatCase(key);
             const datasetPrefix = 'data-pc-';
-            const componentName = (params.props && params.props.__TYPE && ObjectUtils.convertToFlatCase(params.props.__TYPE)) || '';
+            const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
             const defaultPT = (ptKey) => pt && getOptionValue(pt[componentName], ptKey);
             const self = ObjectUtils.getPropValue(ObjectUtils.getPropCaseInsensitive(obj, fkey), params);
