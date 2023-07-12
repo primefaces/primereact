@@ -981,15 +981,7 @@ export default class DomHandler {
     static createInlineStyle(nonce) {
         let styleElement = document.createElement('style');
 
-        try {
-            if (!nonce) {
-                nonce = process.env.REACT_APP_CSS_NONCE;
-            }
-        } catch (error) {
-            // NOOP
-        }
-
-        nonce && styleElement.setAttribute('nonce', nonce);
+        DomHandler.addNonce(styleElement, nonce);
         document.head.appendChild(styleElement);
 
         return styleElement;
@@ -1007,6 +999,18 @@ export default class DomHandler {
         }
 
         return styleElement;
+    }
+
+    static addNonce(styleElement, nonce) {
+        try {
+            if (!nonce) {
+                nonce = process.env.REACT_APP_CSS_NONCE;
+            }
+        } catch (error) {
+            // NOOP
+        }
+
+        nonce && styleElement.setAttribute('nonce', nonce);
     }
 
     static getTargetElement(target) {
