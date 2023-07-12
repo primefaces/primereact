@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { DomHandler } from '../utils/Utils';
 
@@ -7,7 +7,7 @@ let _id = 0;
 export const useStyle = (css, options = {}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const styleRef = useRef(null);
-    const context = React.useContext(PrimeReactContext);
+    const context = useContext(PrimeReactContext);
 
     const defaultDocument = DomHandler.isClient() ? window.document : undefined;
     const { document = defaultDocument, immediate = true, manual = false, name = `style_${++_id}`, id = undefined, media = undefined } = options;
