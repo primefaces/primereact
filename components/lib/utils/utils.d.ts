@@ -76,8 +76,8 @@ export declare class DomHandler {
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
     static saveAs(file: { name: string; url: any }): boolean;
-    static createInlineStyle(nonce: string): HTMLElement;
-    static removeInlineStyle(styleElement: HTMLElement): HTMLElement | null;
+    static createInlineStyle(nonce?: string): HTMLStyleElement;
+    static removeInlineStyle(styleElement: HTMLStyleElement): HTMLStyleElement | null;
     static getTargetElement(target: any): HTMLElement | null;
 }
 

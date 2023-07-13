@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { DomHandler } from '../utils/Utils';
 
 let _id = 0;
@@ -6,6 +7,7 @@ let _id = 0;
 export const useStyle = (css, options = {}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const styleRef = useRef(null);
+    const context = useContext(PrimeReactContext);
 
     const defaultDocument = DomHandler.isClient() ? window.document : undefined;
     const { document = defaultDocument, immediate = true, manual = false, name = `style_${++_id}`, id = undefined, media = undefined } = options;
@@ -23,6 +25,8 @@ export const useStyle = (css, options = {}) => {
             styleRef.current.type = 'text/css';
             id && (styleRef.current.id = id);
             media && (styleRef.current.media = media);
+
+            DomHandler.addNonce(styleRef.current, (context && context.nonce) || PrimeReact.nonce);
             document.head.appendChild(styleRef.current);
             name && styleRef.current.setAttribute('data-primereact-style-id', name);
         }
@@ -37,7 +41,7 @@ export const useStyle = (css, options = {}) => {
     const unload = () => {
         if (!document || !isLoaded) return;
 
-        DomHandler.isExist(styleRef.current) && document.head.removeChild(styleRef.current);
+        DomHandler.removeInlineStyle(styleRef.current);
         setIsLoaded(false);
     };
 
