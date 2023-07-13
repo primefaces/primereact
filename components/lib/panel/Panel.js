@@ -18,7 +18,8 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
     const contentId = idState + '_content';
-    const { load: loadStyle, unload: unloadStyle } = useStyle(PanelBase.css.styles, { name: 'primereact_panel_style', manual: true });
+
+    useStyle(PanelBase.css.styles, { name: 'primereact_panel_style' });
 
     React.useEffect(() => {
         loadStyle();
