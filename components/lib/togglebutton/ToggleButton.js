@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -16,7 +16,7 @@ export const ToggleButton = React.memo(
             props
         });
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
-        const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
+        const hasIcon = props.onIcon && props.offIcon;
         const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
