@@ -59,7 +59,7 @@ export default function RegexDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>In addition to the presets, a regular expression can be configured for customization.</p>
+                <p>In addition to the presets, a regular expression can be configured for customization of blocking a single key press.</p>
             </DocSectionText>
             <div className="card flex flex-wrap gap-3">
                 <div className="flex-auto">
