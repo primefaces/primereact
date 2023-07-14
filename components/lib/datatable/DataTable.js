@@ -1128,11 +1128,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             Object.entries(filters).forEach(([prop, value]) => {
                 cloned[prop] = value.operator
                     ? {
-                        operator: value.operator,
-                        constraints: value.constraints.map((constraint) => {
-                            return { ...constraint };
-                        })
-                    }
+                          operator: value.operator,
+                          constraints: value.constraints.map((constraint) => {
+                              return { ...constraint };
+                          })
+                      }
                     : { ...value };
             });
         } else {

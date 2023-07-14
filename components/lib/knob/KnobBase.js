@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/utils';
+import { classNames } from '../utils/Utils';
 
 export const KnobBase = ComponentBase.extend({
     defaultProps: {

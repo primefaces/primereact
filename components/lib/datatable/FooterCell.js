@@ -84,7 +84,11 @@ export const FooterCell = React.memo((props) => {
         getColumnPTOptions('root')
     );
 
-    return <td ref={elementRef} {...footerCellProps}>{content}</td>;
+    return (
+        <td ref={elementRef} {...footerCellProps}>
+            {content}
+        </td>
+    );
 });
 
 FooterCell.displayName = 'FooterCell';

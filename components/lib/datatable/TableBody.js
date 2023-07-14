@@ -1064,7 +1064,11 @@ export const TableBody = React.memo(
             getColumnPTOptions(ptKey)
         );
 
-        return <tbody ref={refCallback} {...tbodyProps}>{content}</tbody>;
+        return (
+            <tbody ref={refCallback} {...tbodyProps}>
+                {content}
+            </tbody>
+        );
     })
 );
 
