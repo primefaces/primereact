@@ -24,10 +24,6 @@ export const Checkbox = React.memo(
             props,
             state: {
                 focused: focusedState
-            },
-            instance: {
-                checked,
-                focusedState
             }
         });
         const elementRef = React.useRef(null);
