@@ -365,7 +365,6 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                ref: elementRef,
                 className,
                 style,
                 role: 'columnheader',
@@ -387,7 +386,7 @@ export const HeaderCell = React.memo((props) => {
 
         return (
             <>
-                <th {...headerCellProps}>
+                <th ref={elementRef} {...headerCellProps}>
                     {resizer}
                     {header}
                 </th>

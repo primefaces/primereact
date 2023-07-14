@@ -68,7 +68,6 @@ export const RowRadioButton = React.memo((props) => {
     const hiddenInputProps = mergeProps(
         {
             name,
-            ref: inputRef,
             type: 'radio',
             checked: props.checked,
             onFocus: (e) => onFocus(e),
@@ -100,7 +99,7 @@ export const RowRadioButton = React.memo((props) => {
     return (
         <div {...radiobuttonWrapperProps}>
             <div {...hiddenInputWrapperProps}>
-                <input {...hiddenInputProps} />
+                <input ref={inputRef} {...hiddenInputProps} />
             </div>
             <div {...radiobuttonProps}>
                 <div {...radiobuttonIconProps}></div>
