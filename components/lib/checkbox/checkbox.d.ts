@@ -8,10 +8,10 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPassThroughMethodOptions>;
 
@@ -198,6 +198,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {CheckboxPassThroughOptions}
      */
     pt?: CheckboxPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
