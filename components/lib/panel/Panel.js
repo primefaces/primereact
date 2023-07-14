@@ -21,15 +21,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
 
     useStyle(PanelBase.css.styles, { name: 'primereact_panel_style' });
 
-    React.useEffect(() => {
-        loadStyle();
-
-        return () => {
-            unloadStyle();
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const { ptm, cx } = PanelBase.setMetaData({
         props,
         state: {
