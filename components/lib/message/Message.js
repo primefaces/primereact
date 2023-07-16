@@ -15,7 +15,7 @@ export const Message = React.memo(
 
         const elementRef = React.useRef(null);
 
-        useStyle(MessageBase.css.styles, { name: 'primereact_message_style' });
+        useStyle(MessageBase.css.styles, { name: 'message' });
 
         const { ptm, cx } = MessageBase.setMetaData({
             props

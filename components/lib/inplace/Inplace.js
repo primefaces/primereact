@@ -17,7 +17,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const active = props.onToggle ? props.active : activeState;
 
-    useStyle(InplaceBase.css.styles, { name: 'primereact_inplace_style' });
+    useStyle(InplaceBase.css.styles, { name: 'inplace' });
 
     const { ptm, cx } = InplaceBase.setMetaData({
         props,

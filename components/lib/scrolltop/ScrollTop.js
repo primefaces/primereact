@@ -12,7 +12,7 @@ export const ScrollTop = React.memo(
         const [visibleState, setVisibleState] = React.useState(false);
         const context = React.useContext(PrimeReactContext);
 
-        useStyle(ScrollTopBase.css.styles, { name: 'primereact_scrolltop_style' });
+        useStyle(ScrollTopBase.css.styles, { name: 'scrolltop' });
 
         const props = ScrollTopBase.getProps(inProps, context);
         const { ptm, cx } = ScrollTopBase.setMetaData({

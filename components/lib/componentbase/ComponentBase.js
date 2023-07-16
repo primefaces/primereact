@@ -48,23 +48,29 @@ export const ComponentBase = {
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
 
             const getValue = (...args) => {
-                const value = getOptionValue(ObjectUtils.getPropCaseInsensitive(...args));
+                const value = getOptionValue(...args);
 
                 return ObjectUtils.isString(value) ? { className: value } : value;
             };
 
-            const defaultPT = (ptKey) => pt && getValue(pt[componentName], ptKey);
+            const _globalPT = () => {
+                return pt && ObjectUtils.getJSXElement(pt, params);
+            };
+
+            const defaultPT = () => {
+                return getOptionValue(pt, componentName, params) || _globalPT();
+            };
 
             const self = getValue(obj, fkey, params);
+            const globalPT = getValue(defaultPT(), key, params) || (/./g.test(key) && !!params[key.split('.')[0]] ? getValue(_globalPT(), key, params) : undefined);
 
-            const globalPT = defaultPT(fkey);
             const datasetProps = {
                 ...(fkey === 'root' && { [`${datasetPrefix}name`]: componentName }),
                 [`${datasetPrefix}section`]: fkey
             };
 
             let merged = {
-                ...ObjectUtils.getMergedProps(globalPT, self)
+                ...ObjectUtils.getMergedProps(self, globalPT)
             };
 
             if (Object.keys(datasetProps).length) {
@@ -93,7 +99,7 @@ export const ComponentBase = {
             const sx = (key = '', when = true, params = {}) => {
                 if (when) {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
-                    const base = getOptionValue(inlineStyles, key, { props: props || {}, state, ...params });
+                    const base = getOptionValue(inlineStyles, key, { props, state, ...params });
                     let merged = {
                         ...ObjectUtils.getMergedProps(base, self)
                     };

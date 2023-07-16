@@ -18,7 +18,7 @@ const PrimeReactChart = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = ChartBase.getProps(inProps, context);
 
-        useStyle(ChartBase.css.styles, { name: 'primereact_chart_style' });
+        useStyle(ChartBase.css.styles, { name: 'chart' });
 
         const { ptm, cx, sx } = ChartBase.setMetaData({
             props

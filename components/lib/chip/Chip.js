@@ -13,7 +13,7 @@ export const Chip = React.memo(
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
 
-        useStyle(ChipBase.css.styles, { name: 'primereact_chip_style' });
+        useStyle(ChipBase.css.styles, { name: 'chip' });
 
         const { ptm, cx } = ChipBase.setMetaData({
             props

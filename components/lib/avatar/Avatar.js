@@ -11,7 +11,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
 
-    useStyle(AvatarBase.css.styles, { name: 'primereact_avatar_style' });
+    useStyle(AvatarBase.css.styles, { name: 'avatar' });
     const { ptm, cx } = AvatarBase.setMetaData({
         props,
         state: {

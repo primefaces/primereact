@@ -18,7 +18,7 @@ export const Checkbox = React.memo(
 
         const checked = isChecked();
 
-        useStyle(CheckboxBase.css.styles, { name: 'primereact_checkbox_style' });
+        useStyle(CheckboxBase.css.styles, { name: 'checkbox' });
 
         const { ptm, cx } = CheckboxBase.setMetaData({
             props,

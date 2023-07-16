@@ -19,7 +19,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
-    useStyle(FieldsetBase.css.styles, { name: 'primereact_fieldset_style' });
+    useStyle(FieldsetBase.css.styles, { name: 'fieldset' });
 
     const { ptm, cx } = FieldsetBase.setMetaData({
         props,

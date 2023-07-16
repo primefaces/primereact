@@ -11,7 +11,7 @@ export const InputText = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
 
-        useStyle(InputTextBase.css.styles, { name: 'primereact_inputtext_style' });
+        useStyle(InputTextBase.css.styles, { name: 'inputtext' });
 
         const { ptm, cx } = InputTextBase.setMetaData({
             props

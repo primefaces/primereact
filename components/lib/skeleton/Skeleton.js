@@ -8,7 +8,7 @@ export const Skeleton = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
 
-        useStyle(SkeletonBase.css.styles, { name: 'primereact_skeleton_style' });
+        useStyle(SkeletonBase.css.styles, { name: 'skeleton' });
 
         const props = SkeletonBase.getProps(inProps, context);
         const { ptm, cx, sx } = SkeletonBase.setMetaData({

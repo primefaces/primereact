@@ -8,7 +8,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = ScrollPanelBase.getProps(inProps, context);
 
-    useStyle(ScrollPanelBase.css.styles, { name: 'primereact_scrollpanel_style' });
+    useStyle(ScrollPanelBase.css.styles, { name: 'scrollpanel' });
 
     const { ptm, cx } = ScrollPanelBase.setMetaData({
         props

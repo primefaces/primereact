@@ -15,7 +15,7 @@ export const Toolbar = React.memo(
         const center = ObjectUtils.getJSXElement(props.center, props);
         const end = ObjectUtils.getJSXElement(props.right || props.end, props);
 
-        useStyle(ToolbarBase.css.styles, { name: 'primereact_toolbar_style' });
+        useStyle(ToolbarBase.css.styles, { name: 'toolbar' });
 
         const { ptm, cx } = ToolbarBase.setMetaData({
             props

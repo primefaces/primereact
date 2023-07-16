@@ -15,7 +15,7 @@ export const Knob = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = KnobBase.getProps(inProps, context);
 
-        useStyle(KnobBase.css.styles, { name: 'primereact_knob_style' });
+        useStyle(KnobBase.css.styles, { name: 'knob' });
 
         const { ptm, cx } = KnobBase.setMetaData({
             props

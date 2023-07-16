@@ -9,7 +9,7 @@ export const Badge = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = BadgeBase.getProps(inProps, context);
 
-        useStyle(BadgeBase.css.styles, { name: 'primereact_badge_style' });
+        useStyle(BadgeBase.css.styles, { name: 'badge' });
 
         const { ptm, cx } = BadgeBase.setMetaData({
             props

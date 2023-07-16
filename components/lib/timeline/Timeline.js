@@ -9,7 +9,7 @@ export const Timeline = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TimelineBase.getProps(inProps, context);
 
-        useStyle(TimelineBase.css.styles, { name: 'primereact_timeline_style' });
+        useStyle(TimelineBase.css.styles, { name: 'timeline' });
 
         const { ptm, cx } = TimelineBase.setMetaData({
             props

@@ -19,7 +19,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
-    useStyle(PanelBase.css.styles, { name: 'primereact_panel_style' });
+    useStyle(PanelBase.css.styles, { name: 'panel' });
 
     const { ptm, cx } = PanelBase.setMetaData({
         props,
