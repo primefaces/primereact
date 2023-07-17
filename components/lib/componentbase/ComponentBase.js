@@ -96,10 +96,11 @@ export const ComponentBase = {
                 return !isUnstyled() ? getOptionValue(css && css.classes, key, { props, state, ...params }) : undefined;
             };
 
-            const sx = (key = '', when = true, params = {}) => {
+            const sx = (key = '', params = {}, when = true) => {
                 if (when) {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
+
                     let merged = {
                         ...ObjectUtils.getMergedProps(base, self)
                     };

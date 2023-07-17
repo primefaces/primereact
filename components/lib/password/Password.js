@@ -1,8 +1,7 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { useOverlayListener, useStyle, useUnmountEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
@@ -33,7 +32,9 @@ export const Password = React.memo(
         const strongCheckRegExp = React.useRef(new RegExp(props.strongRegex));
         const type = unmaskedState ? 'text' : 'password';
 
-        const { ptm } = PasswordBase.setMetaData({
+        useStyle(PasswordBase.css.styles, { name: 'password' });
+
+        const { ptm, cx, sx } = PasswordBase.setMetaData({
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -289,17 +290,13 @@ export const Password = React.memo(
         };
 
         const createPanel = () => {
-            const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
-                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-            });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);
             const panelProps = mergeProps(
                 {
                     ref: overlayRef,
-                    className: panelClassName,
+                    className: cx('panel', { context }),
                     style: props.panelStyle,
                     onClick: onPanelClick
                 },
@@ -308,20 +305,20 @@ export const Password = React.memo(
 
             const meterProps = mergeProps(
                 {
-                    className: 'p-password-meter'
+                    className: cx('meter')
                 },
                 ptm('meter')
             );
             const meterLabelProps = mergeProps(
                 {
-                    className: `p-password-strength ${strength}`,
-                    style: { width }
+                    className: cx('meterLabel', { strength }),
+                    style: sx('meterLabel', { width })
                 },
                 ptm('meterLabel')
             );
             const infoProps = mergeProps(
                 {
-                    className: `p-password-info ${strength}`
+                    className: cx('info', { strength })
                 },
                 ptm('info')
             );
@@ -370,7 +367,7 @@ export const Password = React.memo(
             },
             props.className
         );
-        const inputClassName = classNames('p-password-input', props.inputClassName);
+
         const inputProps = PasswordBase.getOtherProps(props);
         const icon = createIcon();
         const panel = createPanel();
@@ -379,7 +376,7 @@ export const Password = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: className,
+                className: cx('root', { isFilled, focusedState }),
                 style: props.style
             },
             PasswordBase.getOtherProps(props),
@@ -392,7 +389,7 @@ export const Password = React.memo(
                 id: props.inputId,
                 ...inputProps,
                 type: type,
-                className: inputClassName,
+                className: cx('input'),
                 style: props.inputStyle,
                 onFocus: onFocus,
                 onBlur: onBlur,
