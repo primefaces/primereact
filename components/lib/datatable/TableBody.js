@@ -1061,7 +1061,7 @@ export const TableBody = React.memo(
                 style: props.style,
                 className: props.className
             },
-            getColumnPTOptions(ptKey)
+            props.ptCallbacks.ptm(ptKey)
         );
 
         return (

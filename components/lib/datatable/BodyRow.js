@@ -401,7 +401,7 @@ export const BodyRow = React.memo((props) => {
             onDragEnd: (e) => onDragEnd(e),
             onDrop: (e) => onDrop(e)
         },
-        getColumnPTOptions('row')
+        props.ptCallbacks.ptm('row')
     );
 
     return <tr {...rowProps}>{content}</tr>;
