@@ -1,13 +1,14 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -24,9 +25,7 @@ export const Mention = React.memo(
         const listRef = React.useRef(null);
         const timeout = React.useRef(null);
 
-        useStyle(MentionBase.css.styles, { name: 'mention' });
-
-        const { ptm, cx, sx } = MentionBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = MentionBase.setMetaData({
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -35,6 +34,8 @@ export const Mention = React.memo(
                 trigger: triggerState
             }
         });
+
+        useHandleStyle(MentionBase.css.styles, isUnstyled, { name: 'mention' });
 
         const getPTOptions = (item, suggestion) => {
             return ptm(suggestion, {

@@ -2,18 +2,17 @@ import * as React from 'react';
 import { mergeProps } from '../utils/Utils';
 import { ProgressBarBase } from './ProgressBarBase';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ProgressBarBase.getProps(inProps, context);
-        const { ptm, cx, sx } = ProgressBarBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = ProgressBarBase.setMetaData({
             props
         });
 
-        useStyle(ProgressBarBase.css.styles, { name: 'progressbar' });
-
+        useHandleStyle(ProgressBarBase.css.styles, isUnstyled, { name: 'progressbar' });
         const elementRef = React.useRef(null);
 
         const createLabel = () => {

@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { IconUtils, mergeProps } from '../utils/Utils';
 import { TagBase } from './TagBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Tag = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = TagBase.getProps(inProps, context);
-
-    useStyle(TagBase.css.styles, { name: 'tag' });
-
-    const { ptm, cx } = TagBase.setMetaData({
+    const { ptm, cx, isUnstyled } = TagBase.setMetaData({
         props
     });
+
+    useHandleStyle(TagBase.css.styles, isUnstyled, { name: 'tag' });
 
     const elementRef = React.useRef(null);
 

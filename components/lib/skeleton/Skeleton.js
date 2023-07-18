@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { mergeProps } from '../utils/Utils';
 import { SkeletonBase } from './SkeletonBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Skeleton = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
-
-        useStyle(SkeletonBase.css.styles, { name: 'skeleton' });
-
         const props = SkeletonBase.getProps(inProps, context);
-        const { ptm, cx, sx } = SkeletonBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = SkeletonBase.setMetaData({
             props
         });
+
+        useHandleStyle(SkeletonBase.css.styles, isUnstyled, { name: 'skeleton' });
 
         const elementRef = React.useRef(null);
 

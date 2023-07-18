@@ -9,6 +9,7 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -17,14 +18,6 @@ export const Dropdown = React.memo(
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-        const { ptm, cx, sx } = DropdownBase.setMetaData({
-            props,
-            state: {
-                filter: filterState,
-                focused: focusedState,
-                overlayVisible: overlayVisibleState
-            }
-        });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -36,8 +29,16 @@ export const Dropdown = React.memo(
         const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
         const hasFilter = ObjectUtils.isNotEmpty(filterState);
         const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
+        const { ptm, cx, sx, isUnstyled } = DropdownBase.setMetaData({
+            props,
+            state: {
+                filter: filterState,
+                focused: focusedState,
+                overlayVisible: overlayVisibleState
+            }
+        });
 
-        useStyle(DropdownBase.css.styles, { name: 'dropdown' });
+        useHandleStyle(DropdownBase.css.styles, isUnstyled, { name: 'dropdown' });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,

@@ -1,22 +1,23 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useStyle } from '../hooks/Hooks';
+import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
-
         const elementRef = React.useRef(null);
-
-        useStyle(ToggleButtonBase.css.styles, { name: 'togglebutton' });
-        const { ptm, cx } = ToggleButtonBase.setMetaData({
+        const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
             props
         });
+
+        useHandleStyle(ToggleButtonBase.css.styles, isUnstyled, { name: 'togglebutton' });
+
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
         const hasIcon = props.onIcon && props.offIcon;
         const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';

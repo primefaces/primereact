@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
-import { useStyle } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InplaceBase } from './InplaceBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
@@ -16,15 +16,14 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);
     const active = props.onToggle ? props.active : activeState;
-
-    useStyle(InplaceBase.css.styles, { name: 'inplace' });
-
-    const { ptm, cx } = InplaceBase.setMetaData({
+    const { ptm, cx, isUnstyled } = InplaceBase.setMetaData({
         props,
         state: {
             active: activeState
         }
     });
+
+    useHandleStyle(InplaceBase.css.styles, isUnstyled, { name: 'inplace' });
 
     const open = (event) => {
         if (props.disabled) {

@@ -1,31 +1,25 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useStyle, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = CheckboxBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-
-        const isChecked = () => {
-            return props.checked === props.trueValue;
-        };
-
-        const checked = isChecked();
-
-        useStyle(CheckboxBase.css.styles, { name: 'checkbox' });
-
-        const { ptm, cx } = CheckboxBase.setMetaData({
+        const { ptm, cx, isUnstyled } = CheckboxBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
+
+        useHandleStyle(CheckboxBase.css.styles, isUnstyled, { name: 'checkbox', styled: true });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
@@ -91,6 +85,10 @@ export const Checkbox = React.memo(
             }
         };
 
+        const isChecked = () => {
+            return props.checked === props.trueValue;
+        };
+
         React.useImperativeHandle(ref, () => ({
             props,
             focus: () => DomHandler.focus(inputRef.current),
@@ -112,6 +110,7 @@ export const Checkbox = React.memo(
             }
         });
 
+        const checked = isChecked();
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = CheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);

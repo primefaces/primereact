@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { mergeProps, ObjectUtils } from '../utils/Utils';
 import { TimelineBase } from './TimelineBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = TimelineBase.getProps(inProps, context);
-
-        useStyle(TimelineBase.css.styles, { name: 'timeline' });
-
-        const { ptm, cx } = TimelineBase.setMetaData({
+        const { ptm, cx, isUnstyled } = TimelineBase.setMetaData({
             props
         });
+
+        useHandleStyle(TimelineBase.css.styles, isUnstyled, { name: 'timeline' });
+
         const elementRef = React.useRef(null);
 
         const getKey = (item, index) => {

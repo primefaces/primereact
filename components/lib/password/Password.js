@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useStyle, useUnmountEffect } from '../hooks/Hooks';
+import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
@@ -9,6 +9,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -32,9 +33,7 @@ export const Password = React.memo(
         const strongCheckRegExp = React.useRef(new RegExp(props.strongRegex));
         const type = unmaskedState ? 'text' : 'password';
 
-        useStyle(PasswordBase.css.styles, { name: 'password' });
-
-        const { ptm, cx, sx } = PasswordBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = PasswordBase.setMetaData({
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -44,6 +43,8 @@ export const Password = React.memo(
                 unmasked: unmaskedState
             }
         });
+
+        useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,

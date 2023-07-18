@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { AvatarBase } from './AvatarBase';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -11,13 +11,14 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
 
-    useStyle(AvatarBase.css.styles, { name: 'avatar' });
-    const { ptm, cx } = AvatarBase.setMetaData({
+    const { ptm, cx, isUnstyled } = AvatarBase.setMetaData({
         props,
         state: {
             imageFailed: imageFailed
         }
     });
+
+    useHandleStyle(AvatarBase.css.styles, isUnstyled, { name: 'avatar' });
 
     const createContent = () => {
         if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {

@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
-
-        useStyle(InputTextBase.css.styles, { name: 'inputtext' });
-
-        const { ptm, cx } = InputTextBase.setMetaData({
+        const { ptm, cx, isUnstyled } = InputTextBase.setMetaData({
             props
         });
+
+        useHandleStyle(InputTextBase.css.styles, isUnstyled, { name: 'inputtext', styled: true });
         const elementRef = React.useRef(ref);
 
         const onKeyDown = (event) => {

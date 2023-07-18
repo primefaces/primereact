@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useStyle } from '../hooks/Hooks';
+import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -19,15 +20,15 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
-    useStyle(PanelBase.css.styles, { name: 'panel' });
-
-    const { ptm, cx } = PanelBase.setMetaData({
+    const { ptm, cx, isUnstyled } = PanelBase.setMetaData({
         props,
         state: {
             id: idState,
             collapsed: collapsed
         }
     });
+
+    useHandleStyle(PanelBase.css.styles, isUnstyled, { name: 'panel' });
 
     const toggle = (event) => {
         if (!props.toggleable) {

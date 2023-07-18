@@ -1,23 +1,21 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ChipBase.getProps(inProps, context);
-
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
-
-        useStyle(ChipBase.css.styles, { name: 'chip' });
-
-        const { ptm, cx } = ChipBase.setMetaData({
+        const { ptm, cx, isUnstyled } = ChipBase.setMetaData({
             props
         });
+
+        useHandleStyle(ChipBase.css.styles, isUnstyled, { name: 'chip' });
 
         const onKeyDown = (event) => {
             if (event.keyCode === 13) {

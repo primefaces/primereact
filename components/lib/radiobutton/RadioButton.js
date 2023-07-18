@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useStyle } from '../hooks/Hooks';
+import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -14,14 +15,14 @@ export const RadioButton = React.memo(
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
-        useStyle(RadioButtonBase.css.styles, { name: 'radiobutton' });
-
-        const { ptm, cx } = RadioButtonBase.setMetaData({
+        const { ptm, cx, isUnstyled } = RadioButtonBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
+
+        useHandleStyle(RadioButtonBase.css.styles, isUnstyled, { name: 'radiobutton', styled: true });
 
         const select = (event) => {
             onClick(event);

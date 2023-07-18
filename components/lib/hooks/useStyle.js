@@ -10,7 +10,7 @@ export const useStyle = (css, options = {}) => {
     const context = useContext(PrimeReactContext);
 
     const defaultDocument = DomHandler.isClient() ? window.document : undefined;
-    const { document = defaultDocument, immediate = true, manual = false, name = `style_${++_id}`, id = undefined, media = undefined } = options;
+    const { document = defaultDocument, manual = false, name = `style_${++_id}`, id = undefined, media = undefined } = options;
 
     const update = (newCSS) => {
         isLoaded && css !== newCSS && (styleRef.current.textContent = newCSS);
@@ -46,11 +46,11 @@ export const useStyle = (css, options = {}) => {
     };
 
     useEffect(() => {
-        if (immediate && !manual) load();
+        if (!manual) load();
 
         return () => unload();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [immediate, manual]);
+    }, [manual]);
 
     return {
         id,

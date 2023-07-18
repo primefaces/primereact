@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { BanIcon } from '../icons/ban';
 import { StarIcon } from '../icons/star';
 import { StarFillIcon } from '../icons/starfill';
 import { Tooltip } from '../tooltip/Tooltip';
 import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RatingBase } from './RatingBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Rating = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -15,11 +15,11 @@ export const Rating = React.memo(
 
         const elementRef = React.useRef(null);
 
-        useStyle(RatingBase.css.styles, { name: 'rating' });
-
-        const { ptm, cx } = RatingBase.setMetaData({
+        const { ptm, cx, isUnstyled } = RatingBase.setMetaData({
             props
         });
+
+        useHandleStyle(RatingBase.css.styles, isUnstyled, { name: 'rating' });
 
         const getPTOptions = (value, key) => {
             return ptm(key, {

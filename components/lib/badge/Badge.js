@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { mergeProps } from '../utils/Utils';
 import { BadgeBase } from './BadgeBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Badge = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = BadgeBase.getProps(inProps, context);
 
-        useStyle(BadgeBase.css.styles, { name: 'badge' });
-
-        const { ptm, cx } = BadgeBase.setMetaData({
+        const { ptm, cx, isUnstyled } = BadgeBase.setMetaData({
             props
         });
+
+        useHandleStyle(BadgeBase.css.styles, isUnstyled, { name: 'badge' });
 
         const elementRef = React.useRef(null);
 

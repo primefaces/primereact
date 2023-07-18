@@ -2,7 +2,7 @@ import * as React from 'react';
 import { mergeProps } from '../utils/Utils';
 import { ProgressSpinnerBase } from './ProgressSpinnerBase';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -11,11 +11,11 @@ export const ProgressSpinner = React.memo(
 
         const elementRef = React.useRef(null);
 
-        const { ptm, cx, sx } = ProgressSpinnerBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = ProgressSpinnerBase.setMetaData({
             props
         });
 
-        useStyle(ProgressSpinnerBase.css.styles, { name: 'progressspinner' });
+        useHandleStyle(ProgressSpinnerBase.css.styles, isUnstyled, { name: 'progressspinner' });
 
         React.useImperativeHandle(ref, () => ({
             props,
