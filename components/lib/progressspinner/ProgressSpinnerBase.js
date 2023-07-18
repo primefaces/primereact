@@ -5,7 +5,7 @@ const classes = {
     root: ({ props }) => classNames('p-progress-spinner', props.className),
     spinner: 'p-progress-spinner-svg',
     circle: 'p-progress-spinner-circle'
-}
+};
 const styles = `
 .p-progress-spinner {
     position: relative;
@@ -79,7 +79,7 @@ const styles = `
         stroke: #ffa700;
     }
 }
-`
+`;
 
 const inlineStyles = {
     spinner: ({ props }) => ({ animationDuration: props.animationDuration })

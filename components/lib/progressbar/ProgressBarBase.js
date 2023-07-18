@@ -2,11 +2,11 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/utils';
 
 const classes = {
-    root: ({ props }) => props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate', props.className) : classNames('p-progressbar p-component p-progressbar-determinate', props.className),
+    root: ({ props }) => (props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate', props.className) : classNames('p-progressbar p-component p-progressbar-determinate', props.className)),
     value: 'p-progressbar-value p-progressbar-value-animate',
     label: 'p-progressbar-label',
     indeterminateContainer: 'p-progressbar-indeterminate-container'
-}
+};
 const styles = `
 .p-progressbar {
     position: relative;
@@ -104,11 +104,11 @@ const styles = `
     left: 107%;
     right: -8%; }
 }
-`
+`;
 
 const inlineStyles = {
-    value: ({ props }) => (props.mode === "indeterminate" ? { backgroundColor: props.color } : { width: props.value + '%', display: 'flex', backgroundColor: props.color })
-}
+    value: ({ props }) => (props.mode === 'indeterminate' ? { backgroundColor: props.color } : { width: props.value + '%', display: 'flex', backgroundColor: props.color })
+};
 
 export const ProgressBarBase = ComponentBase.extend({
     defaultProps: {
