@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/utils';
+import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props }) => (props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate', props.className) : classNames('p-progressbar p-component p-progressbar-determinate', props.className)),
