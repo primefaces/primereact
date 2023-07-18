@@ -7,6 +7,14 @@
     animation: p-icon-spin 2s infinite linear;
 }
 
+svg.p-icon {
+    pointer-events: auto;
+}
+
+svg.p-icon g {
+    pointer-events: none;
+}
+
 @-webkit-keyframes p-icon-spin {
     0% {
         -webkit-transform: rotate(0deg);
