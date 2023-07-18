@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useStyle } from '../hooks/Hooks';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -13,7 +14,9 @@ export const InputTextarea = React.memo(
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);
 
-        const { ptm } = InputTextareaBase.setMetaData({
+        useStyle(InputTextareaBase.css.styles, { name: 'inputtextarea' });
+
+        const { ptm, cx } = InputTextareaBase.setMetaData({
             props
         });
 
@@ -114,20 +117,11 @@ export const InputTextarea = React.memo(
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const className = classNames(
-            'p-inputtextarea p-inputtext p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled,
-                'p-inputtextarea-resizable': props.autoResize
-            },
-            props.className
-        );
 
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: className,
+                className: cx('root', { isFilled }),
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyUp: onKeyUp,
