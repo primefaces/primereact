@@ -39,7 +39,6 @@
 @import "../components/lib/steps/Steps.css";
 @import "../components/lib/tabmenu/TabMenu.css";
 @import "../components/lib/tabview/TabView.css";
-/*@import '../components/lib/terminal/Terminal.css';*/
 @import "../components/lib/tieredmenu/TieredMenu.css";
 @import "../components/lib/tooltip/Tooltip.css";
 @import "../components/lib/tree/Tree.css";
@@ -55,5 +54,4 @@
 @import "../components/lib/virtualscroller/VirtualScroller.css";
 @import "../components/lib/speeddial/SpeedDial.css";
 @import "../components/lib/blockui/BlockUI.css";
-@import "../components/lib/terminal/Terminal.css";
 @import "../components/lib/dock/Dock.css";
