@@ -10,9 +10,9 @@
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -1578,6 +1578,10 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      * Closes the current editing cell when incell editing is enabled.
      */
     public closeEditingCell(): void;
+    /**
+     * Closes the current editing rows when row editing is enabled.
+     */
+    public closeEditingRows(): void;
     /**
      * Exports the data to CSV format.
      * @param {object} options - Options to export
