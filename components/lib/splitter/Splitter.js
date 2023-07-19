@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { useEventListener } from '../hooks/Hooks';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
-import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useEventListener } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { SplitterBase, SplitterPanelBase } from './SplitterBase';
 
 export const SplitterPanel = () => {};
 
@@ -36,9 +37,11 @@ export const Splitter = React.memo(
             }
         };
 
-        const { ptm, ptmo } = SplitterBase.setMetaData({
+        const { ptm, ptmo, cx, sx, isUnstyled } = SplitterBase.setMetaData({
             ...metaData
         });
+
+        useHandleStyle(SplitterBase.css.styles, isUnstyled, { name: 'splitter' });
 
         const getPanelPT = (panel, key) => {
             return ptmo(getPanelProp(panel, 'pt'), key, {
@@ -227,13 +230,12 @@ export const Splitter = React.memo(
 
         const createPanel = (panel, index) => {
             const panelClassName = classNames('p-splitter-panel', getPanelProp(panel, 'className'));
-            const gutterStyle = props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' };
 
             const gutterProps = mergeProps(
                 {
                     ref: (el) => (gutterRefs.current[index] = el),
-                    className: 'p-splitter-gutter',
-                    style: gutterStyle,
+                    className: cx('gutter'),
+                    style: sx('gutter'),
 
                     onMouseDown: (event) => onGutterMouseDown(event, index),
                     onTouchStart: (event) => onGutterTouchStart(event, index),
@@ -245,7 +247,7 @@ export const Splitter = React.memo(
 
             const gutterHandlerProps = mergeProps(
                 {
-                    className: 'p-splitter-gutter-handle'
+                    className: cx('gutterHandler')
                 },
                 ptm('gutterHandler')
             );
@@ -280,14 +282,12 @@ export const Splitter = React.memo(
             return React.Children.map(props.children, createPanel);
         };
 
-        const className = classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className);
-
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className
+                className: cx('root')
             },
             SplitterBase.getOtherProps(props),
             ptm('root')
