@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { classNames, ObjectUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 import { CardBase } from './CardBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Card = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -9,14 +10,16 @@ export const Card = React.forwardRef((inProps, ref) => {
 
     const elementRef = React.useRef(ref);
 
-    const { ptm } = CardBase.setMetaData({
+    const { ptm, cx, isUnstyled } = CardBase.setMetaData({
         props
     });
+
+    useHandleStyle(CardBase.css.styles, isUnstyled, { name: 'card' });
 
     const createHeader = () => {
         const headerProps = mergeProps(
             {
-                className: 'p-card-header'
+                className: cx('header')
             },
             ptm('header')
         );
@@ -31,7 +34,7 @@ export const Card = React.forwardRef((inProps, ref) => {
     const createBody = () => {
         const titleProps = mergeProps(
             {
-                className: 'p-card-title'
+                className: cx('title')
             },
             ptm('title')
         );
@@ -40,7 +43,7 @@ export const Card = React.forwardRef((inProps, ref) => {
 
         const subTitleProps = mergeProps(
             {
-                className: 'p-card-subtitle'
+                className: cx('subTitle')
             },
             ptm('subTitle')
         );
@@ -49,7 +52,7 @@ export const Card = React.forwardRef((inProps, ref) => {
 
         const contentProps = mergeProps(
             {
-                className: 'p-card-content'
+                className: cx('content')
             },
             ptm('content')
         );
@@ -58,7 +61,7 @@ export const Card = React.forwardRef((inProps, ref) => {
 
         const footerProps = mergeProps(
             {
-                className: 'p-card-footer'
+                className: cx('footer')
             },
             ptm('footer')
         );
@@ -67,7 +70,7 @@ export const Card = React.forwardRef((inProps, ref) => {
 
         const bodyProps = mergeProps(
             {
-                className: 'p-card-body'
+                className: cx('body')
             },
             ptm('body')
         );
@@ -91,7 +94,7 @@ export const Card = React.forwardRef((inProps, ref) => {
             id: props.id,
             ref: elementRef,
             style: props.style,
-            className: classNames('p-card p-component', props.className)
+            className: cx('root')
         },
         CardBase.getOtherProps(props),
         ptm('root')
