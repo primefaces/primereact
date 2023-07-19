@@ -29,6 +29,10 @@ export interface BlockUIPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: BlockUIPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: BlockUIPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -89,6 +93,11 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {BlockUIPassThroughOptions}
      */
     pt?: BlockUIPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
     /**
      * Fired when the element gets blocked.
      */
