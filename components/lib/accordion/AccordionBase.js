@@ -1,5 +1,56 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
+
+const classes = {
+    root: ({ props }) => classNames('p-accordion p-component', props.className),
+    tab: {
+        root: ({ selected }) =>
+            classNames('p-accordion-tab', {
+                'p-accordion-tab-active': selected
+            }),
+        content: 'p-accordion-content',
+        header: ({ selected, getTabProp, tab }) =>
+            classNames(
+                'p-accordion-header',
+                {
+                    'p-highlight': selected,
+                    'p-disabled': getTabProp(tab, 'disabled')
+                },
+                getTabProp(tab, 'headerClassName'),
+                getTabProp(tab, 'className')
+            ),
+        headeraction: 'p-accordion-header-link',
+        headericon: 'p-accordion-toggle-icon',
+        headertitle: 'p-accordion-header-text',
+        toggleablecontent: ({ getTabProp, tab }) => classNames('p-toggleable-content', getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'))
+    }
+};
+
+const inlineStyles = {
+    tab: {
+        toggleablecontent: ({ getTabProp, tab }) => ({ ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'contentStyle') || {}) }),
+        header: ({ getTabProp, tab }) => ({ ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'headerStyle') || {}) })
+    }
+};
+
+const styles = `
+.p-accordion-header-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    position: relative;
+    text-decoration: none;
+}
+
+.p-accordion-header-link:focus {
+    z-index: 1;
+}
+
+.p-accordion-header-text {
+    line-height: 1;
+}
+`;
 
 export const AccordionBase = ComponentBase.extend({
     defaultProps: {
@@ -16,6 +67,11 @@ export const AccordionBase = ComponentBase.extend({
         onTabClose: null,
         onTabChange: null,
         children: undefined
+    },
+    css: {
+        classes,
+        styles,
+        inlineStyles
     }
 });
 
