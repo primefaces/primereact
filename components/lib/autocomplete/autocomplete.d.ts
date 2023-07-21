@@ -509,6 +509,11 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * @type {AutoCompletePassThroughOptions}
      */
     pt?: AutoCompletePassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
