@@ -183,4 +183,11 @@ export type IconType<ComponentProps, AdditionalProps = NonNullable<unknown>> = R
 
 export type TemplateType<ComponentProps> = React.ReactNode | ((props: ComponentProps) => React.ReactNode);
 
-export type PassThroughType<T, O> = T | ((options?: O) => T | void) | null | undefined;
+export type PassThroughType<T, O> =
+    | T
+    | ((options?: O) => T | void)
+    | null
+    | undefined
+    | {
+          [key: string]: any;
+      };
