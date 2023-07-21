@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { PrimeReactContext, ariaLabel } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { TimesIcon } from '../icons/times';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 import { TabPanelBase, TabViewBase } from './TabViewBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const TabPanel = () => {};
 
@@ -40,9 +40,11 @@ export const TabView = React.forwardRef((inProps, ref) => {
         }
     };
 
-    const { ptm, ptmo } = TabViewBase.setMetaData({
+    const { ptm, ptmo, cx, sx, isUnstyled } = TabViewBase.setMetaData({
         ...metaData
     });
+
+    useHandleStyle(TabViewBase.css.styles, isUnstyled, { name: 'tabview' });
 
     const getTabPT = (tab, key) => {
         return ptmo(getTabProp(tab, 'pt'), key, {
@@ -196,15 +198,13 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const createTabHeader = (tab, index) => {
         const selected = isSelected(index);
         const { headerStyle, headerClassName, style: _style, className: _className, disabled, leftIcon, rightIcon, header, headerTemplate, closable, closeIcon } = TabPanelBase.getCProps(tab);
-        const style = { ...(headerStyle || {}), ...(_style || {}) };
-        const className = classNames('p-unselectable-text', { 'p-tabview-selected p-highlight': selected, 'p-disabled': disabled }, headerClassName, _className);
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = disabled ? null : 0;
         const leftIconElement = leftIcon && IconUtils.getJSXIcon(leftIcon, undefined, { props });
         const headerTitleProps = mergeProps(
             {
-                className: 'p-tabview-title'
+                className: cx('tab.headertitle')
             },
             getTabPT(tab, 'headertitle')
         );
@@ -218,7 +218,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             {
                 id: headerId,
                 role: 'tab',
-                className: 'p-tabview-nav-link',
+                className: cx('tab.headeraction'),
                 tabIndex,
                 'aria-controls': ariaControls,
                 'aria-selected': selected,
@@ -262,8 +262,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const headerProps = mergeProps(
             {
                 ref: (el) => (tabsRef.current[`tab_${index}`] = el),
-                className,
-                style,
+                className: cx('tab.header', { selected, disabled, headerClassName, _className }),
+                style: sx('tab.header', { headerStyle, _style }),
                 role: 'presentation'
             },
             getTabPT(tab, 'root'),
@@ -288,7 +288,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             {
                 id: idState,
                 ref: contentRef,
-                className: 'p-tabview-nav-content',
+                className: cx('navcontent'),
                 style: props.style,
                 onScroll
             },
@@ -298,7 +298,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const navProps = mergeProps(
             {
                 ref: navRef,
-                className: 'p-tabview-nav',
+                className: cx('nav'),
                 role: 'tablist'
             },
             ptm('nav')
@@ -307,7 +307,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const inkbarProps = mergeProps(
             {
                 ref: inkbarRef,
-                className: 'p-tabview-ink-bar'
+                className: cx('inkbar')
             },
             ptm('inkbar')
         );
@@ -323,10 +323,9 @@ export const TabView = React.forwardRef((inProps, ref) => {
     };
 
     const createContent = () => {
-        const className = classNames('p-tabview-panels', props.panelContainerClassName);
         const panelContainerProps = mergeProps(
             {
-                className,
+                className: cx('panelcontainer'),
                 style: props.panelContainerStyle
             },
             ptm('panelcontainer')
@@ -334,15 +333,13 @@ export const TabView = React.forwardRef((inProps, ref) => {
         const contents = React.Children.map(props.children, (tab, index) => {
             if (shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index))) {
                 const selected = isSelected(index);
-                const style = { ...(getTabProp(tab, 'contentStyle') || {}), ...(getTabProp(tab, 'style') || {}) };
-                const className = classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), 'p-tabview-panel', { 'p-hidden': !selected });
                 const contentId = idState + '_content_' + index;
                 const ariaLabelledBy = idState + '_header_' + index;
                 const contentProps = mergeProps(
                     {
                         id: contentId,
-                        className,
-                        style,
+                        className: cx('tab.content', { props, selected, getTabProp, tab, isSelected, shouldUseTab, index }),
+                        style: sx('tab.content', { props, getTabProp, tab, isSelected, shouldUseTab, index }),
                         role: 'tabpanel',
                         'aria-labelledby': ariaLabelledBy,
                         'aria-hidden': !selected
@@ -367,7 +364,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             {
                 ref: prevBtnRef,
                 type: 'button',
-                className: 'p-tabview-nav-prev p-tabview-nav-btn p-link',
+                className: cx('prevbutton'),
                 'aria-label': ariaLabel('previousPageLabel'),
                 onClick: (e) => navBackward(e)
             },
@@ -399,7 +396,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             {
                 ref: nextBtnRef,
                 type: 'button',
-                className: 'p-tabview-nav-next p-tabview-nav-btn p-link',
+                className: cx('nextbutton'),
                 'aria-label': ariaLabel('nextPageLabel'),
                 onClick: (e) => navForward(e)
             },
@@ -416,20 +413,12 @@ export const TabView = React.forwardRef((inProps, ref) => {
         }
     };
 
-    const className = classNames(
-        'p-tabview p-component',
-        {
-            'p-tabview-scrollable': props.scrollable
-        },
-        props.className
-    );
-
     const rootProps = mergeProps(
         {
             id: idState,
             ref: elementRef,
             style: props.style,
-            className
+            className: cx('root')
         },
         TabViewBase.getOtherProps(props),
         ptm('root')
@@ -437,7 +426,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const navContainerProps = mergeProps(
         {
-            className: 'p-tabview-nav-container'
+            className: cx('navcontainer')
         },
         ptm('navcontainer')
     );

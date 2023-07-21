@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
     checkIcon: 'p-checkbox-icon p-c',
