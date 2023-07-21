@@ -214,6 +214,12 @@ export default class DomHandler {
         return false;
     }
 
+    static addStyles(element, styles = {}) {
+        if (element) {
+            Object.entries(styles).forEach(([key, value]) => (element.style[key] = value));
+        }
+    }
+
     static find(element, selector) {
         return element ? Array.from(element.querySelectorAll(selector)) : [];
     }

@@ -120,6 +120,11 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @type {OverlayPanelPassThroughOptions}
      */
     pt?: OverlayPanelPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

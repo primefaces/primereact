@@ -28,6 +28,7 @@ export declare class DomHandler {
     static removeMultipleClasses(el: HTMLElement, className: string): void;
     static addClass(el: HTMLElement, className: string): void;
     static removeClass(el: HTMLElement, className: string): void;
+    static addStyles(el: HTMLElement, styles: object): void;
     static hasClass(el: HTMLElement, className: string): boolean;
     static find(el: HTMLElement, selector: string): any[];
     static findSingle(el: HTMLElement, selector: string): any;
