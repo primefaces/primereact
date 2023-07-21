@@ -39,7 +39,7 @@ export const useStyle = (css, options = {}) => {
     };
 
     const unload = () => {
-        if (!document || !isLoaded) return;
+        if (!document || !styleRef.current) return;
 
         DomHandler.removeInlineStyle(styleRef.current);
         setIsLoaded(false);
