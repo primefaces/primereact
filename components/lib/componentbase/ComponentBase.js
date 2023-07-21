@@ -488,9 +488,11 @@ export const useHandleStyle = (styles, isUnstyled, { name, styled = false }) => 
         }
 
         return () => {
-            unloadCommonStyle();
-            unload();
+            if (!isUnstyled()) {
+                unloadCommonStyle();
+                unload();
+            }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isUnstyled]);
+    }, [styles]);
 };
