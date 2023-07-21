@@ -47477,7 +47477,7 @@
                     "values": "React.ReactNode | Function"
                 },
                 "PassThroughType": {
-                    "values": "T | Function | null | undefined"
+                    "values": "T | Function | null | undefined | Object"
                 }
             }
         }
