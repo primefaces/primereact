@@ -5930,6 +5930,14 @@
                             "type": "CalendarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -6581,7 +6589,7 @@
                             "name": "weekHeader",
                             "optional": true,
                             "readonly": false,
-                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
                             "description": "Uses to pass attributes to the week header's DOM element."
                         },
                         {
@@ -6644,7 +6652,7 @@
                             "name": "dayLabel",
                             "optional": true,
                             "readonly": false,
-                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the day label's DOM element."
                         },
                         {
