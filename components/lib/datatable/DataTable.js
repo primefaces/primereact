@@ -382,7 +382,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             if (props.columnResizeMode === 'expand' && tableWidthState.current) {
                 tableRef.current.style.width = tableWidthState.current;
                 tableRef.current.style.minWidth = tableWidthState.current;
-                elementRef.current.style.width = tableWidthState.current;
             }
 
             if (ObjectUtils.isNotEmpty(widths)) {
