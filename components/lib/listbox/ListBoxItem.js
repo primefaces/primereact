@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
+    const {
+        ptCallbacks: { ptm, cx }
+    } = props;
+
     const getPTOptions = (key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 selected: props.selected,
                 disabled: props.disabled
@@ -77,19 +81,11 @@ export const ListBoxItem = React.memo((props) => {
         return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-listbox-item-group') ? findPrevItem(prevItem) : prevItem) : null;
     };
 
-    const className = classNames(
-        'p-listbox-item',
-        {
-            'p-highlight': props.selected,
-            'p-disabled': props.disabled
-        },
-        props.option.className
-    );
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
     const itemProps = mergeProps(
         {
-            className: className,
+            className: cx('item', { props }),
             style: props.style,
             onClick: onClick,
             onTouchEnd: onTouchEnd,

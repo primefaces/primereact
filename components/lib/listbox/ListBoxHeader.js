@@ -4,6 +4,10 @@ import { InputText } from '../inputtext/InputText';
 import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const ListBoxHeader = React.memo((props) => {
+    const {
+        ptCallbacks: { ptm, cx }
+    } = props;
+
     const filterOptions = {
         filter: (e) => onFilter(e),
         reset: () => props.resetFilter()
@@ -19,12 +23,11 @@ export const ListBoxHeader = React.memo((props) => {
     };
 
     const createHeader = () => {
-        const iconClassName = 'p-listbox-filter-icon';
         const filterIconProps = mergeProps(
             {
-                className: iconClassName
+                className: cx('filterIcon')
             },
-            props.ptm('filterIcon')
+            ptm('filterIcon')
         );
 
         const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
@@ -32,21 +35,21 @@ export const ListBoxHeader = React.memo((props) => {
 
         const headerProps = mergeProps(
             {
-                className: 'p-listbox-header'
+                className: cx('header')
             },
-            props.ptm('header')
+            ptm('header')
         );
 
         const filterContainerProps = mergeProps(
             {
-                className: 'p-listbox-filter-container'
+                className: cx('filterContainer')
             },
-            props.ptm('filterContainer')
+            ptm('filterContainer')
         );
 
         let content = (
             <div {...filterContainerProps}>
-                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} pt={props.ptm('filterInput')} />
+                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} pt={ptm('filterInput')} />
                 {filterIcon}
             </div>
         );
