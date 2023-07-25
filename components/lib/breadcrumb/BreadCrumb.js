@@ -89,7 +89,6 @@ export const BreadCrumb = React.memo(
                 }
 
                 const menuitemProps = mergeProps(
-                    console.log(disabled),
                     {
                         className: cx('home', { _className, disabled }),
                         style
