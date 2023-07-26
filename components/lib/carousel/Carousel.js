@@ -224,7 +224,7 @@ export const Carousel = React.memo(
         };
 
         const changePageOnTouch = (e, diff) => {
-            if (Math.abs(diff) > swipeThreshold) {
+            if (Math.abs(diff) > swipeThreshold.current) {
                 if (diff < 0) {
                     // left
                     navForward(e);
