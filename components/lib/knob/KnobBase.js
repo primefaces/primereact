@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils } from '../utils/Utils';
+import { classNames } from '../utils/Utils';
 
 export const KnobBase = ComponentBase.extend({
     defaultProps: {
@@ -23,5 +23,40 @@ export const KnobBase = ComponentBase.extend({
         valueTemplate: '{value}',
         onChange: null,
         children: undefined
+    },
+    css: {
+        classes: {
+            range: 'p-knob-range',
+            value: 'p-knob-value',
+            label: 'p-knob-text',
+            root: ({ props }) =>
+                classNames(
+                    'p-knob p-component',
+                    {
+                        'p-disabled': props.disabled
+                    },
+                    props.className
+                )
+        },
+        styles: `
+        @keyframes dash-frame {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        .p-knob-range {
+            fill: none;
+            transition: stroke .1s ease-in;
+        }
+        .p-knob-value {
+            animation-name: dash-frame;
+            animation-fill-mode: forwards;
+            fill: none;
+        }
+        .p-knob-text {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        `
     }
 });

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
@@ -15,7 +16,8 @@ import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ImageBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ImageBase.getProps(inProps, context);
 
         const [maskVisibleState, setMaskVisibleState] = React.useState(false);
         const [previewVisibleState, setPreviewVisibleState] = React.useState(false);
@@ -88,7 +90,7 @@ export const Image = React.memo(
         };
 
         const onEntering = () => {
-            ZIndexUtils.set('modal', maskRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['modal']);
+            ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
         };
 
         const onEntered = () => {

@@ -32,7 +32,7 @@ export interface ImagePassThroughOptions {
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: ImagePassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: ImagePassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
     /**
      * Uses to pass attributes to the button's DOM element.
      */
@@ -104,7 +104,7 @@ export interface ImagePassThroughOptions {
     /**
      * Uses to pass attributes to the preview's DOM element.
      */
-    preview?: ImagePassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    preview?: ImagePassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
 }
 
 /**

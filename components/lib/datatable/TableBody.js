@@ -831,7 +831,8 @@ export const TableBody = React.memo(
                         colSpan,
                         role: 'cell'
                     },
-                    getColumnPTOptions('bodyCell')
+                    getColumnPTOptions('bodyCell'),
+                    getColumnPTOptions('root')
                 );
 
                 return (
@@ -859,7 +860,8 @@ export const TableBody = React.memo(
                         {
                             colSpan
                         },
-                        getColumnPTOptions('bodyCell')
+                        getColumnPTOptions('bodyCell'),
+                        getColumnPTOptions('root')
                     );
 
                     const rowgroupHeaderNameProps = mergeProps(
@@ -987,7 +989,8 @@ export const TableBody = React.memo(
                             colSpan,
                             role: 'cell'
                         },
-                        getColumnPTOptions('bodyCell')
+                        getColumnPTOptions('bodyCell'),
+                        getColumnPTOptions('root')
                     );
 
                     content = <td {...bodyCellProps}>{content}</td>;
@@ -1055,14 +1058,17 @@ export const TableBody = React.memo(
         const ptKey = props.className === 'p-datatable-virtualscroller-spacer' ? 'virtualScrollerSpacer' : 'tbody';
         const tbodyProps = mergeProps(
             {
-                ref: refCallback,
                 style: props.style,
                 className: props.className
             },
-            getColumnPTOptions(ptKey)
+            props.ptCallbacks.ptm(ptKey)
         );
 
-        return <tbody {...tbodyProps}>{content}</tbody>;
+        return (
+            <tbody ref={refCallback} {...tbodyProps}>
+                {content}
+            </tbody>
+        );
     })
 );
 

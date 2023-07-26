@@ -1,7 +1,7 @@
+import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { PTDoc } from '../../components/doc/timeline/pt/ptdoc';
 import { Wireframe } from '../../components/doc/timeline/pt/wireframe';
-import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
 import { AlignmentDoc } from '../../components/doc/timeline/alignmentdoc';

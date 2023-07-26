@@ -117,7 +117,7 @@ export interface CalendarPassThroughOptions {
     /**
      * Uses to pass attributes to the week header's DOM element.
      */
-    weekHeader?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    weekHeader?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the table header cell's DOM element.
      */
@@ -153,7 +153,7 @@ export interface CalendarPassThroughOptions {
     /**
      * Uses to pass attributes to the day label's DOM element.
      */
-    dayLabel?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    dayLabel?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the month picker's DOM element.
      */
@@ -874,6 +874,11 @@ export interface CalendarProps {
      * @type {CalendarPassThroughOptions}
      */
     pt?: CalendarPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

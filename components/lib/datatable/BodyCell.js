@@ -31,7 +31,7 @@ export const BodyCell = React.memo((props) => {
     const getColumnPTOptions = (key) => {
         const cProps = getColumnProps(props.column);
 
-        return props.ptCallbacks.ptmo(cProps, key, {
+        return props.ptCallbacks.ptmo(getColumnProp('pt'), key, {
             props: cProps,
             parent: props.metaData,
             state: {
@@ -589,10 +589,30 @@ export const BodyCell = React.memo((props) => {
             content = showSelection && (
                 <>
                     {selectionMode === 'single' && (
-                        <RowRadioButton checked={props.selected} onChange={onRadioChange} tabIndex={props.tabIndex} tableSelector={props.tableSelector} ariaLabel={label} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                        <RowRadioButton
+                            column={props.column}
+                            checked={props.selected}
+                            disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
+                            onChange={onRadioChange}
+                            tabIndex={props.tabIndex}
+                            tableSelector={props.tableSelector}
+                            ariaLabel={label}
+                            ptCallbacks={props.ptCallbacks}
+                            metaData={props.metaData}
+                        />
                     )}
                     {selectionMode === 'multiple' && (
-                        <RowCheckbox checked={props.selected} onChange={onCheckboxChange} tabIndex={props.tabIndex} ariaLabel={label} checkIcon={props.checkIcon} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                        <RowCheckbox
+                            column={props.column}
+                            checked={props.selected}
+                            disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
+                            onChange={onCheckboxChange}
+                            tabIndex={props.tabIndex}
+                            ariaLabel={label}
+                            checkIcon={props.checkIcon}
+                            ptCallbacks={props.ptCallbacks}
+                            metaData={props.metaData}
+                        />
                     )}
                 </>
             );
@@ -757,7 +777,6 @@ export const BodyCell = React.memo((props) => {
             const editorKeyHelperProps = mergeProps(
                 {
                     tabIndex: '0',
-                    ref: keyHelperRef,
                     className: 'p-cell-editor-key-helper p-hidden-accessible',
                     onFocus: (e) => onEditorFocus(e)
                 },
@@ -767,7 +786,7 @@ export const BodyCell = React.memo((props) => {
             const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
             /* eslint-disable */
             editorKeyHelper = (
-                <a {...editorKeyHelperProps}>
+                <a ref={keyHelperRef} {...editorKeyHelperProps}>
                     <span {...editorKeyHelperLabelProps}></span>
                 </a>
             );
@@ -776,7 +795,6 @@ export const BodyCell = React.memo((props) => {
 
         const bodyCellProps = mergeProps(
             {
-                ref: elementRef,
                 style,
                 className,
                 rowSpan: props.rowSpan,
@@ -788,11 +806,12 @@ export const BodyCell = React.memo((props) => {
                 onMouseDown: (e) => onMouseDown(e),
                 onMouseUp: (e) => onMouseUp(e)
             },
-            getColumnPTOptions('bodyCell')
+            getColumnPTOptions('bodyCell'),
+            getColumnPTOptions('root')
         );
 
         return (
-            <td {...bodyCellProps}>
+            <td ref={elementRef} {...bodyCellProps}>
                 {editorKeyHelper}
                 {title}
                 {content}

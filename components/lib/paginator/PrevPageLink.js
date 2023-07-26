@@ -4,9 +4,11 @@ import { AngleLeftIcon } from '../icons/angleleft';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PrevPageLinkBase } from './PaginatorBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const PrevPageLink = React.memo((inProps) => {
-    const props = PrevPageLinkBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = PrevPageLinkBase.getProps(inProps, context);
 
     const getPTOptions = (key) => {
         return props.ptm(key, {

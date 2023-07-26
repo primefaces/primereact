@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { classNames, mergeProps } from '../utils/Utils';
+import { mergeProps } from '../utils/Utils';
 import { ProgressBarBase } from './ProgressBarBase';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ProgressBarBase.getProps(inProps);
-        const { ptm } = ProgressBarBase.setMetaData({
+        const context = React.useContext(PrimeReactContext);
+        const props = ProgressBarBase.getProps(inProps, context);
+        const { ptm, cx, sx, isUnstyled } = ProgressBarBase.setMetaData({
             props
         });
+
+        useHandleStyle(ProgressBarBase.css.styles, isUnstyled, { name: 'progressbar' });
         const elementRef = React.useRef(null);
 
         const createLabel = () => {
@@ -21,13 +26,12 @@ export const ProgressBar = React.memo(
         };
 
         const createDeterminate = () => {
-            const className = classNames('p-progressbar p-component p-progressbar-determinate', props.className);
             const label = createLabel();
             const rootProps = mergeProps(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className,
+                    className: cx('root'),
                     style: props.style,
                     role: 'progressbar',
                     'aria-valuemin': '0',
@@ -39,15 +43,15 @@ export const ProgressBar = React.memo(
             );
             const valueProps = mergeProps(
                 {
-                    className: 'p-progressbar-value p-progressbar-value-animate',
-                    style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
+                    className: cx('value'),
+                    style: sx('value')
                 },
                 ptm('value')
             );
 
             const labelProps = mergeProps(
                 {
-                    className: 'p-progressbar-label'
+                    className: cx('label')
                 },
                 ptm('label')
             );
@@ -60,12 +64,11 @@ export const ProgressBar = React.memo(
         };
 
         const createIndeterminate = () => {
-            const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
             const rootProps = mergeProps(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className,
+                    className: cx('root'),
                     style: props.style,
                     role: 'progressbar'
                 },
@@ -75,15 +78,15 @@ export const ProgressBar = React.memo(
 
             const indeterminateContainerProps = mergeProps(
                 {
-                    className: 'p-progressbar-indeterminate-container'
+                    className: cx('indeterminateContainer')
                 },
                 ptm('indeterminateContainer')
             );
 
             const valueProps = mergeProps(
                 {
-                    className: 'p-progressbar-value p-progressbar-value-animate',
-                    style: { backgroundColor: props.color }
+                    className: cx('value'),
+                    style: sx('value')
                 },
                 ptm('value')
             );

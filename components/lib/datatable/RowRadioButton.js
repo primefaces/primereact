@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { ColumnBase } from '../column/ColumnBase';
+import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
@@ -8,7 +8,7 @@ export const RowRadioButton = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(getColumnProps(), key, {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             context: {
@@ -49,8 +49,8 @@ export const RowRadioButton = React.memo((props) => {
         onClick(event);
     };
 
-    const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState });
-    const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState, 'p-disabled': props.disabled });
+    const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState, 'p-disabled': props.disabled });
+    const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState });
     const name = `${props.tableSelector}_dt_radio`;
     const radiobuttonWrapperProps = mergeProps(
         {
@@ -68,7 +68,6 @@ export const RowRadioButton = React.memo((props) => {
     const hiddenInputProps = mergeProps(
         {
             name,
-            ref: inputRef,
             type: 'radio',
             checked: props.checked,
             onFocus: (e) => onFocus(e),
@@ -100,7 +99,7 @@ export const RowRadioButton = React.memo((props) => {
     return (
         <div {...radiobuttonWrapperProps}>
             <div {...hiddenInputWrapperProps}>
-                <input {...hiddenInputProps} />
+                <input ref={inputRef} {...hiddenInputProps} />
             </div>
             <div {...radiobuttonProps}>
                 <div {...radiobuttonIconProps}></div>

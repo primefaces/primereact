@@ -38,7 +38,7 @@ export interface AvatarPassThroughOptions {
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: AvatarPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: AvatarPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
 }
 
 /**
@@ -102,6 +102,11 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
      * @type {AvatarPassThroughOptions}
      */
     pt?: AvatarPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

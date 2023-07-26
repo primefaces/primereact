@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { FilterService, localeOption } from '../api/Api';
+import { FilterService, PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
@@ -10,7 +11,8 @@ import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ListBoxBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ListBoxBase.getProps(inProps, context);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
@@ -18,12 +20,17 @@ export const ListBox = React.memo(
         const optionTouched = React.useRef(false);
         const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
         const hasFilter = filteredValue && filteredValue.trim().length > 0;
-        const { ptm } = ListBoxBase.setMetaData({
+
+        const metaData = {
             props,
             state: {
                 filterValue: filteredValue
             }
-        });
+        };
+
+        const ptCallbacks = ListBoxBase.setMetaData(metaData);
+
+        useHandleStyle(ListBoxBase.css.styles, ptCallbacks.isUnstyled, { name: 'listbox' });
 
         const onOptionSelect = (event) => {
             const option = event.option;
@@ -292,7 +299,8 @@ export const ListBox = React.memo(
                     disabled={props.disabled}
                     filterPlaceholder={props.filterPlaceholder}
                     filterInputProps={props.filterInputProps}
-                    ptm={ptm}
+                    ptCallbacks={ptCallbacks}
+                    metaData={metaData}
                 />
             ) : null;
         };
@@ -318,7 +326,8 @@ export const ListBox = React.memo(
                         onTouchEnd={onOptionTouchEnd}
                         tabIndex={tabIndex}
                         disabled={disabled}
-                        ptm={ptm}
+                        ptCallbacks={ptCallbacks}
+                        metaData={metaData}
                     />
                 );
             });
@@ -334,11 +343,11 @@ export const ListBox = React.memo(
 
                 const itemGroupProps = mergeProps(
                     {
-                        className: 'p-listbox-item-group',
-                        style: style,
+                        className: ptCallbacks.cx('itemGroup'),
+                        style: ptCallbacks.sx('itemGroup', { scrollerOptions }),
                         role: 'group'
                     },
-                    ptm('itemGroup')
+                    ptCallbacks.ptm('itemGroup')
                 );
 
                 return (
@@ -365,7 +374,8 @@ export const ListBox = React.memo(
                         onTouchEnd={onOptionTouchEnd}
                         tabIndex={tabIndex}
                         disabled={disabled}
-                        ptm={ptm}
+                        ptCallbacks={ptCallbacks}
+                        metaData={metaData}
                     />
                 );
             }
@@ -384,9 +394,9 @@ export const ListBox = React.memo(
         const createEmptyMessage = (emptyMessage, isFilter) => {
             const emptyMessageProps = mergeProps(
                 {
-                    className: 'p-listbox-empty-message'
+                    className: ptCallbacks.cx('emptyMessage')
                 },
-                ptm('emptyMessage')
+                ptCallbacks.ptm('emptyMessage')
             );
 
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
@@ -403,18 +413,16 @@ export const ListBox = React.memo(
                         onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
-                            const className = classNames('p-listbox-list', options.className);
-
                             const listProps = mergeProps(
                                 {
                                     ref: options.contentRef,
-                                    style: options.style,
-                                    className: className,
+                                    style: ptCallbacks.sx('list', { options }),
+                                    className: ptCallbacks.cx('list', { options }),
                                     role: 'listbox',
                                     'aria-multiselectable': props.multiple,
                                     ...ariaProps
                                 },
-                                ptm('list')
+                                ptCallbacks.ptm('list')
                             );
 
                             return <ul {...listProps}>{options.children}</ul>;
@@ -422,18 +430,18 @@ export const ListBox = React.memo(
                     }
                 };
 
-                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
+                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptCallbacks.ptm('virtualScroller')} />;
             } else {
                 const items = createItems();
 
                 const listProps = mergeProps(
                     {
-                        className: 'p-listbox-list',
+                        className: ptCallbacks.cx('list'),
                         role: 'listbox',
                         'aria-multiselectable': props.multiple,
                         ...ariaProps
                     },
-                    ptm('list')
+                    ptCallbacks.ptm('list')
                 );
 
                 return <ul {...listProps}>{items}</ul>;
@@ -445,34 +453,26 @@ export const ListBox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ListBoxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-listbox p-component',
-            {
-                'p-disabled': props.disabled
-            },
-            props.className
-        );
-        const listClassName = classNames('p-listbox-list-wrapper', props.listClassName);
         const list = createList();
         const header = createHeader();
 
         const wrapperProps = mergeProps(
             {
-                className: listClassName,
+                className: ptCallbacks.cx('wrapper'),
                 style: props.listStyle
             },
-            ptm('wrapper')
+            ptCallbacks.ptm('wrapper')
         );
 
         const rootProps = mergeProps(
             {
                 ref: elementRef,
                 id: props.id,
-                className: className,
+                className: ptCallbacks.cx('root'),
                 style: props.style
             },
             ListBoxBase.getOtherProps(props),
-            ptm('root')
+            ptCallbacks.ptm('root')
         );
 
         return (
@@ -481,7 +481,7 @@ export const ListBox = React.memo(
                     {header}
                     <div {...wrapperProps}>{list}</div>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptCallbacks.ptm('tooltip')} />}
             </>
         );
     })

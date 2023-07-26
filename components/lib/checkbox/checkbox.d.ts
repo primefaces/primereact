@@ -8,10 +8,10 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPassThroughMethodOptions>;
 
@@ -41,6 +41,11 @@ export interface CheckboxPassThroughOptions {
      */
     icon?: CheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
      * Uses to pass attributes to the hidden input wrapper's DOM element.
      */
     hiddenInputWrapper?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -48,11 +53,6 @@ export interface CheckboxPassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Uses to pass attributes tooltip's DOM element.
-     * @type {TooltipPassThroughOptions}
-     */
-    tooltip?: TooltipPassThroughOptions;
 }
 
 /**
@@ -198,6 +198,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {CheckboxPassThroughOptions}
      */
     pt?: CheckboxPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

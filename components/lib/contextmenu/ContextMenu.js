@@ -1,15 +1,16 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, mergeProps, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ContextMenuBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ContextMenuBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(false);
         const [reshowState, setReshowState] = React.useState(false);
@@ -41,6 +42,7 @@ export const ContextMenu = React.memo(
 
         const [bindDocumentContextMenuListener] = useEventListener({
             type: 'contextmenu',
+            when: props.global,
             listener: (event) => {
                 show(event);
             }
@@ -56,7 +58,7 @@ export const ContextMenu = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}`;
                 const innerHTML = `
@@ -127,7 +129,7 @@ export const ContextMenu = React.memo(
 
         const onEnter = () => {
             if (props.autoZIndex) {
-                ZIndexUtils.set('menu', menuRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex['menu']);
+                ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
             position(currentEvent.current);
@@ -207,14 +209,14 @@ export const ContextMenu = React.memo(
         };
 
         useMountEffect(() => {
-            if (props.global) {
-                bindDocumentContextMenuListener();
-            }
-
             if (props.breakpoint) {
                 !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
             }
         });
+
+        useUpdateEffect(() => {
+            props.global && bindDocumentContextMenuListener();
+        }, [props.global]);
 
         useUpdateEffect(() => {
             if (attributeSelectorState && menuRef.current) {
@@ -250,8 +252,8 @@ export const ContextMenu = React.memo(
 
         const createContextMenu = () => {
             const className = classNames('p-contextmenu p-component', props.className, {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
 
             const rootProps = mergeProps(

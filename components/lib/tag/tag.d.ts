@@ -71,6 +71,11 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
      * @type {TagPassThroughOptions}
      */
     pt?: TagPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

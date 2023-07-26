@@ -4,10 +4,12 @@ import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
+import { PrimeReactContext } from '../api/Api';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TreeBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TreeBase.getProps(inProps, context);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);

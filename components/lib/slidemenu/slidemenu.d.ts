@@ -185,6 +185,11 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     pt?: SlideMenuPassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Icon of the submenu.
      */
     submenuIcon?: IconType<SlideMenuProps> | undefined;

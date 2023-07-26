@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -25,7 +25,8 @@ export const confirmPopup = (props = {}) => {
 
 export const ConfirmPopup = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ConfirmPopupBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ConfirmPopupBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
@@ -42,6 +43,7 @@ export const ConfirmPopup = React.memo(
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
+        const focusElementOnHide = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
@@ -89,6 +91,10 @@ export const ConfirmPopup = React.memo(
         };
 
         const show = () => {
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
+
             setVisibleState(true);
             setReshowState(false);
             isCallbackExecuting.current = false;
@@ -108,10 +114,13 @@ export const ConfirmPopup = React.memo(
             if (result) {
                 callbackFromProp('onHide', result);
             }
+
+            DomHandler.focus(focusElementOnHide.current);
+            focusElementOnHide.current = null;
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
             align();
         };
 
@@ -305,8 +314,8 @@ export const ConfirmPopup = React.memo(
 
         const createElement = () => {
             const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
             });
             const content = createContent();
             const footer = createFooter();

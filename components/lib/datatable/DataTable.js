@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
+import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
@@ -14,7 +14,8 @@ import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
-    const props = DataTableBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = DataTableBase.getProps(inProps, context);
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
     const [sortFieldState, setSortFieldState] = React.useState(props.sortField);
@@ -769,12 +770,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const createStyleElement = () => {
-        styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
     };
 
     const createResponsiveStyle = () => {
         if (!responsiveStyleElement.current) {
-            responsiveStyleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+            responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
             let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
             let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
@@ -909,7 +910,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
+        return ObjectUtils.sort(value1, value2, order, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const addSortMeta = (meta, multiSortMeta) => {
@@ -995,7 +996,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
+        if (ObjectUtils.compare(value1, value2, (context && context.locale) || PrimeReact.locale) === 0) {
             return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1) : 0;
         }
 
@@ -1141,7 +1142,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const field = getColumnProp(col, 'filterField') || getColumnProp(col, 'field');
                 const filterFunction = getColumnProp(col, 'filterFunction');
                 const dataType = getColumnProp(col, 'dataType');
-                const matchMode = getColumnProp(col, 'filterMatchMode') || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
+                const matchMode =
+                    getColumnProp(col, 'filterMatchMode') ||
+                    ((context && context.filterMatchModeOptions[dataType]) || PrimeReact.filterMatchModeOptions[dataType]
+                        ? (context && context.filterMatchModeOptions[dataType][0]) || PrimeReact.filterMatchModeOptions[dataType][0]
+                        : FilterMatchMode.STARTS_WITH);
                 let constraint = { value: null, matchMode };
 
                 if (filterFunction) {
@@ -1334,7 +1339,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
-        attributeSelector.current = UniqueComponentId();
+        if (elementRef.current) {
+            attributeSelector.current = UniqueComponentId();
+            elementRef.current.setAttribute(attributeSelector.current, '');
+        }
 
         //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
@@ -1349,8 +1357,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     });
 
     useUpdateEffect(() => {
-        elementRef.current.setAttribute(attributeSelector.current, '');
-
         if (props.responsiveLayout === 'stack' && !props.scrollable) {
             createResponsiveStyle();
         }
@@ -1703,7 +1709,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
         const wrapperProps = mergeProps(
             {
-                ref: wrapperRef,
                 className: 'p-datatable-wrapper',
                 style: { maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
             },
@@ -1711,7 +1716,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         );
 
         return (
-            <div {...wrapperProps}>
+            <div ref={wrapperRef} {...wrapperProps}>
                 <VirtualScroller
                     ref={virtualScrollerRef}
                     {...virtualScrollerOptions}
@@ -1825,14 +1830,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.resizableColumns) {
             const resizeHelperProps = mergeProps(
                 {
-                    ref: resizeHelperRef,
                     className: 'p-column-resizer-helper',
                     style: { display: 'none' }
                 },
                 ptCallbacks.ptm('resizeHelper')
             );
 
-            return <div {...resizeHelperProps}></div>;
+            return <div ref={resizeHelperRef} {...resizeHelperProps}></div>;
         }
 
         return null;
@@ -1913,7 +1917,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const reorderIndicators = createReorderIndicators();
     const rootProps = mergeProps(
         {
-            ref: elementRef,
             id: props.id,
             className,
             style: props.style,
@@ -1924,7 +1927,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     );
 
     return (
-        <div {...rootProps}>
+        <div ref={elementRef} {...rootProps}>
             {loader}
             {header}
             {paginatorTop}

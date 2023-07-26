@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
 
 export const PageLinks = React.memo((inProps) => {
-    const props = PageLinksBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = PageLinksBase.getProps(inProps, context);
 
     const getPTOptions = (pageLink, key) => {
         return props.ptm(key, {
@@ -45,7 +46,7 @@ export const PageLinks = React.memo((inProps) => {
                     onClick: (e) => onPageLinkClick(e, pageLink),
                     className,
                     disabled: props.disabled,
-                    'aria-label': ariaLabel('pageLabel', { page: pageLink + 1 })
+                    'aria-label': ariaLabel('pageLabel', { page: pageLink })
                 },
                 getPTOptions(pageLink, 'pageButton')
             );

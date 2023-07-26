@@ -20,7 +20,7 @@ export const HeaderCell = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return ptCallbacks.ptmo(getColumnProps(), key, {
+        return ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: parentParams,
             state: {
@@ -272,7 +272,8 @@ export const HeaderCell = React.memo((props) => {
                 {
                     className: 'p-sortable-column-badge'
                 },
-                getColumnPTOptions('sortBadge')
+                getColumnPTOptions('sortBadge'),
+                getColumnPTOptions('root')
             );
 
             return <span {...sortBadgeProps}>{value}</span>;
@@ -364,7 +365,6 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                ref: elementRef,
                 className,
                 style,
                 role: 'columnheader',
@@ -380,12 +380,13 @@ export const HeaderCell = React.memo((props) => {
                 rowSpan,
                 'aria-sort': ariaSort
             },
-            getColumnPTOptions('headerCell')
+            getColumnPTOptions('headerCell'),
+            getColumnPTOptions('root')
         );
 
         return (
             <>
-                <th {...headerCellProps}>
+                <th ref={elementRef} {...headerCellProps}>
                     {resizer}
                     {header}
                 </th>

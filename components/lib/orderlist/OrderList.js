@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';
@@ -8,7 +9,8 @@ import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = OrderListBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = OrderListBase.getProps(inProps, context);
 
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
@@ -167,7 +169,7 @@ export const OrderList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {

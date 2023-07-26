@@ -91,7 +91,7 @@ export interface ColumnPassThroughOptions {
     /**
      * Uses to pass attributes to the header cell's DOM element.
      */
-    headerCell?: ColumnPassThroughType<React.HTMLAttributes<HTMLTableHeaderCellElement>>;
+    headerCell?: ColumnPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the column resizer's DOM element.
      */

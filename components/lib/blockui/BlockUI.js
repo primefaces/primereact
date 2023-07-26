@@ -1,20 +1,24 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
-    const props = BlockUIBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = BlockUIBase.getProps(inProps, context);
 
     const [visibleState, setVisibleState] = React.useState(props.blocked);
     const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
 
-    const { ptm } = BlockUIBase.setMetaData({
+    const { ptm, cx, sx, isUnstyled } = BlockUIBase.setMetaData({
         props
     });
+
+    useHandleStyle(BlockUIBase.css.styles, isUnstyled, { name: 'blockui' });
 
     const block = () => {
         setVisibleState(true);
@@ -48,7 +52,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
         if (props.autoZIndex) {
             const key = props.fullScreen ? 'modal' : 'overlay';
 
-            ZIndexUtils.set(key, maskRef.current, PrimeReact.autoZIndex, props.baseZIndex || PrimeReact.zIndex[key]);
+            ZIndexUtils.set(key, maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
         }
 
         props.onBlocked && props.onBlocked();
@@ -80,16 +84,15 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const createMask = () => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';
-            const className = classNames(
-                'p-blockui p-component-overlay p-component-overlay-enter',
-                {
-                    'p-blockui-document': props.fullScreen
+            const maskProps =
+                ({
+                    className: cx('mask'),
+                    style: props.style
                 },
-                props.className
-            );
+                ptm('mask'));
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
             const mask = (
-                <div ref={maskRef} className={className} style={props.style}>
+                <div ref={maskRef} {...maskProps}>
                     {content}
                 </div>
             );
@@ -101,14 +104,13 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     };
 
     const mask = createMask();
-    const className = classNames('p-blockui-container', props.containerClassName);
 
     const rootProps = mergeProps(
         {
             id: props.id,
             ref: elementRef,
             style: props.containerStyle,
-            className: className
+            className: cx('root')
         },
         BlockUIBase.getOtherProps(props),
         ptm('root')

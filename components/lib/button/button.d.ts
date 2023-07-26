@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
 
@@ -45,6 +46,11 @@ export interface ButtonPassThroughOptions {
      * Uses to pass attributes to the badge's DOM element.
      */
     badge?: ButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**

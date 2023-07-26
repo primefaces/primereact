@@ -31,7 +31,7 @@ export interface ChipPassThroughOptions {
     /**
      * Uses to pass attributes to the image's DOM element.
      */
-    image?: ChipPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    image?: ChipPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
@@ -111,6 +111,11 @@ export interface ChipProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {ChipPassThroughOptions}
      */
     pt?: ChipPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

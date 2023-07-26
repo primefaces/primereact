@@ -9,10 +9,10 @@
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type ChipsPassThroughType<T> = PassThroughType<T, ChipsPassThroughMethodOptions>;
 
@@ -83,7 +83,7 @@ interface ChipsRemovableOptions {
     /**
      * Current value
      */
-    value: any;
+    value: string;
     /**
      * Current index
      */
@@ -106,7 +106,7 @@ interface ChipsAddEvent {
     /**
      * Added item value
      */
-    value: any;
+    value: string;
 }
 
 /**
@@ -121,7 +121,7 @@ interface ChipsRemoveEvent {
     /**
      * Removed item value
      */
-    value: any;
+    value: string;
 }
 
 /**
@@ -130,7 +130,7 @@ interface ChipsRemoveEvent {
  * @extends {FormEvent}
  * @event
  */
-interface ChipsChangeEvent extends FormEvent<any[]> {}
+interface ChipsChangeEvent extends FormEvent<string[]> {}
 
 /**
  * Defines valid properties in Chips component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -161,7 +161,7 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
     /**
      * Value of the component.
      */
-    value?: any[] | undefined;
+    value?: string[] | undefined;
     /**
      * Maximum number of entries allowed.
      */
@@ -262,6 +262,11 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      * @type {ChipsPassThroughOptions}
      */
     pt?: ChipsPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

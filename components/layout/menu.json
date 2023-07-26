@@ -172,6 +172,10 @@
                             "to": "/dataview"
                         },
                         {
+                            "name": "DataScroller",
+                            "to": "/datascroller"
+                        },
+                        {
                             "name": "OrderList",
                             "to": "/orderlist"
                         },
@@ -460,6 +464,11 @@
                     "href": "https://www.primefaces.org/designer/api/primereact/9.0.0"
                 }
             ]
+        },
+        {
+            "name": "Pass Through",
+            "icon": "pi pi-directions",
+            "to": "/passthrough"
         },
         {
             "name": "Figma UI Kit",

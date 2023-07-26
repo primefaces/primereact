@@ -1,7 +1,7 @@
+import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { PTDoc } from '../../components/doc/autocomplete/pt/ptdoc';
 import { Wireframe } from '../../components/doc/autocomplete/pt/wireframe';
-import React from 'react';
 import { AccessibilityDoc } from '../../components/doc/autocomplete/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/autocomplete/basicdoc';
 import { DisabledDoc } from '../../components/doc/autocomplete/disableddoc';

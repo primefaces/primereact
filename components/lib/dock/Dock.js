@@ -2,10 +2,12 @@ import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DockBase } from './DockBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = DockBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = DockBase.getProps(inProps, context);
 
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const { ptm } = DockBase.setMetaData({

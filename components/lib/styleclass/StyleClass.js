@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils } from '../utils/Utils';
 import { StyleClassBase } from './StyleClassBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const StyleClass = React.forwardRef((inProps, ref) => {
-    const props = StyleClassBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = StyleClassBase.getProps(inProps, context);
 
     const targetRef = React.useRef(null);
     const animating = React.useRef(false);
@@ -167,7 +169,7 @@ export const StyleClass = React.forwardRef((inProps, ref) => {
     };
 
     const isVisible = (target) => {
-        return target.offsetParent !== null;
+        return target && target.offsetParent !== null;
     };
 
     const isOutsideClick = (event) => {

@@ -7,9 +7,10 @@ import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
+    const { ptm, cx } = props;
 
     const getPTOptions = (item, key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 active: isItemActive(item)
             }
@@ -85,33 +86,30 @@ export const PanelMenuSub = React.memo((props) => {
         const separatorProps = mergeProps(
             {
                 key,
-                className: 'p-menu-separator'
+                className: cx('separator')
             },
-            props.ptm('separator')
+            ptm('separator')
         );
 
         return <li {...separatorProps}></li>;
     };
 
     const createSubmenu = (item, active) => {
-        const className = classNames('p-toggleable-content', {
-            'p-toggleable-content-collapsed': !active
-        });
         const submenuRef = React.createRef();
 
         const toggleableContentProps = mergeProps(
             {
                 ref: submenuRef,
-                className
+                className: cx('toggleableContent', { active })
             },
-            props.ptm('toggleableContent')
+            ptm('toggleableContent')
         );
 
         if (item.items) {
             return (
                 <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
                     <div {...toggleableContentProps}>
-                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={props.ptm} />
+                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>
                 </CSSTransition>
             );
@@ -132,14 +130,14 @@ export const PanelMenuSub = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const iconProps = mergeProps(
             {
-                className: iconClassName
+                className: cx('icon', { item })
             },
             getPTOptions(item, 'icon')
         );
         const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
         const labelProps = mergeProps(
             {
-                className: 'p-menuitem-text'
+                className: cx('label')
             },
             getPTOptions(item, 'label')
         );
@@ -147,7 +145,7 @@ export const PanelMenuSub = React.memo((props) => {
         const submenuIconClassName = 'p-panelmenu-icon';
         const submenuIconProps = mergeProps(
             {
-                className: submenuIconClassName
+                className: cx('submenuicon')
             },
             getPTOptions(item, 'submenuicon')
         );
@@ -156,7 +154,7 @@ export const PanelMenuSub = React.memo((props) => {
         const actionProps = mergeProps(
             {
                 href: item.url || '#',
-                className: linkClassName,
+                className: cx('action', { item }),
                 target: item.target,
                 onClick: (event) => onItemClick(event, item, index),
                 role: 'menuitem',
@@ -193,7 +191,7 @@ export const PanelMenuSub = React.memo((props) => {
             {
                 key,
                 id: item.id,
-                className,
+                className: cx('menuitem', { item }),
                 style: item.style,
                 role: 'none'
             },
@@ -216,15 +214,14 @@ export const PanelMenuSub = React.memo((props) => {
         return props.model ? props.model.map(createItem) : null;
     };
 
-    const className = classNames('p-submenu-list', props.className);
     const menu = createMenu();
 
     const menuProps = mergeProps(
         {
-            className,
+            className: cx('menu', { subProps: props }),
             role: 'tree'
         },
-        props.ptm('menu')
+        ptm('menu')
     );
 
     return <ul {...menuProps}>{menu}</ul>;

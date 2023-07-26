@@ -155,6 +155,11 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      * @type {TieredMenuPassThroughOptions}
      */
     pt?: TieredMenuPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

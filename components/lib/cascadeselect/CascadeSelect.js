@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -8,13 +8,17 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
+import PrimeReact from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = CascadeSelectBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = CascadeSelectBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm } = CascadeSelectBase.setMetaData({
+        const { ptm, cx, isUnstyled } = CascadeSelectBase.setMetaData({
             props,
             state: {
                 focused: focusedState,
@@ -22,6 +26,8 @@ export const CascadeSelect = React.memo(
                 attributeSelector: attributeSelectorState
             }
         });
+
+        useHandleStyle(CascadeSelectBase.css.styles, isUnstyled, { name: 'cascadeselect' });
         const elementRef = React.useRef(null);
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(null);
@@ -179,7 +185,8 @@ export const CascadeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
 
             if (attributeSelectorState && props.breakpoint) {
@@ -206,12 +213,12 @@ export const CascadeSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, labelRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 const selector = `${attributeSelectorState}_panel`;
                 const innerHTML = `
@@ -314,15 +321,11 @@ export const CascadeSelect = React.memo(
 
         const createLabel = () => {
             const label = props.value ? getOptionLabel(props.value) : props.placeholder || 'p-emptylabel';
-            const labelClassName = classNames('p-cascadeselect-label ', {
-                'p-placeholder': label === props.placeholder,
-                'p-cascadeselect-label-empty': !props.value && label === 'p-emptylabel'
-            });
 
             const labelProps = mergeProps(
                 {
                     ref: labelRef,
-                    className: labelClassName
+                    className: cx('label', { label })
                 },
                 ptm('label')
             );
@@ -331,10 +334,9 @@ export const CascadeSelect = React.memo(
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = 'p-cascadeselect-trigger-icon';
             const dropdownIconProps = mergeProps(
                 {
-                    className: iconClassName
+                    className: cx('dropdownIcon')
                 },
                 ptm('dropdownIcon')
             );
@@ -342,7 +344,7 @@ export const CascadeSelect = React.memo(
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
             const dropdownButtonProps = mergeProps(
                 {
-                    className: 'p-cascadeselect-trigger',
+                    className: cx('dropdownButton'),
                     role: 'button',
                     'aria-haspopup': 'listbox',
                     'aria-expanded': overlayVisibleState
@@ -355,7 +357,7 @@ export const CascadeSelect = React.memo(
 
         const wrapperProps = mergeProps(
             {
-                className: 'p-cascadeselect-items-wrapper'
+                className: cx('wrapper')
             },
             ptm('wrapper')
         );
@@ -363,7 +365,7 @@ export const CascadeSelect = React.memo(
         const panelProps = mergeProps(
             {
                 ref: overlayRef,
-                className: 'p-cascadeselect-panel p-component',
+                className: cx('panel'),
                 onClick: (e) => onPanelClick(e)
             },
             ptm('panel')
@@ -401,6 +403,7 @@ export const CascadeSelect = React.memo(
                                 template={props.itemTemplate}
                                 onPanelHide={hide}
                                 ptm={ptm}
+                                cx={cx}
                             />
                         </div>
                     </div>
@@ -411,17 +414,6 @@ export const CascadeSelect = React.memo(
         };
 
         const createElement = () => {
-            const className = classNames(
-                'p-cascadeselect p-component p-inputwrapper',
-                {
-                    'p-disabled': props.disabled,
-                    'p-focus': focusedState,
-                    'p-inputwrapper-filled': props.value,
-                    'p-inputwrapper-focus': focusedState || overlayVisibleState
-                },
-                props.className
-            );
-
             const keyboardHelper = createKeyboardHelper();
             const labelElement = createLabel();
             const dropdownIcon = createDropdownIcon();
@@ -430,7 +422,7 @@ export const CascadeSelect = React.memo(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className,
+                    className: cx('root', { focusedState, overlayVisibleState }),
                     style: props.style,
                     onClick: (e) => onClick(e)
                 },

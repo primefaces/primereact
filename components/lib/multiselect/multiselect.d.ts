@@ -88,6 +88,10 @@ export interface MultiSelectPassThroughOptions {
      */
     headerCheckbox?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the header checkbox's DOM element.
+     */
+    headerSelectAllLabel?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLabelElement>>;
+    /**
      * Uses to pass attributes to the filter container's DOM element.
      */
     filterContainer?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
@@ -426,6 +430,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     emptyFilterMessage?: React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
     /**
+     * Text to display when there are no options available. Defaults to global value in Locale configuration.
+     */
+    emptyMessage?: string;
+    /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue true
      */
@@ -568,6 +576,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     pt?: MultiSelectPassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Icon of the remove chip element.
      */
     removeIcon?: IconType<MultiSelectProps> | undefined;
@@ -609,6 +622,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue true
      */
     showSelectAll?: boolean | undefined;
+    /**
+     * Label to display if showSelectAll is true
+     */
+    selectAllLabel?: string;
     /**
      * Inline style of the element.
      */

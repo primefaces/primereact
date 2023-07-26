@@ -10,10 +10,11 @@
 import * as React from 'react';
 import { CSSTransitionProps } from '../csstransition';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
-import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
 
 export declare type DropdownPassThroughType<T> = PassThroughType<T, DropdownPassThroughMethodOptions>;
 
@@ -97,10 +98,6 @@ export interface DropdownPassThroughOptions {
      */
     emptyMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
     /**
-     * Uses to pass attributes to the hidden selected message's DOM element.
-     */
-    hiddenSelectedMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the select's DOM element.
      */
     select?: DropdownPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
@@ -108,6 +105,15 @@ export interface DropdownPassThroughOptions {
      * Uses to pass attributes to the option's DOM element.
      */
     option?: DropdownPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Uses to pass attributes to the hidden selected message's DOM element.
+     */
+    hiddenSelectedMessage?: DropdownPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
 }
 
 /**
@@ -479,6 +485,11 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {DropdownPassThroughOptions}
      */
     pt?: DropdownPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
@@ -517,4 +528,9 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
      * @return {HTMLElement} Overlay element
      */
     public getOverlay(): HTMLElement;
+    /**
+     * Used to get the options of inline virtualScroller component.
+     * @return {VirtualScroller} VirtualScroller component
+     */
+    public getVirtualScroller(): VirtualScroller;
 }

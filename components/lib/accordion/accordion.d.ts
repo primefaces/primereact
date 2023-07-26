@@ -118,6 +118,11 @@ interface AccordionTabProps {
      * @type {AccordionTabPassThroughOptions}
      */
     pt?: AccordionTabPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

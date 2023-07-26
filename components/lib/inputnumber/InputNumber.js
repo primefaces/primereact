@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -7,17 +8,22 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
+import PrimeReact from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputNumberBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm } = InputNumberBase.setMetaData({
+        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
+
+        useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
@@ -37,6 +43,7 @@ export const InputNumber = React.memo(
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
 
+        const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
         const vertical = props.showButtons && props.buttonLayout === 'vertical';
@@ -55,8 +62,8 @@ export const InputNumber = React.memo(
         };
 
         const constructParser = () => {
-            numberFormat.current = new Intl.NumberFormat(props.locale, getOptions());
-            const numerals = [...new Intl.NumberFormat(props.locale, { useGrouping: false }).format(9876543210)].reverse();
+            numberFormat.current = new Intl.NumberFormat(_locale, getOptions());
+            const numerals = [...new Intl.NumberFormat(_locale, { useGrouping: false }).format(9876543210)].reverse();
             const index = new Map(numerals.map((d, i) => [d, i]));
 
             _numeral.current = new RegExp(`[${numerals.join('')}]`, 'g');
@@ -74,13 +81,13 @@ export const InputNumber = React.memo(
         };
 
         const getDecimalExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { ...getOptions(), useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { ...getOptions(), useGrouping: false });
 
             return new RegExp(`[${formatter.format(1.1).replace(_currency.current, '').trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getGroupingExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: true });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: true });
 
             groupChar.current = formatter.format(1000000).trim().replace(_numeral.current, '').charAt(0);
 
@@ -88,14 +95,14 @@ export const InputNumber = React.memo(
         };
 
         const getMinusSignExpression = () => {
-            const formatter = new Intl.NumberFormat(props.locale, { useGrouping: false });
+            const formatter = new Intl.NumberFormat(_locale, { useGrouping: false });
 
             return new RegExp(`[${formatter.format(-1).trim().replace(_numeral.current, '')}]`, 'g');
         };
 
         const getCurrencyExpression = () => {
             if (props.currency) {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: 'currency',
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
@@ -113,7 +120,7 @@ export const InputNumber = React.memo(
             if (props.prefix) {
                 prefixChar.current = props.prefix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
+                const formatter = new Intl.NumberFormat(_locale, { style: props.mode, currency: props.currency, currencyDisplay: props.currencyDisplay });
 
                 prefixChar.current = formatter.format(1).split('1')[0];
             }
@@ -125,7 +132,7 @@ export const InputNumber = React.memo(
             if (props.suffix) {
                 suffixChar.current = props.suffix;
             } else {
-                const formatter = new Intl.NumberFormat(props.locale, {
+                const formatter = new Intl.NumberFormat(_locale, {
                     style: props.mode,
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
@@ -147,7 +154,7 @@ export const InputNumber = React.memo(
                 }
 
                 if (props.format) {
-                    let formatter = new Intl.NumberFormat(props.locale, getOptions());
+                    let formatter = new Intl.NumberFormat(_locale, getOptions());
                     let _formattedValue = formatter.format(value);
 
                     if (props.prefix) {
@@ -1034,26 +1041,18 @@ export const InputNumber = React.memo(
         };
 
         const createUpButton = () => {
-            const className = classNames(
-                'p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component',
-                {
-                    'p-disabled': props.disabled
-                },
-                props.incrementButtonClassName
-            );
-            const iconsClassName = 'p-button-icon';
             const incrementIconProps = mergeProps(
                 {
-                    className: iconsClassName
+                    className: cx('incrementIcon')
                 },
-                ptm('incrementIconProps')
+                ptm('incrementIcon')
             );
             const icon = props.incrementButtonIcon || <AngleUpIcon {...incrementIconProps} />;
             const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
             const incrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className,
+                    className: cx('incrementButton'),
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
                     onPointerUp: onUpButtonMouseUp,
@@ -1074,26 +1073,18 @@ export const InputNumber = React.memo(
         };
 
         const createDownButton = () => {
-            const className = classNames(
-                'p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component',
-                {
-                    'p-disabled': props.disabled
-                },
-                props.decrementButtonClassName
-            );
-            const iconsClassName = 'p-button-icon';
             const decrementIconProps = mergeProps(
                 {
-                    className: iconsClassName
+                    className: cx('decrementIcon')
                 },
-                ptm('decrementIconProps')
+                ptm('decrementIcon')
             );
             const icon = props.decrementButtonIcon || <AngleDownIcon {...decrementIconProps} />;
             const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
             const decrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className,
+                    className: cx('decrementButton'),
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
                     onPointerUp: onDownButtonMouseUp,
@@ -1118,7 +1109,7 @@ export const InputNumber = React.memo(
             const downButton = props.showButtons && createDownButton();
             const buttonGroupProps = mergeProps(
                 {
-                    className: 'p-inputnumber-button-group'
+                    className: cx('buttonGroup')
                 },
                 ptm('buttonGroup')
             );
@@ -1144,24 +1135,13 @@ export const InputNumber = React.memo(
         const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-inputnumber p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
-                'p-inputwrapper-focus': focusedState,
-                'p-inputnumber-buttons-stacked': stacked,
-                'p-inputnumber-buttons-horizontal': horizontal,
-                'p-inputnumber-buttons-vertical': vertical
-            },
-            props.className
-        );
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: cx('root', { focusedState, stacked, horizontal, vertical }),
                 style: props.style
             },
             otherProps,
@@ -1174,7 +1154,7 @@ export const InputNumber = React.memo(
                     {inputElement}
                     {buttonGroup}
                 </span>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

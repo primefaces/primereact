@@ -1,19 +1,24 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputTextareaBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = InputTextareaBase.getProps(inProps, context);
 
         const elementRef = React.useRef(ref);
         const cachedScrollHeight = React.useRef(0);
 
-        const { ptm } = InputTextareaBase.setMetaData({
+        const { ptm, cx, isUnstyled } = InputTextareaBase.setMetaData({
             props
         });
+
+        useHandleStyle(InputTextareaBase.css.styles, isUnstyled, { name: 'inputtextarea' });
 
         const onFocus = (event) => {
             if (props.autoResize) {
@@ -112,20 +117,11 @@ export const InputTextarea = React.memo(
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
-        const className = classNames(
-            'p-inputtextarea p-inputtext p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled,
-                'p-inputtextarea-resizable': props.autoResize
-            },
-            props.className
-        );
 
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: className,
+                className: cx('root', { isFilled }),
                 onFocus: onFocus,
                 onBlur: onBlur,
                 onKeyUp: onKeyUp,

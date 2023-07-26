@@ -2351,6 +2351,9 @@
   font-size: 1.25rem;
   padding: 0.71375rem 0.9375rem;
 }
+.p-splitbutton.p-button-lg > .p-button.p-button-icon-only {
+  width: auto;
+}
 .p-splitbutton.p-button-lg > .p-button .p-button-icon {
   font-size: 1.25rem;
 }
@@ -3902,7 +3905,7 @@
   width: 2rem;
   height: 2rem;
 }
-.p-treetable.p-treetable-gridlines .p-datatable-header {
+.p-treetable.p-treetable-gridlines .p-treetable-header {
   border-width: 1px 1px 0 1px;
 }
 .p-treetable.p-treetable-gridlines .p-treetable-footer {
@@ -3922,6 +3925,22 @@
 }
 .p-treetable.p-treetable-gridlines .p-treetable-tfoot > tr > td {
   border-width: 1px;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd {
+  background: #222222;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight {
+  background: rgba(159, 168, 218, 0.16);
+  color: #9FA8DA;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight .p-row-toggler {
+  color: #9FA8DA;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight .p-row-toggler:hover {
+  color: #9FA8DA;
+}
+.p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd + .p-row-expanded {
+  background: #222222;
 }
 .p-treetable.p-treetable-sm .p-treetable-header {
   padding: 0.65625rem 0.65625rem;

@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { snapshot } from '../../test';
+import { PrimeReactProvider } from '../api/Api';
 import { Panel } from './Panel';
 
 const template = (options) => {
@@ -20,26 +21,37 @@ const template = (options) => {
 };
 
 describe('Panel', () => {
-    snapshot(<Panel />, 'default');
     snapshot(
-        <Panel id="Panel" header="Simple Panel">
-            Content
-        </Panel>,
+        <PrimeReactProvider>
+            <Panel />
+        </PrimeReactProvider>,
+        'default'
+    );
+    snapshot(
+        <PrimeReactProvider>
+            <Panel id="Panel" header="Simple Panel">
+                Content
+            </Panel>
+        </PrimeReactProvider>,
         'header'
     );
     snapshot(
-        <Panel headerTemplate={template} toggleable>
-            Content
-        </Panel>,
+        <PrimeReactProvider>
+            <Panel headerTemplate={template} toggleable>
+                Content
+            </Panel>
+        </PrimeReactProvider>,
         'headerTemplate'
     );
     test('when Panel is toggleable it will toggle when clicked', async () => {
         // Arrange
         const toggleOn = jest.fn();
         const { container } = render(
-            <Panel header="Toggleable" toggleable onToggle={toggleOn}>
-                <p>Lorem ipsum dolor sit amet</p>
-            </Panel>
+            <PrimeReactProvider>
+                <Panel header="Toggleable" toggleable onToggle={toggleOn}>
+                    <p>Lorem ipsum dolor sit amet</p>
+                </Panel>
+            </PrimeReactProvider>
         );
         const toggler = container.getElementsByClassName('p-panel-toggler')[0];
 
@@ -57,9 +69,11 @@ describe('Panel', () => {
         const expandOn = jest.fn();
         const collapseOn = jest.fn();
         const { container } = render(
-            <Panel header="Expand/Collapse" toggleable onExpand={expandOn} onCollapse={collapseOn}>
-                <p>Lorem ipsum dolor sit amet</p>
-            </Panel>
+            <PrimeReactProvider>
+                <Panel header="Expand/Collapse" toggleable onExpand={expandOn} onCollapse={collapseOn}>
+                    <p>Lorem ipsum dolor sit amet</p>
+                </Panel>
+            </PrimeReactProvider>
         );
         const toggler = container.getElementsByClassName('p-panel-toggler')[0];
 

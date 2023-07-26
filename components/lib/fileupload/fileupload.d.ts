@@ -8,11 +8,11 @@
  *
  */
 import * as React from 'react';
-import { IconType, PassThroughType } from '../utils';
+import { BadgePassThroughOptions } from '../badge/badge';
 import { ButtonPassThroughOptions } from '../button/button';
 import { MessagePassThroughOptions } from '../message/message';
 import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
-import { BadgePassThroughOptions } from '../badge/badge';
+import { IconType, PassThroughType } from '../utils';
 
 export declare type FileUploadPassThroughType<T> = PassThroughType<T, FileUploadPassThroughMethodOptions>;
 
@@ -84,7 +84,7 @@ export interface FileUploadPassThroughOptions {
     /**
      * Uses to pass attributes to the thumbnail's DOM element.
      */
-    thumbnail?: FileUploadPassThroughType<React.HTMLAttributes<HTMLImageElement>>;
+    thumbnail?: FileUploadPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
     /**
      * Uses to pass attributes to the details's DOM element.
      */
@@ -595,6 +595,11 @@ interface FileUploadProps {
      * @type {FileUploadPassThroughOptions}
      */
     pt?: FileUploadPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
@@ -647,4 +652,14 @@ export declare class FileUpload extends React.Component<FileUploadProps, any> {
      * @param {File[]} files - Current files.
      */
     public setFiles(files: File[]): void;
+    /**
+     * Gets the current uploaded files list.
+     * @return {File[]} Current uploaded files.
+     */
+    public getUploadedFiles(): File[];
+    /**
+     * Sets the current uploaded files list.
+     * @param {File[]} files - Current uploaded files.
+     */
+    public setUploadedFiles(files: File[]): void;
 }

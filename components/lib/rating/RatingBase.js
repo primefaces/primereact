@@ -1,4 +1,39 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
+
+const classes = {
+    onIcon: 'p-rating-icon',
+    item: ({ active }) => classNames('p-rating-item', { 'p-rating-item-active': active }),
+    cancelIcon: 'p-rating-icon p-rating-cancel',
+    cancelItem: 'p-rating-item p-rating-cancel-item',
+    root: ({ props }) =>
+        classNames(
+            'p-rating',
+            {
+                'p-disabled': props.disabled,
+                'p-readonly': props.readOnly
+            },
+            props.className
+        )
+};
+
+const styles = `
+.p-rating {
+    display: flex;
+    align-items: center;
+}
+
+.p-rating-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.p-rating.p-readonly .p-rating-item {
+    cursor: default;
+}
+
+`;
 
 export const RatingBase = ComponentBase.extend({
     defaultProps: {
@@ -21,5 +56,9 @@ export const RatingBase = ComponentBase.extend({
         onIconProps: null,
         offIconProps: null,
         children: undefined
+    },
+    css: {
+        classes,
+        styles
     }
 });
