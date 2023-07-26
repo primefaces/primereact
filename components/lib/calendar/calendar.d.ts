@@ -499,6 +499,10 @@ export interface CalendarProps {
      */
     disabledDays?: number[] | undefined;
     /**
+     * Array with dates to enable (all other dates will be disabled).
+     */
+    enabledDates?: Date[] | undefined;
+    /**
      * Whether to hide the overlay on date selection when showTime is enabled.
      * @defaultValue false
      */

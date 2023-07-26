@@ -239,6 +239,7 @@ export const CalendarBase = ComponentBase.extend({
         disabled: false,
         disabledDates: null,
         disabledDays: null,
+        enabledDates: null,
         footerTemplate: null,
         formatDateTime: null,
         headerTemplate: null,

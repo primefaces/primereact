@@ -264,6 +264,12 @@ const CalendarProps = [
         description: 'Array with disabled weekday numbers.'
     },
     {
+        name: 'enabledDates',
+        type: 'array;',
+        default: 'null',
+        description: 'Array with dates to enable (all other dates will be disabled).'
+    },
+    {
         name: 'minDate',
         type: 'Date',
         default: 'null',
