@@ -195,6 +195,11 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {MegaMenuPassThroughOptions}
      */
     pt?: MegaMenuPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
