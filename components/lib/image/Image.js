@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
@@ -11,7 +11,7 @@ import { SearchPlusIcon } from '../icons/searchplus';
 import { TimesIcon } from '../icons/times';
 import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
@@ -29,7 +29,7 @@ export const Image = React.memo(
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
 
-        const { ptm } = ImageBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
             props,
             state: {
                 maskVisible: maskVisibleState,
@@ -38,6 +38,8 @@ export const Image = React.memo(
                 scale: scaleState
             }
         });
+
+        useHandleStyle(ImageBase.css.styles, isUnstyled, { name: 'image' });
 
         const show = () => {
             if (props.preview) {
@@ -118,7 +120,7 @@ export const Image = React.memo(
         const createPreview = () => {
             const buttonProps = mergeProps(
                 {
-                    className: 'p-image-preview-indicator',
+                    className: cx('button'),
                     onClick: show
                 },
                 ptm('button')
@@ -133,7 +135,6 @@ export const Image = React.memo(
 
         const createElement = () => {
             const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
-            const imagePreviewStyle = { transform: 'rotate(' + rotateState + 'deg) scale(' + scaleState + ')' };
             const zoomOutDisabled = scaleState <= 0.5;
             const zoomInDisabled = scaleState >= 1.5;
             const downloadIconProps = mergeProps(ptm('downloadIcon'));
@@ -152,7 +153,7 @@ export const Image = React.memo(
             const maskProps = mergeProps(
                 {
                     ref: maskRef,
-                    className: 'p-image-mask p-component-overlay p-component-overlay-enter',
+                    className: cx('mask'),
                     onPointerUp: hide
                 },
                 ptm('mask')
@@ -160,14 +161,14 @@ export const Image = React.memo(
 
             const toolbarProps = mergeProps(
                 {
-                    className: 'p-image-toolbar'
+                    className: cx('toolbar')
                 },
                 ptm('toolbar')
             );
 
             const downloadButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: cx('downloadButton'),
                     onPointerUp: onDownload,
                     type: 'button'
                 },
@@ -176,7 +177,7 @@ export const Image = React.memo(
 
             const rotateRightButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: cx('rotateRightButton'),
                     onPointerUp: rotateRight,
                     type: 'button'
                 },
@@ -185,7 +186,7 @@ export const Image = React.memo(
 
             const rotateLeftButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: cx('rotateLeftButton'),
                     onPointerUp: rotateLeft,
                     type: 'button'
                 },
@@ -194,7 +195,7 @@ export const Image = React.memo(
 
             const zoomOutButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: cx('zoomOutButton'),
                     onPointerUp: zoomOut,
                     type: 'button',
                     disabled: zoomOutDisabled
@@ -204,7 +205,7 @@ export const Image = React.memo(
 
             const zoomInButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: cx('zoomInButton'),
                     onPointerUp: zoomIn,
                     type: 'button',
                     disabled: zoomInDisabled
@@ -214,7 +215,7 @@ export const Image = React.memo(
 
             const closeButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: cx('closeButton'),
                     type: 'button',
                     'aria-label': localeOption('close')
                 },
@@ -224,8 +225,8 @@ export const Image = React.memo(
             const previewProps = mergeProps(
                 {
                     src: props.zoomSrc || props.src,
-                    className: 'p-image-preview',
-                    style: imagePreviewStyle,
+                    className: cx('preview'),
+                    style: sx('preview', { rotateState, scaleState }),
                     onPointerUp: onPreviewImageClick,
                     crossOrigin: crossOrigin,
                     referrerPolicy: referrerPolicy,
@@ -280,14 +281,10 @@ export const Image = React.memo(
         }));
 
         const { src, alt, width, height, crossOrigin, referrerPolicy, useMap, loading } = props;
-        const containerClassName = classNames('p-image p-component', props.className, {
-            'p-image-preview-container': props.preview
-        });
         const element = createElement();
-        const iconClassName = 'p-image-preview-icon';
         const iconProp = mergeProps(
             {
-                className: iconClassName
+                className: cx('icon')
             },
             ptm('icon')
         );
@@ -316,7 +313,7 @@ export const Image = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: containerClassName
+                className: cx('root')
             },
             ImageBase.getOtherProps(props),
             ptm('root')
