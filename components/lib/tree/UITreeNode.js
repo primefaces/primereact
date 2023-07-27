@@ -418,7 +418,7 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const isChecked = () => {
-        return props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false;
+        return (props.selectionKeys ? props.selectionKeys[props.node.key] && props.selectionKeys[props.node.key].checked : false) || false;
     };
 
     const isPartialChecked = () => {
