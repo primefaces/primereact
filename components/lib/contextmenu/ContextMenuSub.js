@@ -2,16 +2,17 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { AngleRightIcon } from '../icons/angleright';
 
 export const ContextMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const submenuRef = React.useRef(null);
     const active = props.root || !props.resetMenu;
+    const { ptm, cx } = props;
 
     const getPTOptions = (item, key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 active: activeItemState === item
             }
@@ -96,9 +97,9 @@ export const ContextMenuSub = React.memo((props) => {
             {
                 role: 'separator',
                 key: 'separator_' + index,
-                className: 'p-menu-separator'
+                className: cx('separator')
             },
-            props.ptm('separator')
+            ptm('separator')
         );
 
         return <li {...separatorProps}></li>;
@@ -106,7 +107,7 @@ export const ContextMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} isMobileMode={props.isMobileMode} submenuIcon={props.submenuIcon} ptm={props.ptm} />;
+            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} isMobileMode={props.isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
         }
 
         return null;
@@ -119,27 +120,23 @@ export const ContextMenuSub = React.memo((props) => {
 
         const active = activeItemState === item;
         const key = item.label + '_' + index;
-        const className = classNames('p-menuitem', { 'p-menuitem-active': active }, item.className);
-        const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
-        const iconClassName = 'p-menuitem-icon';
         const iconProps = mergeProps(
             {
-                className: iconClassName
+                className: cx('icon')
             },
             getPTOptions(item, 'icon')
         );
         const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
-        const submenuIconClassName = 'p-submenu-icon';
         const submenuIconProps = mergeProps(
             {
-                className: submenuIconClassName
+                className: cx('submenuIcon')
             },
             getPTOptions(item, 'submenuIcon')
         );
 
         const labelProps = mergeProps(
             {
-                className: 'p-menuitem-text'
+                className: cx('label')
             },
             getPTOptions(item, 'label')
         );
@@ -149,7 +146,7 @@ export const ContextMenuSub = React.memo((props) => {
         const actionProps = mergeProps(
             {
                 href: item.url || '#',
-                className: linkClassName,
+                className: cx('action', { item }),
                 target: item.target,
                 onClick: (event) => onItemClick(event, item, index),
                 role: 'menuitem',
@@ -173,7 +170,7 @@ export const ContextMenuSub = React.memo((props) => {
                 onClick: (event) => onItemClick(event, item, index),
                 className: 'p-menuitem-link',
                 labelClassName: 'p-menuitem-text',
-                iconClassName,
+                iconClassName: 'p-menuitem-icon',
                 submenuIconClassName,
                 element: content,
                 props,
@@ -187,7 +184,7 @@ export const ContextMenuSub = React.memo((props) => {
             {
                 id: item.id,
                 role: 'none',
-                className,
+                className: cx('menuitem', { item, active }),
                 style: item.style,
                 key,
                 onMouseEnter: (event) => onItemMouseEnter(event, item)
@@ -211,21 +208,19 @@ export const ContextMenuSub = React.memo((props) => {
         return props.model ? props.model.map(createItem) : null;
     };
 
-    const className = classNames({
-        'p-submenu-list': !props.root
-    });
     const submenu = createMenu();
     const menuProps = mergeProps(
         {
-            ref: submenuRef,
-            className
+            className: cx('menu', { menuProps: props })
         },
-        props.ptm('menu')
+        ptm('menu')
     );
 
     return (
         <CSSTransition nodeRef={submenuRef} classNames="p-contextmenusub" in={active} timeout={{ enter: 0, exit: 0 }} unmountOnExit onEnter={onEnter}>
-            <ul {...menuProps}>{submenu}</ul>
+            <ul ref={submenuRef} {...menuProps}>
+                {submenu}
+            </ul>
         </CSSTransition>
     );
 });

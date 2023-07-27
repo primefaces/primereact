@@ -6,6 +6,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -16,7 +17,7 @@ export const ContextMenu = React.memo(
         const [reshowState, setReshowState] = React.useState(false);
         const [resetMenuState, setResetMenuState] = React.useState(false);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm } = ContextMenuBase.setMetaData({
+        const { ptm, cx, isUnstyled } = ContextMenuBase.setMetaData({
             props,
             state: {
                 visible: visibleState,
@@ -25,6 +26,8 @@ export const ContextMenu = React.memo(
                 attributeSelector: attributeSelectorState
             }
         });
+
+        useHandleStyle(ContextMenuBase.css.styles, isUnstyled, { name: 'contextmenu' });
         const menuRef = React.useRef(null);
         const currentEvent = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -128,6 +131,8 @@ export const ContextMenu = React.memo(
         };
 
         const onEnter = () => {
+            DomHandler.addStyles(menuRef.current, { position: 'absolute' });
+
             if (props.autoZIndex) {
                 ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
@@ -251,16 +256,10 @@ export const ContextMenu = React.memo(
         }));
 
         const createContextMenu = () => {
-            const className = classNames('p-contextmenu p-component', props.className, {
-                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-            });
-
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    ref: menuRef,
-                    className,
+                    className: cx('root', { context }),
                     style: props.style,
                     onClick: (e) => onMenuClick(e),
                     onMouseEnter: (e) => onMenuMouseEnter(e)
@@ -282,8 +281,8 @@ export const ContextMenu = React.memo(
                     onExit={onExit}
                     onExited={onExited}
                 >
-                    <div {...rootProps}>
-                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} />
+                    <div ref={menuRef} {...rootProps}>
+                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>
                 </CSSTransition>
             );
