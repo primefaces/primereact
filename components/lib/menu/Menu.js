@@ -7,18 +7,21 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
 import PrimeReact from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = MenuBase.getProps(inProps, context);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
-        const { ptm } = MenuBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = MenuBase.setMetaData({
             props,
             state: {
                 visible: visibleState
             }
         });
+
+        useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
 
@@ -151,18 +154,11 @@ export const Menu = React.memo(
 
         const createSubmenu = (submenu, index) => {
             const key = submenu.label + '_' + index;
-            const className = classNames(
-                'p-submenu-header',
-                {
-                    'p-disabled': submenu.disabled
-                },
-                submenu.className
-            );
             const items = submenu.items.map(createMenuItem);
             const submenuHeaderProps = mergeProps(
                 {
-                    className,
-                    style: submenu.style,
+                    className: cx('submenuHeader', { submenu }),
+                    style: sx('submenuHeader', { submenu }),
                     role: 'presentation'
                 },
                 ptm('submenuHeader')
@@ -181,7 +177,7 @@ export const Menu = React.memo(
             const separatorProps = mergeProps(
                 {
                     key,
-                    className: 'p-menu-separator',
+                    className: cx('separator'),
                     role: 'separator'
                 },
                 ptm('separator')
@@ -195,19 +191,18 @@ export const Menu = React.memo(
                 return null;
             }
 
-            const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
-                    className: 'p-menuitem-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
-                    className: 'p-menuitem-text'
+                    className: cx('label')
                 },
                 ptm('label')
             );
@@ -217,7 +212,7 @@ export const Menu = React.memo(
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: linkClassName,
+                    className: cx('action', { item }),
                     role: 'menuitem',
                     target: item.target,
                     onClick: (event) => onItemClick(event, item),
@@ -253,8 +248,8 @@ export const Menu = React.memo(
             const menuitemProps = mergeProps(
                 {
                     key,
-                    className,
-                    style: item.style,
+                    className: cx('menuitem', { item }),
+                    style: sx('menuitem', { item }),
                     role: 'none'
                 },
                 ptm('menuitem')
@@ -273,21 +268,12 @@ export const Menu = React.memo(
 
         const createElement = () => {
             if (props.model) {
-                const className = classNames(
-                    'p-menu p-component',
-                    {
-                        'p-menu-overlay': props.popup,
-                        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-                        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-                    },
-                    props.className
-                );
                 const menuitems = createMenu();
                 const rootProps = mergeProps(
                     {
                         ref: menuRef,
                         id: props.id,
-                        className,
+                        className: cx('root', { context }),
                         style: props.style,
                         onClick: (e) => onPanelClick(e)
                     },
@@ -297,7 +283,7 @@ export const Menu = React.memo(
 
                 const menuProps = mergeProps(
                     {
-                        className: 'p-menu-list p-reset',
+                        className: cx('menu'),
                         role: 'menu'
                     },
                     ptm('menu')
