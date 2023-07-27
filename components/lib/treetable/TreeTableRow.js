@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { CheckIcon } from '../icons/check';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
-import { ChevronDownIcon } from '../icons/chevrondown';
-import { ChevronRightIcon } from '../icons/chevronright';
-import { CheckIcon } from '../icons/check';
-import { MinusIcon } from '../icons/minus';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -428,10 +428,12 @@ export const TreeTableRow = React.memo((props) => {
             <TreeTableBodyCell
                 key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
                 {...ColumnBase.getCProps(column)}
+                index={index}
                 column={column}
                 selectOnEdit={props.selectOnEdit}
                 selected={isSelected()}
                 node={props.node}
+                rowData={props.node && props.node.data}
                 rowIndex={props.rowIndex}
                 ptCallbacks={props.ptCallbacks}
                 metaData={props.metaData}
