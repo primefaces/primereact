@@ -116,6 +116,11 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {TabMenuPassThroughOptions}
      */
     pt?: TabMenuPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
