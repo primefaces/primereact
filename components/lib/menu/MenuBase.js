@@ -1,6 +1,6 @@
 import PrimeReact from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/utils';
+import { classNames } from '../utils/Utils';
 
 const styles = `
 .p-menu-overlay {

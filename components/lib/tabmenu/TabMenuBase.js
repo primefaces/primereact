@@ -1,5 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/utils';
+import { classNames } from '../utils/Utils';
 
 const classes = {
     icon: ({ _icon }) => classNames('p-menuitem-icon', _icon),

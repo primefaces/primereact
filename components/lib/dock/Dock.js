@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DockBase } from './DockBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -10,13 +11,15 @@ export const Dock = React.memo(
         const props = DockBase.getProps(inProps, context);
 
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
-        const { ptm } = DockBase.setMetaData({
+        const { ptm, cx, isUnstyled } = DockBase.setMetaData({
             props,
             state: {
                 currentIndex: currentIndexState
             }
         });
         const elementRef = React.useRef(null);
+
+        useHandleStyle(DockBase.css.styles, isUnstyled, { name: 'dock' });
 
         const onListMouseLeave = () => {
             setCurrentIndexState(-3);
@@ -40,18 +43,11 @@ export const Dock = React.memo(
             }
 
             const { disabled, icon: _icon, label, template, url, target } = item;
-            const className = classNames('p-dock-item', {
-                'p-dock-item-second-prev': currentIndexState - 2 === index,
-                'p-dock-item-prev': currentIndexState - 1 === index,
-                'p-dock-item-current': currentIndexState === index,
-                'p-dock-item-next': currentIndexState + 1 === index,
-                'p-dock-item-second-next': currentIndexState + 2 === index
-            });
             const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-dock-action-icon', _icon);
             const iconProps = mergeProps(
                 {
-                    className: 'p-dock-action-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -60,7 +56,7 @@ export const Dock = React.memo(
                 {
                     href: url || '#',
                     role: 'menuitem',
-                    className: contentClassName,
+                    className: cx('action', { disabled }),
                     target,
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
@@ -91,7 +87,7 @@ export const Dock = React.memo(
             const menuitemProps = mergeProps(
                 {
                     key: index,
-                    className,
+                    className: cx('menuitem', { currentIndexState, index }),
                     role: 'none',
                     onMouseEnter: () => onItemMouseEnter(index)
                 },
@@ -110,7 +106,7 @@ export const Dock = React.memo(
                 const header = ObjectUtils.getJSXElement(props.header, { props });
                 const headerProps = mergeProps(
                     {
-                        className: 'p-dock-header'
+                        className: cx('header')
                     },
                     ptm('header')
                 );
@@ -125,7 +121,7 @@ export const Dock = React.memo(
             const items = createItems();
             const menuProps = mergeProps(
                 {
-                    className: 'p-dock-list',
+                    className: cx('menu'),
                     role: 'menu',
                     onMouseLeave: onListMouseLeave
                 },
@@ -140,7 +136,7 @@ export const Dock = React.memo(
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
                 const footerProps = mergeProps(
                     {
-                        className: 'p-dock-footer'
+                        className: cx('footer')
                     },
                     ptm('footer')
                 );
@@ -156,13 +152,6 @@ export const Dock = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const className = classNames(
-            `p-dock p-component p-dock-${props.position}`,
-            {
-                'p-dock-magnification': props.magnification
-            },
-            props.className
-        );
         const header = createHeader();
         const list = createList();
         const footer = createFooter();
@@ -170,7 +159,7 @@ export const Dock = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: cx('root'),
                 style: props.style
             },
             DockBase.getOtherProps(props),
@@ -179,7 +168,7 @@ export const Dock = React.memo(
 
         const containerProps = mergeProps(
             {
-                className: 'p-dock-container'
+                className: cx('container')
             },
             ptm('container')
         );
