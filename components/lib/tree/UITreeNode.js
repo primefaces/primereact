@@ -697,7 +697,6 @@ export const UITreeNode = React.memo((props) => {
         const checkbox = createCheckbox();
         const icon = createIcon();
         const label = createLabel();
-        const tabIndex = props.disabled ? undefined : 0;
 
         const contentProps = mergeProps(
             {
@@ -715,12 +714,7 @@ export const UITreeNode = React.memo((props) => {
                 onDragLeave: onDragLeave,
                 onDragStart: onDragStart,
                 onDragEnd: onDragEnd,
-                tabIndex,
-                onKeyDown: onNodeKeyDown,
-                role: 'treeitem',
-                'aria-posinset': props.index + 1,
-                'aria-expanded': expanded,
-                'aria-selected': checked || selected
+                onKeyDown: onNodeKeyDown
             },
             getPTOptions('content')
         );
@@ -795,6 +789,10 @@ export const UITreeNode = React.memo((props) => {
     };
 
     const createNode = () => {
+        const tabIndex = props.disabled ? undefined : 0;
+        const selected = isSelected();
+        const checked = isChecked();
+
         const className = classNames(
             'p-treenode',
             {
@@ -808,7 +806,12 @@ export const UITreeNode = React.memo((props) => {
         const nodeProps = mergeProps(
             {
                 className,
-                style: props.node.style
+                style: props.node.style,
+                tabIndex,
+                role: 'treeitem',
+                'aria-posinset': props.index + 1,
+                'aria-expanded': expanded,
+                'aria-selected': checked || selected
             },
             getPTOptions('node')
         );
