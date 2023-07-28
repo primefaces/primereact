@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { Badge } from '../badge/badge';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { SpinnerIcon } from '../icons/spinner';
 import { Ripple } from '../ripple/Ripple';
@@ -16,7 +17,7 @@ export const Button = React.memo(
             props
         });
 
-        useHandleStyle(ButtonBase.css.styles, isUnstyled, { name: 'button' });
+        useHandleStyle(ButtonBase.css.styles, isUnstyled, { name: 'button', styled: true });
 
         const elementRef = React.useRef(ref);
 
@@ -75,12 +76,14 @@ export const Button = React.memo(
             if (props.badge) {
                 const badgeProps = mergeProps(
                     {
-                        className: cx('badge')
+                        className: classNames('p-badge', props.badgeClassName),
+                        value: props.badge,
+                        unstyled: props.unstyled
                     },
                     ptm('badge')
                 );
 
-                return <span {...badgeProps}>{props.badge}</span>;
+                return <Badge {...badgeProps}>{props.badge}</Badge>;
             }
 
             return null;

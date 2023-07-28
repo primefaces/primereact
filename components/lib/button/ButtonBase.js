@@ -11,7 +11,6 @@ const classes = {
             'p-button-loading-icon': props.loading
         }),
     label: 'p-button-label p-c',
-    badge: ({ props }) => classNames('p-badge', props.badgeClassName),
     root: ({ props, size, disabled }) =>
         classNames('p-button p-component', {
             'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
