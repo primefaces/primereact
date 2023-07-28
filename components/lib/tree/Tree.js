@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
-import { PrimeReactContext } from '../api/Api';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -433,6 +433,7 @@ export const Tree = React.memo(
                         autoComplete: 'off',
                         className: 'p-tree-filter p-inputtext p-component',
                         placeholder: props.filterPlaceholder,
+                        'aria-label': props.filterPlaceholder,
                         onKeyDown: onFilterInputKeyDown,
                         onChange: onFilterInputChange,
                         disabled: props.disabled
