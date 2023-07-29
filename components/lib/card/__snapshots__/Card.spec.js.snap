@@ -66,7 +66,7 @@ exports[`Card advanced 1`] = `
           </button>
           <button
             aria-label="Cancel"
-            class="p-button p-component p-button-secondary ml-2"
+            class="p-button-secondary ml-2 p-button p-component"
             data-pc-name="button"
             data-pc-section="root"
           >
