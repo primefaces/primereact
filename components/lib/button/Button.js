@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { Badge } from '../badge/badge';
+import { Badge } from '../badge/Badge';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { SpinnerIcon } from '../icons/spinner';
 import { Ripple } from '../ripple/Ripple';
