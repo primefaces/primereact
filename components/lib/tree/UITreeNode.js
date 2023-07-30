@@ -374,26 +374,45 @@ export const UITreeNode = React.memo((props) => {
         }
     };
 
+    const findChildrenByKey = (data, key) => {
+        for (const item of data) {
+            if (item.key === key) {
+                return item.children || [];
+            } else if (item.children) {
+                const result = findChildrenByKey(item.children, key);
+
+                if (result.length > 0) {
+                    return result;
+                }
+            }
+        }
+
+        return [];
+    };
+
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
-        let childPartialSelected = false;
 
         for (let child of props.node.children) {
             if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
-            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked) childPartialSelected = true;
         }
 
-        if (check && checkedChildCount === props.node.children.length) {
-            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
-        } else {
-            if (!check) {
-                delete selectionKeys[props.node.key];
-            }
+        const parentKey = props.node.key;
+        const children = findChildrenByKey(props.originalOptions, parentKey);
 
-            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length)) selectionKeys[props.node.key] = { checked: false, partialChecked: true };
-            else delete selectionKeys[props.node.key];
+        let isParentPartiallyChecked = children.some((ele) => ele.key in selectionKeys);
+        let isCompletelyChecked = children.every((ele) => ele.key in selectionKeys && selectionKeys[ele.key].checked);
+
+        if (isParentPartiallyChecked && !isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: true };
+        } else if (isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: true, partialChecked: false };
+        } else if (check) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: false };
+        } else {
+            delete selectionKeys[parentKey];
         }
 
         if (props.propagateSelectionUp && props.onPropagateUp) {
@@ -746,6 +765,7 @@ export const UITreeNode = React.memo((props) => {
                             <UITreeNode
                                 key={childNode.key || childNode.label}
                                 node={childNode}
+                                originalOptions={props.originalOptions}
                                 parent={props.node}
                                 index={index}
                                 last={index === props.node.children.length - 1}
