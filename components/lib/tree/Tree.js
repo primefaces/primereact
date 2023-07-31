@@ -313,6 +313,7 @@ export const Tree = React.memo(
                 <UITreeNode
                     key={node.key || node.label}
                     node={node}
+                    originalOptions={props.value}
                     index={index}
                     last={last}
                     path={String(index)}
