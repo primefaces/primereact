@@ -113,7 +113,7 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange' | 'pt'> 
      * Uses to pass attributes to DOM elements inside the component.
      * @type {InputTextPassThroughOptions}
      */
-    pt?: InputTextPassThroughOptions
+    pt?: InputTextPassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
