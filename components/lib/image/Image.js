@@ -13,6 +13,7 @@ import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
+import { useOnEscape } from '../../lib/hooks/Hooks';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -29,6 +30,9 @@ export const Image = React.memo(
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
 
+        useOnEscape(maskRef, () => {
+            hide();
+        });
         const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
             props,
             state: {
