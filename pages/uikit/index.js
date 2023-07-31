@@ -11,7 +11,7 @@ const UIKitPage = (props) => {
                 </Head>
                 <div>
                     <div style={{ borderRadius: '50px', maxHeight: '500px' }} className="overflow-hidden mb-5 flex align-items-center">
-                        <img alt="PrimeReact Designer" src={`https://primefaces.org/cdn/primereact/images/uikit/primeone-cover-${props.dark ? 'dark' : 'light'}.jpg`} className="w-full" />
+                        <img alt="PrimeReact Designer" src={`https://primefaces.org/cdn/primereact/images/uikit/primeone-cover-${props.dark ? 'dark' : 'light'}.jpeg`} className="w-full" />
                     </div>
 
                     <div className="card mb-5" style={{ borderRadius: '50px' }}>
