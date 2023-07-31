@@ -7,6 +7,5 @@ import { mergeProps } from './MergeProps';
 import ObjectUtils from './ObjectUtils';
 import UniqueComponentId from './UniqueComponentId';
 import { ZIndexUtils } from './ZIndexUtils';
-import { findChildrenByKey } from './FindChildrenByKey';
 
-export { DomHandler, EventBus, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps, findChildrenByKey };
+export { DomHandler, EventBus, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps };

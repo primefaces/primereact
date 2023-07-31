@@ -5,7 +5,7 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, findChildrenByKey } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -384,7 +384,7 @@ export const UITreeNode = React.memo((props) => {
         }
 
         const parentKey = props.node.key;
-        const children = findChildrenByKey(props.originalOptions, parentKey);
+        const children = ObjectUtils.findChildrenByKey(props.originalOptions, parentKey);
 
         let isParentPartiallyChecked = children.some((ele) => ele.key in selectionKeys);
         let isCompletelyChecked = children.every((ele) => ele.key in selectionKeys && selectionKeys[ele.key].checked);

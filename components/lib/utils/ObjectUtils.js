@@ -376,4 +376,20 @@ export default class ObjectUtils {
 
         return result;
     }
+
+    static findChildrenByKey(data, key) {
+        for (const item of data) {
+            if (item.key === key) {
+                return item.children || [];
+            } else if (item.children) {
+                const result = this.findChildrenByKey(item.children, key);
+
+                if (result.length > 0) {
+                    return result;
+                }
+            }
+        }
+
+        return [];
+    }
 }
