@@ -348,6 +348,16 @@ const baseStyles = `
     overflow: hidden;
     transition: max-height 1s ease-in-out;
 }
+
+.p-menu .p-menuitem-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+
 ${buttonStyles}
 ${checkboxStyles}
 ${inputTextStyles}
