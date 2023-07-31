@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, findChildrenByKey } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
 
 export const TreeTableRow = React.memo((props) => {
@@ -178,22 +178,6 @@ export const TreeTableRow = React.memo((props) => {
     const onCheckboxBlur = () => {
         DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
         DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
-    };
-
-    const findChildrenByKey = (data, key) => {
-        for (const item of data) {
-            if (item.key === key) {
-                return item.children || [];
-            } else if (item.children) {
-                const result = findChildrenByKey(item.children, key);
-
-                if (result.length > 0) {
-                    return result;
-                }
-            }
-        }
-
-        return [];
     };
 
     const propagateUp = (event) => {

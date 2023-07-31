@@ -5,7 +5,7 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils, findChildrenByKey } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
     const contentRef = React.useRef(null);
@@ -372,22 +372,6 @@ export const UITreeNode = React.memo((props) => {
                 node: props.node
             });
         }
-    };
-
-    const findChildrenByKey = (data, key) => {
-        for (const item of data) {
-            if (item.key === key) {
-                return item.children || [];
-            } else if (item.children) {
-                const result = findChildrenByKey(item.children, key);
-
-                if (result.length > 0) {
-                    return result;
-                }
-            }
-        }
-
-        return [];
     };
 
     const propagateUp = (event) => {
