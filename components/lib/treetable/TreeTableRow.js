@@ -180,26 +180,45 @@ export const TreeTableRow = React.memo((props) => {
         DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
     };
 
+    const findChildrenByKey = (data, key) => {
+        for (const item of data) {
+            if (item.key === key) {
+                return item.children || [];
+            } else if (item.children) {
+                const result = findChildrenByKey(item.children, key);
+
+                if (result.length > 0) {
+                    return result;
+                }
+            }
+        }
+
+        return [];
+    };
+
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
-        let childPartialSelected = false;
 
         for (let child of props.node.children) {
             if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
-            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked) childPartialSelected = true;
         }
 
-        if (check && checkedChildCount === props.node.children.length) {
-            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
-        } else {
-            if (!check) {
-                delete selectionKeys[props.node.key];
-            }
+        const parentKey = props.node.key;
+        const children = findChildrenByKey(props.originalOptions, parentKey);
 
-            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length)) selectionKeys[props.node.key] = { checked: false, partialChecked: true };
-            else selectionKeys[props.node.key] = { checked: false, partialChecked: false };
+        let isParentPartiallyChecked = children.some((ele) => ele.key in selectionKeys);
+        let isCompletelyChecked = children.every((ele) => ele.key in selectionKeys && selectionKeys[ele.key].checked);
+
+        if (isParentPartiallyChecked && !isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: true };
+        } else if (isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: true, partialChecked: false };
+        } else if (check) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: false };
+        } else {
+            delete selectionKeys[parentKey];
         }
 
         if (props.propagateSelectionUp && props.onPropagateUp) {
@@ -453,6 +472,7 @@ export const TreeTableRow = React.memo((props) => {
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}
                         node={childNode}
+                        originalOptions={props.originalOptions}
                         checkboxIcon={props.checkboxIcon}
                         columns={props.columns}
                         expandedKeys={props.expandedKeys}

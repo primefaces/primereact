@@ -872,6 +872,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return (
             <TreeTableBody
                 value={value}
+                originalOptions={props.value}
                 checkboxIcon={props.checkboxIcon}
                 columns={columns}
                 expandedKeys={getExpandedKeys()}
