@@ -94,10 +94,6 @@
     justify-content: space-between;
 }
 
-.p-multiselect-select-all-label {
-    margin-left: 0.5rem;
-}
-
 .p-multiselect-filter-container {
     position: relative;
     flex: 1 1 auto;

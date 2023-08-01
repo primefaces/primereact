@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -8,6 +8,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
+import PrimeReact from '../api/Api';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -119,8 +120,7 @@ export const SlideMenu = React.memo(
 
         const createBackward = () => {
             const className = classNames('p-slidemenu-backward', {
-                'p-hidden-space': levelState === 0,
-                'p-slidemenu-separator': levelState > 0
+                'p-hidden': levelState === 0
             });
 
             const iconClassName = 'p-slidemenu-backward-icon';
@@ -218,8 +218,8 @@ export const SlideMenu = React.memo(
                                     ptm={ptm}
                                 />
                             </div>
+                            {backward}
                         </div>
-                        {backward}
                     </div>
                 </CSSTransition>
             );

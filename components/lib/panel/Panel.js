@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
@@ -7,13 +6,14 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = PanelBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
-    const elementRef = React.useRef(null);
+    const elementRef = React.useRef(ref);
     const contentRef = React.useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
@@ -28,22 +28,18 @@ export const Panel = React.forwardRef((inProps, ref) => {
     });
 
     const toggle = (event) => {
-        if (!props.toggleable) {
-            return;
-        }
+        if (props.toggleable) {
+            collapsed ? expand(event) : collapse(event);
 
-        collapsed ? expand(event) : collapse(event);
-
-        if (event) {
             if (props.onToggle) {
                 props.onToggle({
                     originalEvent: event,
                     value: !collapsed
                 });
             }
-
-            event.preventDefault();
         }
+
+        event.preventDefault();
     };
 
     const expand = (event) => {
@@ -51,7 +47,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
             setCollapsedState(false);
         }
 
-        props.onExpand && event && props.onExpand(event);
+        props.onExpand && props.onExpand(event);
     };
 
     const collapse = (event) => {
@@ -59,17 +55,18 @@ export const Panel = React.forwardRef((inProps, ref) => {
             setCollapsedState(true);
         }
 
-        props.onCollapse && event && props.onCollapse(event);
+        props.onCollapse && props.onCollapse(event);
     };
 
     React.useImperativeHandle(ref, () => ({
         props,
-        toggle,
-        expand,
-        collapse,
         getElement: () => elementRef.current,
         getContent: () => contentRef.current
     }));
+
+    React.useEffect(() => {
+        ObjectUtils.combinedRefs(elementRef, ref);
+    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (!idState) {

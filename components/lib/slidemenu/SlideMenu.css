@@ -64,6 +64,7 @@
 }
 
 .p-slidemenu-backward {
+    position: absolute;
     bottom: 0;
     width: 100%;
     padding: 0.25em;

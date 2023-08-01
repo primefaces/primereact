@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -43,7 +44,6 @@ export const ConfirmPopup = React.memo(
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
-        const focusElementOnHide = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
@@ -91,10 +91,6 @@ export const ConfirmPopup = React.memo(
         };
 
         const show = () => {
-            // Remember the focused element before we opened the dialog
-            // so we can return focus to it once we close the dialog.
-            focusElementOnHide.current = document.activeElement;
-
             setVisibleState(true);
             setReshowState(false);
             isCallbackExecuting.current = false;
@@ -114,9 +110,6 @@ export const ConfirmPopup = React.memo(
             if (result) {
                 callbackFromProp('onHide', result);
             }
-
-            DomHandler.focus(focusElementOnHide.current);
-            focusElementOnHide.current = null;
         };
 
         const onEnter = () => {

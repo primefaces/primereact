@@ -84,6 +84,7 @@ export const Calendar = React.memo(
         };
 
         const onInputBlur = (event) => {
+            setFocusedState(false);
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
         };
@@ -1438,8 +1439,6 @@ export const Calendar = React.memo(
         };
 
         const show = (type) => {
-            setFocusedState(false);
-
             if (props.onVisibleChange) {
                 props.onVisibleChange({
                     visible: true,
@@ -1474,7 +1473,7 @@ export const Calendar = React.memo(
 
             if (props.onVisibleChange) {
                 props.onVisibleChange({
-                    visible: type !== 'dateselect', // false only if selecting a value to close panel
+                    visible: false,
                     type,
                     callback: _hideCallback
                 });
@@ -1522,7 +1521,7 @@ export const Calendar = React.memo(
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
                 } else {
-                    if (props.view === 'date') {
+                    if (currentView === 'date') {
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                         overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
                     } else {
@@ -2491,7 +2490,7 @@ export const Calendar = React.memo(
             }
         });
 
-        React.useEffect(() => {
+        useUpdateEffect(() => {
             let unbindMaskEvents = null;
 
             if (props.mask) {
@@ -2511,8 +2510,7 @@ export const Calendar = React.memo(
             return () => {
                 props.mask && unbindMaskEvents && unbindMaskEvents();
             };
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [props.disabled, props.mask, props.readOnlyInput]);
+        }, [props.mask]);
 
         useUpdateEffect(() => {
             setCurrentView(props.view);
@@ -3030,6 +3028,37 @@ export const Calendar = React.memo(
             const viewDate = getViewDate();
             const monthsMetaData = createMonthsMeta(viewDate.getMonth(), viewDate.getFullYear());
             const months = createMonths(monthsMetaData);
+
+            return months;
+        };
+
+        const createMonthViewMonth = (index) => {
+            const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(0, index, currentYear) });
+            const monthNamesShort = localeOption('monthNamesShort', props.locale);
+            const monthName = monthNamesShort[index];
+            const monthProps = mergeProps(
+                {
+                    className,
+                    onClick: (event) => onMonthSelect(event, index),
+                    onKeyDown: (event) => onMonthCellKeydown(event, index)
+                },
+                ptm('month')
+            );
+
+            return (
+                <span {...monthProps} key={monthName}>
+                    {monthName}
+                    <Ripple />
+                </span>
+            );
+        };
+
+        const createMonthViewMonths = () => {
+            let months = [];
+
+            for (let i = 0; i <= 11; i++) {
+                months.push(createMonthViewMonth(i));
+            }
 
             return months;
         };
@@ -3556,8 +3585,7 @@ export const Calendar = React.memo(
                             const monthProps = mergeProps(
                                 {
                                     className: classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) }),
-                                    onClick: (event) => onMonthSelect(event, i),
-                                    onKeyDown: (event) => onMonthCellKeydown(event, i)
+                                    onClick: (event) => onMonthSelect(event, i)
                                 },
                                 ptm('month')
                             );
