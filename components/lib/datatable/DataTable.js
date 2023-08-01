@@ -449,7 +449,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
             const selectableVal = getSelectableData(val);
 
-            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
+            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => ObjectUtils.isArray(props.selection) && props.selection.some((s) => isEquals(s, sv)));
         }
     };
 
