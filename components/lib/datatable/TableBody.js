@@ -510,20 +510,23 @@ export const TableBody = React.memo(
         };
 
         const onRowRightClick = (event) => {
+            const isMultiSelection = isCheckboxSelectionModeInColumn && ObjectUtils.isEmpty(props.selection);
+            const data = isMultiSelection ? event.data : props.selection;
+
             if (props.onContextMenu || props.onContextMenuSelectionChange) {
-                DomHandler.clearSelection();
+                if (!ObjectUtils.isEmpty(props.selection)) DomHandler.clearSelection();
 
                 if (props.onContextMenuSelectionChange) {
                     props.onContextMenuSelectionChange({
                         originalEvent: event.originalEvent,
-                        value: event.data
+                        value: data
                     });
                 }
 
                 if (props.onContextMenu) {
                     props.onContextMenu({
                         originalEvent: event.originalEvent,
-                        data: event.data
+                        data
                     });
                 }
 
