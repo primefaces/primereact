@@ -1,5 +1,14 @@
 # Changelog
 
+## [9.6.1](https://github.com/primefaces/primereact/tree/9.6.1) (2023-08-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.0...9.6.1)
+
+**Fixed bugs:**
+
+- FileUpload: Uploading file issue in multiple= false [\#4665](https://github.com/primefaces/primereact/issues/4665)
+- DataTable: Unexpected Behavior in Production Mode for ColumnResize [\#4655](https://github.com/primefaces/primereact/issues/4655)
+
 ## [9.6.0](https://github.com/primefaces/primereact/tree/9.6.0) (2023-06-27)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.5.0...9.6.0)
