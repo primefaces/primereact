@@ -522,7 +522,6 @@ export const ColumnFilter = React.memo((props) => {
             const label = filterLabel();
             const filterMenuButtonProps = mergeProps(
                 {
-                    ref: iconRef,
                     type: 'button',
                     className,
                     'aria-haspopup': true,
@@ -535,7 +534,7 @@ export const ColumnFilter = React.memo((props) => {
             );
 
             return (
-                <button {...filterMenuButtonProps}>
+                <button ref={iconRef} {...filterMenuButtonProps}>
                     {columnFilterIcon}
                     <Ripple />
                 </button>
@@ -819,7 +818,6 @@ export const ColumnFilter = React.memo((props) => {
         const items = props.display === 'row' ? createRowItems() : createItems();
         const filterOverlayProps = mergeProps(
             {
-                ref: overlayRef,
                 style,
                 className,
                 onKeyDown: (e) => onContentKeyDown(e),
@@ -842,7 +840,7 @@ export const ColumnFilter = React.memo((props) => {
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                 >
-                    <div {...filterOverlayProps}>
+                    <div ref={overlayRef} {...filterOverlayProps}>
                         {filterHeader}
                         {items}
                         {filterFooter}

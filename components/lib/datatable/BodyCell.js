@@ -777,7 +777,6 @@ export const BodyCell = React.memo((props) => {
             const editorKeyHelperProps = mergeProps(
                 {
                     tabIndex: '0',
-                    ref: keyHelperRef,
                     className: 'p-cell-editor-key-helper p-hidden-accessible',
                     onFocus: (e) => onEditorFocus(e)
                 },
@@ -787,7 +786,7 @@ export const BodyCell = React.memo((props) => {
             const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
             /* eslint-disable */
             editorKeyHelper = (
-                <a {...editorKeyHelperProps}>
+                <a ref={keyHelperRef} {...editorKeyHelperProps}>
                     <span {...editorKeyHelperLabelProps}></span>
                 </a>
             );
@@ -796,7 +795,6 @@ export const BodyCell = React.memo((props) => {
 
         const bodyCellProps = mergeProps(
             {
-                ref: elementRef,
                 style,
                 className,
                 rowSpan: props.rowSpan,
@@ -813,7 +811,7 @@ export const BodyCell = React.memo((props) => {
         );
 
         return (
-            <td {...bodyCellProps}>
+            <td ref={elementRef} {...bodyCellProps}>
                 {editorKeyHelper}
                 {title}
                 {content}

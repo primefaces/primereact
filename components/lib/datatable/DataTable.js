@@ -1709,7 +1709,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
         const wrapperProps = mergeProps(
             {
-                ref: wrapperRef,
                 className: 'p-datatable-wrapper',
                 style: { maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
             },
@@ -1717,7 +1716,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         );
 
         return (
-            <div {...wrapperProps}>
+            <div ref={wrapperRef} {...wrapperProps}>
                 <VirtualScroller
                     ref={virtualScrollerRef}
                     {...virtualScrollerOptions}
@@ -1831,14 +1830,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.resizableColumns) {
             const resizeHelperProps = mergeProps(
                 {
-                    ref: resizeHelperRef,
                     className: 'p-column-resizer-helper',
                     style: { display: 'none' }
                 },
                 ptCallbacks.ptm('resizeHelper')
             );
 
-            return <div {...resizeHelperProps}></div>;
+            return <div ref={resizeHelperRef} {...resizeHelperProps}></div>;
         }
 
         return null;
@@ -1919,7 +1917,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const reorderIndicators = createReorderIndicators();
     const rootProps = mergeProps(
         {
-            ref: elementRef,
             id: props.id,
             className,
             style: props.style,
@@ -1930,7 +1927,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     );
 
     return (
-        <div {...rootProps}>
+        <div ref={elementRef} {...rootProps}>
             {loader}
             {header}
             {paginatorTop}

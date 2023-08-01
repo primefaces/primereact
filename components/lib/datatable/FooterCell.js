@@ -74,7 +74,6 @@ export const FooterCell = React.memo((props) => {
     const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
     const footerCellProps = mergeProps(
         {
-            ref: elementRef,
             style,
             className,
             role: 'cell',
@@ -85,7 +84,11 @@ export const FooterCell = React.memo((props) => {
         getColumnPTOptions('root')
     );
 
-    return <td {...footerCellProps}>{content}</td>;
+    return (
+        <td ref={elementRef} {...footerCellProps}>
+            {content}
+        </td>
+    );
 });
 
 FooterCell.displayName = 'FooterCell';
