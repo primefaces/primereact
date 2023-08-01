@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useEventListener } from './useEventListener';
 
 export const useOnEscape = (ref, callback) => {
-    const handleEsc = event => {
-        if(event.key === 'Esc' || event.key === 'Escape') {
+    const handleEsc = (event) => {
+        if (event.key === 'Esc' || event.key === 'Escape') {
             callback(event);
         }
 
