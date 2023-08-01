@@ -120,18 +120,14 @@ export const FileUpload = React.memo(
                 return;
             }
 
-            let currentFiles = [];
-
-            if (props.multiple) {
-                currentFiles = filesState ? [...filesState] : [];
-            }
+            let currentFiles = filesState && props.multiple ? [...filesState] : [];
 
             let selectedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files;
 
             for (let i = 0; i < selectedFiles.length; i++) {
                 let file = selectedFiles[i];
 
-                if (!isFileSelected(file) && validate(file)) {
+                if ((!props.multiple || !isFileSelected(file)) && validate(file)) {
                     if (isImage(file)) {
                         file.objectURL = window.URL.createObjectURL(file);
                     }
