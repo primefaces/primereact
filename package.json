@@ -37,7 +37,7 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-final-form": "^6.5.9",
-        "react-hook-form": "^7.45.1",
+        "react-hook-form": "^7.45.2",
         "react-transition-group": "^4.4.5",
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
     },
