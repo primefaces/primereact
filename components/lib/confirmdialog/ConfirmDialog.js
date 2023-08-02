@@ -135,22 +135,24 @@ export const ConfirmDialog = React.memo(
             );
 
             const rejectButtonProps = {
-                    label: rejectLabel,
-                    icon: getPropValue('rejectIcon'),
-                    className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
-                    onClick: reject,
-                    pt: ptm('rejectButton'),
-                    unstyled: props.unstyled
-                };
+                label: rejectLabel,
+                icon: getPropValue('rejectIcon'),
+                className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
+                onClick: reject,
+                pt: ptm('rejectButton'),
+                unstyled: props.unstyled
+            };
 
-            const acceptButtonProps = mergeProps({
+            const acceptButtonProps = mergeProps(
+                {
                     label: acceptLabel,
                     icon: getPropValue('acceptIcon'),
                     className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
                     onClick: accept,
                     unstyled: props.unstyled
                 },
-                ptm('acceptButton'))
+                ptm('acceptButton')
+            );
 
             const content = (
                 <>
@@ -178,7 +180,7 @@ export const ConfirmDialog = React.memo(
         };
 
         const createElement = () => {
-            const currentProps = getCurrentProps();  
+            const currentProps = getCurrentProps();
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
 
             const iconProps = mergeProps(

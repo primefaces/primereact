@@ -6,13 +6,11 @@ const classes = {
     message: 'p-confirm-dialog-message',
     icon: 'p-confirm-dialog-icon',
     acceptButton: 'p-confirm-dialog-accept',
-    rejectButton: ({ getPropValue }) => classNames(
-        'p-confirm-dialog-reject',
-        {
+    rejectButton: ({ getPropValue }) =>
+        classNames('p-confirm-dialog-reject', {
             'p-button-text': !getPropValue('rejectClassName')
-        }
-    )
-}
+        })
+};
 
 export const ConfirmDialogBase = ComponentBase.extend({
     defaultProps: {

@@ -17,7 +17,7 @@ export const PickListTransferControls = React.memo((props) => {
     function getIconComponent(iconType) {
         switch (iconType) {
             case 'moveToTargetIcon':
-                return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> :  props.moveToTargetIcon ||<AngleRightIcon />;
+                return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> : props.moveToTargetIcon || <AngleRightIcon />;
             case 'moveAllToTargetIcon':
                 return props.moveAllToTargetIcon || viewChanged ? props.moveAllToTargetIcon || <AngleDoubleDownIcon /> : props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
             case 'moveToSourceIcon':
