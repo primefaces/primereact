@@ -115,36 +115,29 @@ const styles = `
 `;
 
 const classes = {
-    root: ({ props, visible }) => classNames(
-        `p-speeddial p-component p-speeddial-${props.type}`,
-        {
+    root: ({ props, visible }) =>
+        classNames(`p-speeddial p-component p-speeddial-${props.type}`, {
             [`p-speeddial-direction-${props.direction}`]: props.type !== 'circle',
             'p-speeddial-opened': visible,
             'p-disabled': props.disabled
-        }
-    ),
-    button: ({ props }) => classNames(
-        'p-speeddial-button p-button-rounded',
-        {
+        }),
+    button: ({ props }) =>
+        classNames('p-speeddial-button p-button-rounded', {
             'p-speeddial-rotate': props.rotateAnimation && !props.hideIcon
-        },
-    ),
-    mask: ({visible}) => classNames(
-        'p-speeddial-mask',
-        {
+        }),
+    mask: ({ visible }) =>
+        classNames('p-speeddial-mask', {
             'p-speeddial-mask-visible': visible
-        },
-    ),
+        }),
     action: ({ disabled }) => classNames('p-speeddial-action', { 'p-disabled': disabled }),
-    actionIcon: ({ _icon }) =>  classNames('p-speeddial-action-icon', _icon),
+    actionIcon: ({ _icon }) => classNames('p-speeddial-action-icon', _icon),
     list: 'p-speeddial-list',
     menuitem: 'p-speeddial-item'
-
 };
 
 const inlineStyles = {
     menuitem: ({ index, getItemStyle }) => getItemStyle(index)
-}
+};
 
 export const SpeedDialBase = ComponentBase.extend({
     defaultProps: {

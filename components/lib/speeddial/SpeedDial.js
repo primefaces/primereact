@@ -290,7 +290,6 @@ export const SpeedDial = React.memo(
 
         const createMask = () => {
             if (props.mask) {
-
                 const maskProps = mergeProps(
                     {
                         className: classNames(props.maskClassName, cx('mask', { visible })),
