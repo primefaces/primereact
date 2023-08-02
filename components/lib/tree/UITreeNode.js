@@ -12,9 +12,10 @@ export const UITreeNode = React.memo((props) => {
     const nodeTouched = React.useRef(false);
     const isLeaf = props.isNodeLeaf(props.node);
     const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
+    const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 selected: props.selected,
                 expanded: expanded,
@@ -546,7 +547,7 @@ export const UITreeNode = React.memo((props) => {
     const createLabel = () => {
         const labelProps = mergeProps(
             {
-                className: 'p-treenode-label'
+                className: cx('label')
             },
             getPTOptions('label')
         );
@@ -571,11 +572,9 @@ export const UITreeNode = React.memo((props) => {
         if (isCheckboxSelectionMode() && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked, 'p-disabled': props.disabled });
-            const iconClassName = 'p-checkbox-icon p-c';
             const checkboxIconProps = mergeProps(
                 {
-                    className: iconClassName
+                    className: cx('checkboxIcon')
                 },
                 getPTOptions('checkboxIcon')
             );
@@ -583,13 +582,13 @@ export const UITreeNode = React.memo((props) => {
             const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
             const checkboxContainerProps = mergeProps(
                 {
-                    className: 'p-checkbox p-component'
+                    className: cx('checkboxContainer')
                 },
                 getPTOptions('checkboxContainer')
             );
             const checkboxProps = mergeProps(
                 {
-                    className: className,
+                    className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
                     role: 'checkbox',
                     'aria-checked': checked
                 },
@@ -610,10 +609,9 @@ export const UITreeNode = React.memo((props) => {
         const icon = props.node.icon || (expanded ? props.node.expandedIcon : props.node.collapsedIcon);
 
         if (icon) {
-            const className = classNames('p-treenode-icon', icon);
             const nodeIconProps = mergeProps(
                 {
-                    className
+                    className: classNames(icon, cx('nodeIcon'))
                 },
                 getPTOptions('nodeIcon')
             );
@@ -626,10 +624,10 @@ export const UITreeNode = React.memo((props) => {
 
     const createToggler = () => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
-        const iconProps = { className: 'p-tree-toggler-icon', 'aria-hidden': true };
         const togglerIconProps = mergeProps(
             {
-                className: iconProps
+                className: cx('togglerIcon'),
+                'aria-hidden': true
             },
             getPTOptions('togglerIcon')
         );
@@ -638,7 +636,7 @@ export const UITreeNode = React.memo((props) => {
         const togglerProps = mergeProps(
             {
                 type: 'button',
-                className: 'p-tree-toggler p-link',
+                className: cx('toggler'),
                 tabIndex: -1,
                 onClick: onTogglerClick,
                 'aria-label': label
@@ -672,7 +670,7 @@ export const UITreeNode = React.memo((props) => {
         if (props.dragdropScope) {
             const droppointProps = mergeProps(
                 {
-                    className: 'p-treenode-droppoint',
+                    className: cx('droppoint'),
                     onDrop: (event) => onDropPoint(event, position),
                     onDragOver: onDropPointDragOver,
                     onDragEnter: onDropPointDragEnter,
@@ -690,12 +688,6 @@ export const UITreeNode = React.memo((props) => {
     const createContent = () => {
         const selected = isSelected();
         const checked = isChecked();
-        const className = classNames('p-treenode-content', props.node.className, {
-            'p-treenode-selectable': props.selectionMode && props.node.selectable !== false,
-            'p-highlight': isCheckboxSelectionMode() ? checked : selected,
-            'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
-            'p-disabled': props.disabled
-        });
         const toggler = createToggler();
         const checkbox = createCheckbox();
         const icon = createIcon();
@@ -704,7 +696,7 @@ export const UITreeNode = React.memo((props) => {
         const contentProps = mergeProps(
             {
                 ref: contentRef,
-                className,
+                className: classNames(props.node.className, cx('content', { checked, selected, nodeProps: props, isCheckboxSelectionMode })),
                 style: props.node.style,
                 onClick: onClick,
                 onDoubleClick: onDoubleClick,
@@ -735,7 +727,7 @@ export const UITreeNode = React.memo((props) => {
     const createChildren = () => {
         const subgroupProps = mergeProps(
             {
-                className: 'p-treenode-children',
+                className: cx('subgroup'),
                 role: 'group'
             },
             getPTOptions('subgroup')
@@ -781,7 +773,8 @@ export const UITreeNode = React.memo((props) => {
                                 onDragEnd={props.onDragEnd}
                                 onDrop={props.onDrop}
                                 onDropPoint={props.onDropPoint}
-                                ptm={props.ptm}
+                                ptm={ptm}
+                                cx={cx}
                             />
                         );
                     })}
@@ -797,19 +790,12 @@ export const UITreeNode = React.memo((props) => {
         const selected = isSelected();
         const checked = isChecked();
 
-        const className = classNames(
-            'p-treenode',
-            {
-                'p-treenode-leaf': isLeaf
-            },
-            props.node.className
-        );
         const content = createContent();
         const children = createChildren();
 
         const nodeProps = mergeProps(
             {
-                className,
+                className: classNames(props.node.className, cx('node', { isLeaf })),
                 style: props.node.style,
                 tabIndex,
                 role: 'treeitem',
