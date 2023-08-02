@@ -613,6 +613,11 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @type {PaginatorPassThroughOptions}
      */
     pt?: PaginatorPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

@@ -759,7 +759,7 @@ export const Dropdown = React.memo(
                         ref: inputRef,
                         type: 'text',
                         defaultValue: value,
-                        className: cx('input'),
+                        className: cx('input', { label }),
                         disabled: props.disabled,
                         placeholder: props.placeholder,
                         maxLength: props.maxLength,
@@ -774,15 +774,11 @@ export const Dropdown = React.memo(
 
                 return <input {...inputProps} />;
             } else {
-                const className = classNames('p-dropdown-label p-inputtext', {
-                    'p-placeholder': label === null && props.placeholder,
-                    'p-dropdown-label-empty': label === null && !props.placeholder
-                });
                 const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
                 const inputProps = mergeProps(
                     {
                         ref: inputRef,
-                        className
+                        className: cx('input', { label })
                     },
                     ptm('input')
                 );
