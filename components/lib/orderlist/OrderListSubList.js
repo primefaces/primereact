@@ -4,8 +4,10 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const OrderListSubList = React.memo((props) => {
+    const { ptm, cx } = props;
+
     const getPTOptions = (item, key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 selected: isSelected(item)
             }
@@ -88,12 +90,12 @@ export const OrderListSubList = React.memo((props) => {
     const createDropPoint = (index, key) => {
         const droppointProps = mergeProps(
             {
-                className: 'p-orderlist-droppoint',
+                className: cx('droppoint'),
                 onDragOver: (e) => onDragOver(e, index + 1),
                 onDragLeave: onDragLeave,
                 onDrop: onDrop
             },
-            props.ptm('droppoint')
+            ptm('droppoint')
         );
 
         return <li key={key} {...droppointProps}></li>;
@@ -102,9 +104,9 @@ export const OrderListSubList = React.memo((props) => {
     const createHeader = () => {
         const headerProps = mergeProps(
             {
-                className: 'p-orderlist-header'
+                className: cx('header')
             },
-            props.ptm('header')
+            ptm('header')
         );
 
         return props.header ? <div {...headerProps}>{props.header}</div> : null;
@@ -114,12 +116,11 @@ export const OrderListSubList = React.memo((props) => {
         if (props.value) {
             return props.value.map((item, i) => {
                 const content = props.itemTemplate ? props.itemTemplate(item) : item;
-                const itemClassName = classNames('p-orderlist-item', { 'p-highlight': isSelected(item) }, props.className);
                 const key = JSON.stringify(item);
 
                 const itemProps = mergeProps(
                     {
-                        className: itemClassName,
+                        className: classNames(props.className, cx('item', { item, isSelected })),
                         onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
                         onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
                         role: 'option',
@@ -152,7 +153,7 @@ export const OrderListSubList = React.memo((props) => {
                 } else {
                     const itemProps = mergeProps(
                         {
-                            className: itemClassName,
+                            className: classNames(props.className, cx('item', { item, isSelected })),
                             onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
                             onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
                             role: 'option',
@@ -179,25 +180,24 @@ export const OrderListSubList = React.memo((props) => {
         const listProps = mergeProps(
             {
                 ref: listElementRef,
-                className: 'p-orderlist-list',
+                className: cx('list'),
                 style: props.listStyle,
                 onDragOver: onListMouseMove,
                 role: 'listbox',
                 'aria-multiselectable': true
             },
-            props.ptm('list')
+            ptm('list')
         );
 
         return <ul {...listProps}>{items}</ul>;
     };
 
     const createFilter = () => {
-        const iconClassName = 'p-orderlist-filter';
         const searchIconProps = mergeProps(
             {
-                className: iconClassName
+                className: cx('icon')
             },
-            props.ptm('icon')
+            ptm('icon')
         );
         const icon = props.filterIcon || <SearchIcon {...searchIconProps} />;
         const filterIcon = IconUtils.getJSXIcon(icon, { ...searchIconProps }, { props });
@@ -205,9 +205,9 @@ export const OrderListSubList = React.memo((props) => {
         if (props.filter) {
             const filterProps = mergeProps(
                 {
-                    className: 'p-orderlist-filter'
+                    className: cx('filter')
                 },
-                props.ptm('filter')
+                ptm('filter')
             );
 
             const filterInputProps = mergeProps(
@@ -217,16 +217,16 @@ export const OrderListSubList = React.memo((props) => {
                     onChange: props.onFilter,
                     onKeyDown: onFilterInputKeyDown,
                     placeholder: props.placeholder,
-                    className: 'p-orderlist-filter-input p-inputtext p-component'
+                    className: cx('filterInput')
                 },
-                props.ptm('filterInput')
+                ptm('filterInput')
             );
 
             const filterIconProps = mergeProps(
                 {
-                    className: 'p-orderlist-filter-icon'
+                    className: cx('filterIcon')
                 },
-                props.ptm('filterIcon')
+                ptm('filterIcon')
             );
 
             let content = (
@@ -255,9 +255,9 @@ export const OrderListSubList = React.memo((props) => {
 
             const filterContainerProps = mergeProps(
                 {
-                    className: 'p-orderlist-filter-container'
+                    className: cx('filterContainer')
                 },
-                props.ptm('filterContainer')
+                ptm('filterContainer')
             );
 
             return <div {...filterContainerProps}>{content}</div>;
@@ -272,9 +272,9 @@ export const OrderListSubList = React.memo((props) => {
 
     const containerProps = mergeProps(
         {
-            className: 'p-orderlist-list-container'
+            className: cx('container')
         },
-        props.ptm('container')
+        ptm('container')
     );
 
     return (
