@@ -35,7 +35,7 @@ export const PickListItem = React.memo((props) => {
 
     const itemProps = mergeProps(
         {
-            className: classNames('p-ripple', props.className, cx('item', { subProps: props })),
+            className: classNames(props.className, cx('item', { subProps: props })),
             onClick,
             onKeyDown,
             tabIndex: props.tabIndex,
