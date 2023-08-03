@@ -47,9 +47,12 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     });
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
-    useOnEscape(maskRef, () => {
-        props.onHide();
+
+    useOnEscape(maskRef, props.closable && props.closeOnEscape, (event) => {
+        onClose(event);
+        params.splice(paramLength - 1, 1);
     });
+
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
     const [bindDocumentResizeEndListener, unbindDocumentResizEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onResizeEnd(event) });
@@ -114,11 +117,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         const dialog = document.getElementById(dialogId);
 
-        if (props.closable && props.closeOnEscape && event.key === 'Escape') {
-            onClose(event);
-            event.stopImmediatePropagation();
-            params.splice(paramLength - 1, 1);
-        } else if (event.key === 'Tab') {
+        if (event.key === 'Tab') {
             event.preventDefault();
             const focusableElements = DomHandler.getFocusableElements(dialog);
 

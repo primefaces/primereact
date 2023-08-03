@@ -247,6 +247,11 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies if pressing escape key should hide the preview.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
 }
 
 /**

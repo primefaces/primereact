@@ -30,7 +30,7 @@ export const Image = React.memo(
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
 
-        useOnEscape(maskRef, () => {
+        useOnEscape(maskRef, props.closeOnEscape, () => {
             hide();
         });
         const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
