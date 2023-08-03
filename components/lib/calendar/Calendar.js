@@ -2373,6 +2373,11 @@ export const Calendar = React.memo(
                 day = 1;
             }
 
+            if (props.view === 'year') {
+                day = 1;
+                month = 1;
+            }
+
             const { dayNamesShort, dayNames, monthNamesShort, monthNames } = localeOptions(props.locale);
 
             for (iFormat = 0; iFormat < format.length; iFormat++) {
