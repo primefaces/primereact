@@ -7,6 +7,8 @@ import { IconUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
+        const { ptm, cx } = props;
+
         const next = () => {
             const nextItemIndex = props.activeItemIndex + 1;
 
@@ -83,16 +85,12 @@ export const GalleriaItem = React.memo(
         const createBackwardNavigator = () => {
             if (props.showItemNavigators) {
                 const isDisabled = !props.circular && props.activeItemIndex === 0;
-                const buttonClassName = classNames('p-galleria-item-prev p-galleria-item-nav p-link', {
-                    'p-disabled': isDisabled
-                });
 
-                const iconClassName = 'p-galleria-item-prev-icon';
                 const previousItemIconProps = mergeProps(
                     {
-                        className: iconClassName
+                        className: cx('previousItemIcon')
                     },
-                    props.ptm('previousItemIcon')
+                    ptm('previousItemIcon')
                 );
                 const icon = props.itemPrevIcon || <ChevronLeftIcon {...previousItemIconProps} />;
                 const itemPrevIcon = IconUtils.getJSXIcon(icon, { ...previousItemIconProps }, { props });
@@ -100,11 +98,11 @@ export const GalleriaItem = React.memo(
                 const previousItemButtonProps = mergeProps(
                     {
                         type: 'button',
-                        className: buttonClassName,
+                        className: cx('previousItemButton', { isDisabled }),
                         onClick: navBackward,
                         disabled: isDisabled
                     },
-                    props.ptm('previousItemButton')
+                    ptm('previousItemButton')
                 );
 
                 return (
@@ -121,16 +119,12 @@ export const GalleriaItem = React.memo(
         const createForwardNavigator = () => {
             if (props.showItemNavigators) {
                 const isDisabled = !props.circular && props.activeItemIndex === props.value.length - 1;
-                const buttonClassName = classNames('p-galleria-item-next p-galleria-item-nav p-link', {
-                    'p-disabled': isDisabled
-                });
 
-                const iconClassName = 'p-galleria-item-next-icon';
                 const nextItemIconProps = mergeProps(
                     {
-                        className: iconClassName
+                        className: cx('nextItemIcon')
                     },
-                    props.ptm('nextItemIcon')
+                    ptm('nextItemIcon')
                 );
                 const icon = props.itemNextIcon || <ChevronRightIcon {...nextItemIconProps} />;
                 const itemNextIcon = IconUtils.getJSXIcon(icon, { ...nextItemIconProps }, { props });
@@ -138,11 +132,11 @@ export const GalleriaItem = React.memo(
                 const nextItemButtonProps = mergeProps(
                     {
                         type: 'button',
-                        className: buttonClassName,
+                        className: cx('nextItemButton', { isDisabled }),
                         onClick: navForward,
                         disabled: isDisabled
                     },
-                    props.ptm('nextItemButton')
+                    ptm('nextItemButton')
                 );
 
                 return (
@@ -159,9 +153,9 @@ export const GalleriaItem = React.memo(
         const createCaption = () => {
             const captionProps = mergeProps(
                 {
-                    className: 'p-galleria-caption'
+                    className: cx('caption')
                 },
-                props.ptm('caption')
+                ptm('caption')
             );
 
             if (props.caption) {
@@ -176,21 +170,18 @@ export const GalleriaItem = React.memo(
         const createIndicator = (index) => {
             const key = 'p-galleria-indicator-' + index;
             const isActive = props.activeItemIndex === index;
-            const className = classNames('p-galleria-indicator', {
-                'p-highlight': isActive
-            });
             let indicator = props.indicator && props.indicator(index);
 
             const indicatorProps = mergeProps(
                 {
-                    className: className,
+                    className: cx('indicator', { isActive }),
                     key: key,
                     tabIndex: 0,
                     onClick: () => onIndicatorClick(index),
                     onMouseEnter: () => onIndicatorMouseEnter(index),
                     onKeyDown: (e) => onIndicatorKeyDown(e, index)
                 },
-                props.ptm('indicator')
+                ptm('indicator')
             );
 
             if (!indicator) {
@@ -206,13 +197,12 @@ export const GalleriaItem = React.memo(
 
         const createIndicators = () => {
             if (props.showIndicators) {
-                const className = classNames('p-galleria-indicators p-reset', props.indicatorsContentClassName);
                 let indicators = [];
                 const indicatorsProps = mergeProps(
                     {
-                        className: className
+                        className: classNames(props.indicatorsContentClassName, cx('indicators'))
                     },
-                    props.ptm('indicators')
+                    ptm('indicators')
                 );
 
                 for (let i = 0; i < props.value.length; i++) {
@@ -234,23 +224,23 @@ export const GalleriaItem = React.memo(
         const itemWrapperProps = mergeProps(
             {
                 ref: ref,
-                className: 'p-galleria-item-wrapper'
+                className: cx('itemWrapper')
             },
-            props.ptm('itemWrapper')
+            ptm('itemWrapper')
         );
 
         const itemContainerProps = mergeProps(
             {
-                className: 'p-galleria-item-container'
+                className: cx('itemContainer')
             },
-            props.ptm('itemContainer')
+            ptm('itemContainer')
         );
 
         const itemProps = mergeProps(
             {
-                className: 'p-galleria-item'
+                className: cx('item')
             },
-            props.ptm('item')
+            ptm('item')
         );
 
         return (
