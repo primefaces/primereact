@@ -13,6 +13,7 @@ import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+    const { ptm, cx, unstyled } = props;
 
     function getIconComponent(iconType) {
         switch (iconType) {
@@ -123,21 +124,19 @@ export const PickListTransferControls = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
-
     const buttonsProps = mergeProps(
         {
-            className: className
+            className: classNames(props.className, cx('buttons'))
         },
-        props.ptm('buttons')
+        ptm('buttons')
     );
 
     return (
         <div {...buttonsProps}>
-            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={props.ptm('moveToTargetButton')}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={props.ptm('moveAllToTargetButton')}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={props.ptm('moveToSourceButton')}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={props.ptm('moveAllToSourceButton')}></Button>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={ptm('moveToTargetButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={ptm('moveAllToTargetButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={ptm('moveAllToSourceButton')} unstyled={unstyled}></Button>
         </div>
     );
 });
