@@ -49,6 +49,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
     useOnEscape(maskRef, props.closable && props.closeOnEscape, (event) => {
+        const currentTarget = event.currentTarget;
+
+        if (!currentTarget || !currentTarget.primeDialogParams) {
+            return;
+        }
+
+        const params = currentTarget.primeDialogParams;
+        const paramLength = params.length;
+
         onClose(event);
         params.splice(paramLength - 1, 1);
     });
