@@ -36,7 +36,7 @@ const classes = {
     listWrapper: 'p-autocomplete-items-wrapper',
     list: ({ virtualScrollerOptions, options }) => (virtualScrollerOptions ? classNames('p-autocomplete-items', options.className) : 'p-autocomplete-items'),
     emptyMessage: 'p-autocomplete-item',
-    item: ({ suggestion, optionGroupLabel }) => (optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': item.disabled }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled })),
+    item: ({ suggestion, optionGroupLabel }) => (optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled })),
     itemGroup: 'p-autocomplete-item-group',
     footer: 'p-autocomplete-footer'
 };
