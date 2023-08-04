@@ -8,7 +8,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
-import { useOnEscape } from '../../lib/hooks/Hooks';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -29,7 +29,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
 
-    useOnEscape(maskRef, props.closeOnEscape, (event) => {
+    useOnEscapeKey(maskRef, props.closeOnEscape, (event) => {
         if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', (context && context.autoZIndex) || PrimeReact.autoZIndex)) {
             onClose(event);
         }

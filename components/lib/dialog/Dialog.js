@@ -10,7 +10,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
-import { useOnEscape } from '../../lib/hooks/Hooks';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -48,7 +48,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    useOnEscape(maskRef, props.closable && props.closeOnEscape, (event) => {
+    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
         const currentTarget = event.currentTarget;
 
         if (!currentTarget || !currentTarget.primeDialogParams) {

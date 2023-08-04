@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEventListener } from './useEventListener';
 
-export const useOnEscape = (ref, condition, callback) => {
+export const useOnEscapeKey = (ref, condition, callback) => {
     const handleEsc = (event) => {
         if (event.key === 'Esc' || event.key === 'Escape') {
             event.stopImmediatePropagation();

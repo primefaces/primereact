@@ -296,4 +296,4 @@ export declare function useMatchMedia(query: string, when?: boolean): boolean;
  * @param {React.RefObject<Element>} ref - The ref of the element to detect escape button click.
  * @param {*} callback - The callback to run when escape button clicked.
  */
-export declare function useOnEscape(ref: React.RefObject<Element>, callback: any): void;
+export declare function useOnEscapeKey(ref: React.RefObject<Element>, callback: any): void;
