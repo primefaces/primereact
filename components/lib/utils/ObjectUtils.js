@@ -279,6 +279,11 @@ export default class ObjectUtils {
         return this.isNotEmpty(str) && this.isString(str) ? str[0].toUpperCase() + str.slice(1) : str;
     }
 
+    static trim(value) {
+        // trim only if the value is actually a string
+        return this.isNotEmpty(value) && this.isString(value) ? value.trim() : value;
+    }
+
     static isEmpty(value) {
         return value === null || value === undefined || value === '' || (Array.isArray(value) && value.length === 0) || (!(value instanceof Date) && typeof value === 'object' && Object.keys(value).length === 0);
     }
