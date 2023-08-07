@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { TimesCircleIcon } from '../icons/timescircle';
-import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { ChipBase } from './ChipBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { TimesCircleIcon } from '../icons/timescircle';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { ChipBase } from './ChipBase';
 
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -97,7 +97,7 @@ export const Chip = React.memo(
                 {
                     ref: elementRef,
                     style: props.style,
-                    className: cx('root')
+                    className: classNames(props.className, cx('root'))
                 },
                 ChipBase.getOtherProps(props),
                 ptm('root')

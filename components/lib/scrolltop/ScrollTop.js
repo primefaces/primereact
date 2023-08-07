@@ -1,12 +1,12 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -95,7 +95,7 @@ export const ScrollTop = React.memo(
             {
                 ref: scrollElementRef,
                 type: 'button',
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style,
                 onClick
             },

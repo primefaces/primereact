@@ -2,11 +2,12 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => (props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate', props.className) : classNames('p-progressbar p-component p-progressbar-determinate', props.className)),
+    root: ({ props }) => (props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate') : classNames('p-progressbar p-component p-progressbar-determinate')),
     value: 'p-progressbar-value p-progressbar-value-animate',
     label: 'p-progressbar-label',
     indeterminateContainer: 'p-progressbar-indeterminate-container'
 };
+
 const styles = `
 .p-progressbar {
     position: relative;
