@@ -153,6 +153,7 @@ export const TableHeader = React.memo((props) => {
                         value={props.value}
                         ptCallbacks={props.ptCallbacks}
                         metaData={props.metaData}
+                        unstyled={props.unstyled}
                     />
                 )
             );
@@ -183,6 +184,7 @@ export const TableHeader = React.memo((props) => {
                     onFilterApply={props.onFilterApply}
                     onFilterChange={props.onFilterChange}
                     ptCallbacks={props.ptCallbacks}
+                    unstyled={props.unstyled}
                 />
             );
         }

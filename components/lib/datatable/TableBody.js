@@ -8,13 +8,14 @@ import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
+        const { ptm, ptmo, cx } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
 
         const getColumnPTOptions = (key) => {
             const cProps = getColumnProps(props.column);
 
-            return props.ptCallbacks.ptmo(cProps, key, {
+            return ptmo(cProps, key, {
                 props: cProps,
                 parent: props.metaData,
                 state: {
@@ -1063,9 +1064,9 @@ export const TableBody = React.memo(
         const tbodyProps = mergeProps(
             {
                 style: props.style,
-                className: props.className
+                className: cx(ptKey, { className: props.className })
             },
-            props.ptCallbacks.ptm(ptKey)
+            ptm(ptKey)
         );
 
         return (

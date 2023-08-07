@@ -1551,6 +1551,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @type {DataTablePassThroughOptions}
      */
     pt?: DataTablePassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
