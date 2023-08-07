@@ -76,7 +76,7 @@ export const Button = React.memo(
             if (props.badge) {
                 const badgeProps = mergeProps(
                     {
-                        className: classNames('p-badge', props.badgeClassName),
+                        className: classNames(props.badgeClassName),
                         value: props.badge,
                         unstyled: props.unstyled
                     },
