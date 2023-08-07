@@ -63,7 +63,7 @@ exports[`Button when badge is true it renders Button with badge 1`] = `
        
     </span>
     <span
-      class="p-badge p-component p-badge"
+      class="p-badge p-component"
       data-pc-name="badge"
       data-pc-section="root"
     >
@@ -218,7 +218,7 @@ exports[`Button when using badge and label the aria-label should contain both va
       test
     </span>
     <span
-      class="p-badge p-component p-badge"
+      class="p-badge p-component"
       data-pc-name="badge"
       data-pc-section="root"
     >
@@ -243,7 +243,7 @@ exports[`Button when using badge and label the aria-label should contain both va
       test
     </span>
     <span
-      class="p-badge p-component p-badge"
+      class="p-badge p-component"
       data-pc-name="badge"
       data-pc-section="root"
     >
