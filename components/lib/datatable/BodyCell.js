@@ -151,33 +151,35 @@ export const BodyCell = React.memo((props) => {
 
     const switchCellToViewMode = (event, submit) => {
         const callbackParams = getCellCallbackParams(event);
-        const newRowData = editingRowDataState;
-        const newValue = resolveFieldData(newRowData);
-        const params = { ...callbackParams, newRowData, newValue };
 
-        const onCellEditCancel = getColumnProp('onCellEditCancel');
-        const cellEditValidator = getColumnProp('cellEditValidator');
-        const onCellEditComplete = getColumnProp('onCellEditComplete');
+        setEditingRowDataState((prev) => {
+            const newRowData = prev;
+            const newValue = resolveFieldData(newRowData);
+            const params = { ...callbackParams, newRowData, newValue };
+            const onCellEditCancel = getColumnProp('onCellEditCancel');
+            const cellEditValidator = getColumnProp('cellEditValidator');
+            const onCellEditComplete = getColumnProp('onCellEditComplete');
 
-        if (!submit && onCellEditCancel) {
-            onCellEditCancel(params);
-        }
-
-        let valid = true;
-
-        if (cellEditValidator) {
-            valid = cellEditValidator(params);
-        }
-
-        if (valid) {
-            if (submit && onCellEditComplete) {
-                onCellEditComplete(params);
+            if (!submit && onCellEditCancel) {
+                onCellEditCancel(params);
             }
 
-            closeCell(event);
-        } else {
-            event.preventDefault();
-        }
+            let valid = true;
+
+            if (cellEditValidator) {
+                valid = cellEditValidator(params);
+            }
+
+            if (valid) {
+                if (submit && onCellEditComplete) {
+                    onCellEditComplete(params);
+                }
+
+                closeCell(event);
+            } else {
+                event.preventDefault();
+            }
+        });
     };
 
     const findNextSelectableCell = (cell) => {
