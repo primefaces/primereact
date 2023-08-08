@@ -35,7 +35,7 @@ export const VirtualScroller = React.memo(
             }
         });
 
-        useStyle(VirtualScrollerBase.css.styles, { name: 'virtualscroller' })
+        useStyle(VirtualScrollerBase.css.styles, { name: 'virtualscroller' });
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
         const spacerRef = React.useRef(null);

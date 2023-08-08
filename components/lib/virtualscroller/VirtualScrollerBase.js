@@ -56,7 +56,7 @@ const styles = `
 .p-virtualscroller-inline .p-virtualscroller-content {
     position: static;
 }
-`; 
+`;
 
 export const VirtualScrollerBase = ComponentBase.extend({
     defaultProps: {

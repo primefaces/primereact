@@ -125,7 +125,7 @@ export const TreeTableScrollableView = React.memo((props) => {
 
     const scrollableHeaderBoxProps = mergeProps(
         {
-            className: cx('scrollableHeaderBox'),
+            className: cx('scrollableHeaderBox')
         },
         ptm('scrollableHeaderBox')
     );
