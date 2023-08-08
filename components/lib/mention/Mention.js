@@ -94,9 +94,20 @@ export const Mention = React.memo(
             const { key, index } = triggerState;
             const value = inputRef.current.value;
             const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
+            const viewportWidth = DomHandler.getViewport().width;
+            const inputRefClientRect = inputRef.current.getBoundingClientRect();
+            let left = position.left;
 
             overlayRef.current.style.transformOrigin = 'top';
-            overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
+
+            const isTouchingRight = left >= viewportWidth - inputRefClientRect.right;
+
+            if (isTouchingRight) {
+                overlayRef.current.style.left = `calc(${viewportWidth - inputRefClientRect.right}px - 1rem)`;
+            } else {
+                overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
+            }
+
             overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
         };
 
