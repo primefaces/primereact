@@ -4,6 +4,7 @@ import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmount
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -12,7 +13,7 @@ export const Tooltip = React.memo(
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
-        const { ptm } = TooltipBase.setMetaData({
+        const { ptm, cx, isUnstyled } = TooltipBase.setMetaData({
             props,
             state: {
                 visible: visibleState,
@@ -20,6 +21,8 @@ export const Tooltip = React.memo(
                 className: classNameState
             }
         });
+
+        useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -470,20 +473,11 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
-            const tooltipClassName = classNames(
-                'p-tooltip p-component',
-                {
-                    [`p-tooltip-${positionState}`]: true
-                },
-                props.className,
-                classNameState
-            );
             const empty = isTargetContentEmpty(currentTargetRef.current);
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    ref: elementRef,
-                    className: tooltipClassName,
+                    className: classNames(props.className, cx('root', { positionState, classNameState })),
                     style: props.style,
                     role: 'tooltip',
                     'aria-hidden': visibleState,
@@ -496,23 +490,22 @@ export const Tooltip = React.memo(
 
             const arrowProps = mergeProps(
                 {
-                    className: 'p-tooltip-arrow'
+                    className: cx('arrow')
                 },
                 ptm('arrow')
             );
 
             const textProps = mergeProps(
                 {
-                    ref: textRef,
-                    className: 'p-tooltip-text'
+                    className: cx('text')
                 },
                 ptm('text')
             );
 
             return (
-                <div {...rootProps}>
+                <div ref={elementRef} {...rootProps}>
                     <div {...arrowProps}></div>
-                    <div {...textProps}>{empty && props.children}</div>
+                    <div ref={textRef} {...textProps}>{empty && props.children}</div>
                 </div>
             );
         };
