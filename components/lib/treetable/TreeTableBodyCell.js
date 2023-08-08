@@ -13,11 +13,12 @@ export const TreeTableBodyCell = (props) => {
     const tabIndexTimeout = React.useRef(null);
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const { ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
         const cProps = getColumnProps(props.column);
 
-        return props.ptCallbacks.ptmo(getColumnProp('pt'), key, {
+        return ptmo(getColumnProp('pt'), key, {
             props: cProps,
             parent: props.metaData,
             state: {
@@ -185,10 +186,6 @@ export const TreeTableBodyCell = (props) => {
     });
 
     const bodyClassName = ObjectUtils.getPropValue(props.bodyClassName, props.node.data, { field: props.field, rowIndex: props.rowIndex, props: props });
-    const className = classNames(bodyClassName || props.className, {
-        'p-editable-column': props.editor,
-        'p-cell-editing': props.editor ? editingState : false
-    });
     const style = props.bodyStyle || props.style;
     let content;
 
@@ -220,8 +217,7 @@ export const TreeTableBodyCell = (props) => {
     /* eslint-enable */
     const bodyCellProps = mergeProps(
         {
-            ref: elementRef,
-            className,
+            className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState })),
             style,
             onClick: (e) => onClick(e),
             onKeyDown: (e) => onKeyDown(e)
@@ -231,7 +227,7 @@ export const TreeTableBodyCell = (props) => {
     );
 
     return (
-        <td {...bodyCellProps}>
+        <td ref={elementRef} {...bodyCellProps}>
             {props.children}
             {editorKeyHelper}
             {content}

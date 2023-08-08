@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableScrollableView = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -10,6 +10,7 @@ export const TreeTableScrollableView = React.memo((props) => {
     const scrollTableRef = React.useRef(null);
     const scrollFooterRef = React.useRef(null);
     const scrollFooterBoxRef = React.useRef(null);
+    const { ptm, cx, sx } = props.ptCallbacks;
 
     const setScrollHeight = () => {
         if (props.scrollHeight) {
@@ -92,9 +93,9 @@ export const TreeTableScrollableView = React.memo((props) => {
             const cols = props.columns.map((col, i) => <col key={col.field + '_' + i} />);
             const scrollableColgroupProps = mergeProps(
                 {
-                    className: 'p-treetable-scrollable-colgroup'
+                    className: cx('scrollableColgroup')
                 },
-                props.ptCallbacks.ptm('scrollableColgroup')
+                ptm('scrollableColgroup')
             );
 
             return <colgroup {...scrollableColgroupProps}>{cols}</colgroup>;
@@ -103,104 +104,95 @@ export const TreeTableScrollableView = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-treetable-scrollable-view', { 'p-treetable-frozen-view': props.frozen, 'p-treetable-unfrozen-view': !props.frozen && props.frozenWidth });
     const width = props.frozen ? props.frozenWidth : 'calc(100% - ' + props.frozenWidth + ')';
     const left = props.frozen ? null : props.frozenWidth;
     const colGroup = createColGroup();
-    const scrollableBodyStyle = !props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : null;
     const scrollableProps = mergeProps(
         {
-            className,
-            style: { width: width, left: left },
-            ref: elementRef
+            className: cx('scrollable', { scrolaableProps: props }),
+            style: sx('scrollable', { width, left })
         },
-        props.ptCallbacks.ptm('scrollable')
+        ptm('scrollable')
     );
 
     const scrollableHeaderProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-header',
-            ref: scrollHeaderRef,
+            className: cx('scrollableHeader'),
             onScroll: (e) => onHeaderScroll(e)
         },
-        props.ptCallbacks.ptm('scrollableHeader')
+        ptm('scrollableHeader')
     );
 
     const scrollableHeaderBoxProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-header-box',
-            ref: scrollHeaderBoxRef
+            className: cx('scrollableHeaderBox'),
         },
-        props.ptCallbacks.ptm('scrollableHeaderBox')
+        ptm('scrollableHeaderBox')
     );
 
     const scrollableHeaderTableProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-header-table'
+            className: cx('scrollableHeaderTable')
         },
-        props.ptCallbacks.ptm('scrollableHeaderTable')
+        ptm('scrollableHeaderTable')
     );
 
     const scrollableBodyProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-body',
-            ref: scrollBodyRef,
-            style: scrollableBodyStyle,
+            className: cx('scrollableBody'),
+            style: sx('scrollableBody', { scrolaableProps: props }),
             onScroll: (e) => onBodyScroll(e)
         },
-        props.ptCallbacks.ptm('scrollableBody')
+        ptm('scrollableBody')
     );
 
     const scrollableBodyTableProps = mergeProps(
         {
-            ref: scrollTableRef,
-            style: { top: '0' },
-            className: 'p-treetable-scrollable-body-table'
+            style: sx('scrollableBodyTable'),
+            className: cx('scrollableBodyTable')
         },
-        props.ptCallbacks.ptm('scrollableBodyTable')
+        ptm('scrollableBodyTable')
     );
 
     const scrollableFooterProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-footer',
-            ref: scrollFooterRef
+            className: cx('scrollableFooter')
         },
-        props.ptCallbacks.ptm('scrollableFooter')
+        ptm('scrollableFooter')
     );
 
     const scrollableFooterBoxProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-footer-box',
-            ref: scrollFooterBoxRef
+            className: sx('scrollableFooterBox')
         },
-        props.ptCallbacks.ptm('scrollableFooterBox')
+        ptm('scrollableFooterBox')
     );
 
     const scrollableFooterTableProps = mergeProps(
         {
-            className: 'p-treetable-scrollable-footer-table'
+            className: cx('scrollableFooterTable')
         },
-        props.ptCallbacks.ptm('scrollableFooterTable')
+        ptm('scrollableFooterTable')
     );
 
     return (
-        <div {...scrollableProps}>
-            <div {...scrollableHeaderProps}>
-                <div {...scrollableHeaderBoxProps}>
+        <div ref={elementRef} {...scrollableProps}>
+            <div ref={scrollHeaderRef} {...scrollableHeaderProps}>
+                <div ref={scrollHeaderBoxRef} {...scrollableHeaderBoxProps}>
                     <table {...scrollableHeaderTableProps}>
                         {colGroup}
                         {props.header}
                     </table>
                 </div>
             </div>
-            <div {...scrollableBodyProps}>
-                <table {...scrollableBodyTableProps}>
+            <div ref={scrollBodyRef} {...scrollableBodyProps}>
+                <table ref={scrollTableRef} {...scrollableBodyTableProps}>
                     {colGroup}
                     {props.body}
                 </table>
             </div>
-            <div {...scrollableFooterProps}>
-                <div {...scrollableFooterBoxProps}>
+            <div ref={scrollFooterRef} {...scrollableFooterProps}>
+                <div ref={scrollFooterBoxRef} {...scrollableFooterBoxProps}>
                     <table {...scrollableFooterTableProps}>
                         {colGroup}
                         {props.footer}

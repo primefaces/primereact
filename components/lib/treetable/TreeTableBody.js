@@ -6,6 +6,7 @@ import { TreeTableRow } from './TreeTableRow';
 export const TreeTableBody = React.memo((props) => {
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
+    const { ptm, cx } = props.ptCallbacks;
 
     const flattenizeTree = (nodes) => {
         let rows = [];
@@ -224,15 +225,15 @@ export const TreeTableBody = React.memo((props) => {
             const content = props.emptyMessage || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
-                    className: 'p-treetable-emptymessage'
+                    className: cx('emptyMessage')
                 },
-                props.ptCallbacks.ptm('emptyMessage')
+                ptm('emptyMessage')
             );
             const bodyCellProps = mergeProps(
                 {
                     colSpan
                 },
-                props.ptCallbacks.ptm('bodyCell')
+                ptm('bodyCell')
             );
 
             return (
@@ -246,9 +247,9 @@ export const TreeTableBody = React.memo((props) => {
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
     const tbodyProps = mergeProps(
         {
-            className: 'p-treetable-tbody'
+            className: cx('tbody')
         },
-        props.ptCallbacks.ptm('tbody')
+        ptm('tbody')
     );
 
     return <tbody {...tbodyProps}>{content}</tbody>;
