@@ -125,6 +125,11 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies if pressing escape key should hide the preview.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
 }
 
 /**
