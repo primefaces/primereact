@@ -11,7 +11,7 @@ import { SearchPlusIcon } from '../icons/searchplus';
 import { TimesIcon } from '../icons/times';
 import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
 
 export const Image = React.memo(
@@ -195,7 +195,8 @@ export const Image = React.memo(
 
             const zoomOutButtonProps = mergeProps(
                 {
-                    className: cx('zoomOutButton'),
+                    className: classNames(cx('zoomOutButton'), { 'p-disabled': zoomOutDisabled }),
+                    style: { pointerEvents: 'auto' },
                     onPointerUp: zoomOut,
                     type: 'button',
                     disabled: zoomOutDisabled
@@ -205,7 +206,8 @@ export const Image = React.memo(
 
             const zoomInButtonProps = mergeProps(
                 {
-                    className: cx('zoomInButton'),
+                    className: classNames(cx('zoomInButton'), { 'p-disabled': zoomInDisabled }),
+                    style: { pointerEvents: 'auto' },
                     onPointerUp: zoomIn,
                     type: 'button',
                     disabled: zoomInDisabled
