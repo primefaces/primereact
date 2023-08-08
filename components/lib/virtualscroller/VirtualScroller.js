@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEventListener, useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
 import { classNames, DomHandler, ObjectUtils, IconUtils, mergeProps } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
 import { SpinnerIcon } from '../icons/spinner';
@@ -34,6 +34,8 @@ export const VirtualScroller = React.memo(
                 loaderArr: loaderArrState
             }
         });
+
+        useStyle(VirtualScrollerBase.css.styles, { name: 'virtualscroller' })
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
         const spacerRef = React.useRef(null);
