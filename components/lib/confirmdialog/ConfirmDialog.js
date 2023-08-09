@@ -208,7 +208,8 @@ export const ConfirmDialog = React.memo(
                     onHide: hide,
                     breakpoints: getPropValue('breakpoints'),
                     pt: currentProps.pt,
-                    unstyled: props.unstyled
+                    unstyled: props.unstyled,
+                    appendTo: getPropValue('appendTo')
                 },
                 ConfirmDialogBase.getOtherProps(currentProps)
             );
