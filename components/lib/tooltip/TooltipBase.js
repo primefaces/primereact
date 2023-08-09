@@ -2,13 +2,14 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ positionState, classNameState}) => classNames(
-        'p-tooltip p-component',
-        {
-            [`p-tooltip-${positionState}`]: true
-        },
-        classNameState
-    ),
+    root: ({ positionState, classNameState }) =>
+        classNames(
+            'p-tooltip p-component',
+            {
+                [`p-tooltip-${positionState}`]: true
+            },
+            classNameState
+        ),
     arrow: 'p-tooltip-arrow',
     text: 'p-tooltip-text'
 };
