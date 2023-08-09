@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TooltipBase } from './TooltipBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Tooltip = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -404,8 +404,6 @@ export const Tooltip = React.memo(
         };
 
         useMountEffect(() => {
-            loadTargetEvents();
-
             if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
                 hide();
             }
@@ -505,7 +503,9 @@ export const Tooltip = React.memo(
             return (
                 <div ref={elementRef} {...rootProps}>
                     <div {...arrowProps}></div>
-                    <div ref={textRef} {...textProps}>{empty && props.children}</div>
+                    <div ref={textRef} {...textProps}>
+                        {empty && props.children}
+                    </div>
                 </div>
             );
         };
