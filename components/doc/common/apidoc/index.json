@@ -22297,6 +22297,23 @@
                     ],
                     "returnType": "boolean",
                     "description": "Custom hook to detect if window size matches or not."
+                },
+                "useOnEscapeKey": {
+                    "name": "useOnEscapeKey",
+                    "parameters": [
+                        {
+                            "name": "ref",
+                            "type": "RefObject<Element>",
+                            "description": "The ref of the element to detect escape button click."
+                        },
+                        {
+                            "name": "callback",
+                            "type": "any",
+                            "description": "The callback to run when escape button clicked."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to use detect escape button click."
                 }
             }
         },
@@ -24774,6 +24791,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the preview."
                         }
                     ]
                 },
@@ -32417,6 +32442,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "When enabled, it removes component related styles in the core."
+                        },
+                        {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the preview."
                         }
                     ]
                 },
