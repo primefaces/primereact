@@ -9,6 +9,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -42,6 +43,10 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             isPanelClicked.current = false;
         },
         when: visibleState
+    });
+
+    useOnEscapeKey(overlayRef, props.dismissable && props.closeOnEscape, () => {
+        hide();
     });
 
     const isOutsideClicked = (target) => {

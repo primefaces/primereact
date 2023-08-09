@@ -291,3 +291,9 @@ export declare function useClickOutside(ref: React.RefObject<Element>, callback:
  * @param {boolean} when - Whether to listen to the event or not.
  */
 export declare function useMatchMedia(query: string, when?: boolean): boolean;
+/**
+ * Custom hook to use detect escape button click.
+ * @param {React.RefObject<Element>} ref - The ref of the element to detect escape button click.
+ * @param {*} callback - The callback to run when escape button clicked.
+ */
+export declare function useOnEscapeKey(ref: React.RefObject<Element>, callback: any): void;
