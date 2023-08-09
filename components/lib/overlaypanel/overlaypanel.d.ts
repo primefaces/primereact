@@ -85,6 +85,11 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     closeIcon?: IconType<OverlayPanelProps> | undefined;
     /**
+     * Specifies if pressing escape key should hide the preview.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
+    /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
@@ -125,11 +130,6 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue false
      */
     unstyled?: boolean;
-    /**
-     * Specifies if pressing escape key should hide the preview.
-     * @defaultValue true
-     */
-    closeOnEscape?: boolean | undefined;
 }
 
 /**
