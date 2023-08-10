@@ -8,9 +8,9 @@ export function UnstyledModeDoc(props) {
 import { PrimeReactProvider } from "primereact/api";
 ...
 return(
-    <PrimerReactProvider value={{ unstyled: true }}>
+    <PrimeReactProvider value={{ unstyled: true }}>
         <App />
-    </PrimerReactProvider>
+    </PrimeReactProvider>
 )
 `
     };

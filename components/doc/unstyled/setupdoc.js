@@ -1,6 +1,6 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import { Button } from '../../lib/button/Button';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SetupDoc(props) {
     const code1 = {
@@ -8,9 +8,9 @@ export function SetupDoc(props) {
 import { PrimeReactProvider } from "primereact/api";
 ...
 return(
-    <PrimerReactProvider value={{ unstyled: true }}>
+    <PrimeReactProvider value={{ unstyled: true }}>
         <App />
-    </PrimerReactProvider>
+    </PrimeReactProvider>
 )
 `
     };

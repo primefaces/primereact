@@ -10,9 +10,9 @@ import Tailwind from "primereact/passthrough/tailwind";
 
 ...
 return(
-    <PrimerReactProvider value={{ unstyled: true, pt: Tailwind }}>
+    <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
         <App />
-    </PrimerReactProvider>
+    </PrimeReactProvider>
 )
 `
     };

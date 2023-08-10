@@ -1,5 +1,5 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ThemeDoc(props) {
     const code = {
@@ -25,7 +25,7 @@ return(
         }}
     >
         <App />
-    </PrimerReactProvider>
+    </PrimeReactProvider>
 );
     `
     };

@@ -1,5 +1,5 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function CustomizationDocDoc(props) {
     const code1 = {
@@ -48,9 +48,9 @@ export default function MyApp({ Component }) {
     };
 
     return (
-        <PrimerReactProvider value={{ unstyled: true, pt: CustomTailwindTheme }}>
+        <PrimeReactProvider value={{ unstyled: true, pt: CustomTailwindTheme }}>
             <App />
-        </PrimerReactProvider>
+        </PrimeReactProvider>
     );
 }
 `
