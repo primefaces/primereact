@@ -174,18 +174,20 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const leftPos = offset.left + deltaX;
             const topPos = offset.top + deltaY;
             const viewport = DomHandler.getViewport();
+            const leftMargin = parseFloat(getComputedStyle(dialogRef.current)['margin-left'])
+            const topMargin = parseFloat(getComputedStyle(dialogRef.current)['margin-top'])
 
             dialogRef.current.style.position = 'fixed';
 
             if (props.keepInViewport) {
                 if (leftPos >= props.minX && leftPos + width < viewport.width) {
                     lastPageX.current = event.pageX;
-                    dialogRef.current.style.left = leftPos + 'px';
+                    dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 }
 
                 if (topPos >= props.minY && topPos + height < viewport.height) {
                     lastPageY.current = event.pageY;
-                    dialogRef.current.style.top = topPos + 'px';
+                    dialogRef.current.style.top = topPos - topMargin + 'px';
                 }
             } else {
                 lastPageX.current = event.pageX;
@@ -679,3 +681,4 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 });
 
 Dialog.displayName = 'Dialog';
+
