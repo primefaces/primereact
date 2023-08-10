@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames, mergeProps } from '../utils/Utils';
 import { BadgeBase } from './BadgeBase';
 
 export const Badge = React.memo(
@@ -9,11 +9,11 @@ export const Badge = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = BadgeBase.getProps(inProps, context);
 
-        useStyle(BadgeBase.css.styles, { name: 'primereact_badge_style' });
-
-        const { ptm, cx } = BadgeBase.setMetaData({
+        const { ptm, cx, isUnstyled } = BadgeBase.setMetaData({
             props
         });
+
+        useHandleStyle(BadgeBase.css.styles, isUnstyled, { name: 'badge' });
 
         const elementRef = React.useRef(null);
 
@@ -26,7 +26,7 @@ export const Badge = React.memo(
             {
                 ref: elementRef,
                 style: props.style,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             BadgeBase.getOtherProps(props),
             ptm('root')

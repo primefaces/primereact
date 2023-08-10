@@ -7,9 +7,10 @@ import { PageLinksBase } from './PaginatorBase';
 export const PageLinks = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = PageLinksBase.getProps(inProps, context);
+    const { ptm, cx } = props;
 
     const getPTOptions = (pageLink, key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 active: pageLink - 1 === props.page
             }
@@ -44,7 +45,7 @@ export const PageLinks = React.memo((inProps) => {
                 {
                     type: 'button',
                     onClick: (e) => onPageLinkClick(e, pageLink),
-                    className,
+                    className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
                     disabled: props.disabled,
                     'aria-label': ariaLabel('pageLabel', { page: pageLink })
                 },
@@ -82,9 +83,9 @@ export const PageLinks = React.memo((inProps) => {
 
     const pagesProps = mergeProps(
         {
-            className: 'p-paginator-pages'
+            className: cx('pages')
         },
-        props.ptm('pages')
+        ptm('pages')
     );
 
     return <span {...pagesProps}>{elements}</span>;

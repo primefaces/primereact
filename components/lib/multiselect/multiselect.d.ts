@@ -430,6 +430,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     emptyFilterMessage?: React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
     /**
+     * Text to display when there are no options available. Defaults to global value in Locale configuration.
+     */
+    emptyMessage?: string;
+    /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue true
      */
@@ -571,6 +575,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @type {MultiSelectPassThroughOptions}
      */
     pt?: MultiSelectPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
     /**
      * Icon of the remove chip element.
      */

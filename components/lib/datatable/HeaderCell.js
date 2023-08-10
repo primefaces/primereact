@@ -5,7 +5,7 @@ import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
@@ -14,13 +14,14 @@ export const HeaderCell = React.memo((props) => {
     const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
     const { metaData: parentMetaData, ptCallbacks, index } = props;
+    const { ptmo, cx } = props.ptCallbacks;
 
     const params = { index };
     const parentParams = { ...parentMetaData, ...params };
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: parentParams,
             state: {
@@ -218,7 +219,7 @@ export const HeaderCell = React.memo((props) => {
         if (props.resizableColumns && !getColumnProp('frozen')) {
             const columnResizerProps = mergeProps(
                 {
-                    className: 'p-column-resizer',
+                    className: cx('columnResizer'),
                     onMouseDown: (e) => onResizerMouseDown(e),
                     onClick: (e) => onResizerClick(e),
                     onDoubleClick: (e) => onResizerDoubleClick(e)
@@ -236,7 +237,7 @@ export const HeaderCell = React.memo((props) => {
         const title = ObjectUtils.getJSXElement(getColumnProp('header'), { props: props.tableProps });
         const headerTitleProps = mergeProps(
             {
-                className: 'p-column-title'
+                className: cx('headerTitle')
             },
             getColumnPTOptions('headerTitle')
         );
@@ -246,10 +247,9 @@ export const HeaderCell = React.memo((props) => {
 
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
-            let iconClassName = 'p-sortable-column-icon';
             const sortIconProps = mergeProps(
                 {
-                    className: iconClassName
+                    className: cx('sortIcon')
                 },
                 getColumnPTOptions('sortIcon')
             );
@@ -270,7 +270,7 @@ export const HeaderCell = React.memo((props) => {
             const value = props.groupRowsBy && props.groupRowsBy === props.groupRowSortField ? metaIndex : metaIndex + 1;
             const sortBadgeProps = mergeProps(
                 {
-                    className: 'p-sortable-column-badge'
+                    className: cx('sortBadge')
                 },
                 getColumnPTOptions('sortBadge'),
                 getColumnPTOptions('root')
@@ -306,6 +306,7 @@ export const HeaderCell = React.memo((props) => {
                     filterClearIcon={props.filterClearIcon}
                     ptCallbacks={ptCallbacks}
                     metaData={parentMetaData}
+                    unstyled={props.unstyled}
                 />
             );
         }
@@ -321,7 +322,7 @@ export const HeaderCell = React.memo((props) => {
         const filter = createFilter();
         const headerContentProps = mergeProps(
             {
-                className: 'p-column-header-content'
+                className: cx('headerContent')
             },
             getColumnPTOptions('headerContent')
         );
@@ -343,16 +344,6 @@ export const HeaderCell = React.memo((props) => {
         const style = getStyle();
         const align = getColumnProp('alignHeader') || getColumnProp('align');
         const frozen = getColumnProp('frozen');
-        const className = classNames(getColumnProp('headerClassName'), getColumnProp('className'), {
-            'p-sortable-column': getColumnProp('sortable'),
-            'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
-            'p-highlight': sortMeta.sorted,
-            'p-frozen-column': frozen,
-            'p-selection-column': getColumnProp('selectionMode'),
-            'p-sortable-disabled': getColumnProp('sortable') && _isSortableDisabled,
-            'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable') && !frozen,
-            [`p-align-${align}`]: !!align
-        });
         const tabIndex = getColumnProp('sortable') && !_isSortableDisabled ? props.tabIndex : null;
         const colSpan = getColumnProp('colSpan');
         const rowSpan = getColumnProp('rowSpan');
@@ -365,8 +356,7 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                ref: elementRef,
-                className,
+                className: cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }),
                 style,
                 role: 'columnheader',
                 onClick: (e) => onClick(e),
@@ -387,11 +377,11 @@ export const HeaderCell = React.memo((props) => {
 
         return (
             <>
-                <th {...headerCellProps}>
+                <th ref={elementRef} {...headerCellProps}>
                     {resizer}
                     {header}
                 </th>
-                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} pt={getColumnPTOptions('tooltip')} />}
+                {hasTooltip && <Tooltip target={elementRef} content={headerTooltip} {...headerTooltipOptions} pt={getColumnPTOptions('tooltip')} unstyled={props.unstyled} />}
             </>
         );
     };

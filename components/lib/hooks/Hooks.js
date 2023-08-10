@@ -18,6 +18,7 @@ import { useTimeout } from './useTimeout';
 import { useUnmountEffect } from './useUnmountEffect';
 import { useUpdateEffect } from './useUpdateEffect';
 import { useStyle } from './useStyle';
+import { useOnEscapeKey } from './useOnEscapeKey';
 
 export {
     usePrevious,
@@ -41,5 +42,6 @@ export {
     useMove,
     useClickOutside,
     useDebounce,
-    useMatchMedia
+    useMatchMedia,
+    useOnEscapeKey
 };

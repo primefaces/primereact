@@ -1,25 +1,22 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { ObjectUtils, mergeProps } from '../utils/Utils';
 import { ToolbarBase } from './ToolbarBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Toolbar = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ToolbarBase.getProps(inProps, context);
-
         const elementRef = React.useRef(null);
-
         const start = ObjectUtils.getJSXElement(props.left || props.start, props);
         const center = ObjectUtils.getJSXElement(props.center, props);
         const end = ObjectUtils.getJSXElement(props.right || props.end, props);
-
-        useStyle(ToolbarBase.css.styles, { name: 'primereact_toolbar_style' });
-
-        const { ptm, cx } = ToolbarBase.setMetaData({
+        const { ptm, cx, isUnstyled } = ToolbarBase.setMetaData({
             props
         });
+
+        useHandleStyle(ToolbarBase.css.styles, isUnstyled, { name: 'toolbar' });
 
         React.useImperativeHandle(ref, () => ({
             props,

@@ -1,18 +1,19 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useStyle, useUnmountEffect } from '../hooks/Hooks';
+import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
 import { DomHandler, mergeProps } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = ScrollPanelBase.getProps(inProps, context);
 
-    useStyle(ScrollPanelBase.css.styles, { name: 'primereact_scrollpanel_style' });
-
-    const { ptm, cx } = ScrollPanelBase.setMetaData({
+    const { ptm, cx, isUnstyled } = ScrollPanelBase.setMetaData({
         props
     });
+
+    useHandleStyle(ScrollPanelBase.css.styles, isUnstyled, { name: 'scrollpanel' });
 
     const containerRef = React.useRef(null);
     const contentRef = React.useRef(null);

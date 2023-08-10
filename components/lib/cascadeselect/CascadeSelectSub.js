@@ -4,12 +4,11 @@ import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
-import PrimeReact from '../api/Api';
 export const CascadeSelectSub = React.memo((props) => {
     const [activeOptionState, setActiveOptionState] = React.useState(null);
     const elementRef = React.useRef(null);
-    const ptm = props.ptm;
     const context = React.useContext(PrimeReactContext);
+    const { ptm, cx } = props;
 
     const position = () => {
         const parentItem = elementRef.current.parentElement;
@@ -194,6 +193,7 @@ export const CascadeSelectSub = React.memo((props) => {
                     template={props.template}
                     onPanelHide={props.onPanelHide}
                     ptm={ptm}
+                    cx={cx}
                 />
             );
         }
@@ -202,26 +202,17 @@ export const CascadeSelectSub = React.memo((props) => {
     };
 
     const createOption = (option, index) => {
-        const className = classNames(
-            'p-cascadeselect-item',
-            {
-                'p-cascadeselect-item-group': isOptionGroup(option),
-                'p-cascadeselect-item-active p-highlight': activeOptionState === option
-            },
-            option.className
-        );
         const submenu = createSubmenu(option);
         const textProps = mergeProps(
             {
-                className: 'p-cascadeselect-item-text'
+                className: cx('text')
             },
             ptm('text')
         );
         const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span {...textProps}>{getOptionLabelToRender(option)}</span>;
-        const iconClassName = 'p-cascadeselect-group-icon';
         const optionGroupIconProps = mergeProps(
             {
-                className: iconClassName
+                className: cx('optionGroupIcon')
             },
             ptm('optionGroupIcon')
         );
@@ -230,7 +221,7 @@ export const CascadeSelectSub = React.memo((props) => {
         const key = getOptionLabelToRender(option) + '_' + index;
         const contentProps = mergeProps(
             {
-                className: 'p-cascadeselect-item-content',
+                className: cx('content'),
                 onClick: (event) => onOptionClick(event, option),
                 tabIndex: 0,
                 onKeyDown: (event) => onKeyDown(event, option)
@@ -240,7 +231,7 @@ export const CascadeSelectSub = React.memo((props) => {
 
         const itemProps = mergeProps(
             {
-                className,
+                className: cx('item', { option, isOptionGroup, activeOptionState }),
                 style: option.style,
                 role: 'none'
             },
@@ -263,15 +254,11 @@ export const CascadeSelectSub = React.memo((props) => {
         return props.options ? props.options.map(createOption) : null;
     };
 
-    const className = classNames('p-cascadeselect-panel p-cascadeselect-items', props.className, {
-        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-    });
     const submenu = createMenu();
     const listProps = mergeProps(
         {
             ref: elementRef,
-            className,
+            className: cx('list', { subProps: props.className, context }),
             role: 'listbox',
             'aria-orientation': 'horizontal'
         },

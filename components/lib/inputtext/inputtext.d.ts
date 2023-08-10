@@ -9,9 +9,9 @@
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { PassThroughType } from '../utils/utils';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPassThroughMethodOptions>;
 
@@ -81,6 +81,11 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      * @type {InputTextPassThroughOptions}
      */
     pt?: InputTextPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

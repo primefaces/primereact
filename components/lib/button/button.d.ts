@@ -149,6 +149,11 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      * @type {ButtonPassThroughOptions}
      */
     pt?: ButtonPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

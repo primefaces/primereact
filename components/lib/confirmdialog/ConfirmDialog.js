@@ -40,7 +40,7 @@ export const ConfirmDialog = React.memo(
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
-        const { ptm } = ConfirmDialogBase.setMetaData({
+        const { ptm, cx } = ConfirmDialogBase.setMetaData({
             props,
             state: {
                 visible: visibleState
@@ -134,22 +134,22 @@ export const ConfirmDialog = React.memo(
                 getPropValue('rejectClassName')
             );
 
-            const rejectButtonProps = mergeProps(
-                {
-                    label: rejectLabel,
-                    icon: getPropValue('rejectIcon'),
-                    className: rejectClassName,
-                    onClick: reject
-                },
-                ptm('rejectButton')
-            );
+            const rejectButtonProps = {
+                label: rejectLabel,
+                icon: getPropValue('rejectIcon'),
+                className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
+                onClick: reject,
+                pt: ptm('rejectButton'),
+                unstyled: props.unstyled
+            };
 
             const acceptButtonProps = mergeProps(
                 {
                     label: acceptLabel,
                     icon: getPropValue('acceptIcon'),
-                    className: acceptClassName,
-                    onClick: accept
+                    className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
+                    onClick: accept,
+                    unstyled: props.unstyled
                 },
                 ptm('acceptButton')
             );
@@ -181,12 +181,11 @@ export const ConfirmDialog = React.memo(
 
         const createElement = () => {
             const currentProps = getCurrentProps();
-            const className = classNames('p-confirm-dialog', getPropValue('className'));
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
 
             const iconProps = mergeProps(
                 {
-                    className: 'p-confirm-dialog-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -196,7 +195,7 @@ export const ConfirmDialog = React.memo(
 
             const messageProps = mergeProps(
                 {
-                    className: 'p-confirm-dialog-message'
+                    className: cx('message')
                 },
                 ptm('message')
             );
@@ -204,11 +203,13 @@ export const ConfirmDialog = React.memo(
             const rootProps = mergeProps(
                 {
                     visible: visibleState,
-                    className,
+                    className: classNames(getPropValue('className'), cx('root')),
                     footer,
                     onHide: hide,
                     breakpoints: getPropValue('breakpoints'),
-                    pt: currentProps.pt
+                    pt: currentProps.pt,
+                    unstyled: props.unstyled,
+                    appendTo: getPropValue('appendTo')
                 },
                 ConfirmDialogBase.getOtherProps(currentProps)
             );

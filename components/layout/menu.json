@@ -462,6 +462,27 @@
                 {
                     "name": "SASS API",
                     "href": "https://www.primefaces.org/designer/api/primereact/9.0.0"
+                },
+                {
+                    "name": "Unstyled Mode",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "to": "/unstyled"
+                        },
+                        {
+                            "name": "Tailwind",
+                            "to": "/tailwind"
+                        },
+                        {
+                            "name": "Bootstrap",
+                            "to": "/bootstrap"
+                        },
+                        {
+                            "name": "Bulma",
+                            "to": "/bulma"
+                        }
+                    ]
                 }
             ]
         },

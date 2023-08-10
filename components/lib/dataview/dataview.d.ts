@@ -335,6 +335,16 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DataViewPassThroughOptions}
+     */
+    pt?: DataViewPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

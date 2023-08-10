@@ -308,6 +308,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {InputNumberPassThroughOptions}
      */
     pt?: InputNumberPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

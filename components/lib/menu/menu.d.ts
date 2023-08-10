@@ -131,6 +131,11 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {MenuPassThroughOptions}
      */
     pt?: MenuPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
