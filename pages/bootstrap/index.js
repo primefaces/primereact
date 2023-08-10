@@ -3,7 +3,7 @@ import { ExampleDoc } from '../../components/doc/bootstrap/exampledoc';
 import { SetupDoc } from '../../components/doc/bootstrap/setupdoc';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
-const TerminalDemo = () => {
+const BootstrapDemo = () => {
     const docs = [
         {
             id: 'setup',
@@ -26,4 +26,4 @@ const TerminalDemo = () => {
     return <DocComponent title="Bootstrap - PrimeReact" header="Bootstrap" description={description} componentDocs={docs} hideTabMenu></DocComponent>;
 };
 
-export default TerminalDemo;
+export default BootstrapDemo;

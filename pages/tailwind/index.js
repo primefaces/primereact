@@ -1,10 +1,10 @@
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
-import { SetupDoc } from '../../components/doc/tailwind/setupdoc';
 import { CustomizationDocDoc } from '../../components/doc/tailwind/customizationdoc';
 import { ExampleDoc } from '../../components/doc/tailwind/exampledoc';
+import { SetupDoc } from '../../components/doc/tailwind/setupdoc';
 
-const TerminalDemo = () => {
+const TailwindDemo = () => {
     const docs = [
         {
             id: 'setup',
@@ -34,4 +34,4 @@ const TerminalDemo = () => {
     );
 };
 
-export default TerminalDemo;
+export default TailwindDemo;
