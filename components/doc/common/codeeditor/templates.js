@@ -33,6 +33,7 @@ const getCRA = (props = {}, template = 'javascript') => {
     const fileExtension = isTypeScript ? '.tsx' : '.js';
     const sourceFileName = `${path}App${fileExtension}`;
     const indexFileName = `${path}index${fileExtension}`;
+    const unstyled = props.embedded ? ' value={{ unstyled: true}}' : null;
 
     let extFiles = {};
 
@@ -81,7 +82,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root')${isTypeScript ? ' as HTMLElement' : ''});
 root.render(
     <React.StrictMode>
-        <PrimeReactProvider>
+        <PrimeReactProvider${unstyled}>
             <App />
         </PrimeReactProvider>
     </React.StrictMode>
@@ -290,7 +291,7 @@ export default function Document() {
             content: `/** @type{import('tailwindcss')Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/primereact/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},

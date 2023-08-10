@@ -30,17 +30,11 @@ checkbox: {
 
     const code2 = {
         javascript: `
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
-import { PrimeReactContext } from "primereact/api";
 
 export default function BasicDemo() {
     const [checked, setChecked] = useState(false);
-    const { setUnstyled } = useContext(PrimeReactContext);
-
-    useEffect(() => {
-        setUnstyled(true);
-    },[]);
 
     return (
         <div className="card flex justify-content-center">
@@ -55,7 +49,7 @@ export default function BasicDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    PrimeVue offers a built-in Tailwind theme to get you started quickly. The default values related to the component are displayed below. The component can easily be styled with your own design based on Tailwind utilities, see the{' '}
+                    PrimeReact offers a built-in Tailwind theme to get you started quickly. The default values related to the component are displayed below. The component can easily be styled with your own design based on Tailwind utilities, see the{' '}
                     <Link href="/tailwind">Tailwind Customization</Link> section for an example.
                 </p>
                 <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />

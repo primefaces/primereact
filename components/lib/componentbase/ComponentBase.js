@@ -228,6 +228,46 @@ const radioButtonStyles = `
 }
 
 `;
+const iconStyles = `
+.p-icon {
+    display: inline-block;
+}
+
+.p-icon-spin {
+    -webkit-animation: p-icon-spin 2s infinite linear;
+    animation: p-icon-spin 2s infinite linear;
+}
+
+svg.p-icon {
+    pointer-events: auto;
+}
+
+svg.p-icon g {
+    pointer-events: none;
+}
+
+@-webkit-keyframes p-icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes p-icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+`;
 const baseStyles = `
 .p-component, .p-component * {
     box-sizing: border-box;
@@ -414,6 +454,7 @@ ${buttonStyles}
 ${checkboxStyles}
 ${inputTextStyles}
 ${radioButtonStyles}
+${iconStyles}
 `;
 
 export const ComponentBase = {
@@ -540,8 +581,8 @@ export const ComponentBase = {
 };
 
 export const useHandleStyle = (styles, isUnstyled = false, { name, styled = false }) => {
-    const { load: loadCommonStyle, unload: unloadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
-    const { load, unload } = useStyle(styles, { name: name, manual: true });
+    const { load: loadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
+    const { load } = useStyle(styles, { name: name, manual: true });
 
     useEffect(() => {
         if (!isUnstyled()) {
@@ -549,12 +590,6 @@ export const useHandleStyle = (styles, isUnstyled = false, { name, styled = fals
             if (!styled) load();
         }
 
-        return () => {
-            if (!isUnstyled()) {
-                unloadCommonStyle();
-                unload();
-            }
-        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [styles]);
+    }, []);
 };

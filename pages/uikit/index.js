@@ -182,7 +182,7 @@ const UIKitPage = (props) => {
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Interactive Components</span>
                                             </li>
-                                            <li class="flex align-items-center mb-3">
+                                            <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Tokens Studio Support</span>
                                             </li>
@@ -227,7 +227,7 @@ const UIKitPage = (props) => {
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Interactive Components</span>
                                             </li>
-                                            <li class="flex align-items-center mb-3">
+                                            <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Tokens Studio Support</span>
                                             </li>
@@ -271,7 +271,7 @@ const UIKitPage = (props) => {
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Interactive Components</span>
                                             </li>
-                                            <li class="flex align-items-center mb-3">
+                                            <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Tokens Studio Support</span>
                                             </li>

@@ -64,7 +64,7 @@ export function DocComponent(props) {
                 {tab === 0 ? (
                     <div className="doc-tabpanel">
                         <div className="doc-main">
-                            <div className="doc-intro doc-section-description">
+                            <div className="doc-intro">
                                 <h1>{props.header}</h1>
                                 <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
                             </div>
