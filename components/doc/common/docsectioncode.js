@@ -13,7 +13,7 @@ export function DocSectionCode(props) {
         if (props.embedded) {
             codeEditor.openStackBlitz(codeLang);
         }
-    }, [codeLang]);
+    }, [codeEditor, codeLang, props.embedded]);
 
     const toggleCodeMode = (content) => {
         if (codeMode === 'data') {
