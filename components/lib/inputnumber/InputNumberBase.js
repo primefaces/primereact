@@ -3,36 +3,24 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState, stacked, horizontal, vertical }) =>
-        classNames(
-            'p-inputnumber p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
-                'p-inputwrapper-focus': focusedState,
-                'p-inputnumber-buttons-stacked': stacked,
-                'p-inputnumber-buttons-horizontal': horizontal,
-                'p-inputnumber-buttons-vertical': vertical
-            },
-            props.className
-        ),
+        classNames('p-inputnumber p-component p-inputwrapper', {
+            'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
+            'p-inputwrapper-focus': focusedState,
+            'p-inputnumber-buttons-stacked': stacked,
+            'p-inputnumber-buttons-horizontal': horizontal,
+            'p-inputnumber-buttons-vertical': vertical
+        }),
     buttonGroup: 'p-inputnumber-button-group',
     incrementButton: ({ props }) =>
-        classNames(
-            'p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component',
-            {
-                'p-disabled': props.disabled
-            },
-            props.incrementButtonClassName
-        ),
+        classNames('p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component', {
+            'p-disabled': props.disabled
+        }),
     incrementIcon: 'p-button-icon',
     decrementButton: ({ props }) =>
-        classNames(
-            'p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component',
-            {
-                'p-disabled': props.disabled
-            },
-            props.decrementButtonClassName
-        ),
-    decrementButton: 'p-button-icon'
+        classNames('p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component', {
+            'p-disabled': props.disabled
+        }),
+    decrementIcon: 'p-button-icon'
 };
 
 const styles = `

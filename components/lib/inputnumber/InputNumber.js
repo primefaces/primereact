@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -8,8 +9,6 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -1052,7 +1051,7 @@ export const InputNumber = React.memo(
             const incrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('incrementButton'),
+                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
                     onPointerUp: onUpButtonMouseUp,
@@ -1084,7 +1083,7 @@ export const InputNumber = React.memo(
             const decrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('decrementButton'),
+                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
                     onPointerUp: onDownButtonMouseUp,
@@ -1141,7 +1140,7 @@ export const InputNumber = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root', { focusedState, stacked, horizontal, vertical }),
+                className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
                 style: props.style
             },
             otherProps,
