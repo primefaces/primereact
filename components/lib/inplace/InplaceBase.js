@@ -1,6 +1,43 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
+const classes = {
+    display: ({ props }) =>
+        classNames('p-inplace-display', {
+            'p-disabled': props.disabled
+        }),
+    root: ({ props }) =>
+        classNames('p-inplace p-component', {
+            'p-inplace-closable': props.closable
+        }),
+    closeButton: 'p-inplace-content-close',
+    content: 'p-inplace-content'
+};
+
+const styles = `
+.p-inplace .p-inplace-display {
+    display: inline;
+    cursor: pointer;
+}
+
+.p-inplace .p-inplace-content {
+    display: inline;
+}
+
+.p-fluid .p-inplace.p-inplace-closable .p-inplace-content {
+    display: flex;
+}
+
+.p-fluid .p-inplace.p-inplace-closable .p-inplace-content > .p-inputtext {
+    flex: 1 1 auto;
+    width: 1%;
+}
+
+.p-inplace-content-close {
+    margin-left: .25rem;
+}
+`;
+
 export const InplaceDisplayBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InplaceDisplay',
@@ -32,44 +69,7 @@ export const InplaceBase = ComponentBase.extend({
         children: undefined
     },
     css: {
-        classes: {
-            display: ({ props }) =>
-                classNames('p-inplace-display', {
-                    'p-disabled': props.disabled
-                }),
-            root: ({ props }) =>
-                classNames(
-                    'p-inplace p-component',
-                    {
-                        'p-inplace-closable': props.closable
-                    },
-                    props.className
-                ),
-            closeButton: 'p-inplace-content-close',
-            content: 'p-inplace-content'
-        },
-        styles: `
-        .p-inplace .p-inplace-display {
-            display: inline;
-            cursor: pointer;
-        }
-        
-        .p-inplace .p-inplace-content {
-            display: inline;
-        }
-        
-        .p-fluid .p-inplace.p-inplace-closable .p-inplace-content {
-            display: flex;
-        }
-        
-        .p-fluid .p-inplace.p-inplace-closable .p-inplace-content > .p-inputtext {
-            flex: 1 1 auto;
-            width: 1%;
-        }
-        
-        .p-inplace-content-close {
-            margin-left: .25rem;
-        }
-        `
+        classes,
+        styles
     }
 });

@@ -9,9 +9,10 @@ import { PrimeReactContext } from '../api/Api';
 export const PrevPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = PrevPageLinkBase.getProps(inProps, context);
+    const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
-        return props.ptm(key, {
+        return ptm(key, {
             context: {
                 disabled: props.disabled
             }
@@ -19,11 +20,10 @@ export const PrevPageLink = React.memo((inProps) => {
     };
 
     const className = classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': props.disabled });
-
     const iconClassName = 'p-paginator-icon';
     const prevPageIconProps = mergeProps(
         {
-            className: iconClassName
+            className: cx('prevPageIcon')
         },
         getPTOptions('prevPageIcon')
     );
@@ -33,7 +33,7 @@ export const PrevPageLink = React.memo((inProps) => {
     const prevPageButtonProps = mergeProps(
         {
             type: 'button',
-            className,
+            className: cx('prevPageButton', { disabled: props.disabled }),
             onClick: props.onClick,
             disabled: props.disabled,
             'aria-label': ariaLabel('previousPageLabel')

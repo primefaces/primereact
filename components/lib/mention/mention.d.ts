@@ -223,6 +223,11 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      */
     pt?: MentionPassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Callback to invoke when the element loses focus.
      * @param {React.FocusEvent<HTMLInputElement>} event Browser event
      */

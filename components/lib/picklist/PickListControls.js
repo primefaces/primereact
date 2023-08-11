@@ -7,6 +7,8 @@ import { AngleUpIcon } from '../icons/angleup';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const PickListControls = React.memo((props) => {
+    const { ptm, cx, unstyled } = props;
+
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
     const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
     const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;
@@ -134,21 +136,19 @@ export const PickListControls = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-picklist-buttons', props.className);
-
     const controlsProps = mergeProps(
         {
-            className
+            className: classNames(props.className, cx('controls'))
         },
-        props.ptm('controls')
+        ptm('controls')
     );
 
     return (
         <div {...controlsProps}>
-            <Button disabled={moveDisabled} type="button" icon={moveUpIcon} onClick={moveUp} pt={props.ptm('moveUpButton')}></Button>
-            <Button disabled={moveDisabled} type="button" icon={moveTopIcon} onClick={moveTop} pt={props.ptm('moveTopButton')}></Button>
-            <Button disabled={moveDisabled} type="button" icon={moveDownIcon} onClick={moveDown} pt={props.ptm('moveDownButton')}></Button>
-            <Button disabled={moveDisabled} type="button" icon={moveBottomIcon} onClick={moveBottom} pt={props.ptm('moveBottomButton')}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveUpIcon} onClick={moveUp} pt={ptm('moveUpButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveTopIcon} onClick={moveTop} pt={ptm('moveTopButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveDownIcon} onClick={moveDown} pt={ptm('moveDownButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveDisabled} type="button" icon={moveBottomIcon} onClick={moveBottom} pt={ptm('moveBottomButton')} unstyled={unstyled}></Button>
         </div>
     );
 });

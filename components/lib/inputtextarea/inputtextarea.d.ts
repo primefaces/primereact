@@ -75,6 +75,11 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
      * @type {InputTextareaPassThroughOptions}
      */
     pt?: InputTextareaPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

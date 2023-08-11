@@ -7,19 +7,21 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
-        const { ptm } = SpeedDialBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData({
             props,
             state: {
                 visible: visibleState
             }
         });
 
+        useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
@@ -169,13 +171,12 @@ export const SpeedDial = React.memo(
                 return null;
             }
 
-            const style = getItemStyle(index);
             const { disabled, icon: _icon, label, template, url, target } = item;
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-speeddial-action-icon', _icon);
             const actionIconProps = mergeProps(
                 {
-                    className: iconClassName
+                    className: cx('actionIcon')
                 },
                 ptm('actionIcon')
             );
@@ -183,7 +184,7 @@ export const SpeedDial = React.memo(
                 {
                     href: url || '#',
                     role: 'menuitem',
-                    className: contentClassName,
+                    className: cx('action', { disabled }),
                     target: target,
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
@@ -214,8 +215,8 @@ export const SpeedDial = React.memo(
             const menuItemProps = mergeProps(
                 {
                     key: index,
-                    className: 'p-speeddial-item',
-                    style,
+                    className: cx('menuitem'),
+                    style: sx('item', { index, getItemStyle }),
                     role: 'none'
                 },
                 ptm('menuitem')
@@ -233,7 +234,7 @@ export const SpeedDial = React.memo(
             const menuProps = mergeProps(
                 {
                     ref: listRef,
-                    className: 'p-speeddial-list',
+                    className: cx('list'),
                     role: 'menu'
                 },
                 ptm('menu')
@@ -256,17 +257,18 @@ export const SpeedDial = React.memo(
                 [`${props.showIcon}`]: (!visible && !!props.showIcon) || !props.hideIcon,
                 [`${props.hideIcon}`]: visible && !!props.hideIcon
             });
-            const icon = showIconVisible ? props.showIcon || <PlusIcon className={iconClassName} onClick={onClick} /> : hideIconVisible ? props.hideIcon || <MinusIcon className={iconClassName} onClick={onClick} /> : null;
-            const toggleIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, visible });
+            const icon = showIconVisible ? props.showIcon || <PlusIcon /> : hideIconVisible ? props.hideIcon || <MinusIcon /> : null;
+            const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, visible });
             const buttonProps = mergeProps({
                 type: 'button',
                 style: props.buttonStyle,
-                className,
+                className: classNames(props.buttonClassName, cx('button')),
                 icon: toggleIcon,
                 onClick: (e) => onClick(e),
                 disabled: props.disabled,
                 'aria-label': props['aria-label'],
-                pt: props.pt && props.pt.button ? props.pt.button : {}
+                pt: props.pt && props.pt.button ? props.pt.button : {},
+                unstyled: props.unstyled
             });
             const content = <Button {...buttonProps} />;
 
@@ -288,17 +290,9 @@ export const SpeedDial = React.memo(
 
         const createMask = () => {
             if (props.mask) {
-                const className = classNames(
-                    'p-speeddial-mask',
-                    {
-                        'p-speeddial-mask-visible': visible
-                    },
-                    props.maskClassName
-                );
-
                 const maskProps = mergeProps(
                     {
-                        className,
+                        className: classNames(props.maskClassName, cx('mask', { visible })),
                         style: props.maskStyle
                     },
                     ptm('mask')
@@ -310,23 +304,13 @@ export const SpeedDial = React.memo(
             return null;
         };
 
-        const className = classNames(
-            `p-speeddial p-component p-speeddial-${props.type}`,
-            {
-                [`p-speeddial-direction-${props.direction}`]: props.type !== 'circle',
-                'p-speeddial-opened': visible,
-                'p-disabled': props.disabled
-            },
-            props.className
-        );
         const button = createButton();
         const list = createList();
         const mask = createMask();
         const rootProps = mergeProps(
             {
                 id: props.id,
-                ref: elementRef,
-                className,
+                className: classNames(props.className, cx('root', { visible })),
                 style: props.style
             },
             SpeedDialBase.getOtherProps(props),
@@ -335,7 +319,7 @@ export const SpeedDial = React.memo(
 
         return (
             <React.Fragment>
-                <div {...rootProps}>
+                <div ref={elementRef} {...rootProps}>
                     {button}
                     {list}
                 </div>

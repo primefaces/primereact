@@ -125,6 +125,11 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {DockPassThroughOptions}
      */
     pt?: DockPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

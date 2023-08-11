@@ -2,27 +2,20 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, mergeProps } from '../utils/Utils';
-import PrimeReact from '../api/Api';
+import { mergeProps } from '../utils/Utils';
 
 export const ColorPickerPanel = React.forwardRef((props, ref) => {
     const context = React.useContext(PrimeReactContext);
+    const { ptm, cx } = props;
 
     const createElement = () => {
-        const className = classNames('p-colorpicker-panel', props.panelClassName, {
-            'p-colorpicker-overlay-panel': !props.inline,
-            'p-disabled': props.disabled,
-            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-        });
         const panelProps = mergeProps(
             {
-                ref,
-                className,
+                className: cx('panel', { panelProps: props, context }),
                 style: props.panelStyle,
                 onClick: props.onClick
             },
-            props.ptm('panel')
+            ptm('panel')
         );
 
         return (
@@ -38,7 +31,9 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div {...panelProps}>{props.children}</div>
+                <div ref={ref} {...panelProps}>
+                    {props.children}
+                </div>
             </CSSTransition>
         );
     };

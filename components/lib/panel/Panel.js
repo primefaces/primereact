@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useStyle } from '../hooks/Hooks';
+import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -18,24 +19,16 @@ export const Panel = React.forwardRef((inProps, ref) => {
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
     const contentId = idState + '_content';
-    const { load: loadStyle, unload: unloadStyle } = useStyle(PanelBase.css.styles, { name: 'primereact_panel_style', manual: true });
 
-    React.useEffect(() => {
-        loadStyle();
-
-        return () => {
-            unloadStyle();
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const { ptm, cx } = PanelBase.setMetaData({
+    const { ptm, cx, isUnstyled } = PanelBase.setMetaData({
         props,
         state: {
             id: idState,
             collapsed: collapsed
         }
     });
+
+    useHandleStyle(PanelBase.css.styles, isUnstyled, { name: 'panel' });
 
     const toggle = (event) => {
         if (!props.toggleable) {

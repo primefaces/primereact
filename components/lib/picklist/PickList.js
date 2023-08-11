@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PickListBase } from './PickListBase';
@@ -17,7 +18,7 @@ export const PickList = React.memo(
         const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
         const [targetFilterValueState, setTargetFilterValueState] = React.useState('');
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm } = PickListBase.setMetaData({
+        const { ptm, cx, isUnstyled } = PickListBase.setMetaData({
             props,
             state: {
                 sourceSelection: sourceSelectionState,
@@ -27,6 +28,8 @@ export const PickList = React.memo(
                 attributeSelector: attributeSelectorState
             }
         });
+
+        useHandleStyle(PickListBase.css.styles, isUnstyled, { name: 'picklist' });
         const elementRef = React.useRef(null);
         const sourceListElementRef = React.useRef(null);
         const targetListElementRef = React.useRef(null);
@@ -55,7 +58,7 @@ export const PickList = React.memo(
 
         const handleScrollPosition = (listElement, direction) => {
             if (listElement) {
-                let list = DomHandler.findSingle(listElement, '.p-picklist-list');
+                let list = DomHandler.findSingle(listElement, '[data-pc-section="list"]');
 
                 switch (direction) {
                     case 'up':
@@ -278,7 +281,6 @@ export const PickList = React.memo(
             }
         });
 
-        const className = classNames('p-picklist p-component', props.className);
         const sourceItemTemplate = props.sourceItemTemplate ? props.sourceItemTemplate : props.itemTemplate;
         const targetItemTemplate = props.targetItemTemplate ? props.targetItemTemplate : props.itemTemplate;
         const sourceList = getVisibleList(props.source, 'source');
@@ -288,7 +290,7 @@ export const PickList = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             PickListBase.getOtherProps(props),
@@ -309,6 +311,8 @@ export const PickList = React.memo(
                         moveDownIcon={props.moveDownIcon}
                         moveBottomIcon={props.moveBottomIcon}
                         ptm={ptm}
+                        cx={cx}
+                        unstyled={props.unstyled}
                     />
                 )}
 
@@ -333,6 +337,7 @@ export const PickList = React.memo(
                     filterTemplate={props.sourceFilterTemplate}
                     sourceFilterIcon={props.sourceFilterIcon}
                     ptm={ptm}
+                    cx={cx}
                 />
 
                 <PickListTransferControls
@@ -350,6 +355,8 @@ export const PickList = React.memo(
                     moveToSourceIcon={props.moveToSourceIcon}
                     moveAllToSourceIcon={props.moveAllToSourceIcon}
                     ptm={ptm}
+                    cx={cx}
+                    unstyled={props.unstyled}
                 />
 
                 <PickListSubList
@@ -373,6 +380,7 @@ export const PickList = React.memo(
                     filterTemplate={props.targetFilterTemplate}
                     targetFilterIcon={props.targetFilterIcon}
                     ptm={ptm}
+                    cx={cx}
                 />
 
                 {props.showTargetControls && (
@@ -387,6 +395,8 @@ export const PickList = React.memo(
                         moveDownIcon={props.moveDownIcon}
                         moveBottomIcon={props.moveBottomIcon}
                         ptm={ptm}
+                        cx={cx}
+                        unstyled={props.unstyled}
                     />
                 )}
             </div>

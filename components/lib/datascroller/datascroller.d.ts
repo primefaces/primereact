@@ -139,6 +139,11 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
      * @type {DataScrollerPassThroughOptions}
      */
     pt?: DataScrollerPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

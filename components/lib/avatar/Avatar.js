@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
-import { AvatarBase } from './AvatarBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { AvatarBase } from './AvatarBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -10,12 +11,14 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
 
-    const { ptm } = AvatarBase.setMetaData({
+    const { ptm, cx, isUnstyled } = AvatarBase.setMetaData({
         props,
         state: {
             imageFailed: imageFailed
         }
     });
+
+    useHandleStyle(AvatarBase.css.styles, isUnstyled, { name: 'avatar' });
 
     const createContent = () => {
         if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
@@ -31,7 +34,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         } else if (props.label) {
             const labelProps = mergeProps(
                 {
-                    className: 'p-avatar-text'
+                    className: cx('label')
                 },
                 ptm('label')
             );
@@ -40,7 +43,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         } else if (props.icon) {
             const iconProps = mergeProps(
                 {
-                    className: 'p-avatar-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -71,23 +74,11 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current
     }));
 
-    const containerClassName = classNames(
-        'p-avatar p-component',
-        {
-            'p-avatar-image': ObjectUtils.isNotEmpty(props.image) && !imageFailed,
-            'p-avatar-circle': props.shape === 'circle',
-            'p-avatar-lg': props.size === 'large',
-            'p-avatar-xl': props.size === 'xlarge',
-            'p-avatar-clickable': !!props.onClick
-        },
-        props.className
-    );
-
     const rootProps = mergeProps(
         {
             ref: elementRef,
             style: props.style,
-            className: containerClassName
+            className: classNames(props.className, cx('root', { imageFailed }))
         },
         AvatarBase.getOtherProps(props),
         ptm('root')

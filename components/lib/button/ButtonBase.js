@@ -1,4 +1,33 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
+
+const classes = {
+    icon: ({ props }) =>
+        classNames('p-button-icon p-c', {
+            [`p-button-icon-${props.iconPos}`]: props.label
+        }),
+    loadingIcon: ({ props, className }) =>
+        classNames(className, {
+            'p-button-loading-icon': props.loading
+        }),
+    label: 'p-button-label p-c',
+    root: ({ props, size, disabled }) =>
+        classNames('p-button p-component', {
+            'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
+            'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
+            'p-disabled': disabled,
+            'p-button-loading': props.loading,
+            'p-button-outlined': props.outlined,
+            'p-button-raised': props.raised,
+            'p-button-link': props.link,
+            'p-button-text': props.text,
+            'p-button-rounded': props.rounded,
+            'p-button-loading-label-only': props.loading && !props.icon && props.label,
+            [`p-button-loading-${props.iconPos}`]: props.loading && props.label,
+            [`p-button-${size}`]: size,
+            [`p-button-${props.severity}`]: props.severity
+        })
+};
 
 export const ButtonBase = ComponentBase.extend({
     defaultProps: {
@@ -23,5 +52,8 @@ export const ButtonBase = ComponentBase.extend({
         tooltip: null,
         tooltipOptions: null,
         visible: true
+    },
+    css: {
+        classes
     }
 });

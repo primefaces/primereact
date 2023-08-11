@@ -529,6 +529,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     pt?: TreeTablePassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Style class of the node.
      */
     className?: string | undefined;

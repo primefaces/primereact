@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { useEventListener } from '../hooks/Hooks';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
-import { SliderBase } from './SliderBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useEventListener } from '../hooks/Hooks';
+import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { SliderBase } from './SliderBase';
 
 export const Slider = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -26,9 +27,11 @@ export const Slider = React.memo(
         const [bindDocumentTouchMoveListener, unbindDocumentTouchMoveListener] = useEventListener({ type: 'touchmove', listener: (event) => onDrag(event) });
         const [bindDocumentTouchEndListener, unbindDocumentTouchEndListener] = useEventListener({ type: 'touchend', listener: (event) => onDragEnd(event) });
 
-        const { ptm } = SliderBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = SliderBase.setMetaData({
             props
         });
+
+        useHandleStyle(SliderBase.css.styles, isUnstyled, { name: 'slider' });
 
         const spin = (event, dir) => {
             const val = props.range ? value[handleIndex.current] : value;
@@ -61,7 +64,9 @@ export const Slider = React.memo(
             if (dragging.current) {
                 dragging.current = false;
 
-                props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: props.value });
+                const newValue = setValue(event);
+
+                props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: newValue });
 
                 unbindDocumentMouseMoveListener();
                 unbindDocumentMouseUpListener();
@@ -184,21 +189,18 @@ export const Slider = React.memo(
         };
 
         const createHandle = (leftValue, bottomValue, index) => {
+            leftValue = ObjectUtils.isEmpty(leftValue) ? 0 : leftValue;
+            bottomValue = ObjectUtils.isEmpty(bottomValue) ? 0 : bottomValue;
             const style = {
                 transition: dragging.current ? 'none' : null,
-                left: leftValue !== null && leftValue + '%',
-                bottom: bottomValue && bottomValue + '%'
+                left: leftValue + '%',
+                bottom: bottomValue + '%'
             };
-            const className = classNames('p-slider-handle', {
-                'p-slider-handle-start': index === 0,
-                'p-slider-handle-end': index === 1,
-                'p-slider-handle-active': handleIndex.current === index
-            });
 
             const handleProps = mergeProps(
                 {
-                    className: className,
-                    style: style,
+                    className: cx('handle', { index, handleIndex }),
+                    style: { ...sx('handle', { dragging, leftValue, bottomValue }), ...style },
                     tabIndex: props.tabIndex,
                     role: 'slider',
                     onMouseDown: (event) => onMouseDown(event, index),
@@ -229,8 +231,8 @@ export const Slider = React.memo(
 
             const rangeProps = mergeProps(
                 {
-                    className: 'p-slider-range',
-                    style: rangeStyle
+                    className: cx('range'),
+                    style: { ...sx('range'), ...rangeStyle }
                 },
                 ptm('range')
             );
@@ -256,8 +258,8 @@ export const Slider = React.memo(
 
             const rangeProps = mergeProps(
                 {
-                    className: 'p-slider-range',
-                    style: rangeStyle
+                    className: cx('range'),
+                    style: { ...sx('range'), ...rangeStyle }
                 },
                 ptm('range')
             );
@@ -277,18 +279,14 @@ export const Slider = React.memo(
 
         const otherProps = SliderBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-slider p-component', props.className, {
-            'p-disabled': props.disabled,
-            'p-slider-horizontal': horizontal,
-            'p-slider-vertical': vertical
-        });
+
         const content = props.range ? createRangeSlider() : createSingleSlider();
         const rootProps = mergeProps(
             {
                 ref: elementRef,
                 id: props.id,
                 style: props.style,
-                className: className,
+                className: cx('root', { vertical, horizontal }),
                 onClick: onBarClick
             },
             SliderBase.getOtherProps(props),

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -15,11 +15,11 @@ export const Message = React.memo(
 
         const elementRef = React.useRef(null);
 
-        useStyle(MessageBase.css.styles, { name: 'primereact_message_style' });
-
-        const { ptm, cx } = MessageBase.setMetaData({
+        const { ptm, cx, isUnstyled } = MessageBase.setMetaData({
             props
         });
+
+        useHandleStyle(MessageBase.css.styles, isUnstyled, { name: 'message' });
 
         const createContent = () => {
             if (props.content) {
