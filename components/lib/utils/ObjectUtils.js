@@ -83,18 +83,6 @@ export default class ObjectUtils {
         }
     }
 
-    static isFunction(obj) {
-        return !!(obj && obj.constructor && obj.call && obj.apply);
-    }
-
-    static isObject(obj) {
-        return obj !== null && obj instanceof Object && obj.constructor === Object;
-    }
-
-    static isLetter(char) {
-        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
-    }
-
     static findDiffKeys(obj1, obj2) {
         if (!obj1 || !obj2) {
             return {};
@@ -163,16 +151,16 @@ export default class ObjectUtils {
     }
 
     static getPropCaseInsensitive(props, prop, defaultProps = {}) {
-        const fkey = ObjectUtils.convertToFlatCase(prop);
+        const fkey = this.toFlatCase(prop);
 
         for (let key in props) {
-            if (props.hasOwnProperty(key) && ObjectUtils.convertToFlatCase(key) === fkey) {
+            if (props.hasOwnProperty(key) && this.toFlatCase(key) === fkey) {
                 return props[key];
             }
         }
 
         for (let key in defaultProps) {
-            if (defaultProps.hasOwnProperty(key) && ObjectUtils.convertToFlatCase(key) === fkey) {
+            if (defaultProps.hasOwnProperty(key) && this.toFlatCase(key) === fkey) {
                 return defaultProps[key];
             }
         }
@@ -282,9 +270,18 @@ export default class ObjectUtils {
         return str;
     }
 
-    static convertToFlatCase(str) {
+    static toFlatCase(str) {
         // convert snake, kebab, camel and pascal cases to flat case
-        return this.isNotEmpty(str) && typeof str === 'string' ? str.replace(/(-|_)/g, '').toLowerCase() : str;
+        return this.isNotEmpty(str) && this.isString(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
+    }
+
+    static toCapitalCase(str) {
+        return this.isNotEmpty(str) && this.isString(str) ? str[0].toUpperCase() + str.slice(1) : str;
+    }
+
+    static trim(value) {
+        // trim only if the value is actually a string
+        return this.isNotEmpty(value) && this.isString(value) ? value.trim() : value;
     }
 
     static isEmpty(value) {
@@ -293,6 +290,70 @@ export default class ObjectUtils {
 
     static isNotEmpty(value) {
         return !this.isEmpty(value);
+    }
+
+    static isFunction(value) {
+        return !!(value && value.constructor && value.call && value.apply);
+    }
+
+    static isObject(value) {
+        return value !== null && value instanceof Object && value.constructor === Object;
+    }
+
+    static isDate(value) {
+        return value !== null && value instanceof Date && value.constructor === Date;
+    }
+
+    static isArray(value) {
+        return value !== null && Array.isArray(value);
+    }
+
+    static isString(value) {
+        return value !== null && typeof value === 'string';
+    }
+
+    static isPrintableCharacter(char = '') {
+        return this.isNotEmpty(char) && char.length === 1 && char.match(/\S| /);
+    }
+
+    static isLetter(char) {
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+    }
+
+    /**
+     * Firefox-v103 does not currently support the "findLast" method. It is stated that this method will be supported with Firefox-v104.
+     * https://caniuse.com/mdn-javascript_builtins_array_findlast
+     */
+    static findLast(arr, callback) {
+        let item;
+
+        if (this.isNotEmpty(arr)) {
+            try {
+                item = arr.findLast(callback);
+            } catch {
+                item = [...arr].reverse().find(callback);
+            }
+        }
+
+        return item;
+    }
+
+    /**
+     * Firefox-v103 does not currently support the "findLastIndex" method. It is stated that this method will be supported with Firefox-v104.
+     * https://caniuse.com/mdn-javascript_builtins_array_findlastindex
+     */
+    static findLastIndex(arr, callback) {
+        let index = -1;
+
+        if (this.isNotEmpty(arr)) {
+            try {
+                index = arr.findLastIndex(callback);
+            } catch {
+                index = arr.lastIndexOf([...arr].reverse().find(callback));
+            }
+        }
+
+        return index;
     }
 
     static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
@@ -319,5 +380,21 @@ export default class ObjectUtils {
         else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
 
         return result;
+    }
+
+    static findChildrenByKey(data, key) {
+        for (const item of data) {
+            if (item.key === key) {
+                return item.children || [];
+            } else if (item.children) {
+                const result = this.findChildrenByKey(item.children, key);
+
+                if (result.length > 0) {
+                    return result;
+                }
+            }
+        }
+
+        return [];
     }
 }

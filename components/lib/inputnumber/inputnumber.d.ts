@@ -131,11 +131,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Style class of the increment button.
      */
-    incrementButtonIcon?: string | undefined;
+    incrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Style class of the decrement button.
      */
-    decrementButtonIcon?: string | undefined;
+    decrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Locale to be used in formatting.
      */
@@ -313,6 +313,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {InputNumberPassThroughOptions}
      */
     pt?: InputNumberPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

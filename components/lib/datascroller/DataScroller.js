@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { DataScrollerBase } from './DataScrollerBase';
@@ -11,9 +11,11 @@ export const DataScroller = React.memo(
         const props = DataScrollerBase.getProps(inProps, context);
 
         const [dataToRenderState, setDataToRenderState] = React.useState([]);
-        const { ptm } = DataScrollerBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = DataScrollerBase.setMetaData({
             props
         });
+
+        useHandleStyle(DataScrollerBase.css.styles, isUnstyled, { name: 'datascroller' });
 
         const elementRef = React.useRef(null);
         const contentRef = React.useRef(null);
@@ -161,7 +163,7 @@ export const DataScroller = React.memo(
         const createHeader = () => {
             const headerProps = mergeProps(
                 {
-                    className: 'p-datascroller-header'
+                    className: cx('header')
                 },
                 ptm('header')
             );
@@ -176,7 +178,7 @@ export const DataScroller = React.memo(
         const createFooter = () => {
             const footerProps = mergeProps(
                 {
-                    className: 'p-datascroller-footer'
+                    className: cx('footer')
                 },
                 ptm('footer')
             );
@@ -212,14 +214,14 @@ export const DataScroller = React.memo(
             const contentProps = mergeProps(
                 {
                     ref: contentRef,
-                    className: 'p-datascroller-content',
-                    style: { maxHeight: props.scrollHeight }
+                    className: cx('content'),
+                    style: sx('content')
                 },
                 ptm('content')
             );
             const listProps = mergeProps(
                 {
-                    className: 'p-datascroller-list'
+                    className: cx('list')
                 },
                 ptm('list')
             );
@@ -232,10 +234,6 @@ export const DataScroller = React.memo(
             );
         };
 
-        const className = classNames('p-datascroller p-component', props.className, {
-            'p-datascroller-inline': props.inline
-        });
-
         const header = createHeader();
         const footer = createFooter();
         const content = createContent();
@@ -244,7 +242,7 @@ export const DataScroller = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className
+                className: classNames(props.className, cx('root'))
             },
             DataScrollerBase.getOtherProps(props),
             ptm('root')

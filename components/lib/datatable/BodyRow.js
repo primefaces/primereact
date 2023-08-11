@@ -7,15 +7,19 @@ export const BodyRow = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
     const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
         const cProps = getColumnProps(props.column);
 
-        return props.ptCallbacks.ptmo(cProps, key, {
-            props: cProps,
+        return ptmo(cProps, key, {
+            props,
             parent: props.metaData,
             state: {
                 editing: editingState
+            },
+            context: {
+                index: props.index
             }
         });
     };
@@ -371,12 +375,6 @@ export const BodyRow = React.memo((props) => {
     };
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
-    const className = classNames(rowClassName, {
-        'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
-        'p-highlight-contextmenu': props.contextMenuSelected,
-        'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
-        'p-row-odd': props.rowIndex % 2 !== 0
-    });
     const style = { height: props.virtualScrollerOptions ? props.virtualScrollerOptions.itemSize : undefined };
     const content = createContent();
     const tabIndex = getTabIndex();
@@ -384,7 +382,7 @@ export const BodyRow = React.memo((props) => {
         {
             role: 'row',
             tabIndex: tabIndex,
-            className: className,
+            className: classNames(rowClassName, cx('row', { rowProps: props })),
             style: style,
             onMouseDown: (e) => onMouseDown(e),
             onMouseUp: (e) => onMouseUp(e),
@@ -401,7 +399,7 @@ export const BodyRow = React.memo((props) => {
             onDragEnd: (e) => onDragEnd(e),
             onDrop: (e) => onDrop(e)
         },
-        getColumnPTOptions('row')
+        ptm('row')
     );
 
     return <tr {...rowProps}>{content}</tr>;

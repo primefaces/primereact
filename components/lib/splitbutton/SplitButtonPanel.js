@@ -1,29 +1,29 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, mergeProps } from '../utils/Utils';
+import { mergeProps } from '../utils/Utils';
 
 export const SplitButtonPanel = React.forwardRef((props, ref) => {
-    const createElement = () => {
-        const className = classNames('p-menu p-menu-overlay p-component', props.menuClassName);
+    const { ptm, cx } = props;
 
+    const createElement = () => {
         const menuProps = mergeProps(
             {
                 ref: ref,
-                className: className,
+                className: cx('menu', { subProps: props }),
                 style: props.menuStyle,
                 onClick: props.onClick
             },
-            props.ptm('menu')
+            ptm('menu')
         );
 
         const menuListProps = mergeProps(
             {
                 id: props.menuId,
-                className: 'p-menu-list p-reset',
+                className: cx('menuList'),
                 role: 'menu'
             },
-            props.ptm('menuList')
+            ptm('menuList')
         );
 
         return (

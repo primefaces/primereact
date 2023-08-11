@@ -883,6 +883,8 @@ export interface DataTablePassThroughOptions {
     tooltip?: TooltipPassThroughOptions;
 }
 
+type SortOrder = 1 | 0 | -1 | null | undefined;
+
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
@@ -1269,11 +1271,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     /**
      * Icon to display the current sorting status.
      */
-    sortIcon?: IconType<DataTable<TValue>> | undefined;
+    sortIcon?: IconType<DataTable<TValue>, { sortOrder?: SortOrder; sorted?: boolean }> | undefined;
     /**
      * Order to sort the data by default.
      */
-    sortOrder?: 1 | 0 | -1 | null | undefined;
+    sortOrder?: SortOrder;
     /**
      * Unique identifier of a stateful table to use in state storage.
      */
@@ -1549,6 +1551,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @type {DataTablePassThroughOptions}
      */
     pt?: DataTablePassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

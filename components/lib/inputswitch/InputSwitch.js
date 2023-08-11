@@ -1,21 +1,24 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputSwitch = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputSwitchBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm } = InputSwitchBase.setMetaData({
+        const { ptm, cx, isUnstyled } = InputSwitchBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
+
+        useHandleStyle(InputSwitchBase.css.styles, isUnstyled, { name: 'inputswitch' });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const checked = props.checked === props.trueValue;
@@ -83,21 +86,12 @@ export const InputSwitch = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = InputSwitchBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-inputswitch p-component',
-            {
-                'p-inputswitch-checked': checked,
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
-            },
-            props.className
-        );
 
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: cx('root', { focusedState, checked }),
                 style: props.style,
                 onClick,
                 role: 'checkbox',
@@ -133,7 +127,7 @@ export const InputSwitch = React.memo(
 
         const sliderProps = mergeProps(
             {
-                className: 'p-inputswitch-slider'
+                className: cx('slider')
             },
             ptm('slider')
         );

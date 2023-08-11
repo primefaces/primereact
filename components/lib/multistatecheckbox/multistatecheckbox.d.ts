@@ -226,6 +226,11 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      * @type {MultiStateCheckboxPassThroughOptions}
      */
     pt?: MultiStateCheckboxPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

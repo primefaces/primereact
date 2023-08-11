@@ -28,9 +28,15 @@ export declare class DomHandler {
     static removeMultipleClasses(el: HTMLElement, className: string): void;
     static addClass(el: HTMLElement, className: string): void;
     static removeClass(el: HTMLElement, className: string): void;
+    static addStyles(el: HTMLElement, styles: object): void;
     static hasClass(el: HTMLElement, className: string): boolean;
     static find(el: HTMLElement, selector: string): any[];
     static findSingle(el: HTMLElement, selector: string): any;
+    static createElement(type: string, attributes: object, ...children: any): HTMLElement;
+    static setAttributes(el: HTMLElement, attributes: object): void;
+    static getAttribute(el: HTMLElement, name: string): any;
+    static isAttributeEquals(el: HTMLElement, name: string, value: any): boolean;
+    static isAttributeNotEquals(el: HTMLElement, name: string, value: any): boolean;
     static getHeight(el: HTMLElement): number;
     static getWidth(el: HTMLElement): number;
     static alignOverlay(overlay: HTMLElement, target: HTMLElement, appendTo?: string, calculateMinWidth?: boolean): void;
@@ -61,7 +67,6 @@ export declare class DomHandler {
     static resolveUserAgent(): { browser: string; version: string };
     static isVisible(el: HTMLElement): boolean;
     static isExist(el: HTMLElement): boolean;
-    static hasDOM(): boolean;
     static getFocusableElements(el: HTMLElement, selector?: string): any[];
     static getFirstFocusableElement(el: HTMLElement, selector?: string): any;
     static getLastFocusableElement(el: HTMLElement, selector?: string): any;
@@ -72,8 +77,8 @@ export declare class DomHandler {
     static applyStyle(el: HTMLElement, style: any): void;
     static exportCSV(csv: any, filename: string): void;
     static saveAs(file: { name: string; url: any }): boolean;
-    static createInlineStyle(nonce: string): HTMLElement;
-    static removeInlineStyle(styleElement: HTMLElement): HTMLElement | null;
+    static createInlineStyle(nonce?: string): HTMLStyleElement;
+    static removeInlineStyle(styleElement: HTMLStyleElement): HTMLStyleElement | null;
     static getTargetElement(target: any): HTMLElement | null;
 }
 
@@ -98,7 +103,6 @@ export declare class ObjectUtils {
     static equals(obj1: any, obj2: any, field: string): boolean;
     static deepEquals(a: any, b: any): boolean;
     static resolveFieldData(data: any, field: string): any;
-    static isFunction(obj: any): boolean;
     static findDiffKeys(obj1: any, obj2: any): object;
     static reorderArray(value: any, from: number, to: number): void;
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
@@ -115,17 +119,39 @@ export declare class ObjectUtils {
     static getRefElement(ref: any): any;
     static combinedRefs(innerRef: any, forwardRef: any): void;
     static removeAccents(str: any): string;
+    static toFlatCase(str: string): string;
+    static toCapitalCase(str: string): string;
+    static trim(value: any): any;
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
+    static isFunction(value: any): boolean;
+    static isObject(value: any): boolean;
+    static isDate(value: any): boolean;
+    static isArray(value: any): boolean;
+    static isString(value: any): boolean;
+    static isPrintableCharacter(char: string): boolean;
+    static isLetter(char: string): boolean;
+    static findLast(value: any[], callback: () => any): any;
+    static findLastIndex(value: any[], callback: () => any): number;
     static sort(value1: any, value2: any, order: number, locale: string | string[]): number;
 }
 
+/**
+ * Icon utlities for managing icon tasks.
+ */
 export declare class IconUtils {
     static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, options: any): any;
 }
 
+/**
+ * Generate a unique id for components for a page.
+ * @param prefix the optional string prefix of the id
+ */
 export declare function UniqueComponentId(prefix?: string): string;
 
+/**
+ * ZIndex utlities for managing zindex states of different types.
+ */
 export declare namespace ZIndexUtils {
     export function get(el?: HTMLElement): number;
     export function set(key: string, el: HTMLElement, autoZIndex?: boolean, baseZIndex?: number): void;
@@ -134,15 +160,36 @@ export declare namespace ZIndexUtils {
     export function getCurrent(key: string): number;
 }
 
-export interface IconOptions<ParentProps> {
+/**
+ * Icon options passed to any icon.
+ * ComponentProps are props from the owning component.
+ * AdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example.
+ */
+export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
+    /**
+     * Icon specific properties.
+     */
     iconProps: React.HTMLProps<HTMLElement>;
+    /**
+     * The element representing the icon.
+     */
     element: React.ReactNode;
-    props?: ParentProps;
+    /**
+     * Properties of the owning component.
+     */
+    props?: ComponentProps;
     [key: string]: any;
-}
+};
 
-export type IconType<ParentProps> = React.ReactNode | ((options: IconOptions<ParentProps>) => React.ReactNode);
+export type IconType<ComponentProps, AdditionalProps = NonNullable<unknown>> = React.ReactNode | ((options: IconOptions<ComponentProps, AdditionalProps>) => React.ReactNode);
 
-export type TemplateType<ParentProps> = React.ReactNode | ((props: ParentProps) => React.ReactNode);
+export type TemplateType<ComponentProps> = React.ReactNode | ((props: ComponentProps) => React.ReactNode);
 
-export type PassThroughType<T, O> = T | ((options?: O) => T | void) | null | undefined;
+export type PassThroughType<T, O> =
+    | T
+    | ((options?: O) => T | void)
+    | null
+    | undefined
+    | {
+          [key: string]: any;
+      };

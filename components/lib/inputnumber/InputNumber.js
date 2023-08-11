@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -14,12 +15,14 @@ export const InputNumber = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm } = InputNumberBase.setMetaData({
+        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
+
+        useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
@@ -1050,26 +1053,18 @@ export const InputNumber = React.memo(
         };
 
         const createUpButton = () => {
-            const className = classNames(
-                'p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component',
-                {
-                    'p-disabled': props.disabled
-                },
-                props.incrementButtonClassName
-            );
-            const iconsClassName = 'p-button-icon';
             const incrementIconProps = mergeProps(
                 {
-                    className: iconsClassName
+                    className: cx('incrementIcon')
                 },
-                ptm('incrementIconProps')
+                ptm('incrementIcon')
             );
             const icon = props.incrementButtonIcon || <AngleUpIcon {...incrementIconProps} />;
             const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
             const incrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className,
+                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
                     onPointerUp: onUpButtonMouseUp,
@@ -1090,26 +1085,18 @@ export const InputNumber = React.memo(
         };
 
         const createDownButton = () => {
-            const className = classNames(
-                'p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component',
-                {
-                    'p-disabled': props.disabled
-                },
-                props.decrementButtonClassName
-            );
-            const iconsClassName = 'p-button-icon';
             const decrementIconProps = mergeProps(
                 {
-                    className: iconsClassName
+                    className: cx('decrementIcon')
                 },
-                ptm('decrementIconProps')
+                ptm('decrementIcon')
             );
             const icon = props.decrementButtonIcon || <AngleDownIcon {...decrementIconProps} />;
             const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
             const decrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className,
+                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
                     onPointerUp: onDownButtonMouseUp,
@@ -1134,7 +1121,7 @@ export const InputNumber = React.memo(
             const downButton = props.showButtons && createDownButton();
             const buttonGroupProps = mergeProps(
                 {
-                    className: 'p-inputnumber-button-group'
+                    className: cx('buttonGroup')
                 },
                 ptm('buttonGroup')
             );
@@ -1160,24 +1147,13 @@ export const InputNumber = React.memo(
         const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-inputnumber p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
-                'p-inputwrapper-focus': focusedState,
-                'p-inputnumber-buttons-stacked': stacked,
-                'p-inputnumber-buttons-horizontal': horizontal,
-                'p-inputnumber-buttons-vertical': vertical
-            },
-            props.className
-        );
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
                 style: props.style
             },
             otherProps,

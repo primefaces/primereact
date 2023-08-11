@@ -7,6 +7,7 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { IconUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 import { FieldsetBase } from './FieldsetBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -19,15 +20,15 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
-    useStyle(FieldsetBase.css.styles, { name: 'primereact_fieldset_style' });
-
-    const { ptm, cx } = FieldsetBase.setMetaData({
+    const { ptm, cx, isUnstyled } = FieldsetBase.setMetaData({
         props,
         state: {
             id: idState,
             collapsed: collapsed
         }
     });
+
+    useHandleStyle(FieldsetBase.css.styles, isUnstyled, { name: 'fieldset' });
 
     const toggle = (event) => {
         if (props.toggleable) {

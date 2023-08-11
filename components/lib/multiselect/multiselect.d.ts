@@ -576,6 +576,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     pt?: MultiSelectPassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Icon of the remove chip element.
      */
     removeIcon?: IconType<MultiSelectProps> | undefined;

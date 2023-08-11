@@ -147,6 +147,11 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     children?: React.ReactNode | undefined;
     /**
+     * Specifies if pressing escape key should hide the preview.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
+    /**
      * The crossorigin content attribute on media elements is a CORS settings attribute.
      */
     crossOrigin?: 'anonymous' | 'use-credentials' | '' | undefined;
@@ -242,6 +247,11 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {ImagePassThroughOptions}
      */
     pt?: ImagePassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

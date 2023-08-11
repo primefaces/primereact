@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { TerminalService } from '../terminalservice/TerminalService';
-import { classNames, DomHandler, mergeProps } from '../utils/Utils';
-import { TerminalBase } from './TerminalBase';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { TerminalService } from '../terminalservice/TerminalService';
+import { DomHandler, classNames, mergeProps } from '../utils/Utils';
+import { TerminalBase } from './TerminalBase';
 
 export const Terminal = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -17,7 +18,7 @@ export const Terminal = React.memo(
         const inputRef = React.useRef(null);
         const isEmitted = React.useRef(false);
 
-        const { ptm } = TerminalBase.setMetaData({
+        const { ptm, cx, isUnstyled } = TerminalBase.setMetaData({
             props,
             state: {
                 commandText: commandTextState,
@@ -25,9 +26,10 @@ export const Terminal = React.memo(
             }
         });
 
+        useHandleStyle(TerminalBase.css.styles, isUnstyled, { name: 'terminal' });
         const promptProps = mergeProps(
             {
-                className: 'p-terminal-prompt'
+                className: cx('prompt')
             },
             ptm('prompt')
         );
@@ -133,13 +135,13 @@ export const Terminal = React.memo(
             const commandsProps = mergeProps({ key }, ptm('commands'));
             const commandProps = mergeProps(
                 {
-                    className: 'p-terminal-command'
+                    className: cx('command')
                 },
                 ptm('command')
             );
             const responseProps = mergeProps(
                 {
-                    className: 'p-terminal-response'
+                    className: cx('response')
                 },
                 ptm('response')
             );
@@ -157,7 +159,7 @@ export const Terminal = React.memo(
             const content = commandsState.map(createCommand);
             const contentProps = mergeProps(
                 {
-                    className: 'p-terminal-content'
+                    className: cx('content')
                 },
                 ptm('content')
             );
@@ -168,7 +170,7 @@ export const Terminal = React.memo(
         const createPromptContainer = () => {
             const containerProps = mergeProps(
                 {
-                    className: 'p-terminal-prompt-container'
+                    className: cx('container')
                 },
                 ptm('container')
             );
@@ -178,7 +180,7 @@ export const Terminal = React.memo(
                     ref: inputRef,
                     value: commandTextState,
                     type: 'text',
-                    className: 'p-terminal-input',
+                    className: cx('commandText'),
                     autoComplete: 'off',
                     onChange: (e) => onInputChange(e),
                     onKeyDown: (e) => onInputKeyDown(e)
@@ -194,7 +196,6 @@ export const Terminal = React.memo(
             );
         };
 
-        const className = classNames('p-terminal p-component', props.className);
         const welcomeMessage = createWelcomeMessage();
         const content = createContent();
         const prompt = createPromptContainer();
@@ -202,7 +203,7 @@ export const Terminal = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: classNames(props.className, cx('root')),
                 style: props.style,
                 onClick
             },

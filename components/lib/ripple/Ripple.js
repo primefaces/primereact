@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { DomHandler } from '../utils/Utils';
-import { PrimeReactContext } from '../api/Api';
-import PrimeReact from '../api/Api';
+import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
     React.forwardRef(() => {
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
+
+        useStyle(RippleBase.css.styles, { name: 'ripple' });
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;

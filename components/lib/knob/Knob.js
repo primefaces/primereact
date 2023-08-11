@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useEventListener, useStyle } from '../hooks/Hooks';
+import { useEventListener } from '../hooks/Hooks';
 import { mergeProps } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 const radius = 40;
 const midX = 50;
@@ -15,11 +16,11 @@ export const Knob = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = KnobBase.getProps(inProps, context);
 
-        useStyle(KnobBase.css.styles, { name: 'primereact_knob_style' });
-
-        const { ptm, cx } = KnobBase.setMetaData({
+        const { ptm, cx, isUnstyled } = KnobBase.setMetaData({
             props
         });
+
+        useHandleStyle(KnobBase.css.styles, isUnstyled, { name: 'knob' });
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
 
