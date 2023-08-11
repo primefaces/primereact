@@ -11,7 +11,10 @@ export const InputText = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
         const { ptm, cx, isUnstyled } = InputTextBase.setMetaData({
-            props
+            props,
+            context: {
+                disabled: props.disabled
+            }
         });
 
         useHandleStyle(InputTextBase.css.styles, isUnstyled, { name: 'inputtext', styled: true });

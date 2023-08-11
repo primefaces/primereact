@@ -21,6 +21,7 @@ export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPass
 export interface CheckboxPassThroughMethodOptions {
     props: CheckboxProps;
     state: CheckboxState;
+    context: CheckboxContext;
 }
 
 /**
@@ -53,6 +54,22 @@ export interface CheckboxPassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+}
+
+/**
+ * Defines current options in Checkbox component.
+ */
+export interface CheckboxContext {
+    /**
+     * Current checked state of the item as a boolean.
+     * @defaultValue false
+     */
+    checked: boolean;
+    /**
+     * Current disabled state of the item as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**

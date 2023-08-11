@@ -20,6 +20,7 @@ export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPa
  */
 export interface InputTextPassThroughMethodOptions {
     props: InputTextProps;
+    context: InputTextContext;
 }
 
 /**
@@ -36,6 +37,22 @@ export interface InputTextPassThroughOptions {
      * @see {@link TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current options in InputText component.
+ */
+export interface InputTextContext {
+    /**
+     * Current filled state of the component as a boolean.
+     * @defaultValue false
+     */
+    filled: boolean;
+    /**
+     * Current disabled state of the component as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**
