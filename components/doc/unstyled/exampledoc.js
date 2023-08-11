@@ -1,12 +1,12 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import Link from 'next/link';
 import { Button } from '../../lib/button/Button';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ExampleDoc(props) {
     const code = {
         basic: `
-<Button label="Submit" icon="pi pi-check" unsyled
+<Button label="Submit" icon="pi pi-check" unstyled
     pt={{
         root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
         label: { className: 'text-white font-bold text-xl' },
@@ -21,7 +21,7 @@ import { Button } from 'primereact/button';
 export default function ExampleDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Button label="Submit" icon="pi pi-check" unsyled
+            <Button label="Submit" icon="pi pi-check" unstyled
                 pt={{
                     root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
                     label: { className: 'text-white font-bold text-xl' },
@@ -39,7 +39,7 @@ import { Button } from 'primereact/button';
 export default function ExampleDemo() {
     return (
         <div className="card flex justify-content-center">
-            <Button label="Submit" icon="pi pi-check" unsyled
+            <Button label="Submit" icon="pi pi-check" unstyled
                 pt={{
                     root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
                     label: { className: 'text-white font-bold text-xl' },
@@ -64,7 +64,7 @@ export default function ExampleDemo() {
                 <Button
                     label="Submit"
                     icon="pi pi-check"
-                    unsyled
+                    unstyled
                     pt={{
                         root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
                         label: { className: 'text-white font-bold text-xl' },
