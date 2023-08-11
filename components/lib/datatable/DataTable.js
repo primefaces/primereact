@@ -1301,6 +1301,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const closeEditingRows = () => {
+        DomHandler.find(document.body, '.p-row-editor-cancel').forEach((button, index) => {
+            setTimeout(() => {
+                button.click();
+            }, index * 5);
+        });
+    };
+
     const createEvent = (event) => {
         return {
             first: getFirst(),
@@ -1426,6 +1434,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         props,
         clearState,
         closeEditingCell,
+        closeEditingRows,
         exportCSV,
         filter,
         reset,
