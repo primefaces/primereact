@@ -58,7 +58,7 @@ export const ProgressBar = React.memo(
 
             return (
                 <div {...rootProps}>
-                    <div {...valueProps}>{props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}</div>
+                    <div {...valueProps}>{label != null && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
         };
