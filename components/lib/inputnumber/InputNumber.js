@@ -475,7 +475,7 @@ export const InputNumber = React.memo(
 
             const key = event.key;
 
-            if (key != 'Enter') {
+            if (key !== 'Enter') {
                 // to submit a form
                 event.preventDefault();
             }
