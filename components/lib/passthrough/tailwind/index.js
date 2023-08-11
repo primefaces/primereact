@@ -15,7 +15,7 @@ export const TRANSITIONS = {
     }
 };
 
-export default Tailwind = {
+const Tailwind = {
     //PANELS
     panel: {
         header: ({ props }) => ({
@@ -3419,3 +3419,5 @@ export default Tailwind = {
         root: 'relative'
     }
 };
+
+module.exports = { Tailwind };

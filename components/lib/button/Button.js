@@ -12,9 +12,13 @@ export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ButtonBase.getProps(inProps, context);
+        const disabled = props.disabled || props.loading;
 
         const { ptm, cx, isUnstyled } = ButtonBase.setMetaData({
-            props
+            props,
+            context: {
+                disabled
+            }
         });
 
         useHandleStyle(ButtonBase.css.styles, isUnstyled, { name: 'button', styled: true });
@@ -89,7 +93,6 @@ export const Button = React.memo(
             return null;
         };
 
-        const disabled = props.disabled || props.loading;
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
         const sizeMapping = {
