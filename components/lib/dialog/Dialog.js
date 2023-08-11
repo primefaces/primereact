@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -10,7 +11,6 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -682,4 +682,3 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 });
 
 Dialog.displayName = 'Dialog';
-
