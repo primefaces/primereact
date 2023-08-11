@@ -31,8 +31,8 @@ export const TabMenu = React.memo(
                     index
                 }
             });
-        }
-            
+        };
+
         useHandleStyle(TabMenuBase.css.styles, isUnstyled, { name: 'tabmenu' });
 
         const itemClick = (event, item, index) => {
