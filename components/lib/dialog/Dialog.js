@@ -192,9 +192,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 }
             } else {
                 lastPageX.current = event.pageX;
-                dialogRef.current.style.left = leftPos + 'px';
+                dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 lastPageY.current = event.pageY;
-                dialogRef.current.style.top = topPos + 'px';
+                dialogRef.current.style.top = topPos - topMargin + 'px';
             }
 
             props.onDrag && props.onDrag(event);
