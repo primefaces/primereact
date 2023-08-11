@@ -174,8 +174,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const leftPos = offset.left + deltaX;
             const topPos = offset.top + deltaY;
             const viewport = DomHandler.getViewport();
-            const leftMargin = parseFloat(getComputedStyle(dialogRef.current)['margin-left'])
-            const topMargin = parseFloat(getComputedStyle(dialogRef.current)['margin-top'])
+            const computedStyle = getComputedStyle(dialogRef.current);
+            const leftMargin = parseFloat(computedStyle.marginLeft);
+            const topMargin = parseFloat(computedStyle.marginTop);
 
             dialogRef.current.style.position = 'fixed';
 
