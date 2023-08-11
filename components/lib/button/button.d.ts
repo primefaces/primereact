@@ -19,6 +19,7 @@ export declare type ButtonPassThroughType<T> = PassThroughType<T, ButtonPassThro
  */
 export interface ButtonPassThroughMethodOptions {
     props: ButtonProps;
+    context: ButtonContext;
 }
 
 /**
@@ -51,6 +52,17 @@ export interface ButtonPassThroughOptions {
      * @see {@link TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current options in Button component.
+ */
+export interface ButtonContext {
+    /**
+     * Current disabled state of the element as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**
