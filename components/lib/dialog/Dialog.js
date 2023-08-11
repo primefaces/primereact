@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -10,7 +11,6 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Dialog = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -174,24 +174,27 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const leftPos = offset.left + deltaX;
             const topPos = offset.top + deltaY;
             const viewport = DomHandler.getViewport();
+            const computedStyle = getComputedStyle(dialogRef.current);
+            const leftMargin = parseFloat(computedStyle.marginLeft);
+            const topMargin = parseFloat(computedStyle.marginTop);
 
             dialogRef.current.style.position = 'fixed';
 
             if (props.keepInViewport) {
                 if (leftPos >= props.minX && leftPos + width < viewport.width) {
                     lastPageX.current = event.pageX;
-                    dialogRef.current.style.left = leftPos + 'px';
+                    dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 }
 
                 if (topPos >= props.minY && topPos + height < viewport.height) {
                     lastPageY.current = event.pageY;
-                    dialogRef.current.style.top = topPos + 'px';
+                    dialogRef.current.style.top = topPos - topMargin + 'px';
                 }
             } else {
                 lastPageX.current = event.pageX;
-                dialogRef.current.style.left = leftPos + 'px';
+                dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 lastPageY.current = event.pageY;
-                dialogRef.current.style.top = topPos + 'px';
+                dialogRef.current.style.top = topPos - topMargin + 'px';
             }
 
             props.onDrag && props.onDrag(event);
