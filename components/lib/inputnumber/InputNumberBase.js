@@ -161,6 +161,7 @@ export const InputNumberBase = ComponentBase.extend({
         onChange: null,
         onFocus: null,
         onKeyDown: null,
+        onKeyUp: null,
         onValueChange: null,
         pattern: null,
         placeholder: null,
