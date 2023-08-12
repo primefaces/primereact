@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -8,7 +9,6 @@ import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { CarouselBase } from './CarouselBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 const CarouselItem = React.memo((props) => {
     const { ptm, cx } = props;
@@ -264,12 +264,14 @@ export const Carousel = React.memo(
         `;
 
             if (props.responsiveOptions) {
+                const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
+
                 responsiveOptions.current = [...props.responsiveOptions];
                 responsiveOptions.current.sort((data1, data2) => {
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
 
-                    return ObjectUtils.sort(value1, value2, -1, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, -1, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 for (let i = 0; i < responsiveOptions.current.length; i++) {

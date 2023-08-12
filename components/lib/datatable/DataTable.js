@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
@@ -12,7 +13,6 @@ import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
 import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -925,8 +925,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return props.removableSort ? (props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     };
 
-    const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
+    const compareValuesOnSort = (value1, value2, comparator, order) => {
+        return ObjectUtils.sort(value1, value2, order, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const addSortMeta = (meta, multiSortMeta) => {
@@ -960,11 +960,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (columnSortable.current && columnSortFunction.current) {
             value = columnSortFunction.current({ data, field, order });
         } else {
-            value.sort((data1, data2) => {
-                const value1 = ObjectUtils.resolveFieldData(data1, field);
-                const value2 = ObjectUtils.resolveFieldData(data2, field);
+            // performance optimization to prevent resolving field data in each loop
+            const lookupMap = new Map();
+            const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
 
-                return compareValuesOnSort(value1, value2, order);
+            for (let item of data) {
+                lookupMap.set(item, ObjectUtils.resolveFieldData(item, field));
+            }
+
+            value.sort((data1, data2) => {
+                const value1 = lookupMap.get(data1);
+                const value2 = lookupMap.get(data2);
+
+                return compareValuesOnSort(value1, value2, comparator, order);
             });
         }
 
@@ -995,15 +1003,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
             value = columnSortFunction.current({ data, field, order, multiSortMeta });
         } else {
+            const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
+
             value.sort((data1, data2) => {
-                return multisortField(data1, data2, multiSortMeta, 0);
+                return multisortField(data1, data2, multiSortMeta, 0, comparator);
             });
         }
 
         return value;
     };
 
-    const multisortField = (data1, data2, multiSortMeta, index) => {
+    const multisortField = (data1, data2, multiSortMeta, index, comparator) => {
         if (!multiSortMeta || !multiSortMeta[index]) {
             return;
         }
@@ -1012,11 +1022,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, (context && context.locale) || PrimeReact.locale) === 0) {
-            return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1) : 0;
+        if (ObjectUtils.compare(value1, value2, comparator) === 0) {
+            return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1, comparator) : 0;
         }
 
-        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
+        return compareValuesOnSort(value1, value2, comparator, multiSortMeta[index].order);
     };
 
     const onFilterChange = (filters) => {
@@ -1043,15 +1053,36 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }, props.filterDelay);
     };
 
+    const getActiveFilters = (filters) => {
+        const removeEmptyFilters = ([key, value]) => {
+            if (value.constraints) {
+                const filteredConstraints = value.constraints.filter((constraint) => constraint.value !== null);
+
+                if (filteredConstraints.length > 0) {
+                    return [key, { ...value, constraints: filteredConstraints }];
+                }
+            } else if (value.value !== null) {
+                return [key, value];
+            }
+
+            return undefined;
+        };
+
+        const filterValidEntries = (entry) => entry !== undefined;
+        const entries = Object.entries(filters).map(removeEmptyFilters).filter(filterValidEntries);
+
+        return Object.fromEntries(entries);
+    };
+
     const filterLocal = (data, filters) => {
         if (!data) return;
 
-        filters = filters || {};
+        let activeFilters = getActiveFilters(filters) || {};
 
         let columns = getColumns();
         let filteredValue = [];
 
-        let isGlobalFilter = filters['global'] || props.globalFilter;
+        let isGlobalFilter = activeFilters['global'] || props.globalFilter;
         let globalFilterFieldsArray;
 
         if (isGlobalFilter) {
@@ -1063,15 +1094,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             let globalMatch = false;
             let localFiltered = false;
 
-            for (let prop in filters) {
+            for (let prop in activeFilters) {
                 if (prop === 'null') {
                     continue;
                 }
 
-                if (Object.prototype.hasOwnProperty.call(filters, prop) && prop !== 'global') {
+                if (Object.prototype.hasOwnProperty.call(activeFilters, prop) && prop !== 'global') {
                     localFiltered = true;
                     let filterField = prop;
-                    let filterMeta = filters[filterField];
+                    let filterMeta = activeFilters[filterField];
 
                     if (filterMeta.operator) {
                         for (let j = 0; j < filterMeta.constraints.length; j++) {
@@ -1093,11 +1124,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 }
             }
 
-            if (isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
+            if (localMatch && isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
                 for (let j = 0; j < globalFilterFieldsArray.length; j++) {
                     let globalFilterField = globalFilterFieldsArray[j];
-                    let matchMode = filters['global'] ? filters['global'].matchMode : props.globalFilterMatchMode;
-                    let value = filters['global'] ? filters['global'].value : props.globalFilter;
+                    let matchMode = activeFilters['global'] ? activeFilters['global'].matchMode : props.globalFilterMatchMode;
+                    let value = activeFilters['global'] ? activeFilters['global'].value : props.globalFilter;
 
                     globalMatch = FilterService.filters[matchMode](ObjectUtils.resolveFieldData(data[i], globalFilterField), value, props.filterLocale);
 
@@ -1120,7 +1151,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             }
         }
 
-        if (filteredValue.length === props.value.length) {
+        if (filteredValue.length === props.value.length || Object.keys(activeFilters).length === 0) {
             filteredValue = data;
         }
 
