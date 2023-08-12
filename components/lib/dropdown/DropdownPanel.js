@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
@@ -87,7 +86,9 @@ export const DropdownPanel = React.memo(
         };
 
         const createItem = (option, index, scrollerOptions = {}) => {
-            const style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+            let style = { height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined };
+
+            style = { ...style, ...option.style };
 
             if (props.optionGroupLabel) {
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
