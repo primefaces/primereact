@@ -42,6 +42,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             editingMeta: editingMetaState,
             d_rows: d_rowsState,
             d_filters: d_filtersState
+        },
+        context: {
+            scrollable: props.scrollable
         }
     };
     const ptCallbacks = DataTableBase.setMetaData(metaData);

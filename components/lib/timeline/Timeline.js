@@ -14,6 +14,14 @@ export const Timeline = React.memo(
 
         useHandleStyle(TimelineBase.css.styles, isUnstyled, { name: 'timeline' });
 
+        const getPTOptions = (key, index) => {
+            return ptm(key, {
+                context: {
+                    index: index
+                }
+            });
+        };
+
         const elementRef = React.useRef(null);
 
         const getKey = (item, index) => {
@@ -29,14 +37,14 @@ export const Timeline = React.memo(
                         {
                             className: cx('marker')
                         },
-                        ptm('marker')
+                        getPTOptions('marker', index)
                     );
                     const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div {...markerProps}></div>;
                     const connectorProps = mergeProps(
                         {
                             className: cx('connector')
                         },
-                        ptm('connector')
+                        getPTOptions('connector', index)
                     );
                     const connector = index !== props.value.length - 1 && <div {...connectorProps}></div>;
                     const content = ObjectUtils.getJSXElement(props.content, item, index);
@@ -45,25 +53,25 @@ export const Timeline = React.memo(
                         {
                             className: cx('event')
                         },
-                        ptm('event')
+                        getPTOptions('event', index)
                     );
                     const oppositeProps = mergeProps(
                         {
                             className: cx('opposite')
                         },
-                        ptm('opposite')
+                        getPTOptions('opposite', index)
                     );
                     const separatorProps = mergeProps(
                         {
                             className: cx('separator')
                         },
-                        ptm('separator')
+                        getPTOptions('separator', index)
                     );
                     const contentProps = mergeProps(
                         {
                             className: cx('content')
                         },
-                        ptm('content')
+                        getPTOptions('content', index)
                     );
 
                     return (

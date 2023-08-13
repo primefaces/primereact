@@ -312,6 +312,7 @@ const classes = {
             'p-datatable-resizable-table': props.resizableColumns,
             'p-datatable-resizable-table-fit': props.resizableColumns && props.columnResizeMode === 'fit'
         }),
+    thead: 'p-datatable-thead',
     tfoot: 'p-datatable-tfoot',
     footer: 'p-datatable-footer',
     resizeHelper: 'p-column-resizer-helper',
@@ -397,17 +398,20 @@ const classes = {
         }),
     headerCheckboxIcon: 'p-checkbox-icon',
     headerContent: 'p-column-header-content',
-    headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }) =>
-        classNames(getColumnProp('headerClassName'), getColumnProp('className'), {
-            'p-sortable-column': getColumnProp('sortable'),
-            'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
-            'p-highlight': sortMeta.sorted,
-            'p-frozen-column': frozen,
-            'p-selection-column': getColumnProp('selectionMode'),
-            'p-sortable-disabled': getColumnProp('sortable') && _isSortableDisabled,
-            'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable') && !frozen,
-            [`p-align-${align}`]: !!align
-        }),
+    headerCell: ({ props, frozen, sortMeta, align, _isSortableDisabled, column }) =>
+        column
+            ? classNames('p-filter-column', { 'p-frozen-column': frozen })
+            : classNames({
+                  'p-filter-column': !props.headerColumnGroup && props.filterDisplay === 'row',
+                  'p-sortable-column': props.sortable,
+                  'p-resizable-column': props.resizableColumns && props.resizeable,
+                  'p-highlight': sortMeta.sorted,
+                  'p-frozen-column': frozen,
+                  'p-selection-column': props.selectionMode,
+                  'p-sortable-disabled': props.sortable && _isSortableDisabled,
+                  'p-reorderable-column': props.reorderableColumns && props.reorderable && !frozen,
+                  [`p-align-${align}`]: !!align
+              }),
     footerCell: ({ getColumnProp, align }) =>
         classNames({
             'p-frozen-column': getColumnProp('frozen'),

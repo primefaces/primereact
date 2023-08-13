@@ -601,10 +601,10 @@ const Tailwind = {
             }
         },
         menu: 'm-0 p-0 list-none flex items-center justify-center transition delay-200 z-20',
-        menuitem: ({ props, context }) => ({
+        menuitem: ({ props, state }) => ({
             className: [
                 'transform transition-transform duration-200 ease-out transition-opacity duration-800',
-                context.hidden ? 'opacity-0 scale-0' : 'opacity-1 scale-100',
+                !state.visible ? 'opacity-0 scale-0' : 'opacity-1 scale-100',
                 {
                     'my-1 first:mb-2': props.direction == 'up' && props.type == 'linear',
                     'my-1 first:mt-2': props.direction == 'down' && props.type == 'linear',
