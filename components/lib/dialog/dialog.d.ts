@@ -298,6 +298,11 @@ export interface DialogProps {
      */
     pt?: DialogPassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Callback to invoke when dialog is clicked.
      * @param {React.PointerEvent<HTMLElement>} event - Browser event.
      */

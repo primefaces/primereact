@@ -1,20 +1,21 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { TimesCircleIcon } from '../icons/timescircle';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ChipBase } from './ChipBase';
-import { TimesCircleIcon } from '../icons/timescircle';
-import { PrimeReactContext } from '../api/Api';
 
 export const Chip = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ChipBase.getProps(inProps, context);
-
         const elementRef = React.useRef(null);
         const [visibleState, setVisibleState] = React.useState(true);
-
-        const { ptm } = ChipBase.setMetaData({
+        const { ptm, cx, isUnstyled } = ChipBase.setMetaData({
             props
         });
+
+        useHandleStyle(ChipBase.css.styles, isUnstyled, { name: 'chip' });
 
         const onKeyDown = (event) => {
             if (event.keyCode === 13) {
@@ -38,7 +39,7 @@ export const Chip = React.memo(
                 {
                     key: 'removeIcon',
                     tabIndex: 0,
-                    className: 'p-chip-remove-icon',
+                    className: cx('removeIcon'),
                     onClick: close,
                     onKeyDown
                 },
@@ -62,7 +63,7 @@ export const Chip = React.memo(
                 const chipIconProps = mergeProps(
                     {
                         key: 'icon',
-                        className: 'p-chip-icon'
+                        className: cx('icon')
                     },
                     ptm('icon')
                 );
@@ -74,7 +75,7 @@ export const Chip = React.memo(
                 const labelProps = mergeProps(
                     {
                         key: 'label',
-                        className: 'p-chip-text'
+                        className: cx('label')
                     },
                     ptm('label')
                 );
@@ -90,21 +91,13 @@ export const Chip = React.memo(
         };
 
         const createElement = () => {
-            const className = classNames(
-                'p-chip p-component',
-                {
-                    'p-chip-image': props.image != null
-                },
-                props.className
-            );
-
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
             const rootProps = mergeProps(
                 {
                     ref: elementRef,
                     style: props.style,
-                    className: className
+                    className: classNames(props.className, cx('root'))
                 },
                 ChipBase.getOtherProps(props),
                 ptm('root')

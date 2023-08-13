@@ -253,6 +253,11 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {CarouselPassThroughOptions}
      */
     pt?: CarouselPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

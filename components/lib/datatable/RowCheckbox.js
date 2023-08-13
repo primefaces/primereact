@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { CheckIcon } from '../icons/check';
-import { IconUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, mergeProps } from '../utils/Utils';
 
 export const RowCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const { ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             context: {
@@ -34,6 +35,7 @@ export const RowCheckbox = React.memo((props) => {
             setFocusedState(true);
 
             props.onChange(event);
+            event.stopPropagation();
         }
     };
 
@@ -45,12 +47,9 @@ export const RowCheckbox = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState, 'p-disabled': props.disabled });
-    const boxClassName = classNames('p-checkbox-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState });
-    const iconClassName = 'p-checkbox-icon';
     const checkboxIconProps = mergeProps(
         {
-            className: iconClassName
+            className: cx('checkboxIcon')
         },
         getColumnPTOptions('checkboxIcon')
     );
@@ -59,7 +58,7 @@ export const RowCheckbox = React.memo((props) => {
     const tabIndex = props.disabled ? null : '0';
     const checkboxWrapperProps = mergeProps(
         {
-            className,
+            className: cx('checkboxWrapper', { rowProps: props, focusedState }),
             onClick: (e) => onClick(e)
         },
         getColumnPTOptions('checkboxWrapper')
@@ -67,7 +66,7 @@ export const RowCheckbox = React.memo((props) => {
 
     const checkboxProps = mergeProps(
         {
-            className: boxClassName,
+            className: cx('checkbox', { rowProps: props, focusedState }),
             role: 'checkbox',
             'aria-checked': props.checked,
             tabIndex: tabIndex,

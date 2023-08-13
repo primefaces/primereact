@@ -70,6 +70,11 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {MessagePassThroughOptions}
      */
     pt?: MessagePassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

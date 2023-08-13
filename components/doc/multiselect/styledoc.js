@@ -63,6 +63,10 @@ export function StyleDoc() {
                             <td>p-chips-token-label</td>
                             <td>Label of a selected item element on display='chip' mode.</td>
                         </tr>
+                        <tr>
+                            <td>p-multiselect-select-all-label</td>
+                            <td>Label to display when selectAllLabel is defined.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

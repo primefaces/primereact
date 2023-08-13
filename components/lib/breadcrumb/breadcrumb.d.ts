@@ -85,6 +85,11 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
      * @type {BreadCrumbPassThroughOptions}
      */
     pt?: BreadCrumbPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

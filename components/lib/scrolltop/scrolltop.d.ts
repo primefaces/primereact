@@ -102,6 +102,11 @@ export interface ScrollTopProps {
      * @type {ScrollTopPassThroughOptions}
      */
     pt?: ScrollTopPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

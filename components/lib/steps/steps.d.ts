@@ -109,6 +109,11 @@ export interface StepsProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {StepsPassThroughOptions}
      */
     pt?: StepsPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

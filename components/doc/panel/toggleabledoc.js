@@ -1,8 +1,11 @@
+import { useRef } from 'react';
+import { Button } from '../../lib/button/Button';
 import { Panel } from '../../lib/panel/Panel';
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function ToggleableDoc(props) {
+    const ref = useRef(null);
     const code = {
         basic: `
 <Panel header="Header" toggleable>
@@ -16,11 +19,16 @@ export function ToggleableDoc(props) {
         `,
         javascript: `
 import React from 'react'; 
+import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 
 export default function ToggleableDemo() {
+    const ref = useRef(null);
     return (
-        <Panel header="Header" toggleable>
+        <Button label="Toggle" className="m-2" onClick={() => ref.current.toggle()} />
+        <Button label="Expand" className="m-2" onClick={() => ref.current.expand()} />
+        <Button label="Collapse" className="m-2" onClick={() => ref.current.collapse()} />
+        <Panel ref={ref} header="Header" toggleable>
             <p className="m-0">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -33,11 +41,16 @@ export default function ToggleableDemo() {
         `,
         typescript: `
 import React from 'react'; 
+import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 
 export default function ToggleableDemo() {
+    const ref = useRef<Panel>(null);
     return (
-        <Panel header="Header" toggleable>
+        <Button label="Toggle" className="m-2" onClick={() => ref.current?.toggle()} />
+        <Button label="Expand" className="m-2" onClick={() => ref.current?.expand()} />
+        <Button label="Collapse" className="m-2" onClick={() => ref.current?.collapse()} />
+        <Panel ref={ref} header="Header" toggleable>
             <p className="m-0">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -59,7 +72,11 @@ export default function ToggleableDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <Panel header="Header" toggleable>
+                <Button label="Toggle" className="m-2" onClick={() => ref.current.toggle()} />
+                <Button label="Expand" className="m-2" onClick={() => ref.current.expand()} />
+                <Button label="Collapse" className="m-2" onClick={() => ref.current.collapse()} />
+
+                <Panel ref={ref} header="Header" toggleable>
                     <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

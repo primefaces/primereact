@@ -6,9 +6,10 @@ export const FooterCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const { ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             state: {
@@ -67,16 +68,11 @@ export const FooterCell = React.memo((props) => {
     const align = getColumnProp('align');
     const colSpan = getColumnProp('colSpan');
     const rowSpan = getColumnProp('rowSpan');
-    const className = classNames(getColumnProp('footerClassName'), getColumnProp('className'), {
-        'p-frozen-column': getColumnProp('frozen'),
-        [`p-align-${align}`]: !!align
-    });
     const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
     const footerCellProps = mergeProps(
         {
-            ref: elementRef,
             style,
-            className,
+            className: classNames(getColumnProp('footerClassName'), getColumnProp('className'), cx('footerCell', { getColumnProp, align })),
             role: 'cell',
             colSpan,
             rowSpan
@@ -85,7 +81,11 @@ export const FooterCell = React.memo((props) => {
         getColumnPTOptions('root')
     );
 
-    return <td {...footerCellProps}>{content}</td>;
+    return (
+        <td ref={elementRef} {...footerCellProps}>
+            {content}
+        </td>
+    );
 });
 
 FooterCell.displayName = 'FooterCell';

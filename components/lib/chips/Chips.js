@@ -1,23 +1,28 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const Chips = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ChipsBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm } = ChipsBase.setMetaData({
+
+        const { ptm, cx, isUnstyled } = ChipsBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
+
+        useHandleStyle(ChipsBase.css.styles, isUnstyled, { name: 'chips' });
+
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -224,7 +229,7 @@ export const Chips = React.memo(
         const createRemoveIcon = (value, index) => {
             const iconProps = mergeProps(
                 {
-                    className: 'p-chips-token-icon',
+                    className: cx('removeTokenIcon'),
                     onClick: (event) => removeItem(event, index)
                 },
                 ptm('removeTokenIcon')
@@ -243,7 +248,7 @@ export const Chips = React.memo(
             const content = props.itemTemplate ? props.itemTemplate(value) : value;
             const labelProps = mergeProps(
                 {
-                    className: 'p-chips-token-label'
+                    className: cx('label')
                 },
                 ptm('label')
             );
@@ -252,7 +257,7 @@ export const Chips = React.memo(
             const tokenProps = mergeProps(
                 {
                     key: index,
-                    className: 'p-chips-token p-highlight'
+                    className: cx('token')
                 },
                 ptm('token')
             );
@@ -268,7 +273,7 @@ export const Chips = React.memo(
         const createInput = () => {
             const inputTokenProps = mergeProps(
                 {
-                    className: 'p-chips-input-token'
+                    className: cx('inputToken')
                 },
                 ptm('inputToken')
             );
@@ -303,16 +308,12 @@ export const Chips = React.memo(
         };
 
         const createList = () => {
-            const className = classNames('p-inputtext p-chips-multiple-container', {
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
-            });
             const items = createItems();
             const input = createInput();
             const containerProps = mergeProps(
                 {
                     ref: listRef,
-                    className,
+                    className: cx('container', { focusedState }),
                     onClick: (e) => onWrapperClick(e)
                 },
                 ptm('container')
@@ -329,20 +330,12 @@ export const Chips = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ChipsBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-chips p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        );
         const list = createList();
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: cx('root', { isFilled, focusedState }),
                 style: props.style
             },
             ptm('root')

@@ -61,6 +61,11 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {ScrollPanelPassThroughOptions}
      */
     pt?: ScrollPanelPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

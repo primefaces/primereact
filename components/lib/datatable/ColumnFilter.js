@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { FilterMatchMode, FilterOperator, localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterMatchMode, FilterOperator, PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -14,7 +13,7 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -25,9 +24,10 @@ export const ColumnFilter = React.memo((props) => {
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const context = React.useContext(PrimeReactContext);
+    const { ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(getColumnProps(), key, {
+        return ptmo(getColumnProps(), key, {
             props: getColumnProps(),
             parent: props.metaData,
             state: {
@@ -365,6 +365,7 @@ export const ColumnFilter = React.memo((props) => {
 
     const onOverlayEnter = () => {
         ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+        DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         DomHandler.alignOverlay(overlayRef.current, iconRef.current, (context && context.appendTo) || PrimeReact.appendTo, false);
 
         overlayEventListener.current = (e) => {
@@ -480,6 +481,8 @@ export const ColumnFilter = React.memo((props) => {
                 className="p-column-filter"
                 placeholder={getColumnProp('filterPlaceholder')}
                 maxLength={getColumnProp('filterMaxLength')}
+                aria-label={getColumnProp('filterPlaceholder')}
+                unstyled={props.unstyled}
             />
         );
     };
@@ -489,7 +492,7 @@ export const ColumnFilter = React.memo((props) => {
             const content = createFilterElement(filterModel, 0);
             const filterInputProps = mergeProps(
                 {
-                    className: 'p-fluid p-column-filter-element'
+                    className: cx('filterInput')
                 },
                 getColumnPTOptions('filterInput')
             );
@@ -515,16 +518,11 @@ export const ColumnFilter = React.memo((props) => {
             const icon = props.filterIcon || <FilterIcon {...filterIconProps} />;
             const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
-            const className = classNames('p-column-filter-menu-button p-link', {
-                'p-column-filter-menu-button-open': overlayVisibleState,
-                'p-column-filter-menu-button-active': hasFilter()
-            });
             const label = filterLabel();
             const filterMenuButtonProps = mergeProps(
                 {
-                    ref: iconRef,
                     type: 'button',
-                    className,
+                    className: cx('filterMenuButton', { overlayVisibleState, hasFilter }),
                     'aria-haspopup': true,
                     'aria-expanded': overlayVisibleState,
                     onClick: (e) => toggleMenu(e),
@@ -535,7 +533,7 @@ export const ColumnFilter = React.memo((props) => {
             );
 
             return (
-                <button {...filterMenuButtonProps}>
+                <button ref={iconRef} {...filterMenuButtonProps}>
                     {columnFilterIcon}
                     <Ripple />
                 </button>
@@ -556,13 +554,10 @@ export const ColumnFilter = React.memo((props) => {
         const filterClearIcon = IconUtils.getJSXIcon(icon, { ...filterClearIconProps }, { props });
 
         if (getColumnProp('showClearButton') && props.display === 'row') {
-            const className = classNames('p-column-filter-clear-button p-link', {
-                'p-hidden-space': !hasRowFilter()
-            });
             const clearLabel = clearButtonLabel();
             const headerFilterClearButtonProps = mergeProps(
                 {
-                    className,
+                    className: cx('headerFilterClearButton', { hasRowFilter }),
                     type: 'button',
                     onClick: (e) => clearFilter(e),
                     'aria-label': clearLabel
@@ -587,14 +582,14 @@ export const ColumnFilter = React.memo((props) => {
             const _noFilterLabel = noFilterLabel();
             const filterSeparatorProps = mergeProps(
                 {
-                    className: 'p-column-filter-separator'
+                    className: cx('filterSeparator')
                 },
                 getColumnPTOptions('filterSeparator')
             );
 
             const filterRowItemProps = mergeProps(
                 {
-                    className: 'p-column-filter-row-item',
+                    className: cx('filterRowItem', { isRowMatchModeSelected, isShowMatchModes }),
                     onClick: (e) => clearFilter(e),
                     onKeyDown: (e) => onRowMatchModeKeyDown(e, null, true)
                 },
@@ -603,7 +598,7 @@ export const ColumnFilter = React.memo((props) => {
 
             const filterRowItemsProps = mergeProps(
                 {
-                    className: 'p-column-filter-row-items'
+                    className: cx('filterRowItems')
                 },
                 getColumnPTOptions('filterRowItems')
             );
@@ -612,11 +607,10 @@ export const ColumnFilter = React.memo((props) => {
                 <ul {...filterRowItemsProps}>
                     {_matchModes.map((matchMode, i) => {
                         const { value, label } = matchMode;
-                        const className = classNames('p-column-filter-row-item', { 'p-highlight': isRowMatchModeSelected(value) });
                         const tabIndex = i === 0 ? 0 : null;
                         const filterRowItemProps = mergeProps(
                             {
-                                className,
+                                className: cx('filterRowItem', { isRowMatchModeSelected, isShowMatchModes, value }),
                                 onClick: () => onRowMatchModeChange(value),
                                 onKeyDown: (e) => onRowMatchModeKeyDown(e, matchMode),
                                 tabIndex
@@ -645,14 +639,14 @@ export const ColumnFilter = React.memo((props) => {
             const value = operator();
             const filterOperatorProps = mergeProps(
                 {
-                    className: 'p-column-filter-operator'
+                    className: cx('filterOperator')
                 },
                 getColumnPTOptions('filterOperator')
             );
 
             return (
                 <div {...filterOperatorProps}>
-                    <Dropdown options={options} value={value} onChange={onOperatorChange} className="p-column-filter-operator-dropdown" pt={getColumnPTOptions('filterOperatorDropdown')} />
+                    <Dropdown options={options} value={value} onChange={onOperatorChange} className="p-column-filter-operator-dropdown" pt={getColumnPTOptions('filterOperatorDropdown')} unstyled={props.unstyled} />
                 </div>
             );
         }
@@ -664,7 +658,16 @@ export const ColumnFilter = React.memo((props) => {
         if (isShowMatchModes()) {
             const options = matchModes();
 
-            return <Dropdown options={options} value={constraint.matchMode} onChange={(e) => onMenuMatchModeChange(e.value, index)} className="p-column-filter-matchmode-dropdown" pt={getColumnPTOptions('filterMatchModeDropdown')} />;
+            return (
+                <Dropdown
+                    options={options}
+                    value={constraint.matchMode}
+                    onChange={(e) => onMenuMatchModeChange(e.value, index)}
+                    className="p-column-filter-matchmode-dropdown"
+                    pt={getColumnPTOptions('filterMatchModeDropdown')}
+                    unstyled={props.unstyled}
+                />
+            );
         }
 
         return null;
@@ -682,6 +685,7 @@ export const ColumnFilter = React.memo((props) => {
                     onClick={() => removeConstraint(index)}
                     label={removeRuleLabel}
                     pt={getColumnPTOptions('filterRemoveButton')}
+                    unstyled={props.unstyled}
                 />
             );
         }
@@ -693,14 +697,14 @@ export const ColumnFilter = React.memo((props) => {
         const _fieldConstraints = fieldConstraints();
         const filterConstraintsProps = mergeProps(
             {
-                className: 'p-column-filter-constraints'
+                className: cx('filterConstraints')
             },
             getColumnPTOptions('filterConstraints')
         );
 
         const filterConstraintProps = mergeProps(
             {
-                className: 'p-column-filter-constraint'
+                className: cx('filterConstraint')
             },
             getColumnPTOptions('filterConstraint')
         );
@@ -730,14 +734,22 @@ export const ColumnFilter = React.memo((props) => {
             const addRuleLabel = addRuleButtonLabel();
             const filterAddRuleProps = mergeProps(
                 {
-                    className: 'p-column-filter-add-rule'
+                    className: cx('filterAddRule')
                 },
                 getColumnPTOptions('filterAddRule')
             );
 
             return (
                 <div {...filterAddRuleProps}>
-                    <Button type="button" label={addRuleLabel} icon={props.filterAddIcon || <PlusIcon />} className="p-column-filter-add-button p-button-text p-button-sm" onClick={addConstraint} pt={getColumnPTOptions('filterAddRuleButton')} />
+                    <Button
+                        type="button"
+                        label={addRuleLabel}
+                        icon={props.filterAddIcon || <PlusIcon />}
+                        className="p-column-filter-add-button p-button-text p-button-sm"
+                        onClick={addConstraint}
+                        pt={getColumnPTOptions('filterAddRuleButton')}
+                        unstyled={props.unstyled}
+                    />
                 </div>
             );
         }
@@ -750,7 +762,7 @@ export const ColumnFilter = React.memo((props) => {
             if (!getColumnProp('filterClear')) {
                 const clearLabel = clearButtonLabel();
 
-                return <Button type="button" className="p-button-outlined p-button-sm" onClick={clearFilter} label={clearLabel} pt={getColumnPTOptions('filterClearButton')} />;
+                return <Button type="button" className="p-button-outlined p-button-sm" onClick={clearFilter} label={clearLabel} pt={getColumnPTOptions('filterClearButton')} unstyled={props.unstyled} />;
             }
 
             return ObjectUtils.getJSXElement(getColumnProp('filterClear'), { field, filterModel, filterClearCallback: clearFilter });
@@ -764,7 +776,7 @@ export const ColumnFilter = React.memo((props) => {
             if (!getColumnProp('filterApply')) {
                 const applyLabel = applyButtonLabel();
 
-                return <Button type="button" className="p-button-sm" onClick={applyFilter} label={applyLabel} pt={getColumnPTOptions('filterApplyButton')} />;
+                return <Button type="button" className="p-button-sm" onClick={applyFilter} label={applyLabel} pt={getColumnPTOptions('filterApplyButton')} unstyled={props.unstyled} />;
             }
 
             return ObjectUtils.getJSXElement(getColumnProp('filterApply'), { field, filterModel, filterApplyCallback: applyFilter });
@@ -778,7 +790,7 @@ export const ColumnFilter = React.memo((props) => {
         const applyButton = createFilterApplyButton();
         const filterButtonbarProps = mergeProps(
             {
-                className: 'p-column-filter-buttonbar'
+                className: cx('filterButtonBar')
             },
             getColumnPTOptions('filterButtonBar')
         );
@@ -809,19 +821,13 @@ export const ColumnFilter = React.memo((props) => {
 
     const createOverlay = () => {
         const style = getColumnProp('filterMenuStyle');
-        const className = classNames('p-column-filter-overlay p-component p-fluid', getColumnProp('filterMenuClassName'), {
-            'p-column-filter-overlay-menu': props.display === 'menu',
-            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-        });
         const filterHeader = ObjectUtils.getJSXElement(getColumnProp('filterHeader'), { field, filterModel, filterApplyCallback });
         const filterFooter = ObjectUtils.getJSXElement(getColumnProp('filterFooter'), { field, filterModel, filterApplyCallback });
         const items = props.display === 'row' ? createRowItems() : createItems();
         const filterOverlayProps = mergeProps(
             {
-                ref: overlayRef,
                 style,
-                className,
+                className: cx('filterOverlay', { columnFilterProps: props, context, getColumnProp }),
                 onKeyDown: (e) => onContentKeyDown(e),
                 onClick: (e) => onContentClick(e),
                 onMouseDown: (e) => onContentMouseDown(e)
@@ -842,7 +848,7 @@ export const ColumnFilter = React.memo((props) => {
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                 >
-                    <div {...filterOverlayProps}>
+                    <div ref={overlayRef} {...filterOverlayProps}>
                         {filterHeader}
                         {items}
                         {filterFooter}
@@ -852,17 +858,13 @@ export const ColumnFilter = React.memo((props) => {
         );
     };
 
-    const className = classNames('p-column-filter p-fluid', {
-        'p-column-filter-row': props.display === 'row',
-        'p-column-filter-menu': props.display === 'menu'
-    });
     const rowFilterElement = createRowFilterElement();
     const menuButton = createMenuButton();
     const clearButton = createClearButton();
     const overlay = createOverlay();
     const columnFilter = mergeProps(
         {
-            className
+            className: cx('columnFilter', { columnFilterProps: props })
         },
         getColumnPTOptions('columnFilter')
     );

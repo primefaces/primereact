@@ -1,15 +1,27 @@
 import * as React from 'react';
-import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
-import { TimelineBase } from './TimelineBase';
 import { PrimeReactContext } from '../api/Api';
+import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { TimelineBase } from './TimelineBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Timeline = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = TimelineBase.getProps(inProps, context);
-        const { ptm } = TimelineBase.setMetaData({
+        const { ptm, cx, isUnstyled } = TimelineBase.setMetaData({
             props
         });
+
+        useHandleStyle(TimelineBase.css.styles, isUnstyled, { name: 'timeline' });
+
+        const getPTOptions = (key, index) => {
+            return ptm(key, {
+                context: {
+                    index: index
+                }
+            });
+        };
+
         const elementRef = React.useRef(null);
 
         const getKey = (item, index) => {
@@ -23,43 +35,43 @@ export const Timeline = React.memo(
                     const opposite = ObjectUtils.getJSXElement(props.opposite, item, index);
                     const markerProps = mergeProps(
                         {
-                            className: 'p-timeline-event-marker'
+                            className: cx('marker')
                         },
-                        ptm('marker')
+                        getPTOptions('marker', index)
                     );
                     const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div {...markerProps}></div>;
                     const connectorProps = mergeProps(
                         {
-                            className: 'p-timeline-event-connector'
+                            className: cx('connector')
                         },
-                        ptm('connector')
+                        getPTOptions('connector', index)
                     );
                     const connector = index !== props.value.length - 1 && <div {...connectorProps}></div>;
                     const content = ObjectUtils.getJSXElement(props.content, item, index);
 
                     const eventProps = mergeProps(
                         {
-                            className: 'p-timeline-event'
+                            className: cx('event')
                         },
-                        ptm('event')
+                        getPTOptions('event', index)
                     );
                     const oppositeProps = mergeProps(
                         {
-                            className: 'p-timeline-event-opposite'
+                            className: cx('opposite')
                         },
-                        ptm('opposite')
+                        getPTOptions('opposite', index)
                     );
                     const separatorProps = mergeProps(
                         {
-                            className: 'p-timeline-event-separator'
+                            className: cx('separator')
                         },
-                        ptm('separator')
+                        getPTOptions('separator', index)
                     );
                     const contentProps = mergeProps(
                         {
-                            className: 'p-timeline-event-content'
+                            className: cx('content')
                         },
-                        ptm('content')
+                        getPTOptions('content', index)
                     );
 
                     return (
@@ -81,21 +93,12 @@ export const Timeline = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const className = classNames(
-            'p-timeline p-component',
-            {
-                [`p-timeline-${props.align}`]: true,
-                [`p-timeline-${props.layout}`]: true
-            },
-            props.className
-        );
-
         const events = createEvents();
 
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className
+                className: cx('root')
             },
             TimelineBase.getOtherProps(props),
             ptm('root')

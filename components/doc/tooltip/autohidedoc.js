@@ -9,7 +9,7 @@ export function AutoHideDoc(props) {
 
     const code = {
         basic: `
-<Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+<Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
 
 <Tooltip target=".tooltip-button" autoHide={false}>
     <div className="flex align-items-center">
@@ -30,7 +30,7 @@ export default function AutoHideDemo() {
 
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
-            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
 
             <Tooltip target=".tooltip-button" autoHide={false}>
                 <div className="flex align-items-center">
@@ -54,7 +54,7 @@ export default function AutoHideDemo() {
 
     return (
         <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
-            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+            <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
 
             <Tooltip target=".tooltip-button" autoHide={false}>
                 <div className="flex align-items-center">
@@ -78,7 +78,7 @@ export default function AutoHideDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-wrap align-items-center justify-content-center gap-2">
-                <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" />
+                <Button type="button" label="Save" icon="pi pi-check" tooltip="Save (autoHide: true)" tooltipOptions={{ position: 'left' }} />
 
                 <Tooltip target=".tooltip-button" autoHide={false}>
                     <div className="flex align-items-center">

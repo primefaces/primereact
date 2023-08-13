@@ -22,6 +22,45 @@ interface MousePositionOptions {
 }
 
 /**
+ * Custom UseStyleOptions
+ */
+interface UseStyleOptions {
+    document?: Document;
+    immediate: boolean;
+    manual: boolean;
+    name: string;
+    media: string;
+}
+
+/**
+ * Custom StyleOptions
+ */
+interface StyleOptions {
+    /**
+     * Defines data-pc-name attribute of the style tag.
+     */
+    name: string;
+    /**
+     * The css object.
+     */
+    css: React.RefObject<string>;
+    /**
+     * This option is used to load the style tag by the name.
+     * @returns {void}
+     */
+    load: () => void;
+    /**
+     * This method is used to remove the style tag from the head.
+     * @returns {void}
+     */
+    unload: () => void;
+    /**
+     * Whether the style is loaded or not.
+     */
+    isLoaded: boolean;
+}
+
+/**
  * Custom MouseDataOptions
  */
 declare interface MouseDataOptions extends MousePositionOptions {
@@ -220,6 +259,13 @@ export declare function useMouse(): MouseDataOptions;
  * @param {MousePositionOptions} initialValue - The initial value.
  */
 export declare function useMove(mode: 'horizontal' | 'vertical' | 'both', initialValue: MousePositionOptions): MouseMoveOptions;
+
+/**
+ * Custom hook to use to get style options.
+ * @param {string} css - The style text content.
+ * @param {UseStyleOptions} options - The options of the style.
+ */
+export declare function useStyle(css: string, options?: UseStyleOptions): StyleOptions;
 /**
  * Custom hook to use change the current favicon.
  * @param {string} newIcon - The new favicon url to set.
@@ -245,3 +291,9 @@ export declare function useClickOutside(ref: React.RefObject<Element>, callback:
  * @param {boolean} when - Whether to listen to the event or not.
  */
 export declare function useMatchMedia(query: string, when?: boolean): boolean;
+/**
+ * Custom hook to use detect escape button click.
+ * @param {React.RefObject<Element>} ref - The ref of the element to detect escape button click.
+ * @param {*} callback - The callback to run when escape button clicked.
+ */
+export declare function useOnEscapeKey(ref: React.RefObject<Element>, callback: any): void;

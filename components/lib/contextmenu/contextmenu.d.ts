@@ -164,6 +164,11 @@ export interface ContextMenuProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {ContextMenuPassThroughOptions}
      */
     pt?: ContextMenuPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
