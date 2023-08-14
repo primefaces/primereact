@@ -344,6 +344,9 @@ export const TreeSelect = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            clear,
+            show,
+            hide,
             focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current
         }));

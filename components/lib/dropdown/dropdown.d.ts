@@ -509,6 +509,18 @@ export declare class Dropdown extends React.Component<DropdownProps, any> {
      */
     public focus(): void;
     /**
+     * Clear the currently selected value.
+     */
+    public clear(): void;
+    /**
+     * Show the dropdown overlay panel.
+     */
+    public show(): void;
+    /**
+     * Hide the dropdown overlay panel.
+     */
+    public hide(): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */
