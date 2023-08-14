@@ -8,7 +8,7 @@
         "build": "next build",
         "build:lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build:package",
         "build:package": "npm run build:check && rollup -c && gulp build-resources && npm run build:api",
-        "build:api": "node ./api-generator/build-api.js && npm run apidoc",
+        "build:api": "npm run apiwebtypes && npm run apidoc",
         "build:check": "npm run lint && npm run format:check && npm run type:check && npm run security:check && (NODE_ENV=test npm run test:check)",
         "security:check": "npm audit --production --audit-level high",
         "format": "prettier --write \"{components,pages,service,api-generator}/**/*.{js,ts,tsx,d.ts}\"",
@@ -18,7 +18,8 @@
         "type:check": "tsc",
         "test": "jest --watch --coverage",
         "test:check": "jest --watchAll=false --coverage",
-        "apidoc": "node ./api-generator/build-apidoc.js"
+        "apidoc": "node ./api-generator/build-apidoc.js",
+        "apiwebtypes": "node ./api-generator/build-webtypes.js"
     },
     "dependencies": {
         "@docsearch/react": "3.5.1",
