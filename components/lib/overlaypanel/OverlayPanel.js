@@ -45,7 +45,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         when: visibleState
     });
 
-    useOnEscapeKey(overlayRef, props.dismissable && props.closeOnEscape, () => {
+    useOnEscapeKey(overlayEventListener, props.dismissable && props.closeOnEscape, () => {
         hide();
     });
 
