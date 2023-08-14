@@ -267,11 +267,6 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {PasswordPassThroughOptions}
      */
     pt?: PasswordPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

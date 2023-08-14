@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { useEventListener } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 const radius = 40;
 const midX = 50;
@@ -15,12 +14,9 @@ export const Knob = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = KnobBase.getProps(inProps, context);
-
-        const { ptm, cx, isUnstyled } = KnobBase.setMetaData({
+        const { ptm } = KnobBase.setMetaData({
             props
         });
-
-        useHandleStyle(KnobBase.css.styles, isUnstyled, { name: 'knob' });
         const elementRef = React.useRef(null);
         const enabled = !props.disabled && !props.readOnly;
 
@@ -159,13 +155,21 @@ export const Knob = React.memo(
             getElement: () => elementRef.current
         }));
 
+        const otherProps = KnobBase.getOtherProps(props);
+        const className = classNames(
+            'p-knob p-component',
+            {
+                'p-disabled': props.disabled
+            },
+            props.className
+        );
         const labelProps = mergeProps(
             {
                 x: 50,
                 y: 57,
                 textAnchor: 'middle',
                 fill: props.textColor,
-                className: cx('label'),
+                className: 'p-knob-text',
                 name: props.name
             },
             ptm('label')
@@ -177,7 +181,7 @@ export const Knob = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className,
                 style: props.style
             },
             ptm('root')
@@ -202,7 +206,7 @@ export const Knob = React.memo(
                 d: rangePath,
                 strokeWidth: props.strokeWidth,
                 stroke: props.rangeColor,
-                className: cx('range')
+                className: 'p-knob-range'
             },
             ptm('range')
         );
@@ -212,7 +216,7 @@ export const Knob = React.memo(
                 d: valuePath,
                 strokeWidth: props.strokeWidth,
                 stroke: props.valueColor,
-                className: cx('value')
+                className: 'p-knob-value'
             },
             ptm('value')
         );

@@ -9,10 +9,10 @@
  */
 import * as React from 'react';
 import { KeyFilterType } from '../keyfilter';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type ChipsPassThroughType<T> = PassThroughType<T, ChipsPassThroughMethodOptions>;
 
@@ -262,11 +262,6 @@ export interface ChipsProps extends Omit<React.DetailedHTMLProps<React.InputHTML
      * @type {ChipsPassThroughOptions}
      */
     pt?: ChipsPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -377,12 +377,6 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      */
     pt?: ListboxPassThroughOptions;
     /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
-
-    /**
      * Callback to invoke when value of listbox changes.
      * @param {ListBoxChangeEvent} event - Custom change event.
      */

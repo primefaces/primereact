@@ -242,11 +242,6 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {PanelPassThroughOptions}
      */
     pt?: PanelPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**
@@ -271,19 +266,4 @@ export declare class Panel extends React.Component<PanelProps, any> {
      * @return {HTMLDivElement} Content element
      */
     public getContent(): HTMLDivElement;
-    /**
-     * Toggle the panel if toggleable.
-     * @param {React.SyntheticEvent | undefined} event - Browser event.
-     */
-    public toggle(event: React.SyntheticEvent | undefined): void;
-    /**
-     * Expand the panel if toggleable.
-     * @param {React.SyntheticEvent | undefined} event - Browser event.
-     */
-    public expand(event: React.SyntheticEvent | undefined): void;
-    /**
-     * Collapse the panel if toggleable.
-     * @param {React.SyntheticEvent | undefined} event - Browser event.
-     */
-    public collapse(event: React.SyntheticEvent | undefined): void;
 }

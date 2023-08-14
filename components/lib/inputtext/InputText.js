@@ -1,23 +1,17 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
-        const { ptm, cx, isUnstyled } = InputTextBase.setMetaData({
-            props,
-            context: {
-                disabled: props.disabled
-            }
+        const { ptm } = InputTextBase.setMetaData({
+            props
         });
-
-        useHandleStyle(InputTextBase.css.styles, isUnstyled, { name: 'inputtext', styled: true });
         const elementRef = React.useRef(ref);
 
         const onKeyDown = (event) => {
@@ -64,11 +58,19 @@ export const InputText = React.memo(
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+        const className = classNames(
+            'p-inputtext p-component',
+            {
+                'p-disabled': props.disabled,
+                'p-filled': isFilled
+            },
+            props.className
+        );
 
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root', { isFilled }),
+                className,
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onKeyDown: onKeyDown,

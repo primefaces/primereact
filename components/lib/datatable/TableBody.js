@@ -8,14 +8,13 @@ import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
-        const { ptm, ptmo, cx } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
 
         const getColumnPTOptions = (key) => {
             const cProps = getColumnProps(props.column);
 
-            return ptmo(cProps, key, {
+            return props.ptCallbacks.ptmo(cProps, key, {
                 props: cProps,
                 parent: props.metaData,
                 state: {
@@ -288,7 +287,6 @@ export const TableBody = React.memo(
                     onSelect({ originalEvent, data, type });
                 }
             } else {
-                selection = ObjectUtils.isObject(selection) ? [selection] : selection;
                 selection = toggleable && isMultipleSelection() ? [...selection, data] : [data];
                 onSelect({ originalEvent, data, type });
             }
@@ -512,23 +510,20 @@ export const TableBody = React.memo(
         };
 
         const onRowRightClick = (event) => {
-            const isMultiSelection = isCheckboxSelectionModeInColumn && ObjectUtils.isEmpty(props.selection);
-            const data = isMultiSelection ? event.data : props.selection;
-
             if (props.onContextMenu || props.onContextMenuSelectionChange) {
-                if (!ObjectUtils.isEmpty(props.selection)) DomHandler.clearSelection();
+                DomHandler.clearSelection();
 
                 if (props.onContextMenuSelectionChange) {
                     props.onContextMenuSelectionChange({
                         originalEvent: event.originalEvent,
-                        value: data
+                        value: event.data
                     });
                 }
 
                 if (props.onContextMenu) {
                     props.onContextMenu({
                         originalEvent: event.originalEvent,
-                        data
+                        data: event.data
                     });
                 }
 
@@ -1064,9 +1059,9 @@ export const TableBody = React.memo(
         const tbodyProps = mergeProps(
             {
                 style: props.style,
-                className: cx(ptKey, { className: props.className })
+                className: props.className
             },
-            ptm(ptKey)
+            getColumnPTOptions(ptKey)
         );
 
         return (

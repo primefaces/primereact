@@ -3,7 +3,6 @@ import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydo
 import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
 import { PresetsDoc } from '../../components/doc/keyfilter/presetsdoc';
 import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
-import { RegexWordDoc } from '../../components/doc/keyfilter/regexworddoc';
 
 const KeyFilterDemo = () => {
     const docs = [
@@ -19,13 +18,8 @@ const KeyFilterDemo = () => {
         },
         {
             id: 'regex',
-            label: 'Regex (Single Keypress)',
+            label: 'Regex',
             component: RegexDoc
-        },
-        {
-            id: 'regexword',
-            label: 'Regex (Whole Word)',
-            component: RegexWordDoc
         },
         {
             id: 'accessibility',

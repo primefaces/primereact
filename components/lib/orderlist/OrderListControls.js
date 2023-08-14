@@ -12,7 +12,6 @@ export const OrderListControls = React.memo((props) => {
     const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
     const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;
     const moveBottomIcon = props.moveBottomIcon || <AngleDoubleDownIcon />;
-    const { ptm, cx, unstyled } = props;
 
     const moveUp = (event) => {
         if (props.selection) {
@@ -128,53 +127,49 @@ export const OrderListControls = React.memo((props) => {
 
     const controlProps = mergeProps(
         {
-            className: cx('control')
+            className: 'p-orderlist-controls'
         },
-        ptm('control')
+        props.ptm('control')
     );
 
     const moveUpButtonProps = mergeProps(
         {
             type: 'button',
-            unstyled: unstyled,
             icon: moveUpIcon,
             onClick: moveUp,
             'aria-label': ariaLabel('moveUp')
         },
-        ptm('moveUpButton')
+        props.ptm('moveUpButton')
     );
 
     const moveTopButtonProps = mergeProps(
         {
             type: 'button',
-            unstyled: unstyled,
             icon: moveTopIcon,
             onClick: moveTop,
             'aria-label': ariaLabel('moveTop')
         },
-        ptm('moveTopButton')
+        props.ptm('moveTopButton')
     );
 
     const moveDownButtonProps = mergeProps(
         {
             type: 'button',
-            unstyled: unstyled,
             icon: moveDownIcon,
             onClick: moveDown,
             'aria-label': ariaLabel('moveDown')
         },
-        ptm('moveDownButton')
+        props.ptm('moveDownButton')
     );
 
     const moveBottomButtonProps = mergeProps(
         {
             type: 'button',
-            unstyled: unstyled,
             icon: moveBottomIcon,
             onClick: moveBottom,
             'aria-label': ariaLabel('moveBottom')
         },
-        ptm('moveBottomButton')
+        props.ptm('moveBottomButton')
     );
 
     return (

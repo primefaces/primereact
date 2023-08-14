@@ -84,11 +84,6 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {ProgressBarPassThroughOptions}
      */
     pt?: ProgressBarPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

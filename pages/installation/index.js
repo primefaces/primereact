@@ -9,8 +9,6 @@ import { StylesDoc } from '../../components/doc/installation/stylesdoc';
 import { UsageDoc } from '../../components/doc/installation/usagedoc';
 import { CRADoc } from '../../components/doc/installation/videos/cradoc';
 import { NextJSDoc } from '../../components/doc/installation/videos/nextjsdoc';
-import { UnstyledModeDoc } from '../../components/doc/installation/unstyledmodedoc';
-import { StyledModeDoc } from '../../components/doc/installation/styleddoc';
 
 const InstallationPage = () => {
     const docs = [
@@ -33,23 +31,6 @@ const InstallationPage = () => {
             id: 'usage',
             label: 'Usage',
             component: UsageDoc
-        },
-        {
-            id: 'theming',
-            label: 'Theming',
-            description: 'PrimeReact has two theming has modes; styled or unstyled.',
-            children: [
-                {
-                    id: 'styled',
-                    label: 'Styled Mode',
-                    component: StyledModeDoc
-                },
-                {
-                    id: 'unstyled',
-                    label: 'Unstyled Mode',
-                    component: UnstyledModeDoc
-                }
-            ]
         },
         {
             id: 'examples',

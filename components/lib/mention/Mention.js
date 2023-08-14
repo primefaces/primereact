@@ -1,14 +1,14 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import PrimeReact from '../api/Api';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -25,7 +25,7 @@ export const Mention = React.memo(
         const listRef = React.useRef(null);
         const timeout = React.useRef(null);
 
-        const { ptm, cx, sx, isUnstyled } = MentionBase.setMetaData({
+        const { ptm } = MentionBase.setMetaData({
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -34,8 +34,6 @@ export const Mention = React.memo(
                 trigger: triggerState
             }
         });
-
-        useHandleStyle(MentionBase.css.styles, isUnstyled, { name: 'mention' });
 
         const getPTOptions = (item, suggestion) => {
             return ptm(suggestion, {
@@ -376,7 +374,7 @@ export const Mention = React.memo(
             const itemProps = mergeProps(
                 {
                     key: key,
-                    className: cx('item'),
+                    className: 'p-mention-item',
                     onClick: (e) => onItemClick(e, suggestion)
                 },
                 getPTOptions(suggestion, 'item')
@@ -394,7 +392,7 @@ export const Mention = React.memo(
             const itemsProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx('items')
+                    className: 'p-mention-items'
                 },
                 ptm('items')
             );
@@ -409,6 +407,8 @@ export const Mention = React.memo(
         };
 
         const createPanel = () => {
+            const panelClassName = classNames('p-mention-panel p-component', props.panelClassName);
+            const panelStyle = { maxHeight: props.scrollHeight, ...props.panelStyle };
             const header = ObjectUtils.getJSXElement(props.headerTemplate, props);
             const footer = ObjectUtils.getJSXElement(props.footerTemplate, props);
             const list = createList();
@@ -416,8 +416,8 @@ export const Mention = React.memo(
             const panelProps = mergeProps(
                 {
                     ref: overlayRef,
-                    className: cx('panel'),
-                    style: sx('panel'),
+                    className: panelClassName,
+                    style: panelStyle,
                     onClick: onPanelClick
                 },
                 ptm('panel')
@@ -448,6 +448,15 @@ export const Mention = React.memo(
             return <Portal element={panel} appendTo="self" />;
         };
 
+        const className = classNames(
+            'p-mention p-component p-inputwrapper',
+            {
+                'p-inputwrapper-filled': isFilled,
+                'p-inputwrapper-focus': focusedState
+            },
+            props.className
+        );
+        const inputClassName = classNames('p-mention-input', props.inputClassName);
         const inputProps = MentionBase.getOtherProps(props);
         const panel = createPanel();
 
@@ -455,7 +464,7 @@ export const Mention = React.memo(
             {
                 ref: inputRef,
                 id: props.inputId,
-                className: cx('input'),
+                className: inputClassName,
                 style: props.inputStyle,
                 ...inputProps,
                 onFocus: onFocus,
@@ -472,7 +481,7 @@ export const Mention = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { focusedState, isFilled }),
+                className: className,
                 style: props.style
             },
             MentionBase.getOtherProps(props),

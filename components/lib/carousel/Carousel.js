@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import PrimeReact, { ariaLabel } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
@@ -11,14 +11,18 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, merg
 import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
-    const { ptm, cx } = props;
-    const key = props.className && props.className === 'p-carousel-item-cloned' ? 'itemCloned' : 'item';
     const content = props.template(props.item);
+    const className = classNames(props.className, 'p-carousel-item', {
+        'p-carousel-item-active': props.active,
+        'p-carousel-item-start': props.start,
+        'p-carousel-item-end': props.end
+    });
+    const ptParams = props.className && props.className === 'p-carousel-item-cloned' ? props.ptm('itemCloned') : props.ptm('item');
     const itemClonedProps = mergeProps(
         {
-            className: cx(key, { itemProps: props })
+            className
         },
-        ptm(key)
+        ptParams
     );
 
     return <div {...itemClonedProps}>{content}</div>;
@@ -33,7 +37,7 @@ export const Carousel = React.memo(
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);
         const [totalShiftedItemsState, setTotalShiftedItemsState] = React.useState(props.page * props.numScroll * -1);
         const [pageState, setPageState] = React.useState(props.page);
-        const { ptm, cx, sx, isUnstyled } = CarouselBase.setMetaData({
+        const { ptm } = CarouselBase.setMetaData({
             props,
             state: {
                 numVisible: numVisibleState,
@@ -42,8 +46,6 @@ export const Carousel = React.memo(
                 page: pageState
             }
         });
-
-        useHandleStyle(CarouselBase.css.styles, isUnstyled, { name: 'carousel' });
         const elementRef = React.useRef(null);
         const itemsContainerRef = React.useRef(null);
         const remainingItems = React.useRef(0);
@@ -223,7 +225,7 @@ export const Carousel = React.memo(
         };
 
         const changePageOnTouch = (e, diff) => {
-            if (Math.abs(diff) > swipeThreshold.current) {
+            if (Math.abs(diff) > swipeThreshold) {
                 if (diff < 0) {
                     // left
                     navForward(e);
@@ -264,14 +266,12 @@ export const Carousel = React.memo(
         `;
 
             if (props.responsiveOptions) {
-                const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
-
                 responsiveOptions.current = [...props.responsiveOptions];
                 responsiveOptions.current.sort((data1, data2) => {
                     const value1 = data1.breakpoint;
                     const value2 = data2.breakpoint;
 
-                    return ObjectUtils.sort(value1, value2, -1, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, -1, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 for (let i = 0; i < responsiveOptions.current.length; i++) {
@@ -318,12 +318,10 @@ export const Carousel = React.memo(
                 elementRef.current.setAttribute(attributeSelector.current, '');
             }
 
-            if (!carouselStyle.current) {
-                createStyle();
-                calculatePosition();
-                changePosition(totalShiftedItemsState);
-                bindWindowResizeListener();
-            }
+            createStyle();
+            calculatePosition();
+            changePosition(totalShiftedItemsState);
+            bindWindowResizeListener();
         });
 
         useUpdateEffect(() => {
@@ -421,7 +419,7 @@ export const Carousel = React.memo(
                         const end = index === clonedElements.length - 1;
                         const key = index + '_scloned';
 
-                        return <CarouselItem key={key} className="p-carousel-item-cloned" template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} cx={cx} />;
+                        return <CarouselItem key={key} className="p-carousel-item-cloned" template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} />;
                     });
 
                     clonedElements = props.value.slice(0, numVisibleState);
@@ -431,7 +429,7 @@ export const Carousel = React.memo(
                         const end = index === clonedElements.length - 1;
                         const key = index + '_fcloned';
 
-                        return <CarouselItem key={key} className="p-carousel-item-cloned" template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} cx={cx} />;
+                        return <CarouselItem key={key} className="p-carousel-item-cloned" template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} />;
                     });
                 }
 
@@ -442,7 +440,7 @@ export const Carousel = React.memo(
                     const start = firstIndex === index;
                     const end = lastIndex === index;
 
-                    return <CarouselItem key={index} template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} cx={cx} />;
+                    return <CarouselItem key={index} template={props.itemTemplate} item={item} active={isActive} start={start} end={end} ptm={ptm} />;
                 });
 
                 return (
@@ -459,7 +457,7 @@ export const Carousel = React.memo(
             if (props.header) {
                 const headerProps = mergeProps(
                     {
-                        className: cx('header')
+                        className: 'p-carousel-header'
                     },
                     ptm('header')
                 );
@@ -474,7 +472,7 @@ export const Carousel = React.memo(
             if (props.footer) {
                 const footerProps = mergeProps(
                     {
-                        className: cx('footer')
+                        className: 'p-carousel-footer'
                     },
                     ptm('footer')
                 );
@@ -490,10 +488,11 @@ export const Carousel = React.memo(
             const height = isVertical ? props.verticalViewPortHeight : 'auto';
             const backwardNavigator = createBackwardNavigator();
             const forwardNavigator = createForwardNavigator();
+            const className = classNames('p-carousel-container', props.containerClassName);
             const itemsContentProps = mergeProps(
                 {
-                    className: cx('itemsContent'),
-                    style: sx('itemsContent', { height }),
+                    className: 'p-carousel-items-content',
+                    style: { height: height },
                     onTouchStart: (e) => onTouchStart(e),
                     onTouchMove: (e) => onTouchMove(e),
                     onTouchEnd: (e) => onTouchEnd(e)
@@ -503,14 +502,15 @@ export const Carousel = React.memo(
 
             const containerProps = mergeProps(
                 {
-                    className: classNames(props.containerClassName, cx('container'))
+                    className
                 },
                 ptm('container')
             );
 
             const itemsContainerProps = mergeProps(
                 {
-                    className: cx('itemsContainer'),
+                    ref: itemsContainerRef,
+                    className: 'p-carousel-items-container',
                     onTransitionEnd: onTransitionEnd
                 },
                 ptm('itemsContainer')
@@ -520,9 +520,7 @@ export const Carousel = React.memo(
                 <div {...containerProps}>
                     {backwardNavigator}
                     <div {...itemsContentProps}>
-                        <div ref={itemsContainerRef} {...itemsContainerProps}>
-                            {items}
-                        </div>
+                        <div {...itemsContainerProps}>{items}</div>
                     </div>
                     {forwardNavigator}
                 </div>
@@ -532,9 +530,13 @@ export const Carousel = React.memo(
         const createBackwardNavigator = () => {
             if (props.showNavigators) {
                 const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && currentPage === 0;
+                const className = classNames('p-carousel-prev p-link', {
+                    'p-disabled': isDisabled
+                });
+                const iconClassName = 'p-carousel-prev-icon';
                 const previousButtonIconProps = mergeProps(
                     {
-                        className: cx('previousButtonIcon')
+                        className: iconClassName
                     },
                     ptm('previousButtonIcon')
                 );
@@ -543,7 +545,7 @@ export const Carousel = React.memo(
                 const previousButtonProps = mergeProps(
                     {
                         type: 'button',
-                        className: cx('previousButton', { isDisabled }),
+                        className,
                         onClick: (e) => navBackward(e),
                         disabled: isDisabled,
                         'aria-label': ariaLabel('previousPageLabel')
@@ -565,9 +567,13 @@ export const Carousel = React.memo(
         const createForwardNavigator = () => {
             if (props.showNavigators) {
                 const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && (currentPage === totalIndicators - 1 || totalIndicators === 0);
+                const className = classNames('p-carousel-next p-link', {
+                    'p-disabled': isDisabled
+                });
+                const iconClassName = 'p-carousel-next-icon';
                 const nextButtonIconProps = mergeProps(
                     {
-                        className: cx('nextButtonIcon')
+                        className: iconClassName
                     },
                     ptm('nextButtonIcon')
                 );
@@ -576,7 +582,7 @@ export const Carousel = React.memo(
                 const nextButtonProps = mergeProps(
                     {
                         type: 'button',
-                        className: cx('nextButton', { isDisabled }),
+                        className,
                         onClick: (e) => navForward(e),
                         disabled: isDisabled,
                         'aria-label': ariaLabel('nextPageLabel')
@@ -598,17 +604,20 @@ export const Carousel = React.memo(
         const createIndicator = (index) => {
             const isActive = currentPage === index;
             const key = 'carousel-indicator-' + index;
+            const className = classNames('p-carousel-indicator', {
+                'p-highlight': isActive
+            });
             const indicatorProps = mergeProps(
                 {
                     key,
-                    className: cx('indicator', { isActive })
+                    className
                 },
                 ptm('indicator')
             );
             const indicatorButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('indicatorButton'),
+                    className: 'p-link',
                     onClick: (e) => onDotClick(e, index),
                     'aria-label': `${ariaLabel('pageLabel')} ${index + 1}`
                 },
@@ -626,6 +635,7 @@ export const Carousel = React.memo(
 
         const createIndicators = () => {
             if (props.showIndicators) {
+                const className = classNames('p-carousel-indicators p-reset', props.indicatorsContentClassName);
                 let indicators = [];
 
                 for (let i = 0; i < totalIndicators; i++) {
@@ -634,7 +644,7 @@ export const Carousel = React.memo(
 
                 const indicatorsProps = mergeProps(
                     {
-                        className: classNames(props.indicatorsContentClassName, cx('indicators'))
+                        className
                     },
                     ptm('indicators')
                 );
@@ -645,6 +655,15 @@ export const Carousel = React.memo(
             return null;
         };
 
+        const className = classNames(
+            'p-carousel p-component',
+            {
+                'p-carousel-vertical': isVertical,
+                'p-carousel-horizontal': !isVertical
+            },
+            props.className
+        );
+        const contentClassName = classNames('p-carousel-content', props.contentClassName);
         const content = createContent();
         const indicators = createIndicators();
         const header = createHeader();
@@ -653,7 +672,7 @@ export const Carousel = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: classNames(props.className, cx('root')),
+                className,
                 style: props.style
             },
             CarouselBase.getOtherProps(props),
@@ -662,7 +681,7 @@ export const Carousel = React.memo(
 
         const contentProps = mergeProps(
             {
-                className: classNames(props.contentClassName, cx('content'))
+                className: contentClassName
             },
             ptm('content')
         );

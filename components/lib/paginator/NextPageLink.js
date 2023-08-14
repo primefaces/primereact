@@ -9,10 +9,9 @@ import { PrimeReactContext } from '../api/Api';
 export const NextPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = NextPageLinkBase.getProps(inProps, context);
-    const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
-        return ptm(key, {
+        return props.ptm(key, {
             context: {
                 disabled: props.disabled
             }
@@ -24,7 +23,7 @@ export const NextPageLink = React.memo((inProps) => {
     const iconClassName = 'p-paginator-icon';
     const nextPageIconProps = mergeProps(
         {
-            className: cx('nextPageIcon')
+            className: iconClassName
         },
         getPTOptions('nextPageIcon')
     );
@@ -34,7 +33,7 @@ export const NextPageLink = React.memo((inProps) => {
     const nextPageButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('nextPageButton', { disabled: props.disabled }),
+            className,
             onClick: props.onClick,
             disabled: props.disabled,
             'aria-label': ariaLabel('nextPageLabel')

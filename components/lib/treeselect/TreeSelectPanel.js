@@ -1,31 +1,36 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
+import PrimeReact from '../api/Api';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
     const context = React.useContext(PrimeReactContext);
-    const { ptm, cx } = props;
 
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
+        const className = classNames('p-treeselect-panel p-component', props.panelClassName, {
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+        });
 
         const panelProps = mergeProps(
             {
-                className: cx('panel', { panelProps: props, context }),
+                ref: ref,
+                className: className,
                 style: props.panelStyle,
                 onClick: props.onClick
             },
-            ptm('panel')
+            props.ptm('panel')
         );
 
         const wrapperProps = mergeProps(
             {
-                className: cx('wrapper'),
+                className: 'p-treeselect-items-wrapper',
                 style: wrapperStyle
             },
-            ptm('wrapper')
+            props.ptm('wrapper')
         );
 
         return (
@@ -42,7 +47,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 onExit={props.onExit}
                 onExited={props.onExited}
             >
-                <div ref={ref} {...panelProps}>
+                <div {...panelProps}>
                     {props.header}
                     <div {...wrapperProps}>{props.children}</div>
                     {props.footer}

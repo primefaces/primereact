@@ -73,11 +73,6 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {SkeletonPassThroughOptions}
      */
     pt?: SkeletonPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

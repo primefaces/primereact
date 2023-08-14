@@ -10,7 +10,6 @@ export function LocaleDoc(props) {
 
     addLocale('es', {
         firstDayOfWeek: 1,
-        showMonthAfterYear: true,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
@@ -34,7 +33,6 @@ export default function LocaleDemo() {
 
     addLocale('es', {
         firstDayOfWeek: 1,
-        showMonthAfterYear: true,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
@@ -61,7 +59,6 @@ export default function LocaleDemo() {
 
     addLocale('es', {
         firstDayOfWeek: 1,
-        showMonthAfterYear: true,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],

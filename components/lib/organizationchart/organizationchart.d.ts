@@ -218,11 +218,6 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      * @type {OrganizationChartPassThroughOptions}
      */
     pt?: OrganizationChartPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

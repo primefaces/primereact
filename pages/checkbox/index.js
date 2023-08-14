@@ -13,8 +13,6 @@ import { ImportDoc } from '../../components/doc/checkbox/importdoc';
 import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
 import { StyleDoc } from '../../components/doc/checkbox/styledoc';
 import { DocComponent } from '../../components/doc/common/doccomponent';
-import { TailwindDoc } from '../../components/doc/checkbox/theming/tailwinddoc';
-import { StyledDoc } from '../../components/doc/checkbox/theming/styleddoc';
 
 const CheckboxDemo = () => {
     const docs = [
@@ -76,7 +74,6 @@ const CheckboxDemo = () => {
             component: AccessibilityDoc
         }
     ];
-
     const ptDocs = [
         {
             id: 'pt.wireframe',
@@ -95,27 +92,7 @@ const CheckboxDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Checkbox Component" header="Checkbox" description="Checkbox is an extension to standard checkbox element with theming." componentDocs={docs} apiDocs={['Checkbox']} ptDocs={ptDocs} />;
 };
 
 export default CheckboxDemo;

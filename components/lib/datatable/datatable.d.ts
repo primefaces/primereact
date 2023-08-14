@@ -10,9 +10,9 @@
 import * as React from 'react';
 import { Column, ColumnProps } from '../column';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -883,8 +883,6 @@ export interface DataTablePassThroughOptions {
     tooltip?: TooltipPassThroughOptions;
 }
 
-type SortOrder = 1 | 0 | -1 | null | undefined;
-
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
@@ -1271,11 +1269,11 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
     /**
      * Icon to display the current sorting status.
      */
-    sortIcon?: IconType<DataTable<TValue>, { sortOrder?: SortOrder; sorted?: boolean }> | undefined;
+    sortIcon?: IconType<DataTable<TValue>> | undefined;
     /**
      * Order to sort the data by default.
      */
-    sortOrder?: SortOrder;
+    sortOrder?: 1 | 0 | -1 | null | undefined;
     /**
      * Unique identifier of a stateful table to use in state storage.
      */
@@ -1551,11 +1549,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * @type {DataTablePassThroughOptions}
      */
     pt?: DataTablePassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**
@@ -1578,10 +1571,6 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      * Closes the current editing cell when incell editing is enabled.
      */
     public closeEditingCell(): void;
-    /**
-     * Closes the current editing rows when row editing is enabled.
-     */
-    public closeEditingRows(): void;
     /**
      * Exports the data to CSV format.
      * @param {object} options - Options to export

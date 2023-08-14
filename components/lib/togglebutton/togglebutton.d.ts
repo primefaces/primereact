@@ -156,11 +156,6 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @type {ToggleButtonPassThroughOptions}
      */
     pt?: ToggleButtonPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

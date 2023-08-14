@@ -4,13 +4,11 @@ import { Portal } from '../portal/Portal';
 import { mergeProps } from '../utils/Utils';
 
 export const CalendarPanel = React.forwardRef((props, ref) => {
-    const cx = props.cx;
-
     const createElement = () => {
         const panelProps = mergeProps(
             {
                 ref,
-                className: cx('panel', { panelClassName: props.className }),
+                className: props.className,
                 style: props.style,
                 onClick: props.onClick,
                 onMouseUp: props.onMouseUp

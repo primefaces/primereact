@@ -14,7 +14,7 @@ export const ToastMessage = React.memo(
         const {
             messageInfo,
             metaData: parentMetaData,
-            ptCallbacks: { ptm, ptmo, cx },
+            ptCallbacks: { ptm, ptmo },
             index
         } = props;
         const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon, pt } = messageInfo.message;
@@ -70,9 +70,10 @@ export const ToastMessage = React.memo(
         };
 
         const createCloseIcon = () => {
+            const iconClassName = 'p-toast-icon-close-icon';
             const buttonIconProps = mergeProps(
                 {
-                    className: cx('message.buttonicon')
+                    className: iconClassName
                 },
                 ptm('buttonicon', parentParams),
                 ptmo(pt, 'buttonicon', params)
@@ -85,7 +86,7 @@ export const ToastMessage = React.memo(
             const buttonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('message.button'),
+                    className: 'p-toast-icon-close p-link',
                     onClick: onClose,
                     'aria-label': ariaLabel
                 },
@@ -110,9 +111,10 @@ export const ToastMessage = React.memo(
         const createMessage = () => {
             if (messageInfo) {
                 const contentEl = ObjectUtils.getJSXElement(content, { message: messageInfo.message, onClick, onClose });
+                const iconClassName = 'p-toast-message-icon';
                 const iconProps = mergeProps(
                     {
-                        className: cx('message.icon')
+                        className: iconClassName
                     },
                     ptm('icon', parentParams),
                     ptmo(pt, 'icon', params)
@@ -143,7 +145,7 @@ export const ToastMessage = React.memo(
 
                 const textProps = mergeProps(
                     {
-                        className: cx('message.text')
+                        className: 'p-toast-message-text'
                     },
                     ptm('text', parentParams),
                     ptmo(pt, 'text', params)
@@ -151,7 +153,7 @@ export const ToastMessage = React.memo(
 
                 const summaryProps = mergeProps(
                     {
-                        className: cx('message.summary')
+                        className: 'p-toast-summary'
                     },
                     ptm('summary', parentParams),
                     ptmo(pt, 'summary', params)
@@ -159,7 +161,7 @@ export const ToastMessage = React.memo(
 
                 const detailProps = mergeProps(
                     {
-                        className: cx('message.detail')
+                        className: 'p-toast-detail'
                     },
                     ptm('detail', parentParams),
                     ptmo(pt, 'detail', params)
@@ -181,6 +183,13 @@ export const ToastMessage = React.memo(
             return null;
         };
 
+        const className = classNames(
+            'p-toast-message',
+            {
+                [`p-toast-message-${severity}`]: severity
+            },
+            _className
+        );
         const contentClassName = classNames('p-toast-message-content', _contentClassName);
         const message = createMessage();
         const closeIcon = createCloseIcon();
@@ -188,7 +197,7 @@ export const ToastMessage = React.memo(
         const messageProps = mergeProps(
             {
                 ref,
-                className: classNames(_className, cx('message.message', { severity })),
+                className,
                 style,
                 role: 'alert',
                 'aria-live': 'assertive',

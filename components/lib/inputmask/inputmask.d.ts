@@ -114,11 +114,6 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange' | 'pt'> 
      * @type {InputTextPassThroughOptions}
      */
     pt?: InputTextPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

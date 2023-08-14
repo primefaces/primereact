@@ -354,11 +354,6 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {GalleriaPassThroughOptions}
      */
     pt?: GalleriaPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

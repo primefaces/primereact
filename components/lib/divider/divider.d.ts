@@ -63,11 +63,6 @@ export interface DividerProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {DividerPassThroughOptions}
      */
     pt?: DividerPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

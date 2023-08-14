@@ -206,7 +206,6 @@ export interface APIOptions {
      * This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag.
      */
     pt?: PrimeReactPTOptions;
-    unstyled?: boolean;
     /**
      * This method is used to change the theme dynamically.
      * @param {string} theme - The name of the theme to be applied.

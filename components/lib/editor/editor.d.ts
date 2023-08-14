@@ -162,11 +162,6 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * @type {EditorPassThroughOptions}
      */
     pt?: EditorPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

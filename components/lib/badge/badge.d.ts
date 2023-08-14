@@ -60,11 +60,6 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {BadgePassThroughOptions}
      */
     pt?: BadgePassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

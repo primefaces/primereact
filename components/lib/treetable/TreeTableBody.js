@@ -6,7 +6,6 @@ import { TreeTableRow } from './TreeTableRow';
 export const TreeTableBody = React.memo((props) => {
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
-    const { ptm, cx } = props.ptCallbacks;
 
     const flattenizeTree = (nodes) => {
         let rows = [];
@@ -168,7 +167,6 @@ export const TreeTableBody = React.memo((props) => {
                 rowIndex={index}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
-                originalOptions={props.originalOptions}
                 checkboxIcon={props.checkboxIcon}
                 columns={props.columns}
                 expandedKeys={props.expandedKeys}
@@ -225,15 +223,15 @@ export const TreeTableBody = React.memo((props) => {
             const content = props.emptyMessage || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
-                    className: cx('emptyMessage')
+                    className: 'p-treetable-emptymessage'
                 },
-                ptm('emptyMessage')
+                props.ptCallbacks.ptm('emptyMessage')
             );
             const bodyCellProps = mergeProps(
                 {
                     colSpan
                 },
-                ptm('bodyCell')
+                props.ptCallbacks.ptm('bodyCell')
             );
 
             return (
@@ -247,9 +245,9 @@ export const TreeTableBody = React.memo((props) => {
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
     const tbodyProps = mergeProps(
         {
-            className: cx('tbody')
+            className: 'p-treetable-tbody'
         },
-        ptm('tbody')
+        props.ptCallbacks.ptm('tbody')
     );
 
     return <tbody {...tbodyProps}>{content}</tbody>;

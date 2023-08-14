@@ -67,11 +67,6 @@ export interface ProgressSpinnerProps extends Omit<React.DetailedHTMLProps<React
      * @type {ProgressSpinnerPassThroughOptions}
      */
     pt?: ProgressSpinnerPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

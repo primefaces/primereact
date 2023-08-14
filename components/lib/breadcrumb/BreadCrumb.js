@@ -1,20 +1,17 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = BreadCrumbBase.getProps(inProps, context);
-        const elementRef = React.useRef(null);
-        const { ptm, cx, isUnstyled } = BreadCrumbBase.setMetaData({
+        const { ptm } = BreadCrumbBase.setMetaData({
             props
         });
-
-        useHandleStyle(BreadCrumbBase.css.styles, isUnstyled, { name: 'breadcrumb' });
+        const elementRef = React.useRef(null);
 
         const itemClick = (event, item) => {
             if (item.disabled) {
@@ -44,9 +41,10 @@ export const BreadCrumb = React.memo(
                 }
 
                 const { icon: _icon, target, url, disabled, style, className: _className, template, label: _label } = home;
+                const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
                 const iconProps = mergeProps(
                     {
-                        className: cx('icon')
+                        className: 'p-menuitem-icon'
                     },
                     ptm('icon')
                 );
@@ -54,7 +52,7 @@ export const BreadCrumb = React.memo(
                 const actionProps = mergeProps(
                     {
                         href: url || '#',
-                        className: cx('action'),
+                        className: 'p-menuitem-link',
                         'aria-disabled': disabled,
                         target,
                         onClick: (event) => itemClick(event, home)
@@ -64,7 +62,7 @@ export const BreadCrumb = React.memo(
 
                 const labelProps = mergeProps(
                     {
-                        className: cx('label')
+                        className: 'p-menuitem-text'
                     },
                     ptm('label')
                 );
@@ -90,10 +88,10 @@ export const BreadCrumb = React.memo(
 
                 const menuitemProps = mergeProps(
                     {
-                        className: cx('home', { _className, disabled }),
+                        className,
                         style
                     },
-                    ptm('home')
+                    ptm('menuitem')
                 );
 
                 return <li {...menuitemProps}>{content}</li>;
@@ -103,9 +101,10 @@ export const BreadCrumb = React.memo(
         };
 
         const createSeparator = () => {
+            const iconClassName = 'p-breadcrumb-chevron';
             const separatorIconProps = mergeProps(
                 {
-                    className: cx('separatorIcon')
+                    className: iconClassName
                 },
                 ptm('separatorIcon')
             );
@@ -113,7 +112,7 @@ export const BreadCrumb = React.memo(
             const separatorIcon = IconUtils.getJSXIcon(icon, { ...separatorIconProps }, { props });
             const separatorProps = mergeProps(
                 {
-                    className: cx('separator')
+                    className: 'p-menuitem-separator'
                 },
                 ptm('separator')
             );
@@ -126,9 +125,10 @@ export const BreadCrumb = React.memo(
                 return null;
             }
 
+            const className = classNames('p-menuitem', item.className, { 'p-disabled': item.disabled });
             const labelProps = mergeProps(
                 {
-                    className: cx('label')
+                    className: 'p-menuitem-text'
                 },
                 ptm('label')
             );
@@ -136,7 +136,7 @@ export const BreadCrumb = React.memo(
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: cx('action'),
+                    className: 'p-menuitem-link',
                     target: item.target,
                     onClick: (event) => itemClick(event, item),
                     'aria-disabled': item.disabled
@@ -159,7 +159,7 @@ export const BreadCrumb = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    className: cx('menuitem', { item }),
+                    className,
                     style: item.style
                 },
                 ptm('menuitem')
@@ -198,12 +198,13 @@ export const BreadCrumb = React.memo(
             getElement: () => elementRef.current
         }));
 
+        const className = classNames('p-breadcrumb p-component', props.className);
         const home = createHome();
         const items = createMenuitems();
         const separator = createSeparator();
         const menuProps = mergeProps(
             {
-                className: cx('menu')
+                className: 'p-breadcrumb-list'
             },
             ptm('menu')
         );
@@ -211,7 +212,7 @@ export const BreadCrumb = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root'),
+                className,
                 style: props.style,
                 'aria-label': 'Breadcrumb'
             },

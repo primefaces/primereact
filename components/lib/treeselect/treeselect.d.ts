@@ -95,9 +95,9 @@ export interface TreeSelectPassThroughOptions {
      */
     filterIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
-     * uses to pass attributes to the close icon's DOM element.
+     * uses to pass attributes to the header icon's DOM element.
      */
-    closeIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    headerIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * uses to pass attributes to the header's DOM element.
      */
@@ -425,11 +425,6 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @type {TreeSelectPassThroughOptions}
      */
     pt?: TreeSelectPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
     /**
      * Resets the filter when the overlay is hidden.
      */

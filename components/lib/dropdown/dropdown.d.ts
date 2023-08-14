@@ -485,11 +485,6 @@ export interface DropdownProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {DropdownPassThroughOptions}
      */
     pt?: DropdownPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

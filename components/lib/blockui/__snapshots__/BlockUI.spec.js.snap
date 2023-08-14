@@ -12,7 +12,7 @@ exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1
     />
   </div>
   <div
-    data-pc-section="mask"
+    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document"
     style="z-index: 3204;"
   />
 </body>
@@ -30,8 +30,7 @@ exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen
     />
   </div>
   <div
-    class="p-component-overlay-leave"
-    data-pc-section="mask"
+    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document p-component-overlay-leave"
     style="z-index: 3204;"
   />
 </body>
@@ -67,7 +66,7 @@ exports[`BlockUI block and unblock panel events: blocked-event 1`] = `
       </div>
     </div>
     <div
-      data-pc-section="mask"
+      class="p-blockui p-component-overlay p-component-overlay-enter"
       style="z-index: 2103;"
     />
   </div>
@@ -104,8 +103,7 @@ exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
       </div>
     </div>
     <div
-      class="p-component-overlay-leave"
-      data-pc-section="mask"
+      class="p-blockui p-component-overlay p-component-overlay-enter p-component-overlay-leave"
       style="z-index: 2103;"
     />
   </div>
@@ -124,7 +122,7 @@ exports[`BlockUI block fullscreen 1`] = `
     />
   </div>
   <div
-    data-pc-section="mask"
+    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document"
     style="z-index: 1101;"
   />
 </body>
@@ -163,7 +161,7 @@ exports[`BlockUI block panel 1`] = `
         </div>
       </div>
       <div
-        data-pc-section="mask"
+        class="p-blockui p-component-overlay p-component-overlay-enter"
         style="z-index: 2102;"
       />
     </div>
@@ -205,8 +203,8 @@ exports[`BlockUI container style and className 1`] = `
         </div>
       </div>
       <div
-        data-pc-section="mask"
-        style="z-index: 4205;"
+        class="p-blockui p-component-overlay p-component-overlay-enter block-jest"
+        style="cursor: move; z-index: 4205;"
       />
     </div>
   </div>

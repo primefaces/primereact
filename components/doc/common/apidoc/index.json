@@ -106,14 +106,6 @@
                             "type": "AccordionTabPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -471,7 +463,7 @@
                             "type": "any"
                         }
                     ],
-                    "returnType": "null | ReactElement<any, any>"
+                    "returnType": "ReactNode"
                 },
                 "locale": {
                     "name": "locale",
@@ -732,12 +724,6 @@
                             "readonly": false,
                             "type": "PrimeReactPTOptions",
                             "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean"
                         },
                         {
                             "name": "setAppendTo",
@@ -3735,14 +3721,6 @@
                             "type": "AutoCompletePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -4375,14 +4353,6 @@
                             "type": "AvatarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -4515,14 +4485,6 @@
                             "type": "AvatarGroupPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -4624,14 +4586,6 @@
                             "type": "BadgePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -4782,14 +4736,6 @@
                             "type": "BlockUIPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -4844,13 +4790,6 @@
                             "readonly": false,
                             "type": "BlockUIPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
-                        },
-                        {
-                            "name": "mask",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "BlockUIPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the mask's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -4938,14 +4877,6 @@
                             "type": "BreadCrumbPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -5216,14 +5147,6 @@
                             "type": "ButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -5490,14 +5413,6 @@
                             "type": "number[]",
                             "default": "",
                             "description": "Array with disabled weekday numbers."
-                        },
-                        {
-                            "name": "enabledDates",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "Date[]",
-                            "default": "",
-                            "description": "Array with dates to enable (all other dates will be disabled)."
                         },
                         {
                             "name": "hideOnDateTimeSelect",
@@ -5962,14 +5877,6 @@
                             "type": "CalendarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -6621,7 +6528,7 @@
                             "name": "weekHeader",
                             "optional": true,
                             "readonly": false,
-                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the week header's DOM element."
                         },
                         {
@@ -6684,7 +6591,7 @@
                             "name": "dayLabel",
                             "optional": true,
                             "readonly": false,
-                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the day label's DOM element."
                         },
                         {
@@ -6977,14 +6884,6 @@
                             "type": "CardPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -7267,14 +7166,6 @@
                             "type": "CarouselPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -7802,14 +7693,6 @@
                             "type": "CascadeSelectPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -8219,14 +8102,6 @@
                             "type": "ChartPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -8474,14 +8349,6 @@
                             "type": "CheckboxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -8795,14 +8662,6 @@
                             "type": "ChipPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -9118,14 +8977,6 @@
                             "type": "ChipsPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -9597,14 +9448,6 @@
                             "type": "ColorPickerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -9938,14 +9781,6 @@
                             "type": "ColumnPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         },
                         {
                             "name": "className",
@@ -11999,14 +11834,6 @@
                             "type": "ColumnGroupPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -12207,14 +12034,6 @@
                             "type": "ConfirmDialogPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         },
                         {
                             "name": "ariaCloseIconLabel",
@@ -13059,14 +12878,6 @@
                             "type": "ConfirmPopupPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -13456,14 +13267,6 @@
                             "type": "ContextMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -13791,14 +13594,6 @@
                             "type": "DataScrollerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -14750,7 +14545,7 @@
                             "name": "sortIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "IconType<DataTable<TValue>, Object>",
+                            "type": "IconType<DataTable<TValue>>",
                             "default": "",
                             "description": "Icon to display the current sorting status."
                         },
@@ -14758,7 +14553,7 @@
                             "name": "sortOrder",
                             "optional": true,
                             "readonly": false,
-                            "type": "SortOrder",
+                            "type": "null | 0 | 1 | -1",
                             "default": "",
                             "description": "Order to sort the data by default."
                         },
@@ -14849,14 +14644,6 @@
                             "type": "DataTablePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -16845,9 +16632,6 @@
                 },
                 "DataTablePassThroughType": {
                     "values": "PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>"
-                },
-                "SortOrder": {
-                    "values": "1 | 0 | -1 | null | undefined"
                 }
             }
         }
@@ -17086,22 +16870,6 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
-                        },
-                        {
-                            "name": "pt",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "DataViewPassThroughOptions",
-                            "default": "",
-                            "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -17220,7 +16988,7 @@
                 },
                 "DataViewPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "pt",
+                    "relatedProp": "DataViewProps.pt",
                     "props": [
                         {
                             "name": "root",
@@ -17940,14 +17708,6 @@
                             "type": "DialogPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -18321,14 +18081,6 @@
                             "type": "DividerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -18460,14 +18212,6 @@
                             "type": "DockPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -19106,14 +18850,6 @@
                             "type": "DropdownPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -19652,14 +19388,6 @@
                             "type": "EditorPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -19946,14 +19674,6 @@
                             "type": "FieldsetPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -20500,14 +20220,6 @@
                             "type": "FileUploadPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -21553,14 +21265,6 @@
                             "type": "GalleriaPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -22213,23 +21917,6 @@
                     "returnType": "MouseMoveOptions",
                     "description": "Custom hook to handles move behavior over any element."
                 },
-                "useStyle": {
-                    "name": "useStyle",
-                    "parameters": [
-                        {
-                            "name": "css",
-                            "type": "string",
-                            "description": "The style text content."
-                        },
-                        {
-                            "name": "options",
-                            "type": "UseStyleOptions",
-                            "description": "The options of the style."
-                        }
-                    ],
-                    "returnType": "StyleOptions",
-                    "description": "Custom hook to use to get style options."
-                },
                 "useFavicon": {
                     "name": "useFavicon",
                     "parameters": [
@@ -22297,23 +21984,6 @@
                     ],
                     "returnType": "boolean",
                     "description": "Custom hook to detect if window size matches or not."
-                },
-                "useOnEscapeKey": {
-                    "name": "useOnEscapeKey",
-                    "parameters": [
-                        {
-                            "name": "ref",
-                            "type": "RefObject<Element>",
-                            "description": "The ref of the element to detect escape button click."
-                        },
-                        {
-                            "name": "callback",
-                            "type": "any",
-                            "description": "The callback to run when escape button clicked."
-                        }
-                    ],
-                    "returnType": "void",
-                    "description": "Custom hook to use detect escape button click."
                 }
             }
         },
@@ -22341,83 +22011,6 @@
                     ],
                     "callbacks": [],
                     "extendedBy": "MouseDataOptions"
-                },
-                "UseStyleOptions": {
-                    "description": "Custom UseStyleOptions",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "document",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "Document"
-                        },
-                        {
-                            "name": "immediate",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean"
-                        },
-                        {
-                            "name": "manual",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean"
-                        },
-                        {
-                            "name": "name",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "string"
-                        },
-                        {
-                            "name": "media",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "string"
-                        }
-                    ],
-                    "callbacks": []
-                },
-                "StyleOptions": {
-                    "description": "Custom StyleOptions",
-                    "relatedProp": "",
-                    "props": [
-                        {
-                            "name": "name",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "string",
-                            "description": "Defines data-pc-name attribute of the style tag."
-                        },
-                        {
-                            "name": "css",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "RefObject<string>",
-                            "description": "The css object."
-                        },
-                        {
-                            "name": "load",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "Function"
-                        },
-                        {
-                            "name": "unload",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "Function"
-                        },
-                        {
-                            "name": "isLoaded",
-                            "optional": false,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether the style is loaded or not."
-                        }
-                    ],
-                    "callbacks": []
                 },
                 "MouseDataOptions": {
                     "description": "Custom MouseDataOptions",
@@ -24616,14 +24209,6 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
-                            "name": "closeOnEscape",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "true",
-                            "description": "Specifies if pressing escape key should hide the preview."
-                        },
-                        {
                             "name": "crossOrigin",
                             "optional": true,
                             "readonly": false,
@@ -24791,14 +24376,6 @@
                             "type": "ImagePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -25110,14 +24687,6 @@
                             "type": "InplacePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -25434,14 +25003,6 @@
                             "type": "InputTextPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         },
                         {
                             "name": "keyfilter",
@@ -25975,14 +25536,6 @@
                             "type": "InputNumberPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -26367,14 +25920,6 @@
                             "type": "InputSwitchPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -26614,14 +26159,6 @@
                             "type": "InputTextPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -26765,14 +26302,6 @@
                             "type": "InputTextareaPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -27012,14 +26541,6 @@
                             "type": "KnobPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -27408,14 +26929,6 @@
                             "type": "ListboxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -27898,14 +27411,6 @@
                             "type": "MegaMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -28338,14 +27843,6 @@
                             "type": "MentionPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -28775,14 +28272,6 @@
                             "type": "MenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -29015,14 +28504,6 @@
                             "type": "MenubarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -29467,14 +28948,6 @@
                             "type": "MessagePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -29802,13 +29275,6 @@
                             "readonly": false,
                             "type": "MessagesPassThroughOptions",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ],
                     "callbacks": []
@@ -29960,14 +29426,6 @@
                             "type": "ReactNode | Function",
                             "default": "No records found",
                             "description": "Template to display when filtering does not return any results."
-                        },
-                        {
-                            "name": "emptyMessage",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Text to display when there are no options available. Defaults to global value in Locale configuration."
                         },
                         {
                             "name": "filter",
@@ -30234,14 +29692,6 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
-                        },
-                        {
                             "name": "removeIcon",
                             "optional": true,
                             "readonly": false,
@@ -30312,14 +29762,6 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Whether to show the select all checkbox inside the panel's header."
-                        },
-                        {
-                            "name": "selectAllLabel",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "string",
-                            "default": "",
-                            "description": "Label to display if showSelectAll is true"
                         },
                         {
                             "name": "style",
@@ -30696,13 +30138,6 @@
                             "optional": true,
                             "readonly": false,
                             "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "Uses to pass attributes to the header checkbox's DOM element."
-                        },
-                        {
-                            "name": "headerSelectAllLabel",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLLabelElement>>",
                             "description": "Uses to pass attributes to the header checkbox's DOM element."
                         },
                         {
@@ -31203,14 +30638,6 @@
                             "type": "MultiStateCheckboxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -31622,14 +31049,6 @@
                             "type": "OrderListPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -31976,14 +31395,6 @@
                             "type": "OrganizationChartPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -32388,14 +31799,6 @@
                             "description": "Icon to display as close icon."
                         },
                         {
-                            "name": "closeOnEscape",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "true",
-                            "description": "Specifies if pressing escape key should hide the preview."
-                        },
-                        {
                             "name": "appendTo",
                             "optional": true,
                             "readonly": false,
@@ -32442,14 +31845,6 @@
                             "type": "OverlayPanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -32814,14 +32209,6 @@
                             "type": "PaginatorPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -33736,42 +33123,6 @@
                             "parameters": [],
                             "returnType": "HTMLDivElement",
                             "description": "Used to get content of the panel."
-                        },
-                        {
-                            "name": "toggle",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "type": "undefined | SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Toggle the panel if toggleable."
-                        },
-                        {
-                            "name": "expand",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "type": "undefined | SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Expand the panel if toggleable."
-                        },
-                        {
-                            "name": "collapse",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "type": "undefined | SyntheticEvent<Element, Event>",
-                                    "description": "Browser event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Collapse the panel if toggleable."
                         }
                     ]
                 },
@@ -33873,14 +33224,6 @@
                             "type": "PanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -34271,14 +33614,6 @@
                             "type": "PanelMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -34747,14 +34082,6 @@
                             "type": "PasswordPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -35356,14 +34683,6 @@
                             "type": "PickListPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -35934,14 +35253,6 @@
                             "type": "ProgressBarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -36084,14 +35395,6 @@
                             "type": "ProgressSpinnerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -36294,14 +35597,6 @@
                             "type": "RadioButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -36637,14 +35932,6 @@
                             "type": "RatingPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -36825,14 +36112,6 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -36886,14 +36165,6 @@
                             "type": "RowPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -37002,14 +36273,6 @@
                             "type": "ScrollPanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -37178,14 +36441,6 @@
                             "type": "ScrollTopPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -37420,14 +36675,6 @@
                             "type": "SelectButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -37721,14 +36968,6 @@
                             "description": "Specifies if pressing escape key should hide the sidebar."
                         },
                         {
-                            "name": "header",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "ReactNode | Function",
-                            "default": "true",
-                            "description": "Custom template for the header."
-                        },
-                        {
                             "name": "icons",
                             "optional": true,
                             "readonly": false,
@@ -37775,14 +37014,6 @@
                             "type": "SidebarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -37865,13 +37096,6 @@
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
-                        },
-                        {
-                            "name": "icons",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the custom icons content's DOM element."
                         },
                         {
                             "name": "mask",
@@ -37990,14 +37214,6 @@
                             "type": "SkeletonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -38222,14 +37438,6 @@
                             "type": "SlideMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         },
                         {
                             "name": "submenuIcon",
@@ -38591,14 +37799,6 @@
                             "type": "SliderPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -38918,14 +38118,6 @@
                             "type": "SpeedDialPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -39379,14 +38571,6 @@
                             "type": "SplitButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -39691,14 +38875,6 @@
                             "type": "SplitterPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -39916,14 +39092,6 @@
                             "type": "StepsPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -40234,14 +39402,6 @@
                             "type": "TabMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -40547,14 +39707,6 @@
                             "type": "TabPanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -40640,14 +39792,6 @@
                             "type": "TabViewPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -41141,14 +40285,6 @@
                             "type": "TagPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -41269,14 +40405,6 @@
                             "type": "TerminalPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -41617,14 +40745,6 @@
                             "type": "TieredMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -41888,14 +41008,6 @@
                             "type": "TimelinePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -42302,13 +41414,6 @@
                             "readonly": false,
                             "type": "ToastPassThroughOptions",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ],
                     "callbacks": []
@@ -42554,14 +41659,6 @@
                             "type": "ToggleButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -42809,14 +41906,6 @@
                             "type": "ToolbarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -43983,14 +43072,6 @@
                             "type": "TreePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -45233,14 +44314,6 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
-                        },
-                        {
                             "name": "resetFilterOnHide",
                             "optional": true,
                             "readonly": false,
@@ -45642,11 +44715,11 @@
                             "description": "uses to pass attributes to the filter icon's DOM element."
                         },
                         {
-                            "name": "closeIcon",
+                            "name": "headerIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
-                            "description": "uses to pass attributes to the close icon's DOM element."
+                            "description": "uses to pass attributes to the header icon's DOM element."
                         },
                         {
                             "name": "header",
@@ -45912,14 +44985,6 @@
                             "type": "TreeTablePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         },
                         {
                             "name": "className",
@@ -47535,14 +46600,6 @@
                             "type": "TriStateCheckboxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
-                        },
-                        {
-                            "name": "unstyled",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "false",
-                            "description": "When enabled, it removes component related styles in the core."
                         }
                     ]
                 },
@@ -47845,22 +46902,51 @@
                     "parameters": [
                         {
                             "name": "prefix",
-                            "type": "string",
-                            "description": "the optional string prefix of the id"
+                            "type": "string"
                         }
                     ],
-                    "returnType": "string",
-                    "description": "Generate a unique id for components for a page."
+                    "returnType": "string"
+                }
+            }
+        },
+        "interfaces": {
+            "description": "Defines the custom interfaces used by the module.",
+            "values": {
+                "IconOptions": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "iconProps",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "HTMLProps<HTMLElement>"
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "ReactNode"
+                        },
+                        {
+                            "name": "props",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ParentProps"
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
                 }
             }
         },
         "types": {
             "description": "Defines the custom types used by the module.",
             "values": {
-                "IconOptions": {
-                    "values": "AdditionalProps & Object",
-                    "description": "Icon options passed to any icon.\nComponentProps are props from the owning component.\nAdditionalProps are any custom properties of an icon like SortIcon of the Datatable for example."
-                },
                 "IconType": {
                     "values": "React.ReactNode | Function"
                 },
@@ -47868,7 +46954,7 @@
                     "values": "React.ReactNode | Function"
                 },
                 "PassThroughType": {
-                    "values": "T | Function | null | undefined | Object"
+                    "values": "T | Function | null | undefined"
                 }
             }
         }

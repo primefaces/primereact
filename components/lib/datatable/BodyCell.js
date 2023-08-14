@@ -24,7 +24,6 @@ export const BodyCell = React.memo((props) => {
     const selfClick = React.useRef(false);
     const tabindexTimeout = React.useRef(null);
     const initFocusTimeout = React.useRef(null);
-    const { ptmo, cx, sx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = (column) => ColumnBase.getCProps(column);
@@ -32,7 +31,7 @@ export const BodyCell = React.memo((props) => {
     const getColumnPTOptions = (key) => {
         const cProps = getColumnProps(props.column);
 
-        return ptmo(getColumnProp('pt'), key, {
+        return props.ptCallbacks.ptmo(getColumnProp('pt'), key, {
             props: cProps,
             parent: props.metaData,
             state: {
@@ -151,35 +150,33 @@ export const BodyCell = React.memo((props) => {
 
     const switchCellToViewMode = (event, submit) => {
         const callbackParams = getCellCallbackParams(event);
+        const newRowData = editingRowDataState;
+        const newValue = resolveFieldData(newRowData);
+        const params = { ...callbackParams, newRowData, newValue };
 
-        setEditingRowDataState((prev) => {
-            const newRowData = prev;
-            const newValue = resolveFieldData(newRowData);
-            const params = { ...callbackParams, newRowData, newValue };
-            const onCellEditCancel = getColumnProp('onCellEditCancel');
-            const cellEditValidator = getColumnProp('cellEditValidator');
-            const onCellEditComplete = getColumnProp('onCellEditComplete');
+        const onCellEditCancel = getColumnProp('onCellEditCancel');
+        const cellEditValidator = getColumnProp('cellEditValidator');
+        const onCellEditComplete = getColumnProp('onCellEditComplete');
 
-            if (!submit && onCellEditCancel) {
-                onCellEditCancel(params);
+        if (!submit && onCellEditCancel) {
+            onCellEditCancel(params);
+        }
+
+        let valid = true;
+
+        if (cellEditValidator) {
+            valid = cellEditValidator(params);
+        }
+
+        if (valid) {
+            if (submit && onCellEditComplete) {
+                onCellEditComplete(params);
             }
 
-            let valid = true;
-
-            if (cellEditValidator) {
-                valid = cellEditValidator(params);
-            }
-
-            if (valid) {
-                if (submit && onCellEditComplete) {
-                    onCellEditComplete(params);
-                }
-
-                closeCell(event);
-            } else {
-                event.preventDefault();
-            }
-        });
+            closeCell(event);
+        } else {
+            event.preventDefault();
+        }
     };
 
     const findNextSelectableCell = (cell) => {
@@ -559,10 +556,19 @@ export const BodyCell = React.memo((props) => {
         const expander = ObjectUtils.getPropValue(getColumnProp('expander'), props.rowData, columnBodyOptions);
         const cellClassName = ObjectUtils.getPropValue(props.cellClassName, value, columnBodyOptions);
         const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, columnBodyOptions);
+        const className = classNames(bodyClassName, getColumnProp('className'), cellClassName, {
+            'p-selection-column': selectionMode !== null,
+            'p-editable-column': editor,
+            'p-cell-editing': editor && editingState,
+            'p-frozen-column': frozen,
+            'p-selectable-cell': props.allowCellSelection && props.isSelectable({ data: getCellParams(), index: props.rowIndex }),
+            'p-highlight': cellSelected,
+            [`p-align-${align}`]: !!align
+        });
         const style = getStyle();
         const columnTitleProps = mergeProps(
             {
-                className: cx('columnTitle')
+                className: 'p-column-title'
             },
             getColumnProp('columnTitle')
         );
@@ -612,9 +618,10 @@ export const BodyCell = React.memo((props) => {
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
+            const rowReorderIconClassName = 'p-datatable-reorderablerow-handle';
             const rowReorderIconProps = mergeProps(
                 {
-                    className: cx('rowReorderIcon')
+                    className: rowReorderIconClassName
                 },
                 getColumnProp('rowReorderIcon')
             );
@@ -624,7 +631,7 @@ export const BodyCell = React.memo((props) => {
         } else if (expander) {
             const rowTogglerIconProps = mergeProps(
                 {
-                    className: cx('rowTogglerIcon'),
+                    className: 'p-row-toggler-icon',
                     'aria-hidden': true
                 },
                 getColumnProp('rowTogglerIcon')
@@ -637,7 +644,7 @@ export const BodyCell = React.memo((props) => {
             const label = `${props.expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel')} ${ariaLabelText}`;
             const expanderProps = {
                 onClick: onRowToggle,
-                className: cx('rowToggler')
+                className: 'p-row-toggler p-link'
             };
             const rowTogglerProps = mergeProps(
                 {
@@ -664,9 +671,12 @@ export const BodyCell = React.memo((props) => {
             }
         } else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
-            const rowEditorSaveIconProps = mergeProps({ className: cx('rowEditorSaveIcon') }, getColumnProp('rowEditorSaveIconProps'));
-            const rowEditorCancelIconProps = mergeProps({ className: cx('rowEditorCancelIcon') }, getColumnProp('rowEditorCancelIconProps'));
-            const rowEditorInitIconProps = mergeProps({ className: cx('rowEditorInitIcon') }, getColumnProp('rowEditorInitIconProps'));
+            let rowEditorSaveIconClassName = 'p-row-editor-save-icon',
+                rowEditorCancelIconClassName = 'p-row-editor-cancel-icon',
+                rowEditorInitIconClassName = 'p-row-editor-init-icon';
+            const rowEditorSaveIconProps = mergeProps({ className: rowEditorSaveIconClassName }, getColumnProp('rowEditorSaveIconProps'));
+            const rowEditorCancelIconProps = mergeProps({ className: rowEditorCancelIconClassName }, getColumnProp('rowEditorCancelIconProps'));
+            const rowEditorInitIconProps = mergeProps({ className: rowEditorInitIconClassName }, getColumnProp('rowEditorInitIconProps'));
             const rowEditorSaveIcon = IconUtils.getJSXIcon(props.rowEditorSaveIcon || <CheckIcon {...rowEditorSaveIconProps} />, { ...rowEditorSaveIconProps }, { props });
             const rowEditorCancelIcon = IconUtils.getJSXIcon(props.rowEditorCancelIcon || <TimesIcon {...rowEditorCancelIconProps} />, { ...rowEditorCancelIconProps }, { props });
             const rowEditorInitIcon = IconUtils.getJSXIcon(props.rowEditorInitIcon || <PencilIcon {...rowEditorInitIconProps} />, { ...rowEditorInitIconProps }, { props });
@@ -675,9 +685,9 @@ export const BodyCell = React.memo((props) => {
                 rowEditorProps = {
                     editing: true,
                     onSaveClick: onRowEditSave,
-                    saveClassName: cx('rowEditorSaveButton'),
+                    saveClassName: 'p-row-editor-save p-link',
                     onCancelClick: onRowEditCancel,
-                    cancelClassName: cx('rowEditorCancelButton')
+                    cancelClassName: 'p-row-editor-cancel p-link'
                 };
 
                 const rowEditorEditButtonProps = mergeProps(
@@ -718,7 +728,7 @@ export const BodyCell = React.memo((props) => {
                 rowEditorProps = {
                     editing: false,
                     onInitClick: onRowEditInit,
-                    initClassName: cx('rowEditorInitButton')
+                    initClassName: 'p-row-editor-init p-link'
                 };
 
                 const rowEditorInitButtonProps = mergeProps(
@@ -786,7 +796,7 @@ export const BodyCell = React.memo((props) => {
         const bodyCellProps = mergeProps(
             {
                 style,
-                className: classNames(bodyClassName, getColumnProp('className'), cellClassName, cx('bodyCell', { selectionMode, editor, editingState, frozen, cellSelected, align, bodyProps: props, getCellParams })),
+                className,
                 rowSpan: props.rowSpan,
                 tabIndex,
                 role: 'cell',

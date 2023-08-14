@@ -216,11 +216,6 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {SplitButtonPassThroughOptions}
      */
     pt?: SplitButtonPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

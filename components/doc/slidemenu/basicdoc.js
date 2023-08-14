@@ -272,7 +272,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <SlideMenu model={items} viewportHeight={205} menuWidth={175}></SlideMenu>
+            <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
         </div>
     )
 }
@@ -416,7 +416,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <SlideMenu model={items} viewportHeight={205} menuWidth={175}></SlideMenu>
+            <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
         </div>
     )
 }
@@ -431,7 +431,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <SlideMenu model={items} viewportHeight={210} menuWidth={175}></SlideMenu>
+                <SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu>
             </div>
             <DocSectionCode code={code} />
         </>

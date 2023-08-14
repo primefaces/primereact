@@ -125,11 +125,6 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * @type {SliderPassThroughOptions}
      */
     pt?: SliderPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

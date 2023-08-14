@@ -100,11 +100,6 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {TerminalPassThroughOptions}
      */
     pt?: TerminalPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

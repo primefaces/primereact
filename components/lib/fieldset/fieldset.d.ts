@@ -160,11 +160,6 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {FieldsetPassThroughOptions}
      */
     pt?: FieldsetPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

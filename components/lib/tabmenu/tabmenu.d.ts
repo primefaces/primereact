@@ -19,21 +19,6 @@ export declare type TabMenuPassThroughType<T> = PassThroughType<T, TabMenuThroug
 export interface TabMenuThroughMethodOptions {
     props: TabMenuProps;
     state: TabMenuState;
-    context: TabMenuContext;
-}
-
-/**
- * Defines current options in TabMenu component.
- */
-export interface TabMenuContext {
-    /**
-     * Current menuitem
-     */
-    item: any;
-    /**
-     * Index of the menuitem
-     */
-    index: number;
 }
 
 /**
@@ -131,11 +116,6 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {TabMenuPassThroughOptions}
      */
     pt?: TabMenuPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -128,11 +128,6 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      * @type {TriStateCheckboxPassThroughOptions}
      */
     pt?: TriStateCheckboxPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

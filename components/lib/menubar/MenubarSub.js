@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { AngleDownIcon } from '../icons/angledown';
-import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleDownIcon } from '../icons/angledown';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
         const [activeItemState, setActiveItemState] = React.useState(null);
-        const { ptm, cx } = props;
 
         const getPTOptions = (item, key) => {
-            return ptm(key, {
+            return props.ptm(key, {
                 context: {
                     active: activeItemState === item
                 }
@@ -178,10 +177,10 @@ export const MenubarSub = React.memo(
             const separatorProps = mergeProps(
                 {
                     key,
-                    className: cx('separator'),
+                    className: 'p-menu-separator',
                     role: 'separator'
                 },
-                ptm('separator')
+                props.ptm('separator')
             );
 
             return <li {...separatorProps}></li>;
@@ -198,8 +197,7 @@ export const MenubarSub = React.memo(
                         onKeyDown={onChildItemKeyDown}
                         parentActive={item === activeItemState}
                         submenuIcon={props.submenuIcon}
-                        ptm={ptm}
-                        cx={cx}
+                        ptm={props.ptm}
                     />
                 );
             }
@@ -213,18 +211,19 @@ export const MenubarSub = React.memo(
             }
 
             const key = item.label + '_' + index;
+            const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
-                    className: cx('icon')
+                    className: 'p-menuitem-icon'
                 },
                 getPTOptions(item, 'icon')
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
             const labelProps = mergeProps(
                 {
-                    className: cx('label')
+                    className: 'p-menuitem-text'
                 },
                 getPTOptions(item, 'label')
             );
@@ -232,7 +231,7 @@ export const MenubarSub = React.memo(
             const submenuIconClassName = 'p-submenu-icon';
             const submenuIconProps = mergeProps(
                 {
-                    className: cx('submenuIcon')
+                    className: submenuIconClassName
                 },
                 getPTOptions(item, 'submenuIcon')
             );
@@ -248,7 +247,7 @@ export const MenubarSub = React.memo(
                 {
                     href: item.url || '#',
                     role: 'menuitem',
-                    className: cx('action', { item }),
+                    className: linkClassName,
                     target: item.target,
                     'aria-haspopup': item.items != null,
                     onClick: (event) => onItemClick(event, item),
@@ -286,7 +285,7 @@ export const MenubarSub = React.memo(
                     key,
                     role: 'none',
                     id: item.id,
-                    className: cx('menuitem', { item, activeItemState }),
+                    className,
                     style: item.style,
                     onMouseEnter: (event) => onItemMouseEnter(event, item)
                 },
@@ -310,14 +309,18 @@ export const MenubarSub = React.memo(
         };
 
         const role = props.root ? 'menubar' : 'menu';
+        const className = classNames({
+            'p-submenu-list': !props.root,
+            'p-menubar-root-list': props.root
+        });
         const submenu = createMenu();
         const menuProps = mergeProps(
             {
                 ref,
-                className: cx('menu', { subProps: props }),
+                className,
                 role
             },
-            ptm('menu')
+            props.ptm('menu')
         );
 
         return <ul {...menuProps}>{submenu}</ul>;

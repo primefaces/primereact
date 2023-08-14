@@ -1,18 +1,15 @@
 import * as React from 'react';
-import { mergeProps } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { DividerBase } from './DividerBase';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Divider = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = DividerBase.getProps(inProps, context);
 
-    const { ptm, cx, isUnstyled } = DividerBase.setMetaData({
+    const { ptm } = DividerBase.setMetaData({
         props
     });
-
-    useHandleStyle(DividerBase.css.styles, isUnstyled, { name: 'divider' });
 
     const elementRef = React.useRef(null);
     const horizontal = props.layout === 'horizontal';
@@ -27,7 +24,17 @@ export const Divider = React.forwardRef((inProps, ref) => {
         {
             ref: elementRef,
             style: props.style,
-            className: cx('root', { horizontal, vertical }),
+            className: classNames(
+                `p-divider p-component p-divider-${props.layout} p-divider-${props.type}`,
+                {
+                    'p-divider-left': horizontal && (!props.align || props.align === 'left'),
+                    'p-divider-right': horizontal && props.align === 'right',
+                    'p-divider-center': (horizontal && props.align === 'center') || (vertical && (!props.align || props.align === 'center')),
+                    'p-divider-top': vertical && props.align === 'top',
+                    'p-divider-bottom': vertical && props.align === 'bottom'
+                },
+                props.className
+            ),
             role: 'separator'
         },
         DividerBase.getOtherProps(props),
@@ -36,7 +43,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
 
     const contentProps = mergeProps(
         {
-            className: cx('content')
+            className: 'p-divider-content'
         },
         ptm('content')
     );

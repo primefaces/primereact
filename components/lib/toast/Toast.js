@@ -8,7 +8,6 @@ import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 let messageIdx = 0;
 
@@ -28,8 +27,6 @@ export const Toast = React.memo(
         };
 
         const ptCallbacks = ToastBase.setMetaData(metaData);
-
-        useHandleStyle(ToastBase.css.styles, ptCallbacks.isUnstyled, { name: 'toast' });
 
         const show = (messageInfo) => {
             if (messageInfo) {
@@ -112,12 +109,17 @@ export const Toast = React.memo(
         }));
 
         const createElement = () => {
+            const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+            });
+
             const rootProps = mergeProps(
                 {
                     ref: containerRef,
                     id: props.id,
-                    className: ptCallbacks.cx('root', { context }),
-                    style: ptCallbacks.sx('root')
+                    className,
+                    style: props.style
                 },
                 ToastBase.getOtherProps(props),
                 ptCallbacks.ptm('root')

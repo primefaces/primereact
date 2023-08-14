@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
 import { PrimeReactContext } from '../api/Api';
@@ -12,7 +12,7 @@ export const SelectButton = React.memo(
 
         const elementRef = React.useRef(null);
 
-        const { ptm, cx } = SelectButtonBase.setMetaData({
+        const { ptm } = SelectButtonBase.setMetaData({
             props
         });
 
@@ -96,21 +96,7 @@ export const SelectButton = React.memo(
                     const selected = isSelected(option);
                     const key = optionLabel + '_' + index;
 
-                    return (
-                        <SelectButtonItem
-                            key={key}
-                            label={optionLabel}
-                            className={option.className}
-                            option={option}
-                            onClick={onOptionClick}
-                            template={props.itemTemplate}
-                            selected={selected}
-                            tabIndex={tabIndex}
-                            disabled={isDisabled}
-                            ptm={ptm}
-                            cx={cx}
-                        />
-                    );
+                    return <SelectButtonItem key={key} label={optionLabel} className={option.className} option={option} onClick={onOptionClick} template={props.itemTemplate} selected={selected} tabIndex={tabIndex} disabled={isDisabled} ptm={ptm} />;
                 });
             }
 
@@ -124,13 +110,14 @@ export const SelectButton = React.memo(
         }));
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+        const className = classNames('p-selectbutton p-buttonset p-component', props.className);
         const items = createItems();
 
         const rootProps = mergeProps(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className: className,
                 style: props.style,
                 role: 'group'
             },

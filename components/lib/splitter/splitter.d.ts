@@ -167,11 +167,6 @@ export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {SplitterPassThroughOptions}
      */
     pt?: SplitterPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

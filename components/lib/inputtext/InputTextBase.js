@@ -1,17 +1,4 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
-
-const classes = {
-    root: ({ props, isFilled }) =>
-        classNames(
-            'p-inputtext p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled
-            },
-            props.className
-        )
-};
 
 export const InputTextBase = ComponentBase.extend({
     defaultProps: {
@@ -25,9 +12,5 @@ export const InputTextBase = ComponentBase.extend({
         onKeyDown: null,
         onPaste: null,
         children: undefined
-    },
-
-    css: {
-        classes
     }
 });

@@ -185,11 +185,6 @@ export interface TabPanelProps {
      * @type {TabPanelPassThroughOptions}
      */
     pt?: TabPanelPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**
@@ -351,11 +346,6 @@ export interface TabViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {TabViewPassThroughOptions}
      */
     pt?: TabViewPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
     /**
      * Callback to invoke before an active tab is changed. Return false to prevent tab from changing.
      * @param {TabViewTabChangeEvent} event - Custom tab change event.

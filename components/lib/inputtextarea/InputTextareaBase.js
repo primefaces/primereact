@@ -1,29 +1,4 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
-
-const classes = {
-    root: ({ props, isFilled }) =>
-        classNames(
-            'p-inputtextarea p-inputtext p-component',
-            {
-                'p-disabled': props.disabled,
-                'p-filled': isFilled,
-                'p-inputtextarea-resizable': props.autoResize
-            },
-            props.className
-        )
-};
-
-const styles = `
-.p-inputtextarea-resizable {
-    overflow: hidden;
-    resize: none;
-}
-
-.p-fluid .p-inputtextarea {
-    width: 100%;
-}
-`;
 
 export const InputTextareaBase = ComponentBase.extend({
     defaultProps: {
@@ -41,9 +16,5 @@ export const InputTextareaBase = ComponentBase.extend({
         tooltipOptions: null,
         validateOnly: false,
         children: undefined
-    },
-    css: {
-        classes,
-        styles
     }
 });

@@ -8,13 +8,10 @@ export function ClosableDoc(props) {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        if (msgs.current) {
-            msgs.current.clear();
-            msgs.current.show([
-                { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message' },
-                { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false }
-            ]);
-        }
+        msgs.current.show([
+            { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message' },
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false }
+        ]);
     });
 
     const code = {
@@ -33,13 +30,10 @@ export default function ClosableDemo() {
     const msgs = useRef(null);
     
     useMountEffect(() => {
-        if (msgs.current) {
-            msgs.current.clear();
-            msgs.current.show([
-                { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message' },
-                { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false }
-            ]);
-        }
+        msgs.current.show([
+            { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message'},
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false}
+        ]);
     });
 
     return (
@@ -55,14 +49,14 @@ import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function ClosableDemo() {
-    const msgs = useRef<Messages>(null);
+    const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current?.clear();
         msgs.current?.show([
-            { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message' },
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false }
-        ]);
+            msgs.current.show([
+                { sticky: true, severity: 'success', summary: 'Success', detail: 'Closable Message'},
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Not Closable Message', closable: false}
+            ]);
     };
 
     return (

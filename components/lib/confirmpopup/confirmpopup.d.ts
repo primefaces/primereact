@@ -228,11 +228,6 @@ export interface ConfirmPopupProps {
      * @type {ConfirmPopupPassThroughOptions}
      */
     pt?: ConfirmPopupPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

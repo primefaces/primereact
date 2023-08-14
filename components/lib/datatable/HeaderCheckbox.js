@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { IconUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckIcon } from '../icons/check';
 import { ColumnBase } from '../column/ColumnBase';
 
 export const HeaderCheckbox = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
-    const { ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             context: {
@@ -49,9 +48,15 @@ export const HeaderCheckbox = React.memo((props) => {
         }
     };
 
+    const boxClassName = classNames('p-checkbox-box p-component', {
+        'p-highlight': props.checked,
+        'p-disabled': props.disabled,
+        'p-focus': focusedState
+    });
+    const iconClassName = 'p-checkbox-icon';
     const headerCheckboxIconProps = mergeProps(
         {
-            className: cx('headerCheckboxIcon')
+            className: iconClassName
         },
         getColumnPTOptions('headerCheckboxIcon')
     );
@@ -60,7 +65,7 @@ export const HeaderCheckbox = React.memo((props) => {
     const tabIndex = props.disabled ? null : 0;
     const headerCheckboxWrapperProps = mergeProps(
         {
-            className: cx('headerCheckboxWrapper'),
+            className: 'p-checkbox p-component',
             onClick: (e) => onClick(e)
         },
         getColumnPTOptions('headerCheckboxWrapper')
@@ -68,7 +73,7 @@ export const HeaderCheckbox = React.memo((props) => {
 
     const headerCheckboxProps = mergeProps(
         {
-            className: cx('headerCheckbox', { headerProps: props, focusedState }),
+            className: boxClassName,
             role: 'checkbox',
             'aria-checked': props.checked,
             tabIndex: tabIndex,

@@ -146,11 +146,6 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @type {SelectButtonPassThroughOptions}
      */
     pt?: SelectButtonPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

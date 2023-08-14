@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { TabMenuBase } from './TabMenuBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const TabMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -17,23 +16,12 @@ export const TabMenu = React.memo(
         const tabsRef = React.useRef({});
         const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
-        const { ptm, cx, isUnstyled } = TabMenuBase.setMetaData({
+        const { ptm } = TabMenuBase.setMetaData({
             props,
             state: {
                 activeIndex: activeIndexState
             }
         });
-
-        const getPTOptions = (key, item, index) => {
-            return ptm(key, {
-                context: {
-                    item,
-                    index
-                }
-            });
-        };
-
-        useHandleStyle(TabMenuBase.css.styles, isUnstyled, { name: 'tabmenu' });
 
         const itemClick = (event, item, index) => {
             if (item.disabled) {
@@ -94,21 +82,29 @@ export const TabMenu = React.memo(
             const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
             const key = _label + '_' + index;
             const active = isSelected(index);
+            const className = classNames(
+                'p-tabmenuitem',
+                {
+                    'p-highlight': active,
+                    'p-disabled': disabled
+                },
+                _className
+            );
             const iconClassName = classNames('p-menuitem-icon', _icon);
             const iconProps = mergeProps(
                 {
-                    className: cx('icon', { _icon })
+                    className: iconClassName
                 },
-                getPTOptions('icon', item, index)
+                ptm('icon')
             );
 
             const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
 
             const labelProps = mergeProps(
                 {
-                    className: cx('label')
+                    className: 'p-menuitem-text'
                 },
-                getPTOptions('label', item, index)
+                ptm('label')
             );
 
             const label = _label && <span {...labelProps}>{_label}</span>;
@@ -116,12 +112,12 @@ export const TabMenu = React.memo(
             const actionProps = mergeProps(
                 {
                     href: url || '#',
-                    className: cx('action'),
+                    className: 'p-menuitem-link',
                     target: target,
                     onClick: (event) => itemClick(event, item, index),
                     role: 'presentation'
                 },
-                getPTOptions('action', item, index)
+                ptm('action')
             );
 
             let content = (
@@ -152,14 +148,14 @@ export const TabMenu = React.memo(
                 {
                     ref: tabsRef.current[`tab_${index}`],
                     key,
-                    className: cx('menuitem', { _className, active, disabled }),
+                    className: className,
                     style: style,
                     role: 'tab',
                     'aria-selected': active,
                     'aria-expanded': active,
                     'aria-disabled': disabled
                 },
-                getPTOptions('menuitem', item, index)
+                ptm('menuitem')
             );
 
             return <li {...menuItemProps}>{content}</li>;
@@ -170,19 +166,20 @@ export const TabMenu = React.memo(
         };
 
         if (props.model) {
+            const className = classNames('p-tabmenu p-component', props.className);
             const items = createItems();
 
             const inkbarProps = mergeProps(
                 {
                     ref: inkbarRef,
-                    className: cx('inkbar')
+                    className: 'p-tabmenu-ink-bar'
                 },
                 ptm('inkbar')
             );
             const menuProps = mergeProps(
                 {
                     ref: navRef,
-                    className: cx('menu'),
+                    className: 'p-tabmenu-nav p-reset',
                     role: 'tablist'
                 },
                 ptm('menu')
@@ -192,7 +189,7 @@ export const TabMenu = React.memo(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className: cx('root'),
+                    className,
                     style: props.style
                 },
                 TabMenuBase.getOtherProps(props),

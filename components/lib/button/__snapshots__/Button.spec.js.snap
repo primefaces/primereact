@@ -63,9 +63,8 @@ exports[`Button when badge is true it renders Button with badge 1`] = `
        
     </span>
     <span
-      class="p-badge p-component"
-      data-pc-name="badge"
-      data-pc-section="root"
+      class="p-badge"
+      data-pc-section="badge"
     >
       test
     </span>
@@ -99,7 +98,7 @@ exports[`Button when click the button if loading is true it renders Button with 
   >
     <svg
       aria-hidden="true"
-      class="p-icon p-icon-spin p-button-icon p-c p-button-loading-icon p-button-loading-icon"
+      class="p-icon p-icon-spin p-button-icon p-c p-button-loading-icon"
       data-pc-section="loadingicon"
       fill="none"
       height="14"
@@ -218,9 +217,8 @@ exports[`Button when using badge and label the aria-label should contain both va
       test
     </span>
     <span
-      class="p-badge p-component"
-      data-pc-name="badge"
-      data-pc-section="root"
+      class="p-badge"
+      data-pc-section="badge"
     >
       lost
     </span>
@@ -243,9 +241,8 @@ exports[`Button when using badge and label the aria-label should contain both va
       test
     </span>
     <span
-      class="p-badge p-component"
-      data-pc-name="badge"
-      data-pc-section="root"
+      class="p-badge"
+      data-pc-section="badge"
     >
       lost
     </span>

@@ -5,18 +5,16 @@ import { RowBase } from '../row/RowBase';
 import { mergeProps } from '../utils/Utils';
 
 export const TreeTableFooter = React.memo((props) => {
-    const { ptm, ptmo, cx } = props.ptCallbacks;
-
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
     };
 
     const getColumnProps = (column) => {
-        return ptmo(ColumnBase.getCProps(column));
+        return props.ptCallbacks.ptmo(ColumnBase.getCProps(column));
     };
 
     const getColumnPTOptions = (column, key) => {
-        return ptmo(getColumnProp(column, 'pt'), key, {
+        return props.ptCallbacks.ptmo(getColumnProp(column, 'pt'), key, {
             props: getColumnProps(column),
             parent: props.metaData
         });
@@ -40,7 +38,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
-        const footerRowProps = mergeProps(ptm('footerRow'));
+        const footerRowProps = mergeProps(props.ptCallbacks.ptm('footerRow'));
 
         return (
             <tr {...footerRowProps} key={index}>
@@ -58,7 +56,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createColumns = (columns) => {
         if (columns) {
             const headerCells = columns.map(createFooterCell);
-            const footerRowProps = mergeProps(ptm('footerRow'));
+            const footerRowProps = mergeProps(props.ptCallbacks.ptm('footerRow'));
 
             return <tr {...footerRowProps}>{headerCells}</tr>;
         } else {
@@ -85,9 +83,9 @@ export const TreeTableFooter = React.memo((props) => {
     if (hasFooter()) {
         const tfootProps = mergeProps(
             {
-                className: cx('tfoot')
+                className: 'p-treetable-tfoot'
             },
-            ptm('tfoot')
+            props.ptCallbacks.ptm('tfoot')
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;

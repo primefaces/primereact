@@ -117,7 +117,7 @@ export interface CalendarPassThroughOptions {
     /**
      * Uses to pass attributes to the week header's DOM element.
      */
-    weekHeader?: CalendarPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    weekHeader?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the table header cell's DOM element.
      */
@@ -153,7 +153,7 @@ export interface CalendarPassThroughOptions {
     /**
      * Uses to pass attributes to the day label's DOM element.
      */
-    dayLabel?: CalendarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    dayLabel?: CalendarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the month picker's DOM element.
      */
@@ -498,10 +498,6 @@ export interface CalendarProps {
      * Array with disabled weekday numbers.
      */
     disabledDays?: number[] | undefined;
-    /**
-     * Array with dates to enable (all other dates will be disabled).
-     */
-    enabledDates?: Date[] | undefined;
     /**
      * Whether to hide the overlay on date selection when showTime is enabled.
      * @defaultValue false
@@ -874,11 +870,6 @@ export interface CalendarProps {
      * @type {CalendarPassThroughOptions}
      */
     pt?: CalendarPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

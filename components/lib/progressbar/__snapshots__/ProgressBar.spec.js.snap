@@ -13,7 +13,7 @@ exports[`ProgressBar default 1`] = `
     <div
       class="p-progressbar-value p-progressbar-value-animate"
       data-pc-section="value"
-      style="width: 2%; display: flex; background-color: transparent;"
+      style="display: flex;"
     />
   </div>
 </div>

@@ -5,7 +5,6 @@ import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 import { mergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 let messageIdx = 0;
 
@@ -23,8 +22,6 @@ export const Messages = React.memo(
         };
 
         const ptCallbacks = MessagesBase.setMetaData(metaData);
-
-        useHandleStyle(MessagesBase.css.styles, ptCallbacks.isUnstyled, { name: 'messages' });
 
         const show = (messageInfo) => {
             if (messageInfo) {
@@ -90,6 +87,7 @@ export const Messages = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
+                ref: elementRef,
                 className: props.className,
                 style: props.style
             },
@@ -98,7 +96,7 @@ export const Messages = React.memo(
         );
 
         return (
-            <div ref={elementRef} {...rootProps}>
+            <div {...rootProps}>
                 <TransitionGroup>
                     {messagesState &&
                         messagesState.map((message, index) => {

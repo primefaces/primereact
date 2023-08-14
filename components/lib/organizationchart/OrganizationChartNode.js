@@ -10,10 +10,9 @@ export const OrganizationChartNode = React.memo((props) => {
     const colspan = node.children && node.children.length ? node.children.length * 2 : null;
     const selected = props.isSelected(node);
     const visibility = !leaf && expandedState ? 'inherit' : 'hidden';
-    const { ptm, cx, sx } = props;
 
     const getPTOptions = (key) => {
-        return ptm(key, {
+        return props.ptm(key, {
             state: {
                 expanded: expandedState
             },
@@ -35,16 +34,16 @@ export const OrganizationChartNode = React.memo((props) => {
     const createChildNodes = () => {
         const nodesProps = mergeProps(
             {
-                className: cx('nodes'),
-                style: sx('nodes', { visibility })
+                className: 'p-organizationchart-nodes',
+                style: { visibility }
             },
-            ptm('nodes')
+            props.ptm('nodes')
         );
         const nodeCellProps = mergeProps(
             {
                 colSpan: '2'
             },
-            ptm('nodeCell')
+            props.ptm('nodeCell')
         );
 
         return (
@@ -53,17 +52,7 @@ export const OrganizationChartNode = React.memo((props) => {
                     node.children.map((child, index) => {
                         return (
                             <td key={index} {...nodeCellProps}>
-                                <OrganizationChartNode
-                                    node={child}
-                                    nodeTemplate={props.nodeTemplate}
-                                    selectionMode={props.selectionMode}
-                                    onNodeClick={props.onNodeClick}
-                                    isSelected={props.isSelected}
-                                    togglerIcon={props.togglerIcon}
-                                    ptm={ptm}
-                                    cx={cx}
-                                    sx={sx}
-                                />
+                                <OrganizationChartNode node={child} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={props.onNodeClick} isSelected={props.isSelected} togglerIcon={props.togglerIcon} ptm={props.ptm} />
                             </td>
                         );
                     })}
@@ -75,22 +64,22 @@ export const OrganizationChartNode = React.memo((props) => {
         const nodeChildLength = node.children && node.children.length;
         const linesProps = mergeProps(
             {
-                className: cx('lines'),
-                style: sx('lines', { visibility })
+                className: 'p-organizationchart-lines',
+                style: { visibility }
             },
-            ptm('lines')
+            props.ptm('lines')
         );
         const lineCellProps = mergeProps(
             {
                 colSpan: colspan
             },
-            ptm('lineCell')
+            props.ptm('lineCell')
         );
         const lineDownProps = mergeProps(
             {
-                className: cx('lineDown')
+                className: 'p-organizationchart-line-down'
             },
-            ptm('lineDown')
+            props.ptm('lineDown')
         );
 
         return (
@@ -122,24 +111,24 @@ export const OrganizationChartNode = React.memo((props) => {
     const createLinesDown = () => {
         const linesProps = mergeProps(
             {
-                className: cx('lines'),
-                style: sx('lines', { visibility })
+                className: 'p-organizationchart-lines',
+                style: { visibility }
             },
-            ptm('lines')
+            props.ptm('lines')
         );
 
         const lineCellProps = mergeProps(
             {
                 colSpan: colspan
             },
-            ptm('lineCell')
+            props.ptm('lineCell')
         );
 
         const lineDownProps = mergeProps(
             {
-                className: cx('lineDown')
+                className: 'p-organizationchart-line-down'
             },
-            ptm('lineDown')
+            props.ptm('lineDown')
         );
 
         return (
@@ -153,11 +142,13 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createToggler = () => {
         if (!leaf) {
+            const iconClassName = 'p-node-toggler-icon';
+
             const nodeTogglerIconProps = mergeProps(
                 {
-                    className: cx('nodeTogglerIcon')
+                    className: iconClassName
                 },
-                ptm('nodeTogglerIcon')
+                props.ptm('nodeTogglerIcon')
             );
 
             let icon;
@@ -172,7 +163,7 @@ export const OrganizationChartNode = React.memo((props) => {
 
             const nodeTogglerProps = mergeProps(
                 {
-                    className: cx('nodeToggler'),
+                    className: 'p-node-toggler',
                     onClick: (e) => toggleNode(e, node),
                     href: '#'
                 },
@@ -198,6 +189,14 @@ export const OrganizationChartNode = React.memo((props) => {
     };
 
     const createNodeContent = () => {
+        const nodeClassName = classNames(
+            'p-organizationchart-node-content',
+            {
+                'p-organizationchart-selectable-node': props.selectionMode && node.selectable !== false,
+                'p-highlight': selected
+            },
+            node.className
+        );
         const label = createNodeLabel();
         const toggler = createToggler();
 
@@ -205,12 +204,12 @@ export const OrganizationChartNode = React.memo((props) => {
             {
                 colSpan: colspan
             },
-            ptm('cell')
+            props.ptm('cell')
         );
 
         const nodeProps = mergeProps(
             {
-                className: cx('node', { selected, node, nodeProps: props }),
+                className: nodeClassName,
                 style: node.style,
                 onClick: (e) => onNodeClick(e, node)
             },
@@ -236,9 +235,9 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const tableProps = mergeProps(
         {
-            className: cx('table')
+            className: 'p-organizationchart-table'
         },
-        ptm('table')
+        props.ptm('table')
     );
 
     return (

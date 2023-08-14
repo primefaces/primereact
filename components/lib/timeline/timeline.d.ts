@@ -99,11 +99,6 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {TimelinePassThroughOptions}
      */
     pt?: TimelinePassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

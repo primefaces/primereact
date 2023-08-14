@@ -14,8 +14,8 @@
  *
  */
 import * as React from 'react';
-import { ButtonPassThroughOptions } from '../button';
 import { IconType, PassThroughType } from '../utils/utils';
+import { ButtonPassThroughOptions } from '../button';
 
 export declare type InplacePassThroughType<T> = PassThroughType<T, InplacePassThroughMethodOptions>;
 /**
@@ -130,11 +130,6 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {InplacePassThroughOptions}
      */
     pt?: InplacePassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

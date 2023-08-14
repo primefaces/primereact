@@ -2,8 +2,6 @@ import * as React from 'react';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SplitButtonItem = React.memo((props) => {
-    const { ptm, cx } = props;
-
     const onClick = (e) => {
         if (props.menuitem.command) {
             props.menuitem.command({ originalEvent: e, item: props.menuitem });
@@ -19,10 +17,10 @@ export const SplitButtonItem = React.memo((props) => {
     const createSeparator = () => {
         const separatorProps = mergeProps(
             {
-                className: cx('separator'),
+                className: 'p-menu-separator',
                 role: 'separator'
             },
-            ptm('separator')
+            props.ptm('separator')
         );
 
         return <li {...separatorProps}></li>;
@@ -39,17 +37,17 @@ export const SplitButtonItem = React.memo((props) => {
 
         const menuIconProps = mergeProps(
             {
-                className: cx('menuIcon')
+                className: 'p-menuitem-icon'
             },
-            ptm('menuIcon')
+            props.ptm('menuIcon')
         );
         const icon = IconUtils.getJSXIcon(_icon, { ...menuIconProps }, { props: props.splitButtonProps });
 
         const menuLabelProps = mergeProps(
             {
-                className: cx('menuLabel')
+                className: 'p-menuitem-text'
             },
-            ptm('menuLabel')
+            props.ptm('menuLabel')
         );
         const label = _label && <span {...menuLabelProps}>{_label}</span>;
 
@@ -57,12 +55,12 @@ export const SplitButtonItem = React.memo((props) => {
             {
                 href: url || '#',
                 role: 'menuitem',
-                className: cx('anchor'),
+                className: className,
                 target: target,
                 onClick: onClick,
                 'aria-label': _label
             },
-            ptm('anchor')
+            props.ptm('anchor')
         );
 
         let content = (
@@ -87,10 +85,10 @@ export const SplitButtonItem = React.memo((props) => {
 
         const menuItemProps = mergeProps(
             {
-                className: cx('menuItem'),
+                className: 'p-menuitem',
                 role: 'none'
             },
-            ptm('menuItem')
+            props.ptm('menuItem')
         );
 
         return <li {...menuItemProps}>{content}</li>;

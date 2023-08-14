@@ -107,11 +107,6 @@ export interface ToastMessageOptions {
      * @type {ToastPassThroughOptions}
      */
     pt?: ToastPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

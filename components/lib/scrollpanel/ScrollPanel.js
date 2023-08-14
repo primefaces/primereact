@@ -1,19 +1,16 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUnmountEffect } from '../hooks/Hooks';
-import { DomHandler, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps } from '../utils/Utils';
 import { ScrollPanelBase } from './ScrollPanelBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = ScrollPanelBase.getProps(inProps, context);
 
-    const { ptm, cx, isUnstyled } = ScrollPanelBase.setMetaData({
+    const { ptm } = ScrollPanelBase.setMetaData({
         props
     });
-
-    useHandleStyle(ScrollPanelBase.css.styles, isUnstyled, { name: 'scrollpanel' });
 
     const containerRef = React.useRef(null);
     const contentRef = React.useRef(null);
@@ -174,7 +171,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
             id: props.id,
             ref: containerRef,
             style: props.style,
-            className: cx('root')
+            className: classNames('p-scrollpanel p-component', props.className)
         },
         ScrollPanelBase.getOtherProps(props),
         ptm('root')
@@ -182,14 +179,14 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
 
     const wrapperProps = mergeProps(
         {
-            className: cx('wrapper')
+            className: 'p-scrollpanel-wrapper'
         },
         ptm('wrapper')
     );
 
     const contentProps = mergeProps(
         {
-            className: cx('content'),
+            className: 'p-scrollpanel-content',
             ref: contentRef,
             onScroll: moveBar,
             onMouseEnter: moveBar
@@ -200,7 +197,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const barXProps = mergeProps(
         {
             ref: xBarRef,
-            className: cx('barx'),
+            className: 'p-scrollpanel-bar p-scrollpanel-bar-x',
             onMouseDown: onXBarMouseDown
         },
         ptm('barx')
@@ -209,7 +206,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const barYProps = mergeProps(
         {
             ref: yBarRef,
-            className: cx('bary'),
+            className: 'p-scrollpanel-bar p-scrollpanel-bar-y',
             onMouseDown: onYBarMouseDown
         },
         ptm('bary')

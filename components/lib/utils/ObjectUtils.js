@@ -83,6 +83,18 @@ export default class ObjectUtils {
         }
     }
 
+    static isFunction(obj) {
+        return !!(obj && obj.constructor && obj.call && obj.apply);
+    }
+
+    static isObject(obj) {
+        return obj !== null && obj instanceof Object && obj.constructor === Object;
+    }
+
+    static isLetter(char) {
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+    }
+
     static findDiffKeys(obj1, obj2) {
         if (!obj1 || !obj2) {
             return {};
@@ -148,24 +160,6 @@ export default class ObjectUtils {
         const value = props ? props[prop] : undefined;
 
         return value === undefined ? defaultProps[prop] : value;
-    }
-
-    static getPropCaseInsensitive(props, prop, defaultProps = {}) {
-        const fkey = this.toFlatCase(prop);
-
-        for (let key in props) {
-            if (props.hasOwnProperty(key) && this.toFlatCase(key) === fkey) {
-                return props[key];
-            }
-        }
-
-        for (let key in defaultProps) {
-            if (defaultProps.hasOwnProperty(key) && this.toFlatCase(key) === fkey) {
-                return defaultProps[key];
-            }
-        }
-
-        return undefined; // Property not found
     }
 
     static getMergedProps(props, defaultProps) {
@@ -270,18 +264,9 @@ export default class ObjectUtils {
         return str;
     }
 
-    static toFlatCase(str) {
+    static convertToFlatCase(str) {
         // convert snake, kebab, camel and pascal cases to flat case
-        return this.isNotEmpty(str) && this.isString(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
-    }
-
-    static toCapitalCase(str) {
-        return this.isNotEmpty(str) && this.isString(str) ? str[0].toUpperCase() + str.slice(1) : str;
-    }
-
-    static trim(value) {
-        // trim only if the value is actually a string
-        return this.isNotEmpty(value) && this.isString(value) ? value.trim() : value;
+        return this.isNotEmpty(str) && typeof str === 'string' ? str.replace(/(-|_)/g, '').toLowerCase() : str;
     }
 
     static isEmpty(value) {
@@ -292,72 +277,8 @@ export default class ObjectUtils {
         return !this.isEmpty(value);
     }
 
-    static isFunction(value) {
-        return !!(value && value.constructor && value.call && value.apply);
-    }
-
-    static isObject(value) {
-        return value !== null && value instanceof Object && value.constructor === Object;
-    }
-
-    static isDate(value) {
-        return value !== null && value instanceof Date && value.constructor === Date;
-    }
-
-    static isArray(value) {
-        return value !== null && Array.isArray(value);
-    }
-
-    static isString(value) {
-        return value !== null && typeof value === 'string';
-    }
-
-    static isPrintableCharacter(char = '') {
-        return this.isNotEmpty(char) && char.length === 1 && char.match(/\S| /);
-    }
-
-    static isLetter(char) {
-        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
-    }
-
-    /**
-     * Firefox-v103 does not currently support the "findLast" method. It is stated that this method will be supported with Firefox-v104.
-     * https://caniuse.com/mdn-javascript_builtins_array_findlast
-     */
-    static findLast(arr, callback) {
-        let item;
-
-        if (this.isNotEmpty(arr)) {
-            try {
-                item = arr.findLast(callback);
-            } catch {
-                item = [...arr].reverse().find(callback);
-            }
-        }
-
-        return item;
-    }
-
-    /**
-     * Firefox-v103 does not currently support the "findLastIndex" method. It is stated that this method will be supported with Firefox-v104.
-     * https://caniuse.com/mdn-javascript_builtins_array_findlastindex
-     */
-    static findLastIndex(arr, callback) {
-        let index = -1;
-
-        if (this.isNotEmpty(arr)) {
-            try {
-                index = arr.findLastIndex(callback);
-            } catch {
-                index = arr.lastIndexOf([...arr].reverse().find(callback));
-            }
-        }
-
-        return index;
-    }
-
-    static sort(value1, value2, order = 1, comparator, nullSortOrder = 1) {
-        const result = ObjectUtils.compare(value1, value2, comparator, order);
+    static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
+        const result = ObjectUtils.compare(value1, value2, locale, order);
         let finalSortOrder = order;
 
         // nullSortOrder == 1 means Excel like sort nulls at bottom
@@ -368,7 +289,7 @@ export default class ObjectUtils {
         return finalSortOrder * result;
     }
 
-    static compare(value1, value2, comparator, order = 1) {
+    static compare(value1, value2, locale, order = 1) {
         let result = -1;
         const emptyValue1 = ObjectUtils.isEmpty(value1);
         const emptyValue2 = ObjectUtils.isEmpty(value2);
@@ -376,30 +297,9 @@ export default class ObjectUtils {
         if (emptyValue1 && emptyValue2) result = 0;
         else if (emptyValue1) result = order;
         else if (emptyValue2) result = -order;
-        else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparator(value1, value2);
+        else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2, locale, { numeric: true });
         else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
 
         return result;
-    }
-
-    static localeComparator(locale) {
-        //performance gain using Int.Collator. It is not recommended to use localeCompare against large arrays.
-        return new Intl.Collator(locale, { numeric: true }).compare;
-    }
-
-    static findChildrenByKey(data, key) {
-        for (const item of data) {
-            if (item.key === key) {
-                return item.children || [];
-            } else if (item.children) {
-                const result = this.findChildrenByKey(item.children, key);
-
-                if (result.length > 0) {
-                    return result;
-                }
-            }
-        }
-
-        return [];
     }
 }

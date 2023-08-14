@@ -131,11 +131,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Style class of the increment button.
      */
-    incrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    incrementButtonIcon?: string | undefined;
     /**
      * Style class of the decrement button.
      */
-    decrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    decrementButtonIcon?: string | undefined;
     /**
      * Locale to be used in formatting.
      */
@@ -294,15 +294,10 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     /**
-     * Callback to invoke when the key pressed down.
+     * Callback to invoke when the key pressed.
      * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
      */
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
-    /**
-     * Callback to invoke when the key released.
-     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
-     */
-    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -313,11 +308,6 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {InputNumberPassThroughOptions}
      */
     pt?: InputNumberPassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
+import { PrimeReactContext } from '../api/Api';
+import PrimeReact from '../api/Api';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -14,11 +14,9 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
 
-    const { ptm, cx, isUnstyled } = BlockUIBase.setMetaData({
+    const { ptm } = BlockUIBase.setMetaData({
         props
     });
-
-    useHandleStyle(BlockUIBase.css.styles, isUnstyled, { name: 'blockui' });
 
     const block = () => {
         setVisibleState(true);
@@ -84,15 +82,16 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const createMask = () => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';
-            const maskProps =
-                ({
-                    className: cx('mask'),
-                    style: props.style
+            const className = classNames(
+                'p-blockui p-component-overlay p-component-overlay-enter',
+                {
+                    'p-blockui-document': props.fullScreen
                 },
-                ptm('mask'));
+                props.className
+            );
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
             const mask = (
-                <div ref={maskRef} {...maskProps}>
+                <div ref={maskRef} className={className} style={props.style}>
                     {content}
                 </div>
             );
@@ -104,13 +103,14 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     };
 
     const mask = createMask();
+    const className = classNames('p-blockui-container', props.containerClassName);
 
     const rootProps = mergeProps(
         {
             id: props.id,
             ref: elementRef,
             style: props.containerStyle,
-            className: cx('root')
+            className: className
         },
         BlockUIBase.getOtherProps(props),
         ptm('root')

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 import { ChartBase } from './ChartBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 // GitHub #3059 wrapper if loaded by script tag
 const ChartJS = (function () {
@@ -18,12 +17,9 @@ const PrimeReactChart = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ChartBase.getProps(inProps, context);
-
-        const { ptm, cx, sx, isUnstyled } = ChartBase.setMetaData({
+        const { ptm } = ChartBase.setMetaData({
             props
         });
-
-        useHandleStyle(ChartBase.css.styles, isUnstyled, { name: 'chart' });
         const elementRef = React.useRef(null);
         const chartRef = React.useRef(null);
         const canvasRef = React.useRef(null);
@@ -89,14 +85,16 @@ const PrimeReactChart = React.memo(
             destroyChart();
         });
 
+        const className = classNames('p-chart', props.className);
+        const style = Object.assign({ width: props.width, height: props.height }, props.style);
         const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
         const ariaLabel = props.ariaLabel || title;
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                style: sx('root'),
-                className: cx('root')
+                style,
+                className
             },
             ChartBase.getOtherProps(props),
             ptm('root')

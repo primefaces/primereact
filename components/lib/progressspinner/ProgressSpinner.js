@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ProgressSpinnerBase } from './ProgressSpinnerBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -10,12 +9,11 @@ export const ProgressSpinner = React.memo(
         const props = ProgressSpinnerBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
+        const className = classNames('p-progress-spinner', props.className);
 
-        const { ptm, cx, sx, isUnstyled } = ProgressSpinnerBase.setMetaData({
+        const { ptm } = ProgressSpinnerBase.setMetaData({
             props
         });
-
-        useHandleStyle(ProgressSpinnerBase.css.styles, isUnstyled, { name: 'progressspinner' });
 
         React.useImperativeHandle(ref, () => ({
             props,
@@ -27,25 +25,25 @@ export const ProgressSpinner = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: classNames(props.className, cx('root')),
+                className,
                 role: 'alert',
                 'aria-busy': true
             },
-            ptm('root')
+            ptm('spinner')
         );
 
         const spinnerProps = mergeProps(
             {
-                className: cx('spinner'),
+                className: 'p-progress-spinner-svg',
                 viewBox: '25 25 50 50',
-                style: sx('spinner')
+                style: { animationDuration: props.animationDuration }
             },
             ptm('spinner')
         );
 
         const circleProps = mergeProps(
             {
-                className: cx('circle'),
+                className: 'p-progress-spinner-circle',
                 cx: '50',
                 cy: '50',
                 r: '20',

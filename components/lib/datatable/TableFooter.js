@@ -6,17 +6,16 @@ import { FooterCell } from './FooterCell';
 import { mergeProps } from '../utils/Utils';
 
 export const TableFooter = React.memo((props) => {
-    const { ptm, ptmo, cx } = props.ptCallbacks;
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
     const getColumnGroupProps = () => {
-        return props.footerColumnGroup ? ptmo(ColumnGroupBase.getCProps(props.footerColumnGroup)) : undefined;
+        return props.footerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.footerColumnGroup)) : undefined;
     };
 
     const getRowPTOptions = (row, key) => {
         const rProps = getRowProps(row);
 
-        return ptmo(ColumnGroupBase.getCProp(row, 'pt'), key, {
+        return props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(row, 'pt'), key, {
             props: rProps,
             parent: props.metaData
         });
@@ -24,7 +23,7 @@ export const TableFooter = React.memo((props) => {
 
     const getColumnGroupPTOptions = (key) => {
         return (
-            ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt')),
+            props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt')),
             key,
             {
                 props: getColumnGroupProps(),
@@ -80,7 +79,7 @@ export const TableFooter = React.memo((props) => {
             {
                 role: 'row'
             },
-            ptm('footerRow')
+            props.ptCallbacks.ptm('footerRow')
         );
 
         return <tr {...footerRowProps}>{createFooterCells(props.columns)}</tr>;
@@ -90,9 +89,9 @@ export const TableFooter = React.memo((props) => {
         const content = createContent();
         const tfootProps = mergeProps(
             {
-                className: cx('tfoot')
+                className: 'p-datatable-tfoot'
             },
-            ptm('tfoot'),
+            props.ptCallbacks.ptm('tfoot'),
             getColumnGroupPTOptions('root')
         );
 

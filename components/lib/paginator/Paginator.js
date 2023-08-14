@@ -11,17 +11,15 @@ import { PaginatorBase } from './PaginatorBase';
 import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = PaginatorBase.getProps(inProps, context);
-        const { ptm, cx, isUnstyled } = PaginatorBase.setMetaData({
+        const { ptm } = PaginatorBase.setMetaData({
             props
         });
 
-        useHandleStyle(PaginatorBase.css.styles, isUnstyled, { name: 'paginator' });
         const elementRef = React.useRef(null);
         const page = Math.floor(props.first / props.rows);
         const pageCount = Math.ceil(props.totalRecords / props.rows);
@@ -122,23 +120,23 @@ export const Paginator = React.memo(
 
             switch (key) {
                 case 'FirstPageLink':
-                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} ptm={ptm} />;
                     break;
 
                 case 'PrevPageLink':
-                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} ptm={ptm} />;
                     break;
 
                 case 'NextPageLink':
-                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} ptm={ptm} />;
                     break;
 
                 case 'LastPageLink':
-                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} ptm={ptm} />;
                     break;
 
                 case 'PageLinks':
-                    element = <PageLinks key={key} value={updatePageLinks()} page={page} rows={props.rows} pageCount={pageCount} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />;
+                    element = <PageLinks key={key} value={updatePageLinks()} page={page} rows={props.rows} pageCount={pageCount} onClick={onPageLinkClick} template={template} ptm={ptm} />;
                     break;
 
                 case 'RowsPerPageDropdown':
@@ -154,9 +152,7 @@ export const Paginator = React.memo(
                             appendTo={props.dropdownAppendTo}
                             template={template}
                             disabled={isEmpty}
-                            unstyled={props.unstyled}
                             ptm={ptm}
-                            cx={cx}
                         />
                     );
                     break;
@@ -203,20 +199,21 @@ export const Paginator = React.memo(
         if (!props.alwaysShow && pageCount <= 1) {
             return null;
         } else {
+            const className = classNames('p-paginator p-component', props.className);
             const leftContent = ObjectUtils.getJSXElement(props.leftContent, props);
             const rightContent = ObjectUtils.getJSXElement(props.rightContent, props);
 
             const elements = createElements();
             const leftProps = mergeProps(
                 {
-                    className: cx('left')
+                    className: 'p-paginator-left-content'
                 },
                 ptm('left')
             );
             const leftElement = leftContent && <div {...leftProps}>{leftContent}</div>;
             const endProps = mergeProps(
                 {
-                    className: cx('end')
+                    className: 'p-paginator-right-content'
                 },
                 ptm('end')
             );
@@ -224,7 +221,7 @@ export const Paginator = React.memo(
             const rootProps = mergeProps(
                 {
                     ref: elementRef,
-                    className: classNames(props.className, cx('root')),
+                    className,
                     style: props.style
                 },
                 PaginatorBase.getOtherProps(props),
