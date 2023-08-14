@@ -33,7 +33,7 @@ const getCRA = (props = {}, template = 'javascript') => {
     const fileExtension = isTypeScript ? '.tsx' : '.js';
     const sourceFileName = `${path}App${fileExtension}`;
     const indexFileName = `${path}index${fileExtension}`;
-    const unstyled = props.embedded ? ' value={{ unstyled: true}}' : null;
+    const unstyled = props.embedded ? ' value={{ unstyled: true}}' : '';
 
     let extFiles = {};
 
