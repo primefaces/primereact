@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SearchIcon } from '../icons/search';
@@ -8,10 +8,9 @@ import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -105,6 +104,28 @@ export const TreeSelect = React.memo(
                         name: props.name,
                         id: props.id,
                         value: event.value
+                    }
+                });
+            }
+        };
+
+        const clear = (event) => {
+            if (props.onChange) {
+                selfChange.current = true;
+
+                props.onChange({
+                    originalEvent: event,
+                    value: undefined,
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
+                    target: {
+                        name: props.name,
+                        id: props.id,
+                        value: undefined
                     }
                 });
             }
@@ -485,6 +506,23 @@ export const TreeSelect = React.memo(
             return <div {...triggerProps}>{dropdownIcon}</div>;
         };
 
+        const createClearIcon = () => {
+            if (props.value != null && props.showClear && !props.disabled) {
+                const clearIconProps = mergeProps(
+                    {
+                        className: cx('clearIcon'),
+                        onPointerUp: clear
+                    },
+                    ptm('clearIcon')
+                );
+                const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
+
+                return IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
+            }
+
+            return null;
+        };
+
         const createContent = () => {
             const emptyMessageProps = mergeProps(
                 {
@@ -665,6 +703,7 @@ export const TreeSelect = React.memo(
         const keyboardHelper = createKeyboardHelper();
         const labelElement = createLabel();
         const dropdownIcon = createDropdownIcon();
+        const clearIcon = createClearIcon();
         const content = createContent();
         const header = createHeader();
         const footer = createFooter();
@@ -673,6 +712,7 @@ export const TreeSelect = React.memo(
             <div {...rootProps}>
                 {keyboardHelper}
                 {labelElement}
+                {clearIcon}
                 {dropdownIcon}
                 <TreeSelectPanel
                     ref={overlayRef}

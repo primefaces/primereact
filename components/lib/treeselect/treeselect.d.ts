@@ -106,6 +106,10 @@ export interface TreeSelectPassThroughOptions {
      * uses to pass attributes to the close button's DOM element.
      */
     closeButton?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * uses to pass attributes to the clear icon's DOM element.
+     */
+    clearIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**
@@ -304,6 +308,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     children?: React.ReactNode | undefined;
     /**
+     * Icon of the dropdown.
+     */
+    clearIcon?: IconType<TreeSelectProps> | undefined;
+    /**
      * Icon of the close button.
      */
     closeIcon?: IconType<TreeSelectProps> | undefined;
@@ -439,6 +447,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @defaultValue 400px
      */
     scrollHeight?: string | undefined;
+    /**
+     * When enabled, a clear icon is displayed to clear the value.
+     * @defaultValue false
+     */
+    showClear?: boolean | undefined;
     /**
      * Defines the selection mode, valid values "single", "multiple", and "checkbox".
      */
