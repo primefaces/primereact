@@ -30,12 +30,20 @@ const library = {
 };
 
 const webTypes = {
-    framework: 'React',
+    $schema: 'https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json',
+    framework: 'react',
     name: library.name,
     version: library.version,
     repository: library.repository,
     license: library.license,
-    tags: []
+    contributions: {
+        html: {
+            'types-syntax': 'typescript',
+            'description-markup': 'markdown',
+            tags: [],
+            attributes: []
+        }
+    }
 };
 
 app.bootstrap({
@@ -94,7 +102,7 @@ if (project) {
             'doc-url': url
         };
 
-        webTypes.tags.push(tag);
+        webTypes.contributions.html.tags.push(tag);
 
         doc[name] = {
             description
@@ -158,11 +166,14 @@ if (project) {
                             if (!prop.inheritedFrom || (prop.inheritedFrom && !prop.inheritedFrom.toString().startsWith('Omit.data-pr-'))) {
                                 props.push({
                                     name: prop.name,
+                                    default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : 'null', // TODO: Check
+                                    description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' '),
+                                    value: {
+                                        kind: 'expression',
+                                        type: prop.type.toString()
+                                    }
                                     //optional: prop.flags.isOptional,
                                     //readonly: prop.flags.isReadonly,
-                                    type: prop.type.toString(),
-                                    default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : 'null', // TODO: Check
-                                    description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                                     //deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0].text) : undefined
                                 });
                             }
@@ -189,7 +200,7 @@ if (project) {
                         });
                 }
 
-                tag.props = props;
+                tag.attributes = props;
                 tag.events = callbacks;
 
                 doc[name]['components'][component.name] = {
