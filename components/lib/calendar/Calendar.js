@@ -2490,7 +2490,7 @@ export const Calendar = React.memo(
             }
         });
 
-        useUpdateEffect(() => {
+        React.useEffect(() => {
             let unbindMaskEvents = null;
 
             if (props.mask) {
@@ -2510,7 +2510,8 @@ export const Calendar = React.memo(
             return () => {
                 props.mask && unbindMaskEvents && unbindMaskEvents();
             };
-        }, [props.mask]);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [props.disabled, props.mask, props.readOnlyInput]);
 
         useUpdateEffect(() => {
             setCurrentView(props.view);
