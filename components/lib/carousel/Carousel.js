@@ -1,7 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { ariaLabel } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, usePrevious, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import PrimeReact, { PrimeReactContext, ariaLabel } from '../api/Api';
+import { useMountEffect, usePrevious, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
@@ -318,7 +317,6 @@ export const Carousel = React.memo(
                 elementRef.current.setAttribute(attributeSelector.current, '');
             }
 
-            createStyle();
             calculatePosition();
             changePosition(totalShiftedItemsState);
             bindWindowResizeListener();
@@ -327,6 +325,8 @@ export const Carousel = React.memo(
         useUpdateEffect(() => {
             let stateChanged = false;
             let totalShiftedItems = totalShiftedItemsState;
+
+            createStyle();
 
             if (props.autoplayInterval) {
                 stopAutoplay();
@@ -394,14 +394,14 @@ export const Carousel = React.memo(
             if (!stateChanged && isAutoplay) {
                 startAutoplay();
             }
-        });
 
-        useUnmountEffect(() => {
-            if (props.autoplayInterval) {
-                stopAutoplay();
-            }
+            return () => {
+                if (props.autoplayInterval) {
+                    stopAutoplay();
+                }
 
-            destroyStyle();
+                destroyStyle();
+            };
         });
 
         const createItems = () => {
