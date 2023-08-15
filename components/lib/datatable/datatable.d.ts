@@ -295,11 +295,35 @@ interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValue
 }
 
 /**
- * Custom selection change event.
+ * Custom multiple selection change event.
  * @see {@link DataTableProps.onSelectionChange}
  * @event
  */
-interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableSelectionMultipleChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: TValue;
+    /**
+     * Type of the selection.
+     */
+    type?: 'multiple' | 'all' | 'checkbox' | undefined;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
+ * Custom single selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionSingleChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -307,16 +331,42 @@ interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Selection object.
      */
-    value: DataTableSelection<TValue>;
+    value: TValue[number];
     /**
      * Type of the selection.
      */
-    type?: string;
+    type?: 'single' | 'radio';
     /**
      * Extra options.
      */
     [key: string]: any;
 }
+
+/**
+ * Custom cell selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionCellChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: DataTableCellSelection<TValue>;
+    /**
+     * Type of the selection.
+     */
+    type?: 'cell';
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+type DataTableSelectionChangeEvent<TValue extends DataTableValueArray> = DataTableSelectionSingleChangeEvent<TValue> | DataTableSelectionMultipleChangeEvent<TValue> | DataTableSelectionCellChangeEvent<TValue>;
 
 /**
  * Custom select all change event.

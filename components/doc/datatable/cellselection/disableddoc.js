@@ -112,8 +112,7 @@ export default function DisabledCellSelectionDemo() {
             </div>
             <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell!} metaKeySelection={metaKey}
                     onSelectionChange={(e) => {
-                        const value = e.value as DataTableCellSelection<Product[]>;
-                        setSelectedCell(value);
+                        if (e.type === 'cell') setSelectedCell(e.value);                        
                     }} 
                     isDataSelectable={isCellSelectable} cellClassName={cellClassName} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>

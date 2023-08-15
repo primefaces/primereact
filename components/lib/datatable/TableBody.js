@@ -476,7 +476,7 @@ export const TableBody = React.memo(
 
             if (allowRowSelection()) {
                 if (allowRangeSelection(event)) {
-                    onRangeSelection(event, 'row');
+                    onRangeSelection(event, 'multiple');
                 } else {
                     const toggleable = isRadioSelectionModeInColumn || isCheckboxSelectionModeInColumn || allowMetaKeySelection(event);
 
@@ -485,9 +485,9 @@ export const TableBody = React.memo(
                     anchorRowFirst.current = props.first;
 
                     if (isSingleSelection()) {
-                        onSingleSelection({ ...event, toggleable, type: 'row' });
+                        onSingleSelection({ ...event, toggleable, type: 'single' });
                     } else {
-                        onMultipleSelection({ ...event, toggleable, type: 'row' });
+                        onMultipleSelection({ ...event, toggleable, type: 'multiple' });
                     }
                 }
 
@@ -566,7 +566,7 @@ export const TableBody = React.memo(
             const isSameRow = event.index === anchorRowIndex.current;
 
             if (allowRowDrag(event) && !isSameRow) {
-                onRangeSelection(event, 'row');
+                onRangeSelection(event, 'multiple');
             }
         };
 

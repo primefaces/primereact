@@ -97,9 +97,7 @@ export default function MultipleRowsSelectionDemo() {
             </div>
             <DataTable value={products} selectionMode="multiple" selection={selectedProducts} 
                     onSelectionChange={(e) => {
-                        if (Array.isArray(e.value)) {
-                            setSelectedProducts(e.value);
-                        }
+                        if (e.type === 'multiple') setSelectedProducts(e.value);
                     }}
                     dataKey="id" metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>

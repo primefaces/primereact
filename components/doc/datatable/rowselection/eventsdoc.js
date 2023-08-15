@@ -113,8 +113,7 @@ export default function RowSelectEventsDemo() {
             <Toast ref={toast} />
             <DataTable value={products} selectionMode="single" selection={selectedProduct!} 
                         onSelectionChange={(e) => {
-                            const value = e.value as Product;
-                            setSelectedProduct(value);
+                            if (e.type === 'single') setSelectedCell(e.value);
                         }}  dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

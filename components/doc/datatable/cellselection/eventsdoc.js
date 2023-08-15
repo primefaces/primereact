@@ -117,8 +117,7 @@ export default function CellSelectEventsDemo() {
             <Toast ref={toast} />
             <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell!} metaKeySelection={false}
                     onSelectionChange={(e) => {
-                        const value = e.value as DataTableCellSelection<Product[]>;
-                        setSelectedCell(value);
+                        if (e.type === 'cell') setSelectedCell(e.value);
                     }}
                     onCellSelect={onCellSelect} onCellUnselect={onCellUnselect} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>

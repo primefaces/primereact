@@ -96,8 +96,7 @@ export default function SingleRowSelectionDemo() {
             </div>
             <DataTable value={products} selectionMode="single" selection={selectedProduct!} 
                 onSelectionChange={(e) => {
-                     const value = e.value as Product;
-                     setSelectedProduct(value);
+                    if (e.type === 'single') { setSelectedProduct(e.value); }
                 }} dataKey="id" metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

@@ -97,8 +97,7 @@ export default function SingleCellSelectionDemo() {
             </div>
             <DataTable value={products} cellSelection selectionMode="single" selection={selectedCell!}
                     onSelectionChange={(e) => {
-                        const value = e.value as DataTableCellSelection<Product[]>;
-                         setSelectedCell(value);
+                       if (e.type === 'cell') setSelectedCell(e.value);
                     }} metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

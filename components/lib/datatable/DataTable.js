@@ -359,7 +359,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
             if (restoredState.selection && props.onSelectionChange) {
                 props.onSelectionChange({
-                    value: restoredState.selection
+                    value: restoredState.selection,
+                    type: props.selectionMode || 'cell'
                 });
             }
 

@@ -97,8 +97,9 @@ export default function RadioButtonRowSelectionDemo() {
             </div>
             <DataTable value={products} selectionMode={rowClick ? undefined : 'radiobutton'} selection={selectedProduct!}
                 onSelectionChange={(e) => {
-                     const value = e.value as Product;
-                     setSelectedProduct(value);
+                    if (e.type === 'single' || e.type === 'radio') {
+                        setSelectedProduct(e.value);
+                    }
                 }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="code" header="Code"></Column>

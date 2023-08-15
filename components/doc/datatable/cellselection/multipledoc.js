@@ -99,8 +99,7 @@ export default function MultipleCellsSelectionDemo() {
             </div>
             <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells!}
                     onSelectionChange={(e) => {
-                        const value = e.value as DataTableCellSelection<Product[]>;
-                        setSelectedCells(value);
+                        if (e.type === 'cell') setSelectedCells(e.value);
                     }}
                     metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
