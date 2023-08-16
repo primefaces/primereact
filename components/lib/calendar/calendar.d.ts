@@ -8,12 +8,12 @@
  *
  */
 import * as React from 'react';
+import { ButtonPassThroughOptions } from '../button/button';
 import { CSSTransitionProps } from '../csstransition';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent, Nullable } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
-import { ButtonPassThroughOptions } from '../button/button';
-import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 
 export declare type CalendarPassThroughType<T> = PassThroughType<T, CalendarPassThroughMethodOptions>;
 
@@ -269,18 +269,10 @@ export interface CalendarState {
      */
     overlayVisible: boolean;
     /**
-     * Current viewDate state as a string.
+     * Current viewDate state.
      */
-    viewDate: any;
+    viewDate: Nullable<Date>;
 }
-
-/**
- * Custom change event.
- * @see {@link CalendarProps.onChange}
- * @extends {FormEvent}
- * @event
- */
-interface CalendarChangeEvent extends FormEvent<Date | Date[] | string> {}
 
 /**
  * Custom month change event.
@@ -438,7 +430,7 @@ interface CalendarYearNavigatorTemplateEvent extends CalendarNavigatorTemplateEv
  * Defines valid properties in Calendar component.
  * @group Properties
  */
-export interface CalendarProps {
+interface CalendarBaseProps {
     /**
      * Unique identifier of the element.
      */
@@ -622,11 +614,6 @@ export interface CalendarProps {
      */
     selectOtherMonths?: boolean | undefined;
     /**
-     * Specifies the selection mode.
-     * @defaultValue single
-     */
-    selectionMode?: 'single' | 'multiple' | 'range' | undefined;
-    /**
      * The cutoff year for determining the century for a date.
      * @defaultValue +10
      */
@@ -734,11 +721,6 @@ export interface CalendarProps {
      */
     transitionOptions?: CSSTransitionProps | undefined;
     /**
-     * Value of the component.
-     * @defaultValue null
-     */
-    value?: Date | Date[] | string | null | undefined;
-    /**
      * Type of view to display.
      * @defaultValue date
      */
@@ -746,7 +728,7 @@ export interface CalendarProps {
     /**
      * Date instance whose month and year are used to display the calendar.
      */
-    viewDate?: Date | null | undefined;
+    viewDate?: Nullable<Date>;
     /**
      * Specifies the visibility of the overlay.
      * @defaultValue false
@@ -806,11 +788,6 @@ export interface CalendarProps {
      * @param {React.FocusEvent<HTMLInputElement>} event - Browser event
      */
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
-    /**
-     * Callback to invoke when value changes.
-     * @param {CalendarChangeEvent} event - Custom change event
-     */
-    onChange?(event: CalendarChangeEvent): void;
     /**
      * Callback to invoke when clear button is clicked.
      * @param {React.MouseEvent<HTMLButtonElement>} event - Browser event
@@ -881,6 +858,62 @@ export interface CalendarProps {
     unstyled?: boolean;
 }
 
+interface CalendarPropsSingle extends CalendarBaseProps {
+    /**
+     * Specifies the selection mode either "single", "range", or "multiple";
+     * @defaultValue single
+     */
+    selectionMode?: 'single' | undefined;
+    /**
+     * Value of the component.
+     * @defaultValue null
+     */
+    value?: Nullable<Date>;
+    /**
+     * Callback to invoke when value changes.
+     * @param { FormEvent<Date>} event - Custom change event
+     */
+    onChange?(event: FormEvent<Date>): void;
+}
+
+interface CalendarPropsRange extends CalendarBaseProps {
+    /**
+     * Specifies the selection mode either "single", "range", or "multiple";
+     * @defaultValue single
+     */
+    selectionMode: 'range';
+    /**
+     * Value of the component.
+     * @defaultValue null
+     */
+    value?: Nullable<(Date | null)[]>;
+    /**
+     * Callback to invoke when value changes.
+     * @param { FormEvent<(Date | null)[]>} event - Custom change event
+     */
+    onChange?(event: FormEvent<(Date | null)[]>): void;
+}
+
+interface CalendarPropsMultiple extends CalendarBaseProps {
+    /**
+     * Specifies the selection mode either "single", "range", or "multiple";
+     * @defaultValue single
+     */
+    selectionMode: 'multiple';
+    /**
+     * Value of the component.
+     * @defaultValue null
+     */
+    value?: Nullable<Date[]>;
+    /**
+     * Callback to invoke when value changes.
+     * @param {FormEvent<Date[]>} event - Custom change event
+     */
+    onChange?(event: FormEvent<Date[]>): void;
+}
+
+export type CalendarProps = CalendarPropsSingle | CalendarPropsRange | CalendarPropsMultiple;
+
 /**
  * **PrimeReact - Calendar**
  *
@@ -935,5 +968,5 @@ export declare class Calendar extends React.Component<CalendarProps, any> {
      * @param {React.SyntheticEvent | null} event - Browser event.
      * @param {Date | Date[] | null} value - New date.
      */
-    public updateViewDate(event: React.SyntheticEvent | null, value: Date | Date[] | null | undefined): void;
+    public updateViewDate(event: React.SyntheticEvent | null, value: Nullable<Date | Date[]>): void;
 }
