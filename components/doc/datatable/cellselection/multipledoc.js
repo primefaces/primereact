@@ -70,16 +70,16 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { ProductService } from './service/ProductService';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+    id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    category?: string;
+    quantity?: number;
+    inventoryStatus?: string;
+    rating?: number;
 }
 
 export default function MultipleCellsSelectionDemo() {
@@ -98,10 +98,7 @@ export default function MultipleCellsSelectionDemo() {
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
             <DataTable value={products} cellSelection selectionMode="multiple" selection={selectedCells!}
-                    onSelectionChange={(e) => {
-                        const value = e.value as DataTableCellSelection<Product[]>;
-                        setSelectedCells(value);
-                    }}
+                    onSelectionChange={(e) => setSelectedCells(e.value)}
                     metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

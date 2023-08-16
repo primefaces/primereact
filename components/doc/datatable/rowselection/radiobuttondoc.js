@@ -68,16 +68,16 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { ProductService } from './service/ProductService';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+    id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    category?: string;
+    quantity?: number;
+    inventoryStatus?: string;
+    rating?: number;
 }
 
 export default function RadioButtonRowSelectionDemo() {
@@ -96,10 +96,7 @@ export default function RadioButtonRowSelectionDemo() {
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
             <DataTable value={products} selectionMode={rowClick ? undefined : 'radiobutton'} selection={selectedProduct!}
-                onSelectionChange={(e) => {
-                     const value = e.value as Product;
-                     setSelectedProduct(value);
-                }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
+                onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
