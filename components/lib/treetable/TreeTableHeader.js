@@ -17,11 +17,20 @@ export const TreeTableHeader = React.memo((props) => {
         return ptmo(ColumnBase.getCProps(column));
     };
 
-    const getColumnPTOptions = (column, key) => {
+    const getColumnPTOptions = (column, key, params) => {
         return ptmo(ColumnBase.getCProp(column, 'pt'), key, {
             props: getColumnProps(column),
-            parent: props.metaData
+            parent: props.metaData,
+            ...params
         });
+    };
+
+    const ptHeaderCellOptions = (column) => {
+        return {
+            context: {
+                frozen: getColumnProp(column, 'frozen')
+            }
+        };
     };
 
     const onHeaderClick = (event, column) => {
@@ -250,7 +259,7 @@ export const TreeTableHeader = React.memo((props) => {
                     rowSpan: getColumnProp(column, 'rowSpan'),
                     colSpan: getColumnProp(column, 'colSpan')
                 },
-                getColumnPTOptions(column, 'headerCell'),
+                getColumnPTOptions(column, 'headerCell', ptHeaderCellOptions(column)),
                 getColumnPTOptions(column, 'root')
             );
 

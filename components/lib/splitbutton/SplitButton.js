@@ -21,14 +21,15 @@ export const SplitButton = React.memo(
         const elementRef = React.useRef(null);
         const defaultButtonRef = React.useRef(null);
         const overlayRef = React.useRef(null);
-
-        const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData({
+        const metadata = {
             props,
             state: {
                 id: idState,
                 overlayVisible: overlayVisibleState
             }
-        });
+        };
+
+        const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metadata);
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
 
@@ -174,6 +175,9 @@ export const SplitButton = React.memo(
                         tabIndex={props.tabIndex}
                         {...props.buttonProps}
                         pt={ptm('button')}
+                        __parentMetadata={{
+                            parent: metadata
+                        }}
                         unstyled={props.unstyled}
                     >
                         {buttonContent}
@@ -189,6 +193,9 @@ export const SplitButton = React.memo(
                         aria-controls={overlayVisibleState ? menuId : null}
                         {...props.menuButtonProps}
                         pt={ptm('menuButton')}
+                        __parentMetadata={{
+                            parent: metadata
+                        }}
                         unstyled={props.unstyled}
                     />
                     <SplitButtonPanel
