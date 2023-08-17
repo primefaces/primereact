@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { mergeProps } from '../utils/Utils';
-import { BadgeBase } from './BadgeBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames, mergeProps } from '../utils/Utils';
+import { BadgeBase } from './BadgeBase';
 
 export const Badge = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -26,7 +26,7 @@ export const Badge = React.memo(
             {
                 ref: elementRef,
                 style: props.style,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             BadgeBase.getOtherProps(props),
             ptm('root')

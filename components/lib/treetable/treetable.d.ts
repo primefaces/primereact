@@ -23,6 +23,7 @@ export declare type TreeTablePassThroughType<T> = PassThroughType<T, TreeTablePa
 export interface TreeTablePassThroughMethodOptions {
     props: TreeTableProps;
     state: TreeTableState;
+    context: TreeTableContext;
 }
 
 /**
@@ -243,6 +244,51 @@ export interface TreeTableState {
      * @defaultValue false
      */
     editing: boolean;
+}
+
+/**
+ * Defines current options in TreeTable component.
+ */
+export interface TreeTableContext {
+    /**
+     * Current index state of the item.
+     */
+    index: number;
+    /**
+     * Current frozen state of the row as a boolean.
+     * @defaultValue false
+     */
+    frozen: boolean;
+    /**
+     * Current checked state of the column checkbox as a boolean.
+     * @defaultValue false
+     */
+    checked: boolean;
+    /**
+     * Current partial checked state of the column checkbox as a boolean.
+     * @defaultValue false
+     */
+    partialChecked: boolean;
+    /**
+     * Current selectable state of the row as a boolean.
+     * @defaultValue false
+     */
+    selectable: boolean;
+    /**
+     * Current scrollable state of the row as a boolean.
+     * @defaultValue false
+     */
+    scrollable: boolean;
+    /**
+     * Current showGridlines state of the row as a boolean.
+     * @defaultValue false
+     */
+    showGridlines: boolean;
+    /**x
+     * Current selected state of the row as a boolean.
+     * @defaultValue false
+     */
+    selected: boolean;
 }
 
 /**
@@ -528,6 +574,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @type {TreeTablePassThroughOptions}
      */
     pt?: TreeTablePassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
     /**
      * Style class of the node.
      */

@@ -14,7 +14,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
 
-    const { ptm, cx, sx, isUnstyled } = BlockUIBase.setMetaData({
+    const { ptm, cx, isUnstyled } = BlockUIBase.setMetaData({
         props
     });
 

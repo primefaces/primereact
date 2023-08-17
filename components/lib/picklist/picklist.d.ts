@@ -463,6 +463,11 @@ export interface PickListProps {
      * @type {PickListPassThroughOptions}
      */
     pt?: PickListPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

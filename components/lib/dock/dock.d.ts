@@ -19,6 +19,7 @@ export declare type DockPassThroughType<T> = PassThroughType<T, DockPassThroughM
 export interface DockPassThroughMethodOptions {
     props: DockProps;
     state: DockState;
+    context: DockContext;
 }
 
 /**
@@ -69,6 +70,20 @@ export interface DockState {
      * @defaultvalue -3
      */
     currentIndex: number;
+}
+
+/**
+ * Defines current options in Dock component.
+ */
+export interface DockContext {
+    /**
+     * Current index of the menuitem.
+     */
+    index: number;
+    /**
+     * Current menuitem
+     */
+    item: any;
 }
 
 /**
@@ -125,6 +140,11 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {DockPassThroughOptions}
      */
     pt?: DockPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

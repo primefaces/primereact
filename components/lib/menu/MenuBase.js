@@ -1,4 +1,66 @@
+import PrimeReact from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
+
+const styles = `
+.p-menu-overlay {
+    position: absolute;
+    /* Github #3122: Prevent animation flickering  */
+    top: -9999px;
+    left: -9999px;
+}
+
+.p-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.p-menu .p-menuitem-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.p-menu .p-menuitem-text {
+    line-height: 1;
+}
+`;
+
+const classes = {
+    root: ({ props, context }) =>
+        classNames(
+            'p-menu p-component',
+            {
+                'p-menu-overlay': props.popup,
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+            },
+            props.className
+        ),
+    menu: 'p-menu-list p-reset',
+    action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
+    menuitem: ({ item }) => classNames('p-menuitem', item.className),
+    submenuHeader: ({ submenu }) =>
+        classNames(
+            'p-submenu-header',
+            {
+                'p-disabled': submenu.disabled
+            },
+            submenu.className
+        ),
+    separator: 'p-menu-separator',
+    label: 'p-menuitem-text',
+    icon: 'p-menuitem-icon'
+};
+
+const inlineStyles = {
+    submenuHeader: ({ submenu }) => submenu.style,
+    menuitem: ({ item }) => item.style
+};
 
 export const MenuBase = ComponentBase.extend({
     defaultProps: {
@@ -16,5 +78,10 @@ export const MenuBase = ComponentBase.extend({
         onShow: null,
         onHide: null,
         children: undefined
+    },
+    css: {
+        classes,
+        styles,
+        inlineStyles
     }
 });

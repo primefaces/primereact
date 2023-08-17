@@ -228,13 +228,73 @@ const radioButtonStyles = `
 }
 
 `;
+const iconStyles = `
+.p-icon {
+    display: inline-block;
+}
+
+.p-icon-spin {
+    -webkit-animation: p-icon-spin 2s infinite linear;
+    animation: p-icon-spin 2s infinite linear;
+}
+
+svg.p-icon {
+    pointer-events: auto;
+}
+
+svg.p-icon g {
+    pointer-events: none;
+}
+
+@-webkit-keyframes p-icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes p-icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+`;
 const baseStyles = `
 .p-component, .p-component * {
     box-sizing: border-box;
 }
 
+.p-hidden {
+    display: none;
+}
+
 .p-hidden-space {
     visibility: hidden;
+}
+
+.p-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.p-hidden-accessible input,
+.p-hidden-accessible select {
+    transform: scale(0);
 }
 
 .p-reset {
@@ -261,21 +321,29 @@ const baseStyles = `
     height: 100%;
 }
 
+.p-overflow-hidden {
+    overflow: hidden;
+}
+
 .p-unselectable-text {
     user-select: none;
 }
 
-.p-sr-only {
-    border: 0;
-    clip: rect(1px, 1px, 1px, 1px);
-    clip-path: inset(50%);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
+.p-scrollbar-measure {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
     position: absolute;
-    width: 1px;
-    word-wrap: normal !important;
+    top: -9999px;
+}
+
+@-webkit-keyframes p-fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes p-fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .p-link {
@@ -292,7 +360,7 @@ const baseStyles = `
 	cursor: default;
 }
 
-/* Non vue overlay animations */
+/* Non react overlay animations */
 .p-connected-overlay {
     opacity: 0;
     transform: scaleY(0.8);
@@ -310,48 +378,83 @@ const baseStyles = `
     transition: opacity .1s linear;
 }
 
-/* Vue based overlay animations */
-.p-connected-overlay-enter-from {
+/* React based overlay animations */
+.p-connected-overlay-enter {
     opacity: 0;
     transform: scaleY(0.8);
 }
 
-.p-connected-overlay-leave-to {
-    opacity: 0;
-}
-
 .p-connected-overlay-enter-active {
+    opacity: 1;
+    transform: scaleY(1);
     transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.p-connected-overlay-leave-active {
+.p-connected-overlay-enter-done {
+    transform: none;
+}
+
+.p-connected-overlay-exit {
+    opacity: 1;
+}
+
+.p-connected-overlay-exit-active {
+    opacity: 0;
     transition: opacity .1s linear;
 }
 
 /* Toggleable Content */
-.p-toggleable-content-enter-from,
-.p-toggleable-content-leave-to {
+.p-toggleable-content-enter {
     max-height: 0;
-}
-
-.p-toggleable-content-enter-to,
-.p-toggleable-content-leave-from {
-    max-height: 1000px;
-}
-
-.p-toggleable-content-leave-active {
-    overflow: hidden;
-    transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
 }
 
 .p-toggleable-content-enter-active {
     overflow: hidden;
+    max-height: 1000px;
     transition: max-height 1s ease-in-out;
 }
+
+.p-toggleable-content-enter-done {
+    transform: none;
+}
+
+.p-toggleable-content-exit {
+    max-height: 1000px;
+}
+
+.p-toggleable-content-exit-active {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
+}
+
+.p-sr-only {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+.p-menu .p-menuitem-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+
 ${buttonStyles}
 ${checkboxStyles}
 ${inputTextStyles}
 ${radioButtonStyles}
+${iconStyles}
 `;
 
 export const ComponentBase = {
@@ -477,9 +580,9 @@ export const ComponentBase = {
     }
 };
 
-export const useHandleStyle = (styles, isUnstyled, { name, styled = false }) => {
-    const { load: loadCommonStyle, unload: unloadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
-    const { load, unload } = useStyle(styles, { name: name, manual: true });
+export const useHandleStyle = (styles, isUnstyled = false, { name, styled = false }) => {
+    const { load: loadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
+    const { load } = useStyle(styles, { name: name, manual: true });
 
     useEffect(() => {
         if (!isUnstyled()) {
@@ -487,12 +590,6 @@ export const useHandleStyle = (styles, isUnstyled, { name, styled = false }) => 
             if (!styled) load();
         }
 
-        return () => {
-            if (!isUnstyled()) {
-                unloadCommonStyle();
-                unload();
-            }
-        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [styles]);
+    }, []);
 };

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { classNames, DomHandler, mergeProps } from '../utils/Utils';
+import { DomHandler, mergeProps } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const inputRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
+    const { ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return props.ptCallbacks.ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
             props: getColumnProps(),
             parent: props.metaData,
             context: {
@@ -49,12 +50,10 @@ export const RowRadioButton = React.memo((props) => {
         onClick(event);
     };
 
-    const className = classNames('p-radiobutton p-component', { 'p-radiobutton-focused': focusedState, 'p-disabled': props.disabled });
-    const boxClassName = classNames('p-radiobutton-box p-component', { 'p-highlight': props.checked, 'p-focus': focusedState });
     const name = `${props.tableSelector}_dt_radio`;
     const radiobuttonWrapperProps = mergeProps(
         {
-            className
+            className: cx('radiobuttonWrapper', { rowProps: props, focusedState })
         },
         getColumnPTOptions('radiobuttonWrapper')
     );
@@ -81,7 +80,7 @@ export const RowRadioButton = React.memo((props) => {
 
     const radiobuttonProps = mergeProps(
         {
-            className: boxClassName,
+            className: cx('radiobutton', { rowProps: props, focusedState }),
             onClick: (e) => onClick(e),
             role: 'radio',
             'aria-checked': props.checked
@@ -91,7 +90,7 @@ export const RowRadioButton = React.memo((props) => {
 
     const radiobuttonIconProps = mergeProps(
         {
-            className: 'p-radiobutton-icon'
+            className: cx('radiobuttonIcon')
         },
         getColumnPTOptions('radiobuttonIcon')
     );

@@ -3,17 +3,13 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, state }) =>
-        classNames(
-            'p-avatar p-component',
-            {
-                'p-avatar-image': ObjectUtils.isNotEmpty(props.image) && !state.imageFailed,
-                'p-avatar-circle': props.shape === 'circle',
-                'p-avatar-lg': props.size === 'large',
-                'p-avatar-xl': props.size === 'xlarge',
-                'p-avatar-clickable': !!props.onClick
-            },
-            props.className
-        ),
+        classNames('p-avatar p-component', {
+            'p-avatar-image': ObjectUtils.isNotEmpty(props.image) && !state.imageFailed,
+            'p-avatar-circle': props.shape === 'circle',
+            'p-avatar-lg': props.size === 'large',
+            'p-avatar-xl': props.size === 'xlarge',
+            'p-avatar-clickable': !!props.onClick
+        }),
     label: 'p-avatar-text',
     icon: 'p-avatar-icon'
 };

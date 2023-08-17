@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { CheckIcon } from '../icons/check';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeTableBodyCell } from './TreeTableBodyCell';
-import { ChevronDownIcon } from '../icons/chevrondown';
-import { ChevronRightIcon } from '../icons/chevronright';
-import { CheckIcon } from '../icons/check';
-import { MinusIcon } from '../icons/minus';
 
 export const TreeTableRow = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -16,21 +16,37 @@ export const TreeTableRow = React.memo((props) => {
     const nodeTouched = React.useRef(false);
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
     const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const { ptm, ptmo, cx, sx, isUnstyled } = props.ptCallbacks;
 
     const getColumnPTOptions = (column, key) => {
-        return props.ptCallbacks.ptmo(ColumnBase.getCProp(column, 'pt'), key, {
+        return ptmo(ColumnBase.getCProp(column, 'pt'), key, {
             props: getColumnProps(column),
             parent: props.metaData
         });
     };
 
     const getColumnCheckboxPTOptions = (column, key) => {
-        return props.ptCallbacks.ptmo(ColumnBase.getCProp(column, 'pt'), key, {
+        return ptmo(ColumnBase.getCProp(column, 'pt'), key, {
             props: getColumnProps(column),
             parent: props.metaData,
             context: {
                 checked: isChecked(),
                 partialChecked: isPartialChecked()
+            }
+        });
+    };
+
+    const getRowPTOptions = (key) => {
+        return ptmo(props.pt, key, {
+            props: props,
+            parent: props.metaData,
+            context: {
+                index: props.index,
+                selected: props.selected,
+                selectable: props.metaData.props.rowHover,
+                frozen: getColumnProp('frozen'),
+                scrollable: props.metaData.props.scrollable,
+                showGridlines: props.metaData.props.showGridlines
             }
         });
     };
@@ -171,35 +187,38 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const onCheckboxFocus = () => {
-        DomHandler.addClass(checkboxBoxRef.current, 'p-focus');
-        DomHandler.addClass(checkboxRef.current, 'p-checkbox-focused');
+        !isUnstyled() && DomHandler.addClass(checkboxBoxRef.current, 'p-focus');
+        !isUnstyled() && DomHandler.addClass(checkboxRef.current, 'p-checkbox-focused');
     };
 
     const onCheckboxBlur = () => {
-        DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
-        DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
+        !isUnstyled() && DomHandler.removeClass(checkboxBoxRef.current, 'p-focus');
+        !isUnstyled() && DomHandler.removeClass(checkboxRef.current, 'p-checkbox-focused');
     };
 
     const propagateUp = (event) => {
         let check = event.check;
         let selectionKeys = event.selectionKeys;
         let checkedChildCount = 0;
-        let childPartialSelected = false;
 
         for (let child of props.node.children) {
             if (selectionKeys[child.key] && selectionKeys[child.key].checked) checkedChildCount++;
-            else if (selectionKeys[child.key] && selectionKeys[child.key].partialChecked) childPartialSelected = true;
         }
 
-        if (check && checkedChildCount === props.node.children.length) {
-            selectionKeys[props.node.key] = { checked: true, partialChecked: false };
-        } else {
-            if (!check) {
-                delete selectionKeys[props.node.key];
-            }
+        const parentKey = props.node.key;
+        const children = ObjectUtils.findChildrenByKey(props.originalOptions, parentKey);
 
-            if (childPartialSelected || (checkedChildCount > 0 && checkedChildCount !== props.node.children.length)) selectionKeys[props.node.key] = { checked: false, partialChecked: true };
-            else selectionKeys[props.node.key] = { checked: false, partialChecked: false };
+        let isParentPartiallyChecked = children.some((ele) => ele.key in selectionKeys);
+        let isCompletelyChecked = children.every((ele) => ele.key in selectionKeys && selectionKeys[ele.key].checked);
+
+        if (isParentPartiallyChecked && !isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: true };
+        } else if (isCompletelyChecked) {
+            selectionKeys[parentKey] = { checked: true, partialChecked: false };
+        } else if (check) {
+            selectionKeys[parentKey] = { checked: false, partialChecked: false };
+        } else {
+            delete selectionKeys[parentKey];
         }
 
         if (props.propagateSelectionUp && props.onPropagateUp) {
@@ -311,21 +330,20 @@ export const TreeTableRow = React.memo((props) => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const rowTogglerIconProps = mergeProps(
             {
-                className: 'p-treetable-toggler-icon',
+                className: cx('rowTogglerIcon'),
                 'aria-hidden': true
             },
             getColumnPTOptions(column, 'rowTogglerIcon')
         );
         const icon = expanded ? <ChevronDownIcon {...rowTogglerIconProps} /> : <ChevronRightIcon {...rowTogglerIconProps} />;
         const togglerIcon = IconUtils.getJSXIcon(props.togglerIcon || icon, { ...rowTogglerIconProps }, { props });
-        const style = { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' };
         const rowTogglerProps = mergeProps(
             {
                 type: 'button',
-                className: 'p-treetable-toggler p-link p-unselectable-text',
+                className: cx('rowToggler'),
                 onClick: (e) => onTogglerClick(e),
                 tabIndex: -1,
-                style,
+                style: sx('rowToggler', { rowProps: props }),
                 'aria-label': label
             },
             getColumnPTOptions(column, 'rowToggler')
@@ -346,7 +364,7 @@ export const TreeTableRow = React.memo((props) => {
                 element: content,
                 props,
                 expanded,
-                buttonStyle: style
+                buttonStyle: { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' }
             };
 
             content = ObjectUtils.getJSXElement(props.togglerTemplate, props.node, defaultContentOptions);
@@ -359,16 +377,14 @@ export const TreeTableRow = React.memo((props) => {
         if (props.selectionMode === 'checkbox' && props.node.selectable !== false) {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
-            const className = classNames('p-checkbox-box', { 'p-highlight': checked, 'p-indeterminate': partialChecked });
-            const iconClassName = 'p-checkbox-icon p-c';
             const checboxIconProps = mergeProps(
                 {
-                    className: iconClassName
+                    className: cx('checkboxIcon')
                 },
                 getColumnCheckboxPTOptions(column, 'checkboxIcon')
             );
             const icon = checked ? props.checkboxIcon || <CheckIcon {...checboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checboxIconProps} /> : null;
-            const checkIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props, checked, partialChecked });
+            const checkIcon = IconUtils.getJSXIcon(icon, { ...checboxIconProps }, { props, checked, partialChecked });
             const hiddenInputProps = mergeProps(
                 {
                     type: 'checkbox',
@@ -379,8 +395,7 @@ export const TreeTableRow = React.memo((props) => {
             );
             const checkboxWrapperProps = mergeProps(
                 {
-                    className: 'p-checkbox p-treetable-checkbox p-component',
-                    ref: checkboxRef,
+                    className: cx('checkboxWrapper'),
                     onClick: (e) => onCheckboxChange(e),
                     role: 'checkbox',
                     'aria-checked': checked
@@ -397,18 +412,19 @@ export const TreeTableRow = React.memo((props) => {
 
             const checkboxProps = mergeProps(
                 {
-                    className,
-                    ref: checkboxBoxRef
+                    className: cx('checkbox', { checked, partialChecked })
                 },
                 getColumnCheckboxPTOptions(column, 'checkbox')
             );
 
             return (
-                <div {...checkboxWrapperProps}>
+                <div ref={checkboxRef} {...checkboxWrapperProps}>
                     <div {...hiddenInputWrapperProps}>
                         <input {...hiddenInputProps} />
                     </div>
-                    <div {...checkboxProps}>{checkIcon}</div>
+                    <div ref={checkboxBoxRef} {...checkboxProps}>
+                        {checkIcon}
+                    </div>
                 </div>
             );
         } else {
@@ -428,10 +444,12 @@ export const TreeTableRow = React.memo((props) => {
             <TreeTableBodyCell
                 key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
                 {...ColumnBase.getCProps(column)}
+                index={index}
                 column={column}
                 selectOnEdit={props.selectOnEdit}
                 selected={isSelected()}
                 node={props.node}
+                rowData={props.node && props.node.data}
                 rowIndex={props.rowIndex}
                 ptCallbacks={props.ptCallbacks}
                 metaData={props.metaData}
@@ -451,6 +469,7 @@ export const TreeTableRow = React.memo((props) => {
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}
                         node={childNode}
+                        originalOptions={props.originalOptions}
                         checkboxIcon={props.checkboxIcon}
                         columns={props.columns}
                         expandedKeys={props.expandedKeys}
@@ -487,11 +506,7 @@ export const TreeTableRow = React.memo((props) => {
 
     const cells = props.columns.map(createCell);
     const children = createChildren();
-    let className = {
-        'p-highlight': isSelected(),
-        'p-highlight-contextmenu': props.contextMenuSelectionKey && props.contextMenuSelectionKey === props.node.key,
-        'p-row-odd': props.rowIndex % 2 !== 0
-    };
+    let className = cx('row', { isSelected, rowProps: props });
 
     if (props.rowClassName) {
         let rowClassName = props.rowClassName(props.node);
@@ -502,7 +517,6 @@ export const TreeTableRow = React.memo((props) => {
     className = classNames(className, props.node.className);
     const rowProps = mergeProps(
         {
-            ref: elementRef,
             tabIndex: 0,
             className,
             style: props.node.style,
@@ -513,12 +527,14 @@ export const TreeTableRow = React.memo((props) => {
             onMouseEnter: (e) => onMouseEnter(e),
             onMouseLeave: (e) => onMouseLeave(e)
         },
-        props.ptCallbacks.ptm('row')
+        getRowPTOptions('row')
     );
 
     return (
         <>
-            <tr {...rowProps}>{cells}</tr>
+            <tr ref={elementRef} {...rowProps}>
+                {cells}
+            </tr>
             {children}
         </>
     );

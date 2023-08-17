@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { mergeProps } from '../utils/Utils';
-import { ProgressSpinnerBase } from './ProgressSpinnerBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames, mergeProps } from '../utils/Utils';
+import { ProgressSpinnerBase } from './ProgressSpinnerBase';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -27,7 +27,7 @@ export const ProgressSpinner = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 role: 'alert',
                 'aria-busy': true
             },

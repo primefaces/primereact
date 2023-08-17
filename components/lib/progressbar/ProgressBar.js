@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { mergeProps } from '../utils/Utils';
-import { ProgressBarBase } from './ProgressBarBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames, mergeProps } from '../utils/Utils';
+import { ProgressBarBase } from './ProgressBarBase';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -58,7 +58,7 @@ export const ProgressBar = React.memo(
 
             return (
                 <div {...rootProps}>
-                    <div {...valueProps}>{props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}</div>
+                    <div {...valueProps}>{label != null && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
         };
@@ -68,7 +68,7 @@ export const ProgressBar = React.memo(
                 {
                     id: props.id,
                     ref: elementRef,
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style,
                     role: 'progressbar'
                 },

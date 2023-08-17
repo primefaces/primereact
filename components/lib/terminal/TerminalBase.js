@@ -1,8 +1,7 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-terminal p-component', props.className),
+    root: 'p-terminal p-component',
     content: 'p-terminal-content',
     container: 'p-terminal-prompt-container',
     command: 'p-terminal-command',

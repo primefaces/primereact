@@ -1,8 +1,7 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-progress-spinner', props.className),
+    root: 'p-progress-spinner',
     spinner: 'p-progress-spinner-svg',
     circle: 'p-progress-spinner-circle'
 };

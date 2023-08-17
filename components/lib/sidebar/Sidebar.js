@@ -8,6 +8,7 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -28,14 +29,9 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
 
-    const [bindDocumentEscapeListener, unbindDocumentEscapeListener] = useEventListener({
-        type: 'keydown',
-        listener: (event) => {
-            if (event.key === 'Escape') {
-                if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', (context && context.autoZIndex) || PrimeReact.autoZIndex)) {
-                    onClose(event);
-                }
-            }
+    useOnEscapeKey(maskRef, props.closeOnEscape, (event) => {
+        if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', (context && context.autoZIndex) || PrimeReact.autoZIndex)) {
+            onClose(event);
         }
     });
 
@@ -103,10 +99,6 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     };
 
     const enableDocumentSettings = () => {
-        if (props.closeOnEscape) {
-            bindDocumentEscapeListener();
-        }
-
         if (props.dismissable && !props.modal) {
             bindDocumentClickListener();
         }
@@ -117,7 +109,6 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     };
 
     const disableDocumentSettings = () => {
-        unbindDocumentEscapeListener();
         unbindDocumentClickListener();
 
         if (props.blockScroll) {

@@ -18,6 +18,7 @@ export declare type CarouselPassThroughType<T> = PassThroughType<T, CarouselPass
 export interface CarouselPassThroughMethodOptions {
     props: CarouselProps;
     state: CarouselState;
+    context: CarouselContext;
 }
 
 /**
@@ -115,6 +116,17 @@ export interface CarouselState {
      * @defaultValue 0
      */
     totalShiftedItems: number;
+}
+
+/**
+ * Defines current inline options in Carousel component.
+ */
+export interface CarouselContext {
+    /**
+     * Current active state of the indicator as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
 }
 
 /**
@@ -253,6 +265,11 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {CarouselPassThroughOptions}
      */
     pt?: CarouselPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

@@ -1,10 +1,10 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/treeselect/pt/ptdoc';
-import { Wireframe } from '../../components/doc/treeselect/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
+import { ClearIconDoc } from '../../components/doc/treeselect/clearicondoc';
+import { ControlledDoc } from '../../components/doc/treeselect/controlleddoc';
 import { DisabledDoc } from '../../components/doc/treeselect/disableddoc';
 import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/treeselect/floatlabeldoc';
@@ -13,7 +13,8 @@ import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/treeselect/importdoc';
 import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
-import { ControlledDoc } from '../../components/doc/treeselect/controlleddoc';
+import { PTDoc } from '../../components/doc/treeselect/pt/ptdoc';
+import { Wireframe } from '../../components/doc/treeselect/pt/wireframe';
 import { StyleDoc } from '../../components/doc/treeselect/styledoc';
 
 const TreeSelectDemo = () => {
@@ -42,6 +43,11 @@ const TreeSelectDemo = () => {
             id: 'filter',
             label: 'Filter',
             component: FilterDoc
+        },
+        {
+            id: 'clearicon',
+            label: 'Clear Icon',
+            component: ClearIconDoc
         },
         {
             id: 'controlled',

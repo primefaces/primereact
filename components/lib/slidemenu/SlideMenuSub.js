@@ -69,7 +69,7 @@ export const SlideMenuSub = React.memo((props) => {
                     onForward={props.onForward}
                     parentActive={item === activeItemState}
                     submenuIcon={props.submenuIcon}
-                    ptm={props.ptm}
+                    ptm={ptm}
                     cx={cx}
                     sx={sx}
                 />

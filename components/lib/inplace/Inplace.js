@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
-import { TimesIcon } from '../icons/times';
-import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { InplaceBase } from './InplaceBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { TimesIcon } from '../icons/times';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { InplaceBase } from './InplaceBase';
 
 export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
@@ -138,7 +138,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const rootProps = mergeProps(
         {
             ref: elementRef,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         InplaceBase.getOtherProps(props),
         ptm('root')

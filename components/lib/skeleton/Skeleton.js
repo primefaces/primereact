@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { mergeProps } from '../utils/Utils';
-import { SkeletonBase } from './SkeletonBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames, mergeProps } from '../utils/Utils';
+import { SkeletonBase } from './SkeletonBase';
 
 export const Skeleton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -24,7 +24,7 @@ export const Skeleton = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: sx('root')
             },
             SkeletonBase.getOtherProps(props),

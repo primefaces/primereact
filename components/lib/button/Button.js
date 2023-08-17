@@ -1,19 +1,28 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { Badge } from '../badge/Badge';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { SpinnerIcon } from '../icons/spinner';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ButtonBase } from './ButtonBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ButtonBase.getProps(inProps, context);
+        const disabled = props.disabled || props.loading;
 
-        const { ptm } = ButtonBase.setMetaData({
-            props
+        const { ptm, cx, isUnstyled } = ButtonBase.setMetaData({
+            props,
+            ...inProps.__parentMetadata,
+            context: {
+                disabled
+            }
         });
+
+        useHandleStyle(ButtonBase.css.styles, isUnstyled, { name: 'button', styled: true });
 
         const elementRef = React.useRef(ref);
 
@@ -32,7 +41,7 @@ export const Button = React.memo(
 
             const iconsProps = mergeProps(
                 {
-                    className
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -43,7 +52,7 @@ export const Button = React.memo(
 
             const loadingIconProps = mergeProps(
                 {
-                    className
+                    className: cx('loadingIcon', { className })
                 },
                 ptm('loadingIcon')
             );
@@ -57,7 +66,7 @@ export const Button = React.memo(
             if (props.label) {
                 const labelProps = mergeProps(
                     {
-                        className: 'p-button-label p-c'
+                        className: cx('label')
                     },
                     ptm('label')
                 );
@@ -70,22 +79,21 @@ export const Button = React.memo(
 
         const createBadge = () => {
             if (props.badge) {
-                const badgeClassName = classNames('p-badge', props.badgeClassName);
-
                 const badgeProps = mergeProps(
                     {
-                        className: badgeClassName
+                        className: classNames(props.badgeClassName),
+                        value: props.badge,
+                        unstyled: props.unstyled
                     },
                     ptm('badge')
                 );
 
-                return <span {...badgeProps}>{props.badge}</span>;
+                return <Badge {...badgeProps}>{props.badge}</Badge>;
             }
 
             return null;
         };
 
-        const disabled = props.disabled || props.loading;
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
         const sizeMapping = {
@@ -93,21 +101,6 @@ export const Button = React.memo(
             small: 'sm'
         };
         const size = sizeMapping[props.size];
-        const className = classNames('p-button p-component', props.className, {
-            'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
-            'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
-            'p-disabled': disabled,
-            'p-button-loading': props.loading,
-            'p-button-outlined': props.outlined,
-            'p-button-raised': props.raised,
-            'p-button-link': props.link,
-            'p-button-text': props.text,
-            'p-button-rounded': props.rounded,
-            'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-loading-${props.iconPos}`]: props.loading && props.label,
-            [`p-button-${size}`]: size,
-            [`p-button-${props.severity}`]: props.severity
-        });
 
         const icon = createIcon();
         const label = createLabel();
@@ -118,7 +111,7 @@ export const Button = React.memo(
             {
                 ref: elementRef,
                 'aria-label': defaultAriaLabel,
-                className,
+                className: classNames(props.className, cx('root', { size, disabled })),
                 disabled: disabled
             },
             ButtonBase.getOtherProps(props),

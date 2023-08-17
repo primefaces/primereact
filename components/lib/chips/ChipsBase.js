@@ -47,6 +47,29 @@ const styles = `
 .p-fluid .p-chips {
     display: flex;
 }
+
+.p-chips-icon-left,
+.p-chips-icon-right {
+    position: relative;
+    display: inline-block;
+}
+
+.p-chips-icon-left > i,
+.p-chips-icon-right > i,
+.p-chips-icon-left > svg,
+.p-chips-icon-right > svg,
+.p-chips-icon-left > .p-chips-prefix,
+.p-chips-icon-right > .p-chips-suffix {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.5rem;
+}
+
+.p-fluid .p-chips-icon-left,
+.p-fluid .p-chips-icon-right {
+    display: block;
+    width: 100%;
+}
 `;
 
 const classes = {

@@ -805,6 +805,11 @@ export interface ColumnProps {
      */
     pt?: ColumnPassThroughOptions;
     /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Style class of the component.
      */
     className?: string | undefined;

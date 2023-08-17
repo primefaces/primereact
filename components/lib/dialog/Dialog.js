@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -46,6 +47,20 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     });
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
+
+    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
+        const currentTarget = event.currentTarget;
+
+        if (!currentTarget || !currentTarget.primeDialogParams) {
+            return;
+        }
+
+        const params = currentTarget.primeDialogParams;
+        const paramLength = params.length;
+
+        onClose(event);
+        params.splice(paramLength - 1, 1);
+    });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
@@ -111,11 +126,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         const dialog = document.getElementById(dialogId);
 
-        if (props.closable && props.closeOnEscape && event.key === 'Escape') {
-            onClose(event);
-            event.stopImmediatePropagation();
-            params.splice(paramLength - 1, 1);
-        } else if (event.key === 'Tab') {
+        if (event.key === 'Tab') {
             event.preventDefault();
             const focusableElements = DomHandler.getFocusableElements(dialog);
 
@@ -163,24 +174,27 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const leftPos = offset.left + deltaX;
             const topPos = offset.top + deltaY;
             const viewport = DomHandler.getViewport();
+            const computedStyle = getComputedStyle(dialogRef.current);
+            const leftMargin = parseFloat(computedStyle.marginLeft);
+            const topMargin = parseFloat(computedStyle.marginTop);
 
             dialogRef.current.style.position = 'fixed';
 
             if (props.keepInViewport) {
                 if (leftPos >= props.minX && leftPos + width < viewport.width) {
                     lastPageX.current = event.pageX;
-                    dialogRef.current.style.left = leftPos + 'px';
+                    dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 }
 
                 if (topPos >= props.minY && topPos + height < viewport.height) {
                     lastPageY.current = event.pageY;
-                    dialogRef.current.style.top = topPos + 'px';
+                    dialogRef.current.style.top = topPos - topMargin + 'px';
                 }
             } else {
                 lastPageX.current = event.pageX;
-                dialogRef.current.style.left = leftPos + 'px';
+                dialogRef.current.style.left = leftPos - leftMargin + 'px';
                 lastPageY.current = event.pageY;
-                dialogRef.current.style.top = topPos + 'px';
+                dialogRef.current.style.top = topPos - topMargin + 'px';
             }
 
             props.onDrag && props.onDrag(event);

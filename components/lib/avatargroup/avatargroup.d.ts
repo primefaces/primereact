@@ -43,6 +43,11 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {AvatarGroupPassThroughOptions}
      */
     pt?: AvatarGroupPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

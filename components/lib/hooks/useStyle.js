@@ -48,9 +48,9 @@ export const useStyle = (css, options = {}) => {
     useEffect(() => {
         if (!manual) load();
 
-        return () => unload();
+        // return () => {if (!manual) unload()}; /* @todo */
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [manual]);
+    }, []);
 
     return {
         id,

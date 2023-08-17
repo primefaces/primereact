@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { TerminalService } from '../terminalservice/TerminalService';
-import { DomHandler, mergeProps } from '../utils/Utils';
-import { TerminalBase } from './TerminalBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { TerminalService } from '../terminalservice/TerminalService';
+import { DomHandler, classNames, mergeProps } from '../utils/Utils';
+import { TerminalBase } from './TerminalBase';
 
 export const Terminal = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -203,7 +203,7 @@ export const Terminal = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style,
                 onClick
             },

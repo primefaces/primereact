@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
-import { AvatarBase } from './AvatarBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { AvatarBase } from './AvatarBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -78,7 +78,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         {
             ref: elementRef,
             style: props.style,
-            className: cx('root', { imageFailed })
+            className: classNames(props.className, cx('root', { imageFailed }))
         },
         AvatarBase.getOtherProps(props),
         ptm('root')

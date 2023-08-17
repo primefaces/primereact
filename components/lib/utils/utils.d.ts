@@ -121,6 +121,7 @@ export declare class ObjectUtils {
     static removeAccents(str: any): string;
     static toFlatCase(str: string): string;
     static toCapitalCase(str: string): string;
+    static trim(value: any): any;
     static isEmpty(value: any): boolean;
     static isNotEmpty(value: any): boolean;
     static isFunction(value: any): boolean;

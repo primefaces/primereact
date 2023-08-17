@@ -189,10 +189,12 @@ export const Slider = React.memo(
         };
 
         const createHandle = (leftValue, bottomValue, index) => {
+            leftValue = ObjectUtils.isEmpty(leftValue) ? 0 : leftValue;
+            bottomValue = ObjectUtils.isEmpty(bottomValue) ? 0 : bottomValue;
             const style = {
                 transition: dragging.current ? 'none' : null,
-                left: leftValue !== null && leftValue + '%',
-                bottom: bottomValue && bottomValue + '%'
+                left: leftValue + '%',
+                bottom: bottomValue + '%'
             };
 
             const handleProps = mergeProps(

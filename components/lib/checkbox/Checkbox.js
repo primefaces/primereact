@@ -16,6 +16,10 @@ export const Checkbox = React.memo(
             props,
             state: {
                 focused: focusedState
+            },
+            context: {
+                checked: props.checked === props.trueValue,
+                disabled: props.disabled
             }
         });
 

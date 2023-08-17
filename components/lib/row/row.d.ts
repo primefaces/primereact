@@ -55,6 +55,11 @@ export interface RowProps {
      * @type {RowPassThroughOptions}
      */
     pt?: RowPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

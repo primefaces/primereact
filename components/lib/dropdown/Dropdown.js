@@ -1,15 +1,14 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
-import { useMountEffect, useOverlayListener, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -529,6 +528,7 @@ export const Dropdown = React.memo(
 
         const onOverlayEnter = (callback) => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
             callback && callback();
         };
@@ -623,6 +623,7 @@ export const Dropdown = React.memo(
             props,
             show,
             hide,
+            clear,
             focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
@@ -759,7 +760,7 @@ export const Dropdown = React.memo(
                         ref: inputRef,
                         type: 'text',
                         defaultValue: value,
-                        className: cx('input'),
+                        className: cx('input', { label }),
                         disabled: props.disabled,
                         placeholder: props.placeholder,
                         maxLength: props.maxLength,
@@ -774,15 +775,11 @@ export const Dropdown = React.memo(
 
                 return <input {...inputProps} />;
             } else {
-                const className = classNames('p-dropdown-label p-inputtext', {
-                    'p-placeholder': label === null && props.placeholder,
-                    'p-dropdown-label-empty': label === null && !props.placeholder
-                });
                 const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
                 const inputProps = mergeProps(
                     {
                         ref: inputRef,
-                        className
+                        className: cx('input', { label })
                     },
                     ptm('input')
                 );

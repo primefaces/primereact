@@ -8,7 +8,7 @@
         "build": "next build",
         "build:lib": "NODE_ENV=production INPUT_DIR=components/lib/ OUTPUT_DIR=dist/ npm run build:package",
         "build:package": "npm run build:check && rollup -c && gulp build-resources && npm run build:api",
-        "build:api": "node ./api-generator/build-api.js && npm run apidoc",
+        "build:api": "npm run apiwebtypes && npm run apidoc",
         "build:check": "npm run lint && npm run format:check && npm run type:check && npm run security:check && (NODE_ENV=test npm run test:check)",
         "security:check": "npm audit --production --audit-level high",
         "format": "prettier --write \"{components,pages,service,api-generator}/**/*.{js,ts,tsx,d.ts}\"",
@@ -18,7 +18,8 @@
         "type:check": "tsc",
         "test": "jest --watch --coverage",
         "test:check": "jest --watchAll=false --coverage",
-        "apidoc": "node ./api-generator/build-apidoc.js"
+        "apidoc": "node ./api-generator/build-apidoc.js",
+        "apiwebtypes": "node ./api-generator/build-webtypes.js"
     },
     "dependencies": {
         "@docsearch/react": "3.5.1",
@@ -28,7 +29,7 @@
         "formik": "^2.2.9",
         "fs-extra": "^10.1.0",
         "jspdf": "2.5.1",
-        "jspdf-autotable": "3.5.29",
+        "jspdf-autotable": "3.5.31",
         "next": "12.3.4",
         "path": "^0.12.7",
         "primeflex": "^3.3.1",
@@ -37,7 +38,7 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-final-form": "^6.5.9",
-        "react-hook-form": "^7.45.1",
+        "react-hook-form": "^7.45.2",
         "react-transition-group": "^4.4.5",
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
     },

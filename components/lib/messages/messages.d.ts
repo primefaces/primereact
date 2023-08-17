@@ -104,6 +104,11 @@ export interface MessagesMessage {
      * @type {MessagesPassThroughOptions}
      */
     pt?: MessagesPassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useInterval, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
@@ -26,7 +26,7 @@ export const Galleria = React.memo(
         const activeItemIndex = props.onItemChange ? props.activeIndex : activeIndexState;
         const isVertical = props.thumbnailsPosition === 'left' || props.thumbnailsPosition === 'right';
 
-        const { ptm } = GalleriaBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = GalleriaBase.setMetaData({
             props,
             state: {
                 visible: visibleState,
@@ -35,6 +35,8 @@ export const Galleria = React.memo(
                 activeIndex: activeIndexState
             }
         });
+
+        useHandleStyle(GalleriaBase.css.styles, isUnstyled, { name: 'galleria' });
 
         useInterval(
             () => {
@@ -142,7 +144,7 @@ export const Galleria = React.memo(
         const createHeader = () => {
             const headerProps = mergeProps(
                 {
-                    className: 'p-galleria-header'
+                    className: cx('header')
                 },
                 ptm('header')
             );
@@ -157,7 +159,7 @@ export const Galleria = React.memo(
         const createFooter = () => {
             const footerProps = mergeProps(
                 {
-                    className: 'p-galleria-footer'
+                    className: cx('footer')
                 },
                 ptm('footer')
             );
@@ -172,24 +174,11 @@ export const Galleria = React.memo(
         const createElement = () => {
             const thumbnailsPosClassName = props.showThumbnails && getPositionClassName('p-galleria-thumbnails', props.thumbnailsPosition);
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
-            const galleriaClassName = classNames(
-                'p-galleria p-component',
-                props.className,
-                {
-                    'p-galleria-fullscreen': props.fullScreen,
-                    'p-galleria-indicator-onitem': props.showIndicatorsOnItem,
-                    'p-galleria-item-nav-onhover': props.showItemNavigatorsOnHover && !props.fullScreen,
-                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-                },
-                thumbnailsPosClassName,
-                indicatorPosClassName
-            );
 
-            const iconProps = { className: 'p-galleria-close-icon', 'aria-hidden': true };
             const closeIconProps = mergeProps(
                 {
-                    className: iconProps
+                    className: cx('closeIcon'),
+                    'aria-hidden': true
                 },
                 ptm('closeIcon')
             );
@@ -199,7 +188,7 @@ export const Galleria = React.memo(
             const closeButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: 'p-galleria-close p-link',
+                    className: cx('closeButton'),
                     'aria-label': localeOption('close'),
                     onClick: hide
                 },
@@ -220,7 +209,7 @@ export const Galleria = React.memo(
                 {
                     ref: elementRef,
                     id: props.id,
-                    className: galleriaClassName,
+                    className: classNames(props.className, cx('root', { context, thumbnailsPosClassName, indicatorPosClassName })),
                     style: props.style
                 },
                 GalleriaBase.getOtherProps(props),
@@ -229,7 +218,7 @@ export const Galleria = React.memo(
 
             const contentProps = mergeProps(
                 {
-                    className: 'p-galleria-content'
+                    className: cx('content')
                 },
                 ptm('content')
             );
@@ -258,6 +247,7 @@ export const Galleria = React.memo(
                             startSlideShow={startSlideShow}
                             stopSlideShow={stopSlideShow}
                             ptm={ptm}
+                            cx={cx}
                         />
 
                         {props.showThumbnails && (
@@ -278,6 +268,8 @@ export const Galleria = React.memo(
                                 slideShowActive={slideShowActiveState}
                                 stopSlideShow={stopSlideShow}
                                 ptm={ptm}
+                                cx={cx}
+                                sx={sx}
                             />
                         )}
                     </div>
@@ -292,13 +284,10 @@ export const Galleria = React.memo(
             const element = createElement();
 
             if (props.fullScreen) {
-                const maskClassName = classNames('p-galleria-mask', {
-                    'p-galleria-visible': visibleState
-                });
                 const maskProps = mergeProps(
                     {
                         ref: maskRef,
-                        className: maskClassName
+                        className: cx('mask', { visibleState })
                     },
                     ptm('mask')
                 );
