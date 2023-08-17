@@ -291,15 +291,39 @@ interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValue
     /**
      * Selection object.
      */
-    value: DataTableSelection<TValue>;
+    value: TValue;
 }
 
 /**
- * Custom selection change event.
+ * Custom multiple selection change event.
  * @see {@link DataTableProps.onSelectionChange}
  * @event
  */
-interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableSelectionMultipleChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: TValue;
+    /**
+     * Type of the selection.
+     */
+    type?: 'multiple' | 'all' | 'checkbox' | 'row' | undefined;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
+ * Custom single selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionSingleChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -307,11 +331,35 @@ interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Selection object.
      */
-    value: DataTableSelection<TValue>;
+    value: TValue[number];
     /**
      * Type of the selection.
      */
-    type?: string;
+    type?: 'single' | 'radio' | 'row';
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
+ * Custom cell selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionCellChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: DataTableCellSelection<TValue>;
+    /**
+     * Type of the selection.
+     */
+    type?: 'cell';
     /**
      * Extra options.
      */
@@ -699,8 +747,6 @@ type DataTableCellSelection<TValue extends DataTableValueArray> = {
     value: TValue[number][keyof TValue[number]];
 };
 
-type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
-
 export declare type DataTablePassThroughType<T> = PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>;
 
 /**
@@ -889,7 +935,7 @@ type SortOrder = 1 | 0 | -1 | null | undefined;
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface DataTableProps<TValue extends DataTableValueArray> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
+interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
     /**
      * Unique identifier of the element.
      */
@@ -912,11 +958,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Icon to display in the checkbox.
      */
     checkIcon?: IconType<DataTableProps<TValue>> | undefined;
-    /**
-     * Whether to cell selection is enabled or not.
-     * @defaultValue false
-     */
-    cellSelection?: boolean | undefined;
     /**
      * Style class of the component.
      */
@@ -1218,11 +1259,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     selectOnEdit?: boolean | undefined;
     /**
-     * Selected row in single mode or an array of values in multiple mode.
-     * @defaultValue true
-     */
-    selection?: DataTableSelection<TValue> | undefined;
-    /**
      * When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.
      * @defaultValue true
      */
@@ -1231,10 +1267,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * A field property from the row to add Select &#123;field&#125; and Unselect &#123;field&#125; ARIA labels to checkbox/radio buttons.
      */
     selectionAriaLabel?: string | undefined;
-    /**
-     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
-     */
-    selectionMode?: 'single' | 'multiple' | 'checkbox' | 'radiobutton' | undefined;
     /**
      * When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.
      * @defaultValue false
@@ -1489,11 +1521,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onSelectAllChange?(event: DataTableSelectAllChangeEvent): void;
     /**
-     * Callback to invoke when selection changes.
-     * @param {DataTableSelectionChangeEvent<TValue>} event - Custom selection change event.
-     */
-    onSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
-    /**
      * Callback to invoke on sort.
      * @param {DataTableStateEvent} event - Custom state event.
      */
@@ -1557,6 +1584,71 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     unstyled?: boolean;
 }
+
+interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection?: false | undefined;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode?: 'single' | 'radiobutton' | undefined;
+    /**
+     * Selected single value.
+     */
+    selection?: TValue[number] | undefined | null;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionSingleChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionSingleChangeEvent<TValue>): void;
+}
+
+interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection?: false | undefined;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode: 'multiple' | 'checkbox' | null;
+    /**
+     * Selected array of values.
+     */
+    selection: TValue;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionMultipleChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionMultipleChangeEvent<TValue>): void;
+}
+
+interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection: true;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode: 'single' | 'multiple';
+    /**
+     * Selected cells.
+     */
+    selection: DataTableCellSelection<TValue> | null;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionCellChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionCellChangeEvent<TValue>): void;
+}
+
+export type DataTableProps<TValue extends DataTableValueArray> = DataTablePropsSingle<TValue> | DataTablePropsMultiple<TValue> | DataTablePropsCell<TValue>;
 
 /**
  * **PrimeReact - DataTable<TValue**
