@@ -32,15 +32,16 @@ export default function FloatLabelDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
 export default function FloatLabelDemo() {
-    const [date, setDate] = useState<string | Date | Date[] | null>(null);
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     return (
         <div className="card flex justify-content-center">
             <span className="p-float-label">
-                <Calendar inputId="birth_date" value={date} onChange={(e: CalendarChangeEvent) => setDate(e.value)} />
+                <Calendar inputId="birth_date" value={date} onChange={(e) => setDate(e.value)} />
                 <label htmlFor="birth_date">Birth Date</label>
             </span>
         </div>

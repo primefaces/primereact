@@ -44,10 +44,11 @@ export default function DateTemplateDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
 export default function DateTemplateDemo() {
-    const [date, setDate] = useState<string | Date | Date[] | null>(null);
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     const dateTemplate = (date: Date) => {
         if (date.day > 10 && date.day < 15) {
@@ -61,7 +62,7 @@ export default function DateTemplateDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} dateTemplate={dateTemplate} />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} dateTemplate={dateTemplate} />
         </div>
     )
 }
