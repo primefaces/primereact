@@ -348,6 +348,7 @@ export interface CalendarYearOptions {
     selectable: boolean;
 }
 
+/**
  * Custom month change event.
  * @see {@link CalendarProps.onMonthChange}
  * @event
