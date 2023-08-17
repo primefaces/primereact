@@ -1,5 +1,22 @@
 # Changelog
+## [9.6.2](https://github.com/primefaces/primereact/tree/9.6.2) (2023-08-17)
 
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.1...9.6.2)
+
+**Implemented New Features and Enhancements:**
+
+- DataTable: Type issue for Selection Mode [\#4777](https://github.com/primefaces/primereact/issues/4777)
+
+**Fixed bugs:**
+
+- Carousel: created style lifecycle issue [\#4779](https://github.com/primefaces/primereact/issues/4779)
+- Dropdown: MenuItem not respecting style attribute [\#4766](https://github.com/primefaces/primereact/issues/4766)
+- Slider: onSlideEnd behaviour has changed [\#4680](https://github.com/primefaces/primereact/issues/4680)
+- Tooltip: autoHide={false} broken on version 9 [\#4604](https://github.com/primefaces/primereact/issues/4604)
+- Calendar: Mask is not displayed [\#4579](https://github.com/primefaces/primereact/issues/4579)
+- Calendar: The date cannot be selected from the first click in the opened popup [\#4568](https://github.com/primefaces/primereact/issues/4568)
+- DataTable: Column resize is not working properly. [\#4471](https://github.com/primefaces/primereact/issues/4471)
+- Carousel: Swipe functionality [\#3788](https://github.com/primefaces/primereact/issues/3788)
 ## [9.6.1](https://github.com/primefaces/primereact/tree/9.6.1) (2023-08-01)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.6.0...9.6.1)
