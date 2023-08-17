@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -13,7 +14,6 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -47,6 +47,7 @@ export const Calendar = React.memo(
         const ignoreMaskChange = React.useRef(false);
         const previousButton = React.useRef(false);
         const nextButton = React.useRef(false);
+        const onChangeRef = React.useRef(null);
 
         const [currentView, setCurrentView] = React.useState('date');
         const [currentMonth, setCurrentMonth] = React.useState(null);
@@ -1424,7 +1425,7 @@ export const Calendar = React.memo(
 
                 viewStateChanged.current = true;
 
-                props.onChange({
+                onChangeRef.current({
                     originalEvent: event,
                     value: newValue,
                     stopPropagation: () => {
@@ -2503,6 +2504,10 @@ export const Calendar = React.memo(
                 setTimeout(() => DomHandler.focus(inputRef.current, props.autoFocus), 200);
             }
         });
+
+        React.useEffect(() => {
+            onChangeRef.current = props.onChange;
+        }, [props.onChange]);
 
         React.useEffect(() => {
             let unbindMaskEvents = null;
