@@ -2889,7 +2889,11 @@ export const Calendar = React.memo(
                         scope: 'col',
                         className: cx('weekHeader')
                     },
-                    ptm('weekHeader')
+                    ptm('weekHeader', {
+                        context: {
+                            disabled: props.showWeek
+                        }
+                    })
                 );
 
                 const weekLabel = mergeProps(ptm('weekLabel'));
@@ -2909,11 +2913,19 @@ export const Calendar = React.memo(
         const createDateCellContent = (date, className, groupIndex) => {
             const content = props.dateTemplate ? props.dateTemplate(date) : date.day;
 
-            const dayLabelProps = mergeProps({
-                className: cx('dayLabel', { className }),
-                onClick: (e) => onDateSelect(e, date),
-                onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex)
-            });
+            const dayLabelProps = mergeProps(
+                {
+                    className: cx('dayLabel', { className }),
+                    onClick: (e) => onDateSelect(e, date),
+                    onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex)
+                },
+                ptm('dayLabel', {
+                    context: {
+                        selected: isSelected(date),
+                        disabled: !date.selectable
+                    }
+                })
+            );
 
             return (
                 <span {...dayLabelProps}>
@@ -2932,7 +2944,13 @@ export const Calendar = React.memo(
                     {
                         className: cx('day', { date })
                     },
-                    ptm('day')
+                    ptm('day', {
+                        context: {
+                            date,
+                            today: date.today,
+                            otherMonth: date.otherMonth
+                        }
+                    })
                 );
 
                 return (
@@ -2954,7 +2972,11 @@ export const Calendar = React.memo(
                     {
                         className: cx('weekLabelContainer')
                     },
-                    ptm('weekLabelContainer')
+                    ptm('weekLabelContainer', {
+                        context: {
+                            disabled: props.showWeek
+                        }
+                    })
                 );
 
                 const weekNumberCell = (
@@ -3594,7 +3616,14 @@ export const Calendar = React.memo(
                                     onClick: (event) => onMonthSelect(event, i),
                                     onKeyDown: (event) => onMonthCellKeydown(event, i)
                                 },
-                                ptm('month')
+                                ptm('month', {
+                                    context: {
+                                        month: m,
+                                        monthIndex: i,
+                                        selected: isMonthSelected(i),
+                                        disabled: !m.selectable
+                                    }
+                                })
                             );
 
                             return (
@@ -3627,7 +3656,14 @@ export const Calendar = React.memo(
                                     className: cx('year', { isYearSelected, isSelectable, y }),
                                     onClick: (event) => onYearSelect(event, y)
                                 },
-                                ptm('year')
+                                ptm('year', {
+                                    context: {
+                                        year: y,
+                                        yearIndex: i,
+                                        selected: isYearSelected(i),
+                                        disabled: !y.selectable
+                                    }
+                                })
                             );
 
                             return (

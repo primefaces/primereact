@@ -36,6 +36,21 @@ export const TreeTableRow = React.memo((props) => {
         });
     };
 
+    const getRowPTOptions = (key) => {
+        return ptmo(props.pt, key, {
+            props: props,
+            parent: props.metaData,
+            context: {
+                index: props.index,
+                selected: props.selected,
+                selectable: props.metaData.props.rowHover,
+                frozen: getColumnProp('frozen'),
+                scrollable: props.metaData.props.scrollable,
+                showGridlines: props.metaData.props.showGridlines
+            }
+        });
+    };
+
     const isLeaf = () => {
         return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
     };
@@ -512,7 +527,7 @@ export const TreeTableRow = React.memo((props) => {
             onMouseEnter: (e) => onMouseEnter(e),
             onMouseLeave: (e) => onMouseLeave(e)
         },
-        ptm('row')
+        getRowPTOptions('row')
     );
 
     return (

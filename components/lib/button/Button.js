@@ -16,6 +16,7 @@ export const Button = React.memo(
 
         const { ptm, cx, isUnstyled } = ButtonBase.setMetaData({
             props,
+            ...inProps.__parentMetadata,
             context: {
                 disabled
             }

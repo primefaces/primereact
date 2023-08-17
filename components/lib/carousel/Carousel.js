@@ -67,6 +67,14 @@ export const Carousel = React.memo(
         const isControlled = props.onPageChange && !isAutoplay;
         const currentPage = isControlled ? props.page : pageState;
 
+        const getPTOptions = (key, index) => {
+            return ptm(key, {
+                context: {
+                    active: currentPage === index
+                }
+            });
+        };
+
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
                 calculatePosition();
@@ -603,7 +611,7 @@ export const Carousel = React.memo(
                     key,
                     className: cx('indicator', { isActive })
                 },
-                ptm('indicator')
+                getPTOptions('indicator')
             );
             const indicatorButtonProps = mergeProps(
                 {
@@ -612,7 +620,7 @@ export const Carousel = React.memo(
                     onClick: (e) => onDotClick(e, index),
                     'aria-label': `${ariaLabel('pageLabel')} ${index + 1}`
                 },
-                ptm('indicatorButton')
+                getPTOptions('indicatorButton')
             );
 
             return (
