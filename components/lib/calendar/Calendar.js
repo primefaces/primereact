@@ -2519,6 +2519,7 @@ export const Calendar = React.memo(
         });
 
         React.useEffect(() => {
+            // see https://github.com/primefaces/primereact/issues/4030
             onChangeRef.current = props.onChange;
         }, [props.onChange]);
 
