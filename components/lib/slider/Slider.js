@@ -61,7 +61,9 @@ export const Slider = React.memo(
             if (dragging.current) {
                 dragging.current = false;
 
-                props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: props.value });
+                const newValue = setValue(event);
+
+                props.onSlideEnd && props.onSlideEnd({ originalEvent: event, value: newValue });
 
                 unbindDocumentMouseMoveListener();
                 unbindDocumentMouseUpListener();
