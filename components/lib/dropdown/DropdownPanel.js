@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption, PrimeReactContext } from '../api/Api';
+import PrimeReact, { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
