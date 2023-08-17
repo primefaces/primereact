@@ -3664,7 +3664,6 @@ export const Calendar = React.memo(
         const yearPicker = createYearPicker();
         const rootProps = mergeProps(
             {
-                ref: elementRef,
                 id: props.id,
                 className,
                 style: props.style
@@ -3674,7 +3673,7 @@ export const Calendar = React.memo(
         );
 
         return (
-            <span {...rootProps}>
+            <span ref={elementRef} {...rootProps}>
                 {content}
                 <CalendarPanel
                     ref={overlayRef}
