@@ -57,6 +57,11 @@ export default class ObjectUtils {
     }
 
     static resolveFieldData(data, field) {
+        if (!data || !field) {
+            // short circuit if there is nothing to resolve
+            return null;
+        }
+
         try {
             const value = data[field];
 
@@ -66,7 +71,7 @@ export default class ObjectUtils {
             // do nothing and continue to other methods to resolve field data
         }
 
-        if (data && Object.keys(data).length && field) {
+        if (Object.keys(data).length) {
             if (this.isFunction(field)) {
                 return field(data);
             } else if (ObjectUtils.isNotEmpty(data[field])) {
@@ -87,9 +92,9 @@ export default class ObjectUtils {
 
                 return value;
             }
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     static findDiffKeys(obj1, obj2) {
