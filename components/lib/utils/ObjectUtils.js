@@ -57,6 +57,15 @@ export default class ObjectUtils {
     }
 
     static resolveFieldData(data, field) {
+        try {
+            const value = data[field];
+
+            if (value) return value;
+        } catch {
+            // Performance optimization: https://github.com/primefaces/primereact/issues/4797
+            // do nothing and continue to other methods to resolve field data
+        }
+
         if (data && Object.keys(data).length && field) {
             if (this.isFunction(field)) {
                 return field(data);
