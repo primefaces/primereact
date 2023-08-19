@@ -483,6 +483,9 @@ export const InputNumber = React.memo(
             const _isDecimalSign = isDecimalSign(key);
             const _isMinusSign = isMinusSign(key);
 
+            const code = event.which || event.keyCode;
+            const char = String.fromCharCode(code);
+
             if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
                 insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
             }
