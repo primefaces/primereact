@@ -218,51 +218,51 @@ export interface APIOptions {
     /**
      * Sets the "appendTo" state of the context.
      */
-    setAppendTo: Dispatch<SetStateAction<AppendToType>>;
+    setAppendTo?: Dispatch<SetStateAction<AppendToType>>;
     /**
      * Sets the "autoZIndex" state of the context.
      */
-    setAutoZIndex: Dispatch<SetStateAction<boolean>>;
+    setAutoZIndex?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "cssTransition" state of the context.
      */
-    setCssTransition: Dispatch<SetStateAction<boolean>>;
+    setCssTransition?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "filterMatchModeOptions" state of the context.
      */
-    setFilterMatchModeOptions: Dispatch<SetStateAction<FilterMatchModeOptions>>;
+    setFilterMatchModeOptions?: Dispatch<SetStateAction<FilterMatchModeOptions>>;
     /**
      * Sets the "hideOverlaysOnDocumentScrolling" state of the context.
      */
-    setHideOverlaysOnDocumentScrolling: Dispatch<SetStateAction<boolean>>;
+    setHideOverlaysOnDocumentScrolling?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "inputStyle" state of the context.
      */
-    setInputStyle: Dispatch<SetStateAction<InputStyleType>>;
+    setInputStyle?: Dispatch<SetStateAction<InputStyleType>>;
     /**
      * Sets the "locale" state of the context.
      */
-    setLocale: Dispatch<SetStateAction<string>>;
+    setLocale?: Dispatch<SetStateAction<string>>;
     /**
      * Sets the "nonce" state of the context.
      */
-    setNonce: Dispatch<SetStateAction<string>>;
+    setNonce?: Dispatch<SetStateAction<string>>;
     /**
      * Sets the "nullSortOrder" state of the context.
      */
-    setNullSortOrder: Dispatch<SetStateAction<number>>;
+    setNullSortOrder?: Dispatch<SetStateAction<number>>;
     /**
      * Sets the "ripple" state of the context.
      */
-    setRipple: Dispatch<SetStateAction<boolean>>;
+    setRipple?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "zIndex" state of the context.
      */
-    setZIndex: Dispatch<SetStateAction<ZIndexOptions>>;
+    setZIndex?: Dispatch<SetStateAction<ZIndexOptions>>;
     /**
      * Sets the "pt" state of the context.
      */
-    setPt: Dispatch<SetStateAction<PrimeReactPTOptions>>;
+    setPt?: Dispatch<SetStateAction<PrimeReactPTOptions>>;
 }
 
 /**
