@@ -10238,20 +10238,6 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
-                        },
-                        {
-                            "name": "hiddenInputWrapper",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
-                        },
-                        {
-                            "name": "hiddenInput",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
-                            "description": "Uses to pass attributes to the hidden input's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -11341,11 +11327,11 @@
                             "description": "Uses to pass attributes to the color's DOM element."
                         },
                         {
-                            "name": "colorHandler",
+                            "name": "colorHandle",
                             "optional": true,
                             "readonly": false,
                             "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the color handler's DOM element."
+                            "description": "Uses to pass attributes to the color handle's DOM element."
                         },
                         {
                             "name": "hue",
@@ -11355,11 +11341,11 @@
                             "description": "Uses to pass attributes to the hue's DOM element."
                         },
                         {
-                            "name": "hueHandler",
+                            "name": "hueHandle",
                             "optional": true,
                             "readonly": false,
                             "type": "ColorPickerPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the hue handler's DOM element."
+                            "description": "Uses to pass attributes to the hue handle's DOM element."
                         },
                         {
                             "name": "tooltip",
@@ -31389,6 +31375,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "InputTextareaProps"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "InputTextareaContext"
                         }
                     ],
                     "callbacks": []
@@ -31410,6 +31402,20 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "InputTextareaContext": {
+                    "description": "Defines current options in Textarea component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the component as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -32156,7 +32162,7 @@
                             "name": "filterInput",
                             "optional": true,
                             "readonly": false,
-                            "type": "ListBoxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "type": "InputTextPassThroughOptions",
                             "description": "Uses to pass attributes to the filter input's DOM element."
                         },
                         {
@@ -53697,13 +53703,6 @@
                             "readonly": false,
                             "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the uncheck icon's DOM element."
-                        },
-                        {
-                            "name": "srOnlyAria",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLSpanElement>>",
-                            "description": "Uses to pass attributes to the sr only aria's DOM element."
                         }
                     ],
                     "callbacks": []
