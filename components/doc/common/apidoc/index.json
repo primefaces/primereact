@@ -10238,6 +10238,20 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hiddenInputWrapper",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the hidden input wrapper's DOM element."
+                        },
+                        {
+                            "name": "hiddenInput",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
+                            "description": "Uses to pass attributes to the hidden input's DOM element."
                         }
                     ],
                     "callbacks": []
@@ -43469,8 +43483,22 @@
                             "name": "selected",
                             "optional": false,
                             "readonly": false,
+                            "type": "boolean",
+                            "description": "Current selected value of the item as a boolean."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled value of option or disabled property as a boolean."
+                        },
+                        {
+                            "name": "option",
+                            "optional": false,
+                            "readonly": false,
                             "type": "any",
-                            "description": "Current selected value."
+                            "description": "Available option."
                         }
                     ],
                     "callbacks": []
@@ -53703,6 +53731,13 @@
                             "readonly": false,
                             "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the uncheck icon's DOM element."
+                        },
+                        {
+                            "name": "srOnlyAria",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the sr only aria's DOM element."
                         }
                     ],
                     "callbacks": []
