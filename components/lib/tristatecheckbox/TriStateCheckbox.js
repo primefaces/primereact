@@ -127,6 +127,14 @@ export const TriStateCheckbox = React.memo(
             ptm('checkbox')
         );
 
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
         const rootProps = mergeProps(
             {
                 className: classNames(props.className, cx('root')),
@@ -141,11 +149,7 @@ export const TriStateCheckbox = React.memo(
             <>
                 <div id={props.id} ref={elementRef} {...rootProps}>
                     <div {...checkboxProps}>{checkIcon}</div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>

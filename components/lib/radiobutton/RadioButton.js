@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
@@ -125,9 +125,7 @@ export const RadioButton = React.memo(
 
         const rootProps = mergeProps(
             {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root', { focusedState }),
+                className: classNames(props.className, cx('root', { focusedState })),
                 style: props.style,
                 onClick: onClick
             },
@@ -137,15 +135,13 @@ export const RadioButton = React.memo(
 
         const hiddenInputWrapperProps = mergeProps(
             {
-                className: cx('hiddenInputWrapper')
+                className: 'p-hidden-accessible'
             },
             ptm('hiddenInputWrapper')
         );
 
         const hiddenInputProps = mergeProps(
             {
-                ref: inputRef,
-                id: props.inputId,
                 type: 'radio',
                 name: props.name,
                 defaultChecked: props.checked,
@@ -176,9 +172,9 @@ export const RadioButton = React.memo(
 
         return (
             <>
-                <div {...rootProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
                     <div {...hiddenInputWrapperProps}>
-                        <input {...hiddenInputProps} />
+                        <input id={props.inputId} ref={inputRef} {...hiddenInputProps} />
                     </div>
                     <div {...inputProps}>
                         <div {...iconProps}></div>

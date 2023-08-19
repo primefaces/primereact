@@ -119,6 +119,7 @@ export const Password = React.memo(
 
         const onOverlayEnter = () => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -296,7 +297,6 @@ export const Password = React.memo(
             const footer = ObjectUtils.getJSXElement(props.footer, props);
             const panelProps = mergeProps(
                 {
-                    ref: overlayRef,
                     className: cx('panel', { context }),
                     style: props.panelStyle,
                     onClick: onPanelClick
@@ -313,7 +313,7 @@ export const Password = React.memo(
             const meterLabelProps = mergeProps(
                 {
                     className: cx('meterLabel', { strength }),
-                    style: sx('meterLabel', { width })
+                    style: { width }
                 },
                 ptm('meterLabel')
             );
@@ -348,7 +348,7 @@ export const Password = React.memo(
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
                 >
-                    <div {...panelProps}>
+                    <div ref={overlayRef} {...panelProps}>
                         {header}
                         {content}
                         {footer}

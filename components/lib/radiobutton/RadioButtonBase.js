@@ -3,16 +3,11 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState }) =>
-        classNames(
-            'p-radiobutton p-component',
-            {
-                'p-radiobutton-checked': props.checked,
-                'p-radiobutton-disabled': props.disabled,
-                'p-radiobutton-focused': focusedState
-            },
-            props.className
-        ),
-    hiddenInputWrapper: 'p-hidden-accessible',
+        classNames('p-radiobutton p-component', {
+            'p-radiobutton-checked': props.checked,
+            'p-radiobutton-disabled': props.disabled,
+            'p-radiobutton-focused': focusedState
+        }),
     input: ({ props, focusedState }) =>
         classNames('p-radiobutton-box', {
             'p-highlight': props.checked,

@@ -781,9 +781,12 @@ const Tailwind = {
             })
         }),
         cancelitem: ({ context }) => ({
-            className: classNames('inline-flex items-center cursor-pointer', {
-                'outline-none outline-offset-0 shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]': context.focused
-            })
+            className: classNames(
+                'inline-flex items-center cursor-pointer'
+                // {
+                //     'outline-none outline-offset-0 shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]': context.focused
+                // }
+            )
         }),
         cancelicon: {
             className: classNames('text-red-500', 'w-5 h-5', 'transition duration-200 ease-in')
@@ -819,8 +822,8 @@ const Tailwind = {
                 'first:rounded-l-md first:rounded-tr-none first:rounded-br-none last:border-r last:rounded-tl-none last:rounded-bl-none last:rounded-r-md',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
-                    'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-gray-300 dark:border-blue-900/40 hover:bg-gray-50 dark:hover:bg-gray-800/80 ': !context.active,
-                    'bg-blue-500 border-blue-500 text-white hover:bg-blue-600': context.active,
+                    'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-gray-300 dark:border-blue-900/40 hover:bg-gray-50 dark:hover:bg-gray-800/80 ': !context.selected,
+                    'bg-blue-500 border-blue-500 text-white hover:bg-blue-600': context.selected,
                     'opacity-60 select-none pointer-events-none cursor-default': context.disabled
                 }
             )
@@ -887,13 +890,13 @@ const Tailwind = {
         }),
         panel: 'p-5 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 shadow-md rounded-md',
         meter: 'mb-2 bg-gray-300 dark:bg-gray-700 h-3',
-        meterlabel: ({ instance, props }) => ({
+        meterlabel: ({ state, props }) => ({
             className: classNames(
                 'transition-width duration-1000 ease-in-out h-full',
                 {
-                    'bg-red-500': instance?.meter?.strength == 'weak',
-                    'bg-orange-500': instance?.meter?.strength == 'medium',
-                    'bg-green-500': instance?.meter?.strength == 'strong'
+                    'bg-red-500': state.meter?.strength == 'weak',
+                    'bg-orange-500': state.meter?.strength == 'medium',
+                    'bg-green-500': state.meter?.strength == 'strong'
                 },
                 { 'pr-[2.5rem] ': props.toggleMask }
             )
@@ -979,8 +982,8 @@ const Tailwind = {
                 'flex justify-center items-center',
                 'border-2 w-6 h-6 text-gray-700 rounded-full transition duration-200 ease-in-out',
                 {
-                    'border-gray-300 bg-white dark:border-blue-900/40 dark:bg-gray-900 dark:text-white/80': props.value !== props.modelValue,
-                    'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400': props.value == props.modelValue
+                    'border-gray-300 bg-white dark:border-blue-900/40 dark:bg-gray-900 dark:text-white/80': !props.checked,
+                    'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400': props.checked
                 },
                 {
                     'hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]': !props.disabled,
@@ -990,8 +993,8 @@ const Tailwind = {
         }),
         icon: ({ props }) => ({
             className: classNames('transform rounded-full', 'block w-3 h-3 transition duration-200 bg-white dark:bg-gray-900', {
-                'backface-hidden scale-10 invisible': props.value !== props.modelValue,
-                'transform scale-100 visible': props.value == props.modelValue
+                'backface-hidden scale-10 invisible': !props.checked,
+                'transform scale-100 visible': props.checked
             })
         })
     },

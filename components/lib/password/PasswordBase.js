@@ -60,10 +60,6 @@ const styles = `
 }
 `;
 
-const inlineStyles = {
-    meterLabel: ({ width }) => ({ width })
-};
-
 export const PasswordBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Password',
@@ -101,7 +97,6 @@ export const PasswordBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });
