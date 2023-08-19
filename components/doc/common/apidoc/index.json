@@ -741,84 +741,84 @@
                         },
                         {
                             "name": "setAppendTo",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<AppendToType>>",
                             "description": "Sets the \"appendTo\" state of the context."
                         },
                         {
                             "name": "setAutoZIndex",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<boolean>>",
                             "description": "Sets the \"autoZIndex\" state of the context."
                         },
                         {
                             "name": "setCssTransition",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<boolean>>",
                             "description": "Sets the \"cssTransition\" state of the context."
                         },
                         {
                             "name": "setFilterMatchModeOptions",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<FilterMatchModeOptions>>",
                             "description": "Sets the \"filterMatchModeOptions\" state of the context."
                         },
                         {
                             "name": "setHideOverlaysOnDocumentScrolling",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<boolean>>",
                             "description": "Sets the \"hideOverlaysOnDocumentScrolling\" state of the context."
                         },
                         {
                             "name": "setInputStyle",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<InputStyleType>>",
                             "description": "Sets the \"inputStyle\" state of the context."
                         },
                         {
                             "name": "setLocale",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<string>>",
                             "description": "Sets the \"locale\" state of the context."
                         },
                         {
                             "name": "setNonce",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<string>>",
                             "description": "Sets the \"nonce\" state of the context."
                         },
                         {
                             "name": "setNullSortOrder",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<number>>",
                             "description": "Sets the \"nullSortOrder\" state of the context."
                         },
                         {
                             "name": "setRipple",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<boolean>>",
                             "description": "Sets the \"ripple\" state of the context."
                         },
                         {
                             "name": "setZIndex",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<ZIndexOptions>>",
                             "description": "Sets the \"zIndex\" state of the context."
                         },
                         {
                             "name": "setPt",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "Dispatch<SetStateAction<PrimeReactPTOptions>>",
                             "description": "Sets the \"pt\" state of the context."
