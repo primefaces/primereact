@@ -46,14 +46,6 @@ export interface CheckboxPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Uses to pass attributes to the hidden input wrapper's DOM element.
-     */
-    hiddenInputWrapper?: CheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Uses to pass attributes to the hidden input's DOM element.
-     */
-    hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
 }
 
 /**

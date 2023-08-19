@@ -227,13 +227,13 @@ export const Calendar = React.memo(
                 if (navigation.current.button) {
                     initFocusableCell();
 
-                    if (navigation.current.backward) DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev').focus();
-                    else DomHandler.findSingle(overlayRef.current, '.p-datepicker-next').focus();
+                    if (navigation.current.backward) previousButton.current.focus();
+                    else nextButton.current.focus();
                 } else {
                     let cell;
 
                     if (navigation.current.backward) {
-                        let cells = DomHandler.find(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
+                        let cells = DomHandler.find(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)'); /* @todo */
 
                         cell = cells[cells.length - 1];
                     } else {
@@ -2663,7 +2663,7 @@ export const Calendar = React.memo(
             );
 
             return (
-                <button {...previousButtonProps}>
+                <button ref={previousButton} {...previousButtonProps}>
                     {backwardNavigatorIcon}
                     <Ripple />
                 </button>
@@ -2690,7 +2690,7 @@ export const Calendar = React.memo(
             );
 
             return (
-                <button {...nextButtonProps}>
+                <button ref={nextButton} {...nextButtonProps}>
                     {forwardNavigatorIcon}
                     <Ripple />
                 </button>

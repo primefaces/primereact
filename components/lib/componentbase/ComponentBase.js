@@ -468,18 +468,7 @@ export const ComponentBase = {
     extend: (props = {}) => {
         const css = props.css;
         const defaultProps = { ...props.defaultProps, ...ComponentBase.defaultProps };
-        const inlineStyles = {
-            hiddenAccessible: {
-                border: '0',
-                clip: 'rect(0 0 0 0)',
-                height: '1px',
-                margin: '-1px',
-                overflow: 'hidden',
-                padding: '0',
-                position: 'absolute',
-                width: '1px'
-            }
-        };
+        const inlineStyles = {};
 
         const getProps = (props, context = {}) => {
             ComponentBase.context = context;
@@ -518,7 +507,9 @@ export const ComponentBase = {
             };
 
             const self = getValue(obj, fkey, params);
-            const globalPT = getValue(defaultPT(), key, params) || (/./g.test(key) && !!params[key.split('.')[0]] ? getValue(_globalPT(), key, params) : undefined);
+            const baseGlobalPTValue = getValue(defaultPT(), key, params);
+            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const globalPT = baseGlobalPTValue || (isNestedParam ? getValue(globalPT, key, params) : undefined);
 
             const datasetProps = {
                 ...(fkey === 'root' && { [`${datasetPrefix}name`]: componentName }),
@@ -529,9 +520,12 @@ export const ComponentBase = {
                 ...ObjectUtils.getMergedProps(self, globalPT)
             };
 
+            const mergedClassName = [globalPT.className, self.className].filter(Boolean).join(' ').trim();
+
             if (Object.keys(datasetProps).length) {
                 merged = {
-                    ...merged,
+                    ...ObjectUtils.getMergedProps(self, globalPT),
+                    className: mergedClassName,
                     ...datasetProps
                 };
             }
@@ -585,10 +579,8 @@ export const useHandleStyle = (styles, isUnstyled = false, { name, styled = fals
     const { load } = useStyle(styles, { name: name, manual: true });
 
     useEffect(() => {
-        if (!isUnstyled()) {
-            loadCommonStyle();
-            if (!styled) load();
-        }
+        loadCommonStyle();
+        if (!styled) load();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

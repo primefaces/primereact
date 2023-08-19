@@ -49,7 +49,17 @@ export const ListBoxHeader = React.memo((props) => {
 
         let content = (
             <div {...filterContainerProps}>
-                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} pt={ptm('filterInput')} />
+                <InputText
+                    type="text"
+                    value={props.filter}
+                    onChange={onFilter}
+                    className={cx('filterInput')}
+                    disabled={props.disabled}
+                    placeholder={props.filterPlaceholder}
+                    {...props.filterInputProps}
+                    pt={ptm('filterInput')}
+                    unstyled={props.unstyled}
+                />
                 {filterIcon}
             </div>
         );

@@ -74,7 +74,7 @@ export const Button = React.memo(
                 return <span {...labelProps}>{props.label}</span>;
             }
 
-            return !props.children && !props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
+            return !props.children && !props.label && <span className={cx('label')} dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
         };
 
         const createBadge = () => {

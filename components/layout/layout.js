@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import { classNames } from '../lib/utils/ClassNames';
+import { classNames } from '../lib/utils/Utils';
 import NewsSection from '../news/newssection';
 import AppContentContext from './appcontentcontext';
 import Config from './config';

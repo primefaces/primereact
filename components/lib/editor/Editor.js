@@ -4,6 +4,7 @@ import { DomHandler, mergeProps } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
 const QuillJS = (function () {
     try {
@@ -221,16 +222,14 @@ export const Editor = React.memo(
         const content = <div {...contentProps}></div>;
         const rootProps = mergeProps(
             {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             EditorBase.getOtherProps(props),
             ptm('root')
         );
 
         return (
-            <div {...rootProps}>
+            <div id={props.id} ref={elementRef} {...rootProps}>
                 {header}
                 {content}
             </div>

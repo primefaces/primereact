@@ -49,10 +49,6 @@ export interface TriStateCheckboxPassThroughOptions {
      * Uses to pass attributes to the uncheck icon's DOM element.
      */
     uncheckIcon?: TriStateCheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Uses to pass attributes to the sr only aria's DOM element.
-     */
-    srOnlyAria?: TriStateCheckboxPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

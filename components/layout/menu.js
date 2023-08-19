@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { memo, useEffect } from 'react';
 import { StyleClass } from '../lib/styleclass/StyleClass';
-import { classNames } from '../lib/utils/ClassNames';
+import { classNames } from '../lib/utils/Utils';
 import MenuData from './menu.json';
 
 const Menu = memo((props) => {

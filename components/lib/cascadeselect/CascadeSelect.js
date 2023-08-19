@@ -390,7 +390,6 @@ export const CascadeSelect = React.memo(
                             <CascadeSelectSub
                                 options={props.options}
                                 selectionPath={selectionPath.current}
-                                className={'p-cascadeselect-items'}
                                 optionGroupIcon={props.optionGroupIcon}
                                 optionLabel={props.optionLabel}
                                 optionValue={props.optionValue}

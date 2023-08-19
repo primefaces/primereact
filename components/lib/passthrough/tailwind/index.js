@@ -1,4 +1,4 @@
-import { classNames } from '../../utils/ClassNames';
+import { classNames } from '../../utils/Utils';
 
 export const TRANSITIONS = {
     toggleable: {
@@ -18,6 +18,83 @@ export const TRANSITIONS = {
 };
 
 const Tailwind = {
+    global: {
+        css: `
+        *[data-pd-ripple="true"]{
+            overflow: hidden;
+            position: relative;
+        }
+        span[data-p-ink-active="true"]{
+            animation: ripple 0.4s linear;
+        }
+        @keyframes ripple {
+            100% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
+        }
+
+        .progress-spinner-circle {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: 0;
+            animation: p-progress-spinner-dash 1.5s ease-in-out infinite, p-progress-spinner-color 6s ease-in-out infinite;
+            stroke-linecap: round;
+        }
+
+        @keyframes p-progress-spinner-dash{
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+            
+            50% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -35px;
+            }
+            100% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -124px;
+            }
+        }
+        @keyframes p-progress-spinner-color {
+            100%, 0% {
+                stroke: #ff5757;
+            }
+            40% {
+                stroke: #696cff;
+            }
+            66% {
+                stroke: #1ea97c;
+            }
+            80%, 90% {
+                stroke: #cc8925;
+            }
+        }
+
+        .progressbar-value-animate::after {
+            will-change: left, right;
+            animation: p-progressbar-indeterminate-anim-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+        }
+        .progressbar-value-animate::before {
+            will-change: left, right;
+            animation: p-progressbar-indeterminate-anim 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+        }
+        @keyframes p-progressbar-indeterminate-anim {
+            0% {
+                left: -35%;
+                right: 100%;
+            }
+            60% {
+                left: 100%;
+                right: -90%;
+            }
+            100% {
+                left: 100%;
+                right: -90%;
+            }
+        }
+`
+    },
     //PANELS
     panel: {
         header: ({ props }) => ({
@@ -184,7 +261,7 @@ const Tailwind = {
                         'bg-white border-blue-500 text-blue-500 dark:bg-gray-900 dark:border-blue-300 dark:text-blue-300': parent.state.d_activeIndex === context.index // Condition-based active styles.
                     }
                 ),
-                style: 'margin-bottom:-2px' // Negative margin style.
+                style: { marginBottom: '-2px' } // Negative margin style.
             }),
             headerTitle: {
                 className: classNames('leading-none whitespace-nowrap') // Leading and whitespace styles.
@@ -658,8 +735,8 @@ const Tailwind = {
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 "before:absolute before:content-'' before:top-1/2 before:bg-white before:dark:bg-gray-900 before:w-5 before:h-5 before:left-1 before:-mt-2.5 before:rounded-full before:transition-duration-200",
                 {
-                    'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 hover:dark:bg-gray-700 ': !props.modelValue,
-                    'bg-blue-500 before:transform before:translate-x-5': props.modelValue
+                    'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 hover:dark:bg-gray-700 ': !props.checked,
+                    'bg-blue-500 before:transform before:translate-x-5': props.checked
                 }
             )
         })
@@ -678,6 +755,9 @@ const Tailwind = {
         },
         panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
         list: 'm-0 sm:p-0 list-none',
+        sublist: {
+            className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
+        },
         item: {
             className: classNames(
                 'cursor-pointer font-normal whitespace-nowrap',
@@ -689,9 +769,6 @@ const Tailwind = {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
         groupicon: 'ml-auto',
-        sublist: {
-            className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
-        },
         transition: TRANSITIONS.overlay
     },
     inputmask: {
@@ -835,13 +912,13 @@ const Tailwind = {
                 'inline-flex cursor-pointer select-none items-center align-bottom text-center overflow-hidden relative',
                 'px-4 py-3 rounded-md text-base w-36',
                 'border transition duration-200 ease-in-out',
-                {
-                    'outline-none outline-offset-0 shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]': context.focused
-                },
+                // {
+                //     'outline-none outline-offset-0 shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]': context.focused
+                // },
                 {
                     'bg-white dark:bg-gray-900 border-gray-300 dark:border-blue-900/40 text-gray-700 dark:text-white/80 hover:bg-gray-100 dark:hover:bg-gray-800/80 hover:border-gray-300 dark:hover:bg-gray-800/70 hover:text-gray-700 dark:hover:text-white/80':
-                        !props.modelValue,
-                    'bg-blue-500 border-blue-500 text-white hover:bg-blue-600 hover:border-blue-600': props.modelValue
+                        !props.checked,
+                    'bg-blue-500 border-blue-500 text-white hover:bg-blue-600 hover:border-blue-600': props.checked
                 },
                 { 'opacity-60 select-none pointer-events-none cursor-default': props.disabled }
             )
@@ -850,7 +927,7 @@ const Tailwind = {
         icon: ({ props }) => ({
             className: classNames(' mr-2', {
                 'text-gray-600 dark:text-white/70': !props.modelValue,
-                'text-white': props.modelValue
+                'text-white': props.checked
             })
         })
     },
@@ -863,8 +940,8 @@ const Tailwind = {
                 'flex items-center justify-center',
                 'border-2 w-6 h-6 rounded-lg transition-colors duration-200',
                 {
-                    'border-blue-500 bg-blue-500 text-white dark:border-blue-400 dark:bg-blue-400': props.modelValue || !props.modelValue,
-                    'border-gray-300 text-gray-600 bg-white dark:border-blue-900/40 dark:bg-gray-900': props.modelValue == null
+                    'border-blue-500 bg-blue-500 text-white dark:border-blue-400 dark:bg-blue-400': props.value || !props.value,
+                    'border-gray-300 text-gray-600 bg-white dark:border-blue-900/40 dark:bg-gray-900': props.value == null
                 },
                 {
                     'hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]': !props.disabled,
@@ -987,10 +1064,12 @@ const Tailwind = {
             })
         }),
         input: {
-            className: classNames(
-                'font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none rounded-lg',
-                'hover:border-blue-500' //Hover
-            )
+            root: {
+                className: classNames(
+                    'font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none rounded-lg',
+                    'hover:border-blue-500' //Hover
+                )
+            }
         },
         panel: ({ props }) => ({
             className: classNames('bg-white dark:bg-gray-900', 'min-w-[350px]', {
@@ -1121,13 +1200,15 @@ const Tailwind = {
         },
         filtercontainer: 'relative',
         filterinput: {
-            className: classNames(
-                'pr-7 -mr-7',
-                'w-full',
-                'font-sans text-base text-gray-700 bg-white py-3 px-3 border border-gray-300 transition duration-200 rounded-lg appearance-none',
-                'dark:bg-gray-900 dark:border-blue-900/40 dark:hover:border-blue-300 dark:text-white/80',
-                'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
-            )
+            root: {
+                className: classNames(
+                    'pr-7 -mr-7',
+                    'w-full',
+                    'font-sans text-base text-gray-700 bg-white py-3 px-3 border border-gray-300 transition duration-200 rounded-lg appearance-none',
+                    'dark:bg-gray-900 dark:border-blue-900/40 dark:hover:border-blue-300 dark:text-white/80',
+                    'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
+                )
+            }
         },
         filtericon: '-mt-2 absolute top-1/2'
     },
@@ -1232,7 +1313,7 @@ const Tailwind = {
         clearicon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
         transition: TRANSITIONS.overlay
     },
-    textarea: {
+    inputtextarea: {
         root: ({ context }) => ({
             className: classNames(
                 'm-0',
@@ -1287,16 +1368,18 @@ const Tailwind = {
             className: classNames('py-0.375rem px-0', 'flex-1 inline-flex')
         },
         input: ({ props }) => ({
-            className: classNames(
-                'm-0',
-                ' transition-colors duration-200 appearance-none rounded-lg',
-                { 'rounded-tr-none rounded-br-none': props.dropdown },
-                {
-                    'font-sans text-base text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)] hover:border-blue-500 focus:outline-none':
-                        !props.multiple,
-                    'font-sans text-base text-gray-700 dark:text-white/80 border-0 outline-none bg-transparent m-0 p-0 shadow-none rounded-none w-full': props.multiple
-                }
-            )
+            root: {
+                className: classNames(
+                    'm-0',
+                    'transition-colors duration-200 appearance-none rounded-lg',
+                    { 'rounded-tr-none rounded-br-none': props.dropdown },
+                    {
+                        'font-sans text-base text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)] hover:border-blue-500 focus:outline-none':
+                            !props.multiple,
+                        'font-sans text-base text-gray-700 dark:text-white/80 border-0 outline-none bg-transparent m-0 p-0 shadow-none rounded-none w-full': props.multiple
+                    }
+                )
+            }
         }),
         token: {
             className: classNames('py-1 px-2 mr-2 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white/80 rounded-full', 'cursor-default inline-flex items-center')
@@ -1376,14 +1459,14 @@ const Tailwind = {
         selector: 'absolute h-44 w-40 top-2 left-2',
         color: {
             className: 'h-44 w-40',
-            style: 'background: linear-gradient(to top, #000 0%, rgb(0 0 0 / 0) 100%), linear-gradient(to right, #fff 0%, rgb(255 255 255 / 0) 100%)'
+            style: { background: 'linear-gradient(to top, #000 0%, rgb(0 0 0 / 0) 100%), linear-gradient(to right, #fff 0%, rgb(255 255 255 / 0) 100%)' }
         },
         colorhandle: {
             className: classNames('rounded-full border border-solid cursor-pointer h-3 w-3 absolute  opacity-85', 'border-white')
         },
         hue: {
-            className: classNames('h-44 w-6 absolute top-2 left-44 opacity-85'),
-            style: 'background: linear-gradient(0deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red)'
+            className: 'h-44 w-6 absolute top-2 left-44 opacity-85',
+            style: { background: 'linear-gradient(0deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red)' }
         },
         huehandle: 'border-solid border-2 cursor-pointer h-2 w-8 left-0 -ml-1 -mt-1 opacity-85 absolute',
         transition: TRANSITIONS.overlay
@@ -1853,7 +1936,7 @@ const Tailwind = {
                     'bg-white border-blue-500 text-blue-500 dark:bg-gray-900 dark:border-blue-300 dark:text-blue-300': state.d_activeIndex === context.index // Condition-based active styles.
                 }
             ),
-            style: 'top:2px'
+            style: { top: '2px' }
         }),
         icon: 'mr-2'
     },

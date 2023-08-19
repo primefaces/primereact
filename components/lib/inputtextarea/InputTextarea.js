@@ -15,7 +15,10 @@ export const InputTextarea = React.memo(
         const cachedScrollHeight = React.useRef(0);
 
         const { ptm, cx, isUnstyled } = InputTextareaBase.setMetaData({
-            props
+            props,
+            context: {
+                disabled: props.disabled
+            }
         });
 
         useHandleStyle(InputTextareaBase.css.styles, isUnstyled, { name: 'inputtextarea' });

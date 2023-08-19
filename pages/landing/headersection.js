@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { classNames } from '../../components/lib/utils/ClassNames';
+import { classNames } from '../../components/lib/utils/Utils';
 
 const HeaderSection = (props) => {
     const [menuActive, setMenuActive] = useState(false);

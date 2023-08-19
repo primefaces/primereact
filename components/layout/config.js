@@ -3,7 +3,7 @@ import { Button } from '../lib/button/Button';
 import { InputSwitch } from '../lib/inputswitch/InputSwitch';
 import { RadioButton } from '../lib/radiobutton/RadioButton';
 import { Sidebar } from '../lib/sidebar/Sidebar';
-import { classNames } from '../lib/utils/ClassNames';
+import { classNames } from '../lib/utils/Utils';
 
 export default function Config(props) {
     const [scale, setScale] = useState(14);
