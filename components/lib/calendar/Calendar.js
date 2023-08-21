@@ -1836,7 +1836,7 @@ export const Calendar = React.memo(
                 validDate = !isDateDisabled(day, month, year);
             }
 
-            if (props.disabledDays && currentView !== 'month') {
+            if (props.disabledDays && currentView === 'date') {
                 validDay = !isDayDisabled(day, month, year);
             }
 
