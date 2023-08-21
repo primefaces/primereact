@@ -366,7 +366,7 @@ export const AutoComplete = React.memo(
 
                 selectItem(event, getOptionGroupChildren(optionGroup)[item.dataset.index]);
             } else {
-                selectItem(event, props.suggestions[DomHandler.index(item)]);
+                selectItem(event, props.suggestions[item.getAttribute('index')]);
             }
         };
 
@@ -446,7 +446,7 @@ export const AutoComplete = React.memo(
         };
 
         const getScrollableElement = () => {
-            return virtualScrollerRef.current ? overlayRef.current.firstChild : overlayRef.current;
+            return overlayRef.current.firstChild;
         };
 
         const getOptionGroupLabel = (optionGroup) => {

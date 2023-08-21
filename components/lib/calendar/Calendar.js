@@ -1474,7 +1474,7 @@ export const Calendar = React.memo(
 
             if (props.onVisibleChange) {
                 props.onVisibleChange({
-                    visible: false,
+                    visible: type !== 'dateselect', // false only if selecting a value to close panel
                     type,
                     callback: _hideCallback
                 });
@@ -1522,7 +1522,7 @@ export const Calendar = React.memo(
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
                 } else {
-                    if (currentView === 'date') {
+                    if (props.view === 'date') {
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                         overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
                     } else {
@@ -1822,7 +1822,7 @@ export const Calendar = React.memo(
                 validDate = !isDateDisabled(day, month, year);
             }
 
-            if (props.disabledDays && currentView !== 'month') {
+            if (props.disabledDays && currentView === 'date') {
                 validDay = !isDayDisabled(day, month, year);
             }
 
@@ -2350,6 +2350,11 @@ export const Calendar = React.memo(
 
             if (props.view === 'month') {
                 day = 1;
+            }
+
+            if (props.view === 'year') {
+                day = 1;
+                month = 1;
             }
 
             const { dayNamesShort, dayNames, monthNamesShort, monthNames } = localeOptions(props.locale);
@@ -3034,37 +3039,6 @@ export const Calendar = React.memo(
             return months;
         };
 
-        const createMonthViewMonth = (index) => {
-            const className = classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(index), 'p-disabled': !isSelectable(0, index, currentYear) });
-            const monthNamesShort = localeOption('monthNamesShort', props.locale);
-            const monthName = monthNamesShort[index];
-            const monthProps = mergeProps(
-                {
-                    className,
-                    onClick: (event) => onMonthSelect(event, index),
-                    onKeyDown: (event) => onMonthCellKeydown(event, index)
-                },
-                ptm('month')
-            );
-
-            return (
-                <span {...monthProps} key={monthName}>
-                    {monthName}
-                    <Ripple />
-                </span>
-            );
-        };
-
-        const createMonthViewMonths = () => {
-            let months = [];
-
-            for (let i = 0; i <= 11; i++) {
-                months.push(createMonthViewMonth(i));
-            }
-
-            return months;
-        };
-
         const monthPickerValues = () => {
             let monthPickerValues = [];
             const monthNamesShort = localeOption('monthNamesShort', props.locale);
@@ -3587,7 +3561,8 @@ export const Calendar = React.memo(
                             const monthProps = mergeProps(
                                 {
                                     className: classNames('p-monthpicker-month', { 'p-highlight': isMonthSelected(i), 'p-disabled': !isSelectable(0, i, currentYear) }),
-                                    onClick: (event) => onMonthSelect(event, i)
+                                    onClick: (event) => onMonthSelect(event, i),
+                                    onKeyDown: (event) => onMonthCellKeydown(event, i)
                                 },
                                 ptm('month')
                             );
