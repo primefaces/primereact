@@ -326,17 +326,16 @@ export const Carousel = React.memo(
                 elementRef.current.setAttribute(attributeSelector.current, '');
             }
 
-            if (!carouselStyle.current) {
-                createStyle();
-                calculatePosition();
-                changePosition(totalShiftedItemsState);
-                bindWindowResizeListener();
-            }
+            calculatePosition();
+            changePosition(totalShiftedItemsState);
+            bindWindowResizeListener();
         });
 
         useUpdateEffect(() => {
             let stateChanged = false;
             let totalShiftedItems = totalShiftedItemsState;
+
+            createStyle();
 
             if (props.autoplayInterval) {
                 stopAutoplay();
@@ -404,14 +403,14 @@ export const Carousel = React.memo(
             if (!stateChanged && isAutoplay) {
                 startAutoplay();
             }
-        });
 
-        useUnmountEffect(() => {
-            if (props.autoplayInterval) {
-                stopAutoplay();
-            }
+            return () => {
+                if (props.autoplayInterval) {
+                    stopAutoplay();
+                }
 
-            destroyStyle();
+                destroyStyle();
+            };
         });
 
         const createItems = () => {
