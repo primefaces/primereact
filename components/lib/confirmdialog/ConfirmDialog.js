@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { Dialog } from '../dialog/Dialog';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
@@ -7,7 +7,6 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const confirmDialog = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -202,7 +201,8 @@ export const ConfirmDialog = React.memo(
                     footer,
                     onHide: hide,
                     breakpoints: getPropValue('breakpoints'),
-                    pt: currentProps.pt
+                    pt: currentProps.pt,
+                    appendTo: getPropValue('appendTo')
                 },
                 ConfirmDialogBase.getOtherProps(currentProps)
             );
