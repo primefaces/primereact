@@ -471,7 +471,7 @@
                             "type": "any"
                         }
                     ],
-                    "returnType": "null | ReactElement<any, any>"
+                    "returnType": "ReactNode"
                 },
                 "locale": {
                     "name": "locale",
@@ -41911,11 +41911,11 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "indeterminateContainer",
+                            "name": "container",
                             "optional": true,
                             "readonly": false,
                             "type": "ProgressBarPassThroughType<HTMLAttributes<HTMLDivElement>>",
-                            "description": "Uses to pass attributes to the indeterminate container's DOM element."
+                            "description": "Uses to pass attributes to the container's DOM element."
                         },
                         {
                             "name": "value",
