@@ -173,6 +173,7 @@ export const SplitButton = React.memo(
                         onClick={props.onClick}
                         disabled={props.disabled}
                         tabIndex={props.tabIndex}
+                        size={props.size}
                         {...props.buttonProps}
                         pt={ptm('button')}
                         __parentMetadata={{
@@ -192,6 +193,7 @@ export const SplitButton = React.memo(
                         aria-haspopup="true"
                         aria-controls={overlayVisibleState ? menuId : null}
                         {...props.menuButtonProps}
+                        size={props.size}
                         pt={ptm('menuButton')}
                         __parentMetadata={{
                             parent: metadata

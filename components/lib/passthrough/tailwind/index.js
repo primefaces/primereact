@@ -626,7 +626,7 @@ const Tailwind = {
         button: {
             root: ({ parent }) => ({
                 className: classNames('w-16 !h-16 !rounded-full justify-center z-10', {
-                    'rotate-45': parent.state.d_visible
+                    'rotate-45': parent.state.visible
                 })
             }),
             label: {
@@ -652,8 +652,8 @@ const Tailwind = {
         },
         mask: ({ state }) => ({
             className: classNames('absolute left-0 top-0 w-full h-full transition-opacity duration-250 ease-in-out bg-black/40 z-0', {
-                'opacity-0': !state.d_visible,
-                'pointer-events-none opacity-100 transition-opacity duration-400 ease-in-out': state.d_visible
+                'opacity-0': !state.visible,
+                'pointer-events-none opacity-100 transition-opacity duration-400 ease-in-out': state.visible
             })
         })
     },
@@ -667,6 +667,10 @@ const Tailwind = {
             }),
             icon: 'mr-2'
         },
+        menu: {
+            className: classNames('outline-none', 'm-0 p-0 list-none')
+        },
+        menulist: 'relative',
         menubutton: {
             root: ({ parent }) => ({
                 className: classNames('rounded-l-none', { 'rounded-r-full': parent.props.rounded })
@@ -1522,7 +1526,7 @@ const Tailwind = {
                     'w-16 h-16 text-2xl': props.size == 'xlarge'
                 }
                 // {
-                //     '-ml-4 border-2 border-white dark:border-gray-900': parent.instance.$css !== undefined
+                //     '-ml-4 border-2 border-white dark:border-gray-900': parent.instance !== undefined
                 // }
             )
         }),

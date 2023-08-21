@@ -5,7 +5,7 @@ const classes = {
     root: ({ props }) => (props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate') : classNames('p-progressbar p-component p-progressbar-determinate')),
     value: 'p-progressbar-value p-progressbar-value-animate',
     label: 'p-progressbar-label',
-    indeterminateContainer: 'p-progressbar-indeterminate-container'
+    container: 'p-progressbar-indeterminate-container'
 };
 
 const styles = `

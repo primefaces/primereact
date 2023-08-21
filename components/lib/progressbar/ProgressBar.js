@@ -8,7 +8,7 @@ export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ProgressBarBase.getProps(inProps, context);
-        const { ptm, cx, sx, isUnstyled } = ProgressBarBase.setMetaData({
+        const { ptm, cx, isUnstyled } = ProgressBarBase.setMetaData({
             props
         });
 
@@ -29,8 +29,6 @@ export const ProgressBar = React.memo(
             const label = createLabel();
             const rootProps = mergeProps(
                 {
-                    id: props.id,
-                    ref: elementRef,
                     className: cx('root'),
                     style: props.style,
                     role: 'progressbar',
@@ -44,7 +42,7 @@ export const ProgressBar = React.memo(
             const valueProps = mergeProps(
                 {
                     className: cx('value'),
-                    style: sx('value')
+                    style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
                 },
                 ptm('value')
             );
@@ -57,7 +55,7 @@ export const ProgressBar = React.memo(
             );
 
             return (
-                <div {...rootProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
                     <div {...valueProps}>{label != null && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
@@ -66,8 +64,6 @@ export const ProgressBar = React.memo(
         const createIndeterminate = () => {
             const rootProps = mergeProps(
                 {
-                    id: props.id,
-                    ref: elementRef,
                     className: classNames(props.className, cx('root')),
                     style: props.style,
                     role: 'progressbar'
@@ -76,24 +72,24 @@ export const ProgressBar = React.memo(
                 ptm('root')
             );
 
-            const indeterminateContainerProps = mergeProps(
+            const containerProps = mergeProps(
                 {
-                    className: cx('indeterminateContainer')
+                    className: cx('container')
                 },
-                ptm('indeterminateContainer')
+                ptm('container')
             );
 
             const valueProps = mergeProps(
                 {
                     className: cx('value'),
-                    style: sx('value')
+                    style: { backgroundColor: props.color }
                 },
                 ptm('value')
             );
 
             return (
-                <div {...rootProps}>
-                    <div {...indeterminateContainerProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
+                    <div {...containerProps}>
                         <div {...valueProps}></div>
                     </div>
                 </div>

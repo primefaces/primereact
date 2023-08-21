@@ -14,18 +14,19 @@ export const SpeedDial = React.memo(
         const [visibleState, setVisibleState] = React.useState(false);
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
-        const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData({
+        const visible = props.onVisibleChange ? props.visible : visibleState;
+        const metadata = {
             props,
             state: {
-                visible: visibleState
+                visible
             }
-        });
+        };
+        const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metadata);
 
         useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
         const isItemClicked = React.useRef(false);
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
-        const visible = props.onVisibleChange ? props.visible : visibleState;
 
         const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -216,7 +217,7 @@ export const SpeedDial = React.memo(
                 {
                     key: index,
                     className: cx('menuitem'),
-                    style: sx('item', { index, getItemStyle }),
+                    style: getItemStyle(index),
                     role: 'none'
                 },
                 ptm('menuitem')
@@ -234,7 +235,8 @@ export const SpeedDial = React.memo(
             const menuProps = mergeProps(
                 {
                     ref: listRef,
-                    className: cx('list'),
+                    className: cx('menu'),
+                    style: sx('menu'),
                     role: 'menu'
                 },
                 ptm('menu')
@@ -267,8 +269,11 @@ export const SpeedDial = React.memo(
                 onClick: (e) => onClick(e),
                 disabled: props.disabled,
                 'aria-label': props['aria-label'],
-                pt: props.pt && props.pt.button ? props.pt.button : {},
-                unstyled: props.unstyled
+                pt: ptm('button'),
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metadata
+                }
             });
             const content = <Button {...buttonProps} />;
 
@@ -309,9 +314,8 @@ export const SpeedDial = React.memo(
         const mask = createMask();
         const rootProps = mergeProps(
             {
-                id: props.id,
                 className: classNames(props.className, cx('root', { visible })),
-                style: props.style
+                style: { ...props.style, ...sx('root') }
             },
             SpeedDialBase.getOtherProps(props),
             ptm('root')
@@ -319,7 +323,7 @@ export const SpeedDial = React.memo(
 
         return (
             <React.Fragment>
-                <div ref={elementRef} {...rootProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
                     {button}
                     {list}
                 </div>

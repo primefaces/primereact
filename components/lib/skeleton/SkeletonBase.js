@@ -46,7 +46,7 @@ const styles = `
 `;
 
 const inlineStyles = {
-    root: ({ props }) => (props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius })
+    root: { position: 'relative' }
 };
 
 export const SkeletonBase = ComponentBase.extend({
