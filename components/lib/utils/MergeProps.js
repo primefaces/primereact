@@ -9,7 +9,10 @@ export function mergeProps(...props) {
                 if (key === 'style') {
                     merged['style'] = { ...merged['style'], ...ps['style'] };
                 } else if (key === 'className') {
-                    merged['className'] = [merged['className'], ps['className']].join(' ').trim();
+                    let newClassname = [merged['className'], ps['className']].join(' ').trim();
+                    const isEmpty = newClassname === null || newClassname === undefined || newClassname === '';
+
+                    merged['className'] = isEmpty ? undefined : newClassname;
                 } else if (isFn(value)) {
                     const fn = merged[key];
 

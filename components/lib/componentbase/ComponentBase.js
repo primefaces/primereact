@@ -520,7 +520,9 @@ export const ComponentBase = {
                 ...ObjectUtils.getMergedProps(self, globalPT)
             };
 
-            const mergedClassName = [globalPT.className, self.className].filter(Boolean).join(' ').trim();
+            let mergedClassName = [globalPT.className, self.className].filter(Boolean).join(' ').trim();
+
+            mergedClassName = ObjectUtils.isEmpty(mergedClassName) ? undefined : mergedClassName;
 
             if (Object.keys(datasetProps).length) {
                 merged = {
