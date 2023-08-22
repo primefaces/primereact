@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { AngleRightIcon } from '../icons/angleright';
 
 export const ContextMenuSub = React.memo((props) => {
@@ -167,6 +167,21 @@ export const ContextMenuSub = React.memo((props) => {
                 <Ripple />
             </a>
         );
+
+        if (item.template) {
+            const defaultContentOptions = {
+                onClick: (event) => onItemClick(event, item, index),
+                className: 'p-menuitem-link',
+                labelClassName: 'p-menuitem-text',
+                iconClassName,
+                submenuIconClassName,
+                element: content,
+                props,
+                active
+            };
+
+            content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+        }
 
         const menuitemProps = mergeProps(
             {

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
@@ -6,14 +7,13 @@ import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = PanelBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
-    const elementRef = React.useRef(ref);
+    const elementRef = React.useRef(null);
     const contentRef = React.useRef(null);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
     const headerId = idState + '_header';
@@ -63,10 +63,6 @@ export const Panel = React.forwardRef((inProps, ref) => {
         getElement: () => elementRef.current,
         getContent: () => contentRef.current
     }));
-
-    React.useEffect(() => {
-        ObjectUtils.combinedRefs(elementRef, ref);
-    }, [elementRef, ref]);
 
     useMountEffect(() => {
         if (!idState) {

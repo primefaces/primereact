@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
@@ -194,7 +193,8 @@ export const Image = React.memo(
 
             const zoomOutButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: classNames('p-image-action p-link', { 'p-disabled': zoomOutDisabled }),
+                    style: { pointerEvents: 'auto' },
                     onPointerUp: zoomOut,
                     type: 'button',
                     disabled: zoomOutDisabled
@@ -204,7 +204,8 @@ export const Image = React.memo(
 
             const zoomInButtonProps = mergeProps(
                 {
-                    className: 'p-image-action p-link',
+                    className: classNames('p-image-action p-link', { 'p-disabled': zoomInDisabled }),
+                    style: { pointerEvents: 'auto' },
                     onPointerUp: zoomIn,
                     type: 'button',
                     disabled: zoomInDisabled

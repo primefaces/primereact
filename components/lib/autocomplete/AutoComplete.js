@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -394,11 +393,11 @@ export const AutoComplete = React.memo(
                 return;
             }
 
-            const inputValue = event.target.value.trim();
+            const inputValue = ObjectUtils.trim(event.target.value);
             const item = (props.suggestions || []).find((it) => {
                 const value = props.field ? ObjectUtils.resolveFieldData(it, props.field) : it;
 
-                return value && inputValue === value.trim();
+                return value && inputValue === ObjectUtils.trim(value);
             });
 
             if (item) {
