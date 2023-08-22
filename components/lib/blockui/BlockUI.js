@@ -84,8 +84,8 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const createMask = () => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';
-            const maskProps =
-                mergeProps({
+            const maskProps = mergeProps(
+                {
                     className: cx('mask'),
                     style: {
                         ...props.style,
@@ -93,10 +93,11 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
                         top: '0',
                         left: '0',
                         width: '100%',
-                        height: '100%'                          
+                        height: '100%'
                     }
                 },
-                ptm('mask'));
+                ptm('mask')
+            );
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
             const mask = (
                 <div ref={maskRef} {...maskProps}>

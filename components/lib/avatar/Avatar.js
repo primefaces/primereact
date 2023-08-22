@@ -16,7 +16,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         props,
         state: {
             imageFailed: imageFailed,
-            isNestedInAvatarGroup            
+            isNestedInAvatarGroup
         }
     });
 
@@ -73,9 +73,9 @@ export const Avatar = React.forwardRef((inProps, ref) => {
 
     React.useEffect(() => {
         const isInAG = DomHandler.isAttributeEquals(elementRef.current.parentElement, 'data-pc-name', 'avatargroup');
-        
+
         setisNestedInAvatarGroup(isInAG);
-    },[])
+    }, []);
 
     React.useImperativeHandle(ref, () => ({
         props,
