@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { DocSectionCode } from '../../common/docsectioncode';
 import { DocSectionText } from '../../common/docsectiontext';
-import Link from 'next/link';
 
 export function TailwindDoc(props) {
     const code = {
