@@ -287,6 +287,7 @@ export const TableBody = React.memo(
                     onSelect({ originalEvent, data, type });
                 }
             } else {
+                selection = ObjectUtils.isObject(selection) ? [selection] : selection;
                 selection = toggleable && isMultipleSelection() ? [...selection, data] : [data];
                 onSelect({ originalEvent, data, type });
             }
@@ -1061,7 +1062,7 @@ export const TableBody = React.memo(
                 style: props.style,
                 className: props.className
             },
-            getColumnPTOptions(ptKey)
+            props.ptCallbacks.ptm(ptKey)
         );
 
         return (

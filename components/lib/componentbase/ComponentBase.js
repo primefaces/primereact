@@ -18,33 +18,55 @@ export const ComponentBase = {
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
 
         const getOptionValue = (obj = {}, key = '', params = {}) => {
-            const fKeys = String(ObjectUtils.convertToFlatCase(key)).split('.');
+            const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
             const fKey = fKeys.shift();
-            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.convertToFlatCase(k) === fKey) || '';
+            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) || '';
 
             return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
         };
 
         const getPTValue = (obj = {}, key = '', params = {}) => {
+            const fkey = ObjectUtils.toFlatCase(key);
             const datasetPrefix = 'data-pc-';
-            const componentName = (params.props && params.props.__TYPE && ObjectUtils.convertToFlatCase(params.props.__TYPE)) || '';
+            const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
 
-            const defaultPT = (key) => pt && getOptionValue(pt[componentName], key);
-            const self = ObjectUtils.getPropValue(obj, key, params)[key];
-            const globalPT = defaultPT(key);
+            const getValue = (...args) => {
+                const value = getOptionValue(...args);
+
+                return ObjectUtils.isString(value) ? { className: value } : value;
+            };
+
+            const _globalPT = () => {
+                return pt && ObjectUtils.getJSXElement(pt, params);
+            };
+
+            const defaultPT = () => {
+                return getOptionValue(pt, componentName, params) || _globalPT();
+            };
+
+            const self = getValue(obj, fkey, params);
+            const baseGlobalPTValue = getValue(defaultPT(), key, params);
+            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const globalPT = baseGlobalPTValue || (isNestedParam ? getValue(globalPT, key, params) : undefined);
+
             const datasetProps = {
-                ...(key === 'root' && { [`${datasetPrefix}name`]: componentName }),
-                [`${datasetPrefix}section`]: ObjectUtils.convertToFlatCase(key)
+                ...(fkey === 'root' && { [`${datasetPrefix}name`]: componentName }),
+                [`${datasetPrefix}section`]: fkey
             };
 
             let merged = {
-                ...ObjectUtils.getMergedProps(globalPT, self)
+                ...ObjectUtils.getMergedProps(self, globalPT)
             };
+
+            let mergedClassName = [globalPT.className, self.className].filter(Boolean).join(' ').trim();
+
+            mergedClassName = ObjectUtils.isEmpty(mergedClassName) ? undefined : mergedClassName;
 
             if (Object.keys(datasetProps).length) {
                 merged = {
-                    ...merged,
+                    ...ObjectUtils.getMergedProps(self, globalPT),
+                    className: mergedClassName,
                     ...datasetProps
                 };
             }
