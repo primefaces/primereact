@@ -16,6 +16,23 @@ export declare type AvatarPassThroughType<T> = PassThroughType<T, AvatarPassThro
  */
 export interface AvatarPassThroughMethodOptions {
     props: AvatarProps;
+    state: AvatarState;
+}
+
+/**
+ * Defines current inline state in Avatar component.
+ */
+export interface AvatarState {
+    /**
+     * Current imageFailed state as a boolean.
+     * @defaultValue false
+     */
+    imageFailed: boolean;
+    /**
+     * Current state that indicates whether the Avatar component is nested within an AvatarGroup component.
+     * @defaultValue false
+     */
+    isNestedInAvatarGroup: boolean;
 }
 
 /**

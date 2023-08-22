@@ -85,9 +85,16 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
         if (visibleState) {
             const appendTo = props.fullScreen ? document.body : 'self';
             const maskProps =
-                ({
+                mergeProps({
                     className: cx('mask'),
-                    style: props.style
+                    style: {
+                        ...props.style,
+                        position: props.fullScreen ? 'fixed' : 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%'                          
+                    }
                 },
                 ptm('mask'));
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : null;
