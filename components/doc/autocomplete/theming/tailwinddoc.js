@@ -77,7 +77,7 @@ autocomplete: {
 import React, { useState } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 
-export default function BasicDemo() {
+export default function UnstyledDemo() {
     const [value, setValue] = useState('');
     const [items, setItems] = useState([]);
 

@@ -33,7 +33,7 @@ checkbox: {
 import React, { useState } from "react";
 import { Checkbox } from "primereact/checkbox";
 
-export default function BasicDemo() {
+export default function UnstyledDemo() {
     const [checked, setChecked] = useState(false);
 
     return (

@@ -1,43 +1,6 @@
-import { useState } from 'react';
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function StyledDoc(props) {
-    const [checked, setChecked] = useState(false);
-
-    const code = {
-        basic: `
-<Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
-        `,
-        javascript: `
-import React, { useState } from "react";
-import { Checkbox } from "primereact/checkbox";
-
-export default function UnstyledDemo() {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <div className="card flex justify-content-center">
-            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
-        </div>
-    )
-}
-        `,
-        typescript: `
-import React, { useState } from "react";
-import { Checkbox } from "primereact/checkbox";
-
-export default function UnstyledDemo() {
-    const [checked, setChecked] = useState<boolean>(false);
-
-    return (
-        <div className="card flex justify-content-center">
-            <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
-        </div>
-    )
-}
-        `
-    };
-
     return (
         <>
             <DocSectionText {...props}>

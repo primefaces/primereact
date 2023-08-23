@@ -1,41 +1,6 @@
 import { DocSectionText } from '../../common/docsectiontext';
 
 export function StyledDoc(props) {
-    const code = {
-        basic: `
-<Calendar value={date} onChange={(e) => setDate(e.value)} />
-        `,
-        javascript: `
-import React, { useState } from "react";
-import { Calendar } from 'primereact/calendar';
-
-export default function UnstyledDemo() {
-    const [date, setDate] = useState(null);
-
-    return (
-        <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} />
-        </div>
-    )
-}
-        `,
-        typescript: `
-import React, { useState } from "react";
-import { Calendar } from 'primereact/calendar';
-import { Nullable } from "primereact/ts-helpers";
-
-export default function UnstyledDemo() {
-    const [date, setDate] = useState<Nullable<Date>>(null);
-
-    return (
-        <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} />
-        </div>
-    )
-}
-        `
-    };
-
     return (
         <>
             <DocSectionText {...props}>

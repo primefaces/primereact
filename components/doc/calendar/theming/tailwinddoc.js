@@ -128,7 +128,7 @@ calendar: {
 import React, { useState } from "react";
 import { Calendar } from 'primereact/calendar';
 
-export default function BasicDemo() {
+export default function UnstyledDemo() {
     const [date, setDate] = useState(null);
 
     return (

@@ -1,7 +1,4 @@
 import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/cascadeselect/pt/ptdoc';
-import { Wireframe } from '../../components/doc/cascadeselect/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
 import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
@@ -10,8 +7,13 @@ import { FormikDoc } from '../../components/doc/cascadeselect/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/cascadeselect/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
 import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
+import { PTDoc } from '../../components/doc/cascadeselect/pt/ptdoc';
+import { Wireframe } from '../../components/doc/cascadeselect/pt/wireframe';
 import { StyleDoc } from '../../components/doc/cascadeselect/styledoc';
 import { TemplateDoc } from '../../components/doc/cascadeselect/templatedoc';
+import { StyledDoc } from '../../components/doc/cascadeselect/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/cascadeselect/theming/tailwinddoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const CascadeSelectDemo = () => {
@@ -92,6 +94,26 @@ const CascadeSelectDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <DocComponent
             title="React CascadeSelect Component"
@@ -100,6 +122,7 @@ const CascadeSelectDemo = () => {
             componentDocs={docs}
             apiDocs={['CascadeSelect']}
             ptDocs={ptDocs}
+            themingDocs={themingDocs}
         />
     );
 };

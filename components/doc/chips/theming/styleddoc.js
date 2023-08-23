@@ -16,32 +16,24 @@ export function StyledDoc(props) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>p-autocomplete</td>
+                            <td>p-chips</td>
                             <td>Container element</td>
                         </tr>
                         <tr>
-                            <td>p-autocomplete-panel</td>
-                            <td>Overlay panel of suggestions.</td>
+                            <td>p-chips-token</td>
+                            <td>Chip element container.</td>
                         </tr>
                         <tr>
-                            <td>p-autocomplete-items</td>
-                            <td>List container of suggestions.</td>
+                            <td>p-chips-token-icon</td>
+                            <td>Icon of a chip.</td>
                         </tr>
                         <tr>
-                            <td>p-autocomplete-item</td>
-                            <td>List item of a suggestion.</td>
+                            <td>p-chips-token-label</td>
+                            <td>label of a chip.</td>
                         </tr>
                         <tr>
-                            <td>p-autocomplete-token</td>
-                            <td>Element of a selected item in multiple mode.</td>
-                        </tr>
-                        <tr>
-                            <td>p-autocomplete-token-icon</td>
-                            <td>Close icon element of a selected item in multiple mode.</td>
-                        </tr>
-                        <tr>
-                            <td>p-autocomplete-token-label</td>
-                            <td>Label of a selected item in multiple mode.</td>
+                            <td>p-chips-input-token</td>
+                            <td>Container of input element.</td>
                         </tr>
                     </tbody>
                 </table>
