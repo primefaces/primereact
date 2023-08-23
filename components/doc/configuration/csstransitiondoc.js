@@ -5,11 +5,14 @@ export function CSSTransitionDoc(props) {
     const code = {
         basic: `
 import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
 
 //use in a component
 const { setCSSTransition } = useContext(PrimeReactContext);
 
-setCSSTransition(false);
+useMountEffect(() => {
+   setCSSTransition(false);
+});
         `
     };
 
