@@ -5,11 +5,14 @@ export function NullSortOrderDoc(props) {
     const code = {
         basic: `
 import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
 
 //use in a component
 const { setNullSortOrder } = useContext(PrimeReactContext);
 
-setNullSortOrder(1);
+useMountEffect(() => {
+   setNullSortOrder(1);
+});
         `
     };
 

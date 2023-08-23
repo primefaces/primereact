@@ -5,11 +5,14 @@ export function NonceDoc(props) {
     const code = {
         basic: `
 import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
 
 //use in a component
 const { setNonce } = useContext(PrimeReactContext);
 
-setNonce('.........');
+useMountEffect(() => {
+   setNonce('.........');
+});
         `
     };
 

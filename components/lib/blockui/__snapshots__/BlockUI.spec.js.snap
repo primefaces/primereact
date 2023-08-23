@@ -12,8 +12,9 @@ exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1
     />
   </div>
   <div
+    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document"
     data-pc-section="mask"
-    style="z-index: 3204;"
+    style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3204;"
   />
 </body>
 `;
@@ -30,9 +31,9 @@ exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen
     />
   </div>
   <div
-    class="p-component-overlay-leave"
+    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document p-component-overlay-leave"
     data-pc-section="mask"
-    style="z-index: 3204;"
+    style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 3204;"
   />
 </body>
 `;
@@ -67,8 +68,9 @@ exports[`BlockUI block and unblock panel events: blocked-event 1`] = `
       </div>
     </div>
     <div
+      class="p-blockui p-component-overlay p-component-overlay-enter"
       data-pc-section="mask"
-      style="z-index: 2103;"
+      style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2103;"
     />
   </div>
 </div>
@@ -104,9 +106,9 @@ exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
       </div>
     </div>
     <div
-      class="p-component-overlay-leave"
+      class="p-blockui p-component-overlay p-component-overlay-enter p-component-overlay-leave"
       data-pc-section="mask"
-      style="z-index: 2103;"
+      style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2103;"
     />
   </div>
 </div>
@@ -124,8 +126,9 @@ exports[`BlockUI block fullscreen 1`] = `
     />
   </div>
   <div
+    class="p-blockui p-component-overlay p-component-overlay-enter p-blockui-document"
     data-pc-section="mask"
-    style="z-index: 1101;"
+    style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1101;"
   />
 </body>
 `;
@@ -163,8 +166,9 @@ exports[`BlockUI block panel 1`] = `
         </div>
       </div>
       <div
+        class="p-blockui p-component-overlay p-component-overlay-enter"
         data-pc-section="mask"
-        style="z-index: 2102;"
+        style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2102;"
       />
     </div>
   </div>
@@ -205,8 +209,9 @@ exports[`BlockUI container style and className 1`] = `
         </div>
       </div>
       <div
+        class="p-blockui p-component-overlay p-component-overlay-enter block-jest"
         data-pc-section="mask"
-        style="z-index: 4205;"
+        style="cursor: move; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 4205;"
       />
     </div>
   </div>
