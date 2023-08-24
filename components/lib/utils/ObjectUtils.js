@@ -416,4 +416,55 @@ export default class ObjectUtils {
 
         return [];
     }
+
+    /**
+     * This function takes mutates and object with a new value given
+     * a specific field. This will handle deeply nested fields that
+     * need to be modified or created.
+     *
+     * e.g:
+     * data = {
+     *  nested: {
+     *      foo: "bar"
+     *  }
+     * }
+     *
+     * field = "nested.foo"
+     * value = "baz"
+     *
+     * The function will mutate data to be
+     * e.g:
+     * data = {
+     *  nested: {
+     *      foo: "baz"
+     *  }
+     * }
+     *
+     * @param {object} data the object to be modified
+     * @param {string} field the field in the object to replace
+     * @param {any} value the value to have replaced in the field
+     */
+    static mutateFieldData(data, field, value) {
+        if (typeof data !== 'object' || typeof field !== 'string') {
+            // short circuit if there is nothing to resolve
+            return;
+        }
+
+        const fields = field.split('.');
+        let obj = data;
+
+        for (var i = 0, len = fields.length; i < len; ++i) {
+            // Check if we are on the last field
+            if (i + 1 - len === 0) {
+                obj[fields[i]] = value;
+                break;
+            }
+
+            if (!obj[fields[i]]) {
+                obj[fields[i]] = {};
+            }
+
+            obj = obj[fields[i]];
+        }
+    }
 }

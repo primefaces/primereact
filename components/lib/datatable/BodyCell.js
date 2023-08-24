@@ -271,15 +271,14 @@ export const BodyCell = React.memo((props) => {
     const editorCallback = (val) => {
         let editingRowData = { ...editingRowDataState };
 
-        editingRowData[field] = val;
-
+        ObjectUtils.mutateFieldData(editingRowData, field, val);
         setEditingRowDataState(editingRowData);
 
         // update editing meta for complete methods on row mode
         const currentData = getEditingRowData();
 
         if (currentData) {
-            currentData[field] = val;
+            ObjectUtils.mutateFieldData(currentData, field, val);
         }
     };
 
