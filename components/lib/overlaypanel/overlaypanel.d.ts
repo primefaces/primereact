@@ -161,6 +161,10 @@ export declare class OverlayPanel extends React.Component<OverlayPanelProps, any
      */
     public hide(): void;
     /**
+     * Align the overlay panel to its surroundings.
+     */
+    public align(): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */
