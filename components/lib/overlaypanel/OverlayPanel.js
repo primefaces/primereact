@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -9,7 +10,6 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -37,7 +37,16 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         overlay: overlayRef,
         listener: (event, { type, valid }) => {
             if (valid) {
-                type === 'outside' ? props.dismissable && !isPanelClicked.current && hide() : hide();
+                switch (type) {
+                    case 'outside':
+                        props.dismissable ? !isPanelClicked.current && hide() : hide();
+                        break;
+                    case 'resize':
+                    case 'scroll':
+                    case 'orientationchange':
+                        align();
+                        break;
+                }
             }
 
             isPanelClicked.current = false;
@@ -154,7 +163,10 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
             if (containerOffset.top < targetOffset.top) {
                 overlayRef.current.setAttribute('data-p-overlaypanel-flipped', 'true');
-                !isUnstyled && DomHandler.addClass(overlayRef.current, 'p-overlaypanel-flipped');
+                isUnstyled && DomHandler.addClass(overlayRef.current, 'p-overlaypanel-flipped');
+            } else {
+                overlayRef.current.setAttribute('data-p-overlaypanel-flipped', 'false');
+                isUnstyled && DomHandler.removeClass(overlayRef.current, 'p-overlaypanel-flipped');
             }
         }
     };
@@ -203,6 +215,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         toggle,
         show,
         hide,
+        align,
         getElement: () => overlayRef.current
     }));
 
