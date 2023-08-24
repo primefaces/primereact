@@ -1,13 +1,10 @@
-import Link from 'next/link';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionText } from '../../common/docsectiontext';
 
-export function StyleDoc() {
+export function StyledDoc(props) {
     return (
         <>
-            <DocSectionText id="style" label="Style">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming">theming</Link> page.
-                </p>
+            <DocSectionText {...props}>
+                <p>List of class names used in the styled mode.</p>
             </DocSectionText>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
@@ -19,16 +16,16 @@ export function StyleDoc() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>p-skeleton</td>
+                            <td>p-progress-spinner</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>p-skeleton-circle</td>
-                            <td>Container element of a determinate progressbar.</td>
+                            <td>p-progress-circle</td>
+                            <td>SVG element.</td>
                         </tr>
                         <tr>
-                            <td>p-skeleton-none</td>
-                            <td>Container element of an indeterminate progressbar.</td>
+                            <td>p-progress-path</td>
+                            <td>Circle element.</td>
                         </tr>
                     </tbody>
                 </table>

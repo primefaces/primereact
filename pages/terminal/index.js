@@ -7,6 +7,8 @@ import { ImportDoc } from '../../components/doc/terminal/importdoc';
 import { PTDoc } from '../../components/doc/terminal/pt/ptdoc';
 import { Wireframe } from '../../components/doc/terminal/pt/wireframe';
 import { StyleDoc } from '../../components/doc/terminal/styledoc';
+import { StyledDoc } from '../../components/doc/terminal/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/terminal/theming/tailwinddoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -50,7 +52,27 @@ const TerminalDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Terminal Component" header="Terminal" description="Terminal is a text based user interface." componentDocs={docs} apiDocs={['Terminal', 'TerminalService']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Terminal Component" header="Terminal" description="Terminal is a text based user interface." componentDocs={docs} apiDocs={['Terminal', 'TerminalService']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TerminalDemo;

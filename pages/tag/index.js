@@ -1,16 +1,18 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tag/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tag/basicdoc';
 import { IconDoc } from '../../components/doc/tag/icondoc';
 import { ImportDoc } from '../../components/doc/tag/importdoc';
 import { PillDoc } from '../../components/doc/tag/pilldoc';
+import { PTDoc } from '../../components/doc/tag/pt/ptdoc';
+import { Wireframe } from '../../components/doc/tag/pt/wireframe';
 import { SeverityDoc } from '../../components/doc/tag/severitydoc';
 import { StyleDoc } from '../../components/doc/tag/styledoc';
 import { TemplateDoc } from '../../components/doc/tag/templatedoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { Wireframe } from '../../components/doc/tag/pt/wireframe';
-import { PTDoc } from '../../components/doc/tag/pt/ptdoc';
+import { StyledDoc } from '../../components/doc/tag/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/tag/theming/tailwinddoc';
 
 const TerminalDemo = () => {
     const docs = [
@@ -74,7 +76,27 @@ const TerminalDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Tag Component" header="Tag" description="Tag component is used to categorize content." componentDocs={docs} apiDocs={['Tag']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TerminalDemo;

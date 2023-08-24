@@ -1,9 +1,9 @@
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { useState } from 'react';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Panel } from '../../../components/lib/panel/Panel';
-import { useState } from 'react';
 import { Button } from '../../lib/button/Button';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [blocked, setBlocked] = useState(false);
@@ -25,9 +25,10 @@ export function TemplateDoc(props) {
 </BlockUI>
         `,
         javascript: `
-import React from 'react';
+import React, { useState } from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
+import { Button } from 'primereact/button';
 
 export default function TemplateDemo() {
     const [blocked, setBlocked] = useState(false);
@@ -52,9 +53,10 @@ export default function TemplateDemo() {
 }
         `,
         typescript: `
-import React from 'react';
+import React, { useState } from 'react';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
+import { Button } from 'primereact/button';
 
 export default function TemplateDemo() {
     const [blocked, setBlocked] = useState<boolean>(false);

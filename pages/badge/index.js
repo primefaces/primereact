@@ -4,13 +4,15 @@ import { BasicDoc } from '../../components/doc/badge/basicdoc';
 import { ButtonDoc } from '../../components/doc/badge/buttondoc';
 import { ImportDoc } from '../../components/doc/badge/importdoc';
 import { PositionDoc } from '../../components/doc/badge/positiondoc';
+import { PTDoc } from '../../components/doc/badge/pt/ptdoc';
+import { Wireframe } from '../../components/doc/badge/pt/wireframe';
 import { SeverityDoc } from '../../components/doc/badge/severitydoc';
 import { SizeDoc } from '../../components/doc/badge/sizedoc';
 import { StyleDoc } from '../../components/doc/badge/styledoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { Wireframe } from '../../components/doc/badge/pt/wireframe';
+import { StyledDoc } from '../../components/doc/badge/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/badge/theming/tailwinddoc';
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/badge/pt/ptdoc';
+import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const BadgeDemo = () => {
     const docs = [
@@ -74,7 +76,27 @@ const BadgeDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Badge Component" header="Badge" description="Badge is a small status indicator for another element." componentDocs={docs} apiDocs={['Badge']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Badge Component" header="Badge" description="Badge is a small status indicator for another element." componentDocs={docs} apiDocs={['Badge']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default BadgeDemo;
