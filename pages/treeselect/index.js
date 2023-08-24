@@ -16,6 +16,8 @@ import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
 import { PTDoc } from '../../components/doc/treeselect/pt/ptdoc';
 import { Wireframe } from '../../components/doc/treeselect/pt/wireframe';
 import { StyleDoc } from '../../components/doc/treeselect/styledoc';
+import { StyledDoc } from '../../components/doc/treeselect/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/treeselect/theming/tailwinddoc';
 
 const TreeSelectDemo = () => {
     const docs = [
@@ -115,7 +117,37 @@ const TreeSelectDemo = () => {
         }
     ];
 
-    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect', 'TreeNode']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React TreeSelect Component"
+            header="TreeSelect"
+            description="TreeSelect is a form component to choose from hierarchical data."
+            componentDocs={docs}
+            apiDocs={['TreeSelect', 'TreeNode']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default TreeSelectDemo;

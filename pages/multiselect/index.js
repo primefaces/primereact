@@ -1,6 +1,4 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/multiselect/pt/ptdoc';
-import { Wireframe } from '../../components/doc/multiselect/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/multiselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multiselect/basicdoc';
@@ -13,8 +11,12 @@ import { HookFormDoc } from '../../components/doc/multiselect/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/multiselect/groupdoc';
 import { ImportDoc } from '../../components/doc/multiselect/importdoc';
 import { InvalidDoc } from '../../components/doc/multiselect/invaliddoc';
+import { PTDoc } from '../../components/doc/multiselect/pt/ptdoc';
+import { Wireframe } from '../../components/doc/multiselect/pt/wireframe';
 import { StyleDoc } from '../../components/doc/multiselect/styledoc';
 import { TemplateDoc } from '../../components/doc/multiselect/templatedoc';
+import { StyledDoc } from '../../components/doc/multiselect/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/multiselect/theming/tailwinddoc';
 import { VirtualScrollDoc } from '../../components/doc/multiselect/virtualscrolldoc';
 
 const MultiSelectDemo = () => {
@@ -115,7 +117,29 @@ const MultiSelectDemo = () => {
         }
     ];
 
-    return <DocComponent title="React MultiSelect Component" header="MultiSelect" description="MultiSelect is used to select multiple items from a collection." componentDocs={docs} apiDocs={['MultiSelect']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent title="React MultiSelect Component" header="MultiSelect" description="MultiSelect is used to select multiple items from a collection." componentDocs={docs} apiDocs={['MultiSelect']} ptDocs={ptDocs} themingDocs={themingDocs} />
+    );
 };
 
 export default MultiSelectDemo;
