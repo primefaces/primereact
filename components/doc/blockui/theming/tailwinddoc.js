@@ -5,9 +5,11 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function TailwindDoc(props) {
     const code = {
         basic: `
-blockui: {
-    root: 'relative',
-    mask: 'bg-black/40'
+const Tailwind = {          
+    blockui: {
+        root: 'relative',
+        mask: 'bg-black/40'
+    }
 }
     `
     };

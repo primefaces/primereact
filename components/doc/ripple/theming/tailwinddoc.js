@@ -5,22 +5,24 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function TailwindDoc(props) {
     const code = {
         basic: `
-global: {
-    css: \`
-    *[data-pd-ripple="true"]{
-        overflow: hidden;
-        position: relative;
-    }
-    span[data-p-ink-active="true"]{
-        animation: ripple 0.4s linear;
-    }
-    @keyframes ripple {
-        100% {
-            opacity: 0;
-            transform: scale(2.5);
+const Tailwind = {          
+    global: {
+        css: \`
+        *[data-pd-ripple="true"]{
+            overflow: hidden;
+            position: relative;
         }
+        span[data-p-ink-active="true"]{
+            animation: ripple 0.4s linear;
+        }
+        @keyframes ripple {
+            100% {
+                opacity: 0;
+                transform: scale(2.5);
+            }
+        }
+    \`
     }
-\`
 }
     `
     };
