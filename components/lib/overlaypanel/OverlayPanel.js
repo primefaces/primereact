@@ -39,7 +39,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             if (valid) {
                 switch (type) {
                     case 'outside':
-                        props.dismissable ? !isPanelClicked.current && hide() : hide();
+                        props.dismissable && !isPanelClicked.current && hide();
                         break;
                     case 'resize':
                     case 'scroll':
@@ -54,7 +54,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         when: visibleState
     });
 
-    useOnEscapeKey(overlayEventListener, props.dismissable && props.closeOnEscape, () => {
+    useOnEscapeKey(overlayEventListener, props.closeOnEscape, () => {
         hide();
     });
 
