@@ -1,12 +1,14 @@
 import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
-import { Wireframe } from '../../components/doc/scrollpanel/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/scrollpanel/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/scrollpanel/basicdoc';
 import { CustomDemo } from '../../components/doc/scrollpanel/customdoc';
 import { ImportDoc } from '../../components/doc/scrollpanel/importdoc';
-import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
 import { PTDoc } from '../../components/doc/scrollpanel/pt/ptdoc';
+import { Wireframe } from '../../components/doc/scrollpanel/pt/wireframe';
+import { StyleDoc } from '../../components/doc/scrollpanel/styledoc';
+import { StyledDoc } from '../../components/doc/scrollpanel/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/scrollpanel/theming/tailwinddoc';
 
 const ScrollPanelDemo = () => {
     const docs = [
@@ -55,6 +57,26 @@ const ScrollPanelDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <DocComponent
             title="React ScrollPanel Component"
@@ -63,6 +85,7 @@ const ScrollPanelDemo = () => {
             componentDocs={docs}
             apiDocs={['ScrollPanel']}
             ptDocs={ptDocs}
+            themingDocs={themingDocs}
         />
     );
 };
