@@ -4432,6 +4432,33 @@
                             "optional": false,
                             "readonly": false,
                             "type": "AvatarProps"
+                        },
+                        {
+                            "name": "state",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "AvatarState"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "AvatarState": {
+                    "description": "Defines current inline state in Avatar component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "imageFailed",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current imageFailed state as a boolean."
+                        },
+                        {
+                            "name": "isNestedInAvatarGroup",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current state that indicates whether the Avatar component is nested within an AvatarGroup component."
                         }
                     ],
                     "callbacks": []
@@ -15593,7 +15620,7 @@
                                 },
                                 {
                                     "name": "mode",
-                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                                    "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                                     "description": "Filter match mode"
                                 },
                                 {
@@ -16423,7 +16450,7 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "undefined | \"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "description": "Type of filter match."
                         }
                     ],
@@ -36968,6 +36995,12 @@
                             "description": "Hides the overlay."
                         },
                         {
+                            "name": "align",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Align the overlay panel to its surroundings."
+                        },
+                        {
                             "name": "getElement",
                             "parameters": [],
                             "returnType": "HTMLDivElement",
@@ -52070,7 +52103,7 @@
                             "name": "globalFilterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"notContains\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
+                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"notContains\" | \"lt\" | \"lte\" | \"gt\" | \"gte\" | \"between\" | \"dateIs\" | \"dateIsNot\" | \"dateBefore\" | \"dateAfter\"",
                             "default": "contains",
                             "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },
