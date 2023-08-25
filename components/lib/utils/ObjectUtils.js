@@ -65,7 +65,7 @@ export default class ObjectUtils {
         try {
             const value = data[field];
 
-            if (value) return value;
+            if (this.isNotEmpty(value)) return value;
         } catch {
             // Performance optimization: https://github.com/primefaces/primereact/issues/4797
             // do nothing and continue to other methods to resolve field data
@@ -74,7 +74,7 @@ export default class ObjectUtils {
         if (Object.keys(data).length) {
             if (this.isFunction(field)) {
                 return field(data);
-            } else if (ObjectUtils.isNotEmpty(data[field])) {
+            } else if (this.isNotEmpty(data[field])) {
                 return data[field];
             } else if (field.indexOf('.') === -1) {
                 return data[field];
@@ -371,11 +371,11 @@ export default class ObjectUtils {
     }
 
     static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
-        const result = ObjectUtils.compare(value1, value2, locale, order);
+        const result = this.compare(value1, value2, locale, order);
         let finalSortOrder = order;
 
         // nullSortOrder == 1 means Excel like sort nulls at bottom
-        if (ObjectUtils.isEmpty(value1) || ObjectUtils.isEmpty(value2)) {
+        if (this.isEmpty(value1) || this.isEmpty(value2)) {
             finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
         }
 
@@ -384,8 +384,8 @@ export default class ObjectUtils {
 
     static compare(value1, value2, locale, order = 1) {
         let result = -1;
-        const emptyValue1 = ObjectUtils.isEmpty(value1);
-        const emptyValue2 = ObjectUtils.isEmpty(value2);
+        const emptyValue1 = this.isEmpty(value1);
+        const emptyValue2 = this.isEmpty(value2);
 
         if (emptyValue1 && emptyValue2) result = 0;
         else if (emptyValue1) result = order;
