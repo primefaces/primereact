@@ -356,7 +356,7 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                className: cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }),
+                className: cx('headerCell', { props: getColumnProps(), frozen, sortMeta, align, _isSortableDisabled }),
                 style,
                 role: 'columnheader',
                 onClick: (e) => onClick(e),
