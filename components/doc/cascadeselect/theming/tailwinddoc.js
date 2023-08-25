@@ -5,35 +5,46 @@ import { DocSectionText } from '../../common/docsectiontext';
 export function TailwindDoc(props) {
     const code = {
         basic: `
-cascadeselect: {
-    root: ({ props }) => ({
-        className: classNames('inline-flex cursor-pointer select-none relative', 'bg-white dark:bg-gray-900 border border-gray-300 dark:border-blue-900/40 transition duration-200 ease-in-out rounded-lg', {
-            'opacity-60 select-none pointer-events-none cursor-default': props.disabled
-        })
-    }),
-    label: {
-        className: classNames('block whitespace-nowrap overflow-hidden flex flex-1 w-1 text-overflow-ellipsis cursor-pointer', 'bg-transparent border-0 p-3 text-gray-700 dark:text-white/80', 'appearance-none rounded-md')
-    },
-    dropdownbutton: {
-        className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
-    },
-    panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
-    list: 'm-0 sm:p-0 list-none',
-    sublist: {
-        className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
-    },
-    item: {
-        className: classNames(
-            'cursor-pointer font-normal whitespace-nowrap',
-            'm-0 border-0 bg-transparent transition-shadow rounded-none',
-            'text-gray-700 dark:text-white/80 hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80'
-        )
-    },
-    content: {
-        className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
-    },
-    groupicon: 'ml-auto',
-    transition: TRANSITIONS.overlay
+const TRANSITIONS = {
+    overlay: {
+        enterFromClass: 'opacity-0 scale-75',
+        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
+        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
+        leaveToClass: 'opacity-0'
+    }
+};
+
+const Tailwind = {        
+    cascadeselect: {
+        root: ({ props }) => ({
+            className: classNames('inline-flex cursor-pointer select-none relative', 'bg-white dark:bg-gray-900 border border-gray-300 dark:border-blue-900/40 transition duration-200 ease-in-out rounded-lg', {
+                'opacity-60 select-none pointer-events-none cursor-default': props.disabled
+            })
+        }),
+        label: {
+            className: classNames('block whitespace-nowrap overflow-hidden flex flex-1 w-1 text-overflow-ellipsis cursor-pointer', 'bg-transparent border-0 p-3 text-gray-700 dark:text-white/80', 'appearance-none rounded-md')
+        },
+        dropdownbutton: {
+            className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
+        },
+        panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
+        list: 'm-0 sm:p-0 list-none',
+        sublist: {
+            className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
+        },
+        item: {
+            className: classNames(
+                'cursor-pointer font-normal whitespace-nowrap',
+                'm-0 border-0 bg-transparent transition-shadow rounded-none',
+                'text-gray-700 dark:text-white/80 hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80'
+            )
+        },
+        content: {
+            className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
+        },
+        groupicon: 'ml-auto',
+        transition: TRANSITIONS.overlay
+    }
 }
         `
     };
