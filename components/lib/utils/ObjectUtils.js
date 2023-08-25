@@ -65,7 +65,7 @@ export default class ObjectUtils {
         try {
             const value = data[field];
 
-            if (value) return value;
+            if (ObjectUtils.isNotEmpty(value)) return value;
         } catch {
             // Performance optimization: https://github.com/primefaces/primereact/issues/4797
             // do nothing and continue to other methods to resolve field data
