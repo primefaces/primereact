@@ -19,6 +19,8 @@ import { SizesDoc } from '../../components/doc/button/sizesdoc';
 import { StyleDoc } from '../../components/doc/button/styledoc';
 import { TemplateDoc } from '../../components/doc/button/templatedoc';
 import { TextDoc } from '../../components/doc/button/textdoc';
+import { StyledDoc } from '../../components/doc/button/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/button/theming/tailwinddoc';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
@@ -139,7 +141,27 @@ const ButtonDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Button Component" header="Button" description="Button is an extension to standard input element with icons and theming." componentDocs={docs} apiDocs={['Button']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ButtonDemo;
