@@ -10,13 +10,13 @@ export const Avatar = React.forwardRef((inProps, ref) => {
 
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
-    const [isNestedInAvatarGroup, setisNestedInAvatarGroup] = React.useState(false);
+    const [nested, setNested] = React.useState(false);
 
     const { ptm, cx, isUnstyled } = AvatarBase.setMetaData({
         props,
         state: {
             imageFailed: imageFailed,
-            isNestedInAvatarGroup
+            nested
         }
     });
 
@@ -72,9 +72,9 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     };
 
     React.useEffect(() => {
-        const isInAG = DomHandler.isAttributeEquals(elementRef.current.parentElement, 'data-pc-name', 'avatargroup');
+        const nested = DomHandler.isAttributeEquals(elementRef.current.parentElement, 'data-pc-name', 'avatargroup');
 
-        setisNestedInAvatarGroup(isInAG);
+        setNested(nested);
     }, []);
 
     React.useImperativeHandle(ref, () => ({

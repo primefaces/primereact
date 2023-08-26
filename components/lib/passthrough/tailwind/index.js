@@ -139,8 +139,8 @@ const Tailwind = {
                     'border border-gray-300 bg-gray-100 text-gray-600', // Borders and colors
                     'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80 dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Dark mode
                     'hover:border-gray-300 hover:bg-gray-200 hover:text-gray-800', // Hover
-                    'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)]', // Focus
-                    { 'rounded-br-md rounded-bl-md': !context.active, 'rounded-br-0 rounded-bl-0 text-gray-800': context.active } // Condition
+                    'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)]' // Focus
+                    // { 'rounded-br-md rounded-bl-md': !context.selected, 'rounded-br-0 rounded-bl-0 text-gray-800': context.sellected } // Condition
                 )
             }),
             headerIcon: 'inline-block mr-2',
@@ -1527,7 +1527,7 @@ const Tailwind = {
                     'w-16 h-16 text-2xl': props.size == 'xlarge'
                 },
                 {
-                    '-ml-4 border-2 border-white dark:border-gray-900': state.isNestedInAvatarGroup
+                    '-ml-4 border-2 border-white dark:border-gray-900': state.nested
                 }
             )
         }),
@@ -1940,8 +1940,8 @@ const Tailwind = {
                 'border-b-2 p-5 font-bold rounded-t-lg ',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
-                    'border-gray-300 bg-white text-gray-700 hover:bg-white hover:border-gray-400 hover:text-gray-600 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80': state.d_activeIndex !== context.index, // Condition-based hover styles.
-                    'bg-white border-blue-500 text-blue-500 dark:bg-gray-900 dark:border-blue-300 dark:text-blue-300': state.d_activeIndex === context.index // Condition-based active styles.
+                    'border-gray-300 bg-white text-gray-700 hover:bg-white hover:border-gray-400 hover:text-gray-600 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80': state.activeIndex !== context.index, // Condition-based hover styles.
+                    'bg-white border-blue-500 text-blue-500 dark:bg-gray-900 dark:border-blue-300 dark:text-blue-300': state.activeIndex === context.index // Condition-based active styles.
                 }
             ),
             style: { top: '2px' }
