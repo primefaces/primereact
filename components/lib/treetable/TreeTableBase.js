@@ -262,6 +262,7 @@ export const TreeTableBase = ComponentBase.extend({
         onSort: null,
         onToggle: null,
         onUnselect: null,
+        onValueChange: null,
         pageLinkSize: 5,
         paginator: false,
         paginatorClassName: null,

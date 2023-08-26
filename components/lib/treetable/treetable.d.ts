@@ -8,12 +8,12 @@
  *
  */
 import * as React from 'react';
+import { CSSProperties } from 'react';
 import { ColumnProps } from '../column';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
-import { InputTextPassThroughOptions } from '../inputtext/inputtext';
-import { CSSProperties } from 'react';
 
 export declare type TreeTablePassThroughType<T> = PassThroughType<T, TreeTablePassThroughMethodOptions>;
 
@@ -940,6 +940,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @param {TreeTableEvent} event - Custom treetable event.
      */
     onUnselect?(event: TreeTableEvent): void;
+    /**
+     * Callback to invoke after filtering and sorting to pass the rendered value.
+     * @param {TreeNode[] | undefined} value - Value displayed by the table.
+     */
+    onValueChange?(value: TreeNode[] | undefined): void;
     /**
      * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {TreeNode} data - Value displayed by the treetable.

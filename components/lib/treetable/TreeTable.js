@@ -93,6 +93,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             setFirstState(event.first);
             setRowsState(event.rows);
         }
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData());
+        }
     };
 
     const onSort = (event) => {
@@ -151,6 +155,16 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             setSortFieldState(eventMeta.sortField);
             setSortOrderState(eventMeta.sortOrder);
             setMultiSortMetaState(eventMeta.multiSortMeta);
+        }
+
+        if (props.onValueChange) {
+            props.onValueChange(
+                processedData({
+                    sortField,
+                    sortOrder,
+                    multiSortMeta
+                })
+            );
         }
     };
 
@@ -296,6 +310,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         } else {
             setFirstState(0);
             setFiltersState(newFilters);
+        }
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData({ filters }));
         }
     };
 
@@ -820,14 +838,14 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return node.leaf === false ? false : !(node.children && node.children.length);
     };
 
-    const processData = () => {
+    const processedData = (localState) => {
         let data = props.value || [];
 
         if (!props.lazy) {
             if (data && data.length) {
-                const filters = getFilters();
-                const sortField = getSortField();
-                const multiSortMeta = getMultiSortMeta();
+                const filters = (localState && localState.filters) || getFilters();
+                const sortField = (localState && localState.sortField) || getSortField();
+                const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
                     data = filterLocal(data, filters);
@@ -1054,7 +1072,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    const data = processData();
+    const data = processedData();
 
     const table = createTable(data);
     const totalRecords = getTotalRecords(data);
