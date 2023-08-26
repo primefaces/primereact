@@ -52673,6 +52673,19 @@
                             "description": "Callback to invoke when a node is unselected."
                         },
                         {
+                            "name": "onValueChange",
+                            "parameters": [
+                                {
+                                    "name": "value",
+                                    "optional": false,
+                                    "type": "undefined | TreeNode[]",
+                                    "description": "Value displayed by the table."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke after filtering and sorting to pass the rendered value."
+                        },
+                        {
                             "name": "rowClassName",
                             "parameters": [
                                 {
