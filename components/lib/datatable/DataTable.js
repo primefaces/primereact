@@ -518,7 +518,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const onColumnResize = (event) => {
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
-        DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+        elementRef.current.setAttribute('data-p-unselectable-text', true);
+        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
         resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -577,7 +578,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         resizeHelperRef.current.style.display = 'none';
         resizeColumn.current = null;
         resizeColumnElement.current = null;
-        DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
+        elementRef.current.setAttribute('data-p-unselectable-text', 'true');
+        !ptCallbacks.isUnstyled() && DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
 
         unbindColumnResizeEvents();
     };
@@ -627,7 +629,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const { originalEvent: event, column } = e;
 
         if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false && !getColumnProp(column, 'frozen')) {
-            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.hasClass(event.target, 'p-column-resizer')) event.currentTarget.draggable = false;
+            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.getAttribute(event.target, '[data-pc-section="columnresizer"]')) event.currentTarget.draggable = false;
             else event.currentTarget.draggable = true;
         }
     };
@@ -1769,7 +1771,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const wrapperProps = mergeProps(
             {
                 className: ptCallbacks.cx('wrapper'),
-                style: { maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
+                style: { ...ptCallbacks.sx('wrapper'), maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
             },
             ptCallbacks.ptm('wrapper')
         );

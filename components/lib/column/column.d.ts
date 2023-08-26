@@ -41,6 +41,44 @@ export interface ColumnContext {
      * @defaultValue false
      */
     disabled: boolean;
+    /**
+     * Current index of the column.
+     */
+    index: number;
+    /**
+     * Current sort state of the column as a boolean.
+     * @defaultValue false
+     */
+    sorted: boolean;
+    /**
+     * Current resizable state of the column as a boolean.
+     * @defaultValue false
+     */
+    resizable: boolean;
+    /**
+     * Current size state of the table.
+     */
+    size: string;
+    /**
+     * Current gridlines state of the table as a boolean.
+     * @defaultValue false
+     */
+    showGridlines: boolean;
+    /**
+     * Current highlighted state of the filter row item as a boolean.
+     * @defaultValue false
+     */
+    highlighted: boolean;
+    /**
+     * Current hidden state of the filter clear button of a column as a boolean.
+     * @defaultValue false
+     */
+    hidden: boolean;
+    /**
+     * Current active state of the filter menu of a column as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
 }
 
 /**
@@ -64,6 +102,11 @@ export interface ColumnState {
      * @defaultValue false
      */
     focused: boolean;
+    /**
+     * Current visible state of the filter menu of a column as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
     /**
      * Current style of the rowgroup header.
      */

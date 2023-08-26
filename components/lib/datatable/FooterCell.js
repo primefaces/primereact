@@ -6,16 +6,23 @@ export const FooterCell = React.memo((props) => {
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
-    const { ptmo, cx } = props.ptCallbacks;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        const columnMetaData = {
             props: getColumnProps(),
             parent: props.metaData,
             state: {
                 styleObject: styleObjectState
+            },
+            context: {
+                index: props.index,
+                size: props.metaData.props.size,
+                showGridlines: props.metaData.props.showGridlines
             }
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
     };
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
@@ -77,8 +84,8 @@ export const FooterCell = React.memo((props) => {
             colSpan,
             rowSpan
         },
-        getColumnPTOptions('footerCell'),
-        getColumnPTOptions('root')
+        getColumnPTOptions('root'),
+        getColumnPTOptions('footerCell')
     );
 
     return (

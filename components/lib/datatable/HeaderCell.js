@@ -14,20 +14,29 @@ export const HeaderCell = React.memo((props) => {
     const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
     const { metaData: parentMetaData, ptCallbacks, index } = props;
-    const { ptmo, cx } = props.ptCallbacks;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const params = { index };
     const parentParams = { ...parentMetaData, ...params };
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        const columnMetaData = {
             props: getColumnProps(),
             parent: parentParams,
             state: {
                 styleObject: styleObjectState
+            },
+            context: {
+                index: props.index,
+                sorted: getSortMeta().sorted,
+                resizable: props.resizableColumns,
+                size: props.metaData.props.size,
+                showGridlines: props.metaData.props.showGridlines
             }
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
     };
 
     const isBadgeVisible = () => {
@@ -134,11 +143,12 @@ export const HeaderCell = React.memo((props) => {
             let targetNode = event.target;
 
             if (
-                DomHandler.hasClass(targetNode, 'p-sortable-column') ||
-                DomHandler.hasClass(targetNode, 'p-column-title') ||
-                DomHandler.hasClass(targetNode, 'p-column-header-content') ||
-                DomHandler.hasClass(targetNode, 'p-sortable-column-icon') ||
-                DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')
+                DomHandler.getAttribute(targetNode, 'data-p-sortable-column') === true ||
+                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'headertitle' ||
+                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'headercontent' ||
+                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'sortIcon' ||
+                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sortIcon' ||
+                (targetNode.closest('[data-p-sortable-column="true"]') && !targetNode.closest('[data-pc-section="filtermenubutton"]'))
             ) {
                 DomHandler.clearSelection();
 
@@ -156,7 +166,7 @@ export const HeaderCell = React.memo((props) => {
     };
 
     const onKeyDown = (event) => {
-        if (event.key === 'Enter' && event.currentTarget === elementRef.current && DomHandler.hasClass(event.currentTarget, 'p-sortable-column')) {
+        if (event.key === 'Enter' && event.currentTarget === elementRef.current && DomHandler.getAttribute(event.currentTarget, 'data-p-sortable-column') === 'true') {
             onClick(event);
 
             event.preventDefault();
@@ -272,8 +282,8 @@ export const HeaderCell = React.memo((props) => {
                 {
                     className: cx('sortBadge')
                 },
-                getColumnPTOptions('sortBadge'),
-                getColumnPTOptions('root')
+                getColumnPTOptions('root'),
+                getColumnPTOptions('sortBadge')
             );
 
             return <span {...sortBadgeProps}>{value}</span>;
@@ -356,7 +366,7 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                className: cx('headerCell', { props: getColumnProps(), frozen, sortMeta, align, _isSortableDisabled }),
+                className: cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }),
                 style,
                 role: 'columnheader',
                 onClick: (e) => onClick(e),
@@ -369,10 +379,16 @@ export const HeaderCell = React.memo((props) => {
                 tabIndex,
                 colSpan,
                 rowSpan,
-                'aria-sort': ariaSort
+                'aria-sort': ariaSort,
+                'data-p-sortable-column': getColumnProp('sortable'),
+                'data-p-resizable-column': props.resizableColumns,
+                'data-p-highlight': sortMeta.sorted,
+                'data-p-filter-column': !props.metaData.props.headerColumnGroup && props.filterDisplay === 'row',
+                'data-p-frozen-column': getColumnProp('frozen'),
+                'data-p-reorderable-column': props.reorderableColumns
             },
-            getColumnPTOptions('headerCell'),
-            getColumnPTOptions('root')
+            getColumnPTOptions('root'),
+            getColumnPTOptions('headerCell')
         );
 
         return (

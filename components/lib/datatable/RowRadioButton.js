@@ -6,20 +6,23 @@ export const RowRadioButton = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const inputRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
-    const { ptmo, cx } = props.ptCallbacks;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
-        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        const columnMetaData = {
             props: getColumnProps(),
             parent: props.metaData,
-            context: {
-                checked: props.checked,
-                disabled: props.disabled
-            },
             state: {
                 focused: focusedState
+            },
+            context: {
+                index: props.tabIndex,
+                checked: props.checked,
+                disabled: props.disabled
             }
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
     };
 
     const onFocus = () => {

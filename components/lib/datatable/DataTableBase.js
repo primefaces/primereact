@@ -1,6 +1,6 @@
 import PrimeReact, { FilterMatchMode } from '../api/Api';
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
 const styles = `
 .p-datatable {
@@ -330,7 +330,7 @@ const classes = {
             [`p-align-${align}`]: !!align
         }),
     columnTitle: 'p-column-title',
-    row: ({ rowProps: props }) =>
+    bodyRow: ({ rowProps: props }) =>
         classNames({
             'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
             'p-highlight-contextmenu': props.contextMenuSelected,
@@ -339,8 +339,11 @@ const classes = {
         }),
     rowGroupTogglerIcon: 'p-row-toggler-icon',
     rowGroupToggler: 'p-row-toggler p-link',
+    rowGroupHeader: 'p-rowgroup-header',
+    rowGroupHeaderName: 'p-rowgroup-header-name',
+    rowGroupFooter: 'p-rowgroup-footer',
     rowReorderIcon: 'p-datatable-reorderablerow-handle',
-    rowReorderIcon: 'p-row-toggler-icon',
+    rowTogglerIcon: 'p-row-toggler-icon',
     rowToggler: 'p-row-toggler p-link',
     rowEditorSaveIcon: 'p-row-editor-save-icon',
     rowEditorSaveButton: 'p-row-editor-save p-link',
@@ -348,6 +351,7 @@ const classes = {
     rowEditorCancelButton: 'p-row-editor-cancel p-link',
     rowEditorInitIcon: 'p-row-editor-init-icon',
     rowEditorInitButton: 'p-row-editor-init p-link',
+    rowExpansion: 'p-datatable-row-expansion',
     virtualScrollerSpacer: ({ className }) => className,
     tbody: ({ className }) => className,
     filterInput: 'p-fluid p-column-filter-element',
@@ -380,6 +384,7 @@ const classes = {
             'p-column-filter-menu': props.display === 'menu'
         }),
     columnResizer: 'p-column-resizer',
+    emptyMessage: 'p-datatable-emptymessage',
     sortBadge: 'p-sortable-column-badge',
     sortIcon: 'p-sortable-column-icon',
     checkboxWrapper: ({ rowProps: props, focusedState }) => classNames('p-checkbox p-component', { 'p-checkbox-focused': focusedState, 'p-disabled': props.disabled }),
@@ -398,18 +403,18 @@ const classes = {
         }),
     headerCheckboxIcon: 'p-checkbox-icon',
     headerContent: 'p-column-header-content',
-    headerCell: ({ props, frozen, sortMeta, align, _isSortableDisabled, column }) =>
-        column
+    headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, column, getColumnProp }) =>
+        ObjectUtils.isEmpty(props)
             ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
                   'p-filter-column': !props.headerColumnGroup && props.filterDisplay === 'row',
-                  'p-sortable-column': props.sortable,
-                  'p-resizable-column': props.resizableColumns && props.resizeable,
+                  'p-sortable-column': getColumnProp('sortable'),
+                  'p-resizable-column': props.resizableColumns && getColumnProp('resizeable'),
                   'p-highlight': sortMeta.sorted,
                   'p-frozen-column': frozen,
-                  'p-selection-column': props.selectionMode,
-                  'p-sortable-disabled': props.sortable && _isSortableDisabled,
-                  'p-reorderable-column': props.reorderableColumns && props.reorderable && !frozen,
+                  'p-selection-column': getColumnProp('selectionMode'),
+                  'p-sortable-disabled': getColumnProp('sortable') && _isSortableDisabled,
+                  'p-reorderable-column': props.reorderableColumns && getColumnProp('reorderable') && !frozen,
                   [`p-align-${align}`]: !!align
               }),
     footerCell: ({ getColumnProp, align }) =>
@@ -420,6 +425,7 @@ const classes = {
 };
 
 const inlineStyles = {
+    wrapper: { overflow: 'auto' },
     resizeHelper: { display: 'none' },
     reorderIndicatorUp: ({ style }) => ({ ...style }),
     reorderIndicatorDown: ({ style }) => ({ ...style })

@@ -15,22 +15,21 @@ export const TableFooter = React.memo((props) => {
 
     const getRowPTOptions = (row, key) => {
         const rProps = getRowProps(row);
-
-        return ptmo(ColumnGroupBase.getCProp(row, 'pt'), key, {
+        const rowMetaData = {
             props: rProps,
             parent: props.metaData
-        });
+        };
+
+        return mergeProps(ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData));
     };
 
     const getColumnGroupPTOptions = (key) => {
-        return (
-            ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt')),
-            key,
-            {
-                props: getColumnGroupProps(),
-                parent: props.metaData
-            }
-        );
+        const columnGroupMetaData = {
+            props: getColumnGroupProps(),
+            parent: props.metaData
+        };
+
+        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(ColumnGroupBase.getCProp(props.footerColumnGroup, 'pt'), key, columnGroupMetaData));
     };
 
     const hasFooter = () => {
@@ -92,8 +91,8 @@ export const TableFooter = React.memo((props) => {
             {
                 className: cx('tfoot')
             },
-            ptm('tfoot'),
-            getColumnGroupPTOptions('root')
+            getColumnGroupPTOptions('root'),
+            ptm('tfoot')
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;
