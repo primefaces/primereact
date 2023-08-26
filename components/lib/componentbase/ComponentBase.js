@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import PrimeReact from '../api/Api';
 import { useStyle } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { Tailwind } from '../passthrough/tailwind';
+import { mergeProps } from '../utils/MergeProps';
 
 const buttonStyles = `
 .p-button {
@@ -487,10 +489,11 @@ export const ComponentBase = {
         };
 
         const getPTValue = (obj = {}, key = '', params = {}) => {
-            const fkey = ObjectUtils.toFlatCase(key);
             const datasetPrefix = 'data-pc-';
             const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
+            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
             const getValue = (...args) => {
                 const value = getOptionValue(...args);
@@ -508,29 +511,13 @@ export const ComponentBase = {
 
             const self = getValue(obj, fkey, params);
             const baseGlobalPTValue = getValue(defaultPT(), key, params);
-            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
-            const globalPT = baseGlobalPTValue || (isNestedParam ? getValue(globalPT, key, params) : undefined);
-
+            const globalPT = (isNestedParam ? getValue(getOptionValue(pt, componentName, params), key, params) : undefined) || baseGlobalPTValue;
             const datasetProps = {
-                ...(fkey === 'root' && { [`${datasetPrefix}name`]: componentName }),
+                ...(fkey === 'root' && { [`${datasetPrefix}name`]: isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[0]) : componentName }),
                 [`${datasetPrefix}section`]: fkey
             };
 
-            let merged = {
-                ...ObjectUtils.getMergedProps(self, globalPT)
-            };
-
-            let mergedClassName = [globalPT.className, self.className].filter(Boolean).join(' ').trim();
-
-            mergedClassName = ObjectUtils.isEmpty(mergedClassName) ? undefined : mergedClassName;
-
-            if (Object.keys(datasetProps).length) {
-                merged = {
-                    ...ObjectUtils.getMergedProps(self, globalPT),
-                    className: mergedClassName,
-                    ...datasetProps
-                };
-            }
+            const merged = mergeProps(self, globalPT, Object.keys(datasetProps).length ? datasetProps : {});
 
             return merged;
         };
@@ -553,11 +540,7 @@ export const ComponentBase = {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
 
-                    let merged = {
-                        ...ObjectUtils.getMergedProps(base, self)
-                    };
-
-                    return merged;
+                    return mergeProps(base, self);
                 }
 
                 return undefined;
