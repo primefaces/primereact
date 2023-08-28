@@ -9,12 +9,12 @@
  */
 import * as React from 'react';
 import { Column, ColumnPassThroughOptions, ColumnProps } from '../column';
+import { ColumnGroupPassThroughOptions } from '../columngroup/columngroup';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { RowPassThroughOptions } from '../row/row';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
-import { ColumnGroupPassThroughOptions } from '../columngroup/columngroup';
-import { RowPassThroughOptions } from '../row/row';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -281,11 +281,27 @@ interface DataTableDataSelectableEvent {
 }
 
 /**
- * Custom selection change event for context menu.
+ * Custom selection change event for context menu in single select mode.
  * @see {@link DataTableProps.onContextMenuSelectionChange}
  * @event
  */
-interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableContextMenuSingleSelectionChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection object.
+     */
+    value: TValue[number];
+}
+
+/**
+ * Custom selection change event for context menu in multiple select mode.
+ * @see {@link DataTableProps.onContextMenuSelectionChange}
+ * @event
+ */
+interface DataTableContextMenuMultipleSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -1452,11 +1468,6 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     onContextMenu?(event: DataTableRowEvent): void;
     /**
-     * Callback to invoke when a row selected with right click.
-     * @param {DataTableRowEvent} event - Custom row event.
-     */
-    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
-    /**
      * Callback to invoke on filtering.
      * @param {DataTableStateEvent} event - Custom state event.
      */
@@ -1626,6 +1637,11 @@ interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataT
      */
     selection?: TValue[number] | undefined | null;
     /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuSingleSelectionChangeEvent<TValue>): void;
+    /**
      * Callback to invoke when selection changes.
      * @param {DataTableSelectionSingleChangeEvent<TValue>} event - Custom selection change event.
      */
@@ -1647,6 +1663,11 @@ interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends Dat
      */
     selection: TValue;
     /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
+    /**
      * Callback to invoke when selection changes.
      * @param {DataTableSelectionMultipleChangeEvent<TValue>} event - Custom selection change event.
      */
@@ -1667,6 +1688,11 @@ interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTab
      * Selected cells.
      */
     selection: DataTableCellSelection<TValue> | null;
+    /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke when selection changes.
      * @param {DataTableSelectionCellChangeEvent<TValue>} event - Custom selection change event.
