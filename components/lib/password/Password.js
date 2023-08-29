@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
@@ -9,7 +10,6 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { PasswordBase } from './PasswordBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Password = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -389,15 +389,17 @@ export const Password = React.memo(
                 ref: inputRef,
                 id: props.inputId,
                 ...inputProps,
-                type: type,
                 className: cx('input'),
-                style: props.inputStyle,
-                onFocus: onFocus,
                 onBlur: onBlur,
-                onKeyUp: onKeyup,
+                onFocus: onFocus,
                 onInput: onInput,
+                onKeyUp: onKeyup,
+                style: props.inputStyle,
+                tabIndex: props.tabIndex,
                 tooltip: props.tooltip,
-                tooltipOptions: props.tooltipOptions
+                tooltipOptions: props.tooltipOptions,
+                type: type,
+                value: props.value
             },
             ptm('input')
         );
