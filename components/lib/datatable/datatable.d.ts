@@ -279,11 +279,27 @@ interface DataTableDataSelectableEvent {
 }
 
 /**
- * Custom selection change event for context menu.
+ * Custom selection change event for context menu in single select mode.
  * @see {@link DataTableProps.onContextMenuSelectionChange}
  * @event
  */
-interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableContextMenuSingleSelectionChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection object.
+     */
+    value: TValue[number];
+}
+
+/**
+ * Custom selection change event for context menu in multiple select mode.
+ * @see {@link DataTableProps.onContextMenuSelectionChange}
+ * @event
+ */
+interface DataTableContextMenuMultipleSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -929,6 +945,8 @@ export interface DataTablePassThroughOptions {
     tooltip?: TooltipPassThroughOptions;
 }
 
+type SortOrder = 1 | 0 | -1 | null | undefined;
+
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
@@ -1301,11 +1319,11 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     /**
      * Icon to display the current sorting status.
      */
-    sortIcon?: IconType<DataTable<TValue>> | undefined;
+    sortIcon?: IconType<DataTable<TValue>, { sortOrder?: SortOrder; sorted?: boolean }> | undefined;
     /**
      * Order to sort the data by default.
      */
-    sortOrder?: 1 | 0 | -1 | null | undefined;
+    sortOrder?: SortOrder;
     /**
      * Unique identifier of a stateful table to use in state storage.
      */
@@ -1423,11 +1441,6 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * @param {DataTableRowEvent} event - Custom row event.
      */
     onContextMenu?(event: DataTableRowEvent): void;
-    /**
-     * Callback to invoke when a row selected with right click.
-     * @param {DataTableRowEvent} event - Custom row event.
-     */
-    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke on filtering.
      * @param {DataTableStateEvent} event - Custom state event.
@@ -1593,6 +1606,11 @@ interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataT
      */
     selection?: TValue[number] | undefined | null;
     /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuSingleSelectionChangeEvent<TValue>): void;
+    /**
      * Callback to invoke when selection changes.
      * @param {DataTableSelectionSingleChangeEvent<TValue>} event - Custom selection change event.
      */
@@ -1614,6 +1632,11 @@ interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends Dat
      */
     selection: TValue;
     /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
+    /**
      * Callback to invoke when selection changes.
      * @param {DataTableSelectionMultipleChangeEvent<TValue>} event - Custom selection change event.
      */
@@ -1634,6 +1657,11 @@ interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTab
      * Selected cells.
      */
     selection: DataTableCellSelection<TValue> | null;
+    /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
     /**
      * Callback to invoke when selection changes.
      * @param {DataTableSelectionCellChangeEvent<TValue>} event - Custom selection change event.
