@@ -92,6 +92,7 @@ export const Calendar = React.memo(
         const onInputBlur = (event) => {
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
+            setFocusedState(false);
         };
 
         const onInputKeyDown = (event) => {
@@ -1444,8 +1445,6 @@ export const Calendar = React.memo(
         };
 
         const show = (type) => {
-            setFocusedState(false);
-
             if (props.onVisibleChange) {
                 props.onVisibleChange({
                     visible: true,
