@@ -35,6 +35,10 @@ export interface OrganizationChartPassThroughOptions {
      */
     table?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
+     * Uses to pass attributes to the row's DOM element.
+     */
+    row?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
      * Uses to pass attributes to the cell's DOM element.
      */
     cell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
@@ -54,6 +58,14 @@ export interface OrganizationChartPassThroughOptions {
      * Uses to pass attributes to the lines's DOM element.
      */
     lines?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the lineLeft's DOM element.
+     */
+    lineLeft?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the lineRight's DOM element.
+     */
+    lineRight?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the lineCell's DOM element.
      */
