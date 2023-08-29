@@ -16002,9 +16002,29 @@
                         }
                     ]
                 },
-                "DataTableContextMenuSelectionChangeEvent": {
-                    "description": "Custom selection change event for context menu.",
-                    "relatedProp": "onContextMenuSelectionChange",
+                "DataTableContextMenuSingleSelectionChangeEvent": {
+                    "description": "Custom selection change event for context menu in single select mode.",
+                    "relatedProp": "DataTableProps.onContextMenuSelectionChange",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TValue[number]",
+                            "description": "Selection object."
+                        }
+                    ]
+                },
+                "DataTableContextMenuMultipleSelectionChangeEvent": {
+                    "description": "Custom selection change event for context menu in multiple select mode.",
+                    "relatedProp": "DataTableProps.onContextMenuSelectionChange",
                     "props": [
                         {
                             "name": "originalEvent",
@@ -18222,19 +18242,6 @@
                             "description": "Callback to invoke when a context menu is clicked."
                         },
                         {
-                            "name": "onContextMenuSelectionChange",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "DataTableContextMenuSelectionChangeEvent<TValue>",
-                                    "description": "Custom row event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a row selected with right click."
-                        },
-                        {
                             "name": "onFilter",
                             "parameters": [
                                 {
@@ -18612,6 +18619,19 @@
                             ],
                             "returnType": "undefined | null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row."
+                        },
+                        {
+                            "name": "onContextMenuSelectionChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableContextMenuSingleSelectionChangeEvent<TValue>",
+                                    "description": "Custom row event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row selected with right click."
                         },
                         {
                             "name": "onSelectionChange",
@@ -19635,19 +19655,6 @@
                             "description": "Callback to invoke when a context menu is clicked."
                         },
                         {
-                            "name": "onContextMenuSelectionChange",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "DataTableContextMenuSelectionChangeEvent<TValue>",
-                                    "description": "Custom row event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a row selected with right click."
-                        },
-                        {
                             "name": "onFilter",
                             "parameters": [
                                 {
@@ -20025,6 +20032,19 @@
                             ],
                             "returnType": "undefined | null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row."
+                        },
+                        {
+                            "name": "onContextMenuSelectionChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableContextMenuMultipleSelectionChangeEvent<TValue>",
+                                    "description": "Custom row event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row selected with right click."
                         },
                         {
                             "name": "onSelectionChange",
@@ -21048,19 +21068,6 @@
                             "description": "Callback to invoke when a context menu is clicked."
                         },
                         {
-                            "name": "onContextMenuSelectionChange",
-                            "parameters": [
-                                {
-                                    "name": "event",
-                                    "optional": false,
-                                    "type": "DataTableContextMenuSelectionChangeEvent<TValue>",
-                                    "description": "Custom row event."
-                                }
-                            ],
-                            "returnType": "void",
-                            "description": "Callback to invoke when a row selected with right click."
-                        },
-                        {
                             "name": "onFilter",
                             "parameters": [
                                 {
@@ -21438,6 +21445,19 @@
                             ],
                             "returnType": "undefined | null | boolean",
                             "description": "Function that returns a boolean by passing the row data to decide if the radio or checkbox should be displayed per row."
+                        },
+                        {
+                            "name": "onContextMenuSelectionChange",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableContextMenuMultipleSelectionChangeEvent<TValue>",
+                                    "description": "Custom row event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row selected with right click."
                         },
                         {
                             "name": "onSelectionChange",
