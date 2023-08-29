@@ -22,6 +22,8 @@ import { PTDoc } from '../../components/doc/galleria/pt/ptdoc';
 import { Wireframe } from '../../components/doc/galleria/pt/wireframe';
 import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
 import { StyleDoc } from '../../components/doc/galleria/styledoc';
+import { StyledDoc } from '../../components/doc/galleria/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/galleria/theming/tailwinddoc';
 import { ThumbnailDoc } from '../../components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
@@ -171,7 +173,27 @@ const GalleriaDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Gallery Component" header="Galleria" description="Galleria is a content gallery component." componentDocs={docs} apiDocs={['Galleria']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default GalleriaDemo;
