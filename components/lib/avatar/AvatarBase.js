@@ -28,11 +28,11 @@ const styles = `
     background-color: transparent;
 }
 
-.p-avatar-circle {
+.p-avatar.p-avatar-circle {
     border-radius: 50%;
 }
 
-.p-avatar-circle img {
+.p-avatar.p-avatar-circle img {
     border-radius: 50%;
 }
 
