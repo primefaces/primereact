@@ -12522,6 +12522,62 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current disabled state of row as a boolean."
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Current index of the column."
+                        },
+                        {
+                            "name": "sorted",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current sort state of the column as a boolean."
+                        },
+                        {
+                            "name": "resizable",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current resizable state of the column as a boolean."
+                        },
+                        {
+                            "name": "size",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Current size state of the table."
+                        },
+                        {
+                            "name": "showGridlines",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current gridlines state of the table as a boolean."
+                        },
+                        {
+                            "name": "highlighted",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current highlighted state of the filter row item as a boolean."
+                        },
+                        {
+                            "name": "hidden",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current hidden state of the filter clear button of a column as a boolean."
+                        },
+                        {
+                            "name": "active",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current active state of the filter menu of a column as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -12557,6 +12613,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current focused state as a boolean."
+                        },
+                        {
+                            "name": "overlayVisible",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current visible state of the filter menu of a column as a boolean."
                         },
                         {
                             "name": "rowGroupHeaderStyleObject",
@@ -16821,6 +16884,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "DataTableState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableContext"
                         }
                     ],
                     "callbacks": []
@@ -16905,6 +16974,20 @@
                             "readonly": false,
                             "type": "object",
                             "description": "Current filters object."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "DataTableContext": {
+                    "description": "Defines current options in DataTable component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "scrollable",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current scrollable state as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -17005,21 +17088,21 @@
                             "description": "Uses to pass attributes to the tbody's DOM element."
                         },
                         {
-                            "name": "rowgroupHeader",
+                            "name": "rowGroupHeader",
                             "optional": true,
                             "readonly": false,
                             "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the rowgroup header's DOM element."
                         },
                         {
-                            "name": "rowgroupHeaderName",
+                            "name": "rowGroupHeaderName",
                             "optional": true,
                             "readonly": false,
                             "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the rowgroup header name's DOM element."
                         },
                         {
-                            "name": "row",
+                            "name": "bodyRow",
                             "optional": true,
                             "readonly": false,
                             "type": "DataTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
@@ -17101,6 +17184,27 @@
                             "readonly": false,
                             "type": "DataTablePassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the reorder indicator down icon's DOM element."
+                        },
+                        {
+                            "name": "columnGroup",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnGroupPassThroughOptions",
+                            "description": "Used to pass attributes to the ColumnGroup helper components."
+                        },
+                        {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RowPassThroughOptions",
+                            "description": "Used to pass attributes to the Row helper components."
+                        },
+                        {
+                            "name": "column",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughOptions",
+                            "description": "Used to pass attributes to the Column helper components."
                         },
                         {
                             "name": "tooltip",
@@ -36800,6 +36904,13 @@
                             "description": "Uses to pass attributes to the table's DOM element."
                         },
                         {
+                            "name": "row",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableRowElement>>",
+                            "description": "Uses to pass attributes to the row's DOM element."
+                        },
+                        {
                             "name": "cell",
                             "optional": true,
                             "readonly": false,
@@ -36833,6 +36944,20 @@
                             "readonly": false,
                             "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the lines's DOM element."
+                        },
+                        {
+                            "name": "lineLeft",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the lineLeft's DOM element."
+                        },
+                        {
+                            "name": "lineRight",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the lineRight's DOM element."
                         },
                         {
                             "name": "lineCell",
