@@ -571,7 +571,7 @@ export const BodyCell = React.memo((props) => {
             {
                 className: cx('columnTitle')
             },
-            getColumnProp('columnTitle')
+            getColumnPTOptions('columnTitle')
         );
 
         const title = props.responsiveLayout === 'stack' && <span {...columnTitleProps}>{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
@@ -623,7 +623,7 @@ export const BodyCell = React.memo((props) => {
                 {
                     className: cx('rowReorderIcon')
                 },
-                getColumnProp('rowReorderIcon')
+                getColumnPTOptions('rowReorderIcon')
             );
             const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
 
@@ -634,7 +634,7 @@ export const BodyCell = React.memo((props) => {
                     className: cx('rowTogglerIcon'),
                     'aria-hidden': true
                 },
-                getColumnProp('rowTogglerIcon')
+                getColumnPTOptions('rowTogglerIcon')
             );
             const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...rowTogglerIconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...rowTogglerIconProps} />;
             const togglerIcon = IconUtils.getJSXIcon(icon, { ...rowTogglerIconProps }, { props });
@@ -671,9 +671,9 @@ export const BodyCell = React.memo((props) => {
             }
         } else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
-            const rowEditorSaveIconProps = mergeProps({ className: cx('rowEditorSaveIcon') }, getColumnProp('rowEditorSaveIconProps'));
-            const rowEditorCancelIconProps = mergeProps({ className: cx('rowEditorCancelIcon') }, getColumnProp('rowEditorCancelIconProps'));
-            const rowEditorInitIconProps = mergeProps({ className: cx('rowEditorInitIcon') }, getColumnProp('rowEditorInitIconProps'));
+            const rowEditorSaveIconProps = mergeProps({ className: cx('rowEditorSaveIcon') }, getColumnPTOptions('rowEditorSaveIcon'));
+            const rowEditorCancelIconProps = mergeProps({ className: cx('rowEditorCancelIcon') }, getColumnPTOptions('rowEditorCancelIcon'));
+            const rowEditorInitIconProps = mergeProps({ className: cx('rowEditorInitIcon') }, getColumnPTOptions('rowEditorInitIcon'));
             const rowEditorSaveIcon = IconUtils.getJSXIcon(props.rowEditorSaveIcon || <CheckIcon {...rowEditorSaveIconProps} />, { ...rowEditorSaveIconProps }, { props });
             const rowEditorCancelIcon = IconUtils.getJSXIcon(props.rowEditorCancelIcon || <TimesIcon {...rowEditorCancelIconProps} />, { ...rowEditorCancelIconProps }, { props });
             const rowEditorInitIcon = IconUtils.getJSXIcon(props.rowEditorInitIcon || <PencilIcon {...rowEditorInitIconProps} />, { ...rowEditorInitIconProps }, { props });

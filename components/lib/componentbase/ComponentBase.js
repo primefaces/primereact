@@ -483,7 +483,7 @@ export const ComponentBase = {
         const getOptionValue = (obj = {}, key = '', params = {}) => {
             const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
             const fKey = fKeys.shift();
-            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) || '';
+            const matchedPTOption = ObjectUtils.isNotEmpty(obj) ? Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) : '';
 
             return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
         };
