@@ -23,6 +23,14 @@ export const OrganizationChartNode = React.memo((props) => {
         });
     };
 
+    const getNodePTOptions = (lineTop, key) => {
+        return ptm(key, {
+            context: {
+                lineTop
+            }
+        });
+    };
+
     const onNodeClick = (event, node) => {
         props.onNodeClick(event, node);
     };
@@ -36,7 +44,7 @@ export const OrganizationChartNode = React.memo((props) => {
         const nodesProps = mergeProps(
             {
                 className: cx('nodes'),
-                style: sx('nodes', { visibility })
+                style: { visibility }
             },
             ptm('nodes')
         );
@@ -76,7 +84,7 @@ export const OrganizationChartNode = React.memo((props) => {
         const linesProps = mergeProps(
             {
                 className: cx('lines'),
-                style: sx('lines', { visibility })
+                style: { visibility }
             },
             ptm('lines')
         );
@@ -103,14 +111,24 @@ export const OrganizationChartNode = React.memo((props) => {
                 {node.children &&
                     node.children.length > 1 &&
                     node.children.map((_, index) => {
-                        const leftClassName = classNames('p-organizationchart-line-left', { 'p-organizationchart-line-top': index !== 0 });
-                        const rightClassName = classNames('p-organizationchart-line-right', { 'p-organizationchart-line-top': index !== nodeChildLength - 1 });
+                        const lineLeftProps = mergeProps(
+                            {
+                                className: cx('lineLeft', { index })
+                            },
+                            getNodePTOptions(index !== 0, 'lineLeft')
+                        );
+                        const lineRightProps = mergeProps(
+                            {
+                                className: cx('lineRight', { index })
+                            },
+                            getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
+                        );
 
                         return [
-                            <td key={index + '_lineleft'} className={leftClassName}>
+                            <td key={index + '_lineleft'} {...lineLeftProps}>
                                 &nbsp;
                             </td>,
-                            <td key={index + '_lineright'} className={rightClassName}>
+                            <td key={index + '_lineright'} {...lineRightProps}>
                                 &nbsp;
                             </td>
                         ];
@@ -123,7 +141,7 @@ export const OrganizationChartNode = React.memo((props) => {
         const linesProps = mergeProps(
             {
                 className: cx('lines'),
-                style: sx('lines', { visibility })
+                style: { visibility }
             },
             ptm('lines')
         );
@@ -217,8 +235,10 @@ export const OrganizationChartNode = React.memo((props) => {
             getPTOptions('node')
         );
 
+        const rowProps = mergeProps(ptm('row'));
+
         return (
-            <tr>
+            <tr {...rowProps}>
                 <td {...cellProps}>
                     <div {...nodeProps}>
                         {label}
