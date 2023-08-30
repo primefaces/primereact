@@ -55,13 +55,13 @@ export interface ToastPassThroughOptions {
      */
     detail?: ToastPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the button's DOM element.
+     * Uses to pass attributes to the close button's DOM element.
      */
-    button?: ToastPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    closeButton?: ToastPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
     /**
-     * Uses to pass attributes to the button icon's DOM element.
+     * Uses to pass attributes to the close button icon's DOM element.
      */
-    buttonIcon?: ToastPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    closeButtonIcon?: ToastPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
 }
 
 /**

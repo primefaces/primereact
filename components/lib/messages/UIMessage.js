@@ -7,8 +7,7 @@ import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils } from '../utils/Utils';
-import { mergeProps } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps } from '../utils/Utils';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {

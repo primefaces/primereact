@@ -489,15 +489,17 @@ const Tailwind = {
         uploadicon: 'mr-2'
     },
     //Messages
-    message: {
-        root: ({ props }) => ({
-            className: classNames('my-4 rounded-md', {
-                'bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700': props.severity == 'info',
-                'bg-green-100 border-solid border-0 border-l-4 border-green-500 text-green-700': props.severity == 'success',
-                'bg-orange-100 border-solid border-0 border-l-4 border-orange-500 text-orange-700': props.severity == 'warn',
-                'bg-red-100 border-solid border-0 border-l-4 border-red-500 text-red-700': props.severity == 'error'
-            })
-        }),
+    messages: {
+        root: ({ state, index }) => {
+            return {
+                className: classNames('my-4 rounded-md', {
+                    'bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700': state.messages[index] && state.messages[index].message.severity == 'info',
+                    'bg-green-100 border-solid border-0 border-l-4 border-green-500 text-green-700': state.messages[index] && state.messages[index].message.severity == 'success',
+                    'bg-orange-100 border-solid border-0 border-l-4 border-orange-500 text-orange-700': state.messages[index] && state.messages[index].message.severity == 'warn',
+                    'bg-red-100 border-solid border-0 border-l-4 border-red-500 text-red-700': state.messages[index] && state.messages[index].message.severity == 'error'
+                })
+            };
+        },
         wrapper: 'flex items-center py-5 px-7',
         icon: {
             className: classNames('w-6 h-6', 'text-lg mr-2')
@@ -514,7 +516,7 @@ const Tailwind = {
             leaveToClass: 'max-h-0 opacity-0 !m-0'
         }
     },
-    inlinemessage: {
+    message: {
         root: ({ props }) => ({
             className: classNames('inline-flex items-center justify-center align-top', 'p-3 m-0 rounded-md', {
                 'bg-blue-100 border-0 text-blue-700': props.severity == 'info',
@@ -529,12 +531,12 @@ const Tailwind = {
         root: {
             className: classNames('w-96', 'opacity-90')
         },
-        container: ({ props }) => ({
+        message: ({ state, index }) => ({
             className: classNames('my-4 rounded-md w-full', {
-                'bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700': props.message.severity == 'info',
-                'bg-green-100 border-solid border-0 border-l-4 border-green-500 text-green-700': props.message.severity == 'success',
-                'bg-orange-100 border-solid border-0 border-l-4 border-orange-500 text-orange-700': props.message.severity == 'warn',
-                'bg-red-100 border-solid border-0 border-l-4 border-red-500 text-red-700': props.message.severity == 'error'
+                'bg-blue-100 border-solid border-0 border-l-4 border-blue-500 text-blue-700': state.messages[index] && state.messages[index].message.severity == 'info',
+                'bg-green-100 border-solid border-0 border-l-4 border-green-500 text-green-700': state.messages[index] && state.messages[index].message.severity == 'success',
+                'bg-orange-100 border-solid border-0 border-l-4 border-orange-500 text-orange-700': state.messages[index] && state.messages[index].message.severity == 'warn',
+                'bg-red-100 border-solid border-0 border-l-4 border-red-500 text-red-700': state.messages[index] && state.messages[index].message.severity == 'error'
             })
         }),
         content: 'flex items-center py-5 px-7',
