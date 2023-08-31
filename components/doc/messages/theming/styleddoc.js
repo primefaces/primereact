@@ -1,14 +1,10 @@
-import Link from 'next/link';
+import { DocSectionText } from '../../common/docsectiontext';
 
-import { DocSectionText } from '../common/docsectiontext';
-
-export function StyleDoc() {
+export function StyledDoc(props) {
     return (
         <>
-            <DocSectionText id="style" label="Style">
-                <p>
-                    Following is the list of structural style classes, for theming classes visit <Link href="/theming"> theming</Link> page.
-                </p>
+            <DocSectionText {...props}>
+                <p>List of class names used in the styled mode.</p>
             </DocSectionText>
             <div className="doc-tablewrapper">
                 <table className="doc-table">
