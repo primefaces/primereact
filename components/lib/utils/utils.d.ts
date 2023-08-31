@@ -169,7 +169,7 @@ export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
     /**
      * Icon specific properties.
      */
-    iconProps: React.HTMLProps<HTMLElement>;
+    iconProps: React.HTMLProps<HTMLElement | SVGElement>;
     /**
      * The element representing the icon.
      */
@@ -191,5 +191,5 @@ export type PassThroughType<T, O> =
     | null
     | undefined
     | {
-          [key: string]: any;
-      };
+        [key: string]: any;
+    };
