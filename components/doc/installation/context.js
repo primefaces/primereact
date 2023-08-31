@@ -11,7 +11,7 @@ import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
     const code2 = {
         basic: `
 // _app.js
-import { PrimeReactProvider } from 'primereact/context';
+import { PrimeReactProvider } from 'primereact/api';
 
 export default function MyApp({ Component, pageProps }) {
     return (
@@ -19,7 +19,7 @@ export default function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
         </PrimeReactProvider>
     );
-}        
+}
         `
     };
 
