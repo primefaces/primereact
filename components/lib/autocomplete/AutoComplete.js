@@ -152,7 +152,7 @@ export const AutoComplete = React.memo(
                 });
             }
 
-            selectedItem.current = value.length ? value : null;
+            selectedItem.current = value && value.length ? value : null;
         };
 
         const formatValue = (value) => {
