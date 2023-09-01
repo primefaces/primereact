@@ -191,5 +191,5 @@ export type PassThroughType<T, O> =
     | null
     | undefined
     | {
-        [key: string]: any;
-    };
+          [key: string]: any;
+      };
