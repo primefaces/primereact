@@ -399,7 +399,8 @@ export const Password = React.memo(
                 onKeyUp: onKeyup,
                 onInput: onInput,
                 tooltip: props.tooltip,
-                tooltipOptions: props.tooltipOptions
+                tabIndex: props.tabIndex,
+                value: props.value
             },
             ptm('input')
         );

@@ -627,7 +627,7 @@ export const BodyCell = React.memo((props) => {
             );
             const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
 
-            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props });
+            content = showReorder ? IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props }) : null;
         } else if (expander) {
             const rowTogglerIconProps = mergeProps(
                 {
