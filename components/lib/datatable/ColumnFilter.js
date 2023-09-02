@@ -208,11 +208,12 @@ export const ColumnFilter = React.memo((props) => {
     const onInputChange = (event, index) => {
         let filters = { ...props.filters };
         let value = event.target.value;
+        let filterField = filters[field];
 
-        if (props.display === 'menu') {
-            filters[field].constraints[index].value = value;
+        if (props.display === 'menu' && filterField.constraints) {
+            filterField.constraints[index].value = value;
         } else {
-            filters[field].value = value;
+            filterField.value = value;
         }
 
         props.onFilterChange(filters);
