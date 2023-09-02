@@ -16,13 +16,9 @@ const classes = {
     menu: 'p-dock-list',
     footer: 'p-dock-footer',
     root: ({ props }) =>
-        classNames(
-            `p-dock p-component p-dock-${props.position}`,
-            {
-                'p-dock-magnification': props.magnification
-            },
-            props.className
-        ),
+        classNames(`p-dock p-component p-dock-${props.position}`, {
+            'p-dock-magnification': props.magnification
+        }),
     container: 'p-dock-container'
 };
 

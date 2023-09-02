@@ -5,24 +5,17 @@ const classes = {
     start: 'p-menubar-start',
     end: 'p-menubar-end',
     button: 'p-menubar-button',
-    root: ({ props, mobileActiveState }) =>
-        classNames(
-            'p-menubar p-component',
-            {
-                'p-menubar-mobile-active': mobileActiveState
-            },
-            props.className
-        ),
+    root: ({ mobileActiveState }) =>
+        classNames('p-menubar p-component', {
+            'p-menubar-mobile-active': mobileActiveState
+        }),
     separator: 'p-menu-separator',
     icon: 'p-menuitem-icon',
     label: 'p-menuitem-text',
     submenuIcon: 'p-submenu-icon',
-    menuitem: ({ item, activeItemState }) => classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className),
-    menu: ({ subProps: props }) =>
-        classNames({
-            'p-submenu-list': !props.root,
-            'p-menubar-root-list': props.root
-        }),
+    menuitem: ({ item, activeItemState }) => classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }),
+    menu: 'p-menubar-root-list',
+    submenu: 'p-submenu-list',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled })
 };
 

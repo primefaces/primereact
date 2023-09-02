@@ -32,26 +32,18 @@ const styles = `
 
 const classes = {
     root: ({ props, context }) =>
-        classNames(
-            'p-menu p-component',
-            {
-                'p-menu-overlay': props.popup,
-                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-            },
-            props.className
-        ),
+        classNames('p-menu p-component', {
+            'p-menu-overlay': props.popup,
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+        }),
     menu: 'p-menu-list p-reset',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
-    menuitem: ({ item }) => classNames('p-menuitem', item.className),
+    menuitem: 'p-menuitem',
     submenuHeader: ({ submenu }) =>
-        classNames(
-            'p-submenu-header',
-            {
-                'p-disabled': submenu.disabled
-            },
-            submenu.className
-        ),
+        classNames('p-submenu-header', {
+            'p-disabled': submenu.disabled
+        }),
     separator: 'p-menu-separator',
     label: 'p-menuitem-text',
     icon: 'p-menuitem-icon'

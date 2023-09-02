@@ -36,6 +36,14 @@ export interface MegaMenuPassThroughOptions {
      */
     menu?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
+     * Uses to pass attributes to the menu button's DOM element.
+     */
+    menuButton?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the menu icon's DOM element.
+     */
+    menuButtonIcon?: MegaMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the list item's DOM element.
      */
     menuitem?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;

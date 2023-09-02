@@ -94,13 +94,13 @@ export const Menu = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.getAttribute(nextItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(nextItem, '[data-pc-section="menuitem"]') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.getAttribute(prevItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(prevItem, '[data-pc-section="menuitem"]') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const toggle = (event) => {
@@ -122,6 +122,7 @@ export const Menu = React.memo(
         };
 
         const onEnter = () => {
+            DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
             ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
@@ -157,7 +158,7 @@ export const Menu = React.memo(
             const items = submenu.items.map(createMenuItem);
             const submenuHeaderProps = mergeProps(
                 {
-                    className: cx('submenuHeader', { submenu }),
+                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: sx('submenuHeader', { submenu }),
                     role: 'presentation'
                 },
@@ -248,9 +249,10 @@ export const Menu = React.memo(
             const menuitemProps = mergeProps(
                 {
                     key,
-                    className: cx('menuitem', { item }),
+                    className: classNames(item.className, cx('menuitem')),
                     style: sx('menuitem', { item }),
-                    role: 'none'
+                    role: 'none',
+                    'data-p-disabled': item.disabled || false
                 },
                 ptm('menuitem')
             );
@@ -271,9 +273,7 @@ export const Menu = React.memo(
                 const menuitems = createMenu();
                 const rootProps = mergeProps(
                     {
-                        ref: menuRef,
-                        id: props.id,
-                        className: cx('root', { context }),
+                        className: classNames(props.className, cx('root', { context })),
                         style: props.style,
                         onClick: (e) => onPanelClick(e)
                     },
@@ -302,7 +302,7 @@ export const Menu = React.memo(
                         onExit={onExit}
                         onExited={onExited}
                     >
-                        <div {...rootProps}>
+                        <div id={props.id} ref={menuRef} {...rootProps}>
                             <ul {...menuProps}>{menuitems}</ul>
                         </div>
                     </CSSTransition>

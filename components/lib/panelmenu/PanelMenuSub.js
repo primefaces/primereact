@@ -99,7 +99,6 @@ export const PanelMenuSub = React.memo((props) => {
 
         const toggleableContentProps = mergeProps(
             {
-                ref: submenuRef,
                 className: cx('toggleableContent', { active })
             },
             ptm('toggleableContent')
@@ -108,7 +107,7 @@ export const PanelMenuSub = React.memo((props) => {
         if (item.items) {
             return (
                 <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
-                    <div {...toggleableContentProps}>
+                    <div ref={submenuRef} {...toggleableContentProps}>
                         <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>
                 </CSSTransition>
@@ -125,7 +124,6 @@ export const PanelMenuSub = React.memo((props) => {
 
         const key = item.label + '_' + index;
         const active = isItemActive(item);
-        const className = classNames('p-menuitem', item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const iconProps = mergeProps(
@@ -216,12 +214,13 @@ export const PanelMenuSub = React.memo((props) => {
 
     const menu = createMenu();
 
+    const ptKey = props.root ? 'menu' : 'submenu';
     const menuProps = mergeProps(
         {
-            className: cx('menu', { subProps: props }),
+            className: classNames(cx(ptKey), props.className),
             role: 'tree'
         },
-        ptm('menu')
+        ptm(ptKey)
     );
 
     return <ul {...menuProps}>{menu}</ul>;
