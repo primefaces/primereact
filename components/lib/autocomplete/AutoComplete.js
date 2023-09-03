@@ -533,6 +533,7 @@ export const AutoComplete = React.memo(
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
+                    required={props.required}
                     disabled={props.disabled}
                     placeholder={props.placeholder}
                     size={props.size}
@@ -621,6 +622,7 @@ export const AutoComplete = React.memo(
                     onKeyUp: props.onKeyUp,
                     placeholder: allowMoreValues ? props.placeholder : undefined,
                     readOnly: props.readOnly || !allowMoreValues,
+                    required: props.required,
                     role: 'combobox',
                     style: props.inputStyle,
                     tabIndex: props.tabIndex,
