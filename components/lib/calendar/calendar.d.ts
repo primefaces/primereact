@@ -627,6 +627,11 @@ interface CalendarBaseProps {
      */
     mask?: string | undefined;
     /**
+     * Placeholder character in mask.
+     * @defaultValue _
+     */
+    maskSlotChar?: string | undefined;
+    /**
      * The maximum selectable date.
      */
     maxDate?: Date | undefined;

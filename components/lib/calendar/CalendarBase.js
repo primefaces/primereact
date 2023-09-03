@@ -258,6 +258,7 @@ export const CalendarBase = ComponentBase.extend({
         keepInvalid: false,
         locale: null,
         mask: null,
+        maskSlotChar: '_',
         maxDate: null,
         maxDateCount: null,
         minDate: null,
