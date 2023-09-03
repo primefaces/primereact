@@ -8,13 +8,13 @@
  *
  */
 import * as React from 'react';
+import { ButtonPassThroughOptions } from '../button/button';
 import { CSSTransitionProps } from '../csstransition';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
-import { ButtonPassThroughOptions } from '../button/button';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type AutoCompletePassThroughType<T> = PassThroughType<T, AutoCompletePassThroughMethodOptions>;
 
@@ -360,6 +360,11 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * @defaultValue false
      */
     readOnly?: boolean | undefined;
+    /**
+     * When present, it specifies that an input field must be filled out before submitting the form.
+     * @defaultValue false
+     */
+    required?: boolean | undefined;
     /**
      * Icon of the remove chip element in multiple mode.
      */

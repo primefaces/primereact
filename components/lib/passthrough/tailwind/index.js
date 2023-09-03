@@ -1888,8 +1888,6 @@ const Tailwind = {
             className: classNames('outline-none', 'm-0 p-0 list-none')
         },
         menuitem: ({ context }) => {
-            console.log('context');
-
             return {
                 className: classNames(
                     'text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none',
