@@ -99,9 +99,9 @@ export const FileUpload = React.memo(
         };
 
         const formatSize = (bytes) => {
-            const k = 1024
-            const dm = 3
-            const sizes = localeOption('fileSizeTypes')
+            const k = 1024;
+            const dm = 3;
+            const sizes = localeOption('fileSizeTypes');
 
             if (bytes === 0) {
                 return `0 ${sizes[0]}`;
@@ -109,7 +109,7 @@ export const FileUpload = React.memo(
 
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
-                
+
             return `${formattedSize} ${sizes[i]}`;
         };
 
