@@ -2528,6 +2528,7 @@ export const Calendar = React.memo(
             if (props.mask) {
                 unbindMaskEvents = mask(inputRef.current, {
                     mask: props.mask,
+                    slotChar: props.maskSlotChar,
                     readOnly: props.readOnlyInput || props.disabled,
                     onChange: (e) => {
                         !ignoreMaskChange.current && updateValueOnInput(e.originalEvent, e.value);
