@@ -816,6 +816,14 @@ export interface LocaleOptions {
      */
     close?: string;
     /**
+     * Pending
+     */
+    pending?: string;
+    /**
+     * ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+     */
+    fileSizeTypes?: string[];
+    /**
      * ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
      */
     dayNames?: string[];
