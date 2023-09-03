@@ -104,7 +104,7 @@ export const FileUpload = React.memo(
             const sizes = localeOption('fileSizeTypes')
 
             if (bytes === 0) {
-                return '0 B';
+                return `0 ${sizes[0]}`;
             }
 
             const i = Math.floor(Math.log(bytes) / Math.log(k));
