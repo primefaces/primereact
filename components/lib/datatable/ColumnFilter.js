@@ -210,7 +210,7 @@ export const ColumnFilter = React.memo((props) => {
         let value = event.target.value;
         let filterField = filters[field];
 
-        if (props.display === 'menu' && filterField.constraints) {
+        if (props.display === 'menu' && ObjectUtils.isNotEmpty(filterField.constraints)) {
             filterField.constraints[index].value = value;
         } else {
             filterField.value = value;
