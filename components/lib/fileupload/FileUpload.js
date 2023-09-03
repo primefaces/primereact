@@ -99,16 +99,18 @@ export const FileUpload = React.memo(
         };
 
         const formatSize = (bytes) => {
+            const k = 1024;
+            const dm = 3;
+            const sizes = localeOption('fileSizeTypes');
+
             if (bytes === 0) {
-                return '0 B';
+                return `0 ${sizes[0]}`;
             }
 
-            let k = 1000,
-                dm = 3,
-                sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-                i = Math.floor(Math.log(bytes) / Math.log(k));
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
 
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            return `${formattedSize} ${sizes[i]}`;
         };
 
         const onFileSelect = (event) => {
