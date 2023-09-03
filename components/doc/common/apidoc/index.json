@@ -1710,6 +1710,20 @@
                             "description": "Close"
                         },
                         {
+                            "name": "pending",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Pending"
+                        },
+                        {
+                            "name": "fileSizeTypes",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string[]",
+                            "description": "['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']"
+                        },
+                        {
                             "name": "dayNames",
                             "optional": true,
                             "readonly": false,
