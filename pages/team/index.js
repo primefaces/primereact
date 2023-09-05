@@ -87,19 +87,9 @@ const TemplatesPage = () => {
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/bahadir.jpg" className="border-circle mb-4" alt="Bahadır Sofuoğlu" />
-                        <span className="mb-2 text-xl font-bold">Bahadır Sofuoğlu</span>
-                        <span>Front-End Developer</span>
-                    </div>
-                    <div className="flex flex-column align-items-center flex-auto">
                         <img src="https://primefaces.org/cdn/primereact/images/team/aliriza.jpg" className="border-circle mb-4" alt="Alirıza Gücal" />
                         <span className="mb-2 text-xl font-bold">Ali Rıza Gücal</span>
                         <span>Front-End Developer</span>
-                    </div>
-                    <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/olgu.jpg" className="border-circle mb-4" alt="Olgu Başak" />
-                        <span className="mb-2 text-xl font-bold">Olgu Başak</span>
-                        <span>Java Web Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
                         <img src="https://primefaces.org/cdn/primereact/images/team/furkan.jpg" className="border-circle mb-4" alt="Furkan Seziş" />
