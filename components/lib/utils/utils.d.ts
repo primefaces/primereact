@@ -17,10 +17,10 @@ export declare class DomHandler {
     static getBrowserLanguage(): string;
     static getWindowScrollTop(): number;
     static getWindowScrollLeft(): number;
-    static getOuterWidth(el: HTMLElement, margin: boolean): number;
-    static getOuterHeight(el: HTMLElement, margin: boolean): number;
-    static getClientHeight(el: HTMLElement, margin: boolean): number;
-    static getClientWidth(el: HTMLElement, margin: boolean): number;
+    static getOuterWidth(el?: HTMLElement | null, margin?: boolean): number;
+    static getOuterHeight(el?: HTMLElement | null, margin?: boolean): number;
+    static getClientHeight(el?: HTMLElement | null, margin?: boolean): number;
+    static getClientWidth(el?: HTMLElement | null, margin?: boolean): number;
     static getViewport(): { width: number; height: number };
     static getOffset(el: HTMLElement): { top: any; left: any };
     static index(el: HTMLElement): number;
