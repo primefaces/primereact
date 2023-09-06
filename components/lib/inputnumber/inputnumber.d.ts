@@ -205,7 +205,7 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Mininum boundary value.
      */
-    min?: number | undefined;
+    min?: number | undefined | null;
     /**
      * Maximum boundary value.
      */
