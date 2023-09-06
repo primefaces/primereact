@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
