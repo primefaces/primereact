@@ -402,6 +402,8 @@ export const InputNumber = React.memo(
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                             }
+                        } else if (props.mode === 'currency' && ['¥', '$', 'I', 'N', 'R'].includes(deleteChar)) {
+                            newValueStr = inputValue.slice(1);
                         }
 
                         updateValue(event, newValueStr, null, 'delete-single');
@@ -510,7 +512,7 @@ export const InputNumber = React.memo(
         };
 
         const allowMinusSign = () => {
-            return ObjetUtils.isEmpty(props.min) || props.min < 0;
+            return ObjectUtils.isEmpty(props.min) || props.min < 0;
         };
 
         const isMinusSign = (char) => {
