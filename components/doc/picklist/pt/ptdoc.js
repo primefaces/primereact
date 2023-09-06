@@ -43,8 +43,8 @@ export function PTDoc(props) {
     breakpoint="1400px"
     sourceHeader="Available"
     targetHeader="Selected"
-    sourceStyle={{ height: '30rem' }}
-    targetStyle={{ height: '30rem' }}
+    sourceStyle={{ height: '24rem' }}
+    targetStyle={{ height: '24rem' }}
     pt={{
         list: { style: { height: '342px' } },
         moveAllToTargetButton: {
@@ -101,8 +101,8 @@ export default function PTDemo() {
                 breakpoint="1400px"
                 sourceHeader="Available"
                 targetHeader="Selected"
-                sourceStyle={{ height: '30rem' }}
-                targetStyle={{ height: '30rem' }}
+                sourceStyle={{ height: '24rem' }}
+                targetStyle={{ height: '24rem' }}
                 pt={{
                     list: { style: { height: '342px' } },
                     moveAllToTargetButton: {
@@ -175,8 +175,8 @@ export default function PTDemo() {
                 breakpoint="1400px"
                 sourceHeader="Available"
                 targetHeader="Selected"
-                sourceStyle={{ height: '30rem' }}
-                targetStyle={{ height: '30rem' }}
+                sourceStyle={{ height: '24rem' }}
+                targetStyle={{ height: '24rem' }}
                 pt={{
                     list: { style: { height: '342px' } },
                     moveAllToTargetButton: {
@@ -222,8 +222,8 @@ export default function PTDemo() {
                     breakpoint="1400px"
                     sourceHeader="Available"
                     targetHeader="Selected"
-                    sourceStyle={{ height: '30rem' }}
-                    targetStyle={{ height: '30rem' }}
+                    sourceStyle={{ height: '24rem' }}
+                    targetStyle={{ height: '24rem' }}
                     pt={{
                         list: { style: { height: '342px' } },
                         moveAllToTargetButton: {
