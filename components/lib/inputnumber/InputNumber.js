@@ -402,7 +402,7 @@ export const InputNumber = React.memo(
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
                             }
-                        } else if (props.mode === 'currency' && ['¥', '$', 'I', 'N', 'R'].includes(deleteChar)) {
+                        } else if (props.mode === 'currency' && deleteChar.search(_currency.current) != -1) {
                             newValueStr = inputValue.slice(1);
                         }
 
