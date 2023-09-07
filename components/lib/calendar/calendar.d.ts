@@ -274,7 +274,6 @@ export interface CalendarState {
     viewDate: Nullable<Date>;
 }
 
-
 /**
  * Custom month change event.
  * @see {@link CalendarProps.onMonthChange}
