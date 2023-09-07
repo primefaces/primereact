@@ -14,6 +14,7 @@ import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
 import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
 
 export declare type MultiSelectPassThroughType<T> = PassThroughType<T, MultiSelectPassThroughMethodOptions>;
 
@@ -86,7 +87,11 @@ export interface MultiSelectPassThroughOptions {
     /**
      * Uses to pass attributes to the header checkbox's DOM element.
      */
-    headerCheckbox?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    headerCheckbox?: CheckboxPassThroughOptions;
+    /**
+     * Uses to pass attributes to the header checkbox icon's DOM element.
+     */
+    headerCheckboxIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the header checkbox's DOM element.
      */

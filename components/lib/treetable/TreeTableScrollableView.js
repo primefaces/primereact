@@ -37,7 +37,7 @@ export const TreeTableScrollableView = React.memo((props) => {
         if (element) {
             let el = element;
 
-            while (el && !DomHandler.hasClass(el, 'p-treetable')) {
+            while (el && !(DomHandler.getAttribute(el, 'data-pc-section') === 'root' || DomHandler.getAttribute(el, 'data-pc-name') === 'treetable')) {
                 el = el.parentElement;
             }
 
@@ -110,7 +110,7 @@ export const TreeTableScrollableView = React.memo((props) => {
     const scrollableProps = mergeProps(
         {
             className: cx('scrollable', { scrolaableProps: props }),
-            style: sx('scrollable', { width, left })
+            style: { width, left }
         },
         ptm('scrollable')
     );
@@ -140,7 +140,7 @@ export const TreeTableScrollableView = React.memo((props) => {
     const scrollableBodyProps = mergeProps(
         {
             className: cx('scrollableBody'),
-            style: sx('scrollableBody', { scrolaableProps: props }),
+            style: !props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : undefined,
             onScroll: (e) => onBodyScroll(e)
         },
         ptm('scrollableBody')
@@ -148,7 +148,7 @@ export const TreeTableScrollableView = React.memo((props) => {
 
     const scrollableBodyTableProps = mergeProps(
         {
-            style: sx('scrollableBodyTable'),
+            style: { top: '0' },
             className: cx('scrollableBodyTable')
         },
         ptm('scrollableBodyTable')

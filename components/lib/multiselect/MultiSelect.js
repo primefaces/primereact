@@ -128,17 +128,17 @@ export const MultiSelect = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-p-disabled') === true || DomHandler.getAttribute(nextItem, 'data-pc-section') === 'itemgroup' ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-p-disabled') === true || DomHandler.getAttribute(prevItem, 'data-pc-section') === 'itemgroup' ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onClick = (event) => {
-            if (!props.inline && !props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !isPanelClicked(event) && DomHandler.getAttribute(event.target, 'data-pc-section') !== 'removetokenicon' && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -314,11 +314,11 @@ export const MultiSelect = React.memo(
         };
 
         const isClearClicked = (event) => {
-            return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon');
+            return DomHandler.getAttribute(event.target, 'data-pc-section') === 'clearicon';
         };
 
         const isSelectAllClicked = (event) => {
-            return DomHandler.hasClass(event.target, 'p-multiselect-select-all');
+            return DomHandler.getAttribute(event.target, 'data-pc-section') === 'headercheckboxcontainer';
         };
 
         const isPanelClicked = (event) => {
@@ -769,6 +769,7 @@ export const MultiSelect = React.memo(
                         ptm={ptm}
                         cx={cx}
                         sx={sx}
+                        isUnstyled={isUnstyled}
                     />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}

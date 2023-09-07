@@ -48,20 +48,16 @@ const classes = {
     closeButton: 'p-multiselect-close p-link',
     header: 'p-multiselect-header',
     closeIcon: 'p-multiselect-close-icon',
-    headerCheckbox: 'p-multiselect-select-all p-checkbox-icon p-c',
+    headerCheckboxContainer: 'p-multiselect-select-all',
+    headerCheckboxIcon: 'p-multiselect-select-all p-checkbox-icon p-c',
     headerSelectAllLabel: 'p-multiselect-select-all-label',
     filterContainer: 'p-multiselect-filter-container',
     filterIcon: 'p-multiselect-filter-icon',
     item: ({ itemProps: props }) =>
-        classNames(
-            'p-multiselect-item',
-            {
-                'p-highlight': props.selected,
-                'p-disabled': props.disabled
-            },
-            props.className,
-            props.option.className
-        ),
+        classNames('p-multiselect-item', {
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled
+        }),
     checkboxContainer: 'p-checkbox p-component',
     checkboxIcon: 'p-checkbox-icon p-c',
     checkbox: ({ itemProps: props }) =>
