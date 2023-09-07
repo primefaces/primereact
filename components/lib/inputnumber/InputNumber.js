@@ -376,9 +376,9 @@ export const InputNumber = React.memo(
 
                     if (selectionStart === selectionEnd) {
                         const deleteChar = inputValue.charAt(selectionStart - 1);
-                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
                         if (isNumeralChar(deleteChar)) {
+                            const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
                             const decimalLength = getDecimalLength(inputValue);
 
                             if (_group.current.test(deleteChar)) {
@@ -401,6 +401,12 @@ export const InputNumber = React.memo(
                                 newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
+                            }
+                        } else if (_currency.current.test(deleteChar)) {
+                            const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
+
+                            if (minusCharIndex === currencyCharIndex - 1) {
+                                newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
                             }
                         }
 
@@ -473,18 +479,16 @@ export const InputNumber = React.memo(
                 }
             }
 
-            const key = event.key;
+            const code = event.which || event.keyCode;
 
-            if (key !== 'Enter') {
+            if (code !== 13) {
                 // to submit a form
                 event.preventDefault();
             }
 
-            const _isDecimalSign = isDecimalSign(key);
-            const _isMinusSign = isMinusSign(key);
-
-            const code = event.which || event.keyCode;
             const char = String.fromCharCode(code);
+            const _isDecimalSign = isDecimalSign(char);
+            const _isMinusSign = isMinusSign(char);
 
             if ((48 <= code && code <= 57) || _isMinusSign || _isDecimalSign) {
                 insert(event, char, { isDecimalSign: _isDecimalSign, isMinusSign: _isMinusSign });
@@ -583,10 +587,12 @@ export const InputNumber = React.memo(
             let newValueStr;
 
             if (sign.isMinusSign) {
-                if (selectionStart === 0) {
+                const isNewMinusSign = minusCharIndex === -1;
+
+                if (isNewMinusSign && (selectionStart === 0 || selectionStart === currencyCharIndex + 1)) {
                     newValueStr = inputValue;
 
-                    if (minusCharIndex === -1 || selectionEnd !== 0) {
+                    if (isNewMinusSign || selectionEnd !== 0) {
                         newValueStr = insertText(inputValue, text, 0, selectionEnd);
                     }
 
@@ -1037,7 +1043,7 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyUp={onInputKeyUp}
+                    onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
                     onBlur={onInputBlur}
