@@ -62,7 +62,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 
 export default function ControlledDoc() {
-    const [activeIndex, setActiveIndex] = useState(null);
+    const [activeIndex, setActiveIndex] = useState();
 
     const onClick = (itemIndex) => {
         let _activeIndex = activeIndex ? [...activeIndex] : [];
@@ -125,7 +125,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 
 export default function ControlledDoc() {
-    const [activeIndex, setActiveIndex] = useState<number[] | null>(null);
+    const [activeIndex, setActiveIndex] = useState<number | number[]>();
 
     const onClick = (itemIndex: number) => {
         let _activeIndex = activeIndex ? [...activeIndex] : [];
