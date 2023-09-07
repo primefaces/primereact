@@ -510,7 +510,7 @@ export const InputNumber = React.memo(
         };
 
         const allowMinusSign = () => {
-            return props.min === null || props.min < 0;
+            return ObjectUtils.isEmpty(props.min) || props.min < 0;
         };
 
         const isMinusSign = (char) => {

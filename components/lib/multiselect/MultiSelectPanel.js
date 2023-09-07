@@ -12,7 +12,7 @@ export const MultiSelectPanel = React.memo(
         const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
-        const { ptm, cx, sx } = props;
+        const { ptm, cx, sx, isUnstyled } = props;
 
         const onEnter = () => {
             props.onEnter(() => {
@@ -68,6 +68,7 @@ export const MultiSelectPanel = React.memo(
                     itemCheckboxIcon={props.itemCheckboxIcon}
                     ptm={ptm}
                     cx={cx}
+                    isUnstyled={isUnstyled}
                 />
             );
         };

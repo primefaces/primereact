@@ -13,18 +13,29 @@ export const TreeTableBodyCell = (props) => {
     const tabIndexTimeout = React.useRef(null);
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = (column) => ColumnBase.getCProps(column);
-    const { ptmo, cx } = props.ptCallbacks;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
+        const isSingleSelectionMode = props.metaData.props.selectionMode === 'single';
+        const isMultipleSelectionMode = props.metaData.props.selectionMode === 'multiple';
         const cProps = getColumnProps(props.column);
-
-        return ptmo(getColumnProp('pt'), key, {
+        const columnMetadata = {
             props: cProps,
             parent: props.metaData,
             state: {
                 editing: editingState
+            },
+            context: {
+                index: props.index,
+                selectable: isSingleSelectionMode || isMultipleSelectionMode,
+                selected: props.selected,
+                scrollable: props.metaData.props.scrollable,
+                frozen: getColumnProp('frozen'),
+                showGridlines: props.metaData.props.showGridlines
             }
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
     };
 
     const field = getColumnProp('field') || `field_${props.index}`;
@@ -222,8 +233,8 @@ export const TreeTableBodyCell = (props) => {
             onClick: (e) => onClick(e),
             onKeyDown: (e) => onKeyDown(e)
         },
-        getColumnPTOptions('bodyCell'),
-        getColumnPTOptions('root')
+        getColumnPTOptions('root'),
+        getColumnPTOptions('bodyCell')
     );
 
     return (

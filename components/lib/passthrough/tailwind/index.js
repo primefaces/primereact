@@ -774,7 +774,7 @@ const Tailwind = {
         content: {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
-        groupicon: 'ml-auto',
+        optiongroupicon: 'ml-auto',
         transition: TRANSITIONS.overlay
     },
     inputmask: {
@@ -1887,17 +1887,15 @@ const Tailwind = {
         menu: {
             className: classNames('outline-none', 'm-0 p-0 list-none')
         },
-        menuitem: ({ context }) => {
-            return {
-                className: classNames(
-                    'text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none',
-                    'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80', // Hover
-                    {
-                        'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
-                    }
-                )
-            };
-        },
+        menuitem: ({ context }) => ({
+            className: classNames(
+                'text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none',
+                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80', // Hover
+                {
+                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
+                }
+            )
+        }),
         action: {
             className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'flex items-center cursor-pointer no-underline relative overflow-hidden')
         },
@@ -2831,7 +2829,7 @@ const Tailwind = {
     treetable: {
         root: ({ props }) => ({
             className: classNames('relative', {
-                'flex flex-col h-full': props.scrollHeight === 'flex'
+                'flex flex-col h-full': props.scrollHeight
             })
         }),
         loadingoverlay: {
@@ -2849,6 +2847,12 @@ const Tailwind = {
                 'dark:bg-gray-900 dark:text-white/70 dark:border-blue-900/40' // Dark Mode
             )
         },
+        scrollablewrapper: ({ props }) => ({
+            className: classNames({
+                'relative overflow-auto': props.scrollable,
+                'overflow-x-auto': props.resizableColumns
+            })
+        }),
         wrapper: ({ props }) => ({
             className: classNames({
                 'relative overflow-auto': props.scrollable,
@@ -2897,30 +2901,29 @@ const Tailwind = {
             headercell: ({ context }) => ({
                 className: classNames(
                     'text-left border-gray-300 border font-bold',
-                    'transition duration-200',
-                    context.sorted ? 'bg-blue-50 text-blue-700' : 'bg-slate-50',
-                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
+                    'transition duration-200 p-4',
                     'dark:border-blue-900/40 dark:text-white/80 dark:bg-gray-900', //Dark Mode
                     {
+                        'bg-blue-50 text-blue-700': context.sorted,
+                        'bg-slate-50': !context.sorted,
                         'flex flex-1 items-center': context.scrollable,
-                        'flex-initial shrink-0': context.scrollable && context.scrollDirection === 'both' && !context.frozen,
-                        'sticky z-[1]': context.scrollable && context.scrollDirection === 'both' && context.frozen,
+                        'flex-initial shrink-0': context.scrollable && !context.frozen,
+                        'sticky z-[1]': context.scrollable && context.frozen,
                         'border-x-0 border-l-0 border-t-0': !context.showGridlines,
-                        'overflow-hidden relative bg-clip-padding': context.resizable && !context.frozen
+                        'overflow-hidden relative bg-clip-padding': !context.frozen
                     }
                 )
             }),
             bodycell: ({ context }) => ({
                 className: classNames(
                     'text-left border-gray-300 border',
-                    'transition duration-200',
-                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
+                    'transition duration-200 p-4',
                     'dark:border-blue-900/40', //Dark Mode
                     {
                         'cursor-pointer': context.selectable,
                         'flex flex-1 items-center': context.scrollable,
-                        'flex-initial shrink-0': context.scrollable && context.scrollDirection === 'both' && !context.frozen,
-                        sticky: context.scrollable && context.scrollDirection === 'both' && context.frozen,
+                        'flex-initial shrink-0': context.scrollable && !context.frozen,
+                        sticky: context.scrollable && context.frozen,
                         'border-x-0 border-l-0': !context.showGridlines
                     }
                 )
@@ -2929,12 +2932,18 @@ const Tailwind = {
                 className: classNames(
                     'relative inline-flex items-center justify-center align-center cursor-pointer select-none overflow-hidden bg-transparent',
                     'w-8 h-8 border-0 rounded mr-0.5',
-                    context.selected ? 'text-blue-700' : 'text-gray-500',
+                    {
+                        'text-blue-700': context.selected,
+                        'text-gray-500': !context.selected
+                    },
                     'dark:text-white/70' //Dark Mode
                 )
             }),
             sorticon: ({ context }) => ({
-                className: classNames('ml-2', context.sorted ? 'text-blue-700 dark:text-white/80' : 'text-slate-700 dark:text-white/70')
+                className: classNames('ml-2', {
+                    'text-blue-700 dark:text-white/80': context.sorted,
+                    'text-slate-700 dark:text-white/70': !context.sorted
+                })
             }),
             sortbadge: {
                 className: classNames(
@@ -2950,7 +2959,10 @@ const Tailwind = {
                 className: classNames(
                     'flex items-center justify-center',
                     'border-2 w-6 h-6 text-gray-600 rounded-lg transition-colors duration-200',
-                    context.checked ? 'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400' : 'border-gray-300 bg-white dark:border-blue-900/40 dark:bg-gray-900',
+                    {
+                        'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400': context.checked,
+                        'border-gray-300 bg-white dark:border-blue-900/40 dark:bg-gray-900': !context.checked
+                    },
                     {
                         'hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]': !context.disabled
                     }
@@ -3033,7 +3045,11 @@ const Tailwind = {
             bodycell: ({ props, context }) => ({
                 className: classNames(
                     'text-left border-0 border-b border-solid border-gray-300',
-                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
+                    {
+                        'p-2': context?.size === 'small',
+                        'p-5': context?.size === 'large',
+                        'p-4': !context.size
+                    },
                     'dark:text-white/80 dark:border-blue-900/40', // Dark Mode
                     {
                         'sticky bg-inherit': props.frozen || props.frozen === '', // Frozen Columns
@@ -3046,7 +3062,11 @@ const Tailwind = {
                     'text-left border-0 border-b border-solid border-gray-300 font-bold',
                     'bg-slate-50 text-slate-700',
                     'transition duration-200',
-                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
+                    {
+                        'p-2': context?.size === 'small',
+                        'p-5': context?.size === 'large',
+                        'p-4': !context.size
+                    },
                     'dark:text-white/80 dark:bg-gray-900 dark:border-blue-900/40', // Dark Mode
                     {
                         'border-x border-y': context?.showGridlines

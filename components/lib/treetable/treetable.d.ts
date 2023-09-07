@@ -85,6 +85,10 @@ export interface TreeTablePassThroughOptions {
      */
     emptyMessage?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
+     * Uses to pass attributes to the empty message cell's DOM element.
+     */
+    emptyMessageCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
      * Uses to pass attributes to the body cell's DOM element.
      */
     bodyCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;

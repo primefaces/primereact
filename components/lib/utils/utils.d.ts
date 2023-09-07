@@ -17,10 +17,10 @@ export declare class DomHandler {
     static getBrowserLanguage(): string;
     static getWindowScrollTop(): number;
     static getWindowScrollLeft(): number;
-    static getOuterWidth(el: HTMLElement, margin: boolean): number;
-    static getOuterHeight(el: HTMLElement, margin: boolean): number;
-    static getClientHeight(el: HTMLElement, margin: boolean): number;
-    static getClientWidth(el: HTMLElement, margin: boolean): number;
+    static getOuterWidth(el?: HTMLElement | null, margin?: boolean): number;
+    static getOuterHeight(el?: HTMLElement | null, margin?: boolean): number;
+    static getClientHeight(el?: HTMLElement | null, margin?: boolean): number;
+    static getClientWidth(el?: HTMLElement | null, margin?: boolean): number;
     static getViewport(): { width: number; height: number };
     static getOffset(el: HTMLElement): { top: any; left: any };
     static index(el: HTMLElement): number;
@@ -103,6 +103,7 @@ export declare class ObjectUtils {
     static equals(obj1: any, obj2: any, field: string): boolean;
     static deepEquals(a: any, b: any): boolean;
     static resolveFieldData(data: any, field: string): any;
+    static mutateFieldData(data: object, field: string, value: any): void;
     static findDiffKeys(obj1: any, obj2: any): object;
     static reorderArray(value: any, from: number, to: number): void;
     static findIndexInList(value: any, list: any[], dataKey?: string): number;
@@ -137,7 +138,7 @@ export declare class ObjectUtils {
 }
 
 /**
- * Icon utlities for managing icon tasks.
+ * Icon utilities for managing icon tasks.
  */
 export declare class IconUtils {
     static getJSXIcon(icon: IconType<any>, iconProps: React.HTMLProps<HTMLElement>, options: any): any;
@@ -150,7 +151,7 @@ export declare class IconUtils {
 export declare function UniqueComponentId(prefix?: string): string;
 
 /**
- * ZIndex utlities for managing zindex states of different types.
+ * ZIndex utilities for managing zindex states of different types.
  */
 export declare namespace ZIndexUtils {
     export function get(el?: HTMLElement): number;

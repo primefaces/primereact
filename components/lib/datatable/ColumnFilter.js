@@ -300,8 +300,14 @@ export const ColumnFilter = React.memo((props) => {
     const onMenuMatchModeChange = (value, index) => {
         const filterMatchModeChangeCallback = getColumnProp('onFilterMatchModeChange');
         let filters = { ...props.filters };
+        let filterField = filters[field];
 
-        filters[field].constraints[index].matchMode = value;
+        if (props.display === 'menu' && ObjectUtils.isNotEmpty(filterField.constraints)) {
+            filterField.constraints[index].matchMode = value;
+        } else {
+            filterField.matchMode = value;
+        }
+
         props.onFilterChange(filters);
         filterMatchModeChangeCallback && filterMatchModeChangeCallback({ field, matchMode: value, index: index });
 

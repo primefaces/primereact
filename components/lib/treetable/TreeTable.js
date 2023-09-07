@@ -36,6 +36,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             multiSortMeta: multiSortMetaState,
             filters: filtersState,
             columnOrder: columnOrderState
+        },
+        context: {
+            scrollable: props.scrollable
         }
     };
     const ptCallbacks = TreeTableBase.setMetaData(metaData);
@@ -344,7 +347,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const onColumnResize = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
 
-        !isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizerHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizerHelperRef.current.style.top = 0 + 'px';
         resizerHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -428,7 +431,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         if (column) {
             let parent = column.parentElement;
 
-            while (parent && !DomHandler.hasClass(parent, 'p-treetable-scrollable-view')) {
+            while (parent && DomHandler.getAttribute(parent, 'data-pc-section') !== 'scrollable') {
                 parent = parent.parentElement;
             }
 
@@ -987,7 +990,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         }
 
         scrollableView = createScrollableView(value, scrollableColumns, false, props.headerColumnGroup, props.footerColumnGroup);
-        const scrollableWrapper = mergeProps(
+        const scrollableWrapperProps = mergeProps(
             {
                 className: ptCallbacks.cx('scrollableWrapper')
             },
@@ -995,7 +998,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         );
 
         return (
-            <div {...scrollableWrapper}>
+            <div {...scrollableWrapperProps}>
                 {frozenView}
                 {scrollableView}
             </div>
@@ -1091,7 +1094,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const resizeHelperProps = mergeProps(
         {
             className: ptCallbacks.cx('resizeHelper'),
-            style: ptCallbacks.sx('resizeHelper')
+            style: { display: 'none' }
         },
         ptCallbacks.ptm('resizeHelper')
     );
@@ -1105,7 +1108,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const reorderIndicatorUpProps = mergeProps(
         {
             className: ptCallbacks.cx('reorderIndicatorUp'),
-            style: ptCallbacks.sx('reorderIndicatorUp')
+            style: { position: 'absolute', display: 'none' }
         },
         ptCallbacks.ptm('reorderIndicatorUp')
     );
@@ -1116,7 +1119,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             {reorderIndicatorUpIcon}
         </span>
     );
-    const reorderIndicatorDownProps = { className: ptCallbacks.sx('reorderIndicatorDown'), style: ptCallbacks.sx('reorderIndicatorDown') };
+    const reorderIndicatorDownProps = { className: ptCallbacks.sx('reorderIndicatorDown'), style: { position: 'absolute', display: 'none' } };
     const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
     const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
     const reorderIndicatorDown = props.reorderableColumns && (

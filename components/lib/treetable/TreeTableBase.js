@@ -204,16 +204,6 @@ const classes = {
     scrollableColgroup: 'p-treetable-scrollable-colgroup'
 };
 
-const inlineStyles = {
-    resizeHelper: { display: 'none' },
-    reorderIndicatorUp: { position: 'absolute', display: 'none' },
-    reorderIndicatorDown: { position: 'absolute', display: 'none' },
-    rowToggler: ({ rowProps: props }) => ({ marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' }),
-    scrollableBody: ({ scrolaableProps: props }) => (!props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : undefined),
-    scrollableBodyTable: { top: '0' },
-    scrollable: ({ width, left }) => ({ width: width, left: left })
-};
-
 export const TreeTableBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TreeTable',
@@ -303,7 +293,6 @@ export const TreeTableBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });

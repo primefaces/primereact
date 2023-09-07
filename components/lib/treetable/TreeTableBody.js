@@ -38,7 +38,7 @@ export const TreeTableBody = React.memo((props) => {
 
         const targetNode = event.target.nodeName;
 
-        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')) {
+        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.getAttribute(event.target, 'data-pc-section') === 'columnresizer') {
             return;
         }
 
@@ -229,16 +229,16 @@ export const TreeTableBody = React.memo((props) => {
                 },
                 ptm('emptyMessage')
             );
-            const bodyCellProps = mergeProps(
+            const emptyMessageCellProps = mergeProps(
                 {
                     colSpan
                 },
-                ptm('bodyCell')
+                ptm('emptyMessageCell')
             );
 
             return (
                 <tr {...emptyMessageProps}>
-                    <td {...bodyCellProps}>{content}</td>
+                    <td {...emptyMessageCellProps}>{content}</td>
                 </tr>
             );
         }

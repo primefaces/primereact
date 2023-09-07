@@ -13,24 +13,20 @@ export const TreeTableHeader = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
     const filterTimeout = React.useRef(null);
 
-    const getColumnProps = (column) => {
-        return ptmo(ColumnBase.getCProps(column));
+    const getColumnProp = (column, ...args) => {
+        return column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(column, args[0]) : ColumnBase.getCProp(args[0] || column, args[1])) : null;
     };
 
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
+
     const getColumnPTOptions = (column, key, params) => {
-        return ptmo(ColumnBase.getCProp(column, 'pt'), key, {
+        const columnMetadata = {
             props: getColumnProps(column),
             parent: props.metaData,
             ...params
-        });
-    };
-
-    const ptHeaderCellOptions = (column) => {
-        return {
-            context: {
-                frozen: getColumnProp(column, 'frozen')
-            }
         };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(getColumnProps(column), key, columnMetadata));
     };
 
     const onHeaderClick = (event, column) => {
@@ -38,10 +34,10 @@ export const TreeTableHeader = React.memo((props) => {
             const targetNode = event.target;
 
             if (
-                DomHandler.hasClass(targetNode, 'p-sortable-column') ||
-                DomHandler.hasClass(targetNode, 'p-column-title') ||
-                DomHandler.hasClass(targetNode, 'p-sortable-column-icon') ||
-                DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')
+                DomHandler.getAttribute(targetNode, 'data-p-sortable-column') === true ||
+                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'headertitle' ||
+                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'sorticon' ||
+                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sorticon'
             ) {
                 props.onSort({
                     originalEvent: event,
@@ -168,17 +164,17 @@ export const TreeTableHeader = React.memo((props) => {
         }
     };
 
-    const getColumnProp = (column, ...args) => {
-        return column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(column, args[0]) : ColumnBase.getCProp(args[0] || column, args[1])) : null;
-    };
-
     const createSortIcon = (column, sorted, sortOrder) => {
         if (getColumnProp(column, 'sortable')) {
             const sortIconProps = mergeProps(
                 {
                     className: cx('sortIcon')
                 },
-                getColumnPTOptions(column, 'sortIcon')
+                getColumnPTOptions(column, 'sortIcon', {
+                    context: {
+                        sorted
+                    }
+                })
             );
             let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon {...sortIconProps} /> : <SortAmountUpAltIcon {...sortIconProps} /> : <SortAltIcon {...sortIconProps} />;
             let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { ...sortIconProps }, { props, sorted, sortOrder });
@@ -257,10 +253,17 @@ export const TreeTableHeader = React.memo((props) => {
                     className: classNames(cx('headerCell', { options }), getColumnProp(column, 'filterHeaderClassName')),
                     style: getColumnProp(column, 'filterHeaderStyle') || getColumnProp(column, 'style'),
                     rowSpan: getColumnProp(column, 'rowSpan'),
-                    colSpan: getColumnProp(column, 'colSpan')
+                    colSpan: getColumnProp(column, 'colSpan'),
+                    'data-p-sortable-column': getColumnProp(column, 'sortable'),
+                    'data-p-resizable-column': props.resizableColumns,
+                    'data-p-frozen-column': getColumnProp(column, 'frozen')
                 },
-                getColumnPTOptions(column, 'headerCell', ptHeaderCellOptions(column)),
-                getColumnPTOptions(column, 'root')
+                getColumnPTOptions(column, 'root'),
+                getColumnPTOptions(column, 'headerCell', {
+                    context: {
+                        frozen: getColumnProp(column, 'frozen')
+                    }
+                })
             );
 
             return <th {...headerCellProps}>{filterElement}</th>;
@@ -299,10 +302,20 @@ export const TreeTableHeader = React.memo((props) => {
                     onDragStart: (e) => onDragStart(e, column),
                     onDragOver: (e) => onDragOver(e, column),
                     onDragLeave: (e) => onDragLeave(e, column),
-                    onDrop: (e) => onDrop(e, column)
+                    onDrop: (e) => onDrop(e, column),
+                    'data-p-sortable-column': getColumnProp(column, 'sortable'),
+                    'data-p-resizable-column': props.resizableColumns,
+                    'data-p-highlight': sorted,
+                    'data-p-frozen-column': getColumnProp(column, 'frozen')
                 },
-                getColumnPTOptions(column, 'headerCell'),
-                getColumnPTOptions(column, 'root')
+                getColumnPTOptions(column, 'root'),
+                getColumnPTOptions(column, 'headerCell', {
+                    context: {
+                        sorted,
+                        frozen,
+                        resizable: props.resizableColumns
+                    }
+                })
             );
 
             return (
