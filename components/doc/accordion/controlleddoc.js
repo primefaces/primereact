@@ -61,7 +61,7 @@ import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 
-export default function ControlledDoc() 
+export default function ControlledDoc() {
     const [activeIndex, setActiveIndex] = useState();
 
     const onClick = (itemIndex) => {
