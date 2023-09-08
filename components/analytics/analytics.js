@@ -22,7 +22,6 @@ export const GTagManager = () => {
     }, []);
 
     const pageview = (url) => {
-        // eslint-disable-next-line no-console
         window.gtag('config', 'G-FZJEC89ZVF', {
             page_path: url
         });
