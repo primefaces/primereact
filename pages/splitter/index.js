@@ -8,6 +8,8 @@ import { PTDoc } from '../../components/doc/splitter/pt/ptdoc';
 import { Wireframe } from '../../components/doc/splitter/pt/wireframe';
 import { SizeDoc } from '../../components/doc/splitter/sizedoc';
 import { StyleDoc } from '../../components/doc/splitter/styledoc';
+import { StyledDoc } from '../../components/doc/splitter/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/splitter/theming/tailwinddoc';
 import { VerticalDoc } from '../../components/doc/splitter/verticaldoc';
 
 const SplitterDemo = () => {
@@ -72,7 +74,27 @@ const SplitterDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Splitter Component" header="Splitter" description="Splitter is utilized to separate and resize panels." componentDocs={docs} apiDocs={['Splitter', 'SplitterPanel']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Splitter Component" header="Splitter" description="Splitter is utilized to separate and resize panels." componentDocs={docs} apiDocs={['Splitter', 'SplitterPanel']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default SplitterDemo;
