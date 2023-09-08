@@ -19,7 +19,7 @@ export const GTagManager = () => {
 
     useEffect(() => {
         pageview(router.pathname);
-    }, []);
+    }, [router.pathname]);
 
     const pageview = (url) => {
         window.gtag('config', 'G-FZJEC89ZVF', {
