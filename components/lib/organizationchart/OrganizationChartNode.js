@@ -119,7 +119,7 @@ export const OrganizationChartNode = React.memo((props) => {
                         );
                         const lineRightProps = mergeProps(
                             {
-                                className: cx('lineRight', { index })
+                                className: cx('lineRight', { index, nodeChildLength })
                             },
                             getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
                         );

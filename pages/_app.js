@@ -7,12 +7,11 @@ import '../styles/layout/layout.scss';
 // prettier-ignore
 import '../styles/primereact.css';
 // prettier-ignore
-import { useRouter } from 'next/router';
-import Script from 'next/script';
 import PrimeReact from '../components/lib/api/Api';
 import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
 import AnnouncementData from '../data/news.json';
 import '../styles/demo/demo.scss';
+import { GTagManager } from '../components/analytics/analytics';
 
 function Main({ component: Component }) {
     const [dark, setDark] = useState(false);
@@ -22,31 +21,7 @@ function Main({ component: Component }) {
     const announcement = useRef(AnnouncementData);
     const context = useContext(PrimeReactContext);
 
-    const router = useRouter();
-
     useEffect(() => {
-        const handleRouteChange = (url) => {
-            pageview(url);
-        };
-
-        router.events.on('routeChangeComplete', handleRouteChange);
-
-        return () => {
-            router.events.off('routeChangeComplete', handleRouteChange);
-        };
-    }, [router.events]);
-
-    const pageview = (url) => {
-        // eslint-disable-next-line no-console
-        console.log(url);
-        window.gtag('config', 'G-FZJEC89ZVF', {
-            page_path: url
-        });
-    };
-
-    useEffect(() => {
-        pageview(router.pathname);
-
         const itemString = localStorage.getItem(storageKey);
 
         if (itemString) {
@@ -122,18 +97,11 @@ function Main({ component: Component }) {
 }
 
 export default function MyApp({ Component }) {
+    const isProduction = process.env.NODE_ENV === 'production';
+
     return (
         <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-FZJEC89ZVF" />
-            <Script id="google-analytics">
-                {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', 'G-FZJEC89ZVF');
-        `}
-            </Script>
+            {isProduction && <GTagManager />}
             <PrimeReactProvider>
                 <Main component={Component} />
             </PrimeReactProvider>
