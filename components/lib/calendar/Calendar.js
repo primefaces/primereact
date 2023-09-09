@@ -1924,7 +1924,11 @@ export const Calendar = React.memo(
             if (isComparable()) {
                 let value = isRangeSelection() ? props.value[0] : props.value;
 
-                return !isMultipleSelection() ? value.getMonth() === month && value.getFullYear() === currentYear : false;
+                if (isMultipleSelection()) {
+                    return value.some((currentValue) => currentValue.getMonth() === month && currentValue.getFullYear() === currentYear);
+                } else {
+                    return value.getMonth() === month && value.getFullYear() === currentYear;
+                }
             }
 
             return false;
@@ -1934,7 +1938,11 @@ export const Calendar = React.memo(
             if (isComparable()) {
                 let value = isRangeSelection() ? props.value[0] : props.value;
 
-                return !isMultipleSelection() && isComparable() ? value.getFullYear() === year : false;
+                if (isMultipleSelection()) {
+                    return value.some((currentValue) => currentValue.getFullYear() === year);
+                } else {
+                    return value.getFullYear() === year;
+                }
             }
 
             return false;
