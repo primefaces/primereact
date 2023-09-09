@@ -128,8 +128,13 @@ export const Slider = React.memo(
 
         const setValue = (event) => {
             let handleValue;
-            let pageX = event.touches ? event.touches[0].pageX : event.pageX;
-            let pageY = event.touches ? event.touches[0].pageY : event.pageY;
+
+            let pageX = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageX : event.pageX;
+            let pageY = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageY : event.pageY;
+
+            if (!pageX || !pageY) {
+                return;
+            }
 
             if (horizontal) handleValue = ((pageX - initX.current) * 100) / barWidth.current;
             else handleValue = ((initY.current + barHeight.current - pageY) * 100) / barHeight.current;
