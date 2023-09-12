@@ -3624,6 +3624,14 @@
                             "description": "When present, it specifies that the input cannot be typed."
                         },
                         {
+                            "name": "required",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When present, it specifies that an input field must be filled out before submitting the form."
+                        },
+                        {
                             "name": "removeTokenIcon",
                             "optional": true,
                             "readonly": false,
@@ -6433,6 +6441,13 @@
                             "description": "Mask pattern for input element."
                         },
                         {
+                            "name": "maskSlotChar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Placeholder character in mask."
+                        },
+                        {
                             "name": "maxDate",
                             "optional": true,
                             "readonly": false,
@@ -7185,6 +7200,13 @@
                             "description": "Mask pattern for input element."
                         },
                         {
+                            "name": "maskSlotChar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Placeholder character in mask."
+                        },
+                        {
                             "name": "maxDate",
                             "optional": true,
                             "readonly": false,
@@ -7935,6 +7957,13 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Mask pattern for input element."
+                        },
+                        {
+                            "name": "maskSlotChar",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Placeholder character in mask."
                         },
                         {
                             "name": "maxDate",
@@ -11749,7 +11778,7 @@
                             "name": "filterMatchMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
+                            "type": "FilterMatchMode",
                             "default": "",
                             "description": "Defines filterMatchMode; \"startsWith\", \"contains\", \"endsWith\", \"equals\", \"notEquals\", \"in\", \"lt\", \"lte\", \"gt\", \"gte\" and \"custom\"."
                         },
@@ -12383,7 +12412,7 @@
                             "name": "matchMode",
                             "optional": false,
                             "readonly": false,
-                            "type": "\"endsWith\" | \"startsWith\" | \"custom\" | \"contains\" | \"in\" | \"equals\" | \"notEquals\" | \"lt\" | \"lte\" | \"gt\" | \"gte\"",
+                            "type": "FilterMatchMode",
                             "description": "Type of filter match."
                         }
                     ]
@@ -13654,10 +13683,18 @@
                     "relatedProp": "",
                     "props": [
                         {
-                            "name": "[key: string]",
+                            "name": "label",
                             "optional": false,
                             "readonly": false,
-                            "type": "string"
+                            "type": "string",
+                            "description": "The label to display for the match mode"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The match mode type"
                         }
                     ],
                     "callbacks": []
@@ -32742,6 +32779,20 @@
                             "description": "Uses to pass attributes to the list's DOM element."
                         },
                         {
+                            "name": "menuButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLAnchorElement>>",
+                            "description": "Uses to pass attributes to the menu button's DOM element."
+                        },
+                        {
+                            "name": "menuButtonIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the menu icon's DOM element."
+                        },
+                        {
                             "name": "menuitem",
                             "optional": true,
                             "readonly": false,
@@ -34395,6 +34446,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughOptions",
+                            "default": "",
+                            "description": "Uses to pass attributes to DOM elements inside the component."
                         }
                     ]
                 },
@@ -34449,7 +34508,7 @@
                 },
                 "MessagesPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
-                    "relatedProp": "MessagesProps.pt",
+                    "relatedProp": "pt",
                     "props": [
                         {
                             "name": "root",
@@ -35475,8 +35534,15 @@
                             "name": "headerCheckbox",
                             "optional": true,
                             "readonly": false,
-                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "type": "CheckboxPassThroughOptions",
                             "description": "Uses to pass attributes to the header checkbox's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the header checkbox icon's DOM element."
                         },
                         {
                             "name": "headerSelectAllLabel",
@@ -49053,7 +49119,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | HTMLElement",
+                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49065,7 +49131,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | HTMLElement",
+                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49077,7 +49143,7 @@
                             "parameters": [
                                 {
                                     "name": "target",
-                                    "type": "undefined | HTMLElement",
+                                    "type": "undefined | string | string[] | HTMLElement | RefObject<HTMLElement>",
                                     "description": "Target element or if undefined will use current target."
                                 }
                             ],
@@ -49137,7 +49203,7 @@
                             "name": "target",
                             "optional": true,
                             "readonly": false,
-                            "type": "string | string[] | HTMLElement",
+                            "type": "string | string[] | HTMLElement | RefObject<HTMLElement>",
                             "default": "",
                             "description": "Target element on global tooltip option."
                         },
@@ -53170,6 +53236,13 @@
                             "readonly": false,
                             "type": "TreeTablePassThroughType<HTMLAttributes<HTMLTableRowElement>>",
                             "description": "Uses to pass attributes to the empty message's DOM element."
+                        },
+                        {
+                            "name": "emptyMessageCell",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeTablePassThroughType<HTMLAttributes<HTMLTableCellElement>>",
+                            "description": "Uses to pass attributes to the empty message cell's DOM element."
                         },
                         {
                             "name": "bodyCell",
