@@ -16,6 +16,7 @@ const classes = {
 export const InputTextBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputText',
+        __parentMetadata: null,
         keyfilter: null,
         validateOnly: false,
         tooltip: null,

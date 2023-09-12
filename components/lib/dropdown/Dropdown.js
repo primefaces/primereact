@@ -30,6 +30,7 @@ export const Dropdown = React.memo(
         const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
         const { ptm, cx, sx, isUnstyled } = DropdownBase.setMetaData({
             props,
+            ...props.__parentMetadata,
             state: {
                 filter: filterState,
                 focused: focusedState,

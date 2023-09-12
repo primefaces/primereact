@@ -15,12 +15,14 @@ export const InputNumber = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData({
+        const metaData = {
             props,
+            ...props.__parentMetadata,
             state: {
                 focused: focusedState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData(metaData);
 
         useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
         const elementRef = React.useRef(null);
@@ -1057,6 +1059,7 @@ export const InputNumber = React.memo(
                     {...ariaProps}
                     {...dataProps}
                     pt={ptm('input')}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };

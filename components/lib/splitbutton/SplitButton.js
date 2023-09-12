@@ -21,7 +21,7 @@ export const SplitButton = React.memo(
         const elementRef = React.useRef(null);
         const defaultButtonRef = React.useRef(null);
         const overlayRef = React.useRef(null);
-        const metadata = {
+        const metaData = {
             props,
             state: {
                 id: idState,
@@ -29,7 +29,7 @@ export const SplitButton = React.memo(
             }
         };
 
-        const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metadata);
+        const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metaData);
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
 
@@ -177,7 +177,7 @@ export const SplitButton = React.memo(
                         {...props.buttonProps}
                         pt={ptm('button')}
                         __parentMetadata={{
-                            parent: metadata
+                            parent: metaData
                         }}
                         unstyled={props.unstyled}
                     >
@@ -196,7 +196,7 @@ export const SplitButton = React.memo(
                         size={props.size}
                         pt={ptm('menuButton')}
                         __parentMetadata={{
-                            parent: metadata
+                            parent: metaData
                         }}
                         unstyled={props.unstyled}
                     />

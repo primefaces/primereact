@@ -10,7 +10,8 @@ export const Badge = React.memo(
         const props = BadgeBase.getProps(inProps, context);
 
         const { ptm, cx, isUnstyled } = BadgeBase.setMetaData({
-            props
+            props,
+            ...props.__parentMetadata
         });
 
         useHandleStyle(BadgeBase.css.styles, isUnstyled, { name: 'badge' });

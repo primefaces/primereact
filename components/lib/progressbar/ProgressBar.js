@@ -9,7 +9,8 @@ export const ProgressBar = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = ProgressBarBase.getProps(inProps, context);
         const { ptm, cx, isUnstyled } = ProgressBarBase.setMetaData({
-            props
+            props,
+            ...props.__parentMetadata
         });
 
         useHandleStyle(ProgressBarBase.css.styles, isUnstyled, { name: 'progressbar' });

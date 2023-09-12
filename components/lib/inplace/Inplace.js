@@ -16,12 +16,13 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);
     const active = props.onToggle ? props.active : activeState;
-    const { ptm, cx, isUnstyled } = InplaceBase.setMetaData({
+    const metaData = {
         props,
         state: {
             active: activeState
         }
-    });
+    };
+    const { ptm, cx, isUnstyled } = InplaceBase.setMetaData(metaData);
 
     useHandleStyle(InplaceBase.css.styles, isUnstyled, { name: 'inplace' });
 
@@ -89,7 +90,10 @@ export const Inplace = React.forwardRef((inProps, ref) => {
                 type: 'button',
                 onClick: close,
                 'aria-label': ariaLabel,
-                pt: ptm('closeButton')
+                pt: ptm('closeButton'),
+                __parentMetadata: {
+                    parent: metaData
+                }
             });
 
             return <Button {...closeButtonProps}></Button>;

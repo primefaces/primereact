@@ -148,6 +148,7 @@ const inlineStyles = {
 export const DropdownBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Dropdown',
+        __parentMetadata: null,
         appendTo: null,
         ariaLabel: null,
         ariaLabelledBy: null,

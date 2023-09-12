@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronUpIcon } from '../icons/chevronup';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const OrganizationChartNode = React.memo((props) => {
     const node = props.node;
@@ -119,7 +119,7 @@ export const OrganizationChartNode = React.memo((props) => {
                         );
                         const lineRightProps = mergeProps(
                             {
-                                className: cx('lineRight', { index })
+                                className: cx('lineRight', { index, nodeChildLength })
                             },
                             getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
                         );

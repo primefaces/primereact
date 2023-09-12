@@ -80,13 +80,14 @@ export const DataView = React.memo(
         const props = DataViewBase.getProps(inProps, context);
         const [firstState, setFirstState] = React.useState(props.first);
         const [rowsState, setRowsState] = React.useState(props.rows);
-        const { ptm, cx, isUnstyled } = DataViewBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 first: firstState,
                 rows: rowsState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = DataViewBase.setMetaData(metaData);
 
         useHandleStyle(DataViewBase.css.styles, isUnstyled, { name: 'dataview' });
 
@@ -123,6 +124,7 @@ export const DataView = React.memo(
                     dropdownAppendTo={props.paginatorDropdownAppendTo}
                     ptm={ptm('paginator')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };

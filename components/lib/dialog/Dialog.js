@@ -39,6 +39,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const { ptm, cx, sx, isUnstyled } = DialogBase.setMetaData({
         props,
+        ...props.__parentMetadata,
         state: {
             id: idState,
             maximized: maximized,

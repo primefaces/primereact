@@ -493,6 +493,7 @@ export const ColumnFilter = React.memo((props) => {
                 maxLength={getColumnProp('filterMaxLength')}
                 aria-label={getColumnProp('filterPlaceholder')}
                 unstyled={props.unstyled}
+                __parentMetadata={{ parent: props.metaData }}
             />
         );
     };
@@ -669,7 +670,15 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <div {...filterOperatorProps}>
-                    <Dropdown options={options} value={value} onChange={onOperatorChange} className="p-column-filter-operator-dropdown" pt={getColumnPTOptions('filterOperatorDropdown')} unstyled={props.unstyled} />
+                    <Dropdown
+                        options={options}
+                        value={value}
+                        onChange={onOperatorChange}
+                        className="p-column-filter-operator-dropdown"
+                        pt={getColumnPTOptions('filterOperatorDropdown')}
+                        unstyled={props.unstyled}
+                        __parentMetadata={{ parent: props.metaData }}
+                    />
                 </div>
             );
         }
@@ -709,6 +718,7 @@ export const ColumnFilter = React.memo((props) => {
                     label={removeRuleLabel}
                     pt={getColumnPTOptions('filterRemoveButton')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
                 />
             );
         }

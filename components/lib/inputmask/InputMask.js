@@ -23,6 +23,9 @@ export const InputMask = React.memo(
         const defaultBuffer = React.useRef(null);
         const caretTimeoutId = React.useRef(null);
         const androidChrome = React.useRef(false);
+        const metaData = {
+            props
+        };
 
         const caret = (first, last) => {
             let range, begin, end;
@@ -610,6 +613,7 @@ export const InputMask = React.memo(
                 tooltipOptions={props.tooltipOptions}
                 pt={props.pt}
                 unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     })

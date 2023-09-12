@@ -69,6 +69,7 @@ export const MultiSelectPanel = React.memo(
                     ptm={ptm}
                     cx={cx}
                     isUnstyled={isUnstyled}
+                    metaData={props.metaData}
                 />
             );
         };

@@ -6,7 +6,7 @@ import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
     const { ptm, cx, isUnstyled } = props;
@@ -56,7 +56,17 @@ export const MultiSelectHeader = React.memo((props) => {
 
             let content = (
                 <div {...filterContainerProps}>
-                    <InputText ref={props.filterRef} type="text" role="textbox" value={props.filterValue} onChange={onFilter} className="p-multiselect-filter" placeholder={props.filterPlaceholder} pt={ptm('filterInput')} />
+                    <InputText
+                        ref={props.filterRef}
+                        type="text"
+                        role="textbox"
+                        value={props.filterValue}
+                        onChange={onFilter}
+                        className="p-multiselect-filter"
+                        placeholder={props.filterPlaceholder}
+                        pt={ptm('filterInput')}
+                        __parentMetadata={{ parent: props.metaData }}
+                    />
                     {filterIcon}
                 </div>
             );

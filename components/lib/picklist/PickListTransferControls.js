@@ -133,10 +133,10 @@ export const PickListTransferControls = React.memo((props) => {
 
     return (
         <div {...buttonsProps}>
-            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={ptm('moveToTargetButton')} unstyled={unstyled}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={ptm('moveAllToTargetButton')} unstyled={unstyled}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={ptm('moveAllToSourceButton')} unstyled={unstyled}></Button>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={ptm('moveToTargetButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={ptm('moveAllToTargetButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={ptm('moveAllToSourceButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
         </div>
     );
 });

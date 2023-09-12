@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import { localeOption, PrimeReactContext } from '../api/Api';
 import { Badge } from '../badge/Badge';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { PlusIcon } from '../icons/plus';
 import { TimesIcon } from '../icons/times';
 import { UploadIcon } from '../icons/upload';
@@ -11,7 +11,6 @@ import { ProgressBar } from '../progressbar/ProgressBar';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { FileUploadBase } from './FileUploadBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const FileUpload = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -22,7 +21,8 @@ export const FileUpload = React.memo(
         const [progressState, setProgressState] = React.useState(0);
         const [focusedState, setFocusedState] = React.useState(false);
         const [uploadingState, setUploadingState] = React.useState(false);
-        const { ptm, cx, isUnstyled } = FileUploadBase.setMetaData({
+
+        const metaData = {
             props,
             state: {
                 progress: progressState,
@@ -31,7 +31,9 @@ export const FileUpload = React.memo(
                 files: filesState,
                 focused: focusedState
             }
-        });
+        };
+
+        const { ptm, cx, isUnstyled } = FileUploadBase.setMetaData(metaData);
 
         useHandleStyle(FileUploadBase.css.styles, isUnstyled, { name: 'fileupload' });
         const fileInputRef = React.useRef(null);
@@ -465,12 +467,22 @@ export const FileUpload = React.memo(
                 <div {...detailsProps}>
                     <div {...fileNameProps}> {file.name}</div>
                     <span {...fileSizeProps}>{formatSize(file.size)}</span>
-                    <Badge className="p-fileupload-file-badge" value={badgeOptions.value} severity={badgeOptions.severity} pt={ptm('badge')} />
+                    <Badge className="p-fileupload-file-badge" value={badgeOptions.value} severity={badgeOptions.severity} pt={ptm('badge')} __parentMetadata={{ parent: metaData }} />
                 </div>
             );
             const removeButton = (
                 <div {...actionsProps}>
-                    <Button type="button" icon={props.removeIcon || <TimesIcon />} text rounded severity="danger" onClick={(e) => onRemoveClick(e, badgeOptions, index)} disabled={disabled} pt={ptm('removeButton')} />
+                    <Button
+                        type="button"
+                        icon={props.removeIcon || <TimesIcon />}
+                        text
+                        rounded
+                        severity="danger"
+                        onClick={(e) => onRemoveClick(e, badgeOptions, index)}
+                        disabled={disabled}
+                        pt={ptm('removeButton')}
+                        __parentMetadata={{ parent: metaData }}
+                    />
                 </div>
             );
             let content = (
@@ -537,7 +549,7 @@ export const FileUpload = React.memo(
                 return ObjectUtils.getJSXElement(props.progressBarTemplate, props);
             }
 
-            return <ProgressBar value={progressState} showValue={false} pt={ptm('progressbar')} />;
+            return <ProgressBar value={progressState} showValue={false} pt={ptm('progressbar')} __parentMetadata={{ parent: metaData }} />;
         };
 
         const createAdvanced = () => {
@@ -565,8 +577,32 @@ export const FileUpload = React.memo(
                 );
                 const cancelIcon = IconUtils.getJSXIcon(cancelOptions.icon || <TimesIcon {...cancelIconProps} />, { ...cancelIconProps }, { props });
 
-                uploadButton = <Button type="button" label={uploadLabel} icon={uploadIcon} onClick={upload} disabled={uploadDisabled} style={uploadOptions.style} className={uploadOptions.className} pt={ptm('uploadButton')} />;
-                cancelButton = <Button type="button" label={cancelLabel} icon={cancelIcon} onClick={clear} disabled={cancelDisabled} style={cancelOptions.style} className={cancelOptions.className} pt={ptm('cancelButton')} />;
+                uploadButton = (
+                    <Button
+                        type="button"
+                        label={uploadLabel}
+                        icon={uploadIcon}
+                        onClick={upload}
+                        disabled={uploadDisabled}
+                        style={uploadOptions.style}
+                        className={uploadOptions.className}
+                        pt={ptm('uploadButton')}
+                        __parentMetadata={{ parent: metaData }}
+                    />
+                );
+                cancelButton = (
+                    <Button
+                        type="button"
+                        label={cancelLabel}
+                        icon={cancelIcon}
+                        onClick={clear}
+                        disabled={cancelDisabled}
+                        style={cancelOptions.style}
+                        className={cancelOptions.className}
+                        pt={ptm('cancelButton')}
+                        __parentMetadata={{ parent: metaData }}
+                    />
+                );
             }
 
             if (hasFiles) {
@@ -635,7 +671,7 @@ export const FileUpload = React.memo(
                     {header}
                     <div {...contentProps}>
                         {progressBar}
-                        <Messages ref={messagesRef} />
+                        <Messages ref={messagesRef} __parentMetadata={{ parent: metaData }} />
                         {hasFiles ? filesList : null}
                         {hasUploadedFiles ? uplaodedFilesList : null}
                         {emptyContent}
@@ -699,7 +735,7 @@ export const FileUpload = React.memo(
 
             return (
                 <div {...rootProps}>
-                    <Messages ref={messagesRef} pt={ptm('message')} />
+                    <Messages ref={messagesRef} pt={ptm('message')} __parentMetadata={{ parent: metaData }} />
                     <span {...basicButtonProps}>
                         {chooseIcon}
                         {label}

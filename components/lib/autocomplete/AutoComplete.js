@@ -21,7 +21,8 @@ export const AutoComplete = React.memo(
         const [searchingState, setSearchingState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-        const { ptm, cx, sx, isUnstyled } = AutoCompleteBase.setMetaData({
+
+        const metaData = {
             props,
             state: {
                 id: idState,
@@ -29,7 +30,9 @@ export const AutoComplete = React.memo(
                 focused: focusedState,
                 overlayVisible: overlayVisibleState
             }
-        });
+        };
+
+        const { ptm, cx, sx, isUnstyled } = AutoCompleteBase.setMetaData(metaData);
 
         useHandleStyle(AutoCompleteBase.css.styles, isUnstyled, { name: 'autocomplete' });
         const elementRef = React.useRef(null);
@@ -551,6 +554,7 @@ export const AutoComplete = React.memo(
                     onDoubleClick={props.onDblClick}
                     pt={ptm('input')}
                     {...ariaProps}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
@@ -667,7 +671,18 @@ export const AutoComplete = React.memo(
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
-                return <Button type="button" icon={props.dropdownIcon || <ChevronDownIcon />} className={cx('dropdownButton')} disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} pt={ptm('dropdownButton')} />;
+                return (
+                    <Button
+                        type="button"
+                        icon={props.dropdownIcon || <ChevronDownIcon />}
+                        className={cx('dropdownButton')}
+                        disabled={props.disabled}
+                        onClick={onDropdownClick}
+                        aria-label={ariaLabel}
+                        pt={ptm('dropdownButton')}
+                        __parentMetadata={{ parent: metaData }}
+                    />
+                );
             }
 
             return null;

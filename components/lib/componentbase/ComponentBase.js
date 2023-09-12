@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import PrimeReact from '../api/Api';
 import { useStyle } from '../hooks/Hooks';
-import { ObjectUtils } from '../utils/Utils';
 import { Tailwind } from '../passthrough/tailwind';
 import { mergeProps } from '../utils/MergeProps';
+import { ObjectUtils } from '../utils/Utils';
 
 const buttonStyles = `
 .p-button {

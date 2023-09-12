@@ -1,13 +1,13 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -15,13 +15,13 @@ export const SpeedDial = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
         const visible = props.onVisibleChange ? props.visible : visibleState;
-        const metadata = {
+        const metaData = {
             props,
             state: {
                 visible
             }
         };
-        const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metadata);
+        const { ptm, cx, sx, isUnstyled } = SpeedDialBase.setMetaData(metaData);
 
         useHandleStyle(SpeedDialBase.css.styles, isUnstyled, { name: 'speeddial' });
         const isItemClicked = React.useRef(false);
@@ -272,7 +272,7 @@ export const SpeedDial = React.memo(
                 pt: ptm('button'),
                 unstyled: props.unstyled,
                 __parentMetadata: {
-                    parent: metadata
+                    parent: metaData
                 }
             });
             const content = <Button {...buttonProps} />;

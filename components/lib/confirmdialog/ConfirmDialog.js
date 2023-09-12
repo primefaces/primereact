@@ -40,12 +40,13 @@ export const ConfirmDialog = React.memo(
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
-        const { ptm, cx } = ConfirmDialogBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 visible: visibleState
             }
-        });
+        };
+        const { ptm, cx } = ConfirmDialogBase.setMetaData(metaData);
 
         const accept = () => {
             if (!isCallbackExecuting.current) {
@@ -140,7 +141,10 @@ export const ConfirmDialog = React.memo(
                 className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
                 onClick: reject,
                 pt: ptm('rejectButton'),
-                unstyled: props.unstyled
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
             };
 
             const acceptButtonProps = mergeProps(
@@ -149,7 +153,10 @@ export const ConfirmDialog = React.memo(
                     icon: getPropValue('acceptIcon'),
                     className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
                     onClick: accept,
-                    unstyled: props.unstyled
+                    unstyled: props.unstyled,
+                    __parentMetadata: {
+                        parent: metaData
+                    }
                 },
                 ptm('acceptButton')
             );
@@ -209,7 +216,10 @@ export const ConfirmDialog = React.memo(
                     breakpoints: getPropValue('breakpoints'),
                     pt: currentProps.pt,
                     unstyled: props.unstyled,
-                    appendTo: getPropValue('appendTo')
+                    appendTo: getPropValue('appendTo'),
+                    __parentMetadata: {
+                        parent: metaData
+                    }
                 },
                 ConfirmDialogBase.getOtherProps(currentProps)
             );

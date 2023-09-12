@@ -10,8 +10,10 @@ export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
+
         const { ptm, cx, isUnstyled } = InputTextBase.setMetaData({
             props,
+            ...props.__parentMetadata,
             context: {
                 disabled: props.disabled
             }

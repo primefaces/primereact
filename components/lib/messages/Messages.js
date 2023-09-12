@@ -17,6 +17,7 @@ export const Messages = React.memo(
         const elementRef = React.useRef(null);
         const metaData = {
             props,
+            ...props.__parentMetadata,
             state: {
                 messages: messagesState
             }

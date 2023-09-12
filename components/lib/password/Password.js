@@ -32,8 +32,7 @@ export const Password = React.memo(
         const mediumCheckRegExp = React.useRef(new RegExp(props.mediumRegex));
         const strongCheckRegExp = React.useRef(new RegExp(props.strongRegex));
         const type = unmaskedState ? 'text' : 'password';
-
-        const { ptm, cx, sx, isUnstyled } = PasswordBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -42,7 +41,8 @@ export const Password = React.memo(
                 focused: focusedState,
                 unmasked: unmaskedState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = PasswordBase.setMetaData(metaData);
 
         useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
 
@@ -399,7 +399,10 @@ export const Password = React.memo(
                 tooltip: props.tooltip,
                 tooltipOptions: props.tooltipOptions,
                 type: type,
-                value: props.value
+                value: props.value,
+                __parentMetadata: {
+                    parent: metaData
+                }
             },
             ptm('input')
         );

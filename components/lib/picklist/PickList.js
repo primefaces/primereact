@@ -18,7 +18,7 @@ export const PickList = React.memo(
         const [sourceFilterValueState, setSourceFilterValueState] = React.useState('');
         const [targetFilterValueState, setTargetFilterValueState] = React.useState('');
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm, cx, isUnstyled } = PickListBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 sourceSelection: sourceSelectionState,
@@ -27,7 +27,8 @@ export const PickList = React.memo(
                 targetFilterValue: targetFilterValueState,
                 attributeSelector: attributeSelectorState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = PickListBase.setMetaData(metaData);
 
         useHandleStyle(PickListBase.css.styles, isUnstyled, { name: 'picklist' });
         const elementRef = React.useRef(null);
@@ -313,6 +314,7 @@ export const PickList = React.memo(
                         ptm={ptm}
                         cx={cx}
                         unstyled={props.unstyled}
+                        metaData={metaData}
                     />
                 )}
 
@@ -357,6 +359,7 @@ export const PickList = React.memo(
                     ptm={ptm}
                     cx={cx}
                     unstyled={props.unstyled}
+                    metaData={metaData}
                 />
 
                 <PickListSubList
@@ -397,6 +400,7 @@ export const PickList = React.memo(
                         ptm={ptm}
                         cx={cx}
                         unstyled={props.unstyled}
+                        metaData={metaData}
                     />
                 )}
             </div>

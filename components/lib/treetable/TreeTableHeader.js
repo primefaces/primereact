@@ -242,6 +242,7 @@ export const TreeTableHeader = React.memo((props) => {
                     maxLength={getColumnProp(column, 'filterMaxLength')}
                     pt={getColumnPTOptions(column, 'filterInput')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
                 />
             );
         }

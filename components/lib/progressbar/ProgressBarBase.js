@@ -119,6 +119,7 @@ const inlineStyles = {
 export const ProgressBarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ProgressBar',
+        __parentMetadata: null,
         id: null,
         value: null,
         showValue: true,

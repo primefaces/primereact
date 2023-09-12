@@ -129,6 +129,7 @@ const styles = `
 export const InputNumberBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputNumber',
+        __parentMetadata: null,
         allowEmpty: true,
         ariaLabelledBy: null,
         autoFocus: false,

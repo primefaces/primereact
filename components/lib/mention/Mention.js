@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
@@ -8,7 +9,6 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { MentionBase } from './MentionBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Mention = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -24,8 +24,7 @@ export const Mention = React.memo(
         const inputRef = React.useRef(props.inputRef);
         const listRef = React.useRef(null);
         const timeout = React.useRef(null);
-
-        const { ptm, cx, sx, isUnstyled } = MentionBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -33,7 +32,8 @@ export const Mention = React.memo(
                 searching: searchingState,
                 trigger: triggerState
             }
-        });
+        };
+        const { ptm, cx, sx, isUnstyled } = MentionBase.setMetaData(metaData);
 
         useHandleStyle(MentionBase.css.styles, isUnstyled, { name: 'mention' });
 
@@ -463,7 +463,10 @@ export const Mention = React.memo(
                 onKeyDown: onKeyDown,
                 onInput: onInput,
                 onKeyUp: onKeyUp,
-                onChange: onChange
+                onChange: onChange,
+                __parentMetadata: {
+                    parent: metaData
+                }
             },
             ptm('input')
         );

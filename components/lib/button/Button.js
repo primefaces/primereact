@@ -14,13 +14,15 @@ export const Button = React.memo(
         const props = ButtonBase.getProps(inProps, context);
         const disabled = props.disabled || props.loading;
 
-        const { ptm, cx, isUnstyled } = ButtonBase.setMetaData({
+        const metaData = {
             props,
-            ...inProps.__parentMetadata,
+            ...props.__parentMetadata,
             context: {
                 disabled
             }
-        });
+        };
+
+        const { ptm, cx, isUnstyled } = ButtonBase.setMetaData(metaData);
 
         useHandleStyle(ButtonBase.css.styles, isUnstyled, { name: 'button', styled: true });
 
@@ -83,7 +85,8 @@ export const Button = React.memo(
                     {
                         className: classNames(props.badgeClassName),
                         value: props.badge,
-                        unstyled: props.unstyled
+                        unstyled: props.unstyled,
+                        __parentMetadata: { parent: metaData }
                     },
                     ptm('badge')
                 );

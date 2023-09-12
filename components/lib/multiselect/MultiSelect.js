@@ -1,15 +1,15 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const MultiSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -26,15 +26,15 @@ export const MultiSelect = React.memo(
         const hasFilter = filterState && filterState.trim().length > 0;
         const empty = ObjectUtils.isEmpty(props.value);
         const equalityKey = props.optionValue ? null : props.dataKey;
-
-        const { ptm, cx, sx, isUnstyled } = MultiSelectBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 filterState: filterState,
                 focused: focusedState,
                 overlayVisible: overlayVisibleState
             }
-        });
+        };
+        const { ptm, cx, sx, isUnstyled } = MultiSelectBase.setMetaData(metaData);
 
         useHandleStyle(MultiSelectBase.css.styles, isUnstyled, { name: 'multiselect' });
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
@@ -770,6 +770,7 @@ export const MultiSelect = React.memo(
                         cx={cx}
                         sx={sx}
                         isUnstyled={isUnstyled}
+                        metaData={metaData}
                     />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}

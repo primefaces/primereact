@@ -59,6 +59,7 @@ export const ListBoxHeader = React.memo((props) => {
                     {...props.filterInputProps}
                     pt={ptm('filterInput')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
                 />
                 {filterIcon}
             </div>

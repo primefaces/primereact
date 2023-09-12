@@ -50,6 +50,7 @@ const styles = `
 export const BadgeBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Badge',
+        __parentMetadata: null,
         value: null,
         severity: null,
         size: null,
