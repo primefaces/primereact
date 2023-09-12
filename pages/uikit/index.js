@@ -331,7 +331,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">How can I get support?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3 text-lg">
                                     Support is provided by PrimeTek via
-                                    <a href="https://forum.primefaces.org/viewforum.php?f=159" className="text-primary hover:underline font-semibold">
+                                    <a href="https://github.com/orgs/primefaces/discussions/categories/figma-ui-kit" className="text-primary hover:underline font-semibold">
                                         a dedicated forum channel monitored
                                     </a>{' '}
                                     by PrimeTek support staff.
