@@ -7,11 +7,11 @@ import '../styles/layout/layout.scss';
 // prettier-ignore
 import '../styles/primereact.css';
 // prettier-ignore
+import { GTagManager } from '../components/analytics/analytics';
 import PrimeReact from '../components/lib/api/Api';
 import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
 import AnnouncementData from '../data/news.json';
 import '../styles/demo/demo.scss';
-import { GTagManager } from '../components/analytics/analytics';
 
 function Main({ component: Component }) {
     const [dark, setDark] = useState(false);
@@ -97,6 +97,8 @@ function Main({ component: Component }) {
 }
 
 export default function MyApp({ Component }) {
+    const isProduction = process.env.NODE_ENV === 'production';
+
     return (
         <PrimeReactProvider>
             {isProduction && <GTagManager />}
