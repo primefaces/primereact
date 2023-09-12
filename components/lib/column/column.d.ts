@@ -9,11 +9,12 @@
  *
  */
 import * as React from 'react';
-import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType, PassThroughType } from '../utils/utils';
+import { FilterMatchMode } from '../api/api';
+import { ButtonPassThroughOptions } from '../button/button';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
 import { DropdownPassThroughOptions } from '../dropdown/dropdown';
-import { ButtonPassThroughOptions } from '../button/button';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type ColumnPassThroughType<T> = PassThroughType<T, ColumnPassThroughMethodOptions>;
 
@@ -709,7 +710,7 @@ interface ColumnFilterMatchModeChangeEvent {
     /**
      * Type of filter match.
      */
-    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+    matchMode: FilterMatchMode;
 }
 
 /**
@@ -798,9 +799,13 @@ interface ColumnFilterEvent {
 
 interface ColumnFilterMatchModeOptions {
     /**
-     * Filter match modes for specific columns.
+     * The label to display for the match mode
      */
-    [key: string]: string;
+    label: string;
+    /**
+     * The match mode type
+     */
+    value: FilterMatchMode | string;
 }
 
 /**
@@ -939,7 +944,7 @@ export interface ColumnProps {
     /**
      * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
      */
-    filterMatchMode?: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
+    filterMatchMode?: FilterMatchMode | undefined;
     /**
      * An array of label-value pairs to override the global match mode options.
      */
