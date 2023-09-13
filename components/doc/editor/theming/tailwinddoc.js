@@ -47,7 +47,7 @@ export default function UnstyledDemo() {
                 </p>
                 <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
                 <p>A playground sample with the pre-built Tailwind theme.</p>
-                <DocSectionCode code={code2} embedded />
+                <DocSectionCode code={code2} embedded dependencies={{ quill: '1.3.7' }} />
             </DocSectionText>
         </>
     );
