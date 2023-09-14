@@ -7,6 +7,8 @@ import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
 import { PTDoc } from '../../components/doc/confirmpopup/pt/ptdoc';
 import { Wireframe } from '../../components/doc/confirmpopup/pt/wireframe';
 import { StyleDoc } from '../../components/doc/confirmpopup/styledoc';
+import { StyledDoc } from '../../components/doc/confirmpopup/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/confirmpopup/theming/tailwinddoc';
 import { ConfirmPopup } from '../../components/lib/confirmpopup/ConfirmPopup';
 
 const ConfirmPopupDemo = () => {
@@ -56,6 +58,26 @@ const ConfirmPopupDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <>
             <DocComponent
@@ -65,6 +87,7 @@ const ConfirmPopupDemo = () => {
                 componentDocs={docs}
                 apiDocs={['ConfirmPopup']}
                 ptDocs={ptDocs}
+                themingDocs={themingDocs}
             />
             <ConfirmPopup />
         </>

@@ -8,6 +8,8 @@ import { PositionDoc } from '../../components/doc/confirmdialog/positiondoc';
 import { PTDoc } from '../../components/doc/confirmdialog/pt/ptdoc';
 import { Wireframe } from '../../components/doc/confirmdialog/pt/wireframe';
 import { StyleDoc } from '../../components/doc/confirmdialog/styledoc';
+import { StyledDoc } from '../../components/doc/confirmdialog/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/confirmdialog/theming/tailwinddoc';
 import { ConfirmDialog } from '../../components/lib/confirmdialog/ConfirmDialog';
 
 const ConfirmDialogDemo = () => {
@@ -62,6 +64,26 @@ const ConfirmDialogDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <>
             <DocComponent
@@ -71,6 +93,7 @@ const ConfirmDialogDemo = () => {
                 componentDocs={docs}
                 apiDocs={['ConfirmDialog']}
                 ptDocs={ptDocs}
+                themingDocs={themingDocs}
             />
             <ConfirmDialog />
         </>
