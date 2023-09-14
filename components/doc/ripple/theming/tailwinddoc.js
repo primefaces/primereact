@@ -30,7 +30,6 @@ const Tailwind = {
     const code2 = {
         javascript: `
 import React from 'react';
-import { Ripple } from 'primereact/ripple';
 import { Button } from 'primereact/button';
 
 export default function UnstyledDemo() {

@@ -77,7 +77,7 @@ import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-export default function BasicDemo() {
+export default function UnstyledDemo() {
     const [visible, setVisible] = useState(false);
 
     return (
