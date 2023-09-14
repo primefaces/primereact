@@ -975,7 +975,6 @@ type SortOrder = 1 | 0 | -1 | null | undefined;
 
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
- * @group Properties
  */
 interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
     /**
@@ -1622,6 +1621,10 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     unstyled?: boolean;
 }
 
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
     /**
      * Whether to cell selection is enabled or not.
@@ -1648,6 +1651,10 @@ interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataT
     onSelectionChange?(event: DataTableSelectionSingleChangeEvent<TValue>): void;
 }
 
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
     /**
      * Whether to cell selection is enabled or not.
@@ -1674,6 +1681,10 @@ interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends Dat
     onSelectionChange?(event: DataTableSelectionMultipleChangeEvent<TValue>): void;
 }
 
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
 interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
     /**
      * Whether to cell selection is enabled or not.
@@ -1700,7 +1711,11 @@ interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTab
     onSelectionChange?(event: DataTableSelectionCellChangeEvent<TValue>): void;
 }
 
-export type DataTableProps<TValue extends DataTableValueArray> = DataTablePropsSingle<TValue> | DataTablePropsMultiple<TValue> | DataTablePropsCell<TValue>;
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
+export type DataTableProps<TValue extends DataTableValueArray> = DataTablePropsSingle<TValue> | DataTablePropsCell<TValue> | DataTablePropsMultiple<TValue>;
 
 /**
  * **PrimeReact - DataTable<TValue**
