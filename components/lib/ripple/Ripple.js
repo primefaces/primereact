@@ -18,32 +18,17 @@ export const Ripple = React.memo(
 
         const bindEvents = () => {
             if (targetRef.current) {
-                targetRef.current.addEventListener('mousedown', onMouseDown);
-                DomHandler.isTouchDevice() && targetRef.current.addEventListener('touchstart', onTouchStart);
+                targetRef.current.addEventListener('pointerdown', onPointerDown);
             }
         };
 
         const unbindEvents = () => {
             if (targetRef.current) {
-                targetRef.current.removeEventListener('mousedown', onMouseDown);
-                DomHandler.isTouchDevice() && targetRef.current.removeEventListener('touchstart', onTouchStart);
+                targetRef.current.removeEventListener('pointerdown', onPointerDown);
             }
         };
 
-        const onTouchStart = (event) => {
-            const offset = DomHandler.getOffset(targetRef.current);
-            const offsetX = event.targetTouches[0].pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
-            const offsetY = event.targetTouches[0].pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
-
-            activateRipple(offsetX, offsetY);
-        };
-
-        const onMouseDown = (event) => {
-            if (DomHandler.isTouchDevice()) {
-                // already started ripple with onTouchStart
-                return;
-            }
-
+        const onPointerDown = (event) => {
             const offset = DomHandler.getOffset(targetRef.current);
             const offsetX = event.pageX - offset.left + document.body.scrollTop - DomHandler.getWidth(inkRef.current) / 2;
             const offsetY = event.pageY - offset.top + document.body.scrollLeft - DomHandler.getHeight(inkRef.current) / 2;
