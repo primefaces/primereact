@@ -501,8 +501,7 @@ interface CalendarMonthNavigatorTemplateEvent extends CalendarNavigatorTemplateE
 interface CalendarYearNavigatorTemplateEvent extends CalendarNavigatorTemplateEvent {}
 
 /**
- * Defines valid properties in Calendar component.
- * @group Properties
+ * Defines valid base properties in Calendar component.
  */
 interface CalendarBaseProps {
     /**
@@ -936,7 +935,10 @@ interface CalendarBaseProps {
      */
     unstyled?: boolean;
 }
-
+/**
+ * Defines valid properties in single Calendar component.
+ * @group Properties
+ */
 interface CalendarPropsSingle extends CalendarBaseProps {
     /**
      * Specifies the selection mode either "single", "range", or "multiple";
@@ -954,7 +956,10 @@ interface CalendarPropsSingle extends CalendarBaseProps {
      */
     onChange?(event: FormEvent<Date>): void;
 }
-
+/**
+ * Defines valid properties in range Calendar component.
+ * @group Properties
+ */
 interface CalendarPropsRange extends CalendarBaseProps {
     /**
      * Specifies the selection mode either "single", "range", or "multiple";
@@ -973,6 +978,10 @@ interface CalendarPropsRange extends CalendarBaseProps {
     onChange?(event: FormEvent<(Date | null)[]>): void;
 }
 
+/**
+ * Defines valid properties in multiple Calendar component.
+ * @group Properties
+ */
 interface CalendarPropsMultiple extends CalendarBaseProps {
     /**
      * Specifies the selection mode either "single", "range", or "multiple";
@@ -991,7 +1000,11 @@ interface CalendarPropsMultiple extends CalendarBaseProps {
     onChange?(event: FormEvent<Date[]>): void;
 }
 
-export type CalendarProps = CalendarPropsSingle | CalendarPropsRange | CalendarPropsMultiple;
+/**
+ * Defines valid properties in Calendar component.
+ * @group Properties
+ */
+export type CalendarProps = CalendarPropsRange | CalendarPropsMultiple | CalendarPropsSingle;
 
 /**
  * **PrimeReact - Calendar**
