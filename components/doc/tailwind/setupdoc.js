@@ -1,6 +1,6 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
 import Link from 'next/link';
+import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function SetupDoc(props) {
     const code1 = {
@@ -40,11 +40,11 @@ export default {
                 </p>
                 <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
                 <p>
-                    Tailwind uses PurgeCSS internally to remove unused classes, since PrimeReact components are loaded from node_modules the <i>content</i> property at <i>tailwind.config.js</i> needs to be aware of PrimeReact, otherwise the classes
-                    utilized in the theme will be removed as well.
+                    Tailwind uses PurgeCSS internally to remove unused classes, since PrimeReact components are loaded from <i>node_modules</i> the <i>content</i> property at <i>tailwind.config.js</i> needs to be aware of PrimeReact, otherwise the
+                    classes utilized in the theme will be removed as well.
                 </p>
                 <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
-                <p>Voilà 💙, you now have 90+ awesome React UI components styled with Tailwind that will work in harmony with the rest of your application.</p>
+                <p>Voilà 💙, you now have 90+ awesome React UI components styled with Tailwind that will work in harmony with the rest of your application. Time to customize it to bring in your own style with Tailwind.</p>
             </DocSectionText>
         </>
     );

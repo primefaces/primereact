@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -60,16 +61,19 @@ export default function MyApp({ Component }) {
         <>
             <DocSectionText {...props}>
                 <p>
-                    The built-in theme provides a strong base that can be extended further for your requirements. For customization, the pass through values need to be overriden. The unstyled section of the theming documentation for each component
-                    demonstrates the theme with an editable example. For instance, the panel component has the following default configuration.
+                    The built-in preset is based on the PrimeOne Design and meant to serve as a template to implement your own design. For customization, the pass through values need to be overriden or defined from the ground up. The unstyled section
+                    of the theming documentation for each component demonstrates the theme with an editable example. For the complete list visit the{' '}
+                    <Link href="https://github.com/primefaces/primereact/tree/master/components/lib/passthrough/tailwind">Tailwind Preset</Link>.
+                </p>
+                <p>First approach is building everything from the ground up and consult the default preset to get hints about the implementation details. This technique is suggested when implementing your own design system.</p>
+
+                <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <p>
+                    Alternative way is overriding the opinionated PrimeOne theme with <i> usePassThrough</i>. This approach is suggested when you prefer to customize the default preset for your own requirements. For the merge configuration behavior,
+                    visit
+                    <Link href="/passthrough/#usepassthrough"> usePassThrough</Link> documentation.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
-            <p>
-                Let's assume the <i>title</i> section should be lighter and bigger. To begin with, clone the Tailwind theme to create your own, override the default values with your own utility classes and finally configure your own theme object as
-                the
-                <i>pt</i> of PrimeReact.
-            </p>
             <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );

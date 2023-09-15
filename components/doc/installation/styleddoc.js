@@ -14,7 +14,7 @@ body {
     const code1 = {
         basic: `
 //theme
-import "primevue/resources/themes/lara-light-indigo/theme.css";`
+import "primereact/resources/themes/lara-light-indigo/theme.css";`
     };
 
     return (

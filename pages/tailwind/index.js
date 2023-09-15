@@ -23,15 +23,11 @@ const TailwindDemo = () => {
         }
     ];
 
-    return (
-        <DocComponent
-            title="Tailwind - PrimeReact"
-            header="Tailwind CSS"
-            description="Tailwind is a popular utility-first CSS library that fits perfectly to the unstyled mode of PrimeReact. A <b>built-in Tailwind theme</b> is even available to get started in no time."
-            componentDocs={docs}
-            hideTabMenu
-        />
-    );
+    const description = `
+    The exclusive Tailwind integration of PrimeReact is a great choice for developers who want the flexibility of Tailwind with the convenience of a UI Component library. Tailwind simply fits perfectly to the unstyled mode of PrimeReact to implement design systems. A <b> built-in Tailwind theme </b> based on <a href="/uikit" class="font-semibold hover:underline text-primary"> PrimeOne Design </a> is even available to get started in no time. In the upcoming iterations, PrimeReact will provide more presets to implement various design systems.
+    `;
+
+    return <DocComponent title="Tailwind - PrimeReact" header="Tailwind CSS" description={description} componentDocs={docs} hideTabMenu />;
 };
 
 export default TailwindDemo;
