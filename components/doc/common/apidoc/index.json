@@ -9479,11 +9479,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any"
+                            "type": "boolean"
                         },
                         {
                             "name": "checked",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -9491,7 +9491,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any>"
+                            "type": "FormBooleanTarget"
                         }
                     ]
                 },
@@ -9509,11 +9509,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any"
+                            "type": "boolean"
                         },
                         {
                             "name": "checked",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -9521,7 +9521,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any>"
+                            "type": "FormBooleanTarget"
                         }
                     ]
                 }
@@ -29000,11 +29000,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "Nullable<boolean>"
+                            "type": "boolean"
                         },
                         {
                             "name": "checked",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -29012,7 +29012,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<boolean>"
+                            "type": "FormBooleanTarget"
                         }
                     ]
                 }
@@ -40267,7 +40267,7 @@
                             "readonly": false,
                             "type": "any",
                             "default": "",
-                            "description": "Value of the checkbox."
+                            "description": "Value of the radio."
                         }
                     ]
                 },
@@ -40321,11 +40321,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any"
+                            "type": "boolean"
                         },
                         {
                             "name": "checked",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -40333,7 +40333,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any>"
+                            "type": "FormBooleanTarget"
                         }
                     ]
                 },
@@ -40351,11 +40351,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "any"
+                            "type": "boolean"
                         },
                         {
                             "name": "checked",
-                            "optional": true,
+                            "optional": false,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -40363,7 +40363,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormTarget<any>"
+                            "type": "FormBooleanTarget"
                         }
                     ]
                 }
@@ -51874,6 +51874,42 @@
                     ],
                     "callbacks": []
                 },
+                "FormBooleanTarget": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "name",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "id",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "[key: string]",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any"
+                        }
+                    ],
+                    "callbacks": []
+                },
                 "FormEvent": {
                     "relatedProp": "",
                     "props": [
@@ -51914,7 +51950,49 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,CheckboxClickEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,InputSwitchChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
+                    "extendedBy": "AutoCompleteChangeEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
+                },
+                "FormBooleanEvent": {
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "E"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "checked",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean"
+                        },
+                        {
+                            "name": "target",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "FormBooleanTarget"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "stopPropagation",
+                            "parameters": [],
+                            "returnType": "void"
+                        },
+                        {
+                            "name": "preventDefault",
+                            "parameters": [],
+                            "returnType": "void"
+                        }
+                    ],
+                    "extendedBy": "CheckboxChangeEvent,CheckboxClickEvent,InputSwitchChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent"
                 }
             }
         },
