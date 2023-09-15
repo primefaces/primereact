@@ -7,6 +7,8 @@ import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlined
 import { LoaderDataScrollerDoc } from '../../components/doc/datascroller/loaderdoc';
 import { PTDoc } from '../../components/doc/datascroller/pt/ptdoc';
 import { StyleDoc } from '../../components/doc/datascroller/styledoc';
+import { StyledDoc } from '../../components/doc/datascroller/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/datascroller/theming/tailwinddoc';
 import { Wireframe } from '../../components/doc/timeline/pt/wireframe';
 
 const DataScrollerDemo = () => {
@@ -60,7 +62,37 @@ const DataScrollerDemo = () => {
         }
     ];
 
-    return <DocComponent title="React DataScroller Component" header="DataScroller" description="DataScroller displays data with on demand loading using scroll." componentDocs={docs} apiDocs={['DataScroller']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React DataScroller Component"
+            header="DataScroller"
+            description="DataScroller displays data with on demand loading using scroll."
+            componentDocs={docs}
+            apiDocs={['DataScroller']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default DataScrollerDemo;
