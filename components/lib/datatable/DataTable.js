@@ -28,6 +28,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [editingMetaState, setEditingMetaState] = React.useState({});
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+
     const metaData = {
         props,
         state: {
@@ -48,6 +49,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
     const ptCallbacks = DataTableBase.setMetaData(metaData);
+
+    const disableRowReorderOnFilter = props.disableRowReorderOnFilter || false;
 
     useHandleStyle(DataTableBase.css.styles, ptCallbacks.isUnstyled, { name: 'datatable' });
     const attributeSelector = React.useRef('');
@@ -1079,14 +1082,26 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return Object.fromEntries(entries);
     };
 
+    const checkIfFiltersActive = () => {
+        const _filters = { ...d_filtersState };
+        const activeFilters = getActiveFilters(_filters) || {};
+        const isGlobalFilter = activeFilters['global']?.value || props.globalFilter;
+
+        if (!isGlobalFilter) {
+            delete activeFilters['global'];
+        }
+
+        const isFilterActive = ObjectUtils.isNotEmpty(activeFilters) && ObjectUtils.isNotEmpty(activeFilters);
+
+        return isFilterActive;
+    };
+
     const filterLocal = (data, filters) => {
         if (!data) return;
 
         let activeFilters = getActiveFilters(filters) || {};
-
         let columns = getColumns();
         let filteredValue = [];
-
         let isGlobalFilter = activeFilters['global'] || props.globalFilter;
         let globalFilterFieldsArray;
 
@@ -1663,6 +1678,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerOptions={options}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
+                isFilterActive={isFilterActive}
+                disableRowReorderOnFilter={disableRowReorderOnFilter}
             />
         );
         const body = (
@@ -1742,6 +1759,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 isVirtualScrollerDisabled={isVirtualScrollerDisabled}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
+                isFilterActive={isFilterActive}
+                disableRowReorderOnFilter={disableRowReorderOnFilter}
             />
         );
         const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
@@ -1929,6 +1948,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return null;
     };
 
+    const isFilterActive = checkIfFiltersActive();
     const data = processedData();
     const columns = getColumns();
     const totalRecords = getTotalRecords(data);

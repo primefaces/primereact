@@ -48,6 +48,9 @@ export const TableBody = React.memo(
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
         const isRadioSelectionModeInColumn = props.selectionModeInColumn === 'single';
         const isCheckboxSelectionModeInColumn = props.selectionModeInColumn === 'multiple';
+        const isFilterActive = props.isFilterActive;
+        const disableRowReorderOnFilter = props.disableRowReorderOnFilter;
+        const disableRowReorderElement = disableRowReorderOnFilter && isFilterActive;
 
         const equals = (data1, data2) => {
             if (allowCellSelection()) return (data1.rowIndex === data2.rowIndex || data1.rowData === data2.rowData) && (data1.field === data2.field || data1.cellIndex === data2.cellIndex);
@@ -553,7 +556,7 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) event.currentTarget.draggable = true;
+            if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle') && !disableRowReorderElement) event.currentTarget.draggable = true;
             else event.currentTarget.draggable = false;
 
             if (allowRowDrag(e)) {
@@ -986,6 +989,7 @@ export const TableBody = React.memo(
                         selectionMode={props.selectionMode}
                         selectionModeInColumn={props.selectionModeInColumn}
                         showRowReorderElement={props.showRowReorderElement}
+                        disableRowReorderElement={disableRowReorderElement}
                         showSelectionElement={props.showSelectionElement}
                         tabIndex={props.tabIndex}
                         tableProps={props.tableProps}

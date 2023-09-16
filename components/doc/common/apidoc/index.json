@@ -15208,6 +15208,14 @@
                             "description": "Default sort order of an unsorted column."
                         },
                         {
+                            "name": "disableRowReorderOnFilter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "When enabled, won't be able to drag and drop rows in the datatable when filter is applied."
+                        },
+                        {
                             "name": "dragSelection",
                             "optional": true,
                             "readonly": false,

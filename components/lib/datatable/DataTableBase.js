@@ -342,7 +342,10 @@ const classes = {
     rowGroupHeader: 'p-rowgroup-header',
     rowGroupHeaderName: 'p-rowgroup-header-name',
     rowGroupFooter: 'p-rowgroup-footer',
-    rowReorderIcon: 'p-datatable-reorderablerow-handle',
+    rowReorderIcon: ({ disableRowReorderElement }) =>
+        classNames({
+            'p-datatable-reorderablerow-handle': !disableRowReorderElement
+        }),
     rowTogglerIcon: 'p-row-toggler-icon',
     rowToggler: 'p-row-toggler p-link',
     rowEditorSaveIcon: 'p-row-editor-save-icon',

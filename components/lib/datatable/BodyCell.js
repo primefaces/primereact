@@ -620,7 +620,9 @@ export const BodyCell = React.memo((props) => {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
             const rowReorderIconProps = mergeProps(
                 {
-                    className: cx('rowReorderIcon')
+                    className: cx('rowReorderIcon', {
+                        disableRowReorderElement: props.disableRowReorderElement
+                    })
                 },
                 getColumnPTOptions('rowReorderIcon')
             );

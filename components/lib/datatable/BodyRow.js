@@ -357,6 +357,7 @@ export const BodyRow = React.memo((props) => {
                         selection={props.selection}
                         selectionAriaLabel={props.tableProps.selectionAriaLabel}
                         showRowReorderElement={props.showRowReorderElement}
+                        disableRowReorderElement={props.disableRowReorderElement}
                         showSelectionElement={props.showSelectionElement}
                         tabIndex={props.tabIndex}
                         tableProps={props.tableProps}
