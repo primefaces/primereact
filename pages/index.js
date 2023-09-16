@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { classNames } from '../components/lib/utils/ClassNames';
+import { classNames } from '../components/lib/utils/Utils';
 import NewsSection from '../components/news/newssection';
 import BlockSection from './landing/blocksection';
 import ComponentSection from './landing/componentsection';

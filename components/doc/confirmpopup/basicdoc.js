@@ -50,6 +50,7 @@ export function BasicDoc(props) {
 import React, { useRef } from 'react';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 
 export default function BasicDemo() {
     const toast = useRef(null);
@@ -97,8 +98,9 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React, { useRef } from 'react';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 
 export default function BasicDemo() {
     const toast = useRef<Toast>(null);

@@ -126,11 +126,11 @@ export const OrderListControls = React.memo((props) => {
         }
     };
 
-    const controlProps = mergeProps(
+    const controlsProps = mergeProps(
         {
-            className: cx('control')
+            className: cx('controls')
         },
-        ptm('control')
+        ptm('controls')
     );
 
     const moveUpButtonProps = mergeProps(
@@ -139,7 +139,10 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveUpIcon,
             onClick: moveUp,
-            'aria-label': ariaLabel('moveUp')
+            'aria-label': ariaLabel('moveUp'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
         },
         ptm('moveUpButton')
     );
@@ -150,7 +153,10 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveTopIcon,
             onClick: moveTop,
-            'aria-label': ariaLabel('moveTop')
+            'aria-label': ariaLabel('moveTop'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
         },
         ptm('moveTopButton')
     );
@@ -161,7 +167,10 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveDownIcon,
             onClick: moveDown,
-            'aria-label': ariaLabel('moveDown')
+            'aria-label': ariaLabel('moveDown'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
         },
         ptm('moveDownButton')
     );
@@ -172,13 +181,16 @@ export const OrderListControls = React.memo((props) => {
             unstyled: unstyled,
             icon: moveBottomIcon,
             onClick: moveBottom,
-            'aria-label': ariaLabel('moveBottom')
+            'aria-label': ariaLabel('moveBottom'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
         },
         ptm('moveBottomButton')
     );
 
     return (
-        <div {...controlProps}>
+        <div {...controlsProps}>
             <Button {...moveUpButtonProps}></Button>
             <Button {...moveTopButtonProps}></Button>
             <Button {...moveDownButtonProps}></Button>

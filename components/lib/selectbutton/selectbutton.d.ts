@@ -53,9 +53,19 @@ export interface SelectButtonPassThroughOptions {
  */
 export interface SelectButtonContext {
     /**
-     * Current selected value.
+     * Current selected value of the item as a boolean.
+     * @defaultValue false
      */
-    selected: any;
+    selected: boolean;
+    /**
+     * Current disabled value of option or disabled property as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+    /**
+     * Available option.
+     */
+    option: any;
 }
 
 /**

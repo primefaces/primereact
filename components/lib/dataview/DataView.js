@@ -80,13 +80,14 @@ export const DataView = React.memo(
         const props = DataViewBase.getProps(inProps, context);
         const [firstState, setFirstState] = React.useState(props.first);
         const [rowsState, setRowsState] = React.useState(props.rows);
-        const { ptm, cx, isUnstyled } = DataViewBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 first: firstState,
                 rows: rowsState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = DataViewBase.setMetaData(metaData);
 
         useHandleStyle(DataViewBase.css.styles, isUnstyled, { name: 'dataview' });
 
@@ -123,6 +124,7 @@ export const DataView = React.memo(
                     dropdownAppendTo={props.paginatorDropdownAppendTo}
                     ptm={ptm('paginator')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
@@ -138,13 +140,20 @@ export const DataView = React.memo(
 
         const sort = () => {
             if (props.value) {
+                // performance optimization to prevent resolving field data in each loop
+                const lookupMap = new Map();
+                const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
                 const value = [...props.value];
 
-                value.sort((data1, data2) => {
-                    let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
-                    let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
+                for (let item of value) {
+                    lookupMap.set(item, ObjectUtils.resolveFieldData(item, props.sortField));
+                }
 
-                    return ObjectUtils.sort(value1, value2, props.sortOrder, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
+                value.sort((data1, data2) => {
+                    let value1 = lookupMap.get(data1);
+                    let value2 = lookupMap.get(data2);
+
+                    return ObjectUtils.sort(value1, value2, props.sortOrder, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 return value;

@@ -554,9 +554,9 @@ export const ColorPicker = React.memo(
             const colorHandlerProps = mergeProps(
                 {
                     ref: colorHandleRef,
-                    className: cx('colorHandler')
+                    className: cx('colorHandle')
                 },
-                ptm('colorHandler')
+                ptm('colorHandle')
             );
 
             return (
@@ -582,9 +582,9 @@ export const ColorPicker = React.memo(
 
             const hueHandlerProps = mergeProps(
                 {
-                    className: cx('hueHandler')
+                    className: cx('hueHandle')
                 },
-                ptm('hueHandler')
+                ptm('hueHandle')
             );
 
             return (

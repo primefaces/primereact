@@ -16,10 +16,12 @@ export const TreeTableFooter = React.memo((props) => {
     };
 
     const getColumnPTOptions = (column, key) => {
-        return ptmo(getColumnProp(column, 'pt'), key, {
+        const columnMetadata = {
             props: getColumnProps(column),
             parent: props.metaData
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(getColumnProps(column), key, columnMetadata));
     };
 
     const createFooterCell = (column, index) => {

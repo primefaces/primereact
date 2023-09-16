@@ -63,6 +63,7 @@ const styles = `
 export const PaginatorBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Paginator',
+        __parentMetadata: null,
         totalRecords: 0,
         rows: 0,
         first: 0,
@@ -119,7 +120,9 @@ export const JumpToPageInputBase = ComponentBase.extend({
         disabled: false,
         template: null,
         onChange: null,
-        children: undefined
+        children: undefined,
+        metaData: null,
+        ptm: null
     }
 });
 

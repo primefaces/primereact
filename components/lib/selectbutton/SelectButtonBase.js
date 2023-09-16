@@ -4,15 +4,11 @@ import { classNames } from '../utils/Utils';
 const classes = {
     root: ({ props }) => classNames('p-selectbutton p-buttonset p-component', props.className),
     button: ({ itemProps: props, focusedState }) =>
-        classNames(
-            'p-button p-component',
-            {
-                'p-highlight': props.selected,
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
-            },
-            props.className
-        ),
+        classNames('p-button p-component', {
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        }),
     label: 'p-button-label p-c'
 };
 

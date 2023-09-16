@@ -4,20 +4,6 @@ import { classNames } from '../utils/Utils';
 const classes = {
     root: ({ props }) => classNames('p-component p-editor-container', props.className),
     toolbar: 'p-editor-toolbar',
-    formats: 'ql-formats',
-    header: 'ql-header',
-    font: 'ql-font',
-    bold: 'ql-bold',
-    italic: 'ql-italic',
-    underline: 'ql-underline',
-    color: 'ql-color',
-    background: 'ql-background',
-    list: 'ql-list',
-    select: 'ql-align',
-    link: 'ql-link',
-    image: 'ql-image',
-    codeBlock: 'ql-code-block',
-    clean: 'ql-clean',
     content: 'p-editor-content'
 };
 

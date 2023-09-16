@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption, localeOptions } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, usePrevious, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CalendarIcon } from '../icons/calendar';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -13,7 +14,6 @@ import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mask, mergeProps } from '../utils/Utils';
 import { CalendarBase } from './CalendarBase';
 import { CalendarPanel } from './CalendarPanel';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Calendar = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -22,14 +22,15 @@ export const Calendar = React.memo(
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const [viewDateState, setViewDateState] = React.useState(null);
-        const { ptm, cx, isUnstyled } = CalendarBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 focused: focusedState,
                 overlayVisible: overlayVisibleState,
                 viewDate: viewDateState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = CalendarBase.setMetaData(metaData);
 
         useHandleStyle(CalendarBase.css.styles, isUnstyled, { name: 'calendar' });
         const elementRef = React.useRef(null);
@@ -47,6 +48,7 @@ export const Calendar = React.memo(
         const ignoreMaskChange = React.useRef(false);
         const previousButton = React.useRef(false);
         const nextButton = React.useRef(false);
+        const onChangeRef = React.useRef(null);
 
         const [currentView, setCurrentView] = React.useState('date');
         const [currentMonth, setCurrentMonth] = React.useState(null);
@@ -91,6 +93,7 @@ export const Calendar = React.memo(
         const onInputBlur = (event) => {
             !props.keepInvalid && updateInputfield(props.value);
             props.onBlur && props.onBlur(event);
+            setFocusedState(false);
         };
 
         const onInputKeyDown = (event) => {
@@ -226,13 +229,13 @@ export const Calendar = React.memo(
                 if (navigation.current.button) {
                     initFocusableCell();
 
-                    if (navigation.current.backward) DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev').focus();
-                    else DomHandler.findSingle(overlayRef.current, '.p-datepicker-next').focus();
+                    if (navigation.current.backward) previousButton.current.focus();
+                    else nextButton.current.focus();
                 } else {
                     let cell;
 
                     if (navigation.current.backward) {
-                        let cells = DomHandler.find(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
+                        let cells = DomHandler.find(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)'); /* @todo */
 
                         cell = cells[cells.length - 1];
                     } else {
@@ -1424,7 +1427,7 @@ export const Calendar = React.memo(
 
                 viewStateChanged.current = true;
 
-                props.onChange({
+                onChangeRef.current({
                     originalEvent: event,
                     value: newValue,
                     stopPropagation: () => {
@@ -1443,8 +1446,6 @@ export const Calendar = React.memo(
         };
 
         const show = (type) => {
-            setFocusedState(false);
-
             if (props.onVisibleChange) {
                 props.onVisibleChange({
                     visible: true,
@@ -1835,7 +1836,7 @@ export const Calendar = React.memo(
                 validDate = !isDateDisabled(day, month, year);
             }
 
-            if (props.disabledDays && currentView !== 'month') {
+            if (props.disabledDays && currentView === 'date') {
                 validDay = !isDayDisabled(day, month, year);
             }
 
@@ -1924,7 +1925,11 @@ export const Calendar = React.memo(
             if (isComparable()) {
                 let value = isRangeSelection() ? props.value[0] : props.value;
 
-                return !isMultipleSelection() ? value.getMonth() === month && value.getFullYear() === currentYear : false;
+                if (isMultipleSelection()) {
+                    return value.some((currentValue) => currentValue.getMonth() === month && currentValue.getFullYear() === currentYear);
+                } else {
+                    return value.getMonth() === month && value.getFullYear() === currentYear;
+                }
             }
 
             return false;
@@ -1934,7 +1939,11 @@ export const Calendar = React.memo(
             if (isComparable()) {
                 let value = isRangeSelection() ? props.value[0] : props.value;
 
-                return !isMultipleSelection() && isComparable() ? value.getFullYear() === year : false;
+                if (isMultipleSelection()) {
+                    return value.some((currentValue) => currentValue.getFullYear() === year);
+                } else {
+                    return value.getFullYear() === year;
+                }
             }
 
             return false;
@@ -2518,11 +2527,17 @@ export const Calendar = React.memo(
         });
 
         React.useEffect(() => {
+            // see https://github.com/primefaces/primereact/issues/4030
+            onChangeRef.current = props.onChange;
+        }, [props.onChange]);
+
+        React.useEffect(() => {
             let unbindMaskEvents = null;
 
             if (props.mask) {
                 unbindMaskEvents = mask(inputRef.current, {
                     mask: props.mask,
+                    slotChar: props.maskSlotChar,
                     readOnly: props.readOnlyInput || props.disabled,
                     onChange: (e) => {
                         !ignoreMaskChange.current && updateValueOnInput(e.originalEvent, e.value);
@@ -2657,7 +2672,7 @@ export const Calendar = React.memo(
             );
 
             return (
-                <button {...previousButtonProps}>
+                <button ref={previousButton} {...previousButtonProps}>
                     {backwardNavigatorIcon}
                     <Ripple />
                 </button>
@@ -2684,7 +2699,7 @@ export const Calendar = React.memo(
             );
 
             return (
-                <button {...nextButtonProps}>
+                <button ref={nextButton} {...nextButtonProps}>
                     {forwardNavigatorIcon}
                     <Ripple />
                 </button>
@@ -2889,7 +2904,11 @@ export const Calendar = React.memo(
                         scope: 'col',
                         className: cx('weekHeader')
                     },
-                    ptm('weekHeader')
+                    ptm('weekHeader', {
+                        context: {
+                            disabled: props.showWeek
+                        }
+                    })
                 );
 
                 const weekLabel = mergeProps(ptm('weekLabel'));
@@ -2909,11 +2928,19 @@ export const Calendar = React.memo(
         const createDateCellContent = (date, className, groupIndex) => {
             const content = props.dateTemplate ? props.dateTemplate(date) : date.day;
 
-            const dayLabelProps = mergeProps({
-                className: cx('dayLabel', { className }),
-                onClick: (e) => onDateSelect(e, date),
-                onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex)
-            });
+            const dayLabelProps = mergeProps(
+                {
+                    className: cx('dayLabel', { className }),
+                    onClick: (e) => onDateSelect(e, date),
+                    onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex)
+                },
+                ptm('dayLabel', {
+                    context: {
+                        selected: isSelected(date),
+                        disabled: !date.selectable
+                    }
+                })
+            );
 
             return (
                 <span {...dayLabelProps}>
@@ -2932,7 +2959,13 @@ export const Calendar = React.memo(
                     {
                         className: cx('day', { date })
                     },
-                    ptm('day')
+                    ptm('day', {
+                        context: {
+                            date,
+                            today: date.today,
+                            otherMonth: date.otherMonth
+                        }
+                    })
                 );
 
                 return (
@@ -2954,7 +2987,11 @@ export const Calendar = React.memo(
                     {
                         className: cx('weekLabelContainer')
                     },
-                    ptm('weekLabelContainer')
+                    ptm('weekLabelContainer', {
+                        context: {
+                            disabled: props.showWeek
+                        }
+                    })
                 );
 
                 const weekNumberCell = (
@@ -3503,6 +3540,7 @@ export const Calendar = React.memo(
                         tooltip={props.tooltip}
                         tooltipOptions={props.tooltipOptions}
                         pt={ptm('input')}
+                        __parentMetadata={{ parent: metaData }}
                     />
                 );
             }
@@ -3512,7 +3550,7 @@ export const Calendar = React.memo(
 
         const createButton = () => {
             if (props.showIcon) {
-                return <Button type="button" icon={props.icon || <CalendarIcon />} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className={cx('dropdownButton')} pt={ptm('dropdownButton')} />;
+                return <Button type="button" icon={props.icon || <CalendarIcon />} onClick={onButtonClick} tabIndex="-1" disabled={props.disabled} className={cx('dropdownButton')} pt={ptm('dropdownButton')} __parentMetadata={{ parent: metaData }} />;
             }
 
             return null;
@@ -3594,7 +3632,14 @@ export const Calendar = React.memo(
                                     onClick: (event) => onMonthSelect(event, i),
                                     onKeyDown: (event) => onMonthCellKeydown(event, i)
                                 },
-                                ptm('month')
+                                ptm('month', {
+                                    context: {
+                                        month: m,
+                                        monthIndex: i,
+                                        selected: isMonthSelected(i),
+                                        disabled: !m.selectable
+                                    }
+                                })
                             );
 
                             return (
@@ -3627,7 +3672,14 @@ export const Calendar = React.memo(
                                     className: cx('year', { isYearSelected, isSelectable, y }),
                                     onClick: (event) => onYearSelect(event, y)
                                 },
-                                ptm('year')
+                                ptm('year', {
+                                    context: {
+                                        year: y,
+                                        yearIndex: i,
+                                        selected: isYearSelected(i),
+                                        disabled: !y.selectable
+                                    }
+                                })
                             );
 
                             return (

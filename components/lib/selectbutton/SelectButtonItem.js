@@ -6,10 +6,12 @@ export const SelectButtonItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const { ptm, cx } = props;
 
-    const getPTOptions = (item, key) => {
+    const getPTOptions = (key) => {
         return ptm(key, {
             context: {
-                selected: props.selected
+                selected: props.selected,
+                disabled: props.disabled,
+                option: props.option
             }
         });
     };
@@ -45,7 +47,7 @@ export const SelectButtonItem = React.memo((props) => {
             {
                 className: cx('label')
             },
-            getPTOptions(props.option, 'label')
+            getPTOptions('label')
         );
 
         return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span {...labelProps}>{props.label}</span>;
@@ -55,7 +57,7 @@ export const SelectButtonItem = React.memo((props) => {
 
     const buttonProps = mergeProps(
         {
-            className: cx('button', { itemProps: props, focusedState }),
+            className: classNames(props.className, cx('button', { itemProps: props, focusedState })),
             role: 'button',
             'aria-label': props.label,
             'aria-pressed': props.selected,
@@ -65,7 +67,7 @@ export const SelectButtonItem = React.memo((props) => {
             onFocus: onFocus,
             onBlur: onBlur
         },
-        getPTOptions(props.option, 'button')
+        getPTOptions('button')
     );
 
     return (

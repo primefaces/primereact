@@ -5,7 +5,7 @@ import { Column } from '../../lib/column/Column';
 import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
-import { classNames } from '../../lib/utils/ClassNames';
+import { classNames } from '../../lib/utils/Utils';
 
 export function TemplateDoc(props) {
     const [nodes, setNodes] = useState([]);

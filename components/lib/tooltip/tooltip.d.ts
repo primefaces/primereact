@@ -73,7 +73,7 @@ export interface TooltipProps extends TooltipOptions {
     /**
      * Target element on global tooltip option.
      */
-    target?: string | string[] | HTMLElement | undefined;
+    target?: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined;
     /**
      * Content to be displayed in tooltip.
      */
@@ -104,19 +104,19 @@ export interface TooltipProps extends TooltipOptions {
 export declare class Tooltip extends React.Component<TooltipProps, any> {
     /**
      * Used to reload target events. In some cases, the target element can be hidden initially. Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.
-     * @param {HTMLElement| undefined} target - Target element or if undefined will use current target.
+     * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public updateTargetEvents(target: HTMLElement | undefined): void;
+    public updateTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to load target events.
-     * @param {HTMLElement} target - Target element or if undefined will use current target.
+     * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public loadTargetEvents(target: HTMLElement | undefined): void;
+    public loadTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to unload target events.
-     * @param {HTMLElement | undefined} target - Target element or if undefined will use current target.
+     * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public unloadTargetEvents(target: HTMLElement | undefined): void;
+    public unloadTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to get container element.
      * @return {HTMLElement} Container element

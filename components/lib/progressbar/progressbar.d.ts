@@ -29,9 +29,9 @@ export interface ProgressBarPassThroughOptions {
      */
     root?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the indeterminate container's DOM element.
+     * Uses to pass attributes to the container's DOM element.
      */
-    indeterminateContainer?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    container?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the value's DOM element.
      */

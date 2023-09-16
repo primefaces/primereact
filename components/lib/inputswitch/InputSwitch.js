@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
@@ -89,9 +89,7 @@ export const InputSwitch = React.memo(
 
         const rootProps = mergeProps(
             {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root', { focusedState, checked }),
+                className: classNames(props.className, cx('root', { focusedState, checked })),
                 style: props.style,
                 onClick,
                 role: 'checkbox',
@@ -108,7 +106,6 @@ export const InputSwitch = React.memo(
 
         const hiddenInputProps = mergeProps(
             {
-                ref: inputRef,
                 type: 'checkbox',
                 id: props.inputId,
                 name: props.name,
@@ -134,9 +131,9 @@ export const InputSwitch = React.memo(
 
         return (
             <>
-                <div {...rootProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
                     <div {...hiddenInputWrapperProps}>
-                        <input {...hiddenInputProps} />
+                        <input ref={inputRef} {...hiddenInputProps} />
                     </div>
                     <span {...sliderProps}></span>
                 </div>

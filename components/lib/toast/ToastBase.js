@@ -8,6 +8,10 @@ const styles = `
     max-width: 25rem;
 }
 
+.p-toast-message-icon {
+    flex-shrink: 0;
+}
+
 .p-toast-message-content {
     display: flex;
     align-items: flex-start;
@@ -91,6 +95,7 @@ const classes = {
             classNames('p-toast-message', {
                 [`p-toast-message-${severity}`]: severity
             }),
+        content: 'p-toast-message-content',
         buttonicon: 'p-toast-icon-close-icon',
         button: 'p-toast-icon-close p-link',
         icon: 'p-toast-message-icon',

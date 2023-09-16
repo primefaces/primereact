@@ -165,8 +165,7 @@ const UIKitPage = (props) => {
                                         <div className="text-600 font-medium">For individual designers</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <div className="flex gap-3 flex-wrap">
-                                            <span className="text-2xl font-bold text-600 line-through">$99</span>
-                                            <span className="text-2xl font-bold text-900">$49</span>
+                                            <span className="text-2xl font-bold text-900">$99</span>
                                         </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
@@ -182,7 +181,7 @@ const UIKitPage = (props) => {
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Interactive Components</span>
                                             </li>
-                                            <li class="flex align-items-center mb-3">
+                                            <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Tokens Studio Support</span>
                                             </li>
@@ -210,8 +209,7 @@ const UIKitPage = (props) => {
                                         <div className="text-600 font-medium">For small teams</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <div className="flex gap-3 flex-wrap">
-                                            <span className="text-2xl font-bold text-600 line-through">$249</span>
-                                            <span className="text-2xl font-bold text-900">$149</span>
+                                            <span className="text-2xl font-bold text-900">$249</span>
                                         </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
@@ -227,7 +225,7 @@ const UIKitPage = (props) => {
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Interactive Components</span>
                                             </li>
-                                            <li class="flex align-items-center mb-3">
+                                            <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Tokens Studio Support</span>
                                             </li>
@@ -271,7 +269,7 @@ const UIKitPage = (props) => {
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Interactive Components</span>
                                             </li>
-                                            <li class="flex align-items-center mb-3">
+                                            <li className="flex align-items-center mb-3">
                                                 <i className="pi pi-check-circle text-green-500 mr-2"></i>
                                                 <span>Tokens Studio Support</span>
                                             </li>
@@ -333,7 +331,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">How can I get support?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3 text-lg">
                                     Support is provided by PrimeTek via
-                                    <a href="https://forum.primefaces.org/viewforum.php?f=159" className="text-primary hover:underline font-semibold">
+                                    <a href="https://github.com/orgs/primefaces/discussions/categories/figma-ui-kit" className="text-primary hover:underline font-semibold">
                                         a dedicated forum channel monitored
                                     </a>{' '}
                                     by PrimeTek support staff.

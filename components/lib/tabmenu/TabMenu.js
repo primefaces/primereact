@@ -24,6 +24,15 @@ export const TabMenu = React.memo(
             }
         });
 
+        const getPTOptions = (key, item, index) => {
+            return ptm(key, {
+                context: {
+                    item,
+                    index
+                }
+            });
+        };
+
         useHandleStyle(TabMenuBase.css.styles, isUnstyled, { name: 'tabmenu' });
 
         const itemClick = (event, item, index) => {
@@ -90,7 +99,7 @@ export const TabMenu = React.memo(
                 {
                     className: cx('icon', { _icon })
                 },
-                ptm('icon')
+                getPTOptions('icon', item, index)
             );
 
             const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
@@ -99,7 +108,7 @@ export const TabMenu = React.memo(
                 {
                     className: cx('label')
                 },
-                ptm('label')
+                getPTOptions('label', item, index)
             );
 
             const label = _label && <span {...labelProps}>{_label}</span>;
@@ -112,7 +121,7 @@ export const TabMenu = React.memo(
                     onClick: (event) => itemClick(event, item, index),
                     role: 'presentation'
                 },
-                ptm('action')
+                getPTOptions('action', item, index)
             );
 
             let content = (
@@ -150,7 +159,7 @@ export const TabMenu = React.memo(
                     'aria-expanded': active,
                     'aria-disabled': disabled
                 },
-                ptm('menuitem')
+                getPTOptions('menuitem', item, index)
             );
 
             return <li {...menuItemProps}>{content}</li>;

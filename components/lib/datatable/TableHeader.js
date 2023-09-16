@@ -14,6 +14,7 @@ export const TableHeader = React.memo((props) => {
     const isSingleSort = props.sortMode === 'single';
     const isMultipleSort = props.sortMode === 'multiple';
     const isAllSortableDisabled = isSingleSort && allSortableDisabledState;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
@@ -23,44 +24,44 @@ export const TableHeader = React.memo((props) => {
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
     const getColumnGroupProps = () => {
-        return props.headerColumnGroup ? props.ptCallbacks.ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined;
+        return props.headerColumnGroup ? ptmo(ColumnGroupBase.getCProps(props.headerColumnGroup)) : undefined;
     };
 
     const getColumnGroupPTOptions = (key) => {
-        return (
-            props.ptCallbacks.ptmo(ColumnGroupBase.getCProp(props.headerColumnGroup, 'pt')),
-            key,
-            {
-                props: getColumnGroupProps(),
-                parent: props.metaData,
-                state: {
-                    sortableDisabledFields: sortableDisabledFieldsState,
-                    allSortableDisabled: allSortableDisabledState
-                }
+        const columnGroupMetaData = {
+            props: getColumnGroupProps(),
+            parent: props.metaData,
+            state: {
+                sortableDisabledFields: sortableDisabledFieldsState,
+                allSortableDisabled: allSortableDisabledState
             }
-        );
+        };
+
+        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(getColumnGroupProps(), key, columnGroupMetaData));
     };
 
     const getColumnPTOptions = (column, key) => {
         const cProps = getColumnProps(column);
-
-        return props.ptCallbacks.ptmo(cProps, key, {
+        const columnMetaData = {
             props: cProps,
             parent: props.metaData,
             state: {
                 sortableDisabledFields: sortableDisabledFieldsState,
                 allSortableDisabled: allSortableDisabledState
             }
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
     };
 
     const getRowPTOptions = (row, key) => {
         const rProps = getRowProps(row);
-
-        return props.ptCallbacks.ptmo(rProps, key, {
+        const rowMetaData = {
             props: rProps,
             parent: props.metaData
-        });
+        };
+
+        return mergeProps(ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData));
     };
 
     const isColumnSorted = (column) => {
@@ -199,18 +200,17 @@ export const TableHeader = React.memo((props) => {
             if (isVisible) {
                 const { filterHeaderStyle, style, filterHeaderClassName, className, frozen, columnKey, field, selectionMode, filter } = ColumnBase.getCProps(col);
                 const colStyle = { ...(filterHeaderStyle || {}), ...(style || {}) };
-                const colClassName = classNames('p-filter-column', filterHeaderClassName, className, { 'p-frozen-column': frozen });
                 const colKey = columnKey || field || i;
                 const checkbox = createCheckbox(selectionMode);
                 const filterRow = createFilter(col, filter);
                 const headerCellProps = mergeProps(
                     {
                         style: colStyle,
-                        className: colClassName,
+                        className: classNames(filterHeaderClassName, className, cx('headerCells', { frozen, column: col })),
                         key: colKey
                     },
-                    getColumnPTOptions(col, 'headerCell'),
-                    getColumnPTOptions(col, 'root')
+                    getColumnPTOptions(col, 'root'),
+                    getColumnPTOptions(col, 'headerCell')
                 );
 
                 return (
@@ -248,7 +248,7 @@ export const TableHeader = React.memo((props) => {
                 {
                     role: 'row'
                 },
-                props.ptCallbacks.ptm('headerRow')
+                ptm('headerRow')
             );
             const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
             const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
@@ -265,10 +265,10 @@ export const TableHeader = React.memo((props) => {
     const content = createContent();
     const theadProps = mergeProps(
         {
-            className: 'p-datatable-thead'
+            className: cx('thead')
         },
-        props.ptCallbacks.ptm('thead'),
-        getColumnGroupPTOptions('root')
+        getColumnGroupPTOptions('root'),
+        ptm('thead')
     );
 
     return <thead {...theadProps}>{content}</thead>;

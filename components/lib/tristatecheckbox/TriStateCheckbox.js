@@ -5,7 +5,7 @@ import { useMountEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
 
 export const TriStateCheckbox = React.memo(
@@ -129,7 +129,7 @@ export const TriStateCheckbox = React.memo(
 
         const srOnlyAriaProps = mergeProps(
             {
-                className: cx('srOnlyAria'),
+                className: 'p-sr-only',
                 'aria-live': 'polite'
             },
             ptm('srOnlyAria')
@@ -137,9 +137,7 @@ export const TriStateCheckbox = React.memo(
 
         const rootProps = mergeProps(
             {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style,
                 onClick: onClick
             },
@@ -149,7 +147,7 @@ export const TriStateCheckbox = React.memo(
 
         return (
             <>
-                <div {...rootProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
                     <div {...checkboxProps}>{checkIcon}</div>
                     {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>

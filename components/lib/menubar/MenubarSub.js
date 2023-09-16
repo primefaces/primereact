@@ -151,13 +151,13 @@ export const MenubarSub = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.getAttribute(nextItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(nextItem, '[data-pc-section="menuitem"]') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.getAttribute(prevItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(prevItem, '[data-pc-section="menuitem"]') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onLeafClick = () => {
@@ -286,9 +286,9 @@ export const MenubarSub = React.memo(
                     key,
                     role: 'none',
                     id: item.id,
-                    className: cx('menuitem', { item, activeItemState }),
-                    style: item.style,
-                    onMouseEnter: (event) => onItemMouseEnter(event, item)
+                    className: classNames(item.className, cx('menuitem', { item, activeItemState })),
+                    onMouseEnter: (event) => onItemMouseEnter(event, item),
+                    'data-p-disabled': item.disabled || false
                 },
                 getPTOptions(item, 'menuitem')
             );
@@ -310,14 +310,16 @@ export const MenubarSub = React.memo(
         };
 
         const role = props.root ? 'menubar' : 'menu';
+        const ptKey = props.root ? 'menu' : 'submenu';
         const submenu = createMenu();
         const menuProps = mergeProps(
             {
                 ref,
-                className: cx('menu', { subProps: props }),
+                className: cx(ptKey),
+                style: !props.root && { display: props.parentActive ? 'block' : 'none' },
                 role
             },
-            ptm('menu')
+            ptm(ptKey)
         );
 
         return <ul {...menuProps}>{submenu}</ul>;

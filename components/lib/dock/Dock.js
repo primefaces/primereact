@@ -7,10 +7,9 @@ import { DockBase } from './DockBase';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
+        const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const context = React.useContext(PrimeReactContext);
         const props = DockBase.getProps(inProps, context);
-
-        const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const { ptm, cx, isUnstyled } = DockBase.setMetaData({
             props,
             state: {
@@ -20,6 +19,15 @@ export const Dock = React.memo(
         const elementRef = React.useRef(null);
 
         useHandleStyle(DockBase.css.styles, isUnstyled, { name: 'dock' });
+
+        const getPTOptions = (key, item, index) => {
+            return ptm(key, {
+                context: {
+                    index,
+                    item
+                }
+            });
+        };
 
         const onListMouseLeave = () => {
             setCurrentIndexState(-3);
@@ -49,7 +57,7 @@ export const Dock = React.memo(
                 {
                     className: cx('icon')
                 },
-                ptm('icon')
+                getPTOptions('icon', item, index)
             );
             const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
             const actionProps = mergeProps(
@@ -61,7 +69,7 @@ export const Dock = React.memo(
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
                 },
-                ptm('action')
+                getPTOptions('action', item, index)
             );
 
             let content = (
@@ -91,7 +99,7 @@ export const Dock = React.memo(
                     role: 'none',
                     onMouseEnter: () => onItemMouseEnter(index)
                 },
-                ptm('menuitem')
+                getPTOptions('menuitem', item, index)
             );
 
             return <li {...menuitemProps}>{content}</li>;
@@ -157,9 +165,7 @@ export const Dock = React.memo(
         const footer = createFooter();
         const rootProps = mergeProps(
             {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style
             },
             DockBase.getOtherProps(props),
@@ -174,7 +180,7 @@ export const Dock = React.memo(
         );
 
         return (
-            <div {...rootProps}>
+            <div id={props.id} ref={elementRef} {...rootProps}>
                 <div {...containerProps}>
                     {header}
                     {list}

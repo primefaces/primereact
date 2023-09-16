@@ -212,24 +212,22 @@ export const PanelMenu = React.memo(
                 getPTOptions(item, 'menuContent')
             );
 
-            const headerToggleableContentProps = mergeProps(
+            const toggleableContentProps = mergeProps(
                 {
-                    ref: menuContentRef,
-                    className: cx('headerToggleableContent', { active }),
+                    className: cx('toggleableContent', { active }),
                     role: 'region',
-                    id: contentId,
                     'aria-labelledby': headerId
                 },
-                getPTOptions(item, 'headerToggleableContent')
+                getPTOptions(item, 'toggleableContent')
             );
 
             return (
                 <div {...panelProps}>
                     <div {...headerProps}>{content}</div>
                     <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} onEnter={onEnter} disabled={animationDisabled} in={active} unmountOnExit options={props.transitionOptions}>
-                        <div {...headerToggleableContentProps}>
+                        <div id={contentId} ref={menuContentRef} {...toggleableContentProps}>
                             <div {...menuContentProps}>
-                                <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
+                                <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />
                             </div>
                         </div>
                     </CSSTransition>
@@ -244,8 +242,6 @@ export const PanelMenu = React.memo(
         const panels = createPanels();
         const rootProps = mergeProps(
             {
-                id: props.id,
-                ref: elementRef,
                 className: cx('root'),
                 style: props.style
             },
@@ -253,7 +249,11 @@ export const PanelMenu = React.memo(
             ptm('root')
         );
 
-        return <div {...rootProps}>{panels}</div>;
+        return (
+            <div id={props.id} ref={elementRef} {...rootProps}>
+                {panels}
+            </div>
+        );
     })
 );
 

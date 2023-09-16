@@ -5,19 +5,22 @@ export function ZIndexDoc(props) {
     const code = {
         basic: `
 import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
 
 //use in a component
 const { setZIndex, autoZIndex } = useContext(PrimeReactContext);
 
-setZIndex({
-    modal: 1100,    // dialog, sidebar
-    overlay: 1000,  // dropdown, overlaypanel
-    menu: 1000,     // overlay menus
-    tooltip: 1100   // tooltip
-    toast: 1200     // toast
-});
+useMountEffect(() => {
+   setZIndex({
+        modal: 1100,    // dialog, sidebar
+        overlay: 1000,  // dropdown, overlaypanel
+        menu: 1000,     // overlay menus
+        tooltip: 1100   // tooltip
+        toast: 1200     // toast
+    });
 
-setAutoZIndex(true);
+    setAutoZIndex(true);
+});
         `
     };
 

@@ -23,9 +23,9 @@ const classes = {
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
     content: 'p-colorpicker-content',
-    hueHandler: 'p-colorpicker-hue-handle',
+    hueHandle: 'p-colorpicker-hue-handle',
     hue: 'p-colorpicker-hue',
-    colorHandler: 'p-colorpicker-color-handle',
+    colorHandle: 'p-colorpicker-color-handle',
     color: 'p-colorpicker-color',
     selector: 'p-colorpicker-color-selector'
 };

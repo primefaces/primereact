@@ -86,11 +86,11 @@ const TemplatesPage = () => {
                 </div>
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
-                        <a href="https://www.primefaces.org/ultima-react" rel="noopener noreferrer" target="_blank">
+                        <a href="https://ultima.primereact.org" rel="noopener noreferrer" target="_blank">
                             <img alt="Ultima" src="https://primefaces.org/cdn/primereact/images/layouts/ultima-react.jpg" className="w-full" />
                         </a>
                         <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/ultima-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://ultima.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
                             <a href="https://www.primefaces.org/layouts/ultima-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">
@@ -146,11 +146,11 @@ const TemplatesPage = () => {
                 </div>
                 <div className="col-12 lg:col-6 xl:col-4">
                     <div className="card mb-0">
-                        <a href="https://www.primefaces.org/avalon-react" rel="noopener noreferrer" target="_blank">
+                        <a href="https://avalon.primereact.org" rel="noopener noreferrer" target="_blank">
                             <img alt="Avalon" src="https://primefaces.org/cdn/primereact/images/layouts/avalon-react.jpg" className="w-full" />
                         </a>
                         <div className="flex gap-3 mt-3">
-                            <a href="https://www.primefaces.org/avalon-react" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
+                            <a href="https://avalon.primereact.org" className="flex-1 p-button p-component" rel="noopener noreferrer" target="_blank">
                                 <span className="p-button-label white-space-nowrap">Preview</span>
                             </a>
                             <a href="https://www.primefaces.org/layouts/avalon-react" className="flex-1 p-button p-component p-button-outlined" rel="noopener noreferrer" target="_blank">

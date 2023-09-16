@@ -18,7 +18,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
     const elementRef = React.useRef(null);
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
-
+    const count = React.Children.count(props.children);
     const metaData = {
         props,
         state: {
@@ -33,11 +33,20 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(AccordionBase.css.styles, isUnstyled, { name: 'accordion' });
 
-    const getTabPT = (tab, key) => {
-        return ptmo(getTabProp(tab, 'pt'), key, {
-            props: tab.props,
-            parent: metaData
-        });
+    const getTabPT = (tab, key, index) => {
+        const tabMetaData = {
+            props: tab.props /* @todo */,
+            parent: metaData,
+            context: {
+                index,
+                count,
+                first: index === 0,
+                last: index === count - 1,
+                selected: isSelected(index)
+            }
+        };
+
+        return mergeProps(ptm(`accordiontab.${key}`, { accordiontab: tabMetaData }), ptm(`accordiontab.${key}`, tabMetaData), ptmo(tab.props, key, tabMetaData));
     };
 
     const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
@@ -99,14 +108,14 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             {
                 className: cx('tab.headertitle')
             },
-            getTabPT(tab, 'headertitle')
+            getTabPT(tab, 'headertitle', index)
         );
         const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span {...headerTitleProps}>{getTabProp(tab, 'header')}</span>;
         const headerIconProps = mergeProps(
             {
                 className: cx('tab.headericon')
             },
-            getTabPT(tab, 'headericon')
+            getTabPT(tab, 'headericon', index)
         );
         const icon = selected ? props.collapseIcon || <ChevronDownIcon {...headerIconProps} /> : props.expandIcon || <ChevronRightIcon {...headerIconProps} />;
         const toggleIcon = IconUtils.getJSXIcon(icon, { ...headerIconProps }, { props, selected });
@@ -116,8 +125,9 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 className: cx('tab.header', { selected, getTabProp, tab }),
                 style: sx('tab.header', { getTabProp, tab })
             },
-            getTabPT(tab, 'header')
+            getTabPT(tab, 'header', index)
         );
+
         const headerActionProps = mergeProps(
             {
                 id: headerId,
@@ -130,7 +140,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 'aria-controls': ariaControls,
                 'aria-expanded': selected
             },
-            getTabPT(tab, 'headeraction')
+            getTabPT(tab, 'headeraction', index)
         );
 
         return (
@@ -156,14 +166,14 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 role: 'region',
                 'aria-labelledby': ariaLabelledby
             },
-            getTabPT(tab, 'toggleablecontent')
+            getTabPT(tab, 'toggleablecontent', index)
         );
 
         const contentProps = mergeProps(
             {
                 className: cx('tab.content')
             },
-            getTabPT(tab, 'content')
+            getTabPT(tab, 'content', index)
         );
 
         return (
@@ -188,7 +198,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                     className: cx('tab.root', { selected })
                 },
                 AccordionTabBase.getCOtherProps(tab),
-                getTabPT(tab, 'root')
+                getTabPT(tab, 'root', index)
             );
 
             return (
@@ -209,8 +219,6 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const tabs = createTabs();
     const rootProps = mergeProps(
         {
-            id: idState,
-            ref: elementRef,
             className: cx('root'),
             style: props.style
         },
@@ -218,7 +226,11 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         ptm('root')
     );
 
-    return <div {...rootProps}>{tabs}</div>;
+    return (
+        <div id={idState} ref={elementRef} {...rootProps}>
+            {tabs}
+        </div>
+    );
 });
 
 AccordionTab.displayName = 'AccordionTab';

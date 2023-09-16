@@ -62,7 +62,8 @@ export default function MinMaxDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from "primereact/ts-helpers";
 
 export default function MinMaxDemo() {
     let today = new Date();
@@ -73,7 +74,7 @@ export default function MinMaxDemo() {
     let nextMonth = month === 11 ? 0 : month + 1;
     let nextYear = nextMonth === 0 ? year + 1 : year;
 
-    const [date, setDate] = useState<string | Date | Date[] | null>(null);
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     let minDate = new Date();
 
@@ -87,7 +88,7 @@ export default function MinMaxDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e: CalendarChangeEvent) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} minDate={minDate} maxDate={maxDate} readOnlyInput />
         </div>
     )
 }

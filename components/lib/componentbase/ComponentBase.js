@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import PrimeReact from '../api/Api';
 import { useStyle } from '../hooks/Hooks';
+import { Tailwind } from '../passthrough/tailwind';
+import { mergeProps } from '../utils/MergeProps';
 import { ObjectUtils } from '../utils/Utils';
 
 const buttonStyles = `
@@ -228,6 +230,46 @@ const radioButtonStyles = `
 }
 
 `;
+const iconStyles = `
+.p-icon {
+    display: inline-block;
+}
+
+.p-icon-spin {
+    -webkit-animation: p-icon-spin 2s infinite linear;
+    animation: p-icon-spin 2s infinite linear;
+}
+
+svg.p-icon {
+    pointer-events: auto;
+}
+
+svg.p-icon g {
+    pointer-events: none;
+}
+
+@-webkit-keyframes p-icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes p-icon-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+`;
 const baseStyles = `
 .p-component, .p-component * {
     box-sizing: border-box;
@@ -414,6 +456,7 @@ ${buttonStyles}
 ${checkboxStyles}
 ${inputTextStyles}
 ${radioButtonStyles}
+${iconStyles}
 `;
 
 export const ComponentBase = {
@@ -427,18 +470,7 @@ export const ComponentBase = {
     extend: (props = {}) => {
         const css = props.css;
         const defaultProps = { ...props.defaultProps, ...ComponentBase.defaultProps };
-        const inlineStyles = {
-            hiddenAccessible: {
-                border: '0',
-                clip: 'rect(0 0 0 0)',
-                height: '1px',
-                margin: '-1px',
-                overflow: 'hidden',
-                padding: '0',
-                position: 'absolute',
-                width: '1px'
-            }
-        };
+        const inlineStyles = {};
 
         const getProps = (props, context = {}) => {
             ComponentBase.context = context;
@@ -451,16 +483,17 @@ export const ComponentBase = {
         const getOptionValue = (obj = {}, key = '', params = {}) => {
             const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
             const fKey = fKeys.shift();
-            const matchedPTOption = Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) || '';
+            const matchedPTOption = ObjectUtils.isNotEmpty(obj) ? Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) : '';
 
             return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
         };
 
         const getPTValue = (obj = {}, key = '', params = {}) => {
-            const fkey = ObjectUtils.toFlatCase(key);
             const datasetPrefix = 'data-pc-';
             const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const pt = ComponentBase.context.pt || PrimeReact.pt || {};
+            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
             const getValue = (...args) => {
                 const value = getOptionValue(...args);
@@ -477,23 +510,14 @@ export const ComponentBase = {
             };
 
             const self = getValue(obj, fkey, params);
-            const globalPT = getValue(defaultPT(), key, params) || (/./g.test(key) && !!params[key.split('.')[0]] ? getValue(_globalPT(), key, params) : undefined);
-
+            const baseGlobalPTValue = getValue(defaultPT(), key, params);
+            const globalPT = (isNestedParam ? getValue(getOptionValue(pt, componentName, params), key, params) : undefined) || baseGlobalPTValue;
             const datasetProps = {
-                ...(fkey === 'root' && { [`${datasetPrefix}name`]: componentName }),
+                ...(fkey === 'root' && { [`${datasetPrefix}name`]: isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[0]) : componentName }),
                 [`${datasetPrefix}section`]: fkey
             };
 
-            let merged = {
-                ...ObjectUtils.getMergedProps(self, globalPT)
-            };
-
-            if (Object.keys(datasetProps).length) {
-                merged = {
-                    ...merged,
-                    ...datasetProps
-                };
-            }
+            const merged = mergeProps(self, globalPT, Object.keys(datasetProps).length ? datasetProps : {});
 
             return merged;
         };
@@ -516,11 +540,7 @@ export const ComponentBase = {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
 
-                    let merged = {
-                        ...ObjectUtils.getMergedProps(base, self)
-                    };
-
-                    return merged;
+                    return mergeProps(base, self);
                 }
 
                 return undefined;
@@ -540,21 +560,13 @@ export const ComponentBase = {
 };
 
 export const useHandleStyle = (styles, isUnstyled = false, { name, styled = false }) => {
-    const { load: loadCommonStyle, unload: unloadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
-    const { load, unload } = useStyle(styles, { name: name, manual: true });
+    const { load: loadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
+    const { load } = useStyle(styles, { name: name, manual: true });
 
     useEffect(() => {
-        if (!isUnstyled()) {
-            loadCommonStyle();
-            if (!styled) load();
-        }
+        loadCommonStyle();
+        if (!styled) load();
 
-        return () => {
-            if (!isUnstyled()) {
-                unloadCommonStyle();
-                unload();
-            }
-        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [styles]);
+    }, []);
 };

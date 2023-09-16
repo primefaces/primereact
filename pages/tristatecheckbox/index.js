@@ -1,6 +1,4 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/tristatecheckbox/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tristatecheckbox/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tristatecheckbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tristatecheckbox/basicdoc';
@@ -9,7 +7,11 @@ import { FormikDoc } from '../../components/doc/tristatecheckbox/form/formikdoc'
 import { HookFormDoc } from '../../components/doc/tristatecheckbox/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/tristatecheckbox/importdoc';
 import { InvalidDoc } from '../../components/doc/tristatecheckbox/invaliddoc';
+import { PTDoc } from '../../components/doc/tristatecheckbox/pt/ptdoc';
+import { Wireframe } from '../../components/doc/tristatecheckbox/pt/wireframe';
 import { StyleDoc } from '../../components/doc/tristatecheckbox/styledoc';
+import { StyledDoc } from '../../components/doc/tristatecheckbox/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/tristatecheckbox/theming/tailwinddoc';
 
 const TriStateCheckboxDemo = () => {
     const docs = [
@@ -79,6 +81,26 @@ const TriStateCheckboxDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <DocComponent
             title="React TriStateCheckbox Component"
@@ -87,6 +109,7 @@ const TriStateCheckboxDemo = () => {
             componentDocs={docs}
             apiDocs={['TriStateCheckbox']}
             ptDocs={ptDocs}
+            themingDocs={themingDocs}
         />
     );
 };

@@ -79,16 +79,16 @@ import { Toast } from 'primereact/toast';
 import { ProductService } from './service/ProductService';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+    id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    category?: string;
+    quantity?: number;
+    inventoryStatus?: string;
+    rating?: number;
 }
 
 export default function RowSelectEventsDemo() {
@@ -112,10 +112,7 @@ export default function RowSelectEventsDemo() {
         <div className="card">
             <Toast ref={toast} />
             <DataTable value={products} selectionMode="single" selection={selectedProduct!} 
-                        onSelectionChange={(e) => {
-                            const value = e.value as Product;
-                            setSelectedProduct(value);
-                        }}  dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
+                        onSelectionChange={(e) => setSelectedProduct(e.value)}  dataKey="id" onRowSelect={onRowSelect} onRowUnselect={onRowUnselect} metaKeySelection={false} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>

@@ -23,9 +23,10 @@ const classes = {
             },
             props.option.className
         ),
+    filterContainer: 'p-listbox-filter-container',
     filterIcon: 'p-listbox-filter-icon',
-    header: 'p-listbox-header',
-    filterContainer: 'p-listbox-filter-container'
+    filterInput: 'p-listbox-filter',
+    header: 'p-listbox-header'
 };
 
 const styles = `

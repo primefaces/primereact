@@ -67,16 +67,16 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { ProductService } from './service/ProductService';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+    id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    category?: string;
+    quantity?: number;
+    inventoryStatus?: string;
+    rating?: number;
 }
 
 export default function SingleRowSelectionDemo() {
@@ -95,10 +95,7 @@ export default function SingleRowSelectionDemo() {
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
             <DataTable value={products} selectionMode="single" selection={selectedProduct!} 
-                onSelectionChange={(e) => {
-                     const value = e.value as Product;
-                     setSelectedProduct(value);
-                }} dataKey="id" metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
+                onSelectionChange={(e) => setSelectedProduct(e.value)} dataKey="id" metaKeySelection={metaKey} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>
                 <Column field="category" header="Category"></Column>

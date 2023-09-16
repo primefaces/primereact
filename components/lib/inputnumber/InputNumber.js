@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -8,20 +9,20 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData({
+        const metaData = {
             props,
+            ...props.__parentMetadata,
             state: {
                 focused: focusedState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData(metaData);
 
         useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
         const elementRef = React.useRef(null);
@@ -307,6 +308,15 @@ export const InputNumber = React.memo(
                 return;
             }
 
+            if (props.onKeyDown) {
+                props.onKeyDown(event);
+
+                // do not continue if the user defined event wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
+            }
+
             lastValue.current = event.target.value;
 
             if (event.shiftKey || event.altKey) {
@@ -368,9 +378,9 @@ export const InputNumber = React.memo(
 
                     if (selectionStart === selectionEnd) {
                         const deleteChar = inputValue.charAt(selectionStart - 1);
-                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
                         if (isNumeralChar(deleteChar)) {
+                            const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
                             const decimalLength = getDecimalLength(inputValue);
 
                             if (_group.current.test(deleteChar)) {
@@ -393,6 +403,12 @@ export const InputNumber = React.memo(
                                 newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
+                            }
+                        } else if (_currency.current.test(deleteChar)) {
+                            const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
+
+                            if (minusCharIndex === currencyCharIndex - 1) {
+                                newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
                             }
                         }
 
@@ -449,15 +465,20 @@ export const InputNumber = React.memo(
                 default:
                     break;
             }
-
-            if (props.onKeyDown) {
-                props.onKeyDown(event);
-            }
         };
 
-        const onInputKeyPress = (event) => {
+        const onInputKeyUp = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
+            }
+
+            if (props.onKeyUp) {
+                props.onKeyUp(event);
+
+                // do not continue if the user defined event wants to prevent
+                if (event.defaultPrevented) {
+                    return;
+                }
             }
 
             const code = event.which || event.keyCode;
@@ -495,7 +516,7 @@ export const InputNumber = React.memo(
         };
 
         const allowMinusSign = () => {
-            return props.min === null || props.min < 0;
+            return ObjectUtils.isEmpty(props.min) || props.min < 0;
         };
 
         const isMinusSign = (char) => {
@@ -568,10 +589,12 @@ export const InputNumber = React.memo(
             let newValueStr;
 
             if (sign.isMinusSign) {
-                if (selectionStart === 0) {
+                const isNewMinusSign = minusCharIndex === -1;
+
+                if (isNewMinusSign && (selectionStart === 0 || selectionStart === currencyCharIndex + 1)) {
                     newValueStr = inputValue;
 
-                    if (minusCharIndex === -1 || selectionEnd !== 0) {
+                    if (isNewMinusSign || selectionEnd !== 0) {
                         newValueStr = insertText(inputValue, text, 0, selectionEnd);
                     }
 
@@ -1022,7 +1045,7 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyPress={onInputKeyPress}
+                    onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
                     onBlur={onInputBlur}
@@ -1036,6 +1059,7 @@ export const InputNumber = React.memo(
                     {...ariaProps}
                     {...dataProps}
                     pt={ptm('input')}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
@@ -1052,7 +1076,7 @@ export const InputNumber = React.memo(
             const incrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('incrementButton'),
+                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
                     onPointerUp: onUpButtonMouseUp,
@@ -1084,7 +1108,7 @@ export const InputNumber = React.memo(
             const decrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('decrementButton'),
+                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
                     onPointerUp: onDownButtonMouseUp,
@@ -1141,7 +1165,7 @@ export const InputNumber = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root', { focusedState, stacked, horizontal, vertical }),
+                className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
                 style: props.style
             },
             otherProps,

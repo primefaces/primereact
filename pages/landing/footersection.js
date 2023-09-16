@@ -24,7 +24,7 @@ const FooterSection = (props) => {
                         <ul className="list-none p-0 m-0">
                             <li className="font-bold mb-5">Support</li>
                             <li className="mb-4">
-                                <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
+                                <a href="https://github.com/orgs/primefaces/discussions" className="text-secondary font-medium hover:text-primary transition-colors transition-duration-150">
                                     Forum
                                 </a>
                             </li>

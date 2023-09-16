@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const { ptm, cx } = props;
@@ -63,13 +63,14 @@ export const MultiSelectItem = React.memo((props) => {
 
     const itemProps = mergeProps(
         {
-            className: cx('item', { itemProps: props }),
+            className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
             style: props.style,
             onClick: onClick,
             tabIndex: tabIndex,
             onKeyDown: onKeyDown,
             role: 'option',
-            'aria-selected': props.selected
+            'aria-selected': props.selected,
+            'data-p-disabled': props.disabled
         },
         getPTOptions('item')
     );

@@ -244,6 +244,7 @@ const inlineStyles = {
 export const DialogBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Dialog',
+        __parentMetadata: null,
         appendTo: null,
         ariaCloseIconLabel: null,
         baseZIndex: 0,

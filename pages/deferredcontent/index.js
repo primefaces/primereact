@@ -6,6 +6,7 @@ import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc'
 import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
 import { Wireframe } from '../../components/doc/deferredcontent/pt/wireframe';
 import { StyleDoc } from '../../components/doc/deferredcontent/styledoc';
+import { StyledDoc } from '../../components/doc/deferredcontent/theming/styleddoc';
 
 const DeferredContentDemo = () => {
     const docs = [
@@ -49,6 +50,14 @@ const DeferredContentDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        }
+    ];
+
     return (
         <DocComponent
             title="React Deferred Content Component"
@@ -58,6 +67,7 @@ const DeferredContentDemo = () => {
             apiDocs={['DeferredContent']}
             ptDocs={ptDocs}
             ptDescription=""
+            themingDocs={themingDocs}
         />
     );
 };

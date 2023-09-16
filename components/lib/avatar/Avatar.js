@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { AvatarBase } from './AvatarBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
@@ -10,11 +10,13 @@ export const Avatar = React.forwardRef((inProps, ref) => {
 
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
+    const [nested, setNested] = React.useState(false);
 
     const { ptm, cx, isUnstyled } = AvatarBase.setMetaData({
         props,
         state: {
-            imageFailed: imageFailed
+            imageFailed: imageFailed,
+            nested
         }
     });
 
@@ -68,6 +70,12 @@ export const Avatar = React.forwardRef((inProps, ref) => {
 
         props.onImageError && props.onImageError(event);
     };
+
+    React.useEffect(() => {
+        const nested = DomHandler.isAttributeEquals(elementRef.current.parentElement, 'data-pc-name', 'avatargroup');
+
+        setNested(nested);
+    }, []);
 
     React.useImperativeHandle(ref, () => ({
         props,

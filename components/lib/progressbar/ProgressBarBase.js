@@ -5,7 +5,7 @@ const classes = {
     root: ({ props }) => (props.mode === 'indeterminate' ? classNames('p-progressbar p-component p-progressbar-indeterminate') : classNames('p-progressbar p-component p-progressbar-determinate')),
     value: 'p-progressbar-value p-progressbar-value-animate',
     label: 'p-progressbar-label',
-    indeterminateContainer: 'p-progressbar-indeterminate-container'
+    container: 'p-progressbar-indeterminate-container'
 };
 
 const styles = `
@@ -108,12 +108,18 @@ const styles = `
 `;
 
 const inlineStyles = {
-    value: ({ props }) => (props.mode === 'indeterminate' ? { backgroundColor: props.color } : { width: props.value + '%', display: 'flex', backgroundColor: props.color })
+    value: ({ props }) => {
+        const valueWidth = Math.max(props.value, 2); // min 2 to display full label of 0% and 1%
+        const valueColor = props.value ? props.color : 'transparent';
+
+        return props.mode === 'indeterminate' ? { backgroundColor: props.color } : { width: valueWidth + '%', display: 'flex', backgroundColor: valueColor };
+    }
 };
 
 export const ProgressBarBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'ProgressBar',
+        __parentMetadata: null,
         id: null,
         value: null,
         showValue: true,

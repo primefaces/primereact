@@ -82,21 +82,21 @@ export const ToastMessage = React.memo(
             const closeIcon = IconUtils.getJSXIcon(icon, { ...buttonIconProps }, { props });
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
-            const buttonProps = mergeProps(
+            const closeButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('message.button'),
+                    className: cx('message.closeButton'),
                     onClick: onClose,
                     'aria-label': ariaLabel
                 },
-                ptm('button', parentParams),
-                ptmo(pt, 'button', params)
+                ptm('closeButton', parentParams),
+                ptmo(pt, 'closeButton', params)
             );
 
             if (closable !== false) {
                 return (
                     <div>
-                        <button {...buttonProps}>
+                        <button {...closeButtonProps}>
                             {closeIcon}
                             <Ripple />
                         </button>
@@ -181,7 +181,6 @@ export const ToastMessage = React.memo(
             return null;
         };
 
-        const contentClassName = classNames('p-toast-message-content', _contentClassName);
         const message = createMessage();
         const closeIcon = createCloseIcon();
 
@@ -203,7 +202,7 @@ export const ToastMessage = React.memo(
 
         const contentProps = mergeProps(
             {
-                className: contentClassName,
+                className: classNames(_contentClassName, cx('message.content')),
                 style: contentStyle
             },
             ptm('content', parentParams),

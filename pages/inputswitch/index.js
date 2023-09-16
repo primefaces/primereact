@@ -1,6 +1,4 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/inputswitch/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputswitch/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
@@ -10,7 +8,11 @@ import { HookFormDoc } from '../../components/doc/inputswitch/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
 import { InvalidDoc } from '../../components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
+import { PTDoc } from '../../components/doc/inputswitch/pt/ptdoc';
+import { Wireframe } from '../../components/doc/inputswitch/pt/wireframe';
 import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
+import { StyledDoc } from '../../components/doc/inputswitch/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/inputswitch/theming/tailwinddoc';
 
 const InputSwitchDemo = () => {
     const docs = [
@@ -85,7 +87,27 @@ const InputSwitchDemo = () => {
         }
     ];
 
-    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={['InputSwitch']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React InputSwitch Component" header="InputSwitch" description="InputSwitch is used to select a boolean value." componentDocs={docs} apiDocs={['InputSwitch']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default InputSwitchDemo;

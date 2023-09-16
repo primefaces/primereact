@@ -68,16 +68,16 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { ProductService } from './service/ProductService';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+    id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    category?: string;
+    quantity?: number;
+    inventoryStatus?: string;
+    rating?: number;
 }
 
 export default function CheckboxRowSelectionDemo() {
@@ -96,10 +96,7 @@ export default function CheckboxRowSelectionDemo() {
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
             <DataTable value={products} selectionMode={rowClick ? undefined : 'multiple'} selection={selectedProducts!}
-                        onSelectionChange={(e) => {
-                            const value = e.value as Product[];
-                            setSelectedProducts(value);
-                        }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
+                        onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

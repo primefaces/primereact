@@ -10,7 +10,7 @@
 import * as React from 'react';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { FormEvent } from '../ts-helpers';
+import { FormBooleanEvent, FormEvent } from '../ts-helpers';
 import { PassThroughType } from '../utils/utils';
 
 export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButtonPassThroughMethodOptions>;
@@ -72,7 +72,7 @@ export interface RadioButtonState {
  * @extends {FormEvent}
  * @event
  */
-interface RadioButtonChangeEvent extends FormEvent {}
+interface RadioButtonChangeEvent extends FormBooleanEvent {}
 
 /**
  * Custom click event.
@@ -80,7 +80,7 @@ interface RadioButtonChangeEvent extends FormEvent {}
  * @extends {FormEvent}
  * @event
  */
-interface RadioButtonClickEvent extends FormEvent {}
+interface RadioButtonClickEvent extends FormBooleanEvent {}
 
 /**
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -105,7 +105,7 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     name?: string | undefined;
     /**
-     * Value of the checkbox.
+     * Value of the radio.
      */
     value?: any | undefined;
     /**

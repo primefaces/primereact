@@ -128,8 +128,13 @@ export const Slider = React.memo(
 
         const setValue = (event) => {
             let handleValue;
-            let pageX = event.touches ? event.touches[0].pageX : event.pageX;
-            let pageY = event.touches ? event.touches[0].pageY : event.pageY;
+
+            let pageX = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageX : event.pageX;
+            let pageY = ObjectUtils.isNotEmpty(event.touches) ? event.touches[0].pageY : event.pageY;
+
+            if (!pageX || !pageY) {
+                return;
+            }
 
             if (horizontal) handleValue = ((pageX - initX.current) * 100) / barWidth.current;
             else handleValue = ((initY.current + barHeight.current - pageY) * 100) / barHeight.current;
@@ -189,12 +194,12 @@ export const Slider = React.memo(
         };
 
         const createHandle = (leftValue, bottomValue, index) => {
-            leftValue = ObjectUtils.isEmpty(leftValue) ? 0 : leftValue;
-            bottomValue = ObjectUtils.isEmpty(bottomValue) ? 0 : bottomValue;
+            leftValue = ObjectUtils.isEmpty(leftValue) ? null : leftValue;
+            bottomValue = ObjectUtils.isEmpty(bottomValue) ? null : bottomValue;
             const style = {
                 transition: dragging.current ? 'none' : null,
-                left: leftValue + '%',
-                bottom: bottomValue + '%'
+                left: leftValue && leftValue + '%',
+                bottom: bottomValue && bottomValue + '%'
             };
 
             const handleProps = mergeProps(
@@ -283,8 +288,6 @@ export const Slider = React.memo(
         const content = props.range ? createRangeSlider() : createSingleSlider();
         const rootProps = mergeProps(
             {
-                ref: elementRef,
-                id: props.id,
                 style: props.style,
                 className: cx('root', { vertical, horizontal }),
                 onClick: onBarClick
@@ -293,7 +296,11 @@ export const Slider = React.memo(
             ptm('root')
         );
 
-        return <div {...rootProps}>{content}</div>;
+        return (
+            <div id={props.id} ref={elementRef} {...rootProps}>
+                {content}
+            </div>
+        );
     })
 );
 

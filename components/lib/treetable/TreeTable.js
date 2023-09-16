@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
@@ -12,7 +13,6 @@ import { TreeTableBody } from './TreeTableBody';
 import { TreeTableFooter } from './TreeTableFooter';
 import { TreeTableHeader } from './TreeTableHeader';
 import { TreeTableScrollableView } from './TreeTableScrollableView';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const TreeTable = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -36,6 +36,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             multiSortMeta: multiSortMetaState,
             filters: filtersState,
             columnOrder: columnOrderState
+        },
+        context: {
+            scrollable: props.scrollable
         }
     };
     const ptCallbacks = TreeTableBase.setMetaData(metaData);
@@ -92,6 +95,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         } else {
             setFirstState(event.first);
             setRowsState(event.rows);
+        }
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData());
         }
     };
 
@@ -152,6 +159,16 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             setSortOrderState(eventMeta.sortOrder);
             setMultiSortMetaState(eventMeta.multiSortMeta);
         }
+
+        if (props.onValueChange) {
+            props.onValueChange(
+                processedData({
+                    sortField,
+                    sortOrder,
+                    multiSortMeta
+                })
+            );
+        }
     };
 
     const getCalculatedSortOrder = (currentOrder) => {
@@ -203,12 +220,20 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 order: getSortOrder()
             });
         } else {
-            value.sort((node1, node2) => {
-                const sortField = getSortField();
-                const value1 = ObjectUtils.resolveFieldData(node1.data, sortField);
-                const value2 = ObjectUtils.resolveFieldData(node2.data, sortField);
+            // performance optimization to prevent resolving field data in each loop
+            const lookupMap = new Map();
+            const sortField = getSortField();
+            const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
 
-                return compareValuesOnSort(value1, value2, getSortOrder());
+            for (let node of data) {
+                lookupMap.set(node.data, ObjectUtils.resolveFieldData(node.data, sortField));
+            }
+
+            value.sort((node1, node2) => {
+                const value1 = lookupMap.get(node1.data);
+                const value2 = lookupMap.get(node2.data);
+
+                return compareValuesOnSort(value1, value2, comparator, getSortOrder());
             });
 
             for (let i = 0; i < value.length; i++) {
@@ -231,8 +256,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const sortMultipleNodes = (data, multiSortMeta) => {
         let value = [...data];
 
+        const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
+
         value.sort((node1, node2) => {
-            return multisortField(node1, node2, multiSortMeta, 0);
+            return multisortField(node1, node2, multiSortMeta, 0, comparator);
         });
 
         for (let i = 0; i < value.length; i++) {
@@ -244,20 +271,24 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return value;
     };
 
-    const multisortField = (node1, node2, multiSortMeta, index) => {
+    const multisortField = (node1, node2, multiSortMeta, index, comparator) => {
+        if (!multiSortMeta || !multiSortMeta[index]) {
+            return;
+        }
+
         const value1 = ObjectUtils.resolveFieldData(node1.data, multiSortMeta[index].field);
         const value2 = ObjectUtils.resolveFieldData(node2.data, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, (context && context.locale) || PrimeReact.locale) === 0) {
-            return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1) : 0;
+        if (ObjectUtils.compare(value1, value2, comparator) === 0) {
+            return multiSortMeta.length - 1 > index ? multisortField(node1, node2, multiSortMeta, index + 1, comparator) : 0;
         }
 
-        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
+        return compareValuesOnSort(value1, value2, comparator, multiSortMeta[index].order);
     };
 
-    const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
+    const compareValuesOnSort = (value1, value2, comparator, order) => {
+        return ObjectUtils.sort(value1, value2, order, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const filter = (value, field, mode) => {
@@ -282,6 +313,10 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         } else {
             setFirstState(0);
             setFiltersState(newFilters);
+        }
+
+        if (props.onValueChange) {
+            props.onValueChange(processedData({ filters }));
         }
     };
 
@@ -312,7 +347,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const onColumnResize = (event) => {
         let containerLeft = DomHandler.getOffset(elementRef.current).left;
 
-        !isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizerHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizerHelperRef.current.style.top = 0 + 'px';
         resizerHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -396,7 +431,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         if (column) {
             let parent = column.parentElement;
 
-            while (parent && !DomHandler.hasClass(parent, 'p-treetable-scrollable-view')) {
+            while (parent && DomHandler.getAttribute(parent, 'data-pc-section') !== 'scrollable') {
                 parent = parent.parentElement;
             }
 
@@ -806,14 +841,14 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return node.leaf === false ? false : !(node.children && node.children.length);
     };
 
-    const processData = () => {
+    const processedData = (localState) => {
         let data = props.value || [];
 
         if (!props.lazy) {
             if (data && data.length) {
-                const filters = getFilters();
-                const sortField = getSortField();
-                const multiSortMeta = getMultiSortMeta();
+                const filters = (localState && localState.filters) || getFilters();
+                const sortField = (localState && localState.sortField) || getSortField();
+                const multiSortMeta = (localState && localState.multiSortMeta) || getMultiSortMeta();
 
                 if (ObjectUtils.isNotEmpty(filters) || props.globalFilter) {
                     data = filterLocal(data, filters);
@@ -932,6 +967,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 dropdownAppendTo={props.paginatorDropdownAppendTo}
                 pt={ptCallbacks.ptm('paginator')}
                 unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     };
@@ -955,7 +991,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         }
 
         scrollableView = createScrollableView(value, scrollableColumns, false, props.headerColumnGroup, props.footerColumnGroup);
-        const scrollableWrapper = mergeProps(
+        const scrollableWrapperProps = mergeProps(
             {
                 className: ptCallbacks.cx('scrollableWrapper')
             },
@@ -963,7 +999,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         );
 
         return (
-            <div {...scrollableWrapper}>
+            <div {...scrollableWrapperProps}>
                 {frozenView}
                 {scrollableView}
             </div>
@@ -1040,7 +1076,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return null;
     };
 
-    const data = processData();
+    const data = processedData();
 
     const table = createTable(data);
     const totalRecords = getTotalRecords(data);
@@ -1059,7 +1095,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const resizeHelperProps = mergeProps(
         {
             className: ptCallbacks.cx('resizeHelper'),
-            style: ptCallbacks.sx('resizeHelper')
+            style: { display: 'none' }
         },
         ptCallbacks.ptm('resizeHelper')
     );
@@ -1073,7 +1109,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const reorderIndicatorUpProps = mergeProps(
         {
             className: ptCallbacks.cx('reorderIndicatorUp'),
-            style: ptCallbacks.sx('reorderIndicatorUp')
+            style: { position: 'absolute', display: 'none' }
         },
         ptCallbacks.ptm('reorderIndicatorUp')
     );
@@ -1084,7 +1120,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             {reorderIndicatorUpIcon}
         </span>
     );
-    const reorderIndicatorDownProps = { className: ptCallbacks.sx('reorderIndicatorDown'), style: ptCallbacks.sx('reorderIndicatorDown') };
+    const reorderIndicatorDownProps = { className: ptCallbacks.sx('reorderIndicatorDown'), style: { position: 'absolute', display: 'none' } };
     const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
     const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
     const reorderIndicatorDown = props.reorderableColumns && (

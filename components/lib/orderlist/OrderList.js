@@ -19,15 +19,15 @@ export const OrderList = React.memo(
         const elementRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
-
-        const { ptm, cx, isUnstyled } = OrderListBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 selection: selectionState,
                 filterValue: filterValueState,
                 attributeSelector: attributeSelectorState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = OrderListBase.setMetaData(metaData);
 
         useHandleStyle(OrderListBase.css.styles, isUnstyled, { name: 'orderlist' });
 
@@ -257,6 +257,7 @@ export const OrderList = React.memo(
                     ptm={ptm}
                     cx={cx}
                     unstyled={props.unstyled}
+                    metaData={metaData}
                 />
                 <OrderListSubList
                     value={visibleList}

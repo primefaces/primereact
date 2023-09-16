@@ -3,7 +3,7 @@ import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
-import { IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
 
@@ -136,7 +136,7 @@ export const Menubar = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: cx('root', { mobileActiveState }),
+                className: classNames(props.className, cx('root', { mobileActiveState })),
                 style: props.style
             },
             MenubarBase.getOtherProps(props),

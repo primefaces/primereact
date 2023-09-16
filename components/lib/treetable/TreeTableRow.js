@@ -15,33 +15,63 @@ export const TreeTableRow = React.memo((props) => {
     const checkboxBoxRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
+
+    const getColumnProp = (column, name) => {
+        return ColumnBase.getCProp(column, name);
+    };
+
     const getColumnProps = (column) => ColumnBase.getCProps(column);
     const { ptm, ptmo, cx, sx, isUnstyled } = props.ptCallbacks;
 
     const getColumnPTOptions = (column, key) => {
-        return ptmo(ColumnBase.getCProp(column, 'pt'), key, {
-            props: getColumnProps(column),
-            parent: props.metaData
-        });
+        const cProps = getColumnProps(column);
+        const columnMetadata = {
+            props: cProps,
+            parent: props.metaData,
+            context: {
+                index: props.rowIndex,
+                selectable: props.node.selectable !== false,
+                selected: isSelected(),
+                frozen: getColumnProp(column, 'frozen'),
+                scrollable: props.metaData.props.scrollable
+            }
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
     };
 
     const getColumnCheckboxPTOptions = (column, key) => {
-        return ptmo(ColumnBase.getCProp(column, 'pt'), key, {
-            props: getColumnProps(column),
+        const cProps = getColumnProps(column);
+
+        const columnMetadata = {
+            props: cProps,
             parent: props.metaData,
             context: {
                 checked: isChecked(),
                 partialChecked: isPartialChecked()
             }
-        });
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+    };
+
+    const getRowPTOptions = (key) => {
+        const rowMetadata = {
+            context: {
+                index: props.index,
+                selected: isSelected(),
+                selectable: props.node.selectable !== false,
+                frozen: getColumnProp('frozen'),
+                scrollable: props.metaData.props.scrollable,
+                showGridlines: props.metaData.props.showGridlines
+            }
+        };
+
+        return ptm(key, rowMetadata);
     };
 
     const isLeaf = () => {
         return props.node.leaf === false ? false : !(props.node.children && props.node.children.length);
-    };
-
-    const getColumnProp = (column, name) => {
-        return ColumnBase.getCProp(column, name);
     };
 
     const onTogglerClick = (event) => {
@@ -328,7 +358,7 @@ export const TreeTableRow = React.memo((props) => {
                 className: cx('rowToggler'),
                 onClick: (e) => onTogglerClick(e),
                 tabIndex: -1,
-                style: sx('rowToggler', { rowProps: props }),
+                style: { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' },
                 'aria-label': label
             },
             getColumnPTOptions(column, 'rowToggler')
@@ -510,9 +540,10 @@ export const TreeTableRow = React.memo((props) => {
             onContextMenu: (e) => onRightClick(e),
             onKeyDown: (e) => onKeyDown(e),
             onMouseEnter: (e) => onMouseEnter(e),
-            onMouseLeave: (e) => onMouseLeave(e)
+            onMouseLeave: (e) => onMouseLeave(e),
+            'data-p-highlight': isSelected()
         },
-        ptm('row')
+        getRowPTOptions('row')
     );
 
     return (

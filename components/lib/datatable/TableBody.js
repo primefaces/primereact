@@ -8,20 +8,21 @@ import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
-        const { ptm, ptmo, cx } = props.ptCallbacks;
+        const { ptm, ptmo, cx, isUnsyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
 
         const getColumnPTOptions = (key) => {
             const cProps = getColumnProps(props.column);
-
-            return ptmo(cProps, key, {
+            const columnMetaData = {
                 props: cProps,
                 parent: props.metaData,
                 state: {
                     rowGroupHeaderStyleObject: rowGroupHeaderStyleObjectState
                 }
-            });
+            };
+
+            return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
         };
 
         const elementRef = React.useRef(null);
@@ -424,7 +425,8 @@ export const TableBody = React.memo(
         const enableDragSelection = (event) => {
             if (props.dragSelection && !dragSelectionHelper.current) {
                 dragSelectionHelper.current = document.createElement('div');
-                DomHandler.addClass(dragSelectionHelper.current, 'p-datatable-drag-selection-helper');
+                dragSelectionHelper.current.setAttribute('p-datatable-drag-selection-helper', 'true');
+                !isUnsyled && DomHandler.addClass(dragSelectionHelper.current, 'p-datatable-drag-selection-helper');
 
                 initialDragPosition.current = { x: event.clientX, y: event.clientY };
                 dragSelectionHelper.current.style.top = `${event.pageY}px`;
@@ -454,7 +456,7 @@ export const TableBody = React.memo(
 
         const changeTabIndex = (event, type) => {
             const target = event.currentTarget;
-            const isSelectable = DomHandler.hasClass(target, type === 'cell' ? 'p-selectable-cell' : 'p-selectable-row');
+            const isSelectable = DomHandler.getAttribute(target, type === 'cell' ? 'data-p-selectable-cell' : 'data-p-selectable-row') === true;
 
             if (isSelectable) {
                 const selector = type === 'cell' ? 'tr > td' : 'tr';
@@ -551,7 +553,7 @@ export const TableBody = React.memo(
         const onRowMouseDown = (e) => {
             const { originalEvent: event } = e;
 
-            if (DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) event.currentTarget.draggable = true;
+            if (!isUnsyled && DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle')) event.currentTarget.draggable = true;
             else event.currentTarget.draggable = false;
 
             if (allowRowDrag(e)) {
@@ -641,17 +643,30 @@ export const TableBody = React.memo(
                 const prevRowElement = rowElement.previousElementSibling;
 
                 if (pageY < rowMidY) {
-                    DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
+                    rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
+                    !isUnsyled && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
 
                     droppedRowIndex.current = index;
-                    if (prevRowElement) DomHandler.addClass(prevRowElement, 'p-datatable-dragpoint-bottom');
-                    else DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
+
+                    if (prevRowElement) {
+                        prevRowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'true');
+                        !isUnsyled && DomHandler.addClass(prevRowElement, 'p-datatable-dragpoint-bottom');
+                    } else {
+                        rowElement.setAttribute('data-p-datatable-dragpoint-top', 'true');
+                        !isUnsyled && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
+                    }
                 } else {
-                    if (prevRowElement) DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
-                    else DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
+                    if (prevRowElement) {
+                        prevRowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
+                        !isUnsyled && DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
+                    } else {
+                        rowElement.setAttribute('data-p-datatable-dragpoint-top', 'true');
+                        !isUnsyled && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-top');
+                    }
 
                     droppedRowIndex.current = index + 1;
-                    DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
+                    rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'true');
+                    !isUnsyled && DomHandler.addClass(rowElement, 'p-datatable-dragpoint-bottom');
                 }
             }
 
@@ -664,11 +679,14 @@ export const TableBody = React.memo(
             const prevRowElement = rowElement.previousElementSibling;
 
             if (prevRowElement) {
-                DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
+                prevRowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
+                !isUnsyled && DomHandler.removeClass(prevRowElement, 'p-datatable-dragpoint-bottom');
             }
 
-            DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
-            DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-top');
+            rowElement.setAttribute('data-p-datatable-dragpoint-bottom', 'false');
+            !isUnsyled && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-bottom');
+            rowElement.setAttribute('data-p-datatable-dragpoint-top', 'false');
+            !isUnsyled && DomHandler.removeClass(rowElement, 'p-datatable-dragpoint-top');
         };
 
         const onRowDragEnd = (e) => {
@@ -825,7 +843,7 @@ export const TableBody = React.memo(
                 const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps, frozen: props.frozenRow }) || localeOption('emptyMessage');
                 const emptyMessageProps = mergeProps(
                     {
-                        className: 'p-datatable-emptymessage',
+                        className: cx('emptyMessage'),
                         role: 'row'
                     },
                     getColumnPTOptions('emptyMessage')
@@ -836,8 +854,8 @@ export const TableBody = React.memo(
                         colSpan,
                         role: 'cell'
                     },
-                    getColumnPTOptions('bodyCell'),
-                    getColumnPTOptions('root')
+                    getColumnPTOptions('root'),
+                    getColumnPTOptions('bodyCell')
                 );
 
                 return (
@@ -865,35 +883,35 @@ export const TableBody = React.memo(
                         {
                             colSpan
                         },
-                        getColumnPTOptions('bodyCell'),
-                        getColumnPTOptions('root')
+                        getColumnPTOptions('root'),
+                        getColumnPTOptions('bodyCell')
                     );
 
-                    const rowgroupHeaderNameProps = mergeProps(
+                    const rowGroupHeaderNameProps = mergeProps(
                         {
-                            className: 'p-rowgroup-header-name'
+                            className: cx('rowGroupHeaderName')
                         },
-                        getColumnPTOptions('rowgroupHeaderName')
+                        getColumnPTOptions('rowGroupHeaderName')
                     );
 
                     content = (
                         <td {...bodyCellProps}>
                             {toggler}
-                            <span {...rowgroupHeaderNameProps}>{content}</span>
+                            <span {...rowGroupHeaderNameProps}>{content}</span>
                         </td>
                     );
                 }
 
-                const rowgroupHeaderProps = mergeProps(
+                const rowGroupHeaderProps = mergeProps(
                     {
-                        className: 'p-rowgroup-header',
+                        className: cx('rowGroupHeader'),
                         style,
                         role: 'row'
                     },
-                    getColumnPTOptions('rowgroupHeader')
+                    getColumnPTOptions('rowGroupHeader')
                 );
 
-                return <tr {...rowgroupHeaderProps}>{content}</tr>;
+                return <tr {...rowGroupHeaderProps}>{content}</tr>;
             }
 
             return null;
@@ -994,8 +1012,8 @@ export const TableBody = React.memo(
                             colSpan,
                             role: 'cell'
                         },
-                        getColumnPTOptions('bodyCell'),
-                        getColumnPTOptions('root')
+                        getColumnPTOptions('root'),
+                        getColumnPTOptions('bodyCell')
                     );
 
                     content = <td {...bodyCellProps}>{content}</td>;
@@ -1004,7 +1022,7 @@ export const TableBody = React.memo(
                 const rowExpansionProps = mergeProps(
                     {
                         id,
-                        className: 'p-datatable-row-expansion',
+                        className: cx('rowExpansion'),
                         role: 'row'
                     },
                     getColumnPTOptions('rowExpansion')
@@ -1019,15 +1037,15 @@ export const TableBody = React.memo(
         const createGroupFooter = (rowData, rowIndex, expanded, colSpan) => {
             if (isSubheaderGrouping && shouldRenderRowGroupFooter(props.value, rowData, rowIndex - props.first, expanded)) {
                 const content = ObjectUtils.getJSXElement(props.rowGroupFooterTemplate, rowData, { index: rowIndex, colSpan, props: props.tableProps });
-                const rowgroupFooterProps = mergeProps(
+                const rowGroupFooterProps = mergeProps(
                     {
-                        className: 'p-rowgroup-footer',
+                        className: cx('rowGroupFooter'),
                         role: 'row'
                     },
-                    getColumnPTOptions('rowgroupFooter')
+                    getColumnPTOptions('rowGroupFooter')
                 );
 
-                return <tr {...rowgroupFooterProps}>{content}</tr>;
+                return <tr {...rowGroupFooterProps}>{content}</tr>;
             }
 
             return null;

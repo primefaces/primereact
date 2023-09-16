@@ -34,7 +34,7 @@ import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function SeverityDemo() {
-    const msgs = useRef<Messages>(null);
+    const msgs = useRef(null);
 
     useMountEffect(() => {
         if (msgs.current) {

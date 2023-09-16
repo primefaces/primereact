@@ -3,15 +3,11 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState, checked }) =>
-        classNames(
-            'p-inputswitch p-component',
-            {
-                'p-inputswitch-checked': checked,
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
-            },
-            props.className
-        ),
+        classNames('p-inputswitch p-component', {
+            'p-inputswitch-checked': checked,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        }),
     slider: 'p-inputswitch-slider'
 };
 

@@ -21,7 +21,8 @@ export const AutoComplete = React.memo(
         const [searchingState, setSearchingState] = React.useState(false);
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
-        const { ptm, cx, sx, isUnstyled } = AutoCompleteBase.setMetaData({
+
+        const metaData = {
             props,
             state: {
                 id: idState,
@@ -29,7 +30,9 @@ export const AutoComplete = React.memo(
                 focused: focusedState,
                 overlayVisible: overlayVisibleState
             }
-        });
+        };
+
+        const { ptm, cx, sx, isUnstyled } = AutoCompleteBase.setMetaData(metaData);
 
         useHandleStyle(AutoCompleteBase.css.styles, isUnstyled, { name: 'autocomplete' });
         const elementRef = React.useRef(null);
@@ -104,13 +107,11 @@ export const AutoComplete = React.memo(
             if (props.multiple) {
                 inputRef.current.value = '';
 
-                if (!isSelected(option)) {
-                    // allows empty value/selectionlimit and within sectionlimit
-                    if (!props.value || !props.selectionLimit || props.value.length < props.selectionLimit) {
-                        const newValue = props.value ? [...props.value, option] : [option];
+                // allows empty value/selectionlimit and within sectionlimit
+                if (!isSelected(option) && isAllowMoreValues()) {
+                    const newValue = props.value ? [...props.value, option] : [option];
 
-                        updateModel(event, newValue);
-                    }
+                    updateModel(event, newValue);
                 }
             } else {
                 updateInputField(option);
@@ -154,7 +155,7 @@ export const AutoComplete = React.memo(
                 });
             }
 
-            selectedItem.current = value;
+            selectedItem.current = ObjectUtils.isNotEmpty(value) ? value : null;
         };
 
         const formatValue = (value) => {
@@ -460,6 +461,10 @@ export const AutoComplete = React.memo(
             return ObjectUtils.resolveFieldData(optionGroup, props.optionGroupChildren);
         };
 
+        const isAllowMoreValues = () => {
+            return !props.value || !props.selectionLimit || props.value.length < props.selectionLimit;
+        };
+
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
@@ -531,6 +536,7 @@ export const AutoComplete = React.memo(
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
+                    required={props.required}
                     disabled={props.disabled}
                     placeholder={props.placeholder}
                     size={props.size}
@@ -548,6 +554,7 @@ export const AutoComplete = React.memo(
                     onDoubleClick={props.onDblClick}
                     pt={ptm('input')}
                     {...ariaProps}
+                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
@@ -590,7 +597,7 @@ export const AutoComplete = React.memo(
             return null;
         };
 
-        const createMultiInput = () => {
+        const createMultiInput = (allowMoreValues) => {
             const ariaControls = overlayVisibleState ? idState + '_list' : null;
             const inputTokenProps = mergeProps(
                 {
@@ -602,27 +609,28 @@ export const AutoComplete = React.memo(
                 {
                     id: props.inputId,
                     ref: inputRef,
-                    type: props.type,
-                    disabled: props.disabled,
-                    placeholder: props.placeholder,
-                    role: 'combobox',
                     'aria-autocomplete': 'list',
                     'aria-controls': ariaControls,
-                    'aria-haspopup': 'listbox',
                     'aria-expanded': overlayVisibleState,
+                    'aria-haspopup': 'listbox',
                     autoComplete: 'off',
-                    readOnly: props.readOnly,
-                    tabIndex: props.tabIndex,
-                    onChange: onInputChange,
-                    name: props.name,
-                    style: props.inputStyle,
                     className: props.inputClassName,
+                    disabled: props.disabled,
                     maxLength: props.maxLength,
-                    onKeyUp: props.onKeyUp,
-                    onKeyDown: onInputKeyDown,
-                    onKeyPress: props.onKeyPress,
-                    onFocus: onMultiInputFocus,
+                    name: props.name,
                     onBlur: onMultiInputBlur,
+                    onChange: allowMoreValues ? onInputChange : undefined,
+                    onFocus: onMultiInputFocus,
+                    onKeyDown: allowMoreValues ? onInputKeyDown : undefined,
+                    onKeyPress: props.onKeyPress,
+                    onKeyUp: props.onKeyUp,
+                    placeholder: allowMoreValues ? props.placeholder : undefined,
+                    readOnly: props.readOnly || !allowMoreValues,
+                    required: props.required,
+                    role: 'combobox',
+                    style: props.inputStyle,
+                    tabIndex: props.tabIndex,
+                    type: props.type,
                     ...ariaProps
                 },
                 ptm('input')
@@ -636,13 +644,14 @@ export const AutoComplete = React.memo(
         };
 
         const createMultipleAutoComplete = () => {
+            const allowMoreValues = isAllowMoreValues();
             const tokens = createChips();
-            const input = createMultiInput();
+            const input = createMultiInput(allowMoreValues);
             const containerProps = mergeProps(
                 {
                     ref: multiContainerRef,
                     className: cx('container'),
-                    onClick: onMultiContainerClick,
+                    onClick: allowMoreValues ? onMultiContainerClick : undefined,
                     onContextMenu: props.onContextMenu,
                     onMouseDown: props.onMouseDown,
                     onDoubleClick: props.onDblClick
@@ -662,7 +671,18 @@ export const AutoComplete = React.memo(
             if (props.dropdown) {
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
-                return <Button type="button" icon={props.dropdownIcon || <ChevronDownIcon />} className={cx('dropdownButton')} disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} pt={ptm('dropdownButton')} />;
+                return (
+                    <Button
+                        type="button"
+                        icon={props.dropdownIcon || <ChevronDownIcon />}
+                        className={cx('dropdownButton')}
+                        disabled={props.disabled}
+                        onClick={onDropdownClick}
+                        aria-label={ariaLabel}
+                        pt={ptm('dropdownButton')}
+                        __parentMetadata={{ parent: metaData }}
+                    />
+                );
             }
 
             return null;

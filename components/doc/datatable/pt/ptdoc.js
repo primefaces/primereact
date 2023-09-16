@@ -192,7 +192,6 @@ export default function PTDemo() {
                 }}
             ></Column>
         </DataTable>
-    </div>
     );
 }
         `,

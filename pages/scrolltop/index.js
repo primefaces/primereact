@@ -1,13 +1,15 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/scrolltop/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/scrolltop/basicdoc';
 import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
 import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
-import { StyleDoc } from '../../components/doc/scrolltop/styledoc';
-import { Wireframe } from '../../components/doc/scrolltop/pt/wireframe';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { PTDoc } from '../../components/doc/scrolltop/pt/ptdoc';
+import { Wireframe } from '../../components/doc/scrolltop/pt/wireframe';
+import { StyleDoc } from '../../components/doc/scrolltop/styledoc';
+import { StyledDoc } from '../../components/doc/scrolltop/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/scrolltop/theming/tailwinddoc';
 
 const ScrollTopDemo = () => {
     const docs = [
@@ -56,6 +58,26 @@ const ScrollTopDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <DocComponent
             title="React ScrollTop Component"
@@ -64,6 +86,7 @@ const ScrollTopDemo = () => {
             componentDocs={docs}
             apiDocs={['ScrollTop']}
             ptDocs={ptDocs}
+            themingDocs={themingDocs}
         />
     );
 };

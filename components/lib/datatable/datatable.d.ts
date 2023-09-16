@@ -8,11 +8,13 @@
  *
  */
 import * as React from 'react';
-import { Column, ColumnProps } from '../column';
+import { Column, ColumnPassThroughOptions, ColumnProps } from '../column';
+import { ColumnGroupPassThroughOptions } from '../columngroup/columngroup';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { RowPassThroughOptions } from '../row/row';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller/virtualscroller';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 type DataTableHeaderTemplateType<TValue extends DataTableValueArray> = React.ReactNode | ((options: DataTableHeaderTemplateOptions<TValue>) => React.ReactNode);
 
@@ -279,11 +281,11 @@ interface DataTableDataSelectableEvent {
 }
 
 /**
- * Custom selection change event for context menu.
+ * Custom selection change event for context menu in single select mode.
  * @see {@link DataTableProps.onContextMenuSelectionChange}
  * @event
  */
-interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableContextMenuSingleSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -291,15 +293,15 @@ interface DataTableContextMenuSelectionChangeEvent<TValue extends DataTableValue
     /**
      * Selection object.
      */
-    value: DataTableSelection<TValue>;
+    value: TValue[number];
 }
 
 /**
- * Custom selection change event.
- * @see {@link DataTableProps.onSelectionChange}
+ * Custom selection change event for context menu in multiple select mode.
+ * @see {@link DataTableProps.onContextMenuSelectionChange}
  * @event
  */
-interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
+interface DataTableContextMenuMultipleSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Browser event.
      */
@@ -307,11 +309,75 @@ interface DataTableSelectionChangeEvent<TValue extends DataTableValueArray> {
     /**
      * Selection object.
      */
-    value: DataTableSelection<TValue>;
+    value: TValue;
+}
+
+/**
+ * Custom multiple selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionMultipleChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: TValue;
     /**
      * Type of the selection.
      */
-    type?: string;
+    type?: 'multiple' | 'all' | 'checkbox' | 'row' | undefined;
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
+ * Custom single selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionSingleChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection object.
+     */
+    value: TValue[number];
+    /**
+     * Type of the selection.
+     */
+    type?: 'single' | 'radio' | 'row';
+    /**
+     * Extra options.
+     */
+    [key: string]: any;
+}
+
+/**
+ * Custom cell selection change event.
+ * @see {@link DataTableProps.onSelectionChange}
+ * @event
+ */
+interface DataTableSelectionCellChangeEvent<TValue extends DataTableValueArray> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Selection objects.
+     */
+    value: DataTableCellSelection<TValue>;
+    /**
+     * Type of the selection.
+     */
+    type?: 'cell';
     /**
      * Extra options.
      */
@@ -699,8 +765,6 @@ type DataTableCellSelection<TValue extends DataTableValueArray> = {
     value: TValue[number][keyof TValue[number]];
 };
 
-type DataTableSelection<TValue extends DataTableValueArray> = DataTableRowData<TValue> | DataTableRowDataArray<TValue> | DataTableCellSelection<TValue>;
-
 export declare type DataTablePassThroughType<T> = PassThroughType<T, DataTablePassThroughMethodOptions<DataTableValueArray>>;
 
 /**
@@ -709,6 +773,7 @@ export declare type DataTablePassThroughType<T> = PassThroughType<T, DataTablePa
 export interface DataTablePassThroughMethodOptions<TValue extends DataTableValueArray> {
     props: DataTableProps<TValue>;
     state: DataTableState;
+    context: DataTableContext;
 }
 
 /**
@@ -759,6 +824,17 @@ export interface DataTableState {
      * Current filters object.
      */
     d_filters: object;
+}
+
+/**
+ * Defines current options in DataTable component.
+ */
+export interface DataTableContext {
+    /**
+     * Current scrollable state as a boolean.
+     * @defaultValue false
+     */
+    scrollable: boolean;
 }
 
 /**
@@ -823,15 +899,15 @@ export interface DataTablePassThroughOptions {
     /**
      * Uses to pass attributes to the rowgroup header's DOM element.
      */
-    rowgroupHeader?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    rowGroupHeader?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the rowgroup header name's DOM element.
      */
-    rowgroupHeaderName?: DataTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    rowGroupHeaderName?: DataTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the row's DOM element.
      */
-    row?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    bodyRow?: DataTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
      * Uses to pass attributes to the row expansion's DOM element.
      */
@@ -877,6 +953,18 @@ export interface DataTablePassThroughOptions {
      */
     reorderIndicatorDownIcon?: DataTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Used to pass attributes to the ColumnGroup helper components.
+     */
+    columnGroup?: ColumnGroupPassThroughOptions;
+    /**
+     * Used to pass attributes to the Row helper components.
+     */
+    row?: RowPassThroughOptions;
+    /**
+     * Used to pass attributes to the Column helper components.
+     */
+    column?: ColumnPassThroughOptions;
+    /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
      */
@@ -887,9 +975,8 @@ type SortOrder = 1 | 0 | -1 | null | undefined;
 
 /**
  * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
- * @group Properties
  */
-export interface DataTableProps<TValue extends DataTableValueArray> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
+interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'size' | 'onContextMenu' | 'ref' | 'value'> {
     /**
      * Unique identifier of the element.
      */
@@ -912,11 +999,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * Icon to display in the checkbox.
      */
     checkIcon?: IconType<DataTableProps<TValue>> | undefined;
-    /**
-     * Whether to cell selection is enabled or not.
-     * @defaultValue false
-     */
-    cellSelection?: boolean | undefined;
     /**
      * Style class of the component.
      */
@@ -1218,11 +1300,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     selectOnEdit?: boolean | undefined;
     /**
-     * Selected row in single mode or an array of values in multiple mode.
-     * @defaultValue true
-     */
-    selection?: DataTableSelection<TValue> | undefined;
-    /**
      * When a selectable row is clicked on RadioButton and Checkbox selection, it automatically decides whether to focus on elements such as checkbox or radio.
      * @defaultValue true
      */
@@ -1231,10 +1308,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      * A field property from the row to add Select &#123;field&#125; and Unselect &#123;field&#125; ARIA labels to checkbox/radio buttons.
      */
     selectionAriaLabel?: string | undefined;
-    /**
-     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
-     */
-    selectionMode?: 'single' | 'multiple' | 'checkbox' | 'radiobutton' | undefined;
     /**
      * When enabled with paginator and checkbox selection mode, the select all checkbox in the header will select all rows on the current page.
      * @defaultValue false
@@ -1394,11 +1467,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onContextMenu?(event: DataTableRowEvent): void;
     /**
-     * Callback to invoke when a row selected with right click.
-     * @param {DataTableRowEvent} event - Custom row event.
-     */
-    onContextMenuSelectionChange?(event: DataTableContextMenuSelectionChangeEvent<TValue>): void;
-    /**
      * Callback to invoke on filtering.
      * @param {DataTableStateEvent} event - Custom state event.
      */
@@ -1489,11 +1557,6 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
      */
     onSelectAllChange?(event: DataTableSelectAllChangeEvent): void;
     /**
-     * Callback to invoke when selection changes.
-     * @param {DataTableSelectionChangeEvent<TValue>} event - Custom selection change event.
-     */
-    onSelectionChange?(event: DataTableSelectionChangeEvent<TValue>): void;
-    /**
      * Callback to invoke on sort.
      * @param {DataTableStateEvent} event - Custom state event.
      */
@@ -1559,6 +1622,102 @@ export interface DataTableProps<TValue extends DataTableValueArray> extends Omit
 }
 
 /**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
+interface DataTablePropsSingle<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection?: false | undefined;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode?: 'single' | 'radiobutton' | undefined;
+    /**
+     * Selected single value.
+     */
+    selection?: TValue[number] | undefined | null;
+    /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuSingleSelectionChangeEvent<TValue>): void;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionSingleChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionSingleChangeEvent<TValue>): void;
+}
+
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
+interface DataTablePropsMultiple<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection?: false | undefined;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode: 'multiple' | 'checkbox' | null;
+    /**
+     * Selected array of values.
+     */
+    selection: TValue;
+    /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionMultipleChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionMultipleChangeEvent<TValue>): void;
+}
+
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
+interface DataTablePropsCell<TValue extends DataTableValueArray> extends DataTableBaseProps<TValue> {
+    /**
+     * Whether to cell selection is enabled or not.
+     * @defaultValue false
+     */
+    cellSelection: true;
+    /**
+     * Specifies the selection mode, valid values are "single", "multiple", "radiobutton" and "checkbox".
+     */
+    selectionMode: 'single' | 'multiple';
+    /**
+     * Selected cells.
+     */
+    selection: DataTableCellSelection<TValue> | null;
+    /**
+     * Callback to invoke when a row selected with right click.
+     * @param {DataTableRowEvent} event - Custom row event.
+     */
+    onContextMenuSelectionChange?(event: DataTableContextMenuMultipleSelectionChangeEvent<TValue>): void;
+    /**
+     * Callback to invoke when selection changes.
+     * @param {DataTableSelectionCellChangeEvent<TValue>} event - Custom selection change event.
+     */
+    onSelectionChange?(event: DataTableSelectionCellChangeEvent<TValue>): void;
+}
+
+/**
+ * Defines valid properties in DataTable component. In addition to these, all properties of HTMLDivElement can be used in this component.
+ * @group Properties
+ */
+export type DataTableProps<TValue extends DataTableValueArray> = DataTablePropsSingle<TValue> | DataTablePropsCell<TValue> | DataTablePropsMultiple<TValue>;
+
+/**
  * **PrimeReact - DataTable<TValue**
  *
  * _DataTable displays data in tabular format._
@@ -1578,6 +1737,10 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      * Closes the current editing cell when incell editing is enabled.
      */
     public closeEditingCell(): void;
+    /**
+     * Closes the current editing rows when row editing is enabled.
+     */
+    public closeEditingRows(): void;
     /**
      * Exports the data to CSV format.
      * @param {object} options - Options to export

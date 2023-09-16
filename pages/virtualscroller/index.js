@@ -1,6 +1,4 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/virtualscroller/pt/ptdoc';
-import { Wireframe } from '../../components/doc/virtualscroller/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/virtualscroller/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
@@ -10,7 +8,10 @@ import { HorizontalDoc } from '../../components/doc/virtualscroller/horizontaldo
 import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
 import { LazyDoc } from '../../components/doc/virtualscroller/lazydoc';
 import { LoadingDoc } from '../../components/doc/virtualscroller/loadingdoc';
+import { PTDoc } from '../../components/doc/virtualscroller/pt/ptdoc';
+import { Wireframe } from '../../components/doc/virtualscroller/pt/wireframe';
 import { StyleDoc } from '../../components/doc/virtualscroller/styledoc';
+import { StyledDoc } from '../../components/doc/virtualscroller/theming/styleddoc';
 
 const VirtualScrollerDemo = () => {
     const docs = [
@@ -78,6 +79,14 @@ const VirtualScrollerDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        }
+    ];
+
     return (
         <DocComponent
             title="React Virtual Scroller Component"
@@ -87,6 +96,7 @@ const VirtualScrollerDemo = () => {
             apiDocs={['VirtualScroller']}
             ptDocs={ptDocs}
             className="virtualscroller-demo"
+            themingDocs={themingDocs}
         />
     );
 };

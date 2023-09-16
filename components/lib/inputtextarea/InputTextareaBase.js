@@ -28,6 +28,7 @@ const styles = `
 export const InputTextareaBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputTextarea',
+        __parentMetadata: null,
         autoResize: false,
         keyfilter: null,
         onBlur: null,

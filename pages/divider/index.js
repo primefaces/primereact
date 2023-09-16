@@ -5,11 +5,13 @@ import { BasicDoc } from '../../components/doc/divider/basicdoc';
 import { ContentDoc } from '../../components/doc/divider/contentdoc';
 import { ImportDoc } from '../../components/doc/divider/importdoc';
 import { LoginDoc } from '../../components/doc/divider/logindoc';
-import { StyleDoc } from '../../components/doc/divider/styledoc';
-import { TypeDoc } from '../../components/doc/divider/typedoc';
-import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
 import { PTDoc } from '../../components/doc/divider/pt/ptdoc';
 import { Wireframe } from '../../components/doc/divider/pt/wireframe';
+import { StyleDoc } from '../../components/doc/divider/styledoc';
+import { TailwindDoc } from '../../components/doc/divider/theming/tailwinddoc';
+import { TypeDoc } from '../../components/doc/divider/typedoc';
+import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
+import { StyledDoc } from '../../components/doc/fieldset/theming/styleddoc';
 
 const DividerDemo = () => {
     const docs = [
@@ -73,7 +75,27 @@ const DividerDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={['Divider']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Divider Component" header="Divider" description="Divider is used to separate contents." componentDocs={docs} apiDocs={['Divider']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default DividerDemo;

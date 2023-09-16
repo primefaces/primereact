@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -31,13 +31,14 @@ export const ConfirmPopup = React.memo(
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
-        const { ptm, cx, isUnstyled } = ConfirmPopupBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 visible: visibleState,
                 reshow: reshowState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = ConfirmPopupBase.setMetaData(metaData);
 
         useHandleStyle(ConfirmPopupBase.css.styles, isUnstyled, { name: 'confirmpopup' });
 
@@ -279,7 +280,10 @@ export const ConfirmPopup = React.memo(
                 className: cx('rejectButton', { getPropValue }),
                 onClick: reject,
                 pt: ptm('rejectButton'),
-                unstyled: props.unstyled
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
             });
 
             const acceptButtonProps = mergeProps({
@@ -289,7 +293,10 @@ export const ConfirmPopup = React.memo(
                 className: cx('acceptButton', { getPropValue }),
                 onClick: accept,
                 pt: ptm('acceptButton'),
-                unstyled: props.unstyled
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
             });
 
             const content = (

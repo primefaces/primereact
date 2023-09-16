@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -82,9 +82,7 @@ export const Message = React.memo(
 
         const rootProps = mergeProps(
             {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root'),
+                className: classNames(props.className, cx('root')),
                 style: props.style,
                 role: 'alert',
                 'aria-live': 'polite'
@@ -93,7 +91,11 @@ export const Message = React.memo(
             ptm('root')
         );
 
-        return <div {...rootProps}>{content}</div>;
+        return (
+            <div id={props.id} ref={elementRef} {...rootProps}>
+                {content}
+            </div>
+        );
     })
 );
 

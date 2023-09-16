@@ -3,7 +3,6 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     icon: 'p-checkbox-icon p-c',
-    hiddenInputWrapper: 'p-hidden-accessible',
     input: ({ props, checked, focusedState }) =>
         classNames('p-checkbox-box', {
             'p-highlight': checked,
@@ -11,15 +10,11 @@ const classes = {
             'p-focus': focusedState
         }),
     root: ({ props, checked, focusedState }) =>
-        classNames(
-            'p-checkbox p-component',
-            {
-                'p-checkbox-checked': checked,
-                'p-checkbox-disabled': props.disabled,
-                'p-checkbox-focused': focusedState
-            },
-            props.className
-        )
+        classNames('p-checkbox p-component', {
+            'p-checkbox-checked': checked,
+            'p-checkbox-disabled': props.disabled,
+            'p-checkbox-focused': focusedState
+        })
 };
 
 const styles = `

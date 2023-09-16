@@ -20,6 +20,7 @@ export declare type InputTextareaPassThroughType<T> = PassThroughType<T, InputTe
  */
 export interface InputTextareaPassThroughMethodOptions {
     props: InputTextareaProps;
+    context: InputTextareaContext;
 }
 
 /**
@@ -36,6 +37,17 @@ export interface InputTextareaPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+}
+
+/**
+ * Defines current options in Textarea component.
+ */
+export interface InputTextareaContext {
+    /**
+     * Current disabled state of the component as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**

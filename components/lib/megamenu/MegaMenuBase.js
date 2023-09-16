@@ -2,7 +2,13 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    separatorProps: 'p-menu-separator',
+    root: ({ props, mobileActiveState }) =>
+        classNames('p-megamenu p-component', {
+            'p-megamenu-horizontal': props.orientation === 'horizontal',
+            'p-megamenu-vertical': props.orientation === 'vertical',
+            'p-megamenu-mobile-active': mobileActiveState
+        }),
+    separator: 'p-menu-separator',
     submenuIcon: 'p-submenu-icon',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     submenuItem: ({ item }) => classNames('p-menuitem', item.className),
@@ -19,22 +25,41 @@ const classes = {
     grid: 'p-megamenu-grid',
     icon: 'p-menuitem-icon',
     label: 'p-menuitem-text',
+    column: ({ category }) => {
+        const length = category.items ? category.items.length : 0;
+        let columnClass;
+
+        switch (length) {
+            case 2:
+                columnClass = 'p-megamenu-col-6';
+                break;
+
+            case 3:
+                columnClass = 'p-megamenu-col-4';
+                break;
+
+            case 4:
+                columnClass = 'p-megamenu-col-3';
+                break;
+
+            case 6:
+                columnClass = 'p-megamenu-col-2';
+                break;
+
+            default:
+                columnClass = 'p-megamenu-col-12';
+                break;
+        }
+
+        return columnClass;
+    },
     headerAction: ({ category }) => classNames('p-menuitem-link', { 'p-disabled': category.disabled }),
+    menuButton: 'p-megamenu-button',
     menuitem: ({ category, activeItemState }) => classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className),
     menubar: 'p-megamenu-root-list',
     menu: 'p-megamenu-root-list',
     start: 'p-megamenu-start',
-    end: 'p-megamenu-end',
-    root: ({ props, mobileActiveState }) =>
-        classNames(
-            'p-megamenu p-component',
-            {
-                'p-megamenu-horizontal': props.orientation === 'horizontal',
-                'p-megamenu-vertical': props.orientation === 'vertical',
-                'p-megamenu-mobile-active': mobileActiveState
-            },
-            props.className
-        )
+    end: 'p-megamenu-end'
 };
 
 const styles = `

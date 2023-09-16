@@ -8,6 +8,7 @@ const classes = {
             'p-treeselect p-component p-inputwrapper',
             {
                 'p-treeselect-chip': props.display === 'chip',
+                'p-treeselect-clearable': props.showClear && !props.disabled,
                 'p-disabled': props.disabled,
                 'p-focus': focusedState,
                 'p-inputwrapper-filled': !isValueEmpty,
@@ -35,6 +36,7 @@ const classes = {
     filter: 'p-treeselect-filter p-inputtext p-component',
     filterIcon: 'p-treeselect-filter-icon',
     closeIcon: 'p-treeselect-close-icon',
+    clearIcon: 'p-treeselect-clear-icon p-clickable',
     closeButton: 'p-treeselect-close p-link',
     header: 'p-treeselect-header',
     wrapper: 'p-treeselect-items-wrapper'
@@ -139,6 +141,7 @@ export const TreeSelectBase = ComponentBase.extend({
         ariaLabelledBy: null,
         className: null,
         closeIcon: null,
+        clearIcon: null,
         disabled: false,
         display: 'comma',
         dropdownIcon: null,
@@ -175,6 +178,7 @@ export const TreeSelectBase = ComponentBase.extend({
         resetFilterOnHide: false,
         scrollHeight: '400px',
         selectionMode: 'single',
+        showClear: false,
         style: null,
         tabIndex: null,
         togglerTemplate: null,

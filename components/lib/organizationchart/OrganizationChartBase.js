@@ -70,14 +70,11 @@ const classes = {
         ),
     nodes: 'p-organizationchart-nodes',
     lines: 'p-organizationchart-lines',
+    lineLeft: ({ index }) => classNames('p-organizationchart-line-left', { 'p-organizationchart-line-top': index !== 0 }),
+    lineRight: ({ index, nodeChildLength }) => classNames('p-organizationchart-line-right', { 'p-organizationchart-line-top': index !== nodeChildLength - 1 }),
     lineDown: 'p-organizationchart-line-down',
     nodeTogglerIcon: 'p-node-toggler-icon',
     nodeToggler: 'p-node-toggler'
-};
-
-const inlineStyles = {
-    nodes: ({ visibility }) => ({ visibility }),
-    lines: ({ visibility }) => ({ visibility })
 };
 
 export const OrganizationChartBase = ComponentBase.extend({
@@ -98,7 +95,6 @@ export const OrganizationChartBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });

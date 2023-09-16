@@ -12,10 +12,17 @@ export const Button = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ButtonBase.getProps(inProps, context);
+        const disabled = props.disabled || props.loading;
 
-        const { ptm, cx, isUnstyled } = ButtonBase.setMetaData({
-            props
-        });
+        const metaData = {
+            props,
+            ...props.__parentMetadata,
+            context: {
+                disabled
+            }
+        };
+
+        const { ptm, cx, isUnstyled } = ButtonBase.setMetaData(metaData);
 
         useHandleStyle(ButtonBase.css.styles, isUnstyled, { name: 'button', styled: true });
 
@@ -69,7 +76,7 @@ export const Button = React.memo(
                 return <span {...labelProps}>{props.label}</span>;
             }
 
-            return !props.children && !props.label && <span className="p-button-label p-c" dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
+            return !props.children && !props.label && <span className={cx('label')} dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
         };
 
         const createBadge = () => {
@@ -78,7 +85,8 @@ export const Button = React.memo(
                     {
                         className: classNames(props.badgeClassName),
                         value: props.badge,
-                        unstyled: props.unstyled
+                        unstyled: props.unstyled,
+                        __parentMetadata: { parent: metaData }
                     },
                     ptm('badge')
                 );
@@ -89,7 +97,6 @@ export const Button = React.memo(
             return null;
         };
 
-        const disabled = props.disabled || props.loading;
         const showTooltip = !disabled || (props.tooltipOptions && props.tooltipOptions.showOnDisabled);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip) && showTooltip;
         const sizeMapping = {

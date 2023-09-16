@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -15,7 +15,11 @@ export const InputTextarea = React.memo(
         const cachedScrollHeight = React.useRef(0);
 
         const { ptm, cx, isUnstyled } = InputTextareaBase.setMetaData({
-            props
+            props,
+            ...props.__parentMetadata,
+            context: {
+                disabled: props.disabled
+            }
         });
 
         useHandleStyle(InputTextareaBase.css.styles, isUnstyled, { name: 'inputtextarea' });

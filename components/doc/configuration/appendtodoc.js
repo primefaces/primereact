@@ -5,11 +5,14 @@ export function AppendToDoc(props) {
     const code = {
         basic: `
 import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
 
 //use in a component
 const { setAppendTo } = useContext(PrimeReactContext);
 
-setAppendTo('self');
+useMountEffect(() => {
+   setAppendTo('self');
+});
         `
     };
 

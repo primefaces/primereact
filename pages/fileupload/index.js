@@ -1,6 +1,4 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/fileupload/pt/ptdoc';
-import { Wireframe } from '../../components/doc/fileupload/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/fileupload/accessibilitydoc';
 import { AdvancedDoc } from '../../components/doc/fileupload/advanceddoc';
@@ -8,8 +6,12 @@ import { AutoDoc } from '../../components/doc/fileupload/autodoc';
 import { BasicDoc } from '../../components/doc/fileupload/basicdoc';
 import { CustomUploadDoc } from '../../components/doc/fileupload/customuploaddoc';
 import { ImportDoc } from '../../components/doc/fileupload/importdoc';
+import { PTDoc } from '../../components/doc/fileupload/pt/ptdoc';
+import { Wireframe } from '../../components/doc/fileupload/pt/wireframe';
 import { StyleDoc } from '../../components/doc/fileupload/styledoc';
 import { TemplateDoc } from '../../components/doc/fileupload/templatedoc';
+import { StyledDoc } from '../../components/doc/fileupload/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/fileupload/theming/tailwinddoc';
 
 const FileUploadDemo = () => {
     const docs = [
@@ -72,6 +74,26 @@ const FileUploadDemo = () => {
         }
     ];
 
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
     return (
         <DocComponent
             title="React Upload Component"
@@ -80,6 +102,7 @@ const FileUploadDemo = () => {
             componentDocs={docs}
             apiDocs={['FileUpload']}
             ptDocs={ptDocs}
+            themingDocs={themingDocs}
         />
     );
 };

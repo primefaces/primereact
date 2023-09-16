@@ -5,6 +5,7 @@
  * @module api
  *
  */
+import { Dispatch, SetStateAction } from 'react';
 import { AccordionPassThroughOptions, AccordionTabPassThroughOptions } from '../accordion/accordion';
 import { AutoCompletePassThroughOptions } from '../autocomplete/autocomplete';
 import { AvatarPassThroughOptions } from '../avatar/avatar';
@@ -14,7 +15,6 @@ import { BlockUIPassThroughOptions } from '../blockui/blockui';
 import { BreadCrumbPassThroughOptions } from '../breadcrumb/breadcrumb';
 import { ButtonPassThroughOptions } from '../button/button';
 import { CalendarPassThroughOptions } from '../calendar/calendar';
-import { PanelPassThroughOptions } from '../panel/panel';
 import { CardPassThroughOptions } from '../card/card';
 import { CarouselPassThroughOptions } from '../carousel/carousel';
 import { CascadeSelectPassThroughOptions } from '../cascadeselect/cascadeselect';
@@ -23,6 +23,7 @@ import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
 import { ChipPassThroughOptions } from '../chip/chip';
 import { ChipsPassThroughOptions } from '../chips/chips';
 import { ColorPickerPassThroughOptions } from '../colorpicker/colorpicker';
+import { ColumnPassThroughOptions } from '../column/column';
 import { ColumnGroupPassThroughOptions } from '../columngroup/columngroup';
 import { ConfirmDialogPassThroughOptions } from '../confirmdialog/confirmdialog';
 import { ConfirmPopupPassThroughOptions } from '../confirmpopup/confirmpopup';
@@ -30,9 +31,9 @@ import { ContextMenuPassThroughOptions } from '../contextmenu/contextmenu';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
 import { DataViewLayoutOptionsPassThroughOptions, DataViewPassThroughOptions } from '../dataview/dataview';
 import { DeferredContentPassThroughOptions } from '../deferredcontent/deferredcontent';
+import { DialogPassThroughOptions } from '../dialog/dialog';
 import { DividerPassThroughOptions } from '../divider/divider';
 import { DockPassThroughOptions } from '../dock/dock';
-import { DialogPassThroughOptions } from '../dialog/dialog';
 import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { EditorPassThroughOptions } from '../editor/editor';
 import { FieldsetPassThroughOptions } from '../fieldset/fieldset';
@@ -43,32 +44,41 @@ import { InplacePassThroughOptions } from '../inplace/inplace';
 import { InputNumberPassThroughOptions } from '../inputnumber/inputnumber';
 import { InputSwitchPassThroughOptions } from '../inputswitch/inputswitch';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { InputTextareaPassThroughOptions } from '../inputtextarea/inputtextarea';
 import { KnobPassThroughOptions } from '../knob/knob';
 import { ListboxPassThroughOptions } from '../listbox/listbox';
 import { MegaMenuPassThroughOptions } from '../megamenu/megamenu';
+import { MentionPassThroughOptions } from '../mention/mention';
 import { MenuPassThroughOptions } from '../menu/menu';
 import { MenubarPassThroughOptions } from '../menubar/menubar';
 import { MessagePassThroughOptions } from '../message/message';
+import { MessagesPassThroughOptions } from '../messages/messages';
 import { MultiSelectPassThroughOptions } from '../multiselect/multiselect';
+import { MultiStateCheckboxPassThroughOptions } from '../multistatecheckbox/multistatecheckbox';
 import { OrderListPassThroughOptions } from '../orderlist/orderlist';
 import { OrganizationChartPassThroughOptions } from '../organizationchart/organizationchart';
 import { OverlayPanelPassThroughOptions } from '../overlaypanel/overlaypanel';
 import { PaginatorPassThroughOptions } from '../paginator/paginator';
+import { PanelPassThroughOptions } from '../panel/panel';
 import { PanelMenuPassThroughOptions } from '../panelmenu/panelmenu';
 import { PasswordPassThroughOptions } from '../password/password';
 import { PickListPassThroughOptions } from '../picklist/picklist';
 import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
 import { ProgressSpinnerPassThroughOptions } from '../progressspinner/progressspinner';
 import { RadioButtonPassThroughOptions } from '../radiobutton/radiobutton';
+import { RatingPassThroughOptions } from '../rating/rating';
 import { RowPassThroughOptions } from '../row/row';
 import { ScrollPanelPassThroughOptions } from '../scrollpanel/scrollpanel';
 import { ScrollTopPassThroughOptions } from '../scrolltop/scrolltop';
 import { SelectButtonPassThroughOptions } from '../selectbutton/selectbutton';
 import { SidebarPassThroughOptions } from '../sidebar/sidebar';
 import { SkeletonPassThroughOptions } from '../skeleton/skeleton';
+import { SlideMenuPassThroughOptions } from '../slidemenu/slidemenu';
+import { SliderPassThroughOptions } from '../slider/slider';
 import { SpeedDialPassThroughOptions } from '../speeddial/speeddial';
 import { SplitButtonPassThroughOptions } from '../splitbutton/splitbutton';
 import { SplitterPassThroughOptions } from '../splitter/splitter';
+import { StepsPassThroughOptions } from '../steps/steps';
 import { TabMenuPassThroughOptions } from '../tabmenu/tabmenu';
 import { TabPanelPassThroughOptions, TabViewPassThroughOptions } from '../tabview/tabview';
 import { TagPassThroughOptions } from '../tag/tag';
@@ -76,23 +86,13 @@ import { TerminalPassThroughOptions } from '../terminal/terminal';
 import { TieredMenuPassThroughOptions } from '../tieredmenu/tieredmenu';
 import { TimelinePassThroughOptions } from '../timeline/timeline';
 import { ToastPassThroughOptions } from '../toast/toast';
+import { ToggleButtonPassThroughOptions } from '../togglebutton/togglebutton';
 import { ToolbarPassThroughOptions } from '../toolbar/toolbar';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TreePassThroughOptions } from '../tree/tree';
 import { TreeSelectPassThroughOptions } from '../treeselect/treeselect';
 import { TreeTablePassThroughOptions } from '../treetable/treetable';
 import { VirtualScrollerPassThroughOptions } from '../virtualscroller/virtualscroller';
-import { InputTextareaPassThroughOptions } from '../inputtextarea/inputtextarea';
-import { MessagesPassThroughOptions } from '../messages/messages';
-import { ColumnPassThroughOptions } from '../column/column';
-import { MentionPassThroughOptions } from '../mention/mention';
-import { MultiStateCheckboxPassThroughOptions } from '../multistatecheckbox/multistatecheckbox';
-import { RatingPassThroughOptions } from '../rating/rating';
-import { SlideMenuPassThroughOptions } from '../slidemenu/slidemenu';
-import { SliderPassThroughOptions } from '../slider/slider';
-import { StepsPassThroughOptions } from '../steps/steps';
-import { ToggleButtonPassThroughOptions } from '../togglebutton/togglebutton';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
-import { Dispatch, SetStateAction } from 'react';
 
 // Config
 /**
@@ -218,51 +218,51 @@ export interface APIOptions {
     /**
      * Sets the "appendTo" state of the context.
      */
-    setAppendTo: Dispatch<SetStateAction<AppendToType>>;
+    setAppendTo?: Dispatch<SetStateAction<AppendToType>>;
     /**
      * Sets the "autoZIndex" state of the context.
      */
-    setAutoZIndex: Dispatch<SetStateAction<boolean>>;
+    setAutoZIndex?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "cssTransition" state of the context.
      */
-    setCssTransition: Dispatch<SetStateAction<boolean>>;
+    setCssTransition?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "filterMatchModeOptions" state of the context.
      */
-    setFilterMatchModeOptions: Dispatch<SetStateAction<FilterMatchModeOptions>>;
+    setFilterMatchModeOptions?: Dispatch<SetStateAction<FilterMatchModeOptions>>;
     /**
      * Sets the "hideOverlaysOnDocumentScrolling" state of the context.
      */
-    setHideOverlaysOnDocumentScrolling: Dispatch<SetStateAction<boolean>>;
+    setHideOverlaysOnDocumentScrolling?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "inputStyle" state of the context.
      */
-    setInputStyle: Dispatch<SetStateAction<InputStyleType>>;
+    setInputStyle?: Dispatch<SetStateAction<InputStyleType>>;
     /**
      * Sets the "locale" state of the context.
      */
-    setLocale: Dispatch<SetStateAction<string>>;
+    setLocale?: Dispatch<SetStateAction<string>>;
     /**
      * Sets the "nonce" state of the context.
      */
-    setNonce: Dispatch<SetStateAction<string>>;
+    setNonce?: Dispatch<SetStateAction<string>>;
     /**
      * Sets the "nullSortOrder" state of the context.
      */
-    setNullSortOrder: Dispatch<SetStateAction<number>>;
+    setNullSortOrder?: Dispatch<SetStateAction<number>>;
     /**
      * Sets the "ripple" state of the context.
      */
-    setRipple: Dispatch<SetStateAction<boolean>>;
+    setRipple?: Dispatch<SetStateAction<boolean>>;
     /**
      * Sets the "zIndex" state of the context.
      */
-    setZIndex: Dispatch<SetStateAction<ZIndexOptions>>;
+    setZIndex?: Dispatch<SetStateAction<ZIndexOptions>>;
     /**
      * Sets the "pt" state of the context.
      */
-    setPt: Dispatch<SetStateAction<PrimeReactPTOptions>>;
+    setPt?: Dispatch<SetStateAction<PrimeReactPTOptions>>;
 }
 
 /**
@@ -644,6 +644,10 @@ export default PrimeReact;
 
 type PrimeReactProviderProps = {
     /**
+     * Any default global API options
+     */
+    value?: APIOptions;
+    /**
      * Used to get the child elements of the component.
      * @readonly
      */
@@ -653,7 +657,7 @@ type PrimeReactProviderProps = {
 declare const PrimeReactProvider: React.FC<PrimeReactProviderProps>;
 declare const PrimeReactContext: React.Context<APIOptions>;
 
-export { PrimeReactProvider, PrimeReactContext };
+export { PrimeReactContext, PrimeReactProvider };
 
 // Locale
 /**
@@ -811,6 +815,14 @@ export interface LocaleOptions {
      * Close
      */
     close?: string;
+    /**
+     * Pending
+     */
+    pending?: string;
+    /**
+     * ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+     */
+    fileSizeTypes?: string[];
     /**
      * ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
      */

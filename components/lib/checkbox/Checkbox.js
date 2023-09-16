@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
@@ -16,6 +16,10 @@ export const Checkbox = React.memo(
             props,
             state: {
                 focused: focusedState
+            },
+            context: {
+                checked: props.checked === props.trueValue,
+                disabled: props.disabled
             }
         });
 
@@ -124,9 +128,8 @@ export const Checkbox = React.memo(
         const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
         const rootProps = mergeProps(
             {
-                ref: elementRef,
                 id: props.id,
-                className: cx('root', { checked, focusedState }),
+                className: classNames(props.className, cx('root', { checked, focusedState })),
                 style: props.style,
                 onClick: (e) => onClick(e),
                 onContextMenu: props.onContextMenu,
@@ -138,7 +141,7 @@ export const Checkbox = React.memo(
 
         const hiddenInputWrapperProps = mergeProps(
             {
-                className: cx('hiddenInputWrapper')
+                className: 'p-hidden-accessible'
             },
             ptm('hiddenInputWrapper')
         );
@@ -146,7 +149,6 @@ export const Checkbox = React.memo(
         const hiddenInputProps = mergeProps(
             {
                 id: props.inputId,
-                ref: inputRef,
                 type: 'checkbox',
                 name: props.name,
                 tabIndex: props.tabIndex,
@@ -171,9 +173,9 @@ export const Checkbox = React.memo(
 
         return (
             <>
-                <div {...rootProps}>
+                <div ref={elementRef} {...rootProps}>
                     <div {...hiddenInputWrapperProps}>
-                        <input {...hiddenInputProps} />
+                        <input ref={inputRef} {...hiddenInputProps} />
                     </div>
                     <div {...inputProps}>{checkboxIcon}</div>
                 </div>

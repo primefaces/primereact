@@ -15,6 +15,8 @@ import { PTDoc } from '../../components/doc/password/pt/ptdoc';
 import { Wireframe } from '../../components/doc/password/pt/wireframe';
 import { StyleDoc } from '../../components/doc/password/styledoc';
 import { TemplateDoc } from '../../components/doc/password/templatedoc';
+import { StyledDoc } from '../../components/doc/password/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/password/theming/tailwinddoc';
 import { ToggleMaskDoc } from '../../components/doc/password/togglemaskdoc';
 
 const PasswordDemo = () => {
@@ -110,7 +112,27 @@ const PasswordDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={['Password']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Password Component" header="Password" description="Password displays strength indicator for password fields." componentDocs={docs} apiDocs={['Password']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default PasswordDemo;

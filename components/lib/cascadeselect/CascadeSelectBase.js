@@ -19,20 +19,17 @@ const classes = {
             'p-placeholder': label === props.placeholder,
             'p-cascadeselect-label-empty': !props.value && label === 'p-emptylabel'
         }),
-    list: ({ subProps, context }) =>
-        classNames('p-cascadeselect-panel p-cascadeselect-items', subProps, {
+    list: ({ context }) =>
+        classNames('p-cascadeselect-panel p-cascadeselect-items', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
+    sublist: 'p-cascadeselect-panel p-cascadeselect-items p-cascadeselect-sublist',
     item: ({ option, isOptionGroup, activeOptionState }) =>
-        classNames(
-            'p-cascadeselect-item',
-            {
-                'p-cascadeselect-item-group': isOptionGroup(option),
-                'p-cascadeselect-item-active p-highlight': activeOptionState === option
-            },
-            option.className
-        ),
+        classNames('p-cascadeselect-item', {
+            'p-cascadeselect-item-group': isOptionGroup(option),
+            'p-cascadeselect-item-active p-highlight': activeOptionState === option
+        }),
     dropdownIcon: 'p-cascadeselect-trigger-icon',
     dropdownButton: 'p-cascadeselect-trigger',
     wrapper: 'p-cascadeselect-items-wrapper',

@@ -140,7 +140,8 @@ export const ImageBase = ComponentBase.extend({
         zoomInIcon: null,
         zoomOutIcon: null,
         zoomSrc: null,
-        children: undefined
+        children: undefined,
+        closeOnEscape: true
     },
     css: {
         classes,

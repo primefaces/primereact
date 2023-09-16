@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { CurrentPageReport } from './CurrentPageReport';
@@ -10,16 +12,16 @@ import { PageLinks } from './PageLinks';
 import { PaginatorBase } from './PaginatorBase';
 import { PrevPageLink } from './PrevPageLink';
 import { RowsPerPageDropdown } from './RowsPerPageDropdown';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = PaginatorBase.getProps(inProps, context);
-        const { ptm, cx, isUnstyled } = PaginatorBase.setMetaData({
-            props
-        });
+        const metaData = {
+            props,
+            ...props.__parentMetadata
+        };
+        const { ptm, cx, isUnstyled } = PaginatorBase.setMetaData(metaData);
 
         useHandleStyle(PaginatorBase.css.styles, isUnstyled, { name: 'paginator' });
         const elementRef = React.useRef(null);
@@ -157,6 +159,7 @@ export const Paginator = React.memo(
                             unstyled={props.unstyled}
                             ptm={ptm}
                             cx={cx}
+                            metaData={metaData}
                         />
                     );
                     break;
@@ -165,7 +168,7 @@ export const Paginator = React.memo(
                     element = <CurrentPageReport reportTemplate={props.currentPageReportTemplate} key={key} page={page} pageCount={pageCount} first={props.first} rows={props.rows} totalRecords={props.totalRecords} template={template} ptm={ptm} />;
                     break;
                 case 'JumpToPageInput':
-                    element = <JumpToPageInput key={key} rows={props.rows} page={page} pageCount={pageCount} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} />;
+                    element = <JumpToPageInput key={key} rows={props.rows} page={page} pageCount={pageCount} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />;
                     break;
 
                 default:

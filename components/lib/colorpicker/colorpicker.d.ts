@@ -54,17 +54,17 @@ export interface ColorPickerPassThroughOptions {
      */
     color?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the color handler's DOM element.
+     * Uses to pass attributes to the color handle's DOM element.
      */
-    colorHandler?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    colorHandle?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the hue's DOM element.
      */
     hue?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the hue handler's DOM element.
+     * Uses to pass attributes to the hue handle's DOM element.
      */
-    hueHandler?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    hueHandle?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}

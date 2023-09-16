@@ -4,6 +4,7 @@ import { DomHandler, mergeProps } from '../utils/Utils';
 import { EditorBase } from './EditorBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
 const QuillJS = (function () {
     try {
@@ -161,35 +162,35 @@ export const Editor = React.memo(
             } else {
                 const getMergeProps = (params, key) => mergeProps(params && { ...params }, ptm(key));
 
-                const formatsProps = mergeProps({ className: cx('formats') }, ptm('formats'));
+                const formatsProps = mergeProps({ className: 'ql-formats' }, ptm('formats'));
 
                 return (
                     <div {...toolbarProps}>
                         <span {...formatsProps}>
-                            <select {...getMergeProps({ className: cx('header'), defaultValue: '0' }, 'header')}>
+                            <select {...getMergeProps({ className: 'ql-header', defaultValue: '0' }, 'header')}>
                                 <option {...getMergeProps({ value: '1' }, 'option')}>Heading</option>
                                 <option {...getMergeProps({ value: '2' }, 'option')}>Subheading</option>
                                 <option {...getMergeProps({ value: '0' }, 'option')}>Normal</option>
                             </select>
-                            <select {...getMergeProps({ className: cx('font') }, 'font')}>
+                            <select {...getMergeProps({ className: 'ql-font' }, 'font')}>
                                 <option {...getMergeProps(undefined, 'option')}></option>
                                 <option {...getMergeProps({ value: 'serif' }, 'option')}></option>
                                 <option {...getMergeProps({ value: 'monospace' }, 'option')}></option>
                             </select>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: 'button', className: cx('bold'), 'aria-label': 'Bold' }, 'bold')}></button>
-                            <button {...getMergeProps({ type: 'button', className: cx('italic'), 'aria-label': 'Italic' }, 'italic')}></button>
-                            <button {...getMergeProps({ type: 'button', className: cx('underline'), 'aria-label': 'Underline' }, 'underline')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-bold', 'aria-label': 'Bold' }, 'bold')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-italic', 'aria-label': 'Italic' }, 'italic')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-underline', 'aria-label': 'Underline' }, 'underline')}></button>
                         </span>
                         <span {...formatsProps}>
-                            <select {...getMergeProps({ className: cx('color') }, 'color')}></select>
-                            <select {...getMergeProps({ className: cx('background') }, 'background')}></select>
+                            <select {...getMergeProps({ className: 'ql-color' }, 'color')}></select>
+                            <select {...getMergeProps({ className: 'ql-background' }, 'background')}></select>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: 'button', className: cx('list'), value: 'ordered', 'aria-label': 'Ordered List' }, 'list')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-list', value: 'ordered', 'aria-label': 'Ordered List' }, 'list')}></button>
                             <button {...getMergeProps({ type: 'button', className: cx('list'), value: 'bullet', 'aria-label': 'Unordered List' }, 'list')}></button>
-                            <select {...getMergeProps({ className: cx('select') }, 'select')}>
+                            <select {...getMergeProps({ className: 'ql-align' }, 'select')}>
                                 <option {...getMergeProps({ defaultValue: true }, 'option')}></option>
                                 <option {...getMergeProps({ value: 'center' }, 'option')}></option>
                                 <option {...getMergeProps({ value: 'right' }, 'option')}></option>
@@ -197,12 +198,12 @@ export const Editor = React.memo(
                             </select>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: 'button', className: cx('link'), 'aria-label': 'Insert Link' }, 'link')}></button>
-                            <button {...getMergeProps({ type: 'button', className: cx('image'), 'aria-label': 'Insert Image' }, 'image')}></button>
-                            <button {...getMergeProps({ type: 'button', className: cx('codeBlock'), 'aria-label': 'Insert Code Block' }, 'codeBlock')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-link', 'aria-label': 'Insert Link' }, 'link')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-image', 'aria-label': 'Insert Image' }, 'image')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-code-block', 'aria-label': 'Insert Code Block' }, 'codeBlock')}></button>
                         </span>
                         <span {...formatsProps}>
-                            <button {...getMergeProps({ type: 'button', className: cx('clean'), 'aria-label': 'Remove Styles' }, 'clean')}></button>
+                            <button {...getMergeProps({ type: 'button', className: 'ql-clean', 'aria-label': 'Remove Styles' }, 'clean')}></button>
                         </span>
                     </div>
                 );
@@ -221,16 +222,14 @@ export const Editor = React.memo(
         const content = <div {...contentProps}></div>;
         const rootProps = mergeProps(
             {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             EditorBase.getOtherProps(props),
             ptm('root')
         );
 
         return (
-            <div {...rootProps}>
+            <div id={props.id} ref={elementRef} {...rootProps}>
                 {header}
                 {content}
             </div>

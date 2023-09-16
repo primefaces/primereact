@@ -10,7 +10,7 @@
 import * as React from 'react';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { FormEvent } from '../ts-helpers';
+import { FormBooleanEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPassThroughMethodOptions>;
@@ -21,6 +21,7 @@ export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPass
 export interface CheckboxPassThroughMethodOptions {
     props: CheckboxProps;
     state: CheckboxState;
+    context: CheckboxContext;
 }
 
 /**
@@ -56,6 +57,22 @@ export interface CheckboxPassThroughOptions {
 }
 
 /**
+ * Defines current options in Checkbox component.
+ */
+export interface CheckboxContext {
+    /**
+     * Current checked state of the item as a boolean.
+     * @defaultValue false
+     */
+    checked: boolean;
+    /**
+     * Current disabled state of the item as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+}
+
+/**
  * Defines current inline state in Checkbox component.
  */
 export interface CheckboxState {
@@ -69,18 +86,18 @@ export interface CheckboxState {
 /**
  * Custom change event.
  * @see {@link CheckboxProps.onChange}
- * @extends {FormEvent}
+ * @extends {FormBooleanEvent}
  * @event
  */
-interface CheckboxChangeEvent extends FormEvent {}
+interface CheckboxChangeEvent extends FormBooleanEvent {}
 
 /**
  * Custom click event.
  * @see {@link CheckboxProps.onClick}
- * @extends {FormEvent}
+ * @extends {FormBooleanEvent}
  * @event
  */
-interface CheckboxClickEvent extends FormEvent {}
+interface CheckboxClickEvent extends FormBooleanEvent {}
 
 /**
  * Defines valid properties in Checkbox component. In addition to these, all properties of HTMLDivElement can be used in this component.

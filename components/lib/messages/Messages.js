@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import { CSSTransition } from '../csstransition/CSSTransition';
-import { MessagesBase } from './MessagesBase';
-import { UIMessage } from './UIMessage';
-import { mergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { CSSTransition } from '../csstransition/CSSTransition';
+import { mergeProps } from '../utils/Utils';
+import { MessagesBase } from './MessagesBase';
+import { UIMessage } from './UIMessage';
 
 let messageIdx = 0;
 
@@ -17,6 +17,7 @@ export const Messages = React.memo(
         const elementRef = React.useRef(null);
         const metaData = {
             props,
+            ...props.__parentMetadata,
             state: {
                 messages: messagesState
             }

@@ -64,6 +64,7 @@ const classes = {
 export const MessagesBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Messages',
+        __parentMetadata: null,
         id: null,
         className: null,
         style: null,

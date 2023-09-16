@@ -23,7 +23,6 @@ const classes = {
                   'p-dropdown-label-empty': label === null && !props.placeholder
               }),
     trigger: 'p-dropdown-trigger',
-    clearIcon: 'p-dropdown-clear-icon p-clickable',
     emptyMessage: 'p-dropdown-empty-message',
     itemGroup: 'p-dropdown-item-group',
     dropdownIcon: 'p-dropdown-trigger-icon p-clickable',
@@ -58,12 +57,6 @@ const styles = `
     cursor: pointer;
     position: relative;
     user-select: none;
-}
-
-.p-dropdown-clear-icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
 }
 
 .p-dropdown-trigger {
@@ -128,6 +121,7 @@ input.p-dropdown-label  {
     position: relative;
 }
 
+.p-dropdown-clear-icon,
 .p-dropdown-filter-icon,
 .p-dropdown-filter-clear-icon {
     position: absolute;
@@ -154,6 +148,7 @@ const inlineStyles = {
 export const DropdownBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Dropdown',
+        __parentMetadata: null,
         appendTo: null,
         ariaLabel: null,
         ariaLabelledBy: null,

@@ -32,6 +32,7 @@ const classes = {
 export const ButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Button',
+        __parentMetadata: null,
         badge: null,
         badgeClassName: null,
         className: null,

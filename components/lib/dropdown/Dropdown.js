@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -9,7 +9,6 @@ import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -31,6 +30,7 @@ export const Dropdown = React.memo(
         const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
         const { ptm, cx, sx, isUnstyled } = DropdownBase.setMetaData({
             props,
+            ...props.__parentMetadata,
             state: {
                 filter: filterState,
                 focused: focusedState,
@@ -624,6 +624,7 @@ export const Dropdown = React.memo(
             props,
             show,
             hide,
+            clear,
             focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,

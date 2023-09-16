@@ -179,7 +179,7 @@ export const CascadeSelectSub = React.memo((props) => {
             return (
                 <CascadeSelectSub
                     options={options}
-                    className="p-cascadeselect-sublist"
+                    className={cx('sublist')}
                     selectionPath={props.selectionPath}
                     optionLabel={props.optionLabel}
                     optionValue={props.optionValue}
@@ -231,7 +231,7 @@ export const CascadeSelectSub = React.memo((props) => {
 
         const itemProps = mergeProps(
             {
-                className: cx('item', { option, isOptionGroup, activeOptionState }),
+                className: classNames(option.className, cx('item', { option, isOptionGroup, activeOptionState })),
                 style: option.style,
                 role: 'none'
             },
@@ -258,11 +258,11 @@ export const CascadeSelectSub = React.memo((props) => {
     const listProps = mergeProps(
         {
             ref: elementRef,
-            className: cx('list', { subProps: props.className, context }),
+            className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
             role: 'listbox',
             'aria-orientation': 'horizontal'
         },
-        ptm('list')
+        props.level === 0 ? ptm('list') : ptm('sublist')
     );
 
     return <ul {...listProps}>{submenu}</ul>;

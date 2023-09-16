@@ -57,8 +57,8 @@ export function BasicDoc(props) {
                     <h6 className="mt-0 mb-3">${product.price}</h6>
                     <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
-                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
+                        <Button icon="pi pi-search" rounded />
+                        <Button icon="pi pi-star-fill" rounded severity="success" />
                     </div>
                 </div>
             </div>
@@ -127,8 +127,8 @@ export default function BasicDemo() {
                     <h6 className="mt-0 mb-3">\${product.price}</h6>
                     <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
-                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
+                        <Button icon="pi pi-search" rounded />
+                        <Button icon="pi pi-star-fill" rounded severity="success" />
                     </div>
                 </div>
             </div>
@@ -213,8 +213,8 @@ export default function BasicDemo() {
                     <h6 className="mt-0 mb-3">\${product.price}</h6>
                     <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
-                        <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
+                        <Button icon="pi pi-search" rounded />
+                        <Button icon="pi pi-star-fill" rounded severity="success" />
                     </div>
                 </div>
             </div>

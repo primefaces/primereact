@@ -9,7 +9,6 @@ const classes = {
     panel: ({ item }) => classNames('p-panelmenu-panel', item.className),
     header: ({ active, item }) => classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled }),
     menuContent: 'p-panelmenu-content',
-    headerToggleableContent: ({ active }) => classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active }),
     root: ({ props }) => classNames('p-panelmenu p-component', props.className),
     separator: 'p-menu-separator',
     toggleableContent: ({ active }) =>
@@ -21,7 +20,8 @@ const classes = {
     submenuicon: 'p-panelmenu-icon',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     menuitem: ({ item }) => classNames('p-menuitem', item.className),
-    menu: ({ subProps: props }) => classNames('p-submenu-list', props.className)
+    menu: 'p-submenu-list',
+    submenu: 'p-submenu-list'
 };
 
 const styles = `

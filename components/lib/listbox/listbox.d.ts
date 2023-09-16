@@ -13,6 +13,7 @@ import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 
 export declare type ListBoxPassThroughType<T> = PassThroughType<T, ListBoxPassThroughMethodOptions>;
 
@@ -45,7 +46,7 @@ export interface ListboxPassThroughOptions {
     /**
      * Uses to pass attributes to the filter input's DOM element.
      */
-    filterInput?: ListBoxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    filterInput?: InputTextPassThroughOptions;
     /**
      * Uses to pass attributes to the filter icon's DOM element.
      */

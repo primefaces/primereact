@@ -77,7 +77,7 @@ exports[`ProgressBar mode indeterminate 1`] = `
   >
     <div
       class="p-progressbar-indeterminate-container"
-      data-pc-section="indeterminatecontainer"
+      data-pc-section="container"
     >
       <div
         class="p-progressbar-value p-progressbar-value-animate"
