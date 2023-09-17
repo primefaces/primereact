@@ -69,7 +69,6 @@ export const InputText = React.memo(
 
         const rootProps = mergeProps(
             {
-                ref: elementRef,
                 className: cx('root', { isFilled }),
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
@@ -82,7 +81,7 @@ export const InputText = React.memo(
 
         return (
             <>
-                <input {...rootProps} />
+                <input ref={elementRef} {...rootProps} />
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );

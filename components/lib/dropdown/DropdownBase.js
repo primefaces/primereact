@@ -32,7 +32,7 @@ const classes = {
     filterInput: 'p-dropdown-filter p-inputtext p-component',
     list: ({ options, virtualScrollerOptions }) => (virtualScrollerOptions ? classNames('p-dropdown-items', options.className) : 'p-dropdown-items'),
     panel: ({ props, context }) =>
-        classNames('p-dropdown-panel p-component', props.panelClassName, {
+        classNames('p-dropdown-panel p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),

@@ -399,10 +399,7 @@ export const Password = React.memo(
                 tooltip: props.tooltip,
                 tooltipOptions: props.tooltipOptions,
                 type: type,
-                value: props.value,
-                __parentMetadata: {
-                    parent: metaData
-                }
+                value: props.value
             },
             ptm('input')
         );

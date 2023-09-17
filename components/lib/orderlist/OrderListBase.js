@@ -3,7 +3,7 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: 'p-orderlist p-component',
-    control: 'p-orderlist-controls',
+    controls: 'p-orderlist-controls',
     droppoint: 'p-orderlist-droppoint',
     header: 'p-orderlist-header',
     list: 'p-orderlist-list',

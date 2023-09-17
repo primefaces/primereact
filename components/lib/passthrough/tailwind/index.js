@@ -603,7 +603,7 @@ const Tailwind = {
                     'text-red-500 border border-red-500 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
                 },
                 { 'px-4 py-3 text-base': props.size === null, 'text-xs py-2 px-3': props.size === 'small', 'text-xl py-3 px-4': props.size === 'large' },
-                { 'opacity-60 pointer-events-none cursor-default': context.disabled }
+                { 'opacity-60 pointer-events-none cursor-default': context?.disabled }
             )
         }),
         label: ({ props }) => ({
@@ -1030,7 +1030,7 @@ const Tailwind = {
             className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-500 w-12 rounded-tr-lg rounded-br-lg')
         },
         wrapper: {
-            className: classNames('max-h-[200px] overflow-auto', 'bg-white text-gray-700 border-0 rounded-md shadow-lg', 'dark:bg-gray-900 dark:text-white/80')
+            className: 'max-h-[200px] overflow-auto bg-white text-gray-700 border-0 rounded-md shadow-lg dark:bg-gray-900 dark:text-white/80'
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
@@ -3045,15 +3045,11 @@ const Tailwind = {
             bodycell: ({ props, context }) => ({
                 className: classNames(
                     'text-left border-0 border-b border-solid border-gray-300',
-                    {
-                        'p-2': context?.size === 'small',
-                        'p-5': context?.size === 'large',
-                        'p-4': !context.size
-                    },
+                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
                     'dark:text-white/80 dark:border-blue-900/40', // Dark Mode
                     {
-                        'sticky bg-inherit': props.frozen || props.frozen === '', // Frozen Columns
-                        'border-x border-y': context?.showGridlines
+                        'sticky bg-inherit': props?.frozen || props?.frozen === '', // Frozen Columns
+                        'border-x border-y': context.showGridlines
                     }
                 )
             }),
@@ -3062,14 +3058,10 @@ const Tailwind = {
                     'text-left border-0 border-b border-solid border-gray-300 font-bold',
                     'bg-slate-50 text-slate-700',
                     'transition duration-200',
-                    {
-                        'p-2': context?.size === 'small',
-                        'p-5': context?.size === 'large',
-                        'p-4': !context.size
-                    },
+                    context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
                     'dark:text-white/80 dark:bg-gray-900 dark:border-blue-900/40', // Dark Mode
                     {
-                        'border-x border-y': context?.showGridlines
+                        'border-x border-y': context.showGridlines
                     }
                 )
             }),

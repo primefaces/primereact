@@ -275,8 +275,7 @@ export const DropdownPanel = React.memo(
             const footer = createFooter();
             const panelProps = mergeProps(
                 {
-                    ref,
-                    className: cx('panel', { context }),
+                    className: classNames(props.panelClassName, cx('panel', { context })),
                     style: sx('panel'),
                     onClick: props.onClick
                 },
@@ -297,7 +296,7 @@ export const DropdownPanel = React.memo(
                     onExit={props.onExit}
                     onExited={props.onExited}
                 >
-                    <div {...panelProps}>
+                    <div ref={ref} {...panelProps}>
                         {filter}
                         {content}
                         {footer}

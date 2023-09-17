@@ -158,6 +158,10 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
+    static getItemValue(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
     static getProp(props, prop = '', defaultProps = {}) {
         const value = props ? props[prop] : undefined;
 

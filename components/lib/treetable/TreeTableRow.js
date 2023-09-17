@@ -21,7 +21,7 @@ export const TreeTableRow = React.memo((props) => {
     };
 
     const getColumnProps = (column) => ColumnBase.getCProps(column);
-    const { ptm, ptmo, cx, sx, isUnstyled } = props.ptCallbacks;
+    const { ptm, ptmo, cx, isUnstyled } = props.ptCallbacks;
 
     const getColumnPTOptions = (column, key) => {
         const cProps = getColumnProps(column);

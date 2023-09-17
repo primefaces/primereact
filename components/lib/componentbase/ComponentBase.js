@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
 import PrimeReact from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
-import { Tailwind } from '../passthrough/tailwind';
-import { mergeProps } from '../utils/MergeProps';
+import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ObjectUtils } from '../utils/Utils';
+import { mergeProps } from '../utils/MergeProps';
 
 const buttonStyles = `
 .p-button {
@@ -460,11 +458,16 @@ ${iconStyles}
 `;
 
 export const ComponentBase = {
+    cProps: undefined,
+    cParams: undefined,
+    cName: undefined,
     defaultProps: {
         pt: undefined,
+        ptOptions: undefined,
         unstyled: false
     },
     context: undefined,
+    globalCSS: undefined,
     classes: {},
     styles: '',
     extend: (props = {}) => {
@@ -474,58 +477,49 @@ export const ComponentBase = {
 
         const getProps = (props, context = {}) => {
             ComponentBase.context = context;
+            ComponentBase.cProps = props;
 
             return ObjectUtils.getMergedProps(props, defaultProps);
         };
 
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
 
-        const getOptionValue = (obj = {}, key = '', params = {}) => {
-            const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
-            const fKey = fKeys.shift();
-            const matchedPTOption = ObjectUtils.isNotEmpty(obj) ? Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) : '';
-
-            return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
-        };
-
-        const getPTValue = (obj = {}, key = '', params = {}) => {
-            const datasetPrefix = 'data-pc-';
-            const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
-            const pt = ComponentBase.context.pt || PrimeReact.pt || {};
+        const getPTValue = (obj = {}, key = '', params = {}, searchInDefaultPT = true) => {
+            const hostName = params.parent && ObjectUtils.toFlatCase(params.parent.props.__TYPE);
+            const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const datasetPrefix = 'data-pc-';
             const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
-            const getValue = (...args) => {
+            ComponentBase.cParams = params;
+            ComponentBase.cName = componentName;
+            const { mergeSections = true, mergeProps: useMergeProps = false } = ComponentBase.ptOptions || {};
+
+            const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
 
                 return ObjectUtils.isString(value) ? { className: value } : value;
             };
 
-            const _globalPT = () => {
-                return pt && ObjectUtils.getJSXElement(pt, params);
-            };
+            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, key, params) : _useDefaultPT(getPTClassValue, key, params)) : undefined;
+            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, key, params, componentName);
 
-            const defaultPT = () => {
-                return getOptionValue(pt, componentName, params) || _globalPT();
-            };
-
-            const self = getValue(obj, fkey, params);
-            const baseGlobalPTValue = getValue(defaultPT(), key, params);
-            const globalPT = (isNestedParam ? getValue(getOptionValue(pt, componentName, params), key, params) : undefined) || baseGlobalPTValue;
             const datasetProps = {
-                ...(fkey === 'root' && { [`${datasetPrefix}name`]: isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[0]) : componentName }),
+                ...(fkey === 'root' && { [`${datasetPrefix}name`]: params.props && params.props.__parentMetadata ? ObjectUtils.toFlatCase(params.props.__TYPE) : componentName }),
                 [`${datasetPrefix}section`]: fkey
             };
 
-            const merged = mergeProps(self, globalPT, Object.keys(datasetProps).length ? datasetProps : {});
-
-            return merged;
+            return mergeSections || (!mergeSections && self)
+                ? useMergeProps
+                    ? mergeProps(globalPT, self, Object.keys(datasetProps).length ? datasetProps : {})
+                    : { ...globalPT, ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) }
+                : { ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) };
         };
 
         const setMetaData = (metadata = {}) => {
             const { props, state } = metadata;
-            const ptm = (key = '', params = {}) => ptmo((props || {}).pt, key, { ...metadata, ...params });
-            const ptmo = (obj = {}, key = '', params = {}) => getPTValue(obj, key, params);
+            const ptm = (key = '', params = {}) => getPTValue((props || {}).pt, key, { ...metadata, ...params });
+            const ptmo = (obj = {}, key = '', params = {}) => getPTValue(obj, key, params, false);
 
             const isUnstyled = () => {
                 return ComponentBase.context.unstyled || PrimeReact.unstyled || props.unstyled;
@@ -559,14 +553,99 @@ export const ComponentBase = {
     }
 };
 
-export const useHandleStyle = (styles, isUnstyled = false, { name, styled = false }) => {
+const getOptionValue = (obj, key = '', params = {}) => {
+    const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
+    const fKey = fKeys.shift();
+    const matchedPTOption = ObjectUtils.isNotEmpty(obj) ? Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) : '';
+
+    return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getItemValue(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getItemValue(obj, params);
+};
+
+const _getPT = (pt, key = '', callback) => {
+    const _usept = pt?.['_usept'];
+
+    const getValue = (value, checkSameKey = false) => {
+        const _value = callback ? callback(value) : value;
+        const _key = ObjectUtils.toFlatCase(key);
+
+        return (checkSameKey ? (_key !== ComponentBase.cName ? _value?.[_key] : undefined) : _value?.[_key]) ?? _value;
+    };
+
+    return ObjectUtils.isNotEmpty(_usept)
+        ? {
+              _usept,
+              originalValue: getValue(pt.originalValue),
+              value: getValue(pt.value)
+          }
+        : getValue(pt, true);
+};
+
+const _usePT = (pt, callback, key, params) => {
+    const fn = (value) => callback(value, key, params);
+
+    if (pt?.hasOwnProperty('_usept')) {
+        const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || {};
+        const originalValue = fn(pt.originalValue);
+        const value = fn(pt.value);
+
+        if (originalValue === undefined && value === undefined) return undefined;
+        else if (ObjectUtils.isString(value)) return value;
+        else if (ObjectUtils.isString(originalValue)) return originalValue;
+
+        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps(originalValue, value) : { ...originalValue, ...value }) : value;
+    }
+
+    return fn(pt);
+};
+
+const getGlobalPT = () => {
+    return _getPT(ComponentBase.context.pt || PrimeReact.pt, undefined, (value) => ObjectUtils.getItemValue(value, ComponentBase.cParams));
+};
+
+const getDefaultPT = () => {
+    return _getPT(ComponentBase.context.pt || PrimeReact.pt, undefined, (value) => getOptionValue(value, ComponentBase.cName, ComponentBase.cParams) || ObjectUtils.getItemValue(value, ComponentBase.cParams));
+};
+
+const _useGlobalPT = (callback, key, params) => {
+    return _usePT(getGlobalPT(), callback, key, params);
+};
+
+const _useDefaultPT = (callback, key, params) => {
+    return _usePT(getDefaultPT(), callback, key, params);
+};
+
+export const useHandleStyle = (styles, isUnstyled = false, config) => {
+    const { name, styled = false, hostName = '' } = config;
+
+    const globalCSS = _useGlobalPT(getOptionValue, 'global.css', ComponentBase.cParams);
+    const componentName = ObjectUtils.toFlatCase(name);
+
+    const { load: loadGlobalStyle } = useStyle(globalCSS, { name: 'global', manual: true });
     const { load: loadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
     const { load } = useStyle(styles, { name: name, manual: true });
 
-    useEffect(() => {
+    const hook = (hookName) => {
+        if (!hostName) {
+            const selfHook = _usePT(_getPT((ComponentBase.cProps || {}).pt, componentName), getOptionValue, `hooks.${hookName}`);
+            const defaultHook = _useDefaultPT(getOptionValue, `hooks.${hookName}`);
+
+            selfHook?.();
+            defaultHook?.();
+        }
+    };
+
+    useMountEffect(() => {
+        hook('useMountEffect');
+        loadGlobalStyle();
         loadCommonStyle();
         if (!styled) load();
+    });
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    useUpdateEffect(() => {
+        hook('useUpdateEffect');
+    });
+
+    useUnmountEffect(() => {
+        hook('useUnmountEffect');
+    });
 };

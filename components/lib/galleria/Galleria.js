@@ -286,14 +286,13 @@ export const Galleria = React.memo(
             if (props.fullScreen) {
                 const maskProps = mergeProps(
                     {
-                        ref: maskRef,
                         className: cx('mask', { visibleState })
                     },
                     ptm('mask')
                 );
 
                 const galleriaWrapper = (
-                    <div {...maskProps}>
+                    <div ref={maskRef} {...maskProps}>
                         <CSSTransition
                             nodeRef={elementRef}
                             classNames="p-galleria"

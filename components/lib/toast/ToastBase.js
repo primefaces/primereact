@@ -97,7 +97,7 @@ const classes = {
             }),
         content: 'p-toast-message-content',
         buttonicon: 'p-toast-icon-close-icon',
-        button: 'p-toast-icon-close p-link',
+        closeButton: 'p-toast-icon-close p-link',
         icon: 'p-toast-message-icon',
         text: 'p-toast-message-text',
         summary: 'p-toast-summary',

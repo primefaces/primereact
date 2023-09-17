@@ -2,6 +2,7 @@ import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../components/doc/passthrough/basicdoc';
 import { GlobalPTDoc } from '../../components/doc/passthrough/globalptdoc';
+import { UsePassThroughDoc } from '../../components/doc/passthrough/usepassthroughdoc';
 
 const PassThroughDemo = () => {
     const docs = [
@@ -14,6 +15,11 @@ const PassThroughDemo = () => {
             id: 'globalpt',
             label: 'Global',
             component: GlobalPTDoc
+        },
+        {
+            id: 'usepassthrough',
+            label: 'UsePassThrough',
+            component: UsePassThroughDoc
         }
     ];
 
