@@ -1507,6 +1507,8 @@ export const Calendar = React.memo(
         const onOverlayEntered = () => {
             bindOverlayListener();
             props.onShow && props.onShow();
+            DomHandler.focusFirstElement(overlayRef.current);
+            setFocusedState(false);
         };
 
         const onOverlayExit = () => {
