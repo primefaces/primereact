@@ -233,7 +233,9 @@ export const CascadeSelectSub = React.memo((props) => {
             {
                 className: classNames(option.className, cx('item', { option, isOptionGroup, activeOptionState })),
                 style: option.style,
-                role: 'none'
+                role: 'none',
+                'data-p-item-group': isOptionGroup(option),
+                'data-p-highlight': activeOptionState === option
             },
             ptm('item')
         );

@@ -4,16 +4,12 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState }) =>
-        classNames(
-            'p-autocomplete p-component p-inputwrapper',
-            {
-                'p-autocomplete-dd': props.dropdown,
-                'p-autocomplete-multiple': props.multiple,
-                'p-inputwrapper-filled': props.value,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        ),
+        classNames('p-autocomplete p-component p-inputwrapper', {
+            'p-autocomplete-dd': props.dropdown,
+            'p-autocomplete-multiple': props.multiple,
+            'p-inputwrapper-filled': props.value,
+            'p-inputwrapper-focus': focusedState
+        }),
     container: ({ props }) =>
         classNames('p-autocomplete-multiple-container p-component p-inputtext', {
             'p-disabled': props.disabled
@@ -25,11 +21,11 @@ const classes = {
     tokenLabel: 'p-autocomplete-token-label',
     inputToken: 'p-autocomplete-input-token',
     input: ({ props }) =>
-        classNames('p-autocomplete-input', props.inputClassName, {
+        classNames('p-autocomplete-input', {
             'p-autocomplete-dd-input': props.dropdown
         }),
-    panel: ({ props, context }) =>
-        classNames('p-autocomplete-panel p-component', props.panelClassName, {
+    panel: ({ context }) =>
+        classNames('p-autocomplete-panel p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),

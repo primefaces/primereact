@@ -166,7 +166,10 @@ export const Checkbox = React.memo(
 
         const inputProps = mergeProps(
             {
-                className: cx('input', { checked, focusedState })
+                className: cx('input', { checked, focusedState }),
+                'data-p-highlight': checked,
+                'data-p-disabled': props.disabled,
+                'data-p-focus': focusedState
             },
             ptm('input')
         );

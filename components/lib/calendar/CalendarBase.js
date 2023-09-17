@@ -175,7 +175,7 @@ const styles = `
 
 const classes = {
     root: ({ props, focusedState, isFilled }) =>
-        classNames('p-calendar p-component p-inputwrapper', props.className, {
+        classNames('p-calendar p-component p-inputwrapper', {
             [`p-calendar-w-btn p-calendar-w-btn-${props.iconPos}`]: props.showIcon,
             'p-calendar-disabled': props.disabled,
             'p-calendar-timeonly': props.timeOnly,
@@ -184,8 +184,8 @@ const classes = {
         }),
     dropdownButton: 'p-datepicker-trigger',
     buttonbar: 'p-datepicker-buttonbar',
-    todayButton: ({ props }) => classNames('p-button-text', props.todayButtonClassName),
-    clearButton: ({ props }) => classNames('p-button-text', props.clearButtonClassName),
+    todayButton: 'p-button-text',
+    clearButton: 'p-button-text',
     footer: 'p-datepicker-footer',
     yearPicker: 'p-yearpicker',
     year: ({ isYearSelected, isSelectable, y }) => classNames('p-yearpicker-year', { 'p-highlight': isYearSelected(y), 'p-disabled': !isSelectable(0, -1, y) }),

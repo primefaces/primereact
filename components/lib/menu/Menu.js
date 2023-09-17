@@ -158,9 +158,10 @@ export const Menu = React.memo(
             const items = submenu.items.map(createMenuItem);
             const submenuHeaderProps = mergeProps(
                 {
+                    role: 'presentation',
                     className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: sx('submenuHeader', { submenu }),
-                    role: 'presentation'
+                    'data-p-disabled': submenu.disabled
                 },
                 ptm('submenuHeader')
             );
@@ -219,7 +220,8 @@ export const Menu = React.memo(
                     onClick: (event) => onItemClick(event, item),
                     onKeyDown: (event) => onItemKeyDown(event, item),
                     tabIndex: tabIndex,
-                    'aria-disabled': item.disabled
+                    'aria-disabled': item.disabled,
+                    'data-p-disabled': item.disabled
                 },
                 ptm('action')
             );

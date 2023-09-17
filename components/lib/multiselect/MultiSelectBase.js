@@ -4,18 +4,14 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState, overlayVisibleState }) =>
-        classNames(
-            'p-multiselect p-component p-inputwrapper',
-            {
-                'p-multiselect-chip': props.display === 'chip',
-                'p-disabled': props.disabled,
-                'p-multiselect-clearable': props.showClear && !props.disabled,
-                'p-focus': focusedState,
-                'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
-                'p-inputwrapper-focus': focusedState || overlayVisibleState
-            },
-            props.className
-        ),
+        classNames('p-multiselect p-component p-inputwrapper', {
+            'p-multiselect-chip': props.display === 'chip',
+            'p-disabled': props.disabled,
+            'p-multiselect-clearable': props.showClear && !props.disabled,
+            'p-focus': focusedState,
+            'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
+            'p-inputwrapper-focus': focusedState || overlayVisibleState
+        }),
     label: ({ props, empty }) =>
         classNames('p-multiselect-label', {
             'p-placeholder': empty && props.placeholder,
@@ -23,18 +19,14 @@ const classes = {
             'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value.length > props.maxSelectedLabels
         }),
     panel: ({ panelProps: props, context, allowOptionSelect }) =>
-        classNames(
-            'p-multiselect-panel p-component',
-            {
-                'p-multiselect-inline': props.inline,
-                'p-multiselect-flex': props.flex,
-                'p-multiselect-limited': !allowOptionSelect,
-                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-            },
-            props.panelClassName
-        ),
-    list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? classNames('p-multiselect-items p-component', options.className) : 'p-multiselect-items p-component'),
+        classNames('p-multiselect-panel p-component', {
+            'p-multiselect-inline': props.inline,
+            'p-multiselect-flex': props.flex,
+            'p-multiselect-limited': !allowOptionSelect,
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+        }),
+    list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? 'p-multiselect-items p-component' : 'p-multiselect-items p-component'),
     labelContainer: 'p-multiselect-label-container',
     triggerIcon: 'p-multiselect-trigger-icon p-c',
     trigger: 'p-multiselect-trigger',

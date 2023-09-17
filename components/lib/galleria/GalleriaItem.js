@@ -100,7 +100,8 @@ export const GalleriaItem = React.memo(
                         type: 'button',
                         className: cx('previousItemButton', { isDisabled }),
                         onClick: navBackward,
-                        disabled: isDisabled
+                        disabled: isDisabled,
+                        'data-p-disabled': isDisabled
                     },
                     ptm('previousItemButton')
                 );
@@ -134,7 +135,8 @@ export const GalleriaItem = React.memo(
                         type: 'button',
                         className: cx('nextItemButton', { isDisabled }),
                         onClick: navForward,
-                        disabled: isDisabled
+                        disabled: isDisabled,
+                        'data-p-disabled': isDisabled
                     },
                     ptm('nextItemButton')
                 );
@@ -179,7 +181,8 @@ export const GalleriaItem = React.memo(
                     tabIndex: 0,
                     onClick: () => onIndicatorClick(index),
                     onMouseEnter: () => onIndicatorMouseEnter(index),
-                    onKeyDown: (e) => onIndicatorKeyDown(e, index)
+                    onKeyDown: (e) => onIndicatorKeyDown(e, index),
+                    'data-p-highlight': isActive
                 },
                 ptm('indicator')
             );

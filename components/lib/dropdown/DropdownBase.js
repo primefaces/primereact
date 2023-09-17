@@ -4,17 +4,13 @@ import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
     root: ({ props, focusedState, overlayVisibleState }) =>
-        classNames(
-            'p-dropdown p-component p-inputwrapper',
-            {
-                'p-disabled': props.disabled,
-                'p-focus': focusedState,
-                'p-dropdown-clearable': props.showClear && !props.disabled,
-                'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
-                'p-inputwrapper-focus': focusedState || overlayVisibleState
-            },
-            props.className
-        ),
+        classNames('p-dropdown p-component p-inputwrapper', {
+            'p-disabled': props.disabled,
+            'p-focus': focusedState,
+            'p-dropdown-clearable': props.showClear && !props.disabled,
+            'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
+            'p-inputwrapper-focus': focusedState || overlayVisibleState
+        }),
     input: ({ props, label }) =>
         props.editable
             ? 'p-dropdown-label p-inputtext'
@@ -30,22 +26,18 @@ const classes = {
     filterIcon: 'p-dropdown-filter-icon',
     filterContainer: ({ clearIcon }) => classNames('p-dropdown-filter-container', { 'p-dropdown-clearable-filter': !!clearIcon }),
     filterInput: 'p-dropdown-filter p-inputtext p-component',
-    list: ({ options, virtualScrollerOptions }) => (virtualScrollerOptions ? classNames('p-dropdown-items', options.className) : 'p-dropdown-items'),
-    panel: ({ props, context }) =>
+    list: ({ virtualScrollerOptions }) => (virtualScrollerOptions ? 'p-dropdown-items' : 'p-dropdown-items'),
+    panel: ({ context }) =>
         classNames('p-dropdown-panel p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
-    item: ({ selected, disabled, label, option }) =>
-        classNames(
-            'p-dropdown-item',
-            {
-                'p-highlight': selected,
-                'p-disabled': disabled,
-                'p-dropdown-item-empty': !label || label.length === 0
-            },
-            option && option.className
-        ),
+    item: ({ selected, disabled, label }) =>
+        classNames('p-dropdown-item', {
+            'p-highlight': selected,
+            'p-disabled': disabled,
+            'p-dropdown-item-empty': !label || label.length === 0
+        }),
     wrapper: 'p-dropdown-items-wrapper',
     header: 'p-dropdown-header',
     footer: 'p-dropdown-footer'

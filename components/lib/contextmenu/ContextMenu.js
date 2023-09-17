@@ -259,7 +259,7 @@ export const ContextMenu = React.memo(
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    className: cx('root', { context }),
+                    className: classNames(props.className, cx('root', { context })),
                     style: props.style,
                     onClick: (e) => onMenuClick(e),
                     onMouseEnter: (e) => onMenuMouseEnter(e)

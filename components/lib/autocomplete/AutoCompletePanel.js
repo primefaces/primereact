@@ -3,7 +3,7 @@ import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export const AutoCompletePanel = React.memo(
@@ -49,12 +49,13 @@ export const AutoCompletePanel = React.memo(
                 const itemProps = mergeProps(
                     {
                         role: 'option',
-                        'aria-selected': selected,
                         className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
                         style,
                         onClick: (e) => props.onItemClick(e, item),
+                        'aria-selected': selected,
                         'data-group': i,
-                        'data-index': j
+                        'data-index': j,
+                        'data-p-disabled': suggestion.disabled
                     },
                     getPTOptions(item, 'item')
                 );
@@ -93,12 +94,13 @@ export const AutoCompletePanel = React.memo(
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
                 const itemProps = mergeProps(
                     {
+                        index,
                         role: 'option',
-                        'aria-selected': props.selectedItem === suggestion,
                         className: cx('item', { suggestion }),
                         style,
                         onClick: (e) => props.onItemClick(e, suggestion),
-                        index
+                        'aria-selected': props.selectedItem === suggestion,
+                        'data-p-disabled': suggestion.disabled
                     },
                     getPTOptions(suggestion, 'item')
                 );
@@ -199,7 +201,7 @@ export const AutoCompletePanel = React.memo(
             const footer = createFooter();
             const panelProps = mergeProps(
                 {
-                    className: cx('panel', context),
+                    className: classNames(props.panelClassName, cx('panel', { context })),
                     style,
                     onClick: (e) => props.onClick(e)
                 },

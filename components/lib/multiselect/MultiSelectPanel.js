@@ -216,7 +216,7 @@ export const MultiSelectPanel = React.memo(
                                 {
                                     ref: options.contentRef,
                                     style: options.style,
-                                    className: cx('list', { virtualScrollerProps: props.virtualScrollerOptions, options }),
+                                    className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
                                     role: 'listbox',
                                     'aria-multiselectable': true
                                 },
@@ -265,7 +265,7 @@ export const MultiSelectPanel = React.memo(
 
             const panelProps = mergeProps(
                 {
-                    className: cx('panel', { panelProps: props, context, allowOptionSelect }),
+                    className: classNames(props.panelClassName, cx('panel', { panelProps: props, context, allowOptionSelect })),
                     style: props.panelStyle,
                     onClick: props.onClick
                 },

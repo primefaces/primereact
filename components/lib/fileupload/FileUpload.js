@@ -331,7 +331,8 @@ export const FileUpload = React.memo(
         const onDragOver = (event) => {
             if (!disabled) {
                 event.dataTransfer.dropEffect = 'copy';
-                DomHandler.addClass(contentRef.current, 'p-fileupload-highlight');
+                !isUnstyled() && DomHandler.addClass(contentRef.current, 'p-fileupload-highlight');
+                contentRef.current.setAttribute('data-p-highlight', true);
                 event.stopPropagation();
                 event.preventDefault();
             }
@@ -340,7 +341,8 @@ export const FileUpload = React.memo(
         const onDragLeave = (event) => {
             if (!disabled) {
                 event.dataTransfer.dropEffect = 'copy';
-                DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+                !isUnstyled() && DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+                contentRef.current.setAttribute('data-p-highlight', false);
             }
         };
 
@@ -349,7 +351,8 @@ export const FileUpload = React.memo(
                 return;
             }
 
-            DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+            !isUnstyled() && DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+            contentRef.current.setAttribute('data-p-highlight', false);
             event.stopPropagation();
             event.preventDefault();
 
@@ -413,13 +416,15 @@ export const FileUpload = React.memo(
             const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props });
             const chooseButtonProps = mergeProps(
                 {
-                    className: cx('chooseButton', { iconOnly, disabled, className, focusedState }),
+                    className: classNames(className, cx('chooseButton', { iconOnly, disabled, className, focusedState })),
                     style,
                     onClick: choose,
                     onKeyDown: (e) => onKeyDown(e),
                     onFocus,
                     onBlur,
-                    tabIndex: 0
+                    tabIndex: 0,
+                    'data-p-disabled': disabled,
+                    'data-p-focus': focusedState
                 },
                 ptm('chooseButton')
             );
@@ -616,7 +621,7 @@ export const FileUpload = React.memo(
 
             const buttonbarProps = mergeProps(
                 {
-                    className: cx('buttonbar'),
+                    className: classNames(props.headerClassName, cx('buttonbar')),
                     style: props.headerStyle
                 },
                 ptm('buttonbar')
@@ -656,12 +661,13 @@ export const FileUpload = React.memo(
             const contentProps = mergeProps(
                 {
                     ref: contentRef,
-                    className: cx('content'),
+                    className: classNames(props.contentClassName, cx('content')),
                     style: props.contentStyle,
                     onDragEnter: (e) => onDragEnter(e),
                     onDragOver: (e) => onDragOver(e),
                     onDragLeave: (e) => onDragLeave(e),
-                    onDrop: (e) => onDrop(e)
+                    onDrop: (e) => onDrop(e),
+                    'data-p-highlight': false
                 },
                 ptm('content')
             );
@@ -712,7 +718,7 @@ export const FileUpload = React.memo(
             const input = !hasFiles && <input {...inputProps} />;
             const rootProps = mergeProps(
                 {
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style
                 },
                 FileUploadBase.getOtherProps(props),
@@ -721,7 +727,7 @@ export const FileUpload = React.memo(
 
             const basicButtonProps = mergeProps(
                 {
-                    className: cx('basicButton', { hasFiles, className: chooseOptions.className, disabled, focusedState }),
+                    className: classNames(chooseOptions.className, cx('basicButton', { hasFiles, disabled, focusedState })),
                     style: chooseOptions.style,
                     tabIndex: 0,
                     onMouseUp: onSimpleUploaderClick,

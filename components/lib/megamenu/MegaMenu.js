@@ -306,7 +306,7 @@ export const MegaMenu = React.memo(
                     {
                         key: key,
                         id: item.id,
-                        className: cx('submenuItem', { item }),
+                        className: classNames(item.className, cx('submenuItem')),
                         style: item.style,
                         role: 'none'
                     },
@@ -348,9 +348,10 @@ export const MegaMenu = React.memo(
             const submenuHeaderProps = mergeProps(
                 {
                     id: submenu.id,
-                    className: cx('submenuHeader', { submenu }),
+                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: submenu.style,
-                    role: 'presentation'
+                    role: 'presentation',
+                    'data-p-disabled': submenu.disabled
                 },
                 ptm('submenuHeader')
             );
@@ -570,7 +571,8 @@ export const MegaMenu = React.memo(
                     onClick: (e) => onCategoryClick(e, category),
                     onKeyDown: (e) => onCategoryKeyDown(e, category),
                     role: 'menuitem',
-                    'aria-haspopup': category.items != null
+                    'aria-haspopup': category.items != null,
+                    'data-p-disabled': category.disabled
                 },
                 getPTOptions(category, 'headerAction', index)
             );
@@ -579,7 +581,7 @@ export const MegaMenu = React.memo(
                 {
                     key: category.label + '_' + index,
                     id: category.id,
-                    className: cx('menuitem', { category, activeItemState }),
+                    className: classNames(category.className, cx('menuitem', { category, activeItemState })),
                     style: category.style,
                     onMouseEnter: (e) => onCategoryMouseEnter(e, category),
                     role: 'none',

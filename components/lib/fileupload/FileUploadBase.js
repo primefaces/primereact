@@ -2,25 +2,21 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames(`p-fileupload p-fileupload-${props.mode} p-component`, props.className),
-    buttonbar: ({ props }) => classNames('p-fileupload-buttonbar', props.headerClassName),
-    content: ({ props }) => classNames('p-fileupload-content', props.contentClassName),
-    chooseButton: ({ iconOnly, disabled, className, focusedState }) =>
-        classNames(
-            'p-button p-fileupload-choose p-component',
-            {
-                'p-disabled': disabled,
-                'p-focus': focusedState,
-                'p-button-icon-only': iconOnly
-            },
-            className
-        ),
+    root: ({ props }) => classNames(`p-fileupload p-fileupload-${props.mode} p-component`),
+    buttonbar: 'p-fileupload-buttonbar',
+    content: 'p-fileupload-content',
+    chooseButton: ({ iconOnly, disabled, focusedState }) =>
+        classNames('p-button p-fileupload-choose p-component', {
+            'p-disabled': disabled,
+            'p-focus': focusedState,
+            'p-button-icon-only': iconOnly
+        }),
     label: 'p-button-label p-clickable',
     file: 'p-fileupload-row',
     fileName: 'p-fileupload-filename',
     thumbnail: 'p-fileupload-file-thumbnail',
     chooseButtonLabel: 'p-button-label p-clickable',
-    basicButton: ({ className, disabled, focusedState, hasFiles }) => classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }, className),
+    basicButton: ({ disabled, focusedState, hasFiles }) => classNames('p-button p-component p-fileupload-choose', { 'p-fileupload-choose-selected': hasFiles, 'p-disabled': disabled, 'p-focus': focusedState }),
     chooseIcon: ({ props, iconOnly }) => (props.mode === 'basic' ? classNames('p-button-icon', { 'p-button-icon-left': !iconOnly }) : classNames('p-button-icon p-clickable', { 'p-button-icon-left': !iconOnly })),
     uploadIcon: ({ iconOnly }) => classNames('p-button-icon p-c', { 'p-button-icon-left': !iconOnly }),
     cancelIcon: ({ iconOnly }) => classNames('p-button-icon p-c', { 'p-button-icon-left': !iconOnly })

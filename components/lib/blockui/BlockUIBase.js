@@ -4,13 +4,9 @@ import { classNames } from '../utils/Utils';
 const classes = {
     root: ({ props }) => classNames('p-blockui-container', props.containerClassName),
     mask: ({ props }) =>
-        classNames(
-            'p-blockui p-component-overlay p-component-overlay-enter',
-            {
-                'p-blockui-document': props.fullScreen
-            },
-            props.className
-        )
+        classNames('p-blockui p-component-overlay p-component-overlay-enter', {
+            'p-blockui-document': props.fullScreen
+        })
 };
 
 const styles = `

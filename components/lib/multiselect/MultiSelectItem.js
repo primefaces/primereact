@@ -56,7 +56,8 @@ export const MultiSelectItem = React.memo((props) => {
 
     const checkboxProps = mergeProps(
         {
-            className: cx('checkbox', { itemProps: props })
+            className: cx('checkbox', { itemProps: props }),
+            'data-p-highlight': props.selected
         },
         getPTOptions('checkbox')
     );
@@ -70,6 +71,7 @@ export const MultiSelectItem = React.memo((props) => {
             onKeyDown: onKeyDown,
             role: 'option',
             'aria-selected': props.selected,
+            'data-p-highlight': props.selected,
             'data-p-disabled': props.disabled
         },
         getPTOptions('item')

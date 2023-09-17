@@ -231,7 +231,7 @@ export const DropdownPanel = React.memo(
                                 {
                                     ref: options.contentRef,
                                     style: options.style,
-                                    className: cx('list', { options, virtualScrollerProps: props.virtualScrollerOptions }),
+                                    className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
                                     role: 'listbox'
                                 },
                                 ptm('list')

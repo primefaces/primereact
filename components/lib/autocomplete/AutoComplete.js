@@ -9,7 +9,7 @@ import { TimesCircleIcon } from '../icons/timescircle';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { AutoCompleteBase } from './AutoCompleteBase';
 import { AutoCompletePanel } from './AutoCompletePanel';
 
@@ -201,7 +201,8 @@ export const AutoComplete = React.memo(
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
                 const element = getScrollableElement().firstChild.firstChild;
 
-                DomHandler.addClass(element, 'p-highlight');
+                !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
+                element.current.setAttribute('data-p-highlight', true);
             }
         };
 
@@ -274,7 +275,8 @@ export const AutoComplete = React.memo(
                             let nextElement = findNextItem(highlightItem);
 
                             if (nextElement) {
-                                DomHandler.addClass(nextElement, 'p-highlight');
+                                !isUnstyled() && DomHandler.addClass(nextElement, 'p-highlight');
+                                nextElement.setAttribute('data-p-highlight', true);
                                 DomHandler.removeClass(highlightItem, 'p-highlight');
                                 DomHandler.scrollInView(getScrollableElement(), nextElement);
                             }
@@ -286,7 +288,8 @@ export const AutoComplete = React.memo(
                             }
 
                             if (highlightItem) {
-                                DomHandler.addClass(highlightItem, 'p-highlight');
+                                !isUnstyled() && DomHandler.addClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', true);
                             }
                         }
 
@@ -299,8 +302,10 @@ export const AutoComplete = React.memo(
                             let previousElement = findPrevItem(highlightItem);
 
                             if (previousElement) {
-                                DomHandler.addClass(previousElement, 'p-highlight');
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                !isUnstyled() && DomHandler.addClass(previousElement, 'p-highlight');
+                                previousElement.setAttribute('data-p-highlight', true);
+                                !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', false);
                                 DomHandler.scrollInView(getScrollableElement(), previousElement);
                             }
                         }
@@ -433,12 +438,14 @@ export const AutoComplete = React.memo(
 
         const onMultiInputFocus = (event) => {
             onInputFocus(event);
-            DomHandler.addClass(multiContainerRef.current, 'p-focus');
+            !isUnstyled() && DomHandler.addClass(multiContainerRef.current, 'p-focus');
+            multiContainerRef.current.setAttribute('data-p-focus', true);
         };
 
         const onMultiInputBlur = (event) => {
             onInputBlur(event);
-            DomHandler.removeClass(multiContainerRef.current, 'p-focus');
+            !isUnstyled() && DomHandler.removeClass(multiContainerRef.current, 'p-focus');
+            multiContainerRef.current.setAttribute('data-p-focus', false);
         };
 
         const isSelected = (val) => {
@@ -532,7 +539,7 @@ export const AutoComplete = React.memo(
                     aria-controls={ariaControls}
                     aria-haspopup="listbox"
                     aria-expanded={overlayVisibleState}
-                    className={cx('input')}
+                    className={classNames(props.inputClassName, cx('input'))}
                     style={props.inputStyle}
                     autoComplete="off"
                     readOnly={props.readOnly}
@@ -654,7 +661,9 @@ export const AutoComplete = React.memo(
                     onClick: allowMoreValues ? onMultiContainerClick : undefined,
                     onContextMenu: props.onContextMenu,
                     onMouseDown: props.onMouseDown,
-                    onDoubleClick: props.onDblClick
+                    onDoubleClick: props.onDblClick,
+                    'data-p-focus': focusedState,
+                    'data-p-disabled': props.disabled
                 },
                 ptm('container')
             );
@@ -721,7 +730,7 @@ export const AutoComplete = React.memo(
                 id: idState,
                 ref: elementRef,
                 style: props.style,
-                className: cx('root', { focusedState })
+                className: classNames(props.className, cx('root', { focusedState }))
             },
             otherProps,
             ptm('root')

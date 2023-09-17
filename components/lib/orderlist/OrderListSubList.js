@@ -153,12 +153,13 @@ export const OrderListSubList = React.memo((props) => {
                 } else {
                     const itemProps = mergeProps(
                         {
+                            role: 'option',
+                            tabIndex: props.tabIndex,
                             className: classNames(props.className, cx('item', { item, isSelected })),
                             onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
                             onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
-                            role: 'option',
                             'aria-selected': isSelected(item),
-                            tabIndex: props.tabIndex
+                            'data-p-highlight': isSelected(item)
                         },
                         getPTOptions(item, 'item')
                     );

@@ -11,15 +11,11 @@ const classes = {
     separator: 'p-menu-separator',
     submenuIcon: 'p-submenu-icon',
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
-    submenuItem: ({ item }) => classNames('p-menuitem', item.className),
+    submenuItem: 'p-menuitem',
     submenuHeader: ({ submenu }) =>
-        classNames(
-            'p-megamenu-submenu-header',
-            {
-                'p-disabled': submenu.disabled
-            },
-            submenu.className
-        ),
+        classNames('p-megamenu-submenu-header', {
+            'p-disabled': submenu.disabled
+        }),
     submenu: 'p-megamenu-submenu',
     panel: 'p-megamenu-panel',
     grid: 'p-megamenu-grid',
@@ -55,7 +51,7 @@ const classes = {
     },
     headerAction: ({ category }) => classNames('p-menuitem-link', { 'p-disabled': category.disabled }),
     menuButton: 'p-megamenu-button',
-    menuitem: ({ category, activeItemState }) => classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }, category.className),
+    menuitem: ({ category, activeItemState }) => classNames('p-menuitem', { 'p-menuitem-active': category === activeItemState }),
     menubar: 'p-megamenu-root-list',
     menu: 'p-megamenu-root-list',
     start: 'p-megamenu-start',

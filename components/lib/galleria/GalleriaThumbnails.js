@@ -32,7 +32,11 @@ const GalleriaThumbnailItem = React.memo((props) => {
 
     const thumbnailItemProps = mergeProps(
         {
-            className: classNames(props.className, cx('thumbnailItem', { subProps: props }))
+            className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
+            'data-p-galleria-thumbnail-item-current': subProps.current,
+            'data-p-galleria-thumbnail-item-active': subProps.active,
+            'data-p-galleria-thumbnail-item-start': subProps.start,
+            'data-p-galleria-thumbnail-item-end': subProps.end
         },
         ptm('thumbnailItem')
     );
@@ -352,7 +356,8 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('previousThumbnailButton', { isDisabled }),
                         onClick: navBackward,
-                        disabled: isDisabled
+                        disabled: isDisabled,
+                        'data-p-disabled': isDisabled
                     },
                     ptm('previousThumbnailButton')
                 );
@@ -385,7 +390,8 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('nextThumbnailButton', { isDisabled }),
                         onClick: navForward,
-                        disabled: isDisabled
+                        disabled: isDisabled,
+                        'data-p-disabled': isDisabled
                     },
                     ptm('nextThumbnailButton')
                 );

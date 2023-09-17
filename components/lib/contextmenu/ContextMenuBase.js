@@ -47,8 +47,8 @@ const styles = `
 `;
 
 const classes = {
-    root: ({ props, context }) =>
-        classNames('p-contextmenu p-component', props.className, {
+    root: ({ context }) =>
+        classNames('p-contextmenu p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),

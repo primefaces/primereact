@@ -5,7 +5,7 @@ import { useMountEffect } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
 
 export const Chips = React.memo(
@@ -257,7 +257,8 @@ export const Chips = React.memo(
             const tokenProps = mergeProps(
                 {
                     key: index,
-                    className: cx('token')
+                    className: cx('token'),
+                    'data-p-highlight': true
                 },
                 ptm('token')
             );
@@ -314,7 +315,9 @@ export const Chips = React.memo(
                 {
                     ref: listRef,
                     className: cx('container', { focusedState }),
-                    onClick: (e) => onWrapperClick(e)
+                    onClick: (e) => onWrapperClick(e),
+                    'data-p-disabled': props.disabled,
+                    'data-p-focus': focusedState
                 },
                 ptm('container')
             );
@@ -335,7 +338,7 @@ export const Chips = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root', { isFilled, focusedState }),
+                className: classNames(props.className, cx('root', { isFilled, focusedState })),
                 style: props.style
             },
             ptm('root')

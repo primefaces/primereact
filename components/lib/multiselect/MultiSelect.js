@@ -7,7 +7,7 @@ import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
 
@@ -691,7 +691,7 @@ export const MultiSelect = React.memo(
                 ref: elementRef,
                 id: props.id,
                 style: props.style,
-                className: cx('root', { focusedState, overlayVisibleState }),
+                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
                 ...otherProps,
                 onClick: onClick
             },

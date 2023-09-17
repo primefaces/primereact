@@ -82,15 +82,11 @@ const classes = {
             'p-disabled': props.disabled,
             'p-focus': focusedState
         }),
-    root: ({ props, isFilled, focusedState }) =>
-        classNames(
-            'p-chips p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        )
+    root: ({ isFilled, focusedState }) =>
+        classNames('p-chips p-component p-inputwrapper', {
+            'p-inputwrapper-filled': isFilled,
+            'p-inputwrapper-focus': focusedState
+        })
 };
 
 export const ChipsBase = ComponentBase.extend({

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -101,6 +101,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     }
 
     const createTabHeader = (tab, selected, index) => {
+        const style = { ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'headerStyle') || {}) };
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = getTabProp(tab, 'disabled') ? -1 : getTabProp(tab, 'tabIndex');
@@ -122,8 +123,10 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const headerProps = mergeProps(
             {
-                className: cx('tab.header', { selected, getTabProp, tab }),
-                style: sx('tab.header', { getTabProp, tab })
+                className: classNames(getTabProp(tab, 'headerClassName'), getTabProp(tab, 'className'), cx('tab.header', { selected, getTabProp, tab })),
+                style,
+                'data-p-highlight': selected,
+                'data-p-disabled': getTabProp(tab, 'disabled')
             },
             getTabPT(tab, 'header', index)
         );
@@ -154,6 +157,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     };
 
     const createTabContent = (tab, selected, index) => {
+        const style = { ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'contentStyle') || {}) };
         const contentId = idState + '_content_' + index;
         const ariaLabelledby = idState + '_header_' + index;
         const contentRef = React.createRef();
@@ -161,8 +165,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             {
                 id: contentId,
                 ref: contentRef,
-                className: cx('tab.toggleablecontent', { getTabProp, tab }),
-                style: sx('tab.toggleablecontent', { getTabProp, tab }),
+                className: classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), cx('tab.toggleablecontent')),
+                style,
                 role: 'region',
                 'aria-labelledby': ariaLabelledby
             },
@@ -219,7 +223,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const tabs = createTabs();
     const rootProps = mergeProps(
         {
-            className: cx('root'),
+            className: classNames(props.className, cx('root')),
             style: props.style
         },
         AccordionBase.getOtherProps(props),

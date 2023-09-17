@@ -16,7 +16,10 @@ const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
     const itemClonedProps = mergeProps(
         {
-            className: cx(key, { itemProps: props })
+            className: cx(key, { itemProps: props }),
+            'data-p-carousel-item-active': props.active,
+            'data-p-carousel-item-start': props.start,
+            'data-p-carousel-item-end': props.end
         },
         ptm(key)
     );
@@ -118,7 +121,7 @@ export const Carousel = React.memo(
             }
 
             if (itemsContainerRef.current) {
-                DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
+                !isUnstyled() && DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
                 changePosition(totalShiftedItems);
                 itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
             }
@@ -610,7 +613,8 @@ export const Carousel = React.memo(
             const indicatorProps = mergeProps(
                 {
                     key,
-                    className: cx('indicator', { isActive })
+                    className: cx('indicator', { isActive }),
+                    'data-p-highlight': isActive
                 },
                 getPTOptions('indicator')
             );

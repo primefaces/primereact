@@ -2,7 +2,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames('p-accordion p-component', props.className),
+    root: 'p-accordion p-component',
     tab: {
         root: ({ selected }) =>
             classNames('p-accordion-tab', {
@@ -10,26 +10,14 @@ const classes = {
             }),
         content: 'p-accordion-content',
         header: ({ selected, getTabProp, tab }) =>
-            classNames(
-                'p-accordion-header',
-                {
-                    'p-highlight': selected,
-                    'p-disabled': getTabProp(tab, 'disabled')
-                },
-                getTabProp(tab, 'headerClassName'),
-                getTabProp(tab, 'className')
-            ),
+            classNames('p-accordion-header', {
+                'p-highlight': selected,
+                'p-disabled': getTabProp(tab, 'disabled')
+            }),
         headeraction: 'p-accordion-header-link',
         headericon: 'p-accordion-toggle-icon',
         headertitle: 'p-accordion-header-text',
-        toggleablecontent: ({ getTabProp, tab }) => classNames('p-toggleable-content', getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'))
-    }
-};
-
-const inlineStyles = {
-    tab: {
-        toggleablecontent: ({ getTabProp, tab }) => ({ ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'contentStyle') || {}) }),
-        header: ({ getTabProp, tab }) => ({ ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'headerStyle') || {}) })
+        toggleablecontent: 'p-toggleable-content'
     }
 };
 
@@ -70,8 +58,7 @@ export const AccordionBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });
 
