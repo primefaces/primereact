@@ -38,26 +38,24 @@ export function DocComponent(props) {
                             {header}
                         </button>
                     </li>
-
                     <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
                         <button type="button" onClick={() => activateTab(1)}>
                             API
                         </button>
                     </li>
-
+                    {props.themingDocs ? (
+                        <li className={classNames({ 'doc-tabmenu-active': tab === 2 })}>
+                            <button type="button" onClick={() => activateTab(2)}>
+                                THEMING
+                            </button>
+                        </li>
+                    ) : null}
                     {props.ptDocs ? (
-                        <>
-                            <li className={classNames({ 'doc-tabmenu-active': tab === 2 })}>
-                                <button type="button" onClick={() => activateTab(2)}>
-                                    THEMING
-                                </button>
-                            </li>
-                            <li className={classNames({ 'doc-tabmenu-active': tab === 3 })}>
-                                <button type="button" onClick={() => activateTab(3)}>
-                                    PASS THROUGH
-                                </button>
-                            </li>
-                        </>
+                        <li className={classNames({ 'doc-tabmenu-active': tab === 3 })}>
+                            <button type="button" onClick={() => activateTab(3)}>
+                                PASS THROUGH
+                            </button>
+                        </li>
                     ) : null}
                 </ul>
             ) : null}
