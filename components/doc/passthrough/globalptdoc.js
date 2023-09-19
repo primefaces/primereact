@@ -1,21 +1,29 @@
-import Link from 'next/link';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
 export function GlobalPTDoc(props) {
-    const code2 = {
+    const code = {
         basic: `
-// layout.js        
-const { setPT } = useContext(PrimeReactContext);
+// _app.js        
+import { PrimeReactProvider } from "primereact/api";
 
-setPT({
-    panel: {
-        header: { className: 'bg-primary' }
-    },
-    autocomplete: {
-        input: { root: { className: 'w-16rem' } }
-    }
-});
+export default function GlobalPTDemo() {
+
+    const pt = {
+        panel: {
+            header: { className: 'bg-primary' }
+        },
+        autocomplete: {
+            input: { root: { className: 'w-16rem' } }
+        }
+    };
+
+    return(
+        <PrimeReactProvider value={{ pt }}>
+            <App />
+        </PrimeReactProvider>
+    )
+}
         `
     };
 
@@ -23,11 +31,11 @@ setPT({
         <>
             <DocSectionText {...props}>
                 <p>
-                    PrimeReact components can be globally managed through a single source using the global <i>pt</i> object. Before using the pt state from <i>PrimeReactContext</i>, it is essential to encapsulate your application with{' '}
-                    <i>PrimeReactProvider</i>. For more details, <Link href="/installation/#context">click</Link> here.
+                    Defines the shared pass through properties per component type. For example, with the configuration below all panel headers have the <i>bg-primary</i> style class and the all autocomplete components have a fixed width. These
+                    settings can be overriden by a particular component as components <i>pt</i> property has higher precedence over global <i>pt</i>.
                 </p>
             </DocSectionText>
-            <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
+            <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
         </>
     );
 }

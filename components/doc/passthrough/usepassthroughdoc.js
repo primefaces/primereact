@@ -1,5 +1,5 @@
-import { DocSectionText } from '../common/docsectiontext';
 import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionText } from '../common/docsectiontext';
 
 export function UsePassThroughDoc(props) {
     const code1 = {
@@ -48,7 +48,7 @@ const CustomTailwind = usePassThrough(
 
 // Output: 
 // panel.header.className => 'my_panel_header'
-// panel.title.className => Tailwind.panel.title.class`
+// panel.title.className => Tailwind.panel.title.className`
     };
     const code3 = {
         basic: `
@@ -63,7 +63,7 @@ const CustomTailwind = usePassThrough(
 );
 
 // Output: 
-// panel.header.className => [Tailwind.panel.header.className, 'my_panel_header']
+// panel.header.className => classNames(Tailwind.panel.header.className, 'my_panel_header')
 // panel.title.className => Tailwind.panel.title.className
 `
     };
@@ -80,7 +80,7 @@ const CustomTailwind = usePassThrough(
 );
 
 // Output: 
-// panel.header.className => [Tailwind.panel.header.className, 'my_panel_header']
+// panel.header.className => classNames(Tailwind.panel.header.className, 'my_panel_header')
 // panel.title.className => undefined
 `
     };
@@ -104,16 +104,17 @@ const CustomTailwind = usePassThrough(
 
     return (
         <>
-            <DocSectionText {...props}></DocSectionText>
-            <p>
-                An existing pass through configuration is customized with the <i>usePassThrough</i> utility. The first parameter is the object to customize, the second parameter is the customizations and the final parameter is the behavior of
-                merging. One of the example use cases is customizing existing unstyled themes like Tailwind.
-            </p>
-            <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
-            <p>
-                The <i>mergeSections</i> defines whether the sections from the main configuration gets added and the <i>mergeProps</i> controls whether to override or merge the defined props. Defaults are <i>true</i> for <i>mergeSections</i> and
-                <i>false</i> for <i>mergeProps</i>.
-            </p>
+            <DocSectionText {...props}>
+                <p>
+                    An existing pass through configuration is customized with the <i>usePassThrough</i> utility. The first parameter is the object to customize, the second parameter is the customizations and the final parameter is the behavior of
+                    merging. One of the example use cases is customizing existing unstyled themes like Tailwind.
+                </p>
+                <DocSectionCode code={code1} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <p>
+                    The <i>mergeSections</i> defines whether the sections from the main configuration gets added and the <i>mergeProps</i> controls whether to override or merge the defined props. Defaults are <i>true</i> for <i>mergeSections</i> and
+                    <i>false</i> for <i>mergeProps</i>.
+                </p>
+            </DocSectionText>
             <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
             <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
             <DocSectionCode code={code4} hideToggleCode import hideCodeSandbox hideStackBlitz />
