@@ -45712,7 +45712,14 @@
                             "optional": true,
                             "readonly": false,
                             "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
-                            "description": "Uses to pass attributes to the list's DOM element."
+                            "description": "Uses to pass attributes to the menu's DOM element."
+                        },
+                        {
+                            "name": "submenu",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the submenu's DOM element."
                         },
                         {
                             "name": "menuitem",
