@@ -33,9 +33,13 @@ export interface TieredMenuPassThroughOptions {
      */
     root?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the list's DOM element.
+     * Uses to pass attributes to the menu's DOM element.
      */
     menu?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the submenu's DOM element.
+     */
+    submenu?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Uses to pass attributes to the list item's DOM element.
      */
