@@ -28,6 +28,7 @@ export const TreeTableRow = React.memo((props) => {
         const columnMetadata = {
             props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             context: {
                 index: props.rowIndex,
                 selectable: props.node.selectable !== false,
@@ -46,6 +47,7 @@ export const TreeTableRow = React.memo((props) => {
         const columnMetadata = {
             props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             context: {
                 checked: isChecked(),
                 partialChecked: isPartialChecked()
@@ -57,6 +59,7 @@ export const TreeTableRow = React.memo((props) => {
 
     const getRowPTOptions = (key) => {
         const rowMetadata = {
+            hostName: props.hostName,
             context: {
                 index: props.index,
                 selected: isSelected(),
@@ -457,6 +460,7 @@ export const TreeTableRow = React.memo((props) => {
 
         return (
             <TreeTableBodyCell
+                hostName={props.hostName}
                 key={`${getColumnProp(column, 'columnKey') || getColumnProp(column, 'field')}_${index}`}
                 {...ColumnBase.getCProps(column)}
                 index={index}
@@ -480,6 +484,7 @@ export const TreeTableRow = React.memo((props) => {
             return props.node.children.map((childNode, index) => {
                 return (
                     <TreeTableRow
+                        hostName={props.hostName}
                         key={`${childNode.key || JSON.stringify(childNode.data)}_${index}`}
                         level={props.level + 1}
                         rowIndex={props.rowIndex + '_' + index}

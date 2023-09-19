@@ -12,6 +12,7 @@ export const RowCheckbox = React.memo((props) => {
         const columnMetaData = {
             props: getColumnProps(),
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 focused: focusedState
             },

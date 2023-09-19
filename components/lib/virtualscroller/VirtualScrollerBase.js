@@ -61,6 +61,7 @@ const styles = `
 export const VirtualScrollerBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'VirtualScroller',
+        __parentMetadata: null,
         id: null,
         style: null,
         className: null,

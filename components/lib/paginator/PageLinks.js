@@ -11,6 +11,7 @@ export const PageLinks = React.memo((inProps) => {
 
     const getPTOptions = (pageLink, key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 active: pageLink - 1 === props.page
             }
@@ -85,7 +86,7 @@ export const PageLinks = React.memo((inProps) => {
         {
             className: cx('pages')
         },
-        ptm('pages')
+        ptm('pages', { hostName: props.hostName })
     );
 
     return <span {...pagesProps}>{elements}</span>;

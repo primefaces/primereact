@@ -315,6 +315,7 @@ export const Tree = React.memo(
         const createRootChild = (node, index, last) => {
             return (
                 <UITreeNode
+                    hostName="Tree"
                     key={node.key || node.label}
                     node={node}
                     originalOptions={props.value}

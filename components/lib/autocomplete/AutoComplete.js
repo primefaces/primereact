@@ -743,6 +743,7 @@ export const AutoComplete = React.memo(
                     {loader}
                     {dropdown}
                     <AutoCompletePanel
+                        hostName="AutoComplete"
                         ref={overlayRef}
                         virtualScrollerRef={virtualScrollerRef}
                         {...props}

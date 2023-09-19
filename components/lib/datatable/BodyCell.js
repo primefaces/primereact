@@ -35,6 +35,7 @@ export const BodyCell = React.memo((props) => {
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 styleObject: styleObjectState,
                 editing: editingState,
@@ -590,6 +591,7 @@ export const BodyCell = React.memo((props) => {
                 <>
                     {selectionMode === 'single' && (
                         <RowRadioButton
+                            hostName={props.hostName}
                             column={props.column}
                             checked={props.selected}
                             disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
@@ -603,6 +605,7 @@ export const BodyCell = React.memo((props) => {
                     )}
                     {selectionMode === 'multiple' && (
                         <RowCheckbox
+                            hostName={props.hostName}
                             column={props.column}
                             checked={props.selected}
                             disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}

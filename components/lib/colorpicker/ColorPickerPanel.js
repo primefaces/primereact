@@ -15,7 +15,7 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
                 style: props.panelStyle,
                 onClick: props.onClick
             },
-            ptm('panel')
+            ptm('panel', { hostName: props.hostName })
         );
 
         return (

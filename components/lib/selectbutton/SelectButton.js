@@ -98,6 +98,7 @@ export const SelectButton = React.memo(
 
                     return (
                         <SelectButtonItem
+                            hostName="SelectButton"
                             key={key}
                             label={optionLabel}
                             className={option.className}

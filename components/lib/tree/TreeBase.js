@@ -110,6 +110,7 @@ const styles = `
 export const TreeBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Tree',
+        __parentMetadata: null,
         id: null,
         value: null,
         checkboxIcon: null,

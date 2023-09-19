@@ -15,6 +15,13 @@ export const MultiSelectHeader = React.memo((props) => {
         reset: () => props.resetFilter()
     };
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const onFilter = (event) => {
         if (props.onFilter) {
             props.onFilter({
@@ -40,7 +47,7 @@ export const MultiSelectHeader = React.memo((props) => {
             {
                 className: cx('filterIcon')
             },
-            ptm('filterIcon')
+            getPTOptions('filterIcon')
         );
 
         const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
@@ -51,7 +58,7 @@ export const MultiSelectHeader = React.memo((props) => {
                 {
                     className: cx('filterContainer')
                 },
-                ptm('filterContainer')
+                getPTOptions('filterContainer')
             );
 
             let content = (
@@ -98,14 +105,14 @@ export const MultiSelectHeader = React.memo((props) => {
             htmlFor: selectAllId,
             className: cx('headerSelectAllLabel')
         },
-        ptm('headerSelectAllLabel')
+        getPTOptions('headerSelectAllLabel')
     );
 
     const headerCheckboxIconProps = mergeProps(
         {
             className: cx('headerCheckboxIcon')
         },
-        ptm('headerCheckboxIcon')
+        getPTOptions('headerCheckboxIcon')
     );
 
     const checkedIcon = props.itemCheckboxIcon || <CheckIcon {...headerCheckboxIconProps} />;
@@ -123,7 +130,7 @@ export const MultiSelectHeader = React.memo((props) => {
             className: cx('closeIcon'),
             'aria-hidden': true
         },
-        ptm('closeIcon')
+        getPTOptions('closeIcon')
     );
     const icon = props.closeIcon || <TimesIcon {...iconProps} />;
     const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
@@ -132,7 +139,7 @@ export const MultiSelectHeader = React.memo((props) => {
         {
             className: cx('header')
         },
-        ptm('header')
+        getPTOptions('header')
     );
 
     const closeButtonProps = mergeProps(
@@ -142,7 +149,7 @@ export const MultiSelectHeader = React.memo((props) => {
             'aria-label': localeOption('close'),
             onClick: props.onClose
         },
-        ptm('closeButton')
+        getPTOptions('closeButton')
     );
 
     const closeElement = (

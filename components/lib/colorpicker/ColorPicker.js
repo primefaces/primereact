@@ -657,6 +657,7 @@ export const ColorPicker = React.memo(
                 <div {...rootProps}>
                     {input}
                     <ColorPickerPanel
+                        hostName="ColorPicker"
                         ref={overlayRef}
                         appendTo={props.appendTo}
                         inline={props.inline}

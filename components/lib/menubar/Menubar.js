@@ -132,7 +132,7 @@ export const Menubar = React.memo(
         const start = createStartContent();
         const end = createEndContent();
         const menuButton = createMenuButton();
-        const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
+        const submenu = <MenubarSub hostName="Menubar" ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
         const rootProps = mergeProps(
             {
                 id: props.id,

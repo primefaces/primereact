@@ -202,7 +202,20 @@ export const TieredMenu = React.memo(
                     onExited={onExited}
                 >
                     <div {...rootProps}>
-                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} sx={sx} />
+                        <TieredMenuSub
+                            hostName="TieredMenu"
+                            menuProps={props}
+                            model={props.model}
+                            root
+                            popup={props.popup}
+                            onHide={hide}
+                            isMobileMode={isMobileMode}
+                            onItemToggle={onItemToggle}
+                            submenuIcon={props.submenuIcon}
+                            ptm={ptm}
+                            cx={cx}
+                            sx={sx}
+                        />
                     </div>
                 </CSSTransition>
             );

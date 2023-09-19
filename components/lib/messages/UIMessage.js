@@ -28,6 +28,13 @@ export const UIMessage = React.memo(
             !sticky
         );
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const onClose = (event) => {
             clearTimer();
             props.onClose && props.onClose(props.message);
@@ -51,8 +58,8 @@ export const UIMessage = React.memo(
                         className: cx('uimessage.buttonicon'),
                         'aria-hidden': true
                     },
-                    ptm('buttonicon', parentParams),
-                    ptmo(pt, 'buttonicon', params)
+                    getPTOptions('buttonicon', parentParams),
+                    ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
                 );
 
                 const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
@@ -65,8 +72,8 @@ export const UIMessage = React.memo(
                         'aria-label': ariaLabel,
                         onClick: onClose
                     },
-                    ptm('button', parentParams),
-                    ptmo(pt, 'button', params)
+                    getPTOptions('button', parentParams),
+                    ptmo(pt, 'button', { ...params, hostName: props.hostName })
                 );
 
                 return (
@@ -86,8 +93,8 @@ export const UIMessage = React.memo(
                     {
                         className: cx('uimessage.icon')
                     },
-                    ptm('icon', parentParams),
-                    ptmo(pt, 'icon', params)
+                    getPTOptions('icon', parentParams),
+                    ptmo(pt, 'icon', { ...params, hostName: props.hostName })
                 );
 
                 let icon = _icon;
@@ -117,16 +124,16 @@ export const UIMessage = React.memo(
                     {
                         className: cx('uimessage.summary')
                     },
-                    ptm('summary', parentParams),
-                    ptmo(pt, 'summary', params)
+                    getPTOptions('summary', parentParams),
+                    ptmo(pt, 'summary', { ...params, hostName: props.hostName })
                 );
 
                 const detailProps = mergeProps(
                     {
                         className: cx('uimessage.detail')
                     },
-                    ptm('detail', parentParams),
-                    ptmo(pt, 'detail', params)
+                    getPTOptions('detail', parentParams),
+                    ptmo(pt, 'detail', { ...params, hostName: props.hostName })
                 );
 
                 return (
@@ -151,8 +158,8 @@ export const UIMessage = React.memo(
                 className: classNames(_contentClassName, cx('uimessage.wrapper')),
                 style: contentStyle
             },
-            ptm('wrapper', parentParams),
-            ptmo(pt, 'wrapper', params)
+            getPTOptions('wrapper', parentParams),
+            ptmo(pt, 'wrapper', { ...params, hostName: props.hostName })
         );
 
         const rootProps = mergeProps(
@@ -162,8 +169,8 @@ export const UIMessage = React.memo(
                 style,
                 onClick
             },
-            ptm('root', parentParams),
-            ptmo(pt, 'root', params)
+            getPTOptions('root', parentParams),
+            ptmo(pt, 'root', { ...params, hostName: props.hostName })
         );
 
         return (

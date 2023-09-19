@@ -20,13 +20,15 @@ export const TreeTableHeader = React.memo((props) => {
     const getColumnProps = (column) => ColumnBase.getCProps(column);
 
     const getColumnPTOptions = (column, key, params) => {
+        const cProps = getColumnProps(column);
         const columnMetadata = {
-            props: getColumnProps(column),
+            props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             ...params
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(getColumnProps(column), key, columnMetadata));
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
     };
 
     const onHeaderClick = (event, column) => {
@@ -242,6 +244,7 @@ export const TreeTableHeader = React.memo((props) => {
                     maxLength={getColumnProp(column, 'filterMaxLength')}
                     pt={getColumnPTOptions(column, 'filterInput')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
                 />
             );
         }
@@ -336,7 +339,7 @@ export const TreeTableHeader = React.memo((props) => {
     const createHeaderRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowHeaderCells = rowColumns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: true }));
-        const headerRowProps = mergeProps(ptm('headerRow'));
+        const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
 
         return (
             <tr {...headerRowProps} key={index}>
@@ -353,7 +356,7 @@ export const TreeTableHeader = React.memo((props) => {
 
     const createColumns = (columns) => {
         if (columns) {
-            const headerRowProps = mergeProps(ptm('headerRow'));
+            const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
 
             if (hasColumnFilter(columns)) {
                 return (
@@ -375,7 +378,7 @@ export const TreeTableHeader = React.memo((props) => {
         {
             className: cx('thead')
         },
-        ptm('thead')
+        ptm('thead', { hostName: props.hostName })
     );
 
     return <thead {...theadProps}>{content}</thead>;

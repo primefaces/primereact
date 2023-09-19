@@ -6,6 +6,13 @@ import { mergeProps } from '../utils/Utils';
 export const SplitButtonPanel = React.forwardRef((props, ref) => {
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const createElement = () => {
         const menuProps = mergeProps(
             {
@@ -14,7 +21,7 @@ export const SplitButtonPanel = React.forwardRef((props, ref) => {
                 style: props.menuStyle,
                 onClick: props.onClick
             },
-            ptm('menu')
+            getPTOptions('menu')
         );
 
         const menuListProps = mergeProps(
@@ -23,7 +30,7 @@ export const SplitButtonPanel = React.forwardRef((props, ref) => {
                 className: cx('menuList'),
                 role: 'menu'
             },
-            ptm('menuList')
+            getPTOptions('menuList')
         );
 
         return (

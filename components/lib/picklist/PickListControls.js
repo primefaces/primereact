@@ -140,7 +140,7 @@ export const PickListControls = React.memo((props) => {
         {
             className: classNames(props.className, cx('controls'))
         },
-        ptm('controls')
+        ptm('controls', { hostName: props.hostName })
     );
 
     return (

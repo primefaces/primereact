@@ -13,6 +13,7 @@ export const ContextMenuSub = React.memo((props) => {
 
     const getPTOptions = (item, key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 active: activeItemState === item
             }
@@ -99,7 +100,7 @@ export const ContextMenuSub = React.memo((props) => {
                 key: 'separator_' + index,
                 className: cx('separator')
             },
-            ptm('separator')
+            ptm('separator', { hostName: props.hostName })
         );
 
         return <li {...separatorProps}></li>;
@@ -107,7 +108,19 @@ export const ContextMenuSub = React.memo((props) => {
 
     const createSubmenu = (item) => {
         if (item.items) {
-            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} isMobileMode={props.isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
+            return (
+                <ContextMenuSub
+                    hostName={props.hostName}
+                    menuProps={props.menuProps}
+                    model={item.items}
+                    resetMenu={item !== activeItemState}
+                    onLeafClick={props.onLeafClick}
+                    isMobileMode={props.isMobileMode}
+                    submenuIcon={props.submenuIcon}
+                    ptm={ptm}
+                    cx={cx}
+                />
+            );
         }
 
         return null;
@@ -213,7 +226,7 @@ export const ContextMenuSub = React.memo((props) => {
         {
             className: cx('menu', { menuProps: props })
         },
-        ptm('menu')
+        ptm('menu', { hostName: props.hostName })
     );
 
     return (

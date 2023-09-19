@@ -14,6 +14,13 @@ export const MultiSelectPanel = React.memo(
         const context = React.useContext(PrimeReactContext);
         const { ptm, cx, sx, isUnstyled } = props;
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const onEnter = () => {
             props.onEnter(() => {
                 if (virtualScrollerRef.current) {
@@ -49,6 +56,7 @@ export const MultiSelectPanel = React.memo(
         const createHeader = () => {
             return (
                 <MultiSelectHeader
+                    hostName={props.hostName}
                     id={props.id}
                     filter={props.filter}
                     filterRef={filterInputRef}
@@ -96,6 +104,7 @@ export const MultiSelectPanel = React.memo(
 
                 return (
                     <MultiSelectItem
+                        hostName={props.hostName}
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -122,7 +131,7 @@ export const MultiSelectPanel = React.memo(
                 {
                     className: cx('emptyMessage')
                 },
-                ptm('emptyMessage')
+                getPTOptions('emptyMessage')
             );
 
             return <li {...emptyMessageProps}>{emptyFilterMessage}</li>;
@@ -135,7 +144,7 @@ export const MultiSelectPanel = React.memo(
                 {
                     className: cx('emptyMessage')
                 },
-                ptm('emptyMessage')
+                getPTOptions('emptyMessage')
             );
 
             return <li {...emptyMessageProps}>{emptyMessage}</li>;
@@ -153,7 +162,7 @@ export const MultiSelectPanel = React.memo(
                         className: cx('itemGroup'),
                         style: sx('itemGroup', { scrollerOptions })
                     },
-                    ptm('itemGroup')
+                    getPTOptions('itemGroup')
                 );
 
                 return (
@@ -171,6 +180,7 @@ export const MultiSelectPanel = React.memo(
 
                 return (
                     <MultiSelectItem
+                        hostName={props.hostName}
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -220,7 +230,7 @@ export const MultiSelectPanel = React.memo(
                                     role: 'listbox',
                                     'aria-multiselectable': true
                                 },
-                                ptm('list')
+                                getPTOptions('list')
                             );
 
                             return <ul {...listProps}>{content}</ul>;
@@ -228,7 +238,7 @@ export const MultiSelectPanel = React.memo(
                     }
                 };
 
-                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} />;
+                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptm('virtualScroller')} __parentMetadata={{ parent: props.metaData }} />;
             } else {
                 const items = createItems();
 
@@ -237,7 +247,7 @@ export const MultiSelectPanel = React.memo(
                         className: cx('wrapper'),
                         style: { maxHeight: props.scrollHeight }
                     },
-                    ptm('wrapper')
+                    getPTOptions('wrapper')
                 );
 
                 const listProps = mergeProps(
@@ -246,7 +256,7 @@ export const MultiSelectPanel = React.memo(
                         role: 'listbox',
                         'aria-multiselectable': true
                     },
-                    ptm('list')
+                    getPTOptions('list')
                 );
 
                 return (
@@ -269,7 +279,7 @@ export const MultiSelectPanel = React.memo(
                     style: props.panelStyle,
                     onClick: props.onClick
                 },
-                ptm('panel')
+                getPTOptions('panel')
             );
 
             if (props.inline) {

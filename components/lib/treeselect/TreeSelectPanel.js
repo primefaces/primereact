@@ -8,6 +8,13 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
 
@@ -17,7 +24,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 style: props.panelStyle,
                 onClick: props.onClick
             },
-            ptm('panel')
+            getPTOptions('panel')
         );
 
         const wrapperProps = mergeProps(
@@ -25,7 +32,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 className: cx('wrapper'),
                 style: wrapperStyle
             },
-            ptm('wrapper')
+            getPTOptions('wrapper')
         );
 
         return (

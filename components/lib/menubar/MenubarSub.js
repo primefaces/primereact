@@ -12,6 +12,7 @@ export const MenubarSub = React.memo(
 
         const getPTOptions = (item, key) => {
             return ptm(key, {
+                hostName: props.hostName,
                 context: {
                     active: activeItemState === item
                 }
@@ -181,7 +182,7 @@ export const MenubarSub = React.memo(
                     className: cx('separator'),
                     role: 'separator'
                 },
-                ptm('separator')
+                ptm('separator', { hostName: props.hostName })
             );
 
             return <li {...separatorProps}></li>;
@@ -191,6 +192,7 @@ export const MenubarSub = React.memo(
             if (item.items) {
                 return (
                     <MenubarSub
+                        hostName={props.hostName}
                         menuProps={props.menuProps}
                         model={item.items}
                         mobileActive={props.mobileActive}

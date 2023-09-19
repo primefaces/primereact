@@ -302,6 +302,7 @@ export const PickList = React.memo(
             <div {...rootProps}>
                 {props.showSourceControls && (
                     <PickListControls
+                        hostName="PickList"
                         list={props.source}
                         selection={sourceSelection}
                         onReorder={onSourceReorder}
@@ -319,6 +320,7 @@ export const PickList = React.memo(
                 )}
 
                 <PickListSubList
+                    hostName="PickList"
                     ref={sourceListElementRef}
                     type="source"
                     list={sourceList}
@@ -343,6 +345,7 @@ export const PickList = React.memo(
                 />
 
                 <PickListTransferControls
+                    hostName="PickList"
                     onTransfer={onTransfer}
                     source={props.source}
                     visibleSourceList={sourceList}
@@ -363,6 +366,7 @@ export const PickList = React.memo(
                 />
 
                 <PickListSubList
+                    hostName="PickList"
                     ref={targetListElementRef}
                     type="target"
                     list={targetList}
@@ -388,6 +392,7 @@ export const PickList = React.memo(
 
                 {props.showTargetControls && (
                     <PickListControls
+                        hostName="PickList"
                         list={props.target}
                         selection={targetSelection}
                         onReorder={onTargetReorder}

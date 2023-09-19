@@ -4,7 +4,7 @@ import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { ZIndexUtils, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
 import PrimeReact from '../api/Api';
@@ -133,6 +133,7 @@ export const Toast = React.memo(
                                 return (
                                     <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
                                         <ToastMessage
+                                            hostName="Toast"
                                             ref={messageRef}
                                             messageInfo={messageInfo}
                                             index={index}

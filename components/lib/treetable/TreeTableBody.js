@@ -8,6 +8,13 @@ export const TreeTableBody = React.memo((props) => {
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
     const { ptm, cx } = props.ptCallbacks;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const flattenizeTree = (nodes) => {
         let rows = [];
 
@@ -163,6 +170,7 @@ export const TreeTableBody = React.memo((props) => {
     const createRow = (node, index) => {
         return (
             <TreeTableRow
+                hostName={props.hostName}
                 key={`${node.key || JSON.stringify(node.data)}_${index}`}
                 level={0}
                 rowIndex={index}
@@ -227,13 +235,13 @@ export const TreeTableBody = React.memo((props) => {
                 {
                     className: cx('emptyMessage')
                 },
-                ptm('emptyMessage')
+                getPTOptions('emptyMessage')
             );
             const emptyMessageCellProps = mergeProps(
                 {
                     colSpan
                 },
-                ptm('emptyMessageCell')
+                getPTOptions('emptyMessageCell')
             );
 
             return (
@@ -249,7 +257,7 @@ export const TreeTableBody = React.memo((props) => {
         {
             className: cx('tbody')
         },
-        ptm('tbody')
+        getPTOptions('tbody')
     );
 
     return <tbody {...tbodyProps}>{content}</tbody>;

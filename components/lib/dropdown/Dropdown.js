@@ -867,6 +867,7 @@ export const Dropdown = React.memo(
                     {clearIcon}
                     {dropdownIcon}
                     <DropdownPanel
+                        hostName="Dropdown"
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
                         virtualScrollerRef={virtualScrollerRef}

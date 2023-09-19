@@ -282,7 +282,7 @@ export const ContextMenu = React.memo(
                     onExited={onExited}
                 >
                     <div ref={menuRef} {...rootProps}>
-                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
+                        <ContextMenuSub hostName="ContextMenu" menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>
                 </CSSTransition>
             );

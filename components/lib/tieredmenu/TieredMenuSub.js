@@ -11,6 +11,7 @@ export const TieredMenuSub = React.memo((props) => {
 
     const getPTOptions = (item, key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 active: activeItemState === item
             }
@@ -195,7 +196,7 @@ export const TieredMenuSub = React.memo((props) => {
                 className: cx('separator'),
                 role: 'separator'
             },
-            ptm('separator')
+            ptm('separator', { hostName: props.hostName })
         );
 
         return <li {...separatorProps}></li>;
@@ -326,14 +327,16 @@ export const TieredMenuSub = React.memo((props) => {
     };
 
     const submenu = createMenu();
+    const ptKey = props.root ? 'menu' : 'submenu';
     const menuProps = mergeProps(
         {
             ref: elementRef,
-            className: cx('menu', { subProps: props }),
+            className: cx(ptKey, { subProps: props }),
+            style: sx(ptKey, { subProps: props }),
             role: props.root ? 'menubar' : 'menu',
             'aria-orientation': 'horizontal'
         },
-        ptm('menu')
+        ptm(ptKey, { hostName: props.hostName })
     );
 
     return <ul {...menuProps}>{submenu}</ul>;

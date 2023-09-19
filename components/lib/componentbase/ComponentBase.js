@@ -485,7 +485,7 @@ export const ComponentBase = {
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
 
         const getPTValue = (obj = {}, key = '', params = {}, searchInDefaultPT = true) => {
-            const hostName = params.parent && ObjectUtils.toFlatCase(params.parent.props.__TYPE);
+            const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
             const datasetPrefix = 'data-pc-';
@@ -493,7 +493,7 @@ export const ComponentBase = {
 
             ComponentBase.cParams = params;
             ComponentBase.cName = componentName;
-            const { mergeSections = true, mergeProps: useMergeProps = false } = ComponentBase.ptOptions || {};
+            const { mergeSections = true, mergeProps: useMergeProps = false } = params.props?.ptOptions || {};
 
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);

@@ -9,9 +9,12 @@ export const HeaderCheckbox = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps();
+
         const columnMetaData = {
-            props: getColumnProps(),
+            props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 focused: focusedState
             },
@@ -21,7 +24,7 @@ export const HeaderCheckbox = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
     };
 
     const onFocus = () => {

@@ -107,7 +107,7 @@ export const Messages = React.memo(
 
                             return (
                                 <CSSTransition nodeRef={messageRef} key={message._pId} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptCallbacks={ptCallbacks} metaData={metaData} index={index} />
+                                    <UIMessage hostName="Messages" ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptCallbacks={ptCallbacks} metaData={metaData} index={index} />
                                 </CSSTransition>
                             );
                         })}

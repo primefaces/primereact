@@ -11,6 +11,7 @@ export const BodyRow = React.memo((props) => {
     const getBodyRowPTOptions = (key) => {
         return ptm(key, {
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 editing: editing
             },
@@ -319,6 +320,7 @@ export const BodyRow = React.memo((props) => {
 
                 return (
                     <BodyCell
+                        hostName={props.hostName}
                         key={key}
                         allowCellSelection={props.allowCellSelection}
                         cellClassName={props.cellClassName}

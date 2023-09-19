@@ -22,7 +22,17 @@ const classes = {
     menu: ({ subProps: props }) =>
         classNames({
             'p-submenu-list': !props.root
+        }),
+    submenu: ({ subProps: props }) =>
+        classNames({
+            'p-submenu-list': !props.root
         })
+};
+
+const inlineStyles = {
+    submenu: ({ subProps: props }) => ({
+        display: !props.root && props.parentActive ? 'block' : 'none'
+    })
 };
 
 const styles = `
@@ -96,6 +106,7 @@ export const TieredMenuBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles
+        styles,
+        inlineStyles
     }
 });

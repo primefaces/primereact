@@ -27,16 +27,19 @@ export const ColumnFilter = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key, params) => {
+        const cProps = getColumnProps();
+
         const columnMetadata = {
-            props: getColumnProps(),
+            props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 overlayVisible: overlayVisibleState
             },
             ...params
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(getColumnProps(), key, columnMetadata));
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
     };
 
     const field = getColumnProp('filterField') || getColumnProp('field');
@@ -493,6 +496,7 @@ export const ColumnFilter = React.memo((props) => {
                 maxLength={getColumnProp('filterMaxLength')}
                 aria-label={getColumnProp('filterPlaceholder')}
                 unstyled={props.unstyled}
+                __parentMetadata={{ parent: props.metaData }}
             />
         );
     };
@@ -669,7 +673,15 @@ export const ColumnFilter = React.memo((props) => {
 
             return (
                 <div {...filterOperatorProps}>
-                    <Dropdown options={options} value={value} onChange={onOperatorChange} className="p-column-filter-operator-dropdown" pt={getColumnPTOptions('filterOperatorDropdown')} unstyled={props.unstyled} />
+                    <Dropdown
+                        options={options}
+                        value={value}
+                        onChange={onOperatorChange}
+                        className="p-column-filter-operator-dropdown"
+                        pt={getColumnPTOptions('filterOperatorDropdown')}
+                        unstyled={props.unstyled}
+                        __parentMetadata={{ parent: props.metaData }}
+                    />
                 </div>
             );
         }
@@ -689,6 +701,7 @@ export const ColumnFilter = React.memo((props) => {
                     className="p-column-filter-matchmode-dropdown"
                     pt={getColumnPTOptions('filterMatchModeDropdown')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
                 />
             );
         }
@@ -709,6 +722,7 @@ export const ColumnFilter = React.memo((props) => {
                     label={removeRuleLabel}
                     pt={getColumnPTOptions('filterRemoveButton')}
                     unstyled={props.unstyled}
+                    __parentMetadata={{ parent: props.metaData }}
                 />
             );
         }
@@ -772,6 +786,7 @@ export const ColumnFilter = React.memo((props) => {
                         onClick={addConstraint}
                         pt={getColumnPTOptions('filterAddRuleButton')}
                         unstyled={props.unstyled}
+                        __parentMetadata={{ parent: props.metaData }}
                     />
                 </div>
             );
@@ -785,7 +800,7 @@ export const ColumnFilter = React.memo((props) => {
             if (!getColumnProp('filterClear')) {
                 const clearLabel = clearButtonLabel();
 
-                return <Button type="button" outlined size="small" onClick={clearFilter} label={clearLabel} pt={getColumnPTOptions('filterClearButton')} unstyled={props.unstyled} />;
+                return <Button type="button" outlined size="small" onClick={clearFilter} label={clearLabel} pt={getColumnPTOptions('filterClearButton')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} />;
             }
 
             return ObjectUtils.getJSXElement(getColumnProp('filterClear'), { field, filterModel, filterClearCallback: clearFilter });

@@ -15,7 +15,7 @@ export const CalendarPanel = React.forwardRef((props, ref) => {
                 onClick: props.onClick,
                 onMouseUp: props.onMouseUp
             },
-            props.ptm('panel')
+            props.ptm('panel', { hostName: props.hostName })
         );
 
         return (

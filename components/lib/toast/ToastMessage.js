@@ -29,6 +29,13 @@ export const ToastMessage = React.memo(
             !sticky && !focused
         );
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const onClose = () => {
             clearTimer();
             props.onClose && props.onClose(messageInfo);
@@ -74,8 +81,8 @@ export const ToastMessage = React.memo(
                 {
                     className: cx('message.buttonicon')
                 },
-                ptm('buttonicon', parentParams),
-                ptmo(pt, 'buttonicon', params)
+                getPTOptions('buttonicon', parentParams),
+                ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
             );
 
             const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
@@ -89,8 +96,8 @@ export const ToastMessage = React.memo(
                     onClick: onClose,
                     'aria-label': ariaLabel
                 },
-                ptm('closeButton', parentParams),
-                ptmo(pt, 'closeButton', params)
+                getPTOptions('closeButton', parentParams),
+                ptmo(pt, 'closeButton', { ...params, hostName: props.hostName })
             );
 
             if (closable !== false) {
@@ -114,8 +121,8 @@ export const ToastMessage = React.memo(
                     {
                         className: cx('message.icon')
                     },
-                    ptm('icon', parentParams),
-                    ptmo(pt, 'icon', params)
+                    getPTOptions('icon', parentParams),
+                    ptmo(pt, 'icon', { ...params, hostName: props.hostName })
                 );
 
                 let icon = _icon;
@@ -145,24 +152,24 @@ export const ToastMessage = React.memo(
                     {
                         className: cx('message.text')
                     },
-                    ptm('text', parentParams),
-                    ptmo(pt, 'text', params)
+                    getPTOptions('text', parentParams),
+                    ptmo(pt, 'text', { ...params, hostName: props.hostName })
                 );
 
                 const summaryProps = mergeProps(
                     {
                         className: cx('message.summary')
                     },
-                    ptm('summary', parentParams),
-                    ptmo(pt, 'summary', params)
+                    getPTOptions('summary', parentParams),
+                    ptmo(pt, 'summary', { ...params, hostName: props.hostName })
                 );
 
                 const detailProps = mergeProps(
                     {
                         className: cx('message.detail')
                     },
-                    ptm('detail', parentParams),
-                    ptmo(pt, 'detail', params)
+                    getPTOptions('detail', parentParams),
+                    ptmo(pt, 'detail', { ...params, hostName: props.hostName })
                 );
 
                 return (
@@ -196,8 +203,8 @@ export const ToastMessage = React.memo(
                 onMouseEnter: onMouseEnter,
                 onMouseLeave: onMouseLeave
             },
-            ptm('message', parentParams),
-            ptmo(pt, 'root', params)
+            getPTOptions('message', parentParams),
+            ptmo(pt, 'root', { ...params, hostName: props.hostName })
         );
 
         const contentProps = mergeProps(
@@ -205,8 +212,8 @@ export const ToastMessage = React.memo(
                 className: classNames(_contentClassName, cx('message.content')),
                 style: contentStyle
             },
-            ptm('content', parentParams),
-            ptmo(pt, 'content', params)
+            getPTOptions('content', parentParams),
+            ptmo(pt, 'content', { ...params, hostName: props.hostName })
         );
 
         return (

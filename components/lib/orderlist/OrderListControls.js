@@ -130,7 +130,7 @@ export const OrderListControls = React.memo((props) => {
         {
             className: cx('controls')
         },
-        ptm('controls')
+        ptm('controls', { hostName: props.hostName })
     );
 
     const moveUpButtonProps = mergeProps(

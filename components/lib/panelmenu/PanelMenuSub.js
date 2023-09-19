@@ -9,8 +9,15 @@ export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const { ptm, cx } = props;
 
-    const getPTOptions = (item, key) => {
+    const _ptm = (key, options) => {
         return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
+    const getPTOptions = (item, key) => {
+        return _ptm(key, {
             context: {
                 active: isItemActive(item)
             }
@@ -88,7 +95,7 @@ export const PanelMenuSub = React.memo((props) => {
                 key,
                 className: cx('separator')
             },
-            ptm('separator')
+            _ptm('separator')
         );
 
         return <li {...separatorProps}></li>;
@@ -101,7 +108,7 @@ export const PanelMenuSub = React.memo((props) => {
             {
                 className: cx('toggleableContent', { active })
             },
-            ptm('toggleableContent')
+            _ptm('toggleableContent')
         );
 
         if (item.items) {

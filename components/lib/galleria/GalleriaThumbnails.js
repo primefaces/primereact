@@ -11,6 +11,13 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, merg
 const GalleriaThumbnailItem = React.memo((props) => {
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const onItemClick = (event) => {
         props.onItemClick({
             originalEvent: event,
@@ -33,12 +40,12 @@ const GalleriaThumbnailItem = React.memo((props) => {
     const thumbnailItemProps = mergeProps(
         {
             className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
-            'data-p-galleria-thumbnail-item-current': subProps.current,
-            'data-p-galleria-thumbnail-item-active': subProps.active,
-            'data-p-galleria-thumbnail-item-start': subProps.start,
-            'data-p-galleria-thumbnail-item-end': subProps.end
+            'data-p-galleria-thumbnail-item-current': props.current,
+            'data-p-galleria-thumbnail-item-active': props.active,
+            'data-p-galleria-thumbnail-item-start': props.start,
+            'data-p-galleria-thumbnail-item-end': props.end
         },
-        ptm('thumbnailItem')
+        getPTOptions('thumbnailItem')
     );
 
     const thumbnailItemContentProps = mergeProps(
@@ -48,7 +55,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
             onClick: onItemClick,
             onKeyDown: onItemKeyDown
         },
-        ptm('thumbnailItemContent')
+        getPTOptions('thumbnailItemContent')
     );
 
     return (
@@ -72,6 +79,13 @@ export const GalleriaThumbnails = React.memo(
         const context = React.useContext(PrimeReactContext);
 
         const { ptm, cx, sx } = props;
+
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
 
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
@@ -348,7 +362,7 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('previousThumbnailIcon')
                     },
-                    ptm('previousThumbnailIcon')
+                    getPTOptions('previousThumbnailIcon')
                 );
                 const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon {...previousThumbnailIconProps} /> : props.prevThumbnailIcon || <ChevronLeftIcon {...previousThumbnailIconProps} />;
                 const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { ...previousThumbnailIconProps }, { props });
@@ -359,7 +373,7 @@ export const GalleriaThumbnails = React.memo(
                         disabled: isDisabled,
                         'data-p-disabled': isDisabled
                     },
-                    ptm('previousThumbnailButton')
+                    getPTOptions('previousThumbnailButton')
                 );
 
                 return (
@@ -381,7 +395,7 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('nextThumbnailIcon')
                     },
-                    ptm('nextThumbnailIcon')
+                    getPTOptions('nextThumbnailIcon')
                 );
                 const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon {...nextThumbnailIconProps} /> : props.nextThumbnailIcon || <ChevronRightIcon {...nextThumbnailIconProps} />;
                 const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { ...nextThumbnailIconProps }, { props });
@@ -393,7 +407,7 @@ export const GalleriaThumbnails = React.memo(
                         disabled: isDisabled,
                         'data-p-disabled': isDisabled
                     },
-                    ptm('nextThumbnailButton')
+                    getPTOptions('nextThumbnailButton')
                 );
 
                 return (
@@ -417,7 +431,7 @@ export const GalleriaThumbnails = React.memo(
                 {
                     className: cx('thumbnailContainer')
                 },
-                ptm('thumbnailContainer')
+                getPTOptions('thumbnailContainer')
             );
 
             const thumbnailItemsContainerProps = mergeProps(
@@ -425,7 +439,7 @@ export const GalleriaThumbnails = React.memo(
                     className: cx('thumbnailItemsContainer'),
                     style: sx('thumbnailItemsContainer', { height })
                 },
-                ptm('thumbnailItemsContainer')
+                getPTOptions('thumbnailItemsContainer')
             );
 
             const thumbnailItemsProps = mergeProps(
@@ -437,7 +451,7 @@ export const GalleriaThumbnails = React.memo(
                     onTouchMove: onTouchMove,
                     onTouchEnd: onTouchEnd
                 },
-                ptm('thumbnailItems')
+                getPTOptions('thumbnailItems')
             );
 
             return (
@@ -457,7 +471,7 @@ export const GalleriaThumbnails = React.memo(
             {
                 className: cx('thumbnailWrapper')
             },
-            ptm('thumbnailWrapper')
+            getPTOptions('thumbnailWrapper')
         );
 
         return <div {...thumbnailWrapperProps}>{content}</div>;

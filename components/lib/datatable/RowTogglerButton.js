@@ -7,7 +7,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { ColumnBase } from '../column/ColumnBase';
 
 export const RowTogglerButton = React.memo((props) => {
-    const { ptmo, cx } = props.ptCallbacks;
+    const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const onClick = (event) => {
         props.onClick({
@@ -19,10 +19,14 @@ export const RowTogglerButton = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        return ptmo(ColumnBase.getCProp(props.column, 'pt'), key, {
+        const cProps = getColumnProps();
+        const columnMetaData = {
             props: getColumnProps(),
-            parent: props.metaData
-        });
+            parent: props.metaData,
+            hostName: props.hostName
+        };
+
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
     };
 
     const rowGroupTogglerIconProps = mergeProps(

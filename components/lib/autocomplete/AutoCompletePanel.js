@@ -8,11 +8,18 @@ import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export const AutoCompletePanel = React.memo(
     React.forwardRef((props, ref) => {
-        const { cx } = props;
+        const { ptm, cx } = props;
         const context = React.useContext(PrimeReactContext);
 
+        const _ptm = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const getPTOptions = (item, key) => {
-            return props.ptm(key, {
+            return _ptm(key, {
                 context: {
                     selected: props.selectedItem.current === item
                 }
@@ -30,7 +37,7 @@ export const AutoCompletePanel = React.memo(
                     {
                         className: cx('footer')
                     },
-                    props.ptm('footer')
+                    _ptm('footer')
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -81,7 +88,7 @@ export const AutoCompletePanel = React.memo(
                         className: cx('itemGroup'),
                         style
                     },
-                    props.ptm('itemGroup')
+                    _ptm('itemGroup')
                 );
 
                 return (
@@ -125,14 +132,14 @@ export const AutoCompletePanel = React.memo(
                     {
                         className: cx('emptyMessage')
                     },
-                    props.ptm('emptyMesage')
+                    _ptm('emptyMesage')
                 );
 
                 const listProps = mergeProps(
                     {
                         className: cx('list')
                     },
-                    props.ptm('list')
+                    _ptm('list')
                 );
 
                 return (
@@ -159,7 +166,7 @@ export const AutoCompletePanel = React.memo(
                                     className: cx('list', { virtualScrollerProps, options }),
                                     role: 'listbox'
                                 },
-                                props.ptm('list')
+                                _ptm('list')
                             );
 
                             return <ul {...listProps}>{options.children}</ul>;
@@ -167,7 +174,7 @@ export const AutoCompletePanel = React.memo(
                     }
                 };
 
-                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={props.ptm('virtualScroller')} />;
+                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={_ptm('virtualScroller')} __parentMetadata={{ parent: props.metaData }} />;
             } else {
                 const items = createItems();
                 const listProps = mergeProps(
@@ -176,7 +183,7 @@ export const AutoCompletePanel = React.memo(
                         className: cx('list'),
                         role: 'listbox'
                     },
-                    props.ptm('list')
+                    _ptm('list')
                 );
 
                 const listWrapperProps = mergeProps(
@@ -184,7 +191,7 @@ export const AutoCompletePanel = React.memo(
                         className: cx('listWrapper'),
                         style: { maxHeight: props.scrollHeight || 'auto' }
                     },
-                    props.ptm('listWrapper')
+                    _ptm('listWrapper')
                 );
 
                 return (
@@ -205,7 +212,7 @@ export const AutoCompletePanel = React.memo(
                     style,
                     onClick: (e) => props.onClick(e)
                 },
-                props.ptm('panel')
+                _ptm('panel')
             );
 
             return (

@@ -12,16 +12,18 @@ export const TreeTableFooter = React.memo((props) => {
     };
 
     const getColumnProps = (column) => {
-        return ptmo(ColumnBase.getCProps(column));
+        return ColumnBase.getCProps(column);
     };
 
     const getColumnPTOptions = (column, key) => {
+        const cProps = getColumnProps(column);
         const columnMetadata = {
-            props: getColumnProps(column),
-            parent: props.metaData
+            props: cProps,
+            parent: props.metaData,
+            hostName: props.hostName
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(getColumnProps(column), key, columnMetadata));
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
     };
 
     const createFooterCell = (column, index) => {
@@ -42,7 +44,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
-        const footerRowProps = mergeProps(ptm('footerRow'));
+        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
 
         return (
             <tr {...footerRowProps} key={index}>
@@ -60,7 +62,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createColumns = (columns) => {
         if (columns) {
             const headerCells = columns.map(createFooterCell);
-            const footerRowProps = mergeProps(ptm('footerRow'));
+            const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
 
             return <tr {...footerRowProps}>{headerCells}</tr>;
         } else {
@@ -89,7 +91,7 @@ export const TreeTableFooter = React.memo((props) => {
             {
                 className: cx('tfoot')
             },
-            ptm('tfoot')
+            ptm('tfoot', { hostName: props.hostName })
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;

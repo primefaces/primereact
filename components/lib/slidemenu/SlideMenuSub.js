@@ -9,6 +9,7 @@ export const SlideMenuSub = React.memo((props) => {
 
     const getPTOptions = (item, key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 active: activeItemState === item
             }
@@ -49,7 +50,7 @@ export const SlideMenuSub = React.memo((props) => {
                 key,
                 className: cx('separator')
             },
-            ptm('separator')
+            ptm('separator', { hostName: props.hostName })
         );
 
         return <li {...separatorProps}></li>;
@@ -179,7 +180,7 @@ export const SlideMenuSub = React.memo((props) => {
             className: cx('menu', { subProps: props }),
             style: sx('menu', { subProps: props })
         },
-        ptm('menu')
+        ptm('menu', { hostName: props.hostName })
     );
 
     return <ul {...menuProps}>{items}</ul>;

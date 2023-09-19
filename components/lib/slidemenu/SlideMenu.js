@@ -197,6 +197,7 @@ export const SlideMenu = React.memo(
                         <div {...wrapperProps}>
                             <div {...contentProps}>
                                 <SlideMenuSub
+                                    hostName="SlideMenu"
                                     menuProps={props}
                                     model={props.model}
                                     root

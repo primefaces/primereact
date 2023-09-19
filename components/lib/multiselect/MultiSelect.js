@@ -738,6 +738,7 @@ export const MultiSelect = React.memo(
                         </>
                     )}
                     <MultiSelectPanel
+                        hostName="MultiSelect"
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
                         {...props}

@@ -3741,6 +3741,7 @@ export const Calendar = React.memo(
             <span ref={elementRef} {...rootProps}>
                 {content}
                 <CalendarPanel
+                    hostName="Calendar"
                     ref={overlayRef}
                     className={panelClassName}
                     style={props.panelStyle}

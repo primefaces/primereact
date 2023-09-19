@@ -20,6 +20,13 @@ export const DropdownPanel = React.memo(
             reset: () => props.resetFilter()
         };
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const onEnter = () => {
             props.onEnter(() => {
                 if (props.virtualScrollerRef.current) {
@@ -52,7 +59,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('footer')
                     },
-                    ptm('footer')
+                    getPTOptions('footer')
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -79,7 +86,7 @@ export const DropdownPanel = React.memo(
                 {
                     className: cx('emptyMessage')
                 },
-                ptm('emptyMessage')
+                getPTOptions('emptyMessage')
             );
 
             return <li {...emptyMessageProps}>{message}</li>;
@@ -99,7 +106,7 @@ export const DropdownPanel = React.memo(
                         className: cx('itemGroup'),
                         style
                     },
-                    ptm('itemGroup')
+                    getPTOptions('itemGroup')
                 );
 
                 return (
@@ -136,7 +143,7 @@ export const DropdownPanel = React.memo(
                         'aria-label': ariaLabel,
                         onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
                     },
-                    ptm('clearIcon')
+                    getPTOptions('clearIcon')
                 );
                 const icon = props.filterClearIcon || <TimesIcon {...clearIconProps} />;
                 const filterClearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
@@ -154,7 +161,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('filterIcon')
                     },
-                    ptm('filterIcon')
+                    getPTOptions('filterIcon')
                 );
                 const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
                 const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
@@ -162,7 +169,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('filterContainer', { clearIcon })
                     },
-                    ptm('filterContainer')
+                    getPTOptions('filterContainer')
                 );
                 const filterInputProps = mergeProps(
                     {
@@ -175,7 +182,7 @@ export const DropdownPanel = React.memo(
                         onChange: (e) => onFilterInputChange(e),
                         value: props.filterValue
                     },
-                    ptm('filterInput')
+                    getPTOptions('filterInput')
                 );
                 let content = (
                     <div {...filterContainerProps}>
@@ -204,7 +211,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('header')
                     },
-                    ptm('header')
+                    getPTOptions('header')
                 );
 
                 return <div {...headerProps}>{content}</div>;
@@ -234,7 +241,7 @@ export const DropdownPanel = React.memo(
                                     className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
                                     role: 'listbox'
                                 },
-                                ptm('list')
+                                getPTOptions('list')
                             );
 
                             return <ul {...listProps}>{content}</ul>;
@@ -250,7 +257,7 @@ export const DropdownPanel = React.memo(
                         className: cx('wrapper'),
                         style: sx('wrapper')
                     },
-                    ptm('wrapper')
+                    getPTOptions('wrapper')
                 );
 
                 const listProps = mergeProps(
@@ -258,7 +265,7 @@ export const DropdownPanel = React.memo(
                         className: cx('list'),
                         role: 'listbox'
                     },
-                    ptm('list')
+                    getPTOptions('list')
                 );
 
                 return (
@@ -279,7 +286,7 @@ export const DropdownPanel = React.memo(
                     style: sx('panel'),
                     onClick: props.onClick
                 },
-                ptm('panel')
+                getPTOptions('panel')
             );
 
             return (

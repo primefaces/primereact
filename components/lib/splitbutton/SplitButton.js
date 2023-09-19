@@ -111,7 +111,7 @@ export const SplitButton = React.memo(
         const createItems = () => {
             if (props.model) {
                 return props.model.map((menuitem, index) => {
-                    return <SplitButtonItem splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} ptm={ptm} cx={cx} />;
+                    return <SplitButtonItem hostName="SplitButton" splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} ptm={ptm} cx={cx} />;
                 });
             }
 
@@ -201,6 +201,7 @@ export const SplitButton = React.memo(
                         unstyled={props.unstyled}
                     />
                     <SplitButtonPanel
+                        hostName="SplitButton"
                         ref={overlayRef}
                         appendTo={props.appendTo}
                         menuId={menuId}

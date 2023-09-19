@@ -9,6 +9,7 @@ export const ListBoxItem = React.memo((props) => {
 
     const getPTOptions = (key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 selected: props.selected,
                 disabled: props.disabled

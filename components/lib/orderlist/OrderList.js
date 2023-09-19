@@ -246,6 +246,7 @@ export const OrderList = React.memo(
         return (
             <div {...rootProps}>
                 <OrderListControls
+                    hostName="OrderList"
                     value={visibleList}
                     selection={selectionState}
                     onReorder={onReorder}
@@ -260,6 +261,7 @@ export const OrderList = React.memo(
                     metaData={metaData}
                 />
                 <OrderListSubList
+                    hostName="OrderList"
                     value={visibleList}
                     selection={selectionState}
                     onItemClick={onItemClick}

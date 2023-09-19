@@ -87,7 +87,18 @@ export const OrganizationChart = React.memo(
 
         return (
             <div {...rootProps}>
-                <OrganizationChartNode node={root} nodeTemplate={props.nodeTemplate} selectionMode={props.selectionMode} onNodeClick={onNodeClick} isSelected={isSelected} togglerIcon={props.togglerIcon} ptm={ptm} cx={cx} sx={sx} />
+                <OrganizationChartNode
+                    hostName="OrganizationChart"
+                    node={root}
+                    nodeTemplate={props.nodeTemplate}
+                    selectionMode={props.selectionMode}
+                    onNodeClick={onNodeClick}
+                    isSelected={isSelected}
+                    togglerIcon={props.togglerIcon}
+                    ptm={ptm}
+                    cx={cx}
+                    sx={sx}
+                />
             </div>
         );
     })

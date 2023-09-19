@@ -9,6 +9,13 @@ export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
         const { ptm, cx } = props;
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const next = () => {
             const nextItemIndex = props.activeItemIndex + 1;
 
@@ -90,7 +97,7 @@ export const GalleriaItem = React.memo(
                     {
                         className: cx('previousItemIcon')
                     },
-                    ptm('previousItemIcon')
+                    getPTOptions('previousItemIcon')
                 );
                 const icon = props.itemPrevIcon || <ChevronLeftIcon {...previousItemIconProps} />;
                 const itemPrevIcon = IconUtils.getJSXIcon(icon, { ...previousItemIconProps }, { props });
@@ -103,7 +110,7 @@ export const GalleriaItem = React.memo(
                         disabled: isDisabled,
                         'data-p-disabled': isDisabled
                     },
-                    ptm('previousItemButton')
+                    getPTOptions('previousItemButton')
                 );
 
                 return (
@@ -125,7 +132,7 @@ export const GalleriaItem = React.memo(
                     {
                         className: cx('nextItemIcon')
                     },
-                    ptm('nextItemIcon')
+                    getPTOptions('nextItemIcon')
                 );
                 const icon = props.itemNextIcon || <ChevronRightIcon {...nextItemIconProps} />;
                 const itemNextIcon = IconUtils.getJSXIcon(icon, { ...nextItemIconProps }, { props });
@@ -138,7 +145,7 @@ export const GalleriaItem = React.memo(
                         disabled: isDisabled,
                         'data-p-disabled': isDisabled
                     },
-                    ptm('nextItemButton')
+                    getPTOptions('nextItemButton')
                 );
 
                 return (
@@ -157,7 +164,7 @@ export const GalleriaItem = React.memo(
                 {
                     className: cx('caption')
                 },
-                ptm('caption')
+                getPTOptions('caption')
             );
 
             if (props.caption) {
@@ -184,7 +191,7 @@ export const GalleriaItem = React.memo(
                     onKeyDown: (e) => onIndicatorKeyDown(e, index),
                     'data-p-highlight': isActive
                 },
-                ptm('indicator')
+                getPTOptions('indicator')
             );
 
             if (!indicator) {
@@ -205,7 +212,7 @@ export const GalleriaItem = React.memo(
                     {
                         className: classNames(props.indicatorsContentClassName, cx('indicators'))
                     },
-                    ptm('indicators')
+                    getPTOptions('indicators')
                 );
 
                 for (let i = 0; i < props.value.length; i++) {
@@ -229,21 +236,21 @@ export const GalleriaItem = React.memo(
                 ref: ref,
                 className: cx('itemWrapper')
             },
-            ptm('itemWrapper')
+            getPTOptions('itemWrapper')
         );
 
         const itemContainerProps = mergeProps(
             {
                 className: cx('itemContainer')
             },
-            ptm('itemContainer')
+            getPTOptions('itemContainer')
         );
 
         const itemProps = mergeProps(
             {
                 className: cx('item')
             },
-            ptm('item')
+            getPTOptions('item')
         );
 
         return (

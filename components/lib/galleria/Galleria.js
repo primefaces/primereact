@@ -229,6 +229,7 @@ export const Galleria = React.memo(
                     {header}
                     <div {...contentProps}>
                         <GalleriaItem
+                            hostName="Galleria"
                             ref={previewContentRef}
                             value={props.value}
                             activeItemIndex={activeItemIndex}
@@ -252,6 +253,7 @@ export const Galleria = React.memo(
 
                         {props.showThumbnails && (
                             <GalleriaThumbnails
+                                hostName="Galleria"
                                 value={props.value}
                                 activeItemIndex={activeItemIndex}
                                 onActiveItemChange={onActiveItemChange}
