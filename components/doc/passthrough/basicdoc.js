@@ -1,5 +1,5 @@
 import { Panel } from '../../lib/panel/Panel';
-import { classNames } from '../../lib/utils/utils';
+import { classNames } from '../../lib/utils/Utils';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -22,10 +22,10 @@ export function BasicDoc(props) {
         }),
         content: { className: 'border-primary text-lg text-primary-700' },
         title: 'text-xl', // OR { className: 'text-xl' }
-        toggler: () => 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
+        toggler: 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
     }}
 >
-    <p class="m-0">
+    <p className="m-0">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
@@ -54,10 +54,10 @@ export default function BasicDemo() {
                     }),
                     content: { className: 'border-primary text-lg text-primary-700' },
                     title: 'text-xl', // OR { className: 'text-xl' }
-                    toggler: () => 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
+                    toggler: 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
                 }}
             >
-                <p class="m-0">
+                <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
@@ -89,10 +89,10 @@ export default function BasicDemo() {
                     }),
                     content: { className: 'border-primary text-lg text-primary-700' },
                     title: 'text-xl', // OR { className: 'text-xl' }
-                    toggler: () => 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
+                    toggler: 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
                 }}
             >
-                <p class="m-0">
+                <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
@@ -132,10 +132,10 @@ export default function BasicDemo() {
                         }),
                         content: { className: 'border-primary text-lg text-primary-700' },
                         title: 'text-xl', // OR { className: 'text-xl' }
-                        toggler: () => 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
+                        toggler: 'bg-primary hover:bg-primary-reverse' // OR { className: 'bg-primary hover:bg-primary-reverse' }
                     }}
                 >
-                    <p class="m-0">
+                    <p className="m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
