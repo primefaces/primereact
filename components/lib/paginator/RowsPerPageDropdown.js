@@ -12,7 +12,18 @@ export const RowsPerPageDropdown = React.memo((inProps) => {
     const options = hasOptions ? props.options.map((opt) => ({ label: String(opt), value: opt })) : [];
     const ariaLabel = localeOption('choose');
     const element = hasOptions ? (
-        <Dropdown value={props.value} options={options} onChange={props.onChange} appendTo={props.appendTo} disabled={props.disabled} placeholder={ariaLabel} aria-label={ariaLabel} pt={props.ptm('RPPDropdown')} unstyled={props.unstyled} />
+        <Dropdown
+            value={props.value}
+            options={options}
+            onChange={props.onChange}
+            appendTo={props.appendTo}
+            disabled={props.disabled}
+            placeholder={ariaLabel}
+            aria-label={ariaLabel}
+            pt={props.ptm('RPPDropdown')}
+            unstyled={props.unstyled}
+            __parentMetadata={{ parent: props.metaData }}
+        />
     ) : null;
 
     if (props.template) {

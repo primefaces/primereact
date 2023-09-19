@@ -969,6 +969,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 dropdownAppendTo={props.paginatorDropdownAppendTo}
                 pt={ptCallbacks.ptm('paginator')}
                 unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     };

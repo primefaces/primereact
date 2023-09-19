@@ -814,7 +814,7 @@ export const ColumnFilter = React.memo((props) => {
             if (!getColumnProp('filterApply')) {
                 const applyLabel = applyButtonLabel();
 
-                return <Button type="button" size="small" onClick={applyFilter} label={applyLabel} pt={getColumnPTOptions('filterApplyButton')} unstyled={props.unstyled} />;
+                return <Button type="button" size="small" onClick={applyFilter} label={applyLabel} pt={getColumnPTOptions('filterApplyButton')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} />;
             }
 
             return ObjectUtils.getJSXElement(getColumnProp('filterApply'), { field, filterModel, filterApplyCallback: applyFilter });
