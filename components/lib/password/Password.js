@@ -380,7 +380,6 @@ export const Password = React.memo(
                 className: cx('root', { isFilled, focusedState }),
                 style: props.style
             },
-            PasswordBase.getOtherProps(props),
             ptm('root')
         );
 
