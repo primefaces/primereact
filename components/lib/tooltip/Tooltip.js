@@ -13,14 +13,22 @@ export const Tooltip = React.memo(
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
-        const { ptm, cx, isUnstyled } = TooltipBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 visible: visibleState,
                 position: positionState,
                 className: classNameState
+            },
+            context: {
+                right: positionState === 'right',
+                left: positionState === 'left',
+                top: positionState === 'top',
+                bottom: positionState === 'bottom'
             }
-        });
+        };
+
+        const { ptm, cx, sx, isUnstyled } = TooltipBase.setMetaData(metaData);
 
         useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
         const elementRef = React.useRef(null);
@@ -488,7 +496,8 @@ export const Tooltip = React.memo(
 
             const arrowProps = mergeProps(
                 {
-                    className: cx('arrow')
+                    className: cx('arrow'),
+                    style: sx('arrow', { ...metaData })
                 },
                 ptm('arrow')
             );

@@ -14,6 +14,15 @@ const classes = {
     text: 'p-tooltip-text'
 };
 
+const inlineStyles = {
+    arrow: ({ context }) => ({
+        top: context.bottom ? '0' : context.right || context.left || (!context.right && !context.left && !context.top && !context.bottom) ? '50%' : null,
+        bottom: context.top ? '0' : null,
+        left: context.right || (!context.right && !context.left && !context.top && !context.bottom) ? '0' : context.top || context.bottom ? '50%' : null,
+        right: context.left ? '0' : null
+    })
+};
+
 const styles = `
 .p-tooltip {
     position: absolute;
@@ -113,6 +122,7 @@ export const TooltipBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles
+        styles,
+        inlineStyles
     }
 });
