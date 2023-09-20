@@ -209,7 +209,7 @@ exports[`BlockUI container style and className 1`] = `
         </div>
       </div>
       <div
-        class="p-blockui p-component-overlay p-component-overlay-enter block-jest"
+        class="block-jest p-blockui p-component-overlay p-component-overlay-enter"
         data-pc-section="mask"
         style="cursor: move; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 4205;"
       />

@@ -91,7 +91,7 @@ export const PasswordBase = ComponentBase.extend({
         panelClassName: null,
         transitionOptions: null,
         tabIndex: null,
-        value: null,
+        value: undefined,
         onInput: null,
         onShow: null,
         onHide: null,
