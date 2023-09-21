@@ -35,7 +35,8 @@ export const PanelBase = ComponentBase.extend({
             togglerIcon: 'p-panel-header-icon p-panel-toggler p-link',
             toggleableContent: 'p-toggleable-content',
             content: 'p-panel-content',
-            footer: 'p-panel-footer'
+            footer: 'p-panel-footer',
+            transition: 'p-toggleable-content'
         },
         styles: `
         .p-panel-header {

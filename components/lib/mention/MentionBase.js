@@ -14,7 +14,8 @@ const classes = {
                 'p-inputwrapper-focus': focusedState
             },
             props.className
-        )
+        ),
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

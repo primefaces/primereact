@@ -2,18 +2,22 @@ import { classNames } from '../../utils/Utils';
 
 export const TRANSITIONS = {
     toggleable: {
-        enterFromClass: 'max-h-0',
-        enterActiveClass: 'overflow-hidden transition-all duration-500 ease-in-out',
-        enterToClass: 'max-h-40	',
-        leaveFromClass: 'max-h-40',
-        leaveActiveClass: 'overflow-hidden transition-all duration-500 ease-in',
-        leaveToClass: 'max-h-0'
+        classNames: {
+            enter: 'max-h-0',
+            enterActive: 'overflow-hidden transition-all duration-500 ease-in-out',
+            enterDone: 'max-h-40',
+            exit: 'max-h-40',
+            exitActive: 'overflow-hidden transition-all duration-500 ease-in',
+            exitDone: 'max-h-0'
+        }
     },
     overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'transition-transform transition-opacity duration-150 ease-in',
+            exitActive: 'transition-opacity duration-150 ease-linear',
+            exitDone: 'opacity-0'
+        }
     }
 };
 
@@ -127,11 +131,13 @@ const Tailwind = {
         root: 'mb-1',
         accordiontab: {
             root: 'mb-1',
-            header: ({ props }) => ({
-                className: classNames(
-                    { 'select-none pointer-events-none cursor-default opacity-60': props?.disabled } // Condition
-                )
-            }),
+            header: ({ context }) => {
+                return {
+                    className: classNames(
+                        { 'select-none pointer-events-none cursor-default opacity-60': context.disabled } // Condition
+                    )
+                };
+            },
             headerAction: ({ context }) => ({
                 className: classNames(
                     'flex items-center cursor-pointer relative no-underline select-none', // Alignments
@@ -139,8 +145,8 @@ const Tailwind = {
                     'border border-gray-300 bg-gray-100 text-gray-600', // Borders and colors
                     'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 dark:hover:bg-gray-800/80 dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Dark mode
                     'hover:border-gray-300 hover:bg-gray-200 hover:text-gray-800', // Hover
-                    'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)]' // Focus
-                    // { 'rounded-br-md rounded-bl-md': !context.selected, 'rounded-br-0 rounded-bl-0 text-gray-800': context.sellected } // Condition
+                    'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)]', // Focus
+                    { 'rounded-br-md rounded-bl-md': !context.selected, 'rounded-br-0 rounded-bl-0 text-gray-800': context.selected } // Condition
                 )
             }),
             headerIcon: 'inline-block mr-2',
@@ -486,6 +492,9 @@ const Tailwind = {
         input: 'hidden',
         buttonbar: {
             className: classNames('flex flex-wrap', 'bg-gray-50 dark:bg-gray-800 p-5 border border-solid border-gray-300 dark:border-blue-900/40 text-gray-700 dark:text-white/80 rounded-tr-lg rounded-tl-lg gap-2 border-b-0')
+        },
+        basicButton: {
+            className: classNames('text-white bg-blue-500 border border-blue-500 p-3 px-5 rounded-md text-base', 'overflow-hidden relative')
         },
         chooseButton: {
             className: classNames('text-white bg-blue-500 border border-blue-500 p-3 px-5 rounded-md text-base', 'overflow-hidden relative')
@@ -1166,14 +1175,15 @@ const Tailwind = {
             className: classNames('my-2')
         },
         year: ({ context }) => ({
-            className:
-                ('w-1/2 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
+            className: classNames(
+                'w-1/2 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
                     'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
-                })
+                }
+            )
         }),
         timepicker: {
             className: classNames('flex justify-center items-center', 'border-t-1 border-solid border-gray-300 p-2')

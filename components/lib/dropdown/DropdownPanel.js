@@ -289,20 +289,23 @@ export const DropdownPanel = React.memo(
                 getPTOptions('panel')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: props.in,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onEnter,
+                    onEntered: onEntered,
+                    onExit: props.onExit,
+                    onExited: props.onExited
+                },
+                getPTOptions('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={ref}
-                    classNames="p-connected-overlay"
-                    in={props.in}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntering={props.onEntering}
-                    onEntered={onEntered}
-                    onExit={props.onExit}
-                    onExited={props.onExited}
-                >
+                <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
                         {filter}
                         {content}

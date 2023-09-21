@@ -421,7 +421,8 @@ const classes = {
         classNames({
             'p-frozen-column': getColumnProp('frozen'),
             [`p-align-${align}`]: !!align
-        })
+        }),
+    transition: 'p-connected-overlay'
 };
 
 const inlineStyles = {

@@ -12,6 +12,7 @@ export const MenubarSub = React.memo(
 
         const getPTOptions = (item, key) => {
             return ptm(key, {
+                props,
                 hostName: props.hostName,
                 context: {
                     active: activeItemState === item

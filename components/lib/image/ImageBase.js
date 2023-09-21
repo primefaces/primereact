@@ -16,7 +16,8 @@ const classes = {
     root: ({ props }) =>
         classNames('p-image p-component', props.className, {
             'p-image-preview-container': props.preview
-        })
+        }),
+    transition: 'p-image-preview'
 };
 
 const styles = `

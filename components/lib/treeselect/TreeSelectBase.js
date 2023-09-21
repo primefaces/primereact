@@ -39,7 +39,8 @@ const classes = {
     clearIcon: 'p-treeselect-clear-icon p-clickable',
     closeButton: 'p-treeselect-close p-link',
     header: 'p-treeselect-header',
-    wrapper: 'p-treeselect-items-wrapper'
+    wrapper: 'p-treeselect-items-wrapper',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

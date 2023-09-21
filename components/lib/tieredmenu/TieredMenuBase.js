@@ -26,7 +26,8 @@ const classes = {
     submenu: ({ subProps: props }) =>
         classNames({
             'p-submenu-list': !props.root
-        })
+        }),
+    transition: 'p-connected-overlay'
 };
 
 const inlineStyles = {

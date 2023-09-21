@@ -221,10 +221,23 @@ export const PanelMenu = React.memo(
                 getPTOptions(item, 'toggleableContent')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    onEnter: onEnter,
+                    disabled: animationDisabled,
+                    in: active,
+                    unmountOnExit: true,
+                    options: props.transitionOptions
+                },
+                getPTOptions(item, 'transition')
+            );
+
             return (
                 <div {...panelProps}>
                     <div {...headerProps}>{content}</div>
-                    <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} onEnter={onEnter} disabled={animationDisabled} in={active} unmountOnExit options={props.transitionOptions}>
+                    <CSSTransition nodeRef={menuContentRef} {...transitionProps}>
                         <div id={contentId} ref={menuContentRef} {...toggleableContentProps}>
                             <div {...menuContentProps}>
                                 <PanelMenuSub hostName="PanelMenu" menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />

@@ -123,6 +123,18 @@ export const Toast = React.memo(
                 ptCallbacks.ptm('root')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: ptCallbacks.cx('transition'),
+                    timeout: { enter: 300, exit: 300 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEntered,
+                    onExited
+                },
+                ptCallbacks.ptm('transition')
+            );
+
             return (
                 <div {...rootProps}>
                     <TransitionGroup>
@@ -131,7 +143,7 @@ export const Toast = React.memo(
                                 const messageRef = React.createRef();
 
                                 return (
-                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} {...transitionProps}>
                                         <ToastMessage
                                             hostName="Toast"
                                             ref={messageRef}

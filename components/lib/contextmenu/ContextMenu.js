@@ -268,19 +268,23 @@ export const ContextMenu = React.memo(
                 ptm('root')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: { enter: 250, exit: 0 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onEnter,
+                    onEntered: onEntered,
+                    onExit: onExit,
+                    onExited: onExited
+                },
+                ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={menuRef}
-                    classNames="p-contextmenu"
-                    in={visibleState}
-                    timeout={{ enter: 250, exit: 0 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
+                <CSSTransition nodeRef={menuRef} {...transitionProps}>
                     <div ref={menuRef} {...rootProps}>
                         <ContextMenuSub hostName="ContextMenu" menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>

@@ -488,6 +488,8 @@ export const ComponentBase = {
             const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const isTransition = key === 'transition' || (/./g.test(key) && !!(key.split('.')[1] === 'transition'));
+
             const datasetPrefix = 'data-pc-';
             const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
@@ -504,7 +506,7 @@ export const ComponentBase = {
             const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, key, params) : _useDefaultPT(getPTClassValue, key, params)) : undefined;
             const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, key, params, componentName);
 
-            const datasetProps = {
+            const datasetProps = !isTransition && {
                 ...(fkey === 'root' && { [`${datasetPrefix}name`]: params.props && params.props.__parentMetadata ? ObjectUtils.toFlatCase(params.props.__TYPE) : componentName }),
                 [`${datasetPrefix}section`]: fkey
             };

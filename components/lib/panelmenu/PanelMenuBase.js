@@ -21,7 +21,8 @@ const classes = {
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     menuitem: ({ item }) => classNames('p-menuitem', item.className),
     menu: 'p-submenu-list',
-    submenu: 'p-submenu-list'
+    submenu: 'p-submenu-list',
+    transition: 'p-toggleable-content'
 };
 
 const styles = `

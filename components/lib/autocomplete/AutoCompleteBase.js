@@ -34,7 +34,8 @@ const classes = {
     emptyMessage: 'p-autocomplete-item',
     item: ({ suggestion, optionGroupLabel }) => (optionGroupLabel ? classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled }) : classNames('p-autocomplete-item', { 'p-disabled': suggestion.disabled })),
     itemGroup: 'p-autocomplete-item-group',
-    footer: 'p-autocomplete-footer'
+    footer: 'p-autocomplete-footer',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

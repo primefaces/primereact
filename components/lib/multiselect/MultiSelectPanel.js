@@ -291,19 +291,23 @@ export const MultiSelectPanel = React.memo(
                 );
             }
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: props.in,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExit: props.onExit,
+                    onExited: props.onExited
+                },
+                getPTOptions('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={ref}
-                    classNames="p-connected-overlay"
-                    in={props.in}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={props.onExit}
-                    onExited={props.onExited}
-                >
+                <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
                         {header}
                         {content}

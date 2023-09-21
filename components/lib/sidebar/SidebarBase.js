@@ -31,7 +31,8 @@ const classes = {
         classNames('p-sidebar p-component', props.className, {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-        })
+        }),
+    transition: 'p-sidebar'
 };
 
 const styles = `

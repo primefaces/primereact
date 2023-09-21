@@ -35,7 +35,8 @@ const classes = {
             'p-dialog-default': !maximized,
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
-        })
+        }),
+    transition: 'p-dialog'
 };
 
 const styles = `

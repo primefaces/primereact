@@ -10,7 +10,8 @@ const classes = {
         }),
     closeIcon: 'p-overlaypanel-close-icon',
     closeButton: 'p-overlaypanel-close p-link',
-    content: 'p-overlaypanel-content'
+    content: 'p-overlaypanel-content',
+    transition: 'p-overlaypanel'
 };
 
 const styles = `

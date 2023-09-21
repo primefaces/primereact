@@ -229,8 +229,19 @@ export const ContextMenuSub = React.memo((props) => {
         ptm('menu', { hostName: props.hostName })
     );
 
+    const transitionProps = mergeProps(
+        {
+            classNames: cx('submenuTransition'),
+            in: active,
+            timeout: { enter: 0, exit: 0 },
+            unmountOnExit: true,
+            onEnter
+        },
+        ptm('menu.transition', { hostName: props.hostName })
+    );
+
     return (
-        <CSSTransition nodeRef={submenuRef} classNames="p-contextmenusub" in={active} timeout={{ enter: 0, exit: 0 }} unmountOnExit onEnter={onEnter}>
+        <CSSTransition nodeRef={submenuRef} {...transitionProps}>
             <ul ref={submenuRef} {...menuProps}>
                 {submenu}
             </ul>

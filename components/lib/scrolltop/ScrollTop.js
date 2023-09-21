@@ -103,9 +103,23 @@ export const ScrollTop = React.memo(
             ptm('root')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: visibleState,
+                timeout: { enter: 150, exit: 150 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter,
+                onEntered,
+                onExited
+            },
+            ptm('transition')
+        );
+
         return (
             <>
-                <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
+                <CSSTransition nodeRef={scrollElementRef} {...transitionProps}>
                     <button {...rootProps}>
                         {scrollIcon}
                         <Ripple />

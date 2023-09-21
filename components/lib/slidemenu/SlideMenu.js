@@ -180,19 +180,23 @@ export const SlideMenu = React.memo(
                 ptm('content')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: !props.popup || visibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExit,
+                    onExited
+                },
+                ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={menuRef}
-                    classNames="p-connected-overlay"
-                    in={!props.popup || visibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
+                <CSSTransition nodeRef={menuRef} {...transitionProps}>
                     <div {...rootProps}>
                         <div {...wrapperProps}>
                             <div {...contentProps}>

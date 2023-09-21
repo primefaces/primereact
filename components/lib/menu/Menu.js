@@ -291,19 +291,23 @@ export const Menu = React.memo(
                     ptm('menu')
                 );
 
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                );
+
                 return (
-                    <CSSTransition
-                        nodeRef={menuRef}
-                        classNames="p-connected-overlay"
-                        in={visibleState}
-                        timeout={{ enter: 120, exit: 100 }}
-                        options={props.transitionOptions}
-                        unmountOnExit
-                        onEnter={onEnter}
-                        onEntered={onEntered}
-                        onExit={onExit}
-                        onExited={onExited}
-                    >
+                    <CSSTransition nodeRef={menuRef} {...transitionProps}>
                         <div id={props.id} ref={menuRef} {...rootProps}>
                             <ul {...menuProps}>{menuitems}</ul>
                         </div>

@@ -659,9 +659,24 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             ptm('root')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: transitionTimeout,
+                in: visibleState,
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: onEnter,
+                onEntered: onEntered,
+                onExiting: onExiting,
+                onExited: onExited
+            },
+            ptm('transition')
+        );
+
         return (
             <div {...maskProps}>
-                <CSSTransition nodeRef={dialogRef} classNames="p-dialog" timeout={transitionTimeout} in={visibleState} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
+                <CSSTransition nodeRef={dialogRef} {...transitionProps}>
                     <div {...rootProps}>
                         {header}
                         {content}

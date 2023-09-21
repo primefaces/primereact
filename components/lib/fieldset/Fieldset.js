@@ -87,8 +87,19 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             ptm('toggleableContent')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: !collapsed,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableProps}>
                     <div {...contentProps}>{props.children}</div>
                 </div>

@@ -65,7 +65,8 @@ const classes = {
     indicators: 'p-galleria-indicators p-reset',
     itemWrapper: 'p-galleria-item-wrapper',
     itemContainer: 'p-galleria-item-container',
-    item: 'p-galleria-item'
+    item: 'p-galleria-item',
+    transition: 'p-galleria'
 };
 
 const styles = `

@@ -102,7 +102,8 @@ const classes = {
         text: 'p-toast-message-text',
         summary: 'p-toast-summary',
         detail: 'p-toast-detail'
-    }
+    },
+    transition: 'p-toast-message'
 };
 
 const inlineStyles = {

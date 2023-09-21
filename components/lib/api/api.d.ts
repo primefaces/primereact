@@ -633,6 +633,12 @@ export interface PrimeReactPTOptions {
      * Custom passthrough(pt) options for VirtualScroller.
      */
     virtualscroller?: VirtualScrollerPassThroughOptions;
+    /**
+     * Custom passthrough(pt) options for global css.
+     */
+    global?: {
+        css?: (options: any) => string | string | undefined;
+    };
 }
 
 /**

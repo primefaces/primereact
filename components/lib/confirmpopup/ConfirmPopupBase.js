@@ -65,7 +65,8 @@ const classes = {
     content: 'p-confirm-popup-content',
     icon: 'p-confirm-popup-icon',
     message: 'p-confirm-popup-message',
-    footer: 'p-confirm-popup-footer'
+    footer: 'p-confirm-popup-footer',
+    transition: 'p-connected-overlay'
 };
 
 export const ConfirmPopupBase = ComponentBase.extend({

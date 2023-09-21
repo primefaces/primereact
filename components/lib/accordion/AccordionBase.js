@@ -17,7 +17,8 @@ const classes = {
         headeraction: 'p-accordion-header-link',
         headericon: 'p-accordion-toggle-icon',
         headertitle: 'p-accordion-header-text',
-        toggleablecontent: 'p-toggleable-content'
+        toggleablecontent: 'p-toggleable-content',
+        transition: 'p-toggleable-content'
     }
 };
 

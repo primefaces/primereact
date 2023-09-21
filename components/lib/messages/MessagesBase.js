@@ -57,7 +57,8 @@ const classes = {
         summary: 'p-message-summary',
         icon: 'p-message-icon',
         buttonicon: 'p-message-close-icon',
-        button: 'p-message-close p-link'
+        button: 'p-message-close p-link',
+        transition: 'p-message'
     }
 };
 

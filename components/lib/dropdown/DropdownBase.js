@@ -40,7 +40,8 @@ const classes = {
         }),
     wrapper: 'p-dropdown-items-wrapper',
     header: 'p-dropdown-header',
-    footer: 'p-dropdown-footer'
+    footer: 'p-dropdown-footer',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

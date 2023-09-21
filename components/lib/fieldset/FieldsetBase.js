@@ -29,7 +29,8 @@ export const FieldsetBase = ComponentBase.extend({
             togglericon: 'p-fieldset-toggler',
             legendTitle: 'p-fieldset-legend-text',
             legend: 'p-fieldset-legend p-unselectable-text',
-            content: 'p-fieldset-content'
+            content: 'p-fieldset-content',
+            transition: 'p-toggleable-content'
         },
         styles: `
         .p-fieldset-legend > a,

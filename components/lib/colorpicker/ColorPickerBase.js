@@ -27,7 +27,8 @@ const classes = {
     hue: 'p-colorpicker-hue',
     colorHandle: 'p-colorpicker-color-handle',
     color: 'p-colorpicker-color',
-    selector: 'p-colorpicker-color-selector'
+    selector: 'p-colorpicker-color-selector',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

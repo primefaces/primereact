@@ -1,5 +1,4 @@
 import { PrimeReactPTOptions } from '../../api/api';
 
-interface Tailwind extends PrimeReactPTOptions {}
-
+declare const Tailwind: PrimeReactPTOptions;
 export default Tailwind;

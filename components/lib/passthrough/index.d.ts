@@ -1,7 +1,6 @@
-/* @todo */
+export interface PassThroughOptions {
+    mergeSections?: boolean | undefined;
+    mergeProps?: boolean | undefined;
+}
 
-import { PrimeReactPTOptions } from '../api/api';
-
-interface PassthroughOptions extends PrimeReactPTOptions {}
-
-export default PassthroughOptions;
+export declare function usePassThrough(pt1: object, pt2: object, options?: PassThroughOptions): object;

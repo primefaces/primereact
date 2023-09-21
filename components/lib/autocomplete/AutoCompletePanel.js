@@ -215,20 +215,24 @@ export const AutoCompletePanel = React.memo(
                 _ptm('panel')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: props.in,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: props.onEnter,
+                    onEntering: props.onEntering,
+                    onEntered: props.onEntered,
+                    onExit: props.onExit,
+                    onExited: props.onExited
+                },
+                _ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={ref}
-                    classNames="p-connected-overlay"
-                    in={props.in}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={props.onEnter}
-                    onEntering={props.onEntering}
-                    onEntered={props.onEntered}
-                    onExit={props.onExit}
-                    onExited={props.onExited}
-                >
+                <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
                         {content}
                         {footer}

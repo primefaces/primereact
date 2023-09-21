@@ -98,6 +98,16 @@ export const Messages = React.memo(
             ptCallbacks.ptm('root')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: ptCallbacks.cx('transition'),
+                unmountOnExit: true,
+                timeout: { enter: 300, exit: 300 },
+                options: props.transitionOptions
+            },
+            ptCallbacks.ptm('transition')
+        );
+
         return (
             <div ref={elementRef} {...rootProps}>
                 <TransitionGroup>
@@ -106,7 +116,7 @@ export const Messages = React.memo(
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message._pId} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
+                                <CSSTransition nodeRef={messageRef} key={message._pId} {...transitionProps}>
                                     <UIMessage hostName="Messages" ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptCallbacks={ptCallbacks} metaData={metaData} index={index} />
                                 </CSSTransition>
                             );

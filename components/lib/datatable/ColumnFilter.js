@@ -873,19 +873,23 @@ export const ColumnFilter = React.memo((props) => {
             getColumnPTOptions('filterOverlay')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: overlayVisibleState,
+                timeout: { enter: 120, exit: 100 },
+                unmountOnExit: true,
+                onEnter: onOverlayEnter,
+                onEntered: onOverlayEntered,
+                onExit: onOverlayExit,
+                onExited: onOverlayExited
+            },
+            getColumnPTOptions('transition')
+        );
+
         return (
             <Portal>
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={overlayVisibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    unmountOnExit
-                    onEnter={onOverlayEnter}
-                    onEntered={onOverlayEntered}
-                    onExit={onOverlayExit}
-                    onExited={onOverlayExited}
-                >
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div ref={overlayRef} {...filterOverlayProps}>
                         {filterHeader}
                         {items}

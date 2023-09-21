@@ -257,9 +257,23 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             ptm('icons')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: visibleState,
+                timeout: transitionTimeout,
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEntered,
+                onExiting,
+                onExited
+            },
+            ptm('transition')
+        );
+
         return (
             <div {...maskProps}>
-                <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
+                <CSSTransition nodeRef={sidebarRef} {...transitionProps}>
                     <div ref={sidebarRef} {...rootProps}>
                         <div {...headerProps}>
                             {header}

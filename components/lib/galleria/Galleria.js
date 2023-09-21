@@ -293,21 +293,25 @@ export const Galleria = React.memo(
                     ptm('mask')
                 );
 
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 150, exit: 150 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntering,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                );
+
                 const galleriaWrapper = (
                     <div ref={maskRef} {...maskProps}>
-                        <CSSTransition
-                            nodeRef={elementRef}
-                            classNames="p-galleria"
-                            in={visibleState}
-                            timeout={{ enter: 150, exit: 150 }}
-                            options={props.transitionOptions}
-                            unmountOnExit
-                            onEnter={onEnter}
-                            onEntering={onEntering}
-                            onEntered={onEntered}
-                            onExit={onExit}
-                            onExited={onExited}
-                        >
+                        <CSSTransition nodeRef={elementRef} {...transitionProps}>
                             {element}
                         </CSSTransition>
                     </div>

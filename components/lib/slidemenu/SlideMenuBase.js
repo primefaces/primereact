@@ -29,7 +29,8 @@ const classes = {
             'p-submenu-list': !props.root,
             'p-active-submenu': props.parentActive
         }),
-    menuitem: ({ item, active }) => classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className)
+    menuitem: ({ item, active }) => classNames('p-menuitem', { 'p-menuitem-active': active, 'p-disabled': item.disabled }, item.className),
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

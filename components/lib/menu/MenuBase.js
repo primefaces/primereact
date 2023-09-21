@@ -46,7 +46,8 @@ const classes = {
         }),
     separator: 'p-menu-separator',
     label: 'p-menuitem-text',
-    icon: 'p-menuitem-icon'
+    icon: 'p-menuitem-icon',
+    transition: 'p-connected-overlay'
 };
 
 const inlineStyles = {

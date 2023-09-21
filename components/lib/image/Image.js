@@ -248,6 +248,21 @@ export const Image = React.memo(
                 ptm('previewContainer')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: previewVisibleState,
+                    timeout: { enter: 150, exit: 150 },
+                    unmountOnExit: true,
+                    onEntering: onEntering,
+                    onEntered: onEntered,
+                    onExit: onExit,
+                    onExiting: onExiting,
+                    onExited: onExited
+                },
+                ptm('transition')
+            );
+
             return (
                 <div {...maskProps}>
                     <div {...toolbarProps}>
@@ -258,18 +273,7 @@ export const Image = React.memo(
                         <button {...zoomInButtonProps}>{zoomInIcon}</button>
                         <button {...closeButtonProps}>{closeIcon}</button>
                     </div>
-                    <CSSTransition
-                        nodeRef={previewRef}
-                        classNames="p-image-preview"
-                        in={previewVisibleState}
-                        timeout={{ enter: 150, exit: 150 }}
-                        unmountOnExit
-                        onEntering={onEntering}
-                        onEntered={onEntered}
-                        onExit={onExit}
-                        onExiting={onExiting}
-                        onExited={onExited}
-                    >
+                    <CSSTransition nodeRef={previewRef} {...transitionProps}>
                         <div {...previewContainerProps}>
                             <img alt={alt} {...previewProps} />
                         </div>

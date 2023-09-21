@@ -219,7 +219,8 @@ const classes = {
     weekNumber: 'p-datepicker-weeknumber',
     weekLabelContainer: 'p-disabled',
     container: 'p-datepicker-calendar-container',
-    table: 'p-datepicker-calendar'
+    table: 'p-datepicker-calendar',
+    transition: 'p-connected-overlay'
 };
 
 export const CalendarBase = ComponentBase.extend({

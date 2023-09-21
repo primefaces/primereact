@@ -34,15 +34,17 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     useHandleStyle(AccordionBase.css.styles, isUnstyled, { name: 'accordion' });
 
     const getTabPT = (tab, key, index) => {
+        const atProps = AccordionTabBase.getCProps(tab);
         const tabMetaData = {
-            props: tab.props /* @todo */,
+            // props: atProps, /* @todo */
             parent: metaData,
             context: {
                 index,
                 count,
                 first: index === 0,
                 last: index === count - 1,
-                selected: isSelected(index)
+                selected: isSelected(index),
+                disabled: getTabProp(tab, 'disabled')
             }
         };
 
@@ -180,8 +182,19 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             getTabPT(tab, 'content', index)
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('tab.transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: selected,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            getTabPT(tab, 'transition', index)
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableContentProps}>
                     <div {...contentProps}>{getTabProp(tab, 'children')}</div>
                 </div>

@@ -6,7 +6,8 @@ const classes = {
         classNames('p-scrolltop p-link p-component', {
             'p-scrolltop-sticky': props.target !== 'window'
         }),
-    icon: 'p-scrolltop-icon'
+    icon: 'p-scrolltop-icon',
+    transition: 'p-scrolltop'
 };
 
 const styles = `

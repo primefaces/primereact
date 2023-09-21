@@ -20,7 +20,8 @@ const classes = {
     menuIcon: 'p-menuitem-icon',
     menuLabel: 'p-menuitem-text',
     anchor: ({ _className, disabled }) => classNames('p-menuitem-link', _className, { 'p-disabled': disabled }),
-    menuItem: 'p-menuitem'
+    menuItem: 'p-menuitem',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

@@ -21,7 +21,8 @@ const classes = {
         }),
     meter: 'p-password-meter',
     meterLabel: ({ strength }) => classNames('p-password-strength', strength),
-    info: ({ strength }) => classNames('p-password-info', strength)
+    info: ({ strength }) => classNames('p-password-info', strength),
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

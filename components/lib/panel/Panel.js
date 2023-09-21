@@ -192,8 +192,19 @@ export const Panel = React.forwardRef((inProps, ref) => {
             ptm('content')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: !collapsed,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableContentProps}>
                     <div {...contentProps}>{props.children}</div>
                 </div>

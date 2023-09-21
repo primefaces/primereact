@@ -36,7 +36,8 @@ const classes = {
     panel: 'p-cascadeselect-panel p-component',
     content: 'p-cascadeselect-item-content',
     optionGroupIcon: 'p-cascadeselect-group-icon',
-    text: 'p-cascadeselect-item-text'
+    text: 'p-cascadeselect-item-text',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `

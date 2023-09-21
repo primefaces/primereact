@@ -55,7 +55,8 @@ const classes = {
     checkbox: ({ itemProps: props }) =>
         classNames('p-checkbox-box', {
             'p-highlight': props.selected
-        })
+        }),
+    transition: 'p-connected-overlay'
 };
 
 const styles = `
