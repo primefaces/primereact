@@ -341,7 +341,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         const isMaximized = props.maximizable && maximized;
 
         if (props.modal) {
-            const hasBlockScroll = document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll);
+            const hasBlockScroll = props.blockScroll || (document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll));
 
             if (hasBlockScroll || isMaximized) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
