@@ -8,10 +8,14 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type MessagesPassThroughType<T> = PassThroughType<T, MessagesPassThroughMethodOptions>;
+export declare type MessagesPassThroughTransitionType = ReactCSSTransitionProps | ((options: MessagesPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -53,6 +57,15 @@ export interface MessagesPassThroughOptions {
      * Uses to pass attributes to the button icon's DOM element.
      */
     buttonIcon?: MessagesPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MessagesPassThroughTransitionType;
 }
 
 export interface MessagesMessage {
@@ -105,6 +118,11 @@ export interface MessagesMessage {
      */
     pt?: MessagesPassThroughOptions;
     /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
      */
@@ -140,6 +158,11 @@ export interface MessagesProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {MessagesPassThroughOptions}
      */
     pt?: MessagesPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**

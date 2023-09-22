@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils';
 
 export declare type DataScrollerPassThroughType<T> = PassThroughType<T, DataScrollerPassThroughMethodOptions>;
@@ -52,6 +54,11 @@ export interface DataScrollerPassThroughOptions {
      * Uses to pass attributes to the list's DOM element.
      */
     content?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -139,6 +146,11 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
      * @type {DataScrollerPassThroughOptions}
      */
     pt?: DataScrollerPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

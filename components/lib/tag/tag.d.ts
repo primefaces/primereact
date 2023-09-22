@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type TagPassThroughType<T> = PassThroughType<T, TagPassThroughMethodOptions>;
@@ -36,6 +38,11 @@ export interface TagPassThroughOptions {
      * Uses to pass attributes to the value's DOM element.
      */
     value?: TagPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -71,6 +78,11 @@ export interface TagProps extends Omit<React.DetailedHTMLProps<React.HTMLAttribu
      * @type {TagPassThroughOptions}
      */
     pt?: TagPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

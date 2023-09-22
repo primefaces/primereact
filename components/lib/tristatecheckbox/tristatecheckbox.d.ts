@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
@@ -53,6 +55,11 @@ export interface TriStateCheckboxPassThroughOptions {
      * Uses to pass attributes to the sr only aria's DOM element.
      */
     srOnlyAria?: TriStateCheckboxPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -128,6 +135,11 @@ export interface TriStateCheckboxProps extends Omit<React.DetailedHTMLProps<Reac
      * @type {TriStateCheckboxPassThroughOptions}
      */
     pt?: TriStateCheckboxPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

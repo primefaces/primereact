@@ -11,8 +11,10 @@
 import * as React from 'react';
 import { FilterMatchMode } from '../api/api';
 import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
 import { DropdownPassThroughOptions } from '../dropdown/dropdown';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -346,6 +348,11 @@ export interface ColumnPassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 interface ColumnHeaderOptions {
@@ -852,6 +859,11 @@ export interface ColumnProps {
      * @type {ColumnPassThroughOptions}
      */
     pt?: ColumnPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

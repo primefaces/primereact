@@ -8,11 +8,14 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type ContextMenuPassThroughType<T> = PassThroughType<T, ContextMenuPassThroughMethodOptions>;
+export declare type ContextMenuPassThroughTransitionType = ReactCSSTransitionProps | ((options: ContextMenuPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -60,6 +63,15 @@ export interface ContextMenuPassThroughOptions {
      * Uses to pass attributes to the separator's DOM element.
      */
     separator?: ContextMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: ContextMenuPassThroughTransitionType;
 }
 
 /**

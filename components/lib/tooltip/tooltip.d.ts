@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 import { TooltipEvent, TooltipOptions } from './tooltipoptions';
 
@@ -38,6 +40,11 @@ export interface TooltipPassThroughOptions {
      * Uses to pass attributes to the text's DOM element.
      */
     text?: TooltipPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -88,6 +95,11 @@ export interface TooltipProps extends TooltipOptions {
      * @type {TooltipPassThroughOptions}
      */
     pt?: TooltipPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**

@@ -8,7 +8,9 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type DockPassThroughType<T> = PassThroughType<T, DockPassThroughMethodOptions>;
@@ -59,6 +61,11 @@ export interface DockPassThroughOptions {
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: DockPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -140,6 +147,11 @@ export interface DockProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @type {DockPassThroughOptions}
      */
     pt?: DockPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

@@ -8,7 +8,9 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type DataViewPassThroughType<T> = PassThroughType<T, DataViewPassThroughMethodOptions>;
@@ -71,6 +73,11 @@ export interface DataViewPassThroughOptions {
      * Uses to pass attributes to the grid's DOM element.
      */
     grid?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -340,6 +347,11 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {DataViewPassThroughOptions}
      */
     pt?: DataViewPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

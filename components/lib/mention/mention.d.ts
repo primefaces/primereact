@@ -8,11 +8,15 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { InputTextarea } from '../inputtextarea';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type MentionPassThroughType<T> = PassThroughType<T, MentionPassThroughMethodOptions>;
+export declare type MentionPassThroughTransitionType = ReactCSSTransitionProps | ((options: MentionPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -48,6 +52,15 @@ export interface MentionPassThroughOptions {
      * Uses to pass attributes to the items' DOM element.
      */
     items?: MentionPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MentionPassThroughTransitionType;
 }
 
 /**
@@ -222,6 +235,11 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      * @type {MentionPassThroughOptions}
      */
     pt?: MentionPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

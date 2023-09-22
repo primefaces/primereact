@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type BlockUIPassThroughType<T> = PassThroughType<T, BlockUIPassThroughMethodOptions>;
@@ -33,6 +35,11 @@ export interface BlockUIPassThroughOptions {
      * Uses to pass attributes to the mask's DOM element.
      */
     mask?: BlockUIPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -93,6 +100,11 @@ export interface BlockUIProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {BlockUIPassThroughOptions}
      */
     pt?: BlockUIPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

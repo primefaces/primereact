@@ -10,7 +10,9 @@
 import * as React from 'react';
 import { Column, ColumnPassThroughOptions, ColumnProps } from '../column';
 import { ColumnGroupPassThroughOptions } from '../columngroup/columngroup';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { PassThroughOptions } from '../passthrough';
 import { RowPassThroughOptions } from '../row/row';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { IconType, PassThroughType } from '../utils/utils';
@@ -969,6 +971,11 @@ export interface DataTablePassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 type SortOrder = 1 | 0 | -1 | null | undefined;
@@ -1614,6 +1621,11 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * @type {DataTablePassThroughOptions}
      */
     pt?: DataTablePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

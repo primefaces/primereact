@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
@@ -48,6 +50,11 @@ export interface MultiStateCheckboxPassThroughOptions {
      * Uses to pass attributes to the sr only aria's DOM element.
      */
     srOnlyAria?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -226,6 +233,11 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      * @type {MultiStateCheckboxPassThroughOptions}
      */
     pt?: MultiStateCheckboxPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

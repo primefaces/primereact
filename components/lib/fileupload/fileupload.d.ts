@@ -10,7 +10,9 @@
 import * as React from 'react';
 import { BadgePassThroughOptions } from '../badge/badge';
 import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { MessagePassThroughOptions } from '../message/message';
+import { PassThroughOptions } from '../passthrough';
 import { ProgressBarPassThroughOptions } from '../progressbar/progressbar';
 import { IconType, PassThroughType } from '../utils';
 
@@ -123,6 +125,11 @@ export interface FileUploadPassThroughOptions {
      * Uses to pass attributes to the upload icon's DOM element.
      */
     uploadIcon?: FileUploadPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -595,6 +602,11 @@ interface FileUploadProps {
      * @type {FileUploadPassThroughOptions}
      */
     pt?: FileUploadPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

@@ -9,6 +9,8 @@
  */
 
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type VirtualScrollerPassThroughType<T> = PassThroughType<T, VirtualScrollerPassThroughMethodOptions>;
@@ -46,6 +48,11 @@ export interface VirtualScrollerPassThroughOptions {
      * Uses to pass attributes to the spacer's DOM element.
      */
     spacer?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -476,6 +483,11 @@ export interface VirtualScrollerProps {
      * @type {VirtualScrollerPassThroughOptions}
      */
     pt?: VirtualScrollerPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
