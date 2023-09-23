@@ -92,6 +92,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -185,6 +193,14 @@
                             "type": "AccordionPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "transitionOptions",
@@ -382,6 +398,20 @@
                             "readonly": false,
                             "type": "AccordionTabPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AccordionPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -450,6 +480,9 @@
                 },
                 "AccordionTabPassThroughType": {
                     "values": "PassThroughType<T, AccordionTabPassThroughMethodOptions>"
+                },
+                "AccordionPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -3630,6 +3663,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "readOnly",
                             "optional": true,
                             "readonly": false,
@@ -4242,6 +4283,20 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AutoCompletePassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -4302,6 +4357,9 @@
             "values": {
                 "AutoCompletePassThroughType": {
                     "values": "PassThroughType<T, AutoCompletePassThroughMethodOptions>"
+                },
+                "AutoCompletePassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -4380,6 +4438,14 @@
                             "type": "AvatarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "shape",
@@ -4522,6 +4588,13 @@
                             "readonly": false,
                             "type": "AvatarPassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the image's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -4573,6 +4646,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -4607,6 +4688,13 @@
                             "readonly": false,
                             "type": "AvatarGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -4656,6 +4744,14 @@
                             "type": "BadgePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "severity",
@@ -4723,6 +4819,13 @@
                             "readonly": false,
                             "type": "BadgePassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -4832,6 +4935,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "template",
                             "optional": true,
                             "readonly": false,
@@ -4907,6 +5018,13 @@
                             "readonly": false,
                             "type": "BlockUIPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -4986,6 +5104,14 @@
                             "type": "BreadCrumbPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "separatorIcon",
@@ -5086,6 +5212,13 @@
                             "readonly": false,
                             "type": "BreadCrumbPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the separator icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -5208,6 +5341,14 @@
                             "type": "ButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "raised",
@@ -5356,6 +5497,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes to the Tooltip component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -5790,6 +5938,14 @@
                             "type": "CalendarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnlyInput",
@@ -6914,6 +7070,20 @@
                             "readonly": false,
                             "type": "CalendarPassThroughType<HTMLAttributes<HTMLOptionElement>>",
                             "description": "Uses to pass attributes to the option's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CalendarPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -7581,6 +7751,13 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -7818,6 +7995,9 @@
             "values": {
                 "CalendarPassThroughType": {
                     "values": "PassThroughType<T, CalendarPassThroughMethodOptions>"
+                },
+                "CalendarPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -7865,6 +8045,14 @@
                             "type": "CardPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "subTitle",
@@ -7966,6 +8154,13 @@
                             "readonly": false,
                             "type": "CardPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -8131,6 +8326,14 @@
                             "type": "CarouselPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "responsiveOptions",
@@ -8376,6 +8579,13 @@
                             "readonly": false,
                             "type": "CarouselPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -8688,6 +8898,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "scrollHeight",
                             "optional": true,
                             "readonly": false,
@@ -8984,6 +9202,20 @@
                             "readonly": false,
                             "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the hidden selected message's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CascadeSelectPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -8995,6 +9227,9 @@
             "values": {
                 "CascadeSelectPassThroughType": {
                     "values": "PassThroughType<T, CascadeSelectPassThroughMethodOptions>"
+                },
+                "CascadeSelectPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -9121,6 +9356,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -9193,6 +9436,13 @@
                             "readonly": false,
                             "type": "ChartPassThroughType<HTMLAttributes<HTMLCanvasElement>>",
                             "description": "Uses to pass attributes to the canvas's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -9334,6 +9584,14 @@
                             "type": "CheckboxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -9606,6 +9864,13 @@
                             "readonly": false,
                             "type": "CheckboxPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -9722,6 +9987,14 @@
                             "type": "ChipPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "removable",
@@ -9850,6 +10123,13 @@
                             "readonly": false,
                             "type": "ChipPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the removeIcon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -10013,6 +10293,14 @@
                             "type": "ChipsPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -10314,6 +10602,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -10516,6 +10811,14 @@
                             "type": "ColorPickerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "tooltip",
@@ -10721,6 +11024,20 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColorPickerPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -10802,6 +11119,9 @@
             "values": {
                 "ColorPickerPassThroughType": {
                     "values": "PassThroughType<T, ColorPickerPassThroughMethodOptions>"
+                },
+                "ColorPickerPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -11193,6 +11513,14 @@
                             "type": "ColumnPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "reorderable",
@@ -12346,6 +12674,13 @@
                             "readonly": false,
                             "type": "ColumnPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -13023,6 +13358,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -13070,6 +13413,13 @@
                             "readonly": false,
                             "type": "ColumnGroupPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -13474,6 +13824,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "rejectClassName",
                             "optional": true,
                             "readonly": false,
@@ -13841,6 +14199,13 @@
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -14078,6 +14443,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "rejectClassName",
                             "optional": true,
                             "readonly": false,
@@ -14277,6 +14650,20 @@
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmPopupPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -14403,6 +14790,9 @@
             "values": {
                 "ConfirmPopupPassThroughType": {
                     "values": "PassThroughType<T, ConfirmPopupPassThroughMethodOptions>"
+                },
+                "ConfirmPopupPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -14668,6 +15058,20 @@
                             "readonly": false,
                             "type": "ContextMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ContextMenuPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -14728,6 +15132,9 @@
             "values": {
                 "ContextMenuPassThroughType": {
                     "values": "PassThroughType<T, ContextMenuPassThroughMethodOptions>"
+                },
+                "ContextMenuPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -14848,6 +15255,14 @@
                             "type": "DataScrollerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "rows",
@@ -15009,6 +15424,13 @@
                             "readonly": false,
                             "type": "DataScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -15591,6 +16013,14 @@
                             "type": "DataTablePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "removableSort",
@@ -18012,6 +18442,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -18677,6 +19114,13 @@
                             "readonly": false,
                             "type": "DataTablePassThroughOptions",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -19614,6 +20058,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "rows",
                             "optional": true,
                             "readonly": false,
@@ -19850,6 +20302,13 @@
                             "readonly": false,
                             "type": "DataViewPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the grid's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -20056,6 +20515,14 @@
                             "type": "DeferredContentPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         }
                     ]
                 },
@@ -20111,6 +20578,13 @@
                             "readonly": false,
                             "type": "DeferredContentPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -20460,6 +20934,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "resizable",
                             "optional": true,
                             "readonly": false,
@@ -20780,6 +21262,20 @@
                             "readonly": false,
                             "type": "DialogPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DialogPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -20825,6 +21321,9 @@
             "values": {
                 "DialogPassThroughType": {
                     "values": "PassThroughType<T, DialogPassThroughMethodOptions>"
+                },
+                "DialogPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -20879,6 +21378,14 @@
                             "type": "DividerPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "type",
@@ -20937,6 +21444,13 @@
                             "readonly": false,
                             "type": "DividerPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -21026,6 +21540,14 @@
                             "type": "DockPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -21130,6 +21652,13 @@
                             "readonly": false,
                             "type": "DockPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -21607,6 +22136,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "required",
                             "optional": true,
                             "readonly": false,
@@ -22051,6 +22588,20 @@
                             "readonly": false,
                             "type": "DropdownPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the hidden selected message's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "DropdownPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -22137,6 +22688,9 @@
             "values": {
                 "DropdownPassThroughType": {
                     "values": "PassThroughType<T, DropdownPassThroughMethodOptions>"
+                },
+                "DropdownPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -22231,6 +22785,14 @@
                             "type": "EditorPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -22454,6 +23016,13 @@
                             "readonly": false,
                             "type": "EditorPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -22541,6 +23110,14 @@
                             "type": "FieldsetPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "toggleable",
@@ -22722,6 +23299,20 @@
                             "readonly": false,
                             "type": "FieldsetPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FieldsetPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -22747,6 +23338,9 @@
             "values": {
                 "FieldsetPassThroughType": {
                     "values": "PassThroughType<T, FieldsetPassThroughMethodOptions>"
+                },
+                "FieldsetPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -23063,6 +23657,14 @@
                             "type": "FileUploadPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "removeIcon",
@@ -23624,6 +24226,13 @@
                             "readonly": false,
                             "type": "FileUploadPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the upload icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -24078,6 +24687,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "responsiveOptions",
                             "optional": true,
                             "readonly": false,
@@ -24280,7 +24897,7 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
-                "GalleriaThroughMethodOptions": {
+                "GalleriaPassThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
                     "props": [
@@ -24491,6 +25108,20 @@
                             "readonly": false,
                             "type": "GalleriaPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "GalleriaPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -24557,7 +25188,10 @@
             "description": "Defines the custom types used by the module.",
             "values": {
                 "GalleriaPassThroughType": {
-                    "values": "PassThroughType<T, GalleriaThroughMethodOptions>"
+                    "values": "PassThroughType<T, GalleriaPassThroughMethodOptions>"
+                },
+                "GalleriaPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -27323,6 +27957,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "referrerPolicy",
                             "optional": true,
                             "readonly": false,
@@ -27435,7 +28077,7 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
-                "ImageThroughMethodOptions": {
+                "ImagePassThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
                     "props": [
@@ -27597,6 +28239,20 @@
                             "readonly": false,
                             "type": "ImagePassThroughType<ImgHTMLAttributes<HTMLImageElement>>",
                             "description": "Uses to pass attributes to the preview's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ImagePassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -27642,7 +28298,10 @@
             "description": "Defines the custom types used by the module.",
             "values": {
                 "ImagePassThroughType": {
-                    "values": "PassThroughType<T, ImageThroughMethodOptions>"
+                    "values": "PassThroughType<T, ImagePassThroughMethodOptions>"
+                },
+                "ImagePassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -27721,6 +28380,14 @@
                             "type": "InplacePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -27904,6 +28571,13 @@
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -28005,6 +28679,14 @@
                             "type": "InputTextPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -28492,6 +29174,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "readOnly",
                             "optional": true,
                             "readonly": false,
@@ -28804,6 +29494,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -28951,6 +29648,14 @@
                             "type": "InputSwitchPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "style",
@@ -29143,6 +29848,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -29206,6 +29918,14 @@
                             "type": "InputTextPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "tooltip",
@@ -29314,6 +30034,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes to the Tooltip component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -29394,6 +30121,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "tooltip",
                             "optional": true,
                             "readonly": false,
@@ -29472,6 +30207,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -29595,6 +30337,14 @@
                             "type": "KnobPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "rangeColor",
@@ -29786,6 +30536,13 @@
                             "readonly": false,
                             "type": "KnobPassThroughType<SVGProps<SVGTextElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -30049,6 +30806,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "tooltip",
                             "optional": true,
                             "readonly": false,
@@ -30290,6 +31055,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -30547,6 +31319,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "scrollHeight",
                             "optional": true,
                             "readonly": false,
@@ -30750,6 +31530,13 @@
                             "readonly": false,
                             "type": "MegaMenuPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the end of the component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -30991,6 +31778,14 @@
                             "type": "MentionPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "scrollHeight",
@@ -31243,6 +32038,20 @@
                             "readonly": false,
                             "type": "MentionPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the items' DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MentionPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -31324,6 +32133,9 @@
             "values": {
                 "MentionPassThroughType": {
                     "values": "PassThroughType<T, MentionPassThroughMethodOptions>"
+                },
+                "MentionPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -31452,6 +32264,14 @@
                             "type": "MenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "transitionOptions",
@@ -31585,6 +32405,20 @@
                             "readonly": false,
                             "type": "MenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MenuPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -31610,6 +32444,9 @@
             "values": {
                 "MenuPassThroughType": {
                     "values": "PassThroughType<T, MenuPassThroughMethodOptions>"
+                },
+                "MenuPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -31684,6 +32521,14 @@
                             "type": "MenubarPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "start",
@@ -31832,6 +32677,13 @@
                             "readonly": false,
                             "type": "MenubarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the end of the component."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -32138,6 +32990,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "severity",
                             "optional": true,
                             "readonly": false,
@@ -32209,6 +33069,13 @@
                             "readonly": false,
                             "type": "MessagePassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the text's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -32300,6 +33167,14 @@
                             "type": "MessagesPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "transitionOptions",
@@ -32412,6 +33287,20 @@
                             "readonly": false,
                             "type": "MessagesPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the button icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MessagesPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -32497,6 +33386,13 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -32513,6 +33409,9 @@
             "values": {
                 "MessagesPassThroughType": {
                     "values": "PassThroughType<T, MessagesPassThroughMethodOptions>"
+                },
+                "MessagesPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -32925,6 +33824,14 @@
                             "type": "MultiSelectPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "removeIcon",
@@ -33516,6 +34423,20 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -33755,6 +34676,9 @@
             "values": {
                 "MultiSelectPassThroughType": {
                     "values": "PassThroughType<T, MultiSelectPassThroughMethodOptions>"
+                },
+                "MultiSelectPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -33871,6 +34795,14 @@
                             "type": "MultiStateCheckboxPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -34026,6 +34958,13 @@
                             "readonly": false,
                             "type": "MultiStateCheckboxPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the sr only aria's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -34316,6 +35255,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -34534,6 +35481,13 @@
                             "readonly": false,
                             "type": "OrderListPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the item's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -34644,6 +35598,14 @@
                             "type": "OrganizationChartPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "selection",
@@ -34940,6 +35902,13 @@
                             "readonly": false,
                             "type": "OrganizationChartPassThroughType<HTMLAttributes<HTMLTableCellElement>>",
                             "description": "Uses to pass attributes to the nodeCell's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -35155,6 +36124,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "showCloseIcon",
                             "optional": true,
                             "readonly": false,
@@ -35252,6 +36229,20 @@
                             "readonly": false,
                             "type": "OverlayPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the close icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "OverlayPanelPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -35290,6 +36281,9 @@
             "values": {
                 "OverlayPanelPassThroughType": {
                     "values": "PassThroughType<T, OverlayPanelPassThroughMethodOptions>"
+                },
+                "OverlayPanelPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -35501,6 +36495,14 @@
                             "type": "PaginatorPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "rightContent",
@@ -35775,6 +36777,20 @@
                             "readonly": false,
                             "type": "PaginatorPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the end's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PaginatorPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -36437,6 +37453,9 @@
                 "PaginatorPassThroughType": {
                     "values": "PassThroughType<T, PaginatorPassThroughMethodOptions>"
                 },
+                "PaginatorPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
+                },
                 "PaginatorTemplate": {
                     "values": "PaginatorTemplateOptions | string | undefined",
                     "description": "Custom template for the paginator."
@@ -36584,6 +37603,14 @@
                             "type": "PanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "toggleable",
@@ -36896,6 +37923,20 @@
                             "readonly": false,
                             "type": "PanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the footer's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -36928,6 +37969,9 @@
             "values": {
                 "PanelPassThroughType": {
                     "values": "PassThroughType<T, PanelPassThroughMethodOptions>"
+                },
+                "PanelPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -36982,6 +38026,14 @@
                             "type": "PanelMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "submenuIcon",
@@ -37165,6 +38217,20 @@
                             "readonly": false,
                             "type": "PanelMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PanelMenuPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -37218,6 +38284,9 @@
             "values": {
                 "PanelMenuPassThroughType": {
                     "values": "PassThroughType<T, PanelMenuPassThroughMethodOptions>"
+                },
+                "PanelMenuPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -37461,6 +38530,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "showIcon",
                             "optional": true,
                             "readonly": false,
@@ -37685,6 +38762,20 @@
                             "readonly": false,
                             "type": "PasswordPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the info's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PasswordPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -37758,6 +38849,9 @@
             "values": {
                 "PasswordPassThroughType": {
                     "values": "PassThroughType<T, PasswordPassThroughMethodOptions>"
+                },
+                "PasswordPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -37940,6 +39034,14 @@
                             "type": "PickListPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "showSourceControls",
@@ -38483,6 +39585,13 @@
                             "readonly": false,
                             "type": "PickListPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the buttons' DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -38688,6 +39797,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "showValue",
                             "optional": true,
                             "readonly": false,
@@ -38787,6 +39904,13 @@
                             "readonly": false,
                             "type": "ProgressBarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the label's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -38854,6 +39978,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "strokeWidth",
                             "optional": true,
                             "readonly": false,
@@ -38917,6 +40049,13 @@
                             "readonly": false,
                             "type": "ProgressSpinnerPassThroughType<HTMLAttributes<SVGCircleElement>>",
                             "description": "Uses to pass attributes to the circle's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -39038,6 +40177,14 @@
                             "type": "RadioButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "required",
@@ -39246,6 +40393,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -39373,6 +40527,14 @@
                             "type": "RatingPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -39553,6 +40715,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -39656,6 +40825,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "style",
                             "optional": true,
                             "readonly": false,
@@ -39711,6 +40888,13 @@
                             "readonly": false,
                             "type": "RowPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -39778,6 +40962,14 @@
                             "type": "ScrollPanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -39849,6 +41041,13 @@
                             "readonly": false,
                             "type": "ScrollPanelThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the vertical panel's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -39922,6 +41121,14 @@
                             "type": "ScrollTopPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "style",
@@ -40023,6 +41230,20 @@
                             "readonly": false,
                             "type": "ScrollTopPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ScrollTopPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -40048,6 +41269,9 @@
             "values": {
                 "ScrollTopPassThroughType": {
                     "values": "PassThroughType<T, ScrollTopPassThroughMethodOptions>"
+                },
+                "ScrollTopPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -40156,6 +41380,14 @@
                             "type": "SelectButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "tabIndex",
@@ -40328,6 +41560,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -40543,6 +41782,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "showCloseIcon",
                             "optional": true,
                             "readonly": false,
@@ -40669,6 +41916,20 @@
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SidebarPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -40694,6 +41955,9 @@
             "values": {
                 "SidebarPassThroughType": {
                     "values": "PassThroughType<T, SidebarPassThroughMethodOptions>"
+                },
+                "SidebarPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -40756,6 +42020,14 @@
                             "type": "SkeletonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "shape",
@@ -40823,6 +42095,13 @@
                             "readonly": false,
                             "type": "SkeletonPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -41012,6 +42291,14 @@
                             "type": "SlideMenuPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "submenuIcon",
@@ -41233,6 +42520,20 @@
                             "readonly": false,
                             "type": "SlideMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SlideMenuPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -41279,6 +42580,9 @@
             "values": {
                 "SlideMenuPassThroughType": {
                     "values": "PassThroughType<T, SlideMenuPassThroughMethodOptions>"
+                },
+                "SlideMenuPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -41357,6 +42661,14 @@
                             "type": "SliderPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "range",
@@ -41511,6 +42823,13 @@
                             "readonly": false,
                             "type": "SliderPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the handle's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -41660,6 +42979,14 @@
                             "type": "SpeedDialPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "radius",
@@ -41838,6 +43165,13 @@
                             "readonly": false,
                             "type": "SpeedDialPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the mask's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -42099,6 +43433,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "raised",
                             "optional": true,
                             "readonly": false,
@@ -42315,6 +43657,20 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -42347,6 +43703,9 @@
             "values": {
                 "SplitButtonPassThroughType": {
                     "values": "PassThroughType<T, SplitButtonPassThroughMethodOptions>"
+                },
+                "SplitButtonPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -42394,6 +43753,14 @@
                             "type": "SplitterPanelPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "size",
@@ -42465,6 +43832,14 @@
                             "type": "SplitterPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "stateKey",
@@ -42583,6 +43958,13 @@
                             "readonly": false,
                             "type": "SplitterPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the root's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -42630,6 +44012,13 @@
                             "readonly": false,
                             "type": "SplitterPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the gutter handler's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -42698,6 +44087,14 @@
                             "type": "StepsPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "readOnly",
@@ -42837,6 +44234,13 @@
                             "readonly": false,
                             "type": "StepsPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -43026,6 +44430,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
@@ -43188,6 +44600,13 @@
                             "readonly": false,
                             "type": "TabMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the inkbar's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -43350,6 +44769,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "rightIcon",
                             "optional": true,
                             "readonly": false,
@@ -43441,6 +44868,14 @@
                             "type": "TabViewPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "renderActiveOnly",
@@ -43736,6 +45171,13 @@
                             "readonly": false,
                             "type": "TabPanelPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -43936,6 +45378,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "rounded",
                             "optional": true,
                             "readonly": false,
@@ -44015,6 +45465,13 @@
                             "readonly": false,
                             "type": "TagPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the value's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -44078,6 +45535,14 @@
                             "type": "TerminalPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -44212,6 +45677,13 @@
                             "readonly": false,
                             "type": "TerminalPassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the command text's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -44412,6 +45884,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "scrollHeight",
                             "optional": true,
                             "readonly": false,
@@ -44572,6 +46052,20 @@
                             "readonly": false,
                             "type": "TieredMenuPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the separator's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TieredMenuPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -44618,6 +46112,9 @@
             "values": {
                 "TieredMenuPassThroughType": {
                     "values": "PassThroughType<T, TieredMenuPassThroughMethodOptions>"
+                },
+                "TieredMenuPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -44704,6 +46201,14 @@
                             "type": "TimelinePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -44797,6 +46302,13 @@
                             "readonly": false,
                             "type": "TimelinePassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the content's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -44912,6 +46424,14 @@
                             "type": "ToastPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "transitionOptions",
@@ -45056,6 +46576,20 @@
                             "readonly": false,
                             "type": "ToastPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "Uses to pass attributes to the close button icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ToastPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -45126,6 +46660,13 @@
                             "readonly": false,
                             "type": "ToastPassThroughOptions",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "unstyled",
@@ -45259,6 +46800,13 @@
                             "readonly": false,
                             "type": "Omit<ToastPassThroughOptions, \"message\">",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         }
                     ],
                     "callbacks": []
@@ -45270,6 +46818,9 @@
             "values": {
                 "ToastPassThroughType": {
                     "values": "PassThroughType<T, ToastPassThroughMethodOptions>"
+                },
+                "ToastPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -45362,6 +46913,14 @@
                             "type": "ToggleButtonPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "tooltip",
@@ -45514,6 +47073,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughOptions",
                             "description": "Uses to pass attributes tooltip's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -45618,6 +47184,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "right",
                             "optional": true,
                             "readonly": false,
@@ -45697,6 +47271,13 @@
                             "readonly": false,
                             "type": "ToolbarPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the right's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -45950,6 +47531,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "showDelay",
                             "optional": true,
                             "readonly": false,
@@ -46104,6 +47693,13 @@
                             "readonly": false,
                             "type": "TooltipPassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the text's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -46322,6 +47918,14 @@
                             "type": "TooltipPassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         }
                     ]
                 }
@@ -46759,6 +48363,14 @@
                             "type": "TreePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "selectionKeys",
@@ -47298,6 +48910,13 @@
                             "readonly": false,
                             "type": "TreePassThroughType<HTMLAttributes<HTMLLIElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -48083,6 +49702,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "resetFilterOnHide",
                             "optional": true,
                             "readonly": false,
@@ -48526,6 +50153,20 @@
                             "readonly": false,
                             "type": "TreeSelectPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
                             "description": "uses to pass attributes to the clear icon's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -48701,6 +50342,9 @@
             "values": {
                 "TreeSelectPassThroughType": {
                     "values": "PassThroughType<T, TreeSelectPassThroughMethodOptions>"
+                },
+                "TreeSelectPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -49073,6 +50717,14 @@
                             "type": "TreeTablePassThroughOptions",
                             "default": "",
                             "description": "Uses to pass attributes to DOM elements inside the component."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
                         },
                         {
                             "name": "removableSort",
@@ -50059,6 +51711,13 @@
                             "readonly": false,
                             "type": "TreeTablePassThroughType<HTMLAttributes<HTMLInputElement>>",
                             "description": "Uses to pass attributes to the hidden input's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -50451,6 +52110,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "readOnly",
                             "optional": true,
                             "readonly": false,
@@ -50622,6 +52289,13 @@
                             "readonly": false,
                             "type": "TriStateCheckboxPassThroughType<HTMLAttributes<HTMLSpanElement>>",
                             "description": "Uses to pass attributes to the sr only aria's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
@@ -51159,6 +52833,14 @@
                             "description": "Uses to pass attributes to DOM elements inside the component."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "default": "",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "resizeDelay",
                             "optional": true,
                             "readonly": false,
@@ -51376,6 +53058,13 @@
                             "readonly": false,
                             "type": "VirtualScrollerPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the spacer's DOM element."
+                        },
+                        {
+                            "name": "hooks",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ComponentHooks",
+                            "description": "Used to manage all lifecycle hooks"
                         }
                     ],
                     "callbacks": []
