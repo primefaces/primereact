@@ -14,13 +14,13 @@ import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
-export declare type GalleriaPassThroughType<T> = PassThroughType<T, GalleriaThroughMethodOptions>;
+export declare type GalleriaPassThroughType<T> = PassThroughType<T, GalleriaPassThroughMethodOptions>;
 export declare type GalleriaPassThroughTransitionType = ReactCSSTransitionProps | ((options: GalleriaPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface GalleriaThroughMethodOptions {
+export interface GalleriaPassThroughMethodOptions {
     props: GalleriaProps;
     state: GalleriaState;
 }
