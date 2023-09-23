@@ -13,13 +13,13 @@ import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
-export declare type ImagePassThroughType<T> = PassThroughType<T, ImageThroughMethodOptions>;
+export declare type ImagePassThroughType<T> = PassThroughType<T, ImagePassThroughMethodOptions>;
 export declare type ImagePassThroughTransitionType = ReactCSSTransitionProps | ((options: ImagePassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface ImageThroughMethodOptions {
+export interface ImagePassThroughMethodOptions {
     props: ImageProps;
     state: ImageState;
 }

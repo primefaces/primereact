@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType, TemplateType } from '../utils';
 
 export declare type ChipPassThroughType<T> = PassThroughType<T, ChipPassThroughMethodOptions>;
