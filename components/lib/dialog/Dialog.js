@@ -324,6 +324,16 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         focusElementOnHide.current = null;
     };
 
+    const enableDocumentSettings = () => {
+        bindGlobalListeners();
+        updateGlobalDialogsRegistry(true)
+    };
+
+    const disableDocumentSettings = () => {
+        unbindGlobalListeners();
+        updateGlobalDialogsRegistry(false)
+    };
+
     const updateScrollBlocker = () => {
         // Scroll should be unblocked if there is at least one dialog that blocks scrolling:
         const isThereAnyDialogThatBlocksScrolling = (
@@ -373,16 +383,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         // p-overflow-hidden class is properly added/removed:
         updateScrollBlocker()
     }
-
-    const enableDocumentSettings = () => {
-        bindGlobalListeners();
-        updateGlobalDialogsRegistry(true)
-    };
-
-    const disableDocumentSettings = () => {
-        unbindGlobalListeners();
-        updateGlobalDialogsRegistry(false)
-    };
 
     const bindGlobalListeners = () => {
         if (props.draggable) {
