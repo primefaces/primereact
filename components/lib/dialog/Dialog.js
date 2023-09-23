@@ -319,28 +319,24 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
-        updateGlobalDialogsRegistry(true)
+        updateGlobalDialogsRegistry(true);
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
-        updateGlobalDialogsRegistry(false)
+        updateGlobalDialogsRegistry(false);
     };
 
     const updateScrollBlocker = () => {
         // Scroll should be unblocked if there is at least one dialog that blocks scrolling:
-        const isThereAnyDialogThatBlocksScrolling = (
-            document.primeDialogParams &&
-            document.primeDialogParams.some(i => i.hasBlockScroll)
-        )
+        const isThereAnyDialogThatBlocksScrolling = document.primeDialogParams && document.primeDialogParams.some((i) => i.hasBlockScroll);
 
         if (isThereAnyDialogThatBlocksScrolling) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden')
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
+        } else {
+            DomHandler.removeClass(document.body, 'p-overflow-hidden');
         }
-        else {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden')
-        }
-    }
+    };
 
     const updateGlobalDialogsRegistry = (isMounted) => {
         // Update current dialog info in global registry if it is mounted:
@@ -349,22 +345,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
             // Create registry if not yet created:
             if (!document.primeDialogParams) {
-                document.primeDialogParams = []
+                document.primeDialogParams = [];
             }
 
-            const currentDialogIndexInRegistry = document.primeDialogParams.findIndex(
-                dialogInRegistry => dialogInRegistry.id === idState
-            );
+            const currentDialogIndexInRegistry = document.primeDialogParams.findIndex((dialogInRegistry) => dialogInRegistry.id === idState);
 
             if (currentDialogIndexInRegistry === -1) {
-                document.primeDialogParams = [...document.primeDialogParams, newParam]
-            }
-            else {
-                document.primeDialogParams = document.primeDialogParams.toSpliced(
-                    currentDialogIndexInRegistry,
-                    1,
-                    newParam
-                )
+                document.primeDialogParams = [...document.primeDialogParams, newParam];
+            } else {
+                document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
             }
         }
         // Or remove it from global registry if unmounted:
@@ -374,8 +363,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         // Always update scroll blocker after dialog registry - this way we ensure that
         // p-overflow-hidden class is properly added/removed:
-        updateScrollBlocker()
-    }
+        updateScrollBlocker();
+    };
 
     const bindGlobalListeners = () => {
         if (props.draggable) {
@@ -451,8 +440,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     }, [maskVisibleState]);
 
     useUpdateEffect(() => {
-        updateGlobalDialogsRegistry(true)
-    }, [shouldBlockScroll])
+        updateGlobalDialogsRegistry(true);
+    }, [shouldBlockScroll]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
