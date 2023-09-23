@@ -286,13 +286,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         dialogRef.current.style.margin = '';
     };
 
-    const getPositionClass = () => {
-        const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
-        const pos = positions.find((item) => item === props.position || item.replace('-', '') === props.position);
-
-        return pos ? `p-dialog-${pos}` : '';
-    };
-
     const onEnter = () => {
         dialogRef.current.setAttribute(attributeSelector.current, '');
     };
@@ -367,11 +360,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 document.primeDialogParams = [...document.primeDialogParams, newParam]
             }
             else {
-                // Is it OK to mutate this array?
-                // If mutation is not desired - try to use modern
-                // `.toSpliced` method
-                // (see here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced)
-                document.primeDialogParams[currentDialogIndexInRegistry] = newParam
+                document.primeDialogParams = document.primeDialogParams.toSpliced(
+                    currentDialogIndexInRegistry,
+                    1,
+                    newParam
+                )
             }
         }
         // Or remove it from global registry if unmounted:
