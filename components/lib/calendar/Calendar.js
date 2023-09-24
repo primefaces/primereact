@@ -38,7 +38,6 @@ export const Calendar = React.memo(
         const inputRef = React.useRef(props.inputRef);
         const navigation = React.useRef(null);
         const ignoreFocusFunctionality = React.useRef(false);
-        const isKeydown = React.useRef(false);
         const timePickerTimer = React.useRef(null);
         const viewStateChanged = React.useRef(false);
         const touchUIMask = React.useRef(null);
@@ -97,8 +96,6 @@ export const Calendar = React.memo(
         };
 
         const onInputKeyDown = (event) => {
-            isKeydown.current = true;
-
             switch (event.which) {
                 //escape
                 case 27: {
@@ -120,13 +117,6 @@ export const Calendar = React.memo(
         };
 
         const onUserInput = (event) => {
-            // IE 11 Workaround for input placeholder
-            if (!isKeydown.current) {
-                return;
-            }
-
-            isKeydown.current = false;
-
             updateValueOnInput(event, event.target.value);
             props.onInput && props.onInput(event);
         };

@@ -39,7 +39,6 @@ export const FileUpload = React.memo(
         const fileInputRef = React.useRef(null);
         const messagesRef = React.useRef(null);
         const contentRef = React.useRef(null);
-        const duplicateIEEvent = React.useRef(false);
         const uploadedFileCount = React.useRef(0);
         const hasFiles = ObjectUtils.isNotEmpty(filesState);
         const hasUploadedFiles = ObjectUtils.isNotEmpty(uploadedFilesState);
@@ -93,13 +92,6 @@ export const FileUpload = React.memo(
             }
         };
 
-        const clearIEInput = () => {
-            if (fileInputRef.current) {
-                duplicateIEEvent.current = true; //IE11 fix to prevent onFileChange trigger again
-                fileInputRef.current.value = '';
-            }
-        };
-
         const formatSize = (bytes) => {
             const k = 1024;
             const dm = 3;
@@ -118,12 +110,6 @@ export const FileUpload = React.memo(
         const onFileSelect = (event) => {
             // give caller a chance to stop the selection
             if (props.onBeforeSelect && props.onBeforeSelect({ originalEvent: event, files: filesState }) === false) {
-                return;
-            }
-
-            if (event.type !== 'drop' && isIE11() && duplicateIEEvent.current) {
-                duplicateIEEvent.current = false;
-
                 return;
             }
 
@@ -157,11 +143,7 @@ export const FileUpload = React.memo(
                 props.onSelect({ originalEvent: event, files: currentFiles });
             }
 
-            if (event.type !== 'drop' && isIE11()) {
-                clearIEInput();
-            } else {
-                clearInput();
-            }
+            clearInput();
 
             if (props.mode === 'basic' && currentFiles.length > 0) {
                 fileInputRef.current.style.display = 'none';
@@ -170,10 +152,6 @@ export const FileUpload = React.memo(
 
         const isFileSelected = (file) => {
             return filesState.some((f) => f.name + f.type + f.size === file.name + file.type + file.size);
-        };
-
-        const isIE11 = () => {
-            return !!window['MSInputMethodContext'] && !!document['documentMode'];
         };
 
         const validate = (file) => {
