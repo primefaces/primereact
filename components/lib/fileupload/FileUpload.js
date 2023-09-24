@@ -730,7 +730,7 @@ export const FileUpload = React.memo(
                     className: classNames(chooseOptions.className, cx('basicButton', { hasFiles, disabled, focusedState })),
                     style: chooseOptions.style,
                     tabIndex: 0,
-                    onMouseUp: onSimpleUploaderClick,
+                    onClick: onSimpleUploaderClick,
                     onKeyDown: (e) => onKeyDown(e),
                     onFocus,
                     onBlur
