@@ -8,9 +8,93 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+
+export declare type ColorPickerPassThroughType<T> = PassThroughType<T, ColorPickerPassThroughMethodOptions>;
+export declare type ColorPickerPassThroughTransitionType = ReactCSSTransitionProps | ((options: ColorPickerPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ColorPickerPassThroughMethodOptions {
+    props: ColorPickerProps;
+    state: ColorPickerState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ColorPickerProps.pt}
+ */
+export interface ColorPickerPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the selector's DOM element.
+     */
+    selector?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the color's DOM element.
+     */
+    color?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the color handle's DOM element.
+     */
+    colorHandle?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hue's DOM element.
+     */
+    hue?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hue handle's DOM element.
+     */
+    hueHandle?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: ColorPickerPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in ColorPicker component.
+ */
+export interface ColorPickerState {
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+}
 
 /**
  * RGB type of value
@@ -147,6 +231,21 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ColorPickerPassThroughOptions}
+     */
+    pt?: ColorPickerPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

@@ -13,6 +13,8 @@ export default class PrimeReact {
 
     static autoZIndex = true;
 
+    static hideOverlaysOnDocumentScrolling = false;
+
     static nonce = null;
 
     static nullSortOrder = 1;
@@ -24,6 +26,8 @@ export default class PrimeReact {
         tooltip: 1100,
         toast: 1200
     };
+
+    static pt = undefined;
 
     static filterMatchModeOptions = {
         text: [FilterMatchMode.STARTS_WITH, FilterMatchMode.CONTAINS, FilterMatchMode.NOT_CONTAINS, FilterMatchMode.ENDS_WITH, FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS],

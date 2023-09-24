@@ -1,26 +1,29 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import PrimeReact from '../lib/api/PrimeReact';
-import { classNames } from '../lib/utils/ClassNames';
+import { useContext, useEffect, useState } from 'react';
+import { classNames } from '../lib/utils/Utils';
 import NewsSection from '../news/newssection';
 import AppContentContext from './appcontentcontext';
 import Config from './config';
 import Footer from './footer';
 import Menu from './menu';
 import Topbar from './topbar';
+import { PrimeReactContext } from '../lib/api/PrimeReactContext';
+import PrimeReact from '../lib/api/Api';
 
 export default function Layout(props) {
-    const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(true);
+    const [inputStyle, setInputStyle] = useState('outlined');
+    const [disabled, setDisabled] = useState(false);
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
     const router = useRouter();
+    const context = useContext(PrimeReactContext);
 
     const wrapperClassName = classNames('layout-wrapper', {
         'layout-news-active': props.newsActive,
-        'p-input-filled': inputStyle === 'filled',
-        'p-ripple-disabled': ripple === false,
+        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false,
         'layout-wrapper-dark': props.dark,
         'layout-wrapper-light': !props.dark
     });
@@ -45,11 +48,23 @@ export default function Layout(props) {
     };
 
     const onInputStyleChange = (value) => {
+        if (context) {
+            context.setInputStyle(value);
+        }
+
         setInputStyle(value);
     };
 
     const onRippleChange = (value) => {
+        if (context) {
+            context.setRipple(value);
+        }
+
         setRipple(value);
+    };
+
+    const onHideOverlaysOnDocumentScrolling = (value) => {
+        setHideOverlaysOnDocumentScrolling(value);
     };
 
     const onConfigHide = () => {
@@ -59,6 +74,16 @@ export default function Layout(props) {
     const onConfigButtonClick = () => {
         setConfigActive(true);
     };
+
+    useEffect(() => {
+        if (context) {
+            context.setRipple(ripple);
+            context.setInputStyle(inputStyle);
+        }
+
+        setRipple(true);
+        setInputStyle('outlined');
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (sidebarActive) document.body.classList.add('blocked-scroll');
@@ -77,7 +102,7 @@ export default function Layout(props) {
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    PrimeReact.ripple = true;
+    PrimeReact.ripple = ripple;
 
     return (
         <div className={wrapperClassName}>
@@ -106,9 +131,12 @@ export default function Layout(props) {
                 value={{
                     ripple: ripple,
                     inputStyle: inputStyle,
+                    disabled: disabled,
                     darkTheme: props.dark,
+                    setDisabled: setDisabled,
                     onInputStyleChange: onInputStyleChange,
-                    onRippleChange: onRippleChange
+                    onRippleChange: onRippleChange,
+                    onHideOverlaysOnDocumentScrolling: onHideOverlaysOnDocumentScrolling
                 }}
             >
                 <div className="layout-content">
@@ -117,7 +145,17 @@ export default function Layout(props) {
                         <Footer></Footer>
                     </div>
                 </div>
-                <Config ripple={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange} onThemeChange={onThemeChange} active={configActive} onHide={onConfigHide} />
+                <Config
+                    ripple={ripple}
+                    inputStyle={inputStyle}
+                    disabled={disabled}
+                    onRippleChange={onRippleChange}
+                    onHideOverlaysOnDocumentScrolling={onHideOverlaysOnDocumentScrolling}
+                    onInputStyleChange={onInputStyleChange}
+                    onThemeChange={onThemeChange}
+                    active={configActive}
+                    onHide={onConfigHide}
+                />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
         </div>

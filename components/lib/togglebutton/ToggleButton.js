@@ -1,17 +1,25 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ToggleButtonBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = ToggleButtonBase.getProps(inProps, context);
         const elementRef = React.useRef(null);
+        const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
+            props
+        });
+
+        useHandleStyle(ToggleButtonBase.css.styles, isUnstyled, { name: 'togglebutton' });
+
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
-        const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
+        const hasIcon = props.onIcon && props.offIcon;
         const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
@@ -44,12 +52,14 @@ export const ToggleButton = React.memo(
 
         const createIcon = () => {
             if (hasIcon) {
-                const iconClassName = classNames('p-button-icon p-c', {
-                    'p-button-icon-left': props.iconPos === 'left' && label,
-                    'p-button-icon-right': props.iconPos === 'right' && label
-                });
+                const iconProps = mergeProps(
+                    {
+                        className: cx('icon', { label })
+                    },
+                    ptm('icon')
+                );
 
-                return IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                return IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
             }
 
             return null;
@@ -69,39 +79,41 @@ export const ToggleButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const tabIndex = props.disabled ? -1 : props.tabIndex;
-        const otherProps = ToggleButtonBase.getOtherProps(props);
-        const className = classNames(
-            'p-button p-togglebutton p-component',
-            {
-                'p-button-icon-only': hasIcon && !hasLabel,
-                'p-highlight': props.checked,
-                'p-disabled': props.disabled
-            },
-            props.className
-        );
         const iconElement = createIcon();
+
+        const labelProps = mergeProps(
+            {
+                className: cx('label')
+            },
+            ptm('label')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: cx('root', { hasIcon, hasLabel }),
+                style: props.style,
+                onClick: toggle,
+                onFocus: props.onFocus,
+                onBlur: props.onBlur,
+                onKeyDown: onKeyDown,
+                tabIndex: tabIndex,
+                role: 'button',
+                'aria-pressed': props.checked
+            },
+            ToggleButtonBase.getOtherProps(props),
+            ptm('root')
+        );
 
         return (
             <>
-                <div
-                    ref={elementRef}
-                    id={props.id}
-                    className={className}
-                    style={props.style}
-                    {...otherProps}
-                    onClick={toggle}
-                    onFocus={props.onFocus}
-                    onBlur={props.onBlur}
-                    onKeyDown={onKeyDown}
-                    tabIndex={tabIndex}
-                    role="button"
-                    aria-pressed={props.checked}
-                >
+                <div {...rootProps}>
                     {iconElement}
-                    <span className="p-button-label">{label}</span>
+                    <span {...labelProps}>{label}</span>
                     <Ripple />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

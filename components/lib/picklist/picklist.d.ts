@@ -8,7 +8,142 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type PickListPassThroughType<T> = PassThroughType<T, PickListPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface PickListPassThroughMethodOptions {
+    props: PickListProps;
+    state: PickListState;
+    context: PickListContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link PickListProps.pt}
+ */
+export interface PickListPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the source controls' DOM element.
+     */
+    controls?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveUpButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveTopButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveDownButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveBottomButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the source wrapper's DOM element.
+     */
+    listWrapper?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the source header's DOM element.
+     */
+    header?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    buttons?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveToTargetButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveAllToTargetButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveToSourceButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveAllToSourceButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    filterIcon?: PickListPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    filter?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    filterInput?: PickListPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    filterContainer?: PickListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    item?: PickListPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the buttons' DOM element.
+     */
+    list?: PickListPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+export interface PickListState {
+    /**
+     * Current source selection state as a [].
+     */
+    sourceSelection: [];
+    /**
+     * Current target selection state as a [].
+     */
+    targetSelection: [];
+    /**
+     * Current source filter state as a string.
+     */
+    sourceFilterValue: string;
+    /**
+     * Current source target filter state as a string.
+     */
+    targetFilterValue: string;
+    /**
+     * Current attribute selector state as a any.
+     */
+    attributeSelector: any;
+}
+
+/**
+ * Defines current options in PickList component.
+ */
+export interface PickListContext {
+    /**
+     * Current selection state of the item as a boolean.
+     */
+    selected: boolean;
+}
 
 /**
  * Custom picklist event.
@@ -331,6 +466,21 @@ export interface PickListProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {PickListPassThroughOptions}
+     */
+    pt?: PickListPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

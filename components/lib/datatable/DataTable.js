@@ -1,12 +1,13 @@
 import * as React from 'react';
-import PrimeReact, { FilterMatchMode, FilterOperator, FilterService } from '../api/Api';
+import PrimeReact, { FilterMatchMode, FilterOperator, FilterService, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ArrowDownIcon } from '../icons/arrowdown';
 import { ArrowUpIcon } from '../icons/arrowup';
 import { SpinnerIcon } from '../icons/spinner';
 import { Paginator } from '../paginator/Paginator';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { DataTableBase } from './DataTableBase';
 import { TableBody } from './TableBody';
@@ -14,8 +15,8 @@ import { TableFooter } from './TableFooter';
 import { TableHeader } from './TableHeader';
 
 export const DataTable = React.forwardRef((inProps, ref) => {
-    const props = DataTableBase.getProps(inProps);
-
+    const context = React.useContext(PrimeReactContext);
+    const props = DataTableBase.getProps(inProps, context);
     const [firstState, setFirstState] = React.useState(props.first);
     const [rowsState, setRowsState] = React.useState(props.rows);
     const [sortFieldState, setSortFieldState] = React.useState(props.sortField);
@@ -27,6 +28,28 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const [editingMetaState, setEditingMetaState] = React.useState({});
     const [d_rowsState, setD_rowsState] = React.useState(props.rows);
     const [d_filtersState, setD_filtersState] = React.useState({});
+    const metaData = {
+        props,
+        state: {
+            first: firstState,
+            rows: rowsState,
+            sortField: sortFieldState,
+            sortOrder: sortOrderState,
+            multiSortMeta: multiSortMetaState,
+            filters: filtersState,
+            columnOrder: columnOrderState,
+            groupRowsSortMeta: groupRowsSortMetaState,
+            editingMeta: editingMetaState,
+            d_rows: d_rowsState,
+            d_filters: d_filtersState
+        },
+        context: {
+            scrollable: props.scrollable
+        }
+    };
+    const ptCallbacks = DataTableBase.setMetaData(metaData);
+
+    useHandleStyle(DataTableBase.css.styles, ptCallbacks.isUnstyled, { name: 'datatable' });
     const attributeSelector = React.useRef('');
     const elementRef = React.useRef(null);
     const tableRef = React.useRef(null);
@@ -358,6 +381,26 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const addColumnWidthStyles = (widths) => {
+        createStyleElement();
+        let innerHTML = '';
+        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+
+        widths.forEach((width, index) => {
+            let style = `width: ${width}px !important; max-width: ${width}px !important`;
+
+            innerHTML += `
+                ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
+                ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
+                ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                    ${style}
+                }
+            `;
+        });
+
+        styleElement.current.innerHTML = innerHTML;
+    };
+
     const restoreColumnWidths = () => {
         if (columnWidthsState.current) {
             let widths = columnWidthsState.current.split(',');
@@ -365,28 +408,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             if (props.columnResizeMode === 'expand' && tableWidthState.current) {
                 tableRef.current.style.width = tableWidthState.current;
                 tableRef.current.style.minWidth = tableWidthState.current;
-                elementRef.current.style.width = tableWidthState.current;
             }
 
             if (ObjectUtils.isNotEmpty(widths)) {
-                createStyleElement();
-
-                let innerHTML = '';
-                let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
-
-                widths.forEach((width, index) => {
-                    let style = `width: ${width}px !important; max-width: ${width}px !important`;
-
-                    innerHTML += `
-                        ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                        ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                        ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
-                            ${style}
-                        }
-                    `;
-                });
-
-                styleElement.current.innerHTML = innerHTML;
+                addColumnWidthStyles(widths);
             }
         }
     };
@@ -433,7 +458,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             const val = ObjectUtils.isNotEmpty(props.frozenValue) ? [...props.frozenValue, ...data] : data;
             const selectableVal = getSelectableData(val);
 
-            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => props.selection.some((s) => isEquals(s, sv)));
+            return ObjectUtils.isNotEmpty(selectableVal) && props.selection && selectableVal.every((sv) => ObjectUtils.isArray(props.selection) && props.selection.some((s) => isEquals(s, sv)));
         }
     };
 
@@ -493,7 +518,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const onColumnResize = (event) => {
         const containerLeft = DomHandler.getOffset(elementRef.current).left;
 
-        DomHandler.addClass(elementRef.current, 'p-unselectable-text');
+        elementRef.current.setAttribute('data-p-unselectable-text', true);
+        !ptCallbacks.isUnstyled() && DomHandler.addClass(elementRef.current, 'p-unselectable-text');
         resizeHelperRef.current.style.height = elementRef.current.offsetHeight + 'px';
         resizeHelperRef.current.style.top = 0 + 'px';
         resizeHelperRef.current.style.left = event.pageX - containerLeft + elementRef.current.scrollLeft + 'px';
@@ -552,7 +578,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         resizeHelperRef.current.style.display = 'none';
         resizeColumn.current = null;
         resizeColumnElement.current = null;
-        DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
+        elementRef.current.setAttribute('data-p-unselectable-text', 'true');
+        !ptCallbacks.isUnstyled() && DomHandler.removeClass(elementRef.current, 'p-unselectable-text');
 
         unbindColumnResizeEvents();
     };
@@ -602,7 +629,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const { originalEvent: event, column } = e;
 
         if (props.reorderableColumns && getColumnProp(column, 'reorderable') !== false && !getColumnProp(column, 'frozen')) {
-            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.hasClass(event.target, 'p-column-resizer')) event.currentTarget.draggable = false;
+            if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.getAttribute(event.target, '[data-pc-section="columnresizer"]')) event.currentTarget.draggable = false;
             else event.currentTarget.draggable = true;
         }
     };
@@ -665,15 +692,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const dropHeaderOffset = DomHandler.getOffset(dropHeader);
                 const targetLeft = dropHeaderOffset.left - containerOffset.left;
                 const columnCenter = dropHeaderOffset.left + dropHeader.offsetWidth / 2;
+                let dragIndex = DomHandler.index(draggedColumnElement.current);
+                let dropIndex = DomHandler.index(findParentHeader(event.currentTarget));
 
                 reorderIndicatorUpRef.current.style.top = dropHeaderOffset.top - containerOffset.top - (colReorderIconHeight.current - 1) + 'px';
                 reorderIndicatorDownRef.current.style.top = dropHeaderOffset.top - containerOffset.top + dropHeader.offsetHeight + 'px';
 
-                if (event.pageX > columnCenter) {
+                if (event.pageX > columnCenter && dragIndex < dropIndex) {
                     reorderIndicatorUpRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     reorderIndicatorDownRef.current.style.left = targetLeft + dropHeader.offsetWidth - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     dropPosition.current = 1;
-                } else {
+                } else if (dragIndex > dropIndex) {
                     reorderIndicatorUpRef.current.style.left = targetLeft - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     reorderIndicatorDownRef.current.style.left = targetLeft - Math.ceil(colReorderIconWidth.current / 2) + 'px';
                     dropPosition.current = -1;
@@ -714,6 +743,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let isSameColumn = (col1, col2) => (getColumnProp(col1, 'columnKey') || getColumnProp(col2, 'columnKey') ? ObjectUtils.equals(col1.props, col2.props, 'columnKey') : ObjectUtils.equals(col1.props, col2.props, 'field'));
                 let dragColIndex = columns.findIndex((child) => isSameColumn(child, draggedColumn.current));
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
+                let widths = [];
+                let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
+
+                headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
+                const movedItem = widths.find((items, index) => index === dragColIndex);
+                const remainingItems = widths.filter((items, index) => index !== dragColIndex);
+                const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
+
+                addColumnWidthStyles(reorderedWidths);
 
                 if (dropColIndex < dragColIndex && dropPosition.current === 1) {
                     dropColIndex++;
@@ -753,12 +791,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const createStyleElement = () => {
-        styleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+        styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
     };
 
     const createResponsiveStyle = () => {
         if (!responsiveStyleElement.current) {
-            responsiveStyleElement.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+            responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
             let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
             let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
@@ -892,8 +930,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         return props.removableSort ? (props.defaultSortOrder === currentOrder ? currentOrder * -1 : 0) : currentOrder * -1;
     };
 
-    const compareValuesOnSort = (value1, value2, order) => {
-        return ObjectUtils.sort(value1, value2, order, PrimeReact.locale, PrimeReact.nullSortOrder);
+    const compareValuesOnSort = (value1, value2, comparator, order) => {
+        return ObjectUtils.sort(value1, value2, order, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
     };
 
     const addSortMeta = (meta, multiSortMeta) => {
@@ -927,11 +965,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (columnSortable.current && columnSortFunction.current) {
             value = columnSortFunction.current({ data, field, order });
         } else {
-            value.sort((data1, data2) => {
-                const value1 = ObjectUtils.resolveFieldData(data1, field);
-                const value2 = ObjectUtils.resolveFieldData(data2, field);
+            // performance optimization to prevent resolving field data in each loop
+            const lookupMap = new Map();
+            const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
 
-                return compareValuesOnSort(value1, value2, order);
+            for (let item of data) {
+                lookupMap.set(item, ObjectUtils.resolveFieldData(item, field));
+            }
+
+            value.sort((data1, data2) => {
+                const value1 = lookupMap.get(data1);
+                const value2 = lookupMap.get(data2);
+
+                return compareValuesOnSort(value1, value2, comparator, order);
             });
         }
 
@@ -962,15 +1008,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
             value = columnSortFunction.current({ data, field, order, multiSortMeta });
         } else {
+            const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
+
             value.sort((data1, data2) => {
-                return multisortField(data1, data2, multiSortMeta, 0);
+                return multisortField(data1, data2, multiSortMeta, 0, comparator);
             });
         }
 
         return value;
     };
 
-    const multisortField = (data1, data2, multiSortMeta, index) => {
+    const multisortField = (data1, data2, multiSortMeta, index, comparator) => {
         if (!multiSortMeta || !multiSortMeta[index]) {
             return;
         }
@@ -979,11 +1027,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const value2 = ObjectUtils.resolveFieldData(data2, multiSortMeta[index].field);
 
         // check if they are equal handling dates and locales
-        if (ObjectUtils.compare(value1, value2, PrimeReact.locale) === 0) {
-            return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1) : 0;
+        if (ObjectUtils.compare(value1, value2, comparator) === 0) {
+            return multiSortMeta.length - 1 > index ? multisortField(data1, data2, multiSortMeta, index + 1, comparator) : 0;
         }
 
-        return compareValuesOnSort(value1, value2, multiSortMeta[index].order);
+        return compareValuesOnSort(value1, value2, comparator, multiSortMeta[index].order);
     };
 
     const onFilterChange = (filters) => {
@@ -1010,15 +1058,36 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }, props.filterDelay);
     };
 
+    const getActiveFilters = (filters) => {
+        const removeEmptyFilters = ([key, value]) => {
+            if (value.constraints) {
+                const filteredConstraints = value.constraints.filter((constraint) => constraint.value !== null);
+
+                if (filteredConstraints.length > 0) {
+                    return [key, { ...value, constraints: filteredConstraints }];
+                }
+            } else if (value.value !== null) {
+                return [key, value];
+            }
+
+            return undefined;
+        };
+
+        const filterValidEntries = (entry) => entry !== undefined;
+        const entries = Object.entries(filters).map(removeEmptyFilters).filter(filterValidEntries);
+
+        return Object.fromEntries(entries);
+    };
+
     const filterLocal = (data, filters) => {
         if (!data) return;
 
-        filters = filters || {};
+        let activeFilters = getActiveFilters(filters) || {};
 
         let columns = getColumns();
         let filteredValue = [];
 
-        let isGlobalFilter = filters['global'] || props.globalFilter;
+        let isGlobalFilter = activeFilters['global'] || props.globalFilter;
         let globalFilterFieldsArray;
 
         if (isGlobalFilter) {
@@ -1030,15 +1099,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             let globalMatch = false;
             let localFiltered = false;
 
-            for (let prop in filters) {
+            for (let prop in activeFilters) {
                 if (prop === 'null') {
                     continue;
                 }
 
-                if (Object.prototype.hasOwnProperty.call(filters, prop) && prop !== 'global') {
+                if (Object.prototype.hasOwnProperty.call(activeFilters, prop) && prop !== 'global') {
                     localFiltered = true;
                     let filterField = prop;
-                    let filterMeta = filters[filterField];
+                    let filterMeta = activeFilters[filterField];
 
                     if (filterMeta.operator) {
                         for (let j = 0; j < filterMeta.constraints.length; j++) {
@@ -1060,11 +1129,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 }
             }
 
-            if (isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
+            if (localMatch && isGlobalFilter && !globalMatch && globalFilterFieldsArray) {
                 for (let j = 0; j < globalFilterFieldsArray.length; j++) {
                     let globalFilterField = globalFilterFieldsArray[j];
-                    let matchMode = filters['global'] ? filters['global'].matchMode : props.globalFilterMatchMode;
-                    let value = filters['global'] ? filters['global'].value : props.globalFilter;
+                    let matchMode = activeFilters['global'] ? activeFilters['global'].matchMode : props.globalFilterMatchMode;
+                    let value = activeFilters['global'] ? activeFilters['global'].value : props.globalFilter;
 
                     globalMatch = FilterService.filters[matchMode](ObjectUtils.resolveFieldData(data[i], globalFilterField), value, props.filterLocale);
 
@@ -1087,7 +1156,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             }
         }
 
-        if (filteredValue.length === props.value.length) {
+        if (filteredValue.length === props.value.length || Object.keys(activeFilters).length === 0) {
             filteredValue = data;
         }
 
@@ -1125,7 +1194,11 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 const field = getColumnProp(col, 'filterField') || getColumnProp(col, 'field');
                 const filterFunction = getColumnProp(col, 'filterFunction');
                 const dataType = getColumnProp(col, 'dataType');
-                const matchMode = getColumnProp(col, 'filterMatchMode') || (PrimeReact.filterMatchModeOptions[dataType] ? PrimeReact.filterMatchModeOptions[dataType][0] : FilterMatchMode.STARTS_WITH);
+                const matchMode =
+                    getColumnProp(col, 'filterMatchMode') ||
+                    ((context && context.filterMatchModeOptions[dataType]) || PrimeReact.filterMatchModeOptions[dataType]
+                        ? (context && context.filterMatchModeOptions[dataType][0]) || PrimeReact.filterMatchModeOptions[dataType][0]
+                        : FilterMatchMode.STARTS_WITH);
                 let constraint = { value: null, matchMode };
 
                 if (filterFunction) {
@@ -1264,6 +1337,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const closeEditingRows = () => {
+        DomHandler.find(document.body, '.p-row-editor-cancel').forEach((button, index) => {
+            setTimeout(() => {
+                button.click();
+            }, index * 5);
+        });
+    };
+
     const createEvent = (event) => {
         return {
             first: getFirst(),
@@ -1318,7 +1399,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
-        attributeSelector.current = UniqueComponentId();
+        if (elementRef.current) {
+            attributeSelector.current = UniqueComponentId();
+            elementRef.current.setAttribute(attributeSelector.current, '');
+        }
 
         //setFiltersState(cloneFilters(props.filters)); // Github #4248
         setD_filtersState(cloneFilters(props.filters));
@@ -1333,8 +1417,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     });
 
     useUpdateEffect(() => {
-        elementRef.current.setAttribute(attributeSelector.current, '');
-
         if (props.responsiveLayout === 'stack' && !props.scrollable) {
             createResponsiveStyle();
         }
@@ -1353,7 +1435,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.onValueChange) {
             props.onValueChange(processedData({ filters }));
         }
-    }, [props.filters]);
+    }, [props.filters, props.children]);
 
     useUpdateEffect(() => {
         if (isStateful()) {
@@ -1388,6 +1470,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         props,
         clearState,
         closeEditingCell,
+        closeEditingRows,
         exportCSV,
         filter,
         reset,
@@ -1404,11 +1487,22 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const createLoader = () => {
         if (props.loading) {
-            const iconClassName = 'p-datatable-loading-icon';
-            const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
-            const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const loadingIconProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('loadingIcon')
+                },
+                ptCallbacks.ptm('loadingIcon')
+            );
+            const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+            const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
+            const loadingOverlayProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('loadingOverlay')
+                },
+                ptCallbacks.ptm('loadingOverlay')
+            );
 
-            return <div className="p-datatable-loading-overlay p-component-overlay">{loadingIcon}</div>;
+            return <div {...loadingOverlayProps}>{loadingIcon}</div>;
         }
 
         return null;
@@ -1417,8 +1511,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createHeader = () => {
         if (props.header) {
             const content = ObjectUtils.getJSXElement(props.header, { props });
+            const headerProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('header')
+                },
+                ptCallbacks.ptm('header')
+            );
 
-            return <div className="p-datatable-header">{content}</div>;
+            return <div {...headerProps}>{content}</div>;
         }
 
         return null;
@@ -1440,6 +1540,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         return (
             <TableHeader
+                hostName="DataTable"
                 value={data}
                 tableProps={props}
                 columns={columns}
@@ -1475,6 +1576,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onColumnDrop={onColumnHeaderDrop}
                 rowGroupMode={props.rowGroupMode}
                 reorderableColumns={props.reorderableColumns}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
+                unstyled={props.unstyled}
             />
         );
     };
@@ -1485,80 +1589,87 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         const frozenBody = ObjectUtils.isNotEmpty(props.frozenValue) && (
             <TableBody
+                hostName="DataTable"
                 ref={frozenBodyRef}
-                value={props.frozenValue}
-                className="p-datatable-tbody p-datatable-frozen-tbody"
-                frozenRow
-                tableProps={props}
-                tableSelector={attributeSelector.current}
-                columns={columns}
-                selectionModeInColumn={selectionModeInColumn}
-                first={first}
-                editingMeta={editingMetaState}
-                onEditingMetaChange={onEditingMetaChange}
-                tabIndex={props.tabIndex}
-                onRowClick={props.onRowClick}
-                onRowDoubleClick={props.onRowDoubleClick}
-                onRowMouseEnter={props.onRowMouseEnter}
-                onRowMouseLeave={props.onRowMouseLeave}
-                onCellClick={props.onCellClick}
-                selection={props.selection}
-                onSelectionChange={props.onSelectionChange}
-                lazy={props.lazy}
-                paginator={props.paginator}
-                onCellSelect={props.onCellSelect}
-                onCellUnselect={props.onCellUnselect}
-                onRowSelect={props.onRowSelect}
-                onRowUnselect={props.onRowUnselect}
-                dragSelection={props.dragSelection}
-                onContextMenu={props.onContextMenu}
-                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                metaKeySelection={props.metaKeySelection}
-                selectionMode={props.selectionMode}
+                cellClassName={props.cellClassName}
                 cellSelection={props.cellSelection}
+                checkIcon={props.checkIcon}
+                className="p-datatable-tbody p-datatable-frozen-tbody"
+                collapsedRowIcon={props.collapsedRowIcon}
+                columns={columns}
+                compareSelectionBy={props.compareSelectionBy}
                 contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey}
-                expandedRows={props.expandedRows}
-                onRowCollapse={props.onRowCollapse}
-                onRowExpand={props.onRowExpand}
-                onRowToggle={props.onRowToggle}
+                dragSelection={props.dragSelection}
                 editMode={props.editMode}
+                editingMeta={editingMetaState}
                 editingRows={props.editingRows}
-                onRowReorder={props.onRowReorder}
-                reorderableRows={props.reorderableRows}
-                scrollable={props.scrollable}
-                rowGroupMode={props.rowGroupMode}
-                groupRowsBy={props.groupRowsBy}
-                expandableRowGroups={props.expandableRowGroups}
-                loading={props.loading}
                 emptyMessage={props.emptyMessage}
-                rowGroupHeaderTemplate={props.rowGroupHeaderTemplate}
+                expandableRowGroups={props.expandableRowGroups}
+                expandedRowIcon={props.expandedRowIcon}
+                expandedRows={props.expandedRows}
+                first={first}
+                frozenRow
+                groupRowsBy={props.groupRowsBy}
+                isDataSelectable={props.isDataSelectable}
+                isVirtualScrollerDisabled={true}
+                lazy={props.lazy}
+                loading={props.loading}
+                metaKeySelection={props.metaKeySelection}
+                onCellClick={props.onCellClick}
+                onCellSelect={props.onCellSelect}
+                onCellUnselect={props.onCellUnselect}
+                onContextMenu={props.onContextMenu}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onEditingMetaChange={onEditingMetaChange}
+                onRowClick={props.onRowClick}
+                onRowCollapse={props.onRowCollapse}
+                onRowDoubleClick={props.onRowDoubleClick}
+                onRowEditCancel={props.onRowEditCancel}
+                onRowEditChange={props.onRowEditChange}
+                onRowEditComplete={props.onRowEditComplete}
+                onRowEditInit={props.onRowEditInit}
+                onRowEditSave={props.onRowEditSave}
+                onRowExpand={props.onRowExpand}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
+                onRowReorder={props.onRowReorder}
+                onRowSelect={props.onRowSelect}
+                onRowToggle={props.onRowToggle}
+                onRowUnselect={props.onRowUnselect}
+                onSelectionChange={props.onSelectionChange}
+                paginator={props.paginator}
+                reorderableRows={props.reorderableRows}
+                responsiveLayout={props.responsiveLayout}
+                rowClassName={props.rowClassName}
+                rowEditValidator={props.rowEditValidator}
+                rowEditorCancelIcon={props.rowEditorCancelIcon}
+                rowEditorInitIcon={props.rowEditorInitIcon}
+                rowEditorSaveIcon={props.rowEditorSaveIcon}
                 rowExpansionTemplate={props.rowExpansionTemplate}
                 rowGroupFooterTemplate={props.rowGroupFooterTemplate}
-                onRowEditChange={props.onRowEditChange}
-                compareSelectionBy={props.compareSelectionBy}
+                rowGroupHeaderTemplate={props.rowGroupHeaderTemplate}
+                rowGroupMode={props.rowGroupMode}
+                scrollable={props.scrollable}
                 selectOnEdit={props.selectOnEdit}
-                onRowEditInit={props.onRowEditInit}
-                rowEditValidator={props.rowEditValidator}
-                onRowEditSave={props.onRowEditSave}
-                onRowEditComplete={props.onRowEditComplete}
-                onRowEditCancel={props.onRowEditCancel}
-                cellClassName={props.cellClassName}
-                responsiveLayout={props.responsiveLayout}
+                selection={props.selection}
                 selectionAutoFocus={props.selectionAutoFocus}
-                isDataSelectable={props.isDataSelectable}
-                showSelectionElement={props.showSelectionElement}
+                selectionMode={props.selectionMode}
+                selectionModeInColumn={selectionModeInColumn}
                 showRowReorderElement={props.showRowReorderElement}
-                expandedRowIcon={props.expandedRowIcon}
-                collapsedRowIcon={props.collapsedRowIcon}
-                checkIcon={props.checkIcon}
-                rowClassName={props.rowClassName}
+                showSelectionElement={props.showSelectionElement}
+                tabIndex={props.tabIndex}
+                tableProps={props}
+                tableSelector={attributeSelector.current}
+                value={props.frozenValue}
                 virtualScrollerOptions={options}
-                isVirtualScrollerDisabled={true}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
             />
         );
         const body = (
             <TableBody
+                hostName="DataTable"
                 ref={bodyRef}
                 value={dataToRender(rows)}
                 style={style}
@@ -1632,9 +1743,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 virtualScrollerContentRef={contentRef}
                 virtualScrollerOptions={options}
                 isVirtualScrollerDisabled={isVirtualScrollerDisabled}
+                ptCallbacks={ptCallbacks}
+                metaData={metaData}
             />
         );
-        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" /> : null;
+        const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
+            <TableBody hostName="DataTable" style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
+        ) : null;
 
         return (
             <>
@@ -1648,7 +1763,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createTableFooter = (options) => {
         const { columns } = options;
 
-        return <TableFooter tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} />;
+        return <TableFooter hostName="DataTable" tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
     };
 
     const createContent = (processedData, columns, selectionModeInColumn, empty) => {
@@ -1656,9 +1771,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         const _isVirtualScrollerDisabled = isVirtualScrollerDisabled();
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
+        const wrapperProps = mergeProps(
+            {
+                className: ptCallbacks.cx('wrapper'),
+                style: { ...ptCallbacks.sx('wrapper'), maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
+            },
+            ptCallbacks.ptm('wrapper')
+        );
 
         return (
-            <div ref={wrapperRef} className="p-datatable-wrapper" style={{ maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }}>
+            <div ref={wrapperRef} {...wrapperProps}>
                 <VirtualScroller
                     ref={virtualScrollerRef}
                     {...virtualScrollerOptions}
@@ -1670,6 +1792,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     loaderDisabled
                     inline
                     autoSize
+                    pt={ptCallbacks.ptm('virtualScroller')}
+                    __parentMetadata={{ parent: metaData }}
                     showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => {
@@ -1677,21 +1801,20 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                             options.spacerRef && options.spacerRef(el);
                         };
 
-                        const tableClassName = classNames(
-                            'p-datatable-table',
-                            {
-                                'p-datatable-scrollable-table': props.scrollable,
-                                'p-datatable-resizable-table': props.resizableColumns,
-                                'p-datatable-resizable-table-fit': props.resizableColumns && props.columnResizeMode === 'fit'
-                            },
-                            props.tableClassName
-                        );
                         const tableHeader = createTableHeader(options, empty, _isVirtualScrollerDisabled);
                         const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
                         const tableFooter = createTableFooter(options);
+                        const tableProps = mergeProps(
+                            {
+                                className: classNames(props.tableClassName, ptCallbacks.cx('table')),
+                                style: props.tableStyle,
+                                role: 'table'
+                            },
+                            ptCallbacks.ptm('table')
+                        );
 
                         return (
-                            <table ref={ref} style={props.tableStyle} className={tableClassName} role="table">
+                            <table ref={ref} {...tableProps}>
                                 {tableHeader}
                                 {tableBody}
                                 {tableFooter}
@@ -1706,22 +1829,26 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createFooter = () => {
         if (props.footer) {
             const content = ObjectUtils.getJSXElement(props.footer, { props });
+            const footerProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('footer')
+                },
+                ptCallbacks.ptm('footer')
+            );
 
-            return <div className="p-datatable-footer">{content}</div>;
+            return <div {...footerProps}>{content}</div>;
         }
 
         return null;
     };
 
     const createPaginator = (position, totalRecords) => {
-        const className = classNames('p-paginator-' + position, props.paginatorClassName);
-
         return (
             <Paginator
                 first={getFirst()}
                 rows={getRows()}
                 pageLinkSize={props.pageLinkSize}
-                className={className}
+                className={classNames(props.paginatorClassName, ptCallbacks.cx('paginator', { position }))}
                 onPageChange={onPageChange}
                 template={props.paginatorTemplate}
                 totalRecords={totalRecords}
@@ -1731,6 +1858,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 rightContent={props.paginatorRight}
                 alwaysShow={props.alwaysShowPaginator}
                 dropdownAppendTo={props.paginatorDropdownAppendTo}
+                pt={ptCallbacks.ptm('paginator')}
+                unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     };
@@ -1753,7 +1883,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const createResizeHelper = () => {
         if (props.resizableColumns) {
-            return <div ref={resizeHelperRef} className="p-column-resizer-helper" style={{ display: 'none' }}></div>;
+            const resizeHelperProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('resizeHelper'),
+                    style: ptCallbacks.sx('resizeHelper')
+                },
+                ptCallbacks.ptm('resizeHelper')
+            );
+
+            return <div ref={resizeHelperRef} {...resizeHelperProps}></div>;
         }
 
         return null;
@@ -1762,10 +1900,24 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createReorderIndicators = () => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
-            const reorderIndicatorUpProps = { className: 'p-datatable-reorder-indicator-up', style: { ...style } };
-            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon />, undefined, { props });
-            const reorderIndicatorDownProps = { className: 'p-datatable-reorder-indicator-down', style: { ...style } };
-            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon />, undefined, { props });
+            const reorderIndicatorUpProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('reorderIndicatorUp'),
+                    style: ptCallbacks.sx('reorderIndicatorUp', { style })
+                },
+                ptCallbacks.ptm('reorderIndicatorUp')
+            );
+            const reorderIndicatorUpIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorUpIcon'));
+            const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon {...reorderIndicatorUpIconProps} />, { ...reorderIndicatorUpIconProps }, { props });
+            const reorderIndicatorDownProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('reorderIndicatorDown'),
+                    style: ptCallbacks.sx('reorderIndicatorDown', { style })
+                },
+                ptCallbacks.ptm('reorderIndicatorDown')
+            );
+            const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
+            const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
 
             return (
                 <>
@@ -1788,28 +1940,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const empty = ObjectUtils.isEmpty(data);
     const selectionModeInColumn = getSelectionModeInColumn(columns);
     const selectable = props.selectionMode || selectionModeInColumn;
-    const otherProps = DataTableBase.getOtherProps(props);
-    const className = classNames(
-        'p-datatable p-component',
-        {
-            'p-datatable-hoverable-rows': props.rowHover,
-            'p-datatable-selectable': selectable && !props.cellSelection,
-            'p-datatable-selectable-cell': selectable && props.cellSelection,
-            'p-datatable-resizable': props.resizableColumns,
-            'p-datatable-resizable-fit': props.resizableColumns && props.columnResizeMode === 'fit',
-            'p-datatable-scrollable': props.scrollable,
-            'p-datatable-flex-scrollable': props.scrollable && props.scrollHeight === 'flex',
-            'p-datatable-responsive-stack': props.responsiveLayout === 'stack',
-            'p-datatable-responsive-scroll': props.responsiveLayout === 'scroll',
-            'p-datatable-striped': props.stripedRows,
-            'p-datatable-gridlines': props.showGridlines,
-            'p-datatable-grouped-header': props.headerColumnGroup != null,
-            'p-datatable-grouped-footer': props.footerColumnGroup != null,
-            'p-datatable-sm': props.size === 'small',
-            'p-datatable-lg': props.size === 'large'
-        },
-        props.className
-    );
 
     const loader = createLoader();
     const header = createHeader();
@@ -1819,9 +1949,19 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const footer = createFooter();
     const resizeHelper = createResizeHelper();
     const reorderIndicators = createReorderIndicators();
+    const rootProps = mergeProps(
+        {
+            id: props.id,
+            className: classNames(props.className, ptCallbacks.cx('root', { selectable })),
+            style: props.style,
+            'data-scrollselectors': '.p-datatable-wrapper'
+        },
+        DataTableBase.getOtherProps(props),
+        ptCallbacks.ptm('root')
+    );
 
     return (
-        <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} data-scrollselectors=".p-datatable-wrapper">
+        <div ref={elementRef} {...rootProps}>
             {loader}
             {header}
             {paginatorTop}

@@ -14,10 +14,13 @@
  *
  */
 import * as React from 'react';
-import { IconType, PassThroughType } from '../utils/utils';
 import { ButtonPassThroughOptions } from '../button';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type InplacePassThroughType<T> = PassThroughType<T, InplacePassThroughMethodOptions>;
+
 /**
  * Custom passthrough(pt) option method.
  */
@@ -48,6 +51,11 @@ export interface InplacePassThroughOptions {
      * @see {@link ButtonPassThroughOptions}
      */
     closeButton?: ButtonPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -130,6 +138,16 @@ export interface InplaceProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {InplacePassThroughOptions}
      */
     pt?: InplacePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

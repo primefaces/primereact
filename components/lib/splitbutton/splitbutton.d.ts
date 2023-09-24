@@ -8,13 +8,18 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType, TemplateType } from '../utils';
-import { ButtonPassThroughOptions } from '../button/button';
 
 export declare type SplitButtonPassThroughType<T> = PassThroughType<T, SplitButtonPassThroughMethodOptions>;
+export declare type SplitButtonPassThroughTransitionType = ReactCSSTransitionProps | ((options: SplitButtonPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -33,23 +38,59 @@ export interface SplitButtonPassThroughOptions {
      */
     root?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the button's DOM element.
-     */
-    button?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
      * Uses to pass attributes to the icon's DOM element.
      */
     icon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the Button component.
-     * @see {@link ButtonPassThroughOptions}
+     */
+    button?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
      */
     menuButton?: ButtonPassThroughOptions;
-    // /**
-    //  * Uses to pass attributes to the TieredMenu component.
-    //  * @see {@link TieredMenuPassThroughOptions}
-    //  */
-    //  menu?: TieredMenuPassThroughOptions; @TODO
+    /**
+     * Uses to pass attributes to the menu's DOM element.
+     */
+    menu?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the menu list's DOM element.
+     */
+    menuList?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the menu icon's DOM element.
+     */
+    menuIcon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the menu label's DOM element.
+     */
+    menuLabel?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the anchor's DOM element.
+     */
+    anchor?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the menu item's DOM element.
+     */
+    menuItem?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: SplitButtonPassThroughTransitionType;
 }
 
 /**
@@ -188,6 +229,16 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {SplitButtonPassThroughOptions}
      */
     pt?: SplitButtonPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

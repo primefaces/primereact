@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { FilterService, localeOption } from '../api/Api';
+import { FilterService, PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
+import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { ListBoxBase } from './ListBoxBase';
 import { ListBoxHeader } from './ListBoxHeader';
@@ -10,7 +11,8 @@ import { ListBoxItem } from './ListBoxItem';
 
 export const ListBox = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ListBoxBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ListBoxBase.getProps(inProps, context);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const elementRef = React.useRef(null);
@@ -18,6 +20,17 @@ export const ListBox = React.memo(
         const optionTouched = React.useRef(false);
         const filteredValue = (props.onFilterValueChange ? props.filterValue : filterValueState) || '';
         const hasFilter = filteredValue && filteredValue.trim().length > 0;
+
+        const metaData = {
+            props,
+            state: {
+                filterValue: filteredValue
+            }
+        };
+
+        const ptCallbacks = ListBoxBase.setMetaData(metaData);
+
+        useHandleStyle(ListBoxBase.css.styles, ptCallbacks.isUnstyled, { name: 'listbox' });
 
         const onOptionSelect = (event) => {
             const option = event.option;
@@ -278,6 +291,7 @@ export const ListBox = React.memo(
         const createHeader = () => {
             return props.filter ? (
                 <ListBoxHeader
+                    hostName="ListBox"
                     filter={filteredValue}
                     filterIcon={props.filterIcon}
                     onFilter={onFilter}
@@ -286,6 +300,8 @@ export const ListBox = React.memo(
                     disabled={props.disabled}
                     filterPlaceholder={props.filterPlaceholder}
                     filterInputProps={props.filterInputProps}
+                    ptCallbacks={ptCallbacks}
+                    metaData={metaData}
                 />
             ) : null;
         };
@@ -301,6 +317,7 @@ export const ListBox = React.memo(
 
                 return (
                     <ListBoxItem
+                        hostName="ListBox"
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -311,6 +328,8 @@ export const ListBox = React.memo(
                         onTouchEnd={onOptionTouchEnd}
                         tabIndex={tabIndex}
                         disabled={disabled}
+                        ptCallbacks={ptCallbacks}
+                        metaData={metaData}
                     />
                 );
             });
@@ -324,11 +343,18 @@ export const ListBox = React.memo(
                 const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + getOptionGroupRenderKey(option);
 
+                const itemGroupProps = mergeProps(
+                    {
+                        className: ptCallbacks.cx('itemGroup'),
+                        style: ptCallbacks.sx('itemGroup', { scrollerOptions }),
+                        role: 'group'
+                    },
+                    ptCallbacks.ptm('itemGroup')
+                );
+
                 return (
                     <React.Fragment key={key}>
-                        <li className="p-listbox-item-group" style={style} role="group">
-                            {groupContent}
-                        </li>
+                        <li {...itemGroupProps}>{groupContent}</li>
                         {groupChildrenContent}
                     </React.Fragment>
                 );
@@ -340,6 +366,7 @@ export const ListBox = React.memo(
 
                 return (
                     <ListBoxItem
+                        hostName="ListBox"
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -350,6 +377,8 @@ export const ListBox = React.memo(
                         onTouchEnd={onOptionTouchEnd}
                         tabIndex={tabIndex}
                         disabled={disabled}
+                        ptCallbacks={ptCallbacks}
+                        metaData={metaData}
                     />
                 );
             }
@@ -366,9 +395,16 @@ export const ListBox = React.memo(
         };
 
         const createEmptyMessage = (emptyMessage, isFilter) => {
+            const emptyMessageProps = mergeProps(
+                {
+                    className: ptCallbacks.cx('emptyMessage')
+                },
+                ptCallbacks.ptm('emptyMessage')
+            );
+
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
 
-            return <li className="p-listbox-empty-message">{message}</li>;
+            return <li {...emptyMessageProps}>{message}</li>;
         };
 
         const createList = () => {
@@ -380,26 +416,38 @@ export const ListBox = React.memo(
                         onLazyLoad: (event) => props.virtualScrollerOptions.onLazyLoad({ ...event, ...{ filter: visibleOptions } }),
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
-                            const className = classNames('p-listbox-list', options.className);
-
-                            return (
-                                <ul ref={options.contentRef} style={options.style} className={className} role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
-                                    {options.children}
-                                </ul>
+                            const listProps = mergeProps(
+                                {
+                                    ref: options.contentRef,
+                                    style: ptCallbacks.sx('list', { options }),
+                                    className: ptCallbacks.cx('list', { options }),
+                                    role: 'listbox',
+                                    'aria-multiselectable': props.multiple,
+                                    ...ariaProps
+                                },
+                                ptCallbacks.ptm('list')
                             );
+
+                            return <ul {...listProps}>{options.children}</ul>;
                         }
                     }
                 };
 
-                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} />;
+                return <VirtualScroller ref={virtualScrollerRef} {...virtualScrollerProps} pt={ptCallbacks.ptm('virtualScroller')} />;
             } else {
                 const items = createItems();
 
-                return (
-                    <ul className="p-listbox-list" role="listbox" aria-multiselectable={props.multiple} {...ariaProps}>
-                        {items}
-                    </ul>
+                const listProps = mergeProps(
+                    {
+                        className: ptCallbacks.cx('list'),
+                        role: 'listbox',
+                        'aria-multiselectable': props.multiple,
+                        ...ariaProps
+                    },
+                    ptCallbacks.ptm('list')
                 );
+
+                return <ul {...listProps}>{items}</ul>;
             }
         };
 
@@ -408,26 +456,35 @@ export const ListBox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ListBoxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-listbox p-component',
-            {
-                'p-disabled': props.disabled
-            },
-            props.className
-        );
-        const listClassName = classNames('p-listbox-list-wrapper', props.listClassName);
         const list = createList();
         const header = createHeader();
 
+        const wrapperProps = mergeProps(
+            {
+                className: ptCallbacks.cx('wrapper'),
+                style: props.listStyle
+            },
+            ptCallbacks.ptm('wrapper')
+        );
+
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: ptCallbacks.cx('root'),
+                style: props.style
+            },
+            ListBoxBase.getOtherProps(props),
+            ptCallbacks.ptm('root')
+        );
+
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+                <div {...rootProps}>
                     {header}
-                    <div className={listClassName} style={props.listStyle}>
-                        {list}
-                    </div>
+                    <div {...wrapperProps}>{list}</div>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptCallbacks.ptm('tooltip')} />}
             </>
         );
     })

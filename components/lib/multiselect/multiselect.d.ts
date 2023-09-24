@@ -8,11 +8,205 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils';
-import { VirtualScrollerProps } from '../virtualscroller';
+import { IconType, PassThroughType } from '../utils';
+import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+
+export declare type MultiSelectPassThroughType<T> = PassThroughType<T, MultiSelectPassThroughMethodOptions>;
+export declare type MultiSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: MultiSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MultiSelectPassThroughMethodOptions {
+    props: MultiSelectProps;
+    state: MultiSelectState;
+    context: MultiSelectContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MultiSelectProps.pt}
+ */
+export interface MultiSelectPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the label container's DOM element.
+     */
+    labelContainer?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the token's DOM element.
+     */
+    token?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the token label's DOM element.
+     */
+    tokenLabel?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the remove token icon's DOM element.
+     */
+    removeTokenIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the trigger's DOM element.
+     */
+    trigger?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the trigger icon's DOM element.
+     */
+    triggerIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the clear icon's DOM element.
+     */
+    clearIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the dropdown icon's DOM element.
+     */
+    dropdownIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header checkbox's DOM element.
+     */
+    headerCheckbox?: CheckboxPassThroughOptions;
+    /**
+     * Uses to pass attributes to the header checkbox icon's DOM element.
+     */
+    headerCheckboxIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the header checkbox's DOM element.
+     */
+    headerSelectAllLabel?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLabelElement>>;
+    /**
+     * Uses to pass attributes to the filter container's DOM element.
+     */
+    filterContainer?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the filter input's DOM element.
+     */
+    filterInput?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the filter icon's DOM element.
+     */
+    filterIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the VirtualScroller component.
+     * @see {@link VirtualScrollerPassThroughOptions}
+     */
+    virtualScroller?: VirtualScrollerPassThroughOptions;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    list?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the item group's DOM element.
+     */
+    itemGroup?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the checkbox container's DOM element.
+     */
+    checkboxContainer?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox's DOM element.
+     */
+    checkbox?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox icon's DOM element.
+     */
+    checkboxIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the emptyMessage's DOM element.
+     */
+    emptyMessage?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     */
+    hiddenInputWrapper?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MultiSelectPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in MultiSelect component.
+ */
+export interface MultiSelectState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current filter state as a string.
+     */
+    filterState: string;
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+}
+
+/**
+ * Defines current options in MultiSelect component.
+ */
+export interface MultiSelectContext {
+    /**
+     * Current selection state of the item as a boolean.
+     * @defaultValue false
+     */
+    selected: boolean;
+}
 
 /**
  * Custom checkbox change event
@@ -203,7 +397,7 @@ interface MultiSelectTemplateOptions {
  * Defines valid properties in MultiSelect component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
@@ -254,6 +448,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     emptyFilterMessage?: React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
     /**
+     * Text to display when there are no options available. Defaults to global value in Locale configuration.
+     */
+    emptyMessage?: string;
+    /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue true
      */
@@ -263,6 +461,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue label
      */
     filterBy?: string | undefined;
+    /**
+     * When the panel is opened, it specifies that the filter input should focus automatically.
+     * @defaultValue true
+     */
+    filterInputAutoFocus?: boolean | undefined;
     /**
      * Icon of the filter icon.
      */
@@ -386,6 +589,21 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     placeholder?: string | undefined;
     /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MultiSelectPassThroughOptions}
+     */
+    pt?: MultiSelectPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
      * Icon of the remove chip element.
      */
     removeIcon?: IconType<MultiSelectProps> | undefined;
@@ -427,6 +645,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue true
      */
     showSelectAll?: boolean | undefined;
+    /**
+     * Label to display if showSelectAll is true
+     */
+    selectAllLabel?: string;
     /**
      * Inline style of the element.
      */

@@ -8,9 +8,49 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
 
+export declare type ToggleButtonPassThroughType<T> = PassThroughType<T, ToggleButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ToggleButtonPassThroughMethodOptions {
+    props: ToggleButtonProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ToggleButtonProps.pt}
+ */
+export interface ToggleButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ToggleButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: ToggleButtonPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
 /**
  * Custom toggle button change target options
  */
@@ -61,7 +101,7 @@ interface ToggleButtonChangeEvent {
  * Defines valid properties in ToggleButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * Specifies the on/off state of the button.
      * @defaultValue false
@@ -118,6 +158,21 @@ export interface ToggleButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @param {React.FocusEvent<HTMLElement>} event - Browser event.
      */
     onFocus?(event: React.FocusEvent<HTMLElement>): void;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ToggleButtonPassThroughOptions}
+     */
+    pt?: ToggleButtonPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

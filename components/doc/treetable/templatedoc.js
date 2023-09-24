@@ -5,6 +5,7 @@ import { Column } from '../../lib/column/Column';
 import { TreeTable } from '../../lib/treetable/TreeTable';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { classNames } from '../../lib/utils/Utils';
 
 export function TemplateDoc(props) {
     const [nodes, setNodes] = useState([]);
@@ -22,6 +23,24 @@ export function TemplateDoc(props) {
         );
     };
 
+    const togglerTemplate = (node, options) => {
+        if (!node) {
+            return;
+        }
+
+        const expanded = options.expanded;
+        const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', {
+            'pi-caret-right': !expanded,
+            'pi-caret-down': expanded
+        });
+
+        return (
+            <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
+                <span className={iconClassName} aria-hidden="true"></span>
+            </button>
+        );
+    };
+
     const header = <div className="text-xl font-bold">File Viewer</div>;
     const footer = (
         <div className="flex justify-content-start">
@@ -31,7 +50,7 @@ export function TemplateDoc(props) {
 
     const code = {
         basic: `
-<TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
+<TreeTable value={nodes} header={header} footer={footer} togglerTemplate={togglerTemplate} tableStyle={{ minWidth: '50rem' }}>
     <Column field="name" header="Name" expander></Column>
     <Column field="size" header="Size"></Column>
     <Column field="type" header="Type"></Column>
@@ -61,6 +80,24 @@ export default function TemplateDemo() {
         );
     };
 
+    const togglerTemplate = (node, options) => {
+        if (!node) {
+            return;
+        }
+
+        const expanded = options.expanded;
+        const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', {
+            'pi-caret-right': !expanded,
+            'pi-caret-down': expanded
+        });
+
+        return (
+            <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
+                <span className={iconClassName} aria-hidden="true"></span>
+            </button>
+        );
+    };
+
     const header = <div className="text-xl font-bold">File Viewer</div>;
     const footer = (
         <div className="flex justify-content-start">
@@ -70,7 +107,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
+            <TreeTable value={nodes} header={header} footer={footer} togglerTemplate={togglerTemplate} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -82,7 +119,7 @@ export default function TemplateDemo() {
         `,
         typescript: `
 import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
+import { TreeTable, TreeTableTogglerTemplateOptions } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { TreeNode } from 'primereact/treenode';
@@ -104,6 +141,24 @@ export default function TemplateDemo() {
         );
     };
 
+    const togglerTemplate = (node: TreeNode, options: TreeTableTogglerTemplateOptions) => {
+        if (!node) {
+            return;
+        }
+
+        const expanded = options.expanded;
+        const iconClassName = classNames('p-treetable-toggler-icon pi pi-fw', {
+            'pi-caret-right': !expanded,
+            'pi-caret-down': expanded
+        });
+
+        return (
+            <button type="button" className="p-treetable-toggler p-link" style={options.buttonStyle} tabIndex={-1} onClick={options.onClick}>
+                <span className={iconClassName} aria-hidden="true"></span>
+            </button>
+        );
+    };
+
     const header = <div className="text-xl font-bold">File Viewer</div>;
     const footer = (
         <div className="flex justify-content-start">
@@ -113,7 +168,7 @@ export default function TemplateDemo() {
 
     return (
         <div className="card">
-            <TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
+            <TreeTable value={nodes} header={header} footer={footer} togglerTemplate={togglerTemplate} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="name" header="Name" expander></Column>
                 <Column field="size" header="Size"></Column>
                 <Column field="type" header="Type"></Column>
@@ -157,11 +212,11 @@ export default function TemplateDemo() {
         <>
             <DocSectionText {...props}>
                 <p>
-                    Custom content at <i>header</i>, <i>body</i> and <i>footer</i> sections are supported via templating.
+                    Custom content at <i>header</i>, <i>body</i> and <i>footer</i> sections are supported via templating. The toggler can be customized with the <i>togglerTemplate</i> property.
                 </p>
             </DocSectionText>
             <div className="card">
-                <TreeTable value={nodes} header={header} footer={footer} tableStyle={{ minWidth: '50rem' }}>
+                <TreeTable value={nodes} header={header} footer={footer} togglerTemplate={togglerTemplate} tableStyle={{ minWidth: '50rem' }}>
                     <Column field="name" header="Name" expander></Column>
                     <Column field="size" header="Size"></Column>
                     <Column field="type" header="Type"></Column>

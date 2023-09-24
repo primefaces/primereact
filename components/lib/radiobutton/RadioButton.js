@@ -1,16 +1,28 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = RadioButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = RadioButtonBase.getProps(inProps, context);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
+
+        const { ptm, cx, isUnstyled } = RadioButtonBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
+
+        useHandleStyle(RadioButtonBase.css.styles, isUnstyled, { name: 'radiobutton', styled: true });
 
         const select = (event) => {
             onClick(event);
@@ -110,45 +122,65 @@ export const RadioButton = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = RadioButtonBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-radiobutton p-component',
+
+        const rootProps = mergeProps(
             {
-                'p-radiobutton-checked': props.checked,
-                'p-radiobutton-disabled': props.disabled,
-                'p-radiobutton-focused': focusedState
+                className: classNames(props.className, cx('root', { focusedState })),
+                style: props.style,
+                onClick: onClick
             },
-            props.className
+            RadioButtonBase.getOtherProps(props),
+            ptm('root')
         );
-        const boxClassName = classNames('p-radiobutton-box', {
-            'p-highlight': props.checked,
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
-        });
+
+        const hiddenInputWrapperProps = mergeProps(
+            {
+                className: 'p-hidden-accessible'
+            },
+            ptm('hiddenInputWrapper')
+        );
+
+        const hiddenInputProps = mergeProps(
+            {
+                type: 'radio',
+                name: props.name,
+                defaultChecked: props.checked,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyDown: onKeyDown,
+                disabled: props.disabled,
+                required: props.required,
+                tabIndex: props.tabIndex,
+                ...ariaProps
+            },
+            ptm('hiddenInput')
+        );
+
+        const inputProps = mergeProps(
+            {
+                className: cx('input', { focusedState })
+            },
+            ptm('input')
+        );
+
+        const iconProps = mergeProps(
+            {
+                className: cx('icon')
+            },
+            ptm('icon')
+        );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick}>
-                    <div className="p-hidden-accessible">
-                        <input
-                            ref={inputRef}
-                            id={props.inputId}
-                            type="radio"
-                            name={props.name}
-                            defaultChecked={props.checked}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            onKeyDown={onKeyDown}
-                            disabled={props.disabled}
-                            required={props.required}
-                            tabIndex={props.tabIndex}
-                            {...ariaProps}
-                        />
+                <div id={props.id} ref={elementRef} {...rootProps}>
+                    <div {...hiddenInputWrapperProps}>
+                        <input id={props.inputId} ref={inputRef} {...hiddenInputProps} />
                     </div>
-                    <div className={boxClassName}>
-                        <div className="p-radiobutton-icon"></div>
+                    <div {...inputProps}>
+                        <div {...iconProps}></div>
                     </div>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

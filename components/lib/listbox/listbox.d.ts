@@ -9,9 +9,112 @@
  */
 import * as React from 'react';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { VirtualScroller, VirtualScrollerProps } from '../virtualscroller';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PassThroughOptions } from '../passthrough';
+import { ComponentHooks } from '../componentbase/componentbase';
+
+export declare type ListBoxPassThroughType<T> = PassThroughType<T, ListBoxPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ListBoxPassThroughMethodOptions {
+    props: ListBoxProps;
+    state: ListBoxState;
+    context: ListBoxContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ListboxProps.pt}
+ */
+export interface ListboxPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ListBoxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: ListBoxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the filter container's DOM element.
+     */
+    filterContainer?: ListBoxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the filter input's DOM element.
+     */
+    filterInput?: InputTextPassThroughOptions;
+    /**
+     * Uses to pass attributes to the filter icon's DOM element.
+     */
+    filterIcon?: ListBoxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: ListBoxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the VirtualScroller component.
+     * @see {@link VirtualScrollerPassThroughOptions}
+     */
+    virtualScroller?: VirtualScrollerPassThroughOptions;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    list?: ListBoxPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the item group's DOM element.
+     */
+    itemGroup?: ListBoxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: ListBoxPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the emptyMessage's DOM element.
+     */
+    emptyMessage?: ListBoxPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in ListBox component.
+ */
+export interface ListBoxState {
+    /**
+     * Current filter value state as a string.
+     */
+    filterValue: string;
+}
+
+/**
+ * Defines current options in ListBox component.
+ */
+export interface ListBoxContext {
+    /**
+     * Current selection state of the item as a boolean.
+     * @defaultValue false
+     */
+    selected: boolean;
+    /**
+     * Current disabled state of the item as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+}
 
 /**
  * Custom change target options.
@@ -144,7 +247,7 @@ interface ListBoxFilterOptions {
  * Defines valid properties in ListBox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
      */
@@ -276,6 +379,22 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      * @type {VirtualScrollerProps}
      */
     virtualScrollerOptions?: VirtualScrollerProps | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ListboxPassThroughOptions}
+     */
+    pt?: ListboxPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+
     /**
      * Callback to invoke when value of listbox changes.
      * @param {ListBoxChangeEvent} event - Custom change event.

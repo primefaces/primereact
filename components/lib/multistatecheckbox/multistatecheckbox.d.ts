@@ -8,8 +8,64 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type MultiStateCheckboxPassThroughType<T> = PassThroughType<T, MultiStateCheckboxPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MultiStateCheckboxPassThroughMethodOptions {
+    props: MultiStateCheckboxProps;
+    state: MultiStateCheckboxState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MultiStateCheckboxProps.pt}
+ */
+export interface MultiStateCheckboxPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox box's DOM element.
+     */
+    checkbox?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MultiStateCheckboxPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the sr only aria's DOM element.
+     */
+    srOnlyAria?: MultiStateCheckboxPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in MultiStateCheckbox component.
+ */
+export interface MultiStateCheckboxState {
+    /**
+     * Focused state as a boolean.
+     */
+    focused: boolean;
+}
 
 /**
  * Custom MultiStateCheckbox option.
@@ -105,7 +161,7 @@ interface MultiStateCheckboxChangeEvent {
  * Defines valid properties in MultiStateCheckbox component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
@@ -172,6 +228,21 @@ export interface MultiStateCheckboxProps extends Omit<React.DetailedHTMLProps<Re
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MultiStateCheckboxPassThroughOptions}
+     */
+    pt?: MultiStateCheckboxPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

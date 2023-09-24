@@ -1,6 +1,7 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -25,23 +26,28 @@ export const confirmPopup = (props = {}) => {
 
 export const ConfirmPopup = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ConfirmPopupBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ConfirmPopupBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
-        const { ptm } = ConfirmPopupBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 visible: visibleState,
                 reshow: reshowState
             }
-        });
+        };
+        const { ptm, cx, isUnstyled } = ConfirmPopupBase.setMetaData(metaData);
+
+        useHandleStyle(ConfirmPopupBase.css.styles, isUnstyled, { name: 'confirmpopup' });
 
         const overlayRef = React.useRef(null);
         const acceptBtnRef = React.useRef(null);
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
+        const focusElementOnHide = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
@@ -89,6 +95,10 @@ export const ConfirmPopup = React.memo(
         };
 
         const show = () => {
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
+
             setVisibleState(true);
             setReshowState(false);
             isCallbackExecuting.current = false;
@@ -108,10 +118,14 @@ export const ConfirmPopup = React.memo(
             if (result) {
                 callbackFromProp('onHide', result);
             }
+
+            DomHandler.focus(focusElementOnHide.current);
+            focusElementOnHide.current = null;
         };
 
         const onEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '50%', left: '50%', marginTop: '10px' });
             align();
         };
 
@@ -149,7 +163,7 @@ export const ConfirmPopup = React.memo(
                 overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
                 if (containerOffset.top < targetOffset.top) {
-                    DomHandler.addClass(overlayRef.current, 'p-confirm-popup-flipped');
+                    !isUnstyled() && DomHandler.addClass(overlayRef.current, 'p-confirm-popup-flipped');
                 }
             }
         };
@@ -215,7 +229,7 @@ export const ConfirmPopup = React.memo(
 
             const iconProps = mergeProps(
                 {
-                    className: 'p-confirm-popup-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -223,14 +237,14 @@ export const ConfirmPopup = React.memo(
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { ...iconProps }, { props: currentProps });
             const messageProps = mergeProps(
                 {
-                    className: 'p-confirm-popup-message'
+                    className: cx('message')
                 },
                 ptm('message')
             );
 
             const contentProps = mergeProps(
                 {
-                    className: 'p-confirm-popup-content'
+                    className: cx('content')
                 },
                 ptm('content')
             );
@@ -255,7 +269,7 @@ export const ConfirmPopup = React.memo(
 
             const footerProps = mergeProps(
                 {
-                    className: 'p-confirm-popup-footer'
+                    className: cx('footer')
                 },
                 ptm('footer')
             );
@@ -263,18 +277,26 @@ export const ConfirmPopup = React.memo(
             const rejectButtonProps = mergeProps({
                 label: rejectLabel,
                 icon: getPropValue('rejectIcon'),
-                className: rejectClassName,
+                className: cx('rejectButton', { getPropValue }),
                 onClick: reject,
-                pt: ptm('rejectButton')
+                pt: ptm('rejectButton'),
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
             });
 
             const acceptButtonProps = mergeProps({
                 ref: acceptBtnRef,
                 label: acceptLabel,
                 icon: getPropValue('acceptIcon'),
-                className: acceptClassName,
+                className: cx('acceptButton', { getPropValue }),
                 onClick: accept,
-                pt: ptm('acceptButton')
+                pt: ptm('acceptButton'),
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
             });
 
             const content = (
@@ -304,10 +326,6 @@ export const ConfirmPopup = React.memo(
         };
 
         const createElement = () => {
-            const className = classNames('p-confirm-popup p-component', getPropValue('className'), {
-                'p-input-filled': PrimeReact.inputStyle === 'filled',
-                'p-ripple-disabled': PrimeReact.ripple === false
-            });
             const content = createContent();
             const footer = createFooter();
 
@@ -315,7 +333,7 @@ export const ConfirmPopup = React.memo(
                 {
                     ref: overlayRef,
                     id: getPropValue('id'),
-                    className,
+                    className: cx('root', { context, getPropValue }),
                     style: getPropValue('style'),
                     onClick: onPanelClick
                 },
@@ -323,19 +341,23 @@ export const ConfirmPopup = React.memo(
                 ptm('root')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: getPropValue('transitionOptions'),
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExit,
+                    onExited
+                },
+                ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={visibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={getPropValue('transitionOptions')}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div {...rootProps}>
                         {content}
                         {footer}

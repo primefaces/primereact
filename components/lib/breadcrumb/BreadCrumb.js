@@ -1,15 +1,20 @@
 import * as React from 'react';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { BreadCrumbBase } from './BreadCrumbBase';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { ChevronRightIcon } from '../icons/chevronright';
+import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = BreadCrumbBase.getProps(inProps);
-        const { ptm } = BreadCrumbBase.setMetaData({
+        const context = React.useContext(PrimeReactContext);
+        const props = BreadCrumbBase.getProps(inProps, context);
+        const elementRef = React.useRef(null);
+        const { ptm, cx, isUnstyled } = BreadCrumbBase.setMetaData({
             props
         });
-        const elementRef = React.useRef(null);
+
+        useHandleStyle(BreadCrumbBase.css.styles, isUnstyled, { name: 'breadcrumb' });
 
         const itemClick = (event, item) => {
             if (item.disabled) {
@@ -38,11 +43,10 @@ export const BreadCrumb = React.memo(
                     return null;
                 }
 
-                const { icon: _icon, target, url, disabled, style, className: _className, template } = home;
-                const className = classNames('p-breadcrumb-home', { 'p-disabled': disabled }, _className);
+                const { icon: _icon, target, url, disabled, style, className: _className, template, label: _label } = home;
                 const iconProps = mergeProps(
                     {
-                        className: 'p-menuitem-icon'
+                        className: cx('icon')
                     },
                     ptm('icon')
                 );
@@ -50,7 +54,7 @@ export const BreadCrumb = React.memo(
                 const actionProps = mergeProps(
                     {
                         href: url || '#',
-                        className: 'p-menuitem-link',
+                        className: cx('action'),
                         'aria-disabled': disabled,
                         target,
                         onClick: (event) => itemClick(event, home)
@@ -58,7 +62,19 @@ export const BreadCrumb = React.memo(
                     ptm('action')
                 );
 
-                let content = <a {...actionProps}>{icon}</a>;
+                const labelProps = mergeProps(
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                );
+                const label = _label && <span {...labelProps}>{_label}</span>;
+                let content = (
+                    <a {...actionProps}>
+                        {icon}
+                        {label}
+                    </a>
+                );
 
                 if (template) {
                     const defaultContentOptions = {
@@ -74,10 +90,10 @@ export const BreadCrumb = React.memo(
 
                 const menuitemProps = mergeProps(
                     {
-                        className,
+                        className: cx('home', { _className, disabled }),
                         style
                     },
-                    ptm('menuitem')
+                    ptm('home')
                 );
 
                 return <li {...menuitemProps}>{content}</li>;
@@ -87,17 +103,22 @@ export const BreadCrumb = React.memo(
         };
 
         const createSeparator = () => {
-            const iconClassName = 'p-breadcrumb-chevron';
             const separatorIconProps = mergeProps(
                 {
-                    className: iconClassName
+                    className: cx('separatorIcon')
                 },
                 ptm('separatorIcon')
             );
             const icon = props.separatorIcon || <ChevronRightIcon {...separatorIconProps} />;
             const separatorIcon = IconUtils.getJSXIcon(icon, { ...separatorIconProps }, { props });
+            const separatorProps = mergeProps(
+                {
+                    className: cx('separator')
+                },
+                ptm('separator')
+            );
 
-            return separatorIcon;
+            return <li {...separatorProps}>{separatorIcon}</li>;
         };
 
         const createMenuitem = (item) => {
@@ -105,10 +126,9 @@ export const BreadCrumb = React.memo(
                 return null;
             }
 
-            const className = classNames(item.className, { 'p-disabled': item.disabled });
             const labelProps = mergeProps(
                 {
-                    className: 'p-menuitem-text'
+                    className: cx('label')
                 },
                 ptm('label')
             );
@@ -116,7 +136,7 @@ export const BreadCrumb = React.memo(
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: 'p-menuitem-link',
+                    className: cx('action'),
                     target: item.target,
                     onClick: (event) => itemClick(event, item),
                     'aria-disabled': item.disabled
@@ -139,7 +159,7 @@ export const BreadCrumb = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    className,
+                    className: cx('menuitem', { item }),
                     style: item.style
                 },
                 ptm('menuitem')
@@ -178,16 +198,20 @@ export const BreadCrumb = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const className = classNames('p-breadcrumb p-component', props.className);
         const home = createHome();
         const items = createMenuitems();
         const separator = createSeparator();
-        const menuProps = mergeProps(ptm('menu'));
+        const menuProps = mergeProps(
+            {
+                className: cx('menu')
+            },
+            ptm('menu')
+        );
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className,
+                className: cx('root'),
                 style: props.style,
                 'aria-label': 'Breadcrumb'
             },

@@ -8,9 +8,11 @@
  *
  */
 import * as React from 'react';
-import { DialogProps } from '../dialog';
-import { IconType, PassThroughType } from '../utils';
 import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { DialogProps } from '../dialog';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils';
 
 export declare type ConfirmDialogPassThroughType<T> = PassThroughType<T, ConfirmDialogThroughMethodOptions>;
 
@@ -77,6 +79,11 @@ export interface ConfirmDialogPassThroughOptions {
      * @see {@link ButtonPassThroughOptions}
      */
     acceptButton?: ButtonPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -222,6 +229,16 @@ export interface ConfirmDialogProps extends Omit<DialogProps, 'onHide' | 'footer
      * @type {ConfirmDialogPassThroughOptions}
      */
     pt?: ConfirmDialogPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

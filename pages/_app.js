@@ -1,22 +1,25 @@
 import '@docsearch/css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Layout from '../components/layout/layout';
 import '../styles/layout/layout.scss';
 // prettier-ignore
 import '../styles/primereact.css';
 // prettier-ignore
-import PrimeReact from '../components/lib/api/PrimeReact';
-import '../styles/demo/demo.scss';
+import { GTagManager } from '../components/analytics/analytics';
+import PrimeReact from '../components/lib/api/Api';
+import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
 import AnnouncementData from '../data/news.json';
+import '../styles/demo/demo.scss';
 
-export default function MyApp({ Component }) {
+function Main({ component: Component }) {
     const [dark, setDark] = useState(false);
     const [theme, setTheme] = useState('lara-light-indigo');
     const [newsActive, setNewsActive] = useState(false);
     const storageKey = 'primereact-news';
     const announcement = useRef(AnnouncementData);
+    const context = useContext(PrimeReactContext);
 
     useEffect(() => {
         const itemString = localStorage.getItem(storageKey);
@@ -47,10 +50,17 @@ export default function MyApp({ Component }) {
             localStorage.setItem(storageKey, JSON.stringify(item));
         },
         onThemeChange: (newTheme, dark) => {
-            PrimeReact.changeTheme(theme, newTheme, 'theme-link', () => {
-                setDark(dark);
-                setTheme(newTheme);
-            });
+            if (context) {
+                context.changeTheme(theme, newTheme, 'theme-link', () => {
+                    setDark(dark);
+                    setTheme(newTheme);
+                });
+            } else {
+                PrimeReact.changeTheme(theme, newTheme, 'theme-link', () => {
+                    setDark(dark);
+                    setTheme(newTheme);
+                });
+            }
         },
         onTableThemeChange: (currentTableTheme, newTableTheme) => {
             changeTableTheme(currentTableTheme, newTableTheme);
@@ -84,4 +94,15 @@ export default function MyApp({ Component }) {
             </Layout>
         );
     }
+}
+
+export default function MyApp({ Component }) {
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    return (
+        <PrimeReactProvider>
+            {isProduction && <GTagManager />}
+            <Main component={Component} />
+        </PrimeReactProvider>
+    );
 }

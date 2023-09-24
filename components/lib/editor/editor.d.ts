@@ -8,6 +8,58 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils/utils';
+
+export declare type EditorPassThroughType<T> = PassThroughType<T, EditorPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface EditorPassThroughMethodOptions {
+    props: EditorProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link EditorProps.pt}
+ */
+export interface EditorPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: EditorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the toolbar's DOM element.
+     */
+    toolbar?: EditorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the formats's DOM element.
+     */
+    formats?: EditorPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the select's DOM element.
+     */
+    select?: EditorPassThroughType<React.HTMLAttributes<HTMLSelectElement>>;
+    /**
+     * Uses to pass attributes to the option's DOM element.
+     */
+    option?: EditorPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
+    /**
+     * Uses to pass attributes to the button's DOM element.
+     */
+    button?: EditorPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: EditorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
 
 /**
  * Custom text change event
@@ -112,6 +164,21 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {EditorPassThroughOptions}
+     */
+    pt?: EditorPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

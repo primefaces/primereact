@@ -8,7 +8,9 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type BreadCrumbPassThroughType<T> = PassThroughType<T, BreadCrumbPassThroughMethodOptions>;
@@ -50,9 +52,18 @@ export interface BreadCrumbPassThroughOptions {
      */
     label?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: BreadCrumbPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
      * Uses to pass attributes to the separator icon's DOM element.
      */
     separatorIcon?: BreadCrumbPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 /**
  * Defines valid properties in BreadCrumb component. In addition to these, all properties of HTMLElement can be used in this component.
@@ -81,6 +92,16 @@ export interface BreadCrumbProps extends Omit<React.DetailedHTMLProps<React.HTML
      * @type {BreadCrumbPassThroughOptions}
      */
     pt?: BreadCrumbPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

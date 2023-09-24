@@ -1,11 +1,19 @@
 import * as React from 'react';
 import { localeOption } from '../api/Api';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, mergeProps } from '../utils/Utils';
 import { TreeTableRow } from './TreeTableRow';
 
 export const TreeTableBody = React.memo((props) => {
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
+    const { ptm, cx } = props.ptCallbacks;
+
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
 
     const flattenizeTree = (nodes) => {
         let rows = [];
@@ -37,7 +45,7 @@ export const TreeTableBody = React.memo((props) => {
 
         const targetNode = event.target.nodeName;
 
-        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')) {
+        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.getAttribute(event.target, 'data-pc-section') === 'columnresizer') {
             return;
         }
 
@@ -162,15 +170,18 @@ export const TreeTableBody = React.memo((props) => {
     const createRow = (node, index) => {
         return (
             <TreeTableRow
+                hostName={props.hostName}
                 key={`${node.key || JSON.stringify(node.data)}_${index}`}
                 level={0}
                 rowIndex={index}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
+                originalOptions={props.originalOptions}
                 checkboxIcon={props.checkboxIcon}
                 columns={props.columns}
                 expandedKeys={props.expandedKeys}
                 onToggle={props.onToggle}
+                togglerTemplate={props.togglerTemplate}
                 onExpand={props.onExpand}
                 onCollapse={props.onCollapse}
                 selectionMode={props.selectionMode}
@@ -178,6 +189,8 @@ export const TreeTableBody = React.memo((props) => {
                 onSelectionChange={props.onSelectionChange}
                 metaKeySelection={props.metaKeySelection}
                 onRowClick={onRowClick}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
                 onSelect={props.onSelect}
                 onUnselect={props.onUnselect}
                 propagateSelectionUp={props.propagateSelectionUp}
@@ -186,6 +199,8 @@ export const TreeTableBody = React.memo((props) => {
                 contextMenuSelectionKey={props.contextMenuSelectionKey}
                 onContextMenuSelectionChange={props.onContextMenuSelectionChange}
                 onContextMenu={props.onContextMenu}
+                ptCallbacks={props.ptCallbacks}
+                metaData={props.metaData}
             />
         );
     };
@@ -216,20 +231,36 @@ export const TreeTableBody = React.memo((props) => {
         } else {
             const colSpan = props.columns ? props.columns.length : null;
             const content = props.emptyMessage || localeOption('emptyMessage');
+            const emptyMessageProps = mergeProps(
+                {
+                    className: cx('emptyMessage')
+                },
+                getPTOptions('emptyMessage')
+            );
+            const emptyMessageCellProps = mergeProps(
+                {
+                    colSpan
+                },
+                getPTOptions('emptyMessageCell')
+            );
 
             return (
-                <tr>
-                    <td className="p-treetable-emptymessage" colSpan={colSpan}>
-                        {content}
-                    </td>
+                <tr {...emptyMessageProps}>
+                    <td {...emptyMessageCellProps}>{content}</td>
                 </tr>
             );
         }
     };
 
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
+    const tbodyProps = mergeProps(
+        {
+            className: cx('tbody')
+        },
+        getPTOptions('tbody')
+    );
 
-    return <tbody className="p-treetable-tbody">{content}</tbody>;
+    return <tbody {...tbodyProps}>{content}</tbody>;
 });
 
 TreeTableBody.displayName = 'TreeTableBody';

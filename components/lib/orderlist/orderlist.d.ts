@@ -8,7 +8,125 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type OrderListPassThroughType<T> = PassThroughType<T, OrderListPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface OrderListPassThroughMethodOptions {
+    props: OrderListProps;
+    state: OrderListState;
+    context: OrderListContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link OrderListProps.pt}
+ */
+export interface OrderListPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the controls' DOM element.
+     */
+    controls?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveUpButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveTopButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveDownButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the Button component.
+     */
+    moveBottomButton?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    list?: OrderListPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: OrderListPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    droppoint?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    icon?: OrderListPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    filterInput?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    filterIcon?: OrderListPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    filter?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    filterContainer?: OrderListPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in OrderList component.
+ */
+export interface OrderListState {
+    /**
+     * Current selection state as a boolean.
+     */
+    selection: [];
+    /**
+     * Current filter value as a string.s
+     */
+    filterValue: string;
+    /**
+     * Current attribute selector state as a string.
+     */
+    attributeSelector: string;
+}
+
+/**
+ * Defines current options in OrderList component.
+ */
+export interface OrderListContext {
+    /**
+     * Current selection state of the item as a boolean.
+     */
+    selected: boolean;
+}
 
 /**
  * Custom change event.
@@ -44,7 +162,7 @@ interface OrderListFilterOptions {
  * Defines valid properties in OrderList component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref'> {
+export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'ref' | 'pt'> {
     /**
      * An array of objects to reorder.
      */
@@ -134,6 +252,21 @@ export interface OrderListProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {OrderListPassThroughOptions}
+     */
+    pt?: OrderListPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type SkeletonPassThroughType<T> = PassThroughType<T, SkeletonPassThroughMethodOptions>;
@@ -28,6 +30,11 @@ export interface SkeletonPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: SkeletonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -73,6 +80,16 @@ export interface SkeletonProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {SkeletonPassThroughOptions}
      */
     pt?: SkeletonPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

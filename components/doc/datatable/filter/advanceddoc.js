@@ -504,12 +504,11 @@ export default function AdvancedFilterDemo() {
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'primereact/utils';
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
-import { DataTable, DataTableFilterMeta, ColumnFilterClearTemplateOptions, 
-        ColumnFilterApplyTemplateOptions } from 'primereact/datatable';
+import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
 import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import { InputNumber, InputNumberValueChangeEvent } from 'primereact/inputnumber';
+import { InputNumber, InputNumberChangeEvent } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
 import { ProgressBar } from 'primereact/progressbar';
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
@@ -519,30 +518,62 @@ import { Tag } from 'primereact/tag';
 import { TriStateCheckbox, TriStateCheckboxChangeEvent } from 'primereact/tristatecheckbox';
 import { CustomerService } from './service/CustomerService';
 
-interface RepresentativeOption {
+interface Representative {
+  name: string;
+  image: string;
+}
+
+interface Country {
     name: string;
-    image: string;
+    code: string;
 }
 
 interface Customer {
-    id: number;
-    name: string;
-    country: Country;
-    company: string;
-    date: string;
-    status: string;
-    verified: boolean;
-    activity: number;
-    representative: Representative;
-    balance: number;
+  id: number;
+  name: string;
+  country: Country;
+  company: string;
+  date: string;
+  status: string;
+  verified: boolean;
+  activity: number;
+  representative: Representative;
+  balance: number;
 }
 
+const defaultFilters: DataTableFilterMeta = {
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: {
+    operator: FilterOperator.AND,
+    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+  },
+  'country.name': {
+    operator: FilterOperator.AND,
+    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+  },
+  representative: { value: null, matchMode: FilterMatchMode.IN },
+  date: {
+    operator: FilterOperator.AND,
+    constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }],
+  },
+  balance: {
+    operator: FilterOperator.AND,
+    constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+  },
+  status: {
+    operator: FilterOperator.OR,
+    constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+  },
+  activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
+  verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+};
+
 export default function AdvancedFilterDemo() {
-    const [customers, setCustomers] = useState<Customer[] | null>(null);
-    const [filters, setFilters] = useState<DataTableFilterMeta | null>(null);
+    const [customers, setCustomers] = useState<Customer[]>([]);
+    const [filters, setFilters] = useState<DataTableFilterMeta>(defaultFilters);
     const [loading, setLoading] = useState<boolean>(false);
     const [globalFilterValue, setGlobalFilterValue] = useState<string>('');
-    const [representatives] = useState<RepresentativeOption[]>([
+    const [representatives] = useState<Representative[]>([
         { name: 'Amy Elsner', image: 'amyelsner.png' },
         { name: 'Anna Fali', image: 'annafali.png' },
         { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
@@ -585,6 +616,7 @@ export default function AdvancedFilterDemo() {
 
     const getCustomers = (data: Customer[]) => {
         return [...(data || [])].map((d) => {
+            // @ts-ignore
             d.date = new Date(d.date);
 
             return d;
@@ -611,6 +643,7 @@ export default function AdvancedFilterDemo() {
         const value = e.target.value;
         let _filters = { ...filters };
 
+        // @ts-ignore
         _filters['global'].value = value;
 
         setFilters(_filters);
@@ -618,17 +651,7 @@ export default function AdvancedFilterDemo() {
     };
 
     const initFilters = () => {
-        setFilters({
-            global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-            name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-            'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-            representative: { value: null, matchMode: FilterMatchMode.IN },
-            date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
-            balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-            status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-            activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
-            verified: { value: null, matchMode: FilterMatchMode.EQUALS }
-        });
+        setFilters(defaultFilters);
         setGlobalFilterValue('');
     };
 
@@ -680,7 +703,7 @@ export default function AdvancedFilterDemo() {
         return <MultiSelect value={options.value} options={representatives} itemTemplate={representativesItemTemplate} onChange={(e: MultiSelectChangeEvent) => options.filterCallback(e.value)} optionLabel="name" placeholder="Any" className="p-column-filter" />;
     };
 
-    const representativesItemTemplate = (option: RepresentativeOption) => {
+    const representativesItemTemplate = (option: Representative) => {
         return (
             <div className="flex align-items-center gap-2">
                 <img alt={option.name} src={\`https://primefaces.org/cdn/primereact/images/avatar/\${option.image}\`} width="32" />
@@ -690,7 +713,7 @@ export default function AdvancedFilterDemo() {
     };
 
     const dateBodyTemplate = (rowData: Customer) => {
-        return formatDate(rowData.date);
+        return formatDate(new Date(rowData.date));
     };
 
     const dateFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
@@ -702,7 +725,7 @@ export default function AdvancedFilterDemo() {
     };
 
     const balanceFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
-        return <InputNumber value={options.value} onChange={(e: InputNumberValueChangeEvent) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />;
+        return <InputNumber value={options.value} onChange={(e: InputNumberChangeEvent) => options.filterCallback(e.value, options.index)} mode="currency" currency="USD" locale="en-US" />;
     };
 
     const statusBodyTemplate = (rowData: Customer) => {
@@ -743,7 +766,7 @@ export default function AdvancedFilterDemo() {
                 <label htmlFor="verified-filter" className="font-bold">
                     Verified
                 </label>
-                <TriStateCheckbox inputId="verified-filter" value={options.value} onChange={(e: TriStateCheckboxChangeEvent) => options.filterCallback(e.value)} />
+                <TriStateCheckbox id="verified-filter" value={options.value} onChange={(e: TriStateCheckboxChangeEvent) => options.filterCallback(e.value)} />
             </div>
         );
     };

@@ -8,8 +8,82 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils/utils';
+
+export declare type MenuPassThroughType<T> = PassThroughType<T, MenuPassThroughMethodOptions>;
+export declare type MenuPassThroughTransitionType = ReactCSSTransitionProps | ((options: MenuPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MenuPassThroughMethodOptions {
+    props: MenuProps;
+    state: MenuState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MenuProps.pt}
+ */
+export interface MenuPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: MenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the submenu header's DOM element.
+     */
+    submenuHeader?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: MenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: MenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MenuPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in Menu component.
+ */
+export interface MenuState {
+    /**
+     * Current visible state as a boolean.
+     * @defaultValue true
+     */
+    visible: boolean;
+}
 
 /**
  * Defines valid properties in Menu component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -65,6 +139,21 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MenuPassThroughOptions}
+     */
+    pt?: MenuPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

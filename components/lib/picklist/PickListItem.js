@@ -1,8 +1,19 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames } from '../utils/Utils';
+import { classNames, mergeProps } from '../utils/Utils';
 
 export const PickListItem = React.memo((props) => {
+    const { ptm, cx } = props;
+
+    const getPTOptions = (key) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            context: {
+                selected: props.selected
+            }
+        });
+    };
+
     const onClick = (event) => {
         if (props.onClick) {
             props.onClick({
@@ -22,16 +33,21 @@ export const PickListItem = React.memo((props) => {
     };
 
     const content = props.template ? props.template(props.value) : props.value;
-    const className = classNames(
-        'p-picklist-item',
+
+    const itemProps = mergeProps(
         {
-            'p-highlight': props.selected
+            className: classNames(props.className, cx('item', { subProps: props })),
+            onClick,
+            onKeyDown,
+            tabIndex: props.tabIndex,
+            role: 'option',
+            'aria-selected': props.selected
         },
-        props.className
+        getPTOptions('item')
     );
 
     return (
-        <li className={className} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} role="option" aria-selected={props.selected}>
+        <li {...itemProps}>
             {content}
             <Ripple />
         </li>

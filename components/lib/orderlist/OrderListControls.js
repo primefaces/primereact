@@ -1,16 +1,18 @@
 import * as React from 'react';
+import { ariaLabel } from '../api/Api';
 import { Button } from '../button/Button';
-import { IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleDownIcon } from '../icons/angledown';
-import { AngleDoubleUpIcon } from '../icons/angledoubleup';
-import { AngleUpIcon } from '../icons/angleup';
 import { AngleDoubleDownIcon } from '../icons/angledoubledown';
+import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleUpIcon } from '../icons/angleup';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const OrderListControls = React.memo((props) => {
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
     const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
     const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;
     const moveBottomIcon = props.moveBottomIcon || <AngleDoubleDownIcon />;
+    const { ptm, cx, unstyled } = props;
 
     const moveUp = (event) => {
         if (props.selection) {
@@ -124,12 +126,75 @@ export const OrderListControls = React.memo((props) => {
         }
     };
 
+    const controlsProps = mergeProps(
+        {
+            className: cx('controls')
+        },
+        ptm('controls', { hostName: props.hostName })
+    );
+
+    const moveUpButtonProps = mergeProps(
+        {
+            type: 'button',
+            unstyled: unstyled,
+            icon: moveUpIcon,
+            onClick: moveUp,
+            'aria-label': ariaLabel('moveUp'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
+        },
+        ptm('moveUpButton')
+    );
+
+    const moveTopButtonProps = mergeProps(
+        {
+            type: 'button',
+            unstyled: unstyled,
+            icon: moveTopIcon,
+            onClick: moveTop,
+            'aria-label': ariaLabel('moveTop'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
+        },
+        ptm('moveTopButton')
+    );
+
+    const moveDownButtonProps = mergeProps(
+        {
+            type: 'button',
+            unstyled: unstyled,
+            icon: moveDownIcon,
+            onClick: moveDown,
+            'aria-label': ariaLabel('moveDown'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
+        },
+        ptm('moveDownButton')
+    );
+
+    const moveBottomButtonProps = mergeProps(
+        {
+            type: 'button',
+            unstyled: unstyled,
+            icon: moveBottomIcon,
+            onClick: moveBottom,
+            'aria-label': ariaLabel('moveBottom'),
+            __parentMetadata: {
+                parent: props.metaData
+            }
+        },
+        ptm('moveBottomButton')
+    );
+
     return (
-        <div className="p-orderlist-controls">
-            <Button type="button" icon={moveUpIcon} onClick={moveUp}></Button>
-            <Button type="button" icon={moveTopIcon} onClick={moveTop}></Button>
-            <Button type="button" icon={moveDownIcon} onClick={moveDown}></Button>
-            <Button type="button" icon={moveBottomIcon} onClick={moveBottom}></Button>
+        <div {...controlsProps}>
+            <Button {...moveUpButtonProps}></Button>
+            <Button {...moveTopButtonProps}></Button>
+            <Button {...moveDownButtonProps}></Button>
+            <Button {...moveBottomButtonProps}></Button>
         </div>
     );
 });

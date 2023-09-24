@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableScrollableView = React.memo((props) => {
     const elementRef = React.useRef(null);
@@ -10,6 +10,14 @@ export const TreeTableScrollableView = React.memo((props) => {
     const scrollTableRef = React.useRef(null);
     const scrollFooterRef = React.useRef(null);
     const scrollFooterBoxRef = React.useRef(null);
+    const { ptm, cx, sx } = props.ptCallbacks;
+
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
 
     const setScrollHeight = () => {
         if (props.scrollHeight) {
@@ -36,7 +44,7 @@ export const TreeTableScrollableView = React.memo((props) => {
         if (element) {
             let el = element;
 
-            while (el && !DomHandler.hasClass(el, 'p-treetable')) {
+            while (el && !(DomHandler.getAttribute(el, 'data-pc-section') === 'root' || DomHandler.getAttribute(el, 'data-pc-name') === 'treetable')) {
                 el = el.parentElement;
             }
 
@@ -90,38 +98,109 @@ export const TreeTableScrollableView = React.memo((props) => {
     const createColGroup = () => {
         if (ObjectUtils.isNotEmpty(props.columns)) {
             const cols = props.columns.map((col, i) => <col key={col.field + '_' + i} />);
+            const scrollableColgroupProps = mergeProps(
+                {
+                    className: cx('scrollableColgroup')
+                },
+                getPTOptions('scrollableColgroup')
+            );
 
-            return <colgroup className="p-treetable-scrollable-colgroup">{cols}</colgroup>;
+            return <colgroup {...scrollableColgroupProps}>{cols}</colgroup>;
         } else {
             return null;
         }
     };
 
-    const className = classNames('p-treetable-scrollable-view', { 'p-treetable-frozen-view': props.frozen, 'p-treetable-unfrozen-view': !props.frozen && props.frozenWidth });
     const width = props.frozen ? props.frozenWidth : 'calc(100% - ' + props.frozenWidth + ')';
     const left = props.frozen ? null : props.frozenWidth;
     const colGroup = createColGroup();
-    const scrollableBodyStyle = !props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : null;
+    const scrollableProps = mergeProps(
+        {
+            className: cx('scrollable', { scrolaableProps: props }),
+            style: { width, left }
+        },
+        getPTOptions('scrollable')
+    );
+
+    const scrollableHeaderProps = mergeProps(
+        {
+            className: cx('scrollableHeader'),
+            onScroll: (e) => onHeaderScroll(e)
+        },
+        getPTOptions('scrollableHeader')
+    );
+
+    const scrollableHeaderBoxProps = mergeProps(
+        {
+            className: cx('scrollableHeaderBox')
+        },
+        getPTOptions('scrollableHeaderBox')
+    );
+
+    const scrollableHeaderTableProps = mergeProps(
+        {
+            className: cx('scrollableHeaderTable')
+        },
+        getPTOptions('scrollableHeaderTable')
+    );
+
+    const scrollableBodyProps = mergeProps(
+        {
+            className: cx('scrollableBody'),
+            style: !props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : undefined,
+            onScroll: (e) => onBodyScroll(e)
+        },
+        getPTOptions('scrollableBody')
+    );
+
+    const scrollableBodyTableProps = mergeProps(
+        {
+            style: { top: '0' },
+            className: cx('scrollableBodyTable')
+        },
+        getPTOptions('scrollableBodyTable')
+    );
+
+    const scrollableFooterProps = mergeProps(
+        {
+            className: cx('scrollableFooter')
+        },
+        getPTOptions('scrollableFooter')
+    );
+
+    const scrollableFooterBoxProps = mergeProps(
+        {
+            className: sx('scrollableFooterBox')
+        },
+        getPTOptions('scrollableFooterBox')
+    );
+
+    const scrollableFooterTableProps = mergeProps(
+        {
+            className: cx('scrollableFooterTable')
+        },
+        getPTOptions('scrollableFooterTable')
+    );
 
     return (
-        <div className={className} style={{ width: width, left: left }} ref={elementRef}>
-            <div className="p-treetable-scrollable-header" ref={scrollHeaderRef} onScroll={onHeaderScroll}>
-                <div className="p-treetable-scrollable-header-box" ref={scrollHeaderBoxRef}>
-                    <table className="p-treetable-scrollable-header-table">
+        <div ref={elementRef} {...scrollableProps}>
+            <div ref={scrollHeaderRef} {...scrollableHeaderProps}>
+                <div ref={scrollHeaderBoxRef} {...scrollableHeaderBoxProps}>
+                    <table {...scrollableHeaderTableProps}>
                         {colGroup}
                         {props.header}
                     </table>
                 </div>
             </div>
-            <div className="p-treetable-scrollable-body" ref={scrollBodyRef} style={scrollableBodyStyle} onScroll={onBodyScroll}>
-                <table ref={scrollTableRef} style={{ top: '0' }} className="p-treetable-scrollable-body-table">
+            <div ref={scrollBodyRef} {...scrollableBodyProps}>
+                <table ref={scrollTableRef} {...scrollableBodyTableProps}>
                     {colGroup}
                     {props.body}
                 </table>
             </div>
-            <div className="p-treetable-scrollable-footer" ref={scrollFooterRef}>
-                <div className="p-treetable-scrollable-footer-box" ref={scrollFooterBoxRef}>
-                    <table className="p-treetable-scrollable-footer-table">
+            <div ref={scrollFooterRef} {...scrollableFooterProps}>
+                <div ref={scrollFooterBoxRef} {...scrollableFooterBoxProps}>
+                    <table {...scrollableFooterTableProps}>
                         {colGroup}
                         {props.footer}
                     </table>

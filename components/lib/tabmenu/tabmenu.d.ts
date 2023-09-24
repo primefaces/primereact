@@ -8,7 +8,9 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type TabMenuPassThroughType<T> = PassThroughType<T, TabMenuThroughMethodOptions>;
@@ -19,6 +21,21 @@ export declare type TabMenuPassThroughType<T> = PassThroughType<T, TabMenuThroug
 export interface TabMenuThroughMethodOptions {
     props: TabMenuProps;
     state: TabMenuState;
+    context: TabMenuContext;
+}
+
+/**
+ * Defines current options in TabMenu component.
+ */
+export interface TabMenuContext {
+    /**
+     * Current menuitem
+     */
+    item: any;
+    /**
+     * Index of the menuitem
+     */
+    index: number;
 }
 
 /**
@@ -45,7 +62,7 @@ export interface TabMenuPassThroughOptions {
     /**
      * Uses to pass attributes to the icon's DOM element.
      */
-    icon?: TabMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    icon?: TabMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the label's DOM element.
      */
@@ -54,6 +71,11 @@ export interface TabMenuPassThroughOptions {
      * Uses to pass attributes to the inkbar's DOM element.
      */
     inkbar?: TabMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -116,6 +138,16 @@ export interface TabMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {TabMenuPassThroughOptions}
      */
     pt?: TabMenuPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

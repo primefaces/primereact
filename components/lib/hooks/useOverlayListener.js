@@ -17,12 +17,14 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
      * @param {boolean} options.valid It is controlled by PrimeReact. It is determined whether it is valid or not according to some custom validation.
      */
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
+        target: 'window',
         type: 'click',
         listener: (event) => {
             listener && listener(event, { type: 'outside', valid: event.which !== 3 && isOutsideClicked(event) });
         }
     });
     const [bindWindowResizeListener, unbindWindowResizeListener] = useResizeListener({
+        target: 'window',
         listener: (event) => {
             listener && listener(event, { type: 'resize', valid: !DomHandler.isTouchDevice() });
         }
@@ -32,6 +34,13 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         type: 'orientationchange',
         listener: (event) => {
             listener && listener(event, { type: 'orientationchange', valid: true });
+        }
+    });
+    const [bindWindowScrollChangeListener, unbindWindowScrollChangeListener] = useEventListener({
+        target: 'window',
+        type: 'scroll',
+        listener: (event) => {
+            listener && listener(event, { type: 'scroll', valid: true });
         }
     });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
@@ -49,6 +58,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         bindDocumentClickListener();
         bindWindowResizeListener();
         bindWindowOrientationChangeListener();
+        bindWindowScrollChangeListener();
         bindOverlayScrollListener();
     };
 
@@ -56,6 +66,7 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         unbindDocumentClickListener();
         unbindWindowResizeListener();
         unbindWindowOrientationChangeListener();
+        unbindWindowScrollChangeListener();
         unbindOverlayScrollListener();
     };
 

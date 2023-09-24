@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { InputNumber } from '../inputnumber/InputNumber';
 import { ObjectUtils } from '../utils/Utils';
 import { JumpToPageInputBase } from './PaginatorBase';
 
 export const JumpToPageInput = React.memo((inProps) => {
-    const props = JumpToPageInputBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = JumpToPageInputBase.getProps(inProps, context);
 
     const onChange = (event) => {
         if (props.onChange) {
@@ -13,7 +15,7 @@ export const JumpToPageInput = React.memo((inProps) => {
     };
 
     const value = props.pageCount > 0 ? props.page + 1 : 0;
-    const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} />;
+    const element = <InputNumber value={value} onChange={onChange} className="p-paginator-page-input" disabled={props.disabled} pt={props.ptm('JTPInput')} unstyled={props.unstyled} __parentMetadata={{ parent: props.metaData }} />;
 
     if (props.template) {
         const defaultOptions = {

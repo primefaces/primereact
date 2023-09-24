@@ -1,11 +1,22 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PageLinksBase } from './PaginatorBase';
 
 export const PageLinks = React.memo((inProps) => {
-    const props = PageLinksBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = PageLinksBase.getProps(inProps, context);
+    const { ptm, cx } = props;
+
+    const getPTOptions = (pageLink, key) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            context: {
+                active: pageLink - 1 === props.page
+            }
+        });
+    };
 
     const onPageLinkClick = (event, pageLink) => {
         if (props.onClick) {
@@ -31,8 +42,19 @@ export const PageLinks = React.memo((inProps) => {
                 'p-highlight': pageLink - 1 === props.page
             });
 
+            const pageButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    onClick: (e) => onPageLinkClick(e, pageLink),
+                    className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
+                    disabled: props.disabled,
+                    'aria-label': ariaLabel('pageLabel', { page: pageLink })
+                },
+                getPTOptions(pageLink, 'pageButton')
+            );
+
             let element = (
-                <button type="button" className={className} onClick={(e) => onPageLinkClick(e, pageLink)} aria-label={`${ariaLabel('pageLabel')} ${pageLink + 1}`}>
+                <button {...pageButtonProps}>
                     {pageLink}
                     <Ripple />
                 </button>
@@ -60,7 +82,14 @@ export const PageLinks = React.memo((inProps) => {
         });
     }
 
-    return <span className="p-paginator-pages">{elements}</span>;
+    const pagesProps = mergeProps(
+        {
+            className: cx('pages')
+        },
+        ptm('pages', { hostName: props.hostName })
+    );
+
+    return <span {...pagesProps}>{elements}</span>;
 });
 
 PageLinks.displayName = 'PageLinks';

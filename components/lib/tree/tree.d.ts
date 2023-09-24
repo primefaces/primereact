@@ -8,8 +8,148 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { TreeNode } from '../treenode';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type TreePassThroughType<T> = PassThroughType<T, TreePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TreePassThroughMethodOptions {
+    props: TreeProps;
+    state: TreeState;
+    context: TreeContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TreeProps.pt}
+ */
+export interface TreePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading overlay's DOM element.
+     */
+    loadingOverlay?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading icon's DOM element.
+     */
+    loadingIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the filter container's DOM element.
+     */
+    filterContainer?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: TreePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the search icon's DOM element.
+     */
+    searchIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the container's DOM element.
+     */
+    container?: TreePassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the node's DOM element.
+     */
+    node?: TreePassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the toggler's DOM element.
+     */
+    toggler?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the toggler icon's DOM element.
+     */
+    togglerIcon?: TreePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the checkbox container's DOM element.
+     */
+    checkboxContainer?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox's DOM element.
+     */
+    checkbox?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox icon's DOM element.
+     */
+    checkboxIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the node icon's DOM element.
+     */
+    nodeIcon?: TreePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: TreePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the subgroup's DOM element.
+     */
+    subgroup?: TreePassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    footer?: TreePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    droppoint?: TreePassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in Tree component.
+ */
+export interface TreeState {
+    /**
+     * Current expanded keys state.
+     */
+    expandedKeys: TreeExpandedKeysType;
+    /**
+     * Current filter value state as a string.
+     */
+    filterValue: string;
+}
+
+/**
+ * Defines current options in Tree component.
+ */
+export interface TreeContext {
+    /**
+     * Current expanded state of the node as a boolean.
+     * @defaultValue false
+     */
+    expanded: boolean;
+    /**
+     * Current selected state of the node as a boolean.
+     * @defaultValue false
+     */
+    selected: boolean;
+    /**
+     * Current checked state of the node as a boolean.
+     * @defaultValue false
+     */
+    checked: boolean;
+}
 
 /**
  * Custom tree header template options
@@ -507,6 +647,21 @@ export interface TreeProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TreePassThroughOptions}
+     */
+    pt?: TreePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

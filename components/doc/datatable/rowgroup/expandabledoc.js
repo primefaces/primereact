@@ -190,7 +190,7 @@ export default function ExpandableRowGroupDemo() {
         `,
         typescript: `
 import React, { useState, useEffect, useRef } from 'react';
-import { DataTable, DataTableRowToggleEvent } from 'primereact/datatable';
+import { DataTable, DataTableRowToggleEvent, DataTableExpandedRows } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
 import { CustomerService } from './service/CustomerService';
@@ -220,7 +220,7 @@ interface Customer {
 
 export default function ExpandableRowGroupDemo() {
     const [customers, setCustomers] = useState<Customer[]>([]);
-    const [expandedRows, setExpandedRows] = useState<Customer[]>([]);
+    const [expandedRows, setExpandedRows] = useState<DataTableExpandedRows | Customer[]>([]);
 
     useEffect(() => {
         CustomerService.getCustomersMedium().then((data) => setCustomers(data));

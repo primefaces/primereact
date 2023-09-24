@@ -1,6 +1,6 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
 
-export const InputMaskBase = {
+export const InputMaskBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'InputMask',
         autoClear: true,
@@ -28,7 +28,5 @@ export const InputMaskBase = {
         unmask: false,
         value: null,
         children: undefined
-    },
-    getProps: (props) => ObjectUtils.getMergedProps(props, InputMaskBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, InputMaskBase.defaultProps)
-};
+    }
+});

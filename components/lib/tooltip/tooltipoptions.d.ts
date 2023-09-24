@@ -6,6 +6,7 @@
  *
  */
 import * as React from 'react';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from './tooltip';
 
 /**
@@ -129,6 +130,11 @@ export interface TooltipOptions {
      * Uses to pass attributes to DOM elements inside the component.
      */
     pt?: TooltipPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * Callback to invoke before the tooltip is shown.
      * @param {TooltipEvent} event - Browser event

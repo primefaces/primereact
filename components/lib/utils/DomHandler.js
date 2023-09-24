@@ -214,6 +214,12 @@ export default class DomHandler {
         return false;
     }
 
+    static addStyles(element, styles = {}) {
+        if (element) {
+            Object.entries(styles).forEach(([key, value]) => (element.style[key] = value));
+        }
+    }
+
     static find(element, selector) {
         return element ? Array.from(element.querySelectorAll(selector)) : [];
     }
@@ -224,6 +230,74 @@ export default class DomHandler {
         }
 
         return null;
+    }
+
+    static setAttributes(element, attributes = {}) {
+        if (element) {
+            const computedStyles = (rule, value) => {
+                const styles = element?.$attrs?.[rule] ? [element?.$attrs?.[rule]] : [];
+
+                return [value].flat().reduce((cv, v) => {
+                    if (v !== null && v !== undefined) {
+                        const type = typeof v;
+
+                        if (type === 'string' || type === 'number') {
+                            cv.push(v);
+                        } else if (type === 'object') {
+                            const _cv = Array.isArray(v)
+                                ? computedStyles(rule, v)
+                                : Object.entries(v).map(([_k, _v]) => (rule === 'style' && (!!_v || _v === 0) ? `${_k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}:${_v}` : !!_v ? _k : undefined));
+
+                            cv = _cv.length ? cv.concat(_cv.filter((c) => !!c)) : cv;
+                        }
+                    }
+
+                    return cv;
+                }, styles);
+            };
+
+            Object.entries(attributes).forEach(([key, value]) => {
+                if (value !== undefined && value !== null) {
+                    const matchedEvent = key.match(/^on(.+)/);
+
+                    if (matchedEvent) {
+                        element.addEventListener(matchedEvent[1].toLowerCase(), value);
+                    } else if (key === 'p-bind') {
+                        this.setAttributes(element, value);
+                    } else {
+                        value = key === 'class' ? [...new Set(computedStyles('class', value))].join(' ').trim() : key === 'style' ? computedStyles('style', value).join(';').trim() : value;
+                        (element.$attrs = element.$attrs || {}) && (element.$attrs[key] = value);
+                        element.setAttribute(key, value);
+                    }
+                }
+            });
+        }
+    }
+
+    static getAttribute(element, name) {
+        if (element) {
+            const value = element.getAttribute(name);
+
+            if (!isNaN(value)) {
+                return +value;
+            }
+
+            if (value === 'true' || value === 'false') {
+                return value === 'true';
+            }
+
+            return value;
+        }
+
+        return undefined;
+    }
+
+    static isAttributeEquals(element, name, value) {
+        return element ? this.getAttribute(element, name) === value : false;
+    }
+
+    static isAttributeNotEquals(element, name, value) {
+        return !this.isAttributeEquals(element, name, value);
     }
 
     static getHeight(el) {
@@ -514,7 +588,7 @@ export default class DomHandler {
         return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
     }
 
-    static getScrollableParents(element) {
+    static getScrollableParents(element, hideOverlaysOnDocumentScrolling = false) {
         let scrollableParents = [];
 
         if (element) {
@@ -529,6 +603,15 @@ export default class DomHandler {
                 );
             };
 
+            const addScrollableParent = (node) => {
+                if (hideOverlaysOnDocumentScrolling) {
+                    // nodeType 9 is for document element
+                    scrollableParents.push(node.nodeName === 'BODY' || node.nodeName === 'HTML' || node.nodeType === 9 ? window : node);
+                } else {
+                    scrollableParents.push(node);
+                }
+            };
+
             for (let parent of parents) {
                 let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
 
@@ -539,15 +622,21 @@ export default class DomHandler {
                         let el = this.findSingle(parent, selector);
 
                         if (el && overflowCheck(el)) {
-                            scrollableParents.push(el);
+                            addScrollableParent(el);
                         }
                     }
                 }
 
+                // BODY
                 if (parent.nodeType === 1 && overflowCheck(parent)) {
-                    scrollableParents.push(parent);
+                    addScrollableParent(parent);
                 }
             }
+        }
+
+        // we should always at least have the body or window
+        if (!scrollableParents.some((node) => node === document.body || node === window)) {
+            scrollableParents.push(window);
         }
 
         return scrollableParents;
@@ -652,6 +741,10 @@ export default class DomHandler {
 
     static isChrome() {
         return /(chrome)/i.test(navigator.userAgent);
+    }
+
+    static isClient() {
+        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
     }
 
     static isTouchDevice() {
@@ -774,10 +867,6 @@ export default class DomHandler {
 
     static isExist(element) {
         return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
-    }
-
-    static hasDOM() {
-        return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
     }
 
     static getFocusableElements(element, selector = '') {
@@ -962,15 +1051,7 @@ export default class DomHandler {
     static createInlineStyle(nonce) {
         let styleElement = document.createElement('style');
 
-        try {
-            if (!nonce) {
-                nonce = process.env.REACT_APP_CSS_NONCE;
-            }
-        } catch (error) {
-            // NOOP
-        }
-
-        nonce && styleElement.setAttribute('nonce', nonce);
+        DomHandler.addNonce(styleElement, nonce);
         document.head.appendChild(styleElement);
 
         return styleElement;
@@ -988,6 +1069,18 @@ export default class DomHandler {
         }
 
         return styleElement;
+    }
+
+    static addNonce(styleElement, nonce) {
+        try {
+            if (!nonce) {
+                nonce = process.env.REACT_APP_CSS_NONCE;
+            }
+        } catch (error) {
+            // NOOP
+        }
+
+        nonce && styleElement.setAttribute('nonce', nonce);
     }
 
     static getTargetElement(target) {

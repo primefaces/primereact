@@ -1,3 +1,4 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/knob/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/knob/basicdoc';
@@ -7,6 +8,8 @@ import { FormikDoc } from '../../components/doc/knob/form/formikdoc';
 import { HookFormDoc } from '../../components/doc/knob/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/knob/importdoc';
 import { MinMaxDoc } from '../../components/doc/knob/minmaxdoc';
+import { PTDoc } from '../../components/doc/knob/pt/ptdoc';
+import { Wireframe } from '../../components/doc/knob/pt/wireframe';
 import { ReactiveDoc } from '../../components/doc/knob/reactivedoc';
 import { ReadOnlyDoc } from '../../components/doc/knob/readonlydoc';
 import { SizeDoc } from '../../components/doc/knob/sizedoc';
@@ -14,6 +17,8 @@ import { StepDoc } from '../../components/doc/knob/stepdoc';
 import { StrokeDoc } from '../../components/doc/knob/strokedoc';
 import { StyleDoc } from '../../components/doc/knob/styledoc';
 import { TemplateDoc } from '../../components/doc/knob/templatedoc';
+import { StyledDoc } from '../../components/doc/knob/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/knob/theming/tailwinddoc';
 
 const KnobDemo = () => {
     const docs = [
@@ -100,8 +105,45 @@ const KnobDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.knob.options',
+            label: 'Knob PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Knob Component" header="Knob" description="Knob is a form component to define number inputs with a dial." componentDocs={docs} apiDocs={['Knob']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Knob Component" header="Knob" description="Knob is a form component to define number inputs with a dial." componentDocs={docs} apiDocs={['Knob']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default KnobDemo;

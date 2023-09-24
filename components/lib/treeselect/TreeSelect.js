@@ -1,5 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { SearchIcon } from '../icons/search';
@@ -7,13 +8,14 @@ import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Ripple } from '../ripple/Ripple';
 import { Tree } from '../tree/Tree';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TreeSelectBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TreeSelectBase.getProps(inProps, context);
 
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -31,6 +33,21 @@ export const TreeSelect = React.memo(
         const hasNoOptions = ObjectUtils.isEmpty(props.options);
         const isSingleSelectionMode = props.selectionMode === 'single';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
+
+        const metaData = {
+            props,
+            state: {
+                focused: focusedState,
+                overlayVisible: overlayVisibleState,
+                expandedKeys: expandedKeys,
+                filterValue: filteredValue
+            }
+        };
+
+        const { ptm, cx, isUnstyled } = TreeSelectBase.setMetaData(metaData);
+
+        useHandleStyle(TreeSelectBase.css.styles, isUnstyled, { name: 'treeselect' });
+
         const filterOptions = {
             filter: (e) => onFilterInputChange(e),
             reset: () => resetFilter()
@@ -89,6 +106,28 @@ export const TreeSelect = React.memo(
                         name: props.name,
                         id: props.id,
                         value: event.value
+                    }
+                });
+            }
+        };
+
+        const clear = (event) => {
+            if (props.onChange) {
+                selfChange.current = true;
+
+                props.onChange({
+                    originalEvent: event,
+                    value: undefined,
+                    stopPropagation: () => {
+                        event.stopPropagation();
+                    },
+                    preventDefault: () => {
+                        event.preventDefault();
+                    },
+                    target: {
+                        name: props.name,
+                        id: props.id,
+                        value: undefined
                     }
                 });
             }
@@ -186,7 +225,8 @@ export const TreeSelect = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
             scrollInView();
         };
@@ -216,7 +256,7 @@ export const TreeSelect = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, triggerRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, triggerRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const scrollInView = () => {
@@ -306,6 +346,9 @@ export const TreeSelect = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            clear,
+            show,
+            hide,
             focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current
         }));
@@ -353,31 +396,64 @@ export const TreeSelect = React.memo(
         });
 
         const createKeyboardHelper = () => {
+            const hiddenInputWrapperProps = mergeProps(
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenInputWrapper')
+            );
+
+            const hiddenInputProps = mergeProps(
+                {
+                    ref: focusInputRef,
+                    role: 'listbox',
+                    id: props.inputId,
+                    type: 'text',
+                    'aria-expanded': overlayVisibleState,
+                    onFocus: onInputFocus,
+                    onBlur: onInputBlur,
+                    onKeyDown: onInputKeyDown,
+                    disabled: props.disabled,
+                    tabIndex: props.tabIndex,
+                    ...ariaProps
+                },
+                ptm('hiddenInput')
+            );
+
             return (
-                <div className="p-hidden-accessible">
-                    <input
-                        ref={focusInputRef}
-                        role="listbox"
-                        id={props.inputId}
-                        type="text"
-                        readOnly
-                        aria-expanded={overlayVisibleState}
-                        onFocus={onInputFocus}
-                        onBlur={onInputBlur}
-                        onKeyDown={onInputKeyDown}
-                        disabled={props.disabled}
-                        tabIndex={props.tabIndex}
-                        {...ariaProps}
-                    />
+                <div {...hiddenInputWrapperProps}>
+                    <input {...hiddenInputProps} readOnly />
                 </div>
             );
         };
 
         const createLabel = () => {
-            const labelClassName = classNames('p-treeselect-label', {
-                'p-placeholder': getLabel() === props.placeholder,
-                'p-treeselect-label-empty': !props.placeholder && isValueEmpty
-            });
+            const tokenProps = mergeProps(
+                {
+                    className: cx('token')
+                },
+                ptm('token')
+            );
+            const tokenLabelProps = mergeProps(
+                {
+                    className: cx('tokenLabel')
+                },
+                ptm('tokenLabel')
+            );
+
+            const labelContainerProps = mergeProps(
+                {
+                    className: cx('labelContainer')
+                },
+                ptm('labelContainer')
+            );
+
+            const labelProps = mergeProps(
+                {
+                    className: cx('label', { isValueEmpty, getLabel })
+                },
+                ptm('label')
+            );
 
             let content = null;
 
@@ -392,8 +468,8 @@ export const TreeSelect = React.memo(
                             {selectedNodes &&
                                 selectedNodes.map((node, index) => {
                                     return (
-                                        <div className="p-treeselect-token" key={`${node.key}_${index}`}>
-                                            <span className="p-treeselect-token-label">{node.label}</span>
+                                        <div {...tokenProps} key={`${node.key}_${index}`}>
+                                            <span {...tokenLabelProps}>{node.label}</span>
                                         </div>
                                     );
                                 })}
@@ -405,50 +481,90 @@ export const TreeSelect = React.memo(
             }
 
             return (
-                <div className="p-treeselect-label-container">
-                    <div className={labelClassName}>{content}</div>
+                <div {...labelContainerProps}>
+                    <div {...labelProps}>{content}</div>
                 </div>
             );
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = 'p-treeselect-trigger-icon p-clickable';
-            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
-            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
-
-            return (
-                <div ref={triggerRef} className="p-treeselect-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState}>
-                    {dropdownIcon}
-                </div>
+            const triggerProps = mergeProps(
+                {
+                    ref: triggerRef,
+                    className: cx('trigger'),
+                    role: 'button',
+                    'aria-haspopup': 'listbox',
+                    'aria-expanded': overlayVisibleState
+                },
+                ptm('trigger')
             );
+            const triggerIconProps = mergeProps(
+                {
+                    className: cx('triggerIcon')
+                },
+                ptm('triggerIcon')
+            );
+
+            const icon = props.dropdownIcon || <ChevronDownIcon {...triggerIconProps} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { ...triggerIconProps }, { props });
+
+            return <div {...triggerProps}>{dropdownIcon}</div>;
+        };
+
+        const createClearIcon = () => {
+            if (props.value != null && props.showClear && !props.disabled) {
+                const clearIconProps = mergeProps(
+                    {
+                        className: cx('clearIcon'),
+                        onPointerUp: clear
+                    },
+                    ptm('clearIcon')
+                );
+                const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
+
+                return IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
+            }
+
+            return null;
         };
 
         const createContent = () => {
+            const emptyMessageProps = mergeProps(
+                {
+                    className: cx('emptyMessage')
+                },
+                ptm('emptyMessage')
+            );
+
             return (
                 <>
                     <Tree
-                        value={props.options}
-                        selectionMode={props.selectionMode}
-                        selectionKeys={props.value}
-                        metaKeySelection={props.metaKeySelection}
-                        onSelectionChange={onSelectionChange}
-                        onSelect={onNodeSelect}
-                        onUnselect={onNodeUnselect}
                         expandedKeys={expandedKeys}
-                        onToggle={onNodeToggle}
-                        onExpand={props.onNodeExpand}
-                        onCollapse={props.onNodeCollapse}
                         filter={props.filter}
-                        filterValue={filteredValue}
                         filterBy={props.filterBy}
+                        filterLocale={props.filterLocale}
                         filterMode={props.filterMode}
                         filterPlaceholder={props.filterPlaceholder}
-                        filterLocale={props.filterLocale}
-                        showHeader={false}
+                        filterValue={filteredValue}
+                        metaKeySelection={props.metaKeySelection}
+                        nodeTemplate={props.nodeTemplate}
+                        onCollapse={props.onNodeCollapse}
+                        onExpand={props.onNodeExpand}
                         onFilterValueChange={onFilterValueChange}
+                        onSelect={onNodeSelect}
+                        onSelectionChange={onSelectionChange}
+                        onToggle={onNodeToggle}
+                        onUnselect={onNodeUnselect}
+                        selectionKeys={props.value}
+                        selectionMode={props.selectionMode}
+                        showHeader={false}
+                        togglerTemplate={props.togglerTemplate}
+                        value={props.options}
+                        pt={ptm('tree')}
+                        __parentMetadata={{ parent: metaData }}
                     ></Tree>
 
-                    {hasNoOptions && <div className="p-treeselect-empty-message">{props.emptyMessage || localeOption('emptyMessage')}</div>}
+                    {hasNoOptions && <div {...emptyMessageProps}>{props.emptyMessage || localeOption('emptyMessage')}</div>}
                 </>
             );
         };
@@ -456,23 +572,39 @@ export const TreeSelect = React.memo(
         const createFilterElement = () => {
             if (props.filter) {
                 const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
-                const iconClassName = 'p-treeselect-filter-icon';
-                const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
-                const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const filterContainerProps = mergeProps(
+                    {
+                        className: cx('filterContainer')
+                    },
+                    ptm('filterContainer')
+                );
+                const filterProps = mergeProps(
+                    {
+                        ref: filterInputRef,
+                        type: 'text',
+                        value: filterValue,
+                        autoComplete: 'off',
+                        className: cx('filter'),
+                        placeholder: props.filterPlaceholder,
+                        onKeyDown: onFilterInputKeyDown,
+                        onChange: onFilterInputChange,
+                        disabled: props.disabled
+                    },
+                    ptm('filter')
+                );
+
+                const filterIconProps = mergeProps(
+                    {
+                        className: cx('filterIcon')
+                    },
+                    ptm('filterIcon')
+                );
+                const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
                 let filterContent = (
-                    <div className="p-treeselect-filter-container">
-                        <input
-                            ref={filterInputRef}
-                            type="text"
-                            value={filterValue}
-                            autoComplete="off"
-                            className="p-treeselect-filter p-inputtext p-component"
-                            placeholder={props.filterPlaceholder}
-                            onKeyDown={onFilterInputKeyDown}
-                            onChange={onFilterInputChange}
-                            disabled={props.disabled}
-                        />
+                    <div {...filterContainerProps}>
+                        <input {...filterProps} />
                         {filterIcon}
                     </div>
                 );
@@ -497,18 +629,41 @@ export const TreeSelect = React.memo(
 
         const createHeader = () => {
             const filterElement = createFilterElement();
-            const iconProps = { className: 'p-treeselect-close-icon', 'aria-hidden': true };
-            const icon = props.closeIcon || <TimesIcon {...iconProps} />;
-            const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+            const closeIconProps = mergeProps(
+                {
+                    className: cx('closeIcon'),
+                    'aria-hidden': true
+                },
+                ptm('closeIcon')
+            );
+            const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
+            const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
+
+            const closeButtonProps = mergeProps(
+                {
+                    type: 'button',
+                    className: cx('closeButton'),
+                    onClick: hide,
+                    'aria-label': localeOption('close')
+                },
+                ptm('closeButton')
+            );
+
+            const headerProps = mergeProps(
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            );
 
             const closeElement = (
-                <button type="button" className="p-treeselect-close p-link" onClick={hide} aria-label={localeOption('close')}>
+                <button {...closeButtonProps}>
                     {closeIcon}
                     <Ripple />
                 </button>
             );
             const content = (
-                <div className="p-treeselect-header">
+                <div {...headerProps}>
                     {filterElement}
                     {closeElement}
                 </div>
@@ -540,30 +695,33 @@ export const TreeSelect = React.memo(
 
         const otherProps = TreeSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-treeselect p-component p-inputwrapper',
+        const rootProps = mergeProps(
             {
-                'p-treeselect-chip': props.display === 'chip',
-                'p-disabled': props.disabled,
-                'p-focus': focusedState,
-                'p-inputwrapper-filled': !isValueEmpty,
-                'p-inputwrapper-focus': focusedState || overlayVisibleState
+                ref: elementRef,
+                className: cx('root', { focusedState, overlayVisibleState, isValueEmpty }),
+                style: props.style,
+                onClick: onClick
             },
-            props.className
+            TreeSelectBase.getOtherProps(props),
+            ptm('root')
         );
+
         const keyboardHelper = createKeyboardHelper();
         const labelElement = createLabel();
         const dropdownIcon = createDropdownIcon();
+        const clearIcon = createClearIcon();
         const content = createContent();
         const header = createHeader();
         const footer = createFooter();
 
         return (
-            <div ref={elementRef} className={className} style={props.style} {...otherProps} onClick={onClick}>
+            <div {...rootProps}>
                 {keyboardHelper}
                 {labelElement}
+                {clearIcon}
                 {dropdownIcon}
                 <TreeSelectPanel
+                    hostName="TreeSelect"
                     ref={overlayRef}
                     appendTo={props.appendTo}
                     panelStyle={props.panelStyle}
@@ -578,6 +736,8 @@ export const TreeSelect = React.memo(
                     onEntered={onOverlayEntered}
                     onExit={onOverlayExit}
                     onExited={onOverlayExited}
+                    ptm={ptm}
+                    cx={cx}
                 >
                     {content}
                 </TreeSelectPanel>

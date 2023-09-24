@@ -1,6 +1,31 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
-export const MultiStateCheckboxBase = {
+const classes = {
+    icon: ({ icon }) =>
+        classNames('p-checkbox-icon p-c', {
+            [`${icon}`]: true
+        }),
+    root: ({ props }) => classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled }),
+    srOnlyAria: 'p-sr-only',
+
+    checkbox: ({ props, selectedOption, focusedState }) =>
+        classNames(
+            'p-checkbox-box',
+            {
+                'p-highlight': !!selectedOption,
+                'p-disabled': props.disabled,
+                'p-focus': focusedState
+            },
+            selectedOption && selectedOption.className
+        )
+};
+
+const inlineStyles = {
+    checkbox: ({ selectedOption }) => selectedOption && selectedOption.style
+};
+
+export const MultiStateCheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'MultiStateCheckbox',
         autoFocus: false,
@@ -23,6 +48,8 @@ export const MultiStateCheckboxBase = {
         value: null,
         children: undefined
     },
-    getProps: (props) => ObjectUtils.getMergedProps(props, MultiStateCheckboxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, MultiStateCheckboxBase.defaultProps)
-};
+    css: {
+        classes,
+        inlineStyles
+    }
+});

@@ -8,14 +8,164 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { MenuItem } from '../menuitem';
-import { IconType } from '../utils/utils';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type MegaMenuPassThroughType<T> = PassThroughType<T, MegaMenuPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MegaMenuPassThroughMethodOptions {
+    props: MegaMenuProps;
+    state: MegaMenuState;
+    context: MegaMenuContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MegaMenuProps.pt}
+ */
+export interface MegaMenuPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the menu button's DOM element.
+     */
+    menuButton?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the menu icon's DOM element.
+     */
+    menuButtonIcon?: MegaMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the header action's DOM element.
+     */
+    headerAction?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MegaMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the submenu icon's DOM element.
+     */
+    submenuIcon?: MegaMenuPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the grid's DOM element.
+     */
+    grid?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the column's DOM element.
+     */
+    column?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the submenu's DOM element.
+     */
+    submenu?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the submenu items's DOM element.
+     */
+    submenuItem?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the submenu header's DOM element.
+     */
+    submenuHeader?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the start of the component.
+     */
+    start?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the end of the component.
+     */
+    end?: MegaMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines focused item info
+ */
+export interface MegaMenuFocusedItemInfo {
+    /**
+     * Active item index
+     */
+    index: number;
+    /**
+     * Active item level
+     */
+    level: number;
+    /**
+     * Parent key info
+     */
+    parentKey: string;
+}
+
+/**
+ * Defines current inline state in MegaMenu component.
+ */
+export interface MegaMenuState {
+    /**
+     * Current mobileActive state as a boolean.
+     * @defaultValue false
+     */
+    mobileActive: boolean;
+    /**
+     * Current attributeSelector visible state as a string.
+     */
+    attributeSelector: boolean;
+    /**
+     * Active item path.
+     * @type {MenuItem}
+     */
+    activeItem: MenuItem;
+}
+
+/**
+ * Defines current options in MegaMenu component.
+ */
+export interface MegaMenuContext {
+    /**
+     * Current active state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Defines valid properties in MegaMenu component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * An array of menuitems.
      */
@@ -55,6 +205,21 @@ export interface MegaMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MegaMenuPassThroughOptions}
+     */
+    pt?: MegaMenuPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

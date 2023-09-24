@@ -46,6 +46,7 @@ export function GroupDoc(props) {
             ]
         }
     ];
+
     const code = {
         basic: `
 <Toast ref={toast} />
@@ -53,13 +54,13 @@ export function GroupDoc(props) {
 `,
         javascript: `
 import React, { useRef } from 'react';
-//import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Menu } from 'primereact/menu';
 import { Toast } from 'primereact/toast';
 
 export default function GroupDemo() {
     const toast = useRef(null);
-    //const router = useRouter();
+    const router = useRouter();
     const items = [
         {
             label: 'Options',
@@ -81,7 +82,7 @@ export default function GroupDemo() {
             ]
         },
         {
-            label: 'Navigate',
+            label: 'Links',
             items: [
                 {
                     label: 'React Website',
@@ -89,10 +90,10 @@ export default function GroupDemo() {
                     url: 'https://reactjs.org/'
                 },
                 {
-                    label: 'Router',
+                    label: 'Upload',
                     icon: 'pi pi-upload',
-                    command () => {
-                        //router.push('/fileupload');
+                    command: () => {
+                        router.push('/fileupload');
                     }
                 }
             ]
@@ -109,14 +110,14 @@ export default function GroupDemo() {
         `,
         typescript: `
 import React, { useRef } from 'react';
-//import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 
 export default function GroupDemo() {
     const toast = useRef<Toast>(null);
-    //const router = useRouter();
+    const router = useRouter();
     const items: MenuItem[] = [
         {
             label: 'Options',
@@ -138,7 +139,7 @@ export default function GroupDemo() {
             ]
         },
         {
-            label: 'Navigate',
+            label: 'Links',
             items: [
                 {
                     label: 'React Website',
@@ -146,10 +147,10 @@ export default function GroupDemo() {
                     url: 'https://reactjs.org/'
                 },
                 {
-                    label: 'Router',
+                    label: 'Upload',
                     icon: 'pi pi-upload',
                     command: () => {
-                        //router.push('/fileupload');
+                        router.push('/fileupload');
                     }
                 }
             ]
@@ -168,11 +169,7 @@ export default function GroupDemo() {
 
     return (
         <>
-            <DocSectionText {...props}>
-                <p>
-                    Menu supports one level of nesting by defining children with <i>items</i> property.
-                </p>
-            </DocSectionText>
+            <DocSectionText {...props}></DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <Menu model={items} />

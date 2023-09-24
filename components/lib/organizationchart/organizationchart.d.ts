@@ -8,7 +8,108 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type OrganizationChartPassThroughType<T> = PassThroughType<T, OrganizationChartPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface OrganizationChartPassThroughMethodOptions {
+    props: OrganizationChartProps;
+    state: OrganizationChartState;
+    context: OrganizationChartContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link OrganizationChartProps.pt}
+ */
+export interface OrganizationChartPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the table's DOM element.
+     */
+    table?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the row's DOM element.
+     */
+    row?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the cell's DOM element.
+     */
+    cell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the node's DOM element.
+     */
+    node?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the nodeToggler's DOM element.
+     */
+    nodeToggler?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the nodeTogglerIcon's DOM element.
+     */
+    nodeTogglerIcon?: OrganizationChartPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the lines's DOM element.
+     */
+    lines?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the lineLeft's DOM element.
+     */
+    lineLeft?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the lineRight's DOM element.
+     */
+    lineRight?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the lineCell's DOM element.
+     */
+    lineCell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the lineDown's DOM element.
+     */
+    lineDown?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the nodes's DOM element.
+     */
+    nodes?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the nodeCell's DOM element.
+     */
+    nodeCell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in OrganizationChart component.
+ */
+export interface OrganizationChartState {
+    /**
+     * Current focus expanded of the node as a boolean.
+     */
+    expanded: boolean;
+}
+
+/**
+ * Defines current options in OrganizationChart component.
+ */
+export interface OrganizationChartContext {
+    /**
+     * Current selection state of the node as a boolean.
+     */
+    selected: boolean;
+}
 
 /**
  * Custom node select event.
@@ -89,7 +190,7 @@ interface OrganizationChartNodeData {
  * Defines valid properties in OrganizationChart component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * An array of nested TreeNodes.
      */
@@ -131,6 +232,21 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {OrganizationChartPassThroughOptions}
+     */
+    pt?: OrganizationChartPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

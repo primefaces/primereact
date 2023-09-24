@@ -1,3 +1,4 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/listbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/listbox/basicdoc';
@@ -9,8 +10,12 @@ import { GroupDoc } from '../../components/doc/listbox/groupdoc';
 import { ImportDoc } from '../../components/doc/listbox/importdoc';
 import { InvalidDoc } from '../../components/doc/listbox/invaliddoc';
 import { MultipleDoc } from '../../components/doc/listbox/multipledoc';
+import { PTDoc } from '../../components/doc/listbox/pt/ptdoc';
+import { Wireframe } from '../../components/doc/listbox/pt/wireframe';
 import { StyleDoc } from '../../components/doc/listbox/styledoc';
 import { TemplateDoc } from '../../components/doc/listbox/templatedoc';
+import { StyledDoc } from '../../components/doc/listbox/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/listbox/theming/tailwinddoc';
 import { VirtualScrollDoc } from '../../components/doc/listbox/virtualscrolldoc';
 
 const ListBoxDemo = () => {
@@ -88,8 +93,45 @@ const ListBoxDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.listbox.options',
+            label: 'Listbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React ListBox Component" header="ListBox" description="ListBox is used to select one or more values from a list of items." componentDocs={docs} apiDocs={['ListBox']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React ListBox Component" header="ListBox" description="ListBox is used to select one or more values from a list of items." componentDocs={docs} apiDocs={['ListBox']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ListBoxDemo;

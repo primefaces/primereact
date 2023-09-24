@@ -1,18 +1,19 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
 export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = DropdownBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = DropdownBase.getProps(inProps, context);
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
@@ -20,12 +21,24 @@ export const Dropdown = React.memo(
         const overlayRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const focusInputRef = React.useRef(props.focusInputRef);
+        const virtualScrollerRef = React.useRef(null);
         const searchTimeout = React.useRef(null);
         const searchValue = React.useRef(null);
         const currentSearchChar = React.useRef(null);
         const isLazy = props.virtualScrollerOptions && props.virtualScrollerOptions.lazy;
         const hasFilter = ObjectUtils.isNotEmpty(filterState);
-        const appendTo = props.appendTo || PrimeReact.appendTo;
+        const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
+        const { ptm, cx, sx, isUnstyled } = DropdownBase.setMetaData({
+            props,
+            ...props.__parentMetadata,
+            state: {
+                filter: filterState,
+                focused: focusedState,
+                overlayVisible: overlayVisibleState
+            }
+        });
+
+        useHandleStyle(DropdownBase.css.styles, isUnstyled, { name: 'dropdown' });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -515,7 +528,8 @@ export const Dropdown = React.memo(
         };
 
         const onOverlayEnter = (callback) => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
             callback && callback();
         };
@@ -542,7 +556,7 @@ export const Dropdown = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, inputRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         const scrollInView = () => {
@@ -610,11 +624,13 @@ export const Dropdown = React.memo(
             props,
             show,
             hide,
+            clear,
             focus: () => DomHandler.focus(focusInputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
             getInput: () => inputRef.current,
-            getFocusInput: () => focusInputRef.current
+            getFocusInput: () => focusInputRef.current,
+            getVirtualScroller: () => virtualScrollerRef.current
         }));
 
         React.useEffect(() => {
@@ -668,31 +684,69 @@ export const Dropdown = React.memo(
                 };
             }
 
+            const hiddenSelectedMessageProps = mergeProps(
+                {
+                    className: 'p-hidden-accessible p-dropdown-hidden-select'
+                },
+                ptm('hiddenSelectedMessage')
+            );
+
+            const selectProps = mergeProps(
+                {
+                    ref: inputRef,
+                    required: props.required,
+                    defaultValue: option.value,
+                    name: props.name,
+                    tabIndex: -1,
+                    'aria-hidden': 'true'
+                },
+                ptm('select')
+            );
+
+            const optionProps = mergeProps(
+                {
+                    value: option.value
+                },
+                ptm('option')
+            );
+
             return (
-                <div className="p-hidden-accessible p-dropdown-hidden-select">
-                    <select ref={inputRef} required={props.required} defaultValue={option.value} name={props.name} tabIndex={-1} aria-hidden="true">
-                        <option value={option.value}>{option.label}</option>
+                <div {...hiddenSelectedMessageProps}>
+                    <select {...selectProps}>
+                        <option {...optionProps}>{option.label}</option>
                     </select>
                 </div>
             );
         };
 
         const createKeyboardHelper = () => {
+            const hiddenSelectedMessageProps = mergeProps(
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenSelectedMessage')
+            );
+
+            const inputProps = mergeProps(
+                {
+                    ref: focusInputRef,
+                    id: props.inputId,
+                    type: 'text',
+                    readOnly: true,
+                    'aria-haspopup': 'listbox',
+                    onFocus: onInputFocus,
+                    onBlur: onInputBlur,
+                    onKeyDown: onInputKeyDown,
+                    disabled: props.disabled,
+                    tabIndex: props.tabIndex,
+                    ...ariaProps
+                },
+                ptm('input')
+            );
+
             return (
-                <div className="p-hidden-accessible">
-                    <input
-                        ref={focusInputRef}
-                        id={props.inputId}
-                        type="text"
-                        readOnly
-                        aria-haspopup="listbox"
-                        onFocus={onInputFocus}
-                        onBlur={onInputBlur}
-                        onKeyDown={onInputKeyDown}
-                        disabled={props.disabled}
-                        tabIndex={props.tabIndex}
-                        {...ariaProps}
-                    />
+                <div {...hiddenSelectedMessageProps}>
+                    <input {...inputProps} />
                 </div>
             );
         };
@@ -702,62 +756,79 @@ export const Dropdown = React.memo(
 
             if (props.editable) {
                 const value = label || props.value || '';
-
-                return (
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        defaultValue={value}
-                        className="p-dropdown-label p-inputtext"
-                        disabled={props.disabled}
-                        placeholder={props.placeholder}
-                        maxLength={props.maxLength}
-                        onInput={onEditableInputChange}
-                        onFocus={onEditableInputFocus}
-                        onBlur={onInputBlur}
-                        aria-haspopup="listbox"
-                        {...ariaProps}
-                    />
+                const inputProps = mergeProps(
+                    {
+                        ref: inputRef,
+                        type: 'text',
+                        defaultValue: value,
+                        className: cx('input', { label }),
+                        disabled: props.disabled,
+                        placeholder: props.placeholder,
+                        maxLength: props.maxLength,
+                        onInput: onEditableInputChange,
+                        onFocus: onEditableInputFocus,
+                        onBlur: onInputBlur,
+                        'aria-haspopup': 'listbox',
+                        ...ariaProps
+                    },
+                    ptm('input')
                 );
+
+                return <input {...inputProps} />;
             } else {
-                const className = classNames('p-dropdown-label p-inputtext', {
-                    'p-placeholder': label === null && props.placeholder,
-                    'p-dropdown-label-empty': label === null && !props.placeholder
-                });
                 const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
-
-                return (
-                    <span ref={inputRef} className={className}>
-                        {content}
-                    </span>
+                const inputProps = mergeProps(
+                    {
+                        ref: inputRef,
+                        className: cx('input', { label })
+                    },
+                    ptm('input')
                 );
+
+                return <span {...inputProps}>{content}</span>;
             }
         };
 
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
-                const iconClassName = classNames('p-dropdown-clear-icon p-clickable');
-                const iconProps = { className: iconClassName, onPointerUp: clear };
-                const icon = props.clearIcon || <TimesIcon {...iconProps} />;
+                const clearIconProps = mergeProps(
+                    {
+                        className: cx('clearIcon'),
+                        onPointerUp: clear
+                    },
+                    ptm('clearIcon')
+                );
+                const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
 
-                return IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+                return IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
             }
 
             return null;
         };
 
         const createDropdownIcon = () => {
-            const iconClassName = classNames('p-dropdown-trigger-icon p-clickable');
-            const icon = props.dropdownIcon || <ChevronDownIcon className={iconClassName} />;
-            const dropdownIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+            const dropdownIconProps = mergeProps(
+                {
+                    className: cx('dropdownIcon')
+                },
+                ptm('dropdownIcon')
+            );
+            const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
+            const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
 
             const ariaLabel = props.placeholder || props.ariaLabel;
-
-            return (
-                <div className="p-dropdown-trigger" role="button" aria-haspopup="listbox" aria-expanded={overlayVisibleState} aria-label={ariaLabel}>
-                    {dropdownIcon}
-                </div>
+            const triggerProps = mergeProps(
+                {
+                    className: cx('trigger'),
+                    role: 'button',
+                    'aria-haspopup': 'listbox',
+                    'aria-expanded': overlayVisibleState,
+                    'aria-label': ariaLabel
+                },
+                ptm('trigger')
             );
+
+            return <div {...triggerProps}>{dropdownIcon}</div>;
         };
 
         const visibleOptions = getVisibleOptions();
@@ -766,34 +837,40 @@ export const Dropdown = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = DropdownBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-dropdown p-component p-inputwrapper',
-            {
-                'p-disabled': props.disabled,
-                'p-focus': focusedState,
-                'p-dropdown-clearable': props.showClear && !props.disabled,
-                'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
-                'p-inputwrapper-focus': focusedState || overlayVisibleState
-            },
-            props.className
-        );
         const hiddenSelect = createHiddenSelect();
         const keyboardHelper = createKeyboardHelper();
         const labelElement = createLabel();
         const dropdownIcon = createDropdownIcon();
         const clearIcon = createClearIcon();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
+                style: props.style,
+                onClick: (e) => onClick(e),
+                onMouseDown: props.onMouseDown,
+                onContextMenu: props.onContextMenu,
+                'data-p-disabled': props.disabled,
+                'data-p-focus': focusedState
+            },
+            otherProps,
+            ptm('root')
+        );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} onMouseDown={props.onMouseDown} onContextMenu={props.onContextMenu}>
+                <div {...rootProps}>
                     {keyboardHelper}
                     {hiddenSelect}
                     {labelElement}
                     {clearIcon}
                     {dropdownIcon}
                     <DropdownPanel
+                        hostName="Dropdown"
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
+                        virtualScrollerRef={virtualScrollerRef}
                         {...props}
                         appendTo={appendTo}
                         onClick={onPanelClick}
@@ -817,9 +894,12 @@ export const Dropdown = React.memo(
                         onEntered={onOverlayEntered}
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
+                        ptm={ptm}
+                        cx={cx}
+                        sx={sx}
                     />
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

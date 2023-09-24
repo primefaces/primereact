@@ -1,6 +1,18 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
+import { ObjectUtils, classNames } from '../utils/Utils';
 
-export const TriStateCheckboxBase = {
+const classes = {
+    root: ({ props }) => classNames('p-tristatecheckbox p-checkbox p-component', { 'p-checkbox-disabled': props.disabled }),
+    checkIcon: 'p-checkbox-icon p-c',
+    checkbox: ({ props, focusedState }) =>
+        classNames('p-checkbox-box', {
+            'p-highlight': ObjectUtils.isNotEmpty(props.value),
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        })
+};
+
+export const TriStateCheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'TriStateCheckbox',
         autoFocus: false,
@@ -18,6 +30,7 @@ export const TriStateCheckboxBase = {
         value: null,
         children: undefined
     },
-    getProps: (props) => ObjectUtils.getMergedProps(props, TriStateCheckboxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, TriStateCheckboxBase.defaultProps)
-};
+    css: {
+        classes
+    }
+});

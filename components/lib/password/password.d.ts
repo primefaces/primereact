@@ -8,11 +8,115 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { InputText } from '../inputtext';
 import { KeyFilterType } from '../keyfilter/keyfilteroptions';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type PasswordPassThroughType<T> = PassThroughType<T, PasswordPassThroughMethodOptions>;
+export declare type PasswordPassThroughTransitionType = ReactCSSTransitionProps | ((options: PasswordPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface PasswordPassThroughMethodOptions {
+    props: PasswordProps;
+    state: PasswordState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link PasswordProps.pt}
+ */
+export interface PasswordPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the InputText component.
+     * @see {@link InputTextPassThroughType}
+     */
+    input?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hide icon's DOM element.
+     */
+    hideIcon?: PasswordPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the show icon's DOM element.
+     */
+    showIcon?: PasswordPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the meter's DOM element.
+     */
+    meter?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the meter label's DOM element.
+     */
+    meterLabel?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the info's DOM element.
+     */
+    info?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: PasswordPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in Password component.
+ */
+export interface PasswordState {
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+    /**
+     * Current overlay visible state as a boolean.
+     * @see {@link PasswordMeterStateOptions}
+     */
+    meter: PasswordMeterStateOptions;
+    /**
+     * Current info test state as a string.
+     */
+    infoText: string;
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current unmasked state as a boolean.
+     * @defaultValue false
+     */
+    unmasked: boolean;
+}
+
+export interface PasswordMeterStateOptions {
+    /**
+     * Current strength of the meter state as a string.
+     */
+    strength: string;
+    /**
+     * Current width of the meter state as a string.
+     */
+    width: string;
+}
 
 /**
  * Custom icon event
@@ -42,7 +146,7 @@ interface PasswordIconEvent {
  * Defines valid properties in Password component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'content'> {
+export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'content' | 'pt'> {
     /**
      * Identifier of the input element.
      */
@@ -171,6 +275,21 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {PasswordPassThroughOptions}
+     */
+    pt?: PasswordPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

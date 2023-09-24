@@ -1,3 +1,4 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/datatable/basicdoc';
@@ -22,6 +23,8 @@ import { ImportDoc } from '../../components/doc/datatable/importdoc';
 import { LazyLoadDoc } from '../../components/doc/datatable/lazyloaddoc';
 import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
+import { PTDoc } from '../../components/doc/datatable/pt/ptdoc';
+import { Wireframe } from '../../components/doc/datatable/pt/wireframe';
 import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
 import { RowExpansionDoc } from '../../components/doc/datatable/rowexpansiondoc';
 import { ExpandableRowGroupDoc } from '../../components/doc/datatable/rowgroup/expandabledoc';
@@ -49,6 +52,8 @@ import { StatefulDoc } from '../../components/doc/datatable/statefuldoc';
 import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
 import { StyleDoc } from '../../components/doc/datatable/styledoc';
 import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
+import { StyledDoc } from '../../components/doc/datatable/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/datatable/theming/tailwinddoc';
 import { LazyVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/lazydoc';
 import { PreloadVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/preloaddoc';
 
@@ -381,8 +386,62 @@ const DataTableDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.datatable.options',
+            label: 'DataTable PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.column.options',
+            label: 'Column PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.columngroup.options',
+            label: 'ColumnGroup PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.row.options',
+            label: 'Row PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent title="React Table Component" header="DataTable" description="DataTable displays data in tabular format." componentDocs={docs} apiDocs={['DataTable', 'Column', 'Row', 'ColumnGroup']} ptDocs={ptDocs} themingDocs={themingDocs} />
+    );
 };
 
 export default DataTableDemo;

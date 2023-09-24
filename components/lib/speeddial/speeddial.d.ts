@@ -8,9 +8,11 @@
  *
  */
 import * as React from 'react';
-import { MenuItem } from '../menuitem';
-import { IconType, PassThroughType } from '../utils';
 import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils';
 
 export declare type SpeedDialPassThroughType<T> = PassThroughType<T, SpeedDialPassThroughMethodOptions>;
 
@@ -56,6 +58,11 @@ export interface SpeedDialPassThroughOptions {
      * Uses to pass attributes to the mask's DOM element.
      */
     mask?: SpeedDialPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -209,6 +216,16 @@ export interface SpeedDialProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @type {SpeedDialPassThroughOptions}
      */
     pt?: SpeedDialPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

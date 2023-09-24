@@ -4,7 +4,15 @@ import { DocSectionText } from '../common/docsectiontext';
 export function RippleDoc(props) {
     const code = {
         basic: `
-PrimeReact.ripple = true;
+import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
+
+//use in a component
+const { setRipple } = useContext(PrimeReactContext);
+
+useMountEffect(() => {
+   setRipple(true);
+});
         `
     };
 

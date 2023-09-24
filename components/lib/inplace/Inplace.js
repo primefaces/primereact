@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { localeOption, PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { TimesIcon } from '../icons/times';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InplaceBase } from './InplaceBase';
@@ -9,18 +10,21 @@ export const InplaceDisplay = (props) => props.children;
 export const InplaceContent = (props) => props.children;
 
 export const Inplace = React.forwardRef((inProps, ref) => {
-    const props = InplaceBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = InplaceBase.getProps(inProps, context);
 
     const [activeState, setActiveState] = React.useState(props.active);
     const elementRef = React.useRef(null);
     const active = props.onToggle ? props.active : activeState;
-
-    const { ptm } = InplaceBase.setMetaData({
+    const metaData = {
         props,
         state: {
             active: activeState
         }
-    });
+    };
+    const { ptm, cx, isUnstyled } = InplaceBase.setMetaData(metaData);
+
+    useHandleStyle(InplaceBase.css.styles, isUnstyled, { name: 'inplace' });
 
     const open = (event) => {
         if (props.disabled) {
@@ -60,14 +64,10 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const createDisplay = (content) => {
-        const className = classNames('p-inplace-display', {
-            'p-disabled': props.disabled
-        });
-
         const displayProps = mergeProps(
             {
                 onClick: open,
-                className,
+                className: cx('display'),
                 onKeyDown: onDisplayKeyDown,
                 tabIndex: props.tabIndex,
                 'aria-label': props.ariaLabel
@@ -85,12 +85,15 @@ export const Inplace = React.forwardRef((inProps, ref) => {
 
         if (props.closable) {
             const closeButtonProps = mergeProps({
-                className: 'p-inplace-content-close',
+                className: cx('closeButton'),
                 icon: closeIcon,
                 type: 'button',
                 onClick: close,
                 'aria-label': ariaLabel,
-                pt: ptm('closeButton')
+                pt: ptm('closeButton'),
+                __parentMetadata: {
+                    parent: metaData
+                }
             });
 
             return <Button {...closeButtonProps}></Button>;
@@ -104,7 +107,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
 
         const contentProps = mergeProps(
             {
-                className: 'p-inplace-content'
+                className: cx('content')
             },
             ptm('content')
         );
@@ -135,18 +138,11 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     }));
 
     const children = createChildren();
-    const className = classNames(
-        'p-inplace p-component',
-        {
-            'p-inplace-closable': props.closable
-        },
-        props.className
-    );
 
     const rootProps = mergeProps(
         {
             ref: elementRef,
-            className
+            className: classNames(props.className, cx('root'))
         },
         InplaceBase.getOtherProps(props),
         ptm('root')

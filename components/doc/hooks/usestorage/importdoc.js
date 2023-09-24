@@ -1,10 +1,11 @@
-import { DocSectionText } from '../../common/docsectiontext';
 import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function ImportDoc(props) {
     const code = {
         basic: `
-import { useStorage } from 'primereact/hooks';
+import { useLocalStorage } from 'primereact/hooks';
+import { useSessionStorage } from 'primereact/hooks';
         `
     };
 

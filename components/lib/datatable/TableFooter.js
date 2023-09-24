@@ -3,8 +3,38 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { RowBase } from '../row/RowBase';
 import { FooterCell } from './FooterCell';
+import { mergeProps } from '../utils/Utils';
 
 export const TableFooter = React.memo((props) => {
+    const { ptm, ptmo, cx } = props.ptCallbacks;
+    const getRowProps = (row) => ColumnGroupBase.getCProps(row);
+
+    const getColumnGroupProps = () => {
+        return props.footerColumnGroup ? ColumnGroupBase.getCProps(props.footerColumnGroup) : undefined;
+    };
+
+    const getRowPTOptions = (row, key) => {
+        const rProps = getRowProps(row);
+        const rowMetaData = {
+            props: rProps,
+            parent: props.metaData,
+            hostName: props.hostName
+        };
+
+        return mergeProps(ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData));
+    };
+
+    const getColumnGroupPTOptions = (key) => {
+        const cGProps = getColumnGroupProps();
+        const columnGroupMetaData = {
+            props: getColumnGroupProps(),
+            parent: props.metaData,
+            hostName: props.hostName
+        };
+
+        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(cGProps, key, columnGroupMetaData));
+    };
+
     const hasFooter = () => {
         return props.footerColumnGroup ? true : props.columns ? props.columns.some((col) => col && getColumnProp(col, 'footer')) : false;
     };
@@ -24,7 +54,7 @@ export const TableFooter = React.memo((props) => {
             const isVisible = col ? !getColumnProp(col, 'hidden') : true;
             const key = col ? getColumnProp(col, 'columnKey') || getColumnProp(col, 'field') || i : i;
 
-            return isVisible && <FooterCell key={key} tableProps={props.tableProps} column={col} />;
+            return isVisible && <FooterCell hostName={props.hostName} key={key} tableProps={props.tableProps} column={col} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
         });
     };
 
@@ -32,20 +62,43 @@ export const TableFooter = React.memo((props) => {
         if (props.footerColumnGroup) {
             const rows = React.Children.toArray(ColumnGroupBase.getCProp(props.footerColumnGroup, 'children'));
 
-            return rows.map((row, i) => (
-                <tr key={i} role="row">
-                    {createGroupFooterCells(row)}
-                </tr>
-            ));
+            return rows.map((row, i) => {
+                const rootProps = mergeProps(
+                    {
+                        role: 'row'
+                    },
+                    getRowPTOptions(row, 'root')
+                );
+
+                return (
+                    <tr {...rootProps} key={i}>
+                        {createGroupFooterCells(row)}
+                    </tr>
+                );
+            });
         }
 
-        return <tr role="row">{createFooterCells(props.columns)}</tr>;
+        const footerRowProps = mergeProps(
+            {
+                role: 'row'
+            },
+            ptm('footerRow', { hostName: props.hostName })
+        );
+
+        return <tr {...footerRowProps}>{createFooterCells(props.columns)}</tr>;
     };
 
     if (hasFooter()) {
         const content = createContent();
+        const tfootProps = mergeProps(
+            {
+                className: cx('tfoot')
+            },
+            getColumnGroupPTOptions('root'),
+            ptm('tfoot', { hostName: props.hostName })
+        );
 
-        return <tfoot className="p-datatable-tfoot">{content}</tfoot>;
+        return <tfoot {...tfootProps}>{content}</tfoot>;
     }
 
     return null;

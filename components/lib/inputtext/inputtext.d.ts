@@ -8,8 +8,59 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { KeyFilterType } from '../keyfilter';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
+import { PassThroughType } from '../utils/utils';
+
+export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InputTextPassThroughMethodOptions {
+    props: InputTextProps;
+    context: InputTextContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InputTextProps.pt}
+ */
+export interface InputTextPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InputTextPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current options in InputText component.
+ */
+export interface InputTextContext {
+    /**
+     * Current filled state of the component as a boolean.
+     * @defaultValue false
+     */
+    filled: boolean;
+    /**
+     * Current disabled state of the component as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
+}
 
 /**
  * Defines valid properties in InputText component. In addition to these, all properties of HTMLInputElement can be used in this component.
@@ -49,6 +100,21 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputTextPassThroughOptions}
+     */
+    pt?: InputTextPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

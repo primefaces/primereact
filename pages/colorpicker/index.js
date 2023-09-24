@@ -6,7 +6,12 @@ import { HookFormDoc } from '../../components/doc/colorpicker/form/hookformdoc';
 import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
 import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
 import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
+import { PTDoc } from '../../components/doc/colorpicker/pt/ptdoc';
+import { Wireframe } from '../../components/doc/colorpicker/pt/wireframe';
 import { StyleDoc } from '../../components/doc/colorpicker/styledoc';
+import { StyledDoc } from '../../components/doc/colorpicker/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/colorpicker/theming/tailwinddoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const ColorPickerDemo = () => {
@@ -64,8 +69,45 @@ const ColorPickerDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.colorpicker.options',
+            label: 'ColorPicker PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={['ColorPicker']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React ColorPicker Component" header="ColorPicker" description="ColorPicker is an input component to select a color." componentDocs={docs} apiDocs={['ColorPicker']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ColorPickerDemo;

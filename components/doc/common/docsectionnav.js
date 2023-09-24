@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { useEventListener } from '../../lib/hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils } from '../../lib/utils/Utils';
+import { DomHandler, ObjectUtils, classNames } from '../../lib/utils/Utils';
 
 export function DocSectionNav({ docs = [] }) {
     const router = useRouter();
@@ -85,7 +85,7 @@ export function DocSectionNav({ docs = [] }) {
             <li key={id} className={classNames('navbar-item', { 'active-navbar-item': activeId === id })}>
                 <div className="navbar-item-content">
                     <Link href={href}>
-                        <button className="p-link" onClick={() => onClick(id)} title={label}>
+                        <button className="px-link" onClick={() => onClick(id)} title={label}>
                             {label}
                         </button>
                     </Link>

@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type BadgePassThroughType<T> = PassThroughType<T, BadgePassThroughMethodOptions>;
@@ -28,6 +30,11 @@ export interface BadgePassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: BadgePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -60,6 +67,16 @@ export interface BadgeProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {BadgePassThroughOptions}
      */
     pt?: BadgePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

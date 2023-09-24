@@ -4,7 +4,15 @@ import { DocSectionText } from '../common/docsectiontext';
 export function InputStyleDoc(props) {
     const code = {
         basic: `
-PrimeReact.inputStyle = 'filled';
+import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
+
+//use in a component
+const { setInputStyle } = useContext(PrimeReactContext);
+
+useMountEffect(() => {
+   setInputStyle('filled');
+});
         `
     };
 

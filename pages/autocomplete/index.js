@@ -12,9 +12,14 @@ import { ImportDoc } from '../../components/doc/autocomplete/importdoc';
 import { InvalidDoc } from '../../components/doc/autocomplete/invaliddoc';
 import { MultipleDoc } from '../../components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '../../components/doc/autocomplete/objectsdoc';
+import { PTDoc } from '../../components/doc/autocomplete/pt/ptdoc';
+import { Wireframe } from '../../components/doc/autocomplete/pt/wireframe';
 import { StyleDoc } from '../../components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '../../components/doc/autocomplete/templatedoc';
+import { StyledDoc } from '../../components/doc/autocomplete/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/autocomplete/theming/tailwinddoc';
 import { VirtualScrollDoc } from '../../components/doc/autocomplete/virtualscrolldoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const AutoCompleteDemo = () => {
@@ -107,8 +112,55 @@ const AutoCompleteDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.autocomplete.options',
+            label: 'AutoComplete PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React AutoComplete Component" header="AutoComplete" description="AutoComplete is an input component that provides real-time suggestions while being typed" componentDocs={docs} apiDocs={['AutoComplete']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React AutoComplete Component"
+            header="AutoComplete"
+            description="AutoComplete is an input component that provides real-time suggestions while being typed"
+            componentDocs={docs}
+            apiDocs={['AutoComplete']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default AutoCompleteDemo;

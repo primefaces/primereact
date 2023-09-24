@@ -1,6 +1,18 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
-export const SelectButtonBase = {
+const classes = {
+    root: ({ props }) => classNames('p-selectbutton p-buttonset p-component', props.className),
+    button: ({ itemProps: props, focusedState }) =>
+        classNames('p-button p-component', {
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        }),
+    label: 'p-button-label p-c'
+};
+
+export const SelectButtonBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'SelectButton',
         id: null,
@@ -22,6 +34,7 @@ export const SelectButtonBase = {
         onChange: null,
         children: undefined
     },
-    getProps: (props) => ObjectUtils.getMergedProps(props, SelectButtonBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, SelectButtonBase.defaultProps)
-};
+    css: {
+        classes
+    }
+});

@@ -1,3 +1,6 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/multistatecheckbox/pt/ptdoc';
+import { Wireframe } from '../../components/doc/multistatecheckbox/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/multistatecheckbox/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/multistatecheckbox/basicdoc';
@@ -58,8 +61,25 @@ const MultiStateCheckboxDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.multistatecheckbox.options',
+            label: 'MultiStateCheckbox PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React MultiStateCheckbox Component" header="MultiStateCheckbox" description="MultiStateCheckbox is used to select a state from given options." componentDocs={docs} apiDocs={['MultiStateCheckbox']} />;
+    return <DocComponent title="React MultiStateCheckbox Component" header="MultiStateCheckbox" description="MultiStateCheckbox is used to select a state from given options." componentDocs={docs} apiDocs={['MultiStateCheckbox']} ptDocs={ptDocs} />;
 };
 
 export default MultiStateCheckboxDemo;

@@ -8,10 +8,146 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
+import { TreeNodeTemplateOptions, TreePassThroughOptions, TreeTogglerTemplateOptions } from '../tree/tree';
 import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type TreeSelectPassThroughType<T> = PassThroughType<T, TreeSelectPassThroughMethodOptions>;
+export declare type TreeSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: TreeSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TreeSelectPassThroughMethodOptions {
+    props: TreeSelectProps;
+    state: TreeSelectState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TreeSelectProps.pt}
+ */
+export interface TreeSelectPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label container's DOM element.
+     */
+    labelContainer?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the token's DOM element.
+     */
+    token?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the token label's DOM element.
+     */
+    tokenLabel?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the trigger's DOM element.
+     */
+    trigger?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the trigger icon's DOM element.
+     */
+    triggerIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the trigger's DOM element.
+     * @see {@link TreePassThroughOptionType}
+     */
+    tree?: TreePassThroughOptions;
+    /**
+     * Uses to pass attributes to the empty message's DOM element.
+     */
+    emptyMessage?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     */
+    hiddenInputWrapper?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden input's DOM element.
+     */
+    hiddenInput?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the filter container's DOM element.
+     */
+    filterContainer?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * uses to pass attributes to the filter's DOM element.
+     */
+    filter?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * uses to pass attributes to the filter icon's DOM element.
+     */
+    filterIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * uses to pass attributes to the header's DOM element.
+     */
+    header?: TreeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * uses to pass attributes to the clear icon's DOM element.
+     */
+    clearIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: TreeSelectPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in TreeSelect component.
+ */
+export interface TreeSelectState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+    /**
+     * Current expanded keys state.
+     */
+    expandedKeys: TreeSelectExpandedKeysType;
+    /**
+     * Current selected keys state.
+     */
+    filterValue: string;
+}
 
 /**
  * Custom panel header template options.
@@ -160,7 +296,7 @@ interface TreeSelectFilterOptions {
  * Defines valid properties in TreeSelect component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
+export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref' | 'pt'> {
     /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
@@ -184,6 +320,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Icon of the dropdown.
+     */
+    clearIcon?: IconType<TreeSelectProps> | undefined;
     /**
      * Icon of the close button.
      */
@@ -269,6 +409,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     name?: string | undefined;
     /**
+     * Template of internally used tree component node element.
+     * @defaultValue false
+     */
+    nodeTemplate?: React.ReactNode | ((node: TreeNode, options: TreeNodeTemplateOptions) => React.ReactNode);
+    /**
      * An array of options to display.
      */
     options?: TreeNode[] | undefined;
@@ -296,12 +441,35 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * Clears the filter value when hiding the dropdown.
      * @defaultValue false
      */
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TreeSelectPassThroughOptions}
+     */
+    pt?: TreeSelectPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
+    /**
+     * Resets the filter when the overlay is hidden.
+     */
     resetFilterOnHide?: boolean | undefined;
     /**
      * Maximum height of the options panel.
      * @defaultValue 400px
      */
     scrollHeight?: string | undefined;
+    /**
+     * When enabled, a clear icon is displayed to clear the value.
+     * @defaultValue false
+     */
+    showClear?: boolean | undefined;
     /**
      * Defines the selection mode, valid values "single", "multiple", and "checkbox".
      */
@@ -310,6 +478,10 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
     transitionOptions?: CSSTransitionProps | undefined;
+    /**
+     * Template of toggler element.
+     */
+    togglerTemplate?: React.ReactNode | ((node: TreeNode, options: TreeTogglerTemplateOptions) => React.ReactNode);
     /**
      * A single or an object of keys to control the selection state.
      */
@@ -379,6 +551,18 @@ export declare class TreeSelect extends React.Component<TreeSelectProps, any> {
      * Used to focus the component.
      */
     public focus(): void;
+    /**
+     * Clear the currently selected value.
+     */
+    public clear(): void;
+    /**
+     * Show the dropdown overlay panel.
+     */
+    public show(): void;
+    /**
+     * Hide the dropdown overlay panel.
+     */
+    public hide(): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element

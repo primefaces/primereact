@@ -8,9 +8,111 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type CascadeSelectPassThroughType<T> = PassThroughType<T, CascadeSelectPassThroughMethodOptions>;
+export declare type CascadeSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: CascadeSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface CascadeSelectPassThroughMethodOptions {
+    props: CascadeSelectProps;
+    state: CascadeSelectState;
+}
+
+/**
+ * Defines current inline state in CascadeSelect component.
+ */
+export interface CascadeSelectState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+    /**
+     * Current overlay attributeSelector state as a string.
+     */
+    attributeSelector: string;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link CascadeSelectProps.pt}
+ */
+export interface CascadeSelectPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the dropdown button's DOM element.
+     */
+    dropdownButton?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the dropdown icon's DOM element.
+     */
+    dropdownIcon?: CascadeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    list?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the optionGroup icon's DOM element.
+     */
+    optionGroupIcon?: CascadeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the text's DOM element.
+     */
+    text?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the hidden selected message's DOM element.
+     */
+    hiddenSelectedMessage?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: CascadeSelectPassThroughTransitionType;
+}
 
 /**
  * Custom change event
@@ -177,6 +279,21 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CascadeSelectPassThroughOptions}
+     */
+    pt?: CascadeSelectPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

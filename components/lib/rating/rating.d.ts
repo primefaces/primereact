@@ -8,9 +8,74 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { IconType } from '../utils';
+import { IconType, PassThroughType } from '../utils';
+
+export declare type RatingPassThroughType<T> = PassThroughType<T, RatingPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface RatingPassThroughMethodOptions {
+    props: RatingProps;
+    context: RatingContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link RatingProps.pt}
+ */
+export interface RatingPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: RatingPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the cancel icon's DOM element.
+     */
+    cancelIcon?: RatingPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: RatingPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the cancel item's DOM element.
+     */
+    cancelItem?: RatingPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the on icon's DOM element.
+     */
+    onIcon?: RatingPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the off icon's DOM element.
+     */
+    offIcon?: RatingPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current options in Rating component.
+ */
+export interface RatingContext {
+    /**
+     * Current active state of the item as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Custom change event.
@@ -91,6 +156,21 @@ export interface RatingProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * Properties of the off icon.
      */
     offIconProps?: React.HTMLAttributes<HTMLSpanElement>;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {RatingPassThroughOptions}
+     */
+    pt?: RatingPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

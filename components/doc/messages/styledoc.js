@@ -20,39 +20,39 @@ export function StyleDoc() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>p-messages</td>
+                            <td>p-message</td>
                             <td>Container element.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-info</td>
+                            <td>p-message-info</td>
                             <td>Container element when displaying info messages.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-warn</td>
+                            <td>p-message-warn</td>
                             <td>Container element when displaying warning messages.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-error</td>
+                            <td>p-message-error</td>
                             <td>Container element when displaying error messages.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-success</td>
+                            <td>p-message-success</td>
                             <td>Container element when displaying success messages.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-close</td>
+                            <td>p-message-close</td>
                             <td>Close icon.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-icon</td>
+                            <td>p-message-icon</td>
                             <td>Severity icon.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-summary</td>
+                            <td>p-message-summary</td>
                             <td>Summary of a message.</td>
                         </tr>
                         <tr>
-                            <td>p-messages-detail</td>
+                            <td>p-message-detail</td>
                             <td>Detail of a message.</td>
                         </tr>
                     </tbody>

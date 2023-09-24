@@ -7,6 +7,7 @@ import { useUnmountEffect } from './useUnmountEffect';
 export const useEventListener = ({ target = 'document', type, listener, options, when = true }) => {
     const targetRef = React.useRef(null);
     const listenerRef = React.useRef(null);
+    const prevListener = usePrevious(listener);
     const prevOptions = usePrevious(options);
 
     const bind = (bindOptions = {}) => {
@@ -38,11 +39,12 @@ export const useEventListener = ({ target = 'document', type, listener, options,
     }, [target, when]);
 
     React.useEffect(() => {
-        if (listenerRef.current && (listenerRef.current !== listener || prevOptions !== options)) {
+        // to properly compare functions we can implicitly converting the function to it's body's text as a String
+        if (listenerRef.current && ('' + prevListener !== '' + listener || prevOptions !== options)) {
             unbind();
             when && bind();
         }
-    }, [listener, options]);
+    }, [listener, options, when]);
 
     useUnmountEffect(() => {
         unbind();

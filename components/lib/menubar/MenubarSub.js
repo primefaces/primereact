@@ -1,13 +1,24 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { AngleRightIcon } from '../icons/angleright';
 import { AngleDownIcon } from '../icons/angledown';
+import { AngleRightIcon } from '../icons/angleright';
+import { Ripple } from '../ripple/Ripple';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
         const [activeItemState, setActiveItemState] = React.useState(null);
+        const { ptm, cx } = props;
+
+        const getPTOptions = (item, key) => {
+            return ptm(key, {
+                props,
+                hostName: props.hostName,
+                context: {
+                    active: activeItemState === item
+                }
+            });
+        };
 
         const [bindDocumentClickListener] = useEventListener({
             type: 'click',
@@ -142,13 +153,13 @@ export const MenubarSub = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.getAttribute(nextItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(nextItem, '[data-pc-section="menuitem"]') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.getAttribute(prevItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(prevItem, '[data-pc-section="menuitem"]') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onLeafClick = () => {
@@ -166,13 +177,34 @@ export const MenubarSub = React.memo(
 
         const createSeparator = (index) => {
             const key = 'separator_' + index;
+            const separatorProps = mergeProps(
+                {
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                ptm('separator', { hostName: props.hostName })
+            );
 
-            return <li key={key} className="p-menu-separator" role="separator"></li>;
+            return <li {...separatorProps}></li>;
         };
 
         const createSubmenu = (item) => {
             if (item.items) {
-                return <MenubarSub menuProps={props.menuProps} model={item.items} mobileActive={props.mobileActive} onLeafClick={onLeafClick} onKeyDown={onChildItemKeyDown} parentActive={item === activeItemState} submenuIcon={props.submenuIcon} />;
+                return (
+                    <MenubarSub
+                        hostName={props.hostName}
+                        menuProps={props.menuProps}
+                        model={item.items}
+                        mobileActive={props.mobileActive}
+                        onLeafClick={onLeafClick}
+                        onKeyDown={onChildItemKeyDown}
+                        parentActive={item === activeItemState}
+                        submenuIcon={props.submenuIcon}
+                        ptm={ptm}
+                        cx={cx}
+                    />
+                );
             }
 
             return null;
@@ -184,22 +216,52 @@ export const MenubarSub = React.memo(
             }
 
             const key = item.label + '_' + index;
-            const className = classNames('p-menuitem', { 'p-menuitem-active': activeItemState === item }, item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
-            const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-            const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+            const iconProps = mergeProps(
+                {
+                    className: cx('icon')
+                },
+                getPTOptions(item, 'icon')
+            );
+            const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                getPTOptions(item, 'label')
+            );
+            const label = item.label && <span {...labelProps}>{item.label}</span>;
             const submenuIconClassName = 'p-submenu-icon';
+            const submenuIconProps = mergeProps(
+                {
+                    className: cx('submenuIcon')
+                },
+                getPTOptions(item, 'submenuIcon')
+            );
             const submenuIcon =
                 item.items &&
                 IconUtils.getJSXIcon(
-                    !props.root ? props.submenuIcon || <AngleRightIcon className={submenuIconClassName} /> : props.submenuIcon || <AngleDownIcon className={submenuIconClassName} />,
-                    { className: submenuIconClassName },
+                    !props.root ? props.submenuIcon || <AngleRightIcon {...submenuIconProps} /> : props.submenuIcon || <AngleDownIcon {...submenuIconProps} />,
+                    { ...submenuIconProps },
                     { props: { menuProps: props.menuProps, ...props } }
                 );
             const submenu = createSubmenu(item);
+            const actionProps = mergeProps(
+                {
+                    href: item.url || '#',
+                    role: 'menuitem',
+                    className: cx('action', { item }),
+                    target: item.target,
+                    'aria-haspopup': item.items != null,
+                    onClick: (event) => onItemClick(event, item),
+                    onKeyDown: (event) => onItemKeyDown(event, item)
+                },
+                getPTOptions(item, 'action')
+            );
+
             let content = (
-                <a href={item.url || '#'} role="menuitem" className={linkClassName} target={item.target} aria-haspopup={item.items != null} onClick={(event) => onItemClick(event, item)} onKeyDown={(event) => onItemKeyDown(event, item)}>
+                <a {...actionProps}>
                     {icon}
                     {label}
                     {submenuIcon}
@@ -222,8 +284,20 @@ export const MenubarSub = React.memo(
                 content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
+            const menuitemProps = mergeProps(
+                {
+                    key,
+                    role: 'none',
+                    id: item.id,
+                    className: classNames(item.className, cx('menuitem', { item, activeItemState })),
+                    onMouseEnter: (event) => onItemMouseEnter(event, item),
+                    'data-p-disabled': item.disabled || false
+                },
+                getPTOptions(item, 'menuitem')
+            );
+
             return (
-                <li key={key} role="none" id={item.id} className={className} style={item.style} onMouseEnter={(event) => onItemMouseEnter(event, item)}>
+                <li {...menuitemProps}>
                     {content}
                     {submenu}
                 </li>
@@ -239,17 +313,19 @@ export const MenubarSub = React.memo(
         };
 
         const role = props.root ? 'menubar' : 'menu';
-        const className = classNames({
-            'p-submenu-list': !props.root,
-            'p-menubar-root-list': props.root
-        });
+        const ptKey = props.root ? 'menu' : 'submenu';
         const submenu = createMenu();
-
-        return (
-            <ul ref={ref} className={className} role={role}>
-                {submenu}
-            </ul>
+        const menuProps = mergeProps(
+            {
+                ref,
+                className: cx(ptKey),
+                style: !props.root && { display: props.parentActive ? 'block' : 'none' },
+                role
+            },
+            ptm(ptKey)
         );
+
+        return <ul {...menuProps}>{submenu}</ul>;
     })
 );
 

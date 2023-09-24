@@ -8,8 +8,70 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { FormEvent } from '../ts-helpers';
+import { FormBooleanEvent, FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+
+export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButtonPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface RadioButtonPassThroughMethodOptions {
+    props: RadioButtonProps;
+    state: RadioButtonState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link RadioButtonProps.pt}
+ */
+export interface RadioButtonPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the input's DOM element.
+     */
+    input?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden accessible DOM element wrapper.
+     */
+    hiddenInputWrapper?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden accessible DOM element.
+     */
+    hiddenInput?: RadioButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in RadioButton component.
+ */
+export interface RadioButtonState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * Custom change event.
@@ -17,7 +79,7 @@ import { FormEvent } from '../ts-helpers';
  * @extends {FormEvent}
  * @event
  */
-interface RadioButtonChangeEvent extends FormEvent {}
+interface RadioButtonChangeEvent extends FormBooleanEvent {}
 
 /**
  * Custom click event.
@@ -25,13 +87,13 @@ interface RadioButtonChangeEvent extends FormEvent {}
  * @extends {FormEvent}
  * @event
  */
-interface RadioButtonClickEvent extends FormEvent {}
+interface RadioButtonClickEvent extends FormBooleanEvent {}
 
 /**
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref'> {
+export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'onClick' | 'ref' | 'pt'> {
     /**
      * When present, it specifies that the component should automatically get focus on load.
      * @defaultValue false
@@ -50,7 +112,7 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     name?: string | undefined;
     /**
-     * Value of the checkbox.
+     * Value of the radio.
      */
     value?: any | undefined;
     /**
@@ -91,6 +153,21 @@ export interface RadioButtonProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {RadioButtonPassThroughOptions}
+     */
+    pt?: RadioButtonPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

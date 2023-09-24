@@ -7,6 +7,8 @@ import { PTDoc } from '../../components/doc/fieldset/pt/ptdoc';
 import { Wireframe } from '../../components/doc/fieldset/pt/wireframe';
 import { StyleDoc } from '../../components/doc/fieldset/styledoc';
 import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';
+import { StyledDoc } from '../../components/doc/fieldset/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/fieldset/theming/tailwinddoc';
 import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
 
 const FieldsetDemo = () => {
@@ -61,7 +63,27 @@ const FieldsetDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Fieldset Component" header="Fieldset" description="Fieldset is a grouping component with a content toggle feature." componentDocs={docs} apiDocs={['Fieldset']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Fieldset Component" header="Fieldset" description="Fieldset is a grouping component with a content toggle feature." componentDocs={docs} apiDocs={['Fieldset']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default FieldsetDemo;

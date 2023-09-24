@@ -10,6 +10,7 @@ export function LocaleDoc(props) {
 
     addLocale('es', {
         firstDayOfWeek: 1,
+        showMonthAfterYear: true,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
@@ -33,6 +34,7 @@ export default function LocaleDemo() {
 
     addLocale('es', {
         firstDayOfWeek: 1,
+        showMonthAfterYear: true,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
@@ -51,14 +53,16 @@ export default function LocaleDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
+import { Nullable } from "primereact/ts-helpers";
 
 export default function LocaleDemo() {
-    const [date, setDate] = useState<string | Date | Date[] | null>(null);
+    const [date, setDate] = useState<Nullable<Date>>(null);
 
     addLocale('es', {
         firstDayOfWeek: 1,
+        showMonthAfterYear: true,
         dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
         dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
         dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
@@ -70,7 +74,7 @@ export default function LocaleDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e: CalendarChangeEvent) => setDate(e.value)} locale="es" />
+            <Calendar value={date} onChange={(e) => setDate(e.value)} locale="es" />
         </div>
     )
 }

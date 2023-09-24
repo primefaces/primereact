@@ -79,7 +79,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} showClear={true} options={cities} optionLabel="name" placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
             </div>
             <DocSectionCode code={code} />
         </>

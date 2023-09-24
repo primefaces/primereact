@@ -8,6 +8,50 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils/utils';
+
+export declare type KnobPassThroughType<T> = PassThroughType<T, KnobPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface KnobPassThroughMethodOptions {
+    props: KnobProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link KnobProps.pt}
+ */
+export interface KnobPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: KnobPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the svg's DOM element.
+     */
+    svg?: KnobPassThroughType<React.SVGProps<SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the range's DOM element.
+     */
+    range?: KnobPassThroughType<React.SVGProps<SVGPathElement>>;
+    /**
+     * Uses to pass attributes to the value' DOM element.
+     */
+    value?: KnobPassThroughType<React.SVGProps<SVGPathElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: KnobPassThroughType<React.SVGProps<SVGTextElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
 
 /**
  * Custom change event.
@@ -116,6 +160,21 @@ export interface KnobProps extends Omit<React.DetailedHTMLProps<React.InputHTMLA
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {KnobPassThroughOptions}
+     */
+    pt?: KnobPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

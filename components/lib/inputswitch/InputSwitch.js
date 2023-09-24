@@ -1,14 +1,24 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InputSwitchBase } from './InputSwitchBase';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const InputSwitch = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputSwitchBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = InputSwitchBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+        const { ptm, cx, isUnstyled } = InputSwitchBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
+
+        useHandleStyle(InputSwitchBase.css.styles, isUnstyled, { name: 'inputswitch' });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
         const checked = props.checked === props.trueValue;
@@ -76,39 +86,58 @@ export const InputSwitch = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = InputSwitchBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-inputswitch p-component',
+
+        const rootProps = mergeProps(
             {
-                'p-inputswitch-checked': checked,
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
+                className: classNames(props.className, cx('root', { focusedState, checked })),
+                style: props.style,
+                onClick,
+                role: 'checkbox',
+                'aria-checked': checked
             },
-            props.className
+            ptm('root')
+        );
+        const hiddenInputWrapperProps = mergeProps(
+            {
+                className: 'p-hidden-accessible'
+            },
+            ptm('hiddenInputWrapper')
+        );
+
+        const hiddenInputProps = mergeProps(
+            {
+                type: 'checkbox',
+                id: props.inputId,
+                name: props.name,
+                checked: checked,
+                onChange: toggle,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                disabled: props.disabled,
+                role: 'switch',
+                tabIndex: props.tabIndex,
+                'aria-checked': checked,
+                ...ariaProps
+            },
+            ptm('hiddenInput')
+        );
+
+        const sliderProps = mergeProps(
+            {
+                className: cx('slider')
+            },
+            ptm('slider')
         );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps} onClick={onClick} role="checkbox" aria-checked={checked}>
-                    <div className="p-hidden-accessible">
-                        <input
-                            ref={inputRef}
-                            type="checkbox"
-                            id={props.inputId}
-                            name={props.name}
-                            checked={checked}
-                            onChange={toggle}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            disabled={props.disabled}
-                            role="switch"
-                            tabIndex={props.tabIndex}
-                            aria-checked={checked}
-                            {...ariaProps}
-                        />
+                <div id={props.id} ref={elementRef} {...rootProps}>
+                    <div {...hiddenInputWrapperProps}>
+                        <input ref={inputRef} {...hiddenInputProps} />
                     </div>
-                    <span className="p-inputswitch-slider"></span>
+                    <span {...sliderProps}></span>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

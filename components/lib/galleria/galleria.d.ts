@@ -8,8 +8,170 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { IconType } from '../utils/utils';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type GalleriaPassThroughType<T> = PassThroughType<T, GalleriaPassThroughMethodOptions>;
+export declare type GalleriaPassThroughTransitionType = ReactCSSTransitionProps | ((options: GalleriaPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface GalleriaPassThroughMethodOptions {
+    props: GalleriaProps;
+    state: GalleriaState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link GalleriaProps.pt}
+ */
+export interface GalleriaPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: GalleriaPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: GalleriaPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item wrapper's DOM element.
+     */
+    itemWrapper?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item container's DOM element.
+     */
+    itemContainer?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the previous item button's DOM element.
+     */
+    previousItemButton?: GalleriaPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the previous item icon's DOM element.
+     */
+    previousItemIcon?: GalleriaPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the next item button's DOM element.
+     */
+    nextItemButton?: GalleriaPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the next item icon's DOM element.
+     */
+    nextItemIcon?: GalleriaPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the caption's DOM element.
+     */
+    caption?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the indicators's DOM element.
+     */
+    indicators?: GalleriaPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the indicator's DOM element.
+     */
+    indicator?: GalleriaPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the thumbnail wrapper's DOM element.
+     */
+    thumbnailWrapper?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the thumbnail container's DOM element.
+     */
+    thumbnailContainer?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the previous thumbnail button's DOM element.
+     */
+    previousThumbnailButton?: GalleriaPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the previous thumbnail icon's DOM element.
+     */
+    previousThumbnailIcon?: GalleriaPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the thumbnail items container's DOM element.
+     */
+    thumbnailItemsContainer?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the thumbnail items' DOM element.
+     */
+    thumbnailItems?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the thumbnail item's DOM element.
+     */
+    thumbnailItem?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the thumbnail item content's DOM element.
+     */
+    thumbnailItemContent?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the next thumbnail button's DOM element.
+     */
+    nextThumbnailButton?: GalleriaPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the next thumbnail icon's DOM element.
+     */
+    nextThumbnailIcon?: GalleriaPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: GalleriaPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in Galleria component.
+ */
+export interface GalleriaState {
+    /**
+     * Current visible state as a boolean.
+     * @default false
+     */
+    visible: number;
+    /**
+     * Number of items per page as a number.
+     */
+    numVisible: number;
+    /**
+     * Current slide show active state.
+     * @default false
+     */
+    slideShowActive: number;
+    /**
+     * Current active item index as a number.
+     */
+    activeIndex: number;
+}
 
 /**
  * Custom galleria responsive options
@@ -41,7 +203,7 @@ interface GalleriaItemChangeEvent {
  * Defines valid properties in Galleria component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * An array of objects to display.
      */
@@ -200,6 +362,21 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {GalleriaPassThroughOptions}
+     */
+    pt?: GalleriaPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

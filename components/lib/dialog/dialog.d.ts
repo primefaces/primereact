@@ -8,10 +8,14 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type DialogPassThroughType<T> = PassThroughType<T, DialogPassThroughMethodOptions>;
+export declare type DialogPassThroughTransitionType = ReactCSSTransitionProps | ((options: DialogPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -70,6 +74,15 @@ export interface DialogPassThroughOptions {
      * Uses to pass attributes to the mask's DOM element.
      */
     mask?: DialogPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: DialogPassThroughTransitionType;
 }
 
 /**
@@ -297,6 +310,16 @@ export interface DialogProps {
      * @type {DialogPassThroughOptions}
      */
     pt?: DialogPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
     /**
      * Callback to invoke when dialog is clicked.
      * @param {React.PointerEvent<HTMLElement>} event - Browser event.

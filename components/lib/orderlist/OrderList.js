@@ -1,14 +1,16 @@
 import * as React from 'react';
-import PrimeReact, { FilterService } from '../api/Api';
+import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { DomHandler, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { OrderListBase } from './OrderListBase';
 import { OrderListControls } from './OrderListControls';
 import { OrderListSubList } from './OrderListSubList';
 
 export const OrderList = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = OrderListBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = OrderListBase.getProps(inProps, context);
 
         const [selectionState, setSelectionState] = React.useState([]);
         const [filterValueState, setFilterValueState] = React.useState('');
@@ -17,6 +19,17 @@ export const OrderList = React.memo(
         const elementRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
         const reorderDirection = React.useRef(null);
+        const metaData = {
+            props,
+            state: {
+                selection: selectionState,
+                filterValue: filterValueState,
+                attributeSelector: attributeSelectorState
+            }
+        };
+        const { ptm, cx, isUnstyled } = OrderListBase.setMetaData(metaData);
+
+        useHandleStyle(OrderListBase.css.styles, isUnstyled, { name: 'orderlist' });
 
         const onItemClick = (event) => {
             const metaKey = event.originalEvent.metaKey || event.originalEvent.ctrlKey;
@@ -107,13 +120,13 @@ export const OrderList = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (!DomHandler.hasClass(nextItem, 'p-orderlist-item') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (!DomHandler.getAttribute(nextItem, 'data-pc-section') === 'item' ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (!DomHandler.hasClass(prevItem, 'p-orderlist-item') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (!DomHandler.getAttribute(prevItem, 'data-pc-section') === 'item' ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onReorder = (event) => {
@@ -158,7 +171,7 @@ export const OrderList = React.memo(
 
         const createStyle = () => {
             if (!styleElementRef.current) {
-                styleElementRef.current = DomHandler.createInlineStyle(PrimeReact.nonce);
+                styleElementRef.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
                 let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
@@ -217,13 +230,23 @@ export const OrderList = React.memo(
             }
         });
 
-        const otherProps = OrderListBase.getOtherProps(props);
-        const className = classNames('p-orderlist p-component', props.className);
         const visibleList = getVisibleList();
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                id: props.id,
+                className: classNames(props.className, cx('root')),
+                style: props.style
+            },
+            OrderListBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 <OrderListControls
+                    hostName="OrderList"
                     value={visibleList}
                     selection={selectionState}
                     onReorder={onReorder}
@@ -232,8 +255,13 @@ export const OrderList = React.memo(
                     moveTopIcon={props.moveTopIcon}
                     moveDownIcon={props.moveDownIcon}
                     moveBottomIcon={props.moveBottomIcon}
+                    ptm={ptm}
+                    cx={cx}
+                    unstyled={props.unstyled}
+                    metaData={metaData}
                 />
                 <OrderListSubList
+                    hostName="OrderList"
                     value={visibleList}
                     selection={selectionState}
                     onItemClick={onItemClick}
@@ -251,6 +279,8 @@ export const OrderList = React.memo(
                     onChange={props.onChange}
                     tabIndex={props.tabIndex}
                     filterIcon={props.filterIcon}
+                    ptm={ptm}
+                    cx={cx}
                 />
             </div>
         );

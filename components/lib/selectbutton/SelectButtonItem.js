@@ -1,9 +1,21 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SelectButtonItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
+    const { ptm, cx } = props;
+
+    const getPTOptions = (key) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            context: {
+                selected: props.selected,
+                disabled: props.disabled,
+                option: props.option
+            }
+        });
+    };
 
     const onClick = (event) => {
         if (props.onClick) {
@@ -32,22 +44,35 @@ export const SelectButtonItem = React.memo((props) => {
     };
 
     const createContent = () => {
-        return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span className="p-button-label p-c">{props.label}</span>;
+        const labelProps = mergeProps(
+            {
+                className: cx('label')
+            },
+            getPTOptions('label')
+        );
+
+        return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span {...labelProps}>{props.label}</span>;
     };
 
-    const className = classNames(
-        'p-button p-component',
-        {
-            'p-highlight': props.selected,
-            'p-disabled': props.disabled,
-            'p-focus': focusedState
-        },
-        props.className
-    );
     const content = createContent();
 
+    const buttonProps = mergeProps(
+        {
+            className: classNames(props.className, cx('button', { itemProps: props, focusedState })),
+            role: 'button',
+            'aria-label': props.label,
+            'aria-pressed': props.selected,
+            onClick: onClick,
+            onKeyDown: onKeyDown,
+            tabIndex: props.tabIndex,
+            onFocus: onFocus,
+            onBlur: onBlur
+        },
+        getPTOptions('button')
+    );
+
     return (
-        <div className={className} role="button" aria-label={props.label} aria-pressed={props.selected} onClick={onClick} onKeyDown={onKeyDown} tabIndex={props.tabIndex} onFocus={onFocus} onBlur={onBlur}>
+        <div {...buttonProps}>
             {content}
             {!props.disabled && <Ripple />}
         </div>

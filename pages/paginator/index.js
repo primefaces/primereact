@@ -1,11 +1,16 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/paginator/basicdoc';
 import { ImagesDoc } from '../../components/doc/paginator/imagesdoc';
 import { ImportDoc } from '../../components/doc/paginator/importdoc';
 import { LayoutDoc } from '../../components/doc/paginator/layoutdoc';
+import { PTDoc } from '../../components/doc/paginator/pt/ptdoc';
+import { Wireframe } from '../../components/doc/paginator/pt/wireframe';
 import { StyleDoc } from '../../components/doc/paginator/styledoc';
 import { TemplateDoc } from '../../components/doc/paginator/templatedoc';
+import { StyledDoc } from '../../components/doc/paginator/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/paginator/theming/tailwinddoc';
 
 const PaginatorDemo = () => {
     const docs = [
@@ -45,8 +50,55 @@ const PaginatorDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.paginator.options',
+            label: 'Paginator PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Paginator Component" header="Paginator" description="Paginator displays data in paged format and provides navigation between pages." componentDocs={docs} apiDocs={['Paginator']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React Paginator Component"
+            header="Paginator"
+            description="Paginator displays data in paged format and provides navigation between pages."
+            componentDocs={docs}
+            apiDocs={['Paginator']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default PaginatorDemo;

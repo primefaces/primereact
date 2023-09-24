@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils';
 
 export declare type TerminalPassThroughType<T> = PassThroughType<T, TerminalPassThroughMethodOptions>;
@@ -75,6 +77,11 @@ export interface TerminalPassThroughOptions {
      * Uses to pass attributes to the command text's DOM element.
      */
     commandText?: TerminalPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -100,6 +107,16 @@ export interface TerminalProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {TerminalPassThroughOptions}
      */
     pt?: TerminalPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

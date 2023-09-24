@@ -8,6 +8,42 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils/utils';
+
+export declare type SliderPassThroughType<T> = PassThroughType<T, SliderPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface SliderPassThroughMethodOptions {
+    props: SliderProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link SliderProps.pt}
+ */
+export interface SliderPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: SliderPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the range's DOM element.
+     */
+    range?: SliderPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the handle's DOM element.
+     */
+    handle?: SliderPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
 
 /**
  * Custom change event.
@@ -37,7 +73,7 @@ interface SliderSlideEndEvent extends SliderChangeEvent {}
  * Defines valid properties in Slider component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref'> {
+export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onChange' | 'value' | 'ref' | 'pt'> {
     /**
      * Value of the component.
      * @defaultValue 0
@@ -92,6 +128,21 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SliderPassThroughOptions}
+     */
+    pt?: SliderPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

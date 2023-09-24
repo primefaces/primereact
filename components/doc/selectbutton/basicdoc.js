@@ -19,9 +19,11 @@ export default function BasicDemo() {
     const options = ['Off', 'On'];
     const [value, setValue] = useState(options[0]);
 
-    <div className="card flex justify-content-center">
-        <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
-    </div>
+    return (
+        <div className="card flex justify-content-center">
+            <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
+        </div>
+    );
 }
         `,
         typescript: `

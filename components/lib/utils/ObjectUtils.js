@@ -57,10 +57,24 @@ export default class ObjectUtils {
     }
 
     static resolveFieldData(data, field) {
-        if (data && Object.keys(data).length && field) {
+        if (!data || !field) {
+            // short circuit if there is nothing to resolve
+            return null;
+        }
+
+        try {
+            const value = data[field];
+
+            if (this.isNotEmpty(value)) return value;
+        } catch {
+            // Performance optimization: https://github.com/primefaces/primereact/issues/4797
+            // do nothing and continue to other methods to resolve field data
+        }
+
+        if (Object.keys(data).length) {
             if (this.isFunction(field)) {
                 return field(data);
-            } else if (ObjectUtils.isNotEmpty(data[field])) {
+            } else if (this.isNotEmpty(data[field])) {
                 return data[field];
             } else if (field.indexOf('.') === -1) {
                 return data[field];
@@ -78,17 +92,9 @@ export default class ObjectUtils {
 
                 return value;
             }
-        } else {
-            return null;
         }
-    }
 
-    static isFunction(obj) {
-        return !!(obj && obj.constructor && obj.call && obj.apply);
-    }
-
-    static isLetter(char) {
-        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+        return null;
     }
 
     static findDiffKeys(obj1, obj2) {
@@ -152,10 +158,32 @@ export default class ObjectUtils {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 
+    static getItemValue(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
     static getProp(props, prop = '', defaultProps = {}) {
         const value = props ? props[prop] : undefined;
 
         return value === undefined ? defaultProps[prop] : value;
+    }
+
+    static getPropCaseInsensitive(props, prop, defaultProps = {}) {
+        const fkey = this.toFlatCase(prop);
+
+        for (let key in props) {
+            if (props.hasOwnProperty(key) && this.toFlatCase(key) === fkey) {
+                return props[key];
+            }
+        }
+
+        for (let key in defaultProps) {
+            if (defaultProps.hasOwnProperty(key) && this.toFlatCase(key) === fkey) {
+                return defaultProps[key];
+            }
+        }
+
+        return undefined; // Property not found
     }
 
     static getMergedProps(props, defaultProps) {
@@ -260,9 +288,18 @@ export default class ObjectUtils {
         return str;
     }
 
-    static convertToFlatCase(str) {
+    static toFlatCase(str) {
         // convert snake, kebab, camel and pascal cases to flat case
-        return this.isNotEmpty(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
+        return this.isNotEmpty(str) && this.isString(str) ? str.replace(/(-|_)/g, '').toLowerCase() : str;
+    }
+
+    static toCapitalCase(str) {
+        return this.isNotEmpty(str) && this.isString(str) ? str[0].toUpperCase() + str.slice(1) : str;
+    }
+
+    static trim(value) {
+        // trim only if the value is actually a string
+        return this.isNotEmpty(value) && this.isString(value) ? value.trim() : value;
     }
 
     static isEmpty(value) {
@@ -273,29 +310,165 @@ export default class ObjectUtils {
         return !this.isEmpty(value);
     }
 
-    static sort(value1, value2, order = 1, locale, nullSortOrder = 1) {
-        const result = ObjectUtils.compare(value1, value2, locale, order);
+    static isFunction(value) {
+        return !!(value && value.constructor && value.call && value.apply);
+    }
+
+    static isObject(value) {
+        return value !== null && value instanceof Object && value.constructor === Object;
+    }
+
+    static isDate(value) {
+        return value !== null && value instanceof Date && value.constructor === Date;
+    }
+
+    static isArray(value) {
+        return value !== null && Array.isArray(value);
+    }
+
+    static isString(value) {
+        return value !== null && typeof value === 'string';
+    }
+
+    static isPrintableCharacter(char = '') {
+        return this.isNotEmpty(char) && char.length === 1 && char.match(/\S| /);
+    }
+
+    static isLetter(char) {
+        return char && (char.toUpperCase() != char.toLowerCase() || char.codePointAt(0) > 127);
+    }
+
+    /**
+     * Firefox-v103 does not currently support the "findLast" method. It is stated that this method will be supported with Firefox-v104.
+     * https://caniuse.com/mdn-javascript_builtins_array_findlast
+     */
+    static findLast(arr, callback) {
+        let item;
+
+        if (this.isNotEmpty(arr)) {
+            try {
+                item = arr.findLast(callback);
+            } catch {
+                item = [...arr].reverse().find(callback);
+            }
+        }
+
+        return item;
+    }
+
+    /**
+     * Firefox-v103 does not currently support the "findLastIndex" method. It is stated that this method will be supported with Firefox-v104.
+     * https://caniuse.com/mdn-javascript_builtins_array_findlastindex
+     */
+    static findLastIndex(arr, callback) {
+        let index = -1;
+
+        if (this.isNotEmpty(arr)) {
+            try {
+                index = arr.findLastIndex(callback);
+            } catch {
+                index = arr.lastIndexOf([...arr].reverse().find(callback));
+            }
+        }
+
+        return index;
+    }
+
+    static sort(value1, value2, order = 1, comparator, nullSortOrder = 1) {
+        const result = this.compare(value1, value2, comparator, order);
         let finalSortOrder = order;
 
         // nullSortOrder == 1 means Excel like sort nulls at bottom
-        if (ObjectUtils.isEmpty(value1) || ObjectUtils.isEmpty(value2)) {
+        if (this.isEmpty(value1) || this.isEmpty(value2)) {
             finalSortOrder = nullSortOrder === 1 ? order : nullSortOrder;
         }
 
         return finalSortOrder * result;
     }
 
-    static compare(value1, value2, locale, order = 1) {
+    static compare(value1, value2, comparator, order = 1) {
         let result = -1;
-        const emptyValue1 = ObjectUtils.isEmpty(value1);
-        const emptyValue2 = ObjectUtils.isEmpty(value2);
+        const emptyValue1 = this.isEmpty(value1);
+        const emptyValue2 = this.isEmpty(value2);
 
         if (emptyValue1 && emptyValue2) result = 0;
         else if (emptyValue1) result = order;
         else if (emptyValue2) result = -order;
-        else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2, locale, { numeric: true });
+        else if (typeof value1 === 'string' && typeof value2 === 'string') result = comparator(value1, value2);
         else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
 
         return result;
+    }
+
+    static localeComparator(locale) {
+        //performance gain using Int.Collator. It is not recommended to use localeCompare against large arrays.
+        return new Intl.Collator(locale, { numeric: true }).compare;
+    }
+
+    static findChildrenByKey(data, key) {
+        for (const item of data) {
+            if (item.key === key) {
+                return item.children || [];
+            } else if (item.children) {
+                const result = this.findChildrenByKey(item.children, key);
+
+                if (result.length > 0) {
+                    return result;
+                }
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * This function takes mutates and object with a new value given
+     * a specific field. This will handle deeply nested fields that
+     * need to be modified or created.
+     *
+     * e.g:
+     * data = {
+     *  nested: {
+     *      foo: "bar"
+     *  }
+     * }
+     *
+     * field = "nested.foo"
+     * value = "baz"
+     *
+     * The function will mutate data to be
+     * e.g:
+     * data = {
+     *  nested: {
+     *      foo: "baz"
+     *  }
+     * }
+     *
+     * @param {object} data the object to be modified
+     * @param {string} field the field in the object to replace
+     * @param {any} value the value to have replaced in the field
+     */
+    static mutateFieldData(data, field, value) {
+        if (typeof data !== 'object' || typeof field !== 'string') {
+            // short circuit if there is nothing to resolve
+            return;
+        }
+
+        const fields = field.split('.');
+        let obj = data;
+
+        for (var i = 0, len = fields.length; i < len; ++i) {
+            // Check if we are on the last field
+            if (i + 1 - len === 0) {
+                obj[fields[i]] = value;
+                break;
+            }
+
+            if (!obj[fields[i]]) {
+                obj[fields[i]] = {};
+            }
+
+            obj = obj[fields[i]];
+        }
     }
 }

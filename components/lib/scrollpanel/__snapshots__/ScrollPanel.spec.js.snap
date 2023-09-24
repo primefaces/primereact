@@ -4,14 +4,18 @@ exports[`ScrollPanel ScrollPanel full settings 1`] = `
 <div>
   <div
     class="p-scrollpanel p-component jest"
+    data-pc-name="scrollpanel"
+    data-pc-section="root"
     id="scrollpanel"
     style="width: 100%; height: 200px;"
   >
     <div
       class="p-scrollpanel-wrapper"
+      data-pc-section="wrapper"
     >
       <div
         class="p-scrollpanel-content"
+        data-pc-section="content"
       >
         <div
           style="padding: 1em; line-height: 1.5;"
@@ -22,9 +26,11 @@ exports[`ScrollPanel ScrollPanel full settings 1`] = `
     </div>
     <div
       class="p-scrollpanel-bar p-scrollpanel-bar-x"
+      data-pc-section="barx"
     />
     <div
       class="p-scrollpanel-bar p-scrollpanel-bar-y"
+      data-pc-section="bary"
     />
   </div>
 </div>
@@ -34,14 +40,18 @@ exports[`ScrollPanel refresh method 1`] = `
 <div>
   <div
     class="p-scrollpanel p-component jest"
+    data-pc-name="scrollpanel"
+    data-pc-section="root"
     id="scrollpanel"
     style="width: 100%; height: 200px;"
   >
     <div
       class="p-scrollpanel-wrapper"
+      data-pc-section="wrapper"
     >
       <div
         class="p-scrollpanel-content"
+        data-pc-section="content"
       >
         <div
           style="padding: 1em; line-height: 1.5;"
@@ -52,9 +62,11 @@ exports[`ScrollPanel refresh method 1`] = `
     </div>
     <div
       class="p-scrollpanel-bar p-scrollpanel-bar-x"
+      data-pc-section="barx"
     />
     <div
       class="p-scrollpanel-bar p-scrollpanel-bar-y"
+      data-pc-section="bary"
     />
   </div>
 </div>

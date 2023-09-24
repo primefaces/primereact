@@ -1,16 +1,28 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ChipsBase } from './ChipsBase';
 
 export const Chips = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ChipsBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = ChipsBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
+
+        const { ptm, cx, isUnstyled } = ChipsBase.setMetaData({
+            props,
+            state: {
+                focused: focusedState
+            }
+        });
+
+        useHandleStyle(ChipsBase.css.styles, isUnstyled, { name: 'chips' });
+
         const elementRef = React.useRef(null);
         const listRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
@@ -215,7 +227,13 @@ export const Chips = React.memo(
         });
 
         const createRemoveIcon = (value, index) => {
-            const iconProps = { className: 'p-chips-token-icon', onClick: (event) => removeItem(event, index) };
+            const iconProps = mergeProps(
+                {
+                    className: cx('removeTokenIcon'),
+                    onClick: (event) => removeItem(event, index)
+                },
+                ptm('removeTokenIcon')
+            );
             const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
             const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
@@ -228,11 +246,25 @@ export const Chips = React.memo(
 
         const createItem = (value, index) => {
             const content = props.itemTemplate ? props.itemTemplate(value) : value;
-            const label = <span className="p-chips-token-label">{content}</span>;
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                ptm('label')
+            );
+            const label = <span {...labelProps}>{content}</span>;
             const icon = createRemoveIcon(value, index);
+            const tokenProps = mergeProps(
+                {
+                    key: index,
+                    className: cx('token'),
+                    'data-p-highlight': true
+                },
+                ptm('token')
+            );
 
             return (
-                <li key={index} className="p-chips-token p-highlight">
+                <li {...tokenProps}>
                     {label}
                     {icon}
                 </li>
@@ -240,22 +272,34 @@ export const Chips = React.memo(
         };
 
         const createInput = () => {
+            const inputTokenProps = mergeProps(
+                {
+                    className: cx('inputToken')
+                },
+                ptm('inputToken')
+            );
+
+            const inputProps = mergeProps(
+                {
+                    id: props.inputId,
+                    ref: inputRef,
+                    placeholder: props.placeholder,
+                    type: 'text',
+                    name: props.name,
+                    disabled: props.disabled || isMaxedOut(),
+                    onKeyDown: (e) => onKeyDown(e),
+                    onPaste: (e) => onPaste(e),
+                    onFocus: (e) => onFocus(e),
+                    onBlur: (e) => onBlur(e),
+                    readOnly: props.readOnly,
+                    ...ariaProps
+                },
+                ptm('input')
+            );
+
             return (
-                <li className="p-chips-input-token">
-                    <input
-                        ref={inputRef}
-                        id={props.inputId}
-                        placeholder={props.placeholder}
-                        type="text"
-                        name={props.name}
-                        disabled={props.disabled || isMaxedOut()}
-                        onKeyDown={onKeyDown}
-                        onPaste={onPaste}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        readOnly={props.readOnly}
-                        {...ariaProps}
-                    />
+                <li {...inputTokenProps}>
+                    <input {...inputProps} />
                 </li>
             );
         };
@@ -265,15 +309,21 @@ export const Chips = React.memo(
         };
 
         const createList = () => {
-            const className = classNames('p-inputtext p-chips-multiple-container', {
-                'p-disabled': props.disabled,
-                'p-focus': focusedState
-            });
             const items = createItems();
             const input = createInput();
+            const containerProps = mergeProps(
+                {
+                    ref: listRef,
+                    className: cx('container', { focusedState }),
+                    onClick: (e) => onWrapperClick(e),
+                    'data-p-disabled': props.disabled,
+                    'data-p-focus': focusedState
+                },
+                ptm('container')
+            );
 
             return (
-                <ul ref={listRef} className={className} onClick={onWrapperClick}>
+                <ul {...containerProps}>
                     {items}
                     {input}
                 </ul>
@@ -283,22 +333,21 @@ export const Chips = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = ChipsBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames(
-            'p-chips p-component p-inputwrapper',
-            {
-                'p-inputwrapper-filled': isFilled,
-                'p-inputwrapper-focus': focusedState
-            },
-            props.className
-        );
         const list = createList();
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                ref: elementRef,
+                className: classNames(props.className, cx('root', { isFilled, focusedState })),
+                style: props.style
+            },
+            ptm('root')
+        );
 
         return (
             <>
-                <div ref={elementRef} id={props.id} className={className} style={props.style} {...otherProps}>
-                    {list}
-                </div>
-                {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} />}
+                <div {...rootProps}>{list}</div>
+                {hasTooltip && <Tooltip target={inputRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

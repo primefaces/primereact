@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { Dialog } from '../dialog/Dialog';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmDialogBase } from './ConfirmDialogBase';
 
 export const confirmDialog = (props = {}) => {
@@ -25,12 +25,14 @@ export const confirmDialog = (props = {}) => {
 
 export const ConfirmDialog = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ConfirmDialogBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ConfirmDialogBase.getProps(inProps, context);
 
         const [visibleState, setVisibleState] = React.useState(props.visible);
         const [reshowState, setReshowState] = React.useState(false);
         const confirmProps = React.useRef(null);
         const isCallbackExecuting = React.useRef(false);
+        const focusElementOnHide = React.useRef(null);
         const getCurrentProps = () => confirmProps.current || props;
         const getPropValue = (key) => (confirmProps.current || props)[key];
         const callbackFromProp = (key, ...param) => ObjectUtils.getPropValue(getPropValue(key), param);
@@ -38,12 +40,13 @@ export const ConfirmDialog = React.memo(
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
-        const { ptm } = ConfirmDialogBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 visible: visibleState
             }
-        });
+        };
+        const { ptm, cx } = ConfirmDialogBase.setMetaData(metaData);
 
         const accept = () => {
             if (!isCallbackExecuting.current) {
@@ -64,11 +67,17 @@ export const ConfirmDialog = React.memo(
         const show = () => {
             setVisibleState(true);
             isCallbackExecuting.current = false;
+
+            // Remember the focused element before we opened the dialog
+            // so we can return focus to it once we close the dialog.
+            focusElementOnHide.current = document.activeElement;
         };
 
         const hide = (result = 'cancel') => {
             setVisibleState(false);
             callbackFromProp('onHide', { result });
+            DomHandler.focus(focusElementOnHide.current);
+            focusElementOnHide.current = null;
         };
 
         const confirm = (updatedProps) => {
@@ -126,22 +135,28 @@ export const ConfirmDialog = React.memo(
                 getPropValue('rejectClassName')
             );
 
-            const rejectButtonProps = mergeProps(
-                {
-                    label: rejectLabel,
-                    icon: getPropValue('rejectIcon'),
-                    className: rejectClassName,
-                    onClick: reject
-                },
-                ptm('rejectButton')
-            );
+            const rejectButtonProps = {
+                label: rejectLabel,
+                icon: getPropValue('rejectIcon'),
+                className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
+                onClick: reject,
+                pt: ptm('rejectButton'),
+                unstyled: props.unstyled,
+                __parentMetadata: {
+                    parent: metaData
+                }
+            };
 
             const acceptButtonProps = mergeProps(
                 {
                     label: acceptLabel,
                     icon: getPropValue('acceptIcon'),
-                    className: acceptClassName,
-                    onClick: accept
+                    className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
+                    onClick: accept,
+                    unstyled: props.unstyled,
+                    __parentMetadata: {
+                        parent: metaData
+                    }
                 },
                 ptm('acceptButton')
             );
@@ -173,12 +188,11 @@ export const ConfirmDialog = React.memo(
 
         const createElement = () => {
             const currentProps = getCurrentProps();
-            const className = classNames('p-confirm-dialog', getPropValue('className'));
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
 
             const iconProps = mergeProps(
                 {
-                    className: 'p-confirm-dialog-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -188,7 +202,7 @@ export const ConfirmDialog = React.memo(
 
             const messageProps = mergeProps(
                 {
-                    className: 'p-confirm-dialog-message'
+                    className: cx('message')
                 },
                 ptm('message')
             );
@@ -196,11 +210,16 @@ export const ConfirmDialog = React.memo(
             const rootProps = mergeProps(
                 {
                     visible: visibleState,
-                    className,
+                    className: classNames(getPropValue('className'), cx('root')),
                     footer,
                     onHide: hide,
                     breakpoints: getPropValue('breakpoints'),
-                    pt: currentProps.pt
+                    pt: currentProps.pt,
+                    unstyled: props.unstyled,
+                    appendTo: getPropValue('appendTo'),
+                    __parentMetadata: {
+                        parent: metaData
+                    }
                 },
                 ConfirmDialogBase.getOtherProps(currentProps)
             );

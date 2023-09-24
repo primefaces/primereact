@@ -1,15 +1,17 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect } from '../hooks/Hooks';
-import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, UniqueComponentId } from '../utils/Utils';
-import { FieldsetBase } from './FieldsetBase';
-import { PlusIcon } from '../icons/plus';
+import { useMountEffect, useStyle } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
+import { PlusIcon } from '../icons/plus';
+import { Ripple } from '../ripple/Ripple';
+import { IconUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
+import { FieldsetBase } from './FieldsetBase';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
-    const props = FieldsetBase.getProps(inProps);
-
+    const context = React.useContext(PrimeReactContext);
+    const props = FieldsetBase.getProps(inProps, context);
     const [idState, setIdState] = React.useState(props.id);
     const [collapsedState, setCollapsedState] = React.useState(props.collapsed);
     const collapsed = props.toggleable ? (props.onToggle ? props.collapsed : collapsedState) : false;
@@ -18,13 +20,15 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const headerId = idState + '_header';
     const contentId = idState + '_content';
 
-    const { ptm } = FieldsetBase.setMetaData({
+    const { ptm, cx, isUnstyled } = FieldsetBase.setMetaData({
         props,
         state: {
             id: idState,
             collapsed: collapsed
         }
     });
+
+    useHandleStyle(FieldsetBase.css.styles, isUnstyled, { name: 'fieldset' });
 
     const toggle = (event) => {
         if (props.toggleable) {
@@ -66,7 +70,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const createContent = () => {
         const contentProps = mergeProps(
             {
-                className: 'p-fieldset-content'
+                className: cx('content')
             },
             ptm('content')
         );
@@ -78,13 +82,24 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
                 'aria-hidden': collapsed,
                 role: 'region',
                 'aria-labelledby': headerId,
-                className: 'p-toggleable-content'
+                className: cx('toggleableContent')
             },
             ptm('toggleableContent')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: !collapsed,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableProps}>
                     <div {...contentProps}>{props.children}</div>
                 </div>
@@ -96,7 +111,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
         if (props.toggleable) {
             const togglerIconProps = mergeProps(
                 {
-                    className: 'p-fieldset-toggler'
+                    className: cx('togglericon')
                 },
                 ptm('togglericon')
             );
@@ -113,7 +128,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const createLegendContent = () => {
         const legendTextProps = mergeProps(
             {
-                className: 'p-fieldset-legend-text'
+                className: cx('legendTitle')
             },
             ptm('legendTitle')
         );
@@ -151,7 +166,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const createLegend = () => {
         const legendProps = mergeProps(
             {
-                className: 'p-fieldset-legend p-unselectable-text',
+                className: cx('legend'),
                 onClick: toggle
             },
 
@@ -176,13 +191,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             id: idState,
             ref: elementRef,
             style: props.style,
-            className: classNames(
-                'p-fieldset p-component',
-                {
-                    'p-fieldset-toggleable': props.toggleable
-                },
-                props.className
-            ),
+            className: cx('root'),
             onClick: props.onClick
         },
         FieldsetBase.getOtherProps(props),

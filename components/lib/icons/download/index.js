@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { IconBase } from '../../iconbase/IconBase';
+import { ObjectUtils, UniqueComponentId } from '../../utils/Utils';
 
 export const DownloadIcon = React.memo(
     React.forwardRef((inProps, ref) => {
         const pti = IconBase.getPTI(inProps);
+        const [pathId, setPathId] = React.useState(inProps.id);
+
+        React.useEffect(() => {
+            if (ObjectUtils.isEmpty(pathId)) {
+                setPathId(UniqueComponentId('pr_icon_clip_'));
+            }
+        }, [pathId]);
 
         return (
             <svg ref={ref} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" {...pti}>
-                <g clipPath="url(#clip0_407_20832)">
+                <g clipPath={`url(#${pathId})`}>
                     <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -16,7 +24,7 @@ export const DownloadIcon = React.memo(
                     />
                 </g>
                 <defs>
-                    <clipPath id="clip0_407_20832">
+                    <clipPath id={pathId}>
                         <rect width="14" height="14" fill="white" />
                     </clipPath>
                 </defs>

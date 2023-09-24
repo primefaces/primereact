@@ -28,7 +28,15 @@ const ContextMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="Custom Icons - PrimeReact" header="Custom Icons" description="PrimeReact components can be used with any icon library using the templating features." componentDocs={docs} hideTabMenu />;
+    return (
+        <DocComponent
+            title="Custom Icons - PrimeReact"
+            header="Custom Icons"
+            description="PrimeReact components can be used with any icon library using the templating features. Icons are passed the <i>iconProps</i> of the original icon and the <i>props</i> of the component."
+            componentDocs={docs}
+            hideTabMenu
+        />
+    );
 };
 
 export default ContextMenuDemo;

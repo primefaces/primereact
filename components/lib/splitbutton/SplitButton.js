@@ -1,6 +1,7 @@
 import * as React from 'react';
-import PrimeReact from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
@@ -12,21 +13,25 @@ import { SplitButtonPanel } from './SplitButtonPanel';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = SplitButtonBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = SplitButtonBase.getProps(inProps, context);
 
         const [idState, setIdState] = React.useState(props.id);
         const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
         const elementRef = React.useRef(null);
         const defaultButtonRef = React.useRef(null);
         const overlayRef = React.useRef(null);
-
-        const { ptm } = SplitButtonBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 id: idState,
                 overlayVisible: overlayVisibleState
             }
-        });
+        };
+
+        const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metaData);
+
+        useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -61,7 +66,8 @@ export const SplitButton = React.memo(
         };
 
         const onOverlayEnter = () => {
-            ZIndexUtils.set('overlay', overlayRef.current, PrimeReact.autoZIndex, PrimeReact.zIndex['overlay']);
+            ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -82,7 +88,7 @@ export const SplitButton = React.memo(
         };
 
         const alignOverlay = () => {
-            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || PrimeReact.appendTo);
+            DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || (context && context.appendTo) || PrimeReact.appendTo);
         };
 
         useMountEffect(() => {
@@ -105,7 +111,7 @@ export const SplitButton = React.memo(
         const createItems = () => {
             if (props.model) {
                 return props.model.map((menuitem, index) => {
-                    return <SplitButtonItem splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} />;
+                    return <SplitButtonItem hostName="SplitButton" splitButtonProps={props} menuitem={menuitem} key={index} onItemClick={onItemClick} ptm={ptm} cx={cx} />;
                 });
             }
 
@@ -122,16 +128,6 @@ export const SplitButton = React.memo(
             small: 'sm'
         };
         const size = sizeMapping[props.size];
-        const className = classNames('p-splitbutton p-component', props.className, {
-            'p-disabled': props.disabled,
-            'p-button-loading-label-only': props.loading && !props.icon && props.label,
-            [`p-button-${props.severity}`]: props.severity,
-            'p-button-raised': props.raised,
-            'p-button-rounded': props.rounded,
-            'p-button-text': props.text,
-            'p-button-outlined': props.outlined,
-            [`p-button-${size}`]: size
-        });
         const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
         const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
         const buttonContent = props.buttonTemplate ? ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;
@@ -141,7 +137,7 @@ export const SplitButton = React.memo(
         const dropdownIcon = () => {
             const iconProps = mergeProps(
                 {
-                    className: 'p-button-icon p-c'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -152,57 +148,11 @@ export const SplitButton = React.memo(
             return dropdownIcon;
         };
 
-        const menuButtonProps = mergeProps({
-            type: 'button',
-            className: menuButtonClassName,
-            icon: dropdownIcon,
-            onClick: onDropdownButtonClick,
-            disabled: props.disabled,
-            'aria-expanded': overlayVisibleState,
-            'aria-haspopup': true,
-            'aria-controls': overlayVisibleState ? menuId : null,
-            ...props.menuButtonProps,
-            pt: ptm('menuButton')
-        });
-
-        const menuProps = mergeProps(
-            {
-                ref: overlayRef,
-                appendTo: props.appendTo,
-                menuId: menuId,
-                menuStyle: props.menuStyle,
-                menuClassName: props.menuClassName,
-                onClick: onPanelClick,
-                in: overlayVisibleState,
-                onEnter: onOverlayEnter,
-                onEntered: onOverlayEntered,
-                onExit: onOverlayExit,
-                onExited: onOverlayExited,
-                transitionOptions: props.transitionOptions
-            },
-            ptm('menu')
-        );
-
-        const splitButtonProps = mergeProps({
-            ref: defaultButtonRef,
-            type: 'button',
-            className: buttonClassName,
-            icon: props.icon,
-            loading: props.loading,
-            loadingIcon: props.loadingIcon,
-            label: props.label,
-            onClick: props.onClick,
-            disabled: props.disabled,
-            tabIndex: props.tabIndex,
-            ...props.buttonProps,
-            pt: ptm('button')
-        });
-
         const rootProps = mergeProps(
             {
                 ref: elementRef,
                 id: idState,
-                className: className,
+                className: classNames(props.className, cx('root', { size })),
                 style: props.style
             },
             SplitButtonBase.getOtherProps(props),
@@ -212,11 +162,65 @@ export const SplitButton = React.memo(
         return (
             <>
                 <div {...rootProps}>
-                    <Button {...splitButtonProps}>{buttonContent}</Button>
-                    <Button {...menuButtonProps} />
-                    <SplitButtonPanel {...menuProps}>{items}</SplitButtonPanel>
+                    <Button
+                        ref={defaultButtonRef}
+                        type="button"
+                        className={buttonClassName}
+                        icon={props.icon}
+                        loading={props.loading}
+                        loadingIcon={props.loadingIcon}
+                        label={props.label}
+                        onClick={props.onClick}
+                        disabled={props.disabled}
+                        tabIndex={props.tabIndex}
+                        size={props.size}
+                        {...props.buttonProps}
+                        pt={ptm('button')}
+                        __parentMetadata={{
+                            parent: metaData
+                        }}
+                        unstyled={props.unstyled}
+                    >
+                        {buttonContent}
+                    </Button>
+                    <Button
+                        type="button"
+                        className={menuButtonClassName}
+                        icon={dropdownIcon}
+                        onClick={onDropdownButtonClick}
+                        disabled={props.disabled}
+                        aria-expanded={overlayVisibleState}
+                        aria-haspopup="true"
+                        aria-controls={overlayVisibleState ? menuId : null}
+                        {...props.menuButtonProps}
+                        size={props.size}
+                        pt={ptm('menuButton')}
+                        __parentMetadata={{
+                            parent: metaData
+                        }}
+                        unstyled={props.unstyled}
+                    />
+                    <SplitButtonPanel
+                        hostName="SplitButton"
+                        ref={overlayRef}
+                        appendTo={props.appendTo}
+                        menuId={menuId}
+                        menuStyle={props.menuStyle}
+                        menuClassName={props.menuClassName}
+                        onClick={onPanelClick}
+                        in={overlayVisibleState}
+                        onEnter={onOverlayEnter}
+                        onEntered={onOverlayEntered}
+                        onExit={onOverlayExit}
+                        onExited={onOverlayExited}
+                        transitionOptions={props.transitionOptions}
+                        ptm={ptm}
+                        cx={cx}
+                    >
+                        {items}
+                    </SplitButtonPanel>
                 </div>
-                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} />}
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );
     })

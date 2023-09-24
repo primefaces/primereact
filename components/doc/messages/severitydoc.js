@@ -8,12 +8,15 @@ export function SeverityDoc(props) {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current.show([
-            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
-            { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
-            { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
-            { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
-        ]);
+        if (msgs.current) {
+            msgs.current.clear();
+            msgs.current.show([
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
+            ]);
+        }
     });
 
     const code = {
@@ -34,12 +37,15 @@ export default function SeverityDemo() {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current.show([
-            {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false},
-            {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false},
-            {sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false},
-            {sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false}
-        ]);
+        if (msgs.current) {
+            msgs.current.clear();
+            msgs.current.show([
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
+                { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
+            ]);
+        }
     });
 
     return (
@@ -56,6 +62,7 @@ export default function SeverityDemo() {
     const msgs = useRef<Messages>(null);
 
     useMountEffect(() => {
+        msgs.current?.clear();
         msgs.current?.show([
             {sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content'},
             {sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content'},

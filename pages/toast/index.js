@@ -1,13 +1,18 @@
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/toast/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/toast/basicdoc';
 import { ImportDoc } from '../../components/doc/toast/importdoc';
 import { MultipleDoc } from '../../components/doc/toast/multipledoc';
 import { PositionDoc } from '../../components/doc/toast/positiondoc';
+import { PTDoc } from '../../components/doc/toast/pt/ptdoc';
+import { Wireframe } from '../../components/doc/toast/pt/wireframe';
 import { SeverityDoc } from '../../components/doc/toast/severitydoc';
 import { StickyDoc } from '../../components/doc/toast/stickydoc';
 import { StyleDoc } from '../../components/doc/toast/styledoc';
 import { TemplateDoc } from '../../components/doc/toast/templatedoc';
+import { StyledDoc } from '../../components/doc/toast/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/toast/theming/tailwinddoc';
 
 const ToastDemo = () => {
     const docs = [
@@ -57,8 +62,45 @@ const ToastDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.toast.options',
+            label: 'Toast PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={['Toast']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Toast Component" header="Toast" description="Toast is used to display messages in an overlay." componentDocs={docs} apiDocs={['Toast']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default ToastDemo;

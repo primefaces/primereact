@@ -8,13 +8,148 @@
  *
  */
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
 
+export declare type ImagePassThroughType<T> = PassThroughType<T, ImagePassThroughMethodOptions>;
+export declare type ImagePassThroughTransitionType = ReactCSSTransitionProps | ((options: ImagePassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface ImagePassThroughMethodOptions {
+    props: ImageProps;
+    state: ImageState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link ImageProps.pt}
+ */
+export interface ImagePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: ImagePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the image's DOM element.
+     */
+    image?: ImagePassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
+    /**
+     * Uses to pass attributes to the button's DOM element.
+     */
+    button?: ImagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the mask's DOM element.
+     */
+    mask?: ImagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the toolbar's DOM element.
+     */
+    toolbar?: ImagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the download button's DOM element.
+     */
+    downloadButton?: ImagePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the download icon's DOM element.
+     */
+    downloadIcon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the rotate right button's DOM element.
+     */
+    rotateRightButton?: ImagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the rotate right icon's DOM element.
+     */
+    rotateRightIcon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the rotate left button's DOM element.
+     */
+    rotateLeftButton?: ImagePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the rotate left icon's DOM element.
+     */
+    rotateLeftIcon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the zoom out button's DOM element.
+     */
+    zoomOutButton?: ImagePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the zoom out icon's DOM element.
+     */
+    zoomOutIcon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the zoom in button's DOM element.
+     */
+    zoomInButton?: ImagePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the zoom in icon's DOM element.
+     */
+    zoomInIcon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the close button's DOM element.
+     */
+    closeButton?: ImagePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the close icon's DOM element.
+     */
+    closeIcon?: ImagePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
+    /**
+     * Uses to pass attributes to the preview container's DOM element.
+     */
+    previewContainer?: ImagePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the preview's DOM element.
+     */
+    preview?: ImagePassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: ImagePassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in Image component.
+ */
+export interface ImageState {
+    /**
+     * Mask visible state as a boolean.
+     * @defaultValue false
+     */
+    maskVisible: boolean;
+    /**
+     * Preview visible state as a boolean.
+     * @defaultValue false
+     */
+    previewVisible: boolean;
+    /**
+     * Rotate state as a number.
+     * @defaultValue 0
+     */
+    rotate: number;
+    /**
+     * Scale state as a boolean.
+     * @defaultValue 1
+     */
+    scale: number;
+}
 /**
  * Defines valid properties in Image component. In addition to these, all properties of HTMLSpanElement can be used in this component.
  * @group Properties
  */
-export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref'> {
+export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, 'ref' | 'pt'> {
     /**
      * Specifies an alternate text for an area, if the image cannot be displayed.
      */
@@ -24,6 +159,11 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Specifies if pressing escape key should hide the preview.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
     /**
      * The crossorigin content attribute on media elements is a CORS settings attribute.
      */
@@ -95,7 +235,7 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      */
     src?: string | undefined;
     /**
-     * Changing the default icon when the image is hovered in preview mode.
+     * Changing the default icon when the image is hovered in preview mode. Since v9, use `indicatorIcon` instead.
      * @deprecated Since v9, use `indicatorIcon` instead.
      */
     template?: any | undefined;
@@ -115,6 +255,21 @@ export interface ImageProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * Triggered when the preview overlay is shown.
      */
     onShow?(): void;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {ImagePassThroughOptions}
+     */
+    pt?: ImagePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

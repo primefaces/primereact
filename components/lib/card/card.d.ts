@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils';
 
 export declare type CardPassThroughType<T> = PassThroughType<T, CardPassThroughMethodOptions>;
@@ -52,17 +54,11 @@ export interface CardPassThroughOptions {
      * Uses to pass attributes to the footer's DOM element.
      */
     footer?: CardPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-}
-
-/**
- * Defines valid properties in Card component.
- */
-export interface CardProps {
     /**
-     * Uses to pass attributes to DOM elements inside the component.
-     * @type {CardPassThroughOptions}
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
      */
-    pt?: CardPassThroughOptions;
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -91,6 +87,21 @@ export interface CardProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {CardPassThroughOptions}
+     */
+    pt?: CardPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

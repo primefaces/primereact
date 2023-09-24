@@ -8,8 +8,118 @@
  *
  */
 import * as React from 'react';
-import { PaginatorTemplate } from '../paginator';
-import { IconType } from '../utils/utils';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type DataViewPassThroughType<T> = PassThroughType<T, DataViewPassThroughMethodOptions>;
+export declare type DataViewLayoutOptionsPassThroughType<T> = PassThroughType<T, DataViewLayoutOptionsPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DataViewPassThroughMethodOptions {
+    props: DataViewProps;
+    state: DataViewState;
+}
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DataViewLayoutOptionsPassThroughMethodOptions {
+    props: DataViewLayoutOptionsProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DataViewProps.pt}
+ */
+export interface DataViewPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Paginator component.
+     * @see {@link PaginatorPassThroughOptions}
+     */
+    paginator?: PaginatorPassThroughOptions;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the empty message's DOM element.
+     */
+    emptyMessage?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading overlay's DOM element.
+     */
+    loadingOverlay?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading icon's DOM element.
+     */
+    loadingIcon?: DataViewPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the grid's DOM element.
+     */
+    grid?: DataViewPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in DataView component.
+ */
+export interface DataViewState {
+    /**
+     * Current index of first record as a number.
+     */
+    first: number;
+    /**
+     * Current number of rows to display in new page as a number.
+     */
+    rows: number;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DataViewLayoutOptionsProps.pt}
+ */
+export interface DataViewLayoutOptionsPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DataViewLayoutOptionsPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list button's DOM element.
+     */
+    listButton?: DataViewLayoutOptionsPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the list icon's DOM element.
+     */
+    listIcon?: DataViewLayoutOptionsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the grid button's DOM element.
+     */
+    gridButton?: DataViewLayoutOptionsPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the grid icon's DOM element.
+     */
+    gridIcon?: DataViewLayoutOptionsPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+}
 
 /**
  * Custom page event.
@@ -232,6 +342,21 @@ export interface DataViewProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DataViewPassThroughOptions}
+     */
+    pt?: DataViewPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

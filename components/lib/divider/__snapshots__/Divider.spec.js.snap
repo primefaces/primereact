@@ -4,10 +4,13 @@ exports[`Divider default 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -17,10 +20,13 @@ exports[`Divider horizontal center 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-center"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -30,10 +36,13 @@ exports[`Divider horizontal left 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -43,10 +52,13 @@ exports[`Divider horizontal right 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-right"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -56,10 +68,13 @@ exports[`Divider type dashed 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-dashed p-divider-left"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -69,10 +84,13 @@ exports[`Divider type dotted 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-horizontal p-divider-dotted p-divider-left"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -82,10 +100,13 @@ exports[`Divider vertical bottom 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-vertical p-divider-solid p-divider-bottom"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -95,10 +116,13 @@ exports[`Divider vertical center 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-vertical p-divider-solid p-divider-center"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>
@@ -108,10 +132,13 @@ exports[`Divider vertical top 1`] = `
 <div>
   <div
     class="p-divider p-component p-divider-vertical p-divider-solid p-divider-top"
+    data-pc-name="divider"
+    data-pc-section="root"
     role="separator"
   >
     <div
       class="p-divider-content"
+      data-pc-section="content"
     />
   </div>
 </div>

@@ -4,6 +4,8 @@ exports[`Badge default 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -12,6 +14,8 @@ exports[`Badge severity danger 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-danger"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -20,6 +24,8 @@ exports[`Badge severity info 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-info"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -28,6 +34,8 @@ exports[`Badge severity invalid 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-invalid"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -36,6 +44,8 @@ exports[`Badge severity success 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-success"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -44,6 +54,8 @@ exports[`Badge severity warning 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-warning"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -52,6 +64,8 @@ exports[`Badge size invalid 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -60,6 +74,8 @@ exports[`Badge size large 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-lg"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -68,6 +84,8 @@ exports[`Badge size xlarge 1`] = `
 <div>
   <span
     class="p-badge p-component p-badge-dot p-badge-xl"
+    data-pc-name="badge"
+    data-pc-section="root"
   />
 </div>
 `;
@@ -76,6 +94,8 @@ exports[`Badge value 1`] = `
 <div>
   <span
     class="p-badge p-component"
+    data-pc-name="badge"
+    data-pc-section="root"
   >
     22
   </span>

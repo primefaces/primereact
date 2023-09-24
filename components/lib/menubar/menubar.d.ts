@@ -9,7 +9,102 @@
  */
 import * as React from 'react';
 import { MenuItem } from '../menuitem';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+
+export declare type MenubarPassThroughType<T> = PassThroughType<T, MenubarPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MenubarPassThroughMethodOptions {
+    props: MenubarProps;
+    state: MenubarState;
+    context: MenubarContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MenubarProps.pt}
+ */
+export interface MenubarPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MenubarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    menu?: MenubarPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list item's DOM element.
+     */
+    menuitem?: MenubarPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the action's DOM element.
+     */
+    action?: MenubarPassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: MenubarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the label's DOM element.
+     */
+    label?: MenubarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the submenu icon's DOM element.
+     */
+    submenuIcon?: MenubarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the separator's DOM element.
+     */
+    separator?: MenubarPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    /**
+     * Uses to pass attributes to the mobile popup menu button's DOM element.
+     */
+    button?: MenubarPassThroughType<React.HTMLAttributes<HTMLElement>>;
+    /**
+     * Uses to pass attributes to the mobile popup menu button icon's DOM element.
+     */
+    popupIcon?: MenubarPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the start of the component.
+     */
+    start?: MenubarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the end of the component.
+     */
+    end?: MenubarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in Menubar component.
+ */
+export interface MenubarState {
+    /**
+     * Current mobile menu active state as a boolean.
+     * @defaultValue false
+     */
+    mobileActive: boolean;
+}
+
+/**
+ * Defines current options in Menubar component.
+ */
+export interface MenubarContext {
+    /**
+     * Current active state of menuitem as a boolean.
+     * @defaultValue false
+     */
+    active: boolean;
+}
 
 /**
  * Defines valid properties in Menubar component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -41,6 +136,21 @@ export interface MenubarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MenubarPassThroughOptions}
+     */
+    pt?: MenubarPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

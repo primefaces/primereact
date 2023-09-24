@@ -172,6 +172,10 @@
                             "to": "/dataview"
                         },
                         {
+                            "name": "DataScroller",
+                            "to": "/datascroller"
+                        },
+                        {
                             "name": "OrderList",
                             "to": "/orderlist"
                         },
@@ -458,8 +462,36 @@
                 {
                     "name": "SASS API",
                     "href": "https://www.primefaces.org/designer/api/primereact/9.0.0"
+                },
+                {
+                    "name": "Unstyled Mode",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "to": "/unstyled"
+                        },
+                        {
+                            "name": "Bootstrap",
+                            "to": "/bootstrap"
+                        },
+                        {
+                            "name": "Bulma",
+                            "to": "/bulma"
+                        }
+                    ]
                 }
             ]
+        },
+        {
+            "name": "Pass Through",
+            "icon": "pi pi-directions",
+            "to": "/passthrough"
+        },
+        {
+            "name": "Tailwind",
+            "icon": "pi pi-heart",
+            "to": "/tailwind",
+            "badge": "NEW"
         },
         {
             "name": "Figma UI Kit",
@@ -597,7 +629,7 @@
         {
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
-            "href": "https://www.primefaces.org/primeflex"
+            "href": "https://primeflex.org"
         },
         {
             "name": "Support",
@@ -609,7 +641,7 @@
                 },
                 {
                     "name": "Forum",
-                    "href": "https://forum.primefaces.org/viewforum.php?f=57"
+                    "href": "https://github.com/orgs/primefaces/discussions"
                 },
                 {
                     "name": "PRO",

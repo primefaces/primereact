@@ -8,9 +8,72 @@
  *
  */
 import * as React from 'react';
-import { InputText } from '../inputtext/inputtext';
+import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+import { PassThroughOptions } from '../passthrough';
+import { ComponentHooks } from '../componentbase/componentbase';
+
+export declare type InputNumberPassThroughType<T> = PassThroughType<T, InputNumberPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InputNumberPassThroughMethodOptions {
+    props: InputNumberProps;
+    state: InputNumberState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InputNumberProps.pt}
+ */
+export interface InputNumberPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the Input component.
+     * @see {@link InputTextPassThroughOptions}
+     */
+    input?: InputTextPassThroughOptions;
+    /**
+     * Uses to pass attributes to the button group's DOM element.
+     */
+    buttonGroup?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the increment button's DOM element.
+     */
+    incrementButton?: InputNumberPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the decrement button's DOM element.
+     */
+    decrementButton?: InputNumberPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in InputNumber component.
+ */
+export interface InputNumberState {
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * Custom value change event.
@@ -75,11 +138,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Style class of the increment button.
      */
-    incrementButtonIcon?: string | undefined;
+    incrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Style class of the decrement button.
      */
-    decrementButtonIcon?: string | undefined;
+    decrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Locale to be used in formatting.
      */
@@ -238,15 +301,35 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     /**
-     * Callback to invoke when the key pressed.
+     * Callback to invoke when the key pressed down.
      * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
      */
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
+    /**
+     * Callback to invoke when the key released.
+     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
+     */
+    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputNumberPassThroughOptions}
+     */
+    pt?: InputNumberPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

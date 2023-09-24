@@ -8,6 +8,58 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils';
+
+export declare type DataScrollerPassThroughType<T> = PassThroughType<T, DataScrollerPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface DataScrollerPassThroughMethodOptions {
+    props: DataScrollerProps;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link DataScrollerProps.pt}
+ */
+export interface DataScrollerPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the emptyMessage's DOM element.
+     */
+    emptyMessage?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    list?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Uses to pass attributes to the list's DOM element.
+     */
+    content?: DataScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
 
 /**
  * Custom lazy event.
@@ -29,7 +81,7 @@ interface DataScrollerLazyLoadEvents {
  * Defines valid properties in DataScroller component. In addition to these, all properties of HTMLDivElement can be used in this component.
  * @group Properties
  */
-export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref'> {
+export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'ref' | 'pt'> {
     /**
      * Number of buffer size.
      * @defaultValue 0.9
@@ -89,6 +141,21 @@ export interface DataScrollerProps extends Omit<React.DetailedHTMLProps<React.HT
      * @param {DataScrollerLazyLoadEvents} event - Custom lazy event
      */
     onLazyLoad?(event: DataScrollerLazyLoadEvents): void;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {DataScrollerPassThroughOptions}
+     */
+    pt?: DataScrollerPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

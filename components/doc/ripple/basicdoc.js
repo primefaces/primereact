@@ -13,7 +13,6 @@ export function BasicDoc(props) {
         `,
         javascript: `
 import React from 'react';
-import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 
 export default function BasicDemo() {
@@ -29,7 +28,6 @@ export default function BasicDemo() {
         `,
         typescript: `
 import React from 'react';
-import PrimeReact from 'primereact/api';
 import { Ripple } from 'primereact/ripple';
 
 export default function BasicDemo() {

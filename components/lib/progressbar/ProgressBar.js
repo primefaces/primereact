@@ -1,13 +1,19 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ProgressBarBase } from './ProgressBarBase';
 
 export const ProgressBar = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ProgressBarBase.getProps(inProps);
-        const { ptm } = ProgressBarBase.setMetaData({
-            props
+        const context = React.useContext(PrimeReactContext);
+        const props = ProgressBarBase.getProps(inProps, context);
+        const { ptm, cx, isUnstyled } = ProgressBarBase.setMetaData({
+            props,
+            ...props.__parentMetadata
         });
+
+        useHandleStyle(ProgressBarBase.css.styles, isUnstyled, { name: 'progressbar' });
         const elementRef = React.useRef(null);
 
         const createLabel = () => {
@@ -21,13 +27,10 @@ export const ProgressBar = React.memo(
         };
 
         const createDeterminate = () => {
-            const className = classNames('p-progressbar p-component p-progressbar-determinate', props.className);
             const label = createLabel();
             const rootProps = mergeProps(
                 {
-                    id: props.id,
-                    ref: elementRef,
-                    className,
+                    className: cx('root'),
                     style: props.style,
                     role: 'progressbar',
                     'aria-valuemin': '0',
@@ -39,7 +42,7 @@ export const ProgressBar = React.memo(
             );
             const valueProps = mergeProps(
                 {
-                    className: 'p-progressbar-value p-progressbar-value-animate',
+                    className: cx('value'),
                     style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
                 },
                 ptm('value')
@@ -47,25 +50,22 @@ export const ProgressBar = React.memo(
 
             const labelProps = mergeProps(
                 {
-                    className: 'p-progressbar-label'
+                    className: cx('label')
                 },
                 ptm('label')
             );
 
             return (
-                <div {...rootProps}>
-                    <div {...valueProps}>{props.value != null && props.value !== 0 && props.showValue && <div {...labelProps}>{label}</div>}</div>
+                <div id={props.id} ref={elementRef} {...rootProps}>
+                    <div {...valueProps}>{label != null && <div {...labelProps}>{label}</div>}</div>
                 </div>
             );
         };
 
         const createIndeterminate = () => {
-            const className = classNames('p-progressbar p-component p-progressbar-indeterminate', props.className);
             const rootProps = mergeProps(
                 {
-                    id: props.id,
-                    ref: elementRef,
-                    className,
+                    className: classNames(props.className, cx('root')),
                     style: props.style,
                     role: 'progressbar'
                 },
@@ -73,24 +73,24 @@ export const ProgressBar = React.memo(
                 ptm('root')
             );
 
-            const indeterminateContainerProps = mergeProps(
+            const containerProps = mergeProps(
                 {
-                    className: 'p-progressbar-indeterminate-container'
+                    className: cx('container')
                 },
-                ptm('indeterminateContainer')
+                ptm('container')
             );
 
             const valueProps = mergeProps(
                 {
-                    className: 'p-progressbar-value p-progressbar-value-animate',
+                    className: cx('value'),
                     style: { backgroundColor: props.color }
                 },
                 ptm('value')
             );
 
             return (
-                <div {...rootProps}>
-                    <div {...indeterminateContainerProps}>
+                <div id={props.id} ref={elementRef} {...rootProps}>
+                    <div {...containerProps}>
                         <div {...valueProps}></div>
                     </div>
                 </div>

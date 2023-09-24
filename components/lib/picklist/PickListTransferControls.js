@@ -1,29 +1,30 @@
 import * as React from 'react';
 import { Button } from '../button/Button';
-import { classNames, ObjectUtils, IconUtils } from '../utils/Utils';
-import { AngleLeftIcon } from '../icons/angleleft';
+import { useMatchMedia } from '../hooks/Hooks';
+import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleLeftIcon } from '../icons/angledoubleleft';
 import { AngleDoubleRightIcon } from '../icons/angledoubleright';
-import { AngleRightIcon } from '../icons/angleright';
-import { useMatchMedia } from '../hooks/Hooks';
-import { AngleDownIcon } from '../icons/angledown';
-import { AngleDoubleDownIcon } from '../icons/angledoubledown';
-import { AngleUpIcon } from '../icons/angleup';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
+import { AngleDownIcon } from '../icons/angledown';
+import { AngleLeftIcon } from '../icons/angleleft';
+import { AngleRightIcon } from '../icons/angleright';
+import { AngleUpIcon } from '../icons/angleup';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+    const { ptm, cx, unstyled } = props;
 
     function getIconComponent(iconType) {
         switch (iconType) {
             case 'moveToTargetIcon':
-                return props.moveToTargetIcon || viewChanged ? <AngleDownIcon /> : <AngleRightIcon />;
+                return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> : props.moveToTargetIcon || <AngleRightIcon />;
             case 'moveAllToTargetIcon':
-                return props.moveAllToTargetIcon || viewChanged ? <AngleDoubleDownIcon /> : <AngleDoubleRightIcon />;
+                return props.moveAllToTargetIcon || viewChanged ? props.moveAllToTargetIcon || <AngleDoubleDownIcon /> : props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
             case 'moveToSourceIcon':
-                return props.moveToSourceIcon || viewChanged ? <AngleUpIcon /> : <AngleLeftIcon />;
+                return props.moveToSourceIcon || viewChanged ? props.moveToSourceIcon || <AngleUpIcon /> : props.moveToSourceIcon || <AngleLeftIcon />;
             case 'moveAllToSourceIcon':
-                return props.moveAllToSourceIcon || viewChanged ? <AngleDoubleUpIcon /> : <AngleDoubleLeftIcon />;
+                return props.moveAllToSourceIcon || viewChanged ? props.moveAllToSourceIcon || <AngleDoubleUpIcon /> : props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
             default:
                 return null;
         }
@@ -123,14 +124,19 @@ export const PickListTransferControls = React.memo((props) => {
         }
     };
 
-    const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
+    const buttonsProps = mergeProps(
+        {
+            className: classNames(props.className, cx('buttons'))
+        },
+        ptm('buttons', { hostName: props.hostName })
+    );
 
     return (
-        <div className={className}>
-            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft}></Button>
+        <div {...buttonsProps}>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={ptm('moveToTargetButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={ptm('moveAllToTargetButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={ptm('moveAllToSourceButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
         </div>
     );
 });

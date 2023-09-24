@@ -1,6 +1,7 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
-export const KnobBase = {
+export const KnobBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Knob',
         id: null,
@@ -23,6 +24,39 @@ export const KnobBase = {
         onChange: null,
         children: undefined
     },
-    getProps: (props) => ObjectUtils.getMergedProps(props, KnobBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, KnobBase.defaultProps)
-};
+    css: {
+        classes: {
+            range: 'p-knob-range',
+            value: 'p-knob-value',
+            label: 'p-knob-text',
+            root: ({ props }) =>
+                classNames(
+                    'p-knob p-component',
+                    {
+                        'p-disabled': props.disabled
+                    },
+                    props.className
+                )
+        },
+        styles: `
+        @keyframes dash-frame {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        .p-knob-range {
+            fill: none;
+            transition: stroke .1s ease-in;
+        }
+        .p-knob-value {
+            animation-name: dash-frame;
+            animation-fill-mode: forwards;
+            fill: none;
+        }
+        .p-knob-text {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        `
+    }
+});

@@ -68,16 +68,16 @@ import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
 import { ProductService } from './service/ProductService';
 
 interface Product {
-    id: string;
-    code: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    category: string;
-    quantity: number;
-    inventoryStatus: string;
-    rating: number;
+    id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    price?: number;
+    category?: string;
+    quantity?: number;
+    inventoryStatus?: string;
+    rating?: number;
 }
 
 export default function MultipleRowsSelectionDemo() {
@@ -96,11 +96,7 @@ export default function MultipleRowsSelectionDemo() {
                 <label htmlFor="input-metakey">MetaKey</label>
             </div>
             <DataTable value={products} selectionMode="multiple" selection={selectedProducts} 
-                    onSelectionChange={(e) => {
-                        if (Array.isArray(e.value)) {
-                            setSelectedProducts(e.value);
-                        }
-                    }}
+                    onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" metaKeySelection={metaKey} dragSelection tableStyle={{ minWidth: '50rem' }}>
                 <Column field="code" header="Code"></Column>
                 <Column field="name" header="Name"></Column>

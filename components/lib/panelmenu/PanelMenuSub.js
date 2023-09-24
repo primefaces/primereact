@@ -1,12 +1,28 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, ObjectUtils } from '../utils/Utils';
-import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
+import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
+    const { ptm, cx } = props;
+
+    const _ptm = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
+    const getPTOptions = (item, key) => {
+        return _ptm(key, {
+            context: {
+                active: isItemActive(item)
+            }
+        });
+    };
 
     const findActiveItem = () => {
         if (props.model) {
@@ -74,20 +90,42 @@ export const PanelMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = 'separator_' + index;
 
-        return <li key={key} className="p-menu-separator"></li>;
+        const separatorProps = mergeProps(
+            {
+                key,
+                className: cx('separator')
+            },
+            _ptm('separator')
+        );
+
+        return <li {...separatorProps}></li>;
     };
 
     const createSubmenu = (item, active) => {
-        const className = classNames('p-toggleable-content', {
-            'p-toggleable-content-collapsed': !active
-        });
         const submenuRef = React.createRef();
 
+        const toggleableContentProps = mergeProps(
+            {
+                className: cx('toggleableContent', { active })
+            },
+            _ptm('toggleableContent')
+        );
+
         if (item.items) {
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    in: active,
+                    unmountOnExit: true
+                },
+                _ptm('transition')
+            );
+
             return (
-                <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
-                    <div ref={submenuRef} className={className}>
-                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} />
+                <CSSTransition nodeRef={submenuRef} {...transitionProps}>
+                    <div ref={submenuRef} {...toggleableContentProps}>
+                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>
                 </CSSTransition>
             );
@@ -103,16 +141,45 @@ export const PanelMenuSub = React.memo((props) => {
 
         const key = item.label + '_' + index;
         const active = isItemActive(item);
-        const className = classNames('p-menuitem', item.className);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
-        const icon = IconUtils.getJSXIcon(item.icon, { className: 'p-menuitem-icon' }, { props: props.menuProps });
-        const label = item.label && <span className="p-menuitem-text">{item.label}</span>;
+        const iconProps = mergeProps(
+            {
+                className: cx('icon', { item })
+            },
+            getPTOptions(item, 'icon')
+        );
+        const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
+        const labelProps = mergeProps(
+            {
+                className: cx('label')
+            },
+            getPTOptions(item, 'label')
+        );
+        const label = item.label && <span {...labelProps}>{item.label}</span>;
         const submenuIconClassName = 'p-panelmenu-icon';
-        const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon className={submenuIconClassName} /> : props.submenuIcon || <ChevronRightIcon className={submenuIconClassName} />);
+        const submenuIconProps = mergeProps(
+            {
+                className: cx('submenuicon')
+            },
+            getPTOptions(item, 'submenuicon')
+        );
+        const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
         const submenu = createSubmenu(item, active);
+        const actionProps = mergeProps(
+            {
+                href: item.url || '#',
+                className: cx('action', { item }),
+                target: item.target,
+                onClick: (event) => onItemClick(event, item, index),
+                role: 'menuitem',
+                'aria-disabled': item.disabled
+            },
+            getPTOptions(item, 'action')
+        );
+
         let content = (
-            <a href={item.url || '#'} className={linkClassName} target={item.target} onClick={(event) => onItemClick(event, item, index)} role="menuitem" aria-disabled={item.disabled}>
+            <a {...actionProps}>
                 {submenuIcon}
                 {icon}
                 {label}
@@ -135,8 +202,19 @@ export const PanelMenuSub = React.memo((props) => {
             content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
         }
 
+        const menuitemProps = mergeProps(
+            {
+                key,
+                id: item.id,
+                className: cx('menuitem', { item }),
+                style: item.style,
+                role: 'none'
+            },
+            getPTOptions(item, 'menuitem')
+        );
+
         return (
-            <li key={key} id={item.id} className={className} style={item.style} role="none">
+            <li {...menuitemProps}>
                 {content}
                 {submenu}
             </li>
@@ -151,14 +229,18 @@ export const PanelMenuSub = React.memo((props) => {
         return props.model ? props.model.map(createItem) : null;
     };
 
-    const className = classNames('p-submenu-list', props.className);
     const menu = createMenu();
 
-    return (
-        <ul className={className} role="tree">
-            {menu}
-        </ul>
+    const ptKey = props.root ? 'menu' : 'submenu';
+    const menuProps = mergeProps(
+        {
+            className: classNames(cx(ptKey), props.className),
+            role: 'tree'
+        },
+        ptm(ptKey)
     );
+
+    return <ul {...menuProps}>{menu}</ul>;
 });
 
 PanelMenuSub.displayName = 'PanelMenuSub';

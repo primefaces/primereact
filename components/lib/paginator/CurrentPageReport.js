@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { ObjectUtils } from '../utils/Utils';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 import { CurrentPageReportBase } from './PaginatorBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const CurrentPageReport = React.memo((inProps) => {
-    const props = CurrentPageReportBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = CurrentPageReportBase.getProps(inProps, context);
 
     const report = {
         currentPage: props.page + 1,
@@ -22,7 +24,14 @@ export const CurrentPageReport = React.memo((inProps) => {
         .replace('{rows}', report.rows)
         .replace('{totalRecords}', report.totalRecords);
 
-    const element = <span className="p-paginator-current">{text}</span>;
+    const currentProps = mergeProps(
+        {
+            className: 'p-paginator-current'
+        },
+        props.ptm('current', { hostName: props.hostName })
+    );
+
+    const element = <span {...currentProps}>{text}</span>;
 
     if (props.template) {
         const defaultOptions = {

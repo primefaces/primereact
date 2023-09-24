@@ -1,4 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
 export const ChartBase = ComponentBase.extend({
     defaultProps: {
@@ -13,5 +14,25 @@ export const ChartBase = ComponentBase.extend({
         style: null,
         className: null,
         children: undefined
+    },
+    css: {
+        classes: {
+            root: ({ props }) => classNames('p-chart', props.className)
+        },
+        inlineStyles: {
+            root: ({ props }) =>
+                Object.assign(
+                    {
+                        width: props.width,
+                        height: props.height
+                    },
+                    props.style
+                )
+        },
+        styles: `
+        .p-chart {
+            position: relative
+        }
+        `
     }
 });

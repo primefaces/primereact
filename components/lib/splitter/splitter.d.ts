@@ -12,6 +12,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type SplitterPassThroughType<T> = PassThroughType<T, SplitterPassThroughMethodOptions>;
@@ -60,6 +62,11 @@ export interface SplitterPanelPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: SplitterPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -87,6 +94,11 @@ export interface SplitterPassThroughOptions {
      * Uses to pass attributes to the gutter handler's DOM element.
      */
     gutterHandler?: SplitterPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -115,6 +127,16 @@ interface SplitterPanelProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SplitterPanelPassThroughOptions}
+     */
+    pt?: SplitterPanelPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
@@ -157,6 +179,21 @@ export interface SplitterProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {SplitterPassThroughOptions}
+     */
+    pt?: SplitterPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

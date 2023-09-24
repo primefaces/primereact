@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputText } from '../inputtext/InputText';
 import { DomHandler, ObjectUtils, classNames } from '../utils/Utils';
@@ -6,9 +7,9 @@ import { InputMaskBase } from './InputMaskBase';
 
 export const InputMask = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = InputMaskBase.getProps(inProps);
-
-        const elementRef = React.useRef(ref);
+        const context = React.useContext(PrimeReactContext);
+        const props = InputMaskBase.getProps(inProps, context);
+        const elementRef = React.useRef(null);
         const firstNonMaskPos = React.useRef(null);
         const lastRequiredNonMaskPos = React.useRef(0);
         const tests = React.useRef([]);
@@ -22,6 +23,9 @@ export const InputMask = React.memo(
         const defaultBuffer = React.useRef(null);
         const caretTimeoutId = React.useRef(null);
         const androidChrome = React.useRef(false);
+        const metaData = {
+            props
+        };
 
         const caret = (first, last) => {
             let range, begin, end;
@@ -299,13 +303,15 @@ export const InputMask = React.memo(
         };
 
         const writeBuffer = () => {
-            elementRef.current.value = buffer.current.join('');
+            if (elementRef.current) {
+                elementRef.current.value = buffer.current.join('');
+            }
         };
 
         const checkVal = (allow) => {
             isValueChecked.current = true;
             //try to place characters where they belong
-            let test = elementRef.current.value,
+            let test = elementRef.current && elementRef.current.value,
                 lastMatch = -1,
                 i,
                 c,
@@ -346,7 +352,7 @@ export const InputMask = React.memo(
                 if (props.autoClear || buffer.current.join('') === defaultBuffer.current) {
                     // Invalid value. Remove it and replace it with the
                     // mask, which is the default behavior.
-                    if (elementRef.current.value) elementRef.current.value = '';
+                    if (elementRef.current && elementRef.current.value) elementRef.current.value = '';
                     clearBuffer(0, len.current);
                 } else {
                     // Invalid value, but we opt to show the value to the
@@ -355,7 +361,10 @@ export const InputMask = React.memo(
                 }
             } else {
                 writeBuffer();
-                elementRef.current.value = elementRef.current.value.substring(0, lastMatch + 1);
+
+                if (elementRef.current) {
+                    elementRef.current.value = elementRef.current.value.substring(0, lastMatch + 1);
+                }
             }
 
             return partialPosition.current ? i : firstNonMaskPos.current;
@@ -371,9 +380,13 @@ export const InputMask = React.memo(
             clearTimeout(caretTimeoutId.current);
             let pos;
 
-            focusText.current = elementRef.current.value;
+            if (elementRef.current) {
+                focusText.current = elementRef.current.value;
+            } else {
+                focusText.current = '';
+            }
 
-            pos = checkVal();
+            pos = checkVal() || 0;
 
             caretTimeoutId.current = setTimeout(() => {
                 if (elementRef.current !== document.activeElement) {
@@ -389,7 +402,7 @@ export const InputMask = React.memo(
                 }
 
                 updateFilledState();
-            }, 10);
+            }, 100);
 
             props.onFocus && props.onFocus(e);
         };
@@ -598,6 +611,9 @@ export const InputMask = React.memo(
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
+                pt={props.pt}
+                unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     })

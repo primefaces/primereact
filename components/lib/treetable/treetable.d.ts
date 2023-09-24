@@ -8,10 +8,334 @@
  *
  */
 import * as React from 'react';
+import { CSSProperties } from 'react';
 import { ColumnProps } from '../column';
-import { PaginatorTemplate } from '../paginator';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { PassThroughOptions } from '../passthrough';
 import { TreeNode } from '../treenode';
-import { IconType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type TreeTablePassThroughType<T> = PassThroughType<T, TreeTablePassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface TreeTablePassThroughMethodOptions {
+    props: TreeTableProps;
+    state: TreeTableState;
+    context: TreeTableContext;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link TreeTableProps.pt}
+ */
+export interface TreeTablePassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading wrapper's DOM element.
+     */
+    loadingWrapper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading overlay's DOM element.
+     */
+    loadingOverlay?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading icon's DOM element.
+     */
+    loadingIcon?: TreeTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the header's DOM element.
+     */
+    header?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the Paginator component.
+     * @see {@link PaginatorPassThroughOptions}
+     */
+    paginator?: PaginatorPassThroughOptions;
+    /**
+     * Uses to pass attributes to the wrapper's DOM element.
+     */
+    wrapper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the table's DOM element.
+     */
+    table?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableElement>>;
+    /**
+     * Uses to pass attributes to the thead's DOM element.
+     */
+    thead?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the header row's DOM element.
+     */
+    headerRow?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the header cell's DOM element.
+     */
+    headerCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the tbody's DOM element.
+     */
+    tbody?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
+    /**
+     * Uses to pass attributes to the empty message's DOM element.
+     */
+    emptyMessage?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the empty message cell's DOM element.
+     */
+    emptyMessageCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the body cell's DOM element.
+     */
+    bodyCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
+    /**
+     * Uses to pass attributes to the tfoot's DOM element.
+     */
+    tfoot?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableSectionElement>>;
+    /**
+     * Uses to pass attributes to the footer row's DOM element.
+     */
+    footerRow?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
+    /**
+     * Uses to pass attributes to the footer's DOM element.
+     */
+    footer?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the resize helper's DOM element.
+     */
+    resizeHelper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the row toggler's DOM element.
+     */
+    rowToggler?: TreeTablePassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the row toggler icon's DOM element.
+     */
+    rowTogglerIcon?: TreeTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the column resizer's DOM element.
+     */
+    columnResizer?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the sort badge's DOM element.
+     */
+    sortBadge?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the header title's DOM element.
+     */
+    headerTitle?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the checkbox wrapper's DOM element.
+     */
+    checkboxWrapper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox's DOM element.
+     */
+    checkbox?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the checkbox icon's DOM element.
+     */
+    checkboxIcon?: TreeTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the resize helper's DOM element.
+     * @see {@link InputTextPassThroughOptions}
+     */
+    filterInput?: InputTextPassThroughOptions;
+    /**
+     * Uses to pass attributes to the sort icon label's DOM element.
+     */
+    sortIcon?: TreeTablePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the scrollable wrapper's DOM element.
+     */
+    scrollableWrapper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable's DOM element.
+     */
+    scrollable?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable header's DOM element.
+     */
+    scrollableHeader?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable header box's DOM element.
+     */
+    scrollableHeaderBox?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable header table's DOM element.
+     */
+    scrollableHeaderTable?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableElement>>;
+    /**
+     * Uses to pass attributes to the scrollable body's DOM element.
+     */
+    scrollableBody?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable body box's DOM element.
+     */
+    scrollableBodyBox?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable body table's DOM element.
+     */
+    scrollableBodyTable?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableElement>>;
+    /**
+     * Uses to pass attributes to the scrollable footer's DOM element.
+     */
+    scrollableFooter?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable footer box's DOM element.
+     */
+    scrollableFooterBox?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the scrollable footer table's DOM element.
+     */
+    scrollableFooterTable?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableElement>>;
+    /**
+     * Uses to pass attributes to the editor key helper's DOM element.
+     */
+    editorKeyHelper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLAnchorElement>>;
+    /**
+     * Uses to pass attributes to the editor key helper label's DOM element.
+     */
+    editorKeyHelperLabel?: TreeTablePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     */
+    hiddenInputWrapper?: TreeTablePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden input's DOM element.
+     */
+    hiddenInput?: TreeTablePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in TreeTable component.
+ */
+export interface TreeTableState {
+    /**
+     * Current index of first record as a number.
+     */
+    first: number;
+    /**
+     * Current number of rows to display in new page as a number.
+     */
+    rows: number;
+    /**
+     * Current sort field.
+     */
+    sortField: string | ((item: any) => string) | undefined;
+    /**
+     * Current order to sort the data by default.
+     */
+    sortOrder: number;
+    /**
+     * Current sortmeta objects to sort the data.
+     */
+    multiSortMeta: TreeTableSortMeta[];
+    /**
+     * Current order of the columns.
+     */
+    columnOrder: string[];
+    /**
+     * Current filters object.
+     */
+    filters: TreeTableFilterMeta;
+    /**
+     * Current editing as a boolean.
+     * @defaultValue false
+     */
+    editing: boolean;
+}
+
+/**
+ * Defines current options in TreeTable component.
+ */
+export interface TreeTableContext {
+    /**
+     * Current index state of the item.
+     */
+    index: number;
+    /**
+     * Current frozen state of the row as a boolean.
+     * @defaultValue false
+     */
+    frozen: boolean;
+    /**
+     * Current checked state of the column checkbox as a boolean.
+     * @defaultValue false
+     */
+    checked: boolean;
+    /**
+     * Current partial checked state of the column checkbox as a boolean.
+     * @defaultValue false
+     */
+    partialChecked: boolean;
+    /**
+     * Current selectable state of the row as a boolean.
+     * @defaultValue false
+     */
+    selectable: boolean;
+    /**
+     * Current scrollable state of the row as a boolean.
+     * @defaultValue false
+     */
+    scrollable: boolean;
+    /**
+     * Current showGridlines state of the row as a boolean.
+     * @defaultValue false
+     */
+    showGridlines: boolean;
+    /**x
+     * Current selected state of the row as a boolean.
+     * @defaultValue false
+     */
+    selected: boolean;
+}
+
+/**
+ * Custom treetable toggler template options
+ */
+interface TreeTableTogglerTemplateOptions {
+    /**
+     * Callback to invoke on click.
+     * @param {React.SyntheticEvent} event - Browser event.
+     */
+    onClick(event: React.SyntheticEvent): void;
+    /**
+     * Style class of the panels container.
+     */
+    containerClassName: string;
+    /**
+     * Icon classname.
+     */
+    iconClassName: string;
+    /**
+     * JSX element to be used as the template options.
+     */
+    element: Element;
+    /**
+     * The props of Tree component
+     */
+    props: TreeTableProps;
+    /**
+     * Whether the tree node is expanded or not.
+     */
+    expanded: boolean;
+    /**
+     * Button style for tree indentation
+     */
+    buttonStyle: CSSProperties;
+}
 
 /**
  * Custom selection keys type.
@@ -99,6 +423,22 @@ interface TreeTableEvent {
      * Expanded node instance.
      */
     node: TreeNode;
+}
+
+/**
+ * Custom row mouse event.
+ * @see {@link TreeTableProps.onRowMouseEnter}, {@link TreeTableProps.onRowMouseLeave}
+ * @extends TreeTableEvent
+ */
+interface TreeTableRowMouseEvent extends Omit<TreeTableEvent, 'originalEvent'> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.MouseEvent<HTMLElement>;
+    /**
+     * Clicked row data index
+     */
+    index: number;
 }
 
 /**
@@ -240,6 +580,21 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {TreeTablePassThroughOptions}
+     */
+    pt?: TreeTablePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
     /**
      * Style class of the node.
      */
@@ -509,6 +864,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     tableStyle?: React.CSSProperties | undefined;
     /**
+     * Template of toggler element.
+     */
+    togglerTemplate?: React.ReactNode | ((node: TreeNode, options: TreeTableTogglerTemplateOptions) => React.ReactNode);
+    /**
+     *
      * Number of total records, defaults to length of value when not defined.
      */
     totalRecords?: number | undefined;
@@ -562,6 +922,16 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      */
     onRowClick?(event: TreeTableEvent): void;
     /**
+     * Callback to invoke when a row is hovered with mouse.
+     * @param {TreeTableRowMouseEvent} event - Custom row mouse event.
+     */
+    onRowMouseEnter?(event: TreeTableRowMouseEvent): void;
+    /**
+     * Callback to invoke when a row is navigated away from with mouse.
+     * @param {TreeTableRowMouseEvent} event - Custom row mouse event.
+     */
+    onRowMouseLeave?(event: TreeTableRowMouseEvent): void;
+    /**
      * Callback to invoke when a node is selected.
      * @param {TreeTableEvent} event - Custom treetable event.
      */
@@ -586,6 +956,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @param {TreeTableEvent} event - Custom treetable event.
      */
     onUnselect?(event: TreeTableEvent): void;
+    /**
+     * Callback to invoke after filtering and sorting to pass the rendered value.
+     * @param {TreeNode[] | undefined} value - Value displayed by the table.
+     */
+    onValueChange?(value: TreeNode[] | undefined): void;
     /**
      * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {TreeNode} data - Value displayed by the treetable.

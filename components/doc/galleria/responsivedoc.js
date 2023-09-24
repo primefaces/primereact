@@ -154,7 +154,9 @@ export default function ResponsiveDoc() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>Responsive Doc</p>
+                <p>
+                    Galleria responsiveness is defined with the <i>responsiveOptions</i> property.
+                </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <div>

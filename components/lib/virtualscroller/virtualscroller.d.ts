@@ -9,7 +9,86 @@
  */
 
 import * as React from 'react';
-import { IconType } from '../utils/utils';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils/utils';
+
+export declare type VirtualScrollerPassThroughType<T> = PassThroughType<T, VirtualScrollerPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface VirtualScrollerPassThroughMethodOptions {
+    props: VirtualScrollerProps;
+    state: VirtualScrollerState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link VirtualScrollerProps.pt}
+ */
+export interface VirtualScrollerPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the content's DOM element.
+     */
+    content?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loader's DOM element.
+     */
+    loader?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the loading icon's DOM element.
+     */
+    loadingIcon?: VirtualScrollerPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the spacer's DOM element.
+     */
+    spacer?: VirtualScrollerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in VirtualScroller component.
+ */
+export interface VirtualScrollerState {
+    /**
+     * First index of the new data range to be loaded as a number.
+     */
+    first: number;
+    /**
+     * Last index of the new data range to be loaded as a number.
+     */
+    last: number;
+    /**
+     * Index of the first item as a number.
+     */
+    page: number;
+    /**
+     * Visible item count in the viewport as a number.
+     */
+    numItemsInViewport: number;
+    /**
+     * Additional elements to add to the DOM outside of the view as a number.
+     */
+    numToleratedItems: number;
+    /**
+     * Current loading state as a boolean.
+     * @defaultValue false
+     */
+    loading: number;
+    /**
+     * Loadable items array.
+     */
+    loaderArr: any[];
+}
 
 /**
  * Custom virtual scroller options type.
@@ -399,6 +478,16 @@ export interface VirtualScrollerProps {
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {VirtualScrollerPassThroughOptions}
+     */
+    pt?: VirtualScrollerPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**

@@ -1,17 +1,21 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ProgressSpinnerBase } from './ProgressSpinnerBase';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = ProgressSpinnerBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = ProgressSpinnerBase.getProps(inProps, context);
 
         const elementRef = React.useRef(null);
-        const className = classNames('p-progress-spinner', props.className);
 
-        const { ptm } = ProgressSpinnerBase.setMetaData({
+        const { ptm, cx, sx, isUnstyled } = ProgressSpinnerBase.setMetaData({
             props
         });
+
+        useHandleStyle(ProgressSpinnerBase.css.styles, isUnstyled, { name: 'progressspinner' });
 
         React.useImperativeHandle(ref, () => ({
             props,
@@ -23,25 +27,25 @@ export const ProgressSpinner = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className,
+                className: classNames(props.className, cx('root')),
                 role: 'alert',
                 'aria-busy': true
             },
-            ptm('spinner')
+            ptm('root')
         );
 
         const spinnerProps = mergeProps(
             {
-                className: 'p-progress-spinner-svg',
+                className: cx('spinner'),
                 viewBox: '25 25 50 50',
-                style: { animationDuration: props.animationDuration }
+                style: sx('spinner')
             },
             ptm('spinner')
         );
 
         const circleProps = mergeProps(
             {
-                className: 'p-progress-spinner-circle',
+                className: cx('circle'),
                 cx: '50',
                 cy: '50',
                 r: '20',

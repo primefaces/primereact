@@ -1,19 +1,26 @@
 import * as React from 'react';
-import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { AvatarBase } from './AvatarBase';
 
 export const Avatar = React.forwardRef((inProps, ref) => {
-    const props = AvatarBase.getProps(inProps);
+    const context = React.useContext(PrimeReactContext);
+    const props = AvatarBase.getProps(inProps, context);
 
     const elementRef = React.useRef(null);
     const [imageFailed, setImageFailed] = React.useState(false);
+    const [nested, setNested] = React.useState(false);
 
-    const { ptm } = AvatarBase.setMetaData({
+    const { ptm, cx, isUnstyled } = AvatarBase.setMetaData({
         props,
         state: {
-            imageFailed: imageFailed
+            imageFailed: imageFailed,
+            nested
         }
     });
+
+    useHandleStyle(AvatarBase.css.styles, isUnstyled, { name: 'avatar' });
 
     const createContent = () => {
         if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
@@ -29,7 +36,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         } else if (props.label) {
             const labelProps = mergeProps(
                 {
-                    className: 'p-avatar-text'
+                    className: cx('label')
                 },
                 ptm('label')
             );
@@ -38,7 +45,7 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         } else if (props.icon) {
             const iconProps = mergeProps(
                 {
-                    className: 'p-avatar-icon'
+                    className: cx('icon')
                 },
                 ptm('icon')
             );
@@ -64,28 +71,22 @@ export const Avatar = React.forwardRef((inProps, ref) => {
         props.onImageError && props.onImageError(event);
     };
 
+    React.useEffect(() => {
+        const nested = DomHandler.isAttributeEquals(elementRef.current.parentElement, 'data-pc-name', 'avatargroup');
+
+        setNested(nested);
+    }, []);
+
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => elementRef.current
     }));
 
-    const containerClassName = classNames(
-        'p-avatar p-component',
-        {
-            'p-avatar-image': ObjectUtils.isNotEmpty(props.image) && !imageFailed,
-            'p-avatar-circle': props.shape === 'circle',
-            'p-avatar-lg': props.size === 'large',
-            'p-avatar-xl': props.size === 'xlarge',
-            'p-avatar-clickable': !!props.onClick
-        },
-        props.className
-    );
-
     const rootProps = mergeProps(
         {
             ref: elementRef,
             style: props.style,
-            className: containerClassName
+            className: classNames(props.className, cx('root', { imageFailed }))
         },
         AvatarBase.getOtherProps(props),
         ptm('root')

@@ -1,4 +1,101 @@
 # Changelog
+## [9.6.2](https://github.com/primefaces/primereact/tree/9.6.2) (2023-08-17)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.1...9.6.2)
+
+**Implemented New Features and Enhancements:**
+
+- DataTable: Type issue for Selection Mode [\#4777](https://github.com/primefaces/primereact/issues/4777)
+
+**Fixed bugs:**
+
+- Carousel: created style lifecycle issue [\#4779](https://github.com/primefaces/primereact/issues/4779)
+- Dropdown: MenuItem not respecting style attribute [\#4766](https://github.com/primefaces/primereact/issues/4766)
+- Slider: onSlideEnd behaviour has changed [\#4680](https://github.com/primefaces/primereact/issues/4680)
+- Tooltip: autoHide={false} broken on version 9 [\#4604](https://github.com/primefaces/primereact/issues/4604)
+- Calendar: Mask is not displayed [\#4579](https://github.com/primefaces/primereact/issues/4579)
+- Calendar: The date cannot be selected from the first click in the opened popup [\#4568](https://github.com/primefaces/primereact/issues/4568)
+- DataTable: Column resize is not working properly. [\#4471](https://github.com/primefaces/primereact/issues/4471)
+- Carousel: Swipe functionality [\#3788](https://github.com/primefaces/primereact/issues/3788)
+## [9.6.1](https://github.com/primefaces/primereact/tree/9.6.1) (2023-08-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.0...9.6.1)
+
+**Fixed bugs:**
+
+- FileUpload: Uploading file issue in multiple= false [\#4665](https://github.com/primefaces/primereact/issues/4665)
+- DataTable: Unexpected Behavior in Production Mode for ColumnResize [\#4655](https://github.com/primefaces/primereact/issues/4655)
+
+## [9.6.0](https://github.com/primefaces/primereact/tree/9.6.0) (2023-06-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.5.0...9.6.0)
+
+**Implemented New Features and Enhancements:**
+
+- TreeSelect: Support custom expand/collapse icons [\#4525](https://github.com/primefaces/primereact/issues/4525)
+- FileUpload: Uploaded files ref methods [\#4516](https://github.com/primefaces/primereact/issues/4516)
+- Carousel: Add start/stop autoplay to exposed methods [\#4513](https://github.com/primefaces/primereact/issues/4513)
+- TreeTable: Row hover event [\#4502](https://github.com/primefaces/primereact/issues/4502)
+- TreeTable: Add toggler template \(same as Tree component\) [\#4499](https://github.com/primefaces/primereact/issues/4499)
+- Dropdown: VirtualScrollerRef access for scrollToIndex [\#4489](https://github.com/primefaces/primereact/issues/4489)
+- New passthrough\(pt\) property implementation for Data Components [\#4432](https://github.com/primefaces/primereact/issues/4432)
+- New passthrough\(pt\) property implementation for Form Components [\#4431](https://github.com/primefaces/primereact/issues/4431)
+- InputNumber should support global locale [\#4291](https://github.com/primefaces/primereact/issues/4291)
+- TreeSelect: `nodeTemplate` property [\#3678](https://github.com/primefaces/primereact/issues/3678)
+
+**Fixed bugs:**
+
+- FileUpload component does not pass file information in the onSelect event [\#4557](https://github.com/primefaces/primereact/issues/4557)
+- Calendar: Mask prop does not work [\#4548](https://github.com/primefaces/primereact/issues/4548)
+- ContextMenu: Global not working in Strict Mode [\#4543](https://github.com/primefaces/primereact/issues/4543)
+- PickList: Error when Transferring Unselected Values in Pick List Functionality [\#4540](https://github.com/primefaces/primereact/issues/4540)
+- MultiSelect \(group\) SelectAll checked when all items in first group are selected [\#4535](https://github.com/primefaces/primereact/issues/4535)
+- FileUpload: input passthrough not working when mode="basic" [\#4533](https://github.com/primefaces/primereact/issues/4533)
+- MultiSelect: Dropdown closes on deselect [\#4523](https://github.com/primefaces/primereact/issues/4523)
+- Skeleton: children prop not rendering [\#4512](https://github.com/primefaces/primereact/issues/4512)
+- ScrollTop: doesn't work [\#4505](https://github.com/primefaces/primereact/issues/4505)
+- BreadCrumb: label home prop doesn't work [\#4504](https://github.com/primefaces/primereact/issues/4504)
+- DataTable: Checkbox/Radio not respecting isDataSelectable [\#4492](https://github.com/primefaces/primereact/issues/4492)
+- SplitButton: menu icon not visible in large size [\#4483](https://github.com/primefaces/primereact/issues/4483)
+- Menubar: Cannot use useRef [\#4467](https://github.com/primefaces/primereact/issues/4467)
+- TabView: On initial load, the page will scroll down to the Tab if it's below the scroll window [\#4462](https://github.com/primefaces/primereact/issues/4462)
+- Calendar: showMinMaxRange property is broken in multiple ways [\#4456](https://github.com/primefaces/primereact/issues/4456)
+- Calendar: Navigation broken when defining min and max values [\#4449](https://github.com/primefaces/primereact/issues/4449)
+
+## [9.5.0](https://github.com/primefaces/primereact/tree/9.5.0) (2023-05-24)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.4.0...9.5.0)
+
+**Implemented New Features and Enhancements:**
+
+- Add `hideOverlaysOnDocumentScrolling` option to PrimeReact config [\#4448](https://github.com/primefaces/primereact/issues/4448)
+- Icons: clipPath improvements  [\#4441](https://github.com/primefaces/primereact/issues/4441)
+- AutoComplete: panelFooterTemplate prop [\#4426](https://github.com/primefaces/primereact/issues/4426)
+- MultiSelect: No way to disable filter auto focus [\#4423](https://github.com/primefaces/primereact/issues/4423)
+- New passthrough\(pt\) property implementation for Media Components [\#4393](https://github.com/primefaces/primereact/issues/4393)
+- New passthrough\(pt\) property implementation for Chart & FileUpload & Message Components [\#4392](https://github.com/primefaces/primereact/issues/4392)
+- New passthrough\(pt\) property implementation for Menu Components [\#4391](https://github.com/primefaces/primereact/issues/4391)
+- Mention: suggestion panel to hide when scrolling away [\#4223](https://github.com/primefaces/primereact/issues/4223)
+- Messages-Toast: Inconsistency [\#4077](https://github.com/primefaces/primereact/issues/4077)
+- Menu: Add ability to right align [\#3753](https://github.com/primefaces/primereact/issues/3753)
+
+**Fixed bugs:**
+
+- Dropdown: Footer using incorrect style name [\#4446](https://github.com/primefaces/primereact/issues/4446)
+- InputNumber: preventing ripple on buttons [\#4443](https://github.com/primefaces/primereact/issues/4443)
+- Datatable: filterIcon and filterClearIcon not propagated [\#4439](https://github.com/primefaces/primereact/issues/4439)
+- BreadCrumb: SVG location of the DOM [\#4438](https://github.com/primefaces/primereact/issues/4438)
+- DataTable: Filter Clear icon is missing [\#4437](https://github.com/primefaces/primereact/issues/4437)
+- Datatable: Setting rowEditorInitIcon has no effect. [\#4430](https://github.com/primefaces/primereact/issues/4430)
+- MultiSelect clear icon not aligned correctly [\#4427](https://github.com/primefaces/primereact/issues/4427)
+- TriStateCheckbox: "undefined" value render checkbox highlighted but without value [\#4422](https://github.com/primefaces/primereact/issues/4422)
+- Checkbox: Toggling value by clicking the label broken [\#4402](https://github.com/primefaces/primereact/issues/4402)
+- Image: Zoom out action disabled when fully zoomed in [\#4400](https://github.com/primefaces/primereact/issues/4400)
+- ConfirmDialog: Missing dialog header [\#4397](https://github.com/primefaces/primereact/issues/4397)
+- Autocomplete: multiple + forceSelection  [\#4363](https://github.com/primefaces/primereact/issues/4363)
+- DataTable: resizableColumns with stateStorage will not adjust saved column width after refresh. [\#4211](https://github.com/primefaces/primereact/issues/4211)
+- Autocomplete clears selected values onBlur when forceSelection and multiple are true [\#4203](https://github.com/primefaces/primereact/issues/4203)
+- Dropdown: rendering problem when used in a Dialog [\#2683](https://github.com/primefaces/primereact/issues/2683)
 
 ## [9.4.0](https://github.com/primefaces/primereact/tree/9.4.0) (2023-05-12)
 

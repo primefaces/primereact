@@ -33,7 +33,7 @@ export function ControlledDoc(props) {
     };
 
     const prev = () => {
-        setActiveIndex((prevState) => (prevState === images.length + 1 ? 0 : prevState - 1));
+        setActiveIndex((prevState) => (prevState === 0 ? 0 : prevState - 1));
     };
 
     const itemTemplate = (item) => {
@@ -88,8 +88,8 @@ export default function ControlledDemo() {
     }
 
     const prev = () => {
-        setActiveIndex(prevState => (prevState === images.length + 1) ? 0 : prevState - 1)
-    }
+        setActiveIndex((prevState) => (prevState === 0 ? 0 : prevState - 1));
+    };
 
     const itemTemplate = (item) => {
         return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
@@ -154,8 +154,8 @@ export default function ControlledDemo() {
     }
 
     const prev = () => {
-        setActiveIndex(prevState => (prevState === images.length + 1) ? 0 : prevState - 1)
-    }
+        setActiveIndex((prevState) => (prevState === 0 ? 0 : prevState - 1));
+    };
 
     const itemTemplate = (item) => {
         return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;

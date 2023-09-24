@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
+import { mergeProps } from '../utils/Utils';
 import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 
@@ -8,14 +11,21 @@ let messageIdx = 0;
 
 export const Messages = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = MessagesBase.getProps(inProps);
-
+        const context = React.useContext(PrimeReactContext);
+        const props = MessagesBase.getProps(inProps, context);
         const [messagesState, setMessagesState] = React.useState([]);
         const elementRef = React.useRef(null);
+        const metaData = {
+            props,
+            ...props.__parentMetadata,
+            state: {
+                messages: messagesState
+            }
+        };
 
-        const { ptm } = MessagesBase.setMetaData({
-            props
-        });
+        const ptCallbacks = MessagesBase.setMetaData(metaData);
+
+        useHandleStyle(MessagesBase.css.styles, ptCallbacks.isUnstyled, { name: 'messages' });
 
         const show = (messageInfo) => {
             if (messageInfo) {
@@ -78,18 +88,36 @@ export const Messages = React.memo(
             getElement: () => elementRef.current
         }));
 
-        const otherProps = MessagesBase.getOtherProps(props);
+        const rootProps = mergeProps(
+            {
+                id: props.id,
+                className: props.className,
+                style: props.style
+            },
+            MessagesBase.getOtherProps(props),
+            ptCallbacks.ptm('root')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: ptCallbacks.cx('transition'),
+                unmountOnExit: true,
+                timeout: { enter: 300, exit: 300 },
+                options: props.transitionOptions
+            },
+            ptCallbacks.ptm('transition')
+        );
 
         return (
-            <div id={props.id} ref={elementRef} className={props.className} style={props.style} {...otherProps}>
+            <div ref={elementRef} {...rootProps}>
                 <TransitionGroup>
                     {messagesState &&
-                        messagesState.map((message) => {
+                        messagesState.map((message, index) => {
                             const messageRef = React.createRef();
 
                             return (
-                                <CSSTransition nodeRef={messageRef} key={message._pId} classNames="p-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} options={props.transitionOptions}>
-                                    <UIMessage ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptm={ptm} />
+                                <CSSTransition nodeRef={messageRef} key={message._pId} {...transitionProps}>
+                                    <UIMessage hostName="Messages" ref={messageRef} message={message} onClick={props.onClick} onClose={onClose} ptCallbacks={ptCallbacks} metaData={metaData} index={index} />
                                 </CSSTransition>
                             );
                         })}

@@ -1,4 +1,5 @@
 import React from 'react';
+import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treetable/basicdoc';
@@ -14,6 +15,8 @@ import { ImportDoc } from '../../components/doc/treetable/importdoc';
 import { LazyLoadDoc } from '../../components/doc/treetable/lazyloaddoc';
 import { PaginatorBasicDoc } from '../../components/doc/treetable/paginator/basicdoc';
 import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/templatedoc';
+import { PTDoc } from '../../components/doc/treetable/pt/ptdoc';
+import { Wireframe } from '../../components/doc/treetable/pt/wireframe';
 import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
 import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
 import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
@@ -28,6 +31,8 @@ import { MultipleColumnsDoc } from '../../components/doc/treetable/sort/multiple
 import { SingleColumnDoc } from '../../components/doc/treetable/sort/singlecolumndoc';
 import { StyleDoc } from '../../components/doc/treetable/styledoc';
 import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
+import { StyledDoc } from '../../components/doc/treetable/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/treetable/theming/tailwinddoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -202,8 +207,60 @@ const TreeTableDemo = () => {
             component: AccessibilityDoc
         }
     ];
+    const ptDocs = [
+        {
+            id: 'pt.wireframe',
+            label: 'Wireframe',
+            component: Wireframe
+        },
+        {
+            id: 'pt.treetable.options',
+            label: 'TreeTable PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.column.options',
+            label: 'Column PT Options',
+            component: DocApiTable
+        },
+        {
+            id: 'pt.demo',
+            label: 'Example',
+            component: PTDoc
+        }
+    ];
 
-    return <DocComponent title="React TreeTable Component" header="TreeTable" description="TreeTable is used to display hierarchical data in tabular format." componentDocs={docs} apiDocs={['TreeTable', 'Column', 'TreeNode']} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React TreeTable Component"
+            header="TreeTable"
+            description="TreeTable is used to display hierarchical data in tabular format."
+            componentDocs={docs}
+            apiDocs={['TreeTable', 'Column', 'TreeNode']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default TreeTableDemo;

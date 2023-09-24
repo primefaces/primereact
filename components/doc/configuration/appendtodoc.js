@@ -4,7 +4,15 @@ import { DocSectionText } from '../common/docsectiontext';
 export function AppendToDoc(props) {
     const code = {
         basic: `
-PrimeReact.appendTo = 'self';
+import { PrimeReactContext } from 'primereact/api';
+import { useMountEffect } from "primereact/hooks";
+
+//use in a component
+const { setAppendTo } = useContext(PrimeReactContext);
+
+useMountEffect(() => {
+   setAppendTo('self');
+});
         `
     };
 

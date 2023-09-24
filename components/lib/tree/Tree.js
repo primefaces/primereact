@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
-import { TreeBase } from './TreeBase';
-import { UITreeNode } from './UITreeNode';
+import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { TreeBase } from './TreeBase';
+import { UITreeNode } from './UITreeNode';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
-        const props = TreeBase.getProps(inProps);
+        const context = React.useContext(PrimeReactContext);
+        const props = TreeBase.getProps(inProps, context);
 
         const [filterValueState, setFilterValueState] = React.useState('');
         const [expandedKeysState, setExpandedKeysState] = React.useState(props.expandedKeys);
@@ -17,6 +20,16 @@ export const Tree = React.memo(
         const filterChanged = React.useRef(false);
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
+        const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
+            props,
+            state: {
+                filterValue: filteredValue,
+                expandedKeys: expandedKeys
+            }
+        });
+
+        useHandleStyle(TreeBase.css.styles, isUnstyled, { name: 'tree' });
+
         const filterOptions = {
             filter: (e) => onFilterInputChange(e),
             reset: () => resetFilter()
@@ -302,8 +315,10 @@ export const Tree = React.memo(
         const createRootChild = (node, index, last) => {
             return (
                 <UITreeNode
+                    hostName="Tree"
                     key={node.key || node.label}
                     node={node}
+                    originalOptions={props.value}
                     index={index}
                     last={last}
                     path={String(index)}
@@ -336,6 +351,8 @@ export const Tree = React.memo(
                     onDropPoint={onDropPoint}
                     onClick={props.onNodeClick}
                     onDoubleClick={props.onNodeDoubleClick}
+                    ptm={ptm}
+                    cx={cx}
                 />
             );
         };
@@ -354,13 +371,17 @@ export const Tree = React.memo(
         const createModel = () => {
             if (props.value) {
                 const rootNodes = createRootChildren();
-                const contentClass = classNames('p-tree-container', props.contentClassName);
-
-                return (
-                    <ul className={contentClass} role="tree" style={props.contentStyle} {...ariaProps}>
-                        {rootNodes}
-                    </ul>
+                const containerProps = mergeProps(
+                    {
+                        className: classNames(props.contentClassName, cx('container')),
+                        role: 'tree',
+                        style: props.contentStyle,
+                        ...ariaProps
+                    },
+                    ptm('container')
                 );
+
+                return <ul {...containerProps}>{rootNodes}</ul>;
             }
 
             return null;
@@ -368,11 +389,23 @@ export const Tree = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
-                const iconClassName = 'p-tree-loading-icon';
-                const icon = props.loadingIcon || <SpinnerIcon className={iconClassName} spin />;
-                const loadingIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const loadingIconProps = mergeProps(
+                    {
+                        className: cx('loadingIcon')
+                    },
+                    ptm('loadingIcon')
+                );
+                const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
+                const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
 
-                return <div className="p-tree-loading-overlay p-component-overlay">{loadingIcon}</div>;
+                const loadingOverlayProps = mergeProps(
+                    {
+                        className: cx('loadingOverlay')
+                    },
+                    ptm('loadingOverlay')
+                );
+
+                return <div {...loadingOverlayProps}>{loadingIcon}</div>;
             }
 
             return null;
@@ -381,22 +414,40 @@ export const Tree = React.memo(
         const createFilter = () => {
             if (props.filter) {
                 const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
-                const iconClassName = 'p-tree-filter-icon';
-                const icon = props.filterIcon || <SearchIcon className={iconClassName} />;
-                const filterIcon = IconUtils.getJSXIcon(icon, { className: iconClassName }, { props });
+                const searchIconProps = mergeProps(
+                    {
+                        className: cx('searchIcon')
+                    },
+                    ptm('searchIcon')
+                );
+                const icon = props.filterIcon || <SearchIcon {...searchIconProps} />;
+                const filterIcon = IconUtils.getJSXIcon(icon, { ...searchIconProps }, { props });
+
+                const filterContainerProps = mergeProps(
+                    {
+                        className: cx('filterContainer')
+                    },
+                    ptm('filterContainer')
+                );
+
+                const inputProps = mergeProps(
+                    {
+                        type: 'text',
+                        value: value,
+                        autoComplete: 'off',
+                        className: cx('input'),
+                        placeholder: props.filterPlaceholder,
+                        'aria-label': props.filterPlaceholder,
+                        onKeyDown: onFilterInputKeyDown,
+                        onChange: onFilterInputChange,
+                        disabled: props.disabled
+                    },
+                    ptm('input')
+                );
 
                 let content = (
-                    <div className="p-tree-filter-container">
-                        <input
-                            type="text"
-                            value={value}
-                            autoComplete="off"
-                            className="p-tree-filter p-inputtext p-component"
-                            placeholder={props.filterPlaceholder}
-                            onKeyDown={onFilterInputKeyDown}
-                            onChange={onFilterInputChange}
-                            disabled={props.disabled}
-                        />
+                    <div {...filterContainerProps}>
+                        <input {...inputProps} />
                         {filterIcon}
                     </div>
                 );
@@ -443,7 +494,14 @@ export const Tree = React.memo(
                     content = ObjectUtils.getJSXElement(props.header, defaultContentOptions);
                 }
 
-                return <div className="p-tree-header">{content}</div>;
+                const headerProps = mergeProps(
+                    {
+                        className: cx('header')
+                    },
+                    ptm('header')
+                );
+
+                return <div {...headerProps}>{content}</div>;
             }
 
             return null;
@@ -452,23 +510,36 @@ export const Tree = React.memo(
         const createFooter = () => {
             const content = ObjectUtils.getJSXElement(props.footer, props);
 
-            return <div className="p-tree-footer">{content}</div>;
+            const footerProps = mergeProps(
+                {
+                    className: cx('footer')
+                },
+                ptm('footer')
+            );
+
+            return <div {...footerProps}>{content}</div>;
         };
 
         const otherProps = TreeBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
-        const className = classNames('p-tree p-component', props.className, {
-            'p-tree-selectable': props.selectionMode,
-            'p-tree-loading': props.loading,
-            'p-disabled': props.disabled
-        });
         const loader = createLoader();
         const content = createModel();
         const header = createHeader();
         const footer = createFooter();
 
+        const rootProps = mergeProps(
+            {
+                ref: elementRef,
+                className: classNames(props.className, cx('root')),
+                style: props.style,
+                id: props.id
+            },
+            TreeBase.getOtherProps(props),
+            ptm('root')
+        );
+
         return (
-            <div id={props.id} ref={elementRef} className={className} style={props.style} {...otherProps}>
+            <div {...rootProps}>
                 {loader}
                 {header}
                 {content}

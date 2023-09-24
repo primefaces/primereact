@@ -8,8 +8,95 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { InputTextarea } from '../inputtextarea';
+import { PassThroughOptions } from '../passthrough';
+import { PassThroughType } from '../utils/utils';
+
+export declare type MentionPassThroughType<T> = PassThroughType<T, MentionPassThroughMethodOptions>;
+export declare type MentionPassThroughTransitionType = ReactCSSTransitionProps | ((options: MentionPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface MentionPassThroughMethodOptions {
+    props: MentionProps;
+    state: MentionState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link MentionProps.pt}
+ */
+export interface MentionPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: MentionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the InputTextarea component.
+     * @see {@link InputTextareaPassThroughType}
+     */
+    input?: MentionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the panel's DOM element.
+     */
+    panel?: MentionPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the item's DOM element.
+     */
+    item?: MentionPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Uses to pass attributes to the items' DOM element.
+     */
+    items?: MentionPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MentionPassThroughTransitionType;
+}
+
+/**
+ * Defines current inline state in Mention component.
+ */
+export interface MentionState {
+    /**
+     * Current overlay visible state as a boolean.
+     * @defaultValue false
+     */
+    overlayVisible: boolean;
+    /**
+     * Current search state as a boolean.
+     * @defaultValue false
+     */
+    searching: boolean;
+    /**
+     * Current focused state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+    /**
+     * Current trigger state.
+     */
+    trigger: any;
+}
+
+/**
+ * Defines current options in Mention component.
+ */
+export interface MentionContext {
+    /**
+     * Current trigger state.
+     */
+    trigger: any;
+}
 
 /**
  */
@@ -64,7 +151,7 @@ interface MentionSelectEvent {
  * Defines valid properties in Mention component. In addition to these, all properties of HTMLTextAreaElement can be used in this component.
  * @group Properties
  */
-export interface MentionProps extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'onSelect' | 'onChange' | 'onInput' | 'onFocus' | 'onBlur' | 'ref'> {
+export interface MentionProps extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'onSelect' | 'onChange' | 'onInput' | 'onFocus' | 'onBlur' | 'ref' | 'pt'> {
     /**
      * When enabled, highlights the first item in the list by default.
      * @defaultValue true
@@ -143,6 +230,21 @@ export interface MentionProps extends Omit<React.DetailedHTMLProps<React.Textare
      * @defaultValue "@"
      */
     trigger?: string | string[] | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {MentionPassThroughOptions}
+     */
+    pt?: MentionPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
     /**
      * Callback to invoke when the element loses focus.
      * @param {React.FocusEvent<HTMLInputElement>} event Browser event

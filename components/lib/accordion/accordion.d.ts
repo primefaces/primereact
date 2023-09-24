@@ -12,11 +12,15 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type AccordionPassThroughType<T> = PassThroughType<T, AccordionPassThroughMethodOptions>;
 export declare type AccordionTabPassThroughType<T> = PassThroughType<T, AccordionTabPassThroughMethodOptions>;
+export declare type AccordionPassThroughTransitionType = ReactCSSTransitionProps | ((options: AccordionPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -59,6 +63,15 @@ export interface AccordionTabPassThroughOptions {
      * Uses to pass attributes to the content's DOM element.
      */
     content?: AccordionTabPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: AccordionPassThroughTransitionType;
 }
 
 /**
@@ -118,6 +131,16 @@ interface AccordionTabProps {
      * @type {AccordionTabPassThroughOptions}
      */
     pt?: AccordionTabPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**
@@ -252,6 +275,11 @@ export interface AccordionProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @type {AccordionPassThroughOptions}
      */
     pt?: AccordionPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**

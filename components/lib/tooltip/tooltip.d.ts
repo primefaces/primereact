@@ -8,8 +8,10 @@
  *
  */
 import * as React from 'react';
-import { TooltipEvent, TooltipOptions } from './tooltipoptions';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
+import { TooltipEvent, TooltipOptions } from './tooltipoptions';
 
 export declare type TooltipPassThroughType<T> = PassThroughType<T, TooltipPassThroughMethodOptions>;
 
@@ -38,6 +40,11 @@ export interface TooltipPassThroughOptions {
      * Uses to pass attributes to the text's DOM element.
      */
     text?: TooltipPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -73,7 +80,7 @@ export interface TooltipProps extends TooltipOptions {
     /**
      * Target element on global tooltip option.
      */
-    target?: string | string[] | HTMLElement | undefined;
+    target?: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined;
     /**
      * Content to be displayed in tooltip.
      */
@@ -88,6 +95,11 @@ export interface TooltipProps extends TooltipOptions {
      * @type {TooltipPassThroughOptions}
      */
     pt?: TooltipPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
@@ -104,19 +116,19 @@ export interface TooltipProps extends TooltipOptions {
 export declare class Tooltip extends React.Component<TooltipProps, any> {
     /**
      * Used to reload target events. In some cases, the target element can be hidden initially. Later, when this element becomes visible, it will be necessary to bind tooltip events to this element.
-     * @param {HTMLElement} target - Target element.
+     * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public updateTargetEvents(target: HTMLElement): void;
+    public updateTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to load target events.
-     * @param {HTMLElement} target - Target element.
+     * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public loadTargetEvents(target: HTMLElement): void;
+    public loadTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to unload target events.
-     * @param {HTMLElement} target - Target element.
+     * @param {string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined} target - Target element or if undefined will use current target.
      */
-    public unloadTargetEvents(target: HTMLElement): void;
+    public unloadTargetEvents(target: string | string[] | HTMLElement | React.RefObject<HTMLElement> | undefined): void;
     /**
      * Used to get container element.
      * @return {HTMLElement} Container element

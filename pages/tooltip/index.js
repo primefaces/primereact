@@ -14,6 +14,8 @@ import { ReactiveDoc } from '../../components/doc/tooltip/reactivedoc';
 import { StyleDoc } from '../../components/doc/tooltip/styledoc';
 import { TargetDoc } from '../../components/doc/tooltip/targetdoc';
 import { TemplateDoc } from '../../components/doc/tooltip/templatedoc';
+import { StyledDoc } from '../../components/doc/tooltip/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/tooltip/theming/tailwinddoc';
 
 const TooltipDemo = () => {
     const docs = [
@@ -97,7 +99,37 @@ const TooltipDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tooltip Component" header="Tooltip" description="Tooltip functionality is integrated within various PrimeReact components." componentDocs={docs} apiDocs={['Tooltip', 'TooltipOptions']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React Tooltip Component"
+            header="Tooltip"
+            description="Tooltip functionality is integrated within various PrimeReact components."
+            componentDocs={docs}
+            apiDocs={['Tooltip', 'TooltipOptions']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default TooltipDemo;

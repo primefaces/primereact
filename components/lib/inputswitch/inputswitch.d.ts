@@ -8,16 +8,74 @@
  *
  */
 import * as React from 'react';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { FormEvent } from '../ts-helpers';
+import { FormBooleanEvent } from '../ts-helpers';
+import { PassThroughType } from '../utils/utils';
+import { PassThroughOptions } from '../passthrough';
+import { ComponentHooks } from '../componentbase/componentbase';
+
+export declare type InputSwitchPassThroughType<T> = PassThroughType<T, InputSwitchPassThroughMethodOptions>;
+
+/**
+ * Custom passthrough(pt) option method.
+ */
+export interface InputSwitchPassThroughMethodOptions {
+    props: InputSwitchProps;
+    state: InputSwitchState;
+}
+
+/**
+ * Custom passthrough(pt) options.
+ * @see {@link InputSwitchProps.pt}
+ */
+export interface InputSwitchPassThroughOptions {
+    /**
+     * Uses to pass attributes to the root's DOM element.
+     */
+    root?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the slider's DOM element.
+     */
+    slider?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Uses to pass attributes to the hidden input wrapper's DOM element.
+     */
+    hiddenInputWrapper?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Uses to pass attributes to the hidden input's DOM element.
+     */
+    hiddenInput?: InputSwitchPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Uses to pass attributes tooltip's DOM element.
+     * @type {TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline state in InputSwitch component.
+ */
+export interface InputSwitchState {
+    /**
+     * Current focus state as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
+}
 
 /**
  * Custom change event.
  * @see {@link InputSwitchProps.onChange}
- * @extends {FormEvent}
+ * @extends {FormBooleanEvent}
  * @event
  */
-interface InputSwitchChangeEvent extends FormEvent<boolean> {}
+interface InputSwitchChangeEvent extends FormBooleanEvent {}
 
 /**
  * Defines valid properties in InputMask component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -106,6 +164,21 @@ export interface InputSwitchProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @readonly
      */
     children?: React.ReactNode | undefined;
+    /**
+     * Uses to pass attributes to DOM elements inside the component.
+     * @type {InputSwitchPassThroughOptions}
+     */
+    pt?: InputSwitchPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes component related styles in the core.
+     * @defaultValue false
+     */
+    unstyled?: boolean;
 }
 
 /**

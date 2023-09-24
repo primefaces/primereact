@@ -1,6 +1,43 @@
-import { ObjectUtils } from '../utils/Utils';
+import { ComponentBase } from '../componentbase/ComponentBase';
+import { classNames } from '../utils/Utils';
 
-export const CheckboxBase = {
+const classes = {
+    icon: 'p-checkbox-icon p-c',
+    input: ({ props, checked, focusedState }) =>
+        classNames('p-checkbox-box', {
+            'p-highlight': checked,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        }),
+    root: ({ props, checked, focusedState }) =>
+        classNames('p-checkbox p-component', {
+            'p-checkbox-checked': checked,
+            'p-checkbox-disabled': props.disabled,
+            'p-checkbox-focused': focusedState
+        })
+};
+
+const styles = `
+.p-checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: bottom;
+    position: relative;
+}
+
+.p-checkbox.p-checkbox-disabled {
+    cursor: auto;
+}
+
+.p-checkbox-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}        
+`;
+
+export const CheckboxBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Checkbox',
         autoFocus: false,
@@ -27,6 +64,8 @@ export const CheckboxBase = {
         value: null,
         children: undefined
     },
-    getProps: (props) => ObjectUtils.getMergedProps(props, CheckboxBase.defaultProps),
-    getOtherProps: (props) => ObjectUtils.getDiffProps(props, CheckboxBase.defaultProps)
-};
+    css: {
+        classes,
+        styles
+    }
+});

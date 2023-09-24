@@ -4,9 +4,12 @@ exports[`Tag default 1`] = `
 <div>
   <span
     class="p-tag p-component"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -17,12 +20,16 @@ exports[`Tag icon 1`] = `
 <div>
   <span
     class="p-tag p-component"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-icon pi pi-check"
+      data-pc-section="icon"
     />
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -33,9 +40,12 @@ exports[`Tag rounded 1`] = `
 <div>
   <span
     class="p-tag p-component p-tag-rounded"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -46,9 +56,12 @@ exports[`Tag sevrity danger 1`] = `
 <div>
   <span
     class="p-tag p-component p-tag-danger"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -59,9 +72,12 @@ exports[`Tag sevrity info 1`] = `
 <div>
   <span
     class="p-tag p-component p-tag-info"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -72,9 +88,12 @@ exports[`Tag sevrity success 1`] = `
 <div>
   <span
     class="p-tag p-component p-tag-success"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -85,9 +104,12 @@ exports[`Tag sevrity warning 1`] = `
 <div>
   <span
     class="p-tag p-component p-tag-warning"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span />
   </span>
@@ -98,9 +120,12 @@ exports[`Tag templating 1`] = `
 <div>
   <span
     class="p-tag p-component"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     />
     <span>
       <div>
@@ -115,9 +140,12 @@ exports[`Tag value 1`] = `
 <div>
   <span
     class="p-tag p-component"
+    data-pc-name="tag"
+    data-pc-section="root"
   >
     <span
       class="p-tag-value"
+      data-pc-section="value"
     >
       jest
     </span>

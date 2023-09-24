@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type DeferredContentPassThroughType<T> = PassThroughType<T, DeferredContentPassThroughMethodOptions>;
@@ -29,6 +31,11 @@ export interface DeferredContentPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: DeferredContentPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -62,6 +69,11 @@ export interface DeferredContentProps extends Omit<React.DetailedHTMLProps<React
      * @type {DeferredContentPassThroughOptions}
      */
     pt?: DeferredContentPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
 }
 
 /**
