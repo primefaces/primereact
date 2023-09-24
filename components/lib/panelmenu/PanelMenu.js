@@ -126,7 +126,7 @@ export const PanelMenu = React.memo(
                 return null;
             }
 
-            const key = item.label + '_' + index;
+            const key = item.id || idState + '_' + index;
             const active = isItemActive(item);
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const headerIconProps = mergeProps(
@@ -240,7 +240,7 @@ export const PanelMenu = React.memo(
                     <CSSTransition nodeRef={menuContentRef} {...transitionProps}>
                         <div id={contentId} ref={menuContentRef} {...toggleableContentProps}>
                             <div {...menuContentProps}>
-                                <PanelMenuSub hostName="PanelMenu" menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />
+                                <PanelMenuSub hostName="PanelMenu" id={key} menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />
                             </div>
                         </div>
                     </CSSTransition>

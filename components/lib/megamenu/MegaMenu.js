@@ -14,6 +14,7 @@ export const MegaMenu = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = MegaMenuBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [activeItemState, setActiveItemState] = React.useState(null);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
@@ -27,6 +28,7 @@ export const MegaMenu = React.memo(
         const { ptm, cx, isUnstyled } = MegaMenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 activeItem: activeItemState,
                 attributeSelector: attributeSelectorState,
                 mobileActive: mobileActiveState
@@ -207,8 +209,12 @@ export const MegaMenu = React.memo(
         }));
 
         useMountEffect(() => {
+            const uniqueId = UniqueComponentId();
+
+            !idState && setIdState(uniqueId);
+
             if (props.breakpoint) {
-                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+                !attributeSelectorState && setAttributeSelectorState(uniqueId);
             }
 
             bindDocumentClickListener();
@@ -232,10 +238,11 @@ export const MegaMenu = React.memo(
         }, [activeItemState]);
 
         const createSeparator = (index) => {
-            const key = 'separator_' + index;
+            const key = idState + '_separator__' + index;
 
             const separatorProps = mergeProps(
                 {
+                    id: key,
                     key,
                     className: cx('separator'),
                     role: 'separator'
@@ -272,7 +279,7 @@ export const MegaMenu = React.memo(
             if (item.separator) {
                 return createSeparator(index);
             } else {
-                const key = item.label + '_' + index;
+                const key = item.id || idState + '_' + index;
                 const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
                 const iconProps = mergeProps(
                     {
@@ -304,8 +311,8 @@ export const MegaMenu = React.memo(
 
                 const submenuItemProps = mergeProps(
                     {
-                        key: key,
-                        id: item.id,
+                        key,
+                        id: key,
                         className: classNames(item.className, cx('submenuItem')),
                         style: item.style,
                         role: 'none'
@@ -338,16 +345,18 @@ export const MegaMenu = React.memo(
             }
         };
 
-        const createSubmenu = (submenu) => {
+        const createSubmenu = (submenu, index) => {
             if (submenu.visible === false) {
                 return null;
             }
 
             const items = submenu.items.map(createSubmenuItem);
 
+            const key = submenu.id || idState + '_sub_' + index;
             const submenuHeaderProps = mergeProps(
                 {
-                    id: submenu.id,
+                    id: key,
+                    key,
                     className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: submenu.style,
                     role: 'presentation',
@@ -357,7 +366,7 @@ export const MegaMenu = React.memo(
             );
 
             return (
-                <React.Fragment key={submenu.label}>
+                <React.Fragment key={key}>
                     <li {...submenuHeaderProps}>{submenu.label}</li>
                     {items}
                 </React.Fragment>
@@ -577,10 +586,11 @@ export const MegaMenu = React.memo(
                 getPTOptions(category, 'headerAction', index)
             );
 
+            const key = category.id || idState + '_cat_' + index;
             const menuItemProps = mergeProps(
                 {
-                    key: category.label + '_' + index,
-                    id: category.id,
+                    key,
+                    id: key,
                     className: classNames(category.className, cx('menuitem', { category, activeItemState })),
                     style: category.style,
                     onMouseEnter: (e) => onCategoryMouseEnter(e, category),

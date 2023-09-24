@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { useMountEffect } from '../hooks/Hooks';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
 
 export const Steps = React.memo(
@@ -9,10 +10,14 @@ export const Steps = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = StepsBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const elementRef = React.useRef(null);
 
         const { ptm, cx, isUnstyled } = StepsBase.setMetaData({
-            props
+            props,
+            state: {
+                id: idState
+            }
         });
 
         useHandleStyle(StepsBase.css.styles, isUnstyled, { name: 'steps' });
@@ -50,7 +55,7 @@ export const Steps = React.memo(
                 return null;
             }
 
-            const key = item.label + '_' + index;
+            const key = item.id || idState + '_' + index;
             const active = index === props.activeIndex;
             const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
             const tabIndex = disabled ? -1 : '';
@@ -120,8 +125,8 @@ export const Steps = React.memo(
 
             const menuItemProps = mergeProps(
                 {
-                    key: key,
-                    id: item.id,
+                    key,
+                    id: key,
                     className: cx('menuitem', { active, disabled, item }),
                     style: item.style,
                     role: 'tab',
@@ -150,6 +155,12 @@ export const Steps = React.memo(
 
             return null;
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         React.useImperativeHandle(ref, () => ({
             props,

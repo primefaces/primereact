@@ -2,11 +2,11 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
 
@@ -15,11 +15,13 @@ export const SlideMenu = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = SlideMenuBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
         const { ptm, cx, sx, isUnstyled } = SlideMenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 visible: visibleState,
                 level: levelState
             }
@@ -98,6 +100,12 @@ export const SlideMenu = React.memo(
             ZIndexUtils.clear(menuRef.current);
             setLevelState(0);
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         useUpdateEffect(() => {
             setLevelState(0);
@@ -201,6 +209,7 @@ export const SlideMenu = React.memo(
                         <div {...wrapperProps}>
                             <div {...contentProps}>
                                 <SlideMenuSub
+                                    id={idState}
                                     hostName="SlideMenu"
                                     menuProps={props}
                                     model={props.model}

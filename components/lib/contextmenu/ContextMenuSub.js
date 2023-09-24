@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { AngleRightIcon } from '../icons/angleright';
 
 export const ContextMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -94,11 +94,13 @@ export const ContextMenuSub = React.memo((props) => {
     });
 
     const createSeparator = (index) => {
+        const key = props.id + '_separator_' + index;
         const separatorProps = mergeProps(
             {
-                role: 'separator',
-                key: 'separator_' + index,
-                className: cx('separator')
+                id: key,
+                key,
+                className: cx('separator'),
+                role: 'separator'
             },
             ptm('separator', { hostName: props.hostName })
         );
@@ -106,10 +108,11 @@ export const ContextMenuSub = React.memo((props) => {
         return <li {...separatorProps}></li>;
     };
 
-    const createSubmenu = (item) => {
+    const createSubmenu = (item, index) => {
         if (item.items) {
             return (
                 <ContextMenuSub
+                    id={props.id + '_' + index}
                     hostName={props.hostName}
                     menuProps={props.menuProps}
                     model={item.items}
@@ -132,7 +135,7 @@ export const ContextMenuSub = React.memo((props) => {
         }
 
         const active = activeItemState === item;
-        const key = item.label + '_' + index;
+        const key = item.id || props.id + '_' + index;
         const iconProps = mergeProps(
             {
                 className: cx('icon')
@@ -155,7 +158,7 @@ export const ContextMenuSub = React.memo((props) => {
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props: props.menuProps });
         const label = item.label && <span {...labelProps}>{item.label}</span>;
-        const submenu = createSubmenu(item);
+        const submenu = createSubmenu(item, index);
         const actionProps = mergeProps(
             {
                 href: item.url || '#',
@@ -195,7 +198,8 @@ export const ContextMenuSub = React.memo((props) => {
 
         const menuitemProps = mergeProps(
             {
-                id: item.id,
+                id: key,
+                key,
                 role: 'none',
                 className: cx('menuitem', { item, active }),
                 style: item.style,
