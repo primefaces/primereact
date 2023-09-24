@@ -1,17 +1,22 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMountEffect } from '../hooks/Hooks';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { BreadCrumbBase } from './BreadCrumbBase';
 
 export const BreadCrumb = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = BreadCrumbBase.getProps(inProps, context);
+        const [idState, setIdState] = React.useState(props.id);
         const elementRef = React.useRef(null);
         const { ptm, cx, isUnstyled } = BreadCrumbBase.setMetaData({
-            props
+            props,
+            state: {
+                id: idState
+            }
         });
 
         useHandleStyle(BreadCrumbBase.css.styles, isUnstyled, { name: 'breadcrumb' });
@@ -35,7 +40,7 @@ export const BreadCrumb = React.memo(
             }
         };
 
-        const createHome = () => {
+        const createHome = (index) => {
             const home = props.home;
 
             if (home) {
@@ -88,8 +93,11 @@ export const BreadCrumb = React.memo(
                     content = ObjectUtils.getJSXElement(template, home, defaultContentOptions);
                 }
 
+                const key = idState + '_home';
                 const menuitemProps = mergeProps(
                     {
+                        id: key,
+                        key,
                         className: cx('home', { _className, disabled }),
                         style
                     },
@@ -102,7 +110,8 @@ export const BreadCrumb = React.memo(
             return null;
         };
 
-        const createSeparator = () => {
+        const createSeparator = (index) => {
+            const key = idState + '_sep_' + index;
             const separatorIconProps = mergeProps(
                 {
                     className: cx('separatorIcon')
@@ -113,7 +122,10 @@ export const BreadCrumb = React.memo(
             const separatorIcon = IconUtils.getJSXIcon(icon, { ...separatorIconProps }, { props });
             const separatorProps = mergeProps(
                 {
-                    className: cx('separator')
+                    id: key,
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
                 },
                 ptm('separator')
             );
@@ -121,7 +133,7 @@ export const BreadCrumb = React.memo(
             return <li {...separatorProps}>{separatorIcon}</li>;
         };
 
-        const createMenuitem = (item) => {
+        const createMenuitem = (item, index) => {
             if (item.visible === false) {
                 return null;
             }
@@ -157,8 +169,11 @@ export const BreadCrumb = React.memo(
                 content = ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
             }
 
+            const key = item.id || idState + '_' + index;
             const menuitemProps = mergeProps(
                 {
+                    id: key,
+                    key,
                     className: cx('menuitem', { item }),
                     style: item.style
                 },
@@ -175,9 +190,9 @@ export const BreadCrumb = React.memo(
                         return null;
                     }
 
-                    const menuitem = createMenuitem(item);
-                    const separator = index === props.model.length - 1 ? null : createSeparator();
-                    const key = item.label + '_' + index;
+                    const menuitem = createMenuitem(item, index);
+                    const separator = index === props.model.length - 1 ? null : createSeparator(index);
+                    const key = idState + '_' + index;
 
                     return (
                         <React.Fragment key={key}>
@@ -193,6 +208,12 @@ export const BreadCrumb = React.memo(
             return null;
         };
 
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
@@ -200,7 +221,7 @@ export const BreadCrumb = React.memo(
 
         const home = createHome();
         const items = createMenuitems();
-        const separator = createSeparator();
+        const separator = createSeparator('home');
         const menuProps = mergeProps(
             {
                 className: cx('menu')

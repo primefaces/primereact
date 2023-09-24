@@ -176,9 +176,10 @@ export const MenubarSub = React.memo(
         }, [props.parentActive]);
 
         const createSeparator = (index) => {
-            const key = 'separator_' + index;
+            const key = props.id + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
+                    id: key,
                     key,
                     className: cx('separator'),
                     role: 'separator'
@@ -189,10 +190,11 @@ export const MenubarSub = React.memo(
             return <li {...separatorProps}></li>;
         };
 
-        const createSubmenu = (item) => {
+        const createSubmenu = (item, index) => {
             if (item.items) {
                 return (
                     <MenubarSub
+                        id={props.id + '_' + index}
                         hostName={props.hostName}
                         menuProps={props.menuProps}
                         model={item.items}
@@ -215,7 +217,7 @@ export const MenubarSub = React.memo(
                 return null;
             }
 
-            const key = item.label + '_' + index;
+            const key = item.id || props.id + '_' + index;
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
@@ -246,7 +248,7 @@ export const MenubarSub = React.memo(
                     { ...submenuIconProps },
                     { props: { menuProps: props.menuProps, ...props } }
                 );
-            const submenu = createSubmenu(item);
+            const submenu = createSubmenu(item, index);
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
@@ -286,9 +288,9 @@ export const MenubarSub = React.memo(
 
             const menuitemProps = mergeProps(
                 {
+                    id: key,
                     key,
                     role: 'none',
-                    id: item.id,
                     className: classNames(item.className, cx('menuitem', { item, activeItemState })),
                     onMouseEnter: (event) => onItemMouseEnter(event, item),
                     'data-p-disabled': item.disabled || false
