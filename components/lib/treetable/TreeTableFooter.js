@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { RowBase } from '../row/RowBase';
-import { mergeProps } from '../utils/Utils';
+import { mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableFooter = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
@@ -38,7 +38,9 @@ export const TreeTableFooter = React.memo((props) => {
             getColumnPTOptions(column, 'footerCell')
         );
 
-        return <td {...footerCellProps}>{getColumnProp(column, 'footer')}</td>;
+        const content = ObjectUtils.getJSXElement(getColumnProp(column, 'footer'), { props: getColumnProps(column) });
+
+        return <td {...footerCellProps}>{content}</td>;
     };
 
     const createFooterRow = (row, index) => {
@@ -71,17 +73,7 @@ export const TreeTableFooter = React.memo((props) => {
     };
 
     const hasFooter = () => {
-        if (props.columnGroup) {
-            return true;
-        } else {
-            for (let i = 0; i < props.columns.length; i++) {
-                if (getColumnProp(props.columns[i], 'footer')) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return props.columnGroup ? true : props.columns ? props.columns.some((col) => col && getColumnProp(col, 'footer')) : false;
     };
 
     const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
