@@ -116,13 +116,13 @@ export const MegaMenu = React.memo(
                     originalEvent: event,
                     item: props.item
                 });
+                event.preventDefault();
             }
 
             if (item.items) {
                 activeItemState && activeItemState === item ? setActiveItemState(null) : setActiveItemState(item);
+                event.preventDefault();
             }
-
-            event.preventDefault();
         };
 
         const onCategoryKeyDown = (event, item) => {
