@@ -62,7 +62,7 @@ export const AutoCompletePanel = React.memo(
                         'aria-selected': selected,
                         'data-group': i,
                         'data-index': j,
-                        'data-p-disabled': suggestion.disabled
+                        'data-p-disabled': item.disabled
                     },
                     getPTOptions(item, 'item')
                 );

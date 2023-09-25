@@ -93,6 +93,7 @@ import { TreePassThroughOptions } from '../tree/tree';
 import { TreeSelectPassThroughOptions } from '../treeselect/treeselect';
 import { TreeTablePassThroughOptions } from '../treetable/treetable';
 import { VirtualScrollerPassThroughOptions } from '../virtualscroller/virtualscroller';
+import { PassThroughOptions } from '../passthrough';
 
 // Config
 /**
@@ -206,6 +207,15 @@ export interface APIOptions {
      * This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag.
      */
     pt?: PrimeReactPTOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
+     * When enabled, it removes all of components styles in the core.
+     * @defaultValue false
+     */
     unstyled?: boolean;
     /**
      * This method is used to change the theme dynamically.
@@ -652,7 +662,7 @@ type PrimeReactProviderProps = {
     /**
      * Any default global API options
      */
-    value?: APIOptions;
+    value?: Partial<APIOptions>;
     /**
      * Used to get the child elements of the component.
      * @readonly

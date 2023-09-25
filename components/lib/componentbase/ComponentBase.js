@@ -493,9 +493,17 @@ export const ComponentBase = {
             const datasetPrefix = 'data-pc-';
             const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
+            const getHostInstance = (params) => {
+                return params.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
+            };
+
+            const getPropValue = (name) => {
+                return params.props?.[name] || getHostInstance(params)?.[name];
+            };
+
             ComponentBase.cParams = params;
             ComponentBase.cName = componentName;
-            const { mergeSections = true, mergeProps: useMergeProps = false } = params.props?.ptOptions || {};
+            const { mergeSections = true, mergeProps: useMergeProps = false } = getPropValue('ptOptions') || ComponentBase.context.ptOptions || {};
 
             const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
@@ -586,7 +594,7 @@ const _usePT = (pt, callback, key, params) => {
     const fn = (value) => callback(value, key, params);
 
     if (pt?.hasOwnProperty('_usept')) {
-        const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || {};
+        const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || ComponentBase.context.ptOptions || {};
         const originalValue = fn(pt.originalValue);
         const value = fn(pt.value);
 
