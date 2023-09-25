@@ -42261,6 +42261,14 @@
                             "description": "Used to get the child elements of the component."
                         },
                         {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the SlideMenu Popup."
+                        },
+                        {
                             "name": "easing",
                             "optional": true,
                             "readonly": false,
@@ -42299,14 +42307,6 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Defines if menu would displayed as a popup."
-                        },
-                        {
-                            "name": "closeOnEscape",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "true",
-                            "description": "Specifies if pressing escape key should hide the SlideMenu Popup."
                         },
                         {
                             "name": "pt",
