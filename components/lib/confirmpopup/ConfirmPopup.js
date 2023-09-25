@@ -8,6 +8,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -55,6 +56,10 @@ export const ConfirmPopup = React.memo(
 
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
+
+        useOnEscapeKey(overlayRef, props.dismissable && props.closeOnEscape, (event) => {
+            hide('hide');
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: getPropValue('target'),
