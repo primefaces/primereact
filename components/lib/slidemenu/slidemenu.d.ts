@@ -221,6 +221,11 @@ export interface SlideMenuProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      */
     viewportHeight?: number | undefined;
     /**
+     * Specifies if pressing escape key should hide the SlideMenu Popup.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
+    /**
      * Callback to invoke when a popup menu is shown.
      * @param {React.SyntheticEvent} event - Browser event.
      */
