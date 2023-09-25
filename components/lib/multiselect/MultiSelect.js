@@ -375,7 +375,7 @@ export const MultiSelect = React.memo(
                         }
                     }
                 } else {
-                    option = findOptionByValue(val, props.options);
+                    option = findOptionByValue(val, props.value);
                 }
             }
 
