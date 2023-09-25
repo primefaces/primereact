@@ -10,23 +10,25 @@ const classes = {
 };
 
 const styles = `
-.p-blockui-container {
-    position: relative;
-}
-
-.p-blockui {
-    opacity: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.p-blockui.p-component-overlay {
-    position: absolute;
-}
-
-.p-blockui-document.p-component-overlay {
-    position: fixed;
+@layer primereact {
+    .p-blockui-container {
+        position: relative;
+    }
+    
+    .p-blockui {
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .p-blockui.p-component-overlay {
+        position: absolute;
+    }
+    
+    .p-blockui-document.p-component-overlay {
+        position: fixed;
+    }
 }
 `;
 

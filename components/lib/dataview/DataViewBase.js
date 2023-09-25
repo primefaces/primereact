@@ -25,17 +25,19 @@ const classes = {
 };
 
 const styles = `
-.p-dataview-loading {
-    position: relative;
-    min-height: 4rem;
-}
-
-.p-dataview .p-dataview-loading-overlay {
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@layer primereact {
+    .p-dataview-loading {
+        position: relative;
+        min-height: 4rem;
+    }
+    
+    .p-dataview .p-dataview-loading-overlay {
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 `;
 

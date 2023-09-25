@@ -33,23 +33,25 @@ export const FieldsetBase = ComponentBase.extend({
             transition: 'p-toggleable-content'
         },
         styles: `
-        .p-fieldset-legend > a,
-        .p-fieldset-legend > span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .p-fieldset-toggleable .p-fieldset-legend a {
-            cursor: pointer;
-            user-select: none;
-            overflow: hidden;
-            position: relative;
-            text-decoration: none;
-        }
-        
-        .p-fieldset-legend-text {
-            line-height: 1;
+        @layer primereact {
+            .p-fieldset-legend > a,
+            .p-fieldset-legend > span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .p-fieldset-toggleable .p-fieldset-legend a {
+                cursor: pointer;
+                user-select: none;
+                overflow: hidden;
+                position: relative;
+                text-decoration: none;
+            }
+            
+            .p-fieldset-legend-text {
+                line-height: 1;
+            }
         }
         `
     }

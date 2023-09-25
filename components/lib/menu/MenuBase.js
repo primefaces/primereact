@@ -3,30 +3,32 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-.p-menu-overlay {
-    position: absolute;
-    /* Github #3122: Prevent animation flickering  */
-    top: -9999px;
-    left: -9999px;
-}
-
-.p-menu ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.p-menu .p-menuitem-link {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    overflow: hidden;
-    position: relative;
-}
-
-.p-menu .p-menuitem-text {
-    line-height: 1;
+@layer primereact {
+    .p-menu-overlay {
+        position: absolute;
+        /* Github #3122: Prevent animation flickering  */
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    .p-menu ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .p-menu .p-menuitem-link {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .p-menu .p-menuitem-text {
+        line-height: 1;
+    }
 }
 `;
 

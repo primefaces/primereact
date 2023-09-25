@@ -44,18 +44,20 @@ export const KnobBase = ComponentBase.extend({
                 stroke-dashoffset: 0;
             }
         }
-        .p-knob-range {
-            fill: none;
-            transition: stroke .1s ease-in;
-        }
-        .p-knob-value {
-            animation-name: dash-frame;
-            animation-fill-mode: forwards;
-            fill: none;
-        }
-        .p-knob-text {
-            font-size: 1.3rem;
-            text-align: center;
+        @layer primereact {
+            .p-knob-range {
+                fill: none;
+                transition: stroke .1s ease-in;
+            }
+            .p-knob-value {
+                animation-name: dash-frame;
+                animation-fill-mode: forwards;
+                fill: none;
+            }
+            .p-knob-text {
+                font-size: 1.3rem;
+                text-align: center;
+            }
         }
         `
     }

@@ -23,21 +23,23 @@ const classes = {
 };
 
 const styles = `
-.p-accordion-header-link {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    user-select: none;
-    position: relative;
-    text-decoration: none;
-}
-
-.p-accordion-header-link:focus {
-    z-index: 1;
-}
-
-.p-accordion-header-text {
-    line-height: 1;
+@layer primereact {
+    .p-accordion-header-link {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        user-select: none;
+        position: relative;
+        text-decoration: none;
+    }
+    
+    .p-accordion-header-link:focus {
+        z-index: 1;
+    }
+    
+    .p-accordion-header-text {
+        line-height: 1;
+    }
 }
 `;
 

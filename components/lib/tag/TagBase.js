@@ -12,20 +12,22 @@ const classes = {
 };
 
 const styles = `
-.p-tag {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.p-tag-icon,
-.p-tag-value,
-.p-tag-icon.pi {
-    line-height: 1.5;
-}
-
-.p-tag.p-tag-rounded {
-    border-radius: 10rem;
+@layer primereact {
+    .p-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .p-tag-icon,
+    .p-tag-value,
+    .p-tag-icon.pi {
+        line-height: 1.5;
+    }
+    
+    .p-tag.p-tag-rounded {
+        border-radius: 10rem;
+    }
 }
 `;
 

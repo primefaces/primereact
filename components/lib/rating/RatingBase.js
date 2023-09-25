@@ -18,21 +18,22 @@ const classes = {
 };
 
 const styles = `
-.p-rating {
-    display: flex;
-    align-items: center;
+@layer primereact {
+    .p-rating {
+        display: flex;
+        align-items: center;
+    }
+    
+    .p-rating-item {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .p-rating.p-readonly .p-rating-item {
+        cursor: default;
+    }
 }
-
-.p-rating-item {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.p-rating.p-readonly .p-rating-item {
-    cursor: default;
-}
-
 `;
 
 export const RatingBase = ComponentBase.extend({

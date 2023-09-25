@@ -12,8 +12,10 @@ const classes = {
 };
 
 const styles = `
-.p-card-header img {
-    width: 100%;
+@layer primereact {
+    .p-card-header img {
+        width: 100%;
+    }
 }
 `;
 

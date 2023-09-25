@@ -15,13 +15,15 @@ const classes = {
 };
 
 const styles = `
-.p-inputtextarea-resizable {
-    overflow: hidden;
-    resize: none;
-}
-
-.p-fluid .p-inputtextarea {
-    width: 100%;
+@layer primereact {
+    .p-inputtextarea-resizable {
+        overflow: hidden;
+        resize: none;
+    }
+    
+    .p-fluid .p-inputtextarea {
+        width: 100%;
+    }
 }
 `;
 
