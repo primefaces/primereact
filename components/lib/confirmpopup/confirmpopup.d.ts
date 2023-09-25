@@ -208,6 +208,11 @@ export interface ConfirmPopupProps {
      */
     dismissable?: boolean | undefined;
     /**
+     * Specifies if pressing escape key should hide the popup.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
+    /**
      * Footer content of the confirm popup.
      */
     footer?: React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);

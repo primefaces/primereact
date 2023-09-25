@@ -14411,6 +14411,14 @@
                             "description": "Enables to hide the popup when outside is clicked."
                         },
                         {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the popup."
+                        },
+                        {
                             "name": "footer",
                             "optional": true,
                             "readonly": false,
