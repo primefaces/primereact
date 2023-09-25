@@ -179,7 +179,7 @@ function addEntry(name, input, output, isComponent = true) {
                 },
                 {
                     format: 'esm',
-                    file: `${output}.esm${isMinify ? '.min' : ''}.js`,
+                    file: `${output}.esm${isMinify ? '.min' : ''}.mjs`,
                     exports
                 }
             ]
@@ -336,7 +336,7 @@ function addPackageJson() {
     "unpkg": "primereact.all.min.js",
     "jsdelivr": "primereact.all.min.js",
     "main": "primereact.all.min.js",
-    "module": "primereact.all.esm.min.js",
+    "module": "primereact.all.esm.min.mjs",
     "web-types": "web-types.json",
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
