@@ -48,6 +48,7 @@ export const Image = React.memo(
         const show = () => {
             if (props.preview) {
                 setMaskVisibleState(true);
+                DomHandler.addClass(document.body, 'p-overflow-hidden');
                 setTimeout(() => {
                     setPreviewVisibleState(true);
                 }, 25);
@@ -57,6 +58,7 @@ export const Image = React.memo(
         const hide = () => {
             if (!previewClick.current) {
                 setPreviewVisibleState(false);
+                DomHandler.removeClass(document.body, 'p-overflow-hidden');
                 setRotateState(0);
                 setScaleState(1);
             }
