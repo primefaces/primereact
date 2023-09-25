@@ -9,6 +9,7 @@ import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -33,6 +34,10 @@ export const SlideMenu = React.memo(
         const targetRef = React.useRef(null);
         const backward = React.useRef(null);
         const slideMenuContent = React.useRef(null);
+
+        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
+            hide(event);
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,

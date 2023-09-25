@@ -42301,6 +42301,14 @@
                             "description": "Defines if menu would displayed as a popup."
                         },
                         {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the SlideMenu Popup."
+                        },
+                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,

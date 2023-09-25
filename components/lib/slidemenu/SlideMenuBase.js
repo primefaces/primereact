@@ -155,7 +155,8 @@ export const SlideMenuBase = ComponentBase.extend({
         submenuIcon: null,
         transitionOptions: null,
         viewportHeight: 175,
-        children: undefined
+        children: undefined,
+        closeOnEscape: true
     },
     css: {
         classes,
