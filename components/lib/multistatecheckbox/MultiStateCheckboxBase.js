@@ -7,8 +7,6 @@ const classes = {
             [`${icon}`]: true
         }),
     root: ({ props }) => classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled }),
-    srOnlyAria: 'p-sr-only',
-
     checkbox: ({ props, selectedOption, focusedState }) =>
         classNames(
             'p-checkbox-box',

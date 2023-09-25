@@ -278,14 +278,12 @@ const Tailwind = {
         }
     },
     splitter: {
-        root: ({ context }) => ({
-            className: classNames('bg-white dark:bg-gray-900 rounded-lg text-gray-700 dark:text-white/80', {
-                'border border-solid border-gray-300 dark:border-blue-900/40': !context.nested
+        root: ({ props, state }) => ({
+            className: classNames('flex flex-nowrap bg-white dark:bg-gray-900 rounded-lg text-gray-700 dark:text-white/80', {
+                'border border-solid border-gray-300 dark:border-blue-900/40': !state.nested,
+                'flex-col': props.layout === 'vertical'
             })
         }),
-        splitterpanel: {
-            root: 'flex grow'
-        },
         gutter: ({ props }) => ({
             className: classNames('flex items-center justify-center shrink-0', 'transition-all duration-200 bg-gray-100 dark:bg-gray-800', {
                 'cursor-col-resize': props.layout == 'horizontal',
@@ -294,8 +292,8 @@ const Tailwind = {
         }),
         gutterhandler: ({ props }) => ({
             className: classNames('bg-gray-300 dark:bg-gray-600 transition-all duration-200', {
-                'h-7': props.layout == 'horizontal',
-                'w-7 h-2': props.layout !== 'horizontal'
+                'h-7 w-[0.3rem]': props.layout == 'horizontal',
+                'w-7 h-[0.3rem]': props.layout == 'vertical'
             })
         })
     },
@@ -1253,6 +1251,13 @@ const Tailwind = {
         },
         filtericon: '-mt-2 absolute top-1/2'
     },
+    mention: {
+        root: 'relative',
+        panel: 'max-h-[200px] overflow-auto bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-0 rounded-md shadow-lg',
+        items: 'py-3 list-none m-0',
+        item: 'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap m-0 p-3 border-0 transition-shadow duration-200 rounded-none dark:text-white/80 dark:hover:bg-gray-800 hover:text-gray-700 hover:bg-gray-200',
+        transition: TRANSITIONS.overlay
+    },
     multiselect: {
         root: ({ props }) => ({
             className: classNames('inline-flex cursor-pointer select-none', 'bg-white dark:bg-gray-900 border border-gray-400 dark:border-blue-900/40  transition-colors duration-200 ease-in-out rounded-md', 'w-full md:w-80', {
@@ -1353,6 +1358,25 @@ const Tailwind = {
         filtericon: '-mt-2 absolute top-1/2',
         clearicon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
         transition: TRANSITIONS.overlay
+    },
+    multistatecheckbox: {
+        root: {
+            className: classNames('cursor-pointer inline-flex relative select-none align-bottom', 'w-6 h-6')
+        },
+        checkbox: ({ props }) => ({
+            className: classNames(
+                'flex items-center justify-center',
+                'border-2 w-6 h-6 rounded-lg transition-colors duration-200',
+                {
+                    'border-blue-500 bg-blue-500 text-white dark:border-blue-400 dark:bg-blue-400': props.value || !props.value,
+                    'border-gray-300 text-gray-600 bg-white dark:border-blue-900/40 dark:bg-gray-900': props.value == null
+                },
+                {
+                    'hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]': !props.disabled,
+                    'cursor-default opacity-60': props.disabled
+                }
+            )
+        })
     },
     inputtextarea: {
         root: ({ context }) => ({
@@ -1977,6 +2001,37 @@ const Tailwind = {
         }),
         icon: 'mr-2'
     },
+    slidemenu: {
+        root: {
+            className: classNames('py-1 bg-white border border-gray-300 rounded-lg w-[12.5rem]', 'dark:border-blue-900/40 dark:bg-gray-900')
+        },
+        content: 'relative overflow-x-hidden overflow-y-auto h-full',
+        menu: 'outline-none m-0 p-0 list-none absolute top-0 block',
+        menuitem: ({ context }) => ({
+            className: classNames({
+                relative: !context.active,
+                static: context.active
+            })
+        }),
+        action: ({ context }) => ({
+            className: classNames('py-3 px-5 select-none', 'flex items-center cursor-pointer no-underline relative overflow-hidden', {
+                'text-gray-700 dark:text-white/80 hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.active,
+                'text-blue-600 bg-blue-100': context.active
+            })
+        }),
+        previous: ({ state }) => ({
+            className: classNames('py-3 px-5 cursor-pointer bottom-0 w-full text-gray-700 dark:text-white/80', {
+                hidden: state.level === 0
+            })
+        }),
+        icon: 'mr-2',
+        submenuicon: 'ml-auto',
+        separator: 'border-t border-gray-300 my-1 dark:border-blue-900/40',
+        submenu: {
+            className: classNames('py-1 bg-white dark:bg-gray-900 border-0 shadow-md min-w-full', 'absolute z-10', 'left-full top-0')
+        },
+        transition: TRANSITIONS.overlay
+    },
     tieredmenu: {
         root: {
             className: classNames('py-1 bg-white border border-gray-300 rounded-lg w-[12.5rem]', 'dark:border-blue-900/40 dark:bg-gray-900')
@@ -2347,6 +2402,16 @@ const Tailwind = {
                 props.modelValue === 'grid' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
             )
         })
+    },
+    daatascroller: {
+        content: {
+            className: classNames(
+                'bg-white blue-gray-700 border-0 p-0',
+                'dark:bg-gray-900 dark:text-white/80' // Dark Mode
+            )
+        },
+        grid: 'flex flex-wrap ml-0 mr-0 mt-0 bg-white dark:bg-gray-900',
+        header: 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white/80 border-gray-200 dark:border-blue-900/40 border-t border-b p-4 font-bold'
     },
     organizationchart: {
         table: 'mx-auto my-0 border-spacing-0 border-separate',

@@ -66,6 +66,7 @@ export const Mention = React.memo(
 
         const onOverlayEnter = () => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -417,7 +418,10 @@ export const Mention = React.memo(
                 {
                     ref: overlayRef,
                     className: cx('panel'),
-                    style: sx('panel'),
+                    style: {
+                        maxHeight: props.scrollHeight,
+                        ...props.panelStyle
+                    },
                     onClick: onPanelClick
                 },
                 ptm('panel')

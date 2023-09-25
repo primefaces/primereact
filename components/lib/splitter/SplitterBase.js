@@ -2,9 +2,12 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils, classNames } from '../utils/Utils';
 
 const classes = {
-    root: ({ props }) => classNames(`p-splitter p-component p-splitter-${props.layout}`, props.className),
+    root: ({ props }) => classNames(`p-splitter p-component p-splitter-${props.layout}`),
     gutter: 'p-splitter-gutter',
-    gutterHandler: 'p-splitter-gutter-handle'
+    gutterHandler: 'p-splitter-gutter-handle',
+    panel: {
+        root: 'p-splitter-panel'
+    }
 };
 
 const styles = `
@@ -71,10 +74,6 @@ const styles = `
 
 `;
 
-const inlineStyles = {
-    gutter: ({ props }) => (props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' })
-};
-
 export const SplitterBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Splitter',
@@ -90,8 +89,7 @@ export const SplitterBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });
 

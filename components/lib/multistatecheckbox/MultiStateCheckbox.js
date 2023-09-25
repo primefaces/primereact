@@ -3,7 +3,7 @@ import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { MultiStateCheckboxBase } from './MultiStateCheckboxBase';
 
 export const MultiStateCheckbox = React.memo(
@@ -128,7 +128,7 @@ export const MultiStateCheckbox = React.memo(
                 ptm('icon')
             );
 
-            const content = <span {...iconProps}></span>;
+            const content = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
             if (props.iconTemplate) {
                 const defaultOptions = {
@@ -165,14 +165,6 @@ export const MultiStateCheckbox = React.memo(
             ptm('root')
         );
 
-        const srOnlyAriaProps = mergeProps(
-            {
-                className: cx('srOnlyAria'),
-                'aria-live': 'polite'
-            },
-            ptm('srOnlyAria')
-        );
-
         const checkboxProps = mergeProps(
             {
                 className: cx('checkbox', { focusedState, selectedOption }),
@@ -192,7 +184,11 @@ export const MultiStateCheckbox = React.memo(
             <>
                 <div {...rootProps}>
                     <div {...checkboxProps}>{icon}</div>
-                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
+                    {focusedState && (
+                        <span className="p-sr-only" aria-live="polite">
+                            {ariaValueLabel}
+                        </span>
+                    )}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>

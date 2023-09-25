@@ -61,13 +61,6 @@ const styles = `
 }
 `;
 
-const inlineStyles = {
-    panel: ({ props }) => ({
-        maxHeight: props.scrollHeight,
-        ...props.panelStyle
-    })
-};
-
 export const MentionBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Mention',
@@ -102,7 +95,6 @@ export const MentionBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });
