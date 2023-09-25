@@ -767,10 +767,18 @@
                             "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
                         },
                         {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "When enabled, it removes all of components styles in the core."
                         },
                         {
                             "name": "setAppendTo",
