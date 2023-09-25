@@ -14411,20 +14411,20 @@
                             "description": "Style class of the element."
                         },
                         {
-                            "name": "dismissable",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "true",
-                            "description": "Enables to hide the popup when outside is clicked."
-                        },
-                        {
                             "name": "closeOnEscape",
                             "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "default": "true",
                             "description": "Specifies if pressing escape key should hide the popup."
+                        },
+                        {
+                            "name": "dismissable",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Enables to hide the popup when outside is clicked."
                         },
                         {
                             "name": "footer",
