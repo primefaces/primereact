@@ -26,7 +26,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-password {
         position: relative;
         display: inline-flex;

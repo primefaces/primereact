@@ -10,7 +10,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-blockui-container {
         position: relative;
     }

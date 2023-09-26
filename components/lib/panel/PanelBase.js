@@ -39,7 +39,7 @@ export const PanelBase = ComponentBase.extend({
             transition: 'p-toggleable-content'
         },
         styles: `
-        @layer primereact.core {
+        @layer primereact {
             .p-panel-header {
               display: flex;
               justify-content: space-between;

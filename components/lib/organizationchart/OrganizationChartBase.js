@@ -2,7 +2,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-organizationchart-table {
         border-spacing: 0;
         border-collapse: separate;

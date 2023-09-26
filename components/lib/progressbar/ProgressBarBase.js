@@ -9,7 +9,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
   .p-progressbar {
       position: relative;
       overflow: hidden;

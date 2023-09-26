@@ -23,7 +23,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-dock {
         position: absolute;
         z-index: 1;

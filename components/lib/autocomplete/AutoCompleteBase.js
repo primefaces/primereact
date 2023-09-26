@@ -39,7 +39,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-autocomplete {
         display: inline-flex;
         position: relative;

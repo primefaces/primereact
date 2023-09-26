@@ -18,7 +18,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-divider-horizontal {
         display: flex;
         width: 100%;

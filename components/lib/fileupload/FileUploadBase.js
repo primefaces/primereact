@@ -23,7 +23,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-fileupload-content {
         position: relative;
     }

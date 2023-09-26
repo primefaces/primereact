@@ -60,7 +60,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-multiselect {
         display: inline-flex;
         user-select: none;

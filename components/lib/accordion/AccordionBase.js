@@ -23,7 +23,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-accordion-header-link {
         cursor: pointer;
         display: flex;

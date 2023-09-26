@@ -3,7 +3,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-toast {
         width: calc(100% - var(--toast-indent, 0px));
         max-width: 25rem;

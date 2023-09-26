@@ -13,7 +13,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-badge {
         display: inline-block;
         border-radius: 10px;

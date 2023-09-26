@@ -12,7 +12,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-card-header img {
         width: 100%;
     }

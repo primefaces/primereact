@@ -2,7 +2,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-message-wrapper {
         display: flex;
         align-items: center;

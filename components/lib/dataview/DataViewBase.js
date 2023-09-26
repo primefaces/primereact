@@ -25,7 +25,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-dataview-loading {
         position: relative;
         min-height: 4rem;

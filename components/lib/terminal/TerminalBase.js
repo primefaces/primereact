@@ -11,7 +11,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-terminal {
         height: 18rem;
         overflow: auto;

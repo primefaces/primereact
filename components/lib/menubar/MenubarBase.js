@@ -20,7 +20,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-menubar {
         display: flex;
         align-items: center;

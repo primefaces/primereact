@@ -24,7 +24,7 @@ const inlineStyles = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-tooltip {
         position: absolute;
         padding: .25em .5rem;

@@ -6,7 +6,7 @@ const classes = {
     circle: 'p-progress-spinner-circle'
 };
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-progress-spinner {
         position: relative;
         margin: 0 auto;

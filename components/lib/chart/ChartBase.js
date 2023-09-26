@@ -30,7 +30,7 @@ export const ChartBase = ComponentBase.extend({
                 )
         },
         styles: `
-        @layer primereact.core {
+        @layer primereact {
             .p-chart {
                 position: relative
             }

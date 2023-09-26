@@ -269,7 +269,7 @@ svg.p-icon g {
 }
 `;
 const baseStyles = `
-@layer primereact.core {
+@layer primereact {
     .p-component, .p-component * {
         box-sizing: border-box;
     }

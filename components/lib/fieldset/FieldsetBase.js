@@ -33,7 +33,7 @@ export const FieldsetBase = ComponentBase.extend({
             transition: 'p-toggleable-content'
         },
         styles: `
-        @layer primereact.core {
+        @layer primereact {
             .p-fieldset-legend > a,
             .p-fieldset-legend > span {
                 display: flex;

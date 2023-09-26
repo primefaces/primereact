@@ -34,7 +34,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-slidemenu {
         width: 12.5em;
     }

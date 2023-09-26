@@ -22,7 +22,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-steps {
         position: relative;
     }

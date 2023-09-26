@@ -21,7 +21,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-image-mask {
         display: flex;
         align-items: center;

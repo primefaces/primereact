@@ -26,7 +26,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact.core {
+@layer primereact {
     .p-panelmenu .p-panelmenu-header-link {
         display: flex;
         align-items: center;
