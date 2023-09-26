@@ -12,7 +12,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-tag {
         display: inline-flex;
         align-items: center;

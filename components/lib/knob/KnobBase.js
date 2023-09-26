@@ -44,7 +44,7 @@ export const KnobBase = ComponentBase.extend({
                 stroke-dashoffset: 0;
             }
         }
-        @layer primereact {
+        @layer primereact.core {
             .p-knob-range {
                 fill: none;
                 transition: stroke .1s ease-in;

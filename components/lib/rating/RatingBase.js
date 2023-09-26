@@ -18,7 +18,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-rating {
         display: flex;
         align-items: center;

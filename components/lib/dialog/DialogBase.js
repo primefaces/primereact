@@ -40,7 +40,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-dialog-mask {
         background-color: transparent;
         transition-property: background-color;

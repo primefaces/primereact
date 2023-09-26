@@ -25,7 +25,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-splitbutton {
         display: inline-flex;
         position: relative;

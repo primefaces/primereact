@@ -10,7 +10,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-skeleton {
         position: relative;
         overflow: hidden;

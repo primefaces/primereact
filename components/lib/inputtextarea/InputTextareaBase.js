@@ -15,7 +15,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-inputtextarea-resizable {
         overflow: hidden;
         resize: none;

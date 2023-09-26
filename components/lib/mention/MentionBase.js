@@ -19,7 +19,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-mention {
         display: inline-flex;
         position: relative;

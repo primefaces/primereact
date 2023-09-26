@@ -12,7 +12,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-chip {
         display: inline-flex;
         align-items: center;

@@ -33,7 +33,7 @@ export const TimelineBase = ComponentBase.extend({
                 )
         },
         styles: `
-        @layer primereact {
+        @layer primereact.core {
             .p-timeline {
                 display: flex;
                 flex-grow: 1;

@@ -5,7 +5,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-avatar-group .p-avatar + .p-avatar {
         margin-left: -1rem;
     }

@@ -24,7 +24,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-inputnumber {
         display: inline-flex;
     }

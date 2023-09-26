@@ -70,7 +70,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-galleria-content {
         display: flex;
         flex-direction: column;

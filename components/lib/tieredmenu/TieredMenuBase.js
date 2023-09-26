@@ -37,7 +37,7 @@ const inlineStyles = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-tieredmenu-overlay {
         position: absolute;
     }

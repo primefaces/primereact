@@ -32,7 +32,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-colorpicker {
         display: inline-block;
     }

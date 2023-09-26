@@ -45,7 +45,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-dropdown {
         display: inline-flex;
         cursor: pointer;

@@ -18,7 +18,7 @@ export const ScrollPanelBase = ComponentBase.extend({
             bary: 'p-scrollpanel-bar p-scrollpanel-bar-y'
         },
         styles: `
-        @layer primereact {
+        @layer primereact.core {
             .p-scrollpanel-wrapper {
                 overflow: hidden;
                 width: 100%;

@@ -36,7 +36,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-sidebar-mask {
         display: none;
         justify-content: center;

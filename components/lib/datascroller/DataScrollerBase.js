@@ -13,7 +13,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-datascroller .p-datascroller-header {
         text-align: center;
         padding: .5em .75em;

@@ -11,7 +11,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-splitter {
         display: flex;
         flex-wrap: nowrap;

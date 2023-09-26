@@ -3,7 +3,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-contextmenu ul {
         margin: 0;
         padding: 0;

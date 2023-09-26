@@ -44,7 +44,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-treeselect {
         display: inline-flex;
         cursor: pointer;

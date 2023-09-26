@@ -27,7 +27,7 @@ export const MessageBase = ComponentBase.extend({
             text: 'p-inline-message-text'
         },
         styles: `
-        @layer primereact {
+        @layer primereact.core {
             .p-inline-message {
                 display: inline-flex;
                 align-items: center;

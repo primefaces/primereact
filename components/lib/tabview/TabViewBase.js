@@ -27,7 +27,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-tabview-nav-container {
         position: relative;
     }

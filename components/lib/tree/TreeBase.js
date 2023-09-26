@@ -39,7 +39,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-tree-container {
         margin: 0;
         padding: 0;

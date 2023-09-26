@@ -15,7 +15,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-inplace .p-inplace-display {
         display: inline;
         cursor: pointer;

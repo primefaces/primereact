@@ -3,7 +3,7 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-menu-overlay {
         position: absolute;
         /* Github #3122: Prevent animation flickering  */

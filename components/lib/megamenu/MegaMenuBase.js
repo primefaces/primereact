@@ -59,7 +59,7 @@ const classes = {
 };
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-megamenu {
         display: flex;
     }

@@ -1,7 +1,7 @@
 import { ObjectUtils } from '../utils/Utils';
 
 const styles = `
-@layer primereact {
+@layer primereact.core {
     .p-ripple {
         overflow: hidden;
         position: relative;
