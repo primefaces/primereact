@@ -4,15 +4,21 @@ import { DocSectionText } from '../common/docsectiontext';
 export function HideOverlaysDoc(props) {
     const code = {
         basic: `
-import { PrimeReactContext } from 'primereact/api';
-import { useMountEffect } from "primereact/hooks";
+//_app.js
+import { PrimeReactProvider } from 'primereact/api';
 
-//use in a component
-const { setHideOverlayOnScroll } = useContext(PrimeReactContext);
+export default function MyApp({ Component }) {
+    const value = {
+        hideOverlayOnScroll: true,
+        ...
+    };
 
-useMountEffect(() => {
-   setHideOverlayOnScroll(true);
-});
+    return (
+        <PrimeReactProvider value={value}>
+            <App />
+        </PrimeReactProvider>
+    );
+}
         `
     };
 

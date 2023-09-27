@@ -4,15 +4,21 @@ import { DocSectionText } from '../common/docsectiontext';
 export function CSSTransitionDoc(props) {
     const code = {
         basic: `
-import { PrimeReactContext } from 'primereact/api';
-import { useMountEffect } from "primereact/hooks";
+//_app.js
+import { PrimeReactProvider } from 'primereact/api';
 
-//use in a component
-const { setCSSTransition } = useContext(PrimeReactContext);
+export default function MyApp({ Component }) {
+    const value = {
+        cssTransition: false,
+        ...
+    };
 
-useMountEffect(() => {
-   setCSSTransition(false);
-});
+    return (
+        <PrimeReactProvider value={value}>
+            <App />
+        </PrimeReactProvider>
+    );
+}
         `
     };
 
