@@ -36,6 +36,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const attributeSelector = React.useRef(uniqueId);
     const focusElementOnHide = React.useRef(null);
     const maximized = props.onMaximize ? props.maximized : maximizedState;
+    const shouldBlockScroll = visibleState && (props.blockScroll || (props.maximizable && maximized));
 
     const { ptm, cx, sx, isUnstyled } = DialogBase.setMetaData({
         props,
@@ -285,13 +286,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         dialogRef.current.style.margin = '';
     };
 
-    const getPositionClass = () => {
-        const positions = ['center', 'left', 'right', 'top', 'top-left', 'top-right', 'bottom', 'bottom-left', 'bottom-right'];
-        const pos = positions.find((item) => item === props.position || item.replace('-', '') === props.position);
-
-        return pos ? `p-dialog-${pos}` : '';
-    };
-
     const onEnter = () => {
         dialogRef.current.setAttribute(attributeSelector.current, '');
     };
@@ -310,11 +304,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         if (props.modal) {
             DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         }
-
-        if (props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            document.body.style.removeProperty('--scrollbar-width');
-        }
     };
 
     const onExited = () => {
@@ -330,29 +319,53 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
-
-        if (props.blockScroll || (props.maximizable && maximized)) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
-        }
+        updateGlobalDialogsRegistry(true);
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
+        updateGlobalDialogsRegistry(false);
+    };
 
-        const isMaximized = props.maximizable && maximized;
+    const updateScrollBlocker = () => {
+        // Scroll should be unblocked if there is at least one dialog that blocks scrolling:
+        const isThereAnyDialogThatBlocksScrolling = document.primeDialogParams && document.primeDialogParams.some((i) => i.hasBlockScroll);
 
-        if (props.modal) {
-            const hasBlockScroll = props.blockScroll || (document.primeDialogParams && document.primeDialogParams.some((param) => param.hasBlockScroll));
-
-            if (hasBlockScroll || isMaximized) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
-                document.body.style.removeProperty('--scrollbar-width');
-            }
-        } else if (props.blockScroll || isMaximized) {
+        if (isThereAnyDialogThatBlocksScrolling) {
+            DomHandler.addClass(document.body, 'p-overflow-hidden');
+            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
+        } else {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
             document.body.style.removeProperty('--scrollbar-width');
         }
+    };
+
+    const updateGlobalDialogsRegistry = (isMounted) => {
+        // Update current dialog info in global registry if it is mounted:
+        if (isMounted) {
+            const newParam = { id: idState, hasBlockScroll: shouldBlockScroll };
+
+            // Create registry if not yet created:
+            if (!document.primeDialogParams) {
+                document.primeDialogParams = [];
+            }
+
+            const currentDialogIndexInRegistry = document.primeDialogParams.findIndex((dialogInRegistry) => dialogInRegistry.id === idState);
+
+            if (currentDialogIndexInRegistry === -1) {
+                document.primeDialogParams = [...document.primeDialogParams, newParam];
+            } else {
+                document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
+            }
+        }
+        // Or remove it from global registry if unmounted:
+        else {
+            document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
+        }
+
+        // Always update scroll blocker after dialog registry - this way we ensure that
+        // p-overflow-hidden class is properly added/removed:
+        updateScrollBlocker();
     };
 
     const bindGlobalListeners = () => {
@@ -367,9 +380,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         }
 
         bindDocumentKeyDownListener();
-        const newParam = { id: idState, hasBlockScroll: props.blockScroll };
-
-        document.primeDialogParams = document.primeDialogParams ? [...document.primeDialogParams, newParam] : [newParam];
     };
 
     const unbindGlobalListeners = () => {
@@ -378,8 +388,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         unbindDocumentResizeListener();
         unbindDocumentResizEndListener();
         unbindDocumentKeyDownListener();
-
-        document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
     };
 
     const createStyle = () => {
@@ -398,17 +406,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         }
 
         styleElement.current.innerHTML = innerHTML;
-    };
-
-    const changeScrollOnMaximizable = () => {
-        if (!props.blockScroll) {
-            let funcName = maximized && visibleState ? 'addClass' : 'removeClass';
-
-            DomHandler[funcName](document.body, 'p-overflow-hidden');
-            if (funcName === 'addClass') {
-                document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
-            } else if (funcName === 'removeClass') document.body.style.removeProperty('--scrollbar-width');
-        }
     };
 
     useMountEffect(() => {
@@ -445,8 +442,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     }, [maskVisibleState]);
 
     useUpdateEffect(() => {
-        changeScrollOnMaximizable();
-    }, [props.maximized, maximizedState, visibleState]);
+        updateGlobalDialogsRegistry(true);
+    }, [shouldBlockScroll]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
