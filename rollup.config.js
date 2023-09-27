@@ -65,6 +65,11 @@ const ALIAS_ICON_COMPONENT_ENTRIES = [
     { find: '../icons/windowminimize', replacement: 'primereact/icons/windowminimize' }
 ];
 
+const CORE_PASSTHROUGH_DEPENDENCIES = [
+    { find: '../passthrough', replacement: 'primereact/passthrough' },
+    { find: '../passthrough/tailwind', replacement: 'primereact/passthrough/tailwind' }
+];
+
 const ALIAS_COMPONENT_ENTRIES = [
     { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
@@ -88,7 +93,8 @@ const ALIAS_COMPONENT_ENTRIES = [
     { find: '../dropdown/Dropdown', replacement: 'primereact/dropdown' },
     { find: '../dialog/Dialog', replacement: 'primereact/dialog' },
     { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
-    { find: '../tree/Tree', replacement: 'primereact/tree' }
+    { find: '../tree/Tree', replacement: 'primereact/tree' },
+    ...CORE_PASSTHROUGH_DEPENDENCIES
 ];
 
 // dependencies
@@ -180,7 +186,8 @@ function addEntry(name, input, output, isComponent = true) {
                 {
                     format: 'esm',
                     file: `${output}.esm${isMinify ? '.min' : ''}.mjs`,
-                    exports
+                    exports,
+                    banner: "'use client';" // This line is required for SSR.
                 }
             ]
         };
@@ -292,6 +299,14 @@ function addIcon() {
         });
 }
 
+function addPassThrough() {
+    const inputDir = process.env.INPUT_DIR + 'passthrough';
+    const outputDir = process.env.OUTPUT_DIR + 'passthrough';
+
+    addEntry('passthrough', `${inputDir}/index.js`, `${outputDir}/index`, false);
+    addEntry('passthrough.tailwind', `${inputDir}/tailwind/index.js`, `${outputDir}/tailwind/index`, false);
+}
+
 function addPrimeReact() {
     const input = process.env.INPUT_DIR + 'primereact.all.js';
     const output = process.env.OUTPUT_DIR + 'primereact.all';
@@ -364,6 +379,7 @@ function addPackageJson() {
 addIcon();
 addComponent();
 addPrimeReact();
+addPassThrough();
 addCore();
 addPackageJson();
 
