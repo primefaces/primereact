@@ -76,7 +76,7 @@ export const Galleria = React.memo(
 
         const onEntering = () => {
             ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
-            DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
+            !isUnstyled() && DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
         const onEntered = () => {
@@ -86,7 +86,7 @@ export const Galleria = React.memo(
         const onExit = () => {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
             document.body.style.removeProperty('--scrollbar-width');
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExited = () => {
@@ -271,6 +271,7 @@ export const Galleria = React.memo(
                                 autoPlay={props.autoPlay}
                                 slideShowActive={slideShowActiveState}
                                 stopSlideShow={stopSlideShow}
+                                isUnstyled={isUnstyled}
                                 ptm={ptm}
                                 cx={cx}
                                 sx={sx}

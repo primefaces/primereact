@@ -2175,9 +2175,9 @@ const Tailwind = {
                 'bg-blue-500 hover:bg-blue-600': context.highlighted
             })
         }),
-        mask: {
-            className: classNames('fixed top-0 left-0 w-full h-full', 'flex items-center justify-center', 'bg-black bg-opacity-90')
-        },
+        mask: ({ state }) => ({
+            className: classNames({ 'fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-90': state.visible })
+        }),
         closebutton: {
             className: classNames(
                 'absolute top-0 right-0 flex justify-center items-center overflow-hidden m-2',
@@ -2248,8 +2248,8 @@ const Tailwind = {
         indicator: 'mr-2 mb-2',
         indicatorbutton: ({ context }) => ({
             className: classNames('w-8 h-2 transition duration-200 rounded-0', 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]', {
-                'bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600': !context.active,
-                'bg-blue-500 hover:bg-blue-600': context.active
+                'bg-blue-500 hover:bg-blue-600': context.active,
+                'bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600': !context.active
             })
         })
     },

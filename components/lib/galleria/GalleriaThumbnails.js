@@ -200,7 +200,8 @@ export const GalleriaThumbnails = React.memo(
 
         const onTransitionEnd = (e) => {
             if (itemsContainerRef.current && e.propertyName === 'transform') {
-                DomHandler.addClass(itemsContainerRef.current, 'p-items-hidden');
+                document.body.setAttribute('data-p-items-hidden', 'false');
+                !props.isUnstyled() && DomHandler.addClass(itemsContainerRef.current, 'p-items-hidden');
                 itemsContainerRef.current.style.transition = '';
             }
         };
@@ -250,9 +251,11 @@ export const GalleriaThumbnails = React.memo(
             }
 
             let innerHTML = `
-            .p-galleria-thumbnail-items[${attributeSelector.current}] .p-galleria-thumbnail-item {
-                flex: 1 0 ${100 / numVisibleState}%
-            }
+            [data-pc-section="thumbnailitems"][${attributeSelector.current}] {
+                [data-pc-section="thumbnailitem"] {
+                    flex: 1 0 ${100 / numVisibleState}%
+                }
+            } 
         `;
 
             if (props.responsiveOptions) {
@@ -271,9 +274,11 @@ export const GalleriaThumbnails = React.memo(
 
                     innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        .p-galleria-thumbnail-items[${attributeSelector.current}] .p-galleria-thumbnail-item {
-                            flex: 1 0 ${100 / res.numVisible}%
-                        }
+                        [data-pc-section="thumbnailitems"][${attributeSelector.current}] {
+                            [data-pc-section="thumbnailitem"] {
+                                flex: 1 0 ${100 / res.numVisible}%
+                            }
+                        } 
                     }
                 `;
                 }
@@ -335,7 +340,8 @@ export const GalleriaThumbnails = React.memo(
                 itemsContainerRef.current.style.transform = props.isVertical ? `translate3d(0, ${totalShiftedItems * (100 / numVisibleState)}%, 0)` : `translate3d(${totalShiftedItems * (100 / numVisibleState)}%, 0, 0)`;
 
                 if (prevActiveItemIndex !== props.activeItemIndex) {
-                    DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
+                    document.body.setAttribute('data-p-items-hidden', 'false');
+                    !props.isUnstyled() && DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
                     itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
                 }
             }
