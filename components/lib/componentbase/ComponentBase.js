@@ -3,6 +3,29 @@ import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../
 import { mergeProps } from '../utils/MergeProps';
 import { ObjectUtils } from '../utils/Utils';
 
+const baseStyle = `
+.p-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.p-hidden-accessible input,
+.p-hidden-accessible select {
+    transform: scale(0);
+}
+
+.p-overflow-hidden {
+    overflow: hidden;
+    padding-right: var(--scrollbar-width);
+}
+`;
+
 const buttonStyles = `
 .p-button {
     margin: 0;
@@ -268,7 +291,7 @@ svg.p-icon g {
     }
 }
 `;
-const baseStyles = `
+const commonStyle = `
 @layer primereact {
     .p-component, .p-component * {
         box-sizing: border-box;
@@ -280,22 +303,6 @@ const baseStyles = `
     
     .p-hidden-space {
         visibility: hidden;
-    }
-    
-    .p-hidden-accessible {
-        border: 0;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-    }
-    
-    .p-hidden-accessible input,
-    .p-hidden-accessible select {
-        transform: scale(0);
     }
     
     .p-reset {
@@ -320,10 +327,6 @@ const baseStyles = `
         left: 0;
         width: 100%;
         height: 100%;
-    }
-    
-    .p-overflow-hidden {
-        overflow: hidden;
     }
     
     .p-unselectable-text {
@@ -442,6 +445,7 @@ const baseStyles = `
         word-wrap: normal !important;
     }
     
+    /* @todo Refactor */
     .p-menu .p-menuitem-link {
         cursor: pointer;
         display: flex;
@@ -626,14 +630,15 @@ const _useDefaultPT = (callback, key, params) => {
     return _usePT(getDefaultPT(), callback, key, params);
 };
 
-export const useHandleStyle = (styles, isUnstyled = false, config) => {
+export const useHandleStyle = (styles, isUnstyled = () => {}, config) => {
     const { name, styled = false, hostName = '' } = config;
 
     const globalCSS = _useGlobalPT(getOptionValue, 'global.css', ComponentBase.cParams);
     const componentName = ObjectUtils.toFlatCase(name);
 
+    const { load: loadBaseStyle } = useStyle(baseStyle, { name: 'base', manual: true });
+    const { load: loadCommonStyle } = useStyle(commonStyle, { name: 'common', manual: true });
     const { load: loadGlobalStyle } = useStyle(globalCSS, { name: 'global', manual: true });
-    const { load: loadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
     const { load } = useStyle(styles, { name: name, manual: true });
 
     const hook = (hookName) => {
@@ -647,10 +652,15 @@ export const useHandleStyle = (styles, isUnstyled = false, config) => {
     };
 
     useMountEffect(() => {
-        hook('useMountEffect');
+        loadBaseStyle();
         loadGlobalStyle();
-        loadCommonStyle();
-        if (!styled) load();
+
+        if (!isUnstyled()) {
+            loadCommonStyle();
+            !styled && load();
+        }
+
+        hook('useMountEffect');
     });
 
     useUpdateEffect(() => {
