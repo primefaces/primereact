@@ -20,7 +20,8 @@ export const UITreeNode = React.memo((props) => {
             context: {
                 selected: props.selected,
                 expanded: expanded,
-                checked: props.checked
+                checked: props.checked,
+                isLeaf
             }
         });
     };
