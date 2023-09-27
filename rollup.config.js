@@ -165,8 +165,15 @@ function addEntry(name, input, output, isComponent = true) {
     const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
 
+    const onwarn = (warning) => {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+            return;
+          }
+    }
+
     const getEntry = (isMinify) => {
         return {
+            onwarn,
             input,
             plugins: [...plugins, isMinify && terser(TERSER_PLUGIN_OPTIONS), useCorePlugin && corePlugin()],
             external,
@@ -181,7 +188,8 @@ function addEntry(name, input, output, isComponent = true) {
                 {
                     format: 'cjs',
                     file: `${output}.cjs${isMinify ? '.min' : ''}.js`,
-                    exports
+                    exports,
+                    banner: "'use client';" // This line is required for SSR.
                 },
                 {
                     format: 'esm',
