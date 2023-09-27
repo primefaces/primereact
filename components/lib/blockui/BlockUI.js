@@ -29,6 +29,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
             setVisibleState(false);
 
             props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            document.body.style.removeProperty('--scrollbar-width');
             props.onUnblocked && props.onUnblocked();
         };
 
@@ -46,6 +47,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const onPortalMounted = () => {
         if (props.fullScreen) {
             DomHandler.addClass(document.body, 'p-overflow-hidden');
+            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
             document.activeElement.blur();
         }
 
@@ -69,6 +71,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     useUnmountEffect(() => {
         if (props.fullScreen) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            document.body.style.removeProperty('--scrollbar-width');
         }
 
         ZIndexUtils.clear(maskRef.current);

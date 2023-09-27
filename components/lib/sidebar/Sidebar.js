@@ -105,6 +105,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         if (props.blockScroll) {
             DomHandler.addClass(document.body, 'p-overflow-hidden');
+            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
         }
     };
 
@@ -113,6 +114,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
         if (props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            document.body.style.removeProperty('--scrollbar-width');
         }
     };
 

@@ -313,6 +313,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         if (props.blockScroll) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            document.body.style.removeProperty('--scrollbar-width');
         }
     };
 
@@ -332,6 +333,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         if (props.blockScroll || (props.maximizable && maximized)) {
             DomHandler.addClass(document.body, 'p-overflow-hidden');
+            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
         }
     };
 
@@ -345,9 +347,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
             if (hasBlockScroll || isMaximized) {
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
+                document.body.style.removeProperty('--scrollbar-width');
             }
         } else if (props.blockScroll || isMaximized) {
             DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            document.body.style.removeProperty('--scrollbar-width');
         }
     };
 
@@ -401,6 +405,9 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             let funcName = maximized && visibleState ? 'addClass' : 'removeClass';
 
             DomHandler[funcName](document.body, 'p-overflow-hidden');
+            if (funcName === 'addClass') {
+                document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
+            } else if (funcName === 'removeClass') document.body.style.removeProperty('--scrollbar-width');
         }
     };
 

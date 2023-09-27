@@ -49,6 +49,7 @@ export const Image = React.memo(
             if (props.preview) {
                 setMaskVisibleState(true);
                 DomHandler.addClass(document.body, 'p-overflow-hidden');
+                document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
                 setTimeout(() => {
                     setPreviewVisibleState(true);
                 }, 25);
@@ -59,6 +60,7 @@ export const Image = React.memo(
             if (!previewClick.current) {
                 setPreviewVisibleState(false);
                 DomHandler.removeClass(document.body, 'p-overflow-hidden');
+                document.body.style.removeProperty('--scrollbar-width');
                 setRotateState(0);
                 setScaleState(1);
             }
