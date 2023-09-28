@@ -266,7 +266,7 @@ export const AutoComplete = React.memo(
 
         const onInputKeyDown = (event) => {
             if (overlayVisibleState) {
-                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li.p-highlight');
+                let highlightItem = DomHandler.findSingle(overlayRef.current, 'li[data-p-highlight="true"]');
 
                 switch (event.which) {
                     //down
@@ -277,13 +277,14 @@ export const AutoComplete = React.memo(
                             if (nextElement) {
                                 !isUnstyled() && DomHandler.addClass(nextElement, 'p-highlight');
                                 nextElement.setAttribute('data-p-highlight', true);
-                                DomHandler.removeClass(highlightItem, 'p-highlight');
+                                !isUnstyled() && DomHandler.removeClass(highlightItem, 'p-highlight');
+                                highlightItem.setAttribute('data-p-highlight', false);
                                 DomHandler.scrollInView(getScrollableElement(), nextElement);
                             }
                         } else {
                             highlightItem = DomHandler.findSingle(overlayRef.current, 'li');
 
-                            if (DomHandler.hasClass(highlightItem, 'p-autocomplete-item-group')) {
+                            if (DomHandler.getAttribute(highlightItem, 'data-pc-section') === 'itemgroup') {
                                 highlightItem = findNextItem(highlightItem);
                             }
 
@@ -382,13 +383,13 @@ export const AutoComplete = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.hasClass(nextItem, 'p-autocomplete-item-group') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-pc-section') === 'itemgroup' ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             let prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.hasClass(prevItem, 'p-autocomplete-item-group') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-pc-section') === 'itemgroup' ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onInputFocus = (event) => {

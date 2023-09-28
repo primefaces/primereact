@@ -279,6 +279,7 @@ export const OrderList = React.memo(
                     onChange={props.onChange}
                     tabIndex={props.tabIndex}
                     filterIcon={props.filterIcon}
+                    isUnstyled={isUnstyled}
                     ptm={ptm}
                     cx={cx}
                 />

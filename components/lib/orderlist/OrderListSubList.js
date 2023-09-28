@@ -46,14 +46,16 @@ export const OrderListSubList = React.memo((props) => {
     const onDragOver = (event, index) => {
         if (draggedItemIndex.current !== index && draggedItemIndex.current + 1 !== index) {
             dragOverItemIndex.current = index;
-            DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
+            !props.isUnstyled() && DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
+            event.target.setAttribute('data-p-orderlist-droppoint-highlight', true);
             event.preventDefault();
         }
     };
 
     const onDragLeave = (event) => {
         dragOverItemIndex.current = null;
-        DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        !props.isUnstyled() && DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        event.target.setAttribute('data-p-orderlist-droppoint-highlight', false);
     };
 
     const onDrop = (event) => {
@@ -62,7 +64,8 @@ export const OrderListSubList = React.memo((props) => {
 
         ObjectUtils.reorderArray(value, draggedItemIndex.current, dropIndex);
         dragOverItemIndex.current = null;
-        DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        !props.isUnstyled() && DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        event.target.setAttribute('data-p-orderlist-droppoint-highlight', false);
 
         if (props.onChange) {
             props.onChange({
@@ -135,7 +138,8 @@ export const OrderListSubList = React.memo((props) => {
                         draggable: 'true',
                         onDragStart: (e) => onDragStart(e, i),
                         onDragEnd: onDragEnd,
-                        tabIndex: props.tabIndex
+                        tabIndex: props.tabIndex,
+                        'data-p-highlight': isSelected(item)
                     },
                     getPTOptions(item, 'item')
                 );

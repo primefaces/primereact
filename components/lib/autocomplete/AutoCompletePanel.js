@@ -86,7 +86,8 @@ export const AutoCompletePanel = React.memo(
                 const itemGroupProps = mergeProps(
                     {
                         className: cx('itemGroup'),
-                        style
+                        style,
+                        'data-p-highlight': false
                     },
                     _ptm('itemGroup')
                 );
