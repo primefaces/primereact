@@ -7,6 +7,10 @@ const styles = `
         display: flex;
         align-items: center;
     }
+
+    .p-message-icon {
+        flex-shrink: 0;
+    }
     
     .p-message-close {
         display: flex;
