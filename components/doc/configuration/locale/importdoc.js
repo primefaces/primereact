@@ -1,5 +1,6 @@
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import Link from 'next/link';
+import { DocSectionCode } from '../../common/docsectioncode';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function ImportDoc(props) {
     const code = {
@@ -12,7 +13,7 @@ import { locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOptio
         <>
             <DocSectionText {...props}>
                 <p>
-                    Configuration is managed by the Locale API imported from <i>primereact/api</i>.
+                    Configuration is managed by the <Link href="/configuration/#api.API.LocaleOptions">Locale API</Link> imported from <i>primereact/api</i>.
                 </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />

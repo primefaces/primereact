@@ -13,10 +13,6 @@
                     "to": "/configuration"
                 },
                 {
-                    "name": "Locale",
-                    "to": "/locale"
-                },
-                {
                     "name": "Accessibility",
                     "to": "/accessibility"
                 }

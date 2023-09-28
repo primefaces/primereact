@@ -1,4 +1,4 @@
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionText } from '../../common/docsectiontext';
 
 export function RepositoryDoc(props) {
     return (
