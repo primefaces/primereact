@@ -1,5 +1,9 @@
 # Changelog
 
+## [10.0.1](https://github.com/primefaces/primereact/tree/10.0.1) (2023-09-28)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.0...10.0.1)
+
 ## [10.0.0](https://github.com/primefaces/primereact/tree/10.0.0) (2023-09-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.6.2...10.0.0)
