@@ -79,11 +79,13 @@ import 'primeicons/primeicons.css';
 import './style.css';
 import './flags.css';
 import App from './App';
+${props.embedded ? 'import { ThemeSwitcher } from "./components/ThemeSwitcher";' : ''}
 
 const root = ReactDOM.createRoot(document.getElementById('root')${isTypeScript ? ' as HTMLElement' : ''});
 root.render(
     <React.StrictMode>
         <PrimeReactProvider${unstyled}>
+            ${props.embedded ? '<ThemeSwitcher />' : ''}
             <App />
         </PrimeReactProvider>
     </React.StrictMode>
@@ -105,8 +107,24 @@ root.render(
         <meta name="description" content="**${description}** ${PrimeReact.description}" />
         <!-- Added to show icons in the editor -->
         <link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">
-        ${props.embedded ? '<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">' : ''}
         <title>PrimeReact App</title>
+        ${props.embedded ? '<script src="https://cdn.tailwindcss.com"></script>' : ''}
+        ${
+            props.embedded
+                ? `<script>
+        tailwind.config = {
+          darkMode: 'class',
+          content: [
+            "./src/**/*.{js,jsx,ts,tsx}",
+          ],
+          theme: {
+            extend: {}
+          },
+          plugins: []
+        }
+      </script>`
+                : ''
+        }
         </head>
         <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -119,6 +137,33 @@ root.render(
         },
         ...extFiles
     };
+
+    if (props.embedded) {
+        files[`${path}components/ThemeSwitcher.js`] = {
+            content: `
+import React, { useState } from 'react';
+
+export const ThemeSwitcher = () => {
+    const [iconClassName, setIconClassName] = useState('pi-moon');
+
+    const onThemeToggler = () => {
+        const root = document.getElementsByTagName('html')[0];
+
+        root.classList.toggle('dark');
+        setIconClassName((prevClasName) => (prevClasName === 'pi-moon' ? 'pi-sun' : 'pi-moon'));
+    };
+
+    return (
+        <div className="card flex justify-end mb-4">
+            <button type="button" className="flex border-1 w-2rem h-2rem p-0 align-center justify-center" onClick={onThemeToggler}>
+                <i className={\`dark:text-white pi \${iconClassName}\`} />
+            </button>
+        </div>
+    );
+};
+`
+        };
+    }
 
     if (props.service) {
         props.service.forEach((name) => {
