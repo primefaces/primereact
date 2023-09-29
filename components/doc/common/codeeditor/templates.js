@@ -34,7 +34,6 @@ const getCRA = (props = {}, template = 'javascript') => {
     const sourceFileName = `${path}App${fileExtension}`;
     const indexFileName = `${path}index${fileExtension}`;
     const unstyled = props.embedded ? ' value={{ unstyled: true, pt: Tailwind }}' : '';
-    const twImport = props.embedded ? ', Tailwind' : '';
 
     let extFiles = {};
 
@@ -71,11 +70,12 @@ const getCRA = (props = {}, template = 'javascript') => {
         [`${indexFileName}`]: {
             content: `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { PrimeReactProvider${twImport} } from 'primereact/api';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
+import { PrimeReactProvider } from 'primereact/api';
+${props.embedded ? `import { Tailwind } from 'primereact/passthrough/tailwind';` : ''}
+${!props.embedded ? `import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme` : ''}
+${!props.embedded ? `import 'primeflex/primeflex.css';                                   // css utility` : ''}
 import 'primereact/resources/primereact.css';                       // core css
-import 'primeicons/primeicons.css';                                 // icons
-import 'primeflex/primeflex.css';                                   // css utility
+import 'primeicons/primeicons.css';   
 import './style.css';
 import './flags.css';
 import App from './App';
@@ -105,13 +105,14 @@ root.render(
         <meta name="description" content="**${description}** ${PrimeReact.description}" />
         <!-- Added to show icons in the editor -->
         <link rel="stylesheet" href="https://unpkg.com/primeicons@${dependencies['primeicons'].replace(/[\^|~]/gi, '')}/primeicons.css">
+        ${props.embedded ? '<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">' : ''}
         <title>PrimeReact App</title>
-    </head>
-    <body>
+        </head>
+        <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
-    </body>
-</html>`
+        </body>
+        </html>`
         },
         [`${sourceFileName}`]: {
             content: sources[template].replace(/^\n/, '')
@@ -287,37 +288,13 @@ export default function Document() {
         `
         });
 
-    if (props.embedded) {
-        files['tailwind.config.js'] = {
-            content: `/** @type{import('tailwindcss')Config} */
-module.exports = {
-  content: [
-    "./node_modules/primereact/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}`
-        };
-
-        files['postcss.config.js'] = {
-            content: `module.exports = {
-        plugins: {
-            tailwindcss: {},
-            autoprefixer: {}
-        }
-    }`
-        };
-    }
-
     return { files, dependencies, sourceFileName };
 };
 
 const staticStyles = {
     global: `html {
-    font-size: 14px;
-}
+        font-size: 14px;
+    }
 
 body {
     font-family: var(--font-family);

@@ -168,8 +168,8 @@ function addEntry(name, input, output, isComponent = true) {
     const onwarn = (warning) => {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
             return;
-          }
-    }
+        }
+    };
 
     const getEntry = (isMinify) => {
         return {
@@ -193,7 +193,7 @@ function addEntry(name, input, output, isComponent = true) {
                 },
                 {
                     format: 'esm',
-                    file: `${output}.esm${isMinify ? '.min' : ''}.mjs`,
+                    file: `${output}.esm${isMinify ? '.min' : ''}.js`,
                     exports,
                     banner: "'use client';" // This line is required for SSR.
                 }
