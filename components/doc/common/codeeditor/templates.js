@@ -71,22 +71,30 @@ const getCRA = (props = {}, template = 'javascript') => {
             content: `import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { PrimeReactProvider } from 'primereact/api';
-${props.embedded ? `import Tailwind from 'primereact/passthrough/tailwind';` : ''}
-${!props.embedded ? `import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme` : ''}
-${!props.embedded ? `import 'primeflex/primeflex.css';                                   // css utility` : ''}
-import 'primereact/resources/primereact.css';                       // core css
+${
+    props.embedded
+        ? `import Tailwind from 'primereact/passthrough/tailwind';
+import { ThemeSwitcher } from "./components/ThemeSwitcher";
+`
+        : `import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
+import 'primeflex/primeflex.css';                                   // css utility
 import 'primeicons/primeicons.css';
+import 'primereact/resources/primereact.css';                       // core css`
+}
 import './style.css';
 import './flags.css';
 import App from './App';
-${props.embedded ? 'import { ThemeSwitcher } from "./components/ThemeSwitcher";' : ''}
 
 const root = ReactDOM.createRoot(document.getElementById('root')${isTypeScript ? ' as HTMLElement' : ''});
 root.render(
     <React.StrictMode>
         <PrimeReactProvider${unstyled}>
-            ${props.embedded ? '<ThemeSwitcher />' : ''}
-            <App />
+            ${
+                props.embedded
+                    ? `<ThemeSwitcher />
+             <App />`
+                    : `<App />`
+            }
         </PrimeReactProvider>
     </React.StrictMode>
 );`
