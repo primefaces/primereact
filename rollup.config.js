@@ -359,7 +359,7 @@ function addPackageJson() {
     "unpkg": "primereact.all.min.js",
     "jsdelivr": "primereact.all.min.js",
     "main": "primereact.all.min.js",
-    "module": "primereact.all.esm.min.mjs",
+    "module": "primereact.all.esm.min.js",
     "web-types": "web-types.json",
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
