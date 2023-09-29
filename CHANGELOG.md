@@ -1,8 +1,21 @@
 # Changelog
 
+## [10.0.2](https://github.com/primefaces/primereact/tree/10.0.2) (2023-09-29)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.1...10.0.2)
+
+**Fixed bugs:**
+
+- The .esm builds not working as expected. [\#4984](https://github.com/primefaces/primereact/issues/4984)
+- Improve Tailwind import [\#4985](https://github.com/primefaces/primereact/issues/4985)
+
 ## [10.0.1](https://github.com/primefaces/primereact/tree/10.0.1) (2023-09-28)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.0...10.0.1)
+
+**Fixed bugs:**
+
+- Base styles are not loading [\#4982](https://github.com/primefaces/primereact/issues/4982)
 
 ## [10.0.0](https://github.com/primefaces/primereact/tree/10.0.0) (2023-09-28)
 
