@@ -71,11 +71,11 @@ const getCRA = (props = {}, template = 'javascript') => {
             content: `import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { PrimeReactProvider } from 'primereact/api';
-${props.embedded ? `import { Tailwind } from 'primereact/passthrough/tailwind';` : ''}
+${props.embedded ? `import Tailwind from 'primereact/passthrough/tailwind';` : ''}
 ${!props.embedded ? `import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme` : ''}
 ${!props.embedded ? `import 'primeflex/primeflex.css';                                   // css utility` : ''}
 import 'primereact/resources/primereact.css';                       // core css
-import 'primeicons/primeicons.css';   
+import 'primeicons/primeicons.css';
 import './style.css';
 import './flags.css';
 import App from './App';
