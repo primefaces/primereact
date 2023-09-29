@@ -12,7 +12,7 @@ import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { FormBooleanEvent, FormEvent } from '../ts-helpers';
+import { FormEvent } from '../ts-helpers';
 import { PassThroughType } from '../utils/utils';
 
 export declare type RadioButtonPassThroughType<T> = PassThroughType<T, RadioButtonPassThroughMethodOptions>;
@@ -79,7 +79,7 @@ export interface RadioButtonState {
  * @extends {FormEvent}
  * @event
  */
-interface RadioButtonChangeEvent extends FormBooleanEvent {}
+interface RadioButtonChangeEvent extends FormEvent {}
 
 /**
  * Custom click event.
@@ -87,7 +87,7 @@ interface RadioButtonChangeEvent extends FormBooleanEvent {}
  * @extends {FormEvent}
  * @event
  */
-interface RadioButtonClickEvent extends FormBooleanEvent {}
+interface RadioButtonClickEvent extends FormEvent {}
 
 /**
  * Defines valid properties in RadioButton component. In addition to these, all properties of HTMLDivElement can be used in this component.
