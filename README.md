@@ -28,14 +28,11 @@ Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies a
 
 ## Styles
 
-Theme and core are the necessary css files of the components, visit the [Themes](https://primereact.org/theming) section for the complete list of available themes to choose from.
+Theme is the necessary css file of the components, visit the [Themes](https://primereact.org/theming) section for the complete list of available themes to choose from.
 
 ```javascript
 //theme
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
-
-//core
-import 'primereact/resources/primereact.min.css';
 ```
 
 Each PrimeReact theme has its own font family so it is suggested to apply it to your application for a unified look.
