@@ -50,7 +50,7 @@ const Tailwind = {
                 stroke-dasharray: 1, 200;
                 stroke-dashoffset: 0;
             }
-            
+
             50% {
                 stroke-dasharray: 89, 200;
                 stroke-dashoffset: -35px;
@@ -3363,4 +3363,4 @@ const Tailwind = {
     }
 };
 
-module.exports = { Tailwind };
+export default Tailwind;
