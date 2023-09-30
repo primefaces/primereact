@@ -375,7 +375,11 @@ export const MultiSelect = React.memo(
                         }
                     }
                 } else {
-                    option = findOptionByValue(val, props.value);
+                    option = findOptionByValue(val, props.options);
+
+                    if (ObjectUtils.isEmpty(option)) {
+                        option = findOptionByValue(val, props.value);
+                    }
                 }
             }
 
