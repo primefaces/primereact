@@ -65,7 +65,7 @@
         "eslint": "8.48.0",
         "eslint-config-next": "13.4.19",
         "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-jest-dom": "^4.0.3",
+        "eslint-plugin-jest-dom": "^5.1.0",
         "gulp": "^4.0.2",
         "gulp-concat": "^2.6.1",
         "gulp-flatten": "^0.4.0",
