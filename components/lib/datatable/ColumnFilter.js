@@ -522,46 +522,50 @@ export const ColumnFilter = React.memo((props) => {
     };
 
     const createMenuButton = () => {
-        if (showMenuButton()) {
-            const filterIconProps = mergeProps(
-                {
-                    'aria-hidden': true
-                },
-                getColumnPTOptions('filterIcon')
-            );
-            const icon = props.filterIcon || <FilterIcon {...filterIconProps} />;
-            const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
-
-            const label = filterLabel();
-            const filterMenuButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('filterMenuButton', { overlayVisibleState, hasFilter }),
-                    'aria-haspopup': true,
-                    'aria-expanded': overlayVisibleState,
-                    onClick: (e) => toggleMenu(e),
-                    onKeyDown: (e) => onToggleButtonKeyDown(e),
-                    'aria-label': label
-                },
-                getColumnPTOptions('filterMenuButton', {
-                    context: {
-                        active: hasFilter()
-                    }
-                })
-            );
-
-            return (
-                <button ref={iconRef} {...filterMenuButtonProps}>
-                    {columnFilterIcon}
-                    <Ripple />
-                </button>
-            );
+        if (!showMenuButton()) {
+            return null;
         }
 
-        return null;
+        const filterIconProps = mergeProps(
+            {
+                'aria-hidden': true
+            },
+            getColumnPTOptions('filterIcon')
+        );
+        const icon = props.filterIcon || <FilterIcon {...filterIconProps} />;
+        const columnFilterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
+
+        const label = filterLabel();
+        const filterMenuButtonProps = mergeProps(
+            {
+                type: 'button',
+                className: cx('filterMenuButton', { overlayVisibleState, hasFilter }),
+                'aria-haspopup': true,
+                'aria-expanded': overlayVisibleState,
+                onClick: (e) => toggleMenu(e),
+                onKeyDown: (e) => onToggleButtonKeyDown(e),
+                'aria-label': label
+            },
+            getColumnPTOptions('filterMenuButton', {
+                context: {
+                    active: hasFilter()
+                }
+            })
+        );
+
+        return (
+            <button ref={iconRef} {...filterMenuButtonProps}>
+                {columnFilterIcon}
+                <Ripple />
+            </button>
+        );
     };
 
     const createClearButton = () => {
+        if (!showMenuButton()) {
+            return null;
+        }
+
         const filterClearIconProps = mergeProps(
             {
                 'aria-hidden': true
