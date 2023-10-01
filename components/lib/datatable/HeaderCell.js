@@ -5,7 +5,7 @@ import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
@@ -362,6 +362,7 @@ export const HeaderCell = React.memo((props) => {
         const rowSpan = getColumnProp('rowSpan');
         const ariaSort = getAriaSort(sortMeta);
         const headerTooltip = getColumnProp('headerTooltip');
+        const headerClassName = getColumnProp('headerClassName');
         const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
         const headerTooltipOptions = getColumnProp('headerTooltipOptions');
 
@@ -369,7 +370,7 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                className: cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }),
+                className: classNames(headerClassName, cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp })),
                 style,
                 role: 'columnheader',
                 onClick: (e) => onClick(e),
