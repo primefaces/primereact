@@ -19,9 +19,8 @@ export function TemplateDoc(props) {
 
     const confirm = () => {
         toastBC.current.show({
-            severity: 'info',
+            severity: 'warn',
             sticky: true,
-            className: 'border-none',
             content: (
                 <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                     <div className="text-center">
@@ -29,8 +28,8 @@ export function TemplateDoc(props) {
                         <div className="font-bold text-xl my-3">Are you sure?</div>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem" />
-                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem" />
+                        <Button severity="success" label="Yes" onClick={(e) => clear(true)}></Button>
+                        <Button severity="secondary" label="No" onClick={(e) => clear(false)}></Button>
                     </div>
                 </div>
             )
@@ -41,7 +40,7 @@ export function TemplateDoc(props) {
         basic: `
 <Toast ref={toast} />
 <Toast ref={toastBC} position="bottom-center" />
-<Button type="button" onClick={confirm} label="Submit" />
+<Button onClick={confirm} label="Confirm" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -63,9 +62,8 @@ export default function TemplateDemo() {
 
     const confirm = () => {
         toastBC.current.show({
-            severity: 'info',
+            severity: 'warn',
             sticky: true,
-            className: 'border-none',
             content: (
                 <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                     <div className="text-center">
@@ -73,8 +71,8 @@ export default function TemplateDemo() {
                         <div className="font-bold text-xl my-3">Are you sure?</div>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem" />
-                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem" />
+                        <Button severity="success" label="Yes" onClick={(e) => clear(true)}></Button>
+                        <Button severity="secondary" label="No" onClick={(e) => clear(false)}></Button>
                     </div>
                 </div>
             )
@@ -85,7 +83,7 @@ export default function TemplateDemo() {
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <Toast ref={toastBC} position="bottom-center" />
-            <Button type="button" onClick={confirm} label="Submit" />
+            <Button onClick={confirm} label="Confirm" />
         </div>
     )
 }
@@ -110,9 +108,8 @@ export default function TemplateDemo() {
 
     const confirm = () => {
         toastBC.current?.show({
-            severity: 'info',
+            severity: 'warn',
             sticky: true,
-            className: 'border-none',
             content: (
                 <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                     <div className="text-center">
@@ -120,8 +117,8 @@ export default function TemplateDemo() {
                         <div className="font-bold text-xl my-3">Are you sure?</div>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={(e) => clear(true)} type="button" label="Confirm" className="p-button-success w-6rem" />
-                        <Button onClick={(e) => clear(false)} type="button" label="Cancel" className="p-button-warning w-6rem" />
+                        <Button severity="success" label="Yes" onClick={(e) => clear(true)}></Button>
+                        <Button severity="secondary" label="No" onClick={(e) => clear(false)}></Button>
                     </div>
                 </div>
             )
@@ -132,7 +129,7 @@ export default function TemplateDemo() {
         <div className="card flex justify-content-center">
             <Toast ref={toast} />
             <Toast ref={toastBC} position="bottom-center" />
-            <Button type="button" onClick={confirm} label="Submit" />
+            <Button onClick={confirm} label="Confirm" />
         </div>
     )
 }
@@ -149,7 +146,7 @@ export default function TemplateDemo() {
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <Toast ref={toastBC} position="bottom-center" />
-                <Button type="button" onClick={confirm} label="Submit" />
+                <Button onClick={confirm} label="Confirm" />
             </div>
             <DocSectionCode code={code} />
         </>
