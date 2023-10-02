@@ -425,6 +425,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     closeIcon?: IconType<MultiSelectProps> | undefined;
     /**
+     * Clear icon of the multiselect input.
+     */
+    clearIcon?: IconType<MultiSelectProps> | undefined;
+    /**
      * A property to uniquely match the value in options for better performance.
      */
     dataKey?: string | undefined;
