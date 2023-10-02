@@ -33522,6 +33522,14 @@
                             "description": "Style class of the element."
                         },
                         {
+                            "name": "clearIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<MultiSelectProps>",
+                            "default": "",
+                            "description": "Clear icon of the multiselect input."
+                        },
+                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
