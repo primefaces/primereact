@@ -193,6 +193,11 @@ const styles = `
 `;
 
 const inlineStyles = {
+    root: ({ props }) =>
+        props.showClear &&
+        !props.disabled && {
+            position: 'relative'
+        },
     itemGroup: ({ scrollerOptions }) => ({ height: scrollerOptions.props ? scrollerOptions.props.itemSize : undefined })
 };
 

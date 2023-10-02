@@ -95,6 +95,6 @@ export const DataViewLayoutOptionsBase = ComponentBase.extend({
             root: 'p-dataview-layout-options p-selectbutton p-buttonset',
             listButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' }),
             gridButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' })
-        },
+        }
     }
 });
