@@ -30,7 +30,7 @@ export const ProgressBar = React.memo(
             const label = createLabel();
             const rootProps = mergeProps(
                 {
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style,
                     role: 'progressbar',
                     'aria-valuemin': '0',
