@@ -33,7 +33,7 @@ export const ScrollPanelBase = ComponentBase.extend({
                 width: calc(100% + 18px);
                 padding: 0 18px 18px 0;
                 position: relative;
-                overflow: hidden;
+                overflow: scroll;
                 box-sizing: border-box;
             }
             
