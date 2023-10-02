@@ -8,7 +8,7 @@ export function AdvancedDoc(props) {
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
+            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
         </div>
     );
     const code = {
@@ -32,7 +32,7 @@ export default function AdvancedDemo() {
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
+            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
         </div>
     );
 
@@ -60,7 +60,7 @@ export default function AdvancedDemo() {
     const footer = (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
+            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
         </div>
     );
 
