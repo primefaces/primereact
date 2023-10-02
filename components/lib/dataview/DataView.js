@@ -32,7 +32,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
         {
             id: props.id,
             style: props.style,
-            className: classNames(props.className, cx('option.root'))
+            className: classNames(props.className, cx('root'))
         },
         DataViewLayoutOptionsBase.getOtherProps(props),
         ptm('root')
@@ -41,7 +41,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const listButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('option.listButton'),
+            className: cx('listButton'),
             onClick: (event) => changeLayout(event, 'list')
         },
         ptm('listButton')
@@ -50,7 +50,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const gridButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('option.gridButton'),
+            className: cx('gridButton'),
             onClick: (event) => changeLayout(event, 'grid')
         },
         ptm('gridButton')
