@@ -67,7 +67,7 @@ export default function UnstyledDemo() {
     }, []);
 
     return (
-        <div className="card terminal-demo">
+        <div className="card text-gray-700 dark:text-white/80">
             <p>
                 Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
             </p>
