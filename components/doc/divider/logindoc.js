@@ -12,11 +12,11 @@ export function LoginDoc(props) {
         <div className="col-5 flex align-items-center justify-content-center">
             <div className="p-fluid">
                 <div className="field">
-                    <label for="username">Username</label>
+                    <label htmlFor="username">Username</label>
                     <InputText id="username" type="text" />
                 </div>
                 <div className="field">
-                    <label for="password">Password</label>
+                    <label htmlFor="password">Password</label>
                     <InputText id="password" type="password" />
                 </div>
                 <Button label="Login"></Button>
@@ -49,11 +49,11 @@ export default function LoginDemo() {
                 <div className="col-5 flex align-items-center justify-content-center">
                     <div className="p-fluid">
                         <div className="field">
-                            <label for="username">Username</label>
+                            <label htmlFor="username">Username</label>
                             <InputText id="username" type="text" />
                         </div>
                         <div className="field">
-                            <label for="password">Password</label>
+                            <label htmlFor="password">Password</label>
                             <InputText id="password" type="password" />
                         </div>
                         <Button label="Login"></Button>
@@ -88,11 +88,11 @@ export default function LoginDemo() {
                 <div className="col-5 flex align-items-center justify-content-center">
                     <div className="p-fluid">
                         <div className="field">
-                            <label for="username">Username</label>
+                            <label htmlFor="username">Username</label>
                             <InputText id="username" type="text" />
                         </div>
                         <div className="field">
-                            <label for="password">Password</label>
+                            <label htmlFor="password">Password</label>
                             <InputText id="password" type="password" />
                         </div>
                         <Button label="Login"></Button>
@@ -126,11 +126,11 @@ export default function LoginDemo() {
                     <div className="col-5 flex align-items-center justify-content-center">
                         <div className="p-fluid">
                             <div className="field">
-                                <label for="username">Username</label>
+                                <label htmlFor="username">Username</label>
                                 <InputText id="username" type="text" />
                             </div>
                             <div className="field">
-                                <label for="password">Password</label>
+                                <label htmlFor="password">Password</label>
                                 <InputText id="password" type="password" />
                             </div>
                             <Button label="Login"></Button>
