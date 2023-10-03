@@ -50,7 +50,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
+    useOnEscapeKey(maskRef, visibleState && props.closable && props.closeOnEscape, (event) => {
         const currentTarget = event.currentTarget;
 
         if (!currentTarget || !currentTarget.primeDialogParams) {
@@ -60,8 +60,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         const params = currentTarget.primeDialogParams;
         const paramLength = params.length;
 
-        onClose(event);
-        params.splice(paramLength - 1, 1);
+        // Handle "esc" key only if this dialog is the last one in the list of currently visible
+        // (shown on top of the others):
+        if (params[paramLength-1].id === idState) {
+            onClose(event);
+        }
     });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -319,12 +322,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
-        updateGlobalDialogsRegistry(true);
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
-        updateGlobalDialogsRegistry(false);
     };
 
     const updateScrollBlocker = () => {
@@ -341,8 +342,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const updateGlobalDialogsRegistry = (isMounted) => {
-        // Update current dialog info in global registry if it is mounted:
-        if (isMounted) {
+        // Update current dialog info in global registry if it is mounted and visible:
+        if (isMounted && visibleState) {
             const newParam = { id: idState, hasBlockScroll: shouldBlockScroll };
 
             // Create registry if not yet created:
@@ -358,7 +359,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
             }
         }
-        // Or remove it from global registry if unmounted:
+        // Or remove it from global registry if unmounted or invisible:
         else {
             document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
         }
@@ -409,6 +410,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
+        updateGlobalDialogsRegistry(true)
+
         if (props.visible) {
             setMaskVisibleState(true);
         }
@@ -443,10 +446,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         updateGlobalDialogsRegistry(true);
-    }, [shouldBlockScroll]);
+    }, [shouldBlockScroll, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
+        updateGlobalDialogsRegistry(false);
         DomHandler.removeInlineStyle(styleElement.current);
         ZIndexUtils.clear(maskRef.current);
     });
