@@ -667,7 +667,7 @@ export const Carousel = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { isVertical })),
                 style: props.style
             },
             CarouselBase.getOtherProps(props),
