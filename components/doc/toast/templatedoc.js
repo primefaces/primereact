@@ -18,6 +18,7 @@ export function TemplateDoc(props) {
     };
 
     const confirm = () => {
+        toastBC.current.clear();
         toastBC.current.show({
             severity: 'warn',
             sticky: true,
@@ -61,6 +62,7 @@ export default function TemplateDemo() {
     };
 
     const confirm = () => {
+        toastBC.current.clear();
         toastBC.current.show({
             severity: 'warn',
             sticky: true,
@@ -107,6 +109,7 @@ export default function TemplateDemo() {
     };
 
     const confirm = () => {
+        toastBC.current?.clear();
         toastBC.current?.show({
             severity: 'warn',
             sticky: true,
