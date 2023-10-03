@@ -125,9 +125,9 @@ const styles = `
     }
     
     .p-treeselect-clear-icon {
-        position: absolute;
+        position: relative;
         top: 50%;
-        margin-top: -.5rem;
+        margin-top: -0.6rem;
     }
     
     .p-fluid .p-treeselect {
