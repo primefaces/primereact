@@ -34,7 +34,7 @@ export function TemplateDoc(props) {
 
         if (node.url) {
             label = (
-                <a href={node.url} className="text-primary hover:underline font-semibold">
+                <a href={node.url} className="text-primary hover:underline font-semibold" target="_blank" rel="noopener noreferrer">
                     {node.label}
                 </a>
             );
@@ -100,7 +100,7 @@ export default function TemplateDemo() {
         let label = <b>{node.label}</b>;
 
         if (node.url) {
-            label = <a href={node.url} className="text-primary hover:underline font-semibold">{node.label}</a>;
+            label = <a href={node.url} className="text-primary hover:underline font-semibold" target="_blank" rel="noopener noreferrer">{node.label}</a>;
         }
 
         return <span className={options.className}>{label}</span>;
@@ -167,7 +167,7 @@ export default function TemplateDemo() {
         let label = <b>{node.label}</b>;
 
         if (node.url) {
-            label = <a href={node.url} className="text-primary hover:underline font-semibold">{node.label}</a>;
+            label = <a href={node.url} className="text-primary hover:underline font-semibold" target="_blank" rel="noopener noreferrer">{node.label}</a>;
         }
 
         return <span className={options.className}>{label}</span>;
