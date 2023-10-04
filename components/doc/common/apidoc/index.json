@@ -13444,6 +13444,33 @@
         }
     },
     "componentbase/componentbase": {
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "useHandleStyle": {
+                    "name": "useHandleStyle",
+                    "parameters": [
+                        {
+                            "name": "styles",
+                            "type": "string",
+                            "description": "The style text content."
+                        },
+                        {
+                            "name": "isUnstyled",
+                            "type": "Function",
+                            "description": "Flag removes component related styles in the core."
+                        },
+                        {
+                            "name": "config",
+                            "type": "Object",
+                            "description": "The component configuration."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to use to load style options for a component."
+                }
+            }
+        },
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
