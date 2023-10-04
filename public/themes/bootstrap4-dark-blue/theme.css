@@ -6095,6 +6095,9 @@
     outline-offset: 0;
     box-shadow: 0 0 0 1px #e3f3fe;
   }
+  .p-chip .p-chip-remove-icon:focus {
+    outline: 0 none;
+  }
 
   .p-scrolltop {
     width: 3rem;
