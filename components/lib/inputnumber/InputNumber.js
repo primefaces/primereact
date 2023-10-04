@@ -231,8 +231,9 @@ export const InputNumber = React.memo(
 
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
+                DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
+                event.preventDefault();
             }
         };
 
@@ -262,8 +263,9 @@ export const InputNumber = React.memo(
 
         const onDownButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
+                DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, -1);
+                event.preventDefault();
             }
         };
 
@@ -1164,7 +1166,6 @@ export const InputNumber = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                ref: elementRef,
                 className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
                 style: props.style
             },
@@ -1174,7 +1175,7 @@ export const InputNumber = React.memo(
 
         return (
             <>
-                <span {...rootProps}>
+                <span ref={elementRef} {...rootProps}>
                     {inputElement}
                     {buttonGroup}
                 </span>
