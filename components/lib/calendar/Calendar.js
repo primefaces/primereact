@@ -1297,7 +1297,7 @@ export const Calendar = React.memo(
                 }
 
                 date.setHours(hours);
-                date.setMinutes(minutes);
+                date.setMinutes(doStepMinute(minutes));
                 date.setSeconds(seconds);
                 date.setMilliseconds(milliseconds);
             }
