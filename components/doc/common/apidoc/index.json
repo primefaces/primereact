@@ -9751,11 +9751,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "any"
                         },
                         {
                             "name": "checked",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -9763,7 +9763,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormBooleanTarget"
+                            "type": "FormTarget<any>"
                         }
                     ]
                 },
@@ -9781,11 +9781,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "any"
                         },
                         {
                             "name": "checked",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -9793,7 +9793,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormBooleanTarget"
+                            "type": "FormTarget<any>"
                         }
                     ]
                 }
@@ -52473,7 +52473,7 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "AutoCompleteChangeEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
+                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,CheckboxClickEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
                 },
                 "FormBooleanEvent": {
                     "relatedProp": "",
@@ -52515,7 +52515,7 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "CheckboxChangeEvent,CheckboxClickEvent,InputSwitchChangeEvent"
+                    "extendedBy": "InputSwitchChangeEvent"
                 }
             }
         },
