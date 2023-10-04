@@ -80,11 +80,11 @@ export const MultiSelectHeader = React.memo((props) => {
 
             if (props.filterTemplate) {
                 const defaultContentOptions = {
-                    className: containerClassName,
+                    className: filterContainerProps.className,
                     element: content,
                     filterOptions: filterOptions,
                     onFilter: onFilter,
-                    filterIconClassName,
+                    filterIconClassName: props.filterIconClassName,
                     props
                 };
 

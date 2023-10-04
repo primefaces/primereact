@@ -501,7 +501,11 @@ export const MultiSelect = React.memo(
                 if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 } else {
-                    return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ',' : '') + getLabelByValue(value), '');
+                    if (ObjectUtils.isArray(props.value)) {
+                        return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ',' : '') + getLabelByValue(value), '');
+                    } else {
+                        return '';
+                    }
                 }
             }
 
