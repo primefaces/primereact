@@ -4,8 +4,7 @@ export interface ComponentHooks {
     useUnmountEffect?(): void;
 }
 
-
-export declare function useHandleStyle(styles: string, isUnstyled: () => boolean, config: { name: string; styled?: boolean; hostName?: string; }): void;
+export declare function useHandleStyle(styles: string, isUnstyled: () => boolean, config: { name: string; styled?: boolean; hostName?: string }): void;
 
 export interface ComponentBasePassThroughOptions {
     hooks?: ComponentHooks;
