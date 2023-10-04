@@ -111,6 +111,8 @@ const DocApiTable = (props) => {
                                                                   </React.Fragment>
                                                               );
                                                           })
+                                                        : k === 'default' && ObjectUtils.isEmpty(v)
+                                                        ? 'null'
                                                         : k !== 'description'
                                                         ? createContent(v, k === 'name', d['deprecated'])
                                                         : v}
