@@ -471,7 +471,7 @@ export const TableBody = React.memo(
         };
 
         const onRowClick = (event) => {
-            if (allowCellSelection() || !allowSelection(event)) {
+            if (allowCellSelection() || !allowSelection(event) || event.defaultPrevented) {
                 return;
             }
 

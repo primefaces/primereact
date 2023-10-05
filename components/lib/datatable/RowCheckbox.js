@@ -39,7 +39,7 @@ export const RowCheckbox = React.memo((props) => {
             setFocusedState(true);
 
             props.onChange(event);
-            event.stopPropagation();
+            event.preventDefault();
         }
     };
 
