@@ -154,6 +154,11 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies if pressing escape key should hide the Menu Popup.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
 }
 
 /**
