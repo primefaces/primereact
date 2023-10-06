@@ -35,12 +35,9 @@ export const OrderListSubList = React.memo((props) => {
     };
 
     const onDragStart = (event, index) => {
+        event.dataTransfer.setData('text', 'orderlist');
         dragging.current = true;
         draggedItemIndex.current = index;
-
-        if (props.dragdropScope) {
-            event.dataTransfer.setData('text', 'orderlist');
-        }
     };
 
     const onDragOver = (event, index) => {
@@ -128,23 +125,23 @@ export const OrderListSubList = React.memo((props) => {
                 const content = props.itemTemplate ? props.itemTemplate(item) : item;
                 const key = JSON.stringify(item);
 
-                const itemProps = mergeProps(
-                    {
-                        className: classNames(props.className, cx('item', { item, isSelected })),
-                        onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
-                        onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
-                        role: 'option',
-                        'aria-selected': isSelected(item),
-                        draggable: 'true',
-                        onDragStart: (e) => onDragStart(e, i),
-                        onDragEnd: onDragEnd,
-                        tabIndex: props.tabIndex,
-                        'data-p-highlight': isSelected(item)
-                    },
-                    getPTOptions(item, 'item')
-                );
-
                 if (props.dragdrop) {
+                    const itemProps = mergeProps(
+                        {
+                            className: classNames(props.className, cx('item', { item, isSelected })),
+                            onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
+                            onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
+                            role: 'option',
+                            'aria-selected': isSelected(item),
+                            draggable: 'true',
+                            onDragStart: (e) => onDragStart(e, i),
+                            onDragEnd: onDragEnd,
+                            tabIndex: props.tabIndex,
+                            'data-p-highlight': isSelected(item)
+                        },
+                        getPTOptions(item, 'item')
+                    );
+
                     let items = [];
 
                     if (i === 0) {
