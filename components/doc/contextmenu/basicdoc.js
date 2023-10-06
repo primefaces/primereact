@@ -41,7 +41,7 @@ import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
     const cm = useRef(null);
-    const items: MenuItem = [
+    const items: MenuItem[] = [
         { label: 'View', icon: 'pi pi-fw pi-search' },
         { label: 'Delete', icon: 'pi pi-fw pi-trash' }
     ];
