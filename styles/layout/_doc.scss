@@ -63,11 +63,12 @@
 }
 
 .doc-intro {
-    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
 
     p {
         font-size: 1.125rem;
         color: var(--surface-900);
+        margin: 0;
     }
 }
 
@@ -236,8 +237,13 @@
     }
 
     pre {
-        margin: 0 0 1.5rem 0;
+        margin: 0;
     }
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+
 }
 
 .doc-tablewrapper {
@@ -254,7 +260,7 @@
 
     th {
         border-bottom: 1px solid var(--surface-border);
-        padding: 1rem;
+        padding: .75rem;
         text-align: left;
         text-transform: capitalize;
     }
@@ -265,7 +271,7 @@
         }
 
         td {
-            padding: 1rem;
+            padding: .75rem;
             border-bottom: 1px solid var(--surface-border);
             white-space: pre-wrap;
             line-height: 1.5;
@@ -290,7 +296,6 @@
 
             &:first-child {
                 color: var(--primary-color);
-                font-weight: 700;
                 font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
             }
 
