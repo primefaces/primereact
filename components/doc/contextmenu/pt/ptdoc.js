@@ -299,7 +299,7 @@ import { MenuItem } from 'primereact/menuitem';
 
 export default function PTDemo() {
     const cm = useRef(null);
-    const items: MenuItem = [
+    const items: MenuItem[] = [
         {
             label: 'File',
             icon: 'pi pi-fw pi-file',
