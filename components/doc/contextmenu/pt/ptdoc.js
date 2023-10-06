@@ -298,7 +298,7 @@ import { ContextMenu } from 'primereact/contextmenu';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function PTDemo() {
-    const cm = useRef(null);
+    const cm = useRef<ContextMenu>(null);
     const items: MenuItem[] = [
         {
             label: 'File',
@@ -436,7 +436,7 @@ export default function PTDemo() {
                     action: ({ props, state, context }) => ({ className: context.active ? 'bg-primary-200' : undefined })
                 }}
             />
-            <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current.show(e)} />
+            <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current?.show(e)} />
         </div>
     )
 }
