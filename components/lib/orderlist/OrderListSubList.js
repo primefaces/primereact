@@ -151,7 +151,7 @@ export const OrderListSubList = React.memo((props) => {
                     items.push(
                         <li key={key} {...itemProps}>
                             {content}
-                            <Ripple />
+                            {/*<Ripple />*/}
                         </li>
                     );
 
@@ -175,6 +175,7 @@ export const OrderListSubList = React.memo((props) => {
                     return (
                         <li key={key} {...itemProps}>
                             {content}
+                            <Ripple />
                         </li>
                     );
                 }
