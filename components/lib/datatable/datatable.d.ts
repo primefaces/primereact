@@ -434,6 +434,23 @@ interface DataTableRowMouseEvent extends Omit<DataTableRowEvent, 'originalEvent'
 }
 
 /**
+ * Custom row pointer event.
+ * @see {@link DataTableProps.onRowPointerDown}, {@link DataTableProps.onRowPointerUp}
+ * @extends DataTableRowMouseEvent
+ * @event
+ */
+interface DataTableRowPointerEvent extends Omit<DataTableRowEvent, 'originalEvent'> {
+    /**
+     * Browser event.
+     */
+    originalEvent: React.PointerEvent<HTMLElement>;
+    /**
+     * Clicked row data index
+     */
+    index: number;
+}
+
+/**
  * Custom row click event.
  * @see {@link DataTableProps.onRowClick}, {@link DataTableProps.onRowDoubleClick}
  * @extends DataTableRowMouseEvent
@@ -1498,6 +1515,16 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * @param {DataTableRowClickEvent} event - Custom click event.
      */
     onRowDoubleClick?(event: DataTableRowClickEvent): void;
+    /**
+     * Callback to invoke when a row pointerDown event occurs.
+     * @param {DataTableRowPointerEvent} event - Custom click event.
+     */
+    onRowPointerDown?(event: DataTableRowPointerEvent): void;
+    /**
+     * Callback to invoke when a row pointerUp event occurs.
+     * @param {DataTableRowPointerEvent} event - Custom click event.
+     */
+    onRowPointerUp?(event: DataTableRowPointerEvent): void;
     /**
      * Callback to invoke when the cancel icon is clicked on row editing mode.
      * @param {DataTableRowEditEvent} event - Custom row edit event.

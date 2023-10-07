@@ -16800,6 +16800,32 @@
                             "description": "Callback to invoke when a row is navigated away from with mouse."
                         },
                         {
+                            "name": "onRowPointerDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerDown event occurs."
+                        },
+                        {
+                            "name": "onRowPointerUp",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerUp event occurs."
+                        },
+                        {
                             "name": "onRowReorder",
                             "parameters": [
                                 {
@@ -17396,6 +17422,33 @@
                         }
                     ],
                     "extendedBy": "DataTableRowEditEvent,DataTableRowEditCompleteEvent"
+                },
+                "DataTableRowPointerEvent": {
+                    "description": "Custom row pointer event.",
+                    "relatedProp": "onRowPointerDown",
+                    "props": [
+                        {
+                            "name": "data",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableValue",
+                            "description": "Original rows data."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PointerEvent<HTMLElement>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Clicked row data index"
+                        }
+                    ]
                 },
                 "DataTableRowClickEvent": {
                     "description": "Custom row click event.",
@@ -19551,6 +19604,32 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a row is double clicked."
+                        },
+                        {
+                            "name": "onRowPointerDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerDown event occurs."
+                        },
+                        {
+                            "name": "onRowPointerUp",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerUp event occurs."
                         },
                         {
                             "name": "onRowEditCancel",
