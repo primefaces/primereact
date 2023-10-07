@@ -514,6 +514,30 @@ export const TableBody = React.memo(
             }
         };
 
+        const onRowPointerDown = (e) => {
+            const { originalEvent: event } = e;
+
+            if (DomHandler.isClickable(event.target)) {
+                return;
+            }
+
+            if (props.onRowPointerDown) {
+                props.onRowPointerDown(e);
+            }
+        };
+
+        const onRowPointerUp = (e) => {
+            const { originalEvent: event } = e;
+
+            if (DomHandler.isClickable(event.target)) {
+                return;
+            }
+
+            if (props.onRowPointerUp) {
+                props.onRowPointerUp(e);
+            }
+        };
+
         const onRowRightClick = (event) => {
             if (props.onContextMenu || props.onContextMenuSelectionChange) {
                 const hasSelection = ObjectUtils.isNotEmpty(props.selection);
@@ -965,6 +989,8 @@ export const TableBody = React.memo(
                         onRadioChange={onRadioChange}
                         onRowClick={onRowClick}
                         onRowDoubleClick={onRowDoubleClick}
+                        onRowPointerDown={onRowPointerDown}
+                        onRowPointerUp={onRowPointerUp}
                         onRowDragEnd={onRowDragEnd}
                         onRowDragLeave={onRowDragLeave}
                         onRowDragOver={onRowDragOver}
