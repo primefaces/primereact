@@ -124,7 +124,7 @@ export const BodyRow = React.memo((props) => {
     };
 
     const onPointerUp = (event) => {
-        props.onRowPointerDown({ originalEvent: event, data: props.rowData, index: props.rowIndex });
+        props.onRowPointerUp({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onRightClick = (event) => {
