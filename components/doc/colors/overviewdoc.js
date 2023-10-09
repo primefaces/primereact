@@ -35,7 +35,7 @@ export function OverviewDoc(props) {
                             <td>Font text color.</td>
                         </tr>
                         <tr>
-                            <td>--text-secondary-color</td>
+                            <td>--text-color-secondary</td>
                             <td>Muted font text color with a secondary level.</td>
                         </tr>
                         <tr>
