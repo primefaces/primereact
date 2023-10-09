@@ -31,6 +31,7 @@ const styles = `
     .p-image-preview-container {
         position: relative;
         display: inline-block;
+        line-height: 0;
     }
     
     .p-image-preview-indicator {
@@ -44,6 +45,8 @@ const styles = `
         justify-content: center;
         opacity: 0;
         transition: opacity .3s;
+        border: none;
+        padding: 0;
     }
     
     .p-image-preview-icon {
