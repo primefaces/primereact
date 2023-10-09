@@ -67,7 +67,7 @@ const HeaderSection = (props) => {
                             </li>
                             <li className="mr-0 lg:mr-2">
                                 <a href="https://blocks.primereact.org">
-                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks-icon.svg" alt="primereact templates" />
+                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks-icon.svg" alt="primereact blocks" />
                                     <span>Blocks</span>
                                 </a>
                             </li>
@@ -78,6 +78,12 @@ const HeaderSection = (props) => {
                                 </a>
                             </li>
                             <li className="mr-0 lg:mr-2">
+                                <a href="https://primereact.org/uikit/">
+                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/uikit-icon.svg" alt="primereact designer" />
+                                    <span>UI Kit</span>
+                                </a>
+                            </li>
+                            <li className="mr-0 lg:mr-2">
                                 <a href="https://www.primefaces.org/store/templates.xhtml">
                                     <img src="https://primefaces.org/cdn/primereact/images/landing-new/templates-icon.svg" alt="primereact templates" />
                                     <span>Templates</span>
@@ -85,16 +91,19 @@ const HeaderSection = (props) => {
                             </li>
                         </ol>
                     </nav>
-                    <a href="https://github.com/primefaces/primereact" rel="noopener noreferrer" className="linkbox p-0 header-button mr-2 flex align-items-center justify-content-center flex-shrink-0">
+                    <a href="https://github.com/primefaces/primereact" rel="noopener noreferrer" target="_blank" className="linkbox p-0 header-button mr-1 md:mr-2 flex align-items-center justify-content-center flex-shrink-0">
                         <i className="pi pi-github"></i>
                     </a>
-                    <a href="https://discord.gg/gzKFYnpmCY" rel="noopener noreferrer" className="linkbox p-0 header-button mr-2 flex align-items-center justify-content-center flex-shrink-0">
+                    <a href="https://discord.gg/gzKFYnpmCY" rel="noopener noreferrer" target="_blank" className="linkbox p-0 header-button mr-1 md:mr-2 flex align-items-center justify-content-center flex-shrink-0">
                         <i className="pi pi-discord"></i>
+                    </a>
+                    <a href="https://github.com/orgs/primefaces/discussions" target="_blank" rel="noopener noreferrer" className="linkbox p-0 header-button mr-1 md:mr-2 flex align-items-center justify-content-center flex-shrink-0">
+                        <i className="pi pi-comments"></i>
                     </a>
                     <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center" onClick={changeColorScheme}>
                         <i className={colorSchemeIcon}></i>
                     </button>
-                    <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center lg:hidden ml-2 menu-button" onClick={() => setMenuActive(!menuActive)}>
+                    <button type="button" className="linkbox header-button inline-flex align-items-center justify-content-center lg:hidden ml-1 md:ml-2 menu-button" onClick={() => setMenuActive(!menuActive)}>
                         <i className="pi pi-bars"></i>
                     </button>
                 </div>

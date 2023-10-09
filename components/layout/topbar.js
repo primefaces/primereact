@@ -109,7 +109,9 @@ export default function Topbar(props) {
                     <li>
                         <a
                             href="https://github.com/primefaces/primereact"
-                            className="flex p-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex px-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
                         >
                             <i className="pi pi-github text-700"></i>
                         </a>
@@ -117,14 +119,26 @@ export default function Topbar(props) {
                     <li>
                         <a
                             href="https://discord.gg/gzKFYnpmCY"
-                            className="flex p-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex px-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
                         >
                             <i className="pi pi-discord text-700"></i>
                         </a>
                     </li>
                     <li>
+                        <a
+                            href="https://github.com/orgs/primefaces/discussions"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex px-link border-1 border-solid w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
+                        >
+                            <i className="pi pi-comments text-700"></i>
+                        </a>
+                    </li>
+                    <li>
                         <button type="button" className="p-button flex border-1 w-2rem h-2rem p-0 align-items-center justify-content-center transition-all transition-duration-300 min-w-0" onClick={onConfigButtonClick}>
-                            <i className="pi pi-cog"></i>
+                            <i class="pi pi-palette"></i>
                         </button>
                     </li>
 
