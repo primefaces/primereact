@@ -8,21 +8,19 @@ export function LoginDoc(props) {
     const code = {
         basic: `
 <div className="card">
-    <div className="grid">
-        <div className="col-5 flex align-items-center justify-content-center">
-            <div className="p-fluid">
-                <div className="field">
-                    <label htmlFor="username">Username</label>
-                    <InputText id="username" type="text" />
-                </div>
-                <div className="field">
-                    <label htmlFor="password">Password</label>
-                    <InputText id="password" type="password" />
-                </div>
-                <Button label="Login"></Button>
+    <div className="flex flex-column md:flex-row">
+        <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+            <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                <label className="w-6rem">Username</label>
+                <InputText id="username" type="text" className="w-12rem" />
             </div>
+            <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                <label className="w-6rem">Password</label>
+                <InputText id="password" type="password" className="w-12rem" />
+            </div>
+            <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
         </div>
-        <div className="col-2">
+        <div className="w-full md:w-2">
             <Divider layout="vertical" className="hidden md:flex">
                 <b>OR</b>
             </Divider>
@@ -30,8 +28,8 @@ export function LoginDoc(props) {
                 <b>OR</b>
             </Divider>
         </div>
-        <div className="col-5 flex align-items-center justify-content-center">
-            <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"><Button>
+        <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
+            <Button label="Sign Up" icon="pi pi-user-plus" severity="success" className="w-10rem"></Button>
         </div>
     </div>
 </div>
@@ -45,21 +43,19 @@ import { Button } from 'primereact/button';
 export default function LoginDemo() {
     return (
         <div className="card">
-            <div className="grid">
-                <div className="col-5 flex align-items-center justify-content-center">
-                    <div className="p-fluid">
-                        <div className="field">
-                            <label htmlFor="username">Username</label>
-                            <InputText id="username" type="text" />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="password">Password</label>
-                            <InputText id="password" type="password" />
-                        </div>
-                        <Button label="Login"></Button>
+            <div className="flex flex-column md:flex-row">
+                <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label className="w-6rem">Username</label>
+                        <InputText id="username" type="text" className="w-12rem" />
                     </div>
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label className="w-6rem">Password</label>
+                        <InputText id="password" type="password" className="w-12rem" />
+                    </div>
+                    <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
                 </div>
-                <div className="col-2">
+                <div className="w-full md:w-2">
                     <Divider layout="vertical" className="hidden md:flex">
                         <b>OR</b>
                     </Divider>
@@ -67,8 +63,8 @@ export default function LoginDemo() {
                         <b>OR</b>
                     </Divider>
                 </div>
-                <div className="col-5 flex align-items-center justify-content-center">
-                    <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
+                <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
+                    <Button label="Sign Up" icon="pi pi-user-plus" severity="success" className="w-10rem"></Button>
                 </div>
             </div>
         </div>
@@ -84,21 +80,19 @@ import { Button } from 'primereact/button';
 export default function LoginDemo() {
     return (
         <div className="card">
-            <div className="grid">
-                <div className="col-5 flex align-items-center justify-content-center">
-                    <div className="p-fluid">
-                        <div className="field">
-                            <label htmlFor="username">Username</label>
-                            <InputText id="username" type="text" />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="password">Password</label>
-                            <InputText id="password" type="password" />
-                        </div>
-                        <Button label="Login"></Button>
+            <div className="flex flex-column md:flex-row">
+                <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label className="w-6rem">Username</label>
+                        <InputText id="username" type="text" className="w-12rem" />
                     </div>
+                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label className="w-6rem">Password</label>
+                        <InputText id="password" type="password" className="w-12rem" />
+                    </div>
+                    <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
                 </div>
-                <div className="col-2">
+                <div className="w-full md:w-2">
                     <Divider layout="vertical" className="hidden md:flex">
                         <b>OR</b>
                     </Divider>
@@ -106,8 +100,8 @@ export default function LoginDemo() {
                         <b>OR</b>
                     </Divider>
                 </div>
-                <div className="col-5 flex align-items-center justify-content-center">
-                    <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
+                <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
+                    <Button label="Sign Up" icon="pi pi-user-plus" severity="success" className="w-10rem"></Button>
                 </div>
             </div>
         </div>
@@ -122,21 +116,19 @@ export default function LoginDemo() {
                 <p>Sample implementation of a login form using a divider with content.</p>
             </DocSectionText>
             <div className="card">
-                <div className="grid">
-                    <div className="col-5 flex align-items-center justify-content-center">
-                        <div className="p-fluid">
-                            <div className="field">
-                                <label htmlFor="username">Username</label>
-                                <InputText id="username" type="text" />
-                            </div>
-                            <div className="field">
-                                <label htmlFor="password">Password</label>
-                                <InputText id="password" type="password" />
-                            </div>
-                            <Button label="Login"></Button>
+                <div className="flex flex-column md:flex-row">
+                    <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+                        <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                            <label className="w-6rem">Username</label>
+                            <InputText id="username" type="text" className="w-12rem" />
                         </div>
+                        <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                            <label className="w-6rem">Password</label>
+                            <InputText id="password" type="password" className="w-12rem" />
+                        </div>
+                        <Button label="Login" icon="pi pi-user" className="w-10rem mx-auto"></Button>
                     </div>
-                    <div className="col-2">
+                    <div className="w-full md:w-2">
                         <Divider layout="vertical" className="hidden md:flex">
                             <b>OR</b>
                         </Divider>
@@ -144,8 +136,8 @@ export default function LoginDemo() {
                             <b>OR</b>
                         </Divider>
                     </div>
-                    <div className="col-5 flex align-items-center justify-content-center">
-                        <Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Button>
+                    <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
+                        <Button label="Sign Up" icon="pi pi-user-plus" severity="success" className="w-10rem"></Button>
                     </div>
                 </div>
             </div>
