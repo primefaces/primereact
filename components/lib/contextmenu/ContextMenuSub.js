@@ -187,7 +187,7 @@ export const ContextMenuSub = React.memo((props) => {
                 className: 'p-menuitem-link',
                 labelClassName: 'p-menuitem-text',
                 iconClassName: 'p-menuitem-icon',
-                submenuIconClassName,
+                submenuIconClassName: cx('submenuIcon'),
                 element: content,
                 props,
                 active
