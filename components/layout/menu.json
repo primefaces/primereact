@@ -320,10 +320,6 @@
                             "to": "/panelmenu"
                         },
                         {
-                            "name": "SlideMenu",
-                            "to": "/slidemenu"
-                        },
-                        {
                             "name": "Steps",
                             "to": "/steps"
                         },
