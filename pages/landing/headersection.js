@@ -79,7 +79,7 @@ const HeaderSection = (props) => {
                             </li>
                             <li className="mr-0 lg:mr-2">
                                 <a href="https://primereact.org/uikit/">
-                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/uikit-icon.svg" alt="primereact designer" />
+                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/uikit-icon.svg" alt="primereact designer" width={30} />
                                     <span>UI Kit</span>
                                 </a>
                             </li>
