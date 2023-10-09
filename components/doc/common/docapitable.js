@@ -1,10 +1,13 @@
-import React from 'react';
-import { DocSectionText } from './docsectiontext';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React, { useContext } from 'react';
+import AppContentContext from '../../layout/appcontentcontext';
 import { ObjectUtils, classNames } from '../../lib/utils/Utils';
+import { DocSectionText } from './docsectiontext';
 
 const DocApiTable = (props) => {
+    const appContentContext = useContext(AppContentContext);
+
     const { id, data, name, description, allowLink = true } = props;
     const isPT = id.startsWith('pt.');
 
@@ -101,21 +104,32 @@ const DocApiTable = (props) => {
                                             k !== 'readonly' &&
                                             k !== 'optional' &&
                                             k !== 'deprecated' && (
-                                                <td key={index} className={classNames({ 'doc-option-type': k === 'type', 'doc-option-default': k === 'defaultValue' })}>
-                                                    {k === 'parameters'
-                                                        ? v.map((_v, i) => {
-                                                              return (
-                                                                  <React.Fragment key={i}>
-                                                                      {_v.name}:{createContent(_v.type)}
-                                                                      <br />
-                                                                  </React.Fragment>
-                                                              );
-                                                          })
-                                                        : k === 'default' && ObjectUtils.isEmpty(v)
-                                                        ? 'null'
-                                                        : k !== 'description'
-                                                        ? createContent(v, k === 'name', d['deprecated'])
-                                                        : v}
+                                                <td key={index}>
+                                                    {k === 'parameters' ? (
+                                                        v.map((_v, i) => {
+                                                            return (
+                                                                <div className="doc-option-params" key={i}>
+                                                                    <span className="doc-option-parameter-name">{_v.name}: </span>
+                                                                    <span className="doc-option-parameter-type">{createContent(_v.type)}</span>
+                                                                    <br />
+                                                                </div>
+                                                            );
+                                                        })
+                                                    ) : k === 'default' ? (
+                                                        <div className={classNames('doc-option-default', { 'doc-option-dark': appContentContext.darkTheme, 'doc-option-light': !appContentContext.darkTheme })}>
+                                                            {ObjectUtils.isEmpty(v) ? 'null' : createContent(v, k === 'name', d['deprecated'])}
+                                                        </div>
+                                                    ) : k === 'type' ? (
+                                                        <span className="doc-option-type">{createContent(v, k === 'name', d['deprecated'])}</span>
+                                                    ) : k === 'returnType' ? (
+                                                        <div className={classNames('doc-option-returnType', { 'doc-option-dark': appContentContext.darkTheme, 'doc-option-light': !appContentContext.darkTheme })}>
+                                                            {createContent(v, k === 'name', d['deprecated'])}
+                                                        </div>
+                                                    ) : k === 'description' || k === 'values' ? (
+                                                        <span className="doc-option-description">{v}</span>
+                                                    ) : (
+                                                        createContent(v, k === 'name', d['deprecated'])
+                                                    )}
                                                 </td>
                                             )
                                     )}

@@ -63,7 +63,7 @@
 }
 
 .doc-intro {
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 
     p {
         font-size: 1.125rem;
@@ -82,7 +82,9 @@
         opacity: 0.7;
         margin-left: 1rem;
         display: none;
-        transition: opacity 0.3s, colors 0.3s;
+        transition:
+            opacity 0.3s,
+            colors 0.3s;
     }
 
     &:hover {
@@ -159,8 +161,8 @@
     > .navbar-item {
         .navbar-item-content {
             border-left: 1px solid var(--surface-border);
-            padding-left: .25rem;
-            transition: all .2s;
+            padding-left: 0.25rem;
+            transition: all 0.2s;
 
             &:hover {
                 border-left-color: var(--surface-500);
@@ -179,12 +181,12 @@
                 min-width: 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                transition: all .2s;
+                transition: all 0.2s;
+            }
 
-                &:hover {
-                    .px-link {
-                        color: var(--surface-900);
-                    }
+            &:hover {
+                .px-link {
+                    color: var(--surface-900);
                 }
             }
         }
@@ -243,7 +245,6 @@
     &:not(:last-child) {
         margin-bottom: 1rem;
     }
-
 }
 
 .doc-tablewrapper {
@@ -260,7 +261,7 @@
 
     th {
         border-bottom: 1px solid var(--surface-border);
-        padding: .75rem;
+        padding: 0.75rem 1rem;
         text-align: left;
         text-transform: capitalize;
     }
@@ -271,14 +272,35 @@
         }
 
         td {
-            padding: .75rem;
+            padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--surface-border);
-            white-space: pre-wrap;
+            white-space: pre-line;
             line-height: 1.5;
+            scroll-margin-top: 6.5rem;
 
-            &.doc-option-type {
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
+            &:first-child {
+                color: var(--primary-color);
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+            }
+
+            .doc-option-type {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
                 color: var(--primary-500);
+                font-weight: 500;
 
                 > a {
                     color: var(--primary-500);
@@ -289,19 +311,16 @@
                 }
             }
 
-            &.doc-option-default {
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
-                color: var(--primary-color);
-            }
-
-            &:first-child {
-                color: var(--primary-color);
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
-            }
-
             .doc-option-name,
-            > i {
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
+            > i:not(.pi) {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
                 position: relative;
                 scroll-margin-top: 6.5rem;
                 background-color: var(--highlight-bg);
@@ -310,6 +329,7 @@
                 padding: 2px 6px;
                 font-weight: 600;
                 font-style: normal;
+                white-space: nowrap;
 
                 .doc-option-link {
                     position: absolute;
@@ -318,7 +338,9 @@
                     color: var(--primary-color);
                     opacity: 0.7;
                     display: none;
-                    transition: opacity 0.3s, colors 0.3s;
+                    transition:
+                        opacity 0.3s,
+                        colors 0.3s;
                 }
             }
 
@@ -332,6 +354,71 @@
                         }
                     }
                 }
+            }
+
+            .doc-option-default,
+            .doc-option-returnType {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+                font-weight: 400;
+                font-style: normal;
+                display: flex;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 6px;
+                padding: 2px 6px;
+                max-width: min-content;
+            }
+
+            .doc-option-parameter-name {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+                color: var(--primary-700);
+            }
+
+            .doc-option-parameter-type {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+                color: var(--primary-500);
+            }
+
+            .doc-option-params {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+            }
+
+            .doc-option-light {
+                background: var(--bluegray-50);
+                border-color: var(--bluegray-100);
+            }
+
+            .doc-option-dark {
+                background: var(--bluegray-800);
+                border-color: var(--bluegray-800);
             }
         }
     }
