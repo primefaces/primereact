@@ -25545,7 +25545,7 @@
                     "parameters": [
                         {
                             "name": "initialValue",
-                            "type": "any",
+                            "type": "S",
                             "description": "The initial value for debounce."
                         },
                         {
@@ -25554,7 +25554,7 @@
                             "description": "The delay in milliseconds."
                         }
                     ],
-                    "returnType": "any[]",
+                    "returnType": "[S, React.Dispatch<React.SetStateAction<S>>]",
                     "description": "Custom hook to use a debounced value."
                 },
                 "useMouse": {
