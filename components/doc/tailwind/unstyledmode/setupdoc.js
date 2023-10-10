@@ -7,22 +7,24 @@ export function SetupDoc(props) {
         basic: `
 module.exports = {
     content: [
-      "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-      "./components/**/*.{js,ts,jsx,tsx,mdx}",
-      "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    ],
-    darkMode: ["class"],
-    theme: {
-      extend: {},
-    },
-    plugins: [],
-  };
+        "./app/**/*.{js,ts,jsx,tsx,mdx}",
+        "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+        "./components/**/*.{js,ts,jsx,tsx,mdx}",
+   
+        // Or if using \`\src\` directory:
+        "./src/**/*.{js,ts,jsx,tsx,mdx}",
+      ],
+      darkMode: "class",
+      theme: {
+        extend: {},
+      },
+      plugins: [],
+    }
 `
     };
     const code2 = {
         basic: `
 import { PrimeReactProvider } from "primereact/api";
-import Tailwind from "primereact/passthrough/tailwind";
 
 ...
 return(
@@ -37,7 +39,6 @@ return(
     const code3 = {
         basic: `
 import { PrimeReactProvider } from "primereact/api";
-import Tailwind from "primereact/passthrough/tailwind";
 
 export default function MyApp({ Component }) {
     
