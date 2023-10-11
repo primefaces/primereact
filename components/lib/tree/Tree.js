@@ -58,19 +58,32 @@ export const Tree = React.memo(
             dragState.current = null;
         };
 
-        const copyValue = (value) => {
-            if (value === null || value === undefined) {
-                return value;
-            } else if (Array.isArray(value)) {
-                return Array.from(value);
-            } else {
-                return { ...value };
-            }
+        /**
+         * Deep copy a value. If the value has a data property, it will be shallow copied.
+         * Values that are not plain objects or arrays are returned as-is.
+         */
+        const cloneValue = (value) => {
+            if (Array.isArray(value)) {
+                return value.map(cloneValue);
+            } else if (!!value && Object.getPrototypeOf(value) === Object.prototype) {
+                const result = {};
+
+                // Leave data property alone and clone children
+                for (let key in value) {
+                    if (key !== 'data') {
+                        result[key] = cloneValue(value[key]);
+                    } else {
+                        result[key] = value[key];
+                    }
+                }
+
+                return result;
+            } else return value;
         };
 
         const onDrop = (event) => {
             if (validateDropNode(dragState.current.path, event.path)) {
-                const value = copyValue(props.value);
+                const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -99,7 +112,7 @@ export const Tree = React.memo(
 
         const onDropPoint = (event) => {
             if (validateDropPoint(event)) {
-                const value = copyValue(props.value);
+                const value = cloneValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
