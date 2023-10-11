@@ -34,6 +34,10 @@ export const MessageBase = ComponentBase.extend({
                 justify-content: center;
                 vertical-align: top;
             }
+
+            .p-inline-message-icon {
+                flex-shrink: 0;
+            }
             
             .p-inline-message-icon-only .p-inline-message-text {
                 visibility: hidden;
