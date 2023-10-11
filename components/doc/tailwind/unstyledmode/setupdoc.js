@@ -28,7 +28,7 @@ import { PrimeReactProvider } from "primereact/api";
 
 ...
 return(
-    <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
+    <PrimeReactProvider value={{ unstyled: true, pt: {} }}>
         <App />
     </PrimeReactProvider>
 )
