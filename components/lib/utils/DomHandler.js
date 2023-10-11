@@ -865,7 +865,12 @@ export default class DomHandler {
     }
 
     static blockBodyScroll(className = 'p-overflow-hidden') {
-        document.body.style.setProperty('--scrollbar-width', this.calculateBodyScrollbarWidth() + 'px');
+        /* PR Ref: https://github.com/primefaces/primereact/pull/4976
+         * @todo This method is called several times after this PR. Refactors will be made to prevent this in future releases.
+         */
+        const hasScrollbarWidth = !!document.body.style.getPropertyValue('--scrollbar-width');
+
+        !hasScrollbarWidth && document.body.style.setProperty('--scrollbar-width', this.calculateBodyScrollbarWidth() + 'px');
         this.addClass(document.body, className);
     }
 
