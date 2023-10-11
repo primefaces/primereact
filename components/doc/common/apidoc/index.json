@@ -41565,7 +41565,8 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "true",
-                            "description": "Whether selection can be cleared."
+                            "description": "Whether selection can be cleared.",
+                            "deprecated": "Use 'allowEmpty' property instead."
                         },
                         {
                             "name": "unstyled",
