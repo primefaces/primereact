@@ -58,9 +58,19 @@ export const Tree = React.memo(
             dragState.current = null;
         };
 
+        const copyValue = (value) => {
+            if (value === null || value === undefined) {
+                return value;
+            } else if (Array.isArray(value)) {
+                return Array.from(value);
+            } else {
+                return { ...value };
+            }
+        };
+
         const onDrop = (event) => {
             if (validateDropNode(dragState.current.path, event.path)) {
-                let value = JSON.parse(JSON.stringify(props.value));
+                const value = copyValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -89,7 +99,7 @@ export const Tree = React.memo(
 
         const onDropPoint = (event) => {
             if (validateDropPoint(event)) {
-                let value = JSON.parse(JSON.stringify(props.value));
+                const value = copyValue(props.value);
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
