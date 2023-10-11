@@ -1552,8 +1552,7 @@ export const Calendar = React.memo(
                 touchUIMask.current.addEventListener('click', touchUIMaskClickListener.current);
 
                 document.body.appendChild(touchUIMask.current);
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
-                document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
+                DomHandler.blockBodyScroll();
             }
         };
 
@@ -1591,8 +1590,7 @@ export const Calendar = React.memo(
             }
 
             if (!hasBlockerMasks) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
-                document.body.style.removeProperty('--scrollbar-width');
+                DomHandler.unblockBodyScroll();
             }
         };
 

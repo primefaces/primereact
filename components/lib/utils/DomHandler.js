@@ -829,6 +829,10 @@ export default class DomHandler {
         }
     }
 
+    static calculateBodyScrollbarWidth() {
+        return window.innerWidth - document.documentElement.offsetWidth;
+    }
+
     static getBrowser() {
         if (!this.browser) {
             let matched = this.resolveUserAgent();
@@ -858,6 +862,16 @@ export default class DomHandler {
             browser: match[1] || '',
             version: match[2] || '0'
         };
+    }
+
+    static blockBodyScroll(className = 'p-overflow-hidden') {
+        document.body.style.setProperty('--scrollbar-width', this.calculateBodyScrollbarWidth() + 'px');
+        this.addClass(document.body, className);
+    }
+
+    static unblockBodyScroll(className = 'p-overflow-hidden') {
+        document.body.style.removeProperty('--scrollbar-width');
+        this.removeClass(document.body, className);
     }
 
     static isVisible(element) {

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -8,7 +9,6 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -104,8 +104,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         }
 
         if (props.blockScroll) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
+            DomHandler.blockBodyScroll();
         }
     };
 
@@ -113,8 +112,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         unbindDocumentClickListener();
 
         if (props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            document.body.style.removeProperty('--scrollbar-width');
+            DomHandler.unblockBodyScroll();
         }
     };
 

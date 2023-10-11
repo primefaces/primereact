@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -13,7 +14,6 @@ import { UndoIcon } from '../icons/undo';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ImageBase } from './ImageBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Image = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -48,8 +48,7 @@ export const Image = React.memo(
         const show = () => {
             if (props.preview) {
                 setMaskVisibleState(true);
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
-                document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
+                DomHandler.blockBodyScroll();
                 setTimeout(() => {
                     setPreviewVisibleState(true);
                 }, 25);
@@ -59,8 +58,7 @@ export const Image = React.memo(
         const hide = () => {
             if (!previewClick.current) {
                 setPreviewVisibleState(false);
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
-                document.body.style.removeProperty('--scrollbar-width');
+                DomHandler.unblockBodyScroll();
                 setRotateState(0);
                 setScaleState(1);
             }
