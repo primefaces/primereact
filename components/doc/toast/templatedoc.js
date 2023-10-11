@@ -9,18 +9,9 @@ export function TemplateDoc(props) {
     const toast = useRef(null);
     const toastBC = useRef(null);
 
-    const clear = (submit) => {
+    const clear = () => {
         toastBC.current.clear();
         setVisible(false);
-        submit && show();
-    };
-
-    const show = () => {
-        toast.current.show({
-            severity: 'success',
-            summary: 'Submission Received',
-            detail: 'Thank you, we have received your submission.'
-        });
     };
 
     const confirm = () => {
@@ -33,7 +24,7 @@ export function TemplateDoc(props) {
                 content: (
                     <div className="flex flex-column align-items-center" style={{ flex: '1' }}>
                         <div className="text-center">
-                            <i className="pi pi-exclamation-triangle" style={{ fontSize: '3rem' }}></i>
+                            <i className="pi pi-exclamation-triangle" onClick={(e) => setVisible(false)} style={{ fontSize: '3rem' }}></i>
                             <div className="font-bold text-xl my-3">Are you sure?</div>
                         </div>
                         <div className="flex gap-2">
@@ -62,18 +53,9 @@ export default function TemplateDemo() {
     const toast = useRef(null);
     const toastBC = useRef(null);
 
-    const clear = (submit) => {
+    const clear = () => {
         toastBC.current.clear();
         setVisible(false);
-        submit && show();
-    };
-
-    const show = () => {
-        toast.current.show({
-            severity: 'success',
-            summary: 'Submission Received',
-            detail: 'Thank you, we have received your submission.'
-        });
     };
 
     const confirm = () => {
@@ -118,18 +100,9 @@ export default function TemplateDemo() {
     const toast = useRef<Toast>(null);
     const toastBC = useRef<Toast>(null);
 
-    const clear = (submit) => {
+    const clear = () => {
         toastBC.current?.clear();
         setVisible(false);
-        submit && show();
-    };
-
-    const show = () => {
-        toast.current?.show({
-            severity: 'success',
-            summary: 'Submission Received',
-            detail: 'Thank you, we have received your submission.'
-        });
     };
 
     const confirm = () => {

@@ -18,7 +18,8 @@ export function StickyDoc(props) {
     const code = {
         basic: `
 <Toast ref={toast} />
-<Button onClick={showSticky} label="Sticky" />
+<Button onClick={showSticky} label="Sticky" severity="success" />
+<Button onClick={clear} label="Clear" />
         `,
         javascript: `
 import React, { useRef } from 'react';
