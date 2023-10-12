@@ -16,8 +16,9 @@
         "lint": "next lint --max-warnings=0 --ignore-path .gitignore .",
         "lint:fix": "next lint --fix --ignore-path .gitignore .",
         "type:check": "tsc",
-        "test": "jest --watch --coverage",
-        "test:check": "jest --watchAll=false --coverage",
+        "test": "jest --watch --coverage --silent",
+        "test:check": "jest --watchAll=false --coverage --silent",
+        "test:debug": "jest --watch --coverage",
         "apidoc": "node ./api-generator/build-apidoc.js",
         "apiwebtypes": "node ./api-generator/build-webtypes.js"
     },
