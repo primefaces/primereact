@@ -23,7 +23,7 @@ export const SelectButton = React.memo(
 
             let selected = isSelected(event.option);
 
-            if (selected && !(props.unselectable || props.allowEmpty)) {
+            if (selected && !(props.unselectable && props.allowEmpty)) {
                 return;
             }
 
