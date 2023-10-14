@@ -78,7 +78,7 @@ export const ContextMenu = React.memo(
     }
 
     .p-contextmenu[${selector}] .p-menuitem-active > .p-submenu-list {
-        left: 0 !important;
+        left: 0;
         box-shadow: none;
         border-radius: 0;
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */

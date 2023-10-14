@@ -233,7 +233,7 @@ export const CascadeSelect = React.memo(
     }
 
     .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active > .p-cascadeselect-sublist {
-        left: 0 !important;
+        left: 0;
         box-shadow: none;
         border-radius: 0;
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */

@@ -316,7 +316,7 @@ const commonStyle = `
     }
 
     .p-disabled, .p-disabled * {
-        cursor: default !important;
+        cursor: default;
         pointer-events: none;
         user-select: none;
     }
@@ -442,7 +442,7 @@ const commonStyle = `
         padding: 0;
         position: absolute;
         width: 1px;
-        word-wrap: normal !important;
+        word-wrap: normal;
     }
 
     /* @todo Refactor */

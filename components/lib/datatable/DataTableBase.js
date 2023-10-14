@@ -116,7 +116,7 @@ const styles = `
 
     .p-datatable .p-column-resizer {
         display: block;
-        position: absolute !important;
+        position: absolute;
         top: 0;
         right: 0;
         margin: 0;
@@ -254,7 +254,7 @@ const styles = `
     }
 
     .p-datatable .p-virtualscroller .p-virtualscroller-loading {
-        transform: none !important;
+        transform: none;
         min-height: 0;
         position: sticky;
         top: 0;

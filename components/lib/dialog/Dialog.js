@@ -397,7 +397,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
                     .p-dialog[${attributeSelector.current}] {
-                        width: ${props.breakpoints[breakpoint]} !important;
+                        width: ${props.breakpoints[breakpoint]};
                     }
                 }
             `;
