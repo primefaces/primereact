@@ -1646,6 +1646,9 @@
     box-shadow: 0 0 0 1px #cf95d9;
     border-color: #BA68C8;
   }
+  .p-treeselect.p-treeselect-clearable .p-treeselect-label {
+    padding-right: 1.5rem;
+  }
   .p-treeselect .p-treeselect-label {
     padding: 0.5rem 0.5rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -1666,6 +1669,10 @@
     width: 2.357rem;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+  }
+  .p-treeselect .p-treeselect-clear-icon {
+    color: rgba(255, 255, 255, 0.6);
+    right: 2.357rem;
   }
   .p-treeselect.p-invalid.p-component {
     border-color: #ef9a9a;
