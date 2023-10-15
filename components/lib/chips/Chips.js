@@ -111,6 +111,7 @@ export const Chips = React.memo(
 
                     break;
 
+                case 'Tab':
                 case 'Enter':
                     if (inputValue && inputValue.trim().length && (!props.max || props.max > values.length)) {
                         addItem(event, inputValue, true);
