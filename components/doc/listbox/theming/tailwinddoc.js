@@ -66,7 +66,7 @@ export default function UnstyledDemo() {
     ];
 
     return (
-        <div className="card flex justify-content-center">  
+        <div className="card flex justify-center">  
             <ListBox value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name" className="w-full md:w-14rem" />
         </div>
     )

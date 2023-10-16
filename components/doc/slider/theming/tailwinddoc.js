@@ -71,7 +71,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Slider value={value} onChange={(e) => setValue(e.value)} className="w-14rem" />
         </div>
     )

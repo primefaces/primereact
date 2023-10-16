@@ -40,7 +40,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState(options[0]);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
         </div>
     );

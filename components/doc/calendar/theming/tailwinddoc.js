@@ -143,7 +143,7 @@ export default function UnstyledDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Calendar value={date} onChange={(e) => setDate(e.value)} />
         </div>
     )

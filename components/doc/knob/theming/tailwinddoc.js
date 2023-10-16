@@ -29,7 +29,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState(0);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Knob value={value} onChange={(e) => setValue(e.value)} />
         </div>
     )

@@ -97,7 +97,7 @@ export default function UnstyledDemo() {
     }
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <AutoComplete value={value} suggestions={items} completeMethod={search} onChange={(e) => setValue(e.value)} />
         </div>
     )
