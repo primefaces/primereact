@@ -502,7 +502,7 @@ export const MultiSelect = React.memo(
                     return getSelectedItemsLabel();
                 } else {
                     if (ObjectUtils.isArray(props.value)) {
-                        return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ',' : '') + getLabelByValue(value), '');
+                        return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ', ' : '') + getLabelByValue(value), '');
                     } else {
                         return '';
                     }
