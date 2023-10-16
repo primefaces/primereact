@@ -39,7 +39,7 @@ import { Tag } from 'primereact/tag';
 
 export default function UnstyledDemo() {
     return (
-        <div className="card flex flex-wrap justify-content-center gap-2">
+        <div className="card flex flex-wrap justify-center gap-2">
             <Tag value="Primary"></Tag>
             <Tag severity="success" value="Success"></Tag>
             <Tag severity="info" value="Info"></Tag>

@@ -122,7 +122,7 @@ export default function UnstyledDemo() {
         <>
             <Toast ref={toast} />
             <ConfirmDialog />
-            <div className="card flex flex-wrap gap-2 justify-content-center">
+            <div className="card flex flex-wrap gap-2 justify-center">
                 <Button onClick={confirm1} icon="pi pi-check" label="Confirm" className="mr-2"></Button>
                 <Button onClick={confirm2} icon="pi pi-times" label="Delete"></Button>
             </div>

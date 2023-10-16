@@ -178,7 +178,9 @@ export default function UnstyledDemo() {
     ];
 
     return (
-        <TieredMenu model={items} breakpoint="767px" />
+        <div className="card flex justify-center">
+            <TieredMenu model={items} breakpoint="767px" />
+        </div>
     )
 }
     `

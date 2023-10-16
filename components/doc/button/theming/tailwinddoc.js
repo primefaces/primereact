@@ -82,7 +82,7 @@ import { Button } from 'primereact/button';
 
 export default function UnstyledDemo() {
     return (
-        <div className="card flex flex-wrap justify-content-center gap-3">
+        <div className="card flex flex-wrap justify-center gap-3">
             <Button label="Primary" />
             <Button label="Secondary" severity="secondary" />
             <Button label="Success" severity="success" />
