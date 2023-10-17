@@ -25554,7 +25554,7 @@
                             "description": "The delay in milliseconds."
                         }
                     ],
-                    "returnType": "[S, React.Dispatch<React.SetStateAction<S>>]",
+                    "returnType": "[S, S, React.Dispatch<React.SetStateAction<S>>]",
                     "description": "Custom hook to use a debounced value."
                 },
                 "useMouse": {
@@ -49750,7 +49750,7 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template for filter element."
+                            "description": "Custom template for the filter element."
                         },
                         {
                             "name": "filterValue",
@@ -50467,6 +50467,90 @@
                             "optional": false,
                             "readonly": false,
                             "type": "boolean"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TreeSelectFilterTemplateOptions": {
+                    "description": "Custom filter template options.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the option is disabled or not"
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "HTMLDivElement",
+                            "description": "The filter element."
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The filter."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeSelect>",
+                            "description": "Icon of the filter."
+                        },
+                        {
+                            "name": "filterIconClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter icon."
+                        },
+                        {
+                            "name": "filterInputChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChangeEvent<HTMLInputElement>",
+                            "description": "Browser change event for the filter input element."
+                        },
+                        {
+                            "name": "filterInputProps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "The props of the filter input element."
+                        },
+                        {
+                            "name": "filterOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectFilterOptions",
+                            "description": "The filter input options."
+                        },
+                        {
+                            "name": "filterPlaceholder",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The placeholder of the filter element."
+                        },
+                        {
+                            "name": "filterTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "description": "Custom filter template."
                         }
                     ],
                     "callbacks": []
