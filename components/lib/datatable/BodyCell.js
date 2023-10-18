@@ -618,16 +618,12 @@ export const BodyCell = React.memo((props) => {
             );
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
-            const rowReorderIconClassName = 'p-datatable-reorderablerow-handle';
-            const rowReorderIconProps = mergeProps(
-                {
-                    className: rowReorderIconClassName
-                },
-                getColumnProp('rowReorderIcon')
-            );
-            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
 
-            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props });
+            const rowReorderIconClassName = 'p-datatable-reorderablerow-handle';
+
+            const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon className={rowReorderIconClassName} />;
+
+            content = showReorder && IconUtils.getJSXIcon(rowReorderIcon, { className: rowReorderIconClassName }, { props });
         } else if (expander) {
             const rowTogglerIconProps = mergeProps(
                 {
