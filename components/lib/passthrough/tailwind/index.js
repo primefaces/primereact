@@ -2,13 +2,12 @@ import { classNames } from '../../utils/Utils';
 
 export const TRANSITIONS = {
     toggleable: {
+        timeout: 500,
         classNames: {
             enter: 'max-h-0',
-            enterActive: 'overflow-hidden transition-all duration-500 ease-in-out',
-            enterDone: 'max-h-40',
+            enterActive: '!max-h-40 overflow-hidden transition-all duration-500 ease-in-out',
             exit: 'max-h-40',
-            exitActive: 'overflow-hidden transition-all duration-500 ease-in',
-            exitDone: 'max-h-0'
+            exitActive: '!max-h-0 overflow-hidden transition-all duration-500 ease-in'
         }
     },
     overlay: {
@@ -330,40 +329,44 @@ const Tailwind = {
             className: classNames('transition duration-200', { 'bg-black/40': props.modal })
         }),
         transition: ({ props }) => {
-            return props.position === 'top'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0'
-                  }
-                : props.position === 'bottom'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 translate-y-full',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75 translate-x-0 translate-y-full translate-z-0'
-                  }
-                : props.position === 'left' || props.position === 'topleft' || props.position === 'bottomleft'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75  -translate-x-full translate-y-0 translate-z-0'
-                  }
-                : props.position === 'right' || props.position === 'topright' || props.position === 'bottomright'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75 opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0'
-                  }
-                : {
-                      enterFromClass: 'opacity-0 scale-75',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75'
-                  };
+            return {
+                timeout: 200,
+                classNames:
+                    props.position === 'top'
+                        ? {
+                              enter: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-0 -translate-y-full translate-z-0'
+                          }
+                        : props.position === 'bottom'
+                        ? {
+                              enter: 'opacity-0 scale-75 translate-y-full',
+                              enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-0 translate-y-full translate-z-0'
+                          }
+                        : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
+                        ? {
+                              enter: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 -translate-x-full translate-y-0 translate-z-0'
+                          }
+                        : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
+                        ? {
+                              enter: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-full translate-y-0 translate-z-0'
+                          }
+                        : {
+                              enter: 'opacity-0 scale-75',
+                              enterActive: '!opacity-100 !scale-100 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75'
+                          }
+            };
         }
     },
     confirmpopup: {
@@ -398,10 +401,10 @@ const Tailwind = {
     sidebar: {
         root: ({ props }) => ({
             className: classNames(
-                'flex flex-col pointer-events-auto relative transform translate-x-0 translate-y-0 translate-z-0 relative transition-transform duration-300',
+                'flex flex-col pointer-events-auto relative transform relative',
                 'bg-white text-gray-700 border-0 shadow-lg',
                 {
-                    '!transition-none !transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': props.position == 'full',
+                    '!transition-none !transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': props.fullScreen,
                     'h-full w-80': props.position == 'left' || props.position == 'right',
                     'h-40 w-full': props.position == 'top' || props.position == 'bottom'
                 },
@@ -428,32 +431,45 @@ const Tailwind = {
             className: classNames('flex pointer-events-auto', 'bg-black bg-opacity-40 transition duration-200 z-20 transition-colors')
         },
         transition: ({ props }) => {
-            return props.position === 'top'
-                ? {
-                      enterFromClass: 'translate-x-0 -translate-y-full translate-z-0',
-                      leaveToClass: 'translate-x-0 -translate-y-full translate-z-0'
-                  }
-                : props.position === 'bottom'
-                ? {
-                      enterFromClass: 'translate-x-0 translate-y-full translate-z-0',
-                      leaveToClass: 'translate-x-0 translate-y-full translate-z-0'
-                  }
-                : props.position === 'left'
-                ? {
-                      enterFromClass: '-translate-x-full translate-y-0 translate-z-0',
-                      leaveToClass: '-translate-x-full translate-y-0 translate-z-0'
-                  }
-                : props.position === 'right'
-                ? {
-                      enterFromClass: 'translate-x-full translate-y-0 translate-z-0',
-                      leaveToClass: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0'
-                  }
-                : {
-                      enterFromClass: 'opacity-0',
-                      enterActiveClass: 'transition-opacity duration-400 ease-in',
-                      leaveActiveClass: 'transition-opacity duration-400 ease-in',
-                      leaveToClass: 'opacity-0'
-                  };
+            return {
+                timeout: 300,
+                classNames: props.fullScreen
+                    ? {
+                          enter: 'opacity-0',
+                          enterActive: '!opacity-100 transition-opacity duration-300 ease-in',
+                          exit: 'opacity-100 transition-opacity duration-300 ease-in',
+                          exitActive: '!opacity-0'
+                      }
+                    : props.position === 'top'
+                    ? {
+                          enter: 'translate-x-0 -translate-y-full translate-z-0',
+                          enterActive: '!translate-y-0 transition-transform duration-300',
+                          exit: 'translate-y-0 transition-transform duration-300',
+                          exitActive: 'translate-x-0 !-translate-y-full translate-z-0'
+                      }
+                    : props.position === 'bottom'
+                    ? {
+                          enter: 'translate-x-0 translate-y-full translate-z-0',
+                          enterActive: '!translate-y-0 transition-transform duration-300',
+                          exit: 'translate-y-0 transition-transform duration-300',
+                          exitActive: 'translate-x-0 !translate-y-full translate-z-0'
+                      }
+                    : props.position === 'left'
+                    ? {
+                          enter: '-translate-x-full translate-y-0 translate-z-0',
+                          enterActive: '!translate-x-0 transition-transform duration-300',
+                          exit: 'translate-x-0 transition-transform duration-300',
+                          exitActive: '!-translate-x-full translate-y-0 translate-z-0'
+                      }
+                    : props.position === 'right'
+                    ? {
+                          enter: 'translate-x-full translate-y-0 translate-z-0',
+                          enterActive: '!translate-x-0 transition-transform duration-300',
+                          exit: 'translate-x-0 transition-transform duration-300',
+                          exitActive: '!translate-x-full translate-y-0 translate-z-0'
+                      }
+                    : undefined
+            };
         }
     },
     toolbar: {
@@ -537,11 +553,13 @@ const Tailwind = {
             className: classNames('w-8 h-8 rounded-full bg-transparent transition duration-200 ease-in-out', 'ml-auto overflow-hidden relative', 'flex items-center justify-center', 'hover:bg-white/30')
         },
         transition: {
-            enterFromClass: 'opacity-0',
-            enterActiveClass: 'transition-opacity duration-300',
-            leaveFromClass: 'max-h-40',
-            leaveActiveClass: 'overflow-hidden transition-all duration-300 ease-in',
-            leaveToClass: 'max-h-0 opacity-0 !m-0'
+            timeout: 300,
+            classNames: {
+                enter: 'max-h-0 opacity-0',
+                enterActive: '!max-h-40 !opacity-100 overflow-hidden transition-all duration-300',
+                exit: 'max-h-40 opacity-100',
+                exitActive: '!max-h-0 !opacity-0 !m-0 overflow-hidden transition-all duration-300 ease-in'
+            }
         }
     },
     message: {
@@ -578,11 +596,13 @@ const Tailwind = {
             className: classNames('w-8 h-8 rounded-full bg-transparent transition duration-200 ease-in-out', 'ml-auto overflow-hidden relative', 'flex items-center justify-center', 'hover:bg-white/30')
         },
         transition: {
-            enterFromClass: 'opacity-0 translate-x-0 translate-y-2/4 translate-z-0',
-            enterActiveClass: 'transition-transform transition-opacity duration-300',
-            leaveFromClass: 'max-h-40',
-            leaveActiveClass: 'transition-all duration-500 ease-in',
-            leaveToClass: 'max-h-0 opacity-0 mb-0 overflow-hidden'
+            timeout: { enter: 300, exit: 500 },
+            classNames: {
+                enter: 'opacity-0 max-h-0 translate-x-0 translate-y-2/4 translate-z-0',
+                enterActive: '!max-h-40 !opacity-90 !translate-y-0 transition-transform transition-opacity duration-300',
+                exit: 'max-h-40 opacity-90',
+                exitActive: '!max-h-0 !opacity-0 !mb-0 overflow-hidden transition-all duration-500 ease-in'
+            }
         }
     },
     //BUTTONS
@@ -1686,10 +1706,13 @@ const Tailwind = {
             })
         }),
         transition: {
-            enterFromClass: 'opacity-0',
-            enterActiveClass: 'transition-opacity duration-150',
-            leaveActiveClass: 'transition-opacity duration-150',
-            leaveToClass: 'opacity-0'
+            timeout: 150,
+            classNames: {
+                enter: 'opacity-0',
+                enterActive: '!opacity-100 transition-opacity duration-150',
+                exit: 'opacity-100',
+                exitActive: '!opacity-0 transition-opacity duration-150'
+            }
         }
     },
     terminal: {
@@ -1746,8 +1769,11 @@ const Tailwind = {
         icon: 'text-gray-600 dark:text-white/70 mr-2',
         label: 'text-gray-600 dark:text-white/70',
         transition: {
-            enterFromClass: 'opacity-0',
-            enterActiveClass: 'transition-opacity duration-250'
+            timeout: { enter: 250 },
+            classNames: {
+                enter: 'opacity-0',
+                enterActive: '!opacity-100 transition-opacity duration-250'
+            }
         }
     },
     dock: {
@@ -2138,10 +2164,13 @@ const Tailwind = {
         },
         closeicon: 'w-6 h-6',
         transition: {
-            enterFromClass: 'opacity-0 scale-75',
-            enterActiveClass: 'transition-all duration-150 ease-in-out',
-            leaveActiveClass: 'transition-all duration-150 ease-in',
-            leaveToClass: 'opacity-0 scale-75'
+            timeout: 150,
+            classNames: {
+                enter: 'opacity-0 scale-75',
+                enterActive: '!opacity-100 !scale-100 transition-all duration-150 ease-in-out',
+                exit: 'opacity-100 scale-100',
+                exitActive: '!opacity-0 !scale-75 transition-all duration-150 ease-in'
+            }
         }
     },
     galleria: {
@@ -2221,10 +2250,13 @@ const Tailwind = {
             className: classNames('absolute bottom-0 left-0 w-full', 'bg-black/50 text-white p-4')
         },
         transition: {
-            enterFromClass: 'opacity-0 scale-75',
-            enterActiveClass: 'transition-all duration-150 ease-in-out',
-            leaveActiveClass: 'transition-all duration-150 ease-in',
-            leaveToClass: 'opacity-0 scale-75'
+            timeout: 150,
+            classNames: {
+                enter: 'opacity-0 scale-75',
+                enterActive: '!opacity-100 !scale-100 transition-all duration-150 ease-in-out',
+                exit: 'opacity-100 scale-100',
+                exitActive: '!opacity-0 !scale-75 transition-all duration-150 ease-in'
+            }
         }
     },
     carousel: {
@@ -2749,10 +2781,13 @@ const Tailwind = {
             )
         },
         transition: {
-            enterFromClass: '!transition-none',
-            enterActiveClass: '!transition-none',
-            leaveActiveClass: '!transition-none',
-            leaveToClass: '!transition-none'
+            timeout: 0,
+            classNames: {
+                enter: '!transition-none',
+                enterActive: '!transition-none',
+                exit: '!transition-none',
+                exitActive: '!transition-none'
+            }
         }
     },
     paginator: {
