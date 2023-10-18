@@ -198,8 +198,8 @@ export const Slider = React.memo(
             bottomValue = ObjectUtils.isEmpty(bottomValue) ? null : bottomValue;
             const style = {
                 transition: dragging.current ? 'none' : null,
-                left: leftValue && leftValue + '%',
-                bottom: bottomValue && bottomValue + '%'
+                left: leftValue != null && leftValue + '%',
+                bottom: bottomValue != null && bottomValue + '%'
             };
 
             const handleProps = mergeProps(
@@ -213,7 +213,7 @@ export const Slider = React.memo(
                     onKeyDown: (event) => onKeyDown(event, index),
                     'aria-valuemin': props.min,
                     'aria-valuemax': props.max,
-                    'aria-valuenow': leftValue || bottomValue,
+                    'aria-valuenow': leftValue || bottomValue || 0,
                     'aria-orientation': props.orientation,
                     ...ariaProps
                 },
