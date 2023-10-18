@@ -292,8 +292,8 @@ export const DropdownPanel = React.memo(
 
             const transitionProps = mergeProps(
                 {
-                    classNames: cx('transition'),
                     in: props.in,
+                    ...ptm('transition'),
                     timeout: { enter: 120, exit: 100 },
                     options: props.transitionOptions,
                     unmountOnExit: true,
