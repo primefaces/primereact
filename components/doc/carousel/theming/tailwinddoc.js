@@ -97,14 +97,14 @@ export default function UnstyledDemo() {
     const productTemplate = (product) => {
         return (
             <div className="border bg-white dark:bg-gray-900 border-gray-300 dark:border-blue-900/40 rounded-lg m-2 text-center py-5 px-3">
-                <div className="mb-3">
+                <div className="mb-3 flex justify-center">
                     <img src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} className="w-1/2 shadow-sm" />
                 </div>
                 <div>
-                    <h4 className="mb-1 text-gray-700 dark:text-white/80">{product.name}</h4>
-                    <h6 className="mt-0 mb-3 text-gray-700 dark:text-white/80">\${product.price}</h6>
+                    <h4 className="mb-1 text-gray-700 font-medium dark:text-white/80">{product.name}</h4>
+                    <h6 className="mt-0 mb-3 font-medium text-gray-700 dark:text-white/80">\${product.price}</h6>
                     <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
-                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                    <div className="mt-5 flex flex-wrap gap-2 justify-center align-center">
                         <Button icon="pi pi-search" rounded className="mr-2 text-gray-700 dark:text-white/80 inline-flex"/>
                         <Button icon="pi pi-star-fill" rounded severity="success" className="mr-2 text-gray-700 dark:text-white/80 inline-flex"/>
                     </div>
