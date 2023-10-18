@@ -3011,6 +3011,9 @@ const Tailwind = {
                     'dark:text-white/70' //Dark Mode
                 )
             }),
+            sort: {
+                className: 'inline-block align-middle'
+            },
             sorticon: ({ context }) => ({
                 className: classNames('ml-2', {
                     'text-blue-700 dark:text-white/80': context.sorted,
