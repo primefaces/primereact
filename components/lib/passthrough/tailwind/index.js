@@ -1125,12 +1125,12 @@ const Tailwind = {
             })
         }),
         input: {
-            root: {
+            root: ({ props }) => ({
                 className: classNames('font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none', 'hover:border-blue-500', {
                     'rounded-lg': !props.showIcon,
                     'border-r-0 rounded-l-lg': props.showIcon
                 })
-            }
+            })
         },
         dropdownbutton: ({ props }) => ({
             root: {
