@@ -1,13 +1,14 @@
 import '@docsearch/css';
-import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { GTagManager } from '../components/analytics/analytics';
 import Layout from '../components/layout/layout';
 import PrimeReact from '../components/lib/api/Api';
 import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
+import Tailwind from '../components/lib/passthrough/tailwind';
 import AnnouncementData from '../data/news.json';
 import '../styles/demo/demo.scss';
+import '../styles/globals.css';
 import '../styles/layout/layout.scss';
 
 function Main({ component: Component }) {
@@ -97,7 +98,7 @@ export default function MyApp({ Component }) {
     const isProduction = process.env.NODE_ENV === 'production';
 
     return (
-        <PrimeReactProvider>
+        <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
             {isProduction && <GTagManager />}
             <Main component={Component} />
         </PrimeReactProvider>
