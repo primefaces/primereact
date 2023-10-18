@@ -11,6 +11,7 @@ export const TRANSITIONS = {
         }
     },
     overlay: {
+        timeout: 150,
         classNames: {
             enter: 'opacity-0 scale-75',
             enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
