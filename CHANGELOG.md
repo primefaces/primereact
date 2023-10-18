@@ -1,4 +1,12 @@
 # Changelog
+## [9.6.3](https://github.com/primefaces/primereact/tree/9.6.3) (2023-10-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.2...9.6.3)
+
+**Fixed bugs:**
+
+- DataTable: Invalid attribute warning when passing custom icon to rowReorderIcon [\#5109](https://github.com/primefaces/primereact/issues/5109)
+
 ## [9.6.2](https://github.com/primefaces/primereact/tree/9.6.2) (2023-08-17)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.6.1...9.6.2)
