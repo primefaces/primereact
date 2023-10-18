@@ -1,29 +1,22 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Checkbox = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = CheckboxBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const { ptm, cx, isUnstyled } = CheckboxBase.setMetaData({
+        const { ptm } = CheckboxBase.setMetaData({
             props,
             state: {
                 focused: focusedState
-            },
-            context: {
-                checked: props.checked === props.trueValue,
-                disabled: props.disabled
             }
         });
-
-        useHandleStyle(CheckboxBase.css.styles, isUnstyled, { name: 'checkbox', styled: true });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
@@ -118,9 +111,24 @@ export const Checkbox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = CheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames(
+            'p-checkbox p-component',
+            {
+                'p-checkbox-checked': checked,
+                'p-checkbox-disabled': props.disabled,
+                'p-checkbox-focused': focusedState
+            },
+            props.className
+        );
+        const boxClass = classNames('p-checkbox-box', {
+            'p-highlight': checked,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        });
+        const iconClassName = 'p-checkbox-icon p-c';
         const iconProps = mergeProps(
             {
-                className: cx('icon')
+                className: iconClassName
             },
             ptm('icon')
         );
@@ -128,8 +136,9 @@ export const Checkbox = React.memo(
         const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
         const rootProps = mergeProps(
             {
+                ref: elementRef,
                 id: props.id,
-                className: classNames(props.className, cx('root', { checked, focusedState })),
+                className,
                 style: props.style,
                 onClick: (e) => onClick(e),
                 onContextMenu: props.onContextMenu,
@@ -149,6 +158,7 @@ export const Checkbox = React.memo(
         const hiddenInputProps = mergeProps(
             {
                 id: props.inputId,
+                ref: inputRef,
                 type: 'checkbox',
                 name: props.name,
                 tabIndex: props.tabIndex,
@@ -166,19 +176,16 @@ export const Checkbox = React.memo(
 
         const inputProps = mergeProps(
             {
-                className: cx('input', { checked, focusedState }),
-                'data-p-highlight': checked,
-                'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState
+                className: boxClass
             },
             ptm('input')
         );
 
         return (
             <>
-                <div ref={elementRef} {...rootProps}>
+                <div {...rootProps}>
                     <div {...hiddenInputWrapperProps}>
-                        <input ref={inputRef} {...hiddenInputProps} />
+                        <input {...hiddenInputProps} />
                     </div>
                     <div {...inputProps}>{checkboxIcon}</div>
                 </div>

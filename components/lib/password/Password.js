@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
@@ -32,7 +32,8 @@ export const Password = React.memo(
         const mediumCheckRegExp = React.useRef(new RegExp(props.mediumRegex));
         const strongCheckRegExp = React.useRef(new RegExp(props.strongRegex));
         const type = unmaskedState ? 'text' : 'password';
-        const metaData = {
+
+        const { ptm } = PasswordBase.setMetaData({
             props,
             state: {
                 overlayVisible: overlayVisibleState,
@@ -41,10 +42,7 @@ export const Password = React.memo(
                 focused: focusedState,
                 unmasked: unmaskedState
             }
-        };
-        const { ptm, cx, isUnstyled } = PasswordBase.setMetaData(metaData);
-
-        useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -119,7 +117,6 @@ export const Password = React.memo(
 
         const onOverlayEnter = () => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
-            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -292,12 +289,17 @@ export const Password = React.memo(
         };
 
         const createPanel = () => {
+            const panelClassName = classNames('p-password-panel p-component', props.panelClassName, {
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+            });
             const { strength, width } = meterState || { strength: '', width: '0%' };
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);
             const panelProps = mergeProps(
                 {
-                    className: cx('panel', { context }),
+                    ref: overlayRef,
+                    className: panelClassName,
                     style: props.panelStyle,
                     onClick: onPanelClick
                 },
@@ -306,20 +308,20 @@ export const Password = React.memo(
 
             const meterProps = mergeProps(
                 {
-                    className: cx('meter')
+                    className: 'p-password-meter'
                 },
                 ptm('meter')
             );
             const meterLabelProps = mergeProps(
                 {
-                    className: cx('meterLabel', { strength }),
+                    className: `p-password-strength ${strength}`,
                     style: { width }
                 },
                 ptm('meterLabel')
             );
             const infoProps = mergeProps(
                 {
-                    className: cx('info', { strength })
+                    className: `p-password-info ${strength}`
                 },
                 ptm('info')
             );
@@ -335,24 +337,20 @@ export const Password = React.memo(
                 </>
             );
 
-            const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: overlayVisibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: onOverlayEnter,
-                    onEntered: onOverlayEntered,
-                    onExit: onOverlayExit,
-                    onExited: onOverlayExited
-                },
-                ptm('transition')
-            );
-
             const panel = (
-                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
-                    <div ref={overlayRef} {...panelProps}>
+                <CSSTransition
+                    nodeRef={overlayRef}
+                    classNames="p-connected-overlay"
+                    in={overlayVisibleState}
+                    timeout={{ enter: 120, exit: 100 }}
+                    options={props.transitionOptions}
+                    unmountOnExit
+                    onEnter={onOverlayEnter}
+                    onEntered={onOverlayEntered}
+                    onExit={onOverlayExit}
+                    onExited={onOverlayExited}
+                >
+                    <div {...panelProps}>
                         {header}
                         {content}
                         {footer}
@@ -372,7 +370,7 @@ export const Password = React.memo(
             },
             props.className
         );
-
+        const inputClassName = classNames('p-password-input', props.inputClassName);
         const inputProps = PasswordBase.getOtherProps(props);
         const icon = createIcon();
         const panel = createPanel();
@@ -381,9 +379,10 @@ export const Password = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { isFilled, focusedState }),
+                className: className,
                 style: props.style
             },
+            PasswordBase.getOtherProps(props),
             ptm('root')
         );
 
@@ -392,20 +391,15 @@ export const Password = React.memo(
                 ref: inputRef,
                 id: props.inputId,
                 ...inputProps,
-                className: cx('input'),
-                onBlur: onBlur,
-                onFocus: onFocus,
-                onInput: onInput,
-                onKeyUp: onKeyup,
-                style: props.inputStyle,
-                tabIndex: props.tabIndex,
-                tooltip: props.tooltip,
-                tooltipOptions: props.tooltipOptions,
                 type: type,
-                value: props.value,
-                __parentMetadata: {
-                    parent: metaData
-                }
+                className: inputClassName,
+                style: props.inputStyle,
+                onFocus: onFocus,
+                onBlur: onBlur,
+                onKeyUp: onKeyup,
+                onInput: onInput,
+                tooltip: props.tooltip,
+                tooltipOptions: props.tooltipOptions
             },
             ptm('input')
         );

@@ -26,15 +26,14 @@ export default function YearPickerDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar } from 'primereact/calendar';
-import { Nullable } from "primereact/ts-helpers";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
 export default function YearPickerDemo() {
-    const [date, setDate] = useState<Nullable<Date>>(null);
+    const [date, setDate] = useState<string | Date | Date[] | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={date} onChange={(e) => setDate(e.value)} view="year" dateFormat="yy" />
+            <Calendar value={date} onChange={(e : CalendarChangeEvent) => setDate(e.value)} view="year" dateFormat="yy" />
         </div>
     )
 }

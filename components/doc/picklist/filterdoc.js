@@ -36,7 +36,7 @@ export function FilterDoc(props) {
     const code = {
         basic: `
 <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
-    sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
+    sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }}
     sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         `,
         javascript: `
@@ -76,7 +76,7 @@ export default function FilterDemo() {
     return (
         <div className="card">
             <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
-                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
+                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
     );
@@ -132,7 +132,7 @@ export default function FilterDemo() {
     return (
         <div className="card">
             <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
-                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
+                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
     );
@@ -172,8 +172,8 @@ export default function FilterDemo() {
                     itemTemplate={itemTemplate}
                     sourceHeader="Available"
                     targetHeader="Selected"
-                    sourceStyle={{ height: '24rem' }}
-                    targetStyle={{ height: '24rem' }}
+                    sourceStyle={{ height: '30rem' }}
+                    targetStyle={{ height: '30rem' }}
                     breakpoint="1400px"
                     filter
                     filterBy="name"

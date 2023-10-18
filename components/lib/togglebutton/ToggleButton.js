@@ -1,25 +1,22 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { ToggleButtonBase } from './ToggleButtonBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const ToggleButton = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ToggleButtonBase.getProps(inProps, context);
+
         const elementRef = React.useRef(null);
-        const { ptm, cx, isUnstyled } = ToggleButtonBase.setMetaData({
+        const { ptm } = ToggleButtonBase.setMetaData({
             props
         });
-
-        useHandleStyle(ToggleButtonBase.css.styles, isUnstyled, { name: 'togglebutton' });
-
         const hasLabel = props.onLabel && props.onLabel.length > 0 && props.offLabel && props.offLabel.length > 0;
-        const hasIcon = props.onIcon && props.offIcon;
+        const hasIcon = props.onIcon && props.onIcon.length > 0 && props.offIcon && props.offIcon.length > 0;
         const label = hasLabel ? (props.checked ? props.onLabel : props.offLabel) : '&nbsp;';
         const icon = props.checked ? props.onIcon : props.offIcon;
 
@@ -52,9 +49,14 @@ export const ToggleButton = React.memo(
 
         const createIcon = () => {
             if (hasIcon) {
+                const iconClassName = classNames('p-button-icon p-c', {
+                    'p-button-icon-left': props.iconPos === 'left' && label,
+                    'p-button-icon-right': props.iconPos === 'right' && label
+                });
+
                 const iconProps = mergeProps(
                     {
-                        className: cx('icon', { label })
+                        className: iconClassName
                     },
                     ptm('icon')
                 );
@@ -79,11 +81,20 @@ export const ToggleButton = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const tabIndex = props.disabled ? -1 : props.tabIndex;
+        const className = classNames(
+            'p-button p-togglebutton p-component',
+            {
+                'p-button-icon-only': hasIcon && !hasLabel,
+                'p-highlight': props.checked,
+                'p-disabled': props.disabled
+            },
+            props.className
+        );
         const iconElement = createIcon();
 
         const labelProps = mergeProps(
             {
-                className: cx('label')
+                className: 'p-button-label'
             },
             ptm('label')
         );
@@ -92,7 +103,7 @@ export const ToggleButton = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root', { hasIcon, hasLabel }),
+                className: className,
                 style: props.style,
                 onClick: toggle,
                 onFocus: props.onFocus,

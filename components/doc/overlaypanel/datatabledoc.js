@@ -132,7 +132,7 @@ export default function DataTableDemo() {
             <Toast ref={toast} />
             <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
             {selectedProductContent}
-            <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
+            <OverlayPanel ref={op} showCloseIcon>
                 <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
                     <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
                     <Column header="Image" body={imageBody} />
@@ -206,7 +206,7 @@ export default function DataTableDemo() {
             <Toast ref={toast} />
             <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
             {selectedProductContent}
-            <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
+            <OverlayPanel ref={op} showCloseIcon>
                 <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
                     <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
                     <Column header="Image" body={imageBody} />
@@ -238,16 +238,13 @@ export default function DataTableDemo() {
     return (
         <>
             <DocSectionText {...props}>
-                <p>
-                    An example that displays a DataTable inside a popup to select an item. <i>closeOnEscape</i> is enabled to close the popop when ESC is pressed. The <i>dismissable</i> property when set to <i>false</i> will not close the popup when
-                    the document is clicked outside the popup.
-                </p>
+                <p>An example that displays a DataTable inside a popup to select an item.</p>
             </DocSectionText>
             <div className="card flex flex-column align-items-center gap-3">
                 <Toast ref={toast} />
                 <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
                 {selectedProductContent}
-                <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
+                <OverlayPanel ref={op} showCloseIcon>
                     <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
                         <Column field="name" header="Name" sortable style={{ minWidth: '12rem' }} />
                         <Column header="Image" body={imageBody} />

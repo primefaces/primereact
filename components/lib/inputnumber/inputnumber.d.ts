@@ -13,8 +13,6 @@ import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { PassThroughType } from '../utils/utils';
-import { PassThroughOptions } from '../passthrough';
-import { ComponentHooks } from '../componentbase/componentbase';
 
 export declare type InputNumberPassThroughType<T> = PassThroughType<T, InputNumberPassThroughMethodOptions>;
 
@@ -57,11 +55,6 @@ export interface InputNumberPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -138,11 +131,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Style class of the increment button.
      */
-    incrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    incrementButtonIcon?: string | undefined;
     /**
      * Style class of the decrement button.
      */
-    decrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    decrementButtonIcon?: string | undefined;
     /**
      * Locale to be used in formatting.
      */
@@ -301,15 +294,10 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      */
     onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
     /**
-     * Callback to invoke when the key pressed down.
+     * Callback to invoke when the key pressed.
      * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
      */
     onKeyDown?(event: React.KeyboardEvent<HTMLInputElement>): void;
-    /**
-     * Callback to invoke when the key released.
-     * @param {React.KeyboardEvent<HTMLInputElement>} event - Browser event
-     */
-    onKeyUp?(event: React.KeyboardEvent<HTMLInputElement>): void;
     /**
      * Used to get the child elements of the component.
      * @readonly
@@ -320,16 +308,6 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {InputNumberPassThroughOptions}
      */
     pt?: InputNumberPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

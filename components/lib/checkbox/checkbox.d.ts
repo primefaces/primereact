@@ -8,12 +8,10 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPassThroughMethodOptions>;
 
@@ -23,7 +21,6 @@ export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPass
 export interface CheckboxPassThroughMethodOptions {
     props: CheckboxProps;
     state: CheckboxState;
-    context: CheckboxContext;
 }
 
 /**
@@ -56,27 +53,6 @@ export interface CheckboxPassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: CheckboxPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-}
-
-/**
- * Defines current options in Checkbox component.
- */
-export interface CheckboxContext {
-    /**
-     * Current checked state of the item as a boolean.
-     * @defaultValue false
-     */
-    checked: boolean;
-    /**
-     * Current disabled state of the item as a boolean.
-     * @defaultValue false
-     */
-    disabled: boolean;
 }
 
 /**
@@ -93,7 +69,7 @@ export interface CheckboxState {
 /**
  * Custom change event.
  * @see {@link CheckboxProps.onChange}
- * @extends {FormEvent }
+ * @extends {FormEvent}
  * @event
  */
 interface CheckboxChangeEvent extends FormEvent {}
@@ -101,7 +77,7 @@ interface CheckboxChangeEvent extends FormEvent {}
 /**
  * Custom click event.
  * @see {@link CheckboxProps.onClick}
- * @extends {FormEvent }
+ * @extends {FormEvent}
  * @event
  */
 interface CheckboxClickEvent extends FormEvent {}
@@ -222,16 +198,6 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      * @type {CheckboxPassThroughOptions}
      */
     pt?: CheckboxPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

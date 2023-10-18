@@ -11,7 +11,6 @@ import * as React from 'react';
 import { InputText, InputTextPassThroughOptions, InputTextProps } from '../inputtext';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { PassThroughOptions } from '../passthrough';
 
 /**
  * Custom complete event
@@ -115,16 +114,6 @@ export interface InputMaskProps extends Omit<InputTextProps, 'onChange' | 'pt'> 
      * @type {InputTextPassThroughOptions}
      */
     pt?: InputTextPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

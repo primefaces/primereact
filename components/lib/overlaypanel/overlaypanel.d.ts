@@ -8,14 +8,10 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type OverlayPanelPassThroughType<T> = PassThroughType<T, OverlayPanelPassThroughMethodOptions>;
-export declare type OverlayPanelPassThroughTransitionType = ReactCSSTransitionProps | ((options: OverlayPanelPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -46,15 +42,6 @@ export interface OverlayPanelPassThroughOptions {
      * Uses to pass attributes to the close icon's DOM element.
      */
     closeIcon?: OverlayPanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: OverlayPanelPassThroughTransitionType;
 }
 
 /**
@@ -98,11 +85,6 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     closeIcon?: IconType<OverlayPanelProps> | undefined;
     /**
-     * Specifies if pressing escape key should hide the preview.
-     * @defaultValue true
-     */
-    closeOnEscape?: boolean | undefined;
-    /**
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
@@ -138,16 +120,6 @@ export interface OverlayPanelProps extends Omit<React.DetailedHTMLProps<React.HT
      * @type {OverlayPanelPassThroughOptions}
      */
     pt?: OverlayPanelPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**
@@ -178,10 +150,6 @@ export declare class OverlayPanel extends React.Component<OverlayPanelProps, any
      * Hides the overlay.
      */
     public hide(): void;
-    /**
-     * Align the overlay panel to its surroundings.
-     */
-    public align(): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element

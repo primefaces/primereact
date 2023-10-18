@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type OrganizationChartPassThroughType<T> = PassThroughType<T, OrganizationChartPassThroughMethodOptions>;
@@ -37,10 +35,6 @@ export interface OrganizationChartPassThroughOptions {
      */
     table?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
-     * Uses to pass attributes to the row's DOM element.
-     */
-    row?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
-    /**
      * Uses to pass attributes to the cell's DOM element.
      */
     cell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
@@ -61,14 +55,6 @@ export interface OrganizationChartPassThroughOptions {
      */
     lines?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
     /**
-     * Uses to pass attributes to the lineLeft's DOM element.
-     */
-    lineLeft?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
-    /**
-     * Uses to pass attributes to the lineRight's DOM element.
-     */
-    lineRight?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
-    /**
      * Uses to pass attributes to the lineCell's DOM element.
      */
     lineCell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
@@ -84,11 +70,6 @@ export interface OrganizationChartPassThroughOptions {
      * Uses to pass attributes to the nodeCell's DOM element.
      */
     nodeCell?: OrganizationChartPassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -237,16 +218,6 @@ export interface OrganizationChartProps extends Omit<React.DetailedHTMLProps<Rea
      * @type {OrganizationChartPassThroughOptions}
      */
     pt?: OrganizationChartPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

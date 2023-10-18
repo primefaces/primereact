@@ -7,8 +7,6 @@ import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
 import { PTDoc } from '../../components/doc/overlaypanel/pt/ptdoc';
 import { Wireframe } from '../../components/doc/overlaypanel/pt/wireframe';
 import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
-import { StyledDoc } from '../../components/doc/overlaypanel/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/overlaypanel/theming/tailwinddoc';
 
 const OverlayPanelDemo = () => {
     const docs = [
@@ -57,26 +55,6 @@ const OverlayPanelDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
     return (
         <DocComponent
             title="React Popover Component"
@@ -85,7 +63,6 @@ const OverlayPanelDemo = () => {
             componentDocs={docs}
             apiDocs={['OverlayPanel']}
             ptDocs={ptDocs}
-            themingDocs={themingDocs}
         />
     );
 };

@@ -65,11 +65,6 @@ const ALIAS_ICON_COMPONENT_ENTRIES = [
     { find: '../icons/windowminimize', replacement: 'primereact/icons/windowminimize' }
 ];
 
-const CORE_PASSTHROUGH_DEPENDENCIES = [
-    { find: '../passthrough', replacement: 'primereact/passthrough' },
-    { find: '../passthrough/tailwind', replacement: 'primereact/passthrough/tailwind' }
-];
-
 const ALIAS_COMPONENT_ENTRIES = [
     { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
@@ -93,8 +88,7 @@ const ALIAS_COMPONENT_ENTRIES = [
     { find: '../dropdown/Dropdown', replacement: 'primereact/dropdown' },
     { find: '../dialog/Dialog', replacement: 'primereact/dialog' },
     { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
-    { find: '../tree/Tree', replacement: 'primereact/tree' },
-    ...CORE_PASSTHROUGH_DEPENDENCIES
+    { find: '../tree/Tree', replacement: 'primereact/tree' }
 ];
 
 // dependencies
@@ -165,15 +159,8 @@ function addEntry(name, input, output, isComponent = true) {
     const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
 
-    const onwarn = (warning) => {
-        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
-            return;
-        }
-    };
-
     const getEntry = (isMinify) => {
         return {
-            onwarn,
             input,
             plugins: [...plugins, isMinify && terser(TERSER_PLUGIN_OPTIONS), useCorePlugin && corePlugin()],
             external,
@@ -188,14 +175,12 @@ function addEntry(name, input, output, isComponent = true) {
                 {
                     format: 'cjs',
                     file: `${output}.cjs${isMinify ? '.min' : ''}.js`,
-                    exports,
-                    banner: "'use client';" // This line is required for SSR.
+                    exports
                 },
                 {
                     format: 'esm',
                     file: `${output}.esm${isMinify ? '.min' : ''}.js`,
-                    exports,
-                    banner: "'use client';" // This line is required for SSR.
+                    exports
                 }
             ]
         };
@@ -307,14 +292,6 @@ function addIcon() {
         });
 }
 
-function addPassThrough() {
-    const inputDir = process.env.INPUT_DIR + 'passthrough';
-    const outputDir = process.env.OUTPUT_DIR + 'passthrough';
-
-    addEntry('passthrough', `${inputDir}/index.js`, `${outputDir}/index`, false);
-    addEntry('passthrough.tailwind', `${inputDir}/tailwind/index.js`, `${outputDir}/tailwind/index`, false);
-}
-
 function addPrimeReact() {
     const input = process.env.INPUT_DIR + 'primereact.all.js';
     const output = process.env.OUTPUT_DIR + 'primereact.all';
@@ -387,7 +364,6 @@ function addPackageJson() {
 addIcon();
 addComponent();
 addPrimeReact();
-addPassThrough();
 addCore();
 addPackageJson();
 

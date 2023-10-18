@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import PrimeReact, { FilterService } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
@@ -26,27 +26,22 @@ export const MultiSelect = React.memo(
         const hasFilter = filterState && filterState.trim().length > 0;
         const empty = ObjectUtils.isEmpty(props.value);
         const equalityKey = props.optionValue ? null : props.dataKey;
-        const metaData = {
+
+        const { ptm } = MultiSelectBase.setMetaData({
             props,
             state: {
                 filterState: filterState,
                 focused: focusedState,
                 overlayVisible: overlayVisibleState
             }
-        };
-        const { ptm, cx, sx, isUnstyled } = MultiSelectBase.setMetaData(metaData);
+        });
 
-        useHandleStyle(MultiSelectBase.css.styles, isUnstyled, { name: 'multiselect' });
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
             overlay: overlayRef,
             listener: (event, { type, valid }) => {
                 if (valid) {
-                    if (type === 'outside') {
-                        !isClearClicked(event) && !isSelectAllClicked(event) && hide();
-                    } else {
-                        hide();
-                    }
+                    type === 'outside' ? !isClearClicked(event) && hide() : hide();
                 }
             },
             when: overlayVisibleState
@@ -128,17 +123,17 @@ export const MultiSelect = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.getAttribute(nextItem, 'data-p-disabled') === true || DomHandler.getAttribute(nextItem, 'data-pc-section') === 'itemgroup' ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || DomHandler.hasClass(nextItem, 'p-multiselect-item-group') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.getAttribute(prevItem, 'data-p-disabled') === true || DomHandler.getAttribute(prevItem, 'data-pc-section') === 'itemgroup' ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || DomHandler.hasClass(prevItem, 'p-multiselect-item-group') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onClick = (event) => {
-            if (!props.inline && !props.disabled && !isPanelClicked(event) && DomHandler.getAttribute(event.target, 'data-pc-section') !== 'removetokenicon' && !isClearClicked(event)) {
+            if (!props.inline && !props.disabled && !isPanelClicked(event) && !DomHandler.hasClass(event.target, 'p-multiselect-token-icon') && !isClearClicked(event)) {
                 overlayVisibleState ? hide() : show();
                 DomHandler.focus(inputRef.current);
                 event.preventDefault();
@@ -204,7 +199,7 @@ export const MultiSelect = React.memo(
                         value = selectedOptions.map((option) => getOptionValue(option));
                     }
                 } else if (visibleOptions) {
-                    const options = visibleOptions.filter((option) => !isOptionDisabled(option) || isSelected(option));
+                    const options = visibleOptions.filter((option) => !isOptionDisabled(option));
 
                     if (props.optionGroupLabel) {
                         value = [];
@@ -283,7 +278,6 @@ export const MultiSelect = React.memo(
 
         const onOverlayEnter = (callback) => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
-            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
             scrollInView();
             callback && callback();
@@ -314,11 +308,7 @@ export const MultiSelect = React.memo(
         };
 
         const isClearClicked = (event) => {
-            return DomHandler.getAttribute(event.target, 'data-pc-section') === 'clearicon';
-        };
-
-        const isSelectAllClicked = (event) => {
-            return DomHandler.getAttribute(event.target, 'data-pc-section') === 'headercheckboxcontainer';
+            return DomHandler.hasClass(event.target, 'p-multiselect-clear-icon');
         };
 
         const isPanelClicked = (event) => {
@@ -376,10 +366,6 @@ export const MultiSelect = React.memo(
                     }
                 } else {
                     option = findOptionByValue(val, props.options);
-
-                    if (ObjectUtils.isEmpty(option)) {
-                        option = findOptionByValue(val, props.value);
-                    }
                 }
             }
 
@@ -501,11 +487,7 @@ export const MultiSelect = React.memo(
                 if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 } else {
-                    if (ObjectUtils.isArray(props.value)) {
-                        return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ', ' : '') + getLabelByValue(value), '');
-                    } else {
-                        return '';
-                    }
+                    return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ',' : '') + getLabelByValue(value), '');
                 }
             }
 
@@ -536,7 +518,7 @@ export const MultiSelect = React.memo(
                         const iconProps = mergeProps(
                             {
                                 key: i,
-                                className: cx('removeTokenIcon'),
+                                className: 'p-multiselect-token-icon',
                                 onClick: (e) => removeChip(e, val)
                             },
                             ptm('removeTokenIcon')
@@ -545,7 +527,7 @@ export const MultiSelect = React.memo(
 
                         const tokenProps = mergeProps(
                             {
-                                className: cx('token')
+                                className: 'p-multiselect-token'
                             },
                             ptm('token')
                         );
@@ -553,7 +535,7 @@ export const MultiSelect = React.memo(
                         const tokenLabelProps = mergeProps(
                             {
                                 key: label + i,
-                                className: cx('tokenLabel')
+                                className: 'p-multiselect-token-label'
                             },
                             ptm('tokenLabel')
                         );
@@ -629,7 +611,7 @@ export const MultiSelect = React.memo(
         const createClearIcon = () => {
             const clearIconProps = mergeProps(
                 {
-                    className: cx('clearIcon'),
+                    className: 'p-multiselect-clear-icon',
                     onClick: (e) => updateModel(e, null, null)
                 },
                 ptm('clearIcon')
@@ -647,18 +629,23 @@ export const MultiSelect = React.memo(
 
         const createLabel = () => {
             const content = getLabelContent();
+            const className = classNames('p-multiselect-label', {
+                'p-placeholder': empty && props.placeholder,
+                'p-multiselect-label-empty': empty && !props.placeholder && !props.selectedItemTemplate,
+                'p-multiselect-items-label': !empty && props.display !== 'chip' && props.value.length > props.maxSelectedLabels
+            });
 
             const labelContainerProps = mergeProps(
                 {
                     ref: labelRef,
-                    className: cx('labelContainer')
+                    className: 'p-multiselect-label-container'
                 },
                 ptm('labelContainer')
             );
 
             const labelProps = mergeProps(
                 {
-                    className: cx('label', { empty })
+                    className: className
                 },
                 ptm('label')
             );
@@ -675,17 +662,31 @@ export const MultiSelect = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = MultiSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames(
+            'p-multiselect p-component p-inputwrapper',
+            {
+                'p-multiselect-chip': props.display === 'chip',
+                'p-disabled': props.disabled,
+                'p-multiselect-clearable': props.showClear && !props.disabled,
+                'p-focus': focusedState,
+                'p-inputwrapper-filled': ObjectUtils.isNotEmpty(props.value),
+                'p-inputwrapper-focus': focusedState || overlayVisibleState
+            },
+            props.className
+        );
+
+        const dropdownIconClass = 'p-multiselect-trigger-icon p-c';
 
         const triggerIconProps = mergeProps(
             {
-                className: cx('triggerIcon')
+                className: dropdownIconClass
             },
             ptm('triggerIcon')
         );
 
         const triggerProps = mergeProps(
             {
-                className: cx('trigger')
+                className: 'p-multiselect-trigger'
             },
             ptm('trigger')
         );
@@ -698,8 +699,8 @@ export const MultiSelect = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                style: { ...props.style, ...sx('root') },
-                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
+                style: props.style,
+                className: className,
                 ...otherProps,
                 onClick: onClick
             },
@@ -746,7 +747,6 @@ export const MultiSelect = React.memo(
                         </>
                     )}
                     <MultiSelectPanel
-                        hostName="MultiSelect"
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
                         {...props}
@@ -776,10 +776,6 @@ export const MultiSelect = React.memo(
                         onExit={onOverlayExit}
                         onExited={onOverlayExited}
                         ptm={ptm}
-                        cx={cx}
-                        sx={sx}
-                        isUnstyled={isUnstyled}
-                        metaData={metaData}
                     />
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}

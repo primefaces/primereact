@@ -4,21 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function CSSTransitionDoc(props) {
     const code = {
         basic: `
-//_app.js
-import { PrimeReactProvider } from 'primereact/api';
+import { PrimeReactContext } from 'primereact/api';
 
-export default function MyApp({ Component }) {
-    const value = {
-        cssTransition: false,
-        ...
-    };
+//use in a component
+const { setCSSTransition } = useContext(PrimeReactContext);
 
-    return (
-        <PrimeReactProvider value={value}>
-            <App />
-        </PrimeReactProvider>
-    );
-}
+setCSSTransition(false);
         `
     };
 

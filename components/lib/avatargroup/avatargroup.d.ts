@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type AvatarGroupPassThroughType<T> = PassThroughType<T, AvatarGroupPassThroughMethodOptions>;
@@ -28,11 +26,6 @@ export interface AvatarGroupPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: AvatarGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -50,16 +43,6 @@ export interface AvatarGroupProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {AvatarGroupPassThroughOptions}
      */
     pt?: AvatarGroupPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

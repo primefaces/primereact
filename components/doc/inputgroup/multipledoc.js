@@ -5,7 +5,7 @@ import { DocSectionText } from '../common/docsectiontext';
 export function MultipleDoc(props) {
     const code = {
         basic: `
-<div className="p-inputgroup w-full md:w-30rem">
+<div className="p-inputgroup">
     <span className="p-inputgroup-addon">
         <i className="pi pi-clock"></i>
     </span>

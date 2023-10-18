@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
@@ -9,22 +8,19 @@ import { Ripple } from '../ripple/Ripple';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputNumberBase } from './InputNumberBase';
+import PrimeReact from '../api/Api';
 
 export const InputNumber = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputNumberBase.getProps(inProps, context);
         const [focusedState, setFocusedState] = React.useState(false);
-        const metaData = {
+        const { ptm } = InputNumberBase.setMetaData({
             props,
-            ...props.__parentMetadata,
             state: {
                 focused: focusedState
             }
-        };
-        const { ptm, cx, isUnstyled } = InputNumberBase.setMetaData(metaData);
-
-        useHandleStyle(InputNumberBase.css.styles, isUnstyled, { name: 'inputnumber' });
+        });
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(null);
         const timer = React.useRef(null);
@@ -231,9 +227,8 @@ export const InputNumber = React.memo(
 
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                DomHandler.focus(inputRef.current, props.autoFocus);
+                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
-                event.preventDefault();
             }
         };
 
@@ -263,9 +258,8 @@ export const InputNumber = React.memo(
 
         const onDownButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                DomHandler.focus(inputRef.current, props.autoFocus);
+                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, -1);
-                event.preventDefault();
             }
         };
 
@@ -308,15 +302,6 @@ export const InputNumber = React.memo(
         const onInputKeyDown = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
-            }
-
-            if (props.onKeyDown) {
-                props.onKeyDown(event);
-
-                // do not continue if the user defined event wants to prevent
-                if (event.defaultPrevented) {
-                    return;
-                }
             }
 
             lastValue.current = event.target.value;
@@ -380,9 +365,9 @@ export const InputNumber = React.memo(
 
                     if (selectionStart === selectionEnd) {
                         const deleteChar = inputValue.charAt(selectionStart - 1);
+                        const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
 
                         if (isNumeralChar(deleteChar)) {
-                            const { decimalCharIndex, decimalCharIndexWithoutPrefix } = getDecimalCharIndexes(inputValue);
                             const decimalLength = getDecimalLength(inputValue);
 
                             if (_group.current.test(deleteChar)) {
@@ -405,12 +390,6 @@ export const InputNumber = React.memo(
                                 newValueStr = parseValue(newValueStr) > 0 ? newValueStr : '';
                             } else {
                                 newValueStr = inputValue.slice(0, selectionStart - 1) + inputValue.slice(selectionStart);
-                            }
-                        } else if (_currency.current.test(deleteChar)) {
-                            const { minusCharIndex, currencyCharIndex } = getCharIndexes(inputValue);
-
-                            if (minusCharIndex === currencyCharIndex - 1) {
-                                newValueStr = inputValue.slice(0, minusCharIndex) + inputValue.slice(selectionStart);
                             }
                         }
 
@@ -467,20 +446,15 @@ export const InputNumber = React.memo(
                 default:
                     break;
             }
+
+            if (props.onKeyDown) {
+                props.onKeyDown(event);
+            }
         };
 
-        const onInputKeyUp = (event) => {
+        const onInputKeyPress = (event) => {
             if (props.disabled || props.readOnly) {
                 return;
-            }
-
-            if (props.onKeyUp) {
-                props.onKeyUp(event);
-
-                // do not continue if the user defined event wants to prevent
-                if (event.defaultPrevented) {
-                    return;
-                }
             }
 
             const code = event.which || event.keyCode;
@@ -518,7 +492,7 @@ export const InputNumber = React.memo(
         };
 
         const allowMinusSign = () => {
-            return ObjectUtils.isEmpty(props.min) || props.min < 0;
+            return props.min === null || props.min < 0;
         };
 
         const isMinusSign = (char) => {
@@ -591,12 +565,10 @@ export const InputNumber = React.memo(
             let newValueStr;
 
             if (sign.isMinusSign) {
-                const isNewMinusSign = minusCharIndex === -1;
-
-                if (isNewMinusSign && (selectionStart === 0 || selectionStart === currencyCharIndex + 1)) {
+                if (selectionStart === 0) {
                     newValueStr = inputValue;
 
-                    if (isNewMinusSign || selectionEnd !== 0) {
+                    if (minusCharIndex === -1 || selectionEnd !== 0) {
                         newValueStr = insertText(inputValue, text, 0, selectionEnd);
                     }
 
@@ -1047,7 +1019,7 @@ export const InputNumber = React.memo(
                     name={props.name}
                     autoFocus={props.autoFocus}
                     onKeyDown={onInputKeyDown}
-                    onKeyPress={onInputKeyUp}
+                    onKeyPress={onInputKeyPress}
                     onInput={onInput}
                     onClick={onInputClick}
                     onBlur={onInputBlur}
@@ -1061,24 +1033,31 @@ export const InputNumber = React.memo(
                     {...ariaProps}
                     {...dataProps}
                     pt={ptm('input')}
-                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
 
         const createUpButton = () => {
+            const className = classNames(
+                'p-inputnumber-button p-inputnumber-button-up p-button p-button-icon-only p-component',
+                {
+                    'p-disabled': props.disabled
+                },
+                props.incrementButtonClassName
+            );
+            const iconsClassName = 'p-button-icon';
             const incrementIconProps = mergeProps(
                 {
-                    className: cx('incrementIcon')
+                    className: iconsClassName
                 },
-                ptm('incrementIcon')
+                ptm('incrementIconProps')
             );
             const icon = props.incrementButtonIcon || <AngleUpIcon {...incrementIconProps} />;
             const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
             const incrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
+                    className,
                     onPointerLeave: onUpButtonMouseLeave,
                     onPointerDown: (e) => onUpButtonMouseDown(e),
                     onPointerUp: onUpButtonMouseUp,
@@ -1099,18 +1078,26 @@ export const InputNumber = React.memo(
         };
 
         const createDownButton = () => {
+            const className = classNames(
+                'p-inputnumber-button p-inputnumber-button-down p-button p-button-icon-only p-component',
+                {
+                    'p-disabled': props.disabled
+                },
+                props.decrementButtonClassName
+            );
+            const iconsClassName = 'p-button-icon';
             const decrementIconProps = mergeProps(
                 {
-                    className: cx('decrementIcon')
+                    className: iconsClassName
                 },
-                ptm('decrementIcon')
+                ptm('decrementIconProps')
             );
             const icon = props.decrementButtonIcon || <AngleDownIcon {...decrementIconProps} />;
             const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
             const decrementButtonProps = mergeProps(
                 {
                     type: 'button',
-                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
+                    className,
                     onPointerLeave: onDownButtonMouseLeave,
                     onPointerDown: (e) => onDownButtonMouseDown(e),
                     onPointerUp: onDownButtonMouseUp,
@@ -1135,7 +1122,7 @@ export const InputNumber = React.memo(
             const downButton = props.showButtons && createDownButton();
             const buttonGroupProps = mergeProps(
                 {
-                    className: cx('buttonGroup')
+                    className: 'p-inputnumber-button-group'
                 },
                 ptm('buttonGroup')
             );
@@ -1161,12 +1148,24 @@ export const InputNumber = React.memo(
         const otherProps = InputNumberBase.getOtherProps(props);
         const dataProps = ObjectUtils.reduceKeys(otherProps, DomHandler.DATA_PROPS);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames(
+            'p-inputnumber p-component p-inputwrapper',
+            {
+                'p-inputwrapper-filled': props.value != null && props.value.toString().length > 0,
+                'p-inputwrapper-focus': focusedState,
+                'p-inputnumber-buttons-stacked': stacked,
+                'p-inputnumber-buttons-horizontal': horizontal,
+                'p-inputnumber-buttons-vertical': vertical
+            },
+            props.className
+        );
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
+                ref: elementRef,
+                className,
                 style: props.style
             },
             otherProps,
@@ -1175,7 +1174,7 @@ export const InputNumber = React.memo(
 
         return (
             <>
-                <span ref={elementRef} {...rootProps}>
+                <span {...rootProps}>
                     {inputElement}
                     {buttonGroup}
                 </span>

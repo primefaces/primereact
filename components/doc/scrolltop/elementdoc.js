@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollTop } from '../../lib/scrolltop/ScrollTop';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { ScrollTop } from '../../lib/scrolltop/ScrollTop';
 
 export function ElementDoc(props) {
     const code = {
@@ -11,6 +11,7 @@ export function ElementDoc(props) {
         javascript: `
 import React from 'react'; 
 import { ScrollTop } from 'primereact/scrolltop';
+import { ScrollPanel } from 'primereact/scrollpanel';
 
 export default function ElementDemo() {
     return (
@@ -32,6 +33,7 @@ export default function ElementDemo() {
         typescript: `
 import React from 'react'; 
 import { ScrollTop } from 'primereact/scrolltop';
+import { ScrollPanel } from 'primereact/scrollpanel';
 
 export default function ElementDemo() {
     return (

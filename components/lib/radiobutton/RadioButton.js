@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -15,14 +14,12 @@ export const RadioButton = React.memo(
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
-        const { ptm, cx, isUnstyled } = RadioButtonBase.setMetaData({
+        const { ptm } = RadioButtonBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
-
-        useHandleStyle(RadioButtonBase.css.styles, isUnstyled, { name: 'radiobutton', styled: true });
 
         const select = (event) => {
             onClick(event);
@@ -122,10 +119,26 @@ export const RadioButton = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = RadioButtonBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames(
+            'p-radiobutton p-component',
+            {
+                'p-radiobutton-checked': props.checked,
+                'p-radiobutton-disabled': props.disabled,
+                'p-radiobutton-focused': focusedState
+            },
+            props.className
+        );
+        const boxClassName = classNames('p-radiobutton-box', {
+            'p-highlight': props.checked,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        });
 
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root', { focusedState })),
+                ref: elementRef,
+                id: props.id,
+                className: className,
                 style: props.style,
                 onClick: onClick
             },
@@ -142,6 +155,8 @@ export const RadioButton = React.memo(
 
         const hiddenInputProps = mergeProps(
             {
+                ref: inputRef,
+                id: props.inputId,
                 type: 'radio',
                 name: props.name,
                 defaultChecked: props.checked,
@@ -158,23 +173,23 @@ export const RadioButton = React.memo(
 
         const inputProps = mergeProps(
             {
-                className: cx('input', { focusedState })
+                className: boxClassName
             },
             ptm('input')
         );
 
         const iconProps = mergeProps(
             {
-                className: cx('icon')
+                className: 'p-radiobutton-icon'
             },
             ptm('icon')
         );
 
         return (
             <>
-                <div id={props.id} ref={elementRef} {...rootProps}>
+                <div {...rootProps}>
                     <div {...hiddenInputWrapperProps}>
-                        <input id={props.inputId} ref={inputRef} {...hiddenInputProps} />
+                        <input {...hiddenInputProps} />
                     </div>
                     <div {...inputProps}>
                         <div {...iconProps}></div>

@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type EditorPassThroughType<T> = PassThroughType<T, EditorPassThroughMethodOptions>;
@@ -54,11 +52,6 @@ export interface EditorPassThroughOptions {
      * Uses to pass attributes to the content's DOM element.
      */
     content?: EditorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -169,16 +162,6 @@ export interface EditorProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * @type {EditorPassThroughOptions}
      */
     pt?: EditorPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -1,13 +1,11 @@
 import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/toolbar/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/toolbar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/toolbar/basicdoc';
 import { ImportDoc } from '../../components/doc/toolbar/importdoc';
-import { PTDoc } from '../../components/doc/toolbar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/toolbar/pt/wireframe';
 import { StyleDoc } from '../../components/doc/toolbar/styledoc';
-import { StyledDoc } from '../../components/doc/toolbar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/toolbar/theming/tailwinddoc';
+import { PTDoc } from '../../components/doc/toolbar/pt/ptdoc';
 
 const ToolbarDemo = () => {
     const docs = [
@@ -51,27 +49,7 @@ const ToolbarDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Toolbar Component" header="Toolbar" description="Toolbar is a grouping component for buttons and other content." componentDocs={docs} apiDocs={['Toolbar']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Toolbar Component" header="Toolbar" description="Toolbar is a grouping component for buttons and other content." componentDocs={docs} apiDocs={['Toolbar']} ptDocs={ptDocs} />;
 };
 
 export default ToolbarDemo;

@@ -62,7 +62,6 @@ if (project) {
         };
 
         const module_component_group = module.groups.find((g) => g.title === 'Component');
-        const module_properties_group = module.groups.find((g) => g.title === 'Properties');
 
         module_component_group &&
             module_component_group.children.forEach((component) => {
@@ -104,7 +103,8 @@ if (project) {
                     });
 
                 const component_props_id = component.extendedTypes && component.extendedTypes[0].typeArguments && component.extendedTypes[0].typeArguments[0] && component.extendedTypes[0].typeArguments[0]._target;
-                const component_properties = module_properties_group && module_properties_group.children.find((c) => (component_props_id ? c.id === component_props_id : true));
+                const module_properties_group = module.groups.find((g) => g.title === 'Properties');
+                const component_props = module_properties_group && module_properties_group.children.find((c) => (component_props_id ? c.id === component_props_id : true));
 
                 const props = {
                     description: '',
@@ -115,69 +115,47 @@ if (project) {
                     values: []
                 };
 
-                if (component_properties) {
-                    let collected_properties = [component_properties];
+                if (component_props) {
+                    props.description = component_props.comment ? component_props.comment.summary.map((s) => parseText(s.text || '')).join(' ') : '';
 
-                    // Calendar/DataTable have multiple subtypes for properties
-                    if (component_properties.type && component_properties.type.types) {
-                        component_properties.type.types.forEach((type) => {
-                            const type_props = module_properties_group.children.find((c) => (type._target ? c.id === type._target : true));
+                    const component_props_group = component_props.groups && component_props.groups.find((g) => g.title === 'Properties');
 
-                            if (type_props) {
-                                collected_properties = [type_props];
-
-                                return;
+                    component_props_group &&
+                        component_props_group.children.forEach((prop) => {
+                            if (!prop.inheritedFrom || (prop.inheritedFrom && !prop.inheritedFrom.toString().startsWith('Omit.data-pr-'))) {
+                                props.values.push({
+                                    name: prop.name,
+                                    optional: prop.flags.isOptional,
+                                    readonly: prop.flags.isReadonly,
+                                    type: prop.type.toString(),
+                                    default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
+                                    description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' '),
+                                    deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0].text) : undefined
+                                });
                             }
                         });
-                    }
 
-                    collected_properties.forEach((component_props) => {
-                        props.description = component_props.comment ? component_props.comment.summary.map((s) => parseText(s.text || '')).join(' ') : '';
+                    const component_props_methods_group = component_props.groups && component_props.groups.find((g) => g.title === 'Methods');
 
-                        const component_props_group = component_props.groups && component_props.groups.find((g) => g.title === 'Properties');
+                    component_props_methods_group &&
+                        component_props_methods_group.children.forEach((method) => {
+                            const signature = method.getAllSignatures()[0];
 
-                        component_props_group &&
-                            component_props_group.children.forEach((prop) => {
-                                if ((!prop.inheritedFrom || (prop.inheritedFrom && !prop.inheritedFrom.toString().startsWith('Omit.data-pr-'))) && !prop.name.startsWith('data-pr-')) {
-                                    props.values.push({
-                                        name: prop.name,
-                                        optional: prop.flags.isOptional,
-                                        readonly: prop.flags.isReadonly,
-                                        type: prop.type.toString(),
-                                        default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
-                                        description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' '),
-                                        deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0].text) : undefined
-                                    });
-                                }
+                            callbacks.values.push({
+                                name: signature.name,
+                                parameters: signature.parameters.map((param) => {
+                                    return {
+                                        name: param.name,
+                                        optional: param.flags.isOptional,
+                                        type: param.type.toString(),
+                                        description: param.comment && param.comment.summary.map((s) => parseText(s.text || '')).join(' ')
+                                    };
+                                }),
+                                returnType: signature.type.toString(),
+                                description: signature.comment.summary.map((s) => parseText(s.text || '')).join(' ')
                             });
-
-                        const component_props_methods_group = component_props.groups && component_props.groups.find((g) => g.title === 'Methods');
-
-                        component_props_methods_group &&
-                            component_props_methods_group.children.forEach((method) => {
-                                const signature = method.getAllSignatures()[0];
-
-                                callbacks.values.push({
-                                    name: signature.name,
-                                    parameters: signature.parameters.map((param) => {
-                                        return {
-                                            name: param.name,
-                                            optional: param.flags.isOptional,
-                                            type: param.type.toString(),
-                                            description: param.comment && param.comment.summary.map((s) => parseText(s.text || '')).join(' ')
-                                        };
-                                    }),
-                                    returnType: signature.type.toString(),
-                                    description: signature.comment.summary.map((s) => parseText(s.text || '')).join(' ')
-                                });
-                            });
-                    });
+                        });
                 }
-
-                // sorts
-                props.values.sort((a, b) => a.name.localeCompare(b.name));
-                methods.values.sort((a, b) => a.name.localeCompare(b.name));
-                callbacks.values.sort((a, b) => a.name.localeCompare(b.name));
 
                 doc[name]['components'][component.name] = {
                     description,

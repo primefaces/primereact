@@ -4,15 +4,11 @@ import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SelectButtonItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
-    const { ptm, cx } = props;
 
-    const getPTOptions = (key) => {
-        return ptm(key, {
-            hostName: props.hostName,
+    const getPTOptions = (item, key) => {
+        return props.ptm(key, {
             context: {
-                selected: props.selected,
-                disabled: props.disabled,
-                option: props.option
+                selected: props.selected
             }
         });
     };
@@ -46,19 +42,28 @@ export const SelectButtonItem = React.memo((props) => {
     const createContent = () => {
         const labelProps = mergeProps(
             {
-                className: cx('label')
+                className: 'p-button-label p-c'
             },
-            getPTOptions('label')
+            getPTOptions(props.option, 'label')
         );
 
         return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span {...labelProps}>{props.label}</span>;
     };
 
+    const className = classNames(
+        'p-button p-component',
+        {
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        },
+        props.className
+    );
     const content = createContent();
 
     const buttonProps = mergeProps(
         {
-            className: classNames(props.className, cx('button', { itemProps: props, focusedState })),
+            className: className,
             role: 'button',
             'aria-label': props.label,
             'aria-pressed': props.selected,
@@ -68,7 +73,7 @@ export const SelectButtonItem = React.memo((props) => {
             onFocus: onFocus,
             onBlur: onBlur
         },
-        getPTOptions('button')
+        getPTOptions(props.option, 'button')
     );
 
     return (

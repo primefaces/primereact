@@ -85,7 +85,7 @@ export function FloatLabelDoc(props) {
 <span className="p-float-label">
     <CascadeSelect inputId="cs-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
         optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-        className="w-full md:w-14rem" breakpoint="767px" style={{ minWidth: '14rem' }} />
+        className="w-full md:w-14rem" breakpoint="767px" />
     <label htmlFor="cs-city">City</label>
 </span>
         `,
@@ -177,7 +177,7 @@ export default function FloatLabelDemo() {
             <span className="p-float-label">
                 <CascadeSelect inputId="cs-city" value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
                     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-                    className="w-full md:w-14rem" breakpoint="767px" style={{ minWidth: '14rem' }} />
+                    className="w-full md:w-14rem" breakpoint="767px" />
                 <label htmlFor="cs-city">City</label>
             </span>
         </div>
@@ -288,7 +288,7 @@ export default function FloatLabelDemo() {
             <span className="p-float-label">
                 <CascadeSelect inputId="cs-city" value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
                     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-                    className="w-full md:w-14rem" breakpoint="767px" style={{ minWidth: '14rem' }} />
+                    className="w-full md:w-14rem" breakpoint="767px" />
                 <label htmlFor="cs-city">City</label>
             </span>
         </div>
@@ -314,7 +314,6 @@ export default function FloatLabelDemo() {
                         optionGroupChildren={['states', 'cities']}
                         className="w-full md:w-14rem"
                         breakpoint="767px"
-                        style={{ minWidth: '14rem' }}
                     />
                     <label htmlFor="cs-city">City</label>
                 </span>

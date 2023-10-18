@@ -1,15 +1,13 @@
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/message/pt/ptdoc';
+import { Wireframe } from '../../components/doc/message/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/message/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/message/basicdoc';
 import { ImportDoc } from '../../components/doc/message/importdoc';
-import { PTDoc } from '../../components/doc/message/pt/ptdoc';
-import { Wireframe } from '../../components/doc/message/pt/wireframe';
 import { SeverityDoc } from '../../components/doc/message/severitydoc';
 import { StyleDoc } from '../../components/doc/message/styledoc';
 import { TemplateDoc } from '../../components/doc/message/templatedoc';
-import { StyledDoc } from '../../components/doc/message/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/message/theming/tailwinddoc';
 import { ValidationDoc } from '../../components/doc/message/validationdoc';
 
 const MessageDemo = () => {
@@ -68,37 +66,7 @@ const MessageDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Message Component"
-            header="Message"
-            description="Message component displays information related to another element such as invalid input."
-            componentDocs={docs}
-            apiDocs={['Message']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Message Component" header="Message" description="Message component displays information related to another element such as invalid input." componentDocs={docs} apiDocs={['Message']} ptDocs={ptDocs} />;
 };
 
 export default MessageDemo;

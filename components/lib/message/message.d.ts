@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type MessagePassThroughType<T> = PassThroughType<T, MessagePassThroughMethodOptions>;
@@ -38,11 +36,6 @@ export interface MessagePassThroughOptions {
      * Uses to pass attributes to the text's DOM element.
      */
     text?: MessagePassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -77,16 +70,6 @@ export interface MessageProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {MessagePassThroughOptions}
      */
     pt?: MessagePassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

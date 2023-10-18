@@ -1,26 +1,18 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
-import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { classNames, IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 import { StepsBase } from './StepsBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Steps = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = StepsBase.getProps(inProps, context);
 
-        const [idState, setIdState] = React.useState(props.id);
         const elementRef = React.useRef(null);
 
-        const { ptm, cx, isUnstyled } = StepsBase.setMetaData({
-            props,
-            state: {
-                id: idState
-            }
+        const { ptm } = StepsBase.setMetaData({
+            props
         });
-
-        useHandleStyle(StepsBase.css.styles, isUnstyled, { name: 'steps' });
 
         const itemClick = (event, item, index) => {
             if (props.readOnly || item.disabled) {
@@ -55,15 +47,19 @@ export const Steps = React.memo(
                 return null;
             }
 
-            const key = item.id || idState + '_' + index;
+            const key = item.label + '_' + index;
             const active = index === props.activeIndex;
             const disabled = item.disabled || (index !== props.activeIndex && props.readOnly);
             const tabIndex = disabled ? -1 : '';
+            const className = classNames('p-steps-item', item.className, {
+                'p-highlight p-steps-current': active,
+                'p-disabled': disabled
+            });
 
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
-                    className: cx('icon', { item })
+                    className: iconClassName
                 },
                 ptm('icon')
             );
@@ -72,7 +68,7 @@ export const Steps = React.memo(
 
             const labelProps = mergeProps(
                 {
-                    className: cx('label')
+                    className: 'p-steps-title'
                 },
                 ptm('label')
             );
@@ -81,7 +77,7 @@ export const Steps = React.memo(
 
             const stepProps = mergeProps(
                 {
-                    className: cx('step')
+                    className: 'p-steps-number'
                 },
                 ptm('step')
             );
@@ -89,7 +85,7 @@ export const Steps = React.memo(
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: cx('action'),
+                    className: 'p-menuitem-link',
                     role: 'presentation',
                     target: item.target,
                     onClick: (event) => itemClick(event, item, index),
@@ -125,9 +121,9 @@ export const Steps = React.memo(
 
             const menuItemProps = mergeProps(
                 {
-                    key,
-                    id: key,
-                    className: cx('menuitem', { active, disabled, item }),
+                    key: key,
+                    id: item.id,
+                    className: className,
                     style: item.style,
                     role: 'tab',
                     'aria-selected': active,
@@ -156,22 +152,24 @@ export const Steps = React.memo(
             return null;
         };
 
-        useMountEffect(() => {
-            if (!idState) {
-                setIdState(UniqueComponentId());
-            }
-        });
-
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
 
+        const className = classNames(
+            'p-steps p-component',
+            {
+                'p-readonly': props.readOnly
+            },
+            props.className
+        );
+
         const rootProps = mergeProps(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root'),
+                className,
                 style: props.style
             },
             StepsBase.getOtherProps(props),

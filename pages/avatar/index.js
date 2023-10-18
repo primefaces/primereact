@@ -5,13 +5,11 @@ import { IconDoc } from '../../components/doc/avatar/icondoc';
 import { ImageDoc } from '../../components/doc/avatar/imagedoc';
 import { ImportDoc } from '../../components/doc/avatar/importdoc';
 import { LabelDoc } from '../../components/doc/avatar/labeldoc';
-import { PTDoc } from '../../components/doc/avatar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/avatar/pt/wireframe';
 import { StyleDoc } from '../../components/doc/avatar/styledoc';
-import { StyledDoc } from '../../components/doc/avatar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/avatar/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
+import { Wireframe } from '../../components/doc/avatar/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/avatar/pt/ptdoc';
 
 const AvatarDemo = () => {
     const docs = [
@@ -75,27 +73,7 @@ const AvatarDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Avatar Component" header="Avatar" description="Avatar represents people using icons, labels and images." componentDocs={docs} apiDocs={['Avatar']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Avatar Component" header="Avatar" description="Avatar represents people using icons, labels and images." componentDocs={docs} apiDocs={['Avatar']} ptDocs={ptDocs} />;
 };
 
 export default AvatarDemo;

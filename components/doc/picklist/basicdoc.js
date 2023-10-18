@@ -36,7 +36,7 @@ export function BasicDoc(props) {
     const code = {
         basic: `
 <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
-    sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
+    sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }} />
         `,
         javascript: `
 import React, { useState, useEffect } from 'react';
@@ -75,7 +75,7 @@ export default function BasicDemo() {
     return (
         <div className="card">
             <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
-                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
+                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }} />
         </div>
     );
 }
@@ -130,7 +130,7 @@ export default function BasicDemo() {
     return (
         <div className="card">
             <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
-                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
+                sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }} />
         </div>
     );
 }
@@ -162,7 +162,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card">
-                <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px" sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
+                <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px" sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '30rem' }} targetStyle={{ height: '30rem' }} />
             </div>
             <DocSectionCode code={code} service={['ProductService']} />
         </>

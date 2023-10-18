@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type ChartPassThroughType<T> = PassThroughType<T, ChartPassThroughMethodOptions>;
@@ -34,11 +32,6 @@ export interface ChartPassThroughOptions {
      * Uses to pass attributes to the canvas's DOM element.
      */
     canvas?: ChartPassThroughType<React.HTMLAttributes<HTMLCanvasElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -97,16 +90,6 @@ export interface ChartProps {
      * @type {ChartPassThroughOptions}
      */
     pt?: ChartPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

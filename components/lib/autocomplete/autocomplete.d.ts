@@ -8,19 +8,15 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ButtonPassThroughOptions } from '../button/button';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
+import { ButtonPassThroughOptions } from '../button/button';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type AutoCompletePassThroughType<T> = PassThroughType<T, AutoCompletePassThroughMethodOptions>;
-export declare type AutoCompletePassThroughTransitionType = ReactCSSTransitionProps | ((options: AutoCompletePassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -171,15 +167,6 @@ export interface AutoCompletePassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: AutoCompletePassThroughTransitionType;
 }
 
 /**
@@ -374,11 +361,6 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      */
     readOnly?: boolean | undefined;
     /**
-     * When present, it specifies that an input field must be filled out before submitting the form.
-     * @defaultValue false
-     */
-    required?: boolean | undefined;
-    /**
      * Icon of the remove chip element in multiple mode.
      */
     removeTokenIcon?: IconType<AutoCompleteProps> | undefined;
@@ -527,16 +509,6 @@ export interface AutoCompleteProps extends Omit<React.DetailedHTMLProps<React.HT
      * @type {AutoCompletePassThroughOptions}
      */
     pt?: AutoCompletePassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -9,8 +9,6 @@ import { Wireframe } from '../../components/doc/organizationchart/pt/wireframe';
 import { SelectionDoc } from '../../components/doc/organizationchart/selectiondoc';
 import { StyleDoc } from '../../components/doc/organizationchart/styledoc';
 import { TemplateDoc } from '../../components/doc/organizationchart/templatedoc';
-import { StyledDoc } from '../../components/doc/organizationchart/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/organizationchart/theming/tailwinddoc';
 
 const OrganizationChartDemo = () => {
     const docs = [
@@ -68,26 +66,6 @@ const OrganizationChartDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
     return (
         <DocComponent
             title="React Organization Chart Component"
@@ -97,7 +75,6 @@ const OrganizationChartDemo = () => {
             apiDocs={['OrganizationChart']}
             className="organizationchart-demo"
             ptDocs={ptDocs}
-            themingDocs={themingDocs}
         />
     );
 };

@@ -13,18 +13,17 @@ import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
-    const { ptm, cx, unstyled } = props;
 
     function getIconComponent(iconType) {
         switch (iconType) {
             case 'moveToTargetIcon':
-                return props.moveToTargetIcon || viewChanged ? props.moveToTargetIcon || <AngleDownIcon /> : props.moveToTargetIcon || <AngleRightIcon />;
+                return props.moveToTargetIcon || viewChanged ? <AngleDownIcon /> : <AngleRightIcon />;
             case 'moveAllToTargetIcon':
-                return props.moveAllToTargetIcon || viewChanged ? props.moveAllToTargetIcon || <AngleDoubleDownIcon /> : props.moveAllToTargetIcon || <AngleDoubleRightIcon />;
+                return props.moveAllToTargetIcon || viewChanged ? <AngleDoubleDownIcon /> : <AngleDoubleRightIcon />;
             case 'moveToSourceIcon':
-                return props.moveToSourceIcon || viewChanged ? props.moveToSourceIcon || <AngleUpIcon /> : props.moveToSourceIcon || <AngleLeftIcon />;
+                return props.moveToSourceIcon || viewChanged ? <AngleUpIcon /> : <AngleLeftIcon />;
             case 'moveAllToSourceIcon':
-                return props.moveAllToSourceIcon || viewChanged ? props.moveAllToSourceIcon || <AngleDoubleUpIcon /> : props.moveAllToSourceIcon || <AngleDoubleLeftIcon />;
+                return props.moveAllToSourceIcon || viewChanged ? <AngleDoubleUpIcon /> : <AngleDoubleLeftIcon />;
             default:
                 return null;
         }
@@ -124,19 +123,21 @@ export const PickListTransferControls = React.memo((props) => {
         }
     };
 
+    const className = classNames('p-picklist-buttons p-picklist-transfer-buttons', props.className);
+
     const buttonsProps = mergeProps(
         {
-            className: classNames(props.className, cx('buttons'))
+            className: className
         },
-        ptm('buttons', { hostName: props.hostName })
+        props.ptm('buttons')
     );
 
     return (
         <div {...buttonsProps}>
-            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={ptm('moveToTargetButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
-            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={ptm('moveAllToTargetButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
-            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={ptm('moveToSourceButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
-            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={ptm('moveAllToSourceButton')} unstyled={unstyled} __parentMetadata={{ parent: props.metaData }}></Button>
+            <Button disabled={moveRightDisabled} type="button" icon={moveToTargetIcon} onClick={moveRight} pt={props.ptm('moveToTargetButton')}></Button>
+            <Button disabled={moveAllRightDisabled} type="button" icon={moveAllToTargetIcon} onClick={moveAllRight} pt={props.ptm('moveAllToTargetButton')}></Button>
+            <Button disabled={moveLeftDisabled} type="button" icon={moveToSourceIcon} onClick={moveLeft} pt={props.ptm('moveToSourceButton')}></Button>
+            <Button disabled={moveAllLeftDisabled} type="button" icon={moveAllToSourceIcon} onClick={moveAllLeft} pt={props.ptm('moveAllToSourceButton')}></Button>
         </div>
     );
 });

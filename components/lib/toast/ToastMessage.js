@@ -14,7 +14,7 @@ export const ToastMessage = React.memo(
         const {
             messageInfo,
             metaData: parentMetaData,
-            ptCallbacks: { ptm, ptmo, cx },
+            ptCallbacks: { ptm, ptmo },
             index
         } = props;
         const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon, pt } = messageInfo.message;
@@ -28,13 +28,6 @@ export const ToastMessage = React.memo(
             life || 3000,
             !sticky && !focused
         );
-
-        const getPTOptions = (key, options) => {
-            return ptm(key, {
-                hostName: props.hostName,
-                ...options
-            });
-        };
 
         const onClose = () => {
             clearTimer();
@@ -77,33 +70,34 @@ export const ToastMessage = React.memo(
         };
 
         const createCloseIcon = () => {
+            const iconClassName = 'p-toast-icon-close-icon';
             const buttonIconProps = mergeProps(
                 {
-                    className: cx('message.buttonicon')
+                    className: iconClassName
                 },
-                getPTOptions('buttonicon', parentParams),
-                ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
+                ptm('buttonicon', parentParams),
+                ptmo(pt, 'buttonicon', params)
             );
 
             const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
             const closeIcon = IconUtils.getJSXIcon(icon, { ...buttonIconProps }, { props });
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
-            const closeButtonProps = mergeProps(
+            const buttonProps = mergeProps(
                 {
                     type: 'button',
-                    className: cx('message.closeButton'),
+                    className: 'p-toast-icon-close p-link',
                     onClick: onClose,
                     'aria-label': ariaLabel
                 },
-                getPTOptions('closeButton', parentParams),
-                ptmo(pt, 'closeButton', { ...params, hostName: props.hostName })
+                ptm('button', parentParams),
+                ptmo(pt, 'button', params)
             );
 
             if (closable !== false) {
                 return (
                     <div>
-                        <button {...closeButtonProps}>
+                        <button {...buttonProps}>
                             {closeIcon}
                             <Ripple />
                         </button>
@@ -117,12 +111,13 @@ export const ToastMessage = React.memo(
         const createMessage = () => {
             if (messageInfo) {
                 const contentEl = ObjectUtils.getJSXElement(content, { message: messageInfo.message, onClick, onClose });
+                const iconClassName = 'p-toast-message-icon';
                 const iconProps = mergeProps(
                     {
-                        className: cx('message.icon')
+                        className: iconClassName
                     },
-                    getPTOptions('icon', parentParams),
-                    ptmo(pt, 'icon', { ...params, hostName: props.hostName })
+                    ptm('icon', parentParams),
+                    ptmo(pt, 'icon', params)
                 );
 
                 let icon = _icon;
@@ -150,26 +145,26 @@ export const ToastMessage = React.memo(
 
                 const textProps = mergeProps(
                     {
-                        className: cx('message.text')
+                        className: 'p-toast-message-text'
                     },
-                    getPTOptions('text', parentParams),
-                    ptmo(pt, 'text', { ...params, hostName: props.hostName })
+                    ptm('text', parentParams),
+                    ptmo(pt, 'text', params)
                 );
 
                 const summaryProps = mergeProps(
                     {
-                        className: cx('message.summary')
+                        className: 'p-toast-summary'
                     },
-                    getPTOptions('summary', parentParams),
-                    ptmo(pt, 'summary', { ...params, hostName: props.hostName })
+                    ptm('summary', parentParams),
+                    ptmo(pt, 'summary', params)
                 );
 
                 const detailProps = mergeProps(
                     {
-                        className: cx('message.detail')
+                        className: 'p-toast-detail'
                     },
-                    getPTOptions('detail', parentParams),
-                    ptmo(pt, 'detail', { ...params, hostName: props.hostName })
+                    ptm('detail', parentParams),
+                    ptmo(pt, 'detail', params)
                 );
 
                 return (
@@ -188,13 +183,21 @@ export const ToastMessage = React.memo(
             return null;
         };
 
+        const className = classNames(
+            'p-toast-message',
+            {
+                [`p-toast-message-${severity}`]: severity
+            },
+            _className
+        );
+        const contentClassName = classNames('p-toast-message-content', _contentClassName);
         const message = createMessage();
         const closeIcon = createCloseIcon();
 
         const messageProps = mergeProps(
             {
                 ref,
-                className: classNames(_className, cx('message.message', { severity })),
+                className,
                 style,
                 role: 'alert',
                 'aria-live': 'assertive',
@@ -203,17 +206,17 @@ export const ToastMessage = React.memo(
                 onMouseEnter: onMouseEnter,
                 onMouseLeave: onMouseLeave
             },
-            getPTOptions('message', parentParams),
-            ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            ptm('message', parentParams),
+            ptmo(pt, 'root', params)
         );
 
         const contentProps = mergeProps(
             {
-                className: classNames(_contentClassName, cx('message.content')),
+                className: contentClassName,
                 style: contentStyle
             },
-            getPTOptions('content', parentParams),
-            ptmo(pt, 'content', { ...params, hostName: props.hostName })
+            ptm('content', parentParams),
+            ptmo(pt, 'content', params)
         );
 
         return (

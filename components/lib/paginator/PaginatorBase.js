@@ -1,71 +1,8 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { classNames } from '../utils/Utils';
-
-const classes = {
-    root: 'p-paginator p-component',
-    left: 'p-paginator-left-content',
-    end: 'p-paginator-right-content',
-    firstPageIcon: 'p-paginator-icon',
-    firstPageButton: ({ disabled }) => classNames('p-paginator-first p-paginator-element p-link', { 'p-disabled': disabled }),
-    prevPageIcon: 'p-paginator-icon',
-    prevPageButton: ({ disabled }) => classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': disabled }),
-    nextPageIcon: 'p-paginator-icon',
-    nextPageButton: ({ disabled }) => classNames('p-paginator-next p-paginator-element p-link', { 'p-disabled': disabled }),
-    lastPageIcon: 'p-paginator-icon',
-    lastPageButton: ({ disabled }) => classNames('p-paginator-last p-paginator-element p-link', { 'p-disabled': disabled }),
-    pageButton: ({ pageLink, startPageInView, endPageInView, page }) =>
-        classNames('p-paginator-page p-paginator-element p-link', {
-            'p-paginator-page-start': pageLink === startPageInView,
-            'p-paginator-page-end': pageLink === endPageInView,
-            'p-highlight': pageLink - 1 === page
-        }),
-    pages: 'p-paginator-pages'
-};
-
-const styles = `
-@layer primereact {
-    .p-paginator {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .p-paginator-left-content {
-        margin-right: auto;
-    }
-    
-    .p-paginator-right-content {
-        margin-left: auto;
-    }
-    
-    .p-paginator-page,
-    .p-paginator-next,
-    .p-paginator-last,
-    .p-paginator-first,
-    .p-paginator-prev,
-    .p-paginator-current {
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 1;
-        user-select: none;
-        overflow: hidden;
-        position: relative;
-    }
-    
-    .p-paginator-element:focus {
-        z-index: 1;
-        position: relative;
-    }
-}
-`;
 
 export const PaginatorBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Paginator',
-        __parentMetadata: null,
         totalRecords: 0,
         rows: 0,
         first: 0,
@@ -81,10 +18,6 @@ export const PaginatorBase = ComponentBase.extend({
         dropdownAppendTo: null,
         currentPageReportTemplate: '({currentPage} of {totalPages})',
         children: undefined
-    },
-    css: {
-        classes,
-        styles
     }
 });
 
@@ -122,9 +55,7 @@ export const JumpToPageInputBase = ComponentBase.extend({
         disabled: false,
         template: null,
         onChange: null,
-        children: undefined,
-        metaData: null,
-        ptm: null
+        children: undefined
     }
 });
 

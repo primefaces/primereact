@@ -4,21 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function NonceDoc(props) {
     const code = {
         basic: `
-//_app.js
-import { PrimeReactProvider } from 'primereact/api';
+import { PrimeReactContext } from 'primereact/api';
 
-export default function MyApp({ Component }) {
-    const value = {
-        nonce: '.........',
-        ...
-    };
+//use in a component
+const { setNonce } = useContext(PrimeReactContext);
 
-    return (
-        <PrimeReactProvider value={value}>
-            <App />
-        </PrimeReactProvider>
-    );
-}
+setNonce('.........');
         `
     };
 

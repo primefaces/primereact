@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { ObjectUtils } from '../../lib/utils/Utils';
 import APIDoc from './apidoc';
-import DocApiTable from './docapitable';
 import { DocSectionNav } from './docsectionnav';
 import { DocSections } from './docsections';
+import DocApiTable from './docapitable';
 
 export function DocApiSection(props) {
     const { doc, header } = props;

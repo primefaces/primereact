@@ -9,12 +9,9 @@
  */
 import * as React from 'react';
 import { ButtonPassThroughOptions } from '../button/button';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type PickListPassThroughType<T> = PassThroughType<T, PickListPassThroughMethodOptions>;
-
 /**
  * Custom passthrough(pt) option method.
  */
@@ -105,11 +102,6 @@ export interface PickListPassThroughOptions {
      * Uses to pass attributes to the buttons' DOM element.
      */
     list?: PickListPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 export interface PickListState {
@@ -471,16 +463,6 @@ export interface PickListProps {
      * @type {PickListPassThroughOptions}
      */
     pt?: PickListPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

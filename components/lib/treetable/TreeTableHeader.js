@@ -1,34 +1,26 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
-import { SortAltIcon } from '../icons/sortalt';
-import { SortAmountDownIcon } from '../icons/sortamountdown';
-import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { SortAltIcon } from '../icons/sortalt';
+import { SortAmountDownIcon } from '../icons/sortamountdown';
+import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 
 export const TreeTableHeader = React.memo((props) => {
-    const { ptm, ptmo, cx } = props.ptCallbacks;
     const filterTimeout = React.useRef(null);
 
-    const getColumnProp = (column, ...args) => {
-        return column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(column, args[0]) : ColumnBase.getCProp(args[0] || column, args[1])) : null;
+    const getColumnProps = (column) => {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProps(column));
     };
 
-    const getColumnProps = (column) => ColumnBase.getCProps(column);
-
-    const getColumnPTOptions = (column, key, params) => {
-        const cProps = getColumnProps(column);
-        const columnMetadata = {
-            props: cProps,
-            parent: props.metaData,
-            hostName: props.hostName,
-            ...params
-        };
-
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+    const getColumnPTOptions = (column, key) => {
+        return props.ptCallbacks.ptmo(ColumnBase.getCProp(column, 'pt'), key, {
+            props: getColumnProps(column),
+            parent: props.metaData
+        });
     };
 
     const onHeaderClick = (event, column) => {
@@ -36,10 +28,10 @@ export const TreeTableHeader = React.memo((props) => {
             const targetNode = event.target;
 
             if (
-                DomHandler.getAttribute(targetNode, 'data-p-sortable-column') === true ||
-                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'headertitle' ||
-                DomHandler.getAttribute(targetNode, 'data-pc-section') === 'sorticon' ||
-                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sorticon'
+                DomHandler.hasClass(targetNode, 'p-sortable-column') ||
+                DomHandler.hasClass(targetNode, 'p-column-title') ||
+                DomHandler.hasClass(targetNode, 'p-sortable-column-icon') ||
+                DomHandler.hasClass(targetNode.parentElement, 'p-sortable-column-icon')
             ) {
                 props.onSort({
                     originalEvent: event,
@@ -166,20 +158,21 @@ export const TreeTableHeader = React.memo((props) => {
         }
     };
 
+    const getColumnProp = (column, ...args) => {
+        return column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(column, args[0]) : ColumnBase.getCProp(args[0] || column, args[1])) : null;
+    };
+
     const createSortIcon = (column, sorted, sortOrder) => {
         if (getColumnProp(column, 'sortable')) {
+            let iconClassName = 'p-sortable-column-icon';
             const sortIconProps = mergeProps(
                 {
-                    className: cx('sortIcon')
+                    className: iconClassName
                 },
-                getColumnPTOptions(column, 'sortIcon', {
-                    context: {
-                        sorted
-                    }
-                })
+                getColumnPTOptions(column, 'sortIcon')
             );
             let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon {...sortIconProps} /> : <SortAmountUpAltIcon {...sortIconProps} /> : <SortAltIcon {...sortIconProps} />;
-            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { ...sortIconProps }, { props, sorted, sortOrder });
+            let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { className: iconClassName }, { props, sorted, sortOrder });
 
             return sortIcon;
         } else {
@@ -191,7 +184,7 @@ export const TreeTableHeader = React.memo((props) => {
         if (props.resizableColumns) {
             const columnResizerProps = mergeProps(
                 {
-                    className: cx('columnResizer'),
+                    className: 'p-column-resizer p-clickable',
                     onMouseDown: (e) => onResizerMouseDown(e, column)
                 },
                 getColumnPTOptions(column, 'columnResizer')
@@ -207,7 +200,7 @@ export const TreeTableHeader = React.memo((props) => {
         if (sortMetaDataIndex !== -1 && props.multiSortMeta && props.multiSortMeta.length > 1) {
             const sortBadgeProps = mergeProps(
                 {
-                    className: cx('sortBadge')
+                    className: 'p-sortable-column-badge'
                 },
                 getColumnPTOptions(column, 'sortBadge')
             );
@@ -222,7 +215,7 @@ export const TreeTableHeader = React.memo((props) => {
         const title = ObjectUtils.getJSXElement(getColumnProp(column, 'header'), { props: options });
         const headerTitleProps = mergeProps(
             {
-                className: cx('headerTitle')
+                className: 'p-column-title'
             },
             getColumnPTOptions(column, 'headerTitle')
         );
@@ -243,8 +236,6 @@ export const TreeTableHeader = React.memo((props) => {
                     placeholder={getColumnProp(column, 'filterPlaceholder')}
                     maxLength={getColumnProp(column, 'filterMaxLength')}
                     pt={getColumnPTOptions(column, 'filterInput')}
-                    unstyled={props.unstyled}
-                    __parentMetadata={{ parent: props.metaData }}
                 />
             );
         }
@@ -253,20 +244,13 @@ export const TreeTableHeader = React.memo((props) => {
             const headerCellProps = mergeProps(
                 {
                     key: getColumnProp(column, 'columnKey') || getColumnProp(column, 'field') || options.index,
-                    className: classNames(cx('headerCell', { options }), getColumnProp(column, 'filterHeaderClassName')),
+                    className: classNames('p-filter-column', getColumnProp(column, 'filterHeaderClassName')),
                     style: getColumnProp(column, 'filterHeaderStyle') || getColumnProp(column, 'style'),
                     rowSpan: getColumnProp(column, 'rowSpan'),
-                    colSpan: getColumnProp(column, 'colSpan'),
-                    'data-p-sortable-column': getColumnProp(column, 'sortable'),
-                    'data-p-resizable-column': props.resizableColumns,
-                    'data-p-frozen-column': getColumnProp(column, 'frozen')
+                    colSpan: getColumnProp(column, 'colSpan')
                 },
-                getColumnPTOptions(column, 'root'),
-                getColumnPTOptions(column, 'headerCell', {
-                    context: {
-                        frozen: getColumnProp(column, 'frozen')
-                    }
-                })
+                getColumnPTOptions(column, 'headerCell'),
+                getColumnPTOptions(column, 'root')
             );
 
             return <th {...headerCellProps}>{filterElement}</th>;
@@ -277,7 +261,6 @@ export const TreeTableHeader = React.memo((props) => {
             const singleSorted = getColumnProp(column, 'field') === props.sortField;
             const multipleSorted = multiSortMetaData !== null;
             const sorted = getColumnProp(column, 'sortable') && (singleSorted || multipleSorted);
-            const frozen = getColumnProp(column, 'frozen');
             let sortOrder = 0;
 
             if (singleSorted) sortOrder = props.sortOrder;
@@ -287,13 +270,20 @@ export const TreeTableHeader = React.memo((props) => {
             const ariaSortData = getAriaSort(column, sorted, sortOrder);
             const sortBadge = createSortBadge(column, sortMetaDataIndex);
 
+            const className = classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), {
+                'p-sortable-column': getColumnProp(column, 'sortable'),
+                'p-highlight': sorted,
+                'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable')
+            });
+
             const headerTooltip = getColumnProp(column, 'headerTooltip');
             const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
             const title = createTitle(column, options);
             const resizer = createResizer(column);
             const headerCellProps = mergeProps(
                 {
-                    className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, column, options, getColumnProp, sorted, frozen })),
+                    ref: headerCellRef,
+                    className: className,
                     style: getColumnProp(column, 'headerStyle') || getColumnProp(column, 'style'),
                     tabIndex: getColumnProp(column, 'sortable') ? props.tabIndex : null,
                     onClick: (e) => onHeaderClick(e, column),
@@ -305,32 +295,22 @@ export const TreeTableHeader = React.memo((props) => {
                     onDragStart: (e) => onDragStart(e, column),
                     onDragOver: (e) => onDragOver(e, column),
                     onDragLeave: (e) => onDragLeave(e, column),
-                    onDrop: (e) => onDrop(e, column),
-                    'data-p-sortable-column': getColumnProp(column, 'sortable'),
-                    'data-p-resizable-column': props.resizableColumns,
-                    'data-p-highlight': sorted,
-                    'data-p-frozen-column': getColumnProp(column, 'frozen')
+                    onDrop: (e) => onDrop(e, column)
                 },
-                getColumnPTOptions(column, 'root'),
-                getColumnPTOptions(column, 'headerCell', {
-                    context: {
-                        sorted,
-                        frozen,
-                        resizable: props.resizableColumns
-                    }
-                })
+                getColumnPTOptions(column, 'headerCell'),
+                getColumnPTOptions(column, 'root')
             );
 
             return (
                 <React.Fragment key={column.columnKey || column.field || options.index}>
-                    <th ref={headerCellRef} {...headerCellProps}>
+                    <th {...headerCellProps}>
                         {resizer}
                         {title}
                         {sortIconElement}
                         {sortBadge}
                         {filterElement}
                     </th>
-                    {hasTooltip && <Tooltip target={headerCellRef} content={headerTooltip} {...getColumnProp(column, 'headerTooltipOptions')} unstyled={props.unstyled} />}
+                    {hasTooltip && <Tooltip target={headerCellRef} content={headerTooltip} {...getColumnProp(column, 'headerTooltipOptions')} />}
                 </React.Fragment>
             );
         }
@@ -339,7 +319,7 @@ export const TreeTableHeader = React.memo((props) => {
     const createHeaderRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowHeaderCells = rowColumns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: true }));
-        const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
+        const headerRowProps = mergeProps(props.ptCallbacks.ptm('headerRow'));
 
         return (
             <tr {...headerRowProps} key={index}>
@@ -356,7 +336,7 @@ export const TreeTableHeader = React.memo((props) => {
 
     const createColumns = (columns) => {
         if (columns) {
-            const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
+            const headerRowProps = mergeProps(props.ptCallbacks.ptm('headerRow'));
 
             if (hasColumnFilter(columns)) {
                 return (
@@ -376,9 +356,9 @@ export const TreeTableHeader = React.memo((props) => {
     const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
     const theadProps = mergeProps(
         {
-            className: cx('thead')
+            className: 'p-treetable-thead'
         },
-        ptm('thead', { hostName: props.hostName })
+        props.ptCallbacks.ptm('thead')
     );
 
     return <thead {...theadProps}>{content}</thead>;

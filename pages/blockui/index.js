@@ -3,14 +3,12 @@ import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc'
 import { BasicDoc } from '../../components/doc/blockui/basicdoc';
 import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
 import { ImportDoc } from '../../components/doc/blockui/importdoc';
-import { PTDoc } from '../../components/doc/blockui/pt/ptdoc';
-import { Wireframe } from '../../components/doc/blockui/pt/wireframe';
 import { StyleDoc } from '../../components/doc/blockui/styledoc';
 import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
-import { StyledDoc } from '../../components/doc/blockui/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/blockui/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/blockui/pt/ptdoc';
+import { Wireframe } from '../../components/doc/blockui/pt/wireframe';
 
 const BlockUIDemo = () => {
     const docs = [
@@ -64,27 +62,7 @@ const BlockUIDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React BlockUI Component" header="BlockUI" description="BlockUI can block certain elements or the whole page." componentDocs={docs} apiDocs={['BlockUI']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React BlockUI Component" header="BlockUI" description="BlockUI can block certain elements or the whole page." componentDocs={docs} apiDocs={['BlockUI']} ptDocs={ptDocs} />;
 };
 
 export default BlockUIDemo;

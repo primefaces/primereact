@@ -137,11 +137,11 @@ describe('Button', () => {
         const button = container.getElementsByClassName('p-button')[0];
 
         // Act
-        //expect(() => userEvent.click(button)).toThrow();
+        await userEvent.click(button);
 
         // Assert
         expect(button).toBeDisabled();
-        expect(clickOn).not.toHaveBeenCalled();
+        expect(clickOn).toHaveBeenCalledTimes(0);
     });
     test('when Ripple is enabled button should have ripple effect', async () => {
         // Arrange

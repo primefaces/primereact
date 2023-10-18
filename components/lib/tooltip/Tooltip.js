@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useOverlayScrollListener, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
@@ -13,24 +12,14 @@ export const Tooltip = React.memo(
         const [visibleState, setVisibleState] = React.useState(false);
         const [positionState, setPositionState] = React.useState(props.position);
         const [classNameState, setClassNameState] = React.useState('');
-        const metaData = {
+        const { ptm } = TooltipBase.setMetaData({
             props,
             state: {
                 visible: visibleState,
                 position: positionState,
                 className: classNameState
-            },
-            context: {
-                right: positionState === 'right',
-                left: positionState === 'left',
-                top: positionState === 'top',
-                bottom: positionState === 'bottom'
             }
-        };
-
-        const { ptm, cx, sx, isUnstyled } = TooltipBase.setMetaData(metaData);
-
-        useHandleStyle(TooltipBase.css.styles, isUnstyled, { name: 'tooltip' });
+        });
         const elementRef = React.useRef(null);
         const textRef = React.useRef(null);
         const currentTargetRef = React.useRef(null);
@@ -412,6 +401,8 @@ export const Tooltip = React.memo(
         };
 
         useMountEffect(() => {
+            loadTargetEvents();
+
             if (visibleState && currentTargetRef.current && isDisabled(currentTargetRef.current)) {
                 hide();
             }
@@ -479,11 +470,20 @@ export const Tooltip = React.memo(
         }));
 
         const createElement = () => {
+            const tooltipClassName = classNames(
+                'p-tooltip p-component',
+                {
+                    [`p-tooltip-${positionState}`]: true
+                },
+                props.className,
+                classNameState
+            );
             const empty = isTargetContentEmpty(currentTargetRef.current);
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    className: classNames(props.className, cx('root', { positionState, classNameState })),
+                    ref: elementRef,
+                    className: tooltipClassName,
                     style: props.style,
                     role: 'tooltip',
                     'aria-hidden': visibleState,
@@ -496,25 +496,23 @@ export const Tooltip = React.memo(
 
             const arrowProps = mergeProps(
                 {
-                    className: cx('arrow'),
-                    style: sx('arrow', { ...metaData })
+                    className: 'p-tooltip-arrow'
                 },
                 ptm('arrow')
             );
 
             const textProps = mergeProps(
                 {
-                    className: cx('text')
+                    ref: textRef,
+                    className: 'p-tooltip-text'
                 },
                 ptm('text')
             );
 
             return (
-                <div ref={elementRef} {...rootProps}>
+                <div {...rootProps}>
                     <div {...arrowProps}></div>
-                    <div ref={textRef} {...textProps}>
-                        {empty && props.children}
-                    </div>
+                    <div {...textProps}>{empty && props.children}</div>
                 </div>
             );
         };

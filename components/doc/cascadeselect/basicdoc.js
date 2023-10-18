@@ -84,7 +84,7 @@ export function BasicDoc(props) {
         basic: `
 <CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
     optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-    className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }}  />
+    className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City"  />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -173,7 +173,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <CascadeSelect value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={countries} 
                 optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }}  />
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City"  />
         </div>
     )
 }
@@ -281,7 +281,7 @@ export default function BasicDemo() {
         <div className="card flex justify-content-center">
             <CascadeSelect value={selectedCity} onChange={(e: CascadeSelectChangeEvent) => setSelectedCity(e.value)} options={countries} 
                 optionLabel="cname" optionGroupLabel="name" optionGroupChildren={['states', 'cities']}
-                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City" style={{ minWidth: '14rem' }}  />
+                className="w-full md:w-14rem" breakpoint="767px" placeholder="Select a City"  />
         </div>
     )
 }
@@ -307,7 +307,6 @@ export default function BasicDemo() {
                     className="w-full md:w-14rem"
                     breakpoint="767px"
                     placeholder="Select a City"
-                    style={{ minWidth: '14rem' }}
                 />
             </div>
             <DocSectionCode code={code} />

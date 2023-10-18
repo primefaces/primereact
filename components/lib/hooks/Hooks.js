@@ -17,8 +17,6 @@ import { useLocalStorage, useSessionStorage, useStorage } from './useStorage';
 import { useTimeout } from './useTimeout';
 import { useUnmountEffect } from './useUnmountEffect';
 import { useUpdateEffect } from './useUpdateEffect';
-import { useStyle } from './useStyle';
-import { useOnEscapeKey } from './useOnEscapeKey';
 
 export {
     usePrevious,
@@ -32,7 +30,6 @@ export {
     useIntersectionObserver,
     useInterval,
     useStorage,
-    useStyle,
     useLocalStorage,
     useSessionStorage,
     useTimeout,
@@ -42,6 +39,5 @@ export {
     useMove,
     useClickOutside,
     useDebounce,
-    useMatchMedia,
-    useOnEscapeKey
+    useMatchMedia
 };

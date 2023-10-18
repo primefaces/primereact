@@ -12,8 +12,6 @@ import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
 import { PTDoc } from '../../components/doc/radiobutton/pt/ptdoc';
 import { Wireframe } from '../../components/doc/radiobutton/pt/wireframe';
 import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
-import { StyledDoc } from '../../components/doc/radiobutton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/radiobutton/theming/tailwinddoc';
 
 const RadioButtonDemo = () => {
     const docs = [
@@ -88,37 +86,7 @@ const RadioButtonDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React RadioButton Component"
-            header="RadioButton"
-            description="RadioButton is an extension to standard radio button element with theming."
-            componentDocs={docs}
-            apiDocs={['RadioButton']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React RadioButton Component" header="RadioButton" description="RadioButton is an extension to standard radio button element with theming." componentDocs={docs} apiDocs={['RadioButton']} ptDocs={ptDocs} />;
 };
 
 export default RadioButtonDemo;

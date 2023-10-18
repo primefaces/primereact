@@ -23,8 +23,7 @@ export const useStorage = (initialValue, key, storage = 'local') => {
         listener: (event) => {
             const area = storage === 'local' ? window.localStorage : window.sessionStorage;
             if (event.storageArea === area && event.key === key) {
-                const newValue = event.newValue ? JSON.parse(event.newValue) : undefined;
-                setStoredValue(newValue);
+                setStoredValue(event.newValue || undefined);
             }
         }
     });

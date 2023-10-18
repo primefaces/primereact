@@ -109,7 +109,7 @@ import { MenuItem } from 'primereact/menuitem';
 
 export default function TooltipDoc() {
     const toast = useRef<Toast>(null);
-    const items: MenuItem[] = [
+    const items: MenuItem = [
         {
             label: 'Add',
             icon: 'pi pi-pencil',

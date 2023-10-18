@@ -12,7 +12,7 @@ npm install chart.js
         <>
             <DocSectionText {...props}>
                 <p>
-                    Chart component uses <a href="https://chartjs.org/">Chart.JS</a> underneath so it needs to be installed as a dependency.
+                    Chart component uses <a href="https://chartjs.ırg/">Chart.JS</a> underneath so it needs to be installed as a dependency.
                 </p>
             </DocSectionText>
             <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />

@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type ProgressBarPassThroughType<T> = PassThroughType<T, ProgressBarPassThroughMethodOptions>;
@@ -31,9 +29,9 @@ export interface ProgressBarPassThroughOptions {
      */
     root?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the container's DOM element.
+     * Uses to pass attributes to the indeterminate container's DOM element.
      */
-    container?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    indeterminateContainer?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the value's DOM element.
      */
@@ -42,11 +40,6 @@ export interface ProgressBarPassThroughOptions {
      * Uses to pass attributes to the label's DOM element.
      */
     label?: ProgressBarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -91,16 +84,6 @@ export interface ProgressBarProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {ProgressBarPassThroughOptions}
      */
     pt?: ProgressBarPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -1,47 +1,5 @@
 import { ComponentBase } from '../componentbase/ComponentBase';
-import { ObjectUtils, classNames } from '../utils/Utils';
-
-const classes = {
-    root: 'p-accordion p-component',
-    tab: {
-        root: ({ selected }) =>
-            classNames('p-accordion-tab', {
-                'p-accordion-tab-active': selected
-            }),
-        content: 'p-accordion-content',
-        header: ({ selected, getTabProp, tab }) =>
-            classNames('p-accordion-header', {
-                'p-highlight': selected,
-                'p-disabled': getTabProp(tab, 'disabled')
-            }),
-        headeraction: 'p-accordion-header-link',
-        headericon: 'p-accordion-toggle-icon',
-        headertitle: 'p-accordion-header-text',
-        toggleablecontent: 'p-toggleable-content',
-        transition: 'p-toggleable-content'
-    }
-};
-
-const styles = `
-@layer primereact {
-    .p-accordion-header-link {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        user-select: none;
-        position: relative;
-        text-decoration: none;
-    }
-    
-    .p-accordion-header-link:focus {
-        z-index: 1;
-    }
-    
-    .p-accordion-header-text {
-        line-height: 1;
-    }
-}
-`;
+import { ObjectUtils } from '../utils/Utils';
 
 export const AccordionBase = ComponentBase.extend({
     defaultProps: {
@@ -58,10 +16,6 @@ export const AccordionBase = ComponentBase.extend({
         onTabClose: null,
         onTabChange: null,
         children: undefined
-    },
-    css: {
-        classes,
-        styles
     }
 });
 

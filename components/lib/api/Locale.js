@@ -31,8 +31,6 @@ let locales = {
         choose: 'Choose',
         upload: 'Upload',
         cancel: 'Cancel',
-        pending: 'Pending',
-        fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
         dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
@@ -41,7 +39,6 @@ let locales = {
         today: 'Today',
         weekHeader: 'Wk',
         firstDayOfWeek: 0,
-        showMonthAfterYear: false,
         dateFormat: 'mm/dd/yy',
         weak: 'Weak',
         medium: 'Medium',
@@ -70,7 +67,7 @@ let locales = {
             moveToSource: 'Move to Source',
             moveAllToTarget: 'Move All to Target',
             moveAllToSource: 'Move All to Source',
-            pageLabel: 'Page {page}',
+            pageLabel: 'Page',
             firstPageLabel: 'First Page',
             lastPageLabel: 'Last Page',
             nextPageLabel: 'Next Page',
@@ -139,35 +136,13 @@ function localeOption(key, locale) {
     }
 }
 
-/**
- * Find an ARIA label in the locale by key.  If options are passed it will replace all options:
- * ```ts
- * const ariaValue = "Page {page}, User {user}, Role {role}";
- * const options = { page: 2, user: "John", role: "Admin" };
- * const result = ariaLabel('yourLabel', { page: 2, user: "John", role: "Admin" })
- * console.log(result); // Output: Page 2, User John, Role Admin
- * ```
- * @param {string} ariaKey key of the ARIA label to look up in locale.
- * @param {any} options JSON options like { page: 2, user: "John", role: "Admin" }
- * @returns the ARIA label with replaced values
- */
-function ariaLabel(ariaKey, options) {
+function ariaLabel(key) {
     const _locale = PrimeReact.locale;
 
     try {
-        let ariaLabel = localeOptions(_locale)['aria'][ariaKey];
-
-        if (ariaLabel) {
-            for (const key in options) {
-                if (options.hasOwnProperty(key)) {
-                    ariaLabel = ariaLabel.replace(`{${key}}`, options[key]);
-                }
-            }
-        }
-
-        return ariaLabel;
+        return localeOptions(_locale)['aria'][key];
     } catch (error) {
-        throw new Error(`The ${ariaKey} option is not found in the current locale('${_locale}').`);
+        throw new Error(`The ${key} option is not found in the current locale('${_locale}').`);
     }
 }
 
@@ -177,4 +152,4 @@ function localeOptions(locale) {
     return locales[_locale];
 }
 
-export { addLocale, ariaLabel, locale, localeOption, localeOptions, updateLocaleOption, updateLocaleOptions };
+export { locale, addLocale, updateLocaleOption, updateLocaleOptions, localeOption, localeOptions, ariaLabel };

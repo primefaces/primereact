@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
+import PrimeReact from '../api/Api';
 
 let messageIdx = 0;
 
@@ -27,8 +27,6 @@ export const Toast = React.memo(
         };
 
         const ptCallbacks = ToastBase.setMetaData(metaData);
-
-        useHandleStyle(ToastBase.css.styles, ptCallbacks.isUnstyled, { name: 'toast' });
 
         const show = (messageInfo) => {
             if (messageInfo) {
@@ -74,12 +72,9 @@ export const Toast = React.memo(
         };
 
         const remove = (messageInfo) => {
-            // allow removal by ID or by message equality
-            const removeMessage = messageInfo._pId ? messageInfo.message : messageInfo;
+            setMessagesState((m) => m.filter((msg) => msg._pId !== messageInfo._pId));
 
-            setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
-
-            props.onRemove && props.onRemove(removeMessage);
+            props.onRemove && props.onRemove(messageInfo.message);
         };
 
         const onClose = (messageInfo) => {
@@ -114,27 +109,20 @@ export const Toast = React.memo(
         }));
 
         const createElement = () => {
+            const className = classNames('p-toast p-component p-toast-' + props.position, props.className, {
+                'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+            });
+
             const rootProps = mergeProps(
                 {
                     ref: containerRef,
                     id: props.id,
-                    className: ptCallbacks.cx('root', { context }),
-                    style: ptCallbacks.sx('root')
+                    className,
+                    style: props.style
                 },
                 ToastBase.getOtherProps(props),
                 ptCallbacks.ptm('root')
-            );
-
-            const transitionProps = mergeProps(
-                {
-                    classNames: ptCallbacks.cx('transition'),
-                    timeout: { enter: 300, exit: 300 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEntered,
-                    onExited
-                },
-                ptCallbacks.ptm('transition')
             );
 
             return (
@@ -145,9 +133,8 @@ export const Toast = React.memo(
                                 const messageRef = React.createRef();
 
                                 return (
-                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} {...transitionProps}>
+                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
                                         <ToastMessage
-                                            hostName="Toast"
                                             ref={messageRef}
                                             messageInfo={messageInfo}
                                             index={index}

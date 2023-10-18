@@ -12,21 +12,21 @@ export function CheckboxDoc(props) {
 
     const code = {
         basic: `
-<div className="p-inputgroup flex-1">
+<div className="p-inputgroup">
     <InputText placeholder="Price" />
     <span className="p-inputgroup-addon">
         <RadioButton name="rb1" value="rb1" checked={radioValue === 'rb1'} onChange={(e) => setRadioValue(e.value)} />
     </span>
 </div>
 
-<div className="p-inputgroup flex-1">
+<div className="p-inputgroup">
     <span className="p-inputgroup-addon">
         <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
     </span>
     <InputText placeholder="Username" />
 </div>
 
-<div className="p-inputgroup flex-1">
+<div className="p-inputgroup">
     <span className="p-inputgroup-addon">
         <Checkbox checked={checked2} onChange={(e) => setChecked2(!checked2)} />
     </span>

@@ -8,15 +8,11 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type TieredMenuPassThroughType<T> = PassThroughType<T, TieredMenuPassThroughMethodOptions>;
-export declare type TieredMenuPassThroughTransitionType = ReactCSSTransitionProps | ((options: TieredMenuPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -37,13 +33,9 @@ export interface TieredMenuPassThroughOptions {
      */
     root?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the menu's DOM element.
+     * Uses to pass attributes to the list's DOM element.
      */
     menu?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
-    /**
-     * Uses to pass attributes to the submenu's DOM element.
-     */
-    submenu?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
      * Uses to pass attributes to the list item's DOM element.
      */
@@ -68,15 +60,6 @@ export interface TieredMenuPassThroughOptions {
      * Uses to pass attributes to the separator's DOM element.
      */
     separator?: TieredMenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: TieredMenuPassThroughTransitionType;
 }
 
 /**
@@ -172,16 +155,6 @@ export interface TieredMenuProps extends Omit<React.DetailedHTMLProps<React.HTML
      * @type {TieredMenuPassThroughOptions}
      */
     pt?: TieredMenuPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

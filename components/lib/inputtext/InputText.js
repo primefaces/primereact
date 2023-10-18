@@ -1,25 +1,17 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const InputText = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = InputTextBase.getProps(inProps, context);
-
-        const { ptm, cx, isUnstyled } = InputTextBase.setMetaData({
-            props,
-            ...props.__parentMetadata,
-            context: {
-                disabled: props.disabled
-            }
+        const { ptm } = InputTextBase.setMetaData({
+            props
         });
-
-        useHandleStyle(InputTextBase.css.styles, isUnstyled, { name: 'inputtext', styled: true });
         const elementRef = React.useRef(ref);
 
         const onKeyDown = (event) => {
@@ -66,10 +58,19 @@ export const InputText = React.memo(
 
         const isFilled = React.useMemo(() => ObjectUtils.isNotEmpty(props.value) || ObjectUtils.isNotEmpty(props.defaultValue), [props.value, props.defaultValue]);
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+        const className = classNames(
+            'p-inputtext p-component',
+            {
+                'p-disabled': props.disabled,
+                'p-filled': isFilled
+            },
+            props.className
+        );
 
         const rootProps = mergeProps(
             {
-                className: cx('root', { isFilled }),
+                ref: elementRef,
+                className,
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onKeyDown: onKeyDown,
@@ -81,7 +82,7 @@ export const InputText = React.memo(
 
         return (
             <>
-                <input ref={elementRef} {...rootProps} />
+                <input {...rootProps} />
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>
         );

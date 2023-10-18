@@ -8,14 +8,10 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type PanelPassThroughType<T> = PassThroughType<T, PanelPassThroughMethodOptions>;
-export declare type PanelPassThroughTransitionType = ReactCSSTransitionProps | ((options: PanelPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom panel header template options.
@@ -154,15 +150,6 @@ export interface PanelPassThroughOptions {
      * Uses to pass attributes to the footer's DOM element.
      */
     footer?: PanelPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: PanelPassThroughTransitionType;
 }
 
 /**
@@ -255,16 +242,6 @@ export interface PanelProps extends Omit<React.DetailedHTMLProps<React.HTMLAttri
      * @type {PanelPassThroughOptions}
      */
     pt?: PanelPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**
@@ -289,19 +266,4 @@ export declare class Panel extends React.Component<PanelProps, any> {
      * @return {HTMLDivElement} Content element
      */
     public getContent(): HTMLDivElement;
-    /**
-     * Toggle the panel if toggleable.
-     * @param {React.SyntheticEvent | undefined} event - Browser event.
-     */
-    public toggle(event: React.SyntheticEvent | undefined): void;
-    /**
-     * Expand the panel if toggleable.
-     * @param {React.SyntheticEvent | undefined} event - Browser event.
-     */
-    public expand(event: React.SyntheticEvent | undefined): void;
-    /**
-     * Collapse the panel if toggleable.
-     * @param {React.SyntheticEvent | undefined} event - Browser event.
-     */
-    public collapse(event: React.SyntheticEvent | undefined): void;
 }

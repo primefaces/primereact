@@ -8,12 +8,10 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { KeyFilterType } from '../keyfilter';
-import { PassThroughOptions } from '../passthrough';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPassThroughMethodOptions>;
 
@@ -22,7 +20,6 @@ export declare type InputTextPassThroughType<T> = PassThroughType<T, InputTextPa
  */
 export interface InputTextPassThroughMethodOptions {
     props: InputTextProps;
-    context: InputTextContext;
 }
 
 /**
@@ -39,27 +36,6 @@ export interface InputTextPassThroughOptions {
      * @see {@link TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-}
-
-/**
- * Defines current options in InputText component.
- */
-export interface InputTextContext {
-    /**
-     * Current filled state of the component as a boolean.
-     * @defaultValue false
-     */
-    filled: boolean;
-    /**
-     * Current disabled state of the component as a boolean.
-     * @defaultValue false
-     */
-    disabled: boolean;
 }
 
 /**
@@ -105,16 +81,6 @@ export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.Input
      * @type {InputTextPassThroughOptions}
      */
     pt?: InputTextPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -1,36 +1,22 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { DockBase } from './DockBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
-        const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const context = React.useContext(PrimeReactContext);
         const props = DockBase.getProps(inProps, context);
-        const [idState, setIdState] = React.useState(props.id);
-        const { ptm, cx, isUnstyled } = DockBase.setMetaData({
+
+        const [currentIndexState, setCurrentIndexState] = React.useState(-3);
+        const { ptm } = DockBase.setMetaData({
             props,
             state: {
-                id: idState,
                 currentIndex: currentIndexState
             }
         });
         const elementRef = React.useRef(null);
-
-        useHandleStyle(DockBase.css.styles, isUnstyled, { name: 'dock' });
-
-        const getPTOptions = (key, item, index) => {
-            return ptm(key, {
-                context: {
-                    index,
-                    item
-                }
-            });
-        };
 
         const onListMouseLeave = () => {
             setCurrentIndexState(-3);
@@ -54,26 +40,32 @@ export const Dock = React.memo(
             }
 
             const { disabled, icon: _icon, label, template, url, target } = item;
-            const key = item.id || idState + '_' + index;
+            const className = classNames('p-dock-item', {
+                'p-dock-item-second-prev': currentIndexState - 2 === index,
+                'p-dock-item-prev': currentIndexState - 1 === index,
+                'p-dock-item-current': currentIndexState === index,
+                'p-dock-item-next': currentIndexState + 1 === index,
+                'p-dock-item-second-next': currentIndexState + 2 === index
+            });
             const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-dock-action-icon', _icon);
             const iconProps = mergeProps(
                 {
-                    className: cx('icon')
+                    className: 'p-dock-action-icon'
                 },
-                getPTOptions('icon', item, index)
+                ptm('icon')
             );
             const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
             const actionProps = mergeProps(
                 {
                     href: url || '#',
                     role: 'menuitem',
-                    className: cx('action', { disabled }),
+                    className: contentClassName,
                     target,
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
                 },
-                getPTOptions('action', item, index)
+                ptm('action')
             );
 
             let content = (
@@ -98,13 +90,12 @@ export const Dock = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    id: key,
-                    key,
-                    className: cx('menuitem', { currentIndexState, index }),
+                    key: index,
+                    className,
                     role: 'none',
                     onMouseEnter: () => onItemMouseEnter(index)
                 },
-                getPTOptions('menuitem', item, index)
+                ptm('menuitem')
             );
 
             return <li {...menuitemProps}>{content}</li>;
@@ -119,7 +110,7 @@ export const Dock = React.memo(
                 const header = ObjectUtils.getJSXElement(props.header, { props });
                 const headerProps = mergeProps(
                     {
-                        className: cx('header')
+                        className: 'p-dock-header'
                     },
                     ptm('header')
                 );
@@ -134,7 +125,7 @@ export const Dock = React.memo(
             const items = createItems();
             const menuProps = mergeProps(
                 {
-                    className: cx('menu'),
+                    className: 'p-dock-list',
                     role: 'menu',
                     onMouseLeave: onListMouseLeave
                 },
@@ -149,7 +140,7 @@ export const Dock = React.memo(
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
                 const footerProps = mergeProps(
                     {
-                        className: cx('footer')
+                        className: 'p-dock-footer'
                     },
                     ptm('footer')
                 );
@@ -160,23 +151,26 @@ export const Dock = React.memo(
             return null;
         };
 
-        useMountEffect(() => {
-            if (!idState) {
-                setIdState(UniqueComponentId());
-            }
-        });
-
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
         }));
 
+        const className = classNames(
+            `p-dock p-component p-dock-${props.position}`,
+            {
+                'p-dock-magnification': props.magnification
+            },
+            props.className
+        );
         const header = createHeader();
         const list = createList();
         const footer = createFooter();
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root')),
+                id: props.id,
+                ref: elementRef,
+                className,
                 style: props.style
             },
             DockBase.getOtherProps(props),
@@ -185,13 +179,13 @@ export const Dock = React.memo(
 
         const containerProps = mergeProps(
             {
-                className: cx('container')
+                className: 'p-dock-container'
             },
             ptm('container')
         );
 
         return (
-            <div id={props.id} ref={elementRef} {...rootProps}>
+            <div {...rootProps}>
                 <div {...containerProps}>
                     {header}
                     {list}

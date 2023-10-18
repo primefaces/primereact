@@ -1,30 +1,25 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
-import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { OverlayPanelBase } from './OverlayPanelBase';
 
 export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = OverlayPanelBase.getProps(inProps, context);
     const [visibleState, setVisibleState] = React.useState(false);
-
-    const { ptm, cx, sx, isUnstyled } = OverlayPanelBase.setMetaData({
+    const { ptm } = OverlayPanelBase.setMetaData({
         props,
         state: {
             visible: visibleState
         }
     });
-
-    useHandleStyle(OverlayPanelBase.css.styles, isUnstyled, { name: 'overlaypanel' });
-
     const attributeSelector = React.useRef('');
     const overlayRef = React.useRef(null);
     const currentTargetRef = React.useRef(null);
@@ -37,25 +32,12 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         overlay: overlayRef,
         listener: (event, { type, valid }) => {
             if (valid) {
-                switch (type) {
-                    case 'outside':
-                        props.dismissable && !isPanelClicked.current && hide();
-                        break;
-                    case 'resize':
-                    case 'scroll':
-                    case 'orientationchange':
-                        align();
-                        break;
-                }
+                type === 'outside' ? props.dismissable && !isPanelClicked.current && hide() : hide();
             }
 
             isPanelClicked.current = false;
         },
         when: visibleState
-    });
-
-    useOnEscapeKey(overlayEventListener, props.closeOnEscape, () => {
-        hide();
     });
 
     const isOutsideClicked = (target) => {
@@ -127,7 +109,6 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const onEnter = () => {
         overlayRef.current.setAttribute(attributeSelector.current, '');
         ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
-        DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
         align();
     };
 
@@ -162,11 +143,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             overlayRef.current.style.setProperty('--overlayArrowLeft', `${arrowLeft}px`);
 
             if (containerOffset.top < targetOffset.top) {
-                overlayRef.current.setAttribute('data-p-overlaypanel-flipped', 'true');
-                isUnstyled && DomHandler.addClass(overlayRef.current, 'p-overlaypanel-flipped');
-            } else {
-                overlayRef.current.setAttribute('data-p-overlaypanel-flipped', 'false');
-                isUnstyled && DomHandler.removeClass(overlayRef.current, 'p-overlaypanel-flipped');
+                DomHandler.addClass(overlayRef.current, 'p-overlaypanel-flipped');
             }
         }
     };
@@ -215,14 +192,13 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         toggle,
         show,
         hide,
-        align,
         getElement: () => overlayRef.current
     }));
 
     const createCloseIcon = () => {
         const closeIconProps = mergeProps(
             {
-                className: cx('closeIcon'),
+                className: 'p-overlaypanel-close-icon',
                 'aria-hidden': true
             },
             ptm('closeIcon')
@@ -233,7 +209,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         const closeButtonProps = mergeProps(
             {
                 type: 'button',
-                className: cx('closeButton'),
+                className: 'p-overlaypanel-close p-link',
                 onClick: (e) => onCloseClick(e),
                 'aria-label': ariaLabel
             },
@@ -253,11 +229,16 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
     };
 
     const createElement = () => {
+        const className = classNames('p-overlaypanel p-component', props.className, {
+            'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+            'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+        });
         const closeIcon = createCloseIcon();
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: cx('root', { context }),
+                ref: overlayRef,
+                className,
                 style: props.style,
                 onClick: (e) => onPanelClick(e)
             },
@@ -267,7 +248,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
         const contentProps = mergeProps(
             {
-                className: cx('content'),
+                className: 'p-overlaypanel-content',
                 onClick: (e) => onContentClick(e),
                 onMouseDown: onContentClick
             },
@@ -275,24 +256,20 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             ptm('content')
         );
 
-        const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: { enter: 120, exit: 100 },
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEnter: onEnter,
-                onEntered: onEntered,
-                onExit: onExit,
-                onExited: onExited
-            },
-            ptm('transition')
-        );
-
         return (
-            <CSSTransition nodeRef={overlayRef} {...transitionProps}>
-                <div ref={overlayRef} {...rootProps}>
+            <CSSTransition
+                nodeRef={overlayRef}
+                classNames="p-overlaypanel"
+                in={visibleState}
+                timeout={{ enter: 120, exit: 100 }}
+                options={props.transitionOptions}
+                unmountOnExit
+                onEnter={onEnter}
+                onEntered={onEntered}
+                onExit={onExit}
+                onExited={onExited}
+            >
+                <div {...rootProps}>
                     <div {...contentProps}>{props.children}</div>
                     {closeIcon}
                 </div>

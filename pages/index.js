@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { classNames } from '../components/lib/utils/Utils';
+import { classNames } from '../components/lib/utils/ClassNames';
 import NewsSection from '../components/news/newssection';
 import BlockSection from './landing/blocksection';
 import ComponentSection from './landing/componentsection';
@@ -51,7 +51,7 @@ export default function Home(props) {
                 <meta property="og:title" content="PrimeReact | React UI Component Library"></meta>
                 <meta property="og:url" content="https://primereact.org"></meta>
                 <meta property="og:description" content="The ultimate collection of design-agnostic, flexible and accessible React UI Components." />
-                <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg"></meta>
+                <meta property="og:image" content="https://www.primefaces.org/primereact/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
             </Head>
             <div className="landing-intro">

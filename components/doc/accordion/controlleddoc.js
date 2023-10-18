@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Accordion, AccordionTab } from '../../lib/accordion/Accordion';
 import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function ControlledDoc(props) {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -62,8 +62,6 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 
 export default function ControlledDoc() {
-    const [activeIndex, setActiveIndex] = useState();
-
     const onClick = (itemIndex) => {
         let _activeIndex = activeIndex ? [...activeIndex] : [];
 
@@ -125,9 +123,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 
 export default function ControlledDoc() {
-    const [activeIndex, setActiveIndex] = useState<number | number[]>();
-
-    const onClick = (itemIndex: number) => {
+    const onClick = (itemIndex) => {
         let _activeIndex = activeIndex ? [...activeIndex] : [];
 
         if (_activeIndex.length === 0) {

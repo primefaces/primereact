@@ -6,14 +6,6 @@ import { TreeTableRow } from './TreeTableRow';
 export const TreeTableBody = React.memo((props) => {
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
-    const { ptm, cx } = props.ptCallbacks;
-
-    const getPTOptions = (key, options) => {
-        return ptm(key, {
-            hostName: props.hostName,
-            ...options
-        });
-    };
 
     const flattenizeTree = (nodes) => {
         let rows = [];
@@ -45,7 +37,7 @@ export const TreeTableBody = React.memo((props) => {
 
         const targetNode = event.target.nodeName;
 
-        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.getAttribute(event.target, 'data-pc-section') === 'columnresizer') {
+        if (targetNode === 'INPUT' || targetNode === 'BUTTON' || targetNode === 'A' || DomHandler.hasClass(event.target, 'p-clickable')) {
             return;
         }
 
@@ -170,13 +162,11 @@ export const TreeTableBody = React.memo((props) => {
     const createRow = (node, index) => {
         return (
             <TreeTableRow
-                hostName={props.hostName}
                 key={`${node.key || JSON.stringify(node.data)}_${index}`}
                 level={0}
                 rowIndex={index}
                 selectOnEdit={props.selectOnEdit}
                 node={node}
-                originalOptions={props.originalOptions}
                 checkboxIcon={props.checkboxIcon}
                 columns={props.columns}
                 expandedKeys={props.expandedKeys}
@@ -233,20 +223,20 @@ export const TreeTableBody = React.memo((props) => {
             const content = props.emptyMessage || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
-                    className: cx('emptyMessage')
+                    className: 'p-treetable-emptymessage'
                 },
-                getPTOptions('emptyMessage')
+                props.ptCallbacks.ptm('emptyMessage')
             );
-            const emptyMessageCellProps = mergeProps(
+            const bodyCellProps = mergeProps(
                 {
                     colSpan
                 },
-                getPTOptions('emptyMessageCell')
+                props.ptCallbacks.ptm('bodyCell')
             );
 
             return (
                 <tr {...emptyMessageProps}>
-                    <td {...emptyMessageCellProps}>{content}</td>
+                    <td {...bodyCellProps}>{content}</td>
                 </tr>
             );
         }
@@ -255,9 +245,9 @@ export const TreeTableBody = React.memo((props) => {
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
     const tbodyProps = mergeProps(
         {
-            className: cx('tbody')
+            className: 'p-treetable-tbody'
         },
-        getPTOptions('tbody')
+        props.ptCallbacks.ptm('tbody')
     );
 
     return <tbody {...tbodyProps}>{content}</tbody>;

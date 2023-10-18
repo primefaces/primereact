@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -8,6 +6,7 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PanelMenuBase } from './PanelMenuBase';
 import { PanelMenuSub } from './PanelMenuSub';
+import { PrimeReactContext } from '../api/Api';
 
 export const PanelMenu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -21,7 +20,7 @@ export const PanelMenu = React.memo(
         const headerId = idState + '_header';
         const contentId = idState + '_content';
 
-        const { ptm, cx, isUnstyled } = PanelMenuBase.setMetaData({
+        const { ptm } = PanelMenuBase.setMetaData({
             props,
             state: {
                 id: idState,
@@ -29,8 +28,6 @@ export const PanelMenu = React.memo(
                 animationDisabled: animationDisabled
             }
         });
-
-        useHandleStyle(PanelMenuBase.css.styles, isUnstyled, { name: 'panelmenu' });
 
         const findActiveItem = () => {
             if (props.model) {
@@ -126,12 +123,14 @@ export const PanelMenu = React.memo(
                 return null;
             }
 
-            const key = item.id || idState + '_' + index;
+            const key = item.label + '_' + index;
             const active = isItemActive(item);
+            const className = classNames('p-panelmenu-panel', item.className);
+            const headerClassName = classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const headerIconProps = mergeProps(
                 {
-                    className: cx('headerIcon', { item })
+                    className: iconClassName
                 },
                 getPTOptions(item, 'headerIcon')
             );
@@ -139,23 +138,24 @@ export const PanelMenu = React.memo(
             const submenuIconClassName = 'p-panelmenu-icon';
             const headerSubmenuIconProps = mergeProps(
                 {
-                    className: cx('headerSubmenuIcon')
+                    className: submenuIconClassName
                 },
                 getPTOptions(item, 'headerSubmenuIcon')
             );
             const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...headerSubmenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...headerSubmenuIconProps} />);
             const headerLabelProps = mergeProps(
                 {
-                    className: cx('headerLabel')
+                    className: 'p-menuitem-text'
                 },
                 getPTOptions(item, 'headerLabel')
             );
             const label = item.label && <span {...headerLabelProps}>{item.label}</span>;
+            const contentWrapperClassName = classNames('p-toggleable-content', { 'p-toggleable-content-collapsed': !active });
             const menuContentRef = React.createRef();
             const headerActionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: cx('headerAction'),
+                    className: 'p-panelmenu-header-link',
                     onClick: (e) => onItemClick(e, item),
                     'aria-expanded': active,
                     id: headerId,
@@ -191,7 +191,7 @@ export const PanelMenu = React.memo(
             const panelProps = mergeProps(
                 {
                     key: key,
-                    className: cx('panel', { item }),
+                    className: className,
                     style: item.style
                 },
                 getPTOptions(item, 'panel')
@@ -199,7 +199,7 @@ export const PanelMenu = React.memo(
 
             const headerProps = mergeProps(
                 {
-                    className: cx('header', { active, item }),
+                    className: headerClassName,
                     style: item.style
                 },
                 getPTOptions(item, 'header')
@@ -207,40 +207,29 @@ export const PanelMenu = React.memo(
 
             const menuContentProps = mergeProps(
                 {
-                    className: cx('menuContent')
+                    className: 'p-panelmenu-content'
                 },
                 getPTOptions(item, 'menuContent')
             );
 
-            const toggleableContentProps = mergeProps(
+            const headerToggleableContentProps = mergeProps(
                 {
-                    className: cx('toggleableContent', { active }),
+                    ref: menuContentRef,
+                    className: contentWrapperClassName,
                     role: 'region',
+                    id: contentId,
                     'aria-labelledby': headerId
                 },
-                getPTOptions(item, 'toggleableContent')
-            );
-
-            const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    timeout: { enter: 1000, exit: 450 },
-                    onEnter: onEnter,
-                    disabled: animationDisabled,
-                    in: active,
-                    unmountOnExit: true,
-                    options: props.transitionOptions
-                },
-                getPTOptions(item, 'transition')
+                getPTOptions(item, 'headerToggleableContent')
             );
 
             return (
                 <div {...panelProps}>
                     <div {...headerProps}>{content}</div>
-                    <CSSTransition nodeRef={menuContentRef} {...transitionProps}>
-                        <div id={contentId} ref={menuContentRef} {...toggleableContentProps}>
+                    <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} onEnter={onEnter} disabled={animationDisabled} in={active} unmountOnExit options={props.transitionOptions}>
+                        <div {...headerToggleableContentProps}>
                             <div {...menuContentProps}>
-                                <PanelMenuSub hostName="PanelMenu" id={key} menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />
+                                <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} />
                             </div>
                         </div>
                     </CSSTransition>
@@ -252,21 +241,21 @@ export const PanelMenu = React.memo(
             return props.model ? props.model.map(createPanel) : null;
         };
 
+        const className = classNames('p-panelmenu p-component', props.className);
         const panels = createPanels();
+
         const rootProps = mergeProps(
             {
-                className: cx('root'),
+                id: props.id,
+                ref: elementRef,
+                className: className,
                 style: props.style
             },
             PanelMenuBase.getOtherProps(props),
             ptm('root')
         );
 
-        return (
-            <div id={props.id} ref={elementRef} {...rootProps}>
-                {panels}
-            </div>
-        );
+        return <div {...rootProps}>{panels}</div>;
     })
 );
 

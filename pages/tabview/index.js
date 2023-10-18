@@ -1,4 +1,3 @@
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tabview/basicdoc';
@@ -7,13 +6,12 @@ import { ControlledDoc } from '../../components/doc/tabview/controlleddoc';
 import { DisabledDoc } from '../../components/doc/tabview/disableddoc';
 import { HeaderIconDoc } from '../../components/doc/tabview/headericondoc';
 import { ImportDoc } from '../../components/doc/tabview/importdoc';
-import { PTDoc } from '../../components/doc/tabview/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tabview/pt/wireframe';
 import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
 import { StyleDoc } from '../../components/doc/tabview/styledoc';
 import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
-import { StyledDoc } from '../../components/doc/tabview/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/tabview/theming/tailwinddoc';
+import { Wireframe } from '../../components/doc/tabview/pt/wireframe';
+import { PTDoc } from '../../components/doc/tabview/pt/ptdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
 
 const TabViewDemo = () => {
     const docs = [
@@ -92,38 +90,7 @@ const TabViewDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Tabs Component"
-            header="TabView"
-            description="TabView is a container component to group content with tabs."
-            componentDocs={docs}
-            apiDocs={['TabView', 'TabPanel']}
-            ptDocs={ptDocs}
-            ptDescription=""
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Tabs Component" header="TabView" description="TabView is a container component to group content with tabs." componentDocs={docs} apiDocs={['TabView', 'TabPanel']} ptDocs={ptDocs} ptDescription="" />;
 };
 
 export default TabViewDemo;

@@ -9,14 +9,11 @@
  *
  */
 import * as React from 'react';
-import { FilterMatchMode } from '../api/api';
-import { ButtonPassThroughOptions } from '../button/button';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { DataTablePassThroughOptions } from '../datatable/datatable';
-import { DropdownPassThroughOptions } from '../dropdown/dropdown';
-import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
+import { DataTablePassThroughOptions } from '../datatable/datatable';
+import { DropdownPassThroughOptions } from '../dropdown/dropdown';
+import { ButtonPassThroughOptions } from '../button/button';
 
 export declare type ColumnPassThroughType<T> = PassThroughType<T, ColumnPassThroughMethodOptions>;
 
@@ -44,44 +41,6 @@ export interface ColumnContext {
      * @defaultValue false
      */
     disabled: boolean;
-    /**
-     * Current index of the column.
-     */
-    index: number;
-    /**
-     * Current sort state of the column as a boolean.
-     * @defaultValue false
-     */
-    sorted: boolean;
-    /**
-     * Current resizable state of the column as a boolean.
-     * @defaultValue false
-     */
-    resizable: boolean;
-    /**
-     * Current size state of the table.
-     */
-    size: string;
-    /**
-     * Current gridlines state of the table as a boolean.
-     * @defaultValue false
-     */
-    showGridlines: boolean;
-    /**
-     * Current highlighted state of the filter row item as a boolean.
-     * @defaultValue false
-     */
-    highlighted: boolean;
-    /**
-     * Current hidden state of the filter clear button of a column as a boolean.
-     * @defaultValue false
-     */
-    hidden: boolean;
-    /**
-     * Current active state of the filter menu of a column as a boolean.
-     * @defaultValue false
-     */
-    active: boolean;
 }
 
 /**
@@ -105,11 +64,6 @@ export interface ColumnState {
      * @defaultValue false
      */
     focused: boolean;
-    /**
-     * Current visible state of the filter menu of a column as a boolean.
-     * @defaultValue false
-     */
-    overlayVisible: boolean;
     /**
      * Current style of the rowgroup header.
      */
@@ -348,11 +302,6 @@ export interface ColumnPassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: ColumnPassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 interface ColumnHeaderOptions {
@@ -717,7 +666,7 @@ interface ColumnFilterMatchModeChangeEvent {
     /**
      * Type of filter match.
      */
-    matchMode: FilterMatchMode;
+    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
 }
 
 /**
@@ -806,13 +755,9 @@ interface ColumnFilterEvent {
 
 interface ColumnFilterMatchModeOptions {
     /**
-     * The label to display for the match mode
+     * Filter match modes for specific columns.
      */
-    label: string;
-    /**
-     * The match mode type
-     */
-    value: FilterMatchMode | string;
+    [key: string]: string;
 }
 
 /**
@@ -859,16 +804,6 @@ export interface ColumnProps {
      * @type {ColumnPassThroughOptions}
      */
     pt?: ColumnPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
     /**
      * Style class of the component.
      */
@@ -956,7 +891,7 @@ export interface ColumnProps {
     /**
      * Defines filterMatchMode; "startsWith", "contains", "endsWith", "equals", "notEquals", "in", "lt", "lte", "gt", "gte" and "custom".
      */
-    filterMatchMode?: FilterMatchMode | undefined;
+    filterMatchMode?: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom' | undefined;
     /**
      * An array of label-value pairs to override the global match mode options.
      */

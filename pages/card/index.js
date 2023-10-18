@@ -5,8 +5,6 @@ import { ImportDoc } from '../../components/doc/card/importdoc';
 import { PTDoc } from '../../components/doc/card/pt/ptdoc';
 import { Wireframe } from '../../components/doc/card/pt/wireframe';
 import { StyleDoc } from '../../components/doc/card/styledoc';
-import { StyledDoc } from '../../components/doc/card/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/card/theming/tailwinddoc';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
@@ -57,27 +55,7 @@ const CardDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Card Component" header="Card" description="Card is a flexible container component." componentDocs={docs} apiDocs={['Card']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Card Component" header="Card" description="Card is a flexible container component." componentDocs={docs} apiDocs={['Card']} ptDocs={ptDocs} />;
 };
 
 export default CardDemo;

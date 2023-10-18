@@ -8,14 +8,12 @@
  *
  */
 import * as React from 'react';
-import { CSSProperties } from 'react';
 import { ColumnProps } from '../column';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
-import { PassThroughOptions } from '../passthrough';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { CSSProperties } from 'react';
 
 export declare type TreeTablePassThroughType<T> = PassThroughType<T, TreeTablePassThroughMethodOptions>;
 
@@ -25,7 +23,6 @@ export declare type TreeTablePassThroughType<T> = PassThroughType<T, TreeTablePa
 export interface TreeTablePassThroughMethodOptions {
     props: TreeTableProps;
     state: TreeTableState;
-    context: TreeTableContext;
 }
 
 /**
@@ -86,10 +83,6 @@ export interface TreeTablePassThroughOptions {
      * Uses to pass attributes to the empty message's DOM element.
      */
     emptyMessage?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableRowElement>>;
-    /**
-     * Uses to pass attributes to the empty message cell's DOM element.
-     */
-    emptyMessageCell?: TreeTablePassThroughType<React.HTMLAttributes<HTMLTableCellElement>>;
     /**
      * Uses to pass attributes to the body cell's DOM element.
      */
@@ -211,11 +204,6 @@ export interface TreeTablePassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: TreeTablePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -255,51 +243,6 @@ export interface TreeTableState {
      * @defaultValue false
      */
     editing: boolean;
-}
-
-/**
- * Defines current options in TreeTable component.
- */
-export interface TreeTableContext {
-    /**
-     * Current index state of the item.
-     */
-    index: number;
-    /**
-     * Current frozen state of the row as a boolean.
-     * @defaultValue false
-     */
-    frozen: boolean;
-    /**
-     * Current checked state of the column checkbox as a boolean.
-     * @defaultValue false
-     */
-    checked: boolean;
-    /**
-     * Current partial checked state of the column checkbox as a boolean.
-     * @defaultValue false
-     */
-    partialChecked: boolean;
-    /**
-     * Current selectable state of the row as a boolean.
-     * @defaultValue false
-     */
-    selectable: boolean;
-    /**
-     * Current scrollable state of the row as a boolean.
-     * @defaultValue false
-     */
-    scrollable: boolean;
-    /**
-     * Current showGridlines state of the row as a boolean.
-     * @defaultValue false
-     */
-    showGridlines: boolean;
-    /**x
-     * Current selected state of the row as a boolean.
-     * @defaultValue false
-     */
-    selected: boolean;
 }
 
 /**
@@ -585,16 +528,6 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @type {TreeTablePassThroughOptions}
      */
     pt?: TreeTablePassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
     /**
      * Style class of the node.
      */
@@ -956,11 +889,6 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @param {TreeTableEvent} event - Custom treetable event.
      */
     onUnselect?(event: TreeTableEvent): void;
-    /**
-     * Callback to invoke after filtering and sorting to pass the rendered value.
-     * @param {TreeNode[] | undefined} value - Value displayed by the table.
-     */
-    onValueChange?(value: TreeNode[] | undefined): void;
     /**
      * Function that takes the row data and returns an object in &#123;'styleclass' : condition&#125; format to define a classname for a particular now.
      * @param {TreeNode} data - Value displayed by the treetable.

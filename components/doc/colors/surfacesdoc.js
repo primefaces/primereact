@@ -12,7 +12,7 @@ export function SurfacesDoc(props) {
                 <div className="flex flex-column">
                     {shades.map((shade) => {
                         return (
-                            <div key={shade} className="w-18rem flex align-items-center p-3 font-bold" style={{ backgroundColor: `var(--surface-${shade})`, color: shade < 600 ? 'var(--surface-900)' : 'var(--surface-0)' }}>
+                            <div key={shade} className="w-18rem flex align-items-center p-3 font-bold" style={{ backgroundColor: `var(--surface-${shade})`, color: props.dark ? '#fff' : shade > 500 ? '#fff' : '#000' }}>
                                 --surface-{shade}
                             </div>
                         );

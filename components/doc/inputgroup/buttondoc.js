@@ -6,17 +6,17 @@ import { DocSectionText } from '../common/docsectiontext';
 export function ButtonDoc(props) {
     const code = {
         basic: `
-<div className="p-inputgroup flex-1">
+<div className="p-inputgroup">
     <Button label="Search" />
     <InputText placeholder="Keyword" />
 </div>
 
-<div className="p-inputgroup flex-1">
+<div className="p-inputgroup">
     <InputText placeholder="Keyword" />
     <Button icon="pi pi-search" className="p-button-warning" />
 </div>
 
-<div className="p-inputgroup flex-1">
+<div className="p-inputgroup">
     <Button icon="pi pi-check" className="p-button-success" />
     <InputText placeholder="Vote" />
     <Button icon="pi pi-times" className="p-button-danger" />

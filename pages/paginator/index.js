@@ -9,8 +9,6 @@ import { PTDoc } from '../../components/doc/paginator/pt/ptdoc';
 import { Wireframe } from '../../components/doc/paginator/pt/wireframe';
 import { StyleDoc } from '../../components/doc/paginator/styledoc';
 import { TemplateDoc } from '../../components/doc/paginator/templatedoc';
-import { StyledDoc } from '../../components/doc/paginator/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/paginator/theming/tailwinddoc';
 
 const PaginatorDemo = () => {
     const docs = [
@@ -68,37 +66,7 @@ const PaginatorDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Paginator Component"
-            header="Paginator"
-            description="Paginator displays data in paged format and provides navigation between pages."
-            componentDocs={docs}
-            apiDocs={['Paginator']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Paginator Component" header="Paginator" description="Paginator displays data in paged format and provides navigation between pages." componentDocs={docs} apiDocs={['Paginator']} ptDocs={ptDocs} />;
 };
 
 export default PaginatorDemo;

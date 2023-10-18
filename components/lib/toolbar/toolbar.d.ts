@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils';
 
 export declare type ToolbarPassThroughType<T> = PassThroughType<T, ToolbarPassThroughMethodOptions>;
@@ -42,11 +40,6 @@ export interface ToolbarPassThroughOptions {
      * Uses to pass attributes to the right's DOM element.
      */
     end?: ToolbarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -86,16 +79,6 @@ export interface ToolbarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {ToolbarPassThroughOptions}
      */
     pt?: ToolbarPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

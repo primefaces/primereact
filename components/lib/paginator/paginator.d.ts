@@ -8,15 +8,11 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { DropdownPassThroughOptions } from '../dropdown/dropdown';
 import { InputNumberPassThroughOptions } from '../inputnumber/inputnumber';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type PaginatorPassThroughType<T> = PassThroughType<T, PaginatorPassThroughMethodOptions>;
-export declare type PaginatorPassThroughTransitionType = ReactCSSTransitionProps | ((options: PaginatorPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -97,15 +93,6 @@ export interface PaginatorPassThroughOptions {
      * Uses to pass attributes to the end's DOM element.
      */
     end?: PaginatorPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: PaginatorPassThroughTransitionType;
 }
 
 /**
@@ -626,16 +613,6 @@ export interface PaginatorProps extends Omit<React.DetailedHTMLProps<React.HTMLA
      * @type {PaginatorPassThroughOptions}
      */
     pt?: PaginatorPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

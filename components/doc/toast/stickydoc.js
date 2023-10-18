@@ -11,15 +11,10 @@ export function StickyDoc(props) {
         toast.current.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
     };
 
-    const clear = () => {
-        toast.current.clear();
-    };
-
     const code = {
         basic: `
 <Toast ref={toast} />
-<Button onClick={showSticky} label="Sticky" severity="success" />
-<Button onClick={clear} label="Clear" />
+<Button onClick={showSticky} label="Sticky" />
         `,
         javascript: `
 import React, { useRef } from 'react';
@@ -33,17 +28,10 @@ export default function StickyDemo() {
         toast.current.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
     };
 
-    const clear = () => {
-        toast.current.clear();
-    };
-
     return (
-        <div className="card flex justify-content-center">
+        <div>
             <Toast ref={toast} />
-            <div className="flex flex-wrap gap-2">
-                <Button onClick={showSticky} label="Sticky" severity="success" />
-                <Button onClick={clear} label="Clear" />
-            </div>
+            <Button onClick={showSticky} label="Sticky" />
         </div>
     )
 }
@@ -60,17 +48,10 @@ export default function StickyDemo() {
         toast.current?.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
     };
 
-    const clear = () => {
-        toast.current?.clear();
-    };
-
     return (
-        <div className="card flex justify-content-center">
+        <div>
             <Toast ref={toast} />
-            <div className="flex flex-wrap gap-2">
-                <Button onClick={showSticky} label="Sticky" severity="success" />
-                <Button onClick={clear} label="Clear" />
-            </div>
+            <Button onClick={showSticky} label="Sticky" />
         </div>
     )
 }
@@ -86,9 +67,8 @@ export default function StickyDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
-                <div className="flex flex-wrap gap-2">
-                    <Button onClick={showSticky} label="Sticky" severity="success" />
-                    <Button onClick={clear} label="Clear" />
+                <div>
+                    <Button onClick={showSticky} label="Sticky" />
                 </div>
             </div>
             <DocSectionCode code={code} />

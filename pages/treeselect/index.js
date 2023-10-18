@@ -1,10 +1,10 @@
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/treeselect/pt/ptdoc';
+import { Wireframe } from '../../components/doc/treeselect/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/treeselect/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/treeselect/basicdoc';
 import { CheckboxDoc } from '../../components/doc/treeselect/checkboxdoc';
-import { ClearIconDoc } from '../../components/doc/treeselect/clearicondoc';
-import { ControlledDoc } from '../../components/doc/treeselect/controlleddoc';
 import { DisabledDoc } from '../../components/doc/treeselect/disableddoc';
 import { FilterDoc } from '../../components/doc/treeselect/filterdoc';
 import { FloatLabelDoc } from '../../components/doc/treeselect/floatlabeldoc';
@@ -13,11 +13,8 @@ import { HookFormDoc } from '../../components/doc/treeselect/form/hookformdoc';
 import { ImportDoc } from '../../components/doc/treeselect/importdoc';
 import { InvalidDoc } from '../../components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '../../components/doc/treeselect/multipledoc';
-import { PTDoc } from '../../components/doc/treeselect/pt/ptdoc';
-import { Wireframe } from '../../components/doc/treeselect/pt/wireframe';
+import { ControlledDoc } from '../../components/doc/treeselect/controlleddoc';
 import { StyleDoc } from '../../components/doc/treeselect/styledoc';
-import { StyledDoc } from '../../components/doc/treeselect/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/treeselect/theming/tailwinddoc';
 
 const TreeSelectDemo = () => {
     const docs = [
@@ -45,11 +42,6 @@ const TreeSelectDemo = () => {
             id: 'filter',
             label: 'Filter',
             component: FilterDoc
-        },
-        {
-            id: 'clearicon',
-            label: 'Clear Icon',
-            component: ClearIconDoc
         },
         {
             id: 'controlled',
@@ -117,37 +109,7 @@ const TreeSelectDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React TreeSelect Component"
-            header="TreeSelect"
-            description="TreeSelect is a form component to choose from hierarchical data."
-            componentDocs={docs}
-            apiDocs={['TreeSelect', 'TreeNode']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React TreeSelect Component" header="TreeSelect" description="TreeSelect is a form component to choose from hierarchical data." componentDocs={docs} apiDocs={['TreeSelect', 'TreeNode']} ptDocs={ptDocs} />;
 };
 
 export default TreeSelectDemo;

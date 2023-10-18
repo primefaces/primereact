@@ -2,6 +2,5 @@
     "main": "./componentbase.cjs.js",
     "module": "./componentbase.esm.js",
     "unpkg": "./componentbase.min.js",
-    "types": "./componentbase.d.ts",
     "sideEffects": false
 }

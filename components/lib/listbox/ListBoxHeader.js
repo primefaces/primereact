@@ -4,17 +4,6 @@ import { InputText } from '../inputtext/InputText';
 import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const ListBoxHeader = React.memo((props) => {
-    const {
-        ptCallbacks: { ptm, cx }
-    } = props;
-
-    const getPTOptions = (key, options) => {
-        return ptm(key, {
-            hostName: props.hostName,
-            ...options
-        });
-    };
-
     const filterOptions = {
         filter: (e) => onFilter(e),
         reset: () => props.resetFilter()
@@ -30,11 +19,12 @@ export const ListBoxHeader = React.memo((props) => {
     };
 
     const createHeader = () => {
+        const iconClassName = 'p-listbox-filter-icon';
         const filterIconProps = mergeProps(
             {
-                className: cx('filterIcon')
+                className: iconClassName
             },
-            getPTOptions('filterIcon')
+            props.ptm('filterIcon')
         );
 
         const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
@@ -42,32 +32,21 @@ export const ListBoxHeader = React.memo((props) => {
 
         const headerProps = mergeProps(
             {
-                className: cx('header')
+                className: 'p-listbox-header'
             },
-            getPTOptions('header')
+            props.ptm('header')
         );
 
         const filterContainerProps = mergeProps(
             {
-                className: cx('filterContainer')
+                className: 'p-listbox-filter-container'
             },
-            getPTOptions('filterContainer')
+            props.ptm('filterContainer')
         );
 
         let content = (
             <div {...filterContainerProps}>
-                <InputText
-                    type="text"
-                    value={props.filter}
-                    onChange={onFilter}
-                    className={cx('filterInput')}
-                    disabled={props.disabled}
-                    placeholder={props.filterPlaceholder}
-                    {...props.filterInputProps}
-                    pt={ptm('filterInput')}
-                    unstyled={props.unstyled}
-                    __parentMetadata={{ parent: props.metaData }}
-                />
+                <InputText type="text" value={props.filter} onChange={onFilter} className="p-listbox-filter" disabled={props.disabled} placeholder={props.filterPlaceholder} {...props.filterInputProps} pt={props.ptm('filterInput')} />
                 {filterIcon}
             </div>
         );

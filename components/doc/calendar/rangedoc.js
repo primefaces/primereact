@@ -26,15 +26,14 @@ export default function RangeDemo() {
         `,
         typescript: `
 import React, { useState } from "react";
-import { Calendar } from 'primereact/calendar';
-import { Nullable } from "primereact/ts-helpers";
+import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 
 export default function RangeDemo() {
-    const [dates, setDates] = useState<Nullable<(Date | null)[]>>(null);
+    const [dates, setDates] = useState<string | Date | Date[] | null>(null);
 
     return (
         <div className="card flex justify-content-center">
-            <Calendar value={dates} onChange={(e) => setDates(e.value)} selectionMode="range" readOnlyInput />
+            <Calendar value={dates} onChange={(e : CalendarChangeEvent) => setDates(e.value)} selectionMode="range" readOnlyInput />
         </div>
 
     )

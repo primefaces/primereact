@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest a new idea for PrimeReact
-title: 'Replace_With_Component_Name: Brief_Description'
+title: 'Component: Title'
 labels: ['Type: New Feature', 'Status: Discussion']
 body:
     - type: textarea

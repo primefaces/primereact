@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type AvatarPassThroughType<T> = PassThroughType<T, AvatarPassThroughMethodOptions>;
@@ -18,23 +16,6 @@ export declare type AvatarPassThroughType<T> = PassThroughType<T, AvatarPassThro
  */
 export interface AvatarPassThroughMethodOptions {
     props: AvatarProps;
-    state: AvatarState;
-}
-
-/**
- * Defines current inline state in Avatar component.
- */
-export interface AvatarState {
-    /**
-     * Current imageFailed state as a boolean.
-     * @defaultValue false
-     */
-    imageFailed: boolean;
-    /**
-     * Current state that indicates whether the Avatar component is nested within an AvatarGroup component.
-     * @defaultValue false
-     */
-    isNestedInAvatarGroup: boolean;
 }
 
 /**
@@ -58,11 +39,6 @@ export interface AvatarPassThroughOptions {
      * Uses to pass attributes to the image's DOM element.
      */
     image?: AvatarPassThroughType<React.ImgHTMLAttributes<HTMLImageElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -126,16 +102,6 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
      * @type {AvatarPassThroughOptions}
      */
     pt?: AvatarPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

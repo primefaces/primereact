@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
+import { PrimeReactContext } from '../api/Api';
 
 export const Tree = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -20,16 +19,13 @@ export const Tree = React.memo(
         const filterChanged = React.useRef(false);
         const filteredValue = props.onFilterValueChange ? props.filterValue : filterValueState;
         const expandedKeys = props.onToggle ? props.expandedKeys : expandedKeysState;
-        const { ptm, cx, isUnstyled } = TreeBase.setMetaData({
+        const { ptm } = TreeBase.setMetaData({
             props,
             state: {
                 filterValue: filteredValue,
                 expandedKeys: expandedKeys
             }
         });
-
-        useHandleStyle(TreeBase.css.styles, isUnstyled, { name: 'tree' });
-
         const filterOptions = {
             filter: (e) => onFilterInputChange(e),
             reset: () => resetFilter()
@@ -58,32 +54,9 @@ export const Tree = React.memo(
             dragState.current = null;
         };
 
-        /**
-         * Deep copy a value. If the value has a data property, it will be shallow copied.
-         * Values that are not plain objects or arrays are returned as-is.
-         */
-        const cloneValue = (value) => {
-            if (Array.isArray(value)) {
-                return value.map(cloneValue);
-            } else if (!!value && Object.getPrototypeOf(value) === Object.prototype) {
-                const result = {};
-
-                // Leave data property alone and clone children
-                for (let key in value) {
-                    if (key !== 'data') {
-                        result[key] = cloneValue(value[key]);
-                    } else {
-                        result[key] = value[key];
-                    }
-                }
-
-                return result;
-            } else return value;
-        };
-
         const onDrop = (event) => {
             if (validateDropNode(dragState.current.path, event.path)) {
-                const value = cloneValue(props.value);
+                let value = JSON.parse(JSON.stringify(props.value));
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -112,7 +85,7 @@ export const Tree = React.memo(
 
         const onDropPoint = (event) => {
             if (validateDropPoint(event)) {
-                const value = cloneValue(props.value);
+                let value = JSON.parse(JSON.stringify(props.value));
                 let dragPaths = dragState.current.path.split('-');
 
                 dragPaths.pop();
@@ -338,10 +311,8 @@ export const Tree = React.memo(
         const createRootChild = (node, index, last) => {
             return (
                 <UITreeNode
-                    hostName="Tree"
                     key={node.key || node.label}
                     node={node}
-                    originalOptions={props.value}
                     index={index}
                     last={last}
                     path={String(index)}
@@ -375,7 +346,6 @@ export const Tree = React.memo(
                     onClick={props.onNodeClick}
                     onDoubleClick={props.onNodeDoubleClick}
                     ptm={ptm}
-                    cx={cx}
                 />
             );
         };
@@ -394,9 +364,10 @@ export const Tree = React.memo(
         const createModel = () => {
             if (props.value) {
                 const rootNodes = createRootChildren();
+                const contentClass = classNames('p-tree-container', props.contentClassName);
                 const containerProps = mergeProps(
                     {
-                        className: classNames(props.contentClassName, cx('container')),
+                        className: contentClass,
                         role: 'tree',
                         style: props.contentStyle,
                         ...ariaProps
@@ -412,9 +383,10 @@ export const Tree = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
+                const iconClassName = 'p-tree-loading-icon';
                 const loadingIconProps = mergeProps(
                     {
-                        className: cx('loadingIcon')
+                        className: iconClassName
                     },
                     ptm('loadingIcon')
                 );
@@ -423,7 +395,7 @@ export const Tree = React.memo(
 
                 const loadingOverlayProps = mergeProps(
                     {
-                        className: cx('loadingOverlay')
+                        className: 'p-tree-loading-overlay p-component-overlay'
                     },
                     ptm('loadingOverlay')
                 );
@@ -437,9 +409,10 @@ export const Tree = React.memo(
         const createFilter = () => {
             if (props.filter) {
                 const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
+                const iconClassName = 'p-tree-filter-icon';
                 const searchIconProps = mergeProps(
                     {
-                        className: cx('searchIcon')
+                        className: iconClassName
                     },
                     ptm('searchIcon')
                 );
@@ -448,7 +421,7 @@ export const Tree = React.memo(
 
                 const filterContainerProps = mergeProps(
                     {
-                        className: cx('filterContainer')
+                        className: 'p-tree-filter-container'
                     },
                     ptm('filterContainer')
                 );
@@ -458,9 +431,8 @@ export const Tree = React.memo(
                         type: 'text',
                         value: value,
                         autoComplete: 'off',
-                        className: cx('input'),
+                        className: 'p-tree-filter p-inputtext p-component',
                         placeholder: props.filterPlaceholder,
-                        'aria-label': props.filterPlaceholder,
                         onKeyDown: onFilterInputKeyDown,
                         onChange: onFilterInputChange,
                         disabled: props.disabled
@@ -519,7 +491,7 @@ export const Tree = React.memo(
 
                 const headerProps = mergeProps(
                     {
-                        className: cx('header')
+                        className: 'p-tree-header'
                     },
                     ptm('header')
                 );
@@ -535,7 +507,7 @@ export const Tree = React.memo(
 
             const footerProps = mergeProps(
                 {
-                    className: cx('footer')
+                    className: 'p-tree-footer'
                 },
                 ptm('footer')
             );
@@ -545,6 +517,11 @@ export const Tree = React.memo(
 
         const otherProps = TreeBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames('p-tree p-component', props.className, {
+            'p-tree-selectable': props.selectionMode,
+            'p-tree-loading': props.loading,
+            'p-disabled': props.disabled
+        });
         const loader = createLoader();
         const content = createModel();
         const header = createHeader();
@@ -553,7 +530,7 @@ export const Tree = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: classNames(props.className, cx('root')),
+                className,
                 style: props.style,
                 id: props.id
             },

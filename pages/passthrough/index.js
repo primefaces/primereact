@@ -1,10 +1,7 @@
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { BasicDoc } from '../../components/doc/passthrough/basicdoc';
-import { CustomCSSDoc } from '../../components/doc/passthrough/customcss';
 import { GlobalPTDoc } from '../../components/doc/passthrough/globalptdoc';
-import { LifeCyleDoc } from '../../components/doc/passthrough/lifecycle';
-import { UsePassThroughDoc } from '../../components/doc/passthrough/usepassthroughdoc';
 
 const PassThroughDemo = () => {
     const docs = [
@@ -14,24 +11,9 @@ const PassThroughDemo = () => {
             component: BasicDoc
         },
         {
-            id: 'lifecycle',
-            label: 'Lifecycle',
-            component: LifeCyleDoc
-        },
-        {
             id: 'globalpt',
             label: 'Global',
             component: GlobalPTDoc
-        },
-        {
-            id: 'customcss',
-            label: 'Custom CSS',
-            component: CustomCSSDoc
-        },
-        {
-            id: 'usepassthrough',
-            label: 'UsePassThrough',
-            component: UsePassThroughDoc
         }
     ];
 

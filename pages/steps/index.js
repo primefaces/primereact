@@ -7,8 +7,6 @@ import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
 import { PTDoc } from '../../components/doc/steps/pt/ptdoc';
 import { Wireframe } from '../../components/doc/steps/pt/wireframe';
 import { StyleDoc } from '../../components/doc/steps/styledoc';
-import { StyledDoc } from '../../components/doc/steps/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/steps/theming/tailwinddoc';
 
 const StepsDemo = () => {
     const docs = [
@@ -57,26 +55,6 @@ const StepsDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
     return (
         <DocComponent
             title="React Stepper Component"
@@ -86,7 +64,6 @@ const StepsDemo = () => {
             apiDocs={['Steps', 'MenuItem']}
             className="steps-demo"
             ptDocs={ptDocs}
-            themingDocs={themingDocs}
         />
     );
 };

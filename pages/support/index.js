@@ -10,7 +10,7 @@ const SupportPage = () => {
                     <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
                     <div className="text-2xl text-900 font-semibold mb-3 relative">Community Support</div>
                     <p className="m-0 line-height-3 relative text-lg text-800">
-                        <a href="https://github.com/orgs/primefaces/discussions" className="text-primary hover:underline font-semibold">
+                        <a href="https://forum.primefaces.org/viewforum.php?f=57" className="text-primary hover:underline font-semibold">
                             Forum
                         </a>{' '}
                         and{' '}

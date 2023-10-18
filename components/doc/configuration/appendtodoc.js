@@ -4,22 +4,13 @@ import { DocSectionText } from '../common/docsectiontext';
 export function AppendToDoc(props) {
     const code = {
         basic: `
-//_app.js
-import { PrimeReactProvider } from 'primereact/api';
+import { PrimeReactContext } from 'primereact/api';
 
-export default function MyApp({ Component }) {
-    const value = {
-        appendTo: 'self',
-        ...
-    };
+//use in a component
+const { setAppendTo } = useContext(PrimeReactContext);
 
-    return (
-        <PrimeReactProvider value={value}>
-            <App />
-        </PrimeReactProvider>
-    );
-}
-`
+setAppendTo('self');
+        `
     };
 
     return (

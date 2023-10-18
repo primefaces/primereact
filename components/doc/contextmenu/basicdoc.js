@@ -40,8 +40,8 @@ import { ContextMenu } from 'primereact/contextmenu';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function BasicDemo() {
-    const cm = useRef<ContextMenu>(null);
-    const items: MenuItem[] = [
+    const cm = useRef(null);
+    const items: MenuItem = [
         { label: 'View', icon: 'pi pi-fw pi-search' },
         { label: 'Delete', icon: 'pi pi-fw pi-trash' }
     ];
@@ -49,7 +49,7 @@ export default function BasicDemo() {
     return (
         <div className="card flex md:justify-content-center">
             <ContextMenu model={items} ref={cm} breakpoint="767px" />
-            <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current?.show(e)} />
+            <img src="https://primefaces.org/cdn/primereact/images/nature/nature3.jpg" alt="Logo" className="max-w-full" onContextMenu={(e) => cm.current.show(e)} />
         </div>
     )
 }

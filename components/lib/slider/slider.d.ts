@@ -8,10 +8,7 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
-
 export declare type SliderPassThroughType<T> = PassThroughType<T, SliderPassThroughMethodOptions>;
 
 /**
@@ -38,11 +35,6 @@ export interface SliderPassThroughOptions {
      * Uses to pass attributes to the handle's DOM element.
      */
     handle?: SliderPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -133,16 +125,6 @@ export interface SliderProps extends Omit<React.DetailedHTMLProps<React.InputHTM
      * @type {SliderPassThroughOptions}
      */
     pt?: SliderPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

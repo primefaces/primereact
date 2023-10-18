@@ -6,7 +6,10 @@ export function StylesDoc(props) {
     const code1 = {
         basic: `
 //theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css";                                       
         `
     };
 
@@ -14,7 +17,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
         basic: `
 body {
     font-family: var(--font-family);
-}
+}                                        
         `
     };
 

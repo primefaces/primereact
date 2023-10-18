@@ -22,7 +22,7 @@ export function DocComponent(props) {
 
     useEffect(() => {
         if (router.asPath.includes('#api')) setTab(1);
-        if (router.asPath.includes('#pt')) setTab(3);
+        if (router.asPath.includes('#pt')) setTab(2);
     }, [router.asPath]);
 
     return (
@@ -38,21 +38,16 @@ export function DocComponent(props) {
                             {header}
                         </button>
                     </li>
+
                     <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
                         <button type="button" onClick={() => activateTab(1)}>
                             API
                         </button>
                     </li>
-                    {props.themingDocs ? (
+
+                    {props.ptDocs ? (
                         <li className={classNames({ 'doc-tabmenu-active': tab === 2 })}>
                             <button type="button" onClick={() => activateTab(2)}>
-                                THEMING
-                            </button>
-                        </li>
-                    ) : null}
-                    {props.ptDocs ? (
-                        <li className={classNames({ 'doc-tabmenu-active': tab === 3 })}>
-                            <button type="button" onClick={() => activateTab(3)}>
                                 PASS THROUGH
                             </button>
                         </li>
@@ -63,7 +58,7 @@ export function DocComponent(props) {
                 {tab === 0 ? (
                     <div className="doc-tabpanel">
                         <div className="doc-main">
-                            <div className="doc-intro">
+                            <div className="doc-intro doc-section-description">
                                 <h1>{props.header}</h1>
                                 <p dangerouslySetInnerHTML={{ __html: props.description }}></p>
                             </div>
@@ -89,21 +84,6 @@ export function DocComponent(props) {
                     </div>
                 ) : null}
                 {tab === 2 ? (
-                    <>
-                        {props.themingDocs ? (
-                            <div className="doc-tabpanel">
-                                <div className="doc-main">
-                                    <div className="doc-intro">
-                                        <h1>{props.header} Theming</h1>
-                                    </div>
-                                    <DocSections docs={props.themingDocs} />
-                                </div>
-                                <DocSectionNav docs={props.themingDocs} />
-                            </div>
-                        ) : null}
-                    </>
-                ) : null}
-                {tab === 3 ? (
                     <>
                         {props.ptDocs ? (
                             <div className="doc-tabpanel">

@@ -3,7 +3,7 @@ import { Button } from '../lib/button/Button';
 import { InputSwitch } from '../lib/inputswitch/InputSwitch';
 import { RadioButton } from '../lib/radiobutton/RadioButton';
 import { Sidebar } from '../lib/sidebar/Sidebar';
-import { classNames } from '../lib/utils/Utils';
+import { classNames } from '../lib/utils/ClassNames';
 
 export default function Config(props) {
     const [scale, setScale] = useState(14);
@@ -141,6 +141,16 @@ export default function Config(props) {
                                 <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Compact Dark Deep Purple" className="w-3rem h-3rem border-round" />
                             </button>
                             <span className="white-space-nowrap">Deep Purple</span>
+                        </div>
+                    </div>
+
+                    <h4>Tailwind</h4>
+                    <div className="grid free-themes">
+                        <div className="col-3 flex flex-column align-items-center gap-2">
+                            <button className="p-link h-3rem" onClick={() => onThemeChange('tailwind-light')}>
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/tailwind-light.png" alt="Tailwind Light" className="w-3rem h-3rem border-round" />
+                            </button>
+                            <span className="white-space-nowrap">Tailwind Light</span>
                         </div>
                     </div>
 

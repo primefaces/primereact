@@ -4,11 +4,8 @@ import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
-    const { ptm, cx } = props;
-
     const getPTOptions = (key) => {
-        return ptm(key, {
-            hostName: props.hostName,
+        return props.ptm(key, {
             context: {
                 selected: props.selected
             }
@@ -35,45 +32,55 @@ export const MultiSelectItem = React.memo((props) => {
         }
     };
 
-    const checkboxIconProps = mergeProps(
+    const className = classNames(
+        'p-multiselect-item',
         {
-            className: cx('checkboxIcon')
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled
+        },
+        props.className,
+        props.option.className
+    );
+    const checkboxClassName = classNames('p-checkbox-box', {
+        'p-highlight': props.selected
+    });
+
+    const checkboxIconClassName = mergeProps(
+        {
+            className: 'p-checkbox-icon p-c'
         },
         getPTOptions('checkboxIcon')
     );
 
-    const icon = props.checkboxIcon || <CheckIcon {...checkboxIconProps} />;
-    const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, { selected: props.selected }) : null;
+    const icon = props.checkboxIcon || <CheckIcon {...checkboxIconClassName} />;
+    const checkboxIcon = props.selected ? IconUtils.getJSXIcon(icon, { ...checkboxIconClassName }, { selected: props.selected }) : null;
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
     const tabIndex = props.disabled ? null : props.tabIndex || 0;
 
     const checkboxContainerProps = mergeProps(
         {
-            className: cx('checkboxContainer')
+            className: 'p-checkbox p-component'
         },
         getPTOptions('checkboxContainer')
     );
 
     const checkboxProps = mergeProps(
         {
-            className: cx('checkbox', { itemProps: props }),
-            'data-p-highlight': props.selected
+            className: checkboxClassName
         },
         getPTOptions('checkbox')
     );
 
     const itemProps = mergeProps(
         {
-            className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
+            className: className,
             style: props.style,
             onClick: onClick,
             tabIndex: tabIndex,
             onKeyDown: onKeyDown,
             role: 'option',
-            'aria-selected': props.selected,
-            'data-p-highlight': props.selected,
-            'data-p-disabled': props.disabled
+            'aria-selected': props.selected
         },
         getPTOptions('item')
     );

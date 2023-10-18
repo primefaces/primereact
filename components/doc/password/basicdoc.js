@@ -8,7 +8,7 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} tabIndex={1} />
+<Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
         `,
         javascript: `
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} tabIndex={1} />
+            <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
         </div>
     )
 }
@@ -33,7 +33,7 @@ export default function BasicDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} feedback={false} tabIndex={1} />
+            <Password value={value} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} feedback={false} />
         </div>
     )
 }
@@ -48,7 +48,7 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex justify-content-center">
-                <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} tabIndex={1} />
+                <Password value={value} onChange={(e) => setValue(e.target.value)} feedback={false} />
             </div>
             <DocSectionCode code={code} />
         </>

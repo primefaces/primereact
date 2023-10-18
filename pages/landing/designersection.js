@@ -8,7 +8,7 @@ import { InputText } from '../../components/lib/inputtext/InputText';
 import { ListBox } from '../../components/lib/listbox/ListBox';
 import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
 import { Slider } from '../../components/lib/slider/Slider';
-import { classNames } from '../../components/lib/utils/Utils';
+import { classNames } from '../../components/lib/utils/ClassNames';
 
 const DesignerSection = (props) => {
     const [font, setFont] = useState('-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol');

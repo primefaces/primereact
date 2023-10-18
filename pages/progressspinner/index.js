@@ -1,15 +1,13 @@
 import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
 import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
 import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
-import { PTDoc } from '../../components/doc/progressspinner/pt/ptdoc';
-import { Wireframe } from '../../components/doc/progressspinner/pt/wireframe';
 import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
-import { StyledDoc } from '../../components/doc/progressspinner/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/progressspinner/theming/tailwinddoc';
+import { Wireframe } from '../../components/doc/progressspinner/pt/wireframe';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/progressspinner/pt/ptdoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -58,27 +56,7 @@ const SkeletonDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React ProgressSpinner Component" header="ProgressSpinner" description="ProgressSpinner is a process status indicator." componentDocs={docs} apiDocs={['ProgressSpinner']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React ProgressSpinner Component" header="ProgressSpinner" description="ProgressSpinner is a process status indicator." componentDocs={docs} apiDocs={['ProgressSpinner']} ptDocs={ptDocs} />;
 };
 
 export default SkeletonDemo;

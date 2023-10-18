@@ -8,8 +8,6 @@ import { PTDoc } from '../../components/doc/accordion/pt/ptdoc';
 import { Wireframe } from '../../components/doc/accordion/pt/wireframe';
 import { StyleDoc } from '../../components/doc/accordion/styledoc';
 import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
-import { StyledDoc } from '../../components/doc/accordion/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/accordion/theming/tailwinddoc';
 import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
@@ -80,38 +78,7 @@ const AccordionDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Accordion Component"
-            header="Accordion"
-            description="Accordion groups a collection of contents in tabs."
-            componentDocs={docs}
-            apiDocs={['Accordion', 'AccordionTab']}
-            ptDocs={ptDocs}
-            ptDescription=""
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Accordion Component" header="Accordion" description="Accordion groups a collection of contents in tabs." componentDocs={docs} apiDocs={['Accordion', 'AccordionTab']} ptDocs={ptDocs} ptDescription="" />;
 };
 
 export default AccordionDemo;

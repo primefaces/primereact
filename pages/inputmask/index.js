@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/inputmask/pt/ptdoc';
+import { Wireframe } from '../../components/doc/inputmask/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
@@ -12,12 +13,9 @@ import { ImportDoc } from '../../components/doc/inputmask/importdoc';
 import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
 import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
 import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
-import { PTDoc } from '../../components/doc/inputmask/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputmask/pt/wireframe';
 import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
 import { StyleDoc } from '../../components/doc/inputmask/styledoc';
-import { StyledDoc } from '../../components/doc/inputmask/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputmask/theming/tailwinddoc';
+import Link from 'next/link';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -107,26 +105,6 @@ const InputMaskDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
     const ptDescription = (
         <span>
             InputMask does not have a specific API for PassThrough options, but it does support all the pass through options of{' '}
@@ -145,7 +123,6 @@ const InputMaskDemo = () => {
             apiDocs={['InputMask']}
             ptDocs={ptDocs}
             ptDescription={ptDescription}
-            themingDocs={themingDocs}
         />
     );
 };

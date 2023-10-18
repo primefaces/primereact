@@ -8,9 +8,7 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { KeyFilterType } from '../keyfilter';
-import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { PassThroughType } from '../utils/utils';
@@ -22,7 +20,6 @@ export declare type InputTextareaPassThroughType<T> = PassThroughType<T, InputTe
  */
 export interface InputTextareaPassThroughMethodOptions {
     props: InputTextareaProps;
-    context: InputTextareaContext;
 }
 
 /**
@@ -39,22 +36,6 @@ export interface InputTextareaPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-}
-
-/**
- * Defines current options in Textarea component.
- */
-export interface InputTextareaContext {
-    /**
-     * Current disabled state of the component as a boolean.
-     * @defaultValue false
-     */
-    disabled: boolean;
 }
 
 /**
@@ -94,16 +75,6 @@ export interface InputTextareaProps extends Omit<React.DetailedHTMLProps<React.T
      * @type {InputTextareaPassThroughOptions}
      */
     pt?: InputTextareaPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

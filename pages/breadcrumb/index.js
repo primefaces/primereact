@@ -1,13 +1,11 @@
+import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/breadcrumb/pt/ptdoc';
+import { Wireframe } from '../../components/doc/breadcrumb/pt/wireframe';
 import { AccessibilityDoc } from '../../components/doc/breadcrumb/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/breadcrumb/basicdoc';
 import { ImportDoc } from '../../components/doc/breadcrumb/importdoc';
-import { PTDoc } from '../../components/doc/breadcrumb/pt/ptdoc';
-import { Wireframe } from '../../components/doc/breadcrumb/pt/wireframe';
 import { StyleDoc } from '../../components/doc/breadcrumb/styledoc';
 import { TemplateDoc } from '../../components/doc/breadcrumb/templatedoc';
-import { StyledDoc } from '../../components/doc/breadcrumb/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/breadcrumb/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 
 const BreadCrumbDemo = () => {
@@ -57,37 +55,7 @@ const BreadCrumbDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React BreadCrumb Component"
-            header="BreadCrumb"
-            description="Breadcrumb provides contextual information about page hierarchy."
-            componentDocs={docs}
-            apiDocs={['Breadcrumb', 'MenuItem']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React BreadCrumb Component" header="BreadCrumb" description="Breadcrumb provides contextual information about page hierarchy." componentDocs={docs} apiDocs={['Breadcrumb', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default BreadCrumbDemo;

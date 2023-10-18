@@ -8,17 +8,13 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
-import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 
 export declare type ColorPickerPassThroughType<T> = PassThroughType<T, ColorPickerPassThroughMethodOptions>;
-export declare type ColorPickerPassThroughTransitionType = ReactCSSTransitionProps | ((options: ColorPickerPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -58,31 +54,22 @@ export interface ColorPickerPassThroughOptions {
      */
     color?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the color handle's DOM element.
+     * Uses to pass attributes to the color handler's DOM element.
      */
-    colorHandle?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    colorHandler?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes to the hue's DOM element.
      */
     hue?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the hue handle's DOM element.
+     * Uses to pass attributes to the hue handler's DOM element.
      */
-    hueHandle?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    hueHandler?: ColorPickerPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
      * Uses to pass attributes tooltip's DOM element.
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: ColorPickerPassThroughTransitionType;
 }
 
 /**
@@ -236,16 +223,6 @@ export interface ColorPickerProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @type {ColorPickerPassThroughOptions}
      */
     pt?: ColorPickerPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

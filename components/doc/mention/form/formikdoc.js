@@ -46,7 +46,7 @@ export function FormikDoc(props) {
                 <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
-                    <small style={{ fontSize: '.75rem', color: 'var(--text-color-secondary)' }}>@{suggestion.nickname}</small>
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
                 </span>
             </div>
         );
@@ -154,7 +154,7 @@ export default function FormikDoc() {
                 <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
-                    <small style={{ fontSize: '.75rem', color: 'var(--text-color-secondary)' }}>@{suggestion.nickname}</small>
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
                 </span>
             </div>
         );
@@ -272,7 +272,7 @@ export default function FormikDoc() {
                 <img alt={suggestion.name} src={src} width="32" style={{ verticalAlign: 'middle' }} />
                 <span className="flex flex-column ml-2">
                     {suggestion.name}
-                    <small style={{ fontSize: '.75rem', color: 'var(--text-color-secondary)' }}>@{suggestion.nickname}</small>
+                    <small style={{ fontSize: '.75rem', color: 'var(--text-secondary-color)' }}>@{suggestion.nickname}</small>
                 </span>
             </div>
         );

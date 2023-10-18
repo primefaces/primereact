@@ -9,8 +9,6 @@
  */
 import * as React from 'react';
 import { PassThroughType } from '../utils/utils';
-import { PassThroughOptions } from '../passthrough';
-import { ComponentHooks } from '../componentbase/componentbase';
 
 export declare type TimelinePassThroughType<T> = PassThroughType<T, TimelinePassThroughMethodOptions>;
 
@@ -54,11 +52,6 @@ export interface TimelinePassThroughOptions {
      * Uses to pass attributes to the content's DOM element.
      */
     content?: TimelinePassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -106,16 +99,6 @@ export interface TimelineProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {TimelinePassThroughOptions}
      */
     pt?: TimelinePassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -5,8 +5,7 @@ exports[`ProgressSpinner animationDuration 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
-    data-pc-name="progressspinner"
-    data-pc-section="root"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
@@ -35,8 +34,7 @@ exports[`ProgressSpinner default 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
-    data-pc-name="progressspinner"
-    data-pc-section="root"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
@@ -65,8 +63,7 @@ exports[`ProgressSpinner fill 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
-    data-pc-name="progressspinner"
-    data-pc-section="root"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg
@@ -95,8 +92,7 @@ exports[`ProgressSpinner strokeWidth 1`] = `
   <div
     aria-busy="true"
     class="p-progress-spinner"
-    data-pc-name="progressspinner"
-    data-pc-section="root"
+    data-pc-section="spinner"
     role="alert"
   >
     <svg

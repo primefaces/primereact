@@ -9,11 +9,9 @@ import { PrimeReactContext } from '../api/Api';
 export const FirstPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = FirstPageLinkBase.getProps(inProps, context);
-    const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
-        return ptm(key, {
-            hostName: props.hostName,
+        return props.ptm(key, {
             context: {
                 disabled: props.disabled
             }
@@ -24,7 +22,7 @@ export const FirstPageLink = React.memo((inProps) => {
     const iconClassName = 'p-paginator-icon';
     const firstPageIconProps = mergeProps(
         {
-            className: cx('firstPageIcon')
+            className: iconClassName
         },
         getPTOptions('firstPageIcon')
     );
@@ -33,7 +31,7 @@ export const FirstPageLink = React.memo((inProps) => {
     const firstPageButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('firstPageButton', { disabled: props.disabled }),
+            className,
             onClick: props.onClick,
             disabled: props.disabled,
             'aria-label': ariaLabel('firstPageLabel')

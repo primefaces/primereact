@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PrimeReact, { localeOption, PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import PrimeReact, { localeOption } from '../api/Api';
+import { PrimeReactContext } from '../api/Api';
 import { BarsIcon } from '../icons/bars';
 import { SpinnerIcon } from '../icons/spinner';
 import { ThLargeIcon } from '../icons/thlarge';
@@ -12,7 +12,7 @@ import { DataViewBase, DataViewLayoutOptionsBase } from './DataViewBase';
 export const DataViewLayoutOptions = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = DataViewLayoutOptionsBase.getProps(inProps, context);
-    const { ptm, cx } = DataViewLayoutOptionsBase.setMetaData({
+    const { ptm } = DataViewLayoutOptionsBase.setMetaData({
         props
     });
 
@@ -24,6 +24,9 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
         event.preventDefault();
     };
 
+    const className = classNames('p-dataview-layout-options p-selectbutton p-buttonset', props.className);
+    const buttonListClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' });
+    const buttonGridClass = classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' });
     const listIconProps = mergeProps(ptm('list'));
     const gridIconProps = mergeProps(ptm('grid'));
     const listIcon = IconUtils.getJSXIcon(props.listIcon || <BarsIcon {...listIconProps} />, { ...listIconProps }, { props });
@@ -32,7 +35,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
         {
             id: props.id,
             style: props.style,
-            className: classNames(props.className, cx('root'))
+            className
         },
         DataViewLayoutOptionsBase.getOtherProps(props),
         ptm('root')
@@ -41,7 +44,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const listButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('listButton'),
+            className: buttonListClass,
             onClick: (event) => changeLayout(event, 'list')
         },
         ptm('listButton')
@@ -50,7 +53,7 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
     const gridButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('gridButton'),
+            className: buttonGridClass,
             onClick: (event) => changeLayout(event, 'grid')
         },
         ptm('gridButton')
@@ -80,17 +83,13 @@ export const DataView = React.memo(
         const props = DataViewBase.getProps(inProps, context);
         const [firstState, setFirstState] = React.useState(props.first);
         const [rowsState, setRowsState] = React.useState(props.rows);
-        const metaData = {
+        const { ptm } = DataViewBase.setMetaData({
             props,
             state: {
                 first: firstState,
                 rows: rowsState
             }
-        };
-        const { ptm, cx, isUnstyled } = DataViewBase.setMetaData(metaData);
-
-        useHandleStyle(DataViewBase.css.styles, isUnstyled, { name: 'dataview' });
-
+        });
         const elementRef = React.useRef(null);
         const first = props.onPage ? props.first : firstState;
         const rows = props.onPage ? props.rows : rowsState;
@@ -123,8 +122,6 @@ export const DataView = React.memo(
                     alwaysShow={props.alwaysShowPaginator}
                     dropdownAppendTo={props.paginatorDropdownAppendTo}
                     ptm={ptm('paginator')}
-                    unstyled={props.unstyled}
-                    __parentMetadata={{ parent: metaData }}
                 />
             );
         };
@@ -140,20 +137,13 @@ export const DataView = React.memo(
 
         const sort = () => {
             if (props.value) {
-                // performance optimization to prevent resolving field data in each loop
-                const lookupMap = new Map();
-                const comparator = ObjectUtils.localeComparator((context && context.locale) || PrimeReact.locale);
                 const value = [...props.value];
 
-                for (let item of value) {
-                    lookupMap.set(item, ObjectUtils.resolveFieldData(item, props.sortField));
-                }
-
                 value.sort((data1, data2) => {
-                    let value1 = lookupMap.get(data1);
-                    let value2 = lookupMap.get(data2);
+                    let value1 = ObjectUtils.resolveFieldData(data1, props.sortField);
+                    let value2 = ObjectUtils.resolveFieldData(data2, props.sortField);
 
-                    return ObjectUtils.sort(value1, value2, props.sortOrder, comparator, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
+                    return ObjectUtils.sort(value1, value2, props.sortOrder, (context && context.locale) || PrimeReact.locale, (context && context.nullSortOrder) || PrimeReact.nullSortOrder);
                 });
 
                 return value;
@@ -164,9 +154,10 @@ export const DataView = React.memo(
 
         const createLoader = () => {
             if (props.loading) {
+                const iconClassName = 'p-dataview-loading-icon';
                 const loadingIconProps = mergeProps(
                     {
-                        className: cx('loadingIcon')
+                        className: iconClassName
                     },
                     ptm('loadingIcon')
                 );
@@ -174,7 +165,7 @@ export const DataView = React.memo(
                 const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
                 const loadingOverlayProps = mergeProps(
                     {
-                        className: cx('loadingOverlay')
+                        className: 'p-dataview-loading-overlay p-component-overlay'
                     },
                     ptm('loadingOverlay')
                 );
@@ -206,7 +197,7 @@ export const DataView = React.memo(
                 const content = props.emptyMessage || localeOption('emptyMessage');
                 const emptyMessageProps = mergeProps(
                     {
-                        className: cx('emptyMessage')
+                        className: 'p-col-12 col-12 p-dataview-emptymessage'
                     },
                     ptm('emptyMessage')
                 );
@@ -221,7 +212,7 @@ export const DataView = React.memo(
             if (props.header) {
                 const headerProps = mergeProps(
                     {
-                        className: cx('header')
+                        className: 'p-dataview-header'
                     },
                     ptm('header')
                 );
@@ -236,7 +227,7 @@ export const DataView = React.memo(
             if (props.footer) {
                 const footerProps = mergeProps(
                     {
-                        className: cx('footer')
+                        className: 'p-dataview-footer'
                     },
                     ptm('footer')
                 );
@@ -274,17 +265,20 @@ export const DataView = React.memo(
 
         const createContent = (value) => {
             const items = createItems(value);
+            const gridClassName = classNames('p-grid grid', {
+                'p-nogutter grid-nogutter': !props.gutter
+            });
 
             const gridProps = mergeProps(
                 {
-                    className: cx('grid')
+                    className: gridClassName
                 },
                 ptm('grid')
             );
 
             const contentProps = mergeProps(
                 {
-                    className: cx('content')
+                    className: 'p-dataview-content'
                 },
                 ptm('content')
             );
@@ -312,6 +306,15 @@ export const DataView = React.memo(
         }));
 
         const data = processData();
+
+        const className = classNames(
+            'p-dataview p-component',
+            {
+                [`p-dataview-${props.layout}`]: !!props.layout,
+                'p-dataview-loading': props.loading
+            },
+            props.className
+        );
         const loader = createLoader();
         const topPaginator = createTopPaginator();
         const bottomPaginator = createBottomPaginator();
@@ -323,7 +326,7 @@ export const DataView = React.memo(
                 id: props.id,
                 ref: elementRef,
                 style: props.style,
-                className: classNames(props.className, cx('root'))
+                className
             },
             DataViewBase.getOtherProps(props),
             ptm('root')

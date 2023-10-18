@@ -1,5 +1,4 @@
 import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/inplace/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/inplace/basicdoc';
@@ -7,11 +6,10 @@ import { ImageDoc } from '../../components/doc/inplace/imagedoc';
 import { ImportDoc } from '../../components/doc/inplace/importdoc';
 import { InputDoc } from '../../components/doc/inplace/inputdoc';
 import { LazyDoc } from '../../components/doc/inplace/lazydoc';
-import { PTDoc } from '../../components/doc/inplace/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inplace/pt/wireframe';
 import { StyleDoc } from '../../components/doc/inplace/styledoc';
-import { StyledDoc } from '../../components/doc/inplace/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inplace/theming/tailwinddoc';
+import { PTDoc } from '../../components/doc/inplace/pt/ptdoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/inplace/pt/wireframe';
 
 const ChipDemo = () => {
     const docs = [
@@ -70,26 +68,6 @@ const ChipDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
     return (
         <DocComponent
             title="React Inplace Component"
@@ -98,7 +76,6 @@ const ChipDemo = () => {
             componentDocs={docs}
             apiDocs={['Inplace', 'InplaceDisplay', 'InplaceContent']}
             ptDocs={ptDocs}
-            themingDocs={themingDocs}
         />
     );
 };

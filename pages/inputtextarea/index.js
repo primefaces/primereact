@@ -14,8 +14,6 @@ import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
 import { PTDoc } from '../../components/doc/inputtextarea/pt/ptdoc';
 import { Wireframe } from '../../components/doc/inputtextarea/pt/wireframe';
 import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
-import { StyledDoc } from '../../components/doc/inputtextarea/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputtextarea/theming/tailwinddoc';
 
 const InputTextareaDemo = () => {
     const docs = [
@@ -100,37 +98,7 @@ const InputTextareaDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Textarea Component"
-            header="InputTextarea"
-            description="InputTextarea adds styling and autoResize functionality to standard textarea element."
-            componentDocs={docs}
-            apiDocs={['InputTextarea']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Textarea Component" header="InputTextarea" description="InputTextarea adds styling and autoResize functionality to standard textarea element." componentDocs={docs} apiDocs={['InputTextarea']} ptDocs={ptDocs} />;
 };
 
 export default InputTextareaDemo;

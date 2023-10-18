@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -109,11 +107,6 @@ export interface TreePassThroughOptions {
      * Uses to pass attributes to the header's DOM element.
      */
     droppoint?: TreePassThroughType<React.HTMLAttributes<HTMLLIElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -652,16 +645,6 @@ export interface TreeProps {
      * @type {TreePassThroughOptions}
      */
     pt?: TreePassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

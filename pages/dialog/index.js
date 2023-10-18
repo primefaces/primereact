@@ -11,8 +11,6 @@ import { PTDoc } from '../../components/doc/dialog/pt/ptdoc';
 import { Wireframe } from '../../components/doc/dialog/pt/wireframe';
 import { ResponsiveDoc } from '../../components/doc/dialog/responsivedoc';
 import { StyleDoc } from '../../components/doc/dialog/styledoc';
-import { StyledDoc } from '../../components/doc/dialog/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/dialog/theming/tailwinddoc';
 import { WithoutModalDoc } from '../../components/doc/dialog/withoutmodaldoc';
 
 const DialogDemo = () => {
@@ -87,27 +85,7 @@ const DialogDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={['Dialog']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Dialog Component" header="Dialog" description="Dialog is a container to display content in an overlay window" componentDocs={docs} apiDocs={['Dialog']} ptDocs={ptDocs} />;
 };
 
 export default DialogDemo;

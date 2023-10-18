@@ -1,17 +1,15 @@
 import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/progressbar/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/progressbar/basicdoc';
 import { DynamicDoc } from '../../components/doc/progressbar/dynamicdoc';
 import { ImportDoc } from '../../components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '../../components/doc/progressbar/indeterminatedoc';
-import { PTDoc } from '../../components/doc/progressbar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/progressbar/pt/wireframe';
 import { StyleDoc } from '../../components/doc/progressbar/styledoc';
 import { TemplateDoc } from '../../components/doc/progressbar/templatedoc';
-import { StyledDoc } from '../../components/doc/progressbar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/progressbar/theming/tailwinddoc';
+import DocApiTable from '../../components/doc/common/docapitable';
+import { Wireframe } from '../../components/doc/progressbar/pt/wireframe';
+import { PTDoc } from '../../components/doc/progressbar/pt/ptdoc';
 
 const ProgressBarDemo = () => {
     const docs = [
@@ -70,27 +68,7 @@ const ProgressBarDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React ProgressBar Component" header="ProgressBar" description="ProgressBar is a process status indicator." componentDocs={docs} apiDocs={['ProgressBar']} ptDocs={ptDocs} />;
 };
 
 export default ProgressBarDemo;

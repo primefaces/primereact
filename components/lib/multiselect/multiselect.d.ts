@@ -8,11 +8,7 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
@@ -20,7 +16,6 @@ import { IconType, PassThroughType } from '../utils';
 import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
 
 export declare type MultiSelectPassThroughType<T> = PassThroughType<T, MultiSelectPassThroughMethodOptions>;
-export declare type MultiSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: MultiSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -91,15 +86,7 @@ export interface MultiSelectPassThroughOptions {
     /**
      * Uses to pass attributes to the header checkbox's DOM element.
      */
-    headerCheckbox?: CheckboxPassThroughOptions;
-    /**
-     * Uses to pass attributes to the header checkbox icon's DOM element.
-     */
-    headerCheckboxIcon?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
-    /**
-     * Uses to pass attributes to the header checkbox's DOM element.
-     */
-    headerSelectAllLabel?: MultiSelectPassThroughType<React.HTMLAttributes<HTMLLabelElement>>;
+    headerCheckbox?: MultiSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the filter container's DOM element.
      */
@@ -166,15 +153,6 @@ export interface MultiSelectPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: MultiSelectPassThroughTransitionType;
 }
 
 /**
@@ -425,10 +403,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     closeIcon?: IconType<MultiSelectProps> | undefined;
     /**
-     * Clear icon of the multiselect input.
-     */
-    clearIcon?: IconType<MultiSelectProps> | undefined;
-    /**
      * A property to uniquely match the value in options for better performance.
      */
     dataKey?: string | undefined;
@@ -451,10 +425,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue No records found
      */
     emptyFilterMessage?: React.ReactNode | ((props: MultiSelectProps) => React.ReactNode);
-    /**
-     * Text to display when there are no options available. Defaults to global value in Locale configuration.
-     */
-    emptyMessage?: string;
     /**
      * When specified, displays an input field to filter the items on keyup.
      * @defaultValue true
@@ -598,16 +568,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     pt?: MultiSelectPassThroughOptions;
     /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
-    /**
      * Icon of the remove chip element.
      */
     removeIcon?: IconType<MultiSelectProps> | undefined;
@@ -649,10 +609,6 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * @defaultValue true
      */
     showSelectAll?: boolean | undefined;
-    /**
-     * Label to display if showSelectAll is true
-     */
-    selectAllLabel?: string;
     /**
      * Inline style of the element.
      */

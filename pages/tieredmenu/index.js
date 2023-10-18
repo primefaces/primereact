@@ -1,14 +1,12 @@
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/tieredmenu/pt/ptdoc';
+import { Wireframe } from '../../components/doc/tieredmenu/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tieredmenu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tieredmenu/basicdoc';
 import { ImportDoc } from '../../components/doc/tieredmenu/importdoc';
 import { PopupDoc } from '../../components/doc/tieredmenu/popupdoc';
-import { PTDoc } from '../../components/doc/tieredmenu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tieredmenu/pt/wireframe';
 import { StyleDoc } from '../../components/doc/tieredmenu/styledoc';
-import { StyledDoc } from '../../components/doc/tieredmenu/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/tieredmenu/theming/tailwinddoc';
 
 const TieredMenuDemo = () => {
     const docs = [
@@ -56,27 +54,7 @@ const TieredMenuDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React TieredMenu Component" header="TieredMenu" description="TieredMenu displays submenus in nested overlays." componentDocs={docs} apiDocs={['TieredMenu', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React TieredMenu Component" header="TieredMenu" description="TieredMenu displays submenus in nested overlays." componentDocs={docs} apiDocs={['TieredMenu', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default TieredMenuDemo;

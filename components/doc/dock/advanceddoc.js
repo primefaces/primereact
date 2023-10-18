@@ -1023,8 +1023,8 @@ export default function AdvanceDemo() {
                 <Tooltip className="dark-tooltip" target=".dock-advanced .p-dock-action" my="center+15 bottom-15" at="center top" showDelay={150} />
                 <Menubar model={menubarItems} start={start} end={end} />
                 <div className="dock-window dock-advanced" style={{ backgroundImage: 'url(/images/dock/window.jpg)' }}>
-                    <Toast ref={toast} className="absolute" />
-                    <Toast ref={toast2} className="absolute" />
+                    <Toast ref={toast} />
+                    <Toast ref={toast2} position="top-center" />
 
                     <Dock model={dockItems} />
 

@@ -3,13 +3,11 @@ import { Ripple } from '../ripple/Ripple';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const DropdownItem = React.memo((props) => {
-    const { ptm, cx, selected, disabled, option, label } = props;
-
     const getPTOptions = (key) => {
-        return ptm(key, {
+        return props.ptm(key, {
             context: {
-                selected,
-                disabled
+                selected: props.selected,
+                disabled: props.disabled
             }
         });
     };
@@ -18,25 +16,32 @@ export const DropdownItem = React.memo((props) => {
         if (props.onClick) {
             props.onClick({
                 originalEvent: event,
-                option
+                option: props.option
             });
         }
     };
 
+    const className = classNames(
+        'p-dropdown-item',
+        {
+            'p-highlight': props.selected,
+            'p-disabled': props.disabled,
+            'p-dropdown-item-empty': !props.label || props.label.length === 0
+        },
+        props.option && props.option.className
+    );
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
     const itemProps = mergeProps(
         {
-            role: 'option',
-            key: props.label,
-            className: classNames(option.className, cx('item', { selected, disabled, label })),
+            className,
             style: props.style,
             onClick: (e) => onClick(e),
-            'aria-label': label,
-            'aria-selected': selected,
-            'data-p-highlight': selected,
-            'data-p-disabled': disabled
+            'aria-label': props.label,
+            role: 'option',
+            'aria-selected': props.selected,
+            key: props.label
         },
-        getPTOptions('item', { selected, disabled, option, label })
+        getPTOptions('item')
     );
 
     return (

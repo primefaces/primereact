@@ -8,19 +8,15 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
-export declare type GalleriaPassThroughType<T> = PassThroughType<T, GalleriaPassThroughMethodOptions>;
-export declare type GalleriaPassThroughTransitionType = ReactCSSTransitionProps | ((options: GalleriaPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
+export declare type GalleriaPassThroughType<T> = PassThroughType<T, GalleriaThroughMethodOptions>;
 
 /**
  * Custom passthrough(pt) option method.
  */
-export interface GalleriaPassThroughMethodOptions {
+export interface GalleriaThroughMethodOptions {
     props: GalleriaProps;
     state: GalleriaState;
 }
@@ -138,15 +134,6 @@ export interface GalleriaPassThroughOptions {
      * Uses to pass attributes to the mask's DOM element.
      */
     mask?: GalleriaPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: GalleriaPassThroughTransitionType;
 }
 
 /**
@@ -367,16 +354,6 @@ export interface GalleriaProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {GalleriaPassThroughOptions}
      */
     pt?: GalleriaPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

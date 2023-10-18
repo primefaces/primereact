@@ -28,7 +28,7 @@ or package names.
 What is the first step to be taken?
 -----------------------------------
 
-First of all, **Discuss with the [project members](https://github.com/orgs/primefaces/discussions)** (a new thread should do) about 
+First of all, **Discuss with the [project members](https://forum.primefaces.org/viewforum.php?f=57)** (a new thread should do) about 
 your ideas: new features, fixes, documentation... whatever you would like to contribute to the project. Let we 
 discuss the possibilities with you so that we make sure your contribution goes in the right direction and aligns 
 with the project's standards, intentions and roadmap. 

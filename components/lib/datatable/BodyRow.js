@@ -6,20 +6,16 @@ import { BodyCell } from './BodyCell';
 export const BodyRow = React.memo((props) => {
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
-    const { ptm, cx } = props.ptCallbacks;
+    const getColumnProps = (column) => ColumnBase.getCProps(column);
 
-    const getBodyRowPTOptions = (key) => {
-        return ptm(key, {
+    const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps(props.column);
+
+        return props.ptCallbacks.ptmo(cProps, key, {
+            props: cProps,
             parent: props.metaData,
-            hostName: props.hostName,
             state: {
-                editing: editing
-            },
-            context: {
-                index: props.index,
-                selectable: props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
-                selected: (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
-                stripedRows: props.metaData.props.stripedRows
+                editing: editingState
             }
         });
     };
@@ -62,13 +58,13 @@ export const BodyRow = React.memo((props) => {
     const findNextSelectableRow = (row) => {
         const nextRow = row.nextElementSibling;
 
-        return nextRow ? (DomHandler.getAttribute(nextRow, 'data-p-selectable-row') === true ? nextRow : findNextSelectableRow(nextRow)) : null;
+        return nextRow ? (DomHandler.hasClass(nextRow, 'p-selectable-row') ? nextRow : findNextSelectableRow(nextRow)) : null;
     };
 
     const findPrevSelectableRow = (row) => {
         const prevRow = row.previousElementSibling;
 
-        return prevRow ? DomHandler.getAttribute(prevRow, 'data-p-selectable-row') === true : null;
+        return prevRow ? (DomHandler.hasClass(prevRow, 'p-selectable-row') ? prevRow : findPrevSelectableRow(prevRow)) : null;
     };
 
     const shouldRenderBodyCell = (value, column, i) => {
@@ -117,14 +113,6 @@ export const BodyRow = React.memo((props) => {
 
     const onDoubleClick = (event) => {
         props.onRowDoubleClick({ originalEvent: event, data: props.rowData, index: props.rowIndex });
-    };
-
-    const onPointerDown = (event) => {
-        props.onRowPointerDown({ originalEvent: event, data: props.rowData, index: props.rowIndex });
-    };
-
-    const onPointerUp = (event) => {
-        props.onRowPointerUp({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onRightClick = (event) => {
@@ -328,7 +316,6 @@ export const BodyRow = React.memo((props) => {
 
                 return (
                     <BodyCell
-                        hostName={props.hostName}
                         key={key}
                         allowCellSelection={props.allowCellSelection}
                         cellClassName={props.cellClassName}
@@ -384,6 +371,12 @@ export const BodyRow = React.memo((props) => {
     };
 
     const rowClassName = ObjectUtils.getPropValue(props.rowClassName, props.rowData, { props: props.tableProps });
+    const className = classNames(rowClassName, {
+        'p-highlight': (!props.allowCellSelection && props.selected) || props.contextMenuSelected,
+        'p-highlight-contextmenu': props.contextMenuSelected,
+        'p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
+        'p-row-odd': props.rowIndex % 2 !== 0
+    });
     const style = { height: props.virtualScrollerOptions ? props.virtualScrollerOptions.itemSize : undefined };
     const content = createContent();
     const tabIndex = getTabIndex();
@@ -391,7 +384,7 @@ export const BodyRow = React.memo((props) => {
         {
             role: 'row',
             tabIndex: tabIndex,
-            className: classNames(rowClassName, cx('bodyRow', { rowProps: props })),
+            className: className,
             style: style,
             onMouseDown: (e) => onMouseDown(e),
             onMouseUp: (e) => onMouseUp(e),
@@ -399,8 +392,6 @@ export const BodyRow = React.memo((props) => {
             onMouseLeave: (e) => onMouseLeave(e),
             onClick: (e) => onClick(e),
             onDoubleClick: (e) => onDoubleClick(e),
-            onPointerDown: (e) => onPointerDown(e),
-            onPointerUp: (e) => onPointerUp(e),
             onContextMenu: (e) => onRightClick(e),
             onTouchEnd: (e) => onTouchEnd(e),
             onKeyDown: (e) => onKeyDown(e),
@@ -408,12 +399,9 @@ export const BodyRow = React.memo((props) => {
             onDragOver: (e) => onDragOver(e),
             onDragLeave: (e) => onDragLeave(e),
             onDragEnd: (e) => onDragEnd(e),
-            onDrop: (e) => onDrop(e),
-            'data-p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
-            'data-p-highlight': props.selected,
-            'data-p-highlight-contextmenu': props.contextMenuSelected
+            onDrop: (e) => onDrop(e)
         },
-        getBodyRowPTOptions('bodyRow')
+        getColumnPTOptions('row')
     );
 
     return <tr {...rowProps}>{content}</tr>;

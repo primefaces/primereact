@@ -1,6 +1,6 @@
 import { Panel } from '../../lib/panel/Panel';
-import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '../common/docsectioncode';
 
 export function BasicDoc(props) {
     const code = {

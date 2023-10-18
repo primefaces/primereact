@@ -1,18 +1,16 @@
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/messages/pt/ptdoc';
+import { Wireframe } from '../../components/doc/messages/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/messages/basicdoc';
 import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
 import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
 import { ImportDoc } from '../../components/doc/messages/importdoc';
-import { PTDoc } from '../../components/doc/messages/pt/ptdoc';
-import { Wireframe } from '../../components/doc/messages/pt/wireframe';
 import { SeverityDoc } from '../../components/doc/messages/severitydoc';
 import { StickyDoc } from '../../components/doc/messages/stickydoc';
 import { StyleDoc } from '../../components/doc/messages/styledoc';
 import { TemplateDoc } from '../../components/doc/messages/templatedoc';
-import { StyledDoc } from '../../components/doc/messages/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/messages/theming/tailwinddoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -80,27 +78,7 @@ const MessagesDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Messages Component" header="Messages" description="Messages component is used to display inline messages." componentDocs={docs} apiDocs={['Messages']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Messages Component" header="Messages" description="Messages component is used to display inline messages." componentDocs={docs} apiDocs={['Messages']} ptDocs={ptDocs} />;
 };
 
 export default MessagesDemo;

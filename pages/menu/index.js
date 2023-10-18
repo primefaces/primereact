@@ -1,16 +1,14 @@
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/menu/pt/ptdoc';
+import { Wireframe } from '../../components/doc/menu/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/menu/basicdoc';
 import { GroupDoc } from '../../components/doc/menu/groupdoc';
 import { ImportDoc } from '../../components/doc/menu/importdoc';
 import { PopupDoc } from '../../components/doc/menu/popupdoc';
-import { PTDoc } from '../../components/doc/menu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/menu/pt/wireframe';
 import { StyleDoc } from '../../components/doc/menu/styledoc';
 import { TemplateDoc } from '../../components/doc/menu/templatedoc';
-import { StyledDoc } from '../../components/doc/menu/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/menu/theming/tailwinddoc';
 
 const MenuDemo = () => {
     const docs = [
@@ -68,37 +66,7 @@ const MenuDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Menu Component"
-            header="Menu"
-            description="Menu is a navigation/command component that supports dynamic and static positioning."
-            componentDocs={docs}
-            apiDocs={['Menu', 'MenuItem']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Menu Component" header="Menu" description="Menu is a navigation/command component that supports dynamic and static positioning." componentDocs={docs} apiDocs={['Menu', 'MenuItem']} ptDocs={ptDocs} />;
 };
 
 export default MenuDemo;

@@ -1,4 +1,6 @@
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/dropdown/pt/ptdoc';
+import { Wireframe } from '../../components/doc/dropdown/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
@@ -12,12 +14,8 @@ import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
 import { GroupDoc } from '../../components/doc/dropdown/groupdoc';
 import { ImportDoc } from '../../components/doc/dropdown/importdoc';
 import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
-import { PTDoc } from '../../components/doc/dropdown/pt/ptdoc';
-import { Wireframe } from '../../components/doc/dropdown/pt/wireframe';
 import { StyleDoc } from '../../components/doc/dropdown/styledoc';
 import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
-import { StyledDoc } from '../../components/doc/dropdown/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/dropdown/theming/tailwinddoc';
 import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
 
 const DropdownDemo = () => {
@@ -124,37 +122,7 @@ const DropdownDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Select Component"
-            header="Dropdown"
-            description="Dropdown also known as Select, is used to choose an item from a collection of options."
-            componentDocs={docs}
-            apiDocs={['Dropdown']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Select Component" header="Dropdown" description="Dropdown also known as Select, is used to choose an item from a collection of options." componentDocs={docs} apiDocs={['Dropdown']} ptDocs={ptDocs} />;
 };
 
 export default DropdownDemo;

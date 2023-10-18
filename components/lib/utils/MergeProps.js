@@ -4,16 +4,11 @@ export function mergeProps(...props) {
 
         return props.reduce((merged, ps) => {
             for (const key in ps) {
-                const value = ps[key];
-
                 if (key === 'style') {
                     merged['style'] = { ...merged['style'], ...ps['style'] };
                 } else if (key === 'className') {
-                    let newClassname = [merged['className'], ps['className']].join(' ').trim();
-                    const isEmpty = newClassname === null || newClassname === undefined || newClassname === '';
-
-                    merged['className'] = isEmpty ? undefined : newClassname;
-                } else if (isFn(value)) {
+                    merged['className'] = [merged['className'], ps['className']].join(' ').trim();
+                } else if (isFn(ps[key])) {
                     const fn = merged[key];
 
                     merged[key] = fn
@@ -21,9 +16,9 @@ export function mergeProps(...props) {
                               fn(...args);
                               value(...args);
                           }
-                        : value;
+                        : ps[key];
                 } else {
-                    merged[key] = value;
+                    merged[key] = ps[key];
                 }
             }
 

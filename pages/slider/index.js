@@ -1,17 +1,15 @@
 import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
+import { PTDoc } from '../../components/doc/slider/pt/ptdoc';
+import { Wireframe } from '../../components/doc/slider/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/slider/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/slider/basicdoc';
 import { ImportDoc } from '../../components/doc/slider/importdoc';
 import { InputDoc } from '../../components/doc/slider/inputdoc';
-import { PTDoc } from '../../components/doc/slider/pt/ptdoc';
-import { Wireframe } from '../../components/doc/slider/pt/wireframe';
 import { RangeDoc } from '../../components/doc/slider/rangedoc';
 import { StepDoc } from '../../components/doc/slider/stepdoc';
 import { StyleDoc } from '../../components/doc/slider/styledoc';
-import { StyledDoc } from '../../components/doc/slider/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/slider/theming/tailwinddoc';
 import { VerticalDoc } from '../../components/doc/slider/verticaldoc';
 
 const SliderDemo = () => {
@@ -75,27 +73,7 @@ const SliderDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return <DocComponent title="React Slider Component" header="Slider" description="Slider is a component to provide input with a drag handle." componentDocs={docs} apiDocs={['Slider']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return <DocComponent title="React Slider Component" header="Slider" description="Slider is a component to provide input with a drag handle." componentDocs={docs} apiDocs={['Slider']} ptDocs={ptDocs} />;
 };
 
 export default SliderDemo;

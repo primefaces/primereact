@@ -15,8 +15,6 @@ import { SeverityDoc } from '../../components/doc/splitbutton/severitydoc';
 import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
 import { StyleDoc } from '../../components/doc/splitbutton/styledoc';
 import { TextDoc } from '../../components/doc/splitbutton/textdoc';
-import { StyledDoc } from '../../components/doc/splitbutton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/splitbutton/theming/tailwinddoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -105,37 +103,7 @@ const SplitButtonDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React SplitButton Component"
-            header="SplitButton"
-            description="SplitButton groups a set of commands in an overlay with a default action item."
-            componentDocs={docs}
-            apiDocs={['SplitButton']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React SplitButton Component" header="SplitButton" description="SplitButton groups a set of commands in an overlay with a default action item." componentDocs={docs} apiDocs={['SplitButton']} ptDocs={ptDocs} />;
 };
 
 export default SplitButtonDemo;

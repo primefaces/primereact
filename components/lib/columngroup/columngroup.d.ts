@@ -9,9 +9,7 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { DataTablePassThroughOptions } from '../datatable/datatable';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type ColumnGroupPassThroughType<T> = PassThroughType<T, ColumnGroupPassThroughMethodOptions>;
@@ -33,11 +31,6 @@ export interface ColumnGroupPassThroughOptions {
      * Uses to pass attributes to the root's DOM element.
      */
     root?: ColumnGroupPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -56,16 +49,6 @@ export interface ColumnGroupProps {
      * @type {ColumnGroupPassThroughOptions}
      */
     pt?: ColumnGroupPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

@@ -8,7 +8,7 @@ export function PTDoc(props) {
         basic: `
 <Skeleton
     pt={{
-        root: { className: 'w-3rem h-3rem' }
+        root: { class: 'w-3rem h-3rem' }
     }}
 />
         `,
@@ -21,7 +21,7 @@ export default function PTDemo() {
         <div className="card flex justify-content-center">
             <Skeleton
                 pt={{
-                    root: { className: 'w-3rem h-3rem' }
+                    root: { class: 'w-3rem h-3rem' }
                 }}
             />
         </div>
@@ -37,7 +37,7 @@ export default function PTDemo() {
         <div className="card flex justify-content-center">
             <Skeleton
                 pt={{
-                    root: { className: 'w-3rem h-3rem' }
+                    root: { class: 'w-3rem h-3rem' }
                 }}
             />
         </div>

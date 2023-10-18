@@ -8,10 +8,7 @@ export function BasicDoc(props) {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        if (msgs.current) {
-            msgs.current.clear();
-            msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
-        }
+        msgs.current && msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
     });
 
     const code = {
@@ -27,10 +24,9 @@ export default function BasicDemo() {
     const msgs = useRef(null);
 
     useMountEffect(() => {
-        if (msgs.current) {
-            msgs.current.clear();
-            msgs.current.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
-        }
+        msgs.current.show(
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
+        );
     }); 
 
     return (
@@ -46,11 +42,12 @@ import { useMountEffect } from 'primereact/hooks';
 import { Messages } from 'primereact/messages';
 
 export default function BasicDemo() {
-    const msgs = useRef<Messages>(null);
+    const msgs = useRef(null);
 
     useMountEffect(() => {
-        msgs.current?.clear();
-        msgs.current?.show({ id: '1', sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false });
+        msgs.current.show(
+            { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false }
+        );
     });
 
     return (

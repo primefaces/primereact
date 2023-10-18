@@ -8,14 +8,10 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
-import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
-import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type FieldsetPassThroughType<T> = PassThroughType<T, FieldsetPassThroughMethodOptions>;
-export declare type FieldsetPassThroughTransitionType = ReactCSSTransitionProps | ((options: FieldsetPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -73,15 +69,6 @@ export interface FieldsetPassThroughOptions {
      * Uses to pass attributes to the content's DOM element.
      */
     content?: FieldsetPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
-    /**
-     * Used to control React Transition API.
-     */
-    transition?: FieldsetPassThroughTransitionType;
 }
 
 /**
@@ -173,16 +160,6 @@ export interface FieldsetProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {FieldsetPassThroughOptions}
      */
     pt?: FieldsetPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

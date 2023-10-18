@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { memo, useEffect } from 'react';
-import { Badge } from '../lib/badge/Badge';
 import { StyleClass } from '../lib/styleclass/StyleClass';
-import { classNames } from '../lib/utils/Utils';
+import { classNames } from '../lib/utils/ClassNames';
 import MenuData from './menu.json';
 
 const Menu = memo((props) => {
@@ -26,7 +25,6 @@ const Menu = memo((props) => {
                     </div>
                 )}
                 {name}
-                {item.badge && <Badge value={item.badge} className="ml-auto"></Badge>}
             </>
         );
 
@@ -95,7 +93,7 @@ const Menu = memo((props) => {
 
         return (
             <StyleClass nodeRef={btnRef} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
-                <button ref={btnRef} type="button" className="px-link">
+                <button ref={btnRef} type="button" className="p-link">
                     <div className="menu-icon">
                         <i className={menuitem.icon}></i>
                     </div>

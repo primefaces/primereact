@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ariaLabel, PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { ariaLabel } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { MultiStateCheckboxBase } from './MultiStateCheckboxBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const MultiStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -15,14 +15,12 @@ export const MultiStateCheckbox = React.memo(
         const elementRef = React.useRef(null);
         const equalityKey = props.optionValue ? null : props.dataKey;
 
-        const { ptm, cx, sx, isUnstyled } = MultiStateCheckboxBase.setMetaData({
+        const { ptm } = MultiStateCheckboxBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
-
-        useHandleStyle(MultiStateCheckboxBase.css.styles, isUnstyled, { name: 'multistatecheckbox' });
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
@@ -123,12 +121,12 @@ export const MultiStateCheckbox = React.memo(
             });
             const iconProps = mergeProps(
                 {
-                    className: cx('icon', { icon })
+                    className: className
                 },
                 ptm('icon')
             );
 
-            const content = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+            const content = <span {...iconProps}></span>;
 
             if (props.iconTemplate) {
                 const defaultOptions = {
@@ -149,6 +147,16 @@ export const MultiStateCheckbox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = MultiStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames('p-multistatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
+        const boxClassName = classNames(
+            'p-checkbox-box',
+            {
+                'p-highlight': !!selectedOption,
+                'p-disabled': props.disabled,
+                'p-focus': focusedState
+            },
+            selectedOption && selectedOption.className
+        );
         const icon = createIcon();
         const ariaValueLabel = !!selectedOption ? getOptionAriaLabel(selectedOption) : ariaLabel('nullLabel');
         const ariaChecked = !!selectedOption ? 'true' : 'false';
@@ -157,7 +165,7 @@ export const MultiStateCheckbox = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                className: cx('root'),
+                className: className,
                 style: props.style,
                 onClick: onClick
             },
@@ -165,10 +173,18 @@ export const MultiStateCheckbox = React.memo(
             ptm('root')
         );
 
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
         const checkboxProps = mergeProps(
             {
-                className: cx('checkbox', { focusedState, selectedOption }),
-                style: sx('checkbox', { selectedOption }),
+                className: boxClassName,
+                style: selectedOption && selectedOption.style,
                 tabIndex: props.tabIndex,
                 onFocus: onFocus,
                 onBlur: onBlur,
@@ -184,11 +200,7 @@ export const MultiStateCheckbox = React.memo(
             <>
                 <div {...rootProps}>
                     <div {...checkboxProps}>{icon}</div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>

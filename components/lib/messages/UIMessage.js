@@ -7,14 +7,15 @@ import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps } from '../utils/Utils';
+import { classNames, IconUtils } from '../utils/Utils';
+import { mergeProps } from '../utils/Utils';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
         const {
             message: messageInfo,
             metaData: parentMetaData,
-            ptCallbacks: { ptm, ptmo, cx },
+            ptCallbacks: { ptm, ptmo },
             index
         } = props;
         const { severity, content, summary, detail, closable, life, sticky, className: _className, style, contentClassName: _contentClassName, contentStyle, icon: _icon, closeIcon: _closeIcon, pt } = messageInfo.message;
@@ -27,13 +28,6 @@ export const UIMessage = React.memo(
             life || 3000,
             !sticky
         );
-
-        const getPTOptions = (key, options) => {
-            return ptm(key, {
-                hostName: props.hostName,
-                ...options
-            });
-        };
 
         const onClose = (event) => {
             clearTimer();
@@ -53,13 +47,13 @@ export const UIMessage = React.memo(
             if (closable !== false) {
                 const ariaLabel = localeOption('close');
 
+                const iconProps = { className: 'p-message-close-icon', 'aria-hidden': true };
                 const buttonIconProps = mergeProps(
                     {
-                        className: cx('uimessage.buttonicon'),
-                        'aria-hidden': true
+                        className: iconProps
                     },
-                    getPTOptions('buttonicon', parentParams),
-                    ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
+                    ptm('buttonicon', parentParams),
+                    ptmo(pt, 'buttonicon', params)
                 );
 
                 const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
@@ -68,12 +62,12 @@ export const UIMessage = React.memo(
                 const buttonProps = mergeProps(
                     {
                         type: 'button',
-                        className: cx('uimessage.button'),
+                        className: 'p-message-close p-link',
                         'aria-label': ariaLabel,
                         onClick: onClose
                     },
-                    getPTOptions('button', parentParams),
-                    ptmo(pt, 'button', { ...params, hostName: props.hostName })
+                    ptm('button', parentParams),
+                    ptmo(pt, 'button', params)
                 );
 
                 return (
@@ -89,12 +83,13 @@ export const UIMessage = React.memo(
 
         const createMessage = () => {
             if (props.message) {
+                const iconClassName = 'p-message-icon';
                 const iconProps = mergeProps(
                     {
-                        className: cx('uimessage.icon')
+                        className: iconClassName
                     },
-                    getPTOptions('icon', parentParams),
-                    ptmo(pt, 'icon', { ...params, hostName: props.hostName })
+                    ptm('icon', parentParams),
+                    ptmo(pt, 'icon', params)
                 );
 
                 let icon = _icon;
@@ -122,18 +117,18 @@ export const UIMessage = React.memo(
 
                 const summaryProps = mergeProps(
                     {
-                        className: cx('uimessage.summary')
+                        className: 'p-message-summary'
                     },
-                    getPTOptions('summary', parentParams),
-                    ptmo(pt, 'summary', { ...params, hostName: props.hostName })
+                    ptm('summary', parentParams),
+                    ptmo(pt, 'summary', params)
                 );
 
                 const detailProps = mergeProps(
                     {
-                        className: cx('uimessage.detail')
+                        className: 'p-message-detail'
                     },
-                    getPTOptions('detail', parentParams),
-                    ptmo(pt, 'detail', { ...params, hostName: props.hostName })
+                    ptm('detail', parentParams),
+                    ptmo(pt, 'detail', params)
                 );
 
                 return (
@@ -150,27 +145,35 @@ export const UIMessage = React.memo(
             return null;
         };
 
+        const className = classNames(
+            'p-message p-component',
+            {
+                [`p-message-${severity}`]: severity
+            },
+            _className
+        );
+        const contentClassName = classNames('p-message-wrapper', _contentClassName);
         const closeIcon = createCloseIcon();
         const message = createMessage();
 
         const wrapperProps = mergeProps(
             {
-                className: classNames(_contentClassName, cx('uimessage.wrapper')),
+                className: contentClassName,
                 style: contentStyle
             },
-            getPTOptions('wrapper', parentParams),
-            ptmo(pt, 'wrapper', { ...params, hostName: props.hostName })
+            ptm('wrapper', parentParams),
+            ptmo(pt, 'wrapper', params)
         );
 
         const rootProps = mergeProps(
             {
                 ref,
-                className: classNames(_className, cx('uimessage.root', { severity })),
+                className,
                 style,
                 onClick
             },
-            getPTOptions('root', parentParams),
-            ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            ptm('root', parentParams),
+            ptmo(pt, 'root', params)
         );
 
         return (

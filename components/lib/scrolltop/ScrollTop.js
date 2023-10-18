@@ -1,26 +1,24 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
+import PrimeReact from '../api/Api';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
         const context = React.useContext(PrimeReactContext);
         const props = ScrollTopBase.getProps(inProps, context);
-        const { ptm, cx, isUnstyled } = ScrollTopBase.setMetaData({
+        const { ptm } = ScrollTopBase.setMetaData({
             props,
             state: {
                 visible: visibleState
             }
         });
-
-        useHandleStyle(ScrollTopBase.css.styles, isUnstyled, { name: 'scrolltop' });
 
         const scrollElementRef = React.useRef(null);
         const helperRef = React.useRef(null);
@@ -83,9 +81,18 @@ export const ScrollTop = React.memo(
             ZIndexUtils.clear(scrollElementRef.current);
         });
 
+        const className = classNames(
+            'p-scrolltop p-link p-component',
+            {
+                'p-scrolltop-sticky': props.target !== 'window'
+            },
+            props.className
+        );
+
+        const iconClassName = 'p-scrolltop-icon';
         const iconProps = mergeProps(
             {
-                className: cx('icon')
+                className: iconClassName
             },
             ptm('icon')
         );
@@ -95,7 +102,7 @@ export const ScrollTop = React.memo(
             {
                 ref: scrollElementRef,
                 type: 'button',
-                className: classNames(props.className, cx('root')),
+                className,
                 style: props.style,
                 onClick
             },
@@ -103,23 +110,9 @@ export const ScrollTop = React.memo(
             ptm('root')
         );
 
-        const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: { enter: 150, exit: 150 },
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEnter,
-                onEntered,
-                onExited
-            },
-            ptm('transition')
-        );
-
         return (
             <>
-                <CSSTransition nodeRef={scrollElementRef} {...transitionProps}>
+                <CSSTransition nodeRef={scrollElementRef} classNames="p-scrolltop" in={visibleState} timeout={{ enter: 150, exit: 150 }} options={props.transitionOptions} unmountOnExit onEnter={onEnter} onEntered={onEntered} onExited={onExited}>
                     <button {...rootProps}>
                         {scrollIcon}
                         <Ripple />

@@ -4,21 +4,12 @@ import { DocSectionText } from '../common/docsectiontext';
 export function RippleDoc(props) {
     const code = {
         basic: `
-//_app.js
-import { PrimeReactProvider } from 'primereact/api';
+import { PrimeReactContext } from 'primereact/api';
 
-export default function MyApp({ Component }) {
-    const value = {
-        ripple: false,
-        ...
-    };
+//use in a component
+const { setRipple } = useContext(PrimeReactContext);
 
-    return (
-        <PrimeReactProvider value={value}>
-            <App />
-        </PrimeReactProvider>
-    );
-}
+setRipple(true);
         `
     };
 

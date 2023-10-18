@@ -8,8 +8,6 @@
  *
  */
 import * as React from 'react';
-import { ComponentHooks } from '../componentbase/componentbase';
-import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type ScrollPanelThroughType<T> = PassThroughType<T, ScrollPanelThroughMethodOptions>;
@@ -46,11 +44,6 @@ export interface ScrollPanelPassThroughOptions {
      * Uses to pass attributes to the vertical panel's DOM element.
      */
     barY?: ScrollPanelThroughType<React.HTMLAttributes<HTMLDivElement>>;
-    /**
-     * Used to manage all lifecycle hooks
-     * @see {@link ComponentHooks}
-     */
-    hooks?: ComponentHooks;
 }
 
 /**
@@ -68,16 +61,6 @@ export interface ScrollPanelProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {ScrollPanelPassThroughOptions}
      */
     pt?: ScrollPanelPassThroughOptions;
-    /**
-     * Used to configure passthrough(pt) options of the component.
-     * @type {PassThroughOptions}
-     */
-    ptOptions?: PassThroughOptions;
-    /**
-     * When enabled, it removes component related styles in the core.
-     * @defaultValue false
-     */
-    unstyled?: boolean;
 }
 
 /**

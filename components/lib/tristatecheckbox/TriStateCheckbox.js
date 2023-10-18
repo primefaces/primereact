@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { PrimeReactContext, ariaLabel } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { ariaLabel } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
 import { TimesIcon } from '../icons/times';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { TriStateCheckboxBase } from './TriStateCheckboxBase';
+import { PrimeReactContext } from '../api/Api';
 
 export const TriStateCheckbox = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -16,14 +16,12 @@ export const TriStateCheckbox = React.memo(
         const [focusedState, setFocusedState] = React.useState(false);
         const elementRef = React.useRef(null);
 
-        const { ptm, cx, isUnstyled } = TriStateCheckboxBase.setMetaData({
+        const { ptm } = TriStateCheckboxBase.setMetaData({
             props,
             state: {
                 focused: focusedState
             }
         });
-
-        useHandleStyle(TriStateCheckboxBase.css.styles, isUnstyled, { name: 'tristatecheckbox' });
 
         const onClick = (event) => {
             if (!props.disabled && !props.readOnly) {
@@ -87,15 +85,22 @@ export const TriStateCheckbox = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const otherProps = TriStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+        const className = classNames('p-tristatecheckbox p-checkbox p-component', props.className, { 'p-checkbox-disabled': props.disabled });
+        const boxClassName = classNames('p-checkbox-box', {
+            'p-highlight': ObjectUtils.isNotEmpty(props.value),
+            'p-disabled': props.disabled,
+            'p-focus': focusedState
+        });
+        const iconClassName = 'p-checkbox-icon p-c';
         const checkIconProps = mergeProps(
             {
-                className: cx('checkIcon')
+                className: iconClassName
             },
             ptm('checkIcon')
         );
         const uncheckIconProps = mergeProps(
             {
-                className: cx('checkIcon')
+                className: iconClassName
             },
             ptm('uncheckIcon')
         );
@@ -115,7 +120,7 @@ export const TriStateCheckbox = React.memo(
 
         const checkboxProps = mergeProps(
             {
-                className: cx('checkbox', { focusedState }),
+                className: boxClassName,
                 tabIndex: props.tabIndex,
                 onFocus: onFocus,
                 onBlur: onBlur,
@@ -137,7 +142,9 @@ export const TriStateCheckbox = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: classNames(props.className, cx('root')),
+                ref: elementRef,
+                id: props.id,
+                className: className,
                 style: props.style,
                 onClick: onClick
             },
@@ -147,7 +154,7 @@ export const TriStateCheckbox = React.memo(
 
         return (
             <>
-                <div id={props.id} ref={elementRef} {...rootProps}>
+                <div {...rootProps}>
                     <div {...checkboxProps}>{checkIcon}</div>
                     {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>

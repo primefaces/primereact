@@ -1,35 +1,26 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
+import PrimeReact from '../api/Api';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = MenuBase.getProps(inProps, context);
-        const [idState, setIdState] = React.useState(props.id);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
-        const { ptm, cx, sx, isUnstyled } = MenuBase.setMetaData({
+        const { ptm } = MenuBase.setMetaData({
             props,
             state: {
-                id: idState,
                 visible: visibleState
             }
         });
-
-        useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
-
-        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
-            hide(event);
-        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
@@ -100,13 +91,13 @@ export const Menu = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (DomHandler.getAttribute(nextItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(nextItem, '[data-pc-section="menuitem"]') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (DomHandler.hasClass(nextItem, 'p-disabled') || !DomHandler.hasClass(nextItem, 'p-menuitem') ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (DomHandler.getAttribute(prevItem, '[data-p-disabled="true"]') || !DomHandler.getAttribute(prevItem, '[data-pc-section="menuitem"]') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (DomHandler.hasClass(prevItem, 'p-disabled') || !DomHandler.hasClass(prevItem, 'p-menuitem') ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const toggle = (event) => {
@@ -128,7 +119,6 @@ export const Menu = React.memo(
         };
 
         const onEnter = () => {
-            DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
             ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             DomHandler.absolutePosition(menuRef.current, targetRef.current, props.popupAlignment);
         };
@@ -146,12 +136,6 @@ export const Menu = React.memo(
             ZIndexUtils.clear(menuRef.current);
         };
 
-        useMountEffect(() => {
-            if (!idState) {
-                setIdState(UniqueComponentId());
-            }
-        });
-
         useUnmountEffect(() => {
             ZIndexUtils.clear(menuRef.current);
         });
@@ -166,16 +150,20 @@ export const Menu = React.memo(
         }));
 
         const createSubmenu = (submenu, index) => {
-            const key = idState + '_sub_' + index;
+            const key = submenu.label + '_' + index;
+            const className = classNames(
+                'p-submenu-header',
+                {
+                    'p-disabled': submenu.disabled
+                },
+                submenu.className
+            );
             const items = submenu.items.map(createMenuItem);
             const submenuHeaderProps = mergeProps(
                 {
-                    id: key,
-                    key,
-                    role: 'presentation',
-                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
-                    style: sx('submenuHeader', { submenu }),
-                    'data-p-disabled': submenu.disabled
+                    className,
+                    style: submenu.style,
+                    role: 'presentation'
                 },
                 ptm('submenuHeader')
             );
@@ -189,12 +177,11 @@ export const Menu = React.memo(
         };
 
         const createSeparator = (index) => {
-            const key = idState + '_separator_' + index;
+            const key = 'separator_' + index;
             const separatorProps = mergeProps(
                 {
-                    id: key,
                     key,
-                    className: cx('separator'),
+                    className: 'p-menu-separator',
                     role: 'separator'
                 },
                 ptm('separator')
@@ -208,35 +195,35 @@ export const Menu = React.memo(
                 return null;
             }
 
+            const className = classNames('p-menuitem', item.className);
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
                 {
-                    className: cx('icon')
+                    className: 'p-menuitem-icon'
                 },
                 ptm('icon')
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
                 {
-                    className: cx('label')
+                    className: 'p-menuitem-text'
                 },
                 ptm('label')
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const tabIndex = item.disabled ? null : 0;
-            const key = item.id || idState + '_' + index;
+            const key = item.label + '_' + index;
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
-                    className: cx('action', { item }),
+                    className: linkClassName,
                     role: 'menuitem',
                     target: item.target,
                     onClick: (event) => onItemClick(event, item),
                     onKeyDown: (event) => onItemKeyDown(event, item),
                     tabIndex: tabIndex,
-                    'aria-disabled': item.disabled,
-                    'data-p-disabled': item.disabled
+                    'aria-disabled': item.disabled
                 },
                 ptm('action')
             );
@@ -265,12 +252,10 @@ export const Menu = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    id: key,
                     key,
-                    className: classNames(item.className, cx('menuitem')),
-                    style: sx('menuitem', { item }),
-                    role: 'none',
-                    'data-p-disabled': item.disabled || false
+                    className,
+                    style: item.style,
+                    role: 'none'
                 },
                 ptm('menuitem')
             );
@@ -288,10 +273,21 @@ export const Menu = React.memo(
 
         const createElement = () => {
             if (props.model) {
+                const className = classNames(
+                    'p-menu p-component',
+                    {
+                        'p-menu-overlay': props.popup,
+                        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+                    },
+                    props.className
+                );
                 const menuitems = createMenu();
                 const rootProps = mergeProps(
                     {
-                        className: classNames(props.className, cx('root', { context })),
+                        ref: menuRef,
+                        id: props.id,
+                        className,
                         style: props.style,
                         onClick: (e) => onPanelClick(e)
                     },
@@ -301,30 +297,26 @@ export const Menu = React.memo(
 
                 const menuProps = mergeProps(
                     {
-                        className: cx('menu'),
+                        className: 'p-menu-list p-reset',
                         role: 'menu'
                     },
                     ptm('menu')
                 );
 
-                const transitionProps = mergeProps(
-                    {
-                        classNames: cx('transition'),
-                        in: visibleState,
-                        timeout: { enter: 120, exit: 100 },
-                        options: props.transitionOptions,
-                        unmountOnExit: true,
-                        onEnter,
-                        onEntered,
-                        onExit,
-                        onExited
-                    },
-                    ptm('transition')
-                );
-
                 return (
-                    <CSSTransition nodeRef={menuRef} {...transitionProps}>
-                        <div id={props.id} ref={menuRef} {...rootProps}>
+                    <CSSTransition
+                        nodeRef={menuRef}
+                        classNames="p-connected-overlay"
+                        in={visibleState}
+                        timeout={{ enter: 120, exit: 100 }}
+                        options={props.transitionOptions}
+                        unmountOnExit
+                        onEnter={onEnter}
+                        onEntered={onEntered}
+                        onExit={onExit}
+                        onExited={onExited}
+                    >
+                        <div {...rootProps}>
                             <ul {...menuProps}>{menuitems}</ul>
                         </div>
                     </CSSTransition>

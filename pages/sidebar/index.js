@@ -5,13 +5,11 @@ import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
 import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
 import { ImportDoc } from '../../components/doc/sidebar/importdoc';
 import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
-import { PTDoc } from '../../components/doc/sidebar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/sidebar/pt/wireframe';
 import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
 import { StyleDoc } from '../../components/doc/sidebar/styledoc';
 import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
-import { StyledDoc } from '../../components/doc/sidebar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/sidebar/theming/tailwinddoc';
+import { Wireframe } from '../../components/doc/sidebar/pt/wireframe';
+import { PTDoc } from '../../components/doc/sidebar/pt/ptdoc';
 
 const SidebarDemo = () => {
     const docs = [
@@ -75,37 +73,7 @@ const SidebarDemo = () => {
         }
     ];
 
-    const themingDocs = [
-        {
-            id: 'styled',
-            label: 'Styled',
-            component: StyledDoc
-        },
-        {
-            id: 'unstyled',
-            label: 'Unstyled',
-            description: 'Theming is implemented with the pass through properties in unstyled mode.',
-            children: [
-                {
-                    id: 'tailwind',
-                    label: 'Tailwind',
-                    component: TailwindDoc
-                }
-            ]
-        }
-    ];
-
-    return (
-        <DocComponent
-            title="React Sidebar Component"
-            header="Sidebar"
-            description="Sidebar, also known as Drawer, is a container component displayed as an overlay."
-            componentDocs={docs}
-            apiDocs={['Sidebar']}
-            ptDocs={ptDocs}
-            themingDocs={themingDocs}
-        />
-    );
+    return <DocComponent title="React Sidebar Component" header="Sidebar" description="Sidebar, also known as Drawer, is a container component displayed as an overlay." componentDocs={docs} apiDocs={['Sidebar']} ptDocs={ptDocs} />;
 };
 
 export default SidebarDemo;

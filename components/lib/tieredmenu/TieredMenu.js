@@ -1,33 +1,28 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMatchMedia, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { TieredMenuBase } from './TieredMenuBase';
 import { TieredMenuSub } from './TieredMenuSub';
+import PrimeReact from '../api/Api';
 
 export const TieredMenu = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = TieredMenuBase.getProps(inProps, context);
 
-        const [idState, setIdState] = React.useState(props.id);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
-        const { ptm, cx, sx, isUnstyled } = TieredMenuBase.setMetaData({
+        const { ptm } = TieredMenuBase.setMetaData({
             props,
             state: {
-                id: idState,
                 visible: visibleState,
                 attributeSelector: attributeSelectorState
             }
         });
-
-        useHandleStyle(TieredMenuBase.css.styles, isUnstyled, { name: 'tieredmenu' });
-
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const styleElementRef = React.useRef(null);
@@ -125,7 +120,6 @@ export const TieredMenu = React.memo(
                 ZIndexUtils.set('menu', menuRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['menu']) || PrimeReact.zIndex['menu']);
             }
 
-            DomHandler.addStyles(menuRef.current, { position: 'absolute', top: '0', left: '0' });
             DomHandler.absolutePosition(menuRef.current, targetRef.current);
 
             if (attributeSelectorState && props.breakpoint) {
@@ -149,12 +143,8 @@ export const TieredMenu = React.memo(
         };
 
         useMountEffect(() => {
-            const uniqueId = UniqueComponentId();
-
-            !idState && setIdState(uniqueId);
-
             if (props.breakpoint) {
-                !attributeSelectorState && setAttributeSelectorState(uniqueId);
+                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
             }
         });
 
@@ -182,11 +172,22 @@ export const TieredMenu = React.memo(
         }));
 
         const createElement = () => {
+            const otherProps = TieredMenuBase.getOtherProps(props);
+            const className = classNames(
+                'p-tieredmenu p-component',
+                {
+                    'p-tieredmenu-overlay': props.popup,
+                    'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
+                    'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
+                },
+                props.className
+            );
+
             const rootProps = mergeProps(
                 {
                     ref: menuRef,
                     id: props.id,
-                    className: cx('root'),
+                    className,
                     style: props.style,
                     onClick: onPanelClick
                 },
@@ -194,39 +195,21 @@ export const TieredMenu = React.memo(
                 ptm('root')
             );
 
-            const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: visibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter,
-                    onEntered,
-                    onExit,
-                    onExited
-                },
-                ptm('transition')
-            );
-
             return (
-                <CSSTransition nodeRef={menuRef} {...transitionProps}>
+                <CSSTransition
+                    nodeRef={menuRef}
+                    classNames="p-connected-overlay"
+                    in={visibleState}
+                    timeout={{ enter: 120, exit: 100 }}
+                    options={props.transitionOptions}
+                    unmountOnExit
+                    onEnter={onEnter}
+                    onEntered={onEntered}
+                    onExit={onExit}
+                    onExited={onExited}
+                >
                     <div {...rootProps}>
-                        <TieredMenuSub
-                            id={idState}
-                            hostName="TieredMenu"
-                            menuProps={props}
-                            model={props.model}
-                            root
-                            popup={props.popup}
-                            onHide={hide}
-                            isMobileMode={isMobileMode}
-                            onItemToggle={onItemToggle}
-                            submenuIcon={props.submenuIcon}
-                            ptm={ptm}
-                            cx={cx}
-                            sx={sx}
-                        />
+                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} ptm={ptm} />
                     </div>
                 </CSSTransition>
             );

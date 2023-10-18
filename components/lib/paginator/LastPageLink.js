@@ -9,11 +9,9 @@ import { PrimeReactContext } from '../api/Api';
 export const LastPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
     const props = LastPageLinkBase.getProps(inProps, context);
-    const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
-        return ptm(key, {
-            hostName: props.hostName,
+        return props.ptm(key, {
             context: {
                 disabled: props.disabled
             }
@@ -24,7 +22,7 @@ export const LastPageLink = React.memo((inProps) => {
     const iconClassName = 'p-paginator-icon';
     const lastPageIconProps = mergeProps(
         {
-            className: cx('lastPageIcon')
+            className: iconClassName
         },
         getPTOptions('lastPageIcon')
     );
@@ -33,7 +31,7 @@ export const LastPageLink = React.memo((inProps) => {
     const lastPageButtonProps = mergeProps(
         {
             type: 'button',
-            className: cx('lastPageButton', { disabled: props.disabled }),
+            className,
             onClick: props.onClick,
             disabled: props.disabled,
             'aria-label': ariaLabel('lastPageLabel')
