@@ -150,7 +150,7 @@ export const Tooltip = React.memo(
                     elementRef.current.style.pointerEvents = 'none';
                 }
 
-                if ((isMouseTrack(currentTargetRef.current) || position == 'mouse') && !containerSize.current) {
+                if (((isMouseTrack(currentTargetRef.current) || position == 'mouse') && !containerSize.current) || (isMouseTrack(currentTargetRef.current) || position == 'mouse')) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
                         height: DomHandler.getOuterHeight(elementRef.current)
