@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.0.5](https://github.com/primefaces/primereact/tree/10.0.5) (2023-10-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.4...10.0.5)
+
+**Fixed bugs:**
+
+- Overlay animations are not working with Tailwind preset [\#5117](https://github.com/primefaces/primereact/issues/5117)
+
 ## [10.0.4](https://github.com/primefaces/primereact/tree/10.0.4) (2023-10-19)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.3...10.0.4)
