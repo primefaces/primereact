@@ -193,8 +193,8 @@ const styles = `
         transition: none;
         transform: none;
         margin: 0;
-        width: 100vw;
-        height: 100vh;
+        width: 100vw !important;
+        height: 100vh !important;
         max-height: 100%;
         top: 0px;
         left: 0px;
