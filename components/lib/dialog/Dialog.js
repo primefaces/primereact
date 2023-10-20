@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -49,20 +48,6 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     });
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
-
-    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
-        const currentTarget = event.currentTarget;
-
-        if (!currentTarget || !currentTarget.primeDialogParams) {
-            return;
-        }
-
-        const params = currentTarget.primeDialogParams;
-        const paramLength = params.length;
-
-        onClose(event);
-        params.splice(paramLength - 1, 1);
-    });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
@@ -127,6 +112,14 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         }
 
         const dialog = document.getElementById(dialogId);
+
+        if (event.key === 'Esc' || event.key === 'Escape') {
+            if (props.closable && props.closeOnEscape) {
+                event.stopImmediatePropagation();
+                onClose(event);
+                params.splice(paramLength - 1, 1);
+            }
+        }
 
         if (event.key === 'Tab') {
             event.preventDefault();
