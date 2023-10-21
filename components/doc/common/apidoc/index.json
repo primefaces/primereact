@@ -38509,6 +38509,12 @@
                             "parameters": [],
                             "returnType": "HTMLElement",
                             "description": "Used to get overlay element."
+                        },
+                        {
+                            "name": "toggleMask",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Toggle the mask on or off."
                         }
                     ]
                 },
