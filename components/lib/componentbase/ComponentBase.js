@@ -491,6 +491,11 @@ export const ComponentBase = {
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
 
         const getPTValue = (obj = {}, key = '', params = {}, searchInDefaultPT = true) => {
+            // obj either is the passthrough options or has a .pt property.
+            if (obj.hasOwnProperty('pt') && obj.pt !== undefined) {
+                obj = obj.pt;
+            }
+
             const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
