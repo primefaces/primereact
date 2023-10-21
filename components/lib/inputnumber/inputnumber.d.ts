@@ -8,13 +8,13 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { PassThroughType } from '../utils/utils';
-import { PassThroughOptions } from '../passthrough';
-import { ComponentHooks } from '../componentbase/componentbase';
+import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type InputNumberPassThroughType<T> = PassThroughType<T, InputNumberPassThroughMethodOptions>;
 
@@ -138,11 +138,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Style class of the increment button.
      */
-    incrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    incrementButtonIcon?: IconType<InputNumberProps> | undefined;
     /**
      * Style class of the decrement button.
      */
-    decrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    decrementButtonIcon?: IconType<InputNumberProps> | undefined;
     /**
      * Locale to be used in formatting.
      */
