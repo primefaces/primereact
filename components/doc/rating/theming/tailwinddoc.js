@@ -52,7 +52,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Rating value={value} onChange={(e) => setValue(e.value)} />
         </div>
     );

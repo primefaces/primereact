@@ -20,7 +20,10 @@ const classes = {
               }),
     trigger: 'p-dropdown-trigger',
     emptyMessage: 'p-dropdown-empty-message',
-    itemGroup: 'p-dropdown-item-group',
+    itemGroup: ({ optionGroupLabel }) =>
+        classNames('p-dropdown-item-group', {
+            'p-dropdown-item-empty': !optionGroupLabel || optionGroupLabel.length === 0
+        }),
     dropdownIcon: 'p-dropdown-trigger-icon p-clickable',
     clearIcon: 'p-dropdown-clear-icon p-clickable',
     filterIcon: 'p-dropdown-filter-icon',

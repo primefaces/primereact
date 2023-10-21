@@ -98,12 +98,13 @@ export const DropdownPanel = React.memo(
             style = { ...style, ...option.style };
 
             if (props.optionGroupLabel) {
+                const { optionGroupLabel } = props;
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
-                        className: cx('itemGroup'),
+                        className: cx('itemGroup', { optionGroupLabel }),
                         style
                     },
                     getPTOptions('itemGroup')

@@ -483,6 +483,7 @@ export const BodyCell = React.memo((props) => {
         });
 
         event.preventDefault();
+        event.stopPropagation();
     };
 
     const onRowEditInit = (event) => {

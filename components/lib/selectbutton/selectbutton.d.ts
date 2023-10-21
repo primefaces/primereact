@@ -119,9 +119,15 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
     multiple?: boolean | undefined;
     /**
      * Whether selection can be cleared.
+     * @deprecated Use 'allowEmpty' property instead.
      * @defaultValue true
      */
     unselectable?: boolean | undefined;
+    /**
+     * Whether selection can not be cleared.
+     * @defaultValue true
+     */
+    allowEmpty?: boolean | undefined;
     /**
      * When present, it specifies that the element should be disabled.
      * @defaultValue false

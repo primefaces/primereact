@@ -220,6 +220,10 @@ export const ContextMenu = React.memo(
 
             !idState && setIdState(uniqueId);
 
+            if (props.global) {
+                bindDocumentContextMenuListener();
+            }
+
             if (props.breakpoint) {
                 !attributeSelectorState && setAttributeSelectorState(uniqueId);
             }

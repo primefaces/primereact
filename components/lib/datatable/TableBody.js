@@ -471,7 +471,7 @@ export const TableBody = React.memo(
         };
 
         const onRowClick = (event) => {
-            if (allowCellSelection() || !allowSelection(event)) {
+            if (allowCellSelection() || !allowSelection(event) || event.defaultPrevented) {
                 return;
             }
 
@@ -514,12 +514,36 @@ export const TableBody = React.memo(
             }
         };
 
-        const onRowRightClick = (event) => {
-            const isMultiSelection = isCheckboxSelectionModeInColumn && ObjectUtils.isEmpty(props.selection);
-            const data = isMultiSelection ? event.data : props.selection;
+        const onRowPointerDown = (e) => {
+            const { originalEvent: event } = e;
 
+            if (DomHandler.isClickable(event.target)) {
+                return;
+            }
+
+            if (props.onRowPointerDown) {
+                props.onRowPointerDown(e);
+            }
+        };
+
+        const onRowPointerUp = (e) => {
+            const { originalEvent: event } = e;
+
+            if (DomHandler.isClickable(event.target)) {
+                return;
+            }
+
+            if (props.onRowPointerUp) {
+                props.onRowPointerUp(e);
+            }
+        };
+
+        const onRowRightClick = (event) => {
             if (props.onContextMenu || props.onContextMenuSelectionChange) {
-                if (!ObjectUtils.isEmpty(props.selection)) DomHandler.clearSelection();
+                const hasSelection = ObjectUtils.isNotEmpty(props.selection);
+                const data = hasSelection ? props.selection : event.data;
+
+                if (hasSelection) DomHandler.clearSelection();
 
                 if (props.onContextMenuSelectionChange) {
                     props.onContextMenuSelectionChange({
@@ -965,6 +989,8 @@ export const TableBody = React.memo(
                         onRadioChange={onRadioChange}
                         onRowClick={onRowClick}
                         onRowDoubleClick={onRowDoubleClick}
+                        onRowPointerDown={onRowPointerDown}
+                        onRowPointerUp={onRowPointerUp}
                         onRowDragEnd={onRowDragEnd}
                         onRowDragLeave={onRowDragLeave}
                         onRowDragOver={onRowDragOver}

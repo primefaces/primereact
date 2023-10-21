@@ -2,21 +2,21 @@ import { classNames } from '../../utils/Utils';
 
 export const TRANSITIONS = {
     toggleable: {
+        timeout: 500,
         classNames: {
             enter: 'max-h-0',
-            enterActive: 'overflow-hidden transition-all duration-500 ease-in-out',
-            enterDone: 'max-h-40',
+            enterActive: '!max-h-40 overflow-hidden transition-all duration-500 ease-in-out',
             exit: 'max-h-40',
-            exitActive: 'overflow-hidden transition-all duration-500 ease-in',
-            exitDone: 'max-h-0'
+            exitActive: '!max-h-0 overflow-hidden transition-all duration-500 ease-in'
         }
     },
     overlay: {
+        timeout: 150,
         classNames: {
             enter: 'opacity-0 scale-75',
-            enterActive: 'transition-transform transition-opacity duration-150 ease-in',
-            exitActive: 'transition-opacity duration-150 ease-linear',
-            exitDone: 'opacity-0'
+            enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-100',
+            exitActive: '!opacity-0 transition-opacity duration-150 ease-linear'
         }
     }
 };
@@ -243,13 +243,13 @@ const Tailwind = {
         }),
         navContent: 'overflow-y-hidden overscroll-contain overscroll-auto scroll-smooth [&::-webkit-scrollbar]:hidden', // Overflow and scrollbar styles.
         previousButton: {
-            className: classNames('h-full flex items-center justify-center absolute top-0 z-20', 'left-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 )') // Flex and absolute positioning styles.
+            className: classNames('h-full flex items-center justify-center !absolute top-0 z-20', 'left-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 )') // Flex and absolute positioning styles.
         },
         nextButton: {
-            className: classNames('h-full flex items-center justify-center absolute top-0 z-20', 'right-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ') // Flex and absolute positioning styles.
+            className: classNames('h-full flex items-center justify-center !absolute top-0 z-20', 'right-0', 'bg-white text-blue-500 w-12 shadow-md rounded-none', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ') // Flex and absolute positioning styles.
         },
         nav: {
-            className: classNames('flex flex-1 list-none m-0 p-0', 'bg-white border border-gray-300 border-0 border-b-2', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ') // Flex, list, margin, padding, and border styles.
+            className: classNames('flex flex-1 list-none m-0 p-0', 'bg-transparent border border-gray-300 border-0 border-b-2', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80 ') // Flex, list, margin, padding, and border styles.
         },
         tabpanel: {
             header: ({ props }) => ({
@@ -258,7 +258,7 @@ const Tailwind = {
             headerAction: ({ parent, context }) => ({
                 className: classNames(
                     'items-center cursor-pointer flex overflow-hidden relative select-none text-decoration-none user-select-none', // Flex and overflow styles.
-                    'border-b-2 p-5 font-bold rounded-t-lg transition-shadow duration-200 m-0', // Border, padding, font, and transition styles.
+                    'border-b-2 p-5 font-bold rounded-t-md transition-shadow duration-200 m-0', // Border, padding, font, and transition styles.
                     'transition-colors duration-200', // Transition duration style.
                     'focus:outline-none focus:outline-offset-0 focus:shadow-[inset_0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[inset_0_0_0_0.2rem_rgba(147,197,253,0.5)]', // Focus styles.
                     {
@@ -273,7 +273,7 @@ const Tailwind = {
                 className: classNames('leading-none whitespace-nowrap') // Leading and whitespace styles.
             },
             content: {
-                className: classNames('bg-white p-5 border-0 text-gray-700 rounded-bl-2xl rounded-br-2xl', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80') // Background, padding, border, and text styles.
+                className: classNames('bg-white p-5 border-0 text-gray-700 rounded-bl-md rounded-br-md', 'dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80') // Background, padding, border, and text styles.
             }
         }
     },
@@ -324,46 +324,50 @@ const Tailwind = {
             })
         }),
         footer: {
-            className: classNames('shrink-0 ', 'border-t-0 bg-white text-gray-700 px-6 pb-6 text-right rounded-b-lg', 'dark:bg-gray-900  dark:text-white/80')
+            className: classNames('flex gap-2 shrink-0 justify-end align-center', 'border-t-0 bg-white text-gray-700 px-6 pb-6 text-right rounded-b-lg', 'dark:bg-gray-900 dark:text-white/80')
         },
         mask: ({ props }) => ({
             className: classNames('transition duration-200', { 'bg-black/40': props.modal })
         }),
         transition: ({ props }) => {
-            return props.position === 'top'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0'
-                  }
-                : props.position === 'bottom'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 translate-y-full',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75 translate-x-0 translate-y-full translate-z-0'
-                  }
-                : props.position === 'left' || props.position === 'topleft' || props.position === 'bottomleft'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75  -translate-x-full translate-y-0 translate-z-0'
-                  }
-                : props.position === 'right' || props.position === 'topright' || props.position === 'bottomright'
-                ? {
-                      enterFromClass: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75 opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0'
-                  }
-                : {
-                      enterFromClass: 'opacity-0 scale-75',
-                      enterActiveClass: 'transition-all duration-200 ease-out',
-                      leaveActiveClass: 'transition-all duration-200 ease-out',
-                      leaveToClass: 'opacity-0 scale-75'
-                  };
+            return {
+                timeout: 200,
+                classNames:
+                    props.position === 'top'
+                        ? {
+                              enter: 'opacity-0 scale-75 translate-x-0 -translate-y-full translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-0 -translate-y-full translate-z-0'
+                          }
+                        : props.position === 'bottom'
+                        ? {
+                              enter: 'opacity-0 scale-75 translate-y-full',
+                              enterActive: '!opacity-100 !scale-100 !translate-y-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-0 translate-y-full translate-z-0'
+                          }
+                        : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
+                        ? {
+                              enter: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 -translate-x-full translate-y-0 translate-z-0'
+                          }
+                        : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
+                        ? {
+                              enter: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
+                              enterActive: '!opacity-100 !scale-100 !translate-x-0 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75 translate-x-full translate-y-0 translate-z-0'
+                          }
+                        : {
+                              enter: 'opacity-0 scale-75',
+                              enterActive: '!opacity-100 !scale-100 transition-all duration-200 ease-out',
+                              exit: 'opacity-100 scale-100 transition-all duration-200 ease-out',
+                              exitActive: '!opacity-0 !scale-75'
+                          }
+            };
         }
     },
     confirmpopup: {
@@ -379,7 +383,7 @@ const Tailwind = {
         content: 'p-5 items-center flex',
         icon: 'text-2xl',
         message: 'ml-4',
-        footer: 'text-right px-5 py-5 pt-0 ',
+        footer: 'flex gap-2 justify-end align-center text-right px-5 py-5 pt-0',
         transition: TRANSITIONS.overlay
     },
     overlaypanel: {
@@ -387,7 +391,7 @@ const Tailwind = {
             className: classNames(
                 'bg-white text-gray-700 border-0 rounded-md shadow-lg',
                 'z-40 transform origin-center',
-                'absolute left-0 top-0',
+                'absolute left-0 top-0 mt-3',
                 'before:absolute before:w-0 before:-top-3 before:h-0 before:border-transparent before:border-solid before:ml-6 before:border-x-[0.75rem] before:border-b-[0.75rem] before:border-t-0 before:border-b-white dark:before:border-b-gray-900',
                 'dark:border dark:border-blue-900/40 dark:bg-gray-900  dark:text-white/80'
             )
@@ -398,10 +402,10 @@ const Tailwind = {
     sidebar: {
         root: ({ props }) => ({
             className: classNames(
-                'flex flex-col pointer-events-auto relative transform translate-x-0 translate-y-0 translate-z-0 relative transition-transform duration-300',
+                'flex flex-col pointer-events-auto relative transform relative',
                 'bg-white text-gray-700 border-0 shadow-lg',
                 {
-                    '!transition-none !transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': props.position == 'full',
+                    '!transition-none !transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': props.fullScreen,
                     'h-full w-80': props.position == 'left' || props.position == 'right',
                     'h-40 w-full': props.position == 'top' || props.position == 'bottom'
                 },
@@ -428,32 +432,45 @@ const Tailwind = {
             className: classNames('flex pointer-events-auto', 'bg-black bg-opacity-40 transition duration-200 z-20 transition-colors')
         },
         transition: ({ props }) => {
-            return props.position === 'top'
-                ? {
-                      enterFromClass: 'translate-x-0 -translate-y-full translate-z-0',
-                      leaveToClass: 'translate-x-0 -translate-y-full translate-z-0'
-                  }
-                : props.position === 'bottom'
-                ? {
-                      enterFromClass: 'translate-x-0 translate-y-full translate-z-0',
-                      leaveToClass: 'translate-x-0 translate-y-full translate-z-0'
-                  }
-                : props.position === 'left'
-                ? {
-                      enterFromClass: '-translate-x-full translate-y-0 translate-z-0',
-                      leaveToClass: '-translate-x-full translate-y-0 translate-z-0'
-                  }
-                : props.position === 'right'
-                ? {
-                      enterFromClass: 'translate-x-full translate-y-0 translate-z-0',
-                      leaveToClass: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0'
-                  }
-                : {
-                      enterFromClass: 'opacity-0',
-                      enterActiveClass: 'transition-opacity duration-400 ease-in',
-                      leaveActiveClass: 'transition-opacity duration-400 ease-in',
-                      leaveToClass: 'opacity-0'
-                  };
+            return {
+                timeout: 300,
+                classNames: props.fullScreen
+                    ? {
+                          enter: 'opacity-0',
+                          enterActive: '!opacity-100 transition-opacity duration-300 ease-in',
+                          exit: 'opacity-100 transition-opacity duration-300 ease-in',
+                          exitActive: '!opacity-0'
+                      }
+                    : props.position === 'top'
+                    ? {
+                          enter: 'translate-x-0 -translate-y-full translate-z-0',
+                          enterActive: '!translate-y-0 transition-transform duration-300',
+                          exit: 'translate-y-0 transition-transform duration-300',
+                          exitActive: 'translate-x-0 !-translate-y-full translate-z-0'
+                      }
+                    : props.position === 'bottom'
+                    ? {
+                          enter: 'translate-x-0 translate-y-full translate-z-0',
+                          enterActive: '!translate-y-0 transition-transform duration-300',
+                          exit: 'translate-y-0 transition-transform duration-300',
+                          exitActive: 'translate-x-0 !translate-y-full translate-z-0'
+                      }
+                    : props.position === 'left'
+                    ? {
+                          enter: '-translate-x-full translate-y-0 translate-z-0',
+                          enterActive: '!translate-x-0 transition-transform duration-300',
+                          exit: 'translate-x-0 transition-transform duration-300',
+                          exitActive: '!-translate-x-full translate-y-0 translate-z-0'
+                      }
+                    : props.position === 'right'
+                    ? {
+                          enter: 'translate-x-full translate-y-0 translate-z-0',
+                          enterActive: '!translate-x-0 transition-transform duration-300',
+                          exit: 'translate-x-0 transition-transform duration-300',
+                          exitActive: '!translate-x-full translate-y-0 translate-z-0'
+                      }
+                    : undefined
+            };
         }
     },
     toolbar: {
@@ -537,11 +554,13 @@ const Tailwind = {
             className: classNames('w-8 h-8 rounded-full bg-transparent transition duration-200 ease-in-out', 'ml-auto overflow-hidden relative', 'flex items-center justify-center', 'hover:bg-white/30')
         },
         transition: {
-            enterFromClass: 'opacity-0',
-            enterActiveClass: 'transition-opacity duration-300',
-            leaveFromClass: 'max-h-40',
-            leaveActiveClass: 'overflow-hidden transition-all duration-300 ease-in',
-            leaveToClass: 'max-h-0 opacity-0 !m-0'
+            timeout: 300,
+            classNames: {
+                enter: 'max-h-0 opacity-0',
+                enterActive: '!max-h-40 !opacity-100 overflow-hidden transition-all duration-300',
+                exit: 'max-h-40 opacity-100',
+                exitActive: '!max-h-0 !opacity-0 !m-0 overflow-hidden transition-all duration-300 ease-in'
+            }
         }
     },
     message: {
@@ -578,42 +597,66 @@ const Tailwind = {
             className: classNames('w-8 h-8 rounded-full bg-transparent transition duration-200 ease-in-out', 'ml-auto overflow-hidden relative', 'flex items-center justify-center', 'hover:bg-white/30')
         },
         transition: {
-            enterFromClass: 'opacity-0 translate-x-0 translate-y-2/4 translate-z-0',
-            enterActiveClass: 'transition-transform transition-opacity duration-300',
-            leaveFromClass: 'max-h-40',
-            leaveActiveClass: 'transition-all duration-500 ease-in',
-            leaveToClass: 'max-h-0 opacity-0 mb-0 overflow-hidden'
+            timeout: { enter: 300, exit: 500 },
+            classNames: {
+                enter: 'opacity-0 max-h-0 translate-x-0 translate-y-2/4 translate-z-0',
+                enterActive: '!max-h-40 !opacity-90 !translate-y-0 transition-transform transition-opacity duration-300',
+                exit: 'max-h-40 opacity-90',
+                exitActive: '!max-h-0 !opacity-0 !mb-0 overflow-hidden transition-all duration-500 ease-in'
+            }
         }
     },
     //BUTTONS
     button: {
         root: ({ props, context }) => ({
             className: classNames(
-                'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom h-full',
+                'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom',
                 'transition duration-200 ease-in-out',
-                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]', // Primary button focus
+                'focus:outline-none focus:outline-offset-0',
                 {
-                    'text-white bg-blue-500 border border-blue-500 hover:bg-blue-600 hover:border-blue-600': !props.link && props.severity === null && !props.text && !props.outlined && !props.plain,
-                    'text-blue-600 bg-transparent border-transparent': props.link
+                    'text-white dark:text-gray-900 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:border-blue-600 dark:hover:border-blue-500 focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        !props.link && props.severity === null && !props.text && !props.outlined && !props.plain,
+                    'text-blue-600 bg-transparent border-transparent focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.link
                 },
                 {
-                    'text-white bg-gray-500 border border-gray-500 hover:bg-gray-600 hover:border-gray-600': props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-green-500 border border-green-500 hover:bg-green-600 hover:border-green-600': props.severity === 'success' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-blue-500 border border-blue-500 hover:bg-blue-600 hover:border-blue-600': props.severity === 'info' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-orange-500 border border-orange-500 hover:bg-orange-600 hover:border-orange-600': props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-purple-500 border border-purple-500 hover:bg-purple-600 hover:border-purple-600': props.severity === 'help' && !props.text && !props.outlined && !props.plain,
-                    'text-white bg-red-500 border border-red-500 hover:bg-red-600 hover:border-red-600': props.severity === 'danger' && !props.text && !props.outlined && !props.plain
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(176,185,198,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(203,213,225,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'secondary',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(136,234,172,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(134,239,172,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'success',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(157,193,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(147,197,253,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'info',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(250,207,133,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,211,77,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'warning',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(212,170,251,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(216,180,254,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'help',
+                    'focus:shadow-[0_0_0_2px_rgba(255,255,255,1),0_0_0_4px_rgba(247,162,162,1),0_1px_2px_0_rgba(0,0,0,1)] dark:focus:shadow-[0_0_0_2px_rgba(28,33,39,1),0_0_0_4px_rgba(252,165,165,0.7),0_1px_2px_0_rgba(0,0,0,0)]':
+                        props.severity === 'danger'
+                },
+                {
+                    'text-white dark:text-gray-900 bg-gray-500 dark:bg-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-600 dark:hover:bg-gray-500 hover:border-gray-600 dark:hover:border-gray-500':
+                        props.severity === 'secondary' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-green-500 dark:bg-green-400 border border-green-500 dark:border-green-400 hover:bg-green-600 dark:hover:bg-green-500 hover:border-green-600 dark:hover:border-green-500':
+                        props.severity === 'success' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 dark:bg-blue-400 bg-blue-500 dark:bg-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-600 hover:border-blue-600 dark:hover:bg-blue-500 dark:hover:border-blue-500':
+                        props.severity === 'info' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-orange-500 dark:bg-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-600 dark:hover:bg-orange-500 hover:border-orange-600 dark:hover:border-orange-500':
+                        props.severity === 'warning' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-purple-500 dark:bg-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-600 dark:hover:bg-purple-500 hover:border-purple-600 dark:hover:border-purple-500':
+                        props.severity === 'help' && !props.text && !props.outlined && !props.plain,
+                    'text-white dark:text-gray-900 bg-red-500 dark:bg-red-400 border border-red-500 dark:border-red-400 hover:bg-red-600 dark:hover:bg-red-500 hover:border-red-600 dark:hover:border-red-500':
+                        props.severity === 'danger' && !props.text && !props.outlined && !props.plain
                 },
                 { 'shadow-lg': props.raised },
                 { 'rounded-md': !props.rounded, 'rounded-full': props.rounded },
                 {
                     'bg-transparent border-transparent': props.text && !props.plain,
-                    'text-blue-500 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
-                    'text-gray-500 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
-                    'text-green-500 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
-                    'text-orange-500 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
-                    'text-purple-500 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
-                    'text-red-500 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain
+                    'text-blue-500 dark:text-blue-400 hover:bg-blue-300/20': props.text && (props.severity === null || props.severity === 'info') && !props.plain,
+                    'text-gray-500 dark:text-grayy-400 hover:bg-gray-300/20': props.text && props.severity === 'secondary' && !props.plain,
+                    'text-green-500 dark:text-green-400 hover:bg-green-300/20': props.text && props.severity === 'success' && !props.plain,
+                    'text-orange-500 dark:text-orange-400 hover:bg-orange-300/20': props.text && props.severity === 'warning' && !props.plain,
+                    'text-purple-500 dark:text-purple-400 hover:bg-purple-300/20': props.text && props.severity === 'help' && !props.plain,
+                    'text-red-500 dark:text-red-400 hover:bg-red-300/20': props.text && props.severity === 'danger' && !props.plain
                 },
                 { 'shadow-lg': props.raised && props.text },
                 {
@@ -623,28 +666,35 @@ const Tailwind = {
                 },
                 {
                     'bg-transparent border': props.outlined && !props.plain,
-                    'text-blue-500 border border-blue-500 hover:bg-blue-300/20': props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
-                    'text-gray-500 border border-gray-500 hover:bg-gray-300/20': props.outlined && props.severity === 'secondary' && !props.plain,
-                    'text-green-500 border border-green-500 hover:bg-green-300/20': props.outlined && props.severity === 'success' && !props.plain,
-                    'text-orange-500 border border-orange-500 hover:bg-orange-300/20': props.outlined && props.severity === 'warning' && !props.plain,
-                    'text-purple-500 border border-purple-500 hover:bg-purple-300/20': props.outlined && props.severity === 'help' && !props.plain,
-                    'text-red-500 border border-red-500 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
+                    'text-blue-500 dark:text-blue-400 border border-blue-500 dark:border-blue-400 hover:bg-blue-300/20': props.outlined && (props.severity === null || props.severity === 'info') && !props.plain,
+                    'text-gray-500 dark:text-gray-400 border border-gray-500 dark:border-gray-400 hover:bg-gray-300/20': props.outlined && props.severity === 'secondary' && !props.plain,
+                    'text-green-500 dark:text-green-400 border border-green-500 dark:border-green-400 hover:bg-green-300/20': props.outlined && props.severity === 'success' && !props.plain,
+                    'text-orange-500 dark:text-orange-400 border border-orange-500 dark:border-orange-400 hover:bg-orange-300/20': props.outlined && props.severity === 'warning' && !props.plain,
+                    'text-purple-500 dark:text-purple-400 border border-purple-500 dark:border-purple-400 hover:bg-purple-300/20': props.outlined && props.severity === 'help' && !props.plain,
+                    'text-red-500 dark:text-red-400 border border-red-500 dark:border-red-400 hover:bg-red-300/20': props.outlined && props.severity === 'danger' && !props.plain
                 },
                 { 'px-4 py-3 text-base': props.size === null, 'text-xs py-2 px-3': props.size === 'small', 'text-xl py-3 px-4': props.size === 'large' },
+                { 'flex-column': props.iconPos == 'top' || props.iconPos == 'bottom' },
                 { 'opacity-60 pointer-events-none cursor-default': context?.disabled }
             )
         }),
         label: ({ props }) => ({
-            className: classNames('flex-1', 'duration-200', 'font-bold', {
-                'hover:underline': props.link
-            })
+            className: classNames(
+                'flex-1',
+                'duration-200',
+                'font-bold',
+                {
+                    'hover:underline': props.link
+                },
+                { 'invisible w-0': props.label == null }
+            )
         }),
         icon: ({ props }) => ({
             className: classNames('mx-0', {
                 'mr-2': props.iconPos == 'left' && props.label != null,
-                'ml-2': props.iconPos == 'right' && props.label != null,
+                'ml-2 order-1': props.iconPos == 'right' && props.label != null,
                 'mb-2': props.iconPos == 'top' && props.label != null,
-                'mt-2': props.iconPos == 'bottom' && props.label != null
+                'mt-2 order-2': props.iconPos == 'bottom' && props.label != null
             })
         }),
         badge: ({ props }) => ({
@@ -1062,18 +1112,12 @@ const Tailwind = {
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
-            className: classNames(
-                'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-                'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
-                {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-                }
-            )
+            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
+            })
         }),
         itemgroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
@@ -1102,13 +1146,18 @@ const Tailwind = {
             })
         }),
         input: {
-            root: {
-                className: classNames(
-                    'font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none rounded-lg',
-                    'hover:border-blue-500' //Hover
-                )
-            }
+            root: ({ props }) => ({
+                className: classNames('font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none', 'hover:border-blue-500', {
+                    'rounded-lg': !props.showIcon,
+                    'border-r-0 rounded-l-lg': props.showIcon
+                })
+            })
         },
+        dropdownbutton: ({ props }) => ({
+            root: {
+                className: classNames({ 'rounded-l-none': props.showIcon })
+            }
+        }),
         panel: ({ props }) => ({
             className: classNames('bg-white dark:bg-gray-900', 'min-w-[350px]', {
                 'shadow-md border-0 absolute': !props.inline,
@@ -1218,18 +1267,12 @@ const Tailwind = {
         wrapper: 'overflow-auto',
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
-            className: classNames(
-                'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-                'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
-                {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-                }
-            )
+            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
+            })
         }),
         itemgroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
@@ -1314,18 +1357,12 @@ const Tailwind = {
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
-            className: classNames(
-                'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-                'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
-                {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-                }
-            )
+            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
+            })
         }),
         checkboxContainer: {
             className: classNames('inline-flex cursor-pointer select-none align-bottom relative', 'mr-2', 'w-6 h-6')
@@ -1457,18 +1494,12 @@ const Tailwind = {
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
-            className: classNames(
-                'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-                'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
-                {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-500 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-                }
-            )
+            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
+            })
         }),
         itemgroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
@@ -1676,10 +1707,13 @@ const Tailwind = {
             })
         }),
         transition: {
-            enterFromClass: 'opacity-0',
-            enterActiveClass: 'transition-opacity duration-150',
-            leaveActiveClass: 'transition-opacity duration-150',
-            leaveToClass: 'opacity-0'
+            timeout: 150,
+            classNames: {
+                enter: 'opacity-0',
+                enterActive: '!opacity-100 transition-opacity duration-150',
+                exit: 'opacity-100',
+                exitActive: '!opacity-0 transition-opacity duration-150'
+            }
         }
     },
     terminal: {
@@ -1736,8 +1770,11 @@ const Tailwind = {
         icon: 'text-gray-600 dark:text-white/70 mr-2',
         label: 'text-gray-600 dark:text-white/70',
         transition: {
-            enterFromClass: 'opacity-0',
-            enterActiveClass: 'transition-opacity duration-250'
+            timeout: { enter: 250 },
+            classNames: {
+                enter: 'opacity-0',
+                enterActive: '!opacity-100 transition-opacity duration-250'
+            }
         }
     },
     dock: {
@@ -1835,14 +1872,14 @@ const Tailwind = {
         }),
         action: ({ context }) => ({
             className: classNames('select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative', 'py-3 px-5 select-none', {
-                'max-[960px]:pl-9': context.level === 1,
-                'max-[960px]:pl-14': context.level === 2
+                'pl-9 sm:pl-5': context.level === 1,
+                'pl-14 sm:pl-5': context.level === 2
             })
         }),
         icon: 'mr-2',
         submenuicon: ({ props }) => ({
-            className: classNames('max-[960px]:ml-auto', {
-                'ml-2': props.root,
+            className: classNames({
+                'ml-auto sm:ml-2': props.root,
                 'ml-auto': !props.root
             })
         }),
@@ -2128,10 +2165,13 @@ const Tailwind = {
         },
         closeicon: 'w-6 h-6',
         transition: {
-            enterFromClass: 'opacity-0 scale-75',
-            enterActiveClass: 'transition-all duration-150 ease-in-out',
-            leaveActiveClass: 'transition-all duration-150 ease-in',
-            leaveToClass: 'opacity-0 scale-75'
+            timeout: 150,
+            classNames: {
+                enter: 'opacity-0 scale-75',
+                enterActive: '!opacity-100 !scale-100 transition-all duration-150 ease-in-out',
+                exit: 'opacity-100 scale-100',
+                exitActive: '!opacity-0 !scale-75 transition-all duration-150 ease-in'
+            }
         }
     },
     galleria: {
@@ -2211,10 +2251,13 @@ const Tailwind = {
             className: classNames('absolute bottom-0 left-0 w-full', 'bg-black/50 text-white p-4')
         },
         transition: {
-            enterFromClass: 'opacity-0 scale-75',
-            enterActiveClass: 'transition-all duration-150 ease-in-out',
-            leaveActiveClass: 'transition-all duration-150 ease-in',
-            leaveToClass: 'opacity-0 scale-75'
+            timeout: 150,
+            classNames: {
+                enter: 'opacity-0 scale-75',
+                enterActive: '!opacity-100 !scale-100 transition-all duration-150 ease-in-out',
+                exit: 'opacity-100 scale-100',
+                exitActive: '!opacity-0 !scale-75 transition-all duration-150 ease-in'
+            }
         }
     },
     carousel: {
@@ -2739,10 +2782,13 @@ const Tailwind = {
             )
         },
         transition: {
-            enterFromClass: '!transition-none',
-            enterActiveClass: '!transition-none',
-            leaveActiveClass: '!transition-none',
-            leaveToClass: '!transition-none'
+            timeout: 0,
+            classNames: {
+                enter: '!transition-none',
+                enterActive: '!transition-none',
+                exit: '!transition-none',
+                exitActive: '!transition-none'
+            }
         }
     },
     paginator: {
@@ -3035,6 +3081,9 @@ const Tailwind = {
                     'dark:text-white/70' //Dark Mode
                 )
             }),
+            sort: {
+                className: 'inline-block align-middle'
+            },
             sorticon: ({ context }) => ({
                 className: classNames('ml-2', {
                     'text-blue-700 dark:text-white/80': context.sorted,

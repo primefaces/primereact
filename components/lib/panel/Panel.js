@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -244,7 +244,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
             id: idState,
             ref: elementRef,
             style: props.style,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         PanelBase.getOtherProps(props),
         ptm('root')

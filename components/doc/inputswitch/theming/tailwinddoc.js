@@ -39,7 +39,7 @@ export default function UnstyledDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
         </div>
     );

@@ -44,7 +44,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState([]);
 
     return (
-        <div className="card p-fluid">
+        <div className="card">
             <Chips value={value} onChange={(e) => setValue(e.value)} />
         </div>
     )

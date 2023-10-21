@@ -136,7 +136,7 @@ export default function UnstyledDemo() {
     ];
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name" 
                 placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
         </div>

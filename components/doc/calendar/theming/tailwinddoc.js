@@ -22,13 +22,18 @@ const Tailwind = {
             })
         }),
         input: {
-            root: {
-                className: classNames(
-                    'font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none rounded-lg',
-                    'hover:border-blue-500' //Hover
-                )
-            }
+            root: ({ props }) => ({
+                className: classNames('font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none', 'hover:border-blue-500', {
+                    'rounded-lg': !props.showIcon,
+                    'border-r-0 rounded-l-lg': props.showIcon
+                })
+            })
         },
+        dropdownbutton: ({ props }) => ({
+            root: {
+                className: classNames({ 'rounded-l-none': props.showIcon })
+            }
+        }),
         panel: ({ props }) => ({
             className: classNames('bg-white dark:bg-gray-900', 'min-w-[350px]', {
                 'shadow-md border-0 absolute': !props.inline,
@@ -93,14 +98,15 @@ const Tailwind = {
             className: classNames('my-2')
         },
         year: ({ context }) => ({
-            className:
-                ('w-1/2 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
+            className: classNames(
+                'w-1/2 inline-flex items-center justify-center cursor-pointer overflow-hidden relative',
                 'p-2 transition-shadow duration-200 rounded-lg',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 {
                     'text-gray-600 dark:text-white/70 bg-transprent hover:bg-gray-200 dark:hover:bg-gray-800/80': !context.selected && !context.disabled,
                     'text-blue-700 bg-blue-100 hover:bg-blue-200': context.selected && !context.disabled
-                })
+                }
+            )
         }),
         timepicker: {
             className: classNames('flex justify-center items-center', 'border-t-1 border-solid border-gray-300 p-2')
@@ -130,7 +136,6 @@ const Tailwind = {
         },
         transition: TRANSITIONS.overlay
     }
-}
         `
     };
 
@@ -143,7 +148,7 @@ export default function UnstyledDemo() {
     const [date, setDate] = useState(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Calendar value={date} onChange={(e) => setDate(e.value)} />
         </div>
     )

@@ -1,30 +1,38 @@
 import React from 'react';
 import { DocComponent } from '../../components/doc/common/doccomponent';
-import { CustomizationDocDoc } from '../../components/doc/tailwind/customizationdoc';
-import { ExampleDoc } from '../../components/doc/tailwind/exampledoc';
-import { SetupDoc } from '../../components/doc/tailwind/setupdoc';
+import { CSSLayerDoc } from '../../components/doc/tailwind/csslayerdoc';
+import { ExampleDoc } from '../../components/doc/tailwind/unstyledmode/exampledoc';
+import { SetupDoc } from '../../components/doc/tailwind/unstyledmode/setupdoc';
 
 const TailwindDemo = () => {
     const docs = [
         {
-            id: 'setup',
-            label: 'Setup',
-            component: SetupDoc
+            id: 'csslayer',
+            label: 'CSS Layer',
+            component: CSSLayerDoc
         },
         {
-            id: 'customization',
-            label: 'Customization',
-            component: CustomizationDocDoc
-        },
-        {
-            id: 'example',
-            label: 'Example',
-            component: ExampleDoc
+            id: 'unstyledmode',
+            label: 'Unstyled Mode',
+            description:
+                'In unstyled mode, the exclusive Tailwind integration of PrimeReact is a great choice for developers who want the flexibility of Tailwind with the convenience of a UI Component library. Tailwind is a perfect match for the unstyled mode of PrimeReact to implement design systems. A built-in Tailwind theme as a pass through preset based on PrimeOne Design is even available to get started in no time. In upcoming iterations, a preset gallery will be available to share implementations developed by the PrimeReact community.',
+            children: [
+                {
+                    id: 'setup',
+                    label: 'Setup',
+                    component: SetupDoc
+                },
+                {
+                    id: 'example',
+                    label: 'Example',
+                    component: ExampleDoc
+                }
+            ]
         }
     ];
 
     const description = `
-    The exclusive Tailwind integration of PrimeReact is a great choice for developers who want the flexibility of Tailwind with the convenience of a UI Component library. Tailwind simply fits perfectly to the unstyled mode of PrimeReact to implement design systems. A <b> built-in Tailwind theme </b> based on <a href="/uikit" class="font-semibold hover:underline text-primary"> PrimeOne Design </a> is even available to get started in no time. In the upcoming iterations, PrimeReact will provide more presets to implement various design systems.
+    Tailwind CSS is a popular utility first CSS library that fits perfectly to the unstyled mode to skin the entire UI suite with a design system of your choice.
     `;
 
     return <DocComponent title="Tailwind - PrimeReact" header="Tailwind CSS" description={description} componentDocs={docs} hideTabMenu />;

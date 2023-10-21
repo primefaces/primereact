@@ -1,7 +1,7 @@
 {
     "name": "primereact",
     "private": false,
-    "version": "11.0.0-SNAPSHOT",
+    "version": "10.0.5",
     "scripts": {
         "dev": "next dev",
         "start": "next start",
@@ -16,8 +16,9 @@
         "lint": "next lint --max-warnings=0 --ignore-path .gitignore .",
         "lint:fix": "next lint --fix --ignore-path .gitignore .",
         "type:check": "tsc",
-        "test": "jest --watch --coverage",
-        "test:check": "jest --watchAll=false --coverage",
+        "test": "jest --watch --coverage --silent",
+        "test:check": "jest --watchAll=false --coverage --silent",
+        "test:debug": "jest --watch --coverage",
         "apidoc": "node ./api-generator/build-apidoc.js",
         "apiwebtypes": "node ./api-generator/build-webtypes.js"
     },

@@ -12,7 +12,7 @@ import { ComponentHooks } from '../componentbase/componentbase';
 import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
-import { FormBooleanEvent } from '../ts-helpers';
+import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type CheckboxPassThroughType<T> = PassThroughType<T, CheckboxPassThroughMethodOptions>;
@@ -93,18 +93,18 @@ export interface CheckboxState {
 /**
  * Custom change event.
  * @see {@link CheckboxProps.onChange}
- * @extends {FormBooleanEvent}
+ * @extends {FormEvent }
  * @event
  */
-interface CheckboxChangeEvent extends FormBooleanEvent {}
+interface CheckboxChangeEvent extends FormEvent {}
 
 /**
  * Custom click event.
  * @see {@link CheckboxProps.onClick}
- * @extends {FormBooleanEvent}
+ * @extends {FormEvent }
  * @event
  */
-interface CheckboxClickEvent extends FormBooleanEvent {}
+interface CheckboxClickEvent extends FormEvent {}
 
 /**
  * Defines valid properties in Checkbox component. In addition to these, all properties of HTMLDivElement can be used in this component.

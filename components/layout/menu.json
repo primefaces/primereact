@@ -320,10 +320,6 @@
                             "to": "/panelmenu"
                         },
                         {
-                            "name": "SlideMenu",
-                            "to": "/slidemenu"
-                        },
-                        {
                             "name": "Steps",
                             "to": "/steps"
                         },
@@ -646,6 +642,11 @@
             ]
         },
         {
+            "name": "PrimeTV",
+            "icon": "pi pi-youtube",
+            "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
+        },
+        {
             "name": "Discover",
             "icon": "pi pi-search",
             "children": [
@@ -656,10 +657,6 @@
                 {
                     "name": "Roadmap",
                     "to": "/roadmap"
-                },
-                {
-                    "name": "PrimeTV",
-                    "href": "https://www.youtube.com/channel/UCTgmp69aBOlLnPEqlUyetWw"
                 },
                 {
                     "name": "Source Code",

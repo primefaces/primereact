@@ -87,12 +87,12 @@ export default function UnstyledDemo() {
     return (
         <div>
             <div className="card">
-                <Toast ref={toast}></Toast>
-                <ProgressBar value={value}></ProgressBar>
+                <ProgressBar value={50}></ProgressBar>
             </div>
 
             <div className="card">
-                <ProgressBar value={50}></ProgressBar>
+                <Toast ref={toast}></Toast>
+                <ProgressBar value={value}></ProgressBar>
             </div>
         </div>
     );

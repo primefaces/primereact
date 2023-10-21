@@ -1,5 +1,81 @@
 # Changelog
 
+## [10.0.5](https://github.com/primefaces/primereact/tree/10.0.5) (2023-10-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.4...10.0.5)
+
+**Fixed bugs:**
+
+- Overlay animations are not working with Tailwind preset [\#5117](https://github.com/primefaces/primereact/issues/5117)
+
+## [10.0.4](https://github.com/primefaces/primereact/tree/10.0.4) (2023-10-19)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.3...10.0.4)
+
+**Implemented New Features and Enhancements:**
+
+- MultiSelect: Formatting selected items with spaces after the commas [\#5100](https://github.com/primefaces/primereact/issues/5100)
+- Tree: onDrop should not attempt a copy of node values [\#5080](https://github.com/primefaces/primereact/issues/5080)
+
+**Fixed bugs:**
+
+- Tailwind preset animations are not working as expected [\#5110](https://github.com/primefaces/primereact/issues/5110)
+- Slider (range): Warning: NaN is an invalid value for the left css style property. [\#5111](https://github.com/primefaces/primereact/issues/5111)
+- Inplace Component Doc Image Responsive Issue [\#5103](https://github.com/primefaces/primereact/issues/5103)
+- TreeSelect: Incorrect TypeScript types for filterTemplate options [\#5102](https://github.com/primefaces/primereact/issues/5102)
+- TreeSelect: With selected value, close icon looks cluttered [\#5012](https://github.com/primefaces/primereact/issues/5012)
+- TreeSelect: Clear Icon Misplacement [\#5020](https://github.com/primefaces/primereact/issues/5020)
+- SelectButton: AllowEmpty not working [\#5094](https://github.com/primefaces/primereact/issues/5094)
+- Toast/Messages: remove not working [\#5083](https://github.com/primefaces/primereact/issues/5083)
+- Fieldset: Missing root className pass [\#5088](https://github.com/primefaces/primereact/issues/5088)
+- Panel: Missing props.className passthrough [\#5087](https://github.com/primefaces/primereact/issues/5087)
+- useDebounce: Missing type [\#5085](https://github.com/primefaces/primereact/issues/5085)
+- Message: Icon shrinks as text in message grows larger [\#5078](https://github.com/primefaces/primereact/issues/5078)
+
+## [9.6.3](https://github.com/primefaces/primereact/tree/9.6.3) (2023-10-18)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.2...9.6.3)
+
+**Fixed bugs:**
+
+- DataTable: Invalid attribute warning when passing custom icon to rowReorderIcon [\#5109](https://github.com/primefaces/primereact/issues/5109)
+
+## [10.0.3](https://github.com/primefaces/primereact/tree/10.0.3) (2023-10-11)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.2...10.0.3)
+
+**Deprecated:**
+
+- SlideMenu: Deprecate from PrimeReact [\#5063](https://github.com/primefaces/primereact/issues/5063)
+- Remove FullCalendar theme support  [\#5062](https://github.com/primefaces/primereact/issues/5062)
+
+**Implemented New Features and Enhancements:**
+
+- Improve block/unblockScroll architecture [\#5077](https://github.com/primefaces/primereact/issues/5077)
+- SelectButton: Add allowEmpty property [\#5073](https://github.com/primefaces/primereact/issues/5073)
+- DataTable: Clicking the center mouse button on a row should open the row item in a new tab [\#5051](https://github.com/primefaces/primereact/issues/5051)
+- Dropdown: Allow to pass "className" with a group as well [\#5047](https://github.com/primefaces/primereact/issues/5047)
+
+**Fixed bugs:**
+
+- Dock: Toast Component not working properly [\#5076](https://github.com/primefaces/primereact/issues/5076)
+- DataTable bug when clicked in rowExpansion icon with selectionMode="single". [\#5074](https://github.com/primefaces/primereact/issues/5074)
+- Editor layer defect [\#5065](https://github.com/primefaces/primereact/issues/5065)
+- ContextMenu: Broken with nested items \(10.0\) [\#5064](https://github.com/primefaces/primereact/issues/5064)
+- Menu: Menu with popup prop passed doesnot close on Escape keypress. [\#5044](https://github.com/primefaces/primereact/issues/5044)
+- DataTable: Checkbox onChange stops propagation [\#5039](https://github.com/primefaces/primereact/issues/5039)
+- Scroll Panel: Scroll Panel does not scroll with mouse [\#5038](https://github.com/primefaces/primereact/issues/5038)
+- Context Menu In Datatable [\#5035](https://github.com/primefaces/primereact/issues/5035)
+- MultiSelect: FilterTemplate prop not working, execution error [\#5028](https://github.com/primefaces/primereact/issues/5028)
+- Calendar: When stepMinute is set, the time value does not "snap" on initial date change [\#5027](https://github.com/primefaces/primereact/issues/5027)
+- UseStorage hook window listener does not parse JSON [\#5026](https://github.com/primefaces/primereact/issues/5026)
+- Fixed lara blue state colors [\#5015](https://github.com/primefaces/primereact/issues/5015)
+- Progress bar determinate type doesnt apply classNames passed through props [\#5003](https://github.com/primefaces/primereact/issues/5003)
+- DataTable: Filter Menu Icon disappeared after sorting [\#4994](https://github.com/primefaces/primereact/issues/4994)
+- Column: headerClassName [\#4993](https://github.com/primefaces/primereact/issues/4993)
+- MultiSelect: Doesn't render items [\#4988](https://github.com/primefaces/primereact/issues/4988)
+- InputMask does not fire  onComplete method when a slotChar is present [\#3240](https://github.com/primefaces/primereact/issues/3240)
+
 ## [10.0.2](https://github.com/primefaces/primereact/tree/10.0.2) (2023-09-29)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.1...10.0.2)

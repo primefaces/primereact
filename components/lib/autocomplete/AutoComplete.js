@@ -201,8 +201,10 @@ export const AutoComplete = React.memo(
             if (props.autoHighlight && props.suggestions && props.suggestions.length) {
                 const element = getScrollableElement().firstChild.firstChild;
 
-                !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
-                element.current.setAttribute('data-p-highlight', true);
+                if (element) {
+                    !isUnstyled() && DomHandler.addClass(element, 'p-highlight');
+                    element.setAttribute('data-p-highlight', true);
+                }
             }
         };
 

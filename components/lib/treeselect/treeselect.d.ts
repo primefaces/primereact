@@ -278,14 +278,64 @@ interface TreeSelectFilterValueChangeEvent {
 }
 
 /**
+ * Custom filter template options.
+ */
+interface TreeSelectFilterTemplateOptions {
+    /**
+     * Style class of the filter.
+     */
+    className: string;
+    /**
+     * Whether the option is disabled or not
+     */
+    disabled?: boolean;
+    /**
+     * The filter element.
+     */
+    element: HTMLDivElement;
+    /**
+     * The filter.
+     */
+    filter?: string;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<TreeSelect> | string;
+    /**
+     * Style class of the filter icon.
+     */
+    filterIconClassName: string;
+    /**
+     * Browser change event for the filter input element.
+     */
+    filterInputChange?: React.ChangeEvent<HTMLInputElement>;
+    /**
+     * The props of the filter input element.
+     */
+    filterInputProps?: any;
+    /**
+     * The filter input options.
+     */
+    filterOptions?: TreeSelectFilterOptions;
+    /**
+     * The placeholder of the filter element.
+     */
+    filterPlaceholder?: string;
+    /**
+     * Custom filter template.
+     */
+    filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
+}
+
+/**
  * Custom filter options.
  */
 interface TreeSelectFilterOptions {
     /**
      * Used to filter options
-     * @param {KeyboardEvent} event - Browser event.
+     * @param { React.ChangeEvent<HTMLInputElement>} event - Browser event.
      */
-    filter?: (event?: KeyboardEvent) => void;
+    filter?: (event?: React.ChangeEvent<HTMLInputElement>) => void;
     /**
      * Used to reset the filtered options
      */
@@ -384,9 +434,9 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterPlaceholder?: string | undefined;
     /**
-     * The template for filter element.
+     * Custom template for the filter element.
      */
-    filterTemplate?: React.ReactNode | ((options: TreeSelectFilterOptions) => React.ReactNode);
+    filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
     /**
      * When filtering is enabled, the value of input field.
      */

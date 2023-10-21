@@ -829,6 +829,10 @@ export default class DomHandler {
         }
     }
 
+    static calculateBodyScrollbarWidth() {
+        return window.innerWidth - document.documentElement.offsetWidth;
+    }
+
     static getBrowser() {
         if (!this.browser) {
             let matched = this.resolveUserAgent();
@@ -858,6 +862,21 @@ export default class DomHandler {
             browser: match[1] || '',
             version: match[2] || '0'
         };
+    }
+
+    static blockBodyScroll(className = 'p-overflow-hidden') {
+        /* PR Ref: https://github.com/primefaces/primereact/pull/4976
+         * @todo This method is called several times after this PR. Refactors will be made to prevent this in future releases.
+         */
+        const hasScrollbarWidth = !!document.body.style.getPropertyValue('--scrollbar-width');
+
+        !hasScrollbarWidth && document.body.style.setProperty('--scrollbar-width', this.calculateBodyScrollbarWidth() + 'px');
+        this.addClass(document.body, className);
+    }
+
+    static unblockBodyScroll(className = 'p-overflow-hidden') {
+        document.body.style.removeProperty('--scrollbar-width');
+        this.removeClass(document.body, className);
     }
 
     static isVisible(element) {

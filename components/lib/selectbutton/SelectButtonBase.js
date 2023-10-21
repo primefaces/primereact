@@ -24,6 +24,7 @@ export const SelectButtonBase = ComponentBase.extend({
         tabIndex: null,
         multiple: false,
         unselectable: true,
+        allowEmpty: true,
         disabled: false,
         style: null,
         className: null,

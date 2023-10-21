@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 let messageIdx = 0;
 
@@ -75,9 +74,12 @@ export const Toast = React.memo(
         };
 
         const remove = (messageInfo) => {
-            setMessagesState((m) => m.filter((msg) => msg._pId !== messageInfo._pId));
+            // allow removal by ID or by message equality
+            const removeMessage = messageInfo._pId ? messageInfo.message : messageInfo;
 
-            props.onRemove && props.onRemove(messageInfo.message);
+            setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
+
+            props.onRemove && props.onRemove(removeMessage);
         };
 
         const onClose = (messageInfo) => {

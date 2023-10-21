@@ -70,8 +70,7 @@ export const Galleria = React.memo(
         };
 
         const onEnter = () => {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
-            document.body.style.setProperty('--scrollbar-width', DomHandler.calculateScrollbarWidth() + 'px');
+            DomHandler.blockBodyScroll();
         };
 
         const onEntering = () => {
@@ -84,8 +83,7 @@ export const Galleria = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            document.body.style.removeProperty('--scrollbar-width');
+            DomHandler.unblockBodyScroll();
             !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 

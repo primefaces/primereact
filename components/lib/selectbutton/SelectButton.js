@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { SelectButtonBase } from './SelectButtonBase';
 import { SelectButtonItem } from './SelectButtonItem';
-import { PrimeReactContext } from '../api/Api';
 
 export const SelectButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -23,7 +23,7 @@ export const SelectButton = React.memo(
 
             let selected = isSelected(event.option);
 
-            if (selected && !props.unselectable) {
+            if (selected && !(props.unselectable && props.allowEmpty)) {
                 return;
             }
 

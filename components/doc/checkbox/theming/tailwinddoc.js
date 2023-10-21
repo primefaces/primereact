@@ -39,7 +39,7 @@ export default function UnstyledDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Checkbox onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         </div>
     )

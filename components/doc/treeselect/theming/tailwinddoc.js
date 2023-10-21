@@ -57,7 +57,7 @@ export default function UnstyledDemo() {
     }, []);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <TreeSelect value={selectedNodeKey} onChange={(e) => setSelectedNodeKey(e.value)} options={nodes} 
                 className="md:w-20rem w-full" placeholder="Select Item"></TreeSelect>
         </div>

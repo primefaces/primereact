@@ -7,6 +7,7 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -25,6 +26,10 @@ export const Menu = React.memo(
         useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
+
+        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
+            hide(event);
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,

@@ -9751,11 +9751,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "any"
                         },
                         {
                             "name": "checked",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -9763,7 +9763,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormBooleanTarget"
+                            "type": "FormTarget<any>"
                         }
                     ]
                 },
@@ -9781,11 +9781,11 @@
                             "name": "value",
                             "optional": false,
                             "readonly": false,
-                            "type": "boolean"
+                            "type": "any"
                         },
                         {
                             "name": "checked",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean"
                         },
@@ -9793,7 +9793,7 @@
                             "name": "target",
                             "optional": false,
                             "readonly": false,
-                            "type": "FormBooleanTarget"
+                            "type": "FormTarget<any>"
                         }
                     ]
                 }
@@ -13444,6 +13444,33 @@
         }
     },
     "componentbase/componentbase": {
+        "functions": {
+            "description": "Defines the custom functions used by the module.",
+            "values": {
+                "useHandleStyle": {
+                    "name": "useHandleStyle",
+                    "parameters": [
+                        {
+                            "name": "styles",
+                            "type": "string",
+                            "description": "The style text content."
+                        },
+                        {
+                            "name": "isUnstyled",
+                            "type": "Function",
+                            "description": "Flag removes component related styles in the core."
+                        },
+                        {
+                            "name": "config",
+                            "type": "Object",
+                            "description": "The component configuration."
+                        }
+                    ],
+                    "returnType": "void",
+                    "description": "Custom hook to use to load style options for a component."
+                }
+            }
+        },
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
@@ -16773,6 +16800,32 @@
                             "description": "Callback to invoke when a row is navigated away from with mouse."
                         },
                         {
+                            "name": "onRowPointerDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerDown event occurs."
+                        },
+                        {
+                            "name": "onRowPointerUp",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerUp event occurs."
+                        },
+                        {
                             "name": "onRowReorder",
                             "parameters": [
                                 {
@@ -17369,6 +17422,33 @@
                         }
                     ],
                     "extendedBy": "DataTableRowEditEvent,DataTableRowEditCompleteEvent"
+                },
+                "DataTableRowPointerEvent": {
+                    "description": "Custom row pointer event.",
+                    "relatedProp": "onRowPointerDown",
+                    "props": [
+                        {
+                            "name": "data",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "DataTableValue",
+                            "description": "Original rows data."
+                        },
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "PointerEvent<HTMLElement>",
+                            "description": "Browser event."
+                        },
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Clicked row data index"
+                        }
+                    ]
                 },
                 "DataTableRowClickEvent": {
                     "description": "Custom row click event.",
@@ -19524,6 +19604,32 @@
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a row is double clicked."
+                        },
+                        {
+                            "name": "onRowPointerDown",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerDown event occurs."
+                        },
+                        {
+                            "name": "onRowPointerUp",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "DataTableRowPointerEvent",
+                                    "description": "Custom click event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a row pointerUp event occurs."
                         },
                         {
                             "name": "onRowEditCancel",
@@ -25439,7 +25545,7 @@
                     "parameters": [
                         {
                             "name": "initialValue",
-                            "type": "any",
+                            "type": "S",
                             "description": "The initial value for debounce."
                         },
                         {
@@ -25448,7 +25554,7 @@
                             "description": "The delay in milliseconds."
                         }
                     ],
-                    "returnType": "any[]",
+                    "returnType": "[S, S, React.Dispatch<React.SetStateAction<S>>]",
                     "description": "Custom hook to use a debounced value."
                 },
                 "useMouse": {
@@ -29017,7 +29123,7 @@
                             "name": "decrementButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputNumberPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "IconType<InputNumberProps>",
                             "default": "",
                             "description": "Style class of the decrement button."
                         },
@@ -29049,7 +29155,7 @@
                             "name": "incrementButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputNumberPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "IconType<InputNumberProps>",
                             "default": "",
                             "description": "Style class of the increment button."
                         },
@@ -32248,6 +32354,14 @@
                             "type": "ReactNode",
                             "default": "",
                             "description": "Used to get the child elements of the component."
+                        },
+                        {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the Menu Popup."
                         },
                         {
                             "name": "model",
@@ -41326,6 +41440,14 @@
                     "description": "Defines valid properties in SelectButton component. In addition to these, all properties of HTMLDivElement can be used in this component.",
                     "values": [
                         {
+                            "name": "allowEmpty",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Whether selection can not be cleared."
+                        },
+                        {
                             "name": "ariaLabelledBy",
                             "optional": true,
                             "readonly": false,
@@ -41443,7 +41565,8 @@
                             "readonly": false,
                             "type": "boolean",
                             "default": "true",
-                            "description": "Whether selection can be cleared."
+                            "description": "Whether selection can be cleared.",
+                            "deprecated": "Use 'allowEmpty' property instead."
                         },
                         {
                             "name": "unstyled",
@@ -49627,7 +49750,7 @@
                             "readonly": false,
                             "type": "ReactNode | Function",
                             "default": "",
-                            "description": "The template for filter element."
+                            "description": "Custom template for the filter element."
                         },
                         {
                             "name": "filterValue",
@@ -50344,6 +50467,90 @@
                             "optional": false,
                             "readonly": false,
                             "type": "boolean"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TreeSelectFilterTemplateOptions": {
+                    "description": "Custom filter template options.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "className",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Whether the option is disabled or not"
+                        },
+                        {
+                            "name": "element",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "HTMLDivElement",
+                            "description": "The filter element."
+                        },
+                        {
+                            "name": "filter",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The filter."
+                        },
+                        {
+                            "name": "filterIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "IconType<TreeSelect>",
+                            "description": "Icon of the filter."
+                        },
+                        {
+                            "name": "filterIconClassName",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Style class of the filter icon."
+                        },
+                        {
+                            "name": "filterInputChange",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ChangeEvent<HTMLInputElement>",
+                            "description": "Browser change event for the filter input element."
+                        },
+                        {
+                            "name": "filterInputProps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "The props of the filter input element."
+                        },
+                        {
+                            "name": "filterOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TreeSelectFilterOptions",
+                            "description": "The filter input options."
+                        },
+                        {
+                            "name": "filterPlaceholder",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The placeholder of the filter element."
+                        },
+                        {
+                            "name": "filterTemplate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ReactNode | Function",
+                            "description": "Custom filter template."
                         }
                     ],
                     "callbacks": []
@@ -52473,7 +52680,7 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "AutoCompleteChangeEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
+                    "extendedBy": "AutoCompleteChangeEvent,CheckboxChangeEvent,CheckboxClickEvent,ChipsChangeEvent,ColorPickerChangeEvent,DropdownChangeEvent,InputMaskChangeEvent,InputNumberValueChangeEvent,RadioButtonChangeEvent,RadioButtonClickEvent,RatingChangeEvent,SelectButtonChangeEvent,TreeSelectChangeEvent,TriStateCheckboxChangeEvent"
                 },
                 "FormBooleanEvent": {
                     "relatedProp": "",
@@ -52515,7 +52722,7 @@
                             "returnType": "void"
                         }
                     ],
-                    "extendedBy": "CheckboxChangeEvent,CheckboxClickEvent,InputSwitchChangeEvent"
+                    "extendedBy": "InputSwitchChangeEvent"
                 }
             }
         },

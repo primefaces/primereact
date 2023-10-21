@@ -63,7 +63,7 @@ export default function UnstyledDemo() {
     const [color, setColor] = useState(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <ColorPicker value={color} onChange={(e) => setColor(e.value)} />
         </div>
     )

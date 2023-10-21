@@ -44,7 +44,7 @@ export default function UnstyledDemo() {
     const [checked, setChecked] = useState(false);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <ToggleButton checked={checked} onChange={(e) => setChecked(e.value)} className="w-8rem" />
         </div>
     );

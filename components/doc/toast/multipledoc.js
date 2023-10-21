@@ -7,10 +7,6 @@ import { DocSectionText } from '../common/docsectiontext';
 export function MultipleDoc(props) {
     const toast = useRef(null);
 
-    const clear = () => {
-        toast.current.clear();
-    };
-
     const showMultiple = () => {
         toast.current.show([
             { severity: 'success', summary: 'Success', detail: 'Message Content', life: 3000 },
@@ -24,19 +20,14 @@ export function MultipleDoc(props) {
         basic: `
 <Toast ref={toast} />
 <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-<Button onClick={clear} label="Clear" />
         `,
         javascript: `
 import React, { useRef } from 'react';
-import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 
 export default function MultipleDemo() {
     const toast = useRef(null);
-
-    const clear = () => {
-        toast.current.clear();
-    }
 
     const showMultiple = () => {
         toast.current.show([
@@ -50,24 +41,18 @@ export default function MultipleDemo() {
     return (
         <div className="card flex justify-content-center gap-2">
             <Toast ref={toast} />
-            <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-            <Button onClick={clear} label="Clear" />
+            <Button onClick={showMultiple} label="Multiple" severity='warning' />
         </div>
     )
 }
         `,
         typescript: `
 import React, { useRef } from 'react';
-import { flushSync } from 'react-dom';
-import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 
 export default function MultipleDemo() {
     const toast = useRef<Toast>(null);
-
-    const clear = () => {
-        toast.current?.clear();
-    }
 
     const showMultiple = () => {
         toast.current?.show([
@@ -81,8 +66,7 @@ export default function MultipleDemo() {
     return (
         <div className="card flex justify-content-center gap-2">
             <Toast ref={toast} />
-            <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-            <Button onClick={clear} label="Clear" />
+            <Button onClick={showMultiple} label="Multiple" severity='warning' />
         </div>
     )
 }
@@ -98,8 +82,7 @@ export default function MultipleDemo() {
             </DocSectionText>
             <div className="card flex justify-content-center gap-2">
                 <Toast ref={toast} />
-                <Button onClick={showMultiple} label="Multiple" className="p-button-warning" />
-                <Button onClick={clear} label="Clear" />
+                <Button onClick={showMultiple} label="Multiple" severity="warning" />
             </div>
             <DocSectionCode code={code} />
         </>
