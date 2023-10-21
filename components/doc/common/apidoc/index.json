@@ -29123,7 +29123,7 @@
                             "name": "decrementButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputNumberPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "IconType<InputNumberProps>",
                             "default": "",
                             "description": "Style class of the decrement button."
                         },
@@ -29155,7 +29155,7 @@
                             "name": "incrementButtonIcon",
                             "optional": true,
                             "readonly": false,
-                            "type": "InputNumberPassThroughType<HTMLAttributes<HTMLSpanElement>>",
+                            "type": "IconType<InputNumberProps>",
                             "default": "",
                             "description": "Style class of the increment button."
                         },
