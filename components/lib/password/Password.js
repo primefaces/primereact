@@ -98,7 +98,7 @@ export const Password = React.memo(
             }
         };
 
-        const onMaskToggle = () => {
+        const toggleMask = () => {
             setUnmaskedState((prevUnmasked) => !prevUnmasked);
         };
 
@@ -229,6 +229,7 @@ export const Password = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            toggleMask,
             focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
@@ -272,11 +273,11 @@ export const Password = React.memo(
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
             if (props.toggleMask) {
-                let content = <i onClick={onMaskToggle}> {eyeIcon} </i>;
+                let content = <i onClick={toggleMask}> {eyeIcon} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
-                        onClick: onMaskToggle,
+                        onClick: toggleMask,
                         className,
                         element: content,
                         props
