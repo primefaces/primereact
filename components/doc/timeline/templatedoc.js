@@ -86,7 +86,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import './TimelineDemo.css';
 
-inteface TimelineEvent {
+interface TimelineEvent {
     status?: string;
     date?: string;
     icon?: string;
