@@ -655,13 +655,8 @@ export const useHandleStyle = (styles, isUnstyled = () => {}, config) => {
     useMountEffect(() => {
         loadBaseStyle();
         loadGlobalStyle();
-
-        if (!isUnstyled()) {
-            loadCommonStyle();
-            !styled && load();
-        }
-
-        hook('useMountEffect');
+        loadCommonStyle();
+        if (!styled) load();
     });
 
     useUpdateEffect(() => {

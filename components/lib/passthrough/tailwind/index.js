@@ -318,8 +318,8 @@ const Tailwind = {
             )
         },
         closeButtonIcon: 'w-4 h-4 inline-block',
-        content: ({ props,state }) => ({
-            className: classNames('overflow-y-auto', 'bg-white text-gray-700 px-6 pb-8 pt-0', {'rounded-bl-lg rounded-br-lg': !props.footer}, 'dark:bg-gray-900  dark:text-white/80 ', {
+        content: ({ props, state }) => ({
+            className: classNames('overflow-y-auto', 'bg-white text-gray-700 px-6 pb-8 pt-0', { 'rounded-bl-lg rounded-br-lg': !props.footer }, 'dark:bg-gray-900  dark:text-white/80 ', {
                 grow: state.maximized
             })
         }),
@@ -758,7 +758,7 @@ const Tailwind = {
             label: 'hidden'
         },
         anchor: 'cursor-pointer flex items-center relative overflow-hidden py-3 px-5 rounded-none transition select-none hover:text-gray-700 hover:bg-gray-200',
-        menuIcon:'mr-2'
+        menuIcon: 'mr-2'
     },
     //FORMS
     inputtext: {
@@ -1448,11 +1448,11 @@ const Tailwind = {
         wrapper: {
             className: classNames('max-h-[200px] overflow-auto', 'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-0 rounded-md shadow-lg')
         },
-        header:{
-            className:'py-3 px-5 border-b border-inherit bg-gray-50 m-0 rounded-t-lg flex items-center justify-between'
+        header: {
+            className: 'py-3 px-5 border-b border-inherit bg-gray-50 m-0 rounded-t-lg flex items-center justify-between'
         },
-        closeButton:{
-            className:'w-8 h-8 border-none bg-transparent rounded-full flex items-center justify-center shrink-0 overflow-hidden relative ml-auto transition hover:border-transparent hover:bg-gray-200 text-gray-500'
+        closeButton: {
+            className: 'w-8 h-8 border-none bg-transparent rounded-full flex items-center justify-center shrink-0 overflow-hidden relative ml-auto transition hover:border-transparent hover:bg-gray-200 text-gray-500'
         },
         transition: TRANSITIONS.overlay
     },
@@ -2305,7 +2305,11 @@ const Tailwind = {
         })
     },
     tree: {
-        root:({props})=> ({className: classNames('max-w-[30rem] md:w-full', 'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 p-5',{'border border-solid border-gray-300 dark:border-blue-900/40 rounded-md':props.__parentMetadata?.parent.props.__TYPE !== "TreeSelect"})}),
+        root: ({ props }) => ({
+            className: classNames('max-w-[30rem] md:w-full', 'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 p-5', {
+                'border border-solid border-gray-300 dark:border-blue-900/40 rounded-md': props.__parentMetadata?.parent.props.__TYPE !== 'TreeSelect'
+            })
+        }),
         wrapper: 'overflow-auto',
         container: 'm-0 p-0 list-none overflow-auto',
         node: 'p-1 outline-none',
