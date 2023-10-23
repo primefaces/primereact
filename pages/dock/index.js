@@ -7,6 +7,8 @@ import { AdvancedDoc } from '../../components/doc/dock/advanceddoc';
 import { BasicDoc } from '../../components/doc/dock/basicdoc';
 import { ImportDoc } from '../../components/doc/dock/importdoc';
 import { StyleDoc } from '../../components/doc/dock/styledoc';
+import { TailwindDoc } from '../../components/doc/dock/theming/tailwinddoc';
+import { StyledDoc } from '../../components/doc/dock/theming/styleddoc';
 
 const DockDemo = () => {
     const docs = [
@@ -54,7 +56,27 @@ const DockDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Dock Component" header="Dock" description="Dock is a navigation component consisting of menuitems." componentDocs={docs} apiDocs={['Dock', 'MenuItem']} className="dock-demo" ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+    
+    return <DocComponent title="React Dock Component" header="Dock" description="Dock is a navigation component consisting of menuitems." componentDocs={docs} apiDocs={['Dock', 'MenuItem']} className="dock-demo" ptDocs={ptDocs} themingDocs={themingDocs}/>;
 };
 
 export default DockDemo;
