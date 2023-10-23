@@ -100,7 +100,7 @@ import { SelectButton } from 'primereact/selectbutton';
 import { TreeNode } from 'primereact/treenode';
 import { NodeService } from './service/NodeService';
 
-inteface FilterModeOption {
+interface FilterModeOption {
     label: string;
     value: string;
 }

@@ -38,7 +38,7 @@ export default function OppositeDemo() {
 import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 
-inteface TimelineEvent {
+interface TimelineEvent {
     status?: string;
     date?: string;
     icon?: string;
