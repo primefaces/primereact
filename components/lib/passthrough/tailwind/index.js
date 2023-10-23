@@ -318,8 +318,8 @@ const Tailwind = {
             )
         },
         closeButtonIcon: 'w-4 h-4 inline-block',
-        content: ({ state }) => ({
-            className: classNames('overflow-y-auto', 'bg-white text-gray-700 px-6 pb-8 pt-0', 'rounded-bl-lg rounded-br-lg', 'dark:bg-gray-900  dark:text-white/80 ', {
+        content: ({ props,state }) => ({
+            className: classNames('overflow-y-auto', 'bg-white text-gray-700 px-6 pb-8 pt-0', {'rounded-bl-lg rounded-br-lg': !props.footer}, 'dark:bg-gray-900  dark:text-white/80 ', {
                 grow: state.maximized
             })
         }),
