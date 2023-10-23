@@ -131,8 +131,8 @@ export default function BasicDemo() {
 .dock-demo .p-dock {
     z-index: 1000;
 }`
-    }
-}
+        }
+    };
 
     return (
         <>
