@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import { DocSectionText } from '../../common/docsectiontext';
 
@@ -49,4 +48,3 @@ export function StyledDoc() {
         </>
     );
 }
-

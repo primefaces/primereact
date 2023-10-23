@@ -192,11 +192,7 @@ export const MultiStateCheckbox = React.memo(
             <>
                 <div {...rootProps}>
                     <div {...checkboxProps}>{icon}</div>
-                    {focusedState && (
-                        <span {...srOnlyAriaProps}>
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>

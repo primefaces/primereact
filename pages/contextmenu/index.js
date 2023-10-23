@@ -76,7 +76,17 @@ const ContextMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ContextMenu Component" header="ContextMenu" description="ContextMenu displays an overlay menu on right click of its target." componentDocs={docs} apiDocs={['ContextMenu', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
+    return (
+        <DocComponent
+            title="React ContextMenu Component"
+            header="ContextMenu"
+            description="ContextMenu displays an overlay menu on right click of its target."
+            componentDocs={docs}
+            apiDocs={['ContextMenu', 'MenuItem']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default ContextMenuDemo;
