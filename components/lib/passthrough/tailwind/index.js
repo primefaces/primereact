@@ -1946,6 +1946,9 @@ const Tailwind = {
         icon: {
             className: 'mr-2'
         },
+        submenuItem:{
+            className: classNames('text-gray-700 hover:bg-gray-200')
+        },
         submenuicon: ({ props }) => ({
             className: classNames({
                 'ml-2': props.orientation === 'horizontal',
