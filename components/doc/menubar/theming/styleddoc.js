@@ -10,7 +10,7 @@ export function StyledDoc() {
                 </p>
             </DocSectionText>
             <div className="doc-tablewrapper">
-            <table className="doc-table">
+                <table className="doc-table">
                     <thead>
                         <tr>
                             <th>Name</th>

@@ -1840,7 +1840,7 @@ const Tailwind = {
         action: {
             className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative')
         },
-        menuitem:{
+        menuitem: {
             className: classNames('hover:bg-gray-200')
         },
         icon: 'text-gray-600 dark:text-white/70 mr-2',
@@ -1916,8 +1916,14 @@ const Tailwind = {
                 'flex-col w-48 p-0 py-1': props.orientation !== 'horizontal'
             })
         }),
-        menu:({ props, state }) => ({   
-            className: classNames('m-0 sm:p-0 list-none', 'outline-none', {'hidden': props.orientation !== 'vertical' && !state.mobileActive}, {'md:flex items-center flex-wrap flex-row top-auto left-auto relative bg-transparent shadow-none w-auto':!state.mobileActive},{'flex flex-col bg-white absolute w-full left-0 z-10 top-full': state.mobileActive})
+        menu: ({ props, state }) => ({
+            className: classNames(
+                'm-0 sm:p-0 list-none',
+                'outline-none',
+                { hidden: props.orientation !== 'vertical' && !state.mobileActive },
+                { 'md:flex items-center flex-wrap flex-row top-auto left-auto relative bg-transparent shadow-none w-auto': !state.mobileActive },
+                { 'flex flex-col bg-white absolute w-full left-0 z-10 top-full': state.mobileActive }
+            )
         }),
         menuitem: ({ props, context }) => ({
             className: classNames(
@@ -1937,8 +1943,12 @@ const Tailwind = {
                 }
             )
         }),
-        menuButton: ({props})=> ({
-            className: classNames({'flex md:hidden': props.orientation === 'horizontal'}, {'hidden': props.orientation === 'vertical'}, 'no-underline w-8 h-8 items-center justify-center rounded-full transition hover:bg-gray-200 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]')
+        menuButton: ({ props }) => ({
+            className: classNames(
+                { 'flex md:hidden': props.orientation === 'horizontal' },
+                { hidden: props.orientation === 'vertical' },
+                'no-underline w-8 h-8 items-center justify-center rounded-full transition hover:bg-gray-200 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
+            )
         }),
         headeraction: {
             className: classNames('select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative', 'py-3 px-5 select-none')
@@ -1949,7 +1959,7 @@ const Tailwind = {
         icon: {
             className: 'mr-2'
         },
-        submenuItem:{
+        submenuItem: {
             className: classNames('text-gray-700 hover:bg-gray-200')
         },
         submenuicon: ({ props }) => ({
