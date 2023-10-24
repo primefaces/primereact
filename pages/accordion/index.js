@@ -2,6 +2,7 @@ import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydo
 import { BasicDoc } from '../../components/doc/accordion/basicdoc';
 import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
 import { DisabledDoc } from '../../components/doc/accordion/disableddoc';
+import { DynamicDoc } from '../../components/doc/accordion/dynamicdoc';
 import { ImportDoc } from '../../components/doc/accordion/importdoc';
 import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
 import { PTDoc } from '../../components/doc/accordion/pt/ptdoc';
@@ -29,6 +30,11 @@ const AccordionDemo = () => {
             id: 'multiple',
             label: 'Multiple',
             component: MultipleDoc
+        },
+        {
+            id: 'dynamic',
+            label: 'Dynamic',
+            component: DynamicDoc
         },
         {
             id: 'disabled',
