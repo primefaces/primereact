@@ -14,6 +14,8 @@ const classes = {
             'p-button-outlined': props.outlined,
             [`p-button-${size}`]: size
         }),
+    button: 'p-splitbutton-defaultbutton',
+    menuButton: 'p-splitbutton-menubutton',
     menu: ({ subProps: props }) => classNames('p-menu p-menu-overlay p-component', props.menuClassName),
     menuList: 'p-menu-list p-reset',
     separator: 'p-menu-separator',

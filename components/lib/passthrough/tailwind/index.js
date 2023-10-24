@@ -1913,9 +1913,9 @@ const Tailwind = {
                 'flex-col w-48 p-0 py-1': props.orientation !== 'horizontal'
             })
         }),
-        menu: {
-            className: classNames('m-0 sm:p-0 list-none relative', 'outline-none', 'flex items-center flex-wrap flex-row top-auto left-auto relative bg-transparent shadow-none w-auto')
-        },
+        menu:({ props, state }) => ({   
+            className: classNames('m-0 sm:p-0 list-none', 'outline-none', {'hidden': props.orientation !== 'vertical' && !state.mobileActive}, {'md:flex items-center flex-wrap flex-row top-auto left-auto relative bg-transparent shadow-none w-auto':!state.mobileActive},{'flex flex-col bg-white absolute w-full left-0 z-10 top-full': state.mobileActive})
+        }),
         menuitem: ({ props, context }) => ({
             className: classNames(
                 'transition-shadow duration-200',
@@ -1933,6 +1933,9 @@ const Tailwind = {
                     'hover:bg-blue-200 dark:hover:bg-blue-500': context.active
                 }
             )
+        }),
+        menuButton: ({props})=> ({
+            className: classNames({'flex md:hidden': props.orientation === 'horizontal'}, {'hidden': props.orientation === 'vertical'}, 'no-underline w-8 h-8 items-center justify-center rounded-full transition hover:bg-gray-200 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]')
         }),
         headeraction: {
             className: classNames('select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative', 'py-3 px-5 select-none')
