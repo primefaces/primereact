@@ -3111,7 +3111,7 @@ const Tailwind = {
                 className: 'inline-block align-middle'
             },
             sorticon: ({ context }) => ({
-                className: classNames('ml-2', {
+                className: classNames('ml-2 inline-block align-middle', {
                     'text-blue-700 dark:text-white/80': context.sorted,
                     'text-slate-700 dark:text-white/70': !context.sorted
                 })
