@@ -1840,6 +1840,9 @@ const Tailwind = {
         action: {
             className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative')
         },
+        menuitem:{
+            className: classNames('hover:bg-gray-200')
+        },
         icon: 'text-gray-600 dark:text-white/70 mr-2',
         submenuheader: {
             className: classNames('m-0 p-3 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-bold rounded-tl-none rounded-tr-none')
