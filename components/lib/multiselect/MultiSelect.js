@@ -630,7 +630,7 @@ export const MultiSelect = React.memo(
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, null, null)
+                    onClick: (e) => updateModel(e, [], [])
                 },
                 ptm('clearIcon')
             );
