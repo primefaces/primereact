@@ -1988,13 +1988,9 @@ const Tailwind = {
         header: {
             className: classNames(
                 'outline-none',
-                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]' // Focus
-            )
-        },
-        headercontent: {
-            className: classNames(
+                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 'border border-solid border-gray-300 dark:border-blue-900/40 text-gray-700 dark:text-white/80 bg-gray-100 dark:bg-gray-900 rounded-md transition-shadow duration-200',
-                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80'
+                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80' // Focus
             )
         },
         headeraction: {
@@ -2009,14 +2005,15 @@ const Tailwind = {
         menuitem: ({ context }) => ({
             className: classNames(
                 'text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none',
-                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80', // Hover
                 {
                     'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
                 }
             )
         }),
         action: {
-            className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'flex items-center cursor-pointer no-underline relative overflow-hidden')
+            className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'flex items-center cursor-pointer no-underline relative overflow-hidden',
+            'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80', // Hover
+            )
         },
         icon: 'mr-2',
         submenu: 'p-0 pl-4 m-0 list-none',

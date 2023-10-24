@@ -62,7 +62,7 @@ const styles = `
 
 export const PanelMenuBase = ComponentBase.extend({
     defaultProps: {
-        __TYPE: 'Panel',
+        __TYPE: 'PanelMenu',
         id: null,
         model: null,
         style: null,
