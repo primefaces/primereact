@@ -22,7 +22,7 @@ const Tailwind = {
                 'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom justify-center border',
                 'transition duration-200',
                 'w-12 pt-3 pb-3 rounded-lg rounded-r-none',
-                props.modelValue === 'list' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
+                props.layout === 'list' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80'
             )
         }),
         gridbutton: ({ props }) => ({
@@ -30,7 +30,7 @@ const Tailwind = {
                 'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom justify-center border',
                 'transition duration-200',
                 'w-12 pt-3 pb-3 rounded-lg rounded-l-none',
-                props.modelValue === 'grid' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
+                props.layout === 'grid' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80'
             )
         })
     }
@@ -73,53 +73,67 @@ export default function UnstyledDemo() {
 
     const listItem = (product) => {
         return (
-            <div className="col-12">
-                <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
-                    <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                        <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
-                            <div className="flex align-items-center gap-3">
-                                <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
-                                    <span className="font-semibold">{product.category}</span>
+            <div className="flex-initial shrink-0 w-full">
+            <div className="flex flex-col xl:flex-row xl:items-start p-4 gap-4 bg-white dark:bg-gray-900">
+                <img
+                    className="w-3/4 sm:w-64 xl:w-40 shadow-md block xl:block mx-auto rounded-md"
+                    src={\`https://primefaces.org/cdn/primevue/images/product/\${product.image}\`}
+                    alt={product.name}
+                />
+                <div className="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-4">
+                    <div className="flex flex-col items-center sm:items-start gap-3">
+                        <div className="text-2xl font-bold text-gray-700 dark:text-white/80">
+                            {product.name}
+                        </div>
+                        <Rating value={product.rating} readonly cancel={false} />
+                        <div className="flex items-center gap-3">
+                            <span className="flex items-center gap-2">
+                                <i className="pi pi-tag text-gray-700 dark:text-white/80"></i>
+                                <span className="font-semibold text-gray-700 dark:text-white/80">
+                                    {product.category}
                                 </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
-                            </div>
+                            </span>
+                            <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
                         </div>
-                        <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <span className="text-2xl font-semibold">\${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                        </div>
+                    </div>
+                    <div className="flex sm:flex-col items-center sm:align-end gap-3 sm:gap-2">
+                        <span className="text-2xl font-semibold text-gray-700 dark:text-white/80">
+                        \${product.price}
+                        </span>
+                        <Button
+                            icon="pi pi-shopping-cart"
+                            rounded
+                            disabled={product.inventoryStatus === 'OUTOFSTOCK'}
+                        />
                     </div>
                 </div>
             </div>
+        </div>
         );
     };
 
     const gridItem = (product) => {
         return (
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
-                <div className="p-4 border-1 surface-border surface-card border-round">
-                    <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-                        <div className="flex align-items-center gap-2">
-                            <i className="pi pi-tag"></i>
-                            <span className="font-semibold">{product.category}</span>
-                        </div>
-                        <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+            <div className="flex-initial shrink-0 w-full sm:w-1/2 lg:w-full xl:w-1/3 p-2">
+            <div className="p-4 border rounded-md bg-white dark:bg-gray-900 border-gray-300 dark:border-blue-900/40">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                        <i className="pi pi-tag text-gray-700 dark:text-white/80"></i>
+                        <span className="font-semibold text-gray-700 dark:text-white/80">{product.category}</span>
                     </div>
-                    <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="w-9 shadow-2 border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
-                        <div className="text-2xl font-bold">{product.name}</div>
-                        <Rating value={product.rating} readOnly cancel={false}></Rating>
-                    </div>
-                    <div className="flex align-items-center justify-content-between">
-                        <span className="text-2xl font-semibold">\${product.price}</span>
-                        <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
-                    </div>
+                    <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
+                </div>
+                <div className="flex flex-col items-center gap-3 py-5">
+                    <img className="w-3/4 shadow-md rounded-md" src={\`https://primefaces.org/cdn/primevue/images/product/\${product.image}\`} alt={product.name} />
+                    <div className="text-2xl font-bold text-gray-700 dark:text-white/80">{product.name}</div>
+                    <Rating value={product.rating} readonly cancel={false} />
+                </div>
+                <div className="flex items-center justify-between">
+                    <span className="text-2xl font-semibold text-gray-700 dark:text-white/80">\${product.price}</span>
+                    <Button icon="pi pi-shopping-cart" rounded disabled={product.inventoryStatus === 'OUTOFSTOCK'} />
                 </div>
             </div>
+        </div>
         );
     };
 
@@ -134,7 +148,7 @@ export default function UnstyledDemo() {
 
     const header = () => {
         return (
-            <div className="flex justify-content-end">
+            <div className="flex justify-end bg-gray-100 dark:bg-gray-800">
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
             </div>
         );
