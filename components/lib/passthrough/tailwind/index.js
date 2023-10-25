@@ -2471,7 +2471,7 @@ const Tailwind = {
             )
         })
     },
-    daatascroller: {
+    datascroller: {
         content: {
             className: classNames(
                 'bg-white blue-gray-700 border-0 p-0',
