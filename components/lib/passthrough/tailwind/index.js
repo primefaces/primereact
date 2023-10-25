@@ -2003,16 +2003,15 @@ const Tailwind = {
             className: classNames('outline-none', 'm-0 p-0 list-none')
         },
         menuitem: ({ context }) => ({
-            className: classNames(
-                'text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none',
-                {
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
-                }
-            )
+            className: classNames('text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none', {
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
+            })
         }),
         action: {
-            className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'flex items-center cursor-pointer no-underline relative overflow-hidden',
-            'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80', // Hover
+            className: classNames(
+                'text-gray-700 dark:text-white/80 py-3 px-5 select-none',
+                'flex items-center cursor-pointer no-underline relative overflow-hidden',
+                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80' // Hover
             )
         },
         icon: 'mr-2',
