@@ -2557,7 +2557,7 @@ const Tailwind = {
                     }
                 )
             }),
-              label: () => ({ className: classNames('flex-initial w-0') })
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         movedownbutton: {
             root: ({ context }) => ({
@@ -2573,7 +2573,7 @@ const Tailwind = {
                     }
                 )
             }),
-              label: () => ({ className: classNames('flex-initial w-0') })
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         movebottombutton: {
             root: ({ context }) => ({
@@ -2589,7 +2589,7 @@ const Tailwind = {
                     }
                 )
             }),
-              label: () => ({ className: classNames('flex-initial w-0') })
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         container: 'flex-auto',
         header: {
