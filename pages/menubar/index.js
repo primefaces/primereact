@@ -7,6 +7,8 @@ import { BasicDoc } from '../../components/doc/menubar/basicdoc';
 import { ImportDoc } from '../../components/doc/menubar/importdoc';
 import { StyleDoc } from '../../components/doc/menubar/styledoc';
 import { TemplateDoc } from '../../components/doc/menubar/templatedoc';
+import { StyledDoc } from '../../components/doc/menubar/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/menubar/theming/tailwinddoc';
 
 const MenubarDemo = () => {
     const docs = [
@@ -54,7 +56,27 @@ const MenubarDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Navbar Component" header="Menubar" description="Menubar also known as Navbar, is a horizontal menu component" componentDocs={docs} apiDocs={['Menubar', 'MenuItem']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Navbar Component" header="Menubar" description="Menubar also known as Navbar, is a horizontal menu component" componentDocs={docs} apiDocs={['Menubar', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default MenubarDemo;

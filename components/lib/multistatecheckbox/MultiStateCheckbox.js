@@ -180,15 +180,19 @@ export const MultiStateCheckbox = React.memo(
             ptm('checkbox')
         );
 
+        const srOnlyAriaProps = mergeProps(
+            {
+                className: 'p-sr-only p-hidden-accessible',
+                'aria-live': 'polite'
+            },
+            ptm('srOnlyAria')
+        );
+
         return (
             <>
                 <div {...rootProps}>
                     <div {...checkboxProps}>{icon}</div>
-                    {focusedState && (
-                        <span className="p-sr-only" aria-live="polite">
-                            {ariaValueLabel}
-                        </span>
-                    )}
+                    {focusedState && <span {...srOnlyAriaProps}>{ariaValueLabel}</span>}
                 </div>
                 {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </>

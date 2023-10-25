@@ -318,8 +318,8 @@ const Tailwind = {
             )
         },
         closeButtonIcon: 'w-4 h-4 inline-block',
-        content: ({ state }) => ({
-            className: classNames('overflow-y-auto', 'bg-white text-gray-700 px-6 pb-8 pt-0', 'rounded-bl-lg rounded-br-lg', 'dark:bg-gray-900  dark:text-white/80 ', {
+        content: ({ props, state }) => ({
+            className: classNames('overflow-y-auto', 'bg-white text-gray-700 px-6 pb-8 pt-0', { 'rounded-bl-lg rounded-br-lg': !props.footer }, 'dark:bg-gray-900  dark:text-white/80 ', {
                 grow: state.maximized
             })
         }),
@@ -748,15 +748,17 @@ const Tailwind = {
             icon: 'mr-2'
         },
         menu: {
-            className: classNames('outline-none', 'm-0 p-0 list-none')
+            className: classNames('outline-none', 'py-1	px-0 rounded-md	 list-none bg-white	border-none shadow-lg')
         },
-        menulist: 'relative',
+        menulist: 'm-0 p-0 border-none outline-none no-underline list-none',
         menubutton: {
             root: ({ parent }) => ({
                 className: classNames('rounded-l-none', { 'rounded-r-full': parent.props.rounded })
             }),
             label: 'hidden'
-        }
+        },
+        anchor: 'cursor-pointer flex items-center relative overflow-hidden py-3 px-5 rounded-none transition select-none hover:text-gray-700 hover:bg-gray-200',
+        menuIcon: 'mr-2'
     },
     //FORMS
     inputtext: {
@@ -1296,7 +1298,7 @@ const Tailwind = {
     },
     mention: {
         root: 'relative',
-        panel: 'max-h-[200px] overflow-auto bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-0 rounded-md shadow-lg',
+        panel: 'max-h-[200px] min-w-full overflow-auto bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-0 rounded-md shadow-lg',
         items: 'py-3 list-none m-0',
         item: 'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap m-0 p-3 border-0 transition-shadow duration-200 rounded-none dark:text-white/80 dark:hover:bg-gray-800 hover:text-gray-700 hover:bg-gray-200',
         transition: TRANSITIONS.overlay
@@ -1445,6 +1447,12 @@ const Tailwind = {
         },
         wrapper: {
             className: classNames('max-h-[200px] overflow-auto', 'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 border-0 rounded-md shadow-lg')
+        },
+        header: {
+            className: 'py-3 px-5 border-b border-inherit bg-gray-50 m-0 rounded-t-lg flex items-center justify-between'
+        },
+        closeButton: {
+            className: 'w-8 h-8 border-none bg-transparent rounded-full flex items-center justify-center shrink-0 overflow-hidden relative ml-auto transition hover:border-transparent hover:bg-gray-200 text-gray-500'
         },
         transition: TRANSITIONS.overlay
     },
@@ -1832,6 +1840,9 @@ const Tailwind = {
         action: {
             className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative')
         },
+        menuitem: {
+            className: classNames('hover:bg-gray-200')
+        },
         icon: 'text-gray-600 dark:text-white/70 mr-2',
         submenuheader: {
             className: classNames('m-0 p-3 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-bold rounded-tl-none rounded-tr-none')
@@ -1905,9 +1916,15 @@ const Tailwind = {
                 'flex-col w-48 p-0 py-1': props.orientation !== 'horizontal'
             })
         }),
-        menu: {
-            className: classNames('m-0 sm:p-0 list-none relative', 'outline-none', 'flex items-center flex-wrap flex-row top-auto left-auto relative bg-transparent shadow-none w-auto')
-        },
+        menu: ({ props, state }) => ({
+            className: classNames(
+                'm-0 sm:p-0 list-none',
+                'outline-none',
+                { hidden: props.orientation !== 'vertical' && !state.mobileActive },
+                { 'md:flex items-center flex-wrap flex-row top-auto left-auto relative bg-transparent shadow-none w-auto': !state.mobileActive },
+                { 'flex flex-col bg-white absolute w-full left-0 z-10 top-full': state.mobileActive }
+            )
+        }),
         menuitem: ({ props, context }) => ({
             className: classNames(
                 'transition-shadow duration-200',
@@ -1926,6 +1943,13 @@ const Tailwind = {
                 }
             )
         }),
+        menuButton: ({ props }) => ({
+            className: classNames(
+                { 'flex md:hidden': props.orientation === 'horizontal' },
+                { hidden: props.orientation === 'vertical' },
+                'no-underline w-8 h-8 items-center justify-center rounded-full transition hover:bg-gray-200 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)]'
+            )
+        }),
         headeraction: {
             className: classNames('select-none', 'cursor-pointer flex items-center no-underline overflow-hidden relative', 'py-3 px-5 select-none')
         },
@@ -1934,6 +1958,9 @@ const Tailwind = {
         },
         icon: {
             className: 'mr-2'
+        },
+        submenuItem: {
+            className: classNames('text-gray-700 hover:bg-gray-200')
         },
         submenuicon: ({ props }) => ({
             className: classNames({
@@ -1961,13 +1988,9 @@ const Tailwind = {
         header: {
             className: classNames(
                 'outline-none',
-                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]' // Focus
-            )
-        },
-        headercontent: {
-            className: classNames(
+                'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]',
                 'border border-solid border-gray-300 dark:border-blue-900/40 text-gray-700 dark:text-white/80 bg-gray-100 dark:bg-gray-900 rounded-md transition-shadow duration-200',
-                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80'
+                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80' // Focus
             )
         },
         headeraction: {
@@ -1980,16 +2003,16 @@ const Tailwind = {
             className: classNames('outline-none', 'm-0 p-0 list-none')
         },
         menuitem: ({ context }) => ({
-            className: classNames(
-                'text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none',
-                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80', // Hover
-                {
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
-                }
-            )
+            className: classNames('text-gray-700 dark:text-white/80 transition-shadow duration-200 border-none rounded-none', {
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused
+            })
         }),
         action: {
-            className: classNames('text-gray-700 dark:text-white/80 py-3 px-5 select-none', 'flex items-center cursor-pointer no-underline relative overflow-hidden')
+            className: classNames(
+                'text-gray-700 dark:text-white/80 py-3 px-5 select-none',
+                'flex items-center cursor-pointer no-underline relative overflow-hidden',
+                'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80' // Hover
+            )
         },
         icon: 'mr-2',
         submenu: 'p-0 pl-4 m-0 list-none',
@@ -2297,9 +2320,11 @@ const Tailwind = {
         })
     },
     tree: {
-        root: {
-            className: classNames('max-w-[30rem] md:w-full', 'border border-solid border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 p-5 rounded-md')
-        },
+        root: ({ props }) => ({
+            className: classNames('max-w-[30rem] md:w-full', 'bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 p-5', {
+                'border border-solid border-gray-300 dark:border-blue-900/40 rounded-md': props.__parentMetadata?.parent.props.__TYPE !== 'TreeSelect'
+            })
+        }),
         wrapper: 'overflow-auto',
         container: 'm-0 p-0 list-none overflow-auto',
         node: 'p-1 outline-none',
@@ -2434,7 +2459,7 @@ const Tailwind = {
                 'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom justify-center border',
                 'transition duration-200',
                 'w-12 pt-3 pb-3 rounded-lg rounded-r-none',
-                props.modelValue === 'list' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
+                props.layout === 'list' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
             )
         }),
         gridbutton: ({ props }) => ({
@@ -2442,7 +2467,7 @@ const Tailwind = {
                 'items-center cursor-pointer inline-flex overflow-hidden relative select-none text-center align-bottom justify-center border',
                 'transition duration-200',
                 'w-12 pt-3 pb-3 rounded-lg rounded-l-none',
-                props.modelValue === 'grid' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
+                props.layout === 'grid' ? 'bg-blue-500 border-blue-500 text-white dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' : 'bg-white border-gray-300 text-blue-gray-700 dark:bg-gray-900 dark:border-blue-900/40 dark:text-white/80' // highlighted state
             )
         })
     },
@@ -3085,7 +3110,7 @@ const Tailwind = {
                 className: 'inline-block align-middle'
             },
             sorticon: ({ context }) => ({
-                className: classNames('ml-2', {
+                className: classNames('ml-2 inline-block align-middle', {
                     'text-blue-700 dark:text-white/80': context.sorted,
                     'text-slate-700 dark:text-white/70': !context.sorted
                 })

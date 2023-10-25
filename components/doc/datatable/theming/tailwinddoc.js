@@ -428,7 +428,7 @@ export default function UnstyledDemo() {
 
     const renderHeader = () => {
         return (
-            <div className="flex justify-content-between">
+            <div className="flex justify-between">
                 <Button type="button" icon="pi pi-filter-slash" label="Clear" outlined onClick={clearFilter} />
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
@@ -519,7 +519,7 @@ export default function UnstyledDemo() {
         return (
             <React.Fragment>
                 <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range className="m-3"></Slider>
-                <div className="flex align-items-center justify-content-between px-2">
+                <div className="flex align-items-center justify-between px-2">
                     <span>{options.value ? options.value[0] : 0}</span>
                     <span>{options.value ? options.value[1] : 100}</span>
                 </div>

@@ -27,7 +27,7 @@ export const PrimeReactProvider = (props) => {
     const [ptOptions, setPtOptions] = useState(
         propsValue.ptOptions || {
             mergeSections: true,
-            mergeProps: false
+            mergeProps: true
         }
     );
     const [pt, setPt] = useState(propsValue.pt || undefined);

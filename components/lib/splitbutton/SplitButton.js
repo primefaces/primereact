@@ -128,8 +128,6 @@ export const SplitButton = React.memo(
             small: 'sm'
         };
         const size = sizeMapping[props.size];
-        const buttonClassName = classNames('p-splitbutton-defaultbutton', props.buttonClassName);
-        const menuButtonClassName = classNames('p-splitbutton-menubutton', props.menuButtonClassName);
         const buttonContent = props.buttonTemplate ? ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;
         const items = createItems();
         const menuId = idState + '_menu';
@@ -165,15 +163,19 @@ export const SplitButton = React.memo(
                     <Button
                         ref={defaultButtonRef}
                         type="button"
-                        className={buttonClassName}
+                        className={props.buttonClassName}
                         icon={props.icon}
                         loading={props.loading}
                         loadingIcon={props.loadingIcon}
+                        severity={props.severity}
                         label={props.label}
+                        raised={props.raised}
                         onClick={props.onClick}
                         disabled={props.disabled}
                         tabIndex={props.tabIndex}
                         size={props.size}
+                        outlined={props.outlined}
+                        text={props.text}
                         {...props.buttonProps}
                         pt={ptm('button')}
                         __parentMetadata={{
@@ -185,7 +187,7 @@ export const SplitButton = React.memo(
                     </Button>
                     <Button
                         type="button"
-                        className={menuButtonClassName}
+                        className={props.menuButtonClassName}
                         icon={dropdownIcon}
                         onClick={onDropdownButtonClick}
                         disabled={props.disabled}
@@ -194,6 +196,10 @@ export const SplitButton = React.memo(
                         aria-controls={overlayVisibleState ? menuId : null}
                         {...props.menuButtonProps}
                         size={props.size}
+                        severity={props.severity}
+                        outlined={props.outlined}
+                        text={props.text}
+                        raised={props.raised}
                         pt={ptm('menuButton')}
                         __parentMetadata={{
                             parent: metaData
