@@ -11,11 +11,16 @@ const classes = {
     filterContainer: 'p-picklist-filter-container',
     list: 'p-picklist-list',
     listWrapper: 'p-picklist-list-wrapper',
+    listSourceWrapper: 'p-picklist-source-wrapper',
+    listTargetWrapper: 'p-picklist-target-wrapper',
+    listSource: 'p-picklist-source',
+    listTarget: 'p-picklist-target',
     item: ({ subProps }) =>
         classNames('p-picklist-item', {
             'p-highlight': subProps.selected
         }),
-    controls: 'p-picklist-buttons'
+    sourceControls: 'p-picklist-source-controls p-picklist-buttons',
+    targetControls: 'p-picklist-target-controls p-picklist-buttons'
 };
 
 const styles = `
