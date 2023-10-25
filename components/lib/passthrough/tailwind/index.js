@@ -2534,14 +2534,14 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mb-2 w-12', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
                     {
                         'cursor-default pointer-events-none opacity-60': context.disabled
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         movetopbutton: {
             root: ({ context }) => ({
@@ -2557,7 +2557,7 @@ const Tailwind = {
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+              label: () => ({ className: classNames('flex-initial w-0') })
         },
         movedownbutton: {
             root: ({ context }) => ({
@@ -2573,7 +2573,7 @@ const Tailwind = {
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+              label: () => ({ className: classNames('flex-initial w-0') })
         },
         movebottombutton: {
             root: ({ context }) => ({
@@ -2589,7 +2589,7 @@ const Tailwind = {
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+              label: () => ({ className: classNames('flex-initial w-0') })
         },
         container: 'flex-auto',
         header: {
