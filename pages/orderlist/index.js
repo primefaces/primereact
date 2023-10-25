@@ -1,13 +1,15 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/orderlist/pt/ptdoc';
-import { Wireframe } from '../../components/doc/orderlist/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/orderlist/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/orderlist/basicdoc';
 import { DragDropDoc } from '../../components/doc/orderlist/dragdropdoc';
 import { FilterDoc } from '../../components/doc/orderlist/filterdoc';
 import { ImportDoc } from '../../components/doc/orderlist/importdoc';
+import { PTDoc } from '../../components/doc/orderlist/pt/ptdoc';
+import { Wireframe } from '../../components/doc/orderlist/pt/wireframe';
 import { StyleDoc } from '../../components/doc/orderlist/styledoc';
+import { StyledDoc } from '../../components/doc/orderlist/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/orderlist/theming/tailwinddoc';
 
 const OrderListDemo = () => {
     const docs = [
@@ -59,8 +61,27 @@ const OrderListDemo = () => {
             component: PTDoc
         }
     ];
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
 
-    return <DocComponent title="React OrderList Component" header="OrderList" description="OrderList is used to sort a collection." componentDocs={docs} apiDocs={['OrderList']} ptDocs={ptDocs} />;
+    return <DocComponent title="React OrderList Component" header="OrderList" description="OrderList is used to sort a collection." componentDocs={docs} apiDocs={['OrderList']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default OrderListDemo;
