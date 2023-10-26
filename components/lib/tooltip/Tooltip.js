@@ -149,7 +149,7 @@ export const Tooltip = React.memo(
                 if (isAutoHide()) {
                     elementRef.current.style.pointerEvents = 'none';
                 }
-                
+
                 const mouseTrackCheck = isMouseTrack(currentTargetRef.current) || position === 'mouse';
 
                 if ((mouseTrackCheck && !containerSize.current) || mouseTrackCheck) {
