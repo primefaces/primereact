@@ -163,7 +163,7 @@ export const SplitButton = React.memo(
                     <Button
                         ref={defaultButtonRef}
                         type="button"
-                        className={props.buttonClassName}
+                        className={classNames(props.buttonClassName, cx('button'))}
                         icon={props.icon}
                         loading={props.loading}
                         loadingIcon={props.loadingIcon}
@@ -187,7 +187,7 @@ export const SplitButton = React.memo(
                     </Button>
                     <Button
                         type="button"
-                        className={props.menuButtonClassName}
+                        className={classNames(props.menuButtonClassName, cx('menuButton'))}
                         icon={dropdownIcon}
                         onClick={onDropdownButtonClick}
                         disabled={props.disabled}
