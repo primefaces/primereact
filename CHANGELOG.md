@@ -1,5 +1,27 @@
 # Changelog
 
+## [10.0.6](https://github.com/primefaces/primereact/tree/10.0.6) (2023-10-26)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.5...10.0.6)
+
+**Fixed bugs:**
+
+- AvatarGroup -> Avatar Hover tooltip  [\#4181](https://github.com/primefaces/primereact/issues/4181)
+- MultiSelect: Clicking on "selectAll" checkbox closes options dropdown  [\#5151](https://github.com/primefaces/primereact/issues/5151)
+- AccordionTab cannot be used in custom wrapper [\#2052](https://github.com/primefaces/primereact/issues/2052)
+- SpeedDial: className property not being applied to list items [\#5148](https://github.com/primefaces/primereact/issues/5148)
+- MultiSelect: Clear button marks variable as undefined [\#5142](https://github.com/primefaces/primereact/issues/5142)
+- Mispell of 'inteface' instead of 'interface' [\#5138](https://github.com/primefaces/primereact/issues/5138)
+- Calendar with mask does not work as expected when editing input. [\#5137](https://github.com/primefaces/primereact/issues/5137)
+- DataTable: passthrough styling is ignored [\#5131](https://github.com/primefaces/primereact/issues/5131)
+- Column: Pass Through does not apply header classes correctly [\#5125](https://github.com/primefaces/primereact/issues/5125)
+- InputNumber: Typescript type definition for 'incrementButtonIcon' and 'decrementButtonIcon' errorneous [\#5132](https://github.com/primefaces/primereact/issues/5132)
+- Mention: Mentioning someone deletes the first word of the comment [\#5114](https://github.com/primefaces/primereact/issues/5114)
+
+**New Features:**
+
+- Password with ability to toggle mask via a method and a unmasked property [\#5135](https://github.com/primefaces/primereact/issues/5135)
+
 ## [10.0.5](https://github.com/primefaces/primereact/tree/10.0.5) (2023-10-19)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.4...10.0.5)
