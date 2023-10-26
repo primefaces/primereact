@@ -71,7 +71,7 @@ export const Button = React.memo(
                 },
                 ptm('label')
             );
-            
+
             if (props.label) {
                 return <span {...labelProps}>{props.label}</span>;
             }

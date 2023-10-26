@@ -1736,6 +1736,12 @@ const Tailwind = {
         root: 'relative',
         mask: 'bg-black/40'
     },
+    ripple: {
+        root: {
+            className: 'block absolute bg-white/50 rounded-full pointer-events-none',
+            style: { transform: 'scale(0)' }
+        }
+    },
     //MENU
     breadcrumb: {
         root: {
