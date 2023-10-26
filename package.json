@@ -1,7 +1,7 @@
 {
     "name": "primereact",
     "private": false,
-    "version": "10.0.7-SNAPSHOT",
+    "version": "10.0.7",
     "scripts": {
         "dev": "next dev",
         "start": "next start",
