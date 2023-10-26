@@ -7,8 +7,15 @@ export function TailwindDoc(props) {
         basic: `
 const Tailwind = {
     datascroller: {
-        
-    }
+        content: {
+            className: classNames(
+                'bg-white blue-gray-700 border-0 p-0',
+                'dark:bg-gray-900 dark:text-white/80' // Dark Mode
+            )
+        },
+        grid: 'flex flex-wrap ml-0 mr-0 mt-0 bg-white dark:bg-gray-900',
+        header: 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white/80 border-gray-200 dark:border-blue-900/40 border-t border-b p-4 font-bold'
+    },
 }
         `
     };
@@ -48,23 +55,23 @@ export default function UnstyledDemo() {
     const itemTemplate = (data) => {
         return (
             <div className="flex flex-col xl:flex-row xl:items-start p-4 gap-4">
-                <img className="w-3/4 sm:w-64 xl:w-40 shadow-2 block xl:block mx-auto border-round" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`} alt={data.name} />
-                <div className="flex flex-col  lg:flex-row justify-between items-center xl:items-start lg:flex-1 gap-4">
-                    <div className="flex flex-col  items-center lg:items-start gap-3">
+                <img className="w-3/4 sm:w-64 xl:w-40 shadow-2 block xl:block mx-auto rounded" src={\`https://primefaces.org/cdn/primereact/images/product/\${data.image}\`} alt={data.name} />
+                <div className="flex flex-col lg:flex-row justify-between items-center xl:items-start lg:flex-1 gap-4">
+                    <div className="flex flex-col items-center lg:items-start gap-3">
                         <div className="flex flex-col  gap-1">
-                            <div className="text-2xl font-bold text-900">{data.name}</div>
-                            <div className="text-700">{data.description}</div>
+                            <div className="text-2xl font-bold text-900 dark:text-white/80">{data.name}</div>
+                            <div className="text-700 dark:text-white/80">{data.description}</div>
                         </div>
                         <div className="flex flex-col  gap-2">
                             <Rating value={data.rating} readOnly cancel={false}></Rating>
                             <span className="flex items-center gap-2">
-                                <i className="pi pi-tag product-category-icon"></i>
-                                <span className="font-semibold">{data.category}</span>
+                                <i className="pi pi-tag product-category-icon dark:text-white/80"></i>
+                                <span className="font-semibold dark:text-white/80">{data.category}</span>
                             </span>
                         </div>
                     </div>
-                    <div className="flex flex-row lg:flex-col  items-center lg:items-end gap-4 lg:gap-2">
-                        <span className="text-2xl font-semibold">\${data.price}</span>
+                    <div className="flex flex-row lg:flex-col items-center lg:items-end gap-4 lg:gap-2">
+                        <span className="text-2xl font-semibold dark:text-white/80">\${data.price}</span>
                         <Button icon="pi pi-shopping-cart" label="Add to Cart" disabled={data.inventoryStatus === 'OUTOFSTOCK'}></Button>
                         <Tag value={data.inventoryStatus} severity={getSeverity(data)}></Tag>
                     </div>

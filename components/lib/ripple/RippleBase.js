@@ -1,3 +1,4 @@
+import { ComponentBase } from '../componentbase/ComponentBase';
 import { ObjectUtils } from '../utils/Utils';
 
 const styles = `
@@ -33,14 +34,19 @@ const styles = `
 
 `;
 
-export const RippleBase = {
+const classes = {
+    root: 'p-ink'
+};
+
+export const RippleBase = ComponentBase.extend({
     defaultProps: {
         __TYPE: 'Ripple',
         children: undefined
     },
     css: {
-        styles
+        styles,
+        classes
     },
     getProps: (props) => ObjectUtils.getMergedProps(props, RippleBase.defaultProps),
     getOtherProps: (props) => ObjectUtils.getDiffProps(props, RippleBase.defaultProps)
-};
+});

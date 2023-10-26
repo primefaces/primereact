@@ -1736,6 +1736,12 @@ const Tailwind = {
         root: 'relative',
         mask: 'bg-black/40'
     },
+    ripple: {
+        root: {
+            className: 'block absolute bg-white/50 rounded-full pointer-events-none',
+            style: { transform: 'scale(0)' }
+        }
+    },
     //MENU
     breadcrumb: {
         root: {
@@ -2471,7 +2477,7 @@ const Tailwind = {
             )
         })
     },
-    daatascroller: {
+    datascroller: {
         content: {
             className: classNames(
                 'bg-white blue-gray-700 border-0 p-0',
@@ -2534,14 +2540,14 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mb-2 w-12', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900', //Dark Mode
                     {
                         'cursor-default pointer-events-none opacity-60': context.disabled
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         movetopbutton: {
             root: ({ context }) => ({
@@ -2557,7 +2563,7 @@ const Tailwind = {
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         movedownbutton: {
             root: ({ context }) => ({
@@ -2573,7 +2579,7 @@ const Tailwind = {
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         movebottombutton: {
             root: ({ context }) => ({
@@ -2589,7 +2595,7 @@ const Tailwind = {
                     }
                 )
             }),
-            label: 'flex-initial w-0'
+            label: () => ({ className: classNames('flex-initial w-0') })
         },
         container: 'flex-auto',
         header: {
@@ -2613,8 +2619,8 @@ const Tailwind = {
     },
     picklist: {
         root: 'flex',
-        sourcecontrols: 'flex flex-col justify-center p-5',
-        sourcemoveupbutton: {
+        controls: 'flex flex-col justify-center p-5',
+        moveUpButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2627,7 +2633,7 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        sourcemovetopbutton: {
+        moveTopButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2640,7 +2646,7 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        sourcemovedownbutton: {
+        moveDownButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2653,7 +2659,7 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        sourcemovebottombutton: {
+        moveBottomButton: {
             root: {
                 className: classNames(
                     'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
@@ -2666,14 +2672,14 @@ const Tailwind = {
             },
             label: 'flex-initial w-0'
         },
-        sourcewrapper: 'grow shrink basis-2/4',
-        sourceheader: {
+        listWrapper: 'grow shrink basis-2/4',
+        header: {
             className: classNames(
                 'bg-slate-50 text-slate-700 border border-gray-300 p-5 font-bold border-b-0 rounded-t-md',
                 'dark:bg-gray-900 dark:text-white/80 dark:border-blue-900/40' //Dark Mode
             )
         },
-        sourcelist: {
+        list: {
             className: classNames(
                 'list-none m-0 p-0 overflow-auto min-h-[12rem] max-h-[24rem]',
                 'border border-gray-300 bg-white text-gray-600 py-3 px-0 rounded-b-md outline-none',
@@ -2683,7 +2689,7 @@ const Tailwind = {
         item: ({ context }) => ({
             className: classNames('relative cursor-pointer overflow-hidden', 'py-3 px-5 m-0 border-none text-gray-600 dark:text-white/80', 'transition duration-200', {
                 'text-blue-700 bg-blue-500/20 dark:bg-blue-300/20': context.selected,
-                'text-gray-600 bg-gray-300 dark:bg-blue-900/40': !context.selected
+                'text-gray-600 dark:bg-blue-900/40': !context.selected
             })
         }),
         buttons: 'flex flex-col justify-center p-5',
@@ -2740,58 +2746,6 @@ const Tailwind = {
             label: 'flex-initial w-0'
         },
         targetcontrols: 'flex flex-col justify-center p-5',
-        targetmoveupbutton: {
-            root: {
-                className: classNames(
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
-                )
-            },
-            label: 'flex-initial w-0'
-        },
-        targetmovetopbutton: {
-            root: {
-                className: classNames(
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
-                )
-            },
-            label: 'flex-initial w-0'
-        },
-        targetmovedownbutton: {
-            root: {
-                className: classNames(
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
-                )
-            },
-            label: 'flex-initial w-0'
-        },
-        targetmovebottombutton: {
-            root: {
-                className: classNames(
-                    'relative inline-flex cursor-pointer user-select-none items-center align-bottom text-center overflow-hidden m-0', // button component
-                    'text-white bg-blue-500 border border-blue-500 rounded-md',
-                    'transition duration-200 ease-in-out',
-                    'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
-                    'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
-                )
-            },
-            label: 'flex-initial w-0'
-        },
         targetwrapper: 'grow shrink basis-2/4',
         targetheader: {
             className: classNames(

@@ -1,13 +1,15 @@
 import React from 'react';
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/picklist/pt/ptdoc';
-import { Wireframe } from '../../components/doc/picklist/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/picklist/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/picklist/basicdoc';
 import { FilterDoc } from '../../components/doc/picklist/filterdoc';
 import { ImportDoc } from '../../components/doc/picklist/importdoc';
+import { PTDoc } from '../../components/doc/picklist/pt/ptdoc';
+import { Wireframe } from '../../components/doc/picklist/pt/wireframe';
 import { StyleDoc } from '../../components/doc/picklist/styledoc';
+import { StyledDoc } from '../../components/doc/picklist/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/picklist/theming/tailwinddoc';
 
 const PickListDemo = () => {
     const docs = [
@@ -55,7 +57,27 @@ const PickListDemo = () => {
         }
     ];
 
-    return <DocComponent title="React PickList Component" header="PickList" description="PickList is used to reorder items between different lists.." componentDocs={docs} apiDocs={['PickList']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React PickList Component" header="PickList" description="PickList is used to reorder items between different lists.." componentDocs={docs} apiDocs={['PickList']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default PickListDemo;

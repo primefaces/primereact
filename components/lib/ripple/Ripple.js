@@ -1,16 +1,25 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler } from '../utils/Utils';
+import { DomHandler, classNames, mergeProps } from '../utils/Utils';
 import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
-    React.forwardRef(() => {
+    React.forwardRef((inProps) => {
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
+        const props = RippleBase.getProps(inProps, context);
+
+        const metaData = {
+            props
+        };
 
         useStyle(RippleBase.css.styles, { name: 'ripple' });
+
+        const { ptm, cx } = RippleBase.setMetaData({
+            ...metaData
+        });
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -86,7 +95,14 @@ export const Ripple = React.memo(
             }
         });
 
-        return (context && context.ripple) || PrimeReact.ripple ? <span role="presentation" ref={inkRef} className="p-ink" onAnimationEnd={onAnimationEnd}></span> : null;
+        const rootProps = mergeProps(
+            {
+                className: classNames(cx('root'))
+            },
+            ptm('root')
+        );
+
+        return (context && context.ripple) || PrimeReact.ripple ? <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span> : null;
     })
 );
 
