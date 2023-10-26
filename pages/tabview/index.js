@@ -121,7 +121,6 @@ const TabViewDemo = () => {
             apiDocs={['TabView', 'TabPanel']}
             ptDocs={ptDocs}
             ptDescription=""
-            themingDocs={themingDocs}
         />
     );
 };
