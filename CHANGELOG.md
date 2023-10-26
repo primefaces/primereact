@@ -6,6 +6,7 @@
 
 **Fixed bugs:**
 
+- FileUpload: Adding pending text to localization in component [\#5161](https://github.com/primefaces/primereact/issues/5161)
 - AvatarGroup -> Avatar Hover tooltip  [\#4181](https://github.com/primefaces/primereact/issues/4181)
 - MultiSelect: Clicking on "selectAll" checkbox closes options dropdown  [\#5151](https://github.com/primefaces/primereact/issues/5151)
 - AccordionTab cannot be used in custom wrapper [\#2052](https://github.com/primefaces/primereact/issues/2052)
