@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.0.7](https://github.com/primefaces/primereact/tree/10.0.7) (2023-10-26)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.6...10.0.7)
+
+**Fixed bugs:**
+
+- SplitButton: Missing styles [\#5163](https://github.com/primefaces/primereact/issues/5163)
+
 ## [10.0.6](https://github.com/primefaces/primereact/tree/10.0.6) (2023-10-26)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.5...10.0.6)
