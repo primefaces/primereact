@@ -5,7 +5,7 @@ import { DomHandler, classNames, mergeProps } from '../utils/Utils';
 import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
-    React.forwardRef((inProps) => {
+    React.forwardRef((inProps, ref) => {
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
@@ -71,6 +71,12 @@ export const Ripple = React.memo(
                 inkRef.current.style.width = d + 'px';
             }
         };
+
+        React.useImperativeHandle(ref, () => ({
+            props,
+            getInk: () => inkRef.current,
+            getTarget: () => targetRef.current
+        }));
 
         useMountEffect(() => {
             if (inkRef.current) {
