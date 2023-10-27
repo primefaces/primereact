@@ -100,6 +100,7 @@ export const PrimeIcons = Object.freeze({
     FAST_BACKWARD: 'pi pi-fast-backward',
     FAST_FORWARD: 'pi pi-fast-forward',
     FILE: 'pi pi-file',
+    FILE_EDIT: 'pi pi-file-edit',
     FILE_EXCEL: 'pi pi-file-excel',
     FILE_PDF: 'pi pi-file-pdf',
     FILTER: 'pi pi-filter',
