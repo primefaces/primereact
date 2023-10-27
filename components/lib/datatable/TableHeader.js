@@ -213,7 +213,7 @@ export const TableHeader = React.memo((props) => {
                 const headerCellProps = mergeProps(
                     {
                         style: colStyle,
-                        className: classNames(filterHeaderClassName, className, cx('headerCells', { frozen, column: col })),
+                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col })),
                         key: colKey
                     },
                     getColumnPTOptions(col, 'root'),
