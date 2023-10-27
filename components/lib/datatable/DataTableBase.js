@@ -405,7 +405,7 @@ const classes = {
         }),
     headerCheckboxIcon: 'p-checkbox-icon',
     headerContent: 'p-column-header-content',
-    headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, column, getColumnProp }) =>
+    headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }) =>
         ObjectUtils.isEmpty(props)
             ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
