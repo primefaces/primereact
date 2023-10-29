@@ -1913,7 +1913,8 @@ const Tailwind = {
                 'hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80 ',
                 'focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
-        }
+        },
+        end: 'ml-auto self-auto'
     },
     megamenu: {
         root: ({ props }) => ({
