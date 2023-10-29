@@ -297,3 +297,17 @@ export declare function useMatchMedia(query: string, when?: boolean): boolean;
  * @param {*} callback - The callback to run when escape button clicked.
  */
 export declare function useOnEscapeKey(ref: React.RefObject<Element>, callback: any): void;
+/**
+ * Custom hook to use detect global escape button click.
+ */
+export declare function useGlobalOnEscapeKey(props: {
+  callback: (event: KeyboardEvent) => void,
+  condition: boolean,
+  priority: [number, number]
+}): void;
+/**
+ * Custom hook to use display order of component of one and the same group
+ * @param {string} group
+ * @param {boolean} [isVisible]
+ */
+export declare function useDisplayOrder(group: string, isVisible?: boolean): number|undefined

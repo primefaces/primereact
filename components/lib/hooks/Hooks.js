@@ -1,8 +1,10 @@
 import { useClickOutside } from './useClickOutside';
 import { useCounter } from './useCounter';
 import { useDebounce } from './useDebounce';
+import { useDisplayOrder } from './useDisplayOrder';
 import { useEventListener } from './useEventListener';
 import { useFavicon } from './useFavicon';
+import { useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from './useGlobalOnEscapeKey';
 import { useIntersectionObserver } from './useIntersectionObserver';
 import { useInterval } from './useInterval';
 import { useMatchMedia } from './useMatchMedia';
@@ -42,6 +44,9 @@ export {
     useMove,
     useClickOutside,
     useDebounce,
+    useDisplayOrder,
     useMatchMedia,
-    useOnEscapeKey
+    useOnEscapeKey,
+    useGlobalOnEscapeKey,
+    ESC_KEY_HANDLING_PRIORITIES
 };

@@ -1,9 +1,16 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import {
+    useDisplayOrder,
+    useEventListener,
+    useMountEffect,
+    useUnmountEffect,
+    useUpdateEffect,
+    useGlobalOnEscapeKey,
+    ESC_KEY_HANDLING_PRIORITIES
+} from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
@@ -50,22 +57,17 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    useOnEscapeKey(maskRef, visibleState && props.closable && props.closeOnEscape, (event) => {
-        const currentTarget = event.currentTarget;
+    const displayOrder = useDisplayOrder('dialog', visibleState);
 
-        if (!currentTarget || !currentTarget.primeDialogParams) {
-            return;
-        }
-
-        const params = currentTarget.primeDialogParams;
-        const paramLength = params.length;
-
-        // Handle "esc" key only if this dialog is the last one in the list of currently visible
-        // (shown on top of the others):
-        if (params[paramLength-1].id === idState) {
-            onClose(event);
-        }
-    });
+    useGlobalOnEscapeKey({
+        callback: (event) => {
+            if (props.closable && props.closeOnEscape) {
+                onClose(event)
+            }
+        },
+        condition: visibleState,
+        priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
+    })
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
     const [bindDocumentResizeListener, unbindDocumentResizeListener] = useEventListener({ type: 'mousemove', target: () => window.document, listener: (event) => onResize(event) });
