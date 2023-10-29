@@ -568,9 +568,11 @@ export const InputNumber = React.memo(
             const suffixCharIndex = val.search(_suffix.current);
 
             _suffix.current.lastIndex = 0;
-            const currencyCharIndex = val.search(_currency.current);
+            let currencyCharIndex = val.search(_currency.current);
 
-            _currency.current.lastIndex = 0;
+            if(currencyCharIndex === 0 && _currency.current.toString() === '/[INR]/g'){
+                currencyCharIndex = 3
+            }
 
             return { decimalCharIndex, minusCharIndex, suffixCharIndex, currencyCharIndex };
         };
