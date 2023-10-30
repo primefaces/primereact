@@ -1,5 +1,5 @@
 name: Bug report
-description: Create a report to help PrimeReact improve
+description: Create a report to help PrimeReact improve.
 title: 'Replace_With_Component_Name: Brief_Bug_Description'
 labels: ['Status: Needs Triage']
 body:
