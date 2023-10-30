@@ -329,6 +329,14 @@ export interface ColumnPassThroughOptions {
      */
     rowEditorEditIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Uses to pass attributes to the row editor save button's DOM element.
+     */
+    rowEditorSaveButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
+    /**
+     * Uses to pass attributes to the row editor save icon's DOM element.
+     */
+    rowEditorSaveIcon?: ColumnPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
      * Uses to pass attributes to the row editor cancel button's DOM element.
      */
     rowEditorCancelButton?: ColumnPassThroughType<React.HTMLAttributes<HTMLButtonElement>>;
