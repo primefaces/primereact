@@ -12649,6 +12649,20 @@
                             "description": "Uses to pass attributes to the row editor edit icon's DOM element."
                         },
                         {
+                            "name": "rowEditorSaveButton",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLButtonElement>>",
+                            "description": "Uses to pass attributes to the row editor save button's DOM element."
+                        },
+                        {
+                            "name": "rowEditorSaveIcon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ColumnPassThroughType<HTMLAttributes<HTMLSpanElement> | SVGProps<SVGSVGElement>>",
+                            "description": "Uses to pass attributes to the row editor save icon's DOM element."
+                        },
+                        {
                             "name": "rowEditorCancelButton",
                             "optional": true,
                             "readonly": false,
