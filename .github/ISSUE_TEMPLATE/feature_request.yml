@@ -1,3 +1,4 @@
- - name: Feature request
+contact_links:
+    - name: Feature request
       url: https://github.com/orgs/primefaces/discussions/categories/primereact
       about: Propose an enhancement at discussions.
