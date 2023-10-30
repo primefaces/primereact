@@ -54,7 +54,7 @@ export const PanelMenu = React.memo(
         };
 
         const onItemClick = (event, item) => {
-            if (item.disabled) {
+            if (item.disabled || !item.items) {
                 event.preventDefault();
 
                 return;
