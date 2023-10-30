@@ -1,7 +1,7 @@
 contact_links:
-    - name: Support
-      url: https://primereact.org/support/
-      about: Professional support for the open source innovation.
     - name: Feature request
       url: https://github.com/orgs/primefaces/discussions/categories/primereact
       about: Propose an enhancement at discussions.
+    - name: Support
+      url: https://primereact.org/support/
+      about: Professional support for the open source innovation.
