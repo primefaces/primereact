@@ -568,7 +568,11 @@ export const InputNumber = React.memo(
             const suffixCharIndex = val.search(_suffix.current);
 
             _suffix.current.lastIndex = 0;
-            const currencyCharIndex = val.search(_currency.current);
+            let currencyCharIndex = val.search(_currency.current);
+
+            if (currencyCharIndex === 0 && prefixChar.current && prefixChar.current.length > 1) {
+                currencyCharIndex = prefixChar.current.trim().length;
+            }
 
             _currency.current.lastIndex = 0;
 
