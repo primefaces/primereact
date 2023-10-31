@@ -1313,7 +1313,7 @@ const Tailwind = {
         label: ({ props }) => ({
             className: classNames('block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis', 'text-gray-800 dark:text-white/80', 'p-3 transition duration-200', {
                 '!p-3': props.display !== 'chip' && (props?.modelValue == null || props?.modelValue == undefined),
-                '!py-1.5 px-3': props.display === 'chip' && props?.modelValue !== null,
+                '!py-1.5 px-3': props.display === 'chip' && props?.modelValue !== null
             })
         }),
         token: {
