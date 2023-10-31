@@ -1823,6 +1823,10 @@ export declare class DataTable<TValue extends DataTableValueArray> extends React
      */
     public resetScroll(): void;
     /**
+     * Resets resize columns width.
+     */
+    public resetResizeColumnsWidth(): void;
+    /**
      * Restores the column widths.
      */
     public restoreColumnWidths(): void;

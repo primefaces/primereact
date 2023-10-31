@@ -15599,6 +15599,12 @@
                             "description": "Resets column order when reorderableColumns is enabled."
                         },
                         {
+                            "name": "resetResizeColumnsWidth",
+                            "parameters": [],
+                            "returnType": "void",
+                            "description": "Resets resize columns width."
+                        },
+                        {
                             "name": "resetScroll",
                             "parameters": [],
                             "returnType": "void",

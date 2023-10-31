@@ -1258,6 +1258,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const resetResizeColumnsWidth = () => {
+        destroyStyleElement();
+    };
+
     const resetColumnOrder = () => {
         const columns = getColumns(true);
         let columnOrder = [];
@@ -1476,6 +1480,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         reset,
         resetColumnOrder,
         resetScroll,
+        resetResizeColumnsWidth,
         restoreColumnWidths,
         restoreState,
         restoreTableState,
