@@ -6,12 +6,15 @@ export function TailwindDoc(props) {
     const code = {
         basic: `
 const TRANSITIONS = {
-    overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
-    }
+    toggleable: {
+        timeout: 500,
+        classNames: {
+            enter: 'max-h-0',
+            enterActive: '!max-h-40 overflow-hidden transition-all duration-500 ease-in-out',
+            exit: 'max-h-40',
+            exitActive: '!max-h-0 overflow-hidden transition-all duration-500 ease-in'
+        }
+    },
 };
 
 const Tailwind = {
