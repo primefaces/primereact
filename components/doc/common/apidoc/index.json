@@ -32998,6 +32998,24 @@
                             "description": "The data of the menuitem."
                         }
                     ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": [
+                        {
+                            "name": "command",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MenuItemCommandEvent",
+                                    "description": "Custom command event."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to execute when item is clicked."
+                        }
+                    ]
                 }
             }
         },
@@ -48109,6 +48127,63 @@
                             "description": "Used to configure passthrough(pt) options of the component."
                         }
                     ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": [
+                        {
+                            "name": "onBeforeShow",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke before the tooltip is shown."
+                        },
+                        {
+                            "name": "onBeforeHide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke before the tooltip is hidden."
+                        },
+                        {
+                            "name": "onShow",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the tooltip is shown."
+                        },
+                        {
+                            "name": "onHide",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "TooltipEvent",
+                                    "description": "Browser event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when the tooltip is hidden."
+                        }
+                    ]
                 }
             },
             "TooltipHTMLAttributes": {
@@ -48253,6 +48328,10 @@
                             "description": "Whether to show tooltip for disabled elements."
                         }
                     ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
                 }
             }
         },
@@ -49571,6 +49650,10 @@
                             "description": "Visibility of node."
                         }
                     ]
+                },
+                "callbacks": {
+                    "description": "Defines callbacks that determine the behavior of the component based on a given condition or report the actions that the component takes.",
+                    "values": []
                 }
             }
         }
