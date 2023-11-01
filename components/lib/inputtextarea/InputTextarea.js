@@ -3,11 +3,12 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 import { InputTextareaBase } from './InputTextareaBase';
 
 export const InputTextarea = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = InputTextareaBase.getProps(inProps, context);
 

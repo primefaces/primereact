@@ -2,11 +2,12 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, useMergeProps, ObjectUtils } from '../utils/Utils';
 import { NextPageLinkBase } from './PaginatorBase';
 import { PrimeReactContext } from '../api/Api';
 
 export const NextPageLink = React.memo((inProps) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = NextPageLinkBase.getProps(inProps, context);
     const { ptm, cx } = props;

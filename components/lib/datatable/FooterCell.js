@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const FooterCell = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);

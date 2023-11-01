@@ -2,9 +2,10 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 
 export const TieredMenuSub = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [activeItemState, setActiveItemState] = React.useState(null);
     const elementRef = React.useRef(null);
     const { ptm, cx, sx } = props;

@@ -38508,6 +38508,12 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean"
+                        },
+                        {
+                            "name": "classNameMergeFunction",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Function"
                         }
                     ],
                     "callbacks": []

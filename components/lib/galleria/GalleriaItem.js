@@ -3,10 +3,11 @@ import { useMountEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, classNames, useMergeProps } from '../utils/Utils';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const { ptm, cx } = props;
 
         const getPTOptions = (key, options) => {

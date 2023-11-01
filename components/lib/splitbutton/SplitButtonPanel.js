@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 
 export const SplitButtonPanel = React.forwardRef((props, ref) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key, options) => {

@@ -5,9 +5,10 @@ import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
-import { ObjectUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, useMergeProps } from '../utils/Utils';
 
 export const OrderListControls = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
     const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
     const moveDownIcon = props.moveDownIcon || <AngleDownIcon />;

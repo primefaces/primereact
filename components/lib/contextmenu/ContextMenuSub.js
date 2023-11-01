@@ -3,9 +3,10 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ContextMenuSub = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [activeItemState, setActiveItemState] = React.useState(null);
     const submenuRef = React.useRef(null);
     const active = props.root || !props.resetMenu;

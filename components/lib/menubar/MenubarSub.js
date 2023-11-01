@@ -3,10 +3,11 @@ import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hook
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const [activeItemState, setActiveItemState] = React.useState(null);
         const { ptm, cx } = props;
 

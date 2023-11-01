@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
 
 export const BodyRow = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
     const { ptm, cx } = props.ptCallbacks;

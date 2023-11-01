@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useEventListener, useMountEffect, usePrevious, useResizeListener, useStyle, useUpdateEffect } from '../hooks/Hooks';
-import { classNames, DomHandler, ObjectUtils, IconUtils, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, ObjectUtils, IconUtils, useMergeProps } from '../utils/Utils';
 import { VirtualScrollerBase } from './VirtualScrollerBase';
 import { SpinnerIcon } from '../icons/spinner';
 import { PrimeReactContext } from '../api/Api';
 
 export const VirtualScroller = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = VirtualScrollerBase.getProps(inProps, context);
         const prevProps = usePrevious(inProps) || {};

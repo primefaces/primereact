@@ -5,11 +5,12 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ZIndexUtils, classNames, useMergeProps } from '../utils/Utils';
 import { ScrollTopBase } from './ScrollTopBase';
 
 export const ScrollTop = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const [visibleState, setVisibleState] = React.useState(false);
         const context = React.useContext(PrimeReactContext);
         const props = ScrollTopBase.getProps(inProps, context);

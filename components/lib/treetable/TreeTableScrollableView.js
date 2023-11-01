@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableScrollableView = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const elementRef = React.useRef(null);
     const scrollHeaderRef = React.useRef(null);
     const scrollHeaderBoxRef = React.useRef(null);

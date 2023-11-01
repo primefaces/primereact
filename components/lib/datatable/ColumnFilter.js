@@ -13,9 +13,10 @@ import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, useMergeProps } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [overlayVisibleState, setOverlayVisibleState] = React.useState(false);
     const overlayRef = React.useRef(null);
     const iconRef = React.useRef(null);

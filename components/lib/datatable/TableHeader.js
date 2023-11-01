@@ -3,12 +3,13 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
-import { classNames, mergeProps } from '../utils/Utils';
+import { classNames, useMergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
 export const TableHeader = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [sortableDisabledFieldsState, setSortableDisabledFieldsState] = React.useState([]);
     const [allSortableDisabledState, setAllSortableDisabledState] = React.useState(false);
     const isSingleSort = props.sortMode === 'single';

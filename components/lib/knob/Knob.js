@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useEventListener } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 import { KnobBase } from './KnobBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
@@ -13,6 +13,7 @@ const maxRadians = -Math.PI / 3;
 
 export const Knob = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = KnobBase.getProps(inProps, context);
 

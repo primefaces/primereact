@@ -2,9 +2,10 @@ import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 
 export const TreeTableBodyCell = (props) => {
+    const mergeProps = useMergeProps();
     const [editingState, setEditingState] = React.useState(false);
     const elementRef = React.useRef(null);
     const keyHelperRef = React.useRef(null);

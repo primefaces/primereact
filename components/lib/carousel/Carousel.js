@@ -7,10 +7,11 @@ import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronUpIcon } from '../icons/chevronup';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, useMergeProps } from '../utils/Utils';
 import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
     const key = props.className && props.className === 'p-carousel-item-cloned' ? 'itemCloned' : 'item';
     const content = props.template(props.item);
@@ -31,6 +32,7 @@ export const Carousel = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = CarouselBase.getProps(inProps, context);
+        const mergeProps = useMergeProps();
 
         const [numVisibleState, setNumVisibleState] = React.useState(props.numVisible);
         const [numScrollState, setNumScrollState] = React.useState(props.numScroll);

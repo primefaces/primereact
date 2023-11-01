@@ -3,11 +3,12 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, useMergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { DockBase } from './DockBase';
 
 export const Dock = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const context = React.useContext(PrimeReactContext);
         const props = DockBase.getProps(inProps, context);

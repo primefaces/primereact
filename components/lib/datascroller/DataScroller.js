@@ -2,11 +2,12 @@ import * as React from 'react';
 import { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 import { DataScrollerBase } from './DataScrollerBase';
 
 export const DataScroller = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = DataScrollerBase.getProps(inProps, context);
 

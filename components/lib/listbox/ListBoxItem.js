@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const {
         ptCallbacks: { ptm, cx }
     } = props;

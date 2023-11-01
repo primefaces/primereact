@@ -5,11 +5,12 @@ import { CheckIcon } from '../icons/check';
 import { ExclamationTriangleIcon } from '../icons/exclamationtriangle';
 import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesCircleIcon } from '../icons/timescircle';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 import { MessageBase } from './MessageBase';
 
 export const Message = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = MessageBase.getProps(inProps, context);
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, useMergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -26,6 +26,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             activeIndex: activeIndexState
         }
     };
+    const mergeProps = useMergeProps();
 
     const { ptm, ptmo, cx, sx, isUnstyled } = AccordionBase.setMetaData({
         ...metaData

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, mergeProps } from '../utils/Utils';
+import { classNames, useMergeProps } from '../utils/Utils';
 
 export const PickListItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {

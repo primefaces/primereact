@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 
 export const CalendarPanel = React.forwardRef((props, ref) => {
     const cx = props.cx;
+    const mergeProps = useMergeProps();
 
     const createElement = () => {
         const panelProps = mergeProps(

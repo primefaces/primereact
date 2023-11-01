@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useUnmountEffect } from '../hooks/Hooks';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 import { ChartBase } from './ChartBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
@@ -16,6 +16,7 @@ const ChartJS = (function () {
 
 const PrimeReactChart = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ChartBase.getProps(inProps, context);
 

@@ -2,13 +2,14 @@ import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 import { MultiSelectHeader } from './MultiSelectHeader';
 import { MultiSelectItem } from './MultiSelectItem';
 
 export const MultiSelectPanel = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const virtualScrollerRef = React.useRef(null);
         const filterInputRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);

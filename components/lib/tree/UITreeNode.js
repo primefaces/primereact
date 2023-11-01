@@ -5,9 +5,10 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { MinusIcon } from '../icons/minus';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, DomHandler, IconUtils, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const UITreeNode = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const contentRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
     const isLeaf = props.isNodeLeaf(props.node);

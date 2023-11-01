@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SplitButtonItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key, options) => {

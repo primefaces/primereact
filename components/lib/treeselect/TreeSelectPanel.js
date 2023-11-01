@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 import { PrimeReactContext } from '../api/Api';
 
 export const TreeSelectPanel = React.forwardRef((props, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 

@@ -3,9 +3,10 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { RowBase } from '../row/RowBase';
 import { FooterCell } from './FooterCell';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 
 export const TableFooter = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, ptmo, cx } = props.ptCallbacks;
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
-import { DomHandler, mergeProps } from '../utils/Utils';
+import { DomHandler, useMergeProps } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [focusedState, setFocusedState] = React.useState(false);
     const inputRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { classNames, mergeProps } from '../utils/Utils';
+import { classNames, useMergeProps } from '../utils/Utils';
 import { ProgressSpinnerBase } from './ProgressSpinnerBase';
 
 export const ProgressSpinner = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ProgressSpinnerBase.getProps(inProps, context);
 

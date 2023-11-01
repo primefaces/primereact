@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {

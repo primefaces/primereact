@@ -7,10 +7,11 @@ import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps } from '../utils/Utils';
+import { classNames, IconUtils, useMergeProps } from '../utils/Utils';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const {
             message: messageInfo,
             metaData: parentMetaData,

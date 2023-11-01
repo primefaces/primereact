@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ObjectUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, useMergeProps } from '../utils/Utils';
 import { CardBase } from './CardBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Card = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = CardBase.getProps(inProps, context);
 

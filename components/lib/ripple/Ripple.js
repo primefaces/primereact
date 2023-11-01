@@ -1,11 +1,12 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
-import { DomHandler, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, classNames, useMergeProps } from '../utils/Utils';
 import { RippleBase } from './RippleBase';
 
 export const Ripple = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const inkRef = React.useRef(null);
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);

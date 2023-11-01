@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { SearchIcon } from '../icons/search';
 import { InputText } from '../inputtext/InputText';
-import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, useMergeProps } from '../utils/Utils';
 
 export const ListBoxHeader = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const {
         ptCallbacks: { ptm, cx }
     } = props;

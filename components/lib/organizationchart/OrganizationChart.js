@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classNames, DomHandler, mergeProps } from '../utils/Utils';
+import { classNames, DomHandler, useMergeProps } from '../utils/Utils';
 import { OrganizationChartBase } from './OrganizationChartBase';
 import { OrganizationChartNode } from './OrganizationChartNode';
 import { PrimeReactContext } from '../api/Api';
@@ -7,6 +7,7 @@ import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const OrganizationChart = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = OrganizationChartBase.getProps(inProps, context);
         const { ptm, cx, sx, isUnstyled } = OrganizationChartBase.setMetaData({

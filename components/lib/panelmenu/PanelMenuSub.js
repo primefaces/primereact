@@ -3,9 +3,10 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [activeItemState, setActiveItemState] = React.useState(null);
     const { ptm, cx } = props;
 

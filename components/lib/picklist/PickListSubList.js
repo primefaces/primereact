@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { SearchIcon } from '../icons/search';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
 
 export const PickListSubList = React.memo(
     React.forwardRef((props, ref) => {
+        const mergeProps = useMergeProps();
         const listElementRef = React.useRef(null);
         const { ptm, cx } = props;
 

@@ -7,10 +7,11 @@ import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } f
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, useMergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = SidebarBase.getProps(inProps, context);
 

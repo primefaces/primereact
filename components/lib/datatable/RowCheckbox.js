@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { CheckIcon } from '../icons/check';
-import { IconUtils, mergeProps } from '../utils/Utils';
+import { IconUtils, useMergeProps } from '../utils/Utils';
 
 export const RowCheckbox = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [focusedState, setFocusedState] = React.useState(false);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const { ptm, ptmo, cx } = props.ptCallbacks;

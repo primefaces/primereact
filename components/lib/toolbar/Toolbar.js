@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { ObjectUtils, mergeProps } from '../utils/Utils';
+import { ObjectUtils, useMergeProps } from '../utils/Utils';
 import { ToolbarBase } from './ToolbarBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Toolbar = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = ToolbarBase.getProps(inProps, context);
         const elementRef = React.useRef(null);

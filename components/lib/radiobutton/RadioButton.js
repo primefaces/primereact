@@ -2,12 +2,13 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, useMergeProps } from '../utils/Utils';
 import { RadioButtonBase } from './RadioButtonBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const RadioButton = React.memo(
     React.forwardRef((inProps, ref) => {
+        const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
         const props = RadioButtonBase.getProps(inProps, context);
 

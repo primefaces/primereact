@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { AngleRightIcon } from '../icons/angleright';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SlideMenuSub = React.memo((props) => {
+    const mergeProps = useMergeProps();
     const [activeItemState, setActiveItemState] = React.useState(null);
     const [renderSubMenu, setRenderSubMenu] = React.useState({});
     const { ptm, cx, sx } = props;

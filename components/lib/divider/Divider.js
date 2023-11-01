@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { mergeProps } from '../utils/Utils';
+import { useMergeProps } from '../utils/Utils';
 import { DividerBase } from './DividerBase';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Divider = React.forwardRef((inProps, ref) => {
+    const mergeProps = useMergeProps();
     const context = React.useContext(PrimeReactContext);
     const props = DividerBase.getProps(inProps, context);
 
