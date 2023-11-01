@@ -3,6 +3,10 @@
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.8...10.0.9)
 
+**Fixed bugs:**
+
+- useHandleStyle Broken: Styles not loading [\#5213](https://github.com/primefaces/primereact/issues/5213)
+
 ## [10.0.8](https://github.com/primefaces/primereact/tree/10.0.8) (2023-11-01)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.7...10.0.8)
