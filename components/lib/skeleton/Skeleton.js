@@ -24,13 +24,16 @@ export const Skeleton = React.memo(
         const style = props.size ? { width: props.size, height: props.size, borderRadius: props.borderRadius } : { width: props.width, height: props.height, borderRadius: props.borderRadius };
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                className: classNames(props.className, cx('root')),
-                style: { ...style, ...sx('root') }
-            },
-            SkeletonBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root')),
+                    style: { ...style, ...sx('root') }
+                },
+                SkeletonBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <div {...rootProps}></div>;

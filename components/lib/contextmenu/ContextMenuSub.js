@@ -3,9 +3,11 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ContextMenuSub = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [activeItemState, setActiveItemState] = React.useState(null);
     const submenuRef = React.useRef(null);
     const active = props.root || !props.resetMenu;
@@ -96,13 +98,16 @@ export const ContextMenuSub = React.memo((props) => {
     const createSeparator = (index) => {
         const key = props.id + '_separator_' + index;
         const separatorProps = mergeProps(
-            {
-                id: key,
-                key,
-                className: cx('separator'),
-                role: 'separator'
-            },
-            ptm('separator', { hostName: props.hostName })
+            [
+                {
+                    id: key,
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                ptm('separator', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li {...separatorProps}></li>;
@@ -137,39 +142,51 @@ export const ContextMenuSub = React.memo((props) => {
         const active = activeItemState === item;
         const key = item.id || props.id + '_' + index;
         const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            getPTOptions(item, 'icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                getPTOptions(item, 'icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
         const submenuIconProps = mergeProps(
-            {
-                className: cx('submenuIcon')
-            },
-            getPTOptions(item, 'submenuIcon')
+            [
+                {
+                    className: cx('submenuIcon')
+                },
+                getPTOptions(item, 'submenuIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            getPTOptions(item, 'label')
+            [
+                {
+                    className: cx('label')
+                },
+                getPTOptions(item, 'label')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props: props.menuProps });
         const label = item.label && <span {...labelProps}>{item.label}</span>;
         const submenu = createSubmenu(item, index);
         const actionProps = mergeProps(
-            {
-                href: item.url || '#',
-                className: cx('action', { item }),
-                target: item.target,
-                onClick: (event) => onItemClick(event, item, index),
-                role: 'menuitem',
-                'aria-haspopup': item.items != null,
-                'aria-disabled': item.disabled
-            },
-            getPTOptions(item, 'action')
+            [
+                {
+                    href: item.url || '#',
+                    className: cx('action', { item }),
+                    target: item.target,
+                    onClick: (event) => onItemClick(event, item, index),
+                    role: 'menuitem',
+                    'aria-haspopup': item.items != null,
+                    'aria-disabled': item.disabled
+                },
+                getPTOptions(item, 'action')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (
@@ -197,16 +214,19 @@ export const ContextMenuSub = React.memo((props) => {
         }
 
         const menuitemProps = mergeProps(
-            {
-                id: key,
-                key,
-                role: 'none',
-                className: cx('menuitem', { item, active }),
-                style: item.style,
-                key,
-                onMouseEnter: (event) => onItemMouseEnter(event, item)
-            },
-            getPTOptions(item, 'menuitem')
+            [
+                {
+                    id: key,
+                    key,
+                    role: 'none',
+                    className: cx('menuitem', { item, active }),
+                    style: item.style,
+                    key,
+                    onMouseEnter: (event) => onItemMouseEnter(event, item)
+                },
+                getPTOptions(item, 'menuitem')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -227,21 +247,27 @@ export const ContextMenuSub = React.memo((props) => {
 
     const submenu = createMenu();
     const menuProps = mergeProps(
-        {
-            className: cx('menu', { menuProps: props })
-        },
-        ptm('menu', { hostName: props.hostName })
+        [
+            {
+                className: cx('menu', { menuProps: props })
+            },
+            ptm('menu', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const transitionProps = mergeProps(
-        {
-            classNames: cx('submenuTransition'),
-            in: active,
-            timeout: { enter: 0, exit: 0 },
-            unmountOnExit: true,
-            onEnter
-        },
-        ptm('menu.transition', { hostName: props.hostName })
+        [
+            {
+                classNames: cx('submenuTransition'),
+                in: active,
+                timeout: { enter: 0, exit: 0 },
+                unmountOnExit: true,
+                onEnter
+            },
+            ptm('menu.transition', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

@@ -28,10 +28,13 @@ export const Terminal = React.memo(
 
         useHandleStyle(TerminalBase.css.styles, isUnstyled, { name: 'terminal' });
         const promptProps = mergeProps(
-            {
-                className: cx('prompt')
-            },
-            ptm('prompt')
+            [
+                {
+                    className: cx('prompt')
+                },
+                ptm('prompt')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const onClick = () => {
@@ -121,7 +124,7 @@ export const Terminal = React.memo(
 
         const createWelcomeMessage = () => {
             if (props.welcomeMessage) {
-                const welcomeMessageProps = mergeProps(ptm('welcomeMessage'));
+                const welcomeMessageProps = mergeProps([ptm('welcomeMessage')], { useTailwind: context.useTailwind });
 
                 return <div {...welcomeMessageProps}>{props.welcomeMessage}</div>;
             }
@@ -132,18 +135,24 @@ export const Terminal = React.memo(
         const createCommand = (command, index) => {
             const { text, response } = command;
             const key = text + '_' + index;
-            const commandsProps = mergeProps({ key }, ptm('commands'));
+            const commandsProps = mergeProps([{ key }, ptm('commands')], { useTailwind: context.useTailwind });
             const commandProps = mergeProps(
-                {
-                    className: cx('command')
-                },
-                ptm('command')
+                [
+                    {
+                        className: cx('command')
+                    },
+                    ptm('command')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const responseProps = mergeProps(
-                {
-                    className: cx('response')
-                },
-                ptm('response')
+                [
+                    {
+                        className: cx('response')
+                    },
+                    ptm('response')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -158,10 +167,13 @@ export const Terminal = React.memo(
         const createContent = () => {
             const content = commandsState.map(createCommand);
             const contentProps = mergeProps(
-                {
-                    className: cx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        className: cx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...contentProps}>{content}</div>;
@@ -169,23 +181,29 @@ export const Terminal = React.memo(
 
         const createPromptContainer = () => {
             const containerProps = mergeProps(
-                {
-                    className: cx('container')
-                },
-                ptm('container')
+                [
+                    {
+                        className: cx('container')
+                    },
+                    ptm('container')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const commandTextProps = mergeProps(
-                {
-                    ref: inputRef,
-                    value: commandTextState,
-                    type: 'text',
-                    className: cx('commandText'),
-                    autoComplete: 'off',
-                    onChange: (e) => onInputChange(e),
-                    onKeyDown: (e) => onInputKeyDown(e)
-                },
-                ptm('commandText')
+                [
+                    {
+                        ref: inputRef,
+                        value: commandTextState,
+                        type: 'text',
+                        className: cx('commandText'),
+                        autoComplete: 'off',
+                        onChange: (e) => onInputChange(e),
+                        onKeyDown: (e) => onInputKeyDown(e)
+                    },
+                    ptm('commandText')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -200,15 +218,18 @@ export const Terminal = React.memo(
         const content = createContent();
         const prompt = createPromptContainer();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: classNames(props.className, cx('root')),
-                style: props.style,
-                onClick
-            },
-            TerminalBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root')),
+                    style: props.style,
+                    onClick
+                },
+                TerminalBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

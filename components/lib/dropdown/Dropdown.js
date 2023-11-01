@@ -685,29 +685,38 @@ export const Dropdown = React.memo(
             }
 
             const hiddenSelectedMessageProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible p-dropdown-hidden-select'
-                },
-                ptm('hiddenSelectedMessage')
+                [
+                    {
+                        className: 'p-hidden-accessible p-dropdown-hidden-select'
+                    },
+                    ptm('hiddenSelectedMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const selectProps = mergeProps(
-                {
-                    ref: inputRef,
-                    required: props.required,
-                    defaultValue: option.value,
-                    name: props.name,
-                    tabIndex: -1,
-                    'aria-hidden': 'true'
-                },
-                ptm('select')
+                [
+                    {
+                        ref: inputRef,
+                        required: props.required,
+                        defaultValue: option.value,
+                        name: props.name,
+                        tabIndex: -1,
+                        'aria-hidden': 'true'
+                    },
+                    ptm('select')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const optionProps = mergeProps(
-                {
-                    value: option.value
-                },
-                ptm('option')
+                [
+                    {
+                        value: option.value
+                    },
+                    ptm('option')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -721,27 +730,33 @@ export const Dropdown = React.memo(
 
         const createKeyboardHelper = () => {
             const hiddenSelectedMessageProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible'
-                },
-                ptm('hiddenSelectedMessage')
+                [
+                    {
+                        className: 'p-hidden-accessible'
+                    },
+                    ptm('hiddenSelectedMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const inputProps = mergeProps(
-                {
-                    ref: focusInputRef,
-                    id: props.inputId,
-                    type: 'text',
-                    readOnly: true,
-                    'aria-haspopup': 'listbox',
-                    onFocus: onInputFocus,
-                    onBlur: onInputBlur,
-                    onKeyDown: onInputKeyDown,
-                    disabled: props.disabled,
-                    tabIndex: props.tabIndex,
-                    ...ariaProps
-                },
-                ptm('input')
+                [
+                    {
+                        ref: focusInputRef,
+                        id: props.inputId,
+                        type: 'text',
+                        readOnly: true,
+                        'aria-haspopup': 'listbox',
+                        onFocus: onInputFocus,
+                        onBlur: onInputBlur,
+                        onKeyDown: onInputKeyDown,
+                        disabled: props.disabled,
+                        tabIndex: props.tabIndex,
+                        ...ariaProps
+                    },
+                    ptm('input')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -757,32 +772,38 @@ export const Dropdown = React.memo(
             if (props.editable) {
                 const value = label || props.value || '';
                 const inputProps = mergeProps(
-                    {
-                        ref: inputRef,
-                        type: 'text',
-                        defaultValue: value,
-                        className: cx('input', { label }),
-                        disabled: props.disabled,
-                        placeholder: props.placeholder,
-                        maxLength: props.maxLength,
-                        onInput: onEditableInputChange,
-                        onFocus: onEditableInputFocus,
-                        onBlur: onInputBlur,
-                        'aria-haspopup': 'listbox',
-                        ...ariaProps
-                    },
-                    ptm('input')
+                    [
+                        {
+                            ref: inputRef,
+                            type: 'text',
+                            defaultValue: value,
+                            className: cx('input', { label }),
+                            disabled: props.disabled,
+                            placeholder: props.placeholder,
+                            maxLength: props.maxLength,
+                            onInput: onEditableInputChange,
+                            onFocus: onEditableInputFocus,
+                            onBlur: onInputBlur,
+                            'aria-haspopup': 'listbox',
+                            ...ariaProps
+                        },
+                        ptm('input')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <input {...inputProps} />;
             } else {
                 const content = props.valueTemplate ? ObjectUtils.getJSXElement(props.valueTemplate, selectedOption, props) : label || props.placeholder || 'empty';
                 const inputProps = mergeProps(
-                    {
-                        ref: inputRef,
-                        className: cx('input', { label })
-                    },
-                    ptm('input')
+                    [
+                        {
+                            ref: inputRef,
+                            className: cx('input', { label })
+                        },
+                        ptm('input')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <span {...inputProps}>{content}</span>;
@@ -792,11 +813,14 @@ export const Dropdown = React.memo(
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
                 const clearIconProps = mergeProps(
-                    {
-                        className: cx('clearIcon'),
-                        onPointerUp: clear
-                    },
-                    ptm('clearIcon')
+                    [
+                        {
+                            className: cx('clearIcon'),
+                            onPointerUp: clear
+                        },
+                        ptm('clearIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
 
@@ -808,24 +832,30 @@ export const Dropdown = React.memo(
 
         const createDropdownIcon = () => {
             const dropdownIconProps = mergeProps(
-                {
-                    className: cx('dropdownIcon')
-                },
-                ptm('dropdownIcon')
+                [
+                    {
+                        className: cx('dropdownIcon')
+                    },
+                    ptm('dropdownIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
 
             const ariaLabel = props.placeholder || props.ariaLabel;
             const triggerProps = mergeProps(
-                {
-                    className: cx('trigger'),
-                    role: 'button',
-                    'aria-haspopup': 'listbox',
-                    'aria-expanded': overlayVisibleState,
-                    'aria-label': ariaLabel
-                },
-                ptm('trigger')
+                [
+                    {
+                        className: cx('trigger'),
+                        role: 'button',
+                        'aria-haspopup': 'listbox',
+                        'aria-expanded': overlayVisibleState,
+                        'aria-label': ariaLabel
+                    },
+                    ptm('trigger')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...triggerProps}>{dropdownIcon}</div>;
@@ -843,19 +873,22 @@ export const Dropdown = React.memo(
         const dropdownIcon = createDropdownIcon();
         const clearIcon = createClearIcon();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
-                style: props.style,
-                onClick: (e) => onClick(e),
-                onMouseDown: props.onMouseDown,
-                onContextMenu: props.onContextMenu,
-                'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState
-            },
-            otherProps,
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
+                    style: props.style,
+                    onClick: (e) => onClick(e),
+                    onMouseDown: props.onMouseDown,
+                    onContextMenu: props.onContextMenu,
+                    'data-p-disabled': props.disabled,
+                    'data-p-focus': focusedState
+                },
+                otherProps,
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

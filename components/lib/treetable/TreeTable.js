@@ -996,10 +996,13 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
         scrollableView = createScrollableView(value, scrollableColumns, false, props.headerColumnGroup, props.footerColumnGroup);
         const scrollableWrapperProps = mergeProps(
-            {
-                className: ptCallbacks.cx('scrollableWrapper')
-            },
-            ptCallbacks.ptm('scrollableWrapper')
+            [
+                {
+                    className: ptCallbacks.cx('scrollableWrapper')
+                },
+                ptCallbacks.ptm('scrollableWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -1017,18 +1020,24 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         const body = createTableBody(value, columns);
 
         const wrapperProps = mergeProps(
-            {
-                className: ptCallbacks.cx('wrapper')
-            },
-            ptCallbacks.ptm('wrapper')
+            [
+                {
+                    className: ptCallbacks.cx('wrapper')
+                },
+                ptCallbacks.ptm('wrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const tableProps = mergeProps(
-            {
-                style: props.tableStyle,
-                className: classNames(props.tableClassName, ptCallbacks.cx('table'))
-            },
-            ptCallbacks.ptm('table')
+            [
+                {
+                    style: props.tableStyle,
+                    className: classNames(props.tableClassName, ptCallbacks.cx('table'))
+                },
+                ptCallbacks.ptm('table')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -1049,25 +1058,34 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const createLoader = () => {
         if (props.loading) {
             const loadingIconProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('loadingIcon')
-                },
-                ptCallbacks.ptm('loadingIcon')
+                [
+                    {
+                        className: ptCallbacks.cx('loadingIcon')
+                    },
+                    ptCallbacks.ptm('loadingIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
             const loadingWrapperProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('loadingWrapper')
-                },
-                ptCallbacks.ptm('loadingWrapper')
+                [
+                    {
+                        className: ptCallbacks.cx('loadingWrapper')
+                    },
+                    ptCallbacks.ptm('loadingWrapper')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const loadingOverlayProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('loadingOverlay')
-                },
-                ptCallbacks.ptm('loadingOverlay')
+                [
+                    {
+                        className: ptCallbacks.cx('loadingOverlay')
+                    },
+                    ptCallbacks.ptm('loadingOverlay')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -1085,23 +1103,32 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const table = createTable(data);
     const totalRecords = getTotalRecords(data);
     const headerProps = mergeProps(
-        {
-            className: ptCallbacks.cx('header')
-        },
-        ptCallbacks.ptm('header')
+        [
+            {
+                className: ptCallbacks.cx('header')
+            },
+            ptCallbacks.ptm('header')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const footerProps = mergeProps(
-        {
-            className: ptCallbacks.cx('footer')
-        },
-        ptCallbacks.ptm('footer')
+        [
+            {
+                className: ptCallbacks.cx('footer')
+            },
+            ptCallbacks.ptm('footer')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const resizeHelperProps = mergeProps(
-        {
-            className: ptCallbacks.cx('resizeHelper'),
-            style: { display: 'none' }
-        },
-        ptCallbacks.ptm('resizeHelper')
+        [
+            {
+                className: ptCallbacks.cx('resizeHelper'),
+                style: { display: 'none' }
+            },
+            ptCallbacks.ptm('resizeHelper')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const headerFacet = props.header && <div {...headerProps}>{props.header}</div>;
@@ -1111,13 +1138,16 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const loader = createLoader();
     const resizeHelper = props.resizableColumns && <div ref={resizerHelperRef} {...resizeHelperProps}></div>;
     const reorderIndicatorUpProps = mergeProps(
-        {
-            className: ptCallbacks.cx('reorderIndicatorUp'),
-            style: { position: 'absolute', display: 'none' }
-        },
-        ptCallbacks.ptm('reorderIndicatorUp')
+        [
+            {
+                className: ptCallbacks.cx('reorderIndicatorUp'),
+                style: { position: 'absolute', display: 'none' }
+            },
+            ptCallbacks.ptm('reorderIndicatorUp')
+        ],
+        { useTailwind: context.useTailwind }
     );
-    const reorderIndicatorUpIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorUpIcon'));
+    const reorderIndicatorUpIconProps = mergeProps([ptCallbacks.ptm('reorderIndicatorUpIcon')], { useTailwind: context.useTailwind });
     const reorderIndicatorUpIcon = props.reorderableColumns && IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon {...reorderIndicatorUpIconProps} />, { ...reorderIndicatorUpIconProps }, { props });
     const reorderIndicatorUp = props.reorderableColumns && (
         <span ref={reorderIndicatorUpRef} {...reorderIndicatorUpProps}>
@@ -1125,7 +1155,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         </span>
     );
     const reorderIndicatorDownProps = { className: ptCallbacks.sx('reorderIndicatorDown'), style: { position: 'absolute', display: 'none' } };
-    const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
+    const reorderIndicatorDownIconProps = mergeProps([ptCallbacks.ptm('reorderIndicatorDownIcon')], { useTailwind: context.useTailwind });
     const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
     const reorderIndicatorDown = props.reorderableColumns && (
         <span ref={reorderIndicatorDownRef} {...reorderIndicatorDownProps}>
@@ -1134,14 +1164,17 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     );
 
     const rootProps = mergeProps(
-        {
-            id: props.id,
-            className: classNames(props.className, ptCallbacks.cx('root', { isRowSelectionMode })),
-            style: props.style,
-            'data-scrollselectors': '.p-treetable-wrapper'
-        },
-        ObjectUtils.findDiffKeys(props, TreeTable.defaultProps),
-        ptCallbacks.ptm('root')
+        [
+            {
+                id: props.id,
+                className: classNames(props.className, ptCallbacks.cx('root', { isRowSelectionMode })),
+                style: props.style,
+                'data-scrollselectors': '.p-treetable-wrapper'
+            },
+            ObjectUtils.findDiffKeys(props, TreeTable.defaultProps),
+            ptCallbacks.ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

@@ -115,26 +115,32 @@ export const Toast = React.memo(
 
         const createElement = () => {
             const rootProps = mergeProps(
-                {
-                    ref: containerRef,
-                    id: props.id,
-                    className: ptCallbacks.cx('root', { context }),
-                    style: ptCallbacks.sx('root')
-                },
-                ToastBase.getOtherProps(props),
-                ptCallbacks.ptm('root')
+                [
+                    {
+                        ref: containerRef,
+                        id: props.id,
+                        className: ptCallbacks.cx('root', { context }),
+                        style: ptCallbacks.sx('root')
+                    },
+                    ToastBase.getOtherProps(props),
+                    ptCallbacks.ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: ptCallbacks.cx('transition'),
-                    timeout: { enter: 300, exit: 300 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEntered,
-                    onExited
-                },
-                ptCallbacks.ptm('transition')
+                [
+                    {
+                        classNames: ptCallbacks.cx('transition'),
+                        timeout: { enter: 300, exit: 300 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEntered,
+                        onExited
+                    },
+                    ptCallbacks.ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

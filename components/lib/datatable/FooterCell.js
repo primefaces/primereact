@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const FooterCell = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
@@ -24,7 +26,7 @@ export const FooterCell = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData)], { useTailwind: context.useTailwind });
     };
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
@@ -79,15 +81,18 @@ export const FooterCell = React.memo((props) => {
     const rowSpan = getColumnProp('rowSpan');
     const content = ObjectUtils.getJSXElement(getColumnProp('footer'), { props: props.tableProps });
     const footerCellProps = mergeProps(
-        {
-            style,
-            className: classNames(getColumnProp('footerClassName'), getColumnProp('className'), cx('footerCell', { getColumnProp, align })),
-            role: 'cell',
-            colSpan,
-            rowSpan
-        },
-        getColumnPTOptions('root'),
-        getColumnPTOptions('footerCell')
+        [
+            {
+                style,
+                className: classNames(getColumnProp('footerClassName'), getColumnProp('className'), cx('footerCell', { getColumnProp, align })),
+                role: 'cell',
+                colSpan,
+                rowSpan
+            },
+            getColumnPTOptions('root'),
+            getColumnPTOptions('footerCell')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { CheckIcon } from '../icons/check';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -36,10 +38,13 @@ export const MultiSelectItem = React.memo((props) => {
     };
 
     const checkboxIconProps = mergeProps(
-        {
-            className: cx('checkboxIcon')
-        },
-        getPTOptions('checkboxIcon')
+        [
+            {
+                className: cx('checkboxIcon')
+            },
+            getPTOptions('checkboxIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const icon = props.checkboxIcon || <CheckIcon {...checkboxIconProps} />;
@@ -49,33 +54,42 @@ export const MultiSelectItem = React.memo((props) => {
     const tabIndex = props.disabled ? null : props.tabIndex || 0;
 
     const checkboxContainerProps = mergeProps(
-        {
-            className: cx('checkboxContainer')
-        },
-        getPTOptions('checkboxContainer')
+        [
+            {
+                className: cx('checkboxContainer')
+            },
+            getPTOptions('checkboxContainer')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const checkboxProps = mergeProps(
-        {
-            className: cx('checkbox', { itemProps: props }),
-            'data-p-highlight': props.selected
-        },
-        getPTOptions('checkbox')
+        [
+            {
+                className: cx('checkbox', { itemProps: props }),
+                'data-p-highlight': props.selected
+            },
+            getPTOptions('checkbox')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const itemProps = mergeProps(
-        {
-            className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
-            style: props.style,
-            onClick: onClick,
-            tabIndex: tabIndex,
-            onKeyDown: onKeyDown,
-            role: 'option',
-            'aria-selected': props.selected,
-            'data-p-highlight': props.selected,
-            'data-p-disabled': props.disabled
-        },
-        getPTOptions('item')
+        [
+            {
+                className: classNames(props.className, props.option.className, cx('item', { itemProps: props })),
+                style: props.style,
+                onClick: onClick,
+                tabIndex: tabIndex,
+                onKeyDown: onKeyDown,
+                role: 'option',
+                'aria-selected': props.selected,
+                'data-p-highlight': props.selected,
+                'data-p-disabled': props.disabled
+            },
+            getPTOptions('item')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

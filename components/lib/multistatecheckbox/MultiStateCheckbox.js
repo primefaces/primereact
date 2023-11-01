@@ -122,10 +122,13 @@ export const MultiStateCheckbox = React.memo(
                 [`${icon}`]: true
             });
             const iconProps = mergeProps(
-                {
-                    className: cx('icon', { icon })
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon', { icon })
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const content = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
@@ -154,38 +157,47 @@ export const MultiStateCheckbox = React.memo(
         const ariaChecked = !!selectedOption ? 'true' : 'false';
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root'),
-                style: props.style,
-                onClick: onClick
-            },
-            MultiStateCheckboxBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root'),
+                    style: props.style,
+                    onClick: onClick
+                },
+                MultiStateCheckboxBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const checkboxProps = mergeProps(
-            {
-                className: cx('checkbox', { focusedState, selectedOption }),
-                style: sx('checkbox', { selectedOption }),
-                tabIndex: props.tabIndex,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                role: 'checkbox',
-                'aria-checked': ariaChecked,
-                ...ariaProps
-            },
-            ptm('checkbox')
+            [
+                {
+                    className: cx('checkbox', { focusedState, selectedOption }),
+                    style: sx('checkbox', { selectedOption }),
+                    tabIndex: props.tabIndex,
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onKeyDown: onKeyDown,
+                    role: 'checkbox',
+                    'aria-checked': ariaChecked,
+                    ...ariaProps
+                },
+                ptm('checkbox')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const srOnlyAriaProps = mergeProps(
-            {
-                className: 'p-sr-only p-hidden-accessible',
-                'aria-live': 'polite'
-            },
-            ptm('srOnlyAria')
+            [
+                {
+                    className: 'p-sr-only p-hidden-accessible',
+                    'aria-live': 'polite'
+                },
+                ptm('srOnlyAria')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

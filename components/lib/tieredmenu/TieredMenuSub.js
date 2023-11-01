@@ -2,11 +2,13 @@ import * as React from 'react';
 import { useEventListener, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const TieredMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const elementRef = React.useRef(null);
+    const context = React.useContext(PrimeReactContext);
     const { ptm, cx, sx } = props;
 
     const getPTOptions = (item, key) => {
@@ -191,12 +193,15 @@ export const TieredMenuSub = React.memo((props) => {
         const key = 'separator_' + index;
 
         const separatorProps = mergeProps(
-            {
-                key,
-                className: cx('separator'),
-                role: 'separator'
-            },
-            ptm('separator', { hostName: props.hostName })
+            [
+                {
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                ptm('separator', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li {...separatorProps}></li>;
@@ -237,40 +242,52 @@ export const TieredMenuSub = React.memo((props) => {
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
         const iconProps = mergeProps(
-            {
-                className: cx('icon', { _icon })
-            },
-            getPTOptions(item, 'icon')
+            [
+                {
+                    className: cx('icon', { _icon })
+                },
+                getPTOptions(item, 'icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props: props.menuProps });
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            getPTOptions(item, 'label')
+            [
+                {
+                    className: cx('label')
+                },
+                getPTOptions(item, 'label')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const label = _label && <span {...labelProps}>{_label}</span>;
         const submenuIconClassName = 'p-submenu-icon';
         const submenuIconProps = mergeProps(
-            {
-                className: cx('submenuIcon')
-            },
-            getPTOptions(item, 'submenuIcon')
+            [
+                {
+                    className: cx('submenuIcon')
+                },
+                getPTOptions(item, 'submenuIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props: props.menuProps });
         const submenu = createSubmenu(item, index);
         const actionProps = mergeProps(
-            {
-                href: url || '#',
-                className: cx('action', { disabled }),
-                target: target,
-                role: 'menuitem',
-                'aria-haspopup': items != null,
-                onClick: (event) => onItemClick(event, item),
-                onKeyDown: (event) => onItemKeyDown(event, item),
-                'aria-disabled': disabled
-            },
-            getPTOptions(item, 'action')
+            [
+                {
+                    href: url || '#',
+                    className: cx('action', { disabled }),
+                    target: target,
+                    role: 'menuitem',
+                    'aria-haspopup': items != null,
+                    onClick: (event) => onItemClick(event, item),
+                    onKeyDown: (event) => onItemKeyDown(event, item),
+                    'aria-disabled': disabled
+                },
+                getPTOptions(item, 'action')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (
@@ -300,15 +317,18 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         const menuitemProps = mergeProps(
-            {
-                key,
-                id: key,
-                className: cx('menuitem', { _className, active }),
-                style: style,
-                onMouseEnter: (event) => onItemMouseEnter(event, item),
-                role: 'none'
-            },
-            getPTOptions(item, 'menuitem')
+            [
+                {
+                    key,
+                    id: key,
+                    className: cx('menuitem', { _className, active }),
+                    style: style,
+                    onMouseEnter: (event) => onItemMouseEnter(event, item),
+                    role: 'none'
+                },
+                getPTOptions(item, 'menuitem')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -330,14 +350,17 @@ export const TieredMenuSub = React.memo((props) => {
     const submenu = createMenu();
     const ptKey = props.root ? 'menu' : 'submenu';
     const menuProps = mergeProps(
-        {
-            ref: elementRef,
-            className: cx(ptKey, { subProps: props }),
-            style: sx(ptKey, { subProps: props }),
-            role: props.root ? 'menubar' : 'menu',
-            'aria-orientation': 'horizontal'
-        },
-        ptm(ptKey, { hostName: props.hostName })
+        [
+            {
+                ref: elementRef,
+                className: cx(ptKey, { subProps: props }),
+                style: sx(ptKey, { subProps: props }),
+                role: props.root ? 'menubar' : 'menu',
+                'aria-orientation': 'horizontal'
+            },
+            ptm(ptKey, { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <ul {...menuProps}>{submenu}</ul>;

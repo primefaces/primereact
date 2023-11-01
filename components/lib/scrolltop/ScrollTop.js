@@ -84,37 +84,46 @@ export const ScrollTop = React.memo(
         });
 
         const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            ptm('icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = props.icon || <ChevronUpIcon {...iconProps} />;
         const scrollIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
         const rootProps = mergeProps(
-            {
-                ref: scrollElementRef,
-                type: 'button',
-                className: classNames(props.className, cx('root')),
-                style: props.style,
-                onClick
-            },
-            ScrollTopBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: scrollElementRef,
+                    type: 'button',
+                    className: classNames(props.className, cx('root')),
+                    style: props.style,
+                    onClick
+                },
+                ScrollTopBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: { enter: 150, exit: 150 },
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEnter,
-                onEntered,
-                onExited
-            },
-            ptm('transition')
+            [
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: { enter: 150, exit: 150 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExited
+                },
+                ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

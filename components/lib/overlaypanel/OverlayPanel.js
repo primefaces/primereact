@@ -221,23 +221,29 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
 
     const createCloseIcon = () => {
         const closeIconProps = mergeProps(
-            {
-                className: cx('closeIcon'),
-                'aria-hidden': true
-            },
-            ptm('closeIcon')
+            [
+                {
+                    className: cx('closeIcon'),
+                    'aria-hidden': true
+                },
+                ptm('closeIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
         const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
         const ariaLabel = props.ariaCloseLabel || localeOption('close');
         const closeButtonProps = mergeProps(
-            {
-                type: 'button',
-                className: cx('closeButton'),
-                onClick: (e) => onCloseClick(e),
-                'aria-label': ariaLabel
-            },
-            ptm('closeButton')
+            [
+                {
+                    type: 'button',
+                    className: cx('closeButton'),
+                    onClick: (e) => onCloseClick(e),
+                    'aria-label': ariaLabel
+                },
+                ptm('closeButton')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (props.showCloseIcon) {
@@ -255,39 +261,48 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
     const createElement = () => {
         const closeIcon = createCloseIcon();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: cx('root', { context }),
-                style: props.style,
-                onClick: (e) => onPanelClick(e)
-            },
-            OverlayPanelBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: cx('root', { context }),
+                    style: props.style,
+                    onClick: (e) => onPanelClick(e)
+                },
+                OverlayPanelBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const contentProps = mergeProps(
-            {
-                className: cx('content'),
-                onClick: (e) => onContentClick(e),
-                onMouseDown: onContentClick
-            },
-            OverlayPanelBase.getOtherProps(props),
-            ptm('content')
+            [
+                {
+                    className: cx('content'),
+                    onClick: (e) => onContentClick(e),
+                    onMouseDown: onContentClick
+                },
+                OverlayPanelBase.getOtherProps(props),
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: { enter: 120, exit: 100 },
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEnter: onEnter,
-                onEntered: onEntered,
-                onExit: onExit,
-                onExited: onExited
-            },
-            ptm('transition')
+            [
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onEnter,
+                    onEntered: onEntered,
+                    onExit: onExit,
+                    onExited: onExited
+                },
+                ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

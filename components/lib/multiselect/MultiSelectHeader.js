@@ -6,10 +6,12 @@ import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
 
 export const MultiSelectHeader = React.memo((props) => {
     const { ptm, cx, isUnstyled } = props;
+    const context = React.useContext(PrimeReactContext);
     const filterOptions = {
         filter: (e) => onFilter(e),
         reset: () => props.resetFilter()
@@ -45,10 +47,13 @@ export const MultiSelectHeader = React.memo((props) => {
 
     const createFilterElement = () => {
         const filterIconProps = mergeProps(
-            {
-                className: cx('filterIcon')
-            },
-            getPTOptions('filterIcon')
+            [
+                {
+                    className: cx('filterIcon')
+                },
+                getPTOptions('filterIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
@@ -56,10 +61,13 @@ export const MultiSelectHeader = React.memo((props) => {
 
         if (props.filter) {
             const filterContainerProps = mergeProps(
-                {
-                    className: cx('filterContainer')
-                },
-                getPTOptions('filterContainer')
+                [
+                    {
+                        className: cx('filterContainer')
+                    },
+                    getPTOptions('filterContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -102,18 +110,24 @@ export const MultiSelectHeader = React.memo((props) => {
     const selectAllId = props.id ? props.id + '_selectall' : UniqueComponentId();
 
     const headerSelectAllLabelProps = mergeProps(
-        {
-            htmlFor: selectAllId,
-            className: cx('headerSelectAllLabel')
-        },
-        getPTOptions('headerSelectAllLabel')
+        [
+            {
+                htmlFor: selectAllId,
+                className: cx('headerSelectAllLabel')
+            },
+            getPTOptions('headerSelectAllLabel')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const headerCheckboxIconProps = mergeProps(
-        {
-            className: cx('headerCheckboxIcon')
-        },
-        getPTOptions('headerCheckboxIcon')
+        [
+            {
+                className: cx('headerCheckboxIcon')
+            },
+            getPTOptions('headerCheckboxIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const checkedIcon = props.itemCheckboxIcon || <CheckIcon {...headerCheckboxIconProps} />;
@@ -127,30 +141,39 @@ export const MultiSelectHeader = React.memo((props) => {
     );
 
     const iconProps = mergeProps(
-        {
-            className: cx('closeIcon'),
-            'aria-hidden': true
-        },
-        getPTOptions('closeIcon')
+        [
+            {
+                className: cx('closeIcon'),
+                'aria-hidden': true
+            },
+            getPTOptions('closeIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const icon = props.closeIcon || <TimesIcon {...iconProps} />;
     const closeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
     const headerProps = mergeProps(
-        {
-            className: cx('header')
-        },
-        getPTOptions('header')
+        [
+            {
+                className: cx('header')
+            },
+            getPTOptions('header')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const closeButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('closeButton'),
-            'aria-label': localeOption('close'),
-            onClick: props.onClose
-        },
-        getPTOptions('closeButton')
+        [
+            {
+                type: 'button',
+                className: cx('closeButton'),
+                'aria-label': localeOption('close'),
+                onClick: props.onClose
+            },
+            getPTOptions('closeButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const closeElement = (

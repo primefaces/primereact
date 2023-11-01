@@ -9,10 +9,12 @@ import { AngleDownIcon } from '../icons/angledown';
 import { AngleLeftIcon } from '../icons/angleleft';
 import { AngleRightIcon } from '../icons/angleright';
 import { AngleUpIcon } from '../icons/angleup';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PickListTransferControls = React.memo((props) => {
     const viewChanged = useMatchMedia(`(max-width: ${props.breakpoint})`, props.breakpoint);
+    const context = React.useContext(PrimeReactContext);
     const { ptm, cx, unstyled } = props;
 
     function getIconComponent(iconType) {
@@ -125,10 +127,13 @@ export const PickListTransferControls = React.memo((props) => {
     };
 
     const buttonsProps = mergeProps(
-        {
-            className: classNames(props.className, cx('buttons'))
-        },
-        ptm('buttons', { hostName: props.hostName })
+        [
+            {
+                className: classNames(props.className, cx('buttons'))
+            },
+            ptm('buttons', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

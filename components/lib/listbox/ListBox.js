@@ -344,12 +344,15 @@ export const ListBox = React.memo(
                 const key = index + '_' + getOptionGroupRenderKey(option);
 
                 const itemGroupProps = mergeProps(
-                    {
-                        className: ptCallbacks.cx('itemGroup'),
-                        style: ptCallbacks.sx('itemGroup', { scrollerOptions }),
-                        role: 'group'
-                    },
-                    ptCallbacks.ptm('itemGroup')
+                    [
+                        {
+                            className: ptCallbacks.cx('itemGroup'),
+                            style: ptCallbacks.sx('itemGroup', { scrollerOptions }),
+                            role: 'group'
+                        },
+                        ptCallbacks.ptm('itemGroup')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -396,10 +399,13 @@ export const ListBox = React.memo(
 
         const createEmptyMessage = (emptyMessage, isFilter) => {
             const emptyMessageProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('emptyMessage')
-                },
-                ptCallbacks.ptm('emptyMessage')
+                [
+                    {
+                        className: ptCallbacks.cx('emptyMessage')
+                    },
+                    ptCallbacks.ptm('emptyMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
@@ -417,15 +423,18 @@ export const ListBox = React.memo(
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
                             const listProps = mergeProps(
-                                {
-                                    ref: options.contentRef,
-                                    style: ptCallbacks.sx('list', { options }),
-                                    className: ptCallbacks.cx('list', { options }),
-                                    role: 'listbox',
-                                    'aria-multiselectable': props.multiple,
-                                    ...ariaProps
-                                },
-                                ptCallbacks.ptm('list')
+                                [
+                                    {
+                                        ref: options.contentRef,
+                                        style: ptCallbacks.sx('list', { options }),
+                                        className: ptCallbacks.cx('list', { options }),
+                                        role: 'listbox',
+                                        'aria-multiselectable': props.multiple,
+                                        ...ariaProps
+                                    },
+                                    ptCallbacks.ptm('list')
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return <ul {...listProps}>{options.children}</ul>;
@@ -438,13 +447,16 @@ export const ListBox = React.memo(
                 const items = createItems();
 
                 const listProps = mergeProps(
-                    {
-                        className: ptCallbacks.cx('list'),
-                        role: 'listbox',
-                        'aria-multiselectable': props.multiple,
-                        ...ariaProps
-                    },
-                    ptCallbacks.ptm('list')
+                    [
+                        {
+                            className: ptCallbacks.cx('list'),
+                            role: 'listbox',
+                            'aria-multiselectable': props.multiple,
+                            ...ariaProps
+                        },
+                        ptCallbacks.ptm('list')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <ul {...listProps}>{items}</ul>;
@@ -460,22 +472,28 @@ export const ListBox = React.memo(
         const header = createHeader();
 
         const wrapperProps = mergeProps(
-            {
-                className: ptCallbacks.cx('wrapper'),
-                style: props.listStyle
-            },
-            ptCallbacks.ptm('wrapper')
+            [
+                {
+                    className: ptCallbacks.cx('wrapper'),
+                    style: props.listStyle
+                },
+                ptCallbacks.ptm('wrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: ptCallbacks.cx('root'),
-                style: props.style
-            },
-            ListBoxBase.getOtherProps(props),
-            ptCallbacks.ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: ptCallbacks.cx('root'),
+                    style: props.style
+                },
+                ListBoxBase.getOtherProps(props),
+                ptCallbacks.ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

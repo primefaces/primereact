@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const TreeTableBodyCell = (props) => {
@@ -13,6 +14,7 @@ export const TreeTableBodyCell = (props) => {
     const tabIndexTimeout = React.useRef(null);
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
     const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const context = React.useContext(PrimeReactContext);
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnPTOptions = (key) => {
@@ -36,7 +38,7 @@ export const TreeTableBodyCell = (props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata)], { useTailwind: context.useTailwind });
     };
 
     const field = getColumnProp('field') || `field_${props.index}`;
@@ -210,16 +212,19 @@ export const TreeTableBodyCell = (props) => {
     }
 
     const editorKeyHelperProps = mergeProps(
-        {
-            tabIndex: 0,
-            ref: keyHelperRef,
-            className: 'p-cell-editor-key-helper p-hidden-accessible',
-            onFocus: (e) => onEditorFocus(e)
-        },
-        getColumnPTOptions('editorKeyHelperLabel')
+        [
+            {
+                tabIndex: 0,
+                ref: keyHelperRef,
+                className: 'p-cell-editor-key-helper p-hidden-accessible',
+                onFocus: (e) => onEditorFocus(e)
+            },
+            getColumnPTOptions('editorKeyHelperLabel')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
-    const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
+    const editorKeyHelperLabelProps = mergeProps([getColumnPTOptions('editorKeyHelper')], { useTailwind: context.useTailwind });
     /* eslint-disable */
     const editorKeyHelper = props.editor && (
         <a {...editorKeyHelperProps}>
@@ -228,14 +233,17 @@ export const TreeTableBodyCell = (props) => {
     );
     /* eslint-enable */
     const bodyCellProps = mergeProps(
-        {
-            className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState })),
-            style,
-            onClick: (e) => onClick(e),
-            onKeyDown: (e) => onKeyDown(e)
-        },
-        getColumnPTOptions('root'),
-        getColumnPTOptions('bodyCell')
+        [
+            {
+                className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState })),
+                style,
+                onClick: (e) => onClick(e),
+                onKeyDown: (e) => onKeyDown(e)
+            },
+            getColumnPTOptions('root'),
+            getColumnPTOptions('bodyCell')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

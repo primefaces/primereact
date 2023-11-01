@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronUpIcon } from '../icons/chevronup';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const OrganizationChartNode = React.memo((props) => {
@@ -11,6 +12,7 @@ export const OrganizationChartNode = React.memo((props) => {
     const selected = props.isSelected(node);
     const visibility = !leaf && expandedState ? 'inherit' : 'hidden';
     const { ptm, cx, sx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const _ptm = (key, options) => {
         return ptm(key, {
@@ -49,17 +51,23 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createChildNodes = () => {
         const nodesProps = mergeProps(
-            {
-                className: cx('nodes'),
-                style: { visibility }
-            },
-            _ptm('nodes')
+            [
+                {
+                    className: cx('nodes'),
+                    style: { visibility }
+                },
+                _ptm('nodes')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const nodeCellProps = mergeProps(
-            {
-                colSpan: '2'
-            },
-            _ptm('nodeCell')
+            [
+                {
+                    colSpan: '2'
+                },
+                _ptm('nodeCell')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -89,23 +97,32 @@ export const OrganizationChartNode = React.memo((props) => {
     const createLinesMiddle = () => {
         const nodeChildLength = node.children && node.children.length;
         const linesProps = mergeProps(
-            {
-                className: cx('lines'),
-                style: { visibility }
-            },
-            _ptm('lines')
+            [
+                {
+                    className: cx('lines'),
+                    style: { visibility }
+                },
+                _ptm('lines')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const lineCellProps = mergeProps(
-            {
-                colSpan: colspan
-            },
-            _ptm('lineCell')
+            [
+                {
+                    colSpan: colspan
+                },
+                _ptm('lineCell')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const lineDownProps = mergeProps(
-            {
-                className: cx('lineDown')
-            },
-            _ptm('lineDown')
+            [
+                {
+                    className: cx('lineDown')
+                },
+                _ptm('lineDown')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -119,16 +136,22 @@ export const OrganizationChartNode = React.memo((props) => {
                     node.children.length > 1 &&
                     node.children.map((_, index) => {
                         const lineLeftProps = mergeProps(
-                            {
-                                className: cx('lineLeft', { index })
-                            },
-                            getNodePTOptions(index !== 0, 'lineLeft')
+                            [
+                                {
+                                    className: cx('lineLeft', { index })
+                                },
+                                getNodePTOptions(index !== 0, 'lineLeft')
+                            ],
+                            { useTailwind: context.useTailwind }
                         );
                         const lineRightProps = mergeProps(
-                            {
-                                className: cx('lineRight', { index, nodeChildLength })
-                            },
-                            getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
+                            [
+                                {
+                                    className: cx('lineRight', { index, nodeChildLength })
+                                },
+                                getNodePTOptions(index !== nodeChildLength - 1, 'lineRight')
+                            ],
+                            { useTailwind: context.useTailwind }
                         );
 
                         return [
@@ -146,25 +169,34 @@ export const OrganizationChartNode = React.memo((props) => {
 
     const createLinesDown = () => {
         const linesProps = mergeProps(
-            {
-                className: cx('lines'),
-                style: { visibility }
-            },
-            _ptm('lines')
+            [
+                {
+                    className: cx('lines'),
+                    style: { visibility }
+                },
+                _ptm('lines')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const lineCellProps = mergeProps(
-            {
-                colSpan: colspan
-            },
-            _ptm('lineCell')
+            [
+                {
+                    colSpan: colspan
+                },
+                _ptm('lineCell')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const lineDownProps = mergeProps(
-            {
-                className: cx('lineDown')
-            },
-            _ptm('lineDown')
+            [
+                {
+                    className: cx('lineDown')
+                },
+                _ptm('lineDown')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -179,10 +211,13 @@ export const OrganizationChartNode = React.memo((props) => {
     const createToggler = () => {
         if (!leaf) {
             const nodeTogglerIconProps = mergeProps(
-                {
-                    className: cx('nodeTogglerIcon')
-                },
-                _ptm('nodeTogglerIcon')
+                [
+                    {
+                        className: cx('nodeTogglerIcon')
+                    },
+                    _ptm('nodeTogglerIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let icon;
@@ -196,12 +231,15 @@ export const OrganizationChartNode = React.memo((props) => {
             const togglerIcon = IconUtils.getJSXIcon(icon, { ...nodeTogglerIconProps }, { props });
 
             const nodeTogglerProps = mergeProps(
-                {
-                    className: cx('nodeToggler'),
-                    onClick: (e) => toggleNode(e, node),
-                    href: '#'
-                },
-                getPTOptions('nodeToggler')
+                [
+                    {
+                        className: cx('nodeToggler'),
+                        onClick: (e) => toggleNode(e, node),
+                        href: '#'
+                    },
+                    getPTOptions('nodeToggler')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -227,22 +265,28 @@ export const OrganizationChartNode = React.memo((props) => {
         const toggler = createToggler();
 
         const cellProps = mergeProps(
-            {
-                colSpan: colspan
-            },
-            _ptm('cell')
+            [
+                {
+                    colSpan: colspan
+                },
+                _ptm('cell')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const nodeProps = mergeProps(
-            {
-                className: cx('node', { selected, node, nodeProps: props }),
-                style: node.style,
-                onClick: (e) => onNodeClick(e, node)
-            },
-            getPTOptions('node')
+            [
+                {
+                    className: cx('node', { selected, node, nodeProps: props }),
+                    style: node.style,
+                    onClick: (e) => onNodeClick(e, node)
+                },
+                getPTOptions('node')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
-        const rowProps = mergeProps(_ptm('row'));
+        const rowProps = mergeProps([_ptm('row')], { useTailwind: context.useTailwind });
 
         return (
             <tr {...rowProps}>
@@ -262,10 +306,13 @@ export const OrganizationChartNode = React.memo((props) => {
     const childNodes = createChildNodes();
 
     const tableProps = mergeProps(
-        {
-            className: cx('table')
-        },
-        _ptm('table')
+        [
+            {
+                className: cx('table')
+            },
+            _ptm('table')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

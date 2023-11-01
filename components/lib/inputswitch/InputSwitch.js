@@ -88,45 +88,57 @@ export const InputSwitch = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
 
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root', { focusedState, checked })),
-                style: props.style,
-                onClick,
-                role: 'checkbox',
-                'aria-checked': checked
-            },
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root', { focusedState, checked })),
+                    style: props.style,
+                    onClick,
+                    role: 'checkbox',
+                    'aria-checked': checked
+                },
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const hiddenInputWrapperProps = mergeProps(
-            {
-                className: 'p-hidden-accessible'
-            },
-            ptm('hiddenInputWrapper')
+            [
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenInputWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const hiddenInputProps = mergeProps(
-            {
-                type: 'checkbox',
-                id: props.inputId,
-                name: props.name,
-                checked: checked,
-                onChange: toggle,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                disabled: props.disabled,
-                role: 'switch',
-                tabIndex: props.tabIndex,
-                'aria-checked': checked,
-                ...ariaProps
-            },
-            ptm('hiddenInput')
+            [
+                {
+                    type: 'checkbox',
+                    id: props.inputId,
+                    name: props.name,
+                    checked: checked,
+                    onChange: toggle,
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    disabled: props.disabled,
+                    role: 'switch',
+                    tabIndex: props.tabIndex,
+                    'aria-checked': checked,
+                    ...ariaProps
+                },
+                ptm('hiddenInput')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const sliderProps = mergeProps(
-            {
-                className: cx('slider')
-            },
-            ptm('slider')
+            [
+                {
+                    className: cx('slider')
+                },
+                ptm('slider')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

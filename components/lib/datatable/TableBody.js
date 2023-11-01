@@ -2,12 +2,15 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { PrimeReactContext } from '../api/Api';
+
 import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
 import { BodyRow } from './BodyRow';
 import { RowTogglerButton } from './RowTogglerButton';
 
 export const TableBody = React.memo(
     React.forwardRef((props, ref) => {
+        const context = React.useContext(PrimeReactContext);
         const { ptm, ptmo, cx, isUnsyled } = props.ptCallbacks;
         const [rowGroupHeaderStyleObjectState, setRowGroupHeaderStyleObjectState] = React.useState({});
         const getColumnProps = (column) => ColumnBase.getCProps(column);
@@ -23,7 +26,7 @@ export const TableBody = React.memo(
                 }
             };
 
-            return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+            return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData)], { useTailwind: context.useTailwind });
         };
 
         const elementRef = React.useRef(null);
@@ -867,20 +870,26 @@ export const TableBody = React.memo(
                 const colSpan = getColumnsLength();
                 const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps, frozen: props.frozenRow }) || localeOption('emptyMessage');
                 const emptyMessageProps = mergeProps(
-                    {
-                        className: cx('emptyMessage'),
-                        role: 'row'
-                    },
-                    getColumnPTOptions('emptyMessage')
+                    [
+                        {
+                            className: cx('emptyMessage'),
+                            role: 'row'
+                        },
+                        getColumnPTOptions('emptyMessage')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const bodyCellProps = mergeProps(
-                    {
-                        colSpan,
-                        role: 'cell'
-                    },
-                    getColumnPTOptions('root'),
-                    getColumnPTOptions('bodyCell')
+                    [
+                        {
+                            colSpan,
+                            role: 'cell'
+                        },
+                        getColumnPTOptions('root'),
+                        getColumnPTOptions('bodyCell')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -914,18 +923,24 @@ export const TableBody = React.memo(
                 // check if the user wants complete control of the rendering
                 if (!options.customRendering) {
                     const bodyCellProps = mergeProps(
-                        {
-                            colSpan
-                        },
-                        getColumnPTOptions('root'),
-                        getColumnPTOptions('bodyCell')
+                        [
+                            {
+                                colSpan
+                            },
+                            getColumnPTOptions('root'),
+                            getColumnPTOptions('bodyCell')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     const rowGroupHeaderNameProps = mergeProps(
-                        {
-                            className: cx('rowGroupHeaderName')
-                        },
-                        getColumnPTOptions('rowGroupHeaderName')
+                        [
+                            {
+                                className: cx('rowGroupHeaderName')
+                            },
+                            getColumnPTOptions('rowGroupHeaderName')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     content = (
@@ -937,12 +952,15 @@ export const TableBody = React.memo(
                 }
 
                 const rowGroupHeaderProps = mergeProps(
-                    {
-                        className: cx('rowGroupHeader'),
-                        style,
-                        role: 'row'
-                    },
-                    getColumnPTOptions('rowGroupHeader')
+                    [
+                        {
+                            className: cx('rowGroupHeader'),
+                            style,
+                            role: 'row'
+                        },
+                        getColumnPTOptions('rowGroupHeader')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <tr {...rowGroupHeaderProps}>{content}</tr>;
@@ -1045,24 +1063,30 @@ export const TableBody = React.memo(
                 // check if the user wants complete control of the rendering
                 if (!options.customRendering) {
                     const bodyCellProps = mergeProps(
-                        {
-                            colSpan,
-                            role: 'cell'
-                        },
-                        getColumnPTOptions('root'),
-                        getColumnPTOptions('bodyCell')
+                        [
+                            {
+                                colSpan,
+                                role: 'cell'
+                            },
+                            getColumnPTOptions('root'),
+                            getColumnPTOptions('bodyCell')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     content = <td {...bodyCellProps}>{content}</td>;
                 }
 
                 const rowExpansionProps = mergeProps(
-                    {
-                        id,
-                        className: cx('rowExpansion'),
-                        role: 'row'
-                    },
-                    getColumnPTOptions('rowExpansion')
+                    [
+                        {
+                            id,
+                            className: cx('rowExpansion'),
+                            role: 'row'
+                        },
+                        getColumnPTOptions('rowExpansion')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <tr {...rowExpansionProps}>{content}</tr>;
@@ -1075,11 +1099,14 @@ export const TableBody = React.memo(
             if (isSubheaderGrouping && shouldRenderRowGroupFooter(props.value, rowData, rowIndex - props.first, expanded)) {
                 const content = ObjectUtils.getJSXElement(props.rowGroupFooterTemplate, rowData, { index: rowIndex, colSpan, props: props.tableProps });
                 const rowGroupFooterProps = mergeProps(
-                    {
-                        className: cx('rowGroupFooter'),
-                        role: 'row'
-                    },
-                    getColumnPTOptions('rowGroupFooter')
+                    [
+                        {
+                            className: cx('rowGroupFooter'),
+                            role: 'row'
+                        },
+                        getColumnPTOptions('rowGroupFooter')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <tr {...rowGroupFooterProps}>{content}</tr>;
@@ -1117,11 +1144,14 @@ export const TableBody = React.memo(
         const content = props.empty ? createEmptyContent() : createContent();
         const ptKey = props.className === 'p-datatable-virtualscroller-spacer' ? 'virtualScrollerSpacer' : 'tbody';
         const tbodyProps = mergeProps(
-            {
-                style: props.style,
-                className: cx(ptKey, { className: props.className })
-            },
-            ptm(ptKey, { hostName: props.hostName })
+            [
+                {
+                    style: props.style,
+                    className: cx(ptKey, { className: props.className })
+                },
+                ptm(ptKey, { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

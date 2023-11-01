@@ -242,24 +242,30 @@ export const Splitter = React.memo(
             const panelClassName = classNames(getPanelProp(panel, 'className'), cx('panel.root'));
 
             const gutterProps = mergeProps(
-                {
-                    ref: (el) => (gutterRefs.current[index] = el),
-                    className: cx('gutter'),
-                    style: props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
-                    onMouseDown: (event) => onGutterMouseDown(event, index),
-                    onTouchStart: (event) => onGutterTouchStart(event, index),
-                    onTouchMove: (event) => onGutterTouchMove(event),
-                    onTouchEnd: (event) => onGutterTouchEnd(event),
-                    'data-p-splitter-gutter-resizing': false
-                },
-                ptm('gutter')
+                [
+                    {
+                        ref: (el) => (gutterRefs.current[index] = el),
+                        className: cx('gutter'),
+                        style: props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
+                        onMouseDown: (event) => onGutterMouseDown(event, index),
+                        onTouchStart: (event) => onGutterTouchStart(event, index),
+                        onTouchMove: (event) => onGutterTouchMove(event),
+                        onTouchEnd: (event) => onGutterTouchEnd(event),
+                        'data-p-splitter-gutter-resizing': false
+                    },
+                    ptm('gutter')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const gutterHandlerProps = mergeProps(
-                {
-                    className: cx('gutterHandler')
-                },
-                ptm('gutterHandler')
+                [
+                    {
+                        className: cx('gutterHandler')
+                    },
+                    ptm('gutterHandler')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const gutter = index !== props.children.length - 1 && (
@@ -271,15 +277,18 @@ export const Splitter = React.memo(
             const flexBasis = 'calc(' + panelSize(panelSizes, index) + '% - ' + (childrenLength - 1) * props.gutterSize + 'px)';
 
             const rootProps = mergeProps(
-                {
-                    key: index,
-                    id: getPanelProp(panel, 'id'),
-                    className: panelClassName,
-                    style: { ...getPanelProp(panel, 'style'), flexBasis },
-                    role: 'presentation',
-                    'data-p-splitter-panel-nested': false
-                },
-                getPanelPT('splitterpanel.root')
+                [
+                    {
+                        key: index,
+                        id: getPanelProp(panel, 'id'),
+                        className: panelClassName,
+                        style: { ...getPanelProp(panel, 'style'), flexBasis },
+                        role: 'presentation',
+                        'data-p-splitter-panel-nested': false
+                    },
+                    getPanelPT('splitterpanel.root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -295,14 +304,17 @@ export const Splitter = React.memo(
         };
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                style: props.style,
-                className: classNames(props.className, cx('root')),
-                'data-p-splitter-resizing': false
-            },
-            SplitterBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    style: props.style,
+                    className: classNames(props.className, cx('root')),
+                    'data-p-splitter-resizing': false
+                },
+                SplitterBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const panels = createPanels();

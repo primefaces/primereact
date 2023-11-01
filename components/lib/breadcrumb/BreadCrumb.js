@@ -50,28 +50,37 @@ export const BreadCrumb = React.memo(
 
                 const { icon: _icon, target, url, disabled, style, className: _className, template, label: _label } = home;
                 const iconProps = mergeProps(
-                    {
-                        className: cx('icon')
-                    },
-                    ptm('icon')
+                    [
+                        {
+                            className: cx('icon')
+                        },
+                        ptm('icon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
                 const actionProps = mergeProps(
-                    {
-                        href: url || '#',
-                        className: cx('action'),
-                        'aria-disabled': disabled,
-                        target,
-                        onClick: (event) => itemClick(event, home)
-                    },
-                    ptm('action')
+                    [
+                        {
+                            href: url || '#',
+                            className: cx('action'),
+                            'aria-disabled': disabled,
+                            target,
+                            onClick: (event) => itemClick(event, home)
+                        },
+                        ptm('action')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const labelProps = mergeProps(
-                    {
-                        className: cx('label')
-                    },
-                    ptm('label')
+                    [
+                        {
+                            className: cx('label')
+                        },
+                        ptm('label')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const label = _label && <span {...labelProps}>{_label}</span>;
                 let content = (
@@ -95,13 +104,16 @@ export const BreadCrumb = React.memo(
 
                 const key = idState + '_home';
                 const menuitemProps = mergeProps(
-                    {
-                        id: key,
-                        key,
-                        className: cx('home', { _className, disabled }),
-                        style
-                    },
-                    ptm('home')
+                    [
+                        {
+                            id: key,
+                            key,
+                            className: cx('home', { _className, disabled }),
+                            style
+                        },
+                        ptm('home')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <li {...menuitemProps}>{content}</li>;
@@ -113,21 +125,27 @@ export const BreadCrumb = React.memo(
         const createSeparator = (index) => {
             const key = idState + '_sep_' + index;
             const separatorIconProps = mergeProps(
-                {
-                    className: cx('separatorIcon')
-                },
-                ptm('separatorIcon')
+                [
+                    {
+                        className: cx('separatorIcon')
+                    },
+                    ptm('separatorIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.separatorIcon || <ChevronRightIcon {...separatorIconProps} />;
             const separatorIcon = IconUtils.getJSXIcon(icon, { ...separatorIconProps }, { props });
             const separatorProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: cx('separator'),
-                    role: 'separator'
-                },
-                ptm('separator')
+                [
+                    {
+                        id: key,
+                        key,
+                        className: cx('separator'),
+                        role: 'separator'
+                    },
+                    ptm('separator')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...separatorProps}>{separatorIcon}</li>;
@@ -139,21 +157,27 @@ export const BreadCrumb = React.memo(
             }
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const actionProps = mergeProps(
-                {
-                    href: item.url || '#',
-                    className: cx('action'),
-                    target: item.target,
-                    onClick: (event) => itemClick(event, item),
-                    'aria-disabled': item.disabled
-                },
-                ptm('action')
+                [
+                    {
+                        href: item.url || '#',
+                        className: cx('action'),
+                        target: item.target,
+                        onClick: (event) => itemClick(event, item),
+                        'aria-disabled': item.disabled
+                    },
+                    ptm('action')
+                ],
+                { useTailwind: context.useTailwind }
             );
             let content = <a {...actionProps}>{label}</a>;
 
@@ -171,13 +195,16 @@ export const BreadCrumb = React.memo(
 
             const key = item.id || idState + '_' + index;
             const menuitemProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: cx('menuitem', { item }),
-                    style: item.style
-                },
-                ptm('menuitem')
+                [
+                    {
+                        id: key,
+                        key,
+                        className: cx('menuitem', { item }),
+                        style: item.style
+                    },
+                    ptm('menuitem')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...menuitemProps}>{content}</li>;
@@ -223,21 +250,27 @@ export const BreadCrumb = React.memo(
         const items = createMenuitems();
         const separator = createSeparator('home');
         const menuProps = mergeProps(
-            {
-                className: cx('menu')
-            },
-            ptm('menu')
+            [
+                {
+                    className: cx('menu')
+                },
+                ptm('menu')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root'),
-                style: props.style,
-                'aria-label': 'Breadcrumb'
-            },
-            BreadCrumbBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: cx('root'),
+                    style: props.style,
+                    'aria-label': 'Breadcrumb'
+                },
+                BreadCrumbBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

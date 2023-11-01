@@ -24,21 +24,27 @@ export const Divider = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
-        {
-            ref: elementRef,
-            style: sx('root'),
-            className: cx('root', { horizontal, vertical }),
-            role: 'separator'
-        },
-        DividerBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                ref: elementRef,
+                style: sx('root'),
+                className: cx('root', { horizontal, vertical }),
+                role: 'separator'
+            },
+            DividerBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const contentProps = mergeProps(
-        {
-            className: cx('content')
-        },
-        ptm('content')
+        [
+            {
+                className: cx('content')
+            },
+            ptm('content')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

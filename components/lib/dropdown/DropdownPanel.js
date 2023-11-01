@@ -56,10 +56,13 @@ export const DropdownPanel = React.memo(
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
                 const footerProps = mergeProps(
-                    {
-                        className: cx('footer')
-                    },
-                    getPTOptions('footer')
+                    [
+                        {
+                            className: cx('footer')
+                        },
+                        getPTOptions('footer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -83,10 +86,13 @@ export const DropdownPanel = React.memo(
         const createEmptyMessage = (emptyMessage, isFilter) => {
             const message = ObjectUtils.getJSXElement(emptyMessage, props) || localeOption(isFilter ? 'emptyFilterMessage' : 'emptyMessage');
             const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                getPTOptions('emptyMessage')
+                [
+                    {
+                        className: cx('emptyMessage')
+                    },
+                    getPTOptions('emptyMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...emptyMessageProps}>{message}</li>;
@@ -103,11 +109,14 @@ export const DropdownPanel = React.memo(
                 const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
-                    {
-                        className: cx('itemGroup', { optionGroupLabel }),
-                        style
-                    },
-                    getPTOptions('itemGroup')
+                    [
+                        {
+                            className: cx('itemGroup', { optionGroupLabel }),
+                            style
+                        },
+                        getPTOptions('itemGroup')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -139,12 +148,15 @@ export const DropdownPanel = React.memo(
             if (props.showFilterClear && props.filterValue) {
                 const ariaLabel = localeOption('clear');
                 const clearIconProps = mergeProps(
-                    {
-                        className: cx('clearIcon'),
-                        'aria-label': ariaLabel,
-                        onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
-                    },
-                    getPTOptions('clearIcon')
+                    [
+                        {
+                            className: cx('clearIcon'),
+                            'aria-label': ariaLabel,
+                            onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
+                        },
+                        getPTOptions('clearIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.filterClearIcon || <TimesIcon {...clearIconProps} />;
                 const filterClearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
@@ -159,31 +171,40 @@ export const DropdownPanel = React.memo(
             if (props.filter) {
                 const clearIcon = createFilterClearIcon();
                 const filterIconProps = mergeProps(
-                    {
-                        className: cx('filterIcon')
-                    },
-                    getPTOptions('filterIcon')
+                    [
+                        {
+                            className: cx('filterIcon')
+                        },
+                        getPTOptions('filterIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
                 const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
                 const filterContainerProps = mergeProps(
-                    {
-                        className: cx('filterContainer', { clearIcon })
-                    },
-                    getPTOptions('filterContainer')
+                    [
+                        {
+                            className: cx('filterContainer', { clearIcon })
+                        },
+                        getPTOptions('filterContainer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const filterInputProps = mergeProps(
-                    {
-                        ref: filterInputRef,
-                        type: 'text',
-                        autoComplete: 'off',
-                        className: cx('filterInput'),
-                        placeholder: props.filterPlaceholder,
-                        onKeyDown: props.onFilterInputKeyDown,
-                        onChange: (e) => onFilterInputChange(e),
-                        value: props.filterValue
-                    },
-                    getPTOptions('filterInput')
+                    [
+                        {
+                            ref: filterInputRef,
+                            type: 'text',
+                            autoComplete: 'off',
+                            className: cx('filterInput'),
+                            placeholder: props.filterPlaceholder,
+                            onKeyDown: props.onFilterInputKeyDown,
+                            onChange: (e) => onFilterInputChange(e),
+                            value: props.filterValue
+                        },
+                        getPTOptions('filterInput')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 let content = (
                     <div {...filterContainerProps}>
@@ -209,10 +230,13 @@ export const DropdownPanel = React.memo(
                 }
 
                 const headerProps = mergeProps(
-                    {
-                        className: cx('header')
-                    },
-                    getPTOptions('header')
+                    [
+                        {
+                            className: cx('header')
+                        },
+                        getPTOptions('header')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...headerProps}>{content}</div>;
@@ -236,13 +260,16 @@ export const DropdownPanel = React.memo(
                             const emptyMessage = props.hasFilter ? props.emptyFilterMessage : props.emptyMessage;
                             const content = isEmptyFilter ? createEmptyMessage(emptyMessage) : options.children;
                             const listProps = mergeProps(
-                                {
-                                    ref: options.contentRef,
-                                    style: options.style,
-                                    className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
-                                    role: 'listbox'
-                                },
-                                getPTOptions('list')
+                                [
+                                    {
+                                        ref: options.contentRef,
+                                        style: options.style,
+                                        className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
+                                        role: 'listbox'
+                                    },
+                                    getPTOptions('list')
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return <ul {...listProps}>{content}</ul>;
@@ -254,19 +281,25 @@ export const DropdownPanel = React.memo(
             } else {
                 const items = createItems();
                 const wrapperProps = mergeProps(
-                    {
-                        className: cx('wrapper'),
-                        style: sx('wrapper')
-                    },
-                    getPTOptions('wrapper')
+                    [
+                        {
+                            className: cx('wrapper'),
+                            style: sx('wrapper')
+                        },
+                        getPTOptions('wrapper')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const listProps = mergeProps(
-                    {
-                        className: cx('list'),
-                        role: 'listbox'
-                    },
-                    getPTOptions('list')
+                    [
+                        {
+                            className: cx('list'),
+                            role: 'listbox'
+                        },
+                        getPTOptions('list')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -282,27 +315,33 @@ export const DropdownPanel = React.memo(
             const content = createContent();
             const footer = createFooter();
             const panelProps = mergeProps(
-                {
-                    className: classNames(props.panelClassName, cx('panel', { context })),
-                    style: sx('panel'),
-                    onClick: props.onClick
-                },
-                getPTOptions('panel')
+                [
+                    {
+                        className: classNames(props.panelClassName, cx('panel', { context })),
+                        style: sx('panel'),
+                        onClick: props.onClick
+                    },
+                    getPTOptions('panel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: props.in,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: onEnter,
-                    onEntered: onEntered,
-                    onExit: props.onExit,
-                    onExited: props.onExited
-                },
-                getPTOptions('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: props.in,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter: onEnter,
+                        onEntered: onEntered,
+                        onExit: props.onExit,
+                        onExited: props.onExited
+                    },
+                    getPTOptions('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

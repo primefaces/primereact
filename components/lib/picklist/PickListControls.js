@@ -4,10 +4,12 @@ import { AngleDoubleDownIcon } from '../icons/angledoubledown';
 import { AngleDoubleUpIcon } from '../icons/angledoubleup';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleUpIcon } from '../icons/angleup';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const PickListControls = React.memo((props) => {
     const { ptm, cx, unstyled } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const moveUpIcon = props.moveUpIcon || <AngleUpIcon />;
     const moveTopIcon = props.moveTopIcon || <AngleDoubleUpIcon />;
@@ -137,10 +139,13 @@ export const PickListControls = React.memo((props) => {
     };
 
     const controlsProps = mergeProps(
-        {
-            className: classNames(props.className, cx('controls'))
-        },
-        ptm('controls', { hostName: props.hostName })
+        [
+            {
+                className: classNames(props.className, cx('controls'))
+            },
+            ptm('controls', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

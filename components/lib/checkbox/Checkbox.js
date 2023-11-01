@@ -119,59 +119,74 @@ export const Checkbox = React.memo(
         const otherProps = CheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            ptm('icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = checked ? props.icon || <CheckIcon {...iconProps} /> : null;
         const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: classNames(props.className, cx('root', { checked, focusedState })),
-                style: props.style,
-                onClick: (e) => onClick(e),
-                onContextMenu: props.onContextMenu,
-                onMouseDown: props.onMouseDown
-            },
-            otherProps,
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: classNames(props.className, cx('root', { checked, focusedState })),
+                    style: props.style,
+                    onClick: (e) => onClick(e),
+                    onContextMenu: props.onContextMenu,
+                    onMouseDown: props.onMouseDown
+                },
+                otherProps,
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const hiddenInputWrapperProps = mergeProps(
-            {
-                className: 'p-hidden-accessible'
-            },
-            ptm('hiddenInputWrapper')
+            [
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenInputWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const hiddenInputProps = mergeProps(
-            {
-                id: props.inputId,
-                type: 'checkbox',
-                name: props.name,
-                tabIndex: props.tabIndex,
-                defaultChecked: checked,
-                onFocus: (e) => onFocus(e),
-                onBlur: (e) => onBlur(e),
-                onKeyDown: (e) => onKeyDown(e),
-                disabled: props.disabled,
-                readOnly: props.readOnly,
-                required: props.required,
-                ...ariaProps
-            },
-            ptm('hiddenInput')
+            [
+                {
+                    id: props.inputId,
+                    type: 'checkbox',
+                    name: props.name,
+                    tabIndex: props.tabIndex,
+                    defaultChecked: checked,
+                    onFocus: (e) => onFocus(e),
+                    onBlur: (e) => onBlur(e),
+                    onKeyDown: (e) => onKeyDown(e),
+                    disabled: props.disabled,
+                    readOnly: props.readOnly,
+                    required: props.required,
+                    ...ariaProps
+                },
+                ptm('hiddenInput')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const inputProps = mergeProps(
-            {
-                className: cx('input', { checked, focusedState }),
-                'data-p-highlight': checked,
-                'data-p-disabled': props.disabled,
-                'data-p-focus': focusedState
-            },
-            ptm('input')
+            [
+                {
+                    className: cx('input', { checked, focusedState }),
+                    'data-p-highlight': checked,
+                    'data-p-disabled': props.disabled,
+                    'data-p-focus': focusedState
+                },
+                ptm('input')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

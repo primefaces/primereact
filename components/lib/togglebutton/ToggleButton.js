@@ -53,10 +53,13 @@ export const ToggleButton = React.memo(
         const createIcon = () => {
             if (hasIcon) {
                 const iconProps = mergeProps(
-                    {
-                        className: cx('icon', { label })
-                    },
-                    ptm('icon')
+                    [
+                        {
+                            className: cx('icon', { label })
+                        },
+                        ptm('icon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
@@ -82,28 +85,34 @@ export const ToggleButton = React.memo(
         const iconElement = createIcon();
 
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            ptm('label')
+            [
+                {
+                    className: cx('label')
+                },
+                ptm('label')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root', { hasIcon, hasLabel }),
-                style: props.style,
-                onClick: toggle,
-                onFocus: props.onFocus,
-                onBlur: props.onBlur,
-                onKeyDown: onKeyDown,
-                tabIndex: tabIndex,
-                role: 'button',
-                'aria-pressed': props.checked
-            },
-            ToggleButtonBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root', { hasIcon, hasLabel }),
+                    style: props.style,
+                    onClick: toggle,
+                    onFocus: props.onFocus,
+                    onBlur: props.onBlur,
+                    onKeyDown: onKeyDown,
+                    tabIndex: tabIndex,
+                    role: 'button',
+                    'aria-pressed': props.checked
+                },
+                ToggleButtonBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

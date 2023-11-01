@@ -287,29 +287,35 @@ export const CascadeSelect = React.memo(
         const createKeyboardHelper = () => {
             const value = props.value ? getOptionLabel(props.value) : undefined;
             const hiddenSelectedMessageProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible'
-                },
-                ptm('hiddenSelectedMessage')
+                [
+                    {
+                        className: 'p-hidden-accessible'
+                    },
+                    ptm('hiddenSelectedMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const inputProps = mergeProps(
-                {
-                    ref: inputRef,
-                    type: 'text',
-                    id: props.inputId,
-                    name: props.name,
-                    defaultValue: value,
-                    readOnly: true,
-                    disabled: props.disabled,
-                    onFocus: onInputFocus,
-                    onBlur: onInputBlur,
-                    onKeyDown: (e) => onInputKeyDown(e),
-                    tabIndex: props.tabIndex,
-                    'aria-haspopup': 'listbox',
-                    ...ariaProps
-                },
-                ptm('input')
+                [
+                    {
+                        ref: inputRef,
+                        type: 'text',
+                        id: props.inputId,
+                        name: props.name,
+                        defaultValue: value,
+                        readOnly: true,
+                        disabled: props.disabled,
+                        onFocus: onInputFocus,
+                        onBlur: onInputBlur,
+                        onKeyDown: (e) => onInputKeyDown(e),
+                        tabIndex: props.tabIndex,
+                        'aria-haspopup': 'listbox',
+                        ...ariaProps
+                    },
+                    ptm('input')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -323,11 +329,14 @@ export const CascadeSelect = React.memo(
             const label = props.value ? getOptionLabel(props.value) : props.placeholder || 'p-emptylabel';
 
             const labelProps = mergeProps(
-                {
-                    ref: labelRef,
-                    className: cx('label', { label })
-                },
-                ptm('label')
+                [
+                    {
+                        ref: labelRef,
+                        className: cx('label', { label })
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...labelProps}>{label}</span>;
@@ -335,56 +344,71 @@ export const CascadeSelect = React.memo(
 
         const createDropdownIcon = () => {
             const dropdownIconProps = mergeProps(
-                {
-                    className: cx('dropdownIcon')
-                },
-                ptm('dropdownIcon')
+                [
+                    {
+                        className: cx('dropdownIcon')
+                    },
+                    ptm('dropdownIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.dropdownIcon || <ChevronDownIcon {...dropdownIconProps} />;
             const dropdownIcon = IconUtils.getJSXIcon(icon, { ...dropdownIconProps }, { props });
             const dropdownButtonProps = mergeProps(
-                {
-                    className: cx('dropdownButton'),
-                    role: 'button',
-                    'aria-haspopup': 'listbox',
-                    'aria-expanded': overlayVisibleState
-                },
-                ptm('dropdownButton')
+                [
+                    {
+                        className: cx('dropdownButton'),
+                        role: 'button',
+                        'aria-haspopup': 'listbox',
+                        'aria-expanded': overlayVisibleState
+                    },
+                    ptm('dropdownButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...dropdownButtonProps}>{dropdownIcon}</div>;
         };
 
         const wrapperProps = mergeProps(
-            {
-                className: cx('wrapper')
-            },
-            ptm('wrapper')
+            [
+                {
+                    className: cx('wrapper')
+                },
+                ptm('wrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const panelProps = mergeProps(
-            {
-                ref: overlayRef,
-                className: cx('panel'),
-                onClick: (e) => onPanelClick(e)
-            },
-            ptm('panel')
+            [
+                {
+                    ref: overlayRef,
+                    className: cx('panel'),
+                    onClick: (e) => onPanelClick(e)
+                },
+                ptm('panel')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const createOverlay = () => {
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: overlayVisibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: onOverlayEnter,
-                    onEntered: onOverlayEntered,
-                    onExit: onOverlayExit,
-                    onExited: onOverlayExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: overlayVisibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter: onOverlayEnter,
+                        onEntered: onOverlayEntered,
+                        onExit: onOverlayExit,
+                        onExited: onOverlayExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const overlay = (
@@ -423,15 +447,18 @@ export const CascadeSelect = React.memo(
             const dropdownIcon = createDropdownIcon();
             const overlay = createOverlay();
             const rootProps = mergeProps(
-                {
-                    id: props.id,
-                    ref: elementRef,
-                    className: cx('root', { focusedState, overlayVisibleState }),
-                    style: props.style,
-                    onClick: (e) => onClick(e)
-                },
-                otherProps,
-                ptm('root')
+                [
+                    {
+                        id: props.id,
+                        ref: elementRef,
+                        className: cx('root', { focusedState, overlayVisibleState }),
+                        style: props.style,
+                        onClick: (e) => onClick(e)
+                    },
+                    otherProps,
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

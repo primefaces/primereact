@@ -18,10 +18,13 @@ export const Card = React.forwardRef((inProps, ref) => {
 
     const createHeader = () => {
         const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            ptm('header')
+            [
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (props.header) {
@@ -33,46 +36,61 @@ export const Card = React.forwardRef((inProps, ref) => {
 
     const createBody = () => {
         const titleProps = mergeProps(
-            {
-                className: cx('title')
-            },
-            ptm('title')
+            [
+                {
+                    className: cx('title')
+                },
+                ptm('title')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const title = props.title && <div {...titleProps}>{ObjectUtils.getJSXElement(props.title, props)}</div>;
 
         const subTitleProps = mergeProps(
-            {
-                className: cx('subTitle')
-            },
-            ptm('subTitle')
+            [
+                {
+                    className: cx('subTitle')
+                },
+                ptm('subTitle')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const subTitle = props.subTitle && <div {...subTitleProps}>{ObjectUtils.getJSXElement(props.subTitle, props)}</div>;
 
         const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
+            [
+                {
+                    className: cx('content')
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const children = props.children && <div {...contentProps}>{props.children}</div>;
 
         const footerProps = mergeProps(
-            {
-                className: cx('footer')
-            },
-            ptm('footer')
+            [
+                {
+                    className: cx('footer')
+                },
+                ptm('footer')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const footer = props.footer && <div {...footerProps}>{ObjectUtils.getJSXElement(props.footer, props)}</div>;
 
         const bodyProps = mergeProps(
-            {
-                className: cx('body')
-            },
-            ptm('body')
+            [
+                {
+                    className: cx('body')
+                },
+                ptm('body')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -90,14 +108,17 @@ export const Card = React.forwardRef((inProps, ref) => {
     }, [elementRef, ref]);
 
     const rootProps = mergeProps(
-        {
-            id: props.id,
-            ref: elementRef,
-            style: props.style,
-            className: cx('root')
-        },
-        CardBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                id: props.id,
+                ref: elementRef,
+                style: props.style,
+                className: cx('root')
+            },
+            CardBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const header = createHeader();

@@ -601,10 +601,13 @@ export const VirtualScroller = React.memo(
         const createLoader = () => {
             const iconClassName = 'p-virtualscroller-loading-icon';
             const loadingIconProps = mergeProps(
-                {
-                    className: iconClassName
-                },
-                ptm('loadingIcon')
+                [
+                    {
+                        className: iconClassName
+                    },
+                    ptm('loadingIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
@@ -631,10 +634,13 @@ export const VirtualScroller = React.memo(
                 }
 
                 const loaderProps = mergeProps(
-                    {
-                        className
-                    },
-                    ptm('loader')
+                    [
+                        {
+                            className
+                        },
+                        ptm('loader')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...loaderProps}>{content}</div>;
@@ -646,12 +652,15 @@ export const VirtualScroller = React.memo(
         const createSpacer = () => {
             if (props.showSpacer) {
                 const spacerProps = mergeProps(
-                    {
-                        ref: spacerRef,
-                        style: spacerStyle.current,
-                        className: 'p-virtualscroller-spacer'
-                    },
-                    ptm('spacer')
+                    [
+                        {
+                            ref: spacerRef,
+                            style: spacerStyle.current,
+                            className: 'p-virtualscroller-spacer'
+                        },
+                        ptm('spacer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...spacerProps}></div>;
@@ -677,12 +686,15 @@ export const VirtualScroller = React.memo(
             const items = createItems();
             const className = classNames('p-virtualscroller-content', { 'p-virtualscroller-loading': loadingState });
             const contentProps = mergeProps(
-                {
-                    ref: contentRef,
-                    style: contentStyle.current,
-                    className
-                },
-                ptm('content')
+                [
+                    {
+                        ref: contentRef,
+                        style: contentStyle.current,
+                        className
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const content = <div {...contentProps}>{items}</div>;
 
@@ -740,15 +752,18 @@ export const VirtualScroller = React.memo(
             const content = createContent();
             const spacer = createSpacer();
             const rootProps = mergeProps(
-                {
-                    ref: elementRef,
-                    className,
-                    tabIndex: props.tabIndex,
-                    style: props.style,
-                    onScroll: (e) => onScroll(e)
-                },
-                VirtualScrollerBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: elementRef,
+                        className,
+                        tabIndex: props.tabIndex,
+                        style: props.style,
+                        onScroll: (e) => onScroll(e)
+                    },
+                    VirtualScrollerBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

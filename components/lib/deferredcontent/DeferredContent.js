@@ -57,11 +57,14 @@ export const DeferredContent = React.forwardRef((inProps, ref) => {
     });
 
     const rootProps = mergeProps(
-        {
-            ref: elementRef
-        },
-        DeferredContentBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                ref: elementRef
+            },
+            DeferredContentBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <div {...rootProps}>{loadedState && props.children}</div>;

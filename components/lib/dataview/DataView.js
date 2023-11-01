@@ -24,36 +24,45 @@ export const DataViewLayoutOptions = React.memo((inProps) => {
         event.preventDefault();
     };
 
-    const listIconProps = mergeProps(ptm('list'));
-    const gridIconProps = mergeProps(ptm('grid'));
+    const listIconProps = mergeProps([ptm('list')], { useTailwind: context.useTailwind });
+    const gridIconProps = mergeProps([ptm('grid')], { useTailwind: context.useTailwind });
     const listIcon = IconUtils.getJSXIcon(props.listIcon || <BarsIcon {...listIconProps} />, { ...listIconProps }, { props });
     const gridIcon = IconUtils.getJSXIcon(props.gridIcon || <ThLargeIcon {...gridIconProps} />, { ...gridIconProps }, { props });
     const rootProps = mergeProps(
-        {
-            id: props.id,
-            style: props.style,
-            className: classNames(props.className, cx('root'))
-        },
-        DataViewLayoutOptionsBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                id: props.id,
+                style: props.style,
+                className: classNames(props.className, cx('root'))
+            },
+            DataViewLayoutOptionsBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const listButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('listButton'),
-            onClick: (event) => changeLayout(event, 'list')
-        },
-        ptm('listButton')
+        [
+            {
+                type: 'button',
+                className: cx('listButton'),
+                onClick: (event) => changeLayout(event, 'list')
+            },
+            ptm('listButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const gridButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('gridButton'),
-            onClick: (event) => changeLayout(event, 'grid')
-        },
-        ptm('gridButton')
+        [
+            {
+                type: 'button',
+                className: cx('gridButton'),
+                onClick: (event) => changeLayout(event, 'grid')
+            },
+            ptm('gridButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (
@@ -165,18 +174,24 @@ export const DataView = React.memo(
         const createLoader = () => {
             if (props.loading) {
                 const loadingIconProps = mergeProps(
-                    {
-                        className: cx('loadingIcon')
-                    },
-                    ptm('loadingIcon')
+                    [
+                        {
+                            className: cx('loadingIcon')
+                        },
+                        ptm('loadingIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
                 const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
                 const loadingOverlayProps = mergeProps(
-                    {
-                        className: cx('loadingOverlay')
-                    },
-                    ptm('loadingOverlay')
+                    [
+                        {
+                            className: cx('loadingOverlay')
+                        },
+                        ptm('loadingOverlay')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...loadingOverlayProps}>{loadingIcon}</div>;
@@ -205,10 +220,13 @@ export const DataView = React.memo(
             if (!props.loading) {
                 const content = props.emptyMessage || localeOption('emptyMessage');
                 const emptyMessageProps = mergeProps(
-                    {
-                        className: cx('emptyMessage')
-                    },
-                    ptm('emptyMessage')
+                    [
+                        {
+                            className: cx('emptyMessage')
+                        },
+                        ptm('emptyMessage')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...emptyMessageProps}>{content}</div>;
@@ -220,10 +238,13 @@ export const DataView = React.memo(
         const createHeader = () => {
             if (props.header) {
                 const headerProps = mergeProps(
-                    {
-                        className: cx('header')
-                    },
-                    ptm('header')
+                    [
+                        {
+                            className: cx('header')
+                        },
+                        ptm('header')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...headerProps}>{props.header}</div>;
@@ -235,10 +256,13 @@ export const DataView = React.memo(
         const createFooter = () => {
             if (props.footer) {
                 const footerProps = mergeProps(
-                    {
-                        className: cx('footer')
-                    },
-                    ptm('footer')
+                    [
+                        {
+                            className: cx('footer')
+                        },
+                        ptm('footer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...footerProps}>{props.footer}</div>;
@@ -276,17 +300,23 @@ export const DataView = React.memo(
             const items = createItems(value);
 
             const gridProps = mergeProps(
-                {
-                    className: cx('grid')
-                },
-                ptm('grid')
+                [
+                    {
+                        className: cx('grid')
+                    },
+                    ptm('grid')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const contentProps = mergeProps(
-                {
-                    className: cx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        className: cx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -319,14 +349,17 @@ export const DataView = React.memo(
         const footer = createFooter();
         const content = createContent(data);
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                style: props.style,
-                className: classNames(props.className, cx('root'))
-            },
-            DataViewBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    style: props.style,
+                    className: classNames(props.className, cx('root'))
+                },
+                DataViewBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

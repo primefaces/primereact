@@ -134,10 +134,13 @@ export const SplitButton = React.memo(
 
         const dropdownIcon = () => {
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = props.dropdownIcon || <ChevronDownIcon {...iconProps} />;
@@ -147,14 +150,17 @@ export const SplitButton = React.memo(
         };
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: idState,
-                className: classNames(props.className, cx('root', { size })),
-                style: props.style
-            },
-            SplitButtonBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: idState,
+                    className: classNames(props.className, cx('root', { size })),
+                    style: props.style
+                },
+                SplitButtonBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

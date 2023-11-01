@@ -24,36 +24,48 @@ export const Toolbar = React.memo(
         }));
 
         const startProps = mergeProps(
-            {
-                className: cx('start')
-            },
-            ptm('start')
+            [
+                {
+                    className: cx('start')
+                },
+                ptm('start')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const centerProps = mergeProps(
-            {
-                className: cx('center')
-            },
-            ptm('center')
+            [
+                {
+                    className: cx('center')
+                },
+                ptm('center')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const endProps = mergeProps(
-            {
-                className: cx('end')
-            },
-            ptm('end')
+            [
+                {
+                    className: cx('end')
+                },
+                ptm('end')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                style: props.style,
-                className: cx('root'),
-                role: 'toolbar'
-            },
-            ToolbarBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    style: props.style,
+                    className: cx('root'),
+                    role: 'toolbar'
+                },
+                ToolbarBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

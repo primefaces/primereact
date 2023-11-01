@@ -218,6 +218,11 @@ export interface APIOptions {
      */
     unstyled?: boolean;
     /**
+     * When enabled, all className merges will use twMerge
+     * @defaultValue false
+     */
+    useTailwind?: boolean;
+    /**
      * This method is used to change the theme dynamically.
      * @param {string} theme - The name of the theme to be applied.
      * @param {string} newTheme - The name of the new theme to be applied.

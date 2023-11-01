@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, mergeProps } from '../utils/Utils';
 import { CheckIcon } from '../icons/check';
 import { ColumnBase } from '../column/ColumnBase';
 
 export const HeaderCheckbox = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [focusedState, setFocusedState] = React.useState(false);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
     const { ptm, ptmo, cx } = props.ptCallbacks;
@@ -24,7 +26,7 @@ export const HeaderCheckbox = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData)], { useTailwind: context.useTailwind });
     };
 
     const onFocus = () => {
@@ -55,33 +57,42 @@ export const HeaderCheckbox = React.memo((props) => {
     };
 
     const headerCheckboxIconProps = mergeProps(
-        {
-            className: cx('headerCheckboxIcon')
-        },
-        getColumnPTOptions('headerCheckboxIcon')
+        [
+            {
+                className: cx('headerCheckboxIcon')
+            },
+            getColumnPTOptions('headerCheckboxIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const icon = props.checked ? props.checkIcon || <CheckIcon {...headerCheckboxIconProps} /> : null;
     const checkIcon = IconUtils.getJSXIcon(icon, { ...headerCheckboxIconProps }, { props });
     const tabIndex = props.disabled ? null : 0;
     const headerCheckboxWrapperProps = mergeProps(
-        {
-            className: cx('headerCheckboxWrapper'),
-            onClick: (e) => onClick(e)
-        },
-        getColumnPTOptions('headerCheckboxWrapper')
+        [
+            {
+                className: cx('headerCheckboxWrapper'),
+                onClick: (e) => onClick(e)
+            },
+            getColumnPTOptions('headerCheckboxWrapper')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const headerCheckboxProps = mergeProps(
-        {
-            className: cx('headerCheckbox', { headerProps: props, focusedState }),
-            role: 'checkbox',
-            'aria-checked': props.checked,
-            tabIndex: tabIndex,
-            onFocus: (e) => onFocus(e),
-            onBlur: (e) => onBlur(e),
-            onKeyDown: (e) => onKeyDown(e)
-        },
-        getColumnPTOptions('headerCheckbox')
+        [
+            {
+                className: cx('headerCheckbox', { headerProps: props, focusedState }),
+                role: 'checkbox',
+                'aria-checked': props.checked,
+                tabIndex: tabIndex,
+                onFocus: (e) => onFocus(e),
+                onBlur: (e) => onBlur(e),
+                onKeyDown: (e) => onKeyDown(e)
+            },
+            getColumnPTOptions('headerCheckbox')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

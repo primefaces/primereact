@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, mergeProps } from '../utils/Utils';
 
 export const PickListItem = React.memo((props) => {
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -35,15 +37,18 @@ export const PickListItem = React.memo((props) => {
     const content = props.template ? props.template(props.value) : props.value;
 
     const itemProps = mergeProps(
-        {
-            className: classNames(props.className, cx('item', { subProps: props })),
-            onClick,
-            onKeyDown,
-            tabIndex: props.tabIndex,
-            role: 'option',
-            'aria-selected': props.selected
-        },
-        getPTOptions('item')
+        [
+            {
+                className: classNames(props.className, cx('item', { subProps: props })),
+                onClick,
+                onKeyDown,
+                tabIndex: props.tabIndex,
+                role: 'option',
+                'aria-selected': props.selected
+            },
+            getPTOptions('item')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

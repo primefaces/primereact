@@ -170,48 +170,63 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
-        {
-            id: props.id,
-            ref: containerRef,
-            style: props.style,
-            className: cx('root')
-        },
-        ScrollPanelBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                id: props.id,
+                ref: containerRef,
+                style: props.style,
+                className: cx('root')
+            },
+            ScrollPanelBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const wrapperProps = mergeProps(
-        {
-            className: cx('wrapper')
-        },
-        ptm('wrapper')
+        [
+            {
+                className: cx('wrapper')
+            },
+            ptm('wrapper')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const contentProps = mergeProps(
-        {
-            className: cx('content'),
-            onScroll: moveBar,
-            onMouseEnter: moveBar
-        },
-        ptm('content')
+        [
+            {
+                className: cx('content'),
+                onScroll: moveBar,
+                onMouseEnter: moveBar
+            },
+            ptm('content')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const barXProps = mergeProps(
-        {
-            ref: xBarRef,
-            className: cx('barx'),
-            onMouseDown: onXBarMouseDown
-        },
-        ptm('barx')
+        [
+            {
+                ref: xBarRef,
+                className: cx('barx'),
+                onMouseDown: onXBarMouseDown
+            },
+            ptm('barx')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const barYProps = mergeProps(
-        {
-            ref: yBarRef,
-            className: cx('bary'),
-            onMouseDown: onYBarMouseDown
-        },
-        ptm('bary')
+        [
+            {
+                ref: yBarRef,
+                className: cx('bary'),
+                onMouseDown: onYBarMouseDown
+            },
+            ptm('bary')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

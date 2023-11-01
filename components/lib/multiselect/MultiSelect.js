@@ -534,28 +534,37 @@ export const MultiSelect = React.memo(
                     return value.map((val, i) => {
                         const label = getLabelByValue(val);
                         const iconProps = mergeProps(
-                            {
-                                key: i,
-                                className: cx('removeTokenIcon'),
-                                onClick: (e) => removeChip(e, val)
-                            },
-                            ptm('removeTokenIcon')
+                            [
+                                {
+                                    key: i,
+                                    className: cx('removeTokenIcon'),
+                                    onClick: (e) => removeChip(e, val)
+                                },
+                                ptm('removeTokenIcon')
+                            ],
+                            { useTailwind: context.useTailwind }
                         );
                         const icon = !props.disabled && (props.removeIcon ? IconUtils.getJSXIcon(props.removeIcon, { ...iconProps }, { props }) : <TimesCircleIcon {...iconProps} />);
 
                         const tokenProps = mergeProps(
-                            {
-                                className: cx('token')
-                            },
-                            ptm('token')
+                            [
+                                {
+                                    className: cx('token')
+                                },
+                                ptm('token')
+                            ],
+                            { useTailwind: context.useTailwind }
                         );
 
                         const tokenLabelProps = mergeProps(
-                            {
-                                key: label + i,
-                                className: cx('tokenLabel')
-                            },
-                            ptm('tokenLabel')
+                            [
+                                {
+                                    key: label + i,
+                                    className: cx('tokenLabel')
+                                },
+                                ptm('tokenLabel')
+                            ],
+                            { useTailwind: context.useTailwind }
                         );
 
                         return (
@@ -628,11 +637,14 @@ export const MultiSelect = React.memo(
 
         const createClearIcon = () => {
             const clearIconProps = mergeProps(
-                {
-                    className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, [], [])
-                },
-                ptm('clearIcon')
+                [
+                    {
+                        className: cx('clearIcon'),
+                        onClick: (e) => updateModel(e, [], [])
+                    },
+                    ptm('clearIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
@@ -649,18 +661,24 @@ export const MultiSelect = React.memo(
             const content = getLabelContent();
 
             const labelContainerProps = mergeProps(
-                {
-                    ref: labelRef,
-                    className: cx('labelContainer')
-                },
-                ptm('labelContainer')
+                [
+                    {
+                        ref: labelRef,
+                        className: cx('labelContainer')
+                    },
+                    ptm('labelContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label', { empty })
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label', { empty })
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -677,17 +695,23 @@ export const MultiSelect = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
 
         const triggerIconProps = mergeProps(
-            {
-                className: cx('triggerIcon')
-            },
-            ptm('triggerIcon')
+            [
+                {
+                    className: cx('triggerIcon')
+                },
+                ptm('triggerIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const triggerProps = mergeProps(
-            {
-                className: cx('trigger')
-            },
-            ptm('trigger')
+            [
+                {
+                    className: cx('trigger')
+                },
+                ptm('trigger')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const dropdownIcon = <div {...triggerProps}>{props.dropdownIcon ? IconUtils.getJSXIcon(props.dropdownIcon, { ...triggerIconProps }, { props }) : <ChevronDownIcon {...triggerIconProps} />}</div>;
 
@@ -695,41 +719,50 @@ export const MultiSelect = React.memo(
         const clearIcon = !props.inline && createClearIcon();
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                style: { ...props.style, ...sx('root') },
-                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
-                ...otherProps,
-                onClick: onClick
-            },
-            MultiSelectBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    style: { ...props.style, ...sx('root') },
+                    className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
+                    ...otherProps,
+                    onClick: onClick
+                },
+                MultiSelectBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const hiddenInputWrapperProps = mergeProps(
-            {
-                className: 'p-hidden-accessible'
-            },
-            ptm('hiddenInputWrapper')
+            [
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenInputWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const inputProps = mergeProps(
-            {
-                ref: inputRef,
-                id: props.inputId,
-                name: props.name,
-                type: 'text',
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                role: 'listbox',
-                'aria-expanded': overlayVisibleState,
-                disabled: props.disabled,
-                tabIndex: props.tabIndex,
-                ...ariaProps
-            },
-            ptm('input')
+            [
+                {
+                    ref: inputRef,
+                    id: props.inputId,
+                    name: props.name,
+                    type: 'text',
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onKeyDown: onKeyDown,
+                    role: 'listbox',
+                    'aria-expanded': overlayVisibleState,
+                    disabled: props.disabled,
+                    tabIndex: props.tabIndex,
+                    ...ariaProps
+                },
+                ptm('input')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

@@ -92,24 +92,30 @@ const PrimeReactChart = React.memo(
         const title = props.options && props.options.plugins && props.options.plugins.title && props.options.plugins.title.text;
         const ariaLabel = props.ariaLabel || title;
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                style: sx('root'),
-                className: cx('root')
-            },
-            ChartBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    style: sx('root'),
+                    className: cx('root')
+                },
+                ChartBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const canvasProps = mergeProps(
-            {
-                ref: canvasRef,
-                width: props.width,
-                height: props.height,
-                role: 'img',
-                'aria-label': ariaLabel
-            },
-            ptm('canvas')
+            [
+                {
+                    ref: canvasRef,
+                    width: props.width,
+                    height: props.height,
+                    role: 'img',
+                    'aria-label': ariaLabel
+                },
+                ptm('canvas')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

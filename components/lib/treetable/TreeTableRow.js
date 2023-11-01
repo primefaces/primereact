@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -15,6 +15,7 @@ export const TreeTableRow = React.memo((props) => {
     const checkboxBoxRef = React.useRef(null);
     const nodeTouched = React.useRef(false);
     const expanded = props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false;
+    const context = React.useContext(PrimeReactContext);
 
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
@@ -38,7 +39,7 @@ export const TreeTableRow = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata)], { useTailwind: context.useTailwind });
     };
 
     const getColumnCheckboxPTOptions = (column, key) => {
@@ -54,7 +55,7 @@ export const TreeTableRow = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata)], { useTailwind: context.useTailwind });
     };
 
     const getRowPTOptions = (key) => {
@@ -347,24 +348,30 @@ export const TreeTableRow = React.memo((props) => {
     const createToggler = (column) => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const rowTogglerIconProps = mergeProps(
-            {
-                className: cx('rowTogglerIcon'),
-                'aria-hidden': true
-            },
-            getColumnPTOptions(column, 'rowTogglerIcon')
+            [
+                {
+                    className: cx('rowTogglerIcon'),
+                    'aria-hidden': true
+                },
+                getColumnPTOptions(column, 'rowTogglerIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = expanded ? <ChevronDownIcon {...rowTogglerIconProps} /> : <ChevronRightIcon {...rowTogglerIconProps} />;
         const togglerIcon = IconUtils.getJSXIcon(props.togglerIcon || icon, { ...rowTogglerIconProps }, { props });
         const rowTogglerProps = mergeProps(
-            {
-                type: 'button',
-                className: cx('rowToggler'),
-                onClick: (e) => onTogglerClick(e),
-                tabIndex: -1,
-                style: { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' },
-                'aria-label': label
-            },
-            getColumnPTOptions(column, 'rowToggler')
+            [
+                {
+                    type: 'button',
+                    className: cx('rowToggler'),
+                    onClick: (e) => onTogglerClick(e),
+                    tabIndex: -1,
+                    style: { marginLeft: props.level * 16 + 'px', visibility: props.node.leaf === false || (props.node.children && props.node.children.length) ? 'visible' : 'hidden' },
+                    'aria-label': label
+                },
+                getColumnPTOptions(column, 'rowToggler')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (
@@ -396,43 +403,58 @@ export const TreeTableRow = React.memo((props) => {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
             const checboxIconProps = mergeProps(
-                {
-                    className: cx('checkboxIcon')
-                },
-                getColumnCheckboxPTOptions(column, 'checkboxIcon')
+                [
+                    {
+                        className: cx('checkboxIcon')
+                    },
+                    getColumnCheckboxPTOptions(column, 'checkboxIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = checked ? props.checkboxIcon || <CheckIcon {...checboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checboxIconProps} /> : null;
             const checkIcon = IconUtils.getJSXIcon(icon, { ...checboxIconProps }, { props, checked, partialChecked });
             const hiddenInputProps = mergeProps(
-                {
-                    type: 'checkbox',
-                    onFocus: (e) => onCheckboxFocus(e),
-                    onBlur: (e) => onCheckboxBlur(e)
-                },
-                getColumnCheckboxPTOptions(column, 'hiddenInput')
+                [
+                    {
+                        type: 'checkbox',
+                        onFocus: (e) => onCheckboxFocus(e),
+                        onBlur: (e) => onCheckboxBlur(e)
+                    },
+                    getColumnCheckboxPTOptions(column, 'hiddenInput')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const checkboxWrapperProps = mergeProps(
-                {
-                    className: cx('checkboxWrapper'),
-                    onClick: (e) => onCheckboxChange(e),
-                    role: 'checkbox',
-                    'aria-checked': checked
-                },
-                getColumnCheckboxPTOptions(column, 'checkboxWrapper')
+                [
+                    {
+                        className: cx('checkboxWrapper'),
+                        onClick: (e) => onCheckboxChange(e),
+                        role: 'checkbox',
+                        'aria-checked': checked
+                    },
+                    getColumnCheckboxPTOptions(column, 'checkboxWrapper')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const hiddenInputWrapperProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible'
-                },
-                getColumnCheckboxPTOptions(column, 'hiddenInputWrapper')
+                [
+                    {
+                        className: 'p-hidden-accessible'
+                    },
+                    getColumnCheckboxPTOptions(column, 'hiddenInputWrapper')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const checkboxProps = mergeProps(
-                {
-                    className: cx('checkbox', { checked, partialChecked })
-                },
-                getColumnCheckboxPTOptions(column, 'checkbox')
+                [
+                    {
+                        className: cx('checkbox', { checked, partialChecked })
+                    },
+                    getColumnCheckboxPTOptions(column, 'checkbox')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -536,19 +558,22 @@ export const TreeTableRow = React.memo((props) => {
 
     className = classNames(className, props.node.className);
     const rowProps = mergeProps(
-        {
-            tabIndex: 0,
-            className,
-            style: props.node.style,
-            onClick: (e) => onClick(e),
-            onTouchEnd: (e) => onTouchEnd(e),
-            onContextMenu: (e) => onRightClick(e),
-            onKeyDown: (e) => onKeyDown(e),
-            onMouseEnter: (e) => onMouseEnter(e),
-            onMouseLeave: (e) => onMouseLeave(e),
-            'data-p-highlight': isSelected()
-        },
-        getRowPTOptions('row')
+        [
+            {
+                tabIndex: 0,
+                className,
+                style: props.node.style,
+                onClick: (e) => onClick(e),
+                onTouchEnd: (e) => onTouchEnd(e),
+                onContextMenu: (e) => onRightClick(e),
+                onKeyDown: (e) => onKeyDown(e),
+                onMouseEnter: (e) => onMouseEnter(e),
+                onMouseLeave: (e) => onMouseLeave(e),
+                'data-p-highlight': isSelected()
+            },
+            getRowPTOptions('row')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

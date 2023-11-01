@@ -1493,18 +1493,24 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createLoader = () => {
         if (props.loading) {
             const loadingIconProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('loadingIcon')
-                },
-                ptCallbacks.ptm('loadingIcon')
+                [
+                    {
+                        className: ptCallbacks.cx('loadingIcon')
+                    },
+                    ptCallbacks.ptm('loadingIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
             const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
             const loadingOverlayProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('loadingOverlay')
-                },
-                ptCallbacks.ptm('loadingOverlay')
+                [
+                    {
+                        className: ptCallbacks.cx('loadingOverlay')
+                    },
+                    ptCallbacks.ptm('loadingOverlay')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...loadingOverlayProps}>{loadingIcon}</div>;
@@ -1517,10 +1523,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.header) {
             const content = ObjectUtils.getJSXElement(props.header, { props });
             const headerProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('header')
-                },
-                ptCallbacks.ptm('header')
+                [
+                    {
+                        className: ptCallbacks.cx('header')
+                    },
+                    ptCallbacks.ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...headerProps}>{content}</div>;
@@ -1781,11 +1790,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const _isVirtualScrollerDisabled = isVirtualScrollerDisabled();
         const virtualScrollerOptions = props.virtualScrollerOptions || {};
         const wrapperProps = mergeProps(
-            {
-                className: ptCallbacks.cx('wrapper'),
-                style: { ...ptCallbacks.sx('wrapper'), maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
-            },
-            ptCallbacks.ptm('wrapper')
+            [
+                {
+                    className: ptCallbacks.cx('wrapper'),
+                    style: { ...ptCallbacks.sx('wrapper'), maxHeight: _isVirtualScrollerDisabled ? props.scrollHeight : null }
+                },
+                ptCallbacks.ptm('wrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -1814,12 +1826,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                         const tableBody = createTableBody(options, selectionModeInColumn, empty, _isVirtualScrollerDisabled);
                         const tableFooter = createTableFooter(options);
                         const tableProps = mergeProps(
-                            {
-                                className: classNames(props.tableClassName, ptCallbacks.cx('table')),
-                                style: props.tableStyle,
-                                role: 'table'
-                            },
-                            ptCallbacks.ptm('table')
+                            [
+                                {
+                                    className: classNames(props.tableClassName, ptCallbacks.cx('table')),
+                                    style: props.tableStyle,
+                                    role: 'table'
+                                },
+                                ptCallbacks.ptm('table')
+                            ],
+                            { useTailwind: context.useTailwind }
                         );
 
                         return (
@@ -1839,10 +1854,13 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.footer) {
             const content = ObjectUtils.getJSXElement(props.footer, { props });
             const footerProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('footer')
-                },
-                ptCallbacks.ptm('footer')
+                [
+                    {
+                        className: ptCallbacks.cx('footer')
+                    },
+                    ptCallbacks.ptm('footer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...footerProps}>{content}</div>;
@@ -1893,11 +1911,14 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createResizeHelper = () => {
         if (props.resizableColumns) {
             const resizeHelperProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('resizeHelper'),
-                    style: ptCallbacks.sx('resizeHelper')
-                },
-                ptCallbacks.ptm('resizeHelper')
+                [
+                    {
+                        className: ptCallbacks.cx('resizeHelper'),
+                        style: ptCallbacks.sx('resizeHelper')
+                    },
+                    ptCallbacks.ptm('resizeHelper')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div ref={resizeHelperRef} {...resizeHelperProps}></div>;
@@ -1910,22 +1931,28 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.reorderableColumns) {
             const style = { position: 'absolute', display: 'none' };
             const reorderIndicatorUpProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('reorderIndicatorUp'),
-                    style: ptCallbacks.sx('reorderIndicatorUp', { style })
-                },
-                ptCallbacks.ptm('reorderIndicatorUp')
+                [
+                    {
+                        className: ptCallbacks.cx('reorderIndicatorUp'),
+                        style: ptCallbacks.sx('reorderIndicatorUp', { style })
+                    },
+                    ptCallbacks.ptm('reorderIndicatorUp')
+                ],
+                { useTailwind: context.useTailwind }
             );
-            const reorderIndicatorUpIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorUpIcon'));
+            const reorderIndicatorUpIconProps = mergeProps([ptCallbacks.ptm('reorderIndicatorUpIcon')], { useTailwind: context.useTailwind });
             const reorderIndicatorUpIcon = IconUtils.getJSXIcon(props.reorderIndicatorUpIcon || <ArrowDownIcon {...reorderIndicatorUpIconProps} />, { ...reorderIndicatorUpIconProps }, { props });
             const reorderIndicatorDownProps = mergeProps(
-                {
-                    className: ptCallbacks.cx('reorderIndicatorDown'),
-                    style: ptCallbacks.sx('reorderIndicatorDown', { style })
-                },
-                ptCallbacks.ptm('reorderIndicatorDown')
+                [
+                    {
+                        className: ptCallbacks.cx('reorderIndicatorDown'),
+                        style: ptCallbacks.sx('reorderIndicatorDown', { style })
+                    },
+                    ptCallbacks.ptm('reorderIndicatorDown')
+                ],
+                { useTailwind: context.useTailwind }
             );
-            const reorderIndicatorDownIconProps = mergeProps(ptCallbacks.ptm('reorderIndicatorDownIcon'));
+            const reorderIndicatorDownIconProps = mergeProps([ptCallbacks.ptm('reorderIndicatorDownIcon')], { useTailwind: context.useTailwind });
             const reorderIndicatorDownIcon = IconUtils.getJSXIcon(props.reorderIndicatorDownIcon || <ArrowUpIcon {...reorderIndicatorDownIconProps} />, { ...reorderIndicatorDownIconProps }, { props });
 
             return (
@@ -1959,14 +1986,17 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const resizeHelper = createResizeHelper();
     const reorderIndicators = createReorderIndicators();
     const rootProps = mergeProps(
-        {
-            id: props.id,
-            className: classNames(props.className, ptCallbacks.cx('root', { selectable })),
-            style: props.style,
-            'data-scrollselectors': '.p-datatable-wrapper'
-        },
-        DataTableBase.getOtherProps(props),
-        ptCallbacks.ptm('root')
+        [
+            {
+                id: props.id,
+                className: classNames(props.className, ptCallbacks.cx('root', { selectable })),
+                style: props.style,
+                'data-scrollselectors': '.p-datatable-wrapper'
+            },
+            DataTableBase.getOtherProps(props),
+            ptCallbacks.ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

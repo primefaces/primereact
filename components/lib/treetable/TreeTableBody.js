@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { localeOption } from '../api/Api';
+import { localeOption, PrimeReactContext } from '../api/Api';
 import { DomHandler, mergeProps } from '../utils/Utils';
 import { TreeTableRow } from './TreeTableRow';
 
@@ -7,6 +7,7 @@ export const TreeTableBody = React.memo((props) => {
     const isSingleSelectionMode = props.selectionMode === 'single';
     const isMultipleSelectionMode = props.selectionMode === 'multiple';
     const { ptm, cx } = props.ptCallbacks;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key, options) => {
         return ptm(key, {
@@ -232,16 +233,22 @@ export const TreeTableBody = React.memo((props) => {
             const colSpan = props.columns ? props.columns.length : null;
             const content = props.emptyMessage || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                getPTOptions('emptyMessage')
+                [
+                    {
+                        className: cx('emptyMessage')
+                    },
+                    getPTOptions('emptyMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const emptyMessageCellProps = mergeProps(
-                {
-                    colSpan
-                },
-                getPTOptions('emptyMessageCell')
+                [
+                    {
+                        colSpan
+                    },
+                    getPTOptions('emptyMessageCell')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -254,10 +261,13 @@ export const TreeTableBody = React.memo((props) => {
 
     const content = props.value && props.value.length ? createRows() : createEmptyMessage();
     const tbodyProps = mergeProps(
-        {
-            className: cx('tbody')
-        },
-        getPTOptions('tbody')
+        [
+            {
+                className: cx('tbody')
+            },
+            getPTOptions('tbody')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <tbody {...tbodyProps}>{content}</tbody>;

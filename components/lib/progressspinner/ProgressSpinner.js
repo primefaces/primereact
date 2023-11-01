@@ -23,37 +23,46 @@ export const ProgressSpinner = React.memo(
         }));
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                style: props.style,
-                className: classNames(props.className, cx('root')),
-                role: 'alert',
-                'aria-busy': true
-            },
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    style: props.style,
+                    className: classNames(props.className, cx('root')),
+                    role: 'alert',
+                    'aria-busy': true
+                },
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const spinnerProps = mergeProps(
-            {
-                className: cx('spinner'),
-                viewBox: '25 25 50 50',
-                style: sx('spinner')
-            },
-            ptm('spinner')
+            [
+                {
+                    className: cx('spinner'),
+                    viewBox: '25 25 50 50',
+                    style: sx('spinner')
+                },
+                ptm('spinner')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const circleProps = mergeProps(
-            {
-                className: cx('circle'),
-                cx: '50',
-                cy: '50',
-                r: '20',
-                fill: props.fill,
-                strokeWidth: props.strokeWidth,
-                strokeMiterlimit: '10'
-            },
-            ptm('circle')
+            [
+                {
+                    className: cx('circle'),
+                    cx: '50',
+                    cy: '50',
+                    r: '20',
+                    fill: props.fill,
+                    strokeWidth: props.strokeWidth,
+                    strokeMiterlimit: '10'
+                },
+                ptm('circle')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

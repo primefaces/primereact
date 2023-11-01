@@ -366,45 +366,57 @@ export const FileUpload = React.memo(
         const createChooseButton = () => {
             const { className, style, icon: _icon, iconOnly } = props.chooseOptions;
             const chooseButtonLabelProps = mergeProps(
-                {
-                    className: cx('chooseButtonLabel')
-                },
-                ptm('chooseButtonLabel')
+                [
+                    {
+                        className: cx('chooseButtonLabel')
+                    },
+                    ptm('chooseButtonLabel')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = iconOnly ? <span {...chooseButtonLabelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span {...chooseButtonLabelProps}>{chooseButtonLabel}</span>;
             const inputProps = mergeProps(
-                {
-                    ref: fileInputRef,
-                    type: 'file',
-                    onChange: (e) => onFileSelect(e),
-                    multiple: props.multiple,
-                    accept: props.accept,
-                    disabled: chooseDisabled
-                },
-                ptm('input')
+                [
+                    {
+                        ref: fileInputRef,
+                        type: 'file',
+                        onChange: (e) => onFileSelect(e),
+                        multiple: props.multiple,
+                        accept: props.accept,
+                        disabled: chooseDisabled
+                    },
+                    ptm('input')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const input = <input {...inputProps} />;
             const chooseIconProps = mergeProps(
-                {
-                    className: cx('chooseIcon', { iconOnly })
-                },
-                ptm('chooseIcon')
+                [
+                    {
+                        className: cx('chooseIcon', { iconOnly })
+                    },
+                    ptm('chooseIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = _icon || <PlusIcon {...chooseIconProps} />;
             const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props });
             const chooseButtonProps = mergeProps(
-                {
-                    className: classNames(className, cx('chooseButton', { iconOnly, disabled, className, focusedState })),
-                    style,
-                    onClick: choose,
-                    onKeyDown: (e) => onKeyDown(e),
-                    onFocus,
-                    onBlur,
-                    tabIndex: 0,
-                    'data-p-disabled': disabled,
-                    'data-p-focus': focusedState
-                },
-                ptm('chooseButton')
+                [
+                    {
+                        className: classNames(className, cx('chooseButton', { iconOnly, disabled, className, focusedState })),
+                        style,
+                        onClick: choose,
+                        onKeyDown: (e) => onKeyDown(e),
+                        onFocus,
+                        onBlur,
+                        tabIndex: 0,
+                        'data-p-disabled': disabled,
+                        'data-p-focus': focusedState
+                    },
+                    ptm('chooseButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -425,24 +437,30 @@ export const FileUpload = React.memo(
         const createFile = (file, index, badgeOptions) => {
             const key = file.name + file.type + file.size;
             const thumbnailProps = mergeProps(
-                {
-                    role: 'presentation',
-                    className: cx('thumbnail'),
-                    src: file.objectURL,
-                    width: props.previewWidth
-                },
-                ptm('thumbnail')
+                [
+                    {
+                        role: 'presentation',
+                        className: cx('thumbnail'),
+                        src: file.objectURL,
+                        width: props.previewWidth
+                    },
+                    ptm('thumbnail')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const preview = isImage(file) ? <img {...thumbnailProps} alt={file.name} /> : null;
-            const detailsProps = mergeProps(ptm('details'));
-            const fileSizeProps = mergeProps(ptm('fileSize'));
+            const detailsProps = mergeProps([ptm('details')], { useTailwind: context.useTailwind });
+            const fileSizeProps = mergeProps([ptm('fileSize')], { useTailwind: context.useTailwind });
             const fileNameProps = mergeProps(
-                {
-                    className: cx('fileName')
-                },
-                ptm('fileName')
+                [
+                    {
+                        className: cx('fileName')
+                    },
+                    ptm('fileName')
+                ],
+                { useTailwind: context.useTailwind }
             );
-            const actionsProps = mergeProps(ptm('actions'));
+            const actionsProps = mergeProps([ptm('actions')], { useTailwind: context.useTailwind });
             const fileName = <div {...fileNameProps}>{file.name}</div>;
             const size = <div {...fileSizeProps}>{formatSize(file.size)}</div>;
 
@@ -493,11 +511,14 @@ export const FileUpload = React.memo(
             }
 
             const fileProps = mergeProps(
-                {
-                    key,
-                    className: cx('file')
-                },
-                ptm('file')
+                [
+                    {
+                        key,
+                        className: cx('file')
+                    },
+                    ptm('file')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...fileProps}>{content}</div>;
@@ -546,17 +567,23 @@ export const FileUpload = React.memo(
                 const uploadLabel = !uploadOptions.iconOnly ? uploadButtonLabel : '';
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
                 const uploadIconProps = mergeProps(
-                    {
-                        className: cx('uploadIcon', { iconOnly: uploadOptions.iconOnly })
-                    },
-                    ptm('uploadIcon')
+                    [
+                        {
+                            className: cx('uploadIcon', { iconOnly: uploadOptions.iconOnly })
+                        },
+                        ptm('uploadIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon {...uploadIconProps} />, { ...uploadIconProps }, { props });
                 const cancelIconProps = mergeProps(
-                    {
-                        className: cx('cancelIcon', { iconOnly: cancelOptions.iconOnly })
-                    },
-                    ptm('cancelIcon')
+                    [
+                        {
+                            className: cx('cancelIcon', { iconOnly: cancelOptions.iconOnly })
+                        },
+                        ptm('cancelIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const cancelIcon = IconUtils.getJSXIcon(cancelOptions.icon || <TimesIcon {...cancelIconProps} />, { ...cancelIconProps }, { props });
 
@@ -598,11 +625,14 @@ export const FileUpload = React.memo(
             }
 
             const buttonbarProps = mergeProps(
-                {
-                    className: classNames(props.headerClassName, cx('buttonbar')),
-                    style: props.headerStyle
-                },
-                ptm('buttonbar')
+                [
+                    {
+                        className: classNames(props.headerClassName, cx('buttonbar')),
+                        style: props.headerStyle
+                    },
+                    ptm('buttonbar')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let header = (
@@ -627,27 +657,33 @@ export const FileUpload = React.memo(
             }
 
             const rootProps = mergeProps(
-                {
-                    id: props.id,
-                    className: cx('root'),
-                    style: props.style
-                },
-                FileUploadBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        id: props.id,
+                        className: cx('root'),
+                        style: props.style
+                    },
+                    FileUploadBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const contentProps = mergeProps(
-                {
-                    ref: contentRef,
-                    className: classNames(props.contentClassName, cx('content')),
-                    style: props.contentStyle,
-                    onDragEnter: (e) => onDragEnter(e),
-                    onDragOver: (e) => onDragOver(e),
-                    onDragLeave: (e) => onDragLeave(e),
-                    onDrop: (e) => onDrop(e),
-                    'data-p-highlight': false
-                },
-                ptm('content')
+                [
+                    {
+                        ref: contentRef,
+                        className: classNames(props.contentClassName, cx('content')),
+                        style: props.contentStyle,
+                        onDragEnter: (e) => onDragEnter(e),
+                        onDragOver: (e) => onDragOver(e),
+                        onDragLeave: (e) => onDragLeave(e),
+                        onDrop: (e) => onDrop(e),
+                        'data-p-highlight': false
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -667,54 +703,69 @@ export const FileUpload = React.memo(
         const createBasic = () => {
             const chooseOptions = props.chooseOptions;
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const chooseLabel = chooseOptions.iconOnly ? <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }} /> : <span {...labelProps}>{chooseButtonLabel}</span>;
             const label = props.auto ? chooseLabel : <span {...labelProps}>{hasFiles ? filesState[0].name : chooseLabel}</span>;
             const chooseIconProps = mergeProps(
-                {
-                    className: cx('chooseIcon', { iconOnly: chooseOptions.iconOnly })
-                },
-                ptm('chooseIcon')
+                [
+                    {
+                        className: cx('chooseIcon', { iconOnly: chooseOptions.iconOnly })
+                    },
+                    ptm('chooseIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = chooseOptions.icon ? chooseOptions.icon : !chooseOptions.icon && (!hasFiles || props.auto) ? <PlusIcon {...chooseIconProps} /> : !chooseOptions.icon && hasFiles && !props.auto && <UploadIcon {...chooseIconProps} />;
             const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props, hasFiles });
             const inputProps = mergeProps(
-                {
-                    ref: fileInputRef,
-                    type: 'file',
-                    onChange: (e) => onFileSelect(e),
-                    multiple: props.multiple,
-                    accept: props.accept,
-                    disabled: disabled
-                },
-                ptm('input')
+                [
+                    {
+                        ref: fileInputRef,
+                        type: 'file',
+                        onChange: (e) => onFileSelect(e),
+                        multiple: props.multiple,
+                        accept: props.accept,
+                        disabled: disabled
+                    },
+                    ptm('input')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const input = !hasFiles && <input {...inputProps} />;
             const rootProps = mergeProps(
-                {
-                    className: classNames(props.className, cx('root')),
-                    style: props.style
-                },
-                FileUploadBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        className: classNames(props.className, cx('root')),
+                        style: props.style
+                    },
+                    FileUploadBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const basicButtonProps = mergeProps(
-                {
-                    className: classNames(chooseOptions.className, cx('basicButton', { hasFiles, disabled, focusedState })),
-                    style: chooseOptions.style,
-                    tabIndex: 0,
-                    onClick: onSimpleUploaderClick,
-                    onKeyDown: (e) => onKeyDown(e),
-                    onFocus,
-                    onBlur
-                },
-                FileUploadBase.getOtherProps(props),
-                ptm('basicButton')
+                [
+                    {
+                        className: classNames(chooseOptions.className, cx('basicButton', { hasFiles, disabled, focusedState })),
+                        style: chooseOptions.style,
+                        tabIndex: 0,
+                        onClick: onSimpleUploaderClick,
+                        onKeyDown: (e) => onKeyDown(e),
+                        onFocus,
+                        onBlur
+                    },
+                    FileUploadBase.getOtherProps(props),
+                    ptm('basicButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

@@ -128,10 +128,13 @@ export const MultiSelectPanel = React.memo(
             const emptyFilterMessage = ObjectUtils.getJSXElement(props.emptyFilterMessage, props) || localeOption('emptyFilterMessage');
 
             const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                getPTOptions('emptyMessage')
+                [
+                    {
+                        className: cx('emptyMessage')
+                    },
+                    getPTOptions('emptyMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...emptyMessageProps}>{emptyFilterMessage}</li>;
@@ -141,10 +144,13 @@ export const MultiSelectPanel = React.memo(
             const emptyMessage = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
 
             const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                getPTOptions('emptyMessage')
+                [
+                    {
+                        className: cx('emptyMessage')
+                    },
+                    getPTOptions('emptyMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...emptyMessageProps}>{emptyMessage}</li>;
@@ -158,11 +164,14 @@ export const MultiSelectPanel = React.memo(
                 const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
-                    {
-                        className: cx('itemGroup'),
-                        style: sx('itemGroup', { scrollerOptions })
-                    },
-                    getPTOptions('itemGroup')
+                    [
+                        {
+                            className: cx('itemGroup'),
+                            style: sx('itemGroup', { scrollerOptions })
+                        },
+                        getPTOptions('itemGroup')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -223,14 +232,17 @@ export const MultiSelectPanel = React.memo(
                             const content = isEmptyFilter() ? createEmptyFilter() : options.children;
 
                             const listProps = mergeProps(
-                                {
-                                    ref: options.contentRef,
-                                    style: options.style,
-                                    className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
-                                    role: 'listbox',
-                                    'aria-multiselectable': true
-                                },
-                                getPTOptions('list')
+                                [
+                                    {
+                                        ref: options.contentRef,
+                                        style: options.style,
+                                        className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
+                                        role: 'listbox',
+                                        'aria-multiselectable': true
+                                    },
+                                    getPTOptions('list')
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return <ul {...listProps}>{content}</ul>;
@@ -243,20 +255,26 @@ export const MultiSelectPanel = React.memo(
                 const items = createItems();
 
                 const wrapperProps = mergeProps(
-                    {
-                        className: cx('wrapper'),
-                        style: { maxHeight: props.scrollHeight }
-                    },
-                    getPTOptions('wrapper')
+                    [
+                        {
+                            className: cx('wrapper'),
+                            style: { maxHeight: props.scrollHeight }
+                        },
+                        getPTOptions('wrapper')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const listProps = mergeProps(
-                    {
-                        className: cx('list'),
-                        role: 'listbox',
-                        'aria-multiselectable': true
-                    },
-                    getPTOptions('list')
+                    [
+                        {
+                            className: cx('list'),
+                            role: 'listbox',
+                            'aria-multiselectable': true
+                        },
+                        getPTOptions('list')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -274,12 +292,15 @@ export const MultiSelectPanel = React.memo(
             const footer = createFooter();
 
             const panelProps = mergeProps(
-                {
-                    className: classNames(props.panelClassName, cx('panel', { panelProps: props, context, allowOptionSelect })),
-                    style: props.panelStyle,
-                    onClick: props.onClick
-                },
-                getPTOptions('panel')
+                [
+                    {
+                        className: classNames(props.panelClassName, cx('panel', { panelProps: props, context, allowOptionSelect })),
+                        style: props.panelStyle,
+                        onClick: props.onClick
+                    },
+                    getPTOptions('panel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.inline) {
@@ -292,18 +313,21 @@ export const MultiSelectPanel = React.memo(
             }
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: props.in,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter,
-                    onEntered,
-                    onExit: props.onExit,
-                    onExited: props.onExited
-                },
-                getPTOptions('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: props.in,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit: props.onExit,
+                        onExited: props.onExited
+                    },
+                    getPTOptions('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

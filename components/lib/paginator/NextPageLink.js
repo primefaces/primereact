@@ -24,23 +24,29 @@ export const NextPageLink = React.memo((inProps) => {
 
     const iconClassName = 'p-paginator-icon';
     const nextPageIconProps = mergeProps(
-        {
-            className: cx('nextPageIcon')
-        },
-        getPTOptions('nextPageIcon')
+        [
+            {
+                className: cx('nextPageIcon')
+            },
+            getPTOptions('nextPageIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const icon = props.nextPageLinkIcon || <AngleRightIcon {...nextPageIconProps} />;
     const nextPageLinkIcon = IconUtils.getJSXIcon(icon, { ...nextPageIconProps }, { props });
 
     const nextPageButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('nextPageButton', { disabled: props.disabled }),
-            onClick: props.onClick,
-            disabled: props.disabled,
-            'aria-label': ariaLabel('nextPageLabel')
-        },
-        getPTOptions('nextPageButton')
+        [
+            {
+                type: 'button',
+                className: cx('nextPageButton', { disabled: props.disabled }),
+                onClick: props.onClick,
+                disabled: props.disabled,
+                'aria-label': ariaLabel('nextPageLabel')
+            },
+            getPTOptions('nextPageButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const element = (

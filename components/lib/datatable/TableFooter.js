@@ -3,9 +3,11 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { RowBase } from '../row/RowBase';
 import { FooterCell } from './FooterCell';
+import { PrimeReactContext } from '../api/Api';
 import { mergeProps } from '../utils/Utils';
 
 export const TableFooter = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const { ptm, ptmo, cx } = props.ptCallbacks;
     const getRowProps = (row) => ColumnGroupBase.getCProps(row);
 
@@ -21,7 +23,7 @@ export const TableFooter = React.memo((props) => {
             hostName: props.hostName
         };
 
-        return mergeProps(ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData));
+        return mergeProps([ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData)], { useTailwind: context.useTailwind });
     };
 
     const getColumnGroupPTOptions = (key) => {
@@ -32,7 +34,7 @@ export const TableFooter = React.memo((props) => {
             hostName: props.hostName
         };
 
-        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(cGProps, key, columnGroupMetaData));
+        return mergeProps([ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(cGProps, key, columnGroupMetaData)], { useTailwind: context.useTailwind });
     };
 
     const hasFooter = () => {
@@ -64,10 +66,13 @@ export const TableFooter = React.memo((props) => {
 
             return rows.map((row, i) => {
                 const rootProps = mergeProps(
-                    {
-                        role: 'row'
-                    },
-                    getRowPTOptions(row, 'root')
+                    [
+                        {
+                            role: 'row'
+                        },
+                        getRowPTOptions(row, 'root')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -79,10 +84,13 @@ export const TableFooter = React.memo((props) => {
         }
 
         const footerRowProps = mergeProps(
-            {
-                role: 'row'
-            },
-            ptm('footerRow', { hostName: props.hostName })
+            [
+                {
+                    role: 'row'
+                },
+                ptm('footerRow', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <tr {...footerRowProps}>{createFooterCells(props.columns)}</tr>;
@@ -91,11 +99,14 @@ export const TableFooter = React.memo((props) => {
     if (hasFooter()) {
         const content = createContent();
         const tfootProps = mergeProps(
-            {
-                className: cx('tfoot')
-            },
-            getColumnGroupPTOptions('root'),
-            ptm('tfoot', { hostName: props.hostName })
+            [
+                {
+                    className: cx('tfoot')
+                },
+                getColumnGroupPTOptions('root'),
+                ptm('tfoot', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;

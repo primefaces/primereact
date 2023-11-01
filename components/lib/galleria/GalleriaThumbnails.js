@@ -10,6 +10,7 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, merg
 
 const GalleriaThumbnailItem = React.memo((props) => {
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key, options) => {
         return ptm(key, {
@@ -38,24 +39,30 @@ const GalleriaThumbnailItem = React.memo((props) => {
     const content = props.template && props.template(props.item);
 
     const thumbnailItemProps = mergeProps(
-        {
-            className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
-            'data-p-galleria-thumbnail-item-current': props.current,
-            'data-p-galleria-thumbnail-item-active': props.active,
-            'data-p-galleria-thumbnail-item-start': props.start,
-            'data-p-galleria-thumbnail-item-end': props.end
-        },
-        getPTOptions('thumbnailItem')
+        [
+            {
+                className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
+                'data-p-galleria-thumbnail-item-current': props.current,
+                'data-p-galleria-thumbnail-item-active': props.active,
+                'data-p-galleria-thumbnail-item-start': props.start,
+                'data-p-galleria-thumbnail-item-end': props.end
+            },
+            getPTOptions('thumbnailItem')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const thumbnailItemContentProps = mergeProps(
-        {
-            className: cx('thumbnailItemContent'),
-            tabIndex: tabIndex,
-            onClick: onItemClick,
-            onKeyDown: onItemKeyDown
-        },
-        getPTOptions('thumbnailItemContent')
+        [
+            {
+                className: cx('thumbnailItemContent'),
+                tabIndex: tabIndex,
+                onClick: onItemClick,
+                onKeyDown: onItemKeyDown
+            },
+            getPTOptions('thumbnailItemContent')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (
@@ -365,21 +372,27 @@ export const GalleriaThumbnails = React.memo(
                 let isDisabled = (!props.circular && props.activeItemIndex === 0) || props.value.length <= numVisibleState;
 
                 const previousThumbnailIconProps = mergeProps(
-                    {
-                        className: cx('previousThumbnailIcon')
-                    },
-                    getPTOptions('previousThumbnailIcon')
+                    [
+                        {
+                            className: cx('previousThumbnailIcon')
+                        },
+                        getPTOptions('previousThumbnailIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon {...previousThumbnailIconProps} /> : props.prevThumbnailIcon || <ChevronLeftIcon {...previousThumbnailIconProps} />;
                 const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { ...previousThumbnailIconProps }, { props });
                 const previousThumbnailButtonProps = mergeProps(
-                    {
-                        className: cx('previousThumbnailButton', { isDisabled }),
-                        onClick: navBackward,
-                        disabled: isDisabled,
-                        'data-p-disabled': isDisabled
-                    },
-                    getPTOptions('previousThumbnailButton')
+                    [
+                        {
+                            className: cx('previousThumbnailButton', { isDisabled }),
+                            onClick: navBackward,
+                            disabled: isDisabled,
+                            'data-p-disabled': isDisabled
+                        },
+                        getPTOptions('previousThumbnailButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -398,22 +411,28 @@ export const GalleriaThumbnails = React.memo(
                 const isDisabled = (!props.circular && props.activeItemIndex === props.value.length - 1) || props.value.length <= numVisibleState;
 
                 const nextThumbnailIconProps = mergeProps(
-                    {
-                        className: cx('nextThumbnailIcon')
-                    },
-                    getPTOptions('nextThumbnailIcon')
+                    [
+                        {
+                            className: cx('nextThumbnailIcon')
+                        },
+                        getPTOptions('nextThumbnailIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon {...nextThumbnailIconProps} /> : props.nextThumbnailIcon || <ChevronRightIcon {...nextThumbnailIconProps} />;
                 const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { ...nextThumbnailIconProps }, { props });
 
                 const nextThumbnailButtonProps = mergeProps(
-                    {
-                        className: cx('nextThumbnailButton', { isDisabled }),
-                        onClick: navForward,
-                        disabled: isDisabled,
-                        'data-p-disabled': isDisabled
-                    },
-                    getPTOptions('nextThumbnailButton')
+                    [
+                        {
+                            className: cx('nextThumbnailButton', { isDisabled }),
+                            onClick: navForward,
+                            disabled: isDisabled,
+                            'data-p-disabled': isDisabled
+                        },
+                        getPTOptions('nextThumbnailButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -434,30 +453,39 @@ export const GalleriaThumbnails = React.memo(
             const forwardNavigator = createForwardNavigator();
 
             const thumbnailContainerProps = mergeProps(
-                {
-                    className: cx('thumbnailContainer')
-                },
-                getPTOptions('thumbnailContainer')
+                [
+                    {
+                        className: cx('thumbnailContainer')
+                    },
+                    getPTOptions('thumbnailContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const thumbnailItemsContainerProps = mergeProps(
-                {
-                    className: cx('thumbnailItemsContainer'),
-                    style: sx('thumbnailItemsContainer', { height })
-                },
-                getPTOptions('thumbnailItemsContainer')
+                [
+                    {
+                        className: cx('thumbnailItemsContainer'),
+                        style: sx('thumbnailItemsContainer', { height })
+                    },
+                    getPTOptions('thumbnailItemsContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const thumbnailItemsProps = mergeProps(
-                {
-                    ref: itemsContainerRef,
-                    className: cx('thumbnailItems'),
-                    onTransitionEnd: onTransitionEnd,
-                    onTouchStart: onTouchStart,
-                    onTouchMove: onTouchMove,
-                    onTouchEnd: onTouchEnd
-                },
-                getPTOptions('thumbnailItems')
+                [
+                    {
+                        ref: itemsContainerRef,
+                        className: cx('thumbnailItems'),
+                        onTransitionEnd: onTransitionEnd,
+                        onTouchStart: onTouchStart,
+                        onTouchMove: onTouchMove,
+                        onTouchEnd: onTouchEnd
+                    },
+                    getPTOptions('thumbnailItems')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -474,10 +502,13 @@ export const GalleriaThumbnails = React.memo(
         const content = createContent();
 
         const thumbnailWrapperProps = mergeProps(
-            {
-                className: cx('thumbnailWrapper')
-            },
-            getPTOptions('thumbnailWrapper')
+            [
+                {
+                    className: cx('thumbnailWrapper')
+                },
+                getPTOptions('thumbnailWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <div {...thumbnailWrapperProps}>{content}</div>;

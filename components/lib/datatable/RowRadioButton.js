@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { DomHandler, mergeProps } from '../utils/Utils';
 
 export const RowRadioButton = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [focusedState, setFocusedState] = React.useState(false);
     const inputRef = React.useRef(null);
     const getColumnProps = () => ColumnBase.getCProps(props.column);
@@ -23,7 +25,7 @@ export const RowRadioButton = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData)], { useTailwind: context.useTailwind });
     };
 
     const onFocus = () => {
@@ -56,47 +58,62 @@ export const RowRadioButton = React.memo((props) => {
 
     const name = `${props.tableSelector}_dt_radio`;
     const radiobuttonWrapperProps = mergeProps(
-        {
-            className: cx('radiobuttonWrapper', { rowProps: props, focusedState })
-        },
-        getColumnPTOptions('radiobuttonWrapper')
+        [
+            {
+                className: cx('radiobuttonWrapper', { rowProps: props, focusedState })
+            },
+            getColumnPTOptions('radiobuttonWrapper')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const hiddenInputWrapperProps = mergeProps(
-        {
-            className: 'p-hidden-accessible'
-        },
-        getColumnPTOptions('hiddenInputWrapper')
+        [
+            {
+                className: 'p-hidden-accessible'
+            },
+            getColumnPTOptions('hiddenInputWrapper')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const hiddenInputProps = mergeProps(
-        {
-            name,
-            type: 'radio',
-            checked: props.checked,
-            onFocus: (e) => onFocus(e),
-            onBlur: (e) => onBlur(e),
-            onChange: (e) => onChange(e),
-            onKeyDown: (e) => onKeyDown(e),
-            'aria-label': props.ariaLabel
-        },
-        getColumnPTOptions('hiddenInput')
+        [
+            {
+                name,
+                type: 'radio',
+                checked: props.checked,
+                onFocus: (e) => onFocus(e),
+                onBlur: (e) => onBlur(e),
+                onChange: (e) => onChange(e),
+                onKeyDown: (e) => onKeyDown(e),
+                'aria-label': props.ariaLabel
+            },
+            getColumnPTOptions('hiddenInput')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const radiobuttonProps = mergeProps(
-        {
-            className: cx('radiobutton', { rowProps: props, focusedState }),
-            onClick: (e) => onClick(e),
-            role: 'radio',
-            'aria-checked': props.checked
-        },
-        getColumnPTOptions('radiobutton')
+        [
+            {
+                className: cx('radiobutton', { rowProps: props, focusedState }),
+                onClick: (e) => onClick(e),
+                role: 'radio',
+                'aria-checked': props.checked
+            },
+            getColumnPTOptions('radiobutton')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const radiobuttonIconProps = mergeProps(
-        {
-            className: cx('radiobuttonIcon')
-        },
-        getColumnPTOptions('radiobuttonIcon')
+        [
+            {
+                className: cx('radiobuttonIcon')
+            },
+            getColumnPTOptions('radiobuttonIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

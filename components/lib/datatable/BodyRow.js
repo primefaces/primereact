@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 import { BodyCell } from './BodyCell';
 
 export const BodyRow = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [editingState, setEditingState] = React.useState(false);
     const editing = props.onRowEditChange ? props.editing : editingState;
     const { ptm, cx } = props.ptCallbacks;
@@ -388,32 +390,35 @@ export const BodyRow = React.memo((props) => {
     const content = createContent();
     const tabIndex = getTabIndex();
     const rowProps = mergeProps(
-        {
-            role: 'row',
-            tabIndex: tabIndex,
-            className: classNames(rowClassName, cx('bodyRow', { rowProps: props })),
-            style: style,
-            onMouseDown: (e) => onMouseDown(e),
-            onMouseUp: (e) => onMouseUp(e),
-            onMouseEnter: (e) => onMouseEnter(e),
-            onMouseLeave: (e) => onMouseLeave(e),
-            onClick: (e) => onClick(e),
-            onDoubleClick: (e) => onDoubleClick(e),
-            onPointerDown: (e) => onPointerDown(e),
-            onPointerUp: (e) => onPointerUp(e),
-            onContextMenu: (e) => onRightClick(e),
-            onTouchEnd: (e) => onTouchEnd(e),
-            onKeyDown: (e) => onKeyDown(e),
-            onDragStart: (e) => onDragStart(e),
-            onDragOver: (e) => onDragOver(e),
-            onDragLeave: (e) => onDragLeave(e),
-            onDragEnd: (e) => onDragEnd(e),
-            onDrop: (e) => onDrop(e),
-            'data-p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
-            'data-p-highlight': props.selected,
-            'data-p-highlight-contextmenu': props.contextMenuSelected
-        },
-        getBodyRowPTOptions('bodyRow')
+        [
+            {
+                role: 'row',
+                tabIndex: tabIndex,
+                className: classNames(rowClassName, cx('bodyRow', { rowProps: props })),
+                style: style,
+                onMouseDown: (e) => onMouseDown(e),
+                onMouseUp: (e) => onMouseUp(e),
+                onMouseEnter: (e) => onMouseEnter(e),
+                onMouseLeave: (e) => onMouseLeave(e),
+                onClick: (e) => onClick(e),
+                onDoubleClick: (e) => onDoubleClick(e),
+                onPointerDown: (e) => onPointerDown(e),
+                onPointerUp: (e) => onPointerUp(e),
+                onContextMenu: (e) => onRightClick(e),
+                onTouchEnd: (e) => onTouchEnd(e),
+                onKeyDown: (e) => onKeyDown(e),
+                onDragStart: (e) => onDragStart(e),
+                onDragOver: (e) => onDragOver(e),
+                onDragLeave: (e) => onDragLeave(e),
+                onDragEnd: (e) => onDragEnd(e),
+                onDrop: (e) => onDrop(e),
+                'data-p-selectable-row': props.allowRowSelection && props.isSelectable({ data: props.rowData, index: props.rowIndex }),
+                'data-p-highlight': props.selected,
+                'data-p-highlight-contextmenu': props.contextMenuSelected
+            },
+            getBodyRowPTOptions('bodyRow')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <tr {...rowProps}>{content}</tr>;

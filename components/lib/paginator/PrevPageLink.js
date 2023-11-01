@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { AngleLeftIcon } from '../icons/angleleft';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { PrevPageLinkBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const PrevPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
@@ -23,23 +22,29 @@ export const PrevPageLink = React.memo((inProps) => {
     const className = classNames('p-paginator-prev p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon';
     const prevPageIconProps = mergeProps(
-        {
-            className: cx('prevPageIcon')
-        },
-        getPTOptions('prevPageIcon')
+        [
+            {
+                className: cx('prevPageIcon')
+            },
+            getPTOptions('prevPageIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const icon = props.prevPageLinkIcon || <AngleLeftIcon {...prevPageIconProps} />;
     const prevPageLinkIcon = IconUtils.getJSXIcon(icon, { ...prevPageIconProps }, { props });
 
     const prevPageButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('prevPageButton', { disabled: props.disabled }),
-            onClick: props.onClick,
-            disabled: props.disabled,
-            'aria-label': ariaLabel('previousPageLabel')
-        },
-        getPTOptions('prevPageButton')
+        [
+            {
+                type: 'button',
+                className: cx('prevPageButton', { disabled: props.disabled }),
+                onClick: props.onClick,
+                disabled: props.disabled,
+                'aria-label': ariaLabel('previousPageLabel')
+            },
+            getPTOptions('prevPageButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const element = (
         <button {...prevPageButtonProps}>

@@ -12,16 +12,20 @@ import { CarouselBase } from './CarouselBase';
 
 const CarouselItem = React.memo((props) => {
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
     const key = props.className && props.className === 'p-carousel-item-cloned' ? 'itemCloned' : 'item';
     const content = props.template(props.item);
     const itemClonedProps = mergeProps(
-        {
-            className: cx(key, { itemProps: props }),
-            'data-p-carousel-item-active': props.active,
-            'data-p-carousel-item-start': props.start,
-            'data-p-carousel-item-end': props.end
-        },
-        ptm(key)
+        [
+            {
+                className: cx(key, { itemProps: props }),
+                'data-p-carousel-item-active': props.active,
+                'data-p-carousel-item-start': props.start,
+                'data-p-carousel-item-end': props.end
+            },
+            ptm(key)
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <div {...itemClonedProps}>{content}</div>;
@@ -462,10 +466,13 @@ export const Carousel = React.memo(
         const createHeader = () => {
             if (props.header) {
                 const headerProps = mergeProps(
-                    {
-                        className: cx('header')
-                    },
-                    ptm('header')
+                    [
+                        {
+                            className: cx('header')
+                        },
+                        ptm('header')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...headerProps}>{props.header}</div>;
@@ -477,10 +484,13 @@ export const Carousel = React.memo(
         const createFooter = () => {
             if (props.footer) {
                 const footerProps = mergeProps(
-                    {
-                        className: cx('footer')
-                    },
-                    ptm('footer')
+                    [
+                        {
+                            className: cx('footer')
+                        },
+                        ptm('footer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...footerProps}>{props.footer}</div>;
@@ -495,29 +505,38 @@ export const Carousel = React.memo(
             const backwardNavigator = createBackwardNavigator();
             const forwardNavigator = createForwardNavigator();
             const itemsContentProps = mergeProps(
-                {
-                    className: cx('itemsContent'),
-                    style: sx('itemsContent', { height }),
-                    onTouchStart: (e) => onTouchStart(e),
-                    onTouchMove: (e) => onTouchMove(e),
-                    onTouchEnd: (e) => onTouchEnd(e)
-                },
-                ptm('itemsContent')
+                [
+                    {
+                        className: cx('itemsContent'),
+                        style: sx('itemsContent', { height }),
+                        onTouchStart: (e) => onTouchStart(e),
+                        onTouchMove: (e) => onTouchMove(e),
+                        onTouchEnd: (e) => onTouchEnd(e)
+                    },
+                    ptm('itemsContent')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const containerProps = mergeProps(
-                {
-                    className: classNames(props.containerClassName, cx('container'))
-                },
-                ptm('container')
+                [
+                    {
+                        className: classNames(props.containerClassName, cx('container'))
+                    },
+                    ptm('container')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const itemsContainerProps = mergeProps(
-                {
-                    className: cx('itemsContainer'),
-                    onTransitionEnd: onTransitionEnd
-                },
-                ptm('itemsContainer')
+                [
+                    {
+                        className: cx('itemsContainer'),
+                        onTransitionEnd: onTransitionEnd
+                    },
+                    ptm('itemsContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -537,22 +556,28 @@ export const Carousel = React.memo(
             if (props.showNavigators) {
                 const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && currentPage === 0;
                 const previousButtonIconProps = mergeProps(
-                    {
-                        className: cx('previousButtonIcon')
-                    },
-                    ptm('previousButtonIcon')
+                    [
+                        {
+                            className: cx('previousButtonIcon')
+                        },
+                        ptm('previousButtonIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = isVertical ? props.prevIcon || <ChevronUpIcon {...previousButtonIconProps} /> : props.prevIcon || <ChevronLeftIcon {...previousButtonIconProps} />;
                 const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { ...previousButtonIconProps }, { props });
                 const previousButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('previousButton', { isDisabled }),
-                        onClick: (e) => navBackward(e),
-                        disabled: isDisabled,
-                        'aria-label': ariaLabel('previousPageLabel')
-                    },
-                    ptm('previousButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('previousButton', { isDisabled }),
+                            onClick: (e) => navBackward(e),
+                            disabled: isDisabled,
+                            'aria-label': ariaLabel('previousPageLabel')
+                        },
+                        ptm('previousButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -570,22 +595,28 @@ export const Carousel = React.memo(
             if (props.showNavigators) {
                 const isDisabled = (!circular || (props.value && props.value.length < numVisibleState)) && (currentPage === totalIndicators - 1 || totalIndicators === 0);
                 const nextButtonIconProps = mergeProps(
-                    {
-                        className: cx('nextButtonIcon')
-                    },
-                    ptm('nextButtonIcon')
+                    [
+                        {
+                            className: cx('nextButtonIcon')
+                        },
+                        ptm('nextButtonIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = isVertical ? props.nextIcon || <ChevronDownIcon {...nextButtonIconProps} /> : props.nextIcon || <ChevronRightIcon {...nextButtonIconProps} />;
                 const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { ...nextButtonIconProps }, { props });
                 const nextButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('nextButton', { isDisabled }),
-                        onClick: (e) => navForward(e),
-                        disabled: isDisabled,
-                        'aria-label': ariaLabel('nextPageLabel')
-                    },
-                    ptm('nextButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('nextButton', { isDisabled }),
+                            onClick: (e) => navForward(e),
+                            disabled: isDisabled,
+                            'aria-label': ariaLabel('nextPageLabel')
+                        },
+                        ptm('nextButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -612,21 +643,27 @@ export const Carousel = React.memo(
 
             const key = 'carousel-indicator-' + index;
             const indicatorProps = mergeProps(
-                {
-                    key,
-                    className: cx('indicator', { isActive }),
-                    'data-p-highlight': isActive
-                },
-                getPTOptions('indicator')
+                [
+                    {
+                        key,
+                        className: cx('indicator', { isActive }),
+                        'data-p-highlight': isActive
+                    },
+                    getPTOptions('indicator')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const indicatorButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('indicatorButton'),
-                    onClick: (e) => onDotClick(e, index),
-                    'aria-label': `${ariaLabel('pageLabel')} ${index + 1}`
-                },
-                getPTOptions('indicatorButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('indicatorButton'),
+                        onClick: (e) => onDotClick(e, index),
+                        'aria-label': `${ariaLabel('pageLabel')} ${index + 1}`
+                    },
+                    getPTOptions('indicatorButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -647,10 +684,13 @@ export const Carousel = React.memo(
                 }
 
                 const indicatorsProps = mergeProps(
-                    {
-                        className: classNames(props.indicatorsContentClassName, cx('indicators'))
-                    },
-                    ptm('indicators')
+                    [
+                        {
+                            className: classNames(props.indicatorsContentClassName, cx('indicators'))
+                        },
+                        ptm('indicators')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <ul {...indicatorsProps}>{indicators}</ul>;
@@ -664,21 +704,27 @@ export const Carousel = React.memo(
         const header = createHeader();
         const footer = createFooter();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: classNames(props.className, cx('root', { isVertical })),
-                style: props.style
-            },
-            CarouselBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root', { isVertical })),
+                    style: props.style
+                },
+                CarouselBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const contentProps = mergeProps(
-            {
-                className: classNames(props.contentClassName, cx('content'))
-            },
-            ptm('content')
+            [
+                {
+                    className: classNames(props.contentClassName, cx('content'))
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

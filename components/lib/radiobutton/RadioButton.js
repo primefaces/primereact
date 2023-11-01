@@ -124,50 +124,65 @@ export const RadioButton = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
 
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root', { focusedState })),
-                style: props.style,
-                onClick: onClick
-            },
-            RadioButtonBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root', { focusedState })),
+                    style: props.style,
+                    onClick: onClick
+                },
+                RadioButtonBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const hiddenInputWrapperProps = mergeProps(
-            {
-                className: 'p-hidden-accessible'
-            },
-            ptm('hiddenInputWrapper')
+            [
+                {
+                    className: 'p-hidden-accessible'
+                },
+                ptm('hiddenInputWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const hiddenInputProps = mergeProps(
-            {
-                type: 'radio',
-                name: props.name,
-                defaultChecked: props.checked,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                disabled: props.disabled,
-                required: props.required,
-                tabIndex: props.tabIndex,
-                ...ariaProps
-            },
-            ptm('hiddenInput')
+            [
+                {
+                    type: 'radio',
+                    name: props.name,
+                    defaultChecked: props.checked,
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onKeyDown: onKeyDown,
+                    disabled: props.disabled,
+                    required: props.required,
+                    tabIndex: props.tabIndex,
+                    ...ariaProps
+                },
+                ptm('hiddenInput')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const inputProps = mergeProps(
-            {
-                className: cx('input', { focusedState })
-            },
-            ptm('input')
+            [
+                {
+                    className: cx('input', { focusedState })
+                },
+                ptm('input')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            ptm('icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

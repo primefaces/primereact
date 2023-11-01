@@ -22,13 +22,16 @@ export const AvatarGroup = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
-        {
-            ref: elementRef,
-            style: props.style,
-            className: classNames(props.className, cx('root'))
-        },
-        AvatarGroupBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                ref: elementRef,
+                style: props.style,
+                className: classNames(props.className, cx('root'))
+            },
+            AvatarGroupBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <div {...rootProps}>{props.children}</div>;

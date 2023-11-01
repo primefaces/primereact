@@ -69,33 +69,42 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
 
     const createContent = () => {
         const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
+            [
+                {
+                    className: cx('content')
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const toggleableProps = mergeProps(
-            {
-                ref: contentRef,
-                id: contentId,
-                'aria-hidden': collapsed,
-                role: 'region',
-                'aria-labelledby': headerId,
-                className: cx('toggleableContent')
-            },
-            ptm('toggleableContent')
+            [
+                {
+                    ref: contentRef,
+                    id: contentId,
+                    'aria-hidden': collapsed,
+                    role: 'region',
+                    'aria-labelledby': headerId,
+                    className: cx('toggleableContent')
+                },
+                ptm('toggleableContent')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                timeout: { enter: 1000, exit: 450 },
-                in: !collapsed,
-                unmountOnExit: true,
-                options: props.transitionOptions
-            },
-            ptm('transition')
+            [
+                {
+                    classNames: cx('transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    in: !collapsed,
+                    unmountOnExit: true,
+                    options: props.transitionOptions
+                },
+                ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -110,10 +119,13 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     const createToggleIcon = () => {
         if (props.toggleable) {
             const togglerIconProps = mergeProps(
-                {
-                    className: cx('togglericon')
-                },
-                ptm('togglericon')
+                [
+                    {
+                        className: cx('togglericon')
+                    },
+                    ptm('togglericon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = collapsed ? props.expandIcon || <PlusIcon {...togglerIconProps} /> : props.collapseIcon || <MinusIcon {...togglerIconProps} />;
@@ -127,21 +139,27 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
 
     const createLegendContent = () => {
         const legendTextProps = mergeProps(
-            {
-                className: cx('legendTitle')
-            },
-            ptm('legendTitle')
+            [
+                {
+                    className: cx('legendTitle')
+                },
+                ptm('legendTitle')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const togglerProps = mergeProps(
-            {
-                id: headerId,
-                'aria-expanded': !collapsed,
-                'aria-controls': contentId,
-                href: '#' + contentId,
-                tabIndex: props.toggleable ? null : -1
-            },
-            ptm('toggler')
+            [
+                {
+                    id: headerId,
+                    'aria-expanded': !collapsed,
+                    'aria-controls': contentId,
+                    href: '#' + contentId,
+                    tabIndex: props.toggleable ? null : -1
+                },
+                ptm('toggler')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (props.toggleable) {
@@ -165,12 +183,15 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
 
     const createLegend = () => {
         const legendProps = mergeProps(
-            {
-                className: cx('legend'),
-                onClick: toggle
-            },
+            [
+                {
+                    className: cx('legend'),
+                    onClick: toggle
+                },
 
-            ptm('legend')
+                ptm('legend')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (props.legend != null || props.toggleable) {
@@ -187,15 +208,18 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
-        {
-            id: idState,
-            ref: elementRef,
-            style: props.style,
-            className: classNames(props.className, cx('root')),
-            onClick: props.onClick
-        },
-        FieldsetBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                id: idState,
+                ref: elementRef,
+                style: props.style,
+                className: classNames(props.className, cx('root')),
+                onClick: props.onClick
+            },
+            FieldsetBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const legend = createLegend();

@@ -397,27 +397,33 @@ export const TreeSelect = React.memo(
 
         const createKeyboardHelper = () => {
             const hiddenInputWrapperProps = mergeProps(
-                {
-                    className: 'p-hidden-accessible'
-                },
-                ptm('hiddenInputWrapper')
+                [
+                    {
+                        className: 'p-hidden-accessible'
+                    },
+                    ptm('hiddenInputWrapper')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const hiddenInputProps = mergeProps(
-                {
-                    ref: focusInputRef,
-                    role: 'listbox',
-                    id: props.inputId,
-                    type: 'text',
-                    'aria-expanded': overlayVisibleState,
-                    onFocus: onInputFocus,
-                    onBlur: onInputBlur,
-                    onKeyDown: onInputKeyDown,
-                    disabled: props.disabled,
-                    tabIndex: props.tabIndex,
-                    ...ariaProps
-                },
-                ptm('hiddenInput')
+                [
+                    {
+                        ref: focusInputRef,
+                        role: 'listbox',
+                        id: props.inputId,
+                        type: 'text',
+                        'aria-expanded': overlayVisibleState,
+                        onFocus: onInputFocus,
+                        onBlur: onInputBlur,
+                        onKeyDown: onInputKeyDown,
+                        disabled: props.disabled,
+                        tabIndex: props.tabIndex,
+                        ...ariaProps
+                    },
+                    ptm('hiddenInput')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -429,30 +435,42 @@ export const TreeSelect = React.memo(
 
         const createLabel = () => {
             const tokenProps = mergeProps(
-                {
-                    className: cx('token')
-                },
-                ptm('token')
+                [
+                    {
+                        className: cx('token')
+                    },
+                    ptm('token')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const tokenLabelProps = mergeProps(
-                {
-                    className: cx('tokenLabel')
-                },
-                ptm('tokenLabel')
+                [
+                    {
+                        className: cx('tokenLabel')
+                    },
+                    ptm('tokenLabel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const labelContainerProps = mergeProps(
-                {
-                    className: cx('labelContainer')
-                },
-                ptm('labelContainer')
+                [
+                    {
+                        className: cx('labelContainer')
+                    },
+                    ptm('labelContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label', { isValueEmpty, getLabel })
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label', { isValueEmpty, getLabel })
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = null;
@@ -489,20 +507,26 @@ export const TreeSelect = React.memo(
 
         const createDropdownIcon = () => {
             const triggerProps = mergeProps(
-                {
-                    ref: triggerRef,
-                    className: cx('trigger'),
-                    role: 'button',
-                    'aria-haspopup': 'listbox',
-                    'aria-expanded': overlayVisibleState
-                },
-                ptm('trigger')
+                [
+                    {
+                        ref: triggerRef,
+                        className: cx('trigger'),
+                        role: 'button',
+                        'aria-haspopup': 'listbox',
+                        'aria-expanded': overlayVisibleState
+                    },
+                    ptm('trigger')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const triggerIconProps = mergeProps(
-                {
-                    className: cx('triggerIcon')
-                },
-                ptm('triggerIcon')
+                [
+                    {
+                        className: cx('triggerIcon')
+                    },
+                    ptm('triggerIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = props.dropdownIcon || <ChevronDownIcon {...triggerIconProps} />;
@@ -514,11 +538,14 @@ export const TreeSelect = React.memo(
         const createClearIcon = () => {
             if (props.value != null && props.showClear && !props.disabled) {
                 const clearIconProps = mergeProps(
-                    {
-                        className: cx('clearIcon'),
-                        onPointerUp: clear
-                    },
-                    ptm('clearIcon')
+                    [
+                        {
+                            className: cx('clearIcon'),
+                            onPointerUp: clear
+                        },
+                        ptm('clearIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.clearIcon || <TimesIcon {...clearIconProps} />;
 
@@ -530,10 +557,13 @@ export const TreeSelect = React.memo(
 
         const createContent = () => {
             const emptyMessageProps = mergeProps(
-                {
-                    className: cx('emptyMessage')
-                },
-                ptm('emptyMessage')
+                [
+                    {
+                        className: cx('emptyMessage')
+                    },
+                    ptm('emptyMessage')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -573,31 +603,40 @@ export const TreeSelect = React.memo(
             if (props.filter) {
                 const filterValue = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
                 const filterContainerProps = mergeProps(
-                    {
-                        className: cx('filterContainer')
-                    },
-                    ptm('filterContainer')
+                    [
+                        {
+                            className: cx('filterContainer')
+                        },
+                        ptm('filterContainer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const filterProps = mergeProps(
-                    {
-                        ref: filterInputRef,
-                        type: 'text',
-                        value: filterValue,
-                        autoComplete: 'off',
-                        className: cx('filter'),
-                        placeholder: props.filterPlaceholder,
-                        onKeyDown: onFilterInputKeyDown,
-                        onChange: onFilterInputChange,
-                        disabled: props.disabled
-                    },
-                    ptm('filter')
+                    [
+                        {
+                            ref: filterInputRef,
+                            type: 'text',
+                            value: filterValue,
+                            autoComplete: 'off',
+                            className: cx('filter'),
+                            placeholder: props.filterPlaceholder,
+                            onKeyDown: onFilterInputKeyDown,
+                            onChange: onFilterInputChange,
+                            disabled: props.disabled
+                        },
+                        ptm('filter')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const filterIconProps = mergeProps(
-                    {
-                        className: cx('filterIcon')
-                    },
-                    ptm('filterIcon')
+                    [
+                        {
+                            className: cx('filterIcon')
+                        },
+                        ptm('filterIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
                 const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
@@ -630,30 +669,39 @@ export const TreeSelect = React.memo(
         const createHeader = () => {
             const filterElement = createFilterElement();
             const closeIconProps = mergeProps(
-                {
-                    className: cx('closeIcon'),
-                    'aria-hidden': true
-                },
-                ptm('closeIcon')
+                [
+                    {
+                        className: cx('closeIcon'),
+                        'aria-hidden': true
+                    },
+                    ptm('closeIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
             const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
 
             const closeButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('closeButton'),
-                    onClick: hide,
-                    'aria-label': localeOption('close')
-                },
-                ptm('closeButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('closeButton'),
+                        onClick: hide,
+                        'aria-label': localeOption('close')
+                    },
+                    ptm('closeButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const headerProps = mergeProps(
-                {
-                    className: cx('header')
-                },
-                ptm('header')
+                [
+                    {
+                        className: cx('header')
+                    },
+                    ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const closeElement = (
@@ -696,14 +744,17 @@ export const TreeSelect = React.memo(
         const otherProps = TreeSelectBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                className: cx('root', { focusedState, overlayVisibleState, isValueEmpty }),
-                style: props.style,
-                onClick: onClick
-            },
-            TreeSelectBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    className: cx('root', { focusedState, overlayVisibleState, isValueEmpty }),
+                    style: props.style,
+                    onClick: onClick
+                },
+                TreeSelectBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const keyboardHelper = createKeyboardHelper();

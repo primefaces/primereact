@@ -9,7 +9,7 @@ import * as React from 'react';
 
 export declare function classNames(...args: any[]): string | undefined;
 
-export declare function mergeProps(...args: object[]): object | undefined;
+export declare function mergeProps(props: object[], options: { useTailwind: boolean | undefined }): object | undefined;
 
 export declare class DomHandler {
     static innerWidth(el: HTMLElement): number;

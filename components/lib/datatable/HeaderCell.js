@@ -5,11 +5,13 @@ import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
 export const HeaderCell = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [styleObjectState, setStyleObjectState] = React.useState({});
     const elementRef = React.useRef(null);
     const prevColumn = usePrevious(props.column);
@@ -38,7 +40,7 @@ export const HeaderCell = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData)], { useTailwind: context.useTailwind });
     };
 
     const isBadgeVisible = () => {
@@ -230,13 +232,16 @@ export const HeaderCell = React.memo((props) => {
     const createResizer = () => {
         if (props.resizableColumns && !getColumnProp('frozen')) {
             const columnResizerProps = mergeProps(
-                {
-                    className: cx('columnResizer'),
-                    onMouseDown: (e) => onResizerMouseDown(e),
-                    onClick: (e) => onResizerClick(e),
-                    onDoubleClick: (e) => onResizerDoubleClick(e)
-                },
-                getColumnPTOptions('columnResizer')
+                [
+                    {
+                        className: cx('columnResizer'),
+                        onMouseDown: (e) => onResizerMouseDown(e),
+                        onClick: (e) => onResizerClick(e),
+                        onDoubleClick: (e) => onResizerDoubleClick(e)
+                    },
+                    getColumnPTOptions('columnResizer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...columnResizerProps}></span>;
@@ -248,10 +253,13 @@ export const HeaderCell = React.memo((props) => {
     const createTitle = () => {
         const title = ObjectUtils.getJSXElement(getColumnProp('header'), { props: props.tableProps });
         const headerTitleProps = mergeProps(
-            {
-                className: cx('headerTitle')
-            },
-            getColumnPTOptions('headerTitle')
+            [
+                {
+                    className: cx('headerTitle')
+                },
+                getColumnPTOptions('headerTitle')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <span {...headerTitleProps}>{title}</span>;
@@ -260,13 +268,16 @@ export const HeaderCell = React.memo((props) => {
     const createSortIcon = ({ sorted, sortOrder }) => {
         if (getColumnProp('sortable')) {
             const sortIconProps = mergeProps(
-                {
-                    className: cx('sortIcon')
-                },
-                getColumnPTOptions('sortIcon')
+                [
+                    {
+                        className: cx('sortIcon')
+                    },
+                    getColumnPTOptions('sortIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
-            const sortProps = mergeProps(getColumnPTOptions('sort'));
+            const sortProps = mergeProps([getColumnPTOptions('sort')], { useTailwind: context.useTailwind });
 
             let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon {...sortIconProps} /> : <SortAmountUpAltIcon {...sortIconProps} /> : <SortAltIcon {...sortIconProps} />;
             let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { ...sortIconProps }, { props, sorted, sortOrder });
@@ -281,11 +292,14 @@ export const HeaderCell = React.memo((props) => {
         if (metaIndex !== -1 && isBadgeVisible()) {
             const value = props.groupRowsBy && props.groupRowsBy === props.groupRowSortField ? metaIndex : metaIndex + 1;
             const sortBadgeProps = mergeProps(
-                {
-                    className: cx('sortBadge')
-                },
-                getColumnPTOptions('root'),
-                getColumnPTOptions('sortBadge')
+                [
+                    {
+                        className: cx('sortBadge')
+                    },
+                    getColumnPTOptions('root'),
+                    getColumnPTOptions('sortBadge')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...sortBadgeProps}>{value}</span>;
@@ -334,10 +348,13 @@ export const HeaderCell = React.memo((props) => {
         const checkbox = createCheckbox();
         const filter = createFilter();
         const headerContentProps = mergeProps(
-            {
-                className: cx('headerContent')
-            },
-            getColumnPTOptions('headerContent')
+            [
+                {
+                    className: cx('headerContent')
+                },
+                getColumnPTOptions('headerContent')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -369,30 +386,33 @@ export const HeaderCell = React.memo((props) => {
         const resizer = createResizer();
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
-            {
-                className: classNames(headerClassName, cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp })),
-                style,
-                role: 'columnheader',
-                onClick: (e) => onClick(e),
-                onKeyDown: (e) => onKeyDown(e),
-                onMouseDown: (e) => onMouseDown(e),
-                onDragStart: (e) => onDragStart(e),
-                onDragOver: (e) => onDragOver(e),
-                onDragLeave: (e) => onDragLeave(e),
-                onDrop: (e) => onDrop(e),
-                tabIndex,
-                colSpan,
-                rowSpan,
-                'aria-sort': ariaSort,
-                'data-p-sortable-column': getColumnProp('sortable'),
-                'data-p-resizable-column': props.resizableColumns,
-                'data-p-highlight': sortMeta.sorted,
-                'data-p-filter-column': !props.metaData.props.headerColumnGroup && props.filterDisplay === 'row',
-                'data-p-frozen-column': getColumnProp('frozen'),
-                'data-p-reorderable-column': props.reorderableColumns
-            },
-            getColumnPTOptions('root'),
-            getColumnPTOptions('headerCell')
+            [
+                {
+                    className: classNames(headerClassName, cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp })),
+                    style,
+                    role: 'columnheader',
+                    onClick: (e) => onClick(e),
+                    onKeyDown: (e) => onKeyDown(e),
+                    onMouseDown: (e) => onMouseDown(e),
+                    onDragStart: (e) => onDragStart(e),
+                    onDragOver: (e) => onDragOver(e),
+                    onDragLeave: (e) => onDragLeave(e),
+                    onDrop: (e) => onDrop(e),
+                    tabIndex,
+                    colSpan,
+                    rowSpan,
+                    'aria-sort': ariaSort,
+                    'data-p-sortable-column': getColumnProp('sortable'),
+                    'data-p-resizable-column': props.resizableColumns,
+                    'data-p-highlight': sortMeta.sorted,
+                    'data-p-filter-column': !props.metaData.props.headerColumnGroup && props.filterDisplay === 'row',
+                    'data-p-frozen-column': getColumnProp('frozen'),
+                    'data-p-reorderable-column': props.reorderableColumns
+                },
+                getColumnPTOptions('root'),
+                getColumnPTOptions('headerCell')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

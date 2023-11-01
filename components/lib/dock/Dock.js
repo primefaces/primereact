@@ -58,22 +58,28 @@ export const Dock = React.memo(
             const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-dock-action-icon', _icon);
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                getPTOptions('icon', item, index)
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    getPTOptions('icon', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
             const actionProps = mergeProps(
-                {
-                    href: url || '#',
-                    role: 'menuitem',
-                    className: cx('action', { disabled }),
-                    target,
-                    'data-pr-tooltip': label,
-                    onClick: (e) => onItemClick(e, item)
-                },
-                getPTOptions('action', item, index)
+                [
+                    {
+                        href: url || '#',
+                        role: 'menuitem',
+                        className: cx('action', { disabled }),
+                        target,
+                        'data-pr-tooltip': label,
+                        onClick: (e) => onItemClick(e, item)
+                    },
+                    getPTOptions('action', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -97,14 +103,17 @@ export const Dock = React.memo(
             }
 
             const menuitemProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: cx('menuitem', { currentIndexState, index }),
-                    role: 'none',
-                    onMouseEnter: () => onItemMouseEnter(index)
-                },
-                getPTOptions('menuitem', item, index)
+                [
+                    {
+                        id: key,
+                        key,
+                        className: cx('menuitem', { currentIndexState, index }),
+                        role: 'none',
+                        onMouseEnter: () => onItemMouseEnter(index)
+                    },
+                    getPTOptions('menuitem', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...menuitemProps}>{content}</li>;
@@ -118,10 +127,13 @@ export const Dock = React.memo(
             if (props.header) {
                 const header = ObjectUtils.getJSXElement(props.header, { props });
                 const headerProps = mergeProps(
-                    {
-                        className: cx('header')
-                    },
-                    ptm('header')
+                    [
+                        {
+                            className: cx('header')
+                        },
+                        ptm('header')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...headerProps}>{header}</div>;
@@ -133,12 +145,15 @@ export const Dock = React.memo(
         const createList = () => {
             const items = createItems();
             const menuProps = mergeProps(
-                {
-                    className: cx('menu'),
-                    role: 'menu',
-                    onMouseLeave: onListMouseLeave
-                },
-                ptm('menu')
+                [
+                    {
+                        className: cx('menu'),
+                        role: 'menu',
+                        onMouseLeave: onListMouseLeave
+                    },
+                    ptm('menu')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <ul {...menuProps}>{items}</ul>;
@@ -148,10 +163,13 @@ export const Dock = React.memo(
             if (props.footer) {
                 const footer = ObjectUtils.getJSXElement(props.footer, { props });
                 const footerProps = mergeProps(
-                    {
-                        className: cx('footer')
-                    },
-                    ptm('footer')
+                    [
+                        {
+                            className: cx('footer')
+                        },
+                        ptm('footer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...footerProps}>{footer}</div>;
@@ -175,19 +193,25 @@ export const Dock = React.memo(
         const list = createList();
         const footer = createFooter();
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root')),
-                style: props.style
-            },
-            DockBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root')),
+                    style: props.style
+                },
+                DockBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const containerProps = mergeProps(
-            {
-                className: cx('container')
-            },
-            ptm('container')
+            [
+                {
+                    className: cx('container')
+                },
+                ptm('container')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

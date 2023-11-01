@@ -375,12 +375,15 @@ export const Mention = React.memo(
             const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, { trigger: triggerState ? triggerState.key : '', index }) : formatValue(suggestion);
 
             const itemProps = mergeProps(
-                {
-                    key: key,
-                    className: cx('item'),
-                    onClick: (e) => onItemClick(e, suggestion)
-                },
-                getPTOptions(suggestion, 'item')
+                [
+                    {
+                        key: key,
+                        className: cx('item'),
+                        onClick: (e) => onItemClick(e, suggestion)
+                    },
+                    getPTOptions(suggestion, 'item')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -393,11 +396,14 @@ export const Mention = React.memo(
 
         const createList = () => {
             const itemsProps = mergeProps(
-                {
-                    ref: listRef,
-                    className: cx('items')
-                },
-                ptm('items')
+                [
+                    {
+                        ref: listRef,
+                        className: cx('items')
+                    },
+                    ptm('items')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.suggestions) {
@@ -415,32 +421,38 @@ export const Mention = React.memo(
             const list = createList();
 
             const panelProps = mergeProps(
-                {
-                    ref: overlayRef,
-                    className: cx('panel'),
-                    style: {
-                        maxHeight: props.scrollHeight,
-                        ...props.panelStyle
+                [
+                    {
+                        ref: overlayRef,
+                        className: cx('panel'),
+                        style: {
+                            maxHeight: props.scrollHeight,
+                            ...props.panelStyle
+                        },
+                        onClick: onPanelClick
                     },
-                    onClick: onPanelClick
-                },
-                ptm('panel')
+                    ptm('panel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: overlayVisibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: onOverlayEnter,
-                    onEntering: onOverlayEntering,
-                    onEntered: onOverlayEntered,
-                    onExit: onOverlayExit,
-                    onExited: onOverlayExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: overlayVisibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter: onOverlayEnter,
+                        onEntering: onOverlayEntering,
+                        onEntered: onOverlayEntered,
+                        onExit: onOverlayExit,
+                        onExited: onOverlayExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const panel = (
@@ -460,34 +472,40 @@ export const Mention = React.memo(
         const panel = createPanel();
 
         const inputMentionProps = mergeProps(
-            {
-                ref: inputRef,
-                id: props.inputId,
-                className: cx('input'),
-                style: props.inputStyle,
-                ...inputProps,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                onInput: onInput,
-                onKeyUp: onKeyUp,
-                onChange: onChange,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            },
-            ptm('input')
+            [
+                {
+                    ref: inputRef,
+                    id: props.inputId,
+                    className: cx('input'),
+                    style: props.inputStyle,
+                    ...inputProps,
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onKeyDown: onKeyDown,
+                    onInput: onInput,
+                    onKeyUp: onKeyUp,
+                    onChange: onChange,
+                    __parentMetadata: {
+                        parent: metaData
+                    }
+                },
+                ptm('input')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root', { focusedState, isFilled }),
-                style: props.style
-            },
-            MentionBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root', { focusedState, isFilled }),
+                    style: props.style
+                },
+                MentionBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

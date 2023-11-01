@@ -65,14 +65,17 @@ export const Inplace = React.forwardRef((inProps, ref) => {
 
     const createDisplay = (content) => {
         const displayProps = mergeProps(
-            {
-                onClick: open,
-                className: cx('display'),
-                onKeyDown: onDisplayKeyDown,
-                tabIndex: props.tabIndex,
-                'aria-label': props.ariaLabel
-            },
-            ptm('display')
+            [
+                {
+                    onClick: open,
+                    className: cx('display'),
+                    onKeyDown: onDisplayKeyDown,
+                    tabIndex: props.tabIndex,
+                    'aria-label': props.ariaLabel
+                },
+                ptm('display')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <div {...displayProps}>{content}</div>;
@@ -84,17 +87,22 @@ export const Inplace = React.forwardRef((inProps, ref) => {
         const ariaLabel = localeOption('close');
 
         if (props.closable) {
-            const closeButtonProps = mergeProps({
-                className: cx('closeButton'),
-                icon: closeIcon,
-                type: 'button',
-                onClick: close,
-                'aria-label': ariaLabel,
-                pt: ptm('closeButton'),
-                __parentMetadata: {
-                    parent: metaData
-                }
-            });
+            const closeButtonProps = mergeProps(
+                [
+                    {
+                        className: cx('closeButton'),
+                        icon: closeIcon,
+                        type: 'button',
+                        onClick: close,
+                        'aria-label': ariaLabel,
+                        pt: ptm('closeButton'),
+                        __parentMetadata: {
+                            parent: metaData
+                        }
+                    }
+                ],
+                { useTailwind: context.useTailwind }
+            );
 
             return <Button {...closeButtonProps}></Button>;
         }
@@ -106,10 +114,13 @@ export const Inplace = React.forwardRef((inProps, ref) => {
         const closeButton = createCloseButton();
 
         const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
+            [
+                {
+                    className: cx('content')
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -140,12 +151,15 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const children = createChildren();
 
     const rootProps = mergeProps(
-        {
-            ref: elementRef,
-            className: classNames(props.className, cx('root'))
-        },
-        InplaceBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                ref: elementRef,
+                className: classNames(props.className, cx('root'))
+            },
+            InplaceBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <div {...rootProps}>{children}</div>;

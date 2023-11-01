@@ -7,6 +7,7 @@ import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const ToastMessage = React.memo(
@@ -28,6 +29,7 @@ export const ToastMessage = React.memo(
             life || 3000,
             !sticky && !focused
         );
+        const context = React.useContext(PrimeReactContext);
 
         const getPTOptions = (key, options) => {
             return ptm(key, {
@@ -78,11 +80,14 @@ export const ToastMessage = React.memo(
 
         const createCloseIcon = () => {
             const buttonIconProps = mergeProps(
-                {
-                    className: cx('message.buttonicon')
-                },
-                getPTOptions('buttonicon', parentParams),
-                ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
+                [
+                    {
+                        className: cx('message.buttonicon')
+                    },
+                    getPTOptions('buttonicon', parentParams),
+                    ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
@@ -90,14 +95,17 @@ export const ToastMessage = React.memo(
             const ariaLabel = props.ariaCloseLabel || localeOption('close');
 
             const closeButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('message.closeButton'),
-                    onClick: onClose,
-                    'aria-label': ariaLabel
-                },
-                getPTOptions('closeButton', parentParams),
-                ptmo(pt, 'closeButton', { ...params, hostName: props.hostName })
+                [
+                    {
+                        type: 'button',
+                        className: cx('message.closeButton'),
+                        onClick: onClose,
+                        'aria-label': ariaLabel
+                    },
+                    getPTOptions('closeButton', parentParams),
+                    ptmo(pt, 'closeButton', { ...params, hostName: props.hostName })
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (closable !== false) {
@@ -118,11 +126,14 @@ export const ToastMessage = React.memo(
             if (messageInfo) {
                 const contentEl = ObjectUtils.getJSXElement(content, { message: messageInfo.message, onClick, onClose });
                 const iconProps = mergeProps(
-                    {
-                        className: cx('message.icon')
-                    },
-                    getPTOptions('icon', parentParams),
-                    ptmo(pt, 'icon', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('message.icon')
+                        },
+                        getPTOptions('icon', parentParams),
+                        ptmo(pt, 'icon', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 let icon = _icon;
@@ -149,27 +160,36 @@ export const ToastMessage = React.memo(
                 const messageIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                 const textProps = mergeProps(
-                    {
-                        className: cx('message.text')
-                    },
-                    getPTOptions('text', parentParams),
-                    ptmo(pt, 'text', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('message.text')
+                        },
+                        getPTOptions('text', parentParams),
+                        ptmo(pt, 'text', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const summaryProps = mergeProps(
-                    {
-                        className: cx('message.summary')
-                    },
-                    getPTOptions('summary', parentParams),
-                    ptmo(pt, 'summary', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('message.summary')
+                        },
+                        getPTOptions('summary', parentParams),
+                        ptmo(pt, 'summary', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const detailProps = mergeProps(
-                    {
-                        className: cx('message.detail')
-                    },
-                    getPTOptions('detail', parentParams),
-                    ptmo(pt, 'detail', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('message.detail')
+                        },
+                        getPTOptions('detail', parentParams),
+                        ptmo(pt, 'detail', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -192,28 +212,34 @@ export const ToastMessage = React.memo(
         const closeIcon = createCloseIcon();
 
         const messageProps = mergeProps(
-            {
-                ref,
-                className: classNames(_className, cx('message.message', { severity })),
-                style,
-                role: 'alert',
-                'aria-live': 'assertive',
-                'aria-atomic': 'true',
-                onClick,
-                onMouseEnter: onMouseEnter,
-                onMouseLeave: onMouseLeave
-            },
-            getPTOptions('message', parentParams),
-            ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            [
+                {
+                    ref,
+                    className: classNames(_className, cx('message.message', { severity })),
+                    style,
+                    role: 'alert',
+                    'aria-live': 'assertive',
+                    'aria-atomic': 'true',
+                    onClick,
+                    onMouseEnter: onMouseEnter,
+                    onMouseLeave: onMouseLeave
+                },
+                getPTOptions('message', parentParams),
+                ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const contentProps = mergeProps(
-            {
-                className: classNames(_contentClassName, cx('message.content')),
-                style: contentStyle
-            },
-            getPTOptions('content', parentParams),
-            ptmo(pt, 'content', { ...params, hostName: props.hostName })
+            [
+                {
+                    className: classNames(_contentClassName, cx('message.content')),
+                    style: contentStyle
+                },
+                getPTOptions('content', parentParams),
+                ptmo(pt, 'content', { ...params, hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

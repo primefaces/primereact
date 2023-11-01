@@ -169,15 +169,18 @@ export const Menu = React.memo(
             const key = idState + '_sub_' + index;
             const items = submenu.items.map(createMenuItem);
             const submenuHeaderProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    role: 'presentation',
-                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
-                    style: sx('submenuHeader', { submenu }),
-                    'data-p-disabled': submenu.disabled
-                },
-                ptm('submenuHeader')
+                [
+                    {
+                        id: key,
+                        key,
+                        role: 'presentation',
+                        className: classNames(submenu.className, cx('submenuHeader', { submenu })),
+                        style: sx('submenuHeader', { submenu }),
+                        'data-p-disabled': submenu.disabled
+                    },
+                    ptm('submenuHeader')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -191,13 +194,16 @@ export const Menu = React.memo(
         const createSeparator = (index) => {
             const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: cx('separator'),
-                    role: 'separator'
-                },
-                ptm('separator')
+                [
+                    {
+                        id: key,
+                        key,
+                        className: cx('separator'),
+                        role: 'separator'
+                    },
+                    ptm('separator')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...separatorProps}></li>;
@@ -211,34 +217,43 @@ export const Menu = React.memo(
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const tabIndex = item.disabled ? null : 0;
             const key = item.id || idState + '_' + index;
             const actionProps = mergeProps(
-                {
-                    href: item.url || '#',
-                    className: cx('action', { item }),
-                    role: 'menuitem',
-                    target: item.target,
-                    onClick: (event) => onItemClick(event, item),
-                    onKeyDown: (event) => onItemKeyDown(event, item),
-                    tabIndex: tabIndex,
-                    'aria-disabled': item.disabled,
-                    'data-p-disabled': item.disabled
-                },
-                ptm('action')
+                [
+                    {
+                        href: item.url || '#',
+                        className: cx('action', { item }),
+                        role: 'menuitem',
+                        target: item.target,
+                        onClick: (event) => onItemClick(event, item),
+                        onKeyDown: (event) => onItemKeyDown(event, item),
+                        tabIndex: tabIndex,
+                        'aria-disabled': item.disabled,
+                        'data-p-disabled': item.disabled
+                    },
+                    ptm('action')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -264,15 +279,18 @@ export const Menu = React.memo(
             }
 
             const menuitemProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: classNames(item.className, cx('menuitem')),
-                    style: sx('menuitem', { item }),
-                    role: 'none',
-                    'data-p-disabled': item.disabled || false
-                },
-                ptm('menuitem')
+                [
+                    {
+                        id: key,
+                        key,
+                        className: classNames(item.className, cx('menuitem')),
+                        style: sx('menuitem', { item }),
+                        role: 'none',
+                        'data-p-disabled': item.disabled || false
+                    },
+                    ptm('menuitem')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...menuitemProps}>{content}</li>;
@@ -290,36 +308,45 @@ export const Menu = React.memo(
             if (props.model) {
                 const menuitems = createMenu();
                 const rootProps = mergeProps(
-                    {
-                        className: classNames(props.className, cx('root', { context })),
-                        style: props.style,
-                        onClick: (e) => onPanelClick(e)
-                    },
-                    MenuBase.getOtherProps(props),
-                    ptm('root')
+                    [
+                        {
+                            className: classNames(props.className, cx('root', { context })),
+                            style: props.style,
+                            onClick: (e) => onPanelClick(e)
+                        },
+                        MenuBase.getOtherProps(props),
+                        ptm('root')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const menuProps = mergeProps(
-                    {
-                        className: cx('menu'),
-                        role: 'menu'
-                    },
-                    ptm('menu')
+                    [
+                        {
+                            className: cx('menu'),
+                            role: 'menu'
+                        },
+                        ptm('menu')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const transitionProps = mergeProps(
-                    {
-                        classNames: cx('transition'),
-                        in: visibleState,
-                        timeout: { enter: 120, exit: 100 },
-                        options: props.transitionOptions,
-                        unmountOnExit: true,
-                        onEnter,
-                        onEntered,
-                        onExit,
-                        onExited
-                    },
-                    ptm('transition')
+                    [
+                        {
+                            classNames: cx('transition'),
+                            in: visibleState,
+                            timeout: { enter: 120, exit: 100 },
+                            options: props.transitionOptions,
+                            unmountOnExit: true,
+                            onEnter,
+                            onEntered,
+                            onExit,
+                            onExited
+                        },
+                        ptm('transition')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (

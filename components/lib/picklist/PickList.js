@@ -288,14 +288,17 @@ export const PickList = React.memo(
         const targetList = getVisibleList(props.target, 'target');
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: classNames(props.className, cx('root')),
-                style: props.style
-            },
-            PickListBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root')),
+                    style: props.style
+                },
+                PickListBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

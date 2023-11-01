@@ -10,27 +10,33 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
 
     const createElement = () => {
         const panelProps = mergeProps(
-            {
-                className: cx('panel', { panelProps: props, context }),
-                style: props.panelStyle,
-                onClick: props.onClick
-            },
-            ptm('panel', { hostName: props.hostName })
+            [
+                {
+                    className: cx('panel', { panelProps: props, context }),
+                    style: props.panelStyle,
+                    onClick: props.onClick
+                },
+                ptm('panel', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: props.in,
-                timeout: { enter: 120, exit: 100 },
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEnter: props.onEnter,
-                onEntered: props.onEntered,
-                onExit: props.onExit,
-                onExited: props.onExited
-            },
-            ptm('transition', { hostName: props.hostName })
+            [
+                {
+                    classNames: cx('transition'),
+                    in: props.in,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: props.onEnter,
+                    onEntered: props.onEntered,
+                    onExit: props.onExit,
+                    onExited: props.onExited
+                },
+                ptm('transition', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

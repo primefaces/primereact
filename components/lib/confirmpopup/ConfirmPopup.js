@@ -233,25 +233,34 @@ export const ConfirmPopup = React.memo(
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
 
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { ...iconProps }, { props: currentProps });
             const messageProps = mergeProps(
-                {
-                    className: cx('message')
-                },
-                ptm('message')
+                [
+                    {
+                        className: cx('message')
+                    },
+                    ptm('message')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const contentProps = mergeProps(
-                {
-                    className: cx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        className: cx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -273,36 +282,49 @@ export const ConfirmPopup = React.memo(
             );
 
             const footerProps = mergeProps(
-                {
-                    className: cx('footer')
-                },
-                ptm('footer')
+                [
+                    {
+                        className: cx('footer')
+                    },
+                    ptm('footer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
-            const rejectButtonProps = mergeProps({
-                label: rejectLabel,
-                icon: getPropValue('rejectIcon'),
-                className: cx('rejectButton', { getPropValue }),
-                onClick: reject,
-                pt: ptm('rejectButton'),
-                unstyled: props.unstyled,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            });
+            const rejectButtonProps = mergeProps(
+                [
+                    {
+                        label: rejectLabel,
+                        icon: getPropValue('rejectIcon'),
+                        className: cx('rejectButton', { getPropValue }),
+                        onClick: reject,
+                        pt: ptm('rejectButton'),
+                        unstyled: props.unstyled,
+                        __parentMetadata: {
+                            parent: metaData
+                        }
+                    }
+                ],
+                { useTailwind: context.useTailwind }
+            );
 
-            const acceptButtonProps = mergeProps({
-                ref: acceptBtnRef,
-                label: acceptLabel,
-                icon: getPropValue('acceptIcon'),
-                className: cx('acceptButton', { getPropValue }),
-                onClick: accept,
-                pt: ptm('acceptButton'),
-                unstyled: props.unstyled,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            });
+            const acceptButtonProps = mergeProps(
+                [
+                    {
+                        ref: acceptBtnRef,
+                        label: acceptLabel,
+                        icon: getPropValue('acceptIcon'),
+                        className: cx('acceptButton', { getPropValue }),
+                        onClick: accept,
+                        pt: ptm('acceptButton'),
+                        unstyled: props.unstyled,
+                        __parentMetadata: {
+                            parent: metaData
+                        }
+                    }
+                ],
+                { useTailwind: context.useTailwind }
+            );
 
             const content = (
                 <div {...footerProps}>
@@ -335,30 +357,36 @@ export const ConfirmPopup = React.memo(
             const footer = createFooter();
 
             const rootProps = mergeProps(
-                {
-                    ref: overlayRef,
-                    id: getPropValue('id'),
-                    className: cx('root', { context, getPropValue }),
-                    style: getPropValue('style'),
-                    onClick: onPanelClick
-                },
-                ConfirmPopupBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: overlayRef,
+                        id: getPropValue('id'),
+                        className: cx('root', { context, getPropValue }),
+                        style: getPropValue('style'),
+                        onClick: onPanelClick
+                    },
+                    ConfirmPopupBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: visibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: getPropValue('transitionOptions'),
-                    unmountOnExit: true,
-                    onEnter,
-                    onEntered,
-                    onExit,
-                    onExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: getPropValue('transitionOptions'),
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

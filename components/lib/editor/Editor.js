@@ -148,11 +148,14 @@ export const Editor = React.memo(
 
         const createToolbarHeader = () => {
             const toolbarProps = mergeProps(
-                {
-                    ref: toolbarRef,
-                    className: cx('toolbar')
-                },
-                ptm('toolbar')
+                [
+                    {
+                        ref: toolbarRef,
+                        className: cx('toolbar')
+                    },
+                    ptm('toolbar')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.showHeader === false) {
@@ -160,9 +163,9 @@ export const Editor = React.memo(
             } else if (props.headerTemplate) {
                 return <div {...toolbarProps}>{props.headerTemplate}</div>;
             } else {
-                const getMergeProps = (params, key) => mergeProps(params && { ...params }, ptm(key));
+                const getMergeProps = (params, key) => mergeProps([params && { ...params }, ptm(key)], { useTailwind: context.useTailwind });
 
-                const formatsProps = mergeProps({ className: 'ql-formats' }, ptm('formats'));
+                const formatsProps = mergeProps([{ className: 'ql-formats' }, ptm('formats')], { useTailwind: context.useTailwind });
 
                 return (
                     <div {...toolbarProps}>
@@ -212,20 +215,26 @@ export const Editor = React.memo(
 
         const header = createToolbarHeader();
         const contentProps = mergeProps(
-            {
-                ref: contentRef,
-                className: cx('content'),
-                style: props.style
-            },
-            ptm('content')
+            [
+                {
+                    ref: contentRef,
+                    className: cx('content'),
+                    style: props.style
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const content = <div {...contentProps}></div>;
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root'))
-            },
-            EditorBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root'))
+                },
+                EditorBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

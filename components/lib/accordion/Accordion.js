@@ -48,7 +48,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             }
         };
 
-        return mergeProps(ptm(`accordiontab.${key}`, { accordiontab: tabMetaData }), ptm(`accordiontab.${key}`, tabMetaData), ptmo(tab.props, key, tabMetaData));
+        return mergeProps([ptm(`accordiontab.${key}`, { accordiontab: tabMetaData }), ptm(`accordiontab.${key}`, tabMetaData), ptmo(tab.props, key, tabMetaData)], { useTailwind: context.useTailwind });
     };
 
     const getTabProp = (tab, name) => AccordionTabBase.getCProp(tab, name);
@@ -108,44 +108,56 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const ariaControls = idState + '_content_' + index;
         const tabIndex = getTabProp(tab, 'disabled') ? -1 : getTabProp(tab, 'tabIndex');
         const headerTitleProps = mergeProps(
-            {
-                className: cx('tab.headertitle')
-            },
-            getTabPT(tab, 'headertitle', index)
+            [
+                {
+                    className: cx('tab.headertitle')
+                },
+                getTabPT(tab, 'headertitle', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
         const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span {...headerTitleProps}>{getTabProp(tab, 'header')}</span>;
         const headerIconProps = mergeProps(
-            {
-                className: cx('tab.headericon')
-            },
-            getTabPT(tab, 'headericon', index)
+            [
+                {
+                    className: cx('tab.headericon')
+                },
+                getTabPT(tab, 'headericon', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = selected ? props.collapseIcon || <ChevronDownIcon {...headerIconProps} /> : props.expandIcon || <ChevronRightIcon {...headerIconProps} />;
         const toggleIcon = IconUtils.getJSXIcon(icon, { ...headerIconProps }, { props, selected });
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const headerProps = mergeProps(
-            {
-                className: classNames(getTabProp(tab, 'headerClassName'), getTabProp(tab, 'className'), cx('tab.header', { selected, getTabProp, tab })),
-                style,
-                'data-p-highlight': selected,
-                'data-p-disabled': getTabProp(tab, 'disabled')
-            },
-            getTabPT(tab, 'header', index)
+            [
+                {
+                    className: classNames(getTabProp(tab, 'headerClassName'), getTabProp(tab, 'className'), cx('tab.header', { selected, getTabProp, tab })),
+                    style,
+                    'data-p-highlight': selected,
+                    'data-p-disabled': getTabProp(tab, 'disabled')
+                },
+                getTabPT(tab, 'header', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const headerActionProps = mergeProps(
-            {
-                id: headerId,
-                href: '#' + ariaControls,
-                className: cx('tab.headeraction'),
-                role: 'tab',
-                tabIndex,
-                onClick: (e) => onTabHeaderClick(e, tab, index),
-                'aria-label': label,
-                'aria-controls': ariaControls,
-                'aria-expanded': selected
-            },
-            getTabPT(tab, 'headeraction', index)
+            [
+                {
+                    id: headerId,
+                    href: '#' + ariaControls,
+                    className: cx('tab.headeraction'),
+                    role: 'tab',
+                    tabIndex,
+                    onClick: (e) => onTabHeaderClick(e, tab, index),
+                    'aria-label': label,
+                    'aria-controls': ariaControls,
+                    'aria-expanded': selected
+                },
+                getTabPT(tab, 'headeraction', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -164,33 +176,42 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const ariaLabelledby = idState + '_header_' + index;
         const contentRef = React.createRef();
         const toggleableContentProps = mergeProps(
-            {
-                id: contentId,
-                ref: contentRef,
-                className: classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), cx('tab.toggleablecontent')),
-                style,
-                role: 'region',
-                'aria-labelledby': ariaLabelledby
-            },
-            getTabPT(tab, 'toggleablecontent', index)
+            [
+                {
+                    id: contentId,
+                    ref: contentRef,
+                    className: classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), cx('tab.toggleablecontent')),
+                    style,
+                    role: 'region',
+                    'aria-labelledby': ariaLabelledby
+                },
+                getTabPT(tab, 'toggleablecontent', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const contentProps = mergeProps(
-            {
-                className: cx('tab.content')
-            },
-            getTabPT(tab, 'content', index)
+            [
+                {
+                    className: cx('tab.content')
+                },
+                getTabPT(tab, 'content', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('tab.transition'),
-                timeout: { enter: 1000, exit: 450 },
-                in: selected,
-                unmountOnExit: true,
-                options: props.transitionOptions
-            },
-            getTabPT(tab, 'transition', index)
+            [
+                {
+                    classNames: cx('tab.transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    in: selected,
+                    unmountOnExit: true,
+                    options: props.transitionOptions
+                },
+                getTabPT(tab, 'transition', index)
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -210,12 +231,15 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             const tabContent = createTabContent(tab, selected, index);
 
             const rootProps = mergeProps(
-                {
-                    key,
-                    className: cx('tab.root', { selected })
-                },
-                AccordionTabBase.getCOtherProps(tab),
-                getTabPT(tab, 'root', index)
+                [
+                    {
+                        key,
+                        className: cx('tab.root', { selected })
+                    },
+                    AccordionTabBase.getCOtherProps(tab),
+                    getTabPT(tab, 'root', index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -235,12 +259,15 @@ export const Accordion = React.forwardRef((inProps, ref) => {
 
     const tabs = createTabs();
     const rootProps = mergeProps(
-        {
-            className: classNames(props.className, cx('root')),
-            style: props.style
-        },
-        AccordionBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                className: classNames(props.className, cx('root')),
+                style: props.style
+            },
+            AccordionBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

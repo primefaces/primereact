@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useMountEffect } from '../hooks/Hooks';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableScrollableView = React.memo((props) => {
@@ -11,6 +12,7 @@ export const TreeTableScrollableView = React.memo((props) => {
     const scrollFooterRef = React.useRef(null);
     const scrollFooterBoxRef = React.useRef(null);
     const { ptm, cx, sx } = props.ptCallbacks;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key, options) => {
         return ptm(key, {
@@ -99,10 +101,13 @@ export const TreeTableScrollableView = React.memo((props) => {
         if (ObjectUtils.isNotEmpty(props.columns)) {
             const cols = props.columns.map((col, i) => <col key={col.field + '_' + i} />);
             const scrollableColgroupProps = mergeProps(
-                {
-                    className: cx('scrollableColgroup')
-                },
-                getPTOptions('scrollableColgroup')
+                [
+                    {
+                        className: cx('scrollableColgroup')
+                    },
+                    getPTOptions('scrollableColgroup')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <colgroup {...scrollableColgroupProps}>{cols}</colgroup>;
@@ -115,71 +120,98 @@ export const TreeTableScrollableView = React.memo((props) => {
     const left = props.frozen ? null : props.frozenWidth;
     const colGroup = createColGroup();
     const scrollableProps = mergeProps(
-        {
-            className: cx('scrollable', { scrolaableProps: props }),
-            style: { width, left }
-        },
-        getPTOptions('scrollable')
+        [
+            {
+                className: cx('scrollable', { scrolaableProps: props }),
+                style: { width, left }
+            },
+            getPTOptions('scrollable')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableHeaderProps = mergeProps(
-        {
-            className: cx('scrollableHeader'),
-            onScroll: (e) => onHeaderScroll(e)
-        },
-        getPTOptions('scrollableHeader')
+        [
+            {
+                className: cx('scrollableHeader'),
+                onScroll: (e) => onHeaderScroll(e)
+            },
+            getPTOptions('scrollableHeader')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableHeaderBoxProps = mergeProps(
-        {
-            className: cx('scrollableHeaderBox')
-        },
-        getPTOptions('scrollableHeaderBox')
+        [
+            {
+                className: cx('scrollableHeaderBox')
+            },
+            getPTOptions('scrollableHeaderBox')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableHeaderTableProps = mergeProps(
-        {
-            className: cx('scrollableHeaderTable')
-        },
-        getPTOptions('scrollableHeaderTable')
+        [
+            {
+                className: cx('scrollableHeaderTable')
+            },
+            getPTOptions('scrollableHeaderTable')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableBodyProps = mergeProps(
-        {
-            className: cx('scrollableBody'),
-            style: !props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : undefined,
-            onScroll: (e) => onBodyScroll(e)
-        },
-        getPTOptions('scrollableBody')
+        [
+            {
+                className: cx('scrollableBody'),
+                style: !props.frozen && props.scrollHeight ? { overflowY: 'scroll' } : undefined,
+                onScroll: (e) => onBodyScroll(e)
+            },
+            getPTOptions('scrollableBody')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableBodyTableProps = mergeProps(
-        {
-            style: { top: '0' },
-            className: cx('scrollableBodyTable')
-        },
-        getPTOptions('scrollableBodyTable')
+        [
+            {
+                style: { top: '0' },
+                className: cx('scrollableBodyTable')
+            },
+            getPTOptions('scrollableBodyTable')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableFooterProps = mergeProps(
-        {
-            className: cx('scrollableFooter')
-        },
-        getPTOptions('scrollableFooter')
+        [
+            {
+                className: cx('scrollableFooter')
+            },
+            getPTOptions('scrollableFooter')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableFooterBoxProps = mergeProps(
-        {
-            className: sx('scrollableFooterBox')
-        },
-        getPTOptions('scrollableFooterBox')
+        [
+            {
+                className: sx('scrollableFooterBox')
+            },
+            getPTOptions('scrollableFooterBox')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const scrollableFooterTableProps = mergeProps(
-        {
-            className: cx('scrollableFooterTable')
-        },
-        getPTOptions('scrollableFooterTable')
+        [
+            {
+                className: cx('scrollableFooterTable')
+            },
+            getPTOptions('scrollableFooterTable')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

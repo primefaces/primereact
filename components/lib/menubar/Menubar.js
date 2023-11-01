@@ -82,10 +82,13 @@ export const Menubar = React.memo(
             if (props.start) {
                 const start = ObjectUtils.getJSXElement(props.start, props);
                 const startProps = mergeProps(
-                    {
-                        className: cx('start')
-                    },
-                    ptm('start')
+                    [
+                        {
+                            className: cx('start')
+                        },
+                        ptm('start')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...startProps}>{start}</div>;
@@ -98,10 +101,13 @@ export const Menubar = React.memo(
             if (props.end) {
                 const end = ObjectUtils.getJSXElement(props.end, props);
                 const endProps = mergeProps(
-                    {
-                        className: cx('end')
-                    },
-                    ptm('end')
+                    [
+                        {
+                            className: cx('end')
+                        },
+                        ptm('end')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...endProps}>{end}</div>;
@@ -116,17 +122,20 @@ export const Menubar = React.memo(
             }
 
             const buttonProps = mergeProps(
-                {
-                    ref: menuButtonRef,
-                    href: '#',
-                    role: 'button',
-                    tabIndex: 0,
-                    className: cx('button'),
-                    onClick: (e) => toggle(e)
-                },
-                ptm('button')
+                [
+                    {
+                        ref: menuButtonRef,
+                        href: '#',
+                        role: 'button',
+                        tabIndex: 0,
+                        className: cx('button'),
+                        onClick: (e) => toggle(e)
+                    },
+                    ptm('button')
+                ],
+                { useTailwind: context.useTailwind }
             );
-            const popupIconProps = mergeProps(ptm('popupIcon'));
+            const popupIconProps = mergeProps([ptm('popupIcon')], { useTailwind: context.useTailwind });
             const icon = props.menuIcon || <BarsIcon {...popupIconProps} />;
             const menuIcon = IconUtils.getJSXIcon(icon, { ...popupIconProps }, { props });
 
@@ -142,13 +151,16 @@ export const Menubar = React.memo(
         const menuButton = createMenuButton();
         const submenu = <MenubarSub hostName="Menubar" id={idState} ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: classNames(props.className, cx('root', { mobileActiveState })),
-                style: props.style
-            },
-            MenubarBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: classNames(props.className, cx('root', { mobileActiveState })),
+                    style: props.style
+                },
+                MenubarBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

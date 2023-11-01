@@ -32,6 +32,7 @@ export const PrimeReactProvider = (props) => {
     );
     const [pt, setPt] = useState(propsValue.pt || undefined);
     const [unstyled, setUnstyled] = useState(propsValue.unstyled || false);
+    const [useTailwind, setUseTailwind] = useState(propsValue.useTailwind || false);
     const [filterMatchModeOptions, setFilterMatchModeOptions] = useState(
         propsValue.filterMatchModeOptions || {
             text: [FilterMatchMode.STARTS_WITH, FilterMatchMode.CONTAINS, FilterMatchMode.NOT_CONTAINS, FilterMatchMode.ENDS_WITH, FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS],
@@ -87,7 +88,9 @@ export const PrimeReactProvider = (props) => {
         filterMatchModeOptions,
         setFilterMatchModeOptions,
         unstyled,
-        setUnstyled
+        setUnstyled,
+        useTailwind,
+        setUseTailwind
     };
 
     return <PrimeReactContext.Provider value={value}>{props.children}</PrimeReactContext.Provider>;

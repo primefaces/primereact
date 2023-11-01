@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
@@ -15,6 +15,7 @@ import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
 
 export const BodyCell = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [editingState, setEditingState] = React.useState(props.editing);
     const [editingRowDataState, setEditingRowDataState] = React.useState(props.rowData);
     const [styleObjectState, setStyleObjectState] = React.useState({});
@@ -48,7 +49,7 @@ export const BodyCell = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData)], { useTailwind: context.useTailwind });
     };
 
     const field = getColumnProp('field') || `field_${props.index}`;
@@ -546,7 +547,7 @@ export const BodyCell = React.memo((props) => {
             field: field
         });
         const content = ObjectUtils.getJSXElement(getVirtualScrollerOption('loadingTemplate'), options);
-        const bodyCellProps = mergeProps(getColumnPTOptions('bodyCell'));
+        const bodyCellProps = mergeProps([getColumnPTOptions('bodyCell')], { useTailwind: context.useTailwind });
 
         return <td {...bodyCellProps}>{content}</td>;
     };
@@ -571,10 +572,13 @@ export const BodyCell = React.memo((props) => {
         const bodyClassName = ObjectUtils.getPropValue(getColumnProp('bodyClassName'), props.rowData, columnBodyOptions);
         const style = getStyle();
         const columnTitleProps = mergeProps(
-            {
-                className: cx('columnTitle')
-            },
-            getColumnPTOptions('columnTitle')
+            [
+                {
+                    className: cx('columnTitle')
+                },
+                getColumnPTOptions('columnTitle')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const title = props.responsiveLayout === 'stack' && <span {...columnTitleProps}>{ObjectUtils.getJSXElement(header, { props: props.tableProps })}</span>;
@@ -625,21 +629,27 @@ export const BodyCell = React.memo((props) => {
         } else if (rowReorder) {
             const showReorder = props.showRowReorderElement ? props.showRowReorderElement(props.rowData, { rowIndex: props.rowIndex, props: props.tableProps }) : true;
             const rowReorderIconProps = mergeProps(
-                {
-                    className: cx('rowReorderIcon')
-                },
-                getColumnPTOptions('rowReorderIcon')
+                [
+                    {
+                        className: cx('rowReorderIcon')
+                    },
+                    getColumnPTOptions('rowReorderIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const rowReorderIcon = getColumnProp('rowReorderIcon') || <BarsIcon {...rowReorderIconProps} />;
 
             content = showReorder ? IconUtils.getJSXIcon(rowReorderIcon, { ...rowReorderIconProps }, { props }) : null;
         } else if (expander) {
             const rowTogglerIconProps = mergeProps(
-                {
-                    className: cx('rowTogglerIcon'),
-                    'aria-hidden': true
-                },
-                getColumnPTOptions('rowTogglerIcon')
+                [
+                    {
+                        className: cx('rowTogglerIcon'),
+                        'aria-hidden': true
+                    },
+                    getColumnPTOptions('rowTogglerIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.expanded ? props.expandedRowIcon || <ChevronDownIcon {...rowTogglerIconProps} /> : props.collapsedRowIcon || <ChevronRightIcon {...rowTogglerIconProps} />;
             const togglerIcon = IconUtils.getJSXIcon(icon, { ...rowTogglerIconProps }, { props });
@@ -652,15 +662,18 @@ export const BodyCell = React.memo((props) => {
                 className: cx('rowToggler')
             };
             const rowTogglerProps = mergeProps(
-                {
-                    ...expanderProps,
-                    type: 'button',
-                    'aria-expanded': props.expanded,
-                    'aria-controls': ariaControls,
-                    tabIndex: props.tabIndex,
-                    'aria-label': label
-                },
-                getColumnPTOptions('rowToggler')
+                [
+                    {
+                        ...expanderProps,
+                        type: 'button',
+                        'aria-expanded': props.expanded,
+                        'aria-controls': ariaControls,
+                        tabIndex: props.tabIndex,
+                        'aria-label': label
+                    },
+                    getColumnPTOptions('rowToggler')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             content = (
@@ -676,9 +689,9 @@ export const BodyCell = React.memo((props) => {
             }
         } else if (isRowEditor && rowEditor) {
             let rowEditorProps = {};
-            const rowEditorSaveIconProps = mergeProps({ className: cx('rowEditorSaveIcon') }, getColumnPTOptions('rowEditorSaveIcon'));
-            const rowEditorCancelIconProps = mergeProps({ className: cx('rowEditorCancelIcon') }, getColumnPTOptions('rowEditorCancelIcon'));
-            const rowEditorInitIconProps = mergeProps({ className: cx('rowEditorInitIcon') }, getColumnPTOptions('rowEditorInitIcon'));
+            const rowEditorSaveIconProps = mergeProps([{ className: cx('rowEditorSaveIcon') }, getColumnPTOptions('rowEditorSaveIcon')], { useTailwind: context.useTailwind });
+            const rowEditorCancelIconProps = mergeProps([{ className: cx('rowEditorCancelIcon') }, getColumnPTOptions('rowEditorCancelIcon')], { useTailwind: context.useTailwind });
+            const rowEditorInitIconProps = mergeProps([{ className: cx('rowEditorInitIcon') }, getColumnPTOptions('rowEditorInitIcon')], { useTailwind: context.useTailwind });
             const rowEditorSaveIcon = IconUtils.getJSXIcon(props.rowEditorSaveIcon || <CheckIcon {...rowEditorSaveIconProps} />, { ...rowEditorSaveIconProps }, { props });
             const rowEditorCancelIcon = IconUtils.getJSXIcon(props.rowEditorCancelIcon || <TimesIcon {...rowEditorCancelIconProps} />, { ...rowEditorCancelIconProps }, { props });
             const rowEditorInitIcon = IconUtils.getJSXIcon(props.rowEditorInitIcon || <PencilIcon {...rowEditorInitIconProps} />, { ...rowEditorInitIconProps }, { props });
@@ -693,26 +706,32 @@ export const BodyCell = React.memo((props) => {
                 };
 
                 const rowEditorSaveButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        name: 'row-save',
-                        onClick: rowEditorProps.onSaveClick,
-                        className: rowEditorProps.saveClassName,
-                        tabIndex: props.tabIndex,
-                        'data-p-row-editor-save': true
-                    },
-                    getColumnPTOptions('rowEditorSaveButton')
+                    [
+                        {
+                            type: 'button',
+                            name: 'row-save',
+                            onClick: rowEditorProps.onSaveClick,
+                            className: rowEditorProps.saveClassName,
+                            tabIndex: props.tabIndex,
+                            'data-p-row-editor-save': true
+                        },
+                        getColumnPTOptions('rowEditorSaveButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const rowEditorCancelButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        name: 'row-cancel',
-                        onClick: rowEditorProps.onCancelClick,
-                        className: rowEditorProps.cancelClassName,
-                        tabIndex: props.tabIndex
-                    },
-                    getColumnPTOptions('rowEditorCancelButton')
+                    [
+                        {
+                            type: 'button',
+                            name: 'row-cancel',
+                            onClick: rowEditorProps.onCancelClick,
+                            className: rowEditorProps.cancelClassName,
+                            tabIndex: props.tabIndex
+                        },
+                        getColumnPTOptions('rowEditorCancelButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 content = (
@@ -735,15 +754,18 @@ export const BodyCell = React.memo((props) => {
                 };
 
                 const rowEditorInitButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        name: 'row-edit',
-                        onClick: rowEditorProps.onInitClick,
-                        className: rowEditorProps.initClassName,
-                        tabIndex: props.tabIndex,
-                        'data-p-row-editor-init': true
-                    },
-                    getColumnPTOptions('rowEditorInitButton')
+                    [
+                        {
+                            type: 'button',
+                            name: 'row-edit',
+                            onClick: rowEditorProps.onInitClick,
+                            className: rowEditorProps.initClassName,
+                            tabIndex: props.tabIndex,
+                            'data-p-row-editor-init': true
+                        },
+                        getColumnPTOptions('rowEditorInitButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 content = (
@@ -779,15 +801,18 @@ export const BodyCell = React.memo((props) => {
 
         if (!isRowEditor && editor) {
             const editorKeyHelperProps = mergeProps(
-                {
-                    tabIndex: '0',
-                    className: 'p-cell-editor-key-helper p-hidden-accessible',
-                    onFocus: (e) => onEditorFocus(e)
-                },
-                getColumnPTOptions('editorKeyHelperLabel')
+                [
+                    {
+                        tabIndex: '0',
+                        className: 'p-cell-editor-key-helper p-hidden-accessible',
+                        onFocus: (e) => onEditorFocus(e)
+                    },
+                    getColumnPTOptions('editorKeyHelperLabel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
-            const editorKeyHelperLabelProps = mergeProps(getColumnPTOptions('editorKeyHelper'));
+            const editorKeyHelperLabelProps = mergeProps([getColumnPTOptions('editorKeyHelper')], { useTailwind: context.useTailwind });
             /* eslint-disable */
             editorKeyHelper = (
                 <a ref={keyHelperRef} {...editorKeyHelperProps}>
@@ -798,25 +823,28 @@ export const BodyCell = React.memo((props) => {
         }
 
         const bodyCellProps = mergeProps(
-            {
-                style,
-                className: classNames(bodyClassName, getColumnProp('className'), cellClassName, cx('bodyCell', { selectionMode, editor, editingState, frozen, cellSelected, align, bodyProps: props, getCellParams })),
-                rowSpan: props.rowSpan,
-                tabIndex,
-                role: 'cell',
-                onClick: (e) => onClick(e),
-                onKeyDown: (e) => onKeyDown(e),
-                onBlur: (e) => onBlur(e),
-                onMouseDown: (e) => onMouseDown(e),
-                onMouseUp: (e) => onMouseUp(e),
-                'data-p-selectable-cell': props.allowCellSelection && props.isSelectable({ data: getCellParams(), index: props.rowIndex }),
-                'data-p-selection-column': getColumnProp('selectionMode') != null,
-                'data-p-editable-column': isEditable() != null,
-                'data-p-cell-editing': editingState,
-                'data-p-frozen-column': frozen
-            },
-            getColumnPTOptions('root'),
-            getColumnPTOptions('bodyCell')
+            [
+                {
+                    style,
+                    className: classNames(bodyClassName, getColumnProp('className'), cellClassName, cx('bodyCell', { selectionMode, editor, editingState, frozen, cellSelected, align, bodyProps: props, getCellParams })),
+                    rowSpan: props.rowSpan,
+                    tabIndex,
+                    role: 'cell',
+                    onClick: (e) => onClick(e),
+                    onKeyDown: (e) => onKeyDown(e),
+                    onBlur: (e) => onBlur(e),
+                    onMouseDown: (e) => onMouseDown(e),
+                    onMouseUp: (e) => onMouseUp(e),
+                    'data-p-selectable-cell': props.allowCellSelection && props.isSelectable({ data: getCellParams(), index: props.rowIndex }),
+                    'data-p-selection-column': getColumnProp('selectionMode') != null,
+                    'data-p-editable-column': isEditable() != null,
+                    'data-p-cell-editing': editingState,
+                    'data-p-frozen-column': frozen
+                },
+                getColumnPTOptions('root'),
+                getColumnPTOptions('bodyCell')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

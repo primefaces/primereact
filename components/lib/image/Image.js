@@ -125,11 +125,14 @@ export const Image = React.memo(
 
         const createPreview = () => {
             const buttonProps = mergeProps(
-                {
-                    className: cx('button'),
-                    onClick: show
-                },
-                ptm('button')
+                [
+                    {
+                        className: cx('button'),
+                        onClick: show
+                    },
+                    ptm('button')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.preview) {
@@ -143,12 +146,12 @@ export const Image = React.memo(
             const { downloadable, alt, crossOrigin, referrerPolicy, useMap, loading } = props;
             const zoomOutDisabled = scaleState <= 0.5;
             const zoomInDisabled = scaleState >= 1.5;
-            const downloadIconProps = mergeProps(ptm('downloadIcon'));
-            const rotateRightIconProps = mergeProps(ptm('rotateRightIcon'));
-            const rotateLeftIconProps = mergeProps(ptm('rotateLeftIcon'));
-            const zoomOutIconProps = mergeProps(ptm('zoomOutIcon'));
-            const zoomInIconProps = mergeProps(ptm('zoomInIcon'));
-            const closeIconProps = mergeProps(ptm('closeIcon'));
+            const downloadIconProps = mergeProps([ptm('downloadIcon')], { useTailwind: context.useTailwind });
+            const rotateRightIconProps = mergeProps([ptm('rotateRightIcon')], { useTailwind: context.useTailwind });
+            const rotateLeftIconProps = mergeProps([ptm('rotateLeftIcon')], { useTailwind: context.useTailwind });
+            const zoomOutIconProps = mergeProps([ptm('zoomOutIcon')], { useTailwind: context.useTailwind });
+            const zoomInIconProps = mergeProps([ptm('zoomInIcon')], { useTailwind: context.useTailwind });
+            const closeIconProps = mergeProps([ptm('closeIcon')], { useTailwind: context.useTailwind });
             const downloadIcon = IconUtils.getJSXIcon(props.downloadIcon || <DownloadIcon />, { ...downloadIconProps }, { props });
             const rotateRightIcon = IconUtils.getJSXIcon(props.rotateRightIcon || <RefreshIcon />, { ...rotateRightIconProps }, { props });
             const rotateLeftIcon = IconUtils.getJSXIcon(props.rotateLeftIcon || <UndoIcon />, { ...rotateLeftIconProps }, { props });
@@ -157,112 +160,145 @@ export const Image = React.memo(
             const closeIcon = IconUtils.getJSXIcon(props.closeIcon || <TimesIcon />, { ...closeIconProps }, { props });
 
             const maskProps = mergeProps(
-                {
-                    ref: maskRef,
-                    className: cx('mask'),
-                    onPointerUp: hide
-                },
-                ptm('mask')
+                [
+                    {
+                        ref: maskRef,
+                        className: cx('mask'),
+                        onPointerUp: hide
+                    },
+                    ptm('mask')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const toolbarProps = mergeProps(
-                {
-                    className: cx('toolbar')
-                },
-                ptm('toolbar')
+                [
+                    {
+                        className: cx('toolbar')
+                    },
+                    ptm('toolbar')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const downloadButtonProps = mergeProps(
-                {
-                    className: cx('downloadButton'),
-                    onPointerUp: onDownload,
-                    type: 'button'
-                },
-                ptm('downloadButton')
+                [
+                    {
+                        className: cx('downloadButton'),
+                        onPointerUp: onDownload,
+                        type: 'button'
+                    },
+                    ptm('downloadButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const rotateRightButtonProps = mergeProps(
-                {
-                    className: cx('rotateRightButton'),
-                    onPointerUp: rotateRight,
-                    type: 'button'
-                },
-                ptm('rotateRightButton')
+                [
+                    {
+                        className: cx('rotateRightButton'),
+                        onPointerUp: rotateRight,
+                        type: 'button'
+                    },
+                    ptm('rotateRightButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const rotateLeftButtonProps = mergeProps(
-                {
-                    className: cx('rotateLeftButton'),
-                    onPointerUp: rotateLeft,
-                    type: 'button'
-                },
-                ptm('rotateLeftButton')
+                [
+                    {
+                        className: cx('rotateLeftButton'),
+                        onPointerUp: rotateLeft,
+                        type: 'button'
+                    },
+                    ptm('rotateLeftButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const zoomOutButtonProps = mergeProps(
-                {
-                    className: classNames(cx('zoomOutButton'), { 'p-disabled': zoomOutDisabled }),
-                    style: { pointerEvents: 'auto' },
-                    onPointerUp: zoomOut,
-                    type: 'button',
-                    disabled: zoomOutDisabled
-                },
-                ptm('zoomOutButton')
+                [
+                    {
+                        className: classNames(cx('zoomOutButton'), { 'p-disabled': zoomOutDisabled }),
+                        style: { pointerEvents: 'auto' },
+                        onPointerUp: zoomOut,
+                        type: 'button',
+                        disabled: zoomOutDisabled
+                    },
+                    ptm('zoomOutButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const zoomInButtonProps = mergeProps(
-                {
-                    className: classNames(cx('zoomInButton'), { 'p-disabled': zoomInDisabled }),
-                    style: { pointerEvents: 'auto' },
-                    onPointerUp: zoomIn,
-                    type: 'button',
-                    disabled: zoomInDisabled
-                },
-                ptm('zoomInButton')
+                [
+                    {
+                        className: classNames(cx('zoomInButton'), { 'p-disabled': zoomInDisabled }),
+                        style: { pointerEvents: 'auto' },
+                        onPointerUp: zoomIn,
+                        type: 'button',
+                        disabled: zoomInDisabled
+                    },
+                    ptm('zoomInButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const closeButtonProps = mergeProps(
-                {
-                    className: cx('closeButton'),
-                    type: 'button',
-                    'aria-label': localeOption('close')
-                },
-                ptm('closeButton')
+                [
+                    {
+                        className: cx('closeButton'),
+                        type: 'button',
+                        'aria-label': localeOption('close')
+                    },
+                    ptm('closeButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const previewProps = mergeProps(
-                {
-                    src: props.zoomSrc || props.src,
-                    className: cx('preview'),
-                    style: sx('preview', { rotateState, scaleState }),
-                    onPointerUp: onPreviewImageClick,
-                    crossOrigin: crossOrigin,
-                    referrerPolicy: referrerPolicy,
-                    useMap: useMap,
-                    loading: loading
-                },
-                ptm('preview')
+                [
+                    {
+                        src: props.zoomSrc || props.src,
+                        className: cx('preview'),
+                        style: sx('preview', { rotateState, scaleState }),
+                        onPointerUp: onPreviewImageClick,
+                        crossOrigin: crossOrigin,
+                        referrerPolicy: referrerPolicy,
+                        useMap: useMap,
+                        loading: loading
+                    },
+                    ptm('preview')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const previewContainerProps = mergeProps(
-                {
-                    ref: previewRef
-                },
-                ptm('previewContainer')
+                [
+                    {
+                        ref: previewRef
+                    },
+                    ptm('previewContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: previewVisibleState,
-                    timeout: { enter: 150, exit: 150 },
-                    unmountOnExit: true,
-                    onEntering: onEntering,
-                    onEntered: onEntered,
-                    onExit: onExit,
-                    onExiting: onExiting,
-                    onExited: onExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: previewVisibleState,
+                        timeout: { enter: 150, exit: 150 },
+                        unmountOnExit: true,
+                        onEntering: onEntering,
+                        onEntered: onEntered,
+                        onExit: onExit,
+                        onExiting: onExiting,
+                        onExited: onExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -295,40 +331,49 @@ export const Image = React.memo(
         const { src, alt, width, height, crossOrigin, referrerPolicy, useMap, loading } = props;
         const element = createElement();
         const iconProp = mergeProps(
-            {
-                className: cx('icon')
-            },
-            ptm('icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                ptm('icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = props.indicatorIcon || <EyeIcon {...iconProp} />;
         const indicatorIcon = IconUtils.getJSXIcon(icon, { ...iconProp }, { props });
         const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : indicatorIcon;
         const preview = createPreview();
         const imageProp = mergeProps(
-            {
-                ref: imageRef,
-                src: src,
-                className: props.imageClassName,
-                width: width,
-                height: height,
-                crossOrigin: crossOrigin,
-                referrerPolicy: referrerPolicy,
-                useMap: useMap,
-                loading: loading,
-                style: props.imageStyle,
-                onError: props.onError
-            },
-            ptm('image')
+            [
+                {
+                    ref: imageRef,
+                    src: src,
+                    className: props.imageClassName,
+                    width: width,
+                    height: height,
+                    crossOrigin: crossOrigin,
+                    referrerPolicy: referrerPolicy,
+                    useMap: useMap,
+                    loading: loading,
+                    style: props.imageStyle,
+                    onError: props.onError
+                },
+                ptm('image')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const image = props.src && <img {...imageProp} alt={alt} />;
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                className: cx('root')
-            },
-            ImageBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    className: cx('root')
+                },
+                ImageBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

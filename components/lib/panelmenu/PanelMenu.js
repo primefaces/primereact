@@ -130,39 +130,51 @@ export const PanelMenu = React.memo(
             const active = isItemActive(item);
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const headerIconProps = mergeProps(
-                {
-                    className: cx('headerIcon', { item })
-                },
-                getPTOptions(item, 'headerIcon')
+                [
+                    {
+                        className: cx('headerIcon', { item })
+                    },
+                    getPTOptions(item, 'headerIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...headerIconProps }, { props });
             const submenuIconClassName = 'p-panelmenu-icon';
             const headerSubmenuIconProps = mergeProps(
-                {
-                    className: cx('headerSubmenuIcon')
-                },
-                getPTOptions(item, 'headerSubmenuIcon')
+                [
+                    {
+                        className: cx('headerSubmenuIcon')
+                    },
+                    getPTOptions(item, 'headerSubmenuIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...headerSubmenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...headerSubmenuIconProps} />);
             const headerLabelProps = mergeProps(
-                {
-                    className: cx('headerLabel')
-                },
-                getPTOptions(item, 'headerLabel')
+                [
+                    {
+                        className: cx('headerLabel')
+                    },
+                    getPTOptions(item, 'headerLabel')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = item.label && <span {...headerLabelProps}>{item.label}</span>;
             const menuContentRef = React.createRef();
             const headerActionProps = mergeProps(
-                {
-                    href: item.url || '#',
-                    className: cx('headerAction'),
-                    onClick: (e) => onItemClick(e, item),
-                    'aria-expanded': active,
-                    id: headerId,
-                    'aria-controls': contentId,
-                    'aria-disabled': item.disabled
-                },
-                getPTOptions(item, 'headerAction')
+                [
+                    {
+                        href: item.url || '#',
+                        className: cx('headerAction'),
+                        onClick: (e) => onItemClick(e, item),
+                        'aria-expanded': active,
+                        id: headerId,
+                        'aria-controls': contentId,
+                        'aria-disabled': item.disabled
+                    },
+                    getPTOptions(item, 'headerAction')
+                ],
+                { useTailwind: context.useTailwind }
             );
             let content = (
                 <a {...headerActionProps}>
@@ -189,49 +201,64 @@ export const PanelMenu = React.memo(
             }
 
             const panelProps = mergeProps(
-                {
-                    key: key,
-                    className: cx('panel', { item }),
-                    style: item.style
-                },
-                getPTOptions(item, 'panel')
+                [
+                    {
+                        key: key,
+                        className: cx('panel', { item }),
+                        style: item.style
+                    },
+                    getPTOptions(item, 'panel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const headerProps = mergeProps(
-                {
-                    className: cx('header', { active, item }),
-                    style: item.style
-                },
-                getPTOptions(item, 'header')
+                [
+                    {
+                        className: cx('header', { active, item }),
+                        style: item.style
+                    },
+                    getPTOptions(item, 'header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const menuContentProps = mergeProps(
-                {
-                    className: cx('menuContent')
-                },
-                getPTOptions(item, 'menuContent')
+                [
+                    {
+                        className: cx('menuContent')
+                    },
+                    getPTOptions(item, 'menuContent')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const toggleableContentProps = mergeProps(
-                {
-                    className: cx('toggleableContent', { active }),
-                    role: 'region',
-                    'aria-labelledby': headerId
-                },
-                getPTOptions(item, 'toggleableContent')
+                [
+                    {
+                        className: cx('toggleableContent', { active }),
+                        role: 'region',
+                        'aria-labelledby': headerId
+                    },
+                    getPTOptions(item, 'toggleableContent')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    timeout: { enter: 1000, exit: 450 },
-                    onEnter: onEnter,
-                    disabled: animationDisabled,
-                    in: active,
-                    unmountOnExit: true,
-                    options: props.transitionOptions
-                },
-                getPTOptions(item, 'transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        timeout: { enter: 1000, exit: 450 },
+                        onEnter: onEnter,
+                        disabled: animationDisabled,
+                        in: active,
+                        unmountOnExit: true,
+                        options: props.transitionOptions
+                    },
+                    getPTOptions(item, 'transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -254,12 +281,15 @@ export const PanelMenu = React.memo(
 
         const panels = createPanels();
         const rootProps = mergeProps(
-            {
-                className: cx('root'),
-                style: props.style
-            },
-            PanelMenuBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: cx('root'),
+                    style: props.style
+                },
+                PanelMenuBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

@@ -160,61 +160,76 @@ export const Knob = React.memo(
         }));
 
         const labelProps = mergeProps(
-            {
-                x: 50,
-                y: 57,
-                textAnchor: 'middle',
-                fill: props.textColor,
-                className: cx('label'),
-                name: props.name
-            },
-            ptm('label')
+            [
+                {
+                    x: 50,
+                    y: 57,
+                    textAnchor: 'middle',
+                    fill: props.textColor,
+                    className: cx('label'),
+                    name: props.name
+                },
+                ptm('label')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const text = props.showValue && <text {...labelProps}>{valueToDisplay()}</text>;
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root'),
-                style: props.style
-            },
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root'),
+                    style: props.style
+                },
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const svgProps = mergeProps(
-            {
-                viewBox: '0 0 100 100',
-                width: props.size,
-                height: props.size,
-                onClick: (e) => onClick(e),
-                onMouseDown: (e) => onMouseDown(e),
-                onMouseUp: (e) => onMouseUp(e),
-                onTouchStart: (e) => onTouchStart(e),
-                onTouchEnd: (e) => onTouchEnd(e)
-            },
-            ptm('svg')
+            [
+                {
+                    viewBox: '0 0 100 100',
+                    width: props.size,
+                    height: props.size,
+                    onClick: (e) => onClick(e),
+                    onMouseDown: (e) => onMouseDown(e),
+                    onMouseUp: (e) => onMouseUp(e),
+                    onTouchStart: (e) => onTouchStart(e),
+                    onTouchEnd: (e) => onTouchEnd(e)
+                },
+                ptm('svg')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rangeProps = mergeProps(
-            {
-                d: rangePath,
-                strokeWidth: props.strokeWidth,
-                stroke: props.rangeColor,
-                className: cx('range')
-            },
-            ptm('range')
+            [
+                {
+                    d: rangePath,
+                    strokeWidth: props.strokeWidth,
+                    stroke: props.rangeColor,
+                    className: cx('range')
+                },
+                ptm('range')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const valueProps = mergeProps(
-            {
-                d: valuePath,
-                strokeWidth: props.strokeWidth,
-                stroke: props.valueColor,
-                className: cx('value')
-            },
-            ptm('value')
+            [
+                {
+                    d: valuePath,
+                    strokeWidth: props.strokeWidth,
+                    stroke: props.valueColor,
+                    className: cx('value')
+                },
+                ptm('value')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

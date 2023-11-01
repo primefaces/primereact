@@ -7,11 +7,13 @@ import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { InputText } from '../inputtext/InputText';
 import { RowBase } from '../row/RowBase';
 import { Tooltip } from '../tooltip/Tooltip';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableHeader = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
     const filterTimeout = React.useRef(null);
+    const context = React.useContext(PrimeReactContext);
 
     const getColumnProp = (column, ...args) => {
         return column ? (typeof args[0] === 'string' ? ColumnBase.getCProp(column, args[0]) : ColumnBase.getCProp(args[0] || column, args[1])) : null;
@@ -28,7 +30,7 @@ export const TreeTableHeader = React.memo((props) => {
             ...params
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata)], { useTailwind: context.useTailwind });
     };
 
     const onHeaderClick = (event, column) => {
@@ -169,14 +171,17 @@ export const TreeTableHeader = React.memo((props) => {
     const createSortIcon = (column, sorted, sortOrder) => {
         if (getColumnProp(column, 'sortable')) {
             const sortIconProps = mergeProps(
-                {
-                    className: cx('sortIcon')
-                },
-                getColumnPTOptions(column, 'sortIcon', {
-                    context: {
-                        sorted
-                    }
-                })
+                [
+                    {
+                        className: cx('sortIcon')
+                    },
+                    getColumnPTOptions(column, 'sortIcon', {
+                        context: {
+                            sorted
+                        }
+                    })
+                ],
+                { useTailwind: context.useTailwind }
             );
             let icon = sorted ? sortOrder < 0 ? <SortAmountDownIcon {...sortIconProps} /> : <SortAmountUpAltIcon {...sortIconProps} /> : <SortAltIcon {...sortIconProps} />;
             let sortIcon = IconUtils.getJSXIcon(props.sortIcon || icon, { ...sortIconProps }, { props, sorted, sortOrder });
@@ -190,11 +195,14 @@ export const TreeTableHeader = React.memo((props) => {
     const createResizer = (column) => {
         if (props.resizableColumns) {
             const columnResizerProps = mergeProps(
-                {
-                    className: cx('columnResizer'),
-                    onMouseDown: (e) => onResizerMouseDown(e, column)
-                },
-                getColumnPTOptions(column, 'columnResizer')
+                [
+                    {
+                        className: cx('columnResizer'),
+                        onMouseDown: (e) => onResizerMouseDown(e, column)
+                    },
+                    getColumnPTOptions(column, 'columnResizer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...columnResizerProps} />;
@@ -206,10 +214,13 @@ export const TreeTableHeader = React.memo((props) => {
     const createSortBadge = (column, sortMetaDataIndex) => {
         if (sortMetaDataIndex !== -1 && props.multiSortMeta && props.multiSortMeta.length > 1) {
             const sortBadgeProps = mergeProps(
-                {
-                    className: cx('sortBadge')
-                },
-                getColumnPTOptions(column, 'sortBadge')
+                [
+                    {
+                        className: cx('sortBadge')
+                    },
+                    getColumnPTOptions(column, 'sortBadge')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...sortBadgeProps}>{sortMetaDataIndex + 1}</span>;
@@ -221,10 +232,13 @@ export const TreeTableHeader = React.memo((props) => {
     const createTitle = (column, options) => {
         const title = ObjectUtils.getJSXElement(getColumnProp(column, 'header'), { props: options });
         const headerTitleProps = mergeProps(
-            {
-                className: cx('headerTitle')
-            },
-            getColumnPTOptions(column, 'headerTitle')
+            [
+                {
+                    className: cx('headerTitle')
+                },
+                getColumnPTOptions(column, 'headerTitle')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <span {...headerTitleProps}>{title}</span>;
@@ -251,22 +265,25 @@ export const TreeTableHeader = React.memo((props) => {
 
         if (options.filterOnly) {
             const headerCellProps = mergeProps(
-                {
-                    key: getColumnProp(column, 'columnKey') || getColumnProp(column, 'field') || options.index,
-                    className: classNames(cx('headerCell', { options }), getColumnProp(column, 'filterHeaderClassName')),
-                    style: getColumnProp(column, 'filterHeaderStyle') || getColumnProp(column, 'style'),
-                    rowSpan: getColumnProp(column, 'rowSpan'),
-                    colSpan: getColumnProp(column, 'colSpan'),
-                    'data-p-sortable-column': getColumnProp(column, 'sortable'),
-                    'data-p-resizable-column': props.resizableColumns,
-                    'data-p-frozen-column': getColumnProp(column, 'frozen')
-                },
-                getColumnPTOptions(column, 'root'),
-                getColumnPTOptions(column, 'headerCell', {
-                    context: {
-                        frozen: getColumnProp(column, 'frozen')
-                    }
-                })
+                [
+                    {
+                        key: getColumnProp(column, 'columnKey') || getColumnProp(column, 'field') || options.index,
+                        className: classNames(cx('headerCell', { options }), getColumnProp(column, 'filterHeaderClassName')),
+                        style: getColumnProp(column, 'filterHeaderStyle') || getColumnProp(column, 'style'),
+                        rowSpan: getColumnProp(column, 'rowSpan'),
+                        colSpan: getColumnProp(column, 'colSpan'),
+                        'data-p-sortable-column': getColumnProp(column, 'sortable'),
+                        'data-p-resizable-column': props.resizableColumns,
+                        'data-p-frozen-column': getColumnProp(column, 'frozen')
+                    },
+                    getColumnPTOptions(column, 'root'),
+                    getColumnPTOptions(column, 'headerCell', {
+                        context: {
+                            frozen: getColumnProp(column, 'frozen')
+                        }
+                    })
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <th {...headerCellProps}>{filterElement}</th>;
@@ -292,33 +309,36 @@ export const TreeTableHeader = React.memo((props) => {
             const title = createTitle(column, options);
             const resizer = createResizer(column);
             const headerCellProps = mergeProps(
-                {
-                    className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, column, options, getColumnProp, sorted, frozen })),
-                    style: getColumnProp(column, 'headerStyle') || getColumnProp(column, 'style'),
-                    tabIndex: getColumnProp(column, 'sortable') ? props.tabIndex : null,
-                    onClick: (e) => onHeaderClick(e, column),
-                    onMouseDown: (e) => onHeaderMouseDown(e, column),
-                    onKeyDown: (e) => onHeaderKeyDown(e, column),
-                    rowSpan: getColumnProp(column, 'rowSpan'),
-                    colSpan: getColumnProp(column, 'colSpan'),
-                    'aria-sort': ariaSortData,
-                    onDragStart: (e) => onDragStart(e, column),
-                    onDragOver: (e) => onDragOver(e, column),
-                    onDragLeave: (e) => onDragLeave(e, column),
-                    onDrop: (e) => onDrop(e, column),
-                    'data-p-sortable-column': getColumnProp(column, 'sortable'),
-                    'data-p-resizable-column': props.resizableColumns,
-                    'data-p-highlight': sorted,
-                    'data-p-frozen-column': getColumnProp(column, 'frozen')
-                },
-                getColumnPTOptions(column, 'root'),
-                getColumnPTOptions(column, 'headerCell', {
-                    context: {
-                        sorted,
-                        frozen,
-                        resizable: props.resizableColumns
-                    }
-                })
+                [
+                    {
+                        className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, column, options, getColumnProp, sorted, frozen })),
+                        style: getColumnProp(column, 'headerStyle') || getColumnProp(column, 'style'),
+                        tabIndex: getColumnProp(column, 'sortable') ? props.tabIndex : null,
+                        onClick: (e) => onHeaderClick(e, column),
+                        onMouseDown: (e) => onHeaderMouseDown(e, column),
+                        onKeyDown: (e) => onHeaderKeyDown(e, column),
+                        rowSpan: getColumnProp(column, 'rowSpan'),
+                        colSpan: getColumnProp(column, 'colSpan'),
+                        'aria-sort': ariaSortData,
+                        onDragStart: (e) => onDragStart(e, column),
+                        onDragOver: (e) => onDragOver(e, column),
+                        onDragLeave: (e) => onDragLeave(e, column),
+                        onDrop: (e) => onDrop(e, column),
+                        'data-p-sortable-column': getColumnProp(column, 'sortable'),
+                        'data-p-resizable-column': props.resizableColumns,
+                        'data-p-highlight': sorted,
+                        'data-p-frozen-column': getColumnProp(column, 'frozen')
+                    },
+                    getColumnPTOptions(column, 'root'),
+                    getColumnPTOptions(column, 'headerCell', {
+                        context: {
+                            sorted,
+                            frozen,
+                            resizable: props.resizableColumns
+                        }
+                    })
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -339,7 +359,7 @@ export const TreeTableHeader = React.memo((props) => {
     const createHeaderRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowHeaderCells = rowColumns.map((col, i) => createHeaderCell(col, { index: i, filterOnly: false, renderFilter: true }));
-        const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
+        const headerRowProps = mergeProps([ptm('headerRow', { hostName: props.hostName })], { useTailwind: context.useTailwind });
 
         return (
             <tr {...headerRowProps} key={index}>
@@ -356,7 +376,7 @@ export const TreeTableHeader = React.memo((props) => {
 
     const createColumns = (columns) => {
         if (columns) {
-            const headerRowProps = mergeProps(ptm('headerRow', { hostName: props.hostName }));
+            const headerRowProps = mergeProps([ptm('headerRow', { hostName: props.hostName })], { useTailwind: context.useTailwind });
 
             if (hasColumnFilter(columns)) {
                 return (
@@ -375,10 +395,13 @@ export const TreeTableHeader = React.memo((props) => {
 
     const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
     const theadProps = mergeProps(
-        {
-            className: cx('thead')
-        },
-        ptm('thead', { hostName: props.hostName })
+        [
+            {
+                className: cx('thead')
+            },
+            ptm('thead', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <thead {...theadProps}>{content}</thead>;

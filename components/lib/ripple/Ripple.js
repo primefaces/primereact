@@ -102,10 +102,13 @@ export const Ripple = React.memo(
         });
 
         const rootProps = mergeProps(
-            {
-                className: classNames(cx('root'))
-            },
-            ptm('root')
+            [
+                {
+                    className: classNames(cx('root'))
+                },
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (context && context.ripple) || PrimeReact.ripple ? <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span> : null;

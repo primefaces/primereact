@@ -3,12 +3,14 @@ import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { useMountEffect } from '../hooks/Hooks';
 import { RowBase } from '../row/RowBase';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, mergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCell } from './HeaderCell';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
 export const TableHeader = React.memo((props) => {
+    const context = React.useContext(PrimeReactContext);
     const [sortableDisabledFieldsState, setSortableDisabledFieldsState] = React.useState([]);
     const [allSortableDisabledState, setAllSortableDisabledState] = React.useState(false);
     const isSingleSort = props.sortMode === 'single';
@@ -40,7 +42,7 @@ export const TableHeader = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(cGProps, key, columnGroupMetaData));
+        return mergeProps([ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(cGProps, key, columnGroupMetaData)], { useTailwind: context.useTailwind });
     };
 
     const getColumnPTOptions = (column, key) => {
@@ -55,7 +57,7 @@ export const TableHeader = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData)], { useTailwind: context.useTailwind });
     };
 
     const getRowPTOptions = (row, key) => {
@@ -66,7 +68,7 @@ export const TableHeader = React.memo((props) => {
             hostName: props.hostName
         };
 
-        return mergeProps(ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData));
+        return mergeProps([ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData)], { useTailwind: context.useTailwind });
     };
 
     const isColumnSorted = (column) => {
@@ -211,13 +213,16 @@ export const TableHeader = React.memo((props) => {
                 const checkbox = createCheckbox(selectionMode);
                 const filterRow = createFilter(col, filter);
                 const headerCellProps = mergeProps(
-                    {
-                        style: colStyle,
-                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col })),
-                        key: colKey
-                    },
-                    getColumnPTOptions(col, 'root'),
-                    getColumnPTOptions(col, 'headerCell')
+                    [
+                        {
+                            style: colStyle,
+                            className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col })),
+                            key: colKey
+                        },
+                        getColumnPTOptions(col, 'root'),
+                        getColumnPTOptions(col, 'headerCell')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -238,10 +243,13 @@ export const TableHeader = React.memo((props) => {
 
             return rows.map((row, i) => {
                 const headerRowProps = mergeProps(
-                    {
-                        role: 'row'
-                    },
-                    getRowPTOptions(row, 'root')
+                    [
+                        {
+                            role: 'row'
+                        },
+                        getRowPTOptions(row, 'root')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -252,10 +260,13 @@ export const TableHeader = React.memo((props) => {
             });
         } else {
             const headerRowProps = mergeProps(
-                {
-                    role: 'row'
-                },
-                ptm('headerRow', { hostName: props.hostName })
+                [
+                    {
+                        role: 'row'
+                    },
+                    ptm('headerRow', { hostName: props.hostName })
+                ],
+                { useTailwind: context.useTailwind }
             );
             const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
             const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
@@ -271,11 +282,14 @@ export const TableHeader = React.memo((props) => {
 
     const content = createContent();
     const theadProps = mergeProps(
-        {
-            className: cx('thead')
-        },
-        getColumnGroupPTOptions('root'),
-        ptm('thead', { hostName: props.hostName })
+        [
+            {
+                className: cx('thead')
+            },
+            getColumnGroupPTOptions('root'),
+            ptm('thead', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <thead {...theadProps}>{content}</thead>;

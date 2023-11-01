@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { SearchIcon } from '../icons/search';
 import { InputText } from '../inputtext/InputText';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, ObjectUtils, mergeProps } from '../utils/Utils';
 
 export const ListBoxHeader = React.memo((props) => {
     const {
         ptCallbacks: { ptm, cx }
     } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key, options) => {
         return ptm(key, {
@@ -31,27 +33,36 @@ export const ListBoxHeader = React.memo((props) => {
 
     const createHeader = () => {
         const filterIconProps = mergeProps(
-            {
-                className: cx('filterIcon')
-            },
-            getPTOptions('filterIcon')
+            [
+                {
+                    className: cx('filterIcon')
+                },
+                getPTOptions('filterIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
         const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
         const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            getPTOptions('header')
+            [
+                {
+                    className: cx('header')
+                },
+                getPTOptions('header')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const filterContainerProps = mergeProps(
-            {
-                className: cx('filterContainer')
-            },
-            getPTOptions('filterContainer')
+            [
+                {
+                    className: cx('filterContainer')
+                },
+                getPTOptions('filterContainer')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (

@@ -34,44 +34,62 @@ export const Timeline = React.memo(
                 props.value.map((item, index) => {
                     const opposite = ObjectUtils.getJSXElement(props.opposite, item, index);
                     const markerProps = mergeProps(
-                        {
-                            className: cx('marker')
-                        },
-                        getPTOptions('marker', index)
+                        [
+                            {
+                                className: cx('marker')
+                            },
+                            getPTOptions('marker', index)
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const marker = ObjectUtils.getJSXElement(props.marker, item, index) || <div {...markerProps}></div>;
                     const connectorProps = mergeProps(
-                        {
-                            className: cx('connector')
-                        },
-                        getPTOptions('connector', index)
+                        [
+                            {
+                                className: cx('connector')
+                            },
+                            getPTOptions('connector', index)
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const connector = index !== props.value.length - 1 && <div {...connectorProps}></div>;
                     const content = ObjectUtils.getJSXElement(props.content, item, index);
 
                     const eventProps = mergeProps(
-                        {
-                            className: cx('event')
-                        },
-                        getPTOptions('event', index)
+                        [
+                            {
+                                className: cx('event')
+                            },
+                            getPTOptions('event', index)
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const oppositeProps = mergeProps(
-                        {
-                            className: cx('opposite')
-                        },
-                        getPTOptions('opposite', index)
+                        [
+                            {
+                                className: cx('opposite')
+                            },
+                            getPTOptions('opposite', index)
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const separatorProps = mergeProps(
-                        {
-                            className: cx('separator')
-                        },
-                        getPTOptions('separator', index)
+                        [
+                            {
+                                className: cx('separator')
+                            },
+                            getPTOptions('separator', index)
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const contentProps = mergeProps(
-                        {
-                            className: cx('content')
-                        },
-                        getPTOptions('content', index)
+                        [
+                            {
+                                className: cx('content')
+                            },
+                            getPTOptions('content', index)
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     return (
@@ -96,12 +114,15 @@ export const Timeline = React.memo(
         const events = createEvents();
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                className: classNames(props.className, cx('root'))
-            },
-            TimelineBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root'))
+                },
+                TimelineBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <div {...rootProps}>{events}</div>;

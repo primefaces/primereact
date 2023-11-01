@@ -84,17 +84,20 @@ export const Panel = React.forwardRef((inProps, ref) => {
         if (props.toggleable) {
             const buttonId = idState + '_label';
             const togglerProps = mergeProps(
-                {
-                    className: cx('toggler'),
-                    onClick: toggle,
-                    id: buttonId,
-                    'aria-controls': contentId,
-                    'aria-expanded': !collapsed,
-                    role: 'tab'
-                },
-                ptm('toggler')
+                [
+                    {
+                        className: cx('toggler'),
+                        onClick: toggle,
+                        id: buttonId,
+                        'aria-controls': contentId,
+                        'aria-expanded': !collapsed,
+                        role: 'tab'
+                    },
+                    ptm('toggler')
+                ],
+                { useTailwind: context.useTailwind }
             );
-            const togglerIconProps = mergeProps(ptm('togglericon'));
+            const togglerIconProps = mergeProps([ptm('togglericon')], { useTailwind: context.useTailwind });
 
             const icon = collapsed ? props.expandIcon || <PlusIcon {...togglerIconProps} /> : props.collapseIcon || <MinusIcon {...togglerIconProps} />;
             const toggleIcon = IconUtils.getJSXIcon(icon, togglerIconProps, { props, collapsed });
@@ -116,19 +119,25 @@ export const Panel = React.forwardRef((inProps, ref) => {
         const togglerElement = createToggleIcon();
 
         const titleProps = mergeProps(
-            {
-                id: headerId,
-                className: cx('title')
-            },
-            ptm('title')
+            [
+                {
+                    id: headerId,
+                    className: cx('title')
+                },
+                ptm('title')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const titleElement = <span {...titleProps}>{header}</span>;
 
         const iconsProps = mergeProps(
-            {
-                className: cx('icons')
-            },
-            ptm('icons')
+            [
+                {
+                    className: cx('icons')
+                },
+                ptm('icons')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const iconsElement = (
             <div {...iconsProps}>
@@ -138,10 +147,13 @@ export const Panel = React.forwardRef((inProps, ref) => {
         );
 
         const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            ptm('header')
+            [
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const content = (
             <div {...headerProps}>
@@ -175,32 +187,41 @@ export const Panel = React.forwardRef((inProps, ref) => {
 
     const createContent = () => {
         const toggleableContentProps = mergeProps(
-            {
-                ref: contentRef,
-                className: cx('toggleableContent'),
-                'aria-hidden': collapsed,
-                role: 'region',
-                id: contentId,
-                'aria-labelledby': headerId
-            },
-            ptm('toggleablecontent')
+            [
+                {
+                    ref: contentRef,
+                    className: cx('toggleableContent'),
+                    'aria-hidden': collapsed,
+                    role: 'region',
+                    id: contentId,
+                    'aria-labelledby': headerId
+                },
+                ptm('toggleablecontent')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
+            [
+                {
+                    className: cx('content')
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                timeout: { enter: 1000, exit: 450 },
-                in: !collapsed,
-                unmountOnExit: true,
-                options: props.transitionOptions
-            },
-            ptm('transition')
+            [
+                {
+                    classNames: cx('transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    in: !collapsed,
+                    unmountOnExit: true,
+                    options: props.transitionOptions
+                },
+                ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -216,10 +237,13 @@ export const Panel = React.forwardRef((inProps, ref) => {
         const footer = ObjectUtils.getJSXElement(props.footer, props);
 
         const footerProps = mergeProps(
-            {
-                className: cx('footer')
-            },
-            ptm('footer')
+            [
+                {
+                    className: cx('footer')
+                },
+                ptm('footer')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const content = <div {...footerProps}>{footer}</div>;
@@ -240,14 +264,17 @@ export const Panel = React.forwardRef((inProps, ref) => {
     };
 
     const rootProps = mergeProps(
-        {
-            id: idState,
-            ref: elementRef,
-            style: props.style,
-            className: classNames(props.className, cx('root'))
-        },
-        PanelBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                id: idState,
+                ref: elementRef,
+                style: props.style,
+                className: classNames(props.className, cx('root'))
+            },
+            PanelBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const header = createHeader();
     const content = createContent();

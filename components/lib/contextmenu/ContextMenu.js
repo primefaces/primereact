@@ -267,30 +267,36 @@ export const ContextMenu = React.memo(
 
         const createContextMenu = () => {
             const rootProps = mergeProps(
-                {
-                    id: props.id,
-                    className: classNames(props.className, cx('root', { context })),
-                    style: props.style,
-                    onClick: (e) => onMenuClick(e),
-                    onMouseEnter: (e) => onMenuMouseEnter(e)
-                },
-                ContextMenuBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        id: props.id,
+                        className: classNames(props.className, cx('root', { context })),
+                        style: props.style,
+                        onClick: (e) => onMenuClick(e),
+                        onMouseEnter: (e) => onMenuMouseEnter(e)
+                    },
+                    ContextMenuBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: visibleState,
-                    timeout: { enter: 250, exit: 0 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: onEnter,
-                    onEntered: onEntered,
-                    onExit: onExit,
-                    onExited: onExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 250, exit: 0 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter: onEnter,
+                        onEntered: onEntered,
+                        onExit: onExit,
+                        onExited: onExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

@@ -241,13 +241,16 @@ export const MegaMenu = React.memo(
             const key = idState + '_separator__' + index;
 
             const separatorProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: cx('separator'),
-                    role: 'separator'
-                },
-                ptm('separator')
+                [
+                    {
+                        id: key,
+                        key,
+                        className: cx('separator'),
+                        role: 'separator'
+                    },
+                    ptm('separator')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...separatorProps}></li>;
@@ -256,10 +259,13 @@ export const MegaMenu = React.memo(
         const createSubmenuIcon = (item) => {
             if (item.items) {
                 const submenuIconProps = mergeProps(
-                    {
-                        className: cx('submenuIcon')
-                    },
-                    ptm('submenuIcon')
+                    [
+                        {
+                            className: cx('submenuIcon')
+                        },
+                        ptm('submenuIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const icon = vertical ? props.submenuIcon || <AngleRightIcon {...submenuIconProps} /> : props.submenuIcon || <AngleDownIcon {...submenuIconProps} />;
@@ -282,42 +288,54 @@ export const MegaMenu = React.memo(
                 const key = item.id || idState + '_' + index;
                 const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
                 const iconProps = mergeProps(
-                    {
-                        className: classNames(item.icon, cx('icon'))
-                    },
-                    ptm('icon')
+                    [
+                        {
+                            className: classNames(item.icon, cx('icon'))
+                        },
+                        ptm('icon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const labelProps = mergeProps(
-                    {
-                        className: cx('label')
-                    },
-                    ptm('label')
+                    [
+                        {
+                            className: cx('label')
+                        },
+                        ptm('label')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const iconClassName = classNames(item.icon, 'p-menuitem-icon');
                 const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
                 const label = item.label && <span {...labelProps}>{item.label}</span>;
 
                 const actionProps = mergeProps(
-                    {
-                        href: item.url || '#',
-                        className: cx('action', { item }),
-                        target: item.target,
-                        onClick: (event) => onLeafClick(event, item),
-                        role: 'menuitem',
-                        'aria-disabled': item.disabled
-                    },
-                    getPTOptions(item, 'action', index)
+                    [
+                        {
+                            href: item.url || '#',
+                            className: cx('action', { item }),
+                            target: item.target,
+                            onClick: (event) => onLeafClick(event, item),
+                            role: 'menuitem',
+                            'aria-disabled': item.disabled
+                        },
+                        getPTOptions(item, 'action', index)
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const submenuItemProps = mergeProps(
-                    {
-                        key,
-                        id: key,
-                        className: classNames(item.className, cx('submenuItem')),
-                        style: item.style,
-                        role: 'none'
-                    },
-                    getPTOptions(item, 'submenuItem', index)
+                    [
+                        {
+                            key,
+                            id: key,
+                            className: classNames(item.className, cx('submenuItem')),
+                            style: item.style,
+                            role: 'none'
+                        },
+                        getPTOptions(item, 'submenuItem', index)
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 let content = (
@@ -354,15 +372,18 @@ export const MegaMenu = React.memo(
 
             const key = submenu.id || idState + '_sub_' + index;
             const submenuHeaderProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: classNames(submenu.className, cx('submenuHeader', { submenu })),
-                    style: submenu.style,
-                    role: 'presentation',
-                    'data-p-disabled': submenu.disabled
-                },
-                ptm('submenuHeader')
+                [
+                    {
+                        id: key,
+                        key,
+                        className: classNames(submenu.className, cx('submenuHeader', { submenu })),
+                        style: submenu.style,
+                        role: 'presentation',
+                        'data-p-disabled': submenu.disabled
+                    },
+                    ptm('submenuHeader')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -382,20 +403,26 @@ export const MegaMenu = React.memo(
             const submenus = createSubmenus(column);
 
             const columnProps = mergeProps(
-                {
-                    key: key,
-                    className: cx('column', { category })
-                },
-                ptm('column')
+                [
+                    {
+                        key: key,
+                        className: cx('column', { category })
+                    },
+                    ptm('column')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const submenuProps = mergeProps(
-                {
-                    className: cx('submenu'),
-                    style: { display: activeItemState === category ? 'block' : 'none' },
-                    role: 'menu'
-                },
-                ptm('submenu')
+                [
+                    {
+                        className: cx('submenu'),
+                        style: { display: activeItemState === category ? 'block' : 'none' },
+                        role: 'menu'
+                    },
+                    ptm('submenu')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -420,17 +447,23 @@ export const MegaMenu = React.memo(
                 const columns = createColumns(category);
 
                 const panelProps = mergeProps(
-                    {
-                        className: cx('panel')
-                    },
-                    ptm('panel')
+                    [
+                        {
+                            className: cx('panel')
+                        },
+                        ptm('panel')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const gridProps = mergeProps(
-                    {
-                        className: cx('grid')
-                    },
-                    ptm('grid')
+                    [
+                        {
+                            className: cx('grid')
+                        },
+                        ptm('grid')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -554,18 +587,24 @@ export const MegaMenu = React.memo(
 
         const createCategory = (category, index) => {
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                getPTOptions(category, 'icon', index)
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    getPTOptions(category, 'icon', index)
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = IconUtils.getJSXIcon(category.icon, { ...iconProps }, { props });
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                getPTOptions(category, 'label', index)
+                [
+                    {
+                        className: cx('label')
+                    },
+                    getPTOptions(category, 'label', index)
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = category.label && <span {...labelProps}>{category.label}</span>;
             const itemContent = category.template ? ObjectUtils.getJSXElement(category.template, category) : null;
@@ -573,31 +612,37 @@ export const MegaMenu = React.memo(
             const panel = createCategoryPanel(category);
 
             const headerActionProps = mergeProps(
-                {
-                    href: category.url || '#',
-                    className: cx('headerAction', { category }),
-                    target: category.target,
-                    onClick: (e) => onCategoryClick(e, category),
-                    onKeyDown: (e) => onCategoryKeyDown(e, category),
-                    role: 'menuitem',
-                    'aria-haspopup': category.items != null,
-                    'data-p-disabled': category.disabled
-                },
-                getPTOptions(category, 'headerAction', index)
+                [
+                    {
+                        href: category.url || '#',
+                        className: cx('headerAction', { category }),
+                        target: category.target,
+                        onClick: (e) => onCategoryClick(e, category),
+                        onKeyDown: (e) => onCategoryKeyDown(e, category),
+                        role: 'menuitem',
+                        'aria-haspopup': category.items != null,
+                        'data-p-disabled': category.disabled
+                    },
+                    getPTOptions(category, 'headerAction', index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const key = category.id || idState + '_cat_' + index;
             const menuItemProps = mergeProps(
-                {
-                    key,
-                    id: key,
-                    className: classNames(category.className, cx('menuitem', { category, activeItemState })),
-                    style: category.style,
-                    onMouseEnter: (e) => onCategoryMouseEnter(e, category),
-                    role: 'none',
-                    'data-p-disabled': category.disabled || false
-                },
-                getPTOptions(category, 'menuitem', index)
+                [
+                    {
+                        key,
+                        id: key,
+                        className: classNames(category.className, cx('menuitem', { category, activeItemState })),
+                        style: category.style,
+                        onMouseEnter: (e) => onCategoryMouseEnter(e, category),
+                        role: 'none',
+                        'data-p-disabled': category.disabled || false
+                    },
+                    getPTOptions(category, 'menuitem', index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -616,11 +661,14 @@ export const MegaMenu = React.memo(
 
         const createMenu = () => {
             const menuProps = mergeProps(
-                {
-                    className: cx('menu'),
-                    role: 'menubar'
-                },
-                ptm('menu')
+                [
+                    {
+                        className: cx('menu'),
+                        role: 'menubar'
+                    },
+                    ptm('menu')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.model) {
@@ -638,10 +686,13 @@ export const MegaMenu = React.memo(
 
         const createStartContent = () => {
             const startProps = mergeProps(
-                {
-                    className: cx('start')
-                },
-                ptm('start')
+                [
+                    {
+                        className: cx('start')
+                    },
+                    ptm('start')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.start) {
@@ -655,10 +706,13 @@ export const MegaMenu = React.memo(
 
         const createEndContent = () => {
             const endProps = mergeProps(
-                {
-                    className: cx('end')
-                },
-                ptm('end')
+                [
+                    {
+                        className: cx('end')
+                    },
+                    ptm('end')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.end) {
@@ -676,17 +730,20 @@ export const MegaMenu = React.memo(
             }
 
             const menuButtonProps = mergeProps(
-                {
-                    className: cx('menuButton'),
-                    href: '#',
-                    role: 'button',
-                    tabIndex: 0,
-                    onClick: (e) => toggle(e)
-                },
-                ptm('menuButton')
+                [
+                    {
+                        className: cx('menuButton'),
+                        href: '#',
+                        role: 'button',
+                        tabIndex: 0,
+                        onClick: (e) => toggle(e)
+                    },
+                    ptm('menuButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
-            const menuButtonIconProps = mergeProps(ptm('menuButtonIcon'));
+            const menuButtonIconProps = mergeProps([ptm('menuButtonIcon')], { useTailwind: context.useTailwind });
 
             const icon = props.menuIcon || <BarsIcon {...menuButtonIconProps} />;
             const menuIcon = IconUtils.getJSXIcon(icon, { ...menuButtonIconProps }, { props });
@@ -702,12 +759,15 @@ export const MegaMenu = React.memo(
         };
 
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root', { mobileActiveState })),
-                style: props.style
-            },
-            MegaMenuBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root', { mobileActiveState })),
+                    style: props.style
+                },
+                MegaMenuBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const menu = createMenu();

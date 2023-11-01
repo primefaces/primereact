@@ -29,10 +29,13 @@ export const Message = React.memo(
             const text = ObjectUtils.getJSXElement(props.text, props);
 
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let icon = props.icon;
@@ -59,10 +62,13 @@ export const Message = React.memo(
             const messageIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
             const textProps = mergeProps(
-                {
-                    className: cx('text')
-                },
-                ptm('text')
+                [
+                    {
+                        className: cx('text')
+                    },
+                    ptm('text')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -81,14 +87,17 @@ export const Message = React.memo(
         const content = createContent();
 
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root')),
-                style: props.style,
-                role: 'alert',
-                'aria-live': 'polite'
-            },
-            MessageBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root')),
+                    style: props.style,
+                    role: 'alert',
+                    'aria-live': 'polite'
+                },
+                MessageBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

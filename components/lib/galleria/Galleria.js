@@ -143,10 +143,13 @@ export const Galleria = React.memo(
 
         const createHeader = () => {
             const headerProps = mergeProps(
-                {
-                    className: cx('header')
-                },
-                ptm('header')
+                [
+                    {
+                        className: cx('header')
+                    },
+                    ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.header) {
@@ -158,10 +161,13 @@ export const Galleria = React.memo(
 
         const createFooter = () => {
             const footerProps = mergeProps(
-                {
-                    className: cx('footer')
-                },
-                ptm('footer')
+                [
+                    {
+                        className: cx('footer')
+                    },
+                    ptm('footer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.footer) {
@@ -176,23 +182,29 @@ export const Galleria = React.memo(
             const indicatorPosClassName = props.showIndicators && getPositionClassName('p-galleria-indicators', props.indicatorsPosition);
 
             const closeIconProps = mergeProps(
-                {
-                    className: cx('closeIcon'),
-                    'aria-hidden': true
-                },
-                ptm('closeIcon')
+                [
+                    {
+                        className: cx('closeIcon'),
+                        'aria-hidden': true
+                    },
+                    ptm('closeIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
             const closeIcon = IconUtils.getJSXIcon(icon, { ...closeIconProps }, { props });
 
             const closeButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('closeButton'),
-                    'aria-label': localeOption('close'),
-                    onClick: hide
-                },
-                ptm('closeButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('closeButton'),
+                        'aria-label': localeOption('close'),
+                        onClick: hide
+                    },
+                    ptm('closeButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const closeButton = props.fullScreen && (
@@ -206,21 +218,27 @@ export const Galleria = React.memo(
             const footer = createFooter();
 
             const rootProps = mergeProps(
-                {
-                    ref: elementRef,
-                    id: props.id,
-                    className: classNames(props.className, cx('root', { context, thumbnailsPosClassName, indicatorPosClassName })),
-                    style: props.style
-                },
-                GalleriaBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: elementRef,
+                        id: props.id,
+                        className: classNames(props.className, cx('root', { context, thumbnailsPosClassName, indicatorPosClassName })),
+                        style: props.style
+                    },
+                    GalleriaBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const contentProps = mergeProps(
-                {
-                    className: cx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        className: cx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const element = (
@@ -288,26 +306,32 @@ export const Galleria = React.memo(
 
             if (props.fullScreen) {
                 const maskProps = mergeProps(
-                    {
-                        className: cx('mask', { visibleState })
-                    },
-                    ptm('mask')
+                    [
+                        {
+                            className: cx('mask', { visibleState })
+                        },
+                        ptm('mask')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const transitionProps = mergeProps(
-                    {
-                        classNames: cx('transition'),
-                        in: visibleState,
-                        timeout: { enter: 150, exit: 150 },
-                        options: props.transitionOptions,
-                        unmountOnExit: true,
-                        onEnter,
-                        onEntering,
-                        onEntered,
-                        onExit,
-                        onExited
-                    },
-                    ptm('transition')
+                    [
+                        {
+                            classNames: cx('transition'),
+                            in: visibleState,
+                            timeout: { enter: 150, exit: 150 },
+                            options: props.transitionOptions,
+                            unmountOnExit: true,
+                            onEnter,
+                            onEntering,
+                            onEntered,
+                            onExit,
+                            onExited
+                        },
+                        ptm('transition')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const galleriaWrapper = (

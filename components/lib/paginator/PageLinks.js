@@ -43,14 +43,17 @@ export const PageLinks = React.memo((inProps) => {
             });
 
             const pageButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    onClick: (e) => onPageLinkClick(e, pageLink),
-                    className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
-                    disabled: props.disabled,
-                    'aria-label': ariaLabel('pageLabel', { page: pageLink })
-                },
-                getPTOptions(pageLink, 'pageButton')
+                [
+                    {
+                        type: 'button',
+                        onClick: (e) => onPageLinkClick(e, pageLink),
+                        className: cx('pageButton', { pageLink, startPageInView, endPageInView, page: props.page }),
+                        disabled: props.disabled,
+                        'aria-label': ariaLabel('pageLabel', { page: pageLink })
+                    },
+                    getPTOptions(pageLink, 'pageButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let element = (
@@ -83,10 +86,13 @@ export const PageLinks = React.memo((inProps) => {
     }
 
     const pagesProps = mergeProps(
-        {
-            className: cx('pages')
-        },
-        ptm('pages', { hostName: props.hostName })
+        [
+            {
+                className: cx('pages')
+            },
+            ptm('pages', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <span {...pagesProps}>{elements}</span>;

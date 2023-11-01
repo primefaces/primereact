@@ -203,21 +203,24 @@ export const Slider = React.memo(
             };
 
             const handleProps = mergeProps(
-                {
-                    className: cx('handle', { index, handleIndex }),
-                    style: { ...sx('handle', { dragging, leftValue, bottomValue }), ...style },
-                    tabIndex: props.tabIndex,
-                    role: 'slider',
-                    onMouseDown: (event) => onMouseDown(event, index),
-                    onTouchStart: (event) => onTouchStart(event, index),
-                    onKeyDown: (event) => onKeyDown(event, index),
-                    'aria-valuemin': props.min,
-                    'aria-valuemax': props.max,
-                    'aria-valuenow': leftValue || bottomValue || 0,
-                    'aria-orientation': props.orientation,
-                    ...ariaProps
-                },
-                ptm('handle')
+                [
+                    {
+                        className: cx('handle', { index, handleIndex }),
+                        style: { ...sx('handle', { dragging, leftValue, bottomValue }), ...style },
+                        tabIndex: props.tabIndex,
+                        role: 'slider',
+                        onMouseDown: (event) => onMouseDown(event, index),
+                        onTouchStart: (event) => onTouchStart(event, index),
+                        onKeyDown: (event) => onKeyDown(event, index),
+                        'aria-valuemin': props.min,
+                        'aria-valuemax': props.max,
+                        'aria-valuenow': leftValue || bottomValue || 0,
+                        'aria-orientation': props.orientation,
+                        ...ariaProps
+                    },
+                    ptm('handle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...handleProps}></span>;
@@ -235,11 +238,14 @@ export const Slider = React.memo(
             const rangeStyle = horizontal ? { left: rangeSliderPosition + '%', width: rangeSliderWidth + '%' } : { bottom: rangeSliderPosition + '%', height: rangeSliderWidth + '%' };
 
             const rangeProps = mergeProps(
-                {
-                    className: cx('range'),
-                    style: { ...sx('range'), ...rangeStyle }
-                },
-                ptm('range')
+                [
+                    {
+                        className: cx('range'),
+                        style: { ...sx('range'), ...rangeStyle }
+                    },
+                    ptm('range')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -262,11 +268,14 @@ export const Slider = React.memo(
             const handle = horizontal ? createHandle(handleValue, null, null) : createHandle(null, handleValue, null);
 
             const rangeProps = mergeProps(
-                {
-                    className: cx('range'),
-                    style: { ...sx('range'), ...rangeStyle }
-                },
-                ptm('range')
+                [
+                    {
+                        className: cx('range'),
+                        style: { ...sx('range'), ...rangeStyle }
+                    },
+                    ptm('range')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -287,13 +296,16 @@ export const Slider = React.memo(
 
         const content = props.range ? createRangeSlider() : createSingleSlider();
         const rootProps = mergeProps(
-            {
-                style: props.style,
-                className: cx('root', { vertical, horizontal }),
-                onClick: onBarClick
-            },
-            SliderBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    style: props.style,
+                    className: cx('root', { vertical, horizontal }),
+                    onClick: onBarClick
+                },
+                SliderBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

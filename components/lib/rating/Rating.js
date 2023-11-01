@@ -92,29 +92,38 @@ export const Rating = React.memo(
             return Array.from({ length: props.stars }, (_, i) => i + 1).map((value) => {
                 const active = value <= props.value;
                 const onIconProps = mergeProps(
-                    {
-                        className: cx('onIcon')
-                    },
-                    getPTOptions(props.value, 'onIcon')
+                    [
+                        {
+                            className: cx('onIcon')
+                        },
+                        getPTOptions(props.value, 'onIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const offIconProps = mergeProps(
-                    {
-                        className: cx('onIcon')
-                    },
-                    getPTOptions(props.value, 'offIcon')
+                    [
+                        {
+                            className: cx('onIcon')
+                        },
+                        getPTOptions(props.value, 'offIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = active ? { type: props.onIcon || <StarFillIcon {...onIconProps} /> } : { type: props.offIcon || <StarIcon {...offIconProps} /> };
                 const content = IconUtils.getJSXIcon(icon.type, active ? { ...onIconProps } : { ...offIconProps }, { props });
 
                 const itemProps = mergeProps(
-                    {
-                        key: value,
-                        className: cx('item', { active }),
-                        tabIndex: tabIndex,
-                        onClick: (e) => rate(e, value),
-                        onKeyDown: (e) => onStarKeyDown(e, value)
-                    },
-                    getPTOptions(props.value, 'item')
+                    [
+                        {
+                            key: value,
+                            className: cx('item', { active }),
+                            tabIndex: tabIndex,
+                            onClick: (e) => rate(e, value),
+                            onKeyDown: (e) => onStarKeyDown(e, value)
+                        },
+                        getPTOptions(props.value, 'item')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -128,22 +137,28 @@ export const Rating = React.memo(
         const createCancelIcon = () => {
             if (props.cancel) {
                 const cancelIconProps = mergeProps(
-                    {
-                        className: cx('cancelIcon')
-                    },
-                    ptm('cancelIcon')
+                    [
+                        {
+                            className: cx('cancelIcon')
+                        },
+                        ptm('cancelIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.cancelIcon || <BanIcon {...cancelIconProps} />;
                 const content = IconUtils.getJSXIcon(icon, { ...cancelIconProps, ...props.cancelIconProps }, { props });
 
                 const cancelItemProps = mergeProps(
-                    {
-                        className: cx('cancelItem'),
-                        onClick: clear,
-                        tabIndex: tabIndex,
-                        onKeyDown: onCancelKeyDown
-                    },
-                    ptm('cancelItem')
+                    [
+                        {
+                            className: cx('cancelItem'),
+                            onClick: clear,
+                            tabIndex: tabIndex,
+                            onKeyDown: onCancelKeyDown
+                        },
+                        ptm('cancelItem')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...cancelItemProps}>{content}</div>;
@@ -159,14 +174,17 @@ export const Rating = React.memo(
 
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root'),
-                style: props.style
-            },
-            RatingBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root'),
+                    style: props.style
+                },
+                RatingBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const cancelIcon = createCancelIcon();

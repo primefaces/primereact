@@ -105,32 +105,41 @@ export const TabMenu = React.memo(
             const active = isSelected(index);
             const iconClassName = classNames('p-menuitem-icon', _icon);
             const iconProps = mergeProps(
-                {
-                    className: cx('icon', { _icon })
-                },
-                getPTOptions('icon', item, index)
+                [
+                    {
+                        className: cx('icon', { _icon })
+                    },
+                    getPTOptions('icon', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = IconUtils.getJSXIcon(_icon, { ...iconProps }, { props });
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                getPTOptions('label', item, index)
+                [
+                    {
+                        className: cx('label')
+                    },
+                    getPTOptions('label', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const label = _label && <span {...labelProps}>{_label}</span>;
 
             const actionProps = mergeProps(
-                {
-                    href: url || '#',
-                    className: cx('action'),
-                    target: target,
-                    onClick: (event) => itemClick(event, item, index),
-                    role: 'presentation'
-                },
-                getPTOptions('action', item, index)
+                [
+                    {
+                        href: url || '#',
+                        className: cx('action'),
+                        target: target,
+                        onClick: (event) => itemClick(event, item, index),
+                        role: 'presentation'
+                    },
+                    getPTOptions('action', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -158,18 +167,21 @@ export const TabMenu = React.memo(
             }
 
             const menuItemProps = mergeProps(
-                {
-                    ref: tabsRef.current[`tab_${index}`],
-                    id: key,
-                    key,
-                    className: cx('menuitem', { _className, active, disabled }),
-                    style: style,
-                    role: 'tab',
-                    'aria-selected': active,
-                    'aria-expanded': active,
-                    'aria-disabled': disabled
-                },
-                getPTOptions('menuitem', item, index)
+                [
+                    {
+                        ref: tabsRef.current[`tab_${index}`],
+                        id: key,
+                        key,
+                        className: cx('menuitem', { _className, active, disabled }),
+                        style: style,
+                        role: 'tab',
+                        'aria-selected': active,
+                        'aria-expanded': active,
+                        'aria-disabled': disabled
+                    },
+                    getPTOptions('menuitem', item, index)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...menuItemProps}>{content}</li>;
@@ -183,30 +195,39 @@ export const TabMenu = React.memo(
             const items = createItems();
 
             const inkbarProps = mergeProps(
-                {
-                    ref: inkbarRef,
-                    className: cx('inkbar')
-                },
-                ptm('inkbar')
+                [
+                    {
+                        ref: inkbarRef,
+                        className: cx('inkbar')
+                    },
+                    ptm('inkbar')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const menuProps = mergeProps(
-                {
-                    ref: navRef,
-                    className: cx('menu'),
-                    role: 'tablist'
-                },
-                ptm('menu')
+                [
+                    {
+                        ref: navRef,
+                        className: cx('menu'),
+                        role: 'tablist'
+                    },
+                    ptm('menu')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const rootProps = mergeProps(
-                {
-                    id: props.id,
-                    ref: elementRef,
-                    className: cx('root'),
-                    style: props.style
-                },
-                TabMenuBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        id: props.id,
+                        ref: elementRef,
+                        className: cx('root'),
+                        style: props.style
+                    },
+                    TabMenuBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

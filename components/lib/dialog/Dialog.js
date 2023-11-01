@@ -465,25 +465,31 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const ariaLabel = props.ariaCloseIconLabel || localeOption('close');
 
             const closeButtonIconProps = mergeProps(
-                {
-                    className: cx('closeButtonIcon'),
-                    'aria-hidden': true
-                },
-                ptm('closeButtonIcon')
+                [
+                    {
+                        className: cx('closeButtonIcon'),
+                        'aria-hidden': true
+                    },
+                    ptm('closeButtonIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = props.closeIcon || <TimesIcon {...closeButtonIconProps} />;
             const headerCloseIcon = IconUtils.getJSXIcon(icon, { ...closeButtonIconProps }, { props });
 
             const closeButtonProps = mergeProps(
-                {
-                    ref: closeRef,
-                    type: 'button',
-                    className: cx('closeButton'),
-                    'aria-label': ariaLabel,
-                    onClick: onClose
-                },
-                ptm('closeButton')
+                [
+                    {
+                        ref: closeRef,
+                        type: 'button',
+                        className: cx('closeButton'),
+                        'aria-label': ariaLabel,
+                        onClick: onClose
+                    },
+                    ptm('closeButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -500,10 +506,13 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const createMaximizeIcon = () => {
         let icon;
         const maximizableIconProps = mergeProps(
-            {
-                className: cx('maximizableIcon')
-            },
-            ptm('maximizableIcon')
+            [
+                {
+                    className: cx('maximizableIcon')
+                },
+                ptm('maximizableIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (!maximized) {
@@ -516,12 +525,15 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
         if (props.maximizable) {
             const maximizableButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('maximizableButton'),
-                    onClick: toggleMaximize
-                },
-                ptm('maximizableButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('maximizableButton'),
+                        onClick: toggleMaximize
+                    },
+                    ptm('maximizableButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -544,28 +556,37 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const headerId = idState + '_header';
 
             const headerProps = mergeProps(
-                {
-                    ref: headerRef,
-                    style: props.headerStyle,
-                    className: cx('header'),
-                    onMouseDown: onDragStart
-                },
-                ptm('header')
+                [
+                    {
+                        ref: headerRef,
+                        style: props.headerStyle,
+                        className: cx('header'),
+                        onMouseDown: onDragStart
+                    },
+                    ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const headerTitleProps = mergeProps(
-                {
-                    id: headerId,
-                    className: cx('headerTitle')
-                },
-                ptm('headerTitle')
+                [
+                    {
+                        id: headerId,
+                        className: cx('headerTitle')
+                    },
+                    ptm('headerTitle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const headerIconsProps = mergeProps(
-                {
-                    className: cx('headerIcons')
-                },
-                ptm('headerIcons')
+                [
+                    {
+                        className: cx('headerIcons')
+                    },
+                    ptm('headerIcons')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -587,13 +608,16 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         const contentId = idState + '_content';
 
         const contentProps = mergeProps(
-            {
-                id: contentId,
-                ref: contentRef,
-                style: props.contentStyle,
-                className: cx('content')
-            },
-            ptm('content')
+            [
+                {
+                    id: contentId,
+                    ref: contentRef,
+                    style: props.contentStyle,
+                    className: cx('content')
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <div {...contentProps}>{props.children}</div>;
@@ -603,11 +627,14 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         const footer = ObjectUtils.getJSXElement(props.footer, props);
 
         const footerProps = mergeProps(
-            {
-                ref: footerRef,
-                className: cx('footer')
-            },
-            ptm('footer')
+            [
+                {
+                    ref: footerRef,
+                    className: cx('footer')
+                },
+                ptm('footer')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return footer && <div {...footerProps}>{footer}</div>;
@@ -635,45 +662,54 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         };
 
         const maskProps = mergeProps(
-            {
-                ref: maskRef,
-                style: sx('mask'),
-                className: cx('mask', { maskVisibleState }),
-                onPointerUp: onMaskPointerUp
-            },
-            ptm('mask')
+            [
+                {
+                    ref: maskRef,
+                    style: sx('mask'),
+                    className: cx('mask', { maskVisibleState }),
+                    onPointerUp: onMaskPointerUp
+                },
+                ptm('mask')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                ref: dialogRef,
-                id: idState,
-                className: cx('root', { props, maximized, context }),
-                style: props.style,
-                onClick: props.onClick,
-                role: 'dialog',
-                'aria-labelledby': headerId,
-                'aria-describedby': contentId,
-                'aria-modal': props.modal,
-                onPointerDown: onDialogPointerDown
-            },
-            DialogBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: dialogRef,
+                    id: idState,
+                    className: cx('root', { props, maximized, context }),
+                    style: props.style,
+                    onClick: props.onClick,
+                    role: 'dialog',
+                    'aria-labelledby': headerId,
+                    'aria-describedby': contentId,
+                    'aria-modal': props.modal,
+                    onPointerDown: onDialogPointerDown
+                },
+                DialogBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                timeout: transitionTimeout,
-                in: visibleState,
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEnter: onEnter,
-                onEntered: onEntered,
-                onExiting: onExiting,
-                onExited: onExited
-            },
-            ptm('transition')
+            [
+                {
+                    classNames: cx('transition'),
+                    timeout: transitionTimeout,
+                    in: visibleState,
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onEnter,
+                    onEntered: onEntered,
+                    onExiting: onExiting,
+                    onExited: onExited
+                },
+                ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

@@ -3,10 +3,12 @@ import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hook
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MenubarSub = React.memo(
     React.forwardRef((props, ref) => {
+        const context = React.useContext(PrimeReactContext);
         const [activeItemState, setActiveItemState] = React.useState(null);
         const { ptm, cx } = props;
 
@@ -178,13 +180,16 @@ export const MenubarSub = React.memo(
         const createSeparator = (index) => {
             const key = props.id + '_separator_' + index;
             const separatorProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    className: cx('separator'),
-                    role: 'separator'
-                },
-                ptm('separator', { hostName: props.hostName })
+                [
+                    {
+                        id: key,
+                        key,
+                        className: cx('separator'),
+                        role: 'separator'
+                    },
+                    ptm('separator', { hostName: props.hostName })
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...separatorProps}></li>;
@@ -221,25 +226,34 @@ export const MenubarSub = React.memo(
             const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                getPTOptions(item, 'icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    getPTOptions(item, 'icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                getPTOptions(item, 'label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    getPTOptions(item, 'label')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const submenuIconClassName = 'p-submenu-icon';
             const submenuIconProps = mergeProps(
-                {
-                    className: cx('submenuIcon')
-                },
-                getPTOptions(item, 'submenuIcon')
+                [
+                    {
+                        className: cx('submenuIcon')
+                    },
+                    getPTOptions(item, 'submenuIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const submenuIcon =
                 item.items &&
@@ -250,16 +264,19 @@ export const MenubarSub = React.memo(
                 );
             const submenu = createSubmenu(item, index);
             const actionProps = mergeProps(
-                {
-                    href: item.url || '#',
-                    role: 'menuitem',
-                    className: cx('action', { item }),
-                    target: item.target,
-                    'aria-haspopup': item.items != null,
-                    onClick: (event) => onItemClick(event, item),
-                    onKeyDown: (event) => onItemKeyDown(event, item)
-                },
-                getPTOptions(item, 'action')
+                [
+                    {
+                        href: item.url || '#',
+                        role: 'menuitem',
+                        className: cx('action', { item }),
+                        target: item.target,
+                        'aria-haspopup': item.items != null,
+                        onClick: (event) => onItemClick(event, item),
+                        onKeyDown: (event) => onItemKeyDown(event, item)
+                    },
+                    getPTOptions(item, 'action')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -287,15 +304,18 @@ export const MenubarSub = React.memo(
             }
 
             const menuitemProps = mergeProps(
-                {
-                    id: key,
-                    key,
-                    role: 'none',
-                    className: classNames(item.className, cx('menuitem', { item, activeItemState })),
-                    onMouseEnter: (event) => onItemMouseEnter(event, item),
-                    'data-p-disabled': item.disabled || false
-                },
-                getPTOptions(item, 'menuitem')
+                [
+                    {
+                        id: key,
+                        key,
+                        role: 'none',
+                        className: classNames(item.className, cx('menuitem', { item, activeItemState })),
+                        onMouseEnter: (event) => onItemMouseEnter(event, item),
+                        'data-p-disabled': item.disabled || false
+                    },
+                    getPTOptions(item, 'menuitem')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -318,13 +338,16 @@ export const MenubarSub = React.memo(
         const ptKey = props.root ? 'menu' : 'submenu';
         const submenu = createMenu();
         const menuProps = mergeProps(
-            {
-                ref,
-                className: cx(ptKey),
-                style: !props.root && { display: props.parentActive ? 'block' : 'none' },
-                role
-            },
-            ptm(ptKey)
+            [
+                {
+                    ref,
+                    className: cx(ptKey),
+                    style: !props.root && { display: props.parentActive ? 'block' : 'none' },
+                    role
+                },
+                ptm(ptKey)
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <ul {...menuProps}>{submenu}</ul>;

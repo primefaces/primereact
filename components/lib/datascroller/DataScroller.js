@@ -162,10 +162,13 @@ export const DataScroller = React.memo(
 
         const createHeader = () => {
             const headerProps = mergeProps(
-                {
-                    className: cx('header')
-                },
-                ptm('header')
+                [
+                    {
+                        className: cx('header')
+                    },
+                    ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.header) {
@@ -177,10 +180,13 @@ export const DataScroller = React.memo(
 
         const createFooter = () => {
             const footerProps = mergeProps(
-                {
-                    className: cx('footer')
-                },
-                ptm('footer')
+                [
+                    {
+                        className: cx('footer')
+                    },
+                    ptm('footer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.footer) {
@@ -192,10 +198,13 @@ export const DataScroller = React.memo(
 
         const createItem = (_value, index) => {
             const itemProps = mergeProps(
-                {
-                    key: index + '_datascrollitem'
-                },
-                ptm('item')
+                [
+                    {
+                        key: index + '_datascrollitem'
+                    },
+                    ptm('item')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const content = props.itemTemplate ? props.itemTemplate(_value) : _value;
 
@@ -203,7 +212,7 @@ export const DataScroller = React.memo(
         };
 
         const createEmptyMessage = () => {
-            const emptyMessageProps = mergeProps(ptm('emptyMessage'));
+            const emptyMessageProps = mergeProps([ptm('emptyMessage')], { useTailwind: context.useTailwind });
 
             const content = ObjectUtils.getJSXElement(props.emptyMessage, props) || localeOption('emptyMessage');
 
@@ -212,18 +221,24 @@ export const DataScroller = React.memo(
 
         const createContent = () => {
             const contentProps = mergeProps(
-                {
-                    ref: contentRef,
-                    className: cx('content'),
-                    style: sx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        ref: contentRef,
+                        className: cx('content'),
+                        style: sx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const listProps = mergeProps(
-                {
-                    className: cx('list')
-                },
-                ptm('list')
+                [
+                    {
+                        className: cx('list')
+                    },
+                    ptm('list')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const content = ObjectUtils.isNotEmpty(dataToRenderState) ? dataToRenderState.map(createItem) : createEmptyMessage();
 
@@ -239,13 +254,16 @@ export const DataScroller = React.memo(
         const content = createContent();
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: classNames(props.className, cx('root'))
-            },
-            DataScrollerBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root'))
+                },
+                DataScrollerBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

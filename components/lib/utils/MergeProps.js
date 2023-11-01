@@ -1,4 +1,8 @@
-export function mergeProps(...props) {
+import { twMerge } from 'tailwind-merge';
+
+export function mergeProps(props, options = {}) {
+    const { useTailwind } = options;
+
     if (props) {
         const isFn = (o) => !!(o && o.constructor && o.call && o.apply);
 
@@ -9,7 +13,14 @@ export function mergeProps(...props) {
                 if (key === 'style') {
                     merged['style'] = { ...merged['style'], ...ps['style'] };
                 } else if (key === 'className') {
-                    let newClassname = [merged['className'], ps['className']].join(' ').trim();
+                    let newClassname = '';
+
+                    if (useTailwind) {
+                        newClassname = twMerge(merged['className'], ps['className']);
+                    } else {
+                        newClassname = [merged['className'], ps['className']].join(' ').trim();
+                    }
+
                     const isEmpty = newClassname === null || newClassname === undefined || newClassname === '';
 
                     merged['className'] = isEmpty ? undefined : newClassname;

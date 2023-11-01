@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { SearchIcon } from '../icons/search';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const OrderListSubList = React.memo((props) => {
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const _ptm = (key, options) => {
         return ptm(key, {
@@ -96,13 +98,16 @@ export const OrderListSubList = React.memo((props) => {
 
     const createDropPoint = (index, key) => {
         const droppointProps = mergeProps(
-            {
-                className: cx('droppoint'),
-                onDragOver: (e) => onDragOver(e, index + 1),
-                onDragLeave: onDragLeave,
-                onDrop: onDrop
-            },
-            _ptm('droppoint')
+            [
+                {
+                    className: cx('droppoint'),
+                    onDragOver: (e) => onDragOver(e, index + 1),
+                    onDragLeave: onDragLeave,
+                    onDrop: onDrop
+                },
+                _ptm('droppoint')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li key={key} {...droppointProps}></li>;
@@ -110,10 +115,13 @@ export const OrderListSubList = React.memo((props) => {
 
     const createHeader = () => {
         const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            _ptm('header')
+            [
+                {
+                    className: cx('header')
+                },
+                _ptm('header')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return props.header ? <div {...headerProps}>{props.header}</div> : null;
@@ -127,19 +135,22 @@ export const OrderListSubList = React.memo((props) => {
 
                 if (props.dragdrop) {
                     const itemProps = mergeProps(
-                        {
-                            className: classNames(props.className, cx('item', { item, isSelected })),
-                            onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
-                            onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
-                            role: 'option',
-                            'aria-selected': isSelected(item),
-                            draggable: 'true',
-                            onDragStart: (e) => onDragStart(e, i),
-                            onDragEnd: onDragEnd,
-                            tabIndex: props.tabIndex,
-                            'data-p-highlight': isSelected(item)
-                        },
-                        getPTOptions(item, 'item')
+                        [
+                            {
+                                className: classNames(props.className, cx('item', { item, isSelected })),
+                                onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
+                                onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
+                                role: 'option',
+                                'aria-selected': isSelected(item),
+                                draggable: 'true',
+                                onDragStart: (e) => onDragStart(e, i),
+                                onDragEnd: onDragEnd,
+                                tabIndex: props.tabIndex,
+                                'data-p-highlight': isSelected(item)
+                            },
+                            getPTOptions(item, 'item')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     let items = [];
@@ -160,16 +171,19 @@ export const OrderListSubList = React.memo((props) => {
                     return items;
                 } else {
                     const itemProps = mergeProps(
-                        {
-                            role: 'option',
-                            tabIndex: props.tabIndex,
-                            className: classNames(props.className, cx('item', { item, isSelected })),
-                            onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
-                            onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
-                            'aria-selected': isSelected(item),
-                            'data-p-highlight': isSelected(item)
-                        },
-                        getPTOptions(item, 'item')
+                        [
+                            {
+                                role: 'option',
+                                tabIndex: props.tabIndex,
+                                className: classNames(props.className, cx('item', { item, isSelected })),
+                                onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
+                                onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
+                                'aria-selected': isSelected(item),
+                                'data-p-highlight': isSelected(item)
+                            },
+                            getPTOptions(item, 'item')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     return (
@@ -188,15 +202,18 @@ export const OrderListSubList = React.memo((props) => {
     const createList = () => {
         const items = createItems();
         const listProps = mergeProps(
-            {
-                ref: listElementRef,
-                className: cx('list'),
-                style: props.listStyle,
-                onDragOver: onListMouseMove,
-                role: 'listbox',
-                'aria-multiselectable': true
-            },
-            _ptm('list')
+            [
+                {
+                    ref: listElementRef,
+                    className: cx('list'),
+                    style: props.listStyle,
+                    onDragOver: onListMouseMove,
+                    role: 'listbox',
+                    'aria-multiselectable': true
+                },
+                _ptm('list')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <ul {...listProps}>{items}</ul>;
@@ -204,39 +221,51 @@ export const OrderListSubList = React.memo((props) => {
 
     const createFilter = () => {
         const searchIconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            _ptm('icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                _ptm('icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = props.filterIcon || <SearchIcon {...searchIconProps} />;
         const filterIcon = IconUtils.getJSXIcon(icon, { ...searchIconProps }, { props });
 
         if (props.filter) {
             const filterProps = mergeProps(
-                {
-                    className: cx('filter')
-                },
-                _ptm('filter')
+                [
+                    {
+                        className: cx('filter')
+                    },
+                    _ptm('filter')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const filterInputProps = mergeProps(
-                {
-                    type: 'text',
-                    value: props.filterValue,
-                    onChange: props.onFilter,
-                    onKeyDown: onFilterInputKeyDown,
-                    placeholder: props.placeholder,
-                    className: cx('filterInput')
-                },
-                _ptm('filterInput')
+                [
+                    {
+                        type: 'text',
+                        value: props.filterValue,
+                        onChange: props.onFilter,
+                        onKeyDown: onFilterInputKeyDown,
+                        placeholder: props.placeholder,
+                        className: cx('filterInput')
+                    },
+                    _ptm('filterInput')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const filterIconProps = mergeProps(
-                {
-                    className: cx('filterIcon')
-                },
-                _ptm('filterIcon')
+                [
+                    {
+                        className: cx('filterIcon')
+                    },
+                    _ptm('filterIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -264,10 +293,13 @@ export const OrderListSubList = React.memo((props) => {
             }
 
             const filterContainerProps = mergeProps(
-                {
-                    className: cx('filterContainer')
-                },
-                _ptm('filterContainer')
+                [
+                    {
+                        className: cx('filterContainer')
+                    },
+                    _ptm('filterContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...filterContainerProps}>{content}</div>;
@@ -281,10 +313,13 @@ export const OrderListSubList = React.memo((props) => {
     const list = createList();
 
     const containerProps = mergeProps(
-        {
-            className: cx('container')
-        },
-        _ptm('container')
+        [
+            {
+                className: cx('container')
+            },
+            _ptm('container')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

@@ -532,7 +532,7 @@ export const ComponentBase = {
 
             return mergeSections || (!mergeSections && self)
                 ? useMergeProps
-                    ? mergeProps(globalPT, self, Object.keys(datasetProps).length ? datasetProps : {})
+                    ? mergeProps([globalPT, self, Object.keys(datasetProps).length ? datasetProps : {}], { useTailwind: ComponentBase.context.useTailwind })
                     : { ...globalPT, ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) }
                 : { ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) };
         };
@@ -555,7 +555,7 @@ export const ComponentBase = {
                     const self = getOptionValue(css && css.inlineStyles, key, { props, state, ...params });
                     const base = getOptionValue(inlineStyles, key, { props, state, ...params });
 
-                    return mergeProps(base, self);
+                    return mergeProps([base, self], { useTailwind: ComponentBase.context.useTailwind });
                 }
 
                 return undefined;
@@ -613,7 +613,7 @@ const _usePT = (pt, callback, key, params) => {
         else if (ObjectUtils.isString(value)) return value;
         else if (ObjectUtils.isString(originalValue)) return originalValue;
 
-        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps(originalValue, value) : { ...originalValue, ...value }) : value;
+        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps([originalValue, value], { useTailwind: ComponentBase.context.useTailwind }) : { ...originalValue, ...value }) : value;
     }
 
     return fn(pt);

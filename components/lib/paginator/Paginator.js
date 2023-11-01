@@ -16,6 +16,7 @@ import { RowsPerPageDropdown } from './RowsPerPageDropdown';
 export const Paginator = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
+
         const props = PaginatorBase.getProps(inProps, context);
         const metaData = {
             props,
@@ -225,27 +226,36 @@ export const Paginator = React.memo(
 
             const elements = createElements();
             const leftProps = mergeProps(
-                {
-                    className: cx('left')
-                },
-                ptm('left')
+                [
+                    {
+                        className: cx('left')
+                    },
+                    ptm('left')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const leftElement = leftContent && <div {...leftProps}>{leftContent}</div>;
             const endProps = mergeProps(
-                {
-                    className: cx('end')
-                },
-                ptm('end')
+                [
+                    {
+                        className: cx('end')
+                    },
+                    ptm('end')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const rightElement = rightContent && <div {...endProps}>{rightContent}</div>;
             const rootProps = mergeProps(
-                {
-                    ref: elementRef,
-                    className: classNames(props.className, cx('root')),
-                    style: props.style
-                },
-                PaginatorBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: elementRef,
+                        className: classNames(props.className, cx('root')),
+                        style: props.style
+                    },
+                    PaginatorBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

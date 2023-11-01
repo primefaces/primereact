@@ -3,11 +3,13 @@ import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const PanelMenuSub = React.memo((props) => {
-    const [activeItemState, setActiveItemState] = React.useState(null);
     const { ptm, cx } = props;
+    const [activeItemState, setActiveItemState] = React.useState(null);
+    const context = React.useContext(PrimeReactContext);
 
     const _ptm = (key, options) => {
         return ptm(key, {
@@ -91,13 +93,16 @@ export const PanelMenuSub = React.memo((props) => {
         const key = props.id + '_sep_' + index;
 
         const separatorProps = mergeProps(
-            {
-                id: key,
-                key,
-                className: cx('separator'),
-                role: 'separator'
-            },
-            _ptm('separator')
+            [
+                {
+                    id: key,
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                _ptm('separator')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li {...separatorProps}></li>;
@@ -107,21 +112,27 @@ export const PanelMenuSub = React.memo((props) => {
         const submenuRef = React.createRef();
 
         const toggleableContentProps = mergeProps(
-            {
-                className: cx('toggleableContent', { active })
-            },
-            _ptm('toggleableContent')
+            [
+                {
+                    className: cx('toggleableContent', { active })
+                },
+                _ptm('toggleableContent')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (item.items) {
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    timeout: { enter: 1000, exit: 450 },
-                    in: active,
-                    unmountOnExit: true
-                },
-                _ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        timeout: { enter: 1000, exit: 450 },
+                        in: active,
+                        unmountOnExit: true
+                    },
+                    _ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -146,38 +157,50 @@ export const PanelMenuSub = React.memo((props) => {
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const iconProps = mergeProps(
-            {
-                className: cx('icon', { item })
-            },
-            getPTOptions(item, 'icon')
+            [
+                {
+                    className: cx('icon', { item })
+                },
+                getPTOptions(item, 'icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            getPTOptions(item, 'label')
+            [
+                {
+                    className: cx('label')
+                },
+                getPTOptions(item, 'label')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const label = item.label && <span {...labelProps}>{item.label}</span>;
         const submenuIconClassName = 'p-panelmenu-icon';
         const submenuIconProps = mergeProps(
-            {
-                className: cx('submenuicon')
-            },
-            getPTOptions(item, 'submenuicon')
+            [
+                {
+                    className: cx('submenuicon')
+                },
+                getPTOptions(item, 'submenuicon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
         const submenu = createSubmenu(item, active, index);
         const actionProps = mergeProps(
-            {
-                href: item.url || '#',
-                className: cx('action', { item }),
-                target: item.target,
-                onClick: (event) => onItemClick(event, item, index),
-                role: 'menuitem',
-                'aria-disabled': item.disabled
-            },
-            getPTOptions(item, 'action')
+            [
+                {
+                    href: item.url || '#',
+                    className: cx('action', { item }),
+                    target: item.target,
+                    onClick: (event) => onItemClick(event, item, index),
+                    role: 'menuitem',
+                    'aria-disabled': item.disabled
+                },
+                getPTOptions(item, 'action')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (
@@ -205,14 +228,17 @@ export const PanelMenuSub = React.memo((props) => {
         }
 
         const menuitemProps = mergeProps(
-            {
-                key,
-                id: key,
-                className: cx('menuitem', { item }),
-                style: item.style,
-                role: 'none'
-            },
-            getPTOptions(item, 'menuitem')
+            [
+                {
+                    key,
+                    id: key,
+                    className: cx('menuitem', { item }),
+                    style: item.style,
+                    role: 'none'
+                },
+                getPTOptions(item, 'menuitem')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -235,11 +261,14 @@ export const PanelMenuSub = React.memo((props) => {
 
     const ptKey = props.root ? 'menu' : 'submenu';
     const menuProps = mergeProps(
-        {
-            className: classNames(cx(ptKey), props.className),
-            role: 'tree'
-        },
-        ptm(ptKey)
+        [
+            {
+                className: classNames(cx(ptKey), props.className),
+                role: 'tree'
+            },
+            ptm(ptKey)
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <ul {...menuProps}>{menu}</ul>;

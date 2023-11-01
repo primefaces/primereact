@@ -25,29 +25,38 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     const createContent = () => {
         if (ObjectUtils.isNotEmpty(props.image) && !imageFailed) {
             const imageProps = mergeProps(
-                {
-                    src: props.image,
-                    onError: onImageError
-                },
-                ptm('image')
+                [
+                    {
+                        src: props.image,
+                        onError: onImageError
+                    },
+                    ptm('image')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <img alt={props.imageAlt} {...imageProps}></img>;
         } else if (props.label) {
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...labelProps}>{props.label}</span>;
         } else if (props.icon) {
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return IconUtils.getJSXIcon(props.icon, { ...iconProps }, { props });
@@ -83,13 +92,16 @@ export const Avatar = React.forwardRef((inProps, ref) => {
     }));
 
     const rootProps = mergeProps(
-        {
-            ref: elementRef,
-            style: props.style,
-            className: classNames(props.className, cx('root', { imageFailed }))
-        },
-        AvatarBase.getOtherProps(props),
-        ptm('root')
+        [
+            {
+                ref: elementRef,
+                style: props.style,
+                className: classNames(props.className, cx('root', { imageFailed }))
+            },
+            AvatarBase.getOtherProps(props),
+            ptm('root')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();

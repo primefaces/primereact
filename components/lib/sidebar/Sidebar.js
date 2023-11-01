@@ -164,21 +164,27 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
 
     const createCloseIcon = () => {
         const closeButtonProps = mergeProps(
-            {
-                type: 'button',
-                ref: closeIconRef,
-                className: cx('closeButton'),
-                onClick: (e) => onClose(e),
-                'aria-label': ariaLabel
-            },
-            ptm('closeButton')
+            [
+                {
+                    type: 'button',
+                    ref: closeIconRef,
+                    className: cx('closeButton'),
+                    onClick: (e) => onClose(e),
+                    'aria-label': ariaLabel
+                },
+                ptm('closeButton')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const closeIconProps = mergeProps(
-            {
-                className: cx('closeIcon')
-            },
-            ptm('closeIcon')
+            [
+                {
+                    className: cx('closeIcon')
+                },
+                ptm('closeIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const icon = props.closeIcon || <TimesIcon {...closeIconProps} />;
@@ -216,59 +222,77 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         };
 
         const maskProps = mergeProps(
-            {
-                ref: maskRef,
-                style: sx('mask'),
-                className: cx('mask', { maskVisibleState }),
-                onMouseDown: (e) => onMaskClick(e)
-            },
-            ptm('mask')
+            [
+                {
+                    ref: maskRef,
+                    style: sx('mask'),
+                    className: cx('mask', { maskVisibleState }),
+                    onMouseDown: (e) => onMaskClick(e)
+                },
+                ptm('mask')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: cx('root', { context }),
-                style: props.style,
-                role: 'complementary'
-            },
-            SidebarBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: cx('root', { context }),
+                    style: props.style,
+                    role: 'complementary'
+                },
+                SidebarBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const headerProps = mergeProps(
-            {
-                className: cx('header')
-            },
-            ptm('header')
+            [
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const contentProps = mergeProps(
-            {
-                className: cx('content')
-            },
-            ptm('content')
+            [
+                {
+                    className: cx('content')
+                },
+                ptm('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const iconsProps = mergeProps(
-            {
-                className: cx('icons')
-            },
-            ptm('icons')
+            [
+                {
+                    className: cx('icons')
+                },
+                ptm('icons')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: cx('transition'),
-                in: visibleState,
-                timeout: transitionTimeout,
-                options: props.transitionOptions,
-                unmountOnExit: true,
-                onEntered,
-                onExiting,
-                onExited
-            },
-            ptm('transition')
+            [
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: transitionTimeout,
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEntered,
+                    onExiting,
+                    onExited
+                },
+                ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

@@ -483,32 +483,41 @@ export const Tooltip = React.memo(
         const createElement = () => {
             const empty = isTargetContentEmpty(currentTargetRef.current);
             const rootProps = mergeProps(
-                {
-                    id: props.id,
-                    className: classNames(props.className, cx('root', { positionState, classNameState })),
-                    style: props.style,
-                    role: 'tooltip',
-                    'aria-hidden': visibleState,
-                    onMouseEnter: (e) => onMouseEnter(e),
-                    onMouseLeave: (e) => onMouseLeave(e)
-                },
-                TooltipBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        id: props.id,
+                        className: classNames(props.className, cx('root', { positionState, classNameState })),
+                        style: props.style,
+                        role: 'tooltip',
+                        'aria-hidden': visibleState,
+                        onMouseEnter: (e) => onMouseEnter(e),
+                        onMouseLeave: (e) => onMouseLeave(e)
+                    },
+                    TooltipBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const arrowProps = mergeProps(
-                {
-                    className: cx('arrow'),
-                    style: sx('arrow', { ...metaData })
-                },
-                ptm('arrow')
+                [
+                    {
+                        className: cx('arrow'),
+                        style: sx('arrow', { ...metaData })
+                    },
+                    ptm('arrow')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const textProps = mergeProps(
-                {
-                    className: cx('text')
-                },
-                ptm('text')
+                [
+                    {
+                        className: cx('text')
+                    },
+                    ptm('text')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

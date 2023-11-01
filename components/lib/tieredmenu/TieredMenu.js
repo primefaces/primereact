@@ -183,30 +183,36 @@ export const TieredMenu = React.memo(
 
         const createElement = () => {
             const rootProps = mergeProps(
-                {
-                    ref: menuRef,
-                    id: props.id,
-                    className: cx('root'),
-                    style: props.style,
-                    onClick: onPanelClick
-                },
-                TieredMenuBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: menuRef,
+                        id: props.id,
+                        className: cx('root'),
+                        style: props.style,
+                        onClick: onPanelClick
+                    },
+                    TieredMenuBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: visibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter,
-                    onEntered,
-                    onExit,
-                    onExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

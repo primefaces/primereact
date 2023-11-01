@@ -123,19 +123,22 @@ export const InputTextarea = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                className: cx('root', { isFilled }),
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyUp: onKeyUp,
-                onKeyDown: onKeyDown,
-                onBeforeInput: onBeforeInput,
-                onInput: onInput,
-                onPaste: onPaste
-            },
-            InputTextareaBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    className: cx('root', { isFilled }),
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onKeyUp: onKeyUp,
+                    onKeyDown: onKeyDown,
+                    onBeforeInput: onBeforeInput,
+                    onInput: onInput,
+                    onPaste: onPaste
+                },
+                InputTextareaBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

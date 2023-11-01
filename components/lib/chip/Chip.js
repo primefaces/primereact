@@ -36,36 +36,45 @@ export const Chip = React.memo(
             let content = [];
 
             const removeIconProps = mergeProps(
-                {
-                    key: 'removeIcon',
-                    tabIndex: 0,
-                    className: cx('removeIcon'),
-                    onClick: close,
-                    onKeyDown
-                },
-                ptm('removeIcon')
+                [
+                    {
+                        key: 'removeIcon',
+                        tabIndex: 0,
+                        className: cx('removeIcon'),
+                        onClick: close,
+                        onKeyDown
+                    },
+                    ptm('removeIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = props.removeIcon || <TimesCircleIcon {...removeIconProps} />;
 
             if (props.image) {
                 const imageProps = mergeProps(
-                    {
-                        key: 'image',
-                        src: props.image,
-                        onError: props.onImageError
-                    },
-                    ptm('image')
+                    [
+                        {
+                            key: 'image',
+                            src: props.image,
+                            onError: props.onImageError
+                        },
+                        ptm('image')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 content.push(<img alt={props.imageAlt} {...imageProps}></img>);
             } else if (props.icon) {
                 const chipIconProps = mergeProps(
-                    {
-                        key: 'icon',
-                        className: cx('icon')
-                    },
-                    ptm('icon')
+                    [
+                        {
+                            key: 'icon',
+                            className: cx('icon')
+                        },
+                        ptm('icon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 content.push(IconUtils.getJSXIcon(props.icon, { ...chipIconProps }, { props }));
@@ -73,11 +82,14 @@ export const Chip = React.memo(
 
             if (props.label) {
                 const labelProps = mergeProps(
-                    {
-                        key: 'label',
-                        className: cx('label')
-                    },
-                    ptm('label')
+                    [
+                        {
+                            key: 'label',
+                            className: cx('label')
+                        },
+                        ptm('label')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 content.push(<span {...labelProps}>{props.label}</span>);
@@ -94,13 +106,16 @@ export const Chip = React.memo(
             const content = props.template ? ObjectUtils.getJSXElement(props.template, props) : createContent();
 
             const rootProps = mergeProps(
-                {
-                    ref: elementRef,
-                    style: props.style,
-                    className: classNames(props.className, cx('root'))
-                },
-                ChipBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: elementRef,
+                        style: props.style,
+                        className: classNames(props.className, cx('root'))
+                    },
+                    ChipBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...rootProps}>{content}</div>;

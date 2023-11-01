@@ -148,17 +148,20 @@ export const ConfirmDialog = React.memo(
             };
 
             const acceptButtonProps = mergeProps(
-                {
-                    label: acceptLabel,
-                    icon: getPropValue('acceptIcon'),
-                    className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
-                    onClick: accept,
-                    unstyled: props.unstyled,
-                    __parentMetadata: {
-                        parent: metaData
-                    }
-                },
-                ptm('acceptButton')
+                [
+                    {
+                        label: acceptLabel,
+                        icon: getPropValue('acceptIcon'),
+                        className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
+                        onClick: accept,
+                        unstyled: props.unstyled,
+                        __parentMetadata: {
+                            parent: metaData
+                        }
+                    },
+                    ptm('acceptButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const content = (
@@ -191,37 +194,46 @@ export const ConfirmDialog = React.memo(
             const message = ObjectUtils.getJSXElement(getPropValue('message'), currentProps);
 
             const iconProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = IconUtils.getJSXIcon(getPropValue('icon'), { ...iconProps }, { props: currentProps });
             const footer = createFooter();
 
             const messageProps = mergeProps(
-                {
-                    className: cx('message')
-                },
-                ptm('message')
+                [
+                    {
+                        className: cx('message')
+                    },
+                    ptm('message')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const rootProps = mergeProps(
-                {
-                    visible: visibleState,
-                    className: classNames(getPropValue('className'), cx('root')),
-                    footer,
-                    onHide: hide,
-                    breakpoints: getPropValue('breakpoints'),
-                    pt: currentProps.pt,
-                    unstyled: props.unstyled,
-                    appendTo: getPropValue('appendTo'),
-                    __parentMetadata: {
-                        parent: metaData
-                    }
-                },
-                ConfirmDialogBase.getOtherProps(currentProps)
+                [
+                    {
+                        visible: visibleState,
+                        className: classNames(getPropValue('className'), cx('root')),
+                        footer,
+                        onHide: hide,
+                        breakpoints: getPropValue('breakpoints'),
+                        pt: currentProps.pt,
+                        unstyled: props.unstyled,
+                        appendTo: getPropValue('appendTo'),
+                        __parentMetadata: {
+                            parent: metaData
+                        }
+                    },
+                    ConfirmDialogBase.getOtherProps(currentProps)
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

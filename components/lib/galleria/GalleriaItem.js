@@ -3,10 +3,12 @@ import { useMountEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { IconUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const GalleriaItem = React.memo(
     React.forwardRef((props, ref) => {
+        const context = React.useContext(PrimeReactContext);
         const { ptm, cx } = props;
 
         const getPTOptions = (key, options) => {
@@ -94,23 +96,29 @@ export const GalleriaItem = React.memo(
                 const isDisabled = !props.circular && props.activeItemIndex === 0;
 
                 const previousItemIconProps = mergeProps(
-                    {
-                        className: cx('previousItemIcon')
-                    },
-                    getPTOptions('previousItemIcon')
+                    [
+                        {
+                            className: cx('previousItemIcon')
+                        },
+                        getPTOptions('previousItemIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.itemPrevIcon || <ChevronLeftIcon {...previousItemIconProps} />;
                 const itemPrevIcon = IconUtils.getJSXIcon(icon, { ...previousItemIconProps }, { props });
 
                 const previousItemButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('previousItemButton', { isDisabled }),
-                        onClick: navBackward,
-                        disabled: isDisabled,
-                        'data-p-disabled': isDisabled
-                    },
-                    getPTOptions('previousItemButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('previousItemButton', { isDisabled }),
+                            onClick: navBackward,
+                            disabled: isDisabled,
+                            'data-p-disabled': isDisabled
+                        },
+                        getPTOptions('previousItemButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -129,23 +137,29 @@ export const GalleriaItem = React.memo(
                 const isDisabled = !props.circular && props.activeItemIndex === props.value.length - 1;
 
                 const nextItemIconProps = mergeProps(
-                    {
-                        className: cx('nextItemIcon')
-                    },
-                    getPTOptions('nextItemIcon')
+                    [
+                        {
+                            className: cx('nextItemIcon')
+                        },
+                        getPTOptions('nextItemIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.itemNextIcon || <ChevronRightIcon {...nextItemIconProps} />;
                 const itemNextIcon = IconUtils.getJSXIcon(icon, { ...nextItemIconProps }, { props });
 
                 const nextItemButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('nextItemButton', { isDisabled }),
-                        onClick: navForward,
-                        disabled: isDisabled,
-                        'data-p-disabled': isDisabled
-                    },
-                    getPTOptions('nextItemButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('nextItemButton', { isDisabled }),
+                            onClick: navForward,
+                            disabled: isDisabled,
+                            'data-p-disabled': isDisabled
+                        },
+                        getPTOptions('nextItemButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -161,10 +175,13 @@ export const GalleriaItem = React.memo(
 
         const createCaption = () => {
             const captionProps = mergeProps(
-                {
-                    className: cx('caption')
-                },
-                getPTOptions('caption')
+                [
+                    {
+                        className: cx('caption')
+                    },
+                    getPTOptions('caption')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.caption) {
@@ -182,16 +199,19 @@ export const GalleriaItem = React.memo(
             let indicator = props.indicator && props.indicator(index);
 
             const indicatorProps = mergeProps(
-                {
-                    className: cx('indicator', { isActive }),
-                    key: key,
-                    tabIndex: 0,
-                    onClick: () => onIndicatorClick(index),
-                    onMouseEnter: () => onIndicatorMouseEnter(index),
-                    onKeyDown: (e) => onIndicatorKeyDown(e, index),
-                    'data-p-highlight': isActive
-                },
-                getPTOptions('indicator')
+                [
+                    {
+                        className: cx('indicator', { isActive }),
+                        key: key,
+                        tabIndex: 0,
+                        onClick: () => onIndicatorClick(index),
+                        onMouseEnter: () => onIndicatorMouseEnter(index),
+                        onKeyDown: (e) => onIndicatorKeyDown(e, index),
+                        'data-p-highlight': isActive
+                    },
+                    getPTOptions('indicator')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (!indicator) {
@@ -209,10 +229,13 @@ export const GalleriaItem = React.memo(
             if (props.showIndicators) {
                 let indicators = [];
                 const indicatorsProps = mergeProps(
-                    {
-                        className: classNames(props.indicatorsContentClassName, cx('indicators'))
-                    },
-                    getPTOptions('indicators')
+                    [
+                        {
+                            className: classNames(props.indicatorsContentClassName, cx('indicators'))
+                        },
+                        getPTOptions('indicators')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 for (let i = 0; i < props.value.length; i++) {
@@ -232,25 +255,34 @@ export const GalleriaItem = React.memo(
         const indicators = createIndicators();
 
         const itemWrapperProps = mergeProps(
-            {
-                ref: ref,
-                className: cx('itemWrapper')
-            },
-            getPTOptions('itemWrapper')
+            [
+                {
+                    ref: ref,
+                    className: cx('itemWrapper')
+                },
+                getPTOptions('itemWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const itemContainerProps = mergeProps(
-            {
-                className: cx('itemContainer')
-            },
-            getPTOptions('itemContainer')
+            [
+                {
+                    className: cx('itemContainer')
+                },
+                getPTOptions('itemContainer')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const itemProps = mergeProps(
-            {
-                className: cx('item')
-            },
-            getPTOptions('item')
+            [
+                {
+                    className: cx('item')
+                },
+                getPTOptions('item')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

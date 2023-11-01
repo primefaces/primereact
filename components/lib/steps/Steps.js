@@ -62,40 +62,52 @@ export const Steps = React.memo(
 
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const iconProps = mergeProps(
-                {
-                    className: cx('icon', { item })
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon', { item })
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props });
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const label = item.label && <span {...labelProps}>{item.label}</span>;
 
             const stepProps = mergeProps(
-                {
-                    className: cx('step')
-                },
-                ptm('step')
+                [
+                    {
+                        className: cx('step')
+                    },
+                    ptm('step')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const actionProps = mergeProps(
-                {
-                    href: item.url || '#',
-                    className: cx('action'),
-                    role: 'presentation',
-                    target: item.target,
-                    onClick: (event) => itemClick(event, item, index),
-                    tabIndex
-                },
-                ptm('action')
+                [
+                    {
+                        href: item.url || '#',
+                        className: cx('action'),
+                        role: 'presentation',
+                        target: item.target,
+                        onClick: (event) => itemClick(event, item, index),
+                        tabIndex
+                    },
+                    ptm('action')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             let content = (
@@ -124,16 +136,19 @@ export const Steps = React.memo(
             }
 
             const menuItemProps = mergeProps(
-                {
-                    key,
-                    id: key,
-                    className: cx('menuitem', { active, disabled, item }),
-                    style: item.style,
-                    role: 'tab',
-                    'aria-selected': active,
-                    'aria-expanded': active
-                },
-                ptm('menuitem')
+                [
+                    {
+                        key,
+                        id: key,
+                        className: cx('menuitem', { active, disabled, item }),
+                        style: item.style,
+                        role: 'tab',
+                        'aria-selected': active,
+                        'aria-expanded': active
+                    },
+                    ptm('menuitem')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...menuItemProps}>{content}</li>;
@@ -141,10 +156,13 @@ export const Steps = React.memo(
 
         const createItems = () => {
             const menuProps = mergeProps(
-                {
-                    role: 'tablist'
-                },
-                ptm('menu')
+                [
+                    {
+                        role: 'tablist'
+                    },
+                    ptm('menu')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.model) {
@@ -168,14 +186,17 @@ export const Steps = React.memo(
         }));
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: cx('root'),
-                style: props.style
-            },
-            StepsBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: cx('root'),
+                    style: props.style
+                },
+                StepsBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const items = createItems();

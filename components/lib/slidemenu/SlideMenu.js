@@ -137,21 +137,27 @@ export const SlideMenu = React.memo(
 
         const createBackward = () => {
             const previousIconProps = mergeProps(
-                {
-                    className: cx('previousIcon')
-                },
-                ptm('previousIcon')
+                [
+                    {
+                        className: cx('previousIcon')
+                    },
+                    ptm('previousIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.backIcon || <ChevronLeftIcon {...previousIconProps} />;
             const backIcon = IconUtils.getJSXIcon(icon, { ...previousIconProps }, { props });
-            const previousLabelProps = mergeProps(ptm('previousLabel'));
+            const previousLabelProps = mergeProps([ptm('previousLabel')], { useTailwind: context.useTailwind });
             const previousProps = mergeProps(
-                {
-                    ref: backward,
-                    className: cx('previous', { levelState }),
-                    onClick: (e) => navigateBack(e)
-                },
-                ptm('previous')
+                [
+                    {
+                        ref: backward,
+                        className: cx('previous', { levelState }),
+                        onClick: (e) => navigateBack(e)
+                    },
+                    ptm('previous')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -166,46 +172,58 @@ export const SlideMenu = React.memo(
             const wrapperStyle = { height: props.viewportHeight + 'px' };
             const backward = createBackward();
             const rootProps = mergeProps(
-                {
-                    ref: menuRef,
-                    id: props.id,
-                    className: cx('root'),
-                    style: props.style,
-                    onClick: (e) => onPanelClick(e)
-                },
-                SlideMenuBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        ref: menuRef,
+                        id: props.id,
+                        className: cx('root'),
+                        style: props.style,
+                        onClick: (e) => onPanelClick(e)
+                    },
+                    SlideMenuBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const wrapperProps = mergeProps(
-                {
-                    className: cx('wrapper'),
-                    style: wrapperStyle
-                },
-                ptm('wrapper')
+                [
+                    {
+                        className: cx('wrapper'),
+                        style: wrapperStyle
+                    },
+                    ptm('wrapper')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const contentProps = mergeProps(
-                {
-                    ref: slideMenuContent,
-                    className: cx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        ref: slideMenuContent,
+                        className: cx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: !props.popup || visibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter,
-                    onEntered,
-                    onExit,
-                    onExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: !props.popup || visibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { SearchIcon } from '../icons/search';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { PickListItem } from './PickListItem';
 
 export const PickListSubList = React.memo(
     React.forwardRef((props, ref) => {
         const listElementRef = React.useRef(null);
+        const context = React.useContext(PrimeReactContext);
         const { ptm, cx } = props;
 
         const getPTOptions = (key, options) => {
@@ -119,10 +121,13 @@ export const PickListSubList = React.memo(
 
         const createHeader = () => {
             const headerProps = mergeProps(
-                {
-                    className: cx('header')
-                },
-                getPTOptions('header')
+                [
+                    {
+                        className: cx('header')
+                    },
+                    getPTOptions('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.header) {
@@ -148,32 +153,41 @@ export const PickListSubList = React.memo(
         const createFilter = () => {
             const iconClassName = 'p-picklist-filter-icon';
             const filterIconProps = mergeProps(
-                {
-                    className: cx('filterIcon')
-                },
-                getPTOptions('filterIcon')
+                [
+                    {
+                        className: cx('filterIcon')
+                    },
+                    getPTOptions('filterIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.type === 'source' ? props.sourceFilterIcon || <SearchIcon {...filterIconProps} /> : props.targetFilterIcon || <SearchIcon {...filterIconProps} />;
             const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
 
             if (props.showFilter) {
                 const filterProps = mergeProps(
-                    {
-                        className: cx('filter')
-                    },
-                    getPTOptions('filter')
+                    [
+                        {
+                            className: cx('filter')
+                        },
+                        getPTOptions('filter')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const filterInputProps = mergeProps(
-                    {
-                        type: 'text',
-                        value: props.filterValue,
-                        onChange: onFilter,
-                        onKeyDown: onFilterInputKeyDown,
-                        placeholder: props.placeholder,
-                        className: cx('filterInput')
-                    },
-                    getPTOptions('filterInput')
+                    [
+                        {
+                            type: 'text',
+                            value: props.filterValue,
+                            onChange: onFilter,
+                            onKeyDown: onFilterInputKeyDown,
+                            placeholder: props.placeholder,
+                            className: cx('filterInput')
+                        },
+                        getPTOptions('filterInput')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 let content = (
@@ -200,10 +214,13 @@ export const PickListSubList = React.memo(
                 }
 
                 const filterContainerProps = mergeProps(
-                    {
-                        className: cx('filterContainer')
-                    },
-                    getPTOptions('filterContainer')
+                    [
+                        {
+                            className: cx('filterContainer')
+                        },
+                        getPTOptions('filterContainer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...filterContainerProps}>{content}</div>;
@@ -216,13 +233,16 @@ export const PickListSubList = React.memo(
             const items = createItems();
 
             const listProps = mergeProps(
-                {
-                    className: classNames(props.listClassName, cx('list')),
-                    role: 'listbox',
-                    'aria-multiselectable': true,
-                    style: props.style
-                },
-                getPTOptions('list')
+                [
+                    {
+                        className: classNames(props.listClassName, cx('list')),
+                        role: 'listbox',
+                        'aria-multiselectable': true,
+                        style: props.style
+                    },
+                    getPTOptions('list')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <ul {...listProps}>{items}</ul>;
@@ -233,11 +253,14 @@ export const PickListSubList = React.memo(
         const list = createList();
 
         const listWrapperProps = mergeProps(
-            {
-                className: classNames(props.className, cx('listWrapper')),
-                ref: listElementRef
-            },
-            getPTOptions('listWrapper')
+            [
+                {
+                    className: classNames(props.className, cx('listWrapper')),
+                    ref: listElementRef
+                },
+                getPTOptions('listWrapper')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

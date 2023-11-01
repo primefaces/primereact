@@ -533,30 +533,39 @@ export const ColorPicker = React.memo(
 
         const createColorSelector = () => {
             const selectorProps = mergeProps(
-                {
-                    ref: colorSelectorRef,
-                    className: cx('selector'),
-                    onMouseDown: (e) => onColorMousedown(e),
-                    onTouchStart: (e) => onColorDragStart(e),
-                    onTouchMove: (e) => onDrag(e),
-                    onTouchEnd: onDragEnd
-                },
-                ptm('selector')
+                [
+                    {
+                        ref: colorSelectorRef,
+                        className: cx('selector'),
+                        onMouseDown: (e) => onColorMousedown(e),
+                        onTouchStart: (e) => onColorDragStart(e),
+                        onTouchMove: (e) => onDrag(e),
+                        onTouchEnd: onDragEnd
+                    },
+                    ptm('selector')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const colorProps = mergeProps(
-                {
-                    className: cx('color')
-                },
-                ptm('color')
+                [
+                    {
+                        className: cx('color')
+                    },
+                    ptm('color')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const colorHandlerProps = mergeProps(
-                {
-                    ref: colorHandleRef,
-                    className: cx('colorHandle')
-                },
-                ptm('colorHandle')
+                [
+                    {
+                        ref: colorHandleRef,
+                        className: cx('colorHandle')
+                    },
+                    ptm('colorHandle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -570,21 +579,27 @@ export const ColorPicker = React.memo(
 
         const createHue = () => {
             const hueProps = mergeProps(
-                {
-                    className: cx('hue'),
-                    onMouseDown: (e) => onHueMousedown(e),
-                    onTouchStart: (e) => onHueDragStart(e),
-                    onTouchMove: (e) => onDrag(e),
-                    onTouchEnd: onDragEnd
-                },
-                ptm('hue')
+                [
+                    {
+                        className: cx('hue'),
+                        onMouseDown: (e) => onHueMousedown(e),
+                        onTouchStart: (e) => onHueDragStart(e),
+                        onTouchMove: (e) => onDrag(e),
+                        onTouchEnd: onDragEnd
+                    },
+                    ptm('hue')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const hueHandlerProps = mergeProps(
-                {
-                    className: cx('hueHandle')
-                },
-                ptm('hueHandle')
+                [
+                    {
+                        className: cx('hueHandle')
+                    },
+                    ptm('hueHandle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -598,10 +613,13 @@ export const ColorPicker = React.memo(
             const colorSelector = createColorSelector();
             const hue = createHue();
             const contentProps = mergeProps(
-                {
-                    className: cx('content')
-                },
-                ptm('content')
+                [
+                    {
+                        className: cx('content')
+                    },
+                    ptm('content')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -616,20 +634,23 @@ export const ColorPicker = React.memo(
             if (!props.inline) {
                 const inputProps = ColorPickerBase.getOtherProps(props);
                 const _inputProps = mergeProps(
-                    {
-                        ref: inputRef,
-                        type: 'text',
-                        readOnly: true,
-                        className: cx('input'),
-                        style: props.inputStyle,
-                        id: props.inputId,
-                        tabIndex: props.tabIndex,
-                        disabled: props.disabled,
-                        onClick: onInputClick,
-                        onKeyDown: onInputKeydown,
-                        ...inputProps
-                    },
-                    ptm('input')
+                    [
+                        {
+                            ref: inputRef,
+                            type: 'text',
+                            readOnly: true,
+                            className: cx('input'),
+                            style: props.inputStyle,
+                            id: props.inputId,
+                            tabIndex: props.tabIndex,
+                            disabled: props.disabled,
+                            onClick: onInputClick,
+                            onKeyDown: onInputKeydown,
+                            ...inputProps
+                        },
+                        ptm('input')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <input {..._inputProps} />;
@@ -642,14 +663,17 @@ export const ColorPicker = React.memo(
         const content = createContent();
         const input = createInput();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                style: props.style,
-                className: cx('root')
-            },
-            ColorPickerBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    style: props.style,
+                    className: cx('root')
+                },
+                ColorPickerBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

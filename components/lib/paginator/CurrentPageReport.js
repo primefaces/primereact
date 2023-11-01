@@ -25,10 +25,13 @@ export const CurrentPageReport = React.memo((inProps) => {
         .replace('{totalRecords}', report.totalRecords);
 
     const currentProps = mergeProps(
-        {
-            className: 'p-paginator-current'
-        },
-        props.ptm('current', { hostName: props.hostName })
+        [
+            {
+                className: 'p-paginator-current'
+            },
+            props.ptm('current', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     const element = <span {...currentProps}>{text}</span>;

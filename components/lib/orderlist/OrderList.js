@@ -233,14 +233,17 @@ export const OrderList = React.memo(
         const visibleList = getVisibleList();
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: classNames(props.className, cx('root')),
-                style: props.style
-            },
-            OrderListBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: classNames(props.className, cx('root')),
+                    style: props.style
+                },
+                OrderListBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

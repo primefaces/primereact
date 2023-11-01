@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SelectButtonItem = React.memo((props) => {
     const [focusedState, setFocusedState] = React.useState(false);
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -45,10 +47,13 @@ export const SelectButtonItem = React.memo((props) => {
 
     const createContent = () => {
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            getPTOptions('label')
+            [
+                {
+                    className: cx('label')
+                },
+                getPTOptions('label')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return props.template ? ObjectUtils.getJSXElement(props.template, props.option) : <span {...labelProps}>{props.label}</span>;
@@ -57,18 +62,21 @@ export const SelectButtonItem = React.memo((props) => {
     const content = createContent();
 
     const buttonProps = mergeProps(
-        {
-            className: classNames(props.className, cx('button', { itemProps: props, focusedState })),
-            role: 'button',
-            'aria-label': props.label,
-            'aria-pressed': props.selected,
-            onClick: onClick,
-            onKeyDown: onKeyDown,
-            tabIndex: props.tabIndex,
-            onFocus: onFocus,
-            onBlur: onBlur
-        },
-        getPTOptions('button')
+        [
+            {
+                className: classNames(props.className, cx('button', { itemProps: props, focusedState })),
+                role: 'button',
+                'aria-label': props.label,
+                'aria-pressed': props.selected,
+                onClick: onClick,
+                onKeyDown: onKeyDown,
+                tabIndex: props.tabIndex,
+                onFocus: onFocus,
+                onBlur: onBlur
+            },
+            getPTOptions('button')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

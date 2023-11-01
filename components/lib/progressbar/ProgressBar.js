@@ -29,30 +29,39 @@ export const ProgressBar = React.memo(
         const createDeterminate = () => {
             const label = createLabel();
             const rootProps = mergeProps(
-                {
-                    className: classNames(props.className, cx('root')),
-                    style: props.style,
-                    role: 'progressbar',
-                    'aria-valuemin': '0',
-                    'aria-valuenow': props.value,
-                    'aria-valuemax': '100'
-                },
-                ProgressBarBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        className: classNames(props.className, cx('root')),
+                        style: props.style,
+                        role: 'progressbar',
+                        'aria-valuemin': '0',
+                        'aria-valuenow': props.value,
+                        'aria-valuemax': '100'
+                    },
+                    ProgressBarBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const valueProps = mergeProps(
-                {
-                    className: cx('value'),
-                    style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
-                },
-                ptm('value')
+                [
+                    {
+                        className: cx('value'),
+                        style: { width: props.value + '%', display: 'flex', backgroundColor: props.color }
+                    },
+                    ptm('value')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -64,28 +73,37 @@ export const ProgressBar = React.memo(
 
         const createIndeterminate = () => {
             const rootProps = mergeProps(
-                {
-                    className: classNames(props.className, cx('root')),
-                    style: props.style,
-                    role: 'progressbar'
-                },
-                ProgressBarBase.getOtherProps(props),
-                ptm('root')
+                [
+                    {
+                        className: classNames(props.className, cx('root')),
+                        style: props.style,
+                        role: 'progressbar'
+                    },
+                    ProgressBarBase.getOtherProps(props),
+                    ptm('root')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const containerProps = mergeProps(
-                {
-                    className: cx('container')
-                },
-                ptm('container')
+                [
+                    {
+                        className: cx('container')
+                    },
+                    ptm('container')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const valueProps = mergeProps(
-                {
-                    className: cx('value'),
-                    style: { backgroundColor: props.color }
-                },
-                ptm('value')
+                [
+                    {
+                        className: cx('value'),
+                        style: { backgroundColor: props.color }
+                    },
+                    ptm('value')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

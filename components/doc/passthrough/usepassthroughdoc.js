@@ -22,7 +22,8 @@ export default function UsePassThroughDemo() {
         },
         {
             mergeSections: true,
-            mergeProps: false
+            mergeProps: false,
+            useTailwind: false
         }
     );
 
@@ -43,7 +44,7 @@ const CustomTailwind = usePassThrough(
             header: 'my_panel_header'
         }
     },
-    { mergeSections: true, mergeProps: false }
+    { mergeSections: true, mergeProps: false, useTailwind: false }
 );
 
 // Output: 
@@ -59,7 +60,7 @@ const CustomTailwind = usePassThrough(
             header: 'my_panel_header'
         }
     },
-    { mergeSections: true, mergeProps: true }
+    { mergeSections: true, mergeProps: true, useTailwind: false }
 );
 
 // Output: 
@@ -76,7 +77,7 @@ const CustomTailwind = usePassThrough(
             header: 'my_panel_header'
         }
     },
-    { mergeSections: false, mergeProps: true }
+    { mergeSections: false, mergeProps: true, useTailwind: false }
 );
 
 // Output: 
@@ -93,7 +94,7 @@ const CustomTailwind = usePassThrough(
             header: 'my_panel_header'
         }
     },
-    { mergeSections: false, mergeProps: false }
+    { mergeSections: false, mergeProps: false, useTailwind: false }
 );
 
 // Output: 
@@ -113,6 +114,12 @@ const CustomTailwind = usePassThrough(
                 <p>
                     The <i>mergeSections</i> defines whether the sections from the main configuration gets added and the <i>mergeProps</i> controls whether to override or merge the defined props. Defaults are <i>true</i> for <i>mergeSections</i> and
                     <i>false</i> for <i>mergeProps</i>.
+                </p>
+                <p>
+                    The <i>useTailwind</i> option should be set to <i>true</i> if using Tailwind to prevent className conflicts between the default Tailwind theme and your custom theme. If <i>useTailwind</i> is set to <i>true</i> <i>mergeProps</i>{' '}
+                    will be overridden to <i>true</i>.
+                    <br />
+                    See <a href="https://www.npmjs.com/package/tailwind-merge">tailwind-merge</a> for more information.
                 </p>
             </DocSectionText>
             <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />

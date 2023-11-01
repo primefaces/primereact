@@ -128,15 +128,18 @@ export const SelectButton = React.memo(
         const items = createItems();
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root'),
-                style: props.style,
-                role: 'group'
-            },
-            SelectButtonBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root'),
+                    style: props.style,
+                    role: 'group'
+                },
+                SelectButtonBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

@@ -2,10 +2,12 @@ import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { RowBase } from '../row/RowBase';
+import { PrimeReactContext } from '../api/Api';
 import { mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableFooter = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
+    const context = React.useContext(PrimeReactContext);
 
     const getColumnProp = (column, name) => {
         return ColumnBase.getCProp(column, name);
@@ -23,19 +25,22 @@ export const TreeTableFooter = React.memo((props) => {
             hostName: props.hostName
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
+        return mergeProps([ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata)], { useTailwind: context.useTailwind });
     };
 
     const createFooterCell = (column, index) => {
         const footerCellProps = mergeProps(
-            {
-                key: column.field || index,
-                className: getColumnProp(column, 'footerClassName') || getColumnProp(column, 'className'),
-                style: getColumnProp(column, 'footerStyle') || getColumnProp(column, 'style'),
-                rowSpan: getColumnProp(column, 'rowSpan'),
-                colSpan: getColumnProp(column, 'colSpan')
-            },
-            getColumnPTOptions(column, 'footerCell')
+            [
+                {
+                    key: column.field || index,
+                    className: getColumnProp(column, 'footerClassName') || getColumnProp(column, 'className'),
+                    style: getColumnProp(column, 'footerStyle') || getColumnProp(column, 'style'),
+                    rowSpan: getColumnProp(column, 'rowSpan'),
+                    colSpan: getColumnProp(column, 'colSpan')
+                },
+                getColumnPTOptions(column, 'footerCell')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const content = ObjectUtils.getJSXElement(getColumnProp(column, 'footer'), { props: getColumnProps(column) });
@@ -46,7 +51,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
-        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
+        const footerRowProps = mergeProps([ptm('footerRow', { hostName: props.hostName })], { useTailwind: context.useTailwind });
 
         return (
             <tr {...footerRowProps} key={index}>
@@ -64,7 +69,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createColumns = (columns) => {
         if (columns) {
             const headerCells = columns.map(createFooterCell);
-            const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
+            const footerRowProps = mergeProps([ptm('footerRow', { hostName: props.hostName })], { useTailwind: context.useTailwind });
 
             return <tr {...footerRowProps}>{headerCells}</tr>;
         } else {
@@ -80,10 +85,13 @@ export const TreeTableFooter = React.memo((props) => {
 
     if (hasFooter()) {
         const tfootProps = mergeProps(
-            {
-                className: cx('tfoot')
-            },
-            ptm('tfoot', { hostName: props.hostName })
+            [
+                {
+                    className: cx('tfoot')
+                },
+                ptm('tfoot', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;

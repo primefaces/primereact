@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SplitButtonItem = React.memo((props) => {
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key, options) => {
         return ptm(key, {
@@ -25,11 +27,14 @@ export const SplitButtonItem = React.memo((props) => {
 
     const createSeparator = () => {
         const separatorProps = mergeProps(
-            {
-                className: cx('separator'),
-                role: 'separator'
-            },
-            getPTOptions('separator')
+            [
+                {
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                getPTOptions('separator')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li {...separatorProps}></li>;
@@ -45,31 +50,40 @@ export const SplitButtonItem = React.memo((props) => {
         const iconClassName = classNames('p-menuitem-icon', _icon);
 
         const menuIconProps = mergeProps(
-            {
-                className: cx('menuIcon')
-            },
-            getPTOptions('menuIcon')
+            [
+                {
+                    className: cx('menuIcon')
+                },
+                getPTOptions('menuIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = IconUtils.getJSXIcon(_icon, { ...menuIconProps }, { props: props.splitButtonProps });
 
         const menuLabelProps = mergeProps(
-            {
-                className: cx('menuLabel')
-            },
-            getPTOptions('menuLabel')
+            [
+                {
+                    className: cx('menuLabel')
+                },
+                getPTOptions('menuLabel')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const label = _label && <span {...menuLabelProps}>{_label}</span>;
 
         const anchorProps = mergeProps(
-            {
-                href: url || '#',
-                role: 'menuitem',
-                className: cx('anchor'),
-                target: target,
-                onClick: onClick,
-                'aria-label': _label
-            },
-            getPTOptions('anchor')
+            [
+                {
+                    href: url || '#',
+                    role: 'menuitem',
+                    className: cx('anchor'),
+                    target: target,
+                    onClick: onClick,
+                    'aria-label': _label
+                },
+                getPTOptions('anchor')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (
@@ -93,11 +107,14 @@ export const SplitButtonItem = React.memo((props) => {
         }
 
         const menuItemProps = mergeProps(
-            {
-                className: cx('menuItem'),
-                role: 'none'
-            },
-            getPTOptions('menuItem')
+            [
+                {
+                    className: cx('menuItem'),
+                    role: 'none'
+                },
+                getPTOptions('menuItem')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li {...menuItemProps}>{content}</li>;

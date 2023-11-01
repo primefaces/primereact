@@ -39,6 +39,20 @@ return(
         basic: `
 import { PrimeReactProvider } from "primereact/api";
 
+...
+return(
+    <PrimeReactProvider value={{ unstyled: true, pt: {}, useTailwind: true }}>
+        <App />
+    </PrimeReactProvider>
+)
+ 
+`
+    };
+
+    const code4 = {
+        basic: `
+import { PrimeReactProvider } from "primereact/api";
+
 export default function MyApp({ Component, pageProps }) {
     
     //My Design System with Tailwind
@@ -125,11 +139,19 @@ export default function MyApp({ Component, pageProps }) {
                 <p className="flex align-items-start gap-2">
                     <Badge value="3"></Badge>
                     <span>
+                        <b>Optional:</b> enable <i>useTailwind</i> to resolve className conflicts via <a href="https://www.npmjs.com/package/tailwind-merge">tailwind-merge</a>. This will prevent classNames specified in the global pass through from
+                        overriding those specified via pass through in your application.
+                    </span>
+                </p>
+                <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <p className="flex align-items-start gap-2">
+                    <Badge value="4"></Badge>
+                    <span>
                         At the final step, component styles are provided via a pass through configuration that utilizes Tailwind CSS. The default preset of each component is available at the Tailwind part under theming section of each component so
                         you'll able to copy paste instead of starting from scratch. Example below styles, inputtext and panel components;
                     </span>
                 </p>
-                <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
+                <DocSectionCode code={code4} hideToggleCode import hideCodeSandbox hideStackBlitz />
                 <p>Voilà 💙, you now have 90+ awesome React UI components styled with Tailwind that will work in harmony with the rest of your application. Time to customize it to bring in your own style with Tailwind.</p>
             </DocSectionText>
         </>

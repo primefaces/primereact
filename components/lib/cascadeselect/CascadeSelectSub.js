@@ -211,40 +211,52 @@ export const CascadeSelectSub = React.memo((props) => {
     const createOption = (option, index) => {
         const submenu = createSubmenu(option);
         const textProps = mergeProps(
-            {
-                className: cx('text')
-            },
-            getPTOptions('text')
+            [
+                {
+                    className: cx('text')
+                },
+                getPTOptions('text')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span {...textProps}>{getOptionLabelToRender(option)}</span>;
         const optionGroupIconProps = mergeProps(
-            {
-                className: cx('optionGroupIcon')
-            },
-            getPTOptions('optionGroupIcon')
+            [
+                {
+                    className: cx('optionGroupIcon')
+                },
+                getPTOptions('optionGroupIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = props.optionGroupIcon || <AngleRightIcon {...optionGroupIconProps} />;
         const optionGroup = isOptionGroup(option) && IconUtils.getJSXIcon(icon, { ...optionGroupIconProps }, { props });
         const key = getOptionLabelToRender(option) + '_' + index;
         const contentProps = mergeProps(
-            {
-                className: cx('content'),
-                onClick: (event) => onOptionClick(event, option),
-                tabIndex: 0,
-                onKeyDown: (event) => onKeyDown(event, option)
-            },
-            getPTOptions('content')
+            [
+                {
+                    className: cx('content'),
+                    onClick: (event) => onOptionClick(event, option),
+                    tabIndex: 0,
+                    onKeyDown: (event) => onKeyDown(event, option)
+                },
+                getPTOptions('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const itemProps = mergeProps(
-            {
-                className: classNames(option.className, cx('item', { option, isOptionGroup, activeOptionState })),
-                style: option.style,
-                role: 'none',
-                'data-p-item-group': isOptionGroup(option),
-                'data-p-highlight': activeOptionState === option
-            },
-            getPTOptions('item')
+            [
+                {
+                    className: classNames(option.className, cx('item', { option, isOptionGroup, activeOptionState })),
+                    style: option.style,
+                    role: 'none',
+                    'data-p-item-group': isOptionGroup(option),
+                    'data-p-highlight': activeOptionState === option
+                },
+                getPTOptions('item')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -265,13 +277,16 @@ export const CascadeSelectSub = React.memo((props) => {
 
     const submenu = createMenu();
     const listProps = mergeProps(
-        {
-            ref: elementRef,
-            className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
-            role: 'listbox',
-            'aria-orientation': 'horizontal'
-        },
-        props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
+        [
+            {
+                ref: elementRef,
+                className: cx(props.level === 0 ? 'list' : 'sublist', { context }),
+                role: 'listbox',
+                'aria-orientation': 'horizontal'
+            },
+            props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <ul {...listProps}>{submenu}</ul>;

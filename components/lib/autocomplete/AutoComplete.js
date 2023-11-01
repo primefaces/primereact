@@ -574,25 +574,34 @@ export const AutoComplete = React.memo(
                 return props.value.map((val, index) => {
                     const key = index + 'multi-item';
                     const removeTokenIconProps = mergeProps(
-                        {
-                            className: cx('removeTokenIcon'),
-                            onClick: (e) => removeItem(e, index)
-                        },
-                        ptm('removeTokenIcon')
+                        [
+                            {
+                                className: cx('removeTokenIcon'),
+                                onClick: (e) => removeItem(e, index)
+                            },
+                            ptm('removeTokenIcon')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const icon = props.removeTokenIcon || <TimesCircleIcon {...removeTokenIconProps} />;
                     const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...removeTokenIconProps }, { props });
                     const tokenProps = mergeProps(
-                        {
-                            className: cx('token')
-                        },
-                        ptm('token')
+                        [
+                            {
+                                className: cx('token')
+                            },
+                            ptm('token')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
                     const tokenLabelProps = mergeProps(
-                        {
-                            className: cx('tokenLabel')
-                        },
-                        ptm('tokenLabel')
+                        [
+                            {
+                                className: cx('tokenLabel')
+                            },
+                            ptm('tokenLabel')
+                        ],
+                        { useTailwind: context.useTailwind }
                     );
 
                     return (
@@ -610,40 +619,46 @@ export const AutoComplete = React.memo(
         const createMultiInput = (allowMoreValues) => {
             const ariaControls = overlayVisibleState ? idState + '_list' : null;
             const inputTokenProps = mergeProps(
-                {
-                    className: cx('inputToken')
-                },
-                ptm('inputToken')
+                [
+                    {
+                        className: cx('inputToken')
+                    },
+                    ptm('inputToken')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const inputProps = mergeProps(
-                {
-                    id: props.inputId,
-                    ref: inputRef,
-                    'aria-autocomplete': 'list',
-                    'aria-controls': ariaControls,
-                    'aria-expanded': overlayVisibleState,
-                    'aria-haspopup': 'listbox',
-                    autoComplete: 'off',
-                    className: props.inputClassName,
-                    disabled: props.disabled,
-                    maxLength: props.maxLength,
-                    name: props.name,
-                    onBlur: onMultiInputBlur,
-                    onChange: allowMoreValues ? onInputChange : undefined,
-                    onFocus: onMultiInputFocus,
-                    onKeyDown: allowMoreValues ? onInputKeyDown : undefined,
-                    onKeyPress: props.onKeyPress,
-                    onKeyUp: props.onKeyUp,
-                    placeholder: allowMoreValues ? props.placeholder : undefined,
-                    readOnly: props.readOnly || !allowMoreValues,
-                    required: props.required,
-                    role: 'combobox',
-                    style: props.inputStyle,
-                    tabIndex: props.tabIndex,
-                    type: props.type,
-                    ...ariaProps
-                },
-                ptm('input')
+                [
+                    {
+                        id: props.inputId,
+                        ref: inputRef,
+                        'aria-autocomplete': 'list',
+                        'aria-controls': ariaControls,
+                        'aria-expanded': overlayVisibleState,
+                        'aria-haspopup': 'listbox',
+                        autoComplete: 'off',
+                        className: props.inputClassName,
+                        disabled: props.disabled,
+                        maxLength: props.maxLength,
+                        name: props.name,
+                        onBlur: onMultiInputBlur,
+                        onChange: allowMoreValues ? onInputChange : undefined,
+                        onFocus: onMultiInputFocus,
+                        onKeyDown: allowMoreValues ? onInputKeyDown : undefined,
+                        onKeyPress: props.onKeyPress,
+                        onKeyUp: props.onKeyUp,
+                        placeholder: allowMoreValues ? props.placeholder : undefined,
+                        readOnly: props.readOnly || !allowMoreValues,
+                        required: props.required,
+                        role: 'combobox',
+                        style: props.inputStyle,
+                        tabIndex: props.tabIndex,
+                        type: props.type,
+                        ...ariaProps
+                    },
+                    ptm('input')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -658,17 +673,20 @@ export const AutoComplete = React.memo(
             const tokens = createChips();
             const input = createMultiInput(allowMoreValues);
             const containerProps = mergeProps(
-                {
-                    ref: multiContainerRef,
-                    className: cx('container'),
-                    onClick: allowMoreValues ? onMultiContainerClick : undefined,
-                    onContextMenu: props.onContextMenu,
-                    onMouseDown: props.onMouseDown,
-                    onDoubleClick: props.onDblClick,
-                    'data-p-focus': focusedState,
-                    'data-p-disabled': props.disabled
-                },
-                ptm('container')
+                [
+                    {
+                        ref: multiContainerRef,
+                        className: cx('container'),
+                        onClick: allowMoreValues ? onMultiContainerClick : undefined,
+                        onContextMenu: props.onContextMenu,
+                        onMouseDown: props.onMouseDown,
+                        onDoubleClick: props.onDblClick,
+                        'data-p-focus': focusedState,
+                        'data-p-disabled': props.disabled
+                    },
+                    ptm('container')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -703,10 +721,13 @@ export const AutoComplete = React.memo(
         const createLoader = () => {
             if (searchingState) {
                 const loadingIconProps = mergeProps(
-                    {
-                        className: cx('loadingIcon')
-                    },
-                    ptm('loadingIcon')
+                    [
+                        {
+                            className: cx('loadingIcon')
+                        },
+                        ptm('loadingIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
                 const loaderIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
@@ -729,14 +750,17 @@ export const AutoComplete = React.memo(
         const input = createInput();
         const dropdown = createDropdown();
         const rootProps = mergeProps(
-            {
-                id: idState,
-                ref: elementRef,
-                style: props.style,
-                className: classNames(props.className, cx('root', { focusedState }))
-            },
-            otherProps,
-            ptm('root')
+            [
+                {
+                    id: idState,
+                    ref: elementRef,
+                    style: props.style,
+                    className: classNames(props.className, cx('root', { focusedState }))
+                },
+                otherProps,
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

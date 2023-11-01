@@ -2655,20 +2655,26 @@ export const Calendar = React.memo(
         const createBackwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onPrevButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
             const previousIconProps = mergeProps(
-                {
-                    className: cx('previousIcon')
-                },
-                ptm('previousIcon')
+                [
+                    {
+                        className: cx('previousIcon')
+                    },
+                    ptm('previousIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.prevIcon || <ChevronLeftIcon {...previousIconProps} />;
             const backwardNavigatorIcon = IconUtils.getJSXIcon(icon, { ...previousIconProps }, { props });
             const previousButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('previousButton'),
-                    ...navigatorProps
-                },
-                ptm('previousButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('previousButton'),
+                        ...navigatorProps
+                    },
+                    ptm('previousButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -2682,20 +2688,26 @@ export const Calendar = React.memo(
         const createForwardNavigator = (isVisible) => {
             const navigatorProps = isVisible ? { onClick: onNextButtonClick, onKeyDown: (e) => onContainerButtonKeydown(e) } : { style: { visibility: 'hidden' } };
             const nextIconProps = mergeProps(
-                {
-                    className: cx('nextIcon')
-                },
-                ptm('nextIcon')
+                [
+                    {
+                        className: cx('nextIcon')
+                    },
+                    ptm('nextIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.nextIcon || <ChevronRightIcon {...nextIconProps} />;
             const forwardNavigatorIcon = IconUtils.getJSXIcon(icon, { ...nextIconProps }, { props });
             const nextButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('nextButton'),
-                    ...navigatorProps
-                },
-                ptm('nextButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('nextButton'),
+                        ...navigatorProps
+                    },
+                    ptm('nextButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -2717,21 +2729,27 @@ export const Calendar = React.memo(
                     .filter((option) => !!option);
                 const displayedMonthNames = displayedMonthOptions.map((option) => option.label);
                 const selectProps = mergeProps(
-                    {
-                        className: cx('select'),
-                        onChange: (e) => onMonthDropdownChange(e, e.target.value),
-                        value: viewMonth
-                    },
-                    ptm('select')
+                    [
+                        {
+                            className: cx('select'),
+                            onChange: (e) => onMonthDropdownChange(e, e.target.value),
+                            value: viewMonth
+                        },
+                        ptm('select')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const content = (
                     <select {...selectProps}>
                         {displayedMonthOptions.map((option) => {
                             const optionProps = mergeProps(
-                                {
-                                    value: option.value
-                                },
-                                ptm('option')
+                                [
+                                    {
+                                        value: option.value
+                                    },
+                                    ptm('option')
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return (
@@ -2761,12 +2779,15 @@ export const Calendar = React.memo(
             }
 
             const monthTitleProps = mergeProps(
-                {
-                    className: cx('monthTitle'),
-                    onClick: switchToMonthView,
-                    disabled: switchViewButtonDisabled()
-                },
-                ptm('monthTitle')
+                [
+                    {
+                        className: cx('monthTitle'),
+                        onClick: switchToMonthView,
+                        disabled: switchViewButtonDisabled()
+                    },
+                    ptm('monthTitle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return currentView === 'date' && <button {...monthTitleProps}>{monthNames[month]}</button>;
@@ -2787,22 +2808,28 @@ export const Calendar = React.memo(
                 const viewYear = viewDate.getFullYear();
                 const displayedYearNames = yearOptions.filter((year) => !(props.minDate && props.minDate.getFullYear() > year) && !(props.maxDate && props.maxDate.getFullYear() < year));
                 const selectProps = mergeProps(
-                    {
-                        className: cx('select'),
-                        onChange: (e) => onYearDropdownChange(e, e.target.value),
-                        value: viewYear
-                    },
-                    ptm('select')
+                    [
+                        {
+                            className: cx('select'),
+                            onChange: (e) => onYearDropdownChange(e, e.target.value),
+                            value: viewYear
+                        },
+                        ptm('select')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const content = (
                     <select {...selectProps}>
                         {displayedYearNames.map((year) => {
                             const optionProps = mergeProps(
-                                {
-                                    value: year
-                                },
-                                ptm('option')
+                                [
+                                    {
+                                        value: year
+                                    },
+                                    ptm('option')
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return (
@@ -2834,12 +2861,15 @@ export const Calendar = React.memo(
 
             const displayYear = props.numberOfMonths > 1 ? metaYear : currentYear;
             const yearTitleProps = mergeProps(
-                {
-                    className: cx('yearTitle'),
-                    onClick: (e) => switchToYearView(e),
-                    disabled: switchViewButtonDisabled()
-                },
-                ptm('yearTitle')
+                [
+                    {
+                        className: cx('yearTitle'),
+                        onClick: (e) => switchToYearView(e),
+                        disabled: switchViewButtonDisabled()
+                    },
+                    ptm('yearTitle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return currentView !== 'year' && <button {...yearTitleProps}>{displayYear}</button>;
@@ -2848,14 +2878,17 @@ export const Calendar = React.memo(
         const createTitleDecadeElement = () => {
             const years = yearPickerValues();
             const decadeTitleProps = mergeProps(
-                {
-                    className: cx('decadeTitle')
-                },
-                ptm('decadeTitle')
+                [
+                    {
+                        className: cx('decadeTitle')
+                    },
+                    ptm('decadeTitle')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (currentView === 'year') {
-                const decadeTitleTextProps = mergeProps(ptm('decadeTitleText'));
+                const decadeTitleTextProps = mergeProps([ptm('decadeTitleText')], { useTailwind: context.useTailwind });
 
                 return <span {...decadeTitleProps}>{props.decadeTemplate ? props.decadeTemplate(years) : <span {...decadeTitleTextProps}>{`${yearPickerValues()[0]} - ${yearPickerValues()[yearPickerValues().length - 1]}`}</span>}</span>;
             }
@@ -2868,10 +2901,13 @@ export const Calendar = React.memo(
             const year = createTitleYearElement(monthMetaData.year);
             const decade = createTitleDecadeElement();
             const titleProps = mergeProps(
-                {
-                    className: cx('title')
-                },
-                ptm('title')
+                [
+                    {
+                        className: cx('title')
+                    },
+                    ptm('title')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const showMonthAfterYear = localeOption('showMonthAfterYear', props.locale);
 
@@ -2885,12 +2921,15 @@ export const Calendar = React.memo(
         };
 
         const createDayNames = (weekDays) => {
-            const weekDayProps = mergeProps(ptm('weekDay'));
+            const weekDayProps = mergeProps([ptm('weekDay')], { useTailwind: context.useTailwind });
             const tableHeaderCellProps = mergeProps(
-                {
-                    scope: 'col'
-                },
-                ptm('tableHeaderCell')
+                [
+                    {
+                        scope: 'col'
+                    },
+                    ptm('tableHeaderCell')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const dayNames = weekDays.map((weekDay, index) => (
                 <th {...tableHeaderCellProps} key={`${weekDay}-${index}`}>
@@ -2900,19 +2939,22 @@ export const Calendar = React.memo(
 
             if (props.showWeek) {
                 const weekHeaderProps = mergeProps(
-                    {
-                        scope: 'col',
-                        className: cx('weekHeader'),
-                        'data-p-disabled': props.showWeek
-                    },
-                    ptm('weekHeader', {
-                        context: {
-                            disabled: props.showWeek
-                        }
-                    })
+                    [
+                        {
+                            scope: 'col',
+                            className: cx('weekHeader'),
+                            'data-p-disabled': props.showWeek
+                        },
+                        ptm('weekHeader', {
+                            context: {
+                                disabled: props.showWeek
+                            }
+                        })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
-                const weekLabel = mergeProps(ptm('weekLabel'));
+                const weekLabel = mergeProps([ptm('weekLabel')], { useTailwind: context.useTailwind });
 
                 const weekHeader = (
                     <th {...weekHeaderProps} key="wn">
@@ -2930,19 +2972,22 @@ export const Calendar = React.memo(
             const content = props.dateTemplate ? props.dateTemplate(date) : date.day;
 
             const dayLabelProps = mergeProps(
-                {
-                    className: cx('dayLabel', { className }),
-                    onClick: (e) => onDateSelect(e, date),
-                    onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex),
-                    'data-p-highlight': isSelected(date),
-                    'data-p-disabled': !date.selectable
-                },
-                ptm('dayLabel', {
-                    context: {
-                        selected: isSelected(date),
-                        disabled: !date.selectable
-                    }
-                })
+                [
+                    {
+                        className: cx('dayLabel', { className }),
+                        onClick: (e) => onDateSelect(e, date),
+                        onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex),
+                        'data-p-highlight': isSelected(date),
+                        'data-p-disabled': !date.selectable
+                    },
+                    ptm('dayLabel', {
+                        context: {
+                            selected: isSelected(date),
+                            disabled: !date.selectable
+                        }
+                    })
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -2959,18 +3004,21 @@ export const Calendar = React.memo(
                 const dateClassName = classNames({ 'p-highlight': selected, 'p-disabled': !date.selectable });
                 const content = date.otherMonth && !props.showOtherMonths ? null : createDateCellContent(date, dateClassName, groupIndex);
                 const dayProps = mergeProps(
-                    {
-                        className: cx('day', { date }),
-                        'data-p-today': date.today,
-                        'data-p-other-month': date.otherMonth
-                    },
-                    ptm('day', {
-                        context: {
-                            date,
-                            today: date.today,
-                            otherMonth: date.otherMonth
-                        }
-                    })
+                    [
+                        {
+                            className: cx('day', { date }),
+                            'data-p-today': date.today,
+                            'data-p-other-month': date.otherMonth
+                        },
+                        ptm('day', {
+                            context: {
+                                date,
+                                today: date.today,
+                                otherMonth: date.otherMonth
+                            }
+                        })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -2982,22 +3030,28 @@ export const Calendar = React.memo(
 
             if (props.showWeek) {
                 const weekNumberProps = mergeProps(
-                    {
-                        className: cx('weekNumber')
-                    },
-                    ptm('weekNumber')
+                    [
+                        {
+                            className: cx('weekNumber')
+                        },
+                        ptm('weekNumber')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const weekLabelContainerProps = mergeProps(
-                    {
-                        className: cx('weekLabelContainer'),
-                        'data-p-disabled': props.showWeek
-                    },
-                    ptm('weekLabelContainer', {
-                        context: {
-                            disabled: props.showWeek
-                        }
-                    })
+                    [
+                        {
+                            className: cx('weekLabelContainer'),
+                            'data-p-disabled': props.showWeek
+                        },
+                        ptm('weekLabelContainer', {
+                            context: {
+                                disabled: props.showWeek
+                            }
+                        })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const weekNumberCell = (
@@ -3013,7 +3067,7 @@ export const Calendar = React.memo(
         };
 
         const createDates = (monthMetaData, groupIndex) => {
-            const tableBodyRowProps = mergeProps(ptm('tableBodyRowProps'));
+            const tableBodyRowProps = mergeProps([ptm('tableBodyRowProps')], { useTailwind: context.useTailwind });
 
             return monthMetaData.dates.map((weekDates, index) => (
                 <tr {...tableBodyRowProps} key={index}>
@@ -3026,21 +3080,27 @@ export const Calendar = React.memo(
             const dayNames = createDayNames(weekDays);
             const dates = createDates(monthMetaData, groupIndex);
             const containerProps = mergeProps(
-                {
-                    className: cx('container'),
-                    key: UniqueComponentId('calendar_container_')
-                },
-                ptm('container')
+                [
+                    {
+                        className: cx('container'),
+                        key: UniqueComponentId('calendar_container_')
+                    },
+                    ptm('container')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const tableProps = mergeProps(
-                {
-                    className: cx('table')
-                },
-                ptm('table')
+                [
+                    {
+                        className: cx('table')
+                    },
+                    ptm('table')
+                ],
+                { useTailwind: context.useTailwind }
             );
-            const tableHeaderProps = mergeProps(ptm('tableHeader'));
-            const tableHeaderRowProps = mergeProps(ptm('tableHeaderRow'));
-            const tableBodyProps = mergeProps(ptm('tableBody'));
+            const tableHeaderProps = mergeProps([ptm('tableHeader')], { useTailwind: context.useTailwind });
+            const tableHeaderRowProps = mergeProps([ptm('tableHeaderRow')], { useTailwind: context.useTailwind });
+            const tableBodyProps = mergeProps([ptm('tableBody')], { useTailwind: context.useTailwind });
 
             return (
                 currentView === 'date' && (
@@ -3066,18 +3126,24 @@ export const Calendar = React.memo(
             const header = props.headerTemplate ? props.headerTemplate() : null;
             const monthKey = monthMetaData.month + '-' + monthMetaData.year;
             const groupProps = mergeProps(
-                {
-                    className: cx('group')
-                },
-                ptm('group')
+                [
+                    {
+                        className: cx('group')
+                    },
+                    ptm('group')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const headerProps = mergeProps(
-                {
-                    className: cx('header'),
-                    key: index
-                },
-                ptm('header')
+                [
+                    {
+                        className: cx('header'),
+                        key: index
+                    },
+                    ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -3097,10 +3163,13 @@ export const Calendar = React.memo(
             const groups = monthsMetaData.map(createMonth);
 
             const groupContainerProps = mergeProps(
-                {
-                    className: cx('groupContainer')
-                },
-                ptm('groupContainer')
+                [
+                    {
+                        className: cx('groupContainer')
+                    },
+                    ptm('groupContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...groupContainerProps}>{groups}</div>;
@@ -3142,31 +3211,43 @@ export const Calendar = React.memo(
             const yearElement = createTitleYearElement(getViewDate().getFullYear());
             const decade = createTitleDecadeElement();
             const groupContainerProps = mergeProps(
-                {
-                    className: cx('groupContainer')
-                },
-                ptm('groupContainer')
+                [
+                    {
+                        className: cx('groupContainer')
+                    },
+                    ptm('groupContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const groupProps = mergeProps(
-                {
-                    className: cx('group')
-                },
-                ptm('group')
+                [
+                    {
+                        className: cx('group')
+                    },
+                    ptm('group')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const headerProps = mergeProps(
-                {
-                    className: cx('header')
-                },
-                ptm('header')
+                [
+                    {
+                        className: cx('header')
+                    },
+                    ptm('header')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const titleProps = mergeProps(
-                {
-                    className: cx('title')
-                },
-                ptm('title')
+                [
+                    {
+                        className: cx('title')
+                    },
+                    ptm('title')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -3199,8 +3280,8 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const incrementIconProps = mergeProps(ptm('incrementIcon'));
-        const decrementIconProps = mergeProps(ptm('decrementIcon'));
+        const incrementIconProps = mergeProps([ptm('incrementIcon')], { useTailwind: context.useTailwind });
+        const decrementIconProps = mergeProps([ptm('decrementIcon')], { useTailwind: context.useTailwind });
         const incrementIcon = IconUtils.getJSXIcon(props.incrementIcon || <ChevronUpIcon {...incrementIconProps} />, { ...incrementIconProps }, { props });
         const decrementIcon = IconUtils.getJSXIcon(props.decrementIcon || <ChevronDownIcon {...decrementIconProps} />, { ...decrementIconProps }, { props });
 
@@ -3217,37 +3298,46 @@ export const Calendar = React.memo(
                 else if (hour > 11 && hour !== 12) hour = hour - 12;
             }
 
-            const hourProps = mergeProps(ptm('hour'));
+            const hourProps = mergeProps([ptm('hour')], { useTailwind: context.useTailwind });
             const hourDisplay = hour < 10 ? '0' + hour : hour;
             const hourPickerProps = mergeProps(
-                {
-                    className: cx('hourPicker')
-                },
-                ptm('hourPicker')
+                [
+                    {
+                        className: cx('hourPicker')
+                    },
+                    ptm('hourPicker')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const incrementButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('incrementButton'),
-                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 0, 1),
-                    onMouseUp: onTimePickerElementMouseUp,
-                    onMouseLeave: onTimePickerElementMouseLeave,
-                    onKeyDown: (e) => onContainerButtonKeydown(e)
-                },
-                ptm('incrementButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('incrementButton'),
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 0, 1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('incrementButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const decrementButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('decrementButton'),
-                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 0, -1),
-                    onMouseUp: onTimePickerElementMouseUp,
-                    onMouseLeave: onTimePickerElementMouseLeave,
-                    onKeyDown: (e) => onContainerButtonKeydown(e)
-                },
-                ptm('decrementButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('decrementButton'),
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 0, -1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('decrementButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -3270,37 +3360,46 @@ export const Calendar = React.memo(
             let minute = doStepMinute(currentTime.getMinutes());
 
             minute = minute > 59 ? minute - 60 : minute;
-            const minuteProps = mergeProps(ptm('minute'));
+            const minuteProps = mergeProps([ptm('minute')], { useTailwind: context.useTailwind });
             const minuteDisplay = minute < 10 ? '0' + minute : minute;
             const minutePickerProps = mergeProps(
-                {
-                    className: cx('minutePicker')
-                },
-                ptm('minutePicker')
+                [
+                    {
+                        className: cx('minutePicker')
+                    },
+                    ptm('minutePicker')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const incrementButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('incrementButton'),
-                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 1, 1),
-                    onMouseUp: onTimePickerElementMouseUp,
-                    onMouseLeave: onTimePickerElementMouseLeave,
-                    onKeyDown: (e) => onContainerButtonKeydown(e)
-                },
-                ptm('incrementButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('incrementButton'),
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 1, 1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('incrementButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const decrementButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: cx('decrementButton'),
-                    onMouseDown: (e) => onTimePickerElementMouseDown(e, 1, -1),
-                    onMouseUp: onTimePickerElementMouseUp,
-                    onMouseLeave: onTimePickerElementMouseLeave,
-                    onKeyDown: (e) => onContainerButtonKeydown(e)
-                },
-                ptm('decrementButton')
+                [
+                    {
+                        type: 'button',
+                        className: cx('decrementButton'),
+                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 1, -1),
+                        onMouseUp: onTimePickerElementMouseUp,
+                        onMouseLeave: onTimePickerElementMouseLeave,
+                        onKeyDown: (e) => onContainerButtonKeydown(e)
+                    },
+                    ptm('decrementButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -3321,38 +3420,47 @@ export const Calendar = React.memo(
         const createSecondPicker = () => {
             if (props.showSeconds) {
                 const currentTime = getCurrentDateTime();
-                const secondProps = mergeProps(ptm('second'));
+                const secondProps = mergeProps([ptm('second')], { useTailwind: context.useTailwind });
                 const second = currentTime.getSeconds();
                 const secondDisplay = second < 10 ? '0' + second : second;
                 const secondPickerProps = mergeProps(
-                    {
-                        className: cx('secondPicker')
-                    },
-                    ptm('secondPicker')
+                    [
+                        {
+                            className: cx('secondPicker')
+                        },
+                        ptm('secondPicker')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const incrementButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('incrementButton'),
-                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 2, 1),
-                        onMouseUp: onTimePickerElementMouseUp,
-                        onMouseLeave: onTimePickerElementMouseLeave,
-                        onKeyDown: (e) => onContainerButtonKeydown(e)
-                    },
-                    ptm('incrementButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('incrementButton'),
+                            onMouseDown: (e) => onTimePickerElementMouseDown(e, 2, 1),
+                            onMouseUp: onTimePickerElementMouseUp,
+                            onMouseLeave: onTimePickerElementMouseLeave,
+                            onKeyDown: (e) => onContainerButtonKeydown(e)
+                        },
+                        ptm('incrementButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const decrementButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('decrementButton'),
-                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 2, -1),
-                        onMouseUp: onTimePickerElementMouseUp,
-                        onMouseLeave: onTimePickerElementMouseLeave,
-                        onKeyDown: (e) => onContainerButtonKeydown(e)
-                    },
-                    ptm('decrementButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('decrementButton'),
+                            onMouseDown: (e) => onTimePickerElementMouseDown(e, 2, -1),
+                            onMouseUp: onTimePickerElementMouseUp,
+                            onMouseLeave: onTimePickerElementMouseLeave,
+                            onKeyDown: (e) => onContainerButtonKeydown(e)
+                        },
+                        ptm('decrementButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -3376,38 +3484,47 @@ export const Calendar = React.memo(
         const createMiliSecondPicker = () => {
             if (props.showMillisec) {
                 const currentTime = getCurrentDateTime();
-                const millisecondProps = mergeProps(ptm('millisecond'));
+                const millisecondProps = mergeProps([ptm('millisecond')], { useTailwind: context.useTailwind });
                 const millisecond = currentTime.getMilliseconds();
                 const millisecondDisplay = millisecond < 100 ? (millisecond < 10 ? '00' : '0') + millisecond : millisecond;
                 const millisecondPickerProps = mergeProps(
-                    {
-                        className: cx('millisecondPicker')
-                    },
-                    ptm('millisecondPicker')
+                    [
+                        {
+                            className: cx('millisecondPicker')
+                        },
+                        ptm('millisecondPicker')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const incrementButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('incrementButton'),
-                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 3, 1),
-                        onMouseUp: onTimePickerElementMouseUp,
-                        onMouseLeave: onTimePickerElementMouseLeave,
-                        onKeyDown: (e) => onContainerButtonKeydown(e)
-                    },
-                    ptm('incrementButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('incrementButton'),
+                            onMouseDown: (e) => onTimePickerElementMouseDown(e, 3, 1),
+                            onMouseUp: onTimePickerElementMouseUp,
+                            onMouseLeave: onTimePickerElementMouseLeave,
+                            onKeyDown: (e) => onContainerButtonKeydown(e)
+                        },
+                        ptm('incrementButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const decrementButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('decrementButton'),
-                        onMouseDown: (e) => onTimePickerElementMouseDown(e, 3, -1),
-                        onMouseUp: onTimePickerElementMouseUp,
-                        onMouseLeave: onTimePickerElementMouseLeave,
-                        onKeyDown: (e) => onContainerButtonKeydown(e)
-                    },
-                    ptm('decrementButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('decrementButton'),
+                            onMouseDown: (e) => onTimePickerElementMouseDown(e, 3, -1),
+                            onMouseUp: onTimePickerElementMouseUp,
+                            onMouseLeave: onTimePickerElementMouseLeave,
+                            onKeyDown: (e) => onContainerButtonKeydown(e)
+                        },
+                        ptm('decrementButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -3433,30 +3550,39 @@ export const Calendar = React.memo(
                 const currentTime = getCurrentDateTime();
                 const hour = currentTime.getHours();
                 const display = hour > 11 ? 'PM' : 'AM';
-                const ampmProps = mergeProps(ptm('ampm'));
+                const ampmProps = mergeProps([ptm('ampm')], { useTailwind: context.useTailwind });
                 const ampmPickerProps = mergeProps(
-                    {
-                        className: cx('ampmPicker')
-                    },
-                    ptm('ampmPicker')
+                    [
+                        {
+                            className: cx('ampmPicker')
+                        },
+                        ptm('ampmPicker')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const incrementButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('incrementButton'),
-                        onClick: (e) => toggleAmPm(e)
-                    },
-                    ptm('incrementButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('incrementButton'),
+                            onClick: (e) => toggleAmPm(e)
+                        },
+                        ptm('incrementButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const decrementButtonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('decrementButton'),
-                        onClick: (e) => toggleAmPm(e)
-                    },
-                    ptm('decrementButton')
+                    [
+                        {
+                            type: 'button',
+                            className: cx('decrementButton'),
+                            onClick: (e) => toggleAmPm(e)
+                        },
+                        ptm('decrementButton')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -3479,13 +3605,16 @@ export const Calendar = React.memo(
 
         const createSeparator = (separator) => {
             const separatorContainerProps = mergeProps(
-                {
-                    className: cx('separatorContainer')
-                },
-                ptm('separatorContainer')
+                [
+                    {
+                        className: cx('separatorContainer')
+                    },
+                    ptm('separatorContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
-            const separatorProps = mergeProps(ptm('separator'));
+            const separatorProps = mergeProps([ptm('separator')], { useTailwind: context.useTailwind });
 
             return (
                 <div {...separatorContainerProps}>
@@ -3497,10 +3626,13 @@ export const Calendar = React.memo(
         const createTimePicker = () => {
             if ((props.showTime || props.timeOnly) && currentView === 'date') {
                 const timePickerProps = mergeProps(
-                    {
-                        className: cx('timePicker')
-                    },
-                    ptm('timePicker')
+                    [
+                        {
+                            className: cx('timePicker')
+                        },
+                        ptm('timePicker')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -3587,10 +3719,13 @@ export const Calendar = React.memo(
             if (props.showButtonBar) {
                 const { today, clear } = localeOptions(props.locale);
                 const buttonbarProps = mergeProps(
-                    {
-                        className: cx('buttonbar')
-                    },
-                    ptm('buttonbar')
+                    [
+                        {
+                            className: cx('buttonbar')
+                        },
+                        ptm('buttonbar')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -3608,10 +3743,13 @@ export const Calendar = React.memo(
             if (props.footerTemplate) {
                 const content = props.footerTemplate();
                 const footerProps = mergeProps(
-                    {
-                        className: cx('footer')
-                    },
-                    ptm('footer')
+                    [
+                        {
+                            className: cx('footer')
+                        },
+                        ptm('footer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -3623,31 +3761,37 @@ export const Calendar = React.memo(
         const createMonthPicker = () => {
             if (currentView === 'month') {
                 const monthPickerProps = mergeProps(
-                    {
-                        className: cx('monthPicker')
-                    },
-                    ptm('monthPicker')
+                    [
+                        {
+                            className: cx('monthPicker')
+                        },
+                        ptm('monthPicker')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
                     <div {...monthPickerProps}>
                         {monthPickerValues().map((m, i) => {
                             const monthProps = mergeProps(
-                                {
-                                    className: cx('month', { isMonthSelected, isSelectable, i, currentYear }),
-                                    onClick: (event) => onMonthSelect(event, i),
-                                    onKeyDown: (event) => onMonthCellKeydown(event, i),
-                                    'data-p-disabled': !m.selectable,
-                                    'data-p-highlight': isMonthSelected(i)
-                                },
-                                ptm('month', {
-                                    context: {
-                                        month: m,
-                                        monthIndex: i,
-                                        selected: isMonthSelected(i),
-                                        disabled: !m.selectable
-                                    }
-                                })
+                                [
+                                    {
+                                        className: cx('month', { isMonthSelected, isSelectable, i, currentYear }),
+                                        onClick: (event) => onMonthSelect(event, i),
+                                        onKeyDown: (event) => onMonthCellKeydown(event, i),
+                                        'data-p-disabled': !m.selectable,
+                                        'data-p-highlight': isMonthSelected(i)
+                                    },
+                                    ptm('month', {
+                                        context: {
+                                            month: m,
+                                            monthIndex: i,
+                                            selected: isMonthSelected(i),
+                                            disabled: !m.selectable
+                                        }
+                                    })
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return (
@@ -3666,30 +3810,36 @@ export const Calendar = React.memo(
         const createYearPicker = () => {
             if (currentView === 'year') {
                 const yearPickerProps = mergeProps(
-                    {
-                        className: cx('yearPicker')
-                    },
-                    ptm('yearPicker')
+                    [
+                        {
+                            className: cx('yearPicker')
+                        },
+                        ptm('yearPicker')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
                     <div {...yearPickerProps}>
                         {yearPickerValues().map((y, i) => {
                             const yearProps = mergeProps(
-                                {
-                                    className: cx('year', { isYearSelected, isSelectable, y }),
-                                    onClick: (event) => onYearSelect(event, y),
-                                    'data-p-highlight': isYearSelected(y),
-                                    'data-p-disabled': !isSelectable(0, -1, y)
-                                },
-                                ptm('year', {
-                                    context: {
-                                        year: y,
-                                        yearIndex: i,
-                                        selected: isYearSelected(i),
-                                        disabled: !y.selectable
-                                    }
-                                })
+                                [
+                                    {
+                                        className: cx('year', { isYearSelected, isSelectable, y }),
+                                        onClick: (event) => onYearSelect(event, y),
+                                        'data-p-highlight': isYearSelected(y),
+                                        'data-p-disabled': !isSelectable(0, -1, y)
+                                    },
+                                    ptm('year', {
+                                        context: {
+                                            year: y,
+                                            yearIndex: i,
+                                            selected: isYearSelected(i),
+                                            disabled: !y.selectable
+                                        }
+                                    })
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return (
@@ -3724,13 +3874,16 @@ export const Calendar = React.memo(
         const yearPicker = createYearPicker();
         const isFilled = DomHandler.hasClass(inputRef.current, 'p-filled') && inputRef.current.value !== '';
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: classNames(props.className, cx('root', { focusedState, isFilled })),
-                style: props.style
-            },
-            CalendarBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: classNames(props.className, cx('root', { focusedState, isFilled })),
+                    style: props.style
+                },
+                CalendarBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

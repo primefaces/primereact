@@ -1072,26 +1072,32 @@ export const InputNumber = React.memo(
 
         const createUpButton = () => {
             const incrementIconProps = mergeProps(
-                {
-                    className: cx('incrementIcon')
-                },
-                ptm('incrementIcon')
+                [
+                    {
+                        className: cx('incrementIcon')
+                    },
+                    ptm('incrementIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.incrementButtonIcon || <AngleUpIcon {...incrementIconProps} />;
             const upButton = IconUtils.getJSXIcon(icon, { ...incrementIconProps }, { props });
             const incrementButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: classNames(props.incrementButtonClassName, cx('incrementButton')),
-                    onPointerLeave: onUpButtonMouseLeave,
-                    onPointerDown: (e) => onUpButtonMouseDown(e),
-                    onPointerUp: onUpButtonMouseUp,
-                    onKeyDown: (e) => onUpButtonKeyDown(e),
-                    onKeyUp: onUpButtonKeyUp,
-                    disabled: props.disabled,
-                    tabIndex: -1
-                },
-                ptm('incrementButton')
+                [
+                    {
+                        type: 'button',
+                        className: classNames(props.incrementButtonClassName, cx('incrementButton')),
+                        onPointerLeave: onUpButtonMouseLeave,
+                        onPointerDown: (e) => onUpButtonMouseDown(e),
+                        onPointerUp: onUpButtonMouseUp,
+                        onKeyDown: (e) => onUpButtonKeyDown(e),
+                        onKeyUp: onUpButtonKeyUp,
+                        disabled: props.disabled,
+                        tabIndex: -1
+                    },
+                    ptm('incrementButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -1104,26 +1110,32 @@ export const InputNumber = React.memo(
 
         const createDownButton = () => {
             const decrementIconProps = mergeProps(
-                {
-                    className: cx('decrementIcon')
-                },
-                ptm('decrementIcon')
+                [
+                    {
+                        className: cx('decrementIcon')
+                    },
+                    ptm('decrementIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.decrementButtonIcon || <AngleDownIcon {...decrementIconProps} />;
             const downButton = IconUtils.getJSXIcon(icon, { ...decrementIconProps }, { props });
             const decrementButtonProps = mergeProps(
-                {
-                    type: 'button',
-                    className: classNames(props.decrementButtonClassName, cx('decrementButton')),
-                    onPointerLeave: onDownButtonMouseLeave,
-                    onPointerDown: (e) => onDownButtonMouseDown(e),
-                    onPointerUp: onDownButtonMouseUp,
-                    onKeyDown: (e) => onDownButtonKeyDown(e),
-                    onKeyUp: onDownButtonKeyUp,
-                    disabled: props.disabled,
-                    tabIndex: -1
-                },
-                ptm('decrementButton')
+                [
+                    {
+                        type: 'button',
+                        className: classNames(props.decrementButtonClassName, cx('decrementButton')),
+                        onPointerLeave: onDownButtonMouseLeave,
+                        onPointerDown: (e) => onDownButtonMouseDown(e),
+                        onPointerUp: onDownButtonMouseUp,
+                        onKeyDown: (e) => onDownButtonKeyDown(e),
+                        onKeyUp: onDownButtonKeyUp,
+                        disabled: props.disabled,
+                        tabIndex: -1
+                    },
+                    ptm('decrementButton')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -1138,10 +1150,13 @@ export const InputNumber = React.memo(
             const upButton = props.showButtons && createUpButton();
             const downButton = props.showButtons && createDownButton();
             const buttonGroupProps = mergeProps(
-                {
-                    className: cx('buttonGroup')
-                },
-                ptm('buttonGroup')
+                [
+                    {
+                        className: cx('buttonGroup')
+                    },
+                    ptm('buttonGroup')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (stacked) {
@@ -1168,13 +1183,16 @@ export const InputNumber = React.memo(
         const inputElement = createInputElement();
         const buttonGroup = createButtonGroup();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
-                style: props.style
-            },
-            otherProps,
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
+                    style: props.style
+                },
+                otherProps,
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

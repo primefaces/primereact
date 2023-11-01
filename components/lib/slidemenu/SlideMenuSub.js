@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { AngleRightIcon } from '../icons/angleright';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const SlideMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const [renderSubMenu, setRenderSubMenu] = React.useState({});
     const { ptm, cx, sx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (item, key) => {
         return ptm(key, {
@@ -47,13 +49,16 @@ export const SlideMenuSub = React.memo((props) => {
         const key = props.id + '_sep_' + index;
 
         const separatorProps = mergeProps(
-            {
-                id: key,
-                key,
-                className: cx('separator'),
-                role: 'separator'
-            },
-            ptm('separator', { hostName: props.hostName })
+            [
+                {
+                    id: key,
+                    key,
+                    className: cx('separator'),
+                    role: 'separator'
+                },
+                ptm('separator', { hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return <li {...separatorProps}></li>;
@@ -97,36 +102,48 @@ export const SlideMenuSub = React.memo((props) => {
         const active = activeItemState === item;
         const iconClassName = classNames('p-menuitem-icon', item.icon);
         const iconProps = mergeProps(
-            {
-                className: cx('icon')
-            },
-            getPTOptions(item, 'icon')
+            [
+                {
+                    className: cx('icon')
+                },
+                getPTOptions(item, 'icon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = IconUtils.getJSXIcon(item.icon, { ...iconProps }, { props: props.menuProps });
         const submenuIconProps = mergeProps(
-            {
-                className: cx('submenuIcon')
-            },
-            getPTOptions(item, 'submenuIcon')
+            [
+                {
+                    className: cx('submenuIcon')
+                },
+                getPTOptions(item, 'submenuIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            getPTOptions(item, 'label')
+            [
+                {
+                    className: cx('label')
+                },
+                getPTOptions(item, 'label')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props });
         const label = item.label && <span {...labelProps}>{item.label}</span>;
         const submenu = createSubmenu(item, index);
         const actionProps = mergeProps(
-            {
-                href: item.url || '#',
-                className: cx('action'),
-                target: item.target,
-                onClick: (event) => onItemClick(event, item, index),
-                'aria-disabled': item.disabled
-            },
-            getPTOptions(item, 'action')
+            [
+                {
+                    href: item.url || '#',
+                    className: cx('action'),
+                    target: item.target,
+                    onClick: (event) => onItemClick(event, item, index),
+                    'aria-disabled': item.disabled
+                },
+                getPTOptions(item, 'action')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let content = (
@@ -153,13 +170,16 @@ export const SlideMenuSub = React.memo((props) => {
         }
 
         const menuitemProps = mergeProps(
-            {
-                id: key,
-                key,
-                className: cx('menuitem', { active, item }),
-                style: item.style
-            },
-            getPTOptions(item, 'menuitem')
+            [
+                {
+                    id: key,
+                    key,
+                    className: cx('menuitem', { active, item }),
+                    style: item.style
+                },
+                getPTOptions(item, 'menuitem')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -180,11 +200,14 @@ export const SlideMenuSub = React.memo((props) => {
 
     const items = createItems();
     const menuProps = mergeProps(
-        {
-            className: cx('menu', { subProps: props }),
-            style: sx('menu', { subProps: props })
-        },
-        ptm('menu', { hostName: props.hostName })
+        [
+            {
+                className: cx('menu', { subProps: props }),
+                style: sx('menu', { subProps: props })
+            },
+            ptm('menu', { hostName: props.hostName })
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return <ul {...menuProps}>{items}</ul>;

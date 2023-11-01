@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { AngleDoubleRightIcon } from '../icons/angledoubleright';
 import { Ripple } from '../ripple/Ripple';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { LastPageLinkBase } from './PaginatorBase';
-import { PrimeReactContext } from '../api/Api';
 
 export const LastPageLink = React.memo((inProps) => {
     const context = React.useContext(PrimeReactContext);
@@ -23,22 +22,28 @@ export const LastPageLink = React.memo((inProps) => {
     const className = classNames('p-paginator-last p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon';
     const lastPageIconProps = mergeProps(
-        {
-            className: cx('lastPageIcon')
-        },
-        getPTOptions('lastPageIcon')
+        [
+            {
+                className: cx('lastPageIcon')
+            },
+            getPTOptions('lastPageIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const icon = props.lastPageLinkIcon || <AngleDoubleRightIcon {...lastPageIconProps} />;
     const lastPageLinkIcon = IconUtils.getJSXIcon(icon, { ...lastPageIconProps }, { props });
     const lastPageButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('lastPageButton', { disabled: props.disabled }),
-            onClick: props.onClick,
-            disabled: props.disabled,
-            'aria-label': ariaLabel('lastPageLabel')
-        },
-        getPTOptions('lastPageButton')
+        [
+            {
+                type: 'button',
+                className: cx('lastPageButton', { disabled: props.disabled }),
+                onClick: props.onClick,
+                disabled: props.disabled,
+                'aria-label': ariaLabel('lastPageLabel')
+            },
+            getPTOptions('lastPageButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const element = (
         <button {...lastPageButtonProps}>

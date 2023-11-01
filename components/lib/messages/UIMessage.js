@@ -7,10 +7,12 @@ import { InfoCircleIcon } from '../icons/infocircle';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { classNames, IconUtils, mergeProps } from '../utils/Utils';
 
 export const UIMessage = React.memo(
     React.forwardRef((props, ref) => {
+        const context = React.useContext(PrimeReactContext);
         const {
             message: messageInfo,
             metaData: parentMetaData,
@@ -54,26 +56,32 @@ export const UIMessage = React.memo(
                 const ariaLabel = localeOption('close');
 
                 const buttonIconProps = mergeProps(
-                    {
-                        className: cx('uimessage.buttonicon'),
-                        'aria-hidden': true
-                    },
-                    getPTOptions('buttonicon', parentParams),
-                    ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('uimessage.buttonicon'),
+                            'aria-hidden': true
+                        },
+                        getPTOptions('buttonicon', parentParams),
+                        ptmo(pt, 'buttonicon', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const icon = _closeIcon || <TimesIcon {...buttonIconProps} />;
                 const closeIcon = IconUtils.getJSXIcon(icon, { ...buttonIconProps }, { props });
 
                 const buttonProps = mergeProps(
-                    {
-                        type: 'button',
-                        className: cx('uimessage.button'),
-                        'aria-label': ariaLabel,
-                        onClick: onClose
-                    },
-                    getPTOptions('button', parentParams),
-                    ptmo(pt, 'button', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            type: 'button',
+                            className: cx('uimessage.button'),
+                            'aria-label': ariaLabel,
+                            onClick: onClose
+                        },
+                        getPTOptions('button', parentParams),
+                        ptmo(pt, 'button', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -90,11 +98,14 @@ export const UIMessage = React.memo(
         const createMessage = () => {
             if (props.message) {
                 const iconProps = mergeProps(
-                    {
-                        className: cx('uimessage.icon')
-                    },
-                    getPTOptions('icon', parentParams),
-                    ptmo(pt, 'icon', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('uimessage.icon')
+                        },
+                        getPTOptions('icon', parentParams),
+                        ptmo(pt, 'icon', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 let icon = _icon;
@@ -121,19 +132,25 @@ export const UIMessage = React.memo(
                 const iconContent = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
 
                 const summaryProps = mergeProps(
-                    {
-                        className: cx('uimessage.summary')
-                    },
-                    getPTOptions('summary', parentParams),
-                    ptmo(pt, 'summary', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('uimessage.summary')
+                        },
+                        getPTOptions('summary', parentParams),
+                        ptmo(pt, 'summary', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const detailProps = mergeProps(
-                    {
-                        className: cx('uimessage.detail')
-                    },
-                    getPTOptions('detail', parentParams),
-                    ptmo(pt, 'detail', { ...params, hostName: props.hostName })
+                    [
+                        {
+                            className: cx('uimessage.detail')
+                        },
+                        getPTOptions('detail', parentParams),
+                        ptmo(pt, 'detail', { ...params, hostName: props.hostName })
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -154,23 +171,29 @@ export const UIMessage = React.memo(
         const message = createMessage();
 
         const wrapperProps = mergeProps(
-            {
-                className: classNames(_contentClassName, cx('uimessage.wrapper')),
-                style: contentStyle
-            },
-            getPTOptions('wrapper', parentParams),
-            ptmo(pt, 'wrapper', { ...params, hostName: props.hostName })
+            [
+                {
+                    className: classNames(_contentClassName, cx('uimessage.wrapper')),
+                    style: contentStyle
+                },
+                getPTOptions('wrapper', parentParams),
+                ptmo(pt, 'wrapper', { ...params, hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                ref,
-                className: classNames(_className, cx('uimessage.root', { severity })),
-                style,
-                onClick
-            },
-            getPTOptions('root', parentParams),
-            ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            [
+                {
+                    ref,
+                    className: classNames(_className, cx('uimessage.root', { severity })),
+                    style,
+                    onClick
+                },
+                getPTOptions('root', parentParams),
+                ptmo(pt, 'root', { ...params, hostName: props.hostName })
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

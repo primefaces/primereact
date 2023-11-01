@@ -88,16 +88,22 @@ export const TriStateCheckbox = React.memo(
         const otherProps = TriStateCheckboxBase.getOtherProps(props);
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const checkIconProps = mergeProps(
-            {
-                className: cx('checkIcon')
-            },
-            ptm('checkIcon')
+            [
+                {
+                    className: cx('checkIcon')
+                },
+                ptm('checkIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const uncheckIconProps = mergeProps(
-            {
-                className: cx('checkIcon')
-            },
-            ptm('uncheckIcon')
+            [
+                {
+                    className: cx('checkIcon')
+                },
+                ptm('uncheckIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         let icon;
@@ -114,35 +120,44 @@ export const TriStateCheckbox = React.memo(
         const ariaChecked = props.value ? 'true' : 'false';
 
         const checkboxProps = mergeProps(
-            {
-                className: cx('checkbox', { focusedState }),
-                tabIndex: props.tabIndex,
-                onFocus: onFocus,
-                onBlur: onBlur,
-                onKeyDown: onKeyDown,
-                role: 'checkbox',
-                'aria-checked': ariaChecked,
-                ...ariaProps
-            },
-            ptm('checkbox')
+            [
+                {
+                    className: cx('checkbox', { focusedState }),
+                    tabIndex: props.tabIndex,
+                    onFocus: onFocus,
+                    onBlur: onBlur,
+                    onKeyDown: onKeyDown,
+                    role: 'checkbox',
+                    'aria-checked': ariaChecked,
+                    ...ariaProps
+                },
+                ptm('checkbox')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const srOnlyAriaProps = mergeProps(
-            {
-                className: 'p-sr-only p-hidden-accessible',
-                'aria-live': 'polite'
-            },
-            ptm('srOnlyAria')
+            [
+                {
+                    className: 'p-sr-only p-hidden-accessible',
+                    'aria-live': 'polite'
+                },
+                ptm('srOnlyAria')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root')),
-                style: props.style,
-                onClick: onClick
-            },
-            TriStateCheckboxBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root')),
+                    style: props.style,
+                    onClick: onClick
+                },
+                TriStateCheckboxBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

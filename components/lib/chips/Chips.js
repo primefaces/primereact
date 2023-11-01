@@ -228,11 +228,14 @@ export const Chips = React.memo(
 
         const createRemoveIcon = (value, index) => {
             const iconProps = mergeProps(
-                {
-                    className: cx('removeTokenIcon'),
-                    onClick: (event) => removeItem(event, index)
-                },
-                ptm('removeTokenIcon')
+                [
+                    {
+                        className: cx('removeTokenIcon'),
+                        onClick: (event) => removeItem(event, index)
+                    },
+                    ptm('removeTokenIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = props.removeIcon || <TimesCircleIcon {...iconProps} />;
             const removeIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
@@ -247,20 +250,26 @@ export const Chips = React.memo(
         const createItem = (value, index) => {
             const content = props.itemTemplate ? props.itemTemplate(value) : value;
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const label = <span {...labelProps}>{content}</span>;
             const icon = createRemoveIcon(value, index);
             const tokenProps = mergeProps(
-                {
-                    key: index,
-                    className: cx('token'),
-                    'data-p-highlight': true
-                },
-                ptm('token')
+                [
+                    {
+                        key: index,
+                        className: cx('token'),
+                        'data-p-highlight': true
+                    },
+                    ptm('token')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -273,28 +282,34 @@ export const Chips = React.memo(
 
         const createInput = () => {
             const inputTokenProps = mergeProps(
-                {
-                    className: cx('inputToken')
-                },
-                ptm('inputToken')
+                [
+                    {
+                        className: cx('inputToken')
+                    },
+                    ptm('inputToken')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const inputProps = mergeProps(
-                {
-                    id: props.inputId,
-                    ref: inputRef,
-                    placeholder: props.placeholder,
-                    type: 'text',
-                    name: props.name,
-                    disabled: props.disabled || isMaxedOut(),
-                    onKeyDown: (e) => onKeyDown(e),
-                    onPaste: (e) => onPaste(e),
-                    onFocus: (e) => onFocus(e),
-                    onBlur: (e) => onBlur(e),
-                    readOnly: props.readOnly,
-                    ...ariaProps
-                },
-                ptm('input')
+                [
+                    {
+                        id: props.inputId,
+                        ref: inputRef,
+                        placeholder: props.placeholder,
+                        type: 'text',
+                        name: props.name,
+                        disabled: props.disabled || isMaxedOut(),
+                        onKeyDown: (e) => onKeyDown(e),
+                        onPaste: (e) => onPaste(e),
+                        onFocus: (e) => onFocus(e),
+                        onBlur: (e) => onBlur(e),
+                        readOnly: props.readOnly,
+                        ...ariaProps
+                    },
+                    ptm('input')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -312,14 +327,17 @@ export const Chips = React.memo(
             const items = createItems();
             const input = createInput();
             const containerProps = mergeProps(
-                {
-                    ref: listRef,
-                    className: cx('container', { focusedState }),
-                    onClick: (e) => onWrapperClick(e),
-                    'data-p-disabled': props.disabled,
-                    'data-p-focus': focusedState
-                },
-                ptm('container')
+                [
+                    {
+                        ref: listRef,
+                        className: cx('container', { focusedState }),
+                        onClick: (e) => onWrapperClick(e),
+                        'data-p-disabled': props.disabled,
+                        'data-p-focus': focusedState
+                    },
+                    ptm('container')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -335,13 +353,16 @@ export const Chips = React.memo(
         const ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
         const list = createList();
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                ref: elementRef,
-                className: classNames(props.className, cx('root', { isFilled, focusedState })),
-                style: props.style
-            },
-            ptm('root')
+            [
+                {
+                    id: props.id,
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root', { isFilled, focusedState })),
+                    style: props.style
+                },
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
+import { PrimeReactContext } from '../api/Api';
 import { DomHandler, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
     const {
         ptCallbacks: { ptm, cx }
     } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -85,20 +87,23 @@ export const ListBoxItem = React.memo((props) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
 
     const itemProps = mergeProps(
-        {
-            className: cx('item', { props }),
-            style: props.style,
-            onClick: onClick,
-            onTouchEnd: onTouchEnd,
-            onKeyDown: onKeyDown,
-            tabIndex: '-1',
-            'aria-label': props.label,
-            key: props.label,
-            role: 'option',
-            'aria-selected': props.selected,
-            'aria-disabled': props.disabled
-        },
-        getPTOptions('item')
+        [
+            {
+                className: cx('item', { props }),
+                style: props.style,
+                onClick: onClick,
+                onTouchEnd: onTouchEnd,
+                onKeyDown: onKeyDown,
+                tabIndex: '-1',
+                'aria-label': props.label,
+                key: props.label,
+                role: 'option',
+                'aria-selected': props.selected,
+                'aria-disabled': props.disabled
+            },
+            getPTOptions('item')
+        ],
+        { useTailwind: context.useTailwind }
     );
 
     return (

@@ -92,23 +92,29 @@ export const Messages = React.memo(
         }));
 
         const rootProps = mergeProps(
-            {
-                id: props.id,
-                className: props.className,
-                style: props.style
-            },
-            MessagesBase.getOtherProps(props),
-            ptCallbacks.ptm('root')
+            [
+                {
+                    id: props.id,
+                    className: props.className,
+                    style: props.style
+                },
+                MessagesBase.getOtherProps(props),
+                ptCallbacks.ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const transitionProps = mergeProps(
-            {
-                classNames: ptCallbacks.cx('transition'),
-                unmountOnExit: true,
-                timeout: { enter: 300, exit: 300 },
-                options: props.transitionOptions
-            },
-            ptCallbacks.ptm('transition')
+            [
+                {
+                    classNames: ptCallbacks.cx('transition'),
+                    unmountOnExit: true,
+                    timeout: { enter: 300, exit: 300 },
+                    options: props.transitionOptions
+                },
+                ptCallbacks.ptm('transition')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

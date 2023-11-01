@@ -23,22 +23,28 @@ export const FirstPageLink = React.memo((inProps) => {
     const className = classNames('p-paginator-first p-paginator-element p-link', { 'p-disabled': props.disabled });
     const iconClassName = 'p-paginator-icon';
     const firstPageIconProps = mergeProps(
-        {
-            className: cx('firstPageIcon')
-        },
-        getPTOptions('firstPageIcon')
+        [
+            {
+                className: cx('firstPageIcon')
+            },
+            getPTOptions('firstPageIcon')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const icon = props.firstPageLinkIcon || <AngleDoubleLeftIcon {...firstPageIconProps} />;
     const firstPageLinkIcon = IconUtils.getJSXIcon(icon, { ...firstPageIconProps }, { props });
     const firstPageButtonProps = mergeProps(
-        {
-            type: 'button',
-            className: cx('firstPageButton', { disabled: props.disabled }),
-            onClick: props.onClick,
-            disabled: props.disabled,
-            'aria-label': ariaLabel('firstPageLabel')
-        },
-        getPTOptions('firstPageButton')
+        [
+            {
+                type: 'button',
+                className: cx('firstPageButton', { disabled: props.disabled }),
+                onClick: props.onClick,
+                disabled: props.disabled,
+                'aria-label': ariaLabel('firstPageLabel')
+            },
+            getPTOptions('firstPageButton')
+        ],
+        { useTailwind: context.useTailwind }
     );
     const element = (
         <button {...firstPageButtonProps}>

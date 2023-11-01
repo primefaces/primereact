@@ -42,10 +42,13 @@ export const Button = React.memo(
             });
 
             const iconsProps = mergeProps(
-                {
-                    className: cx('icon')
-                },
-                ptm('icon')
+                [
+                    {
+                        className: cx('icon')
+                    },
+                    ptm('icon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             className = classNames(className, {
@@ -53,10 +56,13 @@ export const Button = React.memo(
             });
 
             const loadingIconProps = mergeProps(
-                {
-                    className: cx('loadingIcon', { className })
-                },
-                ptm('loadingIcon')
+                [
+                    {
+                        className: cx('loadingIcon', { className })
+                    },
+                    ptm('loadingIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const icon = props.loading ? props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin /> : props.icon;
@@ -66,10 +72,13 @@ export const Button = React.memo(
 
         const createLabel = () => {
             const labelProps = mergeProps(
-                {
-                    className: cx('label')
-                },
-                ptm('label')
+                [
+                    {
+                        className: cx('label')
+                    },
+                    ptm('label')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             if (props.label) {
@@ -82,13 +91,16 @@ export const Button = React.memo(
         const createBadge = () => {
             if (props.badge) {
                 const badgeProps = mergeProps(
-                    {
-                        className: classNames(props.badgeClassName),
-                        value: props.badge,
-                        unstyled: props.unstyled,
-                        __parentMetadata: { parent: metaData }
-                    },
-                    ptm('badge')
+                    [
+                        {
+                            className: classNames(props.badgeClassName),
+                            value: props.badge,
+                            unstyled: props.unstyled,
+                            __parentMetadata: { parent: metaData }
+                        },
+                        ptm('badge')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <Badge {...badgeProps}>{props.badge}</Badge>;
@@ -111,14 +123,17 @@ export const Button = React.memo(
         const defaultAriaLabel = props.label ? props.label + (props.badge ? ' ' + props.badge : '') : props['aria-label'];
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                'aria-label': defaultAriaLabel,
-                className: classNames(props.className, cx('root', { size, disabled })),
-                disabled: disabled
-            },
-            ButtonBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    'aria-label': defaultAriaLabel,
+                    className: classNames(props.className, cx('root', { size, disabled })),
+                    disabled: disabled
+                },
+                ButtonBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

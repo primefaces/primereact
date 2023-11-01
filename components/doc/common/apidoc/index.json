@@ -781,6 +781,13 @@
                             "description": "When enabled, it removes all of components styles in the core."
                         },
                         {
+                            "name": "useTailwind",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When enabled, all className merges will use twMerge"
+                        },
+                        {
                             "name": "setAppendTo",
                             "optional": true,
                             "readonly": false,
@@ -38490,6 +38497,12 @@
                             "optional": true,
                             "readonly": false,
                             "type": "boolean"
+                        },
+                        {
+                            "name": "useTailwind",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean"
                         }
                     ],
                     "callbacks": []
@@ -52786,8 +52799,12 @@
                     "name": "mergeProps",
                     "parameters": [
                         {
-                            "name": "args",
+                            "name": "props",
                             "type": "object[]"
+                        },
+                        {
+                            "name": "options",
+                            "type": "object"
                         }
                     ],
                     "returnType": "object | undefined"

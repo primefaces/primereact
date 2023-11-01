@@ -68,15 +68,18 @@ export const InputText = React.memo(
         const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
         const rootProps = mergeProps(
-            {
-                className: cx('root', { isFilled }),
-                onBeforeInput: onBeforeInput,
-                onInput: onInput,
-                onKeyDown: onKeyDown,
-                onPaste: onPaste
-            },
-            InputTextBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: cx('root', { isFilled }),
+                    onBeforeInput: onBeforeInput,
+                    onInput: onInput,
+                    onKeyDown: onKeyDown,
+                    onPaste: onPaste
+                },
+                InputTextBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

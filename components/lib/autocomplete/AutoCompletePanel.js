@@ -34,10 +34,13 @@ export const AutoCompletePanel = React.memo(
             if (props.panelFooterTemplate) {
                 const content = ObjectUtils.getJSXElement(props.panelFooterTemplate, props, props.onOverlayHide);
                 const footerProps = mergeProps(
-                    {
-                        className: cx('footer')
-                    },
-                    _ptm('footer')
+                    [
+                        {
+                            className: cx('footer')
+                        },
+                        _ptm('footer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -54,17 +57,20 @@ export const AutoCompletePanel = React.memo(
                 const selected = props.selectedItem === item;
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, item, j) : props.field ? ObjectUtils.resolveFieldData(item, props.field) : item;
                 const itemProps = mergeProps(
-                    {
-                        role: 'option',
-                        className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
-                        style,
-                        onClick: (e) => props.onItemClick(e, item),
-                        'aria-selected': selected,
-                        'data-group': i,
-                        'data-index': j,
-                        'data-p-disabled': item.disabled
-                    },
-                    getPTOptions(item, 'item')
+                    [
+                        {
+                            role: 'option',
+                            className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
+                            style,
+                            onClick: (e) => props.onItemClick(e, item),
+                            'aria-selected': selected,
+                            'data-group': i,
+                            'data-index': j,
+                            'data-p-disabled': item.disabled
+                        },
+                        getPTOptions(item, 'item')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -84,12 +90,15 @@ export const AutoCompletePanel = React.memo(
                 const childrenContent = createGroupChildren(suggestion, index, style);
                 const key = index + '_' + getOptionGroupRenderKey(suggestion);
                 const itemGroupProps = mergeProps(
-                    {
-                        className: cx('itemGroup'),
-                        style,
-                        'data-p-highlight': false
-                    },
-                    _ptm('itemGroup')
+                    [
+                        {
+                            className: cx('itemGroup'),
+                            style,
+                            'data-p-highlight': false
+                        },
+                        _ptm('itemGroup')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -101,16 +110,19 @@ export const AutoCompletePanel = React.memo(
             } else {
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
                 const itemProps = mergeProps(
-                    {
-                        index,
-                        role: 'option',
-                        className: cx('item', { suggestion }),
-                        style,
-                        onClick: (e) => props.onItemClick(e, suggestion),
-                        'aria-selected': props.selectedItem === suggestion,
-                        'data-p-disabled': suggestion.disabled
-                    },
-                    getPTOptions(suggestion, 'item')
+                    [
+                        {
+                            index,
+                            role: 'option',
+                            className: cx('item', { suggestion }),
+                            style,
+                            onClick: (e) => props.onItemClick(e, suggestion),
+                            'aria-selected': props.selectedItem === suggestion,
+                            'data-p-disabled': suggestion.disabled
+                        },
+                        getPTOptions(suggestion, 'item')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -130,17 +142,23 @@ export const AutoCompletePanel = React.memo(
             if (props.showEmptyMessage && ObjectUtils.isEmpty(props.suggestions)) {
                 const emptyMessage = props.emptyMessage || localeOption('emptyMessage');
                 const emptyMessageProps = mergeProps(
-                    {
-                        className: cx('emptyMessage')
-                    },
-                    _ptm('emptyMesage')
+                    [
+                        {
+                            className: cx('emptyMessage')
+                        },
+                        _ptm('emptyMesage')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const listProps = mergeProps(
-                    {
-                        className: cx('list')
-                    },
-                    _ptm('list')
+                    [
+                        {
+                            className: cx('list')
+                        },
+                        _ptm('list')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -160,14 +178,17 @@ export const AutoCompletePanel = React.memo(
                         itemTemplate: (item, options) => item && createItem(item, options.index, options),
                         contentTemplate: (options) => {
                             const listProps = mergeProps(
-                                {
-                                    id: props.listId,
-                                    ref: options.contentRef,
-                                    style: options.style,
-                                    className: cx('list', { virtualScrollerProps, options }),
-                                    role: 'listbox'
-                                },
-                                _ptm('list')
+                                [
+                                    {
+                                        id: props.listId,
+                                        ref: options.contentRef,
+                                        style: options.style,
+                                        className: cx('list', { virtualScrollerProps, options }),
+                                        role: 'listbox'
+                                    },
+                                    _ptm('list')
+                                ],
+                                { useTailwind: context.useTailwind }
                             );
 
                             return <ul {...listProps}>{options.children}</ul>;
@@ -179,20 +200,26 @@ export const AutoCompletePanel = React.memo(
             } else {
                 const items = createItems();
                 const listProps = mergeProps(
-                    {
-                        id: props.listId,
-                        className: cx('list'),
-                        role: 'listbox'
-                    },
-                    _ptm('list')
+                    [
+                        {
+                            id: props.listId,
+                            className: cx('list'),
+                            role: 'listbox'
+                        },
+                        _ptm('list')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const listWrapperProps = mergeProps(
-                    {
-                        className: cx('listWrapper'),
-                        style: { maxHeight: props.scrollHeight || 'auto' }
-                    },
-                    _ptm('listWrapper')
+                    [
+                        {
+                            className: cx('listWrapper'),
+                            style: { maxHeight: props.scrollHeight || 'auto' }
+                        },
+                        _ptm('listWrapper')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return (
@@ -208,28 +235,34 @@ export const AutoCompletePanel = React.memo(
             const content = createContent();
             const footer = createFooter();
             const panelProps = mergeProps(
-                {
-                    className: classNames(props.panelClassName, cx('panel', { context })),
-                    style,
-                    onClick: (e) => props.onClick(e)
-                },
-                _ptm('panel')
+                [
+                    {
+                        className: classNames(props.panelClassName, cx('panel', { context })),
+                        style,
+                        onClick: (e) => props.onClick(e)
+                    },
+                    _ptm('panel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: props.in,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: props.onEnter,
-                    onEntering: props.onEntering,
-                    onEntered: props.onEntered,
-                    onExit: props.onExit,
-                    onExited: props.onExited
-                },
-                _ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: props.in,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter: props.onEnter,
+                        onEntering: props.onEntering,
+                        onEntered: props.onEntered,
+                        onExit: props.onExit,
+                        onExited: props.onExited
+                    },
+                    _ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (

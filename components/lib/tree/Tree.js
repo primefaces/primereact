@@ -395,13 +395,16 @@ export const Tree = React.memo(
             if (props.value) {
                 const rootNodes = createRootChildren();
                 const containerProps = mergeProps(
-                    {
-                        className: classNames(props.contentClassName, cx('container')),
-                        role: 'tree',
-                        style: props.contentStyle,
-                        ...ariaProps
-                    },
-                    ptm('container')
+                    [
+                        {
+                            className: classNames(props.contentClassName, cx('container')),
+                            role: 'tree',
+                            style: props.contentStyle,
+                            ...ariaProps
+                        },
+                        ptm('container')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <ul {...containerProps}>{rootNodes}</ul>;
@@ -413,19 +416,25 @@ export const Tree = React.memo(
         const createLoader = () => {
             if (props.loading) {
                 const loadingIconProps = mergeProps(
-                    {
-                        className: cx('loadingIcon')
-                    },
-                    ptm('loadingIcon')
+                    [
+                        {
+                            className: cx('loadingIcon')
+                        },
+                        ptm('loadingIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.loadingIcon || <SpinnerIcon {...loadingIconProps} spin />;
                 const loadingIcon = IconUtils.getJSXIcon(icon, { ...loadingIconProps }, { props });
 
                 const loadingOverlayProps = mergeProps(
-                    {
-                        className: cx('loadingOverlay')
-                    },
-                    ptm('loadingOverlay')
+                    [
+                        {
+                            className: cx('loadingOverlay')
+                        },
+                        ptm('loadingOverlay')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...loadingOverlayProps}>{loadingIcon}</div>;
@@ -438,34 +447,43 @@ export const Tree = React.memo(
             if (props.filter) {
                 const value = ObjectUtils.isNotEmpty(filteredValue) ? filteredValue : '';
                 const searchIconProps = mergeProps(
-                    {
-                        className: cx('searchIcon')
-                    },
-                    ptm('searchIcon')
+                    [
+                        {
+                            className: cx('searchIcon')
+                        },
+                        ptm('searchIcon')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
                 const icon = props.filterIcon || <SearchIcon {...searchIconProps} />;
                 const filterIcon = IconUtils.getJSXIcon(icon, { ...searchIconProps }, { props });
 
                 const filterContainerProps = mergeProps(
-                    {
-                        className: cx('filterContainer')
-                    },
-                    ptm('filterContainer')
+                    [
+                        {
+                            className: cx('filterContainer')
+                        },
+                        ptm('filterContainer')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 const inputProps = mergeProps(
-                    {
-                        type: 'text',
-                        value: value,
-                        autoComplete: 'off',
-                        className: cx('input'),
-                        placeholder: props.filterPlaceholder,
-                        'aria-label': props.filterPlaceholder,
-                        onKeyDown: onFilterInputKeyDown,
-                        onChange: onFilterInputChange,
-                        disabled: props.disabled
-                    },
-                    ptm('input')
+                    [
+                        {
+                            type: 'text',
+                            value: value,
+                            autoComplete: 'off',
+                            className: cx('input'),
+                            placeholder: props.filterPlaceholder,
+                            'aria-label': props.filterPlaceholder,
+                            onKeyDown: onFilterInputKeyDown,
+                            onChange: onFilterInputChange,
+                            disabled: props.disabled
+                        },
+                        ptm('input')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 let content = (
@@ -518,10 +536,13 @@ export const Tree = React.memo(
                 }
 
                 const headerProps = mergeProps(
-                    {
-                        className: cx('header')
-                    },
-                    ptm('header')
+                    [
+                        {
+                            className: cx('header')
+                        },
+                        ptm('header')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...headerProps}>{content}</div>;
@@ -534,10 +555,13 @@ export const Tree = React.memo(
             const content = ObjectUtils.getJSXElement(props.footer, props);
 
             const footerProps = mergeProps(
-                {
-                    className: cx('footer')
-                },
-                ptm('footer')
+                [
+                    {
+                        className: cx('footer')
+                    },
+                    ptm('footer')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <div {...footerProps}>{content}</div>;
@@ -551,14 +575,17 @@ export const Tree = React.memo(
         const footer = createFooter();
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                className: classNames(props.className, cx('root')),
-                style: props.style,
-                id: props.id
-            },
-            TreeBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    className: classNames(props.className, cx('root')),
+                    style: props.style,
+                    id: props.id
+                },
+                TreeBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

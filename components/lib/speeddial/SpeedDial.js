@@ -176,22 +176,28 @@ export const SpeedDial = React.memo(
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-speeddial-action-icon', _icon);
             const actionIconProps = mergeProps(
-                {
-                    className: cx('actionIcon')
-                },
-                ptm('actionIcon')
+                [
+                    {
+                        className: cx('actionIcon')
+                    },
+                    ptm('actionIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const actionProps = mergeProps(
-                {
-                    href: url || '#',
-                    role: 'menuitem',
-                    className: classNames(_itemClassName, cx('action', { disabled })),
-                    style: _itemStyle,
-                    target: target,
-                    'data-pr-tooltip': label,
-                    onClick: (e) => onItemClick(e, item)
-                },
-                ptm('action')
+                [
+                    {
+                        href: url || '#',
+                        role: 'menuitem',
+                        className: classNames(_itemClassName, cx('action', { disabled })),
+                        style: _itemStyle,
+                        target: target,
+                        'data-pr-tooltip': label,
+                        onClick: (e) => onItemClick(e, item)
+                    },
+                    ptm('action')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = IconUtils.getJSXIcon(_icon, { ...actionIconProps }, { props });
             let content = (
@@ -215,13 +221,16 @@ export const SpeedDial = React.memo(
             }
 
             const menuItemProps = mergeProps(
-                {
-                    key: index,
-                    className: cx('menuitem'),
-                    style: getItemStyle(index),
-                    role: 'none'
-                },
-                ptm('menuitem')
+                [
+                    {
+                        key: index,
+                        className: cx('menuitem'),
+                        style: getItemStyle(index),
+                        role: 'none'
+                    },
+                    ptm('menuitem')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...menuItemProps}>{content}</li>;
@@ -234,13 +243,16 @@ export const SpeedDial = React.memo(
         const createList = () => {
             const items = createItems();
             const menuProps = mergeProps(
-                {
-                    ref: listRef,
-                    className: cx('menu'),
-                    style: sx('menu'),
-                    role: 'menu'
-                },
-                ptm('menu')
+                [
+                    {
+                        ref: listRef,
+                        className: cx('menu'),
+                        style: sx('menu'),
+                        role: 'menu'
+                    },
+                    ptm('menu')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <ul {...menuProps}>{items}</ul>;
@@ -262,20 +274,25 @@ export const SpeedDial = React.memo(
             });
             const icon = showIconVisible ? props.showIcon || <PlusIcon /> : hideIconVisible ? props.hideIcon || <MinusIcon /> : null;
             const toggleIcon = IconUtils.getJSXIcon(icon, undefined, { props, visible });
-            const buttonProps = mergeProps({
-                type: 'button',
-                style: props.buttonStyle,
-                className: classNames(props.buttonClassName, cx('button')),
-                icon: toggleIcon,
-                onClick: (e) => onClick(e),
-                disabled: props.disabled,
-                'aria-label': props['aria-label'],
-                pt: ptm('button'),
-                unstyled: props.unstyled,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            });
+            const buttonProps = mergeProps(
+                [
+                    {
+                        type: 'button',
+                        style: props.buttonStyle,
+                        className: classNames(props.buttonClassName, cx('button')),
+                        icon: toggleIcon,
+                        onClick: (e) => onClick(e),
+                        disabled: props.disabled,
+                        'aria-label': props['aria-label'],
+                        pt: ptm('button'),
+                        unstyled: props.unstyled,
+                        __parentMetadata: {
+                            parent: metaData
+                        }
+                    }
+                ],
+                { useTailwind: context.useTailwind }
+            );
             const content = <Button {...buttonProps} />;
 
             if (props.buttonTemplate) {
@@ -297,11 +314,14 @@ export const SpeedDial = React.memo(
         const createMask = () => {
             if (props.mask) {
                 const maskProps = mergeProps(
-                    {
-                        className: classNames(props.maskClassName, cx('mask', { visible })),
-                        style: props.maskStyle
-                    },
-                    ptm('mask')
+                    [
+                        {
+                            className: classNames(props.maskClassName, cx('mask', { visible })),
+                            style: props.maskStyle
+                        },
+                        ptm('mask')
+                    ],
+                    { useTailwind: context.useTailwind }
                 );
 
                 return <div {...maskProps}></div>;
@@ -314,12 +334,15 @@ export const SpeedDial = React.memo(
         const list = createList();
         const mask = createMask();
         const rootProps = mergeProps(
-            {
-                className: classNames(props.className, cx('root', { visible })),
-                style: { ...props.style, ...sx('root') }
-            },
-            SpeedDialBase.getOtherProps(props),
-            ptm('root')
+            [
+                {
+                    className: classNames(props.className, cx('root', { visible })),
+                    style: { ...props.style, ...sx('root') }
+                },
+                SpeedDialBase.getOtherProps(props),
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

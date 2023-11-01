@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
 import { CheckIcon } from '../icons/check';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
@@ -13,6 +13,7 @@ export const UITreeNode = React.memo((props) => {
     const isLeaf = props.isNodeLeaf(props.node);
     const expanded = (props.expandedKeys ? props.expandedKeys[props.node.key] !== undefined : false) || props.node.expanded;
     const { ptm, cx } = props;
+    const context = React.useContext(PrimeReactContext);
 
     const getPTOptions = (key) => {
         return ptm(key, {
@@ -548,10 +549,13 @@ export const UITreeNode = React.memo((props) => {
 
     const createLabel = () => {
         const labelProps = mergeProps(
-            {
-                className: cx('label')
-            },
-            getPTOptions('label')
+            [
+                {
+                    className: cx('label')
+                },
+                getPTOptions('label')
+            ],
+            { useTailwind: context.useTailwind }
         );
         let content = <span {...labelProps}>{props.node.label}</span>;
 
@@ -575,26 +579,35 @@ export const UITreeNode = React.memo((props) => {
             const checked = isChecked();
             const partialChecked = isPartialChecked();
             const checkboxIconProps = mergeProps(
-                {
-                    className: cx('checkboxIcon')
-                },
-                getPTOptions('checkboxIcon')
+                [
+                    {
+                        className: cx('checkboxIcon')
+                    },
+                    getPTOptions('checkboxIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const icon = checked ? props.checkboxIcon || <CheckIcon {...checkboxIconProps} /> : partialChecked ? props.checkboxIcon || <MinusIcon {...checkboxIconProps} /> : null;
             const checkboxIcon = IconUtils.getJSXIcon(icon, { ...checkboxIconProps }, props);
             const checkboxContainerProps = mergeProps(
-                {
-                    className: cx('checkboxContainer')
-                },
-                getPTOptions('checkboxContainer')
+                [
+                    {
+                        className: cx('checkboxContainer')
+                    },
+                    getPTOptions('checkboxContainer')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const checkboxProps = mergeProps(
-                {
-                    className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
-                    role: 'checkbox',
-                    'aria-checked': checked
-                },
-                getPTOptions('checkbox')
+                [
+                    {
+                        className: cx('checkbox', { checked, partialChecked, nodeProps: props }),
+                        role: 'checkbox',
+                        'aria-checked': checked
+                    },
+                    getPTOptions('checkbox')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return (
@@ -612,10 +625,13 @@ export const UITreeNode = React.memo((props) => {
 
         if (icon) {
             const nodeIconProps = mergeProps(
-                {
-                    className: classNames(icon, cx('nodeIcon'))
-                },
-                getPTOptions('nodeIcon')
+                [
+                    {
+                        className: classNames(icon, cx('nodeIcon'))
+                    },
+                    getPTOptions('nodeIcon')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <span {...nodeIconProps}></span>;
@@ -627,23 +643,29 @@ export const UITreeNode = React.memo((props) => {
     const createToggler = () => {
         const label = expanded ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const togglerIconProps = mergeProps(
-            {
-                className: cx('togglerIcon'),
-                'aria-hidden': true
-            },
-            getPTOptions('togglerIcon')
+            [
+                {
+                    className: cx('togglerIcon'),
+                    'aria-hidden': true
+                },
+                getPTOptions('togglerIcon')
+            ],
+            { useTailwind: context.useTailwind }
         );
         const icon = expanded ? props.collapseIcon || <ChevronDownIcon {...togglerIconProps} /> : props.expandIcon || <ChevronRightIcon {...togglerIconProps} />;
         const togglerIcon = IconUtils.getJSXIcon(icon, { ...togglerIconProps }, { props, expanded });
         const togglerProps = mergeProps(
-            {
-                type: 'button',
-                className: cx('toggler'),
-                tabIndex: -1,
-                onClick: onTogglerClick,
-                'aria-label': label
-            },
-            getPTOptions('toggler')
+            [
+                {
+                    type: 'button',
+                    className: cx('toggler'),
+                    tabIndex: -1,
+                    onClick: onTogglerClick,
+                    'aria-label': label
+                },
+                getPTOptions('toggler')
+            ],
+            { useTailwind: context.useTailwind }
         );
         let content = (
             <button {...togglerProps}>
@@ -671,14 +693,17 @@ export const UITreeNode = React.memo((props) => {
     const createDropPoint = (position) => {
         if (props.dragdropScope) {
             const droppointProps = mergeProps(
-                {
-                    className: cx('droppoint'),
-                    onDrop: (event) => onDropPoint(event, position),
-                    onDragOver: onDropPointDragOver,
-                    onDragEnter: onDropPointDragEnter,
-                    onDragLeave: onDropPointDragLeave
-                },
-                getPTOptions('droppoint')
+                [
+                    {
+                        className: cx('droppoint'),
+                        onDrop: (event) => onDropPoint(event, position),
+                        onDragOver: onDropPointDragOver,
+                        onDragEnter: onDropPointDragEnter,
+                        onDragLeave: onDropPointDragLeave
+                    },
+                    getPTOptions('droppoint')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             return <li {...droppointProps}></li>;
@@ -696,24 +721,27 @@ export const UITreeNode = React.memo((props) => {
         const label = createLabel();
 
         const contentProps = mergeProps(
-            {
-                ref: contentRef,
-                className: classNames(props.node.className, cx('content', { checked, selected, nodeProps: props, isCheckboxSelectionMode })),
-                style: props.node.style,
-                onClick: onClick,
-                onDoubleClick: onDoubleClick,
-                onContextMenu: onRightClick,
-                onTouchEnd: onTouchEnd,
-                draggable: props.dragdropScope && props.node.draggable !== false && !props.disabled,
-                onDrop: onDrop,
-                onDragOver: onDragOver,
-                onDragEnter: onDragEnter,
-                onDragLeave: onDragLeave,
-                onDragStart: onDragStart,
-                onDragEnd: onDragEnd,
-                onKeyDown: onNodeKeyDown
-            },
-            getPTOptions('content')
+            [
+                {
+                    ref: contentRef,
+                    className: classNames(props.node.className, cx('content', { checked, selected, nodeProps: props, isCheckboxSelectionMode })),
+                    style: props.node.style,
+                    onClick: onClick,
+                    onDoubleClick: onDoubleClick,
+                    onContextMenu: onRightClick,
+                    onTouchEnd: onTouchEnd,
+                    draggable: props.dragdropScope && props.node.draggable !== false && !props.disabled,
+                    onDrop: onDrop,
+                    onDragOver: onDragOver,
+                    onDragEnter: onDragEnter,
+                    onDragLeave: onDragLeave,
+                    onDragStart: onDragStart,
+                    onDragEnd: onDragEnd,
+                    onKeyDown: onNodeKeyDown
+                },
+                getPTOptions('content')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
@@ -728,11 +756,14 @@ export const UITreeNode = React.memo((props) => {
 
     const createChildren = () => {
         const subgroupProps = mergeProps(
-            {
-                className: cx('subgroup'),
-                role: 'group'
-            },
-            getPTOptions('subgroup')
+            [
+                {
+                    className: cx('subgroup'),
+                    role: 'group'
+                },
+                getPTOptions('subgroup')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         if (ObjectUtils.isNotEmpty(props.node.children) && expanded) {
@@ -796,16 +827,19 @@ export const UITreeNode = React.memo((props) => {
         const children = createChildren();
 
         const nodeProps = mergeProps(
-            {
-                className: classNames(props.node.className, cx('node', { isLeaf })),
-                style: props.node.style,
-                tabIndex,
-                role: 'treeitem',
-                'aria-posinset': props.index + 1,
-                'aria-expanded': expanded,
-                'aria-selected': checked || selected
-            },
-            getPTOptions('node')
+            [
+                {
+                    className: classNames(props.node.className, cx('node', { isLeaf })),
+                    style: props.node.style,
+                    tabIndex,
+                    role: 'treeitem',
+                    'aria-posinset': props.index + 1,
+                    'aria-expanded': expanded,
+                    'aria-selected': checked || selected
+                },
+                getPTOptions('node')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (

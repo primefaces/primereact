@@ -261,8 +261,8 @@ export const Password = React.memo(
         const createIcon = () => {
             let icon;
 
-            const hideIconProps = mergeProps(ptm('hideIcon'));
-            const showIconProps = mergeProps(ptm('showIcon'));
+            const hideIconProps = mergeProps([ptm('hideIcon')], { useTailwind: context.useTailwind });
+            const showIconProps = mergeProps([ptm('showIcon')], { useTailwind: context.useTailwind });
 
             if (unmaskedState) {
                 icon = props.hideIcon || <EyeSlashIcon {...hideIconProps} />;
@@ -297,32 +297,44 @@ export const Password = React.memo(
             const header = ObjectUtils.getJSXElement(props.header, props);
             const footer = ObjectUtils.getJSXElement(props.footer, props);
             const panelProps = mergeProps(
-                {
-                    className: cx('panel', { context }),
-                    style: props.panelStyle,
-                    onClick: onPanelClick
-                },
-                ptm('panel')
+                [
+                    {
+                        className: cx('panel', { context }),
+                        style: props.panelStyle,
+                        onClick: onPanelClick
+                    },
+                    ptm('panel')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const meterProps = mergeProps(
-                {
-                    className: cx('meter')
-                },
-                ptm('meter')
+                [
+                    {
+                        className: cx('meter')
+                    },
+                    ptm('meter')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const meterLabelProps = mergeProps(
-                {
-                    className: cx('meterLabel', { strength }),
-                    style: { width }
-                },
-                ptm('meterLabel')
+                [
+                    {
+                        className: cx('meterLabel', { strength }),
+                        style: { width }
+                    },
+                    ptm('meterLabel')
+                ],
+                { useTailwind: context.useTailwind }
             );
             const infoProps = mergeProps(
-                {
-                    className: cx('info', { strength })
-                },
-                ptm('info')
+                [
+                    {
+                        className: cx('info', { strength })
+                    },
+                    ptm('info')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const content = props.content ? (
@@ -337,18 +349,21 @@ export const Password = React.memo(
             );
 
             const transitionProps = mergeProps(
-                {
-                    classNames: cx('transition'),
-                    in: overlayVisibleState,
-                    timeout: { enter: 120, exit: 100 },
-                    options: props.transitionOptions,
-                    unmountOnExit: true,
-                    onEnter: onOverlayEnter,
-                    onEntered: onOverlayEntered,
-                    onExit: onOverlayExit,
-                    onExited: onOverlayExited
-                },
-                ptm('transition')
+                [
+                    {
+                        classNames: cx('transition'),
+                        in: overlayVisibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter: onOverlayEnter,
+                        onEntered: onOverlayEntered,
+                        onExit: onOverlayExit,
+                        onExited: onOverlayExited
+                    },
+                    ptm('transition')
+                ],
+                { useTailwind: context.useTailwind }
             );
 
             const panel = (
@@ -379,36 +394,42 @@ export const Password = React.memo(
         const panel = createPanel();
 
         const rootProps = mergeProps(
-            {
-                ref: elementRef,
-                id: props.id,
-                className: cx('root', { isFilled, focusedState }),
-                style: props.style
-            },
-            ptm('root')
+            [
+                {
+                    ref: elementRef,
+                    id: props.id,
+                    className: cx('root', { isFilled, focusedState }),
+                    style: props.style
+                },
+                ptm('root')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         const inputTextProps = mergeProps(
-            {
-                ref: inputRef,
-                id: props.inputId,
-                ...inputProps,
-                className: cx('input'),
-                onBlur: onBlur,
-                onFocus: onFocus,
-                onInput: onInput,
-                onKeyUp: onKeyup,
-                style: props.inputStyle,
-                tabIndex: props.tabIndex,
-                tooltip: props.tooltip,
-                tooltipOptions: props.tooltipOptions,
-                type: type,
-                value: props.value,
-                __parentMetadata: {
-                    parent: metaData
-                }
-            },
-            ptm('input')
+            [
+                {
+                    ref: inputRef,
+                    id: props.inputId,
+                    ...inputProps,
+                    className: cx('input'),
+                    onBlur: onBlur,
+                    onFocus: onFocus,
+                    onInput: onInput,
+                    onKeyUp: onKeyup,
+                    style: props.inputStyle,
+                    tabIndex: props.tabIndex,
+                    tooltip: props.tooltip,
+                    tooltipOptions: props.tooltipOptions,
+                    type: type,
+                    value: props.value,
+                    __parentMetadata: {
+                        parent: metaData
+                    }
+                },
+                ptm('input')
+            ],
+            { useTailwind: context.useTailwind }
         );
 
         return (
