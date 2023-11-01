@@ -1990,7 +1990,9 @@ const Tailwind = {
     },
     panelmenu: {
         root: 'w-full md:w-[25rem]',
-        panel: 'mb-1',
+        panel: {
+            className: classNames('mb-1')
+        },
         header: {
             className: classNames(
                 'outline-none',
@@ -2002,9 +2004,15 @@ const Tailwind = {
         headeraction: {
             className: classNames('flex items-center select-none cursor-pointer relative no-underline', 'text-gray-700 dark:text-white/80 p-5 font-bold')
         },
-        submenuicon: 'mr-2',
-        headericon: 'mr-2',
-        menucontent: 'py-1 border border-t-0 border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 rounded-t-none rounded-br-md rounded-bl-md',
+        headersubmenuicon: {
+            className: classNames('mr-2')
+        },
+        headericon: {
+            className: classNames('mr-2')
+        },
+        menucontent: {
+            className: classNames('py-1 border border-t-0 border-gray-300 dark:border-blue-900/40 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 rounded-t-none rounded-br-md rounded-bl-md')
+        },
         menu: {
             className: classNames('outline-none', 'm-0 p-0 list-none')
         },
@@ -2020,8 +2028,15 @@ const Tailwind = {
                 'hover:bg-gray-200 dark:hover:bg-gray-800/80  hover:text-gray-700 dark:hover:text-white/80' // Hover
             )
         },
-        icon: 'mr-2',
-        submenu: 'p-0 pl-4 m-0 list-none',
+        icon: {
+            className: classNames('mr-2')
+        },
+        submenu: {
+            className: classNames('p-0 pl-4 m-0 list-none')
+        },
+        submenuicon: {
+            className: classNames('mr-2')
+        },
         transition: TRANSITIONS.toggleable
     },
     steps: {
