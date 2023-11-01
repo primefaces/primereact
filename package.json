@@ -63,7 +63,7 @@
         "@types/react-dom": "^18.2.7",
         "@types/react-transition-group": "^4.4.6",
         "@typescript-eslint/eslint-plugin": "^6.5.0",
-        "eslint": "8.48.0",
+        "eslint": "8.52.0",
         "eslint-config-next": "13.5.3",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-jest-dom": "^4.0.3",
