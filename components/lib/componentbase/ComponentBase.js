@@ -472,7 +472,7 @@ export const ComponentBase = {
         ptOptions: undefined,
         unstyled: false
     },
-    context: undefined,
+    context: {},
     globalCSS: undefined,
     classes: {},
     styles: '',
@@ -635,7 +635,7 @@ const _useDefaultPT = (callback, key, params) => {
     return _usePT(getDefaultPT(), callback, key, params);
 };
 
-export const useHandleStyle = (styles, isUnstyled = () => {}, config) => {
+export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
     const { name, styled = false, hostName = '' } = config;
 
     const globalCSS = _useGlobalPT(getOptionValue, 'global.css', ComponentBase.cParams);
