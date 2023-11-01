@@ -114,6 +114,10 @@ const CustomTailwind = usePassThrough(
                     The <i>mergeSections</i> defines whether the sections from the main configuration gets added and the <i>mergeProps</i> controls whether to override or merge the defined props. Defaults are <i>true</i> for <i>mergeSections</i> and
                     <i>false</i> for <i>mergeProps</i>.
                 </p>
+                <p>
+                    Some CSS libraries, such as <i>Tailwind</i>, require that class names be merged in a non-conflicting manner. In order to support them a <i>classNameMergeFunction</i> may be passed as part of the <i>ptOptions</i> object to manually
+                    define how class names will be merged.
+                </p>
             </DocSectionText>
             <DocSectionCode code={code2} hideToggleCode import hideCodeSandbox hideStackBlitz />
             <DocSectionCode code={code3} hideToggleCode import hideCodeSandbox hideStackBlitz />
