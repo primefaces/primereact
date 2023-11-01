@@ -54,7 +54,7 @@
         "@rollup/plugin-node-resolve": "^14.1.0",
         "@rollup/plugin-replace": "^5.0.2",
         "@stackblitz/sdk": "1.9.0",
-        "@svgr/webpack": "^6.5.1",
+        "@svgr/webpack": "^8.1.0",
         "@testing-library/jest-dom": "^6.1.2",
         "@testing-library/react": "^14.0.0",
         "@testing-library/user-event": "^14.4.3",
