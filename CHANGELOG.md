@@ -1,5 +1,30 @@
 # Changelog
 
+## [10.0.8](https://github.com/primefaces/primereact/tree/10.0.8) (2023-11-01)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.0.7...10.0.8)
+
+**Fixed bugs:**
+
+- MultiSelect: Dropdown body detaches from dropdown head/button [\#5210](https://github.com/primefaces/primereact/issues/5210)
+- "Command" docs are missing [\#5205](https://github.com/primefaces/primereact/issues/5205)
+- Tailwind: Panelmenu: Some classes not being picked up during Styling [\#5206](https://github.com/primefaces/primereact/issues/5206)
+- ComponentBase: TypeError: Cannot read properties of undefined (reading 'unstyled') [\#5168](https://github.com/primefaces/primereact/issues/5168)
+- TypeError: Cannot read properties of undefined (reading 'unstyled') [\#5203](https://github.com/primefaces/primereact/issues/5203)
+- Tailwind: MultiSelect: multiple conflicting classname keys [\#5200](https://github.com/primefaces/primereact/issues/5200)
+- Tailwind: PanelMenu: Documentation Pointing to Incorrect TRANSITION [\#5198](https://github.com/primefaces/primereact/issues/5198)
+- Datatable: Missing rowEditorSaveButton and rowEditorSaveIcon on ColumnPassThroughOptions [\#5196](https://github.com/primefaces/primereact/issues/5196)
+- DataTable: Redefine column width after resizing a column manually [\#5123](https://github.com/primefaces/primereact/issues/5123)
+- DataTable: When using InputTextarea as editor, pressing Ctrl + Enter or Shift + Enter results in a submission  [\#5193](https://github.com/primefaces/primereact/issues/5193)
+- InputNumber: Minus Sign not working for Currency INR [\#5185](https://github.com/primefaces/primereact/issues/5185)
+- PanelMenu: Visual defect [\#5190](https://github.com/primefaces/primereact/issues/5190)
+- Tailwind with Menubar end attribute does not align-right [\#5181](https://github.com/primefaces/primereact/issues/5181)
+- DataTable with frozen columns and displayFilter 'row' doesn't freeze filter cell [\#5164](https://github.com/primefaces/primereact/issues/5164)
+- Add missing pi-file-edit icon [\#5179](https://github.com/primefaces/primereact/issues/5179)
+- OrderList: order of selection reversed when moving multiple items to top or bottom [\#5177](https://github.com/primefaces/primereact/issues/5177)
+- 10.0.7: forwardRef Warning [\#5172](https://github.com/primefaces/primereact/issues/5172)
+- id not passed to SplitterPanel [\#5169](https://github.com/primefaces/primereact/issues/5169)
+
 ## [10.0.7](https://github.com/primefaces/primereact/tree/10.0.7) (2023-10-26)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.6...10.0.7)
