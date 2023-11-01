@@ -617,10 +617,10 @@ export const MultiSelect = React.memo(
         }, [props.overlayVisible]);
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && hasFilter) {
+            if (overlayVisibleState && filterState && hasFilter) {
                 alignOverlay();
             }
-        }, [overlayVisibleState, hasFilter]);
+        }, [overlayVisibleState, filterState, hasFilter]);
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
