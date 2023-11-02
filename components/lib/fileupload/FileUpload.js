@@ -252,8 +252,8 @@ export const FileUpload = React.memo(
                             }
                         }
 
-                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                         clear();
+                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                     }
                 };
 
@@ -273,12 +273,10 @@ export const FileUpload = React.memo(
 
         const clear = () => {
             setFilesState([]);
+            setUploadedFilesState([]);
             setUploadingState(false);
             props.onClear && props.onClear();
-
-            if (props.mode === 'advanced') {
-                clearInput();
-            }
+            clearInput();
         };
 
         const choose = () => {
