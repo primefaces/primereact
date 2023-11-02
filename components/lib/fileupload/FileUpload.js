@@ -273,10 +273,12 @@ export const FileUpload = React.memo(
 
         const clear = () => {
             setFilesState([]);
-            setUploadedFilesState([]);
             setUploadingState(false);
             props.onClear && props.onClear();
-            clearInput();
+
+            if (props.mode === 'advanced') {
+                clearInput();
+            }
         };
 
         const choose = () => {
