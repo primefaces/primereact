@@ -202,7 +202,7 @@ export const Mention = React.memo(
 
             if (currentText.trim() !== selectedText) {
                 const prevText = value.substring(0, triggerState.index);
-                const nextText = value.substring(spaceIndex > -1 ? triggerState.index : triggerState.index + currentText.length);
+                const nextText = value.substring(spaceIndex > -1 ? selectionStart : triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
                 event.target = inputRef.current;
