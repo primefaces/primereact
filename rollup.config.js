@@ -377,7 +377,10 @@ function addPackageJson() {
     },
     "sideEffects": [
         "**/*.css"
-    ]
+    ],
+    "engines": {
+        "node": ">=14.0.0"
+    }
 }`;
 
     !fs.existsSync(outputDir) && fs.mkdirSync(outputDir);
