@@ -23,15 +23,14 @@ const styles = `
     .p-ripple-disabled .p-ink {
         display: none !important;
     }
-}
 
-@keyframes ripple {
-    100% {
-        opacity: 0;
-        transform: scale(2.5);
+    @keyframes ripple {
+        100% {
+            opacity: 0;
+            transform: scale(2.5);
+        }
     }
 }
-
 `;
 
 const classes = {
