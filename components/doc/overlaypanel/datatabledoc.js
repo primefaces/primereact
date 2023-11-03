@@ -29,10 +29,10 @@ export function DataTableDoc(props) {
     const toast = useRef(null);
     const isMounted = useRef(false);
 
-    const productSelect = (e) =>{
+    const productSelect = (e) => {
         op.current.hide();
-        toast.current.show({ severity: 'info', summary: 'Product Selected', detail:e.data.name, life: 3000 }); 
-    }
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail: e.data.name, life: 3000 });
+    };
 
     useEffect(() => {
         isMounted.current = true;
@@ -97,10 +97,10 @@ export default function DataTableDemo() {
     const toast = useRef(null);
     const isMounted = useRef(false);
 
-    const productSelect = (e) =>{
+    const productSelect = (e) => {
         op.current.hide();
         toast.current.show({ severity: 'info', summary: 'Product Selected', detail:e.data.name, life: 3000 }); 
-    }
+    };
 
     useEffect(() => {
         isMounted.current = true;
@@ -169,10 +169,10 @@ export default function DataTableDemo() {
         </div>
     );
     
-    const productSelect = (e) =>{
+    const productSelect = (e) => {
         op.current.hide();
         toast.current.show({ severity: 'info', summary: 'Product Selected', detail:e.data.name, life: 3000 }); 
-    }
+    };
 
     useEffect(() => {
         isMounted.current = true;
