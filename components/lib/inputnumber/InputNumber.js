@@ -853,9 +853,13 @@ export const InputNumber = React.memo(
                     selectionEnd = sRegex.lastIndex + tRegex.lastIndex;
                     inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 } else if (newLength === currentLength) {
-                    if (operation === 'insert' || operation === 'delete-back-single') inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
-                    else if (operation === 'delete-single') inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
-                    else if (operation === 'delete-range' || operation === 'spin') inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    if (operation === 'insert' || operation === 'delete-back-single') {
+                        inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    } else if (operation === 'delete-single') {
+                        inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
+                    } else if (operation === 'delete-range' || operation === 'spin') {
+                        inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    }
                 } else if (operation === 'delete-back-single') {
                     let prevChar = inputValue.charAt(selectionEnd - 1);
                     let nextChar = inputValue.charAt(selectionEnd);
