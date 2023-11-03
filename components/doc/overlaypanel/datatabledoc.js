@@ -29,12 +29,10 @@ export function DataTableDoc(props) {
     const toast = useRef(null);
     const isMounted = useRef(false);
 
-    useEffect(() => {
-        if (isMounted.current && selectedProduct) {
-            op.current.hide();
-            toast.current.show({ severity: 'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000 });
-        }
-    }, [selectedProduct]); // eslint-disable-line react-hooks/exhaustive-deps
+    const productSelect = (e) =>{
+        op.current.hide();
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail:e.data.name, life: 3000 }); 
+    }
 
     useEffect(() => {
         isMounted.current = true;
@@ -99,12 +97,10 @@ export default function DataTableDemo() {
     const toast = useRef(null);
     const isMounted = useRef(false);
 
-    useEffect(() => {
-        if (isMounted.current && selectedProduct) {
-            op.current.hide();
-            toast.current.show({ severity: 'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000 });
-        }
-    }, [selectedProduct]);
+    const productSelect = (e) =>{
+        op.current.hide();
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail:e.data.name, life: 3000 }); 
+    }
 
     useEffect(() => {
         isMounted.current = true;
@@ -133,11 +129,11 @@ export default function DataTableDemo() {
             <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
             {selectedProductContent}
             <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
-                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
-                    <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
-                    <Column header="Image" body={imageBody} />
-                    <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
-                </DataTable>
+                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} onRowClick={productSelect}>
+                        <Column field="name" header="Name" sortable style={{ minWidth: '12rem' }} />
+                        <Column header="Image" body={imageBody} />
+                        <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
+                    </DataTable>
             </OverlayPanel>
         </div>
     );
@@ -172,13 +168,11 @@ export default function DataTableDemo() {
             <span className="text-600">{selectedProduct.category}</span>
         </div>
     );
-
-    useEffect(() => {
-        if (isMounted.current && selectedProduct) {
-            op.current.hide();
-            toast.current.show({ severity: 'info', summary: 'Product Selected', detail: selectedProduct.name, life: 3000 });
-        }
-    }, [selectedProduct]);
+    
+    const productSelect = (e) =>{
+        op.current.hide();
+        toast.current.show({ severity: 'info', summary: 'Product Selected', detail:e.data.name, life: 3000 }); 
+    }
 
     useEffect(() => {
         isMounted.current = true;
@@ -207,11 +201,11 @@ export default function DataTableDemo() {
             <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
             {selectedProductContent}
             <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
-                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
-                    <Column field="name" header="Name" sortable style={{minWidth: '12rem'}} />
-                    <Column header="Image" body={imageBody} />
-                    <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
-                </DataTable>
+                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} onRowClick={productSelect}>
+                        <Column field="name" header="Name" sortable style={{ minWidth: '12rem' }} />
+                        <Column header="Image" body={imageBody} />
+                        <Column field="price" header="Price" sortable body={priceBody} style={{minWidth: '8rem'}} />
+                    </DataTable>
             </OverlayPanel>
         </div>
     );
@@ -248,7 +242,7 @@ export default function DataTableDemo() {
                 <Button type="button" icon="pi pi-search" label="Search" onClick={(e) => op.current.toggle(e)} />
                 {selectedProductContent}
                 <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
-                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)}>
+                    <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e) => setSelectedProduct(e.value)} onRowClick={productSelect}>
                         <Column field="name" header="Name" sortable style={{ minWidth: '12rem' }} />
                         <Column header="Image" body={imageBody} />
                         <Column field="price" header="Price" sortable body={priceBody} style={{ minWidth: '8rem' }} />
