@@ -3,5 +3,15 @@
     "module": "./multiselect.esm.js",
     "unpkg": "./multiselect.min.js",
     "types": "./multiselect.d.ts",
+    "exports": {
+        ".": {
+            "types": "./multiselect.d.ts",
+            "module": "./multiselect.esm.js",
+            "import": "./multiselect.esm.js",
+            "require": "./multiselect.cjs.js",
+            "default": "./multiselect.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

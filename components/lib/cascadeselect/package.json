@@ -3,5 +3,15 @@
     "module": "./cascadeselect.esm.js",
     "unpkg": "./cascadeselect.min.js",
     "types": "./cascadeselect.d.ts",
+    "exports": {
+        ".": {
+            "types": "./cascadeselect.d.ts",
+            "module": "./cascadeselect.esm.js",
+            "import": "./cascadeselect.esm.js",
+            "require": "./cascadeselect.cjs.js",
+            "default": "./cascadeselect.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

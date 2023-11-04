@@ -3,5 +3,15 @@
     "module": "./slider.esm.js",
     "unpkg": "./slider.min.js",
     "types": "./slider.d.ts",
+    "exports": {
+        ".": {
+            "types": "./slider.d.ts",
+            "module": "./slider.esm.js",
+            "import": "./slider.esm.js",
+            "require": "./slider.cjs.js",
+            "default": "./slider.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

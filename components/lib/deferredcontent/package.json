@@ -3,5 +3,15 @@
     "module": "./deferredcontent.esm.js",
     "unpkg": "./deferredcontent.min.js",
     "types": "./deferredcontent.d.ts",
+    "exports": {
+        ".": {
+            "types": "./deferredcontent.d.ts",
+            "module": "./deferredcontent.esm.js",
+            "import": "./deferredcontent.esm.js",
+            "require": "./deferredcontent.cjs.js",
+            "default": "./deferredcontent.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

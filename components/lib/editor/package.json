@@ -3,5 +3,15 @@
     "module": "./editor.esm.js",
     "unpkg": "./editor.min.js",
     "types": "./editor.d.ts",
+    "exports": {
+        ".": {
+            "types": "./editor.d.ts",
+            "module": "./editor.esm.js",
+            "import": "./editor.esm.js",
+            "require": "./editor.cjs.js",
+            "default": "./editor.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

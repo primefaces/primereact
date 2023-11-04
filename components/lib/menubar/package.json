@@ -3,5 +3,15 @@
     "module": "./menubar.esm.js",
     "unpkg": "./menubar.min.js",
     "types": "./menubar.d.ts",
+    "exports": {
+        ".": {
+            "types": "./menubar.d.ts",
+            "module": "./menubar.esm.js",
+            "import": "./menubar.esm.js",
+            "require": "./menubar.cjs.js",
+            "default": "./menubar.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

@@ -3,5 +3,15 @@
     "module": "./accordion.esm.js",
     "unpkg": "./accordion.min.js",
     "types": "./accordion.d.ts",
+    "exports": {
+        ".": {
+            "types": "./accordion.d.ts",
+            "module": "./accordion.esm.js",
+            "import": "./accordion.esm.js",
+            "require": "./accordion.cjs.js",
+            "default": "./accordion.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

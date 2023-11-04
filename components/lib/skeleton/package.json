@@ -3,5 +3,15 @@
     "module": "./skeleton.esm.js",
     "unpkg": "./skeleton.min.js",
     "types": "./skeleton.d.ts",
+    "exports": {
+        ".": {
+            "types": "./skeleton.d.ts",
+            "module": "./skeleton.esm.js",
+            "import": "./skeleton.esm.js",
+            "require": "./skeleton.cjs.js",
+            "default": "./skeleton.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

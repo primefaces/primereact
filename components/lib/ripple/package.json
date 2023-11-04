@@ -3,5 +3,15 @@
     "module": "./ripple.esm.js",
     "unpkg": "./ripple.min.js",
     "types": "./ripple.d.ts",
+    "exports": {
+        ".": {
+            "types": "./ripple.d.ts",
+            "module": "./ripple.esm.js",
+            "import": "./ripple.esm.js",
+            "require": "./ripple.cjs.js",
+            "default": "./ripple.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

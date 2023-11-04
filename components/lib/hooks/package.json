@@ -3,5 +3,15 @@
     "module": "./hooks.esm.js",
     "unpkg": "./hooks.min.js",
     "types": "./hooks.d.ts",
+    "exports": {
+        ".": {
+            "types": "./hooks.d.ts",
+            "module": "./hooks.esm.js",
+            "import": "./hooks.esm.js",
+            "require": "./hooks.cjs.js",
+            "default": "./hooks.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

@@ -3,5 +3,15 @@
     "module": "./column.esm.js",
     "unpkg": "./column.min.js",
     "types": "./column.d.ts",
+    "exports": {
+        ".": {
+            "types": "./column.d.ts",
+            "module": "./column.esm.js",
+            "import": "./column.esm.js",
+            "require": "./column.cjs.js",
+            "default": "./column.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

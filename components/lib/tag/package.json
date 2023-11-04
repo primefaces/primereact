@@ -3,5 +3,15 @@
     "module": "./tag.esm.js",
     "unpkg": "./tag.min.js",
     "types": "./tag.d.ts",
+    "exports": {
+        ".": {
+            "types": "./tag.d.ts",
+            "module": "./tag.esm.js",
+            "import": "./tag.esm.js",
+            "require": "./tag.cjs.js",
+            "default": "./tag.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

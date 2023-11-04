@@ -3,5 +3,15 @@
     "module": "./chip.esm.js",
     "unpkg": "./chip.min.js",
     "types": "./chip.d.ts",
+    "exports": {
+        ".": {
+            "types": "./chip.d.ts",
+            "module": "./chip.esm.js",
+            "import": "./chip.esm.js",
+            "require": "./chip.cjs.js",
+            "default": "./chip.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

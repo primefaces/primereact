@@ -1,4 +1,10 @@
 {
     "types": "./treenode.d.ts",
+    "exports": {
+        ".": {
+            "types": "./treenode.d.ts"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

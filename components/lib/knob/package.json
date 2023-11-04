@@ -3,5 +3,15 @@
     "module": "./knob.esm.js",
     "unpkg": "./knob.min.js",
     "types": "./knob.d.ts",
+    "exports": {
+        ".": {
+            "types": "./knob.d.ts",
+            "module": "./knob.esm.js",
+            "import": "./knob.esm.js",
+            "require": "./knob.cjs.js",
+            "default": "./knob.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

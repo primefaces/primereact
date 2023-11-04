@@ -3,5 +3,15 @@
     "module": "./scrolltop.esm.js",
     "unpkg": "./scrolltop.min.js",
     "types": "./scrolltop.d.ts",
+    "exports": {
+        ".": {
+            "types": "./scrolltop.d.ts",
+            "module": "./scrolltop.esm.js",
+            "import": "./scrolltop.esm.js",
+            "require": "./scrolltop.cjs.js",
+            "default": "./scrolltop.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

@@ -3,5 +3,15 @@
     "module": "./chart.esm.js",
     "unpkg": "./chart.min.js",
     "types": "./chart.d.ts",
+    "exports": {
+        ".": {
+            "types": "./chart.d.ts",
+            "module": "./chart.esm.js",
+            "import": "./chart.esm.js",
+            "require": "./chart.cjs.js",
+            "default": "./chart.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

@@ -3,5 +3,15 @@
     "module": "./fileupload.esm.js",
     "unpkg": "./fileupload.min.js",
     "types": "./fileupload.d.ts",
+    "exports": {
+        ".": {
+            "types": "./fileupload.d.ts",
+            "module": "./fileupload.esm.js",
+            "import": "./fileupload.esm.js",
+            "require": "./fileupload.cjs.js",
+            "default": "./fileupload.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

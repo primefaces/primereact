@@ -3,5 +3,15 @@
     "module": "./button.esm.js",
     "unpkg": "./button.min.js",
     "types": "./button.d.ts",
+    "exports": {
+        ".": {
+            "types": "./button.d.ts",
+            "module": "./button.esm.js",
+            "import": "./button.esm.js",
+            "require": "./button.cjs.js",
+            "default": "./button.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

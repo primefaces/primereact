@@ -3,5 +3,15 @@
     "module": "./breadcrumb.esm.js",
     "unpkg": "./breadcrumb.min.js",
     "types": "./breadcrumb.d.ts",
+    "exports": {
+        ".": {
+            "types": "./breadcrumb.d.ts",
+            "module": "./breadcrumb.esm.js",
+            "import": "./breadcrumb.esm.js",
+            "require": "./breadcrumb.cjs.js",
+            "default": "./breadcrumb.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

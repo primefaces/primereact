@@ -3,5 +3,15 @@
     "module": "./mention.esm.js",
     "unpkg": "./mention.min.js",
     "types": "./mention.d.ts",
+    "exports": {
+        ".": {
+            "types": "./mention.d.ts",
+            "module": "./mention.esm.js",
+            "import": "./mention.esm.js",
+            "require": "./mention.cjs.js",
+            "default": "./mention.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

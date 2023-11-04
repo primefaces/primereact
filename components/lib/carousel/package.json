@@ -3,5 +3,15 @@
     "module": "./carousel.esm.js",
     "unpkg": "./carousel.min.js",
     "types": "./carousel.d.ts",
+    "exports": {
+        ".": {
+            "types": "./carousel.d.ts",
+            "module": "./carousel.esm.js",
+            "import": "./carousel.esm.js",
+            "require": "./carousel.cjs.js",
+            "default": "./carousel.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

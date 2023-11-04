@@ -3,5 +3,15 @@
     "module": "./overlaypanel.esm.js",
     "unpkg": "./overlaypanel.min.js",
     "types": "./overlaypanel.d.ts",
+    "exports": {
+        ".": {
+            "types": "./overlaypanel.d.ts",
+            "module": "./overlaypanel.esm.js",
+            "import": "./overlaypanel.esm.js",
+            "require": "./overlaypanel.cjs.js",
+            "default": "./overlaypanel.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

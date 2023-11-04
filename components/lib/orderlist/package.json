@@ -3,5 +3,15 @@
     "module": "./orderlist.esm.js",
     "unpkg": "./orderlist.min.js",
     "types": "./orderlist.d.ts",
+    "exports": {
+        ".": {
+            "types": "./orderlist.d.ts",
+            "module": "./orderlist.esm.js",
+            "import": "./orderlist.esm.js",
+            "require": "./orderlist.cjs.js",
+            "default": "./orderlist.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

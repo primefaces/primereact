@@ -3,5 +3,15 @@
     "module": "./organizationchart.esm.js",
     "unpkg": "./organizationchart.min.js",
     "types": "./organizationchart.d.ts",
+    "exports": {
+        ".": {
+            "types": "./organizationchart.d.ts",
+            "module": "./organizationchart.esm.js",
+            "import": "./organizationchart.esm.js",
+            "require": "./organizationchart.cjs.js",
+            "default": "./organizationchart.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

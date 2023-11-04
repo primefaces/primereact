@@ -3,5 +3,15 @@
     "module": "./confirmpopup.esm.js",
     "unpkg": "./confirmpopup.min.js",
     "types": "./confirmpopup.d.ts",
+    "exports": {
+        ".": {
+            "types": "./confirmpopup.d.ts",
+            "module": "./confirmpopup.esm.js",
+            "import": "./confirmpopup.esm.js",
+            "require": "./confirmpopup.cjs.js",
+            "default": "./confirmpopup.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

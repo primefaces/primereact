@@ -3,5 +3,15 @@
     "module": "./divider.esm.js",
     "unpkg": "./divider.min.js",
     "types": "./divider.d.ts",
+    "exports": {
+        ".": {
+            "types": "./divider.d.ts",
+            "module": "./divider.esm.js",
+            "import": "./divider.esm.js",
+            "require": "./divider.cjs.js",
+            "default": "./divider.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

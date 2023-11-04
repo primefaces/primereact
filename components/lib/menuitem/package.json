@@ -1,4 +1,10 @@
 {
     "types": "./menuitem.d.ts",
+    "exports": {
+        ".": {
+            "types": "./menuitem.d.ts"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

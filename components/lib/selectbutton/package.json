@@ -3,5 +3,15 @@
     "module": "./selectbutton.esm.js",
     "unpkg": "./selectbutton.min.js",
     "types": "./selectbutton.d.ts",
+    "exports": {
+        ".": {
+            "types": "./selectbutton.d.ts",
+            "module": "./selectbutton.esm.js",
+            "import": "./selectbutton.esm.js",
+            "require": "./selectbutton.cjs.js",
+            "default": "./selectbutton.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

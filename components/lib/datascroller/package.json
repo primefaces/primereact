@@ -3,5 +3,15 @@
     "module": "./datascroller.esm.js",
     "unpkg": "./datascroller.min.js",
     "types": "./datascroller.d.ts",
+    "exports": {
+        ".": {
+            "types": "./datascroller.d.ts",
+            "module": "./datascroller.esm.js",
+            "import": "./datascroller.esm.js",
+            "require": "./datascroller.cjs.js",
+            "default": "./datascroller.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

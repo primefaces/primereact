@@ -3,5 +3,15 @@
     "module": "./row.esm.js",
     "unpkg": "./row.min.js",
     "types": "./row.d.ts",
+    "exports": {
+        ".": {
+            "types": "./row.d.ts",
+            "module": "./row.esm.js",
+            "import": "./row.esm.js",
+            "require": "./row.cjs.js",
+            "default": "./row.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

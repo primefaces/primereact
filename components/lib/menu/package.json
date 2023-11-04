@@ -3,5 +3,15 @@
     "module": "./menu.esm.js",
     "unpkg": "./menu.min.js",
     "types": "./menu.d.ts",
+    "exports": {
+        ".": {
+            "types": "./menu.d.ts",
+            "module": "./menu.esm.js",
+            "import": "./menu.esm.js",
+            "require": "./menu.cjs.js",
+            "default": "./menu.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

@@ -3,5 +3,15 @@
     "module": "./scrollpanel.esm.js",
     "unpkg": "./scrollpanel.min.js",
     "types": "./scrollpanel.d.ts",
+    "exports": {
+        ".": {
+            "types": "./scrollpanel.d.ts",
+            "module": "./scrollpanel.esm.js",
+            "import": "./scrollpanel.esm.js",
+            "require": "./scrollpanel.cjs.js",
+            "default": "./scrollpanel.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

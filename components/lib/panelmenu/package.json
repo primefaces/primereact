@@ -3,5 +3,15 @@
     "module": "./panelmenu.esm.js",
     "unpkg": "./panelmenu.min.js",
     "types": "./panelmenu.d.ts",
+    "exports": {
+        ".": {
+            "types": "./panelmenu.d.ts",
+            "module": "./panelmenu.esm.js",
+            "import": "./panelmenu.esm.js",
+            "require": "./panelmenu.cjs.js",
+            "default": "./panelmenu.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

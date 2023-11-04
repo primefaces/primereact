@@ -3,5 +3,15 @@
     "module": "./password.esm.js",
     "unpkg": "./password.min.js",
     "types": "./password.d.ts",
+    "exports": {
+        ".": {
+            "types": "./password.d.ts",
+            "module": "./password.esm.js",
+            "import": "./password.esm.js",
+            "require": "./password.cjs.js",
+            "default": "./password.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

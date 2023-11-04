@@ -3,5 +3,15 @@
     "module": "./dataview.esm.js",
     "unpkg": "./dataview.min.js",
     "types": "./dataview.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dataview.d.ts",
+            "module": "./dataview.esm.js",
+            "import": "./dataview.esm.js",
+            "require": "./dataview.cjs.js",
+            "default": "./dataview.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

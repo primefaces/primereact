@@ -223,6 +223,7 @@ function addEntry(name, input, output, isComponent = true) {
     };
 
     entries.push(get_CJS_ESM());
+
     if (!NPM_LINK) {
         entries.push(get_IIFE());
 
@@ -369,6 +370,15 @@ function addPackageJson() {
     "main": "primereact.all.min.js",
     "module": "primereact.all.esm.min.js",
     "web-types": "web-types.json",
+    "exports": {
+        ".": {
+            "module": "./primereact.all.esm.min.js",
+            "import": "./primereact.all.esm.min.js",
+            "require": "./primereact.all.min.js",
+            "default": "./primereact.all.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "peerDependencies": {
         "@types/react": "^17.0.0 || ^18.0.0",
         "react": "^17.0.0 || ^18.0.0",

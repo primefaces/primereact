@@ -3,5 +3,15 @@
     "module": "./inputnumber.esm.js",
     "unpkg": "./inputnumber.min.js",
     "types": "./inputnumber.d.ts",
+    "exports": {
+        ".": {
+            "types": "./inputnumber.d.ts",
+            "module": "./inputnumber.esm.js",
+            "import": "./inputnumber.esm.js",
+            "require": "./inputnumber.cjs.js",
+            "default": "./inputnumber.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

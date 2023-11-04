@@ -3,5 +3,15 @@
     "module": "./inputmask.esm.js",
     "unpkg": "./inputmask.min.js",
     "types": "./inputmask.d.ts",
+    "exports": {
+        ".": {
+            "types": "./inputmask.d.ts",
+            "module": "./inputmask.esm.js",
+            "import": "./inputmask.esm.js",
+            "require": "./inputmask.cjs.js",
+            "default": "./inputmask.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

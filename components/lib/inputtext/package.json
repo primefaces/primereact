@@ -3,5 +3,15 @@
     "module": "./inputtext.esm.js",
     "unpkg": "./inputtext.min.js",
     "types": "./inputtext.d.ts",
+    "exports": {
+        ".": {
+            "types": "./inputtext.d.ts",
+            "module": "./inputtext.esm.js",
+            "import": "./inputtext.esm.js",
+            "require": "./inputtext.cjs.js",
+            "default": "./inputtext.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

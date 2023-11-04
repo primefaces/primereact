@@ -1,7 +1,17 @@
 {
-  "main": "./terminal.cjs.js",
-  "module": "./terminal.esm.js",
-  "unpkg": "./terminal.min.js",
-  "types": "./terminal.d.ts",
+    "main": "./terminal.cjs.js",
+    "module": "./terminal.esm.js",
+    "unpkg": "./terminal.min.js",
+    "types": "./terminal.d.ts",
+    "exports": {
+        ".": {
+            "types": "./terminal.d.ts",
+            "module": "./terminal.esm.js",
+            "import": "./terminal.esm.js",
+            "require": "./terminal.cjs.js",
+            "default": "./terminal.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

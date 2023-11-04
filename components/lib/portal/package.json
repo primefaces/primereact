@@ -2,5 +2,14 @@
     "main": "./portal.cjs.js",
     "module": "./portal.esm.js",
     "unpkg": "./portal.min.js",
+    "exports": {
+        ".": {
+            "module": "./portal.esm.js",
+            "import": "./portal.esm.js",
+            "require": "./portal.cjs.js",
+            "default": "./portal.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

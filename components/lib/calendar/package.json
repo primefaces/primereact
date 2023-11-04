@@ -3,5 +3,15 @@
     "module": "./calendar.esm.js",
     "unpkg": "./calendar.min.js",
     "types": "./calendar.d.ts",
+    "exports": {
+        ".": {
+            "types": "./calendar.d.ts",
+            "module": "./calendar.esm.js",
+            "import": "./calendar.esm.js",
+            "require": "./calendar.cjs.js",
+            "default": "./calendar.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

@@ -3,5 +3,15 @@
     "module": "./progressbar.esm.js",
     "unpkg": "./progressbar.min.js",
     "types": "./progressbar.d.ts",
+    "exports": {
+        ".": {
+            "types": "./progressbar.d.ts",
+            "module": "./progressbar.esm.js",
+            "import": "./progressbar.esm.js",
+            "require": "./progressbar.cjs.js",
+            "default": "./progressbar.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

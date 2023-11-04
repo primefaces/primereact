@@ -3,5 +3,15 @@
     "module": "./index.esm.js",
     "unpkg": "./index.min.js",
     "types": "./index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./index.d.ts",
+            "module": "./index.esm.js",
+            "import": "./index.esm.js",
+            "require": "./index.cjs.js",
+            "default": "./index.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

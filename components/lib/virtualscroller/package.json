@@ -3,5 +3,15 @@
     "module": "./virtualscroller.esm.js",
     "unpkg": "./virtualscroller.min.js",
     "types": "./virtualscroller.d.ts",
+    "exports": {
+        ".": {
+            "types": "./virtualscroller.d.ts",
+            "module": "./virtualscroller.esm.js",
+            "import": "./virtualscroller.esm.js",
+            "require": "./virtualscroller.cjs.js",
+            "default": "./virtualscroller.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

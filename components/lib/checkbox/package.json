@@ -3,5 +3,15 @@
     "module": "./checkbox.esm.js",
     "unpkg": "./checkbox.min.js",
     "types": "./checkbox.d.ts",
+    "exports": {
+        ".": {
+            "types": "./checkbox.d.ts",
+            "module": "./checkbox.esm.js",
+            "import": "./checkbox.esm.js",
+            "require": "./checkbox.cjs.js",
+            "default": "./checkbox.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

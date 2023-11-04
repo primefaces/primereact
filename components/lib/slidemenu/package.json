@@ -3,5 +3,15 @@
     "module": "./slidemenu.esm.js",
     "unpkg": "./slidemenu.min.js",
     "types": "./slidemenu.d.ts",
+    "exports": {
+        ".": {
+            "types": "./slidemenu.d.ts",
+            "module": "./slidemenu.esm.js",
+            "import": "./slidemenu.esm.js",
+            "require": "./slidemenu.cjs.js",
+            "default": "./slidemenu.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

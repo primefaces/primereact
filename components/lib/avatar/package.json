@@ -3,5 +3,15 @@
     "module": "./avatar.esm.js",
     "unpkg": "./avatar.min.js",
     "types": "./avatar.d.ts",
+    "exports": {
+        ".": {
+            "types": "./avatar.d.ts",
+            "module": "./avatar.esm.js",
+            "import": "./avatar.esm.js",
+            "require": "./avatar.cjs.js",
+            "default": "./avatar.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

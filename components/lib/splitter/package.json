@@ -3,5 +3,15 @@
     "module": "./splitter.esm.js",
     "unpkg": "./splitter.min.js",
     "types": "./splitter.d.ts",
+    "exports": {
+        ".": {
+            "types": "./splitter.d.ts",
+            "module": "./splitter.esm.js",
+            "import": "./splitter.esm.js",
+            "require": "./splitter.cjs.js",
+            "default": "./splitter.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

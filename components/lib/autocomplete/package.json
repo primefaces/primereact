@@ -3,5 +3,15 @@
     "module": "./autocomplete.esm.js",
     "unpkg": "./autocomplete.min.js",
     "types": "./autocomplete.d.ts",
+    "exports": {
+        ".": {
+            "types": "./autocomplete.d.ts",
+            "module": "./autocomplete.esm.js",
+            "import": "./autocomplete.esm.js",
+            "require": "./autocomplete.cjs.js",
+            "default": "./autocomplete.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

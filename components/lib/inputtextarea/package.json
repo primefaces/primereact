@@ -3,5 +3,15 @@
     "module": "./inputtextarea.esm.js",
     "unpkg": "./inputtextarea.min.js",
     "types": "./inputtextarea.d.ts",
+    "exports": {
+        ".": {
+            "types": "./inputtextarea.d.ts",
+            "module": "./inputtextarea.esm.js",
+            "import": "./inputtextarea.esm.js",
+            "require": "./inputtextarea.cjs.js",
+            "default": "./inputtextarea.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

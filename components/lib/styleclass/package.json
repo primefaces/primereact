@@ -3,5 +3,15 @@
     "module": "./styleclass.esm.js",
     "unpkg": "./styleclass.min.js",
     "types": "./styleclass.d.ts",
+    "exports": {
+        ".": {
+            "types": "./styleclass.d.ts",
+            "module": "./styleclass.esm.js",
+            "import": "./styleclass.esm.js",
+            "require": "./styleclass.cjs.js",
+            "default": "./styleclass.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

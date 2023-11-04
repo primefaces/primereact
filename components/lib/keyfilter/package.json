@@ -3,5 +3,15 @@
     "module": "./keyfilter.esm.js",
     "unpkg": "./keyfilter.min.js",
     "types": "./keyfilteroptions.d.ts",
+    "exports": {
+        ".": {
+            "types": "./keyfilteroptions.d.ts",
+            "module": "./keyfilter.esm.js",
+            "import": "./keyfilter.esm.js",
+            "require": "./keyfilter.cjs.js",
+            "default": "./keyfilter.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

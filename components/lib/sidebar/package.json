@@ -3,5 +3,15 @@
     "module": "./sidebar.esm.js",
     "unpkg": "./sidebar.min.js",
     "types": "./sidebar.d.ts",
+    "exports": {
+        ".": {
+            "types": "./sidebar.d.ts",
+            "module": "./sidebar.esm.js",
+            "import": "./sidebar.esm.js",
+            "require": "./sidebar.cjs.js",
+            "default": "./sidebar.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

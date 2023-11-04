@@ -3,5 +3,15 @@
     "module": "./radiobutton.esm.js",
     "unpkg": "./radiobutton.min.js",
     "types": "./radiobutton.d.ts",
+    "exports": {
+        ".": {
+            "types": "./radiobutton.d.ts",
+            "module": "./radiobutton.esm.js",
+            "import": "./radiobutton.esm.js",
+            "require": "./radiobutton.cjs.js",
+            "default": "./radiobutton.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

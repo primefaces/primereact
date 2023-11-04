@@ -3,5 +3,15 @@
     "module": "./steps.esm.js",
     "unpkg": "./steps.min.js",
     "types": "./steps.d.ts",
+    "exports": {
+        ".": {
+            "types": "./steps.d.ts",
+            "module": "./steps.esm.js",
+            "import": "./steps.esm.js",
+            "require": "./steps.cjs.js",
+            "default": "./steps.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

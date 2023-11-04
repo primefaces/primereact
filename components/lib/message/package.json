@@ -3,5 +3,15 @@
     "module": "./message.esm.js",
     "unpkg": "./message.min.js",
     "types": "./message.d.ts",
+    "exports": {
+        ".": {
+            "types": "./message.d.ts",
+            "module": "./message.esm.js",
+            "import": "./message.esm.js",
+            "require": "./message.cjs.js",
+            "default": "./message.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

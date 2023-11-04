@@ -3,5 +3,15 @@
     "module": "./tabview.esm.js",
     "unpkg": "./tabview.min.js",
     "types": "./tabview.d.ts",
+    "exports": {
+        ".": {
+            "types": "./tabview.d.ts",
+            "module": "./tabview.esm.js",
+            "import": "./tabview.esm.js",
+            "require": "./tabview.cjs.js",
+            "default": "./tabview.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

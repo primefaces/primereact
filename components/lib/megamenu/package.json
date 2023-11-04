@@ -3,5 +3,15 @@
     "module": "./megamenu.esm.js",
     "unpkg": "./megamenu.min.js",
     "types": "./megamenu.d.ts",
+    "exports": {
+        ".": {
+            "types": "./megamenu.d.ts",
+            "module": "./megamenu.esm.js",
+            "import": "./megamenu.esm.js",
+            "require": "./megamenu.cjs.js",
+            "default": "./megamenu.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

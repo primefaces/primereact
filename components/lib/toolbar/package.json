@@ -3,5 +3,15 @@
     "module": "./toolbar.esm.js",
     "unpkg": "./toolbar.min.js",
     "types": "./toolbar.d.ts",
+    "exports": {
+        ".": {
+            "types": "./toolbar.d.ts",
+            "module": "./toolbar.esm.js",
+            "import": "./toolbar.esm.js",
+            "require": "./toolbar.cjs.js",
+            "default": "./toolbar.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

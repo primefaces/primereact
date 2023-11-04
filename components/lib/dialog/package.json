@@ -3,5 +3,15 @@
     "module": "./dialog.esm.js",
     "unpkg": "./dialog.min.js",
     "types": "./dialog.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dialog.d.ts",
+            "module": "./dialog.esm.js",
+            "import": "./dialog.esm.js",
+            "require": "./dialog.cjs.js",
+            "default": "./dialog.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

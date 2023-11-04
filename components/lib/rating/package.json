@@ -3,5 +3,15 @@
     "module": "./rating.esm.js",
     "unpkg": "./rating.min.js",
     "types": "./rating.d.ts",
+    "exports": {
+        ".": {
+            "types": "./rating.d.ts",
+            "module": "./rating.esm.js",
+            "import": "./rating.esm.js",
+            "require": "./rating.cjs.js",
+            "default": "./rating.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

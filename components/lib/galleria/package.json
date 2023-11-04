@@ -3,5 +3,15 @@
     "module": "./galleria.esm.js",
     "unpkg": "./galleria.min.js",
     "types": "./galleria.d.ts",
+    "exports": {
+        ".": {
+            "types": "./galleria.d.ts",
+            "module": "./galleria.esm.js",
+            "import": "./galleria.esm.js",
+            "require": "./galleria.cjs.js",
+            "default": "./galleria.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

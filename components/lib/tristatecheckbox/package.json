@@ -3,5 +3,15 @@
     "module": "./tristatecheckbox.esm.js",
     "unpkg": "./tristatecheckbox.min.js",
     "types": "./tristatecheckbox.d.ts",
+    "exports": {
+        ".": {
+            "types": "./tristatecheckbox.d.ts",
+            "module": "./tristatecheckbox.esm.js",
+            "import": "./tristatecheckbox.esm.js",
+            "require": "./tristatecheckbox.cjs.js",
+            "default": "./tristatecheckbox.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

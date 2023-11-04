@@ -3,5 +3,15 @@
     "module": "./progressspinner.esm.js",
     "unpkg": "./progressspinner.min.js",
     "types": "./progressspinner.d.ts",
+    "exports": {
+        ".": {
+            "types": "./progressspinner.d.ts",
+            "module": "./progressspinner.esm.js",
+            "import": "./progressspinner.esm.js",
+            "require": "./progressspinner.cjs.js",
+            "default": "./progressspinner.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

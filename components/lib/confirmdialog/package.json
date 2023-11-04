@@ -3,5 +3,15 @@
     "module": "./confirmdialog.esm.js",
     "unpkg": "./confirmdialog.min.js",
     "types": "./confirmdialog.d.ts",
+    "exports": {
+        ".": {
+            "types": "./confirmdialog.d.ts",
+            "module": "./confirmdialog.esm.js",
+            "import": "./confirmdialog.esm.js",
+            "require": "./confirmdialog.cjs.js",
+            "default": "./confirmdialog.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

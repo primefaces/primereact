@@ -1,4 +1,10 @@
 {
     "types": "./selectitem.d.ts",
+    "exports": {
+        ".": {
+            "types": "./selectitem.d.ts"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

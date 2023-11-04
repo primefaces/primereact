@@ -3,5 +3,15 @@
     "module": "./speeddial.esm.js",
     "unpkg": "./speeddial.min.js",
     "types": "./speeddial.d.ts",
+    "exports": {
+        ".": {
+            "types": "./speeddial.d.ts",
+            "module": "./speeddial.esm.js",
+            "import": "./speeddial.esm.js",
+            "require": "./speeddial.cjs.js",
+            "default": "./speeddial.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

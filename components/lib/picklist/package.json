@@ -3,5 +3,15 @@
     "module": "./picklist.esm.js",
     "unpkg": "./picklist.min.js",
     "types": "./picklist.d.ts",
+    "exports": {
+        ".": {
+            "types": "./picklist.d.ts",
+            "module": "./picklist.esm.js",
+            "import": "./picklist.esm.js",
+            "require": "./picklist.cjs.js",
+            "default": "./picklist.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

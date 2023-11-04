@@ -3,5 +3,15 @@
     "module": "./image.esm.js",
     "unpkg": "./image.min.js",
     "types": "./image.d.ts",
+    "exports": {
+        ".": {
+            "types": "./image.d.ts",
+            "module": "./image.esm.js",
+            "import": "./image.esm.js",
+            "require": "./image.cjs.js",
+            "default": "./image.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

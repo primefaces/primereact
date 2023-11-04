@@ -3,5 +3,15 @@
     "module": "./badge.esm.js",
     "unpkg": "./badge.min.js",
     "types": "./badge.d.ts",
+    "exports": {
+        ".": {
+            "types": "./badge.d.ts",
+            "module": "./badge.esm.js",
+            "import": "./badge.esm.js",
+            "require": "./badge.cjs.js",
+            "default": "./badge.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

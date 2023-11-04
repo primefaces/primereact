@@ -3,5 +3,15 @@
     "module": "./tooltip.esm.js",
     "unpkg": "./tooltip.min.js",
     "types": "./tooltip.d.ts",
+    "exports": {
+        ".": {
+            "types": "./tooltip.d.ts",
+            "module": "./tooltip.esm.js",
+            "import": "./tooltip.esm.js",
+            "require": "./tooltip.cjs.js",
+            "default": "./tooltip.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

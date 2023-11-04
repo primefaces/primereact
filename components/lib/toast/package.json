@@ -3,5 +3,15 @@
     "module": "./toast.esm.js",
     "unpkg": "./toast.min.js",
     "types": "./toast.d.ts",
+    "exports": {
+        ".": {
+            "types": "./toast.d.ts",
+            "module": "./toast.esm.js",
+            "import": "./toast.esm.js",
+            "require": "./toast.cjs.js",
+            "default": "./toast.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

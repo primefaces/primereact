@@ -3,5 +3,15 @@
     "module": "./avatargroup.esm.js",
     "unpkg": "./avatargroup.min.js",
     "types": "./avatargroup.d.ts",
+    "exports": {
+        ".": {
+            "types": "./avatargroup.d.ts",
+            "module": "./avatargroup.esm.js",
+            "import": "./avatargroup.esm.js",
+            "require": "./avatargroup.cjs.js",
+            "default": "./avatargroup.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

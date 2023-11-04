@@ -3,5 +3,15 @@
     "module": "./overlayservice.esm.js",
     "unpkg": "./overlayservice.min.js",
     "types": "./overlayservice.d.ts",
+    "exports": {
+        ".": {
+            "types": "./overlayservice.d.ts",
+            "module": "./overlayservice.esm.js",
+            "import": "./overlayservice.esm.js",
+            "require": "./overlayservice.cjs.js",
+            "default": "./overlayservice.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

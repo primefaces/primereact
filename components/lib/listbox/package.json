@@ -3,5 +3,15 @@
     "module": "./listbox.esm.js",
     "unpkg": "./listbox.min.js",
     "types": "./listbox.d.ts",
+    "exports": {
+        ".": {
+            "types": "./listbox.d.ts",
+            "module": "./listbox.esm.js",
+            "import": "./listbox.esm.js",
+            "require": "./listbox.cjs.js",
+            "default": "./listbox.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

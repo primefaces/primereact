@@ -3,5 +3,15 @@
     "module": "./dock.esm.js",
     "unpkg": "./dock.min.js",
     "types": "./dock.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dock.d.ts",
+            "module": "./dock.esm.js",
+            "import": "./dock.esm.js",
+            "require": "./dock.cjs.js",
+            "default": "./dock.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

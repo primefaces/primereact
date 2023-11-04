@@ -3,5 +3,15 @@
     "module": "./contextmenu.esm.js",
     "unpkg": "./contextmenu.min.js",
     "types": "./contextmenu.d.ts",
+    "exports": {
+        ".": {
+            "types": "./contextmenu.d.ts",
+            "module": "./contextmenu.esm.js",
+            "import": "./contextmenu.esm.js",
+            "require": "./contextmenu.cjs.js",
+            "default": "./contextmenu.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

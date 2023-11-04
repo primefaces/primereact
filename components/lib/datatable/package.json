@@ -3,5 +3,15 @@
     "module": "./datatable.esm.js",
     "unpkg": "./datatable.min.js",
     "types": "./datatable.d.ts",
+    "exports": {
+        ".": {
+            "types": "./datatable.d.ts",
+            "module": "./datatable.esm.js",
+            "import": "./datatable.esm.js",
+            "require": "./datatable.cjs.js",
+            "default": "./datatable.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

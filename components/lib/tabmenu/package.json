@@ -3,5 +3,15 @@
     "module": "./tabmenu.esm.js",
     "unpkg": "./tabmenu.min.js",
     "types": "./tabmenu.d.ts",
+    "exports": {
+        ".": {
+            "types": "./tabmenu.d.ts",
+            "module": "./tabmenu.esm.js",
+            "import": "./tabmenu.esm.js",
+            "require": "./tabmenu.cjs.js",
+            "default": "./tabmenu.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

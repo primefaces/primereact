@@ -3,5 +3,15 @@
     "module": "./tree.esm.js",
     "unpkg": "./tree.min.js",
     "types": "./tree.d.ts",
+    "exports": {
+        ".": {
+            "types": "./tree.d.ts",
+            "module": "./tree.esm.js",
+            "import": "./tree.esm.js",
+            "require": "./tree.cjs.js",
+            "default": "./tree.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

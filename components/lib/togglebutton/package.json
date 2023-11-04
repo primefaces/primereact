@@ -3,5 +3,15 @@
     "module": "./togglebutton.esm.js",
     "unpkg": "./togglebutton.min.js",
     "types": "./togglebutton.d.ts",
+    "exports": {
+        ".": {
+            "types": "./togglebutton.d.ts",
+            "module": "./togglebutton.esm.js",
+            "import": "./togglebutton.esm.js",
+            "require": "./togglebutton.cjs.js",
+            "default": "./togglebutton.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

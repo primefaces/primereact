@@ -3,5 +3,15 @@
     "module": "./paginator.esm.js",
     "unpkg": "./paginator.min.js",
     "types": "./paginator.d.ts",
+    "exports": {
+        ".": {
+            "types": "./paginator.d.ts",
+            "module": "./paginator.esm.js",
+            "import": "./paginator.esm.js",
+            "require": "./paginator.cjs.js",
+            "default": "./paginator.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }

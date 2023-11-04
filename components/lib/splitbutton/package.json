@@ -3,5 +3,15 @@
     "module": "./splitbutton.esm.js",
     "unpkg": "./splitbutton.min.js",
     "types": "./splitbutton.d.ts",
+    "exports": {
+        ".": {
+            "types": "./splitbutton.d.ts",
+            "module": "./splitbutton.esm.js",
+            "import": "./splitbutton.esm.js",
+            "require": "./splitbutton.cjs.js",
+            "default": "./splitbutton.min.js"
+        },
+        "./package.json": "./package.json"
+    },
     "sideEffects": false
 }
