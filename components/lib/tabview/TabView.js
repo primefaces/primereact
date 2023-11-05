@@ -56,13 +56,13 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const isSelected = (index) => index === activeIndex;
     const getTabProp = (tab, name) => TabPanelBase.getCProp(tab, name);
 
-    const shouldUseTab = (tab, index) => {
-        return tab && ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== index);
+    const shouldUseTab = (tab) => {
+        return tab && ObjectUtils.isValidChild(tab, 'TabPanel') && hiddenTabsState.every((_i) => _i !== tab.key);
     };
 
     const findVisibleActiveTab = (i) => {
         const tabsInfo = React.Children.map(props.children, (tab, index) => {
-            if (shouldUseTab(tab, index)) {
+            if (shouldUseTab(tab)) {
                 return { tab, index };
             }
         });
@@ -73,15 +73,18 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const onTabHeaderClose = (event, index) => {
         event.preventDefault();
 
+        const { onBeforeTabClose, onTabClose, children } = props;
+        const { key } = children[index];
+
         // give caller a chance to stop the selection
-        if (props.onBeforeTabClose && props.onBeforeTabClose({ originalEvent: event, index }) === false) {
+        if (onBeforeTabClose && onBeforeTabClose({ originalEvent: event, index }) === false) {
             return;
         }
 
-        setHiddenTabsState([...hiddenTabsState, index]);
+        setHiddenTabsState([...hiddenTabsState, key]);
 
-        if (props.onTabClose) {
-            props.onTabClose({ originalEvent: event, index });
+        if (onTabClose) {
+            onTabClose({ originalEvent: event, index });
         }
     };
 
@@ -275,7 +278,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     const createTabHeaders = () => {
         return React.Children.map(props.children, (tab, index) => {
-            if (shouldUseTab(tab, index)) {
+            if (shouldUseTab(tab)) {
                 return createTabHeader(tab, index);
             }
         });
@@ -331,7 +334,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             ptm('panelcontainer')
         );
         const contents = React.Children.map(props.children, (tab, index) => {
-            if (shouldUseTab(tab, index) && (!props.renderActiveOnly || isSelected(index))) {
+            if (shouldUseTab(tab) && (!props.renderActiveOnly || isSelected(index))) {
                 const selected = isSelected(index);
                 const contentId = idState + '_content_' + index;
                 const ariaLabelledBy = idState + '_header_' + index;
