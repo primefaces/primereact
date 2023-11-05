@@ -45422,7 +45422,7 @@
                             "name": "hiddenTabsState",
                             "optional": false,
                             "readonly": false,
-                            "type": "number[]",
+                            "type": "(string | number)[]",
                             "description": "Current state of hidden tab."
                         },
                         {
