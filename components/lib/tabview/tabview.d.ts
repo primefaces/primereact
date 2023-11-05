@@ -265,7 +265,7 @@ export interface TabViewState {
     /**
      * Current state of hidden tab.
      */
-    hiddenTabsState: number[];
+    hiddenTabsState: (number | string)[];
     /**
      * Current state of previous button.
      * @defaultValue true
