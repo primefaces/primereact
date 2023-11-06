@@ -481,6 +481,13 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
+            if (props.onRemove) {
+                props.onRemove({
+                    originalEvent: event,
+                    value
+                });
+            }
+
             updateModel(event, value, item);
         };
 

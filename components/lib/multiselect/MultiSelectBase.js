@@ -239,6 +239,7 @@ export const MultiSelectBase = ComponentBase.extend({
         onFilter: null,
         onFocus: null,
         onHide: null,
+        onRemove: null,
         onSelectAll: null,
         onShow: null,
         optionDisabled: null,
