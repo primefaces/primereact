@@ -24,6 +24,7 @@ export const MultiSelectItem = React.memo((props) => {
         }
 
         event.preventDefault();
+        event.stopPropagation();
     };
 
     const onKeyDown = (event) => {
