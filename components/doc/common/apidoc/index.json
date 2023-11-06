@@ -34225,6 +34225,19 @@
                             "description": "Callback to invoke when overlay panel becomes hidden."
                         },
                         {
+                            "name": "onRemove",
+                            "parameters": [
+                                {
+                                    "name": "event",
+                                    "optional": false,
+                                    "type": "MultiSelectRemoveEvent",
+                                    "description": "Custom remove event"
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "Callback to invoke when a chip is removed."
+                        },
+                        {
                             "name": "onSelectAll",
                             "parameters": [
                                 {
@@ -34299,6 +34312,26 @@
                             "readonly": false,
                             "type": "MultiSelectChangeTargetOptions",
                             "description": "Additional information about the event."
+                        }
+                    ]
+                },
+                "MultiSelectRemoveEvent": {
+                    "description": "Custom remove event when chip is removed.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "any",
+                            "description": "Removed item value"
                         }
                     ]
                 },
