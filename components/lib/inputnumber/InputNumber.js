@@ -1028,6 +1028,13 @@ export const InputNumber = React.memo(
             changeValue();
         }, [props.value]);
 
+        useUpdateEffect(() => {
+            // #5245 prevent infinite loop
+            if (props.disabled) {
+                clearTimer();
+            }
+        }, [props.disabled]);
+
         const createInputElement = () => {
             const className = classNames('p-inputnumber-input', props.inputClassName);
             const valueToRender = formattedValue(props.value);
