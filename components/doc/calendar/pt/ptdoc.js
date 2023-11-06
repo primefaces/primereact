@@ -13,7 +13,9 @@ export function PTDoc(props) {
     onChange={(e) => setDate(e.value)}
     showIcon
     pt={{
-        input: { className: 'w-16rem' },
+        input: {
+            root: { className: 'border-teal-500' }
+        },
         dropdownButton: {
             root: { className: 'bg-teal-500 border-teal-500' }
         }
@@ -34,7 +36,9 @@ export default function PTDemo() {
                 onChange={(e) => setDate(e.value)}
                 showIcon
                 pt={{
-                    input: { className: 'w-16rem' },
+                    input: {
+                        root: { className: 'border-teal-500' }
+                    },
                     dropdownButton: {
                         root: { className: 'bg-teal-500 border-teal-500' }
                     }
@@ -58,7 +62,9 @@ export default function PTDemo() {
                 onChange={(e) => setDate(e.value)}
                 showIcon
                 pt={{
-                    input: { className: 'w-16rem' },
+                    input: {
+                        root: { className: 'border-teal-500' }
+                    },
                     dropdownButton: {
                         root: { className: 'bg-teal-500 border-teal-500' }
                     }
@@ -79,7 +85,9 @@ export default function PTDemo() {
                     onChange={(e) => setDate(e.value)}
                     showIcon
                     pt={{
-                        input: { className: 'w-16rem' },
+                        input: {
+                            root: { className: 'border-teal-500' }
+                        },
                         dropdownButton: {
                             root: { className: 'bg-teal-500 border-teal-500' }
                         }
