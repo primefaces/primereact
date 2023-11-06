@@ -172,9 +172,9 @@ const classes = {
         }),
     sortBadge: 'p-sortable-column-badge',
     headerTitle: 'p-column-title',
-    headerCell: ({ headerProps: props, column, options, getColumnProp, sorted, frozen }) =>
+    headerCell: ({ headerProps: props, frozen, column, options, getColumnProp, sorted }) =>
         options.filterOnly
-            ? 'p-filter-column'
+            ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
                   'p-sortable-column': getColumnProp(column, 'sortable'),
                   'p-highlight': sorted,
