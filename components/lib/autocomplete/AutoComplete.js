@@ -159,7 +159,7 @@ export const AutoComplete = React.memo(
         };
 
         const formatValue = (value) => {
-            if (value || value === 0) {
+            if (ObjectUtils.isNotEmpty(value)) {
                 if (typeof value === 'string') {
                     return value;
                 } else if (props.selectedItemTemplate) {
