@@ -14,6 +14,8 @@ import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PassThroughOptions } from '../passthrough';
+import { ComponentHooks } from '../componentbase/componentbase';
 
 export declare type ListBoxPassThroughType<T> = PassThroughType<T, ListBoxPassThroughMethodOptions>;
 
@@ -81,6 +83,11 @@ export interface ListboxPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -377,6 +384,11 @@ export interface ListBoxProps extends Omit<React.DetailedHTMLProps<React.InputHT
      * @type {ListboxPassThroughOptions}
      */
     pt?: ListboxPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

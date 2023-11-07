@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ariaLabel } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
-import { IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -34,15 +34,17 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     useHandleStyle(AccordionBase.css.styles, isUnstyled, { name: 'accordion' });
 
     const getTabPT = (tab, key, index) => {
+        const atProps = AccordionTabBase.getCProps(tab);
         const tabMetaData = {
-            props: tab.props /* @todo */,
+            // props: atProps, /* @todo */
             parent: metaData,
             context: {
                 index,
                 count,
                 first: index === 0,
                 last: index === count - 1,
-                selected: isSelected(index)
+                selected: isSelected(index),
+                disabled: getTabProp(tab, 'disabled')
             }
         };
 
@@ -101,6 +103,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     }
 
     const createTabHeader = (tab, selected, index) => {
+        const style = { ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'headerStyle') || {}) };
         const headerId = idState + '_header_' + index;
         const ariaControls = idState + '_content_' + index;
         const tabIndex = getTabProp(tab, 'disabled') ? -1 : getTabProp(tab, 'tabIndex');
@@ -122,8 +125,10 @@ export const Accordion = React.forwardRef((inProps, ref) => {
         const label = selected ? ariaLabel('collapseLabel') : ariaLabel('expandLabel');
         const headerProps = mergeProps(
             {
-                className: cx('tab.header', { selected, getTabProp, tab }),
-                style: sx('tab.header', { getTabProp, tab })
+                className: classNames(getTabProp(tab, 'headerClassName'), getTabProp(tab, 'className'), cx('tab.header', { selected, getTabProp, tab })),
+                style,
+                'data-p-highlight': selected,
+                'data-p-disabled': getTabProp(tab, 'disabled')
             },
             getTabPT(tab, 'header', index)
         );
@@ -154,6 +159,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     };
 
     const createTabContent = (tab, selected, index) => {
+        const style = { ...(getTabProp(tab, 'style') || {}), ...(getTabProp(tab, 'contentStyle') || {}) };
         const contentId = idState + '_content_' + index;
         const ariaLabelledby = idState + '_header_' + index;
         const contentRef = React.createRef();
@@ -161,8 +167,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             {
                 id: contentId,
                 ref: contentRef,
-                className: cx('tab.toggleablecontent', { getTabProp, tab }),
-                style: sx('tab.toggleablecontent', { getTabProp, tab }),
+                className: classNames(getTabProp(tab, 'contentClassName'), getTabProp(tab, 'className'), cx('tab.toggleablecontent')),
+                style,
                 role: 'region',
                 'aria-labelledby': ariaLabelledby
             },
@@ -176,8 +182,19 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             getTabPT(tab, 'content', index)
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('tab.transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: selected,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            getTabPT(tab, 'transition', index)
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={selected} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableContentProps}>
                     <div {...contentProps}>{getTabProp(tab, 'children')}</div>
                 </div>
@@ -219,7 +236,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     const tabs = createTabs();
     const rootProps = mergeProps(
         {
-            className: cx('root'),
+            className: classNames(props.className, cx('root')),
             style: props.style
         },
         AccordionBase.getOtherProps(props),

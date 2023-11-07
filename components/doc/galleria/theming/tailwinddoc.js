@@ -147,7 +147,7 @@ export default function UnstyleDemo() {
                 </p>
                 <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
                 <p>A playground sample with the pre-built Tailwind theme.</p>
-                <DocSectionCode code={code2} embedded />
+                <DocSectionCode code={code2} embedded service={['PhotoService']} />
             </DocSectionText>
         </>
     );

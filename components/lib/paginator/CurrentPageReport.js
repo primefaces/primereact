@@ -28,7 +28,7 @@ export const CurrentPageReport = React.memo((inProps) => {
         {
             className: 'p-paginator-current'
         },
-        props.ptm('current')
+        props.ptm('current', { hostName: props.hostName })
     );
 
     const element = <span {...currentProps}>{text}</span>;

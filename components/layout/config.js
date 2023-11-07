@@ -144,16 +144,6 @@ export default function Config(props) {
                         </div>
                     </div>
 
-                    <h4>Tailwind</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('tailwind-light')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/tailwind-light.png" alt="Tailwind Light" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Tailwind Light</span>
-                        </div>
-                    </div>
-
                     <h4>Fluent UI</h4>
                     <div className="grid free-themes">
                         <div className="col-3 flex flex-column align-items-center gap-2">

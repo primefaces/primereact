@@ -7,6 +7,8 @@ import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
 import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
 import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
 import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
+import { TailwindDoc } from '../../components/doc/contextmenu/theming/tailwinddoc';
+import { StyledDoc } from '../../components/doc/contextmenu/theming/styleddoc';
 
 const ContextMenuDemo = () => {
     const docs = [
@@ -54,7 +56,37 @@ const ContextMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React ContextMenu Component" header="ContextMenu" description="ContextMenu displays an overlay menu on right click of its target." componentDocs={docs} apiDocs={['ContextMenu', 'MenuItem']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return (
+        <DocComponent
+            title="React ContextMenu Component"
+            header="ContextMenu"
+            description="ContextMenu displays an overlay menu on right click of its target."
+            componentDocs={docs}
+            apiDocs={['ContextMenu', 'MenuItem']}
+            ptDocs={ptDocs}
+            themingDocs={themingDocs}
+        />
+    );
 };
 
 export default ContextMenuDemo;

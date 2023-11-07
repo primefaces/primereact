@@ -13,6 +13,7 @@ export const PrevPageLink = React.memo((inProps) => {
 
     const getPTOptions = (key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 disabled: props.disabled
             }

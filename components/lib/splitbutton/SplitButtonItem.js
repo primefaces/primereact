@@ -4,6 +4,13 @@ import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 export const SplitButtonItem = React.memo((props) => {
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const onClick = (e) => {
         if (props.menuitem.command) {
             props.menuitem.command({ originalEvent: e, item: props.menuitem });
@@ -22,7 +29,7 @@ export const SplitButtonItem = React.memo((props) => {
                 className: cx('separator'),
                 role: 'separator'
             },
-            ptm('separator')
+            getPTOptions('separator')
         );
 
         return <li {...separatorProps}></li>;
@@ -41,7 +48,7 @@ export const SplitButtonItem = React.memo((props) => {
             {
                 className: cx('menuIcon')
             },
-            ptm('menuIcon')
+            getPTOptions('menuIcon')
         );
         const icon = IconUtils.getJSXIcon(_icon, { ...menuIconProps }, { props: props.splitButtonProps });
 
@@ -49,7 +56,7 @@ export const SplitButtonItem = React.memo((props) => {
             {
                 className: cx('menuLabel')
             },
-            ptm('menuLabel')
+            getPTOptions('menuLabel')
         );
         const label = _label && <span {...menuLabelProps}>{_label}</span>;
 
@@ -62,7 +69,7 @@ export const SplitButtonItem = React.memo((props) => {
                 onClick: onClick,
                 'aria-label': _label
             },
-            ptm('anchor')
+            getPTOptions('anchor')
         );
 
         let content = (
@@ -90,7 +97,7 @@ export const SplitButtonItem = React.memo((props) => {
                 className: cx('menuItem'),
                 role: 'none'
             },
-            ptm('menuItem')
+            getPTOptions('menuItem')
         );
 
         return <li {...menuItemProps}>{content}</li>;

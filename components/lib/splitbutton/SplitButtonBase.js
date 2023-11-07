@@ -14,46 +14,51 @@ const classes = {
             'p-button-outlined': props.outlined,
             [`p-button-${size}`]: size
         }),
+    button: 'p-splitbutton-defaultbutton',
+    menuButton: 'p-splitbutton-menubutton',
     menu: ({ subProps: props }) => classNames('p-menu p-menu-overlay p-component', props.menuClassName),
     menuList: 'p-menu-list p-reset',
     separator: 'p-menu-separator',
     menuIcon: 'p-menuitem-icon',
     menuLabel: 'p-menuitem-text',
     anchor: ({ _className, disabled }) => classNames('p-menuitem-link', _className, { 'p-disabled': disabled }),
-    menuItem: 'p-menuitem'
+    menuItem: 'p-menuitem',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `
-.p-splitbutton {
-    display: inline-flex;
-    position: relative;
-}
-
-.p-splitbutton .p-splitbutton-defaultbutton,
-.p-splitbutton.p-button-rounded > .p-splitbutton-defaultbutton.p-button,
-.p-splitbutton.p-button-outlined > .p-splitbutton-defaultbutton.p-button {
-    flex: 1 1 auto;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right: 0 none;
-}
-
-.p-splitbutton-menubutton,
-.p-splitbutton.p-button-rounded > .p-splitbutton-menubutton.p-button,
-.p-splitbutton.p-button-outlined > .p-splitbutton-menubutton.p-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.p-splitbutton .p-menu {
-    min-width: 100%;
-}
-
-.p-fluid .p-splitbutton  {
-    display: flex;
+@layer primereact {
+    .p-splitbutton {
+        display: inline-flex;
+        position: relative;
+    }
+    
+    .p-splitbutton .p-splitbutton-defaultbutton,
+    .p-splitbutton.p-button-rounded > .p-splitbutton-defaultbutton.p-button,
+    .p-splitbutton.p-button-outlined > .p-splitbutton-defaultbutton.p-button {
+        flex: 1 1 auto;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 0 none;
+    }
+    
+    .p-splitbutton-menubutton,
+    .p-splitbutton.p-button-rounded > .p-splitbutton-menubutton.p-button,
+    .p-splitbutton.p-button-outlined > .p-splitbutton-menubutton.p-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .p-splitbutton .p-menu {
+        min-width: 100%;
+    }
+    
+    .p-fluid .p-splitbutton  {
+        display: flex;
+    }
 }
 `;
 

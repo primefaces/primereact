@@ -7,7 +7,7 @@ import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MultiSelectBase } from './MultiSelectBase';
 import { MultiSelectPanel } from './MultiSelectPanel';
 
@@ -376,6 +376,10 @@ export const MultiSelect = React.memo(
                     }
                 } else {
                     option = findOptionByValue(val, props.options);
+
+                    if (ObjectUtils.isEmpty(option)) {
+                        option = findOptionByValue(val, props.value);
+                    }
                 }
             }
 
@@ -477,6 +481,13 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
+            if (props.onRemove) {
+                props.onRemove({
+                    originalEvent: event,
+                    value
+                });
+            }
+
             updateModel(event, value, item);
         };
 
@@ -497,7 +508,11 @@ export const MultiSelect = React.memo(
                 if (ObjectUtils.isNotEmpty(props.maxSelectedLabels) && props.value.length > props.maxSelectedLabels) {
                     return getSelectedItemsLabel();
                 } else {
-                    return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ',' : '') + getLabelByValue(value), '');
+                    if (ObjectUtils.isArray(props.value)) {
+                        return props.value.reduce((acc, value, index) => acc + (index !== 0 ? ', ' : '') + getLabelByValue(value), '');
+                    } else {
+                        return '';
+                    }
                 }
             }
 
@@ -609,10 +624,10 @@ export const MultiSelect = React.memo(
         }, [props.overlayVisible]);
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && hasFilter) {
+            if (overlayVisibleState && filterState && hasFilter) {
                 alignOverlay();
             }
-        }, [overlayVisibleState, hasFilter]);
+        }, [overlayVisibleState, filterState, hasFilter]);
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
@@ -622,7 +637,7 @@ export const MultiSelect = React.memo(
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, null, null)
+                    onClick: (e) => updateModel(e, [], [])
                 },
                 ptm('clearIcon')
             );
@@ -690,8 +705,8 @@ export const MultiSelect = React.memo(
             {
                 ref: elementRef,
                 id: props.id,
-                style: props.style,
-                className: cx('root', { focusedState, overlayVisibleState }),
+                style: { ...props.style, ...sx('root') },
+                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
                 ...otherProps,
                 onClick: onClick
             },
@@ -738,6 +753,7 @@ export const MultiSelect = React.memo(
                         </>
                     )}
                     <MultiSelectPanel
+                        hostName="MultiSelect"
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
                         {...props}

@@ -3,52 +3,54 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const styles = `
-.p-contextmenu ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.p-contextmenu .p-submenu-list {
-    position: absolute;
-    min-width: 100%;
-    z-index: 1;
-}
-
-.p-contextmenu .p-menuitem-link {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    overflow: hidden;
-    position: relative;
-}
-
-.p-contextmenu .p-menuitem-text {
-    line-height: 1;
-}
-
-.p-contextmenu .p-menuitem {
-    position: relative;
-}
-
-.p-contextmenu .p-menuitem-link .p-submenu-icon {
-    margin-left: auto;
-}
-
-.p-contextmenu-enter {
-    opacity: 0;
-}
-
-.p-contextmenu-enter-active {
-    opacity: 1;
-    transition: opacity 250ms;
+@layer primereact {
+    .p-contextmenu ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .p-contextmenu .p-submenu-list {
+        position: absolute;
+        min-width: 100%;
+        z-index: 1;
+    }
+    
+    .p-contextmenu .p-menuitem-link {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .p-contextmenu .p-menuitem-text {
+        line-height: 1;
+    }
+    
+    .p-contextmenu .p-menuitem {
+        position: relative;
+    }
+    
+    .p-contextmenu .p-menuitem-link .p-submenu-icon {
+        margin-left: auto;
+    }
+    
+    .p-contextmenu-enter {
+        opacity: 0;
+    }
+    
+    .p-contextmenu-enter-active {
+        opacity: 1;
+        transition: opacity 250ms;
+    }
 }
 `;
 
 const classes = {
-    root: ({ props, context }) =>
-        classNames('p-contextmenu p-component', props.className, {
+    root: ({ context }) =>
+        classNames('p-contextmenu p-component', {
             'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
@@ -61,7 +63,9 @@ const classes = {
     icon: 'p-menuitem-icon',
     submenuIcon: 'p-submenu-icon',
     label: 'p-menuitem-text',
-    separator: 'p-menu-separator'
+    separator: 'p-menu-separator',
+    transition: 'p-contextmenu',
+    submenuTransition: 'p-contextmenusub'
 };
 
 export const ContextMenuBase = ComponentBase.extend({

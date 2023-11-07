@@ -4,14 +4,15 @@ exports[`Splitter Nested 1`] = `
 <div>
   <div
     class="p-splitter p-component p-splitter-horizontal"
+    data-p-splitter-resizing="false"
     data-pc-name="splitter"
     data-pc-section="root"
     style="height: 300px;"
   >
     <div
-      class="p-splitter-panel flex align-items-center justify-content-center"
-      data-pc-name=""
-      data-pc-section="root"
+      class="flex align-items-center justify-content-center p-splitter-panel"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(20% - 4px);"
     >
@@ -19,6 +20,7 @@ exports[`Splitter Nested 1`] = `
     </div>
     <div
       class="p-splitter-gutter"
+      data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
       style="width: 4px;"
     >
@@ -29,20 +31,21 @@ exports[`Splitter Nested 1`] = `
     </div>
     <div
       class="p-splitter-panel p-splitter-panel-nested"
-      data-pc-name=""
-      data-pc-section="root"
+      data-p-splitter-panel-nested="true"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(80% - 4px);"
     >
       <div
         class="p-splitter p-component p-splitter-vertical"
+        data-p-splitter-resizing="false"
         data-pc-name="splitter"
         data-pc-section="root"
       >
         <div
-          class="p-splitter-panel flex align-items-center justify-content-center"
-          data-pc-name=""
-          data-pc-section="root"
+          class="flex align-items-center justify-content-center p-splitter-panel"
+          data-p-splitter-panel-nested="false"
+          data-pc-section="splitterpanel.root"
           role="presentation"
           style="flex-basis: calc(15% - 4px);"
         >
@@ -50,6 +53,7 @@ exports[`Splitter Nested 1`] = `
         </div>
         <div
           class="p-splitter-gutter"
+          data-p-splitter-gutter-resizing="false"
           data-pc-section="gutter"
           style="height: 4px;"
         >
@@ -60,20 +64,21 @@ exports[`Splitter Nested 1`] = `
         </div>
         <div
           class="p-splitter-panel p-splitter-panel-nested"
-          data-pc-name=""
-          data-pc-section="root"
+          data-p-splitter-panel-nested="true"
+          data-pc-section="splitterpanel.root"
           role="presentation"
           style="flex-basis: calc(85% - 4px);"
         >
           <div
             class="p-splitter p-component p-splitter-horizontal"
+            data-p-splitter-resizing="false"
             data-pc-name="splitter"
             data-pc-section="root"
           >
             <div
-              class="p-splitter-panel flex align-items-center justify-content-center"
-              data-pc-name=""
-              data-pc-section="root"
+              class="flex align-items-center justify-content-center p-splitter-panel"
+              data-p-splitter-panel-nested="false"
+              data-pc-section="splitterpanel.root"
               role="presentation"
               style="flex-basis: calc(20% - 4px);"
             >
@@ -81,6 +86,7 @@ exports[`Splitter Nested 1`] = `
             </div>
             <div
               class="p-splitter-gutter"
+              data-p-splitter-gutter-resizing="false"
               data-pc-section="gutter"
               style="width: 4px;"
             >
@@ -90,9 +96,9 @@ exports[`Splitter Nested 1`] = `
               />
             </div>
             <div
-              class="p-splitter-panel flex align-items-center justify-content-center"
-              data-pc-name=""
-              data-pc-section="root"
+              class="flex align-items-center justify-content-center p-splitter-panel"
+              data-p-splitter-panel-nested="false"
+              data-pc-section="splitterpanel.root"
               role="presentation"
               style="flex-basis: calc(80% - 4px);"
             >
@@ -110,14 +116,15 @@ exports[`Splitter Single Panel with size 1`] = `
 <div>
   <div
     class="p-splitter p-component p-splitter-vertical"
+    data-p-splitter-resizing="false"
     data-pc-name="splitter"
     data-pc-section="root"
     style="height: 300px;"
   >
     <div
       class="p-splitter-panel"
-      data-pc-name=""
-      data-pc-section="root"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(5% - 0px);"
     >
@@ -125,6 +132,7 @@ exports[`Splitter Single Panel with size 1`] = `
     </div>
     <div
       class="p-splitter-gutter"
+      data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
       style="height: 4px;"
     >
@@ -141,14 +149,15 @@ exports[`Splitter Single Panel without size 1`] = `
 <div>
   <div
     class="p-splitter p-component p-splitter-vertical"
+    data-p-splitter-resizing="false"
     data-pc-name="splitter"
     data-pc-section="root"
     style="height: 300px;"
   >
     <div
       class="p-splitter-panel"
-      data-pc-name=""
-      data-pc-section="root"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(100% - 0px);"
     >
@@ -156,6 +165,7 @@ exports[`Splitter Single Panel without size 1`] = `
     </div>
     <div
       class="p-splitter-gutter"
+      data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
       style="height: 4px;"
     >
@@ -171,15 +181,16 @@ exports[`Splitter Single Panel without size 1`] = `
 exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = `
 <div>
   <div
-    class="p-splitter p-component p-splitter-horizontal mb-5"
+    class="mb-5 p-splitter p-component p-splitter-horizontal"
+    data-p-splitter-resizing="false"
     data-pc-name="splitter"
     data-pc-section="root"
     style="height: 300px;"
   >
     <div
-      class="p-splitter-panel flex align-items-center justify-content-center"
-      data-pc-name=""
-      data-pc-section="root"
+      class="flex align-items-center justify-content-center p-splitter-panel"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(50% - 4px);"
     >
@@ -187,6 +198,7 @@ exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = 
     </div>
     <div
       class="p-splitter-gutter"
+      data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
       style="width: 4px;"
     >
@@ -196,9 +208,9 @@ exports[`Splitter Splitter requires two SplitterPanel components to wrap. 1`] = 
       />
     </div>
     <div
-      class="p-splitter-panel flex align-items-center justify-content-center"
-      data-pc-name=""
-      data-pc-section="root"
+      class="flex align-items-center justify-content-center p-splitter-panel"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(50% - 4px);"
     >
@@ -212,14 +224,15 @@ exports[`Splitter Vertical layout 1`] = `
 <div>
   <div
     class="p-splitter p-component p-splitter-vertical"
+    data-p-splitter-resizing="false"
     data-pc-name="splitter"
     data-pc-section="root"
     style="height: 300px;"
   >
     <div
       class="p-splitter-panel"
-      data-pc-name=""
-      data-pc-section="root"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(50% - 4px);"
     >
@@ -227,6 +240,7 @@ exports[`Splitter Vertical layout 1`] = `
     </div>
     <div
       class="p-splitter-gutter"
+      data-p-splitter-gutter-resizing="false"
       data-pc-section="gutter"
       style="height: 4px;"
     >
@@ -237,8 +251,8 @@ exports[`Splitter Vertical layout 1`] = `
     </div>
     <div
       class="p-splitter-panel"
-      data-pc-name=""
-      data-pc-section="root"
+      data-p-splitter-panel-nested="false"
+      data-pc-section="splitterpanel.root"
       role="presentation"
       style="flex-basis: calc(50% - 4px);"
     >
@@ -252,6 +266,7 @@ exports[`Splitter Without panels 1`] = `
 <div>
   <div
     class="p-splitter p-component p-splitter-vertical"
+    data-p-splitter-resizing="false"
     data-pc-name="splitter"
     data-pc-section="root"
     style="height: 300px;"

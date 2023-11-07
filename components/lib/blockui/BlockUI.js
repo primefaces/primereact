@@ -3,7 +3,7 @@ import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { DomHandler, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { BlockUIBase } from './BlockUIBase';
 
 export const BlockUI = React.forwardRef((inProps, ref) => {
@@ -28,7 +28,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
         const callback = () => {
             setVisibleState(false);
 
-            props.fullScreen && DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            props.fullScreen && DomHandler.unblockBodyScroll();
             props.onUnblocked && props.onUnblocked();
         };
 
@@ -45,7 +45,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
 
     const onPortalMounted = () => {
         if (props.fullScreen) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
+            DomHandler.blockBodyScroll();
             document.activeElement.blur();
         }
 
@@ -68,7 +68,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
 
     useUnmountEffect(() => {
         if (props.fullScreen) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            DomHandler.unblockBodyScroll();
         }
 
         ZIndexUtils.clear(maskRef.current);
@@ -86,7 +86,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
             const appendTo = props.fullScreen ? document.body : 'self';
             const maskProps = mergeProps(
                 {
-                    className: cx('mask'),
+                    className: classNames(props.className, cx('mask')),
                     style: {
                         ...props.style,
                         position: props.fullScreen ? 'fixed' : 'absolute',

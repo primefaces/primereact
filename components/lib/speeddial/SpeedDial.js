@@ -172,7 +172,7 @@ export const SpeedDial = React.memo(
                 return null;
             }
 
-            const { disabled, icon: _icon, label, template, url, target } = item;
+            const { disabled, icon: _icon, label, template, url, target, className: _itemClassName, style: _itemStyle } = item;
             const contentClassName = classNames('p-speeddial-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-speeddial-action-icon', _icon);
             const actionIconProps = mergeProps(
@@ -185,7 +185,8 @@ export const SpeedDial = React.memo(
                 {
                     href: url || '#',
                     role: 'menuitem',
-                    className: cx('action', { disabled }),
+                    className: classNames(_itemClassName, cx('action', { disabled })),
+                    style: _itemStyle,
                     target: target,
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)

@@ -8,13 +8,17 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { TreeNodeTemplateOptions, TreePassThroughOptions, TreeTogglerTemplateOptions } from '../tree/tree';
 import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type TreeSelectPassThroughType<T> = PassThroughType<T, TreeSelectPassThroughMethodOptions>;
+export declare type TreeSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: TreeSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -110,6 +114,15 @@ export interface TreeSelectPassThroughOptions {
      * uses to pass attributes to the clear icon's DOM element.
      */
     clearIcon?: TreeSelectPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: TreeSelectPassThroughTransitionType;
 }
 
 /**
@@ -265,14 +278,64 @@ interface TreeSelectFilterValueChangeEvent {
 }
 
 /**
+ * Custom filter template options.
+ */
+interface TreeSelectFilterTemplateOptions {
+    /**
+     * Style class of the filter.
+     */
+    className: string;
+    /**
+     * Whether the option is disabled or not
+     */
+    disabled?: boolean;
+    /**
+     * The filter element.
+     */
+    element: HTMLDivElement;
+    /**
+     * The filter.
+     */
+    filter?: string;
+    /**
+     * Icon of the filter.
+     */
+    filterIcon?: IconType<TreeSelect> | string;
+    /**
+     * Style class of the filter icon.
+     */
+    filterIconClassName: string;
+    /**
+     * Browser change event for the filter input element.
+     */
+    filterInputChange?: React.ChangeEvent<HTMLInputElement>;
+    /**
+     * The props of the filter input element.
+     */
+    filterInputProps?: any;
+    /**
+     * The filter input options.
+     */
+    filterOptions?: TreeSelectFilterOptions;
+    /**
+     * The placeholder of the filter element.
+     */
+    filterPlaceholder?: string;
+    /**
+     * Custom filter template.
+     */
+    filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
+}
+
+/**
  * Custom filter options.
  */
 interface TreeSelectFilterOptions {
     /**
      * Used to filter options
-     * @param {KeyboardEvent} event - Browser event.
+     * @param { React.ChangeEvent<HTMLInputElement>} event - Browser event.
      */
-    filter?: (event?: KeyboardEvent) => void;
+    filter?: (event?: React.ChangeEvent<HTMLInputElement>) => void;
     /**
      * Used to reset the filtered options
      */
@@ -371,9 +434,9 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      */
     filterPlaceholder?: string | undefined;
     /**
-     * The template for filter element.
+     * Custom template for the filter element.
      */
-    filterTemplate?: React.ReactNode | ((options: TreeSelectFilterOptions) => React.ReactNode);
+    filterTemplate?: React.ReactNode | ((options: TreeSelectFilterTemplateOptions) => React.ReactNode);
     /**
      * When filtering is enabled, the value of input field.
      */
@@ -433,6 +496,11 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * @type {TreeSelectPassThroughOptions}
      */
     pt?: TreeSelectPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

@@ -8,10 +8,14 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type SidebarPassThroughType<T> = PassThroughType<T, SidebarPassThroughMethodOptions>;
+export declare type SidebarPassThroughTransitionType = ReactCSSTransitionProps | ((options: SidebarPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -54,6 +58,15 @@ export interface SidebarPassThroughOptions {
      * Uses to pass attributes to the mask's DOM element.
      */
     mask?: SidebarPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: SidebarPassThroughTransitionType;
 }
 
 /**
@@ -172,6 +185,11 @@ export interface SidebarProps extends Omit<React.DetailedHTMLProps<React.HTMLAtt
      * @type {SidebarPassThroughOptions}
      */
     pt?: SidebarPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

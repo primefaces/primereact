@@ -3,16 +3,23 @@ import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
-import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
 
 export const AutoCompletePanel = React.memo(
     React.forwardRef((props, ref) => {
-        const { cx } = props;
+        const { ptm, cx } = props;
         const context = React.useContext(PrimeReactContext);
 
+        const _ptm = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const getPTOptions = (item, key) => {
-            return props.ptm(key, {
+            return _ptm(key, {
                 context: {
                     selected: props.selectedItem.current === item
                 }
@@ -30,7 +37,7 @@ export const AutoCompletePanel = React.memo(
                     {
                         className: cx('footer')
                     },
-                    props.ptm('footer')
+                    _ptm('footer')
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -49,12 +56,13 @@ export const AutoCompletePanel = React.memo(
                 const itemProps = mergeProps(
                     {
                         role: 'option',
-                        'aria-selected': selected,
                         className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
                         style,
                         onClick: (e) => props.onItemClick(e, item),
+                        'aria-selected': selected,
                         'data-group': i,
-                        'data-index': j
+                        'data-index': j,
+                        'data-p-disabled': item.disabled
                     },
                     getPTOptions(item, 'item')
                 );
@@ -78,9 +86,10 @@ export const AutoCompletePanel = React.memo(
                 const itemGroupProps = mergeProps(
                     {
                         className: cx('itemGroup'),
-                        style
+                        style,
+                        'data-p-highlight': false
                     },
-                    props.ptm('itemGroup')
+                    _ptm('itemGroup')
                 );
 
                 return (
@@ -93,12 +102,13 @@ export const AutoCompletePanel = React.memo(
                 const content = props.itemTemplate ? ObjectUtils.getJSXElement(props.itemTemplate, suggestion, index) : props.field ? ObjectUtils.resolveFieldData(suggestion, props.field) : suggestion;
                 const itemProps = mergeProps(
                     {
+                        index,
                         role: 'option',
-                        'aria-selected': props.selectedItem === suggestion,
                         className: cx('item', { suggestion }),
                         style,
                         onClick: (e) => props.onItemClick(e, suggestion),
-                        index
+                        'aria-selected': props.selectedItem === suggestion,
+                        'data-p-disabled': suggestion.disabled
                     },
                     getPTOptions(suggestion, 'item')
                 );
@@ -123,14 +133,14 @@ export const AutoCompletePanel = React.memo(
                     {
                         className: cx('emptyMessage')
                     },
-                    props.ptm('emptyMesage')
+                    _ptm('emptyMesage')
                 );
 
                 const listProps = mergeProps(
                     {
                         className: cx('list')
                     },
-                    props.ptm('list')
+                    _ptm('list')
                 );
 
                 return (
@@ -157,7 +167,7 @@ export const AutoCompletePanel = React.memo(
                                     className: cx('list', { virtualScrollerProps, options }),
                                     role: 'listbox'
                                 },
-                                props.ptm('list')
+                                _ptm('list')
                             );
 
                             return <ul {...listProps}>{options.children}</ul>;
@@ -165,7 +175,7 @@ export const AutoCompletePanel = React.memo(
                     }
                 };
 
-                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={props.ptm('virtualScroller')} />;
+                return <VirtualScroller ref={props.virtualScrollerRef} {...virtualScrollerProps} pt={_ptm('virtualScroller')} __parentMetadata={{ parent: props.metaData }} />;
             } else {
                 const items = createItems();
                 const listProps = mergeProps(
@@ -174,7 +184,7 @@ export const AutoCompletePanel = React.memo(
                         className: cx('list'),
                         role: 'listbox'
                     },
-                    props.ptm('list')
+                    _ptm('list')
                 );
 
                 const listWrapperProps = mergeProps(
@@ -182,7 +192,7 @@ export const AutoCompletePanel = React.memo(
                         className: cx('listWrapper'),
                         style: { maxHeight: props.scrollHeight || 'auto' }
                     },
-                    props.ptm('listWrapper')
+                    _ptm('listWrapper')
                 );
 
                 return (
@@ -199,27 +209,31 @@ export const AutoCompletePanel = React.memo(
             const footer = createFooter();
             const panelProps = mergeProps(
                 {
-                    className: cx('panel', context),
+                    className: classNames(props.panelClassName, cx('panel', { context })),
                     style,
                     onClick: (e) => props.onClick(e)
                 },
-                props.ptm('panel')
+                _ptm('panel')
+            );
+
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: props.in,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: props.onEnter,
+                    onEntering: props.onEntering,
+                    onEntered: props.onEntered,
+                    onExit: props.onExit,
+                    onExited: props.onExited
+                },
+                _ptm('transition')
             );
 
             return (
-                <CSSTransition
-                    nodeRef={ref}
-                    classNames="p-connected-overlay"
-                    in={props.in}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={props.onEnter}
-                    onEntering={props.onEntering}
-                    onEntered={props.onEntered}
-                    onExit={props.onExit}
-                    onExited={props.onExited}
-                >
+                <CSSTransition nodeRef={ref} {...transitionProps}>
                     <div ref={ref} {...panelProps}>
                         {content}
                         {footer}

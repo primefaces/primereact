@@ -28,16 +28,19 @@ export const TableHeader = React.memo((props) => {
     };
 
     const getColumnGroupPTOptions = (key) => {
+        const cGProps = getColumnGroupProps();
+
         const columnGroupMetaData = {
-            props: getColumnGroupProps(),
+            props: cGProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 sortableDisabledFields: sortableDisabledFieldsState,
                 allSortableDisabled: allSortableDisabledState
             }
         };
 
-        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(getColumnGroupProps(), key, columnGroupMetaData));
+        return mergeProps(ptm(`columnGroup.${key}`, { columnGroup: columnGroupMetaData }), ptm(`columnGroup.${key}`, columnGroupMetaData), ptmo(cGProps, key, columnGroupMetaData));
     };
 
     const getColumnPTOptions = (column, key) => {
@@ -45,6 +48,7 @@ export const TableHeader = React.memo((props) => {
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 sortableDisabledFields: sortableDisabledFieldsState,
                 allSortableDisabled: allSortableDisabledState
@@ -58,7 +62,8 @@ export const TableHeader = React.memo((props) => {
         const rProps = getRowProps(row);
         const rowMetaData = {
             props: rProps,
-            parent: props.metaData
+            parent: props.metaData,
+            hostName: props.hostName
         };
 
         return mergeProps(ptm(`row.${key}`, { row: rowMetaData }), ptm(`row.${key}`, rowMetaData), ptmo(rProps, key, rowMetaData));
@@ -114,6 +119,7 @@ export const TableHeader = React.memo((props) => {
             return (
                 isVisible && (
                     <HeaderCell
+                        hostName={props.hostName}
                         allRowsSelected={props.allRowsSelected}
                         allSortableDisabled={isAllSortableDisabled}
                         column={col}
@@ -165,7 +171,7 @@ export const TableHeader = React.memo((props) => {
         if (props.showSelectAll && selectionMode === 'multiple') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
+            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={onCheckboxChange} disabled={props.empty} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />;
         }
 
         return null;
@@ -175,6 +181,7 @@ export const TableHeader = React.memo((props) => {
         if (filter) {
             return (
                 <ColumnFilter
+                    hostName={props.hostName}
                     display="row"
                     column={column}
                     filterClearIcon={props.filterClearIcon}
@@ -206,7 +213,7 @@ export const TableHeader = React.memo((props) => {
                 const headerCellProps = mergeProps(
                     {
                         style: colStyle,
-                        className: classNames(filterHeaderClassName, className, cx('headerCells', { frozen, column: col })),
+                        className: classNames(filterHeaderClassName, className, cx('headerCell', { frozen, column: col })),
                         key: colKey
                     },
                     getColumnPTOptions(col, 'root'),
@@ -248,7 +255,7 @@ export const TableHeader = React.memo((props) => {
                 {
                     role: 'row'
                 },
-                ptm('headerRow')
+                ptm('headerRow', { hostName: props.hostName })
             );
             const headerRow = <tr {...headerRowProps}>{createHeaderCells(props.columns)}</tr>;
             const filterRow = props.filterDisplay === 'row' && <tr {...headerRowProps}>{createFilterCells()}</tr>;
@@ -268,7 +275,7 @@ export const TableHeader = React.memo((props) => {
             className: cx('thead')
         },
         getColumnGroupPTOptions('root'),
-        ptm('thead')
+        ptm('thead', { hostName: props.hostName })
     );
 
     return <thead {...theadProps}>{content}</thead>;

@@ -2,11 +2,6 @@ import { ComponentBase } from '../componentbase/ComponentBase';
 import { classNames } from '../utils/Utils';
 
 const classes = {
-    option: {
-        root: 'p-dataview-layout-options p-selectbutton p-buttonset',
-        listButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' }),
-        gridButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' })
-    },
     loadingIcon: 'p-dataview-loading-icon',
     loadingOverlay: 'p-dataview-loading-overlay p-component-overlay',
     emptyMessage: 'p-col-12 col-12 p-dataview-emptymessage',
@@ -25,17 +20,19 @@ const classes = {
 };
 
 const styles = `
-.p-dataview-loading {
-    position: relative;
-    min-height: 4rem;
-}
-
-.p-dataview .p-dataview-loading-overlay {
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@layer primereact {
+    .p-dataview-loading {
+        position: relative;
+        min-height: 4rem;
+    }
+    
+    .p-dataview .p-dataview-loading-overlay {
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 `;
 
@@ -92,5 +89,12 @@ export const DataViewLayoutOptionsBase = ComponentBase.extend({
         gridIcon: null,
         onChange: null,
         children: undefined
+    },
+    css: {
+        classes: {
+            root: 'p-dataview-layout-options p-selectbutton p-buttonset',
+            listButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'list' }),
+            gridButton: ({ props }) => classNames('p-button p-button-icon-only', { 'p-highlight': props.layout === 'grid' })
+        }
     }
 });

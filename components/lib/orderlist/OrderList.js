@@ -120,13 +120,13 @@ export const OrderList = React.memo(
         const findNextItem = (item) => {
             const nextItem = item.nextElementSibling;
 
-            return nextItem ? (!DomHandler.hasClass(nextItem, 'p-orderlist-item') ? findNextItem(nextItem) : nextItem) : null;
+            return nextItem ? (!DomHandler.getAttribute(nextItem, 'data-pc-section') === 'item' ? findNextItem(nextItem) : nextItem) : null;
         };
 
         const findPrevItem = (item) => {
             const prevItem = item.previousElementSibling;
 
-            return prevItem ? (!DomHandler.hasClass(prevItem, 'p-orderlist-item') ? findPrevItem(prevItem) : prevItem) : null;
+            return prevItem ? (!DomHandler.getAttribute(prevItem, 'data-pc-section') === 'item' ? findPrevItem(prevItem) : prevItem) : null;
         };
 
         const onReorder = (event) => {
@@ -246,6 +246,7 @@ export const OrderList = React.memo(
         return (
             <div {...rootProps}>
                 <OrderListControls
+                    hostName="OrderList"
                     value={visibleList}
                     selection={selectionState}
                     onReorder={onReorder}
@@ -260,6 +261,7 @@ export const OrderList = React.memo(
                     metaData={metaData}
                 />
                 <OrderListSubList
+                    hostName="OrderList"
                     value={visibleList}
                     selection={selectionState}
                     onItemClick={onItemClick}
@@ -277,6 +279,7 @@ export const OrderList = React.memo(
                     onChange={props.onChange}
                     tabIndex={props.tabIndex}
                     filterIcon={props.filterIcon}
+                    isUnstyled={isUnstyled}
                     ptm={ptm}
                     cx={cx}
                 />

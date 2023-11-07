@@ -11,55 +11,62 @@ const classes = {
     filterContainer: 'p-picklist-filter-container',
     list: 'p-picklist-list',
     listWrapper: 'p-picklist-list-wrapper',
+    listSourceWrapper: 'p-picklist-source-wrapper',
+    listTargetWrapper: 'p-picklist-target-wrapper',
+    listSource: 'p-picklist-source',
+    listTarget: 'p-picklist-target',
     item: ({ subProps }) =>
         classNames('p-picklist-item', {
             'p-highlight': subProps.selected
         }),
-    controls: 'p-picklist-buttons'
+    sourceControls: 'p-picklist-source-controls p-picklist-buttons',
+    targetControls: 'p-picklist-target-controls p-picklist-buttons'
 };
 
 const styles = `
-.p-picklist {
-    display: flex;
-}
-
-.p-picklist-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.p-picklist-list-wrapper {
-    flex: 1 1 50%;
-}
-
-.p-picklist-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    min-height: 12rem;
-    max-height: 24rem;
-}
-
-.p-picklist-item {
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-}
-
-.p-picklist-filter {
-    position: relative;
-}
-
-.p-picklist-filter-icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
-}
-
-.p-picklist-filter-input {
-    width: 100%;
+@layer primereact {
+    .p-picklist {
+        display: flex;
+    }
+    
+    .p-picklist-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .p-picklist-list-wrapper {
+        flex: 1 1 50%;
+    }
+    
+    .p-picklist-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+        min-height: 12rem;
+        max-height: 24rem;
+    }
+    
+    .p-picklist-item {
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .p-picklist-filter {
+        position: relative;
+    }
+    
+    .p-picklist-filter-icon {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5rem;
+    }
+    
+    .p-picklist-filter-input {
+        width: 100%;
+    }
 }
 `;
 

@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type CarouselPassThroughType<T> = PassThroughType<T, CarouselPassThroughMethodOptions>;
@@ -90,6 +92,11 @@ export interface CarouselPassThroughOptions {
      * Uses to pass attributes to the footer's DOM element.
      */
     footer?: CarouselPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -265,6 +272,11 @@ export interface CarouselProps extends Omit<React.DetailedHTMLProps<React.HTMLAt
      * @type {CarouselPassThroughOptions}
      */
     pt?: CarouselPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

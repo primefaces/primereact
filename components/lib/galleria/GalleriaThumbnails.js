@@ -11,6 +11,13 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, merg
 const GalleriaThumbnailItem = React.memo((props) => {
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const onItemClick = (event) => {
         props.onItemClick({
             originalEvent: event,
@@ -32,9 +39,13 @@ const GalleriaThumbnailItem = React.memo((props) => {
 
     const thumbnailItemProps = mergeProps(
         {
-            className: classNames(props.className, cx('thumbnailItem', { subProps: props }))
+            className: classNames(props.className, cx('thumbnailItem', { subProps: props })),
+            'data-p-galleria-thumbnail-item-current': props.current,
+            'data-p-galleria-thumbnail-item-active': props.active,
+            'data-p-galleria-thumbnail-item-start': props.start,
+            'data-p-galleria-thumbnail-item-end': props.end
         },
-        ptm('thumbnailItem')
+        getPTOptions('thumbnailItem')
     );
 
     const thumbnailItemContentProps = mergeProps(
@@ -44,7 +55,7 @@ const GalleriaThumbnailItem = React.memo((props) => {
             onClick: onItemClick,
             onKeyDown: onItemKeyDown
         },
-        ptm('thumbnailItemContent')
+        getPTOptions('thumbnailItemContent')
     );
 
     return (
@@ -68,6 +79,13 @@ export const GalleriaThumbnails = React.memo(
         const context = React.useContext(PrimeReactContext);
 
         const { ptm, cx, sx } = props;
+
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
 
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
@@ -182,7 +200,8 @@ export const GalleriaThumbnails = React.memo(
 
         const onTransitionEnd = (e) => {
             if (itemsContainerRef.current && e.propertyName === 'transform') {
-                DomHandler.addClass(itemsContainerRef.current, 'p-items-hidden');
+                document.body.setAttribute('data-p-items-hidden', 'false');
+                !props.isUnstyled() && DomHandler.addClass(itemsContainerRef.current, 'p-items-hidden');
                 itemsContainerRef.current.style.transition = '';
             }
         };
@@ -232,9 +251,11 @@ export const GalleriaThumbnails = React.memo(
             }
 
             let innerHTML = `
-            .p-galleria-thumbnail-items[${attributeSelector.current}] .p-galleria-thumbnail-item {
-                flex: 1 0 ${100 / numVisibleState}%
-            }
+            [data-pc-section="thumbnailitems"][${attributeSelector.current}] {
+                [data-pc-section="thumbnailitem"] {
+                    flex: 1 0 ${100 / numVisibleState}%
+                }
+            } 
         `;
 
             if (props.responsiveOptions) {
@@ -253,9 +274,11 @@ export const GalleriaThumbnails = React.memo(
 
                     innerHTML += `
                     @media screen and (max-width: ${res.breakpoint}) {
-                        .p-galleria-thumbnail-items[${attributeSelector.current}] .p-galleria-thumbnail-item {
-                            flex: 1 0 ${100 / res.numVisible}%
-                        }
+                        [data-pc-section="thumbnailitems"][${attributeSelector.current}] {
+                            [data-pc-section="thumbnailitem"] {
+                                flex: 1 0 ${100 / res.numVisible}%
+                            }
+                        } 
                     }
                 `;
                 }
@@ -317,7 +340,8 @@ export const GalleriaThumbnails = React.memo(
                 itemsContainerRef.current.style.transform = props.isVertical ? `translate3d(0, ${totalShiftedItems * (100 / numVisibleState)}%, 0)` : `translate3d(${totalShiftedItems * (100 / numVisibleState)}%, 0, 0)`;
 
                 if (prevActiveItemIndex !== props.activeItemIndex) {
-                    DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
+                    document.body.setAttribute('data-p-items-hidden', 'false');
+                    !props.isUnstyled() && DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
                     itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
                 }
             }
@@ -344,7 +368,7 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('previousThumbnailIcon')
                     },
-                    ptm('previousThumbnailIcon')
+                    getPTOptions('previousThumbnailIcon')
                 );
                 const icon = props.isVertical ? props.prevThumbnailIcon || <ChevronUpIcon {...previousThumbnailIconProps} /> : props.prevThumbnailIcon || <ChevronLeftIcon {...previousThumbnailIconProps} />;
                 const prevThumbnailIcon = IconUtils.getJSXIcon(icon, { ...previousThumbnailIconProps }, { props });
@@ -352,9 +376,10 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('previousThumbnailButton', { isDisabled }),
                         onClick: navBackward,
-                        disabled: isDisabled
+                        disabled: isDisabled,
+                        'data-p-disabled': isDisabled
                     },
-                    ptm('previousThumbnailButton')
+                    getPTOptions('previousThumbnailButton')
                 );
 
                 return (
@@ -376,7 +401,7 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('nextThumbnailIcon')
                     },
-                    ptm('nextThumbnailIcon')
+                    getPTOptions('nextThumbnailIcon')
                 );
                 const icon = props.isVertical ? props.nextThumbnailIcon || <ChevronDownIcon {...nextThumbnailIconProps} /> : props.nextThumbnailIcon || <ChevronRightIcon {...nextThumbnailIconProps} />;
                 const nextThumbnailIcon = IconUtils.getJSXIcon(icon, { ...nextThumbnailIconProps }, { props });
@@ -385,9 +410,10 @@ export const GalleriaThumbnails = React.memo(
                     {
                         className: cx('nextThumbnailButton', { isDisabled }),
                         onClick: navForward,
-                        disabled: isDisabled
+                        disabled: isDisabled,
+                        'data-p-disabled': isDisabled
                     },
-                    ptm('nextThumbnailButton')
+                    getPTOptions('nextThumbnailButton')
                 );
 
                 return (
@@ -411,7 +437,7 @@ export const GalleriaThumbnails = React.memo(
                 {
                     className: cx('thumbnailContainer')
                 },
-                ptm('thumbnailContainer')
+                getPTOptions('thumbnailContainer')
             );
 
             const thumbnailItemsContainerProps = mergeProps(
@@ -419,7 +445,7 @@ export const GalleriaThumbnails = React.memo(
                     className: cx('thumbnailItemsContainer'),
                     style: sx('thumbnailItemsContainer', { height })
                 },
-                ptm('thumbnailItemsContainer')
+                getPTOptions('thumbnailItemsContainer')
             );
 
             const thumbnailItemsProps = mergeProps(
@@ -431,7 +457,7 @@ export const GalleriaThumbnails = React.memo(
                     onTouchMove: onTouchMove,
                     onTouchEnd: onTouchEnd
                 },
-                ptm('thumbnailItems')
+                getPTOptions('thumbnailItems')
             );
 
             return (
@@ -451,7 +477,7 @@ export const GalleriaThumbnails = React.memo(
             {
                 className: cx('thumbnailWrapper')
             },
-            ptm('thumbnailWrapper')
+            getPTOptions('thumbnailWrapper')
         );
 
         return <div {...thumbnailWrapperProps}>{content}</div>;

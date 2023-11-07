@@ -8,6 +8,13 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const createElement = () => {
         const wrapperStyle = { maxHeight: props.scrollHeight || 'auto' };
 
@@ -17,7 +24,7 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 style: props.panelStyle,
                 onClick: props.onClick
             },
-            ptm('panel')
+            getPTOptions('panel')
         );
 
         const wrapperProps = mergeProps(
@@ -25,23 +32,26 @@ export const TreeSelectPanel = React.forwardRef((props, ref) => {
                 className: cx('wrapper'),
                 style: wrapperStyle
             },
-            ptm('wrapper')
+            getPTOptions('wrapper')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: props.in,
+                timeout: { enter: 120, exit: 100 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: props.onEnter,
+                onEntered: props.onEntered,
+                onExit: props.onExit,
+                onExited: props.onExited
+            },
+            getPTOptions('transition')
         );
 
         return (
-            <CSSTransition
-                nodeRef={ref}
-                classNames="p-connected-overlay"
-                in={props.in}
-                timeout={{ enter: 120, exit: 100 }}
-                options={props.transitionOptions}
-                unmountOnExit
-                onEnter={props.onEnter}
-                onEntering={props.onEntering}
-                onEntered={props.onEntered}
-                onExit={props.onExit}
-                onExited={props.onExited}
-            >
+            <CSSTransition nodeRef={ref} {...transitionProps}>
                 <div ref={ref} {...panelProps}>
                     {props.header}
                     <div {...wrapperProps}>{props.children}</div>

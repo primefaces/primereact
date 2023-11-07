@@ -5,6 +5,10 @@ import { CSSTransitionDoc } from '../../components/doc/configuration/csstransiti
 import { FilterMatchModeDoc } from '../../components/doc/configuration/filtermatchmodedoc';
 import { HideOverlaysDoc } from '../../components/doc/configuration/hideoverlaysdoc';
 import { InputStyleDoc } from '../../components/doc/configuration/inputstyledoc';
+import { AddLocaleDoc } from '../../components/doc/configuration/locale/addlocaledoc';
+import { ImportDoc } from '../../components/doc/configuration/locale/importdoc';
+import { RepositoryDoc } from '../../components/doc/configuration/locale/repositorydoc';
+import { SetLocaleDoc } from '../../components/doc/configuration/locale/setlocaledoc';
 import { NonceDoc } from '../../components/doc/configuration/noncedoc';
 import { NullSortOrderDoc } from '../../components/doc/configuration/nullsortorderdoc';
 import { RippleDoc } from '../../components/doc/configuration/rippledoc';
@@ -56,6 +60,32 @@ const InstallationPage = () => {
             id: 'zindex',
             label: 'ZIndex',
             component: ZIndexDoc
+        },
+        {
+            id: 'Locale',
+            label: 'Locale',
+            children: [
+                {
+                    id: 'import',
+                    label: 'Import',
+                    component: ImportDoc
+                },
+                {
+                    id: 'setlocale',
+                    label: 'Set Locale',
+                    component: SetLocaleDoc
+                },
+                {
+                    id: 'addlocale',
+                    label: 'Add Locale',
+                    component: AddLocaleDoc
+                },
+                {
+                    id: 'repositorydoc',
+                    label: 'Repository',
+                    component: RepositoryDoc
+                }
+            ]
         }
     ];
 

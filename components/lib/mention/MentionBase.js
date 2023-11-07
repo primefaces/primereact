@@ -14,56 +14,52 @@ const classes = {
                 'p-inputwrapper-focus': focusedState
             },
             props.className
-        )
+        ),
+    transition: 'p-connected-overlay'
 };
 
 const styles = `
-.p-mention {
-    display: inline-flex;
-    position: relative;
-}
-
-.p-autocomplete-loader {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
-}
-
-.p-mention .p-mention-panel {
-    min-width: 100%;
-}
-
-.p-mention-panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: auto;
-}
-
-.p-mention-items {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.p-mention-item {
-    cursor: pointer;
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
-}
-
-.p-fluid .p-mention {
-    display: flex;
+@layer primereact {
+    .p-mention {
+        display: inline-flex;
+        position: relative;
+    }
+    
+    .p-autocomplete-loader {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5rem;
+    }
+    
+    .p-mention .p-mention-panel {
+        min-width: 100%;
+    }
+    
+    .p-mention-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: auto;
+    }
+    
+    .p-mention-items {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .p-mention-item {
+        cursor: pointer;
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .p-fluid .p-mention {
+        display: flex;
+    }
 }
 `;
-
-const inlineStyles = {
-    panel: ({ props }) => ({
-        maxHeight: props.scrollHeight,
-        ...props.panelStyle
-    })
-};
 
 export const MentionBase = ComponentBase.extend({
     defaultProps: {
@@ -99,7 +95,6 @@ export const MentionBase = ComponentBase.extend({
     },
     css: {
         classes,
-        styles,
-        inlineStyles
+        styles
     }
 });

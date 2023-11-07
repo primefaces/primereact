@@ -1273,6 +1273,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const resetResizeColumnsWidth = () => {
+        destroyStyleElement();
+    };
+
     const resetColumnOrder = () => {
         const columns = getColumns(true);
         let columnOrder = [];
@@ -1491,6 +1495,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         reset,
         resetColumnOrder,
         resetScroll,
+        resetResizeColumnsWidth,
         restoreColumnWidths,
         restoreState,
         restoreTableState,
@@ -1555,6 +1560,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         return (
             <TableHeader
+                hostName="DataTable"
                 value={data}
                 tableProps={props}
                 columns={columns}
@@ -1603,6 +1609,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         const frozenBody = ObjectUtils.isNotEmpty(props.frozenValue) && (
             <TableBody
+                hostName="DataTable"
                 ref={frozenBodyRef}
                 cellClassName={props.cellClassName}
                 cellSelection={props.cellSelection}
@@ -1638,6 +1645,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 onRowClick={props.onRowClick}
                 onRowCollapse={props.onRowCollapse}
                 onRowDoubleClick={props.onRowDoubleClick}
+                onRowPointerDown={props.onRowPointerDown}
+                onRowPointerUp={props.onRowPointerUp}
                 onRowEditCancel={props.onRowEditCancel}
                 onRowEditChange={props.onRowEditChange}
                 onRowEditComplete={props.onRowEditComplete}
@@ -1684,6 +1693,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         );
         const body = (
             <TableBody
+                hostName="DataTable"
                 ref={bodyRef}
                 value={dataToRender(rows)}
                 style={style}
@@ -1700,6 +1710,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 tabIndex={props.tabIndex}
                 onRowClick={props.onRowClick}
                 onRowDoubleClick={props.onRowDoubleClick}
+                onRowPointerDown={props.onRowPointerDown}
+                onRowPointerUp={props.onRowPointerUp}
                 onRowMouseEnter={props.onRowMouseEnter}
                 onRowMouseLeave={props.onRowMouseLeave}
                 onCellClick={props.onCellClick}
@@ -1764,7 +1776,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             />
         );
         const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (
-            <TableBody style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
+            <TableBody hostName="DataTable" style={{ height: `calc(${spacerStyle.height} - ${rows.length * itemSize}px)` }} className="p-datatable-virtualscroller-spacer" ptCallbacks={ptCallbacks} metaData={metaData} />
         ) : null;
 
         return (
@@ -1779,7 +1791,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const createTableFooter = (options) => {
         const { columns } = options;
 
-        return <TableFooter tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
+        return <TableFooter hostName="DataTable" tableProps={props} columns={columns} footerColumnGroup={props.footerColumnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
     };
 
     const createContent = (processedData, columns, selectionModeInColumn, empty) => {
@@ -1809,6 +1821,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     inline
                     autoSize
                     pt={ptCallbacks.ptm('virtualScroller')}
+                    __parentMetadata={{ parent: metaData }}
                     showSpacer={false}
                     contentTemplate={(options) => {
                         const ref = (el) => {
@@ -1875,6 +1888,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 dropdownAppendTo={props.paginatorDropdownAppendTo}
                 pt={ptCallbacks.ptm('paginator')}
                 unstyled={props.unstyled}
+                __parentMetadata={{ parent: metaData }}
             />
         );
     };

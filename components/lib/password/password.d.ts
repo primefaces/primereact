@@ -8,13 +8,17 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { InputText } from '../inputtext';
 import { KeyFilterType } from '../keyfilter/keyfilteroptions';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type PasswordPassThroughType<T> = PassThroughType<T, PasswordPassThroughMethodOptions>;
+export declare type PasswordPassThroughTransitionType = ReactCSSTransitionProps | ((options: PasswordPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -62,6 +66,15 @@ export interface PasswordPassThroughOptions {
      * Uses to pass attributes to the info's DOM element.
      */
     info?: PasswordPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: PasswordPassThroughTransitionType;
 }
 
 /**
@@ -268,6 +281,11 @@ export interface PasswordProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     pt?: PasswordPassThroughOptions;
     /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
      */
@@ -290,6 +308,10 @@ export declare class Password extends React.Component<PasswordProps, any> {
      * Used to focus the component.
      */
     public focus(): void;
+    /**
+     * Toggle the mask on or off.
+     */
+    public toggleMask(): void;
     /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element

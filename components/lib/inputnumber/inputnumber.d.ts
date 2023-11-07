@@ -8,11 +8,13 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { InputText, InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
-import { PassThroughType } from '../utils/utils';
+import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type InputNumberPassThroughType<T> = PassThroughType<T, InputNumberPassThroughMethodOptions>;
 
@@ -55,6 +57,11 @@ export interface InputNumberPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -131,11 +138,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
     /**
      * Style class of the increment button.
      */
-    incrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    incrementButtonIcon?: IconType<InputNumberProps> | undefined;
     /**
      * Style class of the decrement button.
      */
-    decrementButtonIcon?: InputNumberPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    decrementButtonIcon?: IconType<InputNumberProps> | undefined;
     /**
      * Locale to be used in formatting.
      */
@@ -313,6 +320,11 @@ export interface InputNumberProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @type {InputNumberPassThroughOptions}
      */
     pt?: InputNumberPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

@@ -29,7 +29,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <InputTextarea value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} />
         </div>
     )

@@ -6,10 +6,10 @@ import { DocSectionText } from '../common/docsectiontext';
 export function AdvancedDoc(props) {
     const header = <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />;
     const footer = (
-        <div className="flex flex-wrap justify-content-end gap-2">
+        <>
             <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
-        </div>
+            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
+        </>
     );
     const code = {
         basic: `
@@ -30,10 +30,10 @@ export default function AdvancedDemo() {
         <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
     );
     const footer = (
-        <div className="flex flex-wrap justify-content-end gap-2">
+        <>
             <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
-        </div>
+            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
+        </>
     );
 
     return (
@@ -58,10 +58,10 @@ export default function AdvancedDemo() {
         <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
     );
     const footer = (
-        <div className="flex flex-wrap justify-content-end gap-2">
+        <>
             <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
-        </div>
+            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
+        </>
     );
 
     return (

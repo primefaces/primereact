@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUpdateEffect } from '../hooks/Hooks';
+import { AngleRightIcon } from '../icons/angleright';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
-import { AngleRightIcon } from '../icons/angleright';
 
 export const ContextMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
@@ -13,6 +13,7 @@ export const ContextMenuSub = React.memo((props) => {
 
     const getPTOptions = (item, key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 active: activeItemState === item
             }
@@ -93,21 +94,36 @@ export const ContextMenuSub = React.memo((props) => {
     });
 
     const createSeparator = (index) => {
+        const key = props.id + '_separator_' + index;
         const separatorProps = mergeProps(
             {
-                role: 'separator',
-                key: 'separator_' + index,
-                className: cx('separator')
+                id: key,
+                key,
+                className: cx('separator'),
+                role: 'separator'
             },
-            ptm('separator')
+            ptm('separator', { hostName: props.hostName })
         );
 
         return <li {...separatorProps}></li>;
     };
 
-    const createSubmenu = (item) => {
+    const createSubmenu = (item, index) => {
         if (item.items) {
-            return <ContextMenuSub menuProps={props.menuProps} model={item.items} resetMenu={item !== activeItemState} onLeafClick={props.onLeafClick} isMobileMode={props.isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
+            return (
+                <ContextMenuSub
+                    id={props.id + '_' + index}
+                    hostName={props.hostName}
+                    menuProps={props.menuProps}
+                    model={item.items}
+                    resetMenu={item !== activeItemState}
+                    onLeafClick={props.onLeafClick}
+                    isMobileMode={props.isMobileMode}
+                    submenuIcon={props.submenuIcon}
+                    ptm={ptm}
+                    cx={cx}
+                />
+            );
         }
 
         return null;
@@ -119,7 +135,7 @@ export const ContextMenuSub = React.memo((props) => {
         }
 
         const active = activeItemState === item;
-        const key = item.label + '_' + index;
+        const key = item.id || props.id + '_' + index;
         const iconProps = mergeProps(
             {
                 className: cx('icon')
@@ -142,7 +158,7 @@ export const ContextMenuSub = React.memo((props) => {
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props: props.menuProps });
         const label = item.label && <span {...labelProps}>{item.label}</span>;
-        const submenu = createSubmenu(item);
+        const submenu = createSubmenu(item, index);
         const actionProps = mergeProps(
             {
                 href: item.url || '#',
@@ -171,7 +187,7 @@ export const ContextMenuSub = React.memo((props) => {
                 className: 'p-menuitem-link',
                 labelClassName: 'p-menuitem-text',
                 iconClassName: 'p-menuitem-icon',
-                submenuIconClassName,
+                submenuIconClassName: cx('submenuIcon'),
                 element: content,
                 props,
                 active
@@ -182,7 +198,8 @@ export const ContextMenuSub = React.memo((props) => {
 
         const menuitemProps = mergeProps(
             {
-                id: item.id,
+                id: key,
+                key,
                 role: 'none',
                 className: cx('menuitem', { item, active }),
                 style: item.style,
@@ -213,11 +230,22 @@ export const ContextMenuSub = React.memo((props) => {
         {
             className: cx('menu', { menuProps: props })
         },
-        ptm('menu')
+        ptm('menu', { hostName: props.hostName })
+    );
+
+    const transitionProps = mergeProps(
+        {
+            classNames: cx('submenuTransition'),
+            in: active,
+            timeout: { enter: 0, exit: 0 },
+            unmountOnExit: true,
+            onEnter
+        },
+        ptm('menu.transition', { hostName: props.hostName })
     );
 
     return (
-        <CSSTransition nodeRef={submenuRef} classNames="p-contextmenusub" in={active} timeout={{ enter: 0, exit: 0 }} unmountOnExit onEnter={onEnter}>
+        <CSSTransition nodeRef={submenuRef} {...transitionProps}>
             <ul ref={submenuRef} {...menuProps}>
                 {submenu}
             </ul>

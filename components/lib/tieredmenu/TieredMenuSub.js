@@ -11,6 +11,7 @@ export const TieredMenuSub = React.memo((props) => {
 
     const getPTOptions = (item, key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
                 active: activeItemState === item
             }
@@ -195,16 +196,17 @@ export const TieredMenuSub = React.memo((props) => {
                 className: cx('separator'),
                 role: 'separator'
             },
-            ptm('separator')
+            ptm('separator', { hostName: props.hostName })
         );
 
         return <li {...separatorProps}></li>;
     };
 
-    const createSubmenu = (item) => {
+    const createSubmenu = (item, index) => {
         if (item.items) {
             return (
                 <TieredMenuSub
+                    id={props.id + '_' + index}
                     menuProps={props.menuProps}
                     model={item.items}
                     onLeafClick={onLeafClick}
@@ -230,7 +232,7 @@ export const TieredMenuSub = React.memo((props) => {
         }
 
         const { id, className: _className, style, disabled, icon: _icon, label: _label, items, target, url, template } = item;
-        const key = _label + '_' + index;
+        const key = id || props.id + '_' + index;
         const active = activeItemState === item;
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': disabled });
         const iconClassName = classNames('p-menuitem-icon', _icon);
@@ -256,7 +258,7 @@ export const TieredMenuSub = React.memo((props) => {
             getPTOptions(item, 'submenuIcon')
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(props.submenuIcon || <AngleRightIcon {...submenuIconProps} />, { ...submenuIconProps }, { props: props.menuProps });
-        const submenu = createSubmenu(item);
+        const submenu = createSubmenu(item, index);
         const actionProps = mergeProps(
             {
                 href: url || '#',
@@ -300,7 +302,7 @@ export const TieredMenuSub = React.memo((props) => {
         const menuitemProps = mergeProps(
             {
                 key,
-                id: item.id,
+                id: key,
                 className: cx('menuitem', { _className, active }),
                 style: style,
                 onMouseEnter: (event) => onItemMouseEnter(event, item),
@@ -326,14 +328,16 @@ export const TieredMenuSub = React.memo((props) => {
     };
 
     const submenu = createMenu();
+    const ptKey = props.root ? 'menu' : 'submenu';
     const menuProps = mergeProps(
         {
             ref: elementRef,
-            className: cx('menu', { subProps: props }),
+            className: cx(ptKey, { subProps: props }),
+            style: sx(ptKey, { subProps: props }),
             role: props.root ? 'menubar' : 'menu',
             'aria-orientation': 'horizontal'
         },
-        ptm('menu')
+        ptm(ptKey, { hostName: props.hostName })
     );
 
     return <ul {...menuProps}>{submenu}</ul>;

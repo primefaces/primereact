@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
@@ -52,6 +54,11 @@ export interface ButtonPassThroughOptions {
      * @see {@link TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -161,6 +168,11 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      * @type {ButtonPassThroughOptions}
      */
     pt?: ButtonPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

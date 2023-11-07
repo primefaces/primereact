@@ -302,10 +302,11 @@ export const PickList = React.memo(
             <div {...rootProps}>
                 {props.showSourceControls && (
                     <PickListControls
+                        hostName="PickList"
                         list={props.source}
                         selection={sourceSelection}
                         onReorder={onSourceReorder}
-                        className="p-picklist-source-controls"
+                        className={cx('sourceControls')}
                         dataKey={props.dataKey}
                         moveUpIcon={props.moveUpIcon}
                         moveTopIcon={props.moveTopIcon}
@@ -319,6 +320,7 @@ export const PickList = React.memo(
                 )}
 
                 <PickListSubList
+                    hostName="PickList"
                     ref={sourceListElementRef}
                     type="source"
                     list={sourceList}
@@ -327,8 +329,8 @@ export const PickList = React.memo(
                     itemTemplate={sourceItemTemplate}
                     header={props.sourceHeader}
                     style={props.sourceStyle}
-                    className="p-picklist-source-wrapper"
-                    listClassName="p-picklist-source"
+                    className={cx('listSourceWrapper')}
+                    listClassName={cx('listSource')}
                     metaKeySelection={props.metaKeySelection}
                     tabIndex={props.tabIndex}
                     dataKey={props.dataKey}
@@ -343,6 +345,7 @@ export const PickList = React.memo(
                 />
 
                 <PickListTransferControls
+                    hostName="PickList"
                     onTransfer={onTransfer}
                     source={props.source}
                     visibleSourceList={sourceList}
@@ -363,6 +366,7 @@ export const PickList = React.memo(
                 />
 
                 <PickListSubList
+                    hostName="PickList"
                     ref={targetListElementRef}
                     type="target"
                     list={targetList}
@@ -371,8 +375,8 @@ export const PickList = React.memo(
                     itemTemplate={targetItemTemplate}
                     header={props.targetHeader}
                     style={props.targetStyle}
-                    className="p-picklist-target-wrapper"
-                    listClassName="p-picklist-target"
+                    className={cx('listTargetWrapper')}
+                    listClassName={cx('listWrapper')}
                     metaKeySelection={props.metaKeySelection}
                     tabIndex={props.tabIndex}
                     dataKey={props.dataKey}
@@ -388,10 +392,11 @@ export const PickList = React.memo(
 
                 {props.showTargetControls && (
                     <PickListControls
+                        hostName="PickList"
                         list={props.target}
                         selection={targetSelection}
                         onReorder={onTargetReorder}
-                        className="p-picklist-target-controls"
+                        className={cx('targetControls')}
                         dataKey={props.dataKey}
                         moveUpIcon={props.moveUpIcon}
                         moveTopIcon={props.moveTopIcon}

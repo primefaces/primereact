@@ -89,7 +89,7 @@ export default function UnstyledDemo() {
     const [visible, setVisible] = useState(false);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Button label="Show" icon="pi pi-external-link" onClick={() => setVisible(true)} />
             <Dialog header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
                 <p className="m-0">

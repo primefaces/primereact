@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
-import { IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenubarBase } from './MenubarBase';
 import { MenubarSub } from './MenubarSub';
 
@@ -12,6 +12,7 @@ export const Menubar = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = MenubarBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [mobileActiveState, setMobileActiveState] = React.useState(false);
         const elementRef = React.useRef(null);
         const rootMenuRef = React.useRef(null);
@@ -19,6 +20,7 @@ export const Menubar = React.memo(
         const { ptm, cx, isUnstyled } = MenubarBase.setMetaData({
             props,
             state: {
+                id: idState,
                 mobileActive: mobileActiveState
             }
         });
@@ -47,6 +49,12 @@ export const Menubar = React.memo(
         const isOutsideClicked = (event) => {
             return rootMenuRef.current !== event.target && !rootMenuRef.current.contains(event.target) && menuButtonRef.current !== event.target && !menuButtonRef.current.contains(event.target);
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         useUpdateEffect(() => {
             if (mobileActiveState) {
@@ -132,7 +140,7 @@ export const Menubar = React.memo(
         const start = createStartContent();
         const end = createEndContent();
         const menuButton = createMenuButton();
-        const submenu = <MenubarSub ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
+        const submenu = <MenubarSub hostName="Menubar" id={idState} ref={rootMenuRef} menuProps={props} model={props.model} root mobileActive={mobileActiveState} onLeafClick={onLeafClick} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />;
         const rootProps = mergeProps(
             {
                 id: props.id,

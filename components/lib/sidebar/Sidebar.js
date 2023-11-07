@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
@@ -8,7 +9,6 @@ import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SidebarBase } from './SidebarBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Sidebar = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -104,7 +104,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         }
 
         if (props.blockScroll) {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
+            DomHandler.blockBodyScroll();
         }
     };
 
@@ -112,7 +112,7 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         unbindDocumentClickListener();
 
         if (props.blockScroll) {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
+            DomHandler.unblockBodyScroll();
         }
     };
 
@@ -257,9 +257,23 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
             ptm('icons')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: visibleState,
+                timeout: transitionTimeout,
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEntered,
+                onExiting,
+                onExited
+            },
+            ptm('transition')
+        );
+
         return (
             <div {...maskProps}>
-                <CSSTransition nodeRef={sidebarRef} classNames="p-sidebar" in={visibleState} timeout={transitionTimeout} options={props.transitionOptions} unmountOnExit onEntered={onEntered} onExiting={onExiting} onExited={onExited}>
+                <CSSTransition nodeRef={sidebarRef} {...transitionProps}>
                     <div ref={sidebarRef} {...rootProps}>
                         <div {...headerProps}>
                             {header}

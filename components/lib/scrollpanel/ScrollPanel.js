@@ -190,7 +190,6 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const contentProps = mergeProps(
         {
             className: cx('content'),
-            ref: contentRef,
             onScroll: moveBar,
             onMouseEnter: moveBar
         },
@@ -218,7 +217,9 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     return (
         <div {...rootProps}>
             <div {...wrapperProps}>
-                <div {...contentProps}>{props.children}</div>
+                <div ref={contentRef} {...contentProps}>
+                    {props.children}
+                </div>
             </div>
             <div {...barXProps}></div>
             <div {...barYProps}></div>

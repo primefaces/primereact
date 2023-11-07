@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { TabMenuBase } from './TabMenuBase';
 
 export const TabMenu = React.memo(
@@ -10,6 +11,7 @@ export const TabMenu = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TabMenuBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [activeIndexState, setActiveIndexState] = React.useState(props.activeIndex);
         const elementRef = React.useRef(null);
         const inkbarRef = React.useRef(null);
@@ -20,6 +22,7 @@ export const TabMenu = React.memo(
         const { ptm, cx, isUnstyled } = TabMenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 activeIndex: activeIndexState
             }
         });
@@ -77,6 +80,12 @@ export const TabMenu = React.memo(
             }
         };
 
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
+
         React.useImperativeHandle(ref, () => ({
             props,
             getElement: () => elementRef.current
@@ -92,7 +101,7 @@ export const TabMenu = React.memo(
             }
 
             const { className: _className, style, disabled, icon: _icon, label: _label, template, url, target } = item;
-            const key = _label + '_' + index;
+            const key = item.id || idState + '_' + index;
             const active = isSelected(index);
             const iconClassName = classNames('p-menuitem-icon', _icon);
             const iconProps = mergeProps(
@@ -151,6 +160,7 @@ export const TabMenu = React.memo(
             const menuItemProps = mergeProps(
                 {
                     ref: tabsRef.current[`tab_${index}`],
+                    id: key,
                     key,
                     className: cx('menuitem', { _className, active, disabled }),
                     style: style,

@@ -38,7 +38,6 @@ export function DocComponent(props) {
                             {header}
                         </button>
                     </li>
-
                     <li className={classNames({ 'doc-tabmenu-active': tab === 1 })}>
                         <button type="button" onClick={() => activateTab(1)}>
                             API

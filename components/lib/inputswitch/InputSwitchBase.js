@@ -12,25 +12,27 @@ const classes = {
 };
 
 const styles = `
-.p-inputswitch {
-    position: relative;
-    display: inline-block;
-}
-
-.p-inputswitch-slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid transparent;
-}
-
-.p-inputswitch-slider:before {
-    position: absolute;
-    content: "";
-    top: 50%;
+@layer primereact {
+    .p-inputswitch {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .p-inputswitch-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid transparent;
+    }
+    
+    .p-inputswitch-slider:before {
+        position: absolute;
+        content: "";
+        top: 50%;
+    }
 }
 `;
 

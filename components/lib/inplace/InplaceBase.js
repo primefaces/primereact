@@ -15,26 +15,28 @@ const classes = {
 };
 
 const styles = `
-.p-inplace .p-inplace-display {
-    display: inline;
-    cursor: pointer;
-}
-
-.p-inplace .p-inplace-content {
-    display: inline;
-}
-
-.p-fluid .p-inplace.p-inplace-closable .p-inplace-content {
-    display: flex;
-}
-
-.p-fluid .p-inplace.p-inplace-closable .p-inplace-content > .p-inputtext {
-    flex: 1 1 auto;
-    width: 1%;
-}
-
-.p-inplace-content-close {
-    margin-left: .25rem;
+@layer primereact {
+    .p-inplace .p-inplace-display {
+        display: inline;
+        cursor: pointer;
+    }
+    
+    .p-inplace .p-inplace-content {
+        display: inline;
+    }
+    
+    .p-fluid .p-inplace.p-inplace-closable .p-inplace-content {
+        display: flex;
+    }
+    
+    .p-fluid .p-inplace.p-inplace-closable .p-inplace-content > .p-inputtext {
+        flex: 1 1 auto;
+        width: 1%;
+    }
+    
+    .p-inplace-content-close {
+        margin-left: .25rem;
+    }
 }
 `;
 

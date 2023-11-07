@@ -1,21 +1,23 @@
 import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/tree/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tree/pt/wireframe';
 import { DocComponent } from '../../components/doc/common/doccomponent';
 import { AccessibilityDoc } from '../../components/doc/tree/accessibilitydoc';
 import { BasicDoc } from '../../components/doc/tree/basicdoc';
 import { ContextMenuDoc } from '../../components/doc/tree/contextmenudoc';
+import { ControlledDoc } from '../../components/doc/tree/controlleddoc';
+import { DragDropDoc } from '../../components/doc/tree/dragdropdoc';
 import { EventsDoc } from '../../components/doc/tree/eventsdoc';
+import { FilterDoc } from '../../components/doc/tree/filterdoc';
 import { ImportDoc } from '../../components/doc/tree/importdoc';
 import { LazyDoc } from '../../components/doc/tree/lazydoc';
-import { ControlledDoc } from '../../components/doc/tree/controlleddoc';
+import { PTDoc } from '../../components/doc/tree/pt/ptdoc';
+import { Wireframe } from '../../components/doc/tree/pt/wireframe';
 import { CheckboxSelectionDoc } from '../../components/doc/tree/selection/checkboxselectiondoc';
+import { MultipleSelectionDoc } from '../../components/doc/tree/selection/multipleselectiondoc';
 import { SingleSelectionDoc } from '../../components/doc/tree/selection/singleselectiondoc';
 import { StyleDoc } from '../../components/doc/tree/styledoc';
 import { TemplateDoc } from '../../components/doc/tree/templatedoc';
-import { MultipleSelectionDoc } from '../../components/doc/tree/selection/multipleselectiondoc';
-import { DragDropDoc } from '../../components/doc/tree/dragdropdoc';
-import { FilterDoc } from '../../components/doc/tree/filterdoc';
+import { StyledDoc } from '../../components/doc/tree/theming/styleddoc';
+import { TailwindDoc } from '../../components/doc/tree/theming/tailwinddoc';
 
 const TreeDemo = () => {
     const docs = [
@@ -115,7 +117,27 @@ const TreeDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Tree Component" header="Tree" description="Tree is used to display hierarchical data." componentDocs={docs} apiDocs={['Tree', 'TreeNode']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Tree Component" header="Tree" description="Tree is used to display hierarchical data." componentDocs={docs} apiDocs={['Tree', 'TreeNode']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default TreeDemo;

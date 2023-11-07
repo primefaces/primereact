@@ -4,6 +4,12 @@ export default class ObjectUtils {
         else return this.deepEquals(obj1, obj2);
     }
 
+    /**
+     * Compares two JSON objects for deep equality recursively comparing both objects.
+     * @param {*} a the first JSON object
+     * @param {*} b the second JSON object
+     * @returns true if equals, false it not
+     */
     static deepEquals(a, b) {
         if (a === b) return true;
 
@@ -155,6 +161,10 @@ export default class ObjectUtils {
     }
 
     static getJSXElement(obj, ...params) {
+        return this.isFunction(obj) ? obj(...params) : obj;
+    }
+
+    static getItemValue(obj, ...params) {
         return this.isFunction(obj) ? obj(...params) : obj;
     }
 

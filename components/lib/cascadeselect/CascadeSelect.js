@@ -5,7 +5,7 @@ import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect }
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
 import PrimeReact from '../api/Api';
@@ -372,22 +372,27 @@ export const CascadeSelect = React.memo(
         );
 
         const createOverlay = () => {
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: overlayVisibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onOverlayEnter,
+                    onEntered: onOverlayEntered,
+                    onExit: onOverlayExit,
+                    onExited: onOverlayExited
+                },
+                ptm('transition')
+            );
+
             const overlay = (
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={overlayVisibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onOverlayEnter}
-                    onEntered={onOverlayEntered}
-                    onExit={onOverlayExit}
-                    onExited={onOverlayExited}
-                >
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div {...panelProps}>
                         <div {...wrapperProps}>
                             <CascadeSelectSub
+                                hostName="CascadeSelect"
                                 options={props.options}
                                 selectionPath={selectionPath.current}
                                 optionGroupIcon={props.optionGroupIcon}

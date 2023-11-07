@@ -39,22 +39,22 @@ import { Badge } from 'primereact/badge';
 export default function UnstyledDemo() {
     return (
         <div>
-            <div className="card flex flex-wrap justify-content-center gap-2">
+            <div className="card flex flex-wrap justify-center gap-2">
                 <Badge value="2"></Badge>
                 <Badge value="8" severity="success"></Badge>
                 <Badge value="4" severity="info"></Badge >
                 <Badge value="12" severity="warning"></Badge>
                 <Badge value="3" severity="danger"></Badge>
             </div>
-            <div className="card flex flex-wrap justify-content-center gap-4">
-                <i className="pi pi-bell p-overlay-badge" style={{ fontSize: '2rem' }}>
-                    <Badge value="2"></Badge>
+            <div className="card flex flex-wrap justify-center gap-4">
+                <i className="pi pi-bell relative text-gray-700 dark:text-white/80" style={{ fontSize: '2rem' }}>
+                    <Badge className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 origin-top-right m-0" value="2"></Badge>
                 </i>
-                <i className="pi pi-calendar p-overlay-badge" style={{ fontSize: '2rem' }}>
-                    <Badge value="5+" severity="danger"></Badge>
+                <i className="pi pi-calendar relative text-gray-700 dark:text-white/80" style={{ fontSize: '2rem' }}>
+                    <Badge className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 origin-top-right m-0" value="5+" severity="danger"></Badge>
                 </i>
-                <i className="pi pi-envelope p-overlay-badge" style={{ fontSize: '2rem' }}>
-                    <Badge severity="danger"></Badge>
+                <i className="pi pi-envelope relative text-gray-700 dark:text-white/80" style={{ fontSize: '2rem' }}>
+                    <Badge className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 origin-top-right m-0" severity="danger" style={{ minWidth:'0.75rem', height:'0.75rem' }}></Badge>
                 </i>
             </div>
         </div>

@@ -90,7 +90,7 @@ import { MenuItem } from 'primereact/menuitem';
 export default function InteractiveDemo() {
     const [activeIndex, setActiveIndex] = useState<number>(1);
     const toast = useRef(null);
-    const items: MenuItem = [
+    const items: MenuItem[] = [
         {
             label: 'Personal',
             command: (event) => {

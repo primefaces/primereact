@@ -1,6 +1,6 @@
 import React from 'react';
-import { DocSectionText } from './docsectiontext';
 import APIDocs from './apidoc/index.json';
+import { DocSectionText } from './docsectiontext';
 
 export function DocSections({ docs }) {
     const getPTOption = (name) => {
@@ -61,7 +61,7 @@ export function DocSections({ docs }) {
             };
 
             return (
-                <section key={`${label}_${i}`} className="py-3">
+                <section key={`${label}_${i}`} className="py-4">
                     {children ? renderDocChildren(doc) : Comp ? <Comp {...props} /> : null}
                 </section>
             );

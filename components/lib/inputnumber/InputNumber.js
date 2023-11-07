@@ -231,8 +231,9 @@ export const InputNumber = React.memo(
 
         const onUpButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
+                DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, 1);
+                event.preventDefault();
             }
         };
 
@@ -262,8 +263,9 @@ export const InputNumber = React.memo(
 
         const onDownButtonMouseDown = (event) => {
             if (!props.disabled && !props.readOnly) {
-                props.autoFocus && DomHandler.focus(inputRef.current, props.autoFocus);
+                DomHandler.focus(inputRef.current, props.autoFocus);
                 repeat(event, null, -1);
+                event.preventDefault();
             }
         };
 
@@ -566,7 +568,11 @@ export const InputNumber = React.memo(
             const suffixCharIndex = val.search(_suffix.current);
 
             _suffix.current.lastIndex = 0;
-            const currencyCharIndex = val.search(_currency.current);
+            let currencyCharIndex = val.search(_currency.current);
+
+            if (currencyCharIndex === 0 && prefixChar.current && prefixChar.current.length > 1) {
+                currencyCharIndex = prefixChar.current.trim().length;
+            }
 
             _currency.current.lastIndex = 0;
 
@@ -847,9 +853,11 @@ export const InputNumber = React.memo(
                     selectionEnd = sRegex.lastIndex + tRegex.lastIndex;
                     inputEl.setSelectionRange(selectionEnd, selectionEnd);
                 } else if (newLength === currentLength) {
-                    if (operation === 'insert' || operation === 'delete-back-single') inputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
-                    else if (operation === 'delete-single') inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
-                    else if (operation === 'delete-range' || operation === 'spin') inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    if (['insert', 'delete-back-single', 'delete-range', 'spin'].includes(operation)) {
+                        inputEl.setSelectionRange(selectionEnd, selectionEnd);
+                    } else if (operation === 'delete-single') {
+                        inputEl.setSelectionRange(selectionEnd - 1, selectionEnd - 1);
+                    }
                 } else if (operation === 'delete-back-single') {
                     let prevChar = inputValue.charAt(selectionEnd - 1);
                     let nextChar = inputValue.charAt(selectionEnd);
@@ -1020,6 +1028,13 @@ export const InputNumber = React.memo(
             changeValue();
         }, [props.value]);
 
+        useUpdateEffect(() => {
+            // #5245 prevent infinite loop
+            if (props.disabled) {
+                clearTimer();
+            }
+        }, [props.disabled]);
+
         const createInputElement = () => {
             const className = classNames('p-inputnumber-input', props.inputClassName);
             const valueToRender = formattedValue(props.value);
@@ -1164,7 +1179,6 @@ export const InputNumber = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                ref: elementRef,
                 className: classNames(props.className, cx('root', { focusedState, stacked, horizontal, vertical })),
                 style: props.style
             },
@@ -1174,7 +1188,7 @@ export const InputNumber = React.memo(
 
         return (
             <>
-                <span {...rootProps}>
+                <span ref={elementRef} {...rootProps}>
                     {inputElement}
                     {buttonGroup}
                 </span>

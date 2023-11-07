@@ -50,16 +50,18 @@ export default function UnstyledDemo() {
         if (msgs.current) {
             msgs.current.clear();
             msgs.current.show([
-                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
-                { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content', closable: false },
-                { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
-                { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
+                { sticky: true, severity: 'info', summary: 'Info', detail: 'Message Content' },
+                { sticky: true, severity: 'success', summary: 'Success', detail: 'Message Content' },
+                { sticky: true, severity: 'warn', summary: 'Warning', detail: 'Message Content' },
+                { sticky: true, severity: 'error', summary: 'Error', detail: 'Message Content' }
             ]);
         }
     });
 
     return (
-        <Messages ref={msgs} />
+        <div className="card">
+            <Messages ref={msgs} />
+        </div>
     )
 }
     `

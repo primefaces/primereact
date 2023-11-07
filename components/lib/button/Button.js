@@ -65,18 +65,18 @@ export const Button = React.memo(
         };
 
         const createLabel = () => {
-            if (props.label) {
-                const labelProps = mergeProps(
-                    {
-                        className: cx('label')
-                    },
-                    ptm('label')
-                );
+            const labelProps = mergeProps(
+                {
+                    className: cx('label')
+                },
+                ptm('label')
+            );
 
+            if (props.label) {
                 return <span {...labelProps}>{props.label}</span>;
             }
 
-            return !props.children && !props.label && <span className={cx('label')} dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
+            return !props.children && !props.label && <span {...labelProps} dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>;
         };
 
         const createBadge = () => {

@@ -42,7 +42,7 @@ export default function UnstyledDemo() {
     const op = useRef(null);
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Button type="button" icon="pi pi-image" label="Image" onClick={(e) => op.current.toggle(e)} />
             <OverlayPanel ref={op}>
                 <img src={'https://primefaces.org/cdn/primereact/images/product/bamboo-watch.jpg'} alt="Bamboo Watch"></img>

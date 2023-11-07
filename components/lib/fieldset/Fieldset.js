@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useStyle } from '../hooks/Hooks';
+import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
+import { IconUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { FieldsetBase } from './FieldsetBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Fieldset = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -87,8 +87,19 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             ptm('toggleableContent')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: !collapsed,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableProps}>
                     <div {...contentProps}>{props.children}</div>
                 </div>
@@ -180,7 +191,7 @@ export const Fieldset = React.forwardRef((inProps, ref) => {
             id: idState,
             ref: elementRef,
             style: props.style,
-            className: cx('root'),
+            className: classNames(props.className, cx('root')),
             onClick: props.onClick
         },
         FieldsetBase.getOtherProps(props),

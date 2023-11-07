@@ -15,22 +15,26 @@ export const ColorPickerPanel = React.forwardRef((props, ref) => {
                 style: props.panelStyle,
                 onClick: props.onClick
             },
-            ptm('panel')
+            ptm('panel', { hostName: props.hostName })
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: props.in,
+                timeout: { enter: 120, exit: 100 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: props.onEnter,
+                onEntered: props.onEntered,
+                onExit: props.onExit,
+                onExited: props.onExited
+            },
+            ptm('transition', { hostName: props.hostName })
         );
 
         return (
-            <CSSTransition
-                nodeRef={ref}
-                classNames="p-connected-overlay"
-                in={props.in}
-                timeout={{ enter: 120, exit: 100 }}
-                options={props.transitionOptions}
-                unmountOnExit
-                onEnter={props.onEnter}
-                onEntered={props.onEntered}
-                onExit={props.onExit}
-                onExited={props.onExited}
-            >
+            <CSSTransition nodeRef={ref} {...transitionProps}>
                 <div ref={ref} {...panelProps}>
                     {props.children}
                 </div>

@@ -199,6 +199,10 @@ if (project) {
                     description: '',
                     values: []
                 };
+                const callbacks = {
+                    description: staticMessages['callbacks'],
+                    values: []
+                };
                 const model_props_group = model.groups.find((g) => g.title === 'Properties');
 
                 model_props_group &&
@@ -213,9 +217,31 @@ if (project) {
                         });
                     });
 
+                const model_props_methods_group = model.groups && model.groups.find((g) => g.title === 'Methods');
+
+                model_props_methods_group &&
+                    model_props_methods_group.children.forEach((method) => {
+                        const signature = method.getAllSignatures()[0];
+
+                        callbacks.values.push({
+                            name: signature.name,
+                            parameters: signature.parameters.map((param) => {
+                                return {
+                                    name: param.name,
+                                    optional: param.flags.isOptional,
+                                    type: param.type.toString(),
+                                    description: param.comment && param.comment.summary.map((s) => parseText(s.text || '')).join(' ')
+                                };
+                            }),
+                            returnType: signature.type.toString(),
+                            description: signature.comment.summary.map((s) => parseText(s.text || '')).join(' ')
+                        });
+                    });
+
                 doc[name]['model'][model.name] = {
                     description: event_props_description,
-                    props
+                    props,
+                    callbacks
                 };
             });
 

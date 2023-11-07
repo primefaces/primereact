@@ -54,7 +54,7 @@ export const PanelMenu = React.memo(
         };
 
         const onItemClick = (event, item) => {
-            if (item.disabled) {
+            if (item.disabled || !item.items) {
                 event.preventDefault();
 
                 return;
@@ -126,7 +126,7 @@ export const PanelMenu = React.memo(
                 return null;
             }
 
-            const key = item.label + '_' + index;
+            const key = item.id || idState + '_' + index;
             const active = isItemActive(item);
             const iconClassName = classNames('p-menuitem-icon', item.icon);
             const headerIconProps = mergeProps(
@@ -221,13 +221,26 @@ export const PanelMenu = React.memo(
                 getPTOptions(item, 'toggleableContent')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    onEnter: onEnter,
+                    disabled: animationDisabled,
+                    in: active,
+                    unmountOnExit: true,
+                    options: props.transitionOptions
+                },
+                getPTOptions(item, 'transition')
+            );
+
             return (
                 <div {...panelProps}>
                     <div {...headerProps}>{content}</div>
-                    <CSSTransition nodeRef={menuContentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} onEnter={onEnter} disabled={animationDisabled} in={active} unmountOnExit options={props.transitionOptions}>
+                    <CSSTransition nodeRef={menuContentRef} {...transitionProps}>
                         <div id={contentId} ref={menuContentRef} {...toggleableContentProps}>
                             <div {...menuContentProps}>
-                                <PanelMenuSub menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />
+                                <PanelMenuSub hostName="PanelMenu" id={key} menuProps={props} model={item.items} className="p-panelmenu-root-submenu" multiple={props.multiple} submenuIcon={props.submenuIcon} root ptm={ptm} cx={cx} />
                             </div>
                         </div>
                     </CSSTransition>

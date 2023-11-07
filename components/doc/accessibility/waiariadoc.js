@@ -59,7 +59,7 @@ export function WAIAriaDoc(props) {
             </p>
             <CodeHighlight>
                 {`
-<label for="chkbox">Remember Me</label>
+<label htmlFor="chkbox">Remember Me</label>
 <div className="fancy-checkbox" onClick="() => toggle()">
     <input className="p-sr-only" type="checkbox" id="chkbox" onFocus="() => updateParentVisuals()" onBlur="() => updateParentVisuals()"
         onKeyDown="(e) => e.keyCode === 32 && updateParentVisuals()">

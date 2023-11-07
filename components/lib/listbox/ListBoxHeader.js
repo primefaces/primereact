@@ -8,6 +8,13 @@ export const ListBoxHeader = React.memo((props) => {
         ptCallbacks: { ptm, cx }
     } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const filterOptions = {
         filter: (e) => onFilter(e),
         reset: () => props.resetFilter()
@@ -27,7 +34,7 @@ export const ListBoxHeader = React.memo((props) => {
             {
                 className: cx('filterIcon')
             },
-            ptm('filterIcon')
+            getPTOptions('filterIcon')
         );
 
         const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
@@ -37,14 +44,14 @@ export const ListBoxHeader = React.memo((props) => {
             {
                 className: cx('header')
             },
-            ptm('header')
+            getPTOptions('header')
         );
 
         const filterContainerProps = mergeProps(
             {
                 className: cx('filterContainer')
             },
-            ptm('filterContainer')
+            getPTOptions('filterContainer')
         );
 
         let content = (

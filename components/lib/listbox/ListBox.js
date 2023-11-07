@@ -291,6 +291,7 @@ export const ListBox = React.memo(
         const createHeader = () => {
             return props.filter ? (
                 <ListBoxHeader
+                    hostName="ListBox"
                     filter={filteredValue}
                     filterIcon={props.filterIcon}
                     onFilter={onFilter}
@@ -316,6 +317,7 @@ export const ListBox = React.memo(
 
                 return (
                     <ListBoxItem
+                        hostName="ListBox"
                         key={optionKey}
                         label={optionLabel}
                         option={option}
@@ -364,6 +366,7 @@ export const ListBox = React.memo(
 
                 return (
                     <ListBoxItem
+                        hostName="ListBox"
                         key={optionKey}
                         label={optionLabel}
                         option={option}

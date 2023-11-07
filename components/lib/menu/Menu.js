@@ -1,22 +1,24 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { MenuBase } from './MenuBase';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const Menu = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = MenuBase.getProps(inProps, context);
+        const [idState, setIdState] = React.useState(props.id);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const { ptm, cx, sx, isUnstyled } = MenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 visible: visibleState
             }
         });
@@ -24,6 +26,10 @@ export const Menu = React.memo(
         useHandleStyle(MenuBase.css.styles, isUnstyled, { name: 'menu' });
         const menuRef = React.useRef(null);
         const targetRef = React.useRef(null);
+
+        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
+            hide(event);
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
@@ -140,6 +146,12 @@ export const Menu = React.memo(
             ZIndexUtils.clear(menuRef.current);
         };
 
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
+
         useUnmountEffect(() => {
             ZIndexUtils.clear(menuRef.current);
         });
@@ -154,13 +166,16 @@ export const Menu = React.memo(
         }));
 
         const createSubmenu = (submenu, index) => {
-            const key = submenu.label + '_' + index;
+            const key = idState + '_sub_' + index;
             const items = submenu.items.map(createMenuItem);
             const submenuHeaderProps = mergeProps(
                 {
+                    id: key,
+                    key,
+                    role: 'presentation',
                     className: classNames(submenu.className, cx('submenuHeader', { submenu })),
                     style: sx('submenuHeader', { submenu }),
-                    role: 'presentation'
+                    'data-p-disabled': submenu.disabled
                 },
                 ptm('submenuHeader')
             );
@@ -174,9 +189,10 @@ export const Menu = React.memo(
         };
 
         const createSeparator = (index) => {
-            const key = 'separator_' + index;
+            const key = idState + '_separator_' + index;
             const separatorProps = mergeProps(
                 {
+                    id: key,
                     key,
                     className: cx('separator'),
                     role: 'separator'
@@ -209,7 +225,7 @@ export const Menu = React.memo(
             );
             const label = item.label && <span {...labelProps}>{item.label}</span>;
             const tabIndex = item.disabled ? null : 0;
-            const key = item.label + '_' + index;
+            const key = item.id || idState + '_' + index;
             const actionProps = mergeProps(
                 {
                     href: item.url || '#',
@@ -219,7 +235,8 @@ export const Menu = React.memo(
                     onClick: (event) => onItemClick(event, item),
                     onKeyDown: (event) => onItemKeyDown(event, item),
                     tabIndex: tabIndex,
-                    'aria-disabled': item.disabled
+                    'aria-disabled': item.disabled,
+                    'data-p-disabled': item.disabled
                 },
                 ptm('action')
             );
@@ -248,6 +265,7 @@ export const Menu = React.memo(
 
             const menuitemProps = mergeProps(
                 {
+                    id: key,
                     key,
                     className: classNames(item.className, cx('menuitem')),
                     style: sx('menuitem', { item }),
@@ -289,19 +307,23 @@ export const Menu = React.memo(
                     ptm('menu')
                 );
 
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 120, exit: 100 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                );
+
                 return (
-                    <CSSTransition
-                        nodeRef={menuRef}
-                        classNames="p-connected-overlay"
-                        in={visibleState}
-                        timeout={{ enter: 120, exit: 100 }}
-                        options={props.transitionOptions}
-                        unmountOnExit
-                        onEnter={onEnter}
-                        onEntered={onEntered}
-                        onExit={onExit}
-                        onExited={onExited}
-                    >
+                    <CSSTransition nodeRef={menuRef} {...transitionProps}>
                         <div id={props.id} ref={menuRef} {...rootProps}>
                             <ul {...menuProps}>{menuitems}</ul>
                         </div>

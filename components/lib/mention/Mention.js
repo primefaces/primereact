@@ -66,6 +66,7 @@ export const Mention = React.memo(
 
         const onOverlayEnter = () => {
             ZIndexUtils.set('overlay', overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, (context && context.zIndex['overlay']) || PrimeReact.zIndex['overlay']);
+            DomHandler.addStyles(overlayRef.current, { position: 'absolute', top: '0', left: '0' });
             alignOverlay();
         };
 
@@ -201,7 +202,7 @@ export const Mention = React.memo(
 
             if (currentText.trim() !== selectedText) {
                 const prevText = value.substring(0, triggerState.index);
-                const nextText = value.substring(triggerState.index + currentText.length);
+                const nextText = value.substring(spaceIndex > -1 ? selectionStart : triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
                 event.target = inputRef.current;
@@ -417,26 +418,33 @@ export const Mention = React.memo(
                 {
                     ref: overlayRef,
                     className: cx('panel'),
-                    style: sx('panel'),
+                    style: {
+                        maxHeight: props.scrollHeight,
+                        ...props.panelStyle
+                    },
                     onClick: onPanelClick
                 },
                 ptm('panel')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: overlayVisibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onOverlayEnter,
+                    onEntering: onOverlayEntering,
+                    onEntered: onOverlayEntered,
+                    onExit: onOverlayExit,
+                    onExited: onOverlayExited
+                },
+                ptm('transition')
+            );
+
             const panel = (
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={overlayVisibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onOverlayEnter}
-                    onEntering={onOverlayEntering}
-                    onEntered={onOverlayEntered}
-                    onExit={onOverlayExit}
-                    onExited={onOverlayExited}
-                >
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div {...panelProps}>
                         {header}
                         {list}

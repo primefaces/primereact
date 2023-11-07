@@ -21,46 +21,48 @@ const classes = {
     action: ({ item }) => classNames('p-menuitem-link', { 'p-disabled': item.disabled }),
     menuitem: ({ item }) => classNames('p-menuitem', item.className),
     menu: 'p-submenu-list',
-    submenu: 'p-submenu-list'
+    submenu: 'p-submenu-list',
+    transition: 'p-toggleable-content'
 };
 
 const styles = `
-.p-panelmenu .p-panelmenu-header-link {
-    display: flex;
-    align-items: center;
-    user-select: none;
-    cursor: pointer;
-    position: relative;
-    text-decoration: none;
+@layer primereact {
+    .p-panelmenu .p-panelmenu-header-link {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        position: relative;
+        text-decoration: none;
+    }
+    
+    .p-panelmenu .p-panelmenu-header-link:focus {
+        z-index: 1;
+    }
+    
+    .p-panelmenu .p-submenu-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .p-panelmenu .p-menuitem-link {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .p-panelmenu .p-menuitem-text {
+        line-height: 1;
+    }
 }
-
-.p-panelmenu .p-panelmenu-header-link:focus {
-    z-index: 1;
-}
-
-.p-panelmenu .p-submenu-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.p-panelmenu .p-menuitem-link {
-    display: flex;
-    align-items: center;
-    user-select: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.p-panelmenu .p-menuitem-text {
-    line-height: 1;
-}
-
 `;
 
 export const PanelMenuBase = ComponentBase.extend({
     defaultProps: {
-        __TYPE: 'Panel',
+        __TYPE: 'PanelMenu',
         id: null,
         model: null,
         style: null,

@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { DropdownBase } from './DropdownBase';
 import { DropdownPanel } from './DropdownPanel';
 
@@ -846,11 +846,13 @@ export const Dropdown = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: cx('root', { focusedState, overlayVisibleState }),
+                className: classNames(props.className, cx('root', { focusedState, overlayVisibleState })),
                 style: props.style,
                 onClick: (e) => onClick(e),
                 onMouseDown: props.onMouseDown,
-                onContextMenu: props.onContextMenu
+                onContextMenu: props.onContextMenu,
+                'data-p-disabled': props.disabled,
+                'data-p-focus': focusedState
             },
             otherProps,
             ptm('root')
@@ -865,6 +867,7 @@ export const Dropdown = React.memo(
                     {clearIcon}
                     {dropdownIcon}
                     <DropdownPanel
+                        hostName="Dropdown"
                         ref={overlayRef}
                         visibleOptions={visibleOptions}
                         virtualScrollerRef={virtualScrollerRef}

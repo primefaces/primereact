@@ -38,14 +38,12 @@ export const Calendar = React.memo(
         const inputRef = React.useRef(props.inputRef);
         const navigation = React.useRef(null);
         const ignoreFocusFunctionality = React.useRef(false);
-        const isKeydown = React.useRef(false);
         const timePickerTimer = React.useRef(null);
         const viewStateChanged = React.useRef(false);
         const touchUIMask = React.useRef(null);
         const overlayEventListener = React.useRef(null);
         const touchUIMaskClickListener = React.useRef(null);
         const isOverlayClicked = React.useRef(false);
-        const ignoreMaskChange = React.useRef(false);
         const previousButton = React.useRef(false);
         const nextButton = React.useRef(false);
         const onChangeRef = React.useRef(null);
@@ -97,8 +95,6 @@ export const Calendar = React.memo(
         };
 
         const onInputKeyDown = (event) => {
-            isKeydown.current = true;
-
             switch (event.which) {
                 //escape
                 case 27: {
@@ -120,18 +116,11 @@ export const Calendar = React.memo(
         };
 
         const onUserInput = (event) => {
-            // IE 11 Workaround for input placeholder
-            if (!isKeydown.current) {
-                return;
-            }
-
-            isKeydown.current = false;
-
             updateValueOnInput(event, event.target.value);
             props.onInput && props.onInput(event);
         };
 
-        const updateValueOnInput = (event, rawValue) => {
+        const updateValueOnInput = (event, rawValue, invalidCallback) => {
             try {
                 const value = parseValueFromString(rawValue);
 
@@ -141,9 +130,13 @@ export const Calendar = React.memo(
                 }
             } catch (err) {
                 //invalid date
-                const value = props.keepInvalid ? rawValue : null;
+                if (invalidCallback) {
+                    invalidCallback();
+                } else {
+                    const value = props.keepInvalid ? rawValue : null;
 
-                updateModel(event, value);
+                    updateModel(event, value);
+                }
             }
         };
 
@@ -235,11 +228,11 @@ export const Calendar = React.memo(
                     let cell;
 
                     if (navigation.current.backward) {
-                        let cells = DomHandler.find(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)'); /* @todo */
+                        let cells = DomHandler.find(overlayRef.current, 'table td span:not([data-p-disabled="true"])');
 
                         cell = cells[cells.length - 1];
                     } else {
-                        cell = DomHandler.findSingle(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
+                        cell = DomHandler.findSingle(overlayRef.current, 'table td span:not([data-p-disabled="true"])');
                     }
 
                     if (cell) {
@@ -258,18 +251,18 @@ export const Calendar = React.memo(
             let cell;
 
             if (props.view === 'month') {
-                const cells = DomHandler.find(overlayRef.current, '.p-monthpicker .p-monthpicker-month');
-                const selectedCell = DomHandler.findSingle(overlayRef.current, '.p-monthpicker .p-monthpicker-month.p-highlight');
+                const cells = DomHandler.find(overlayRef.current, '[data-pc-section="monthpicker"] [data-pc-section="month"]');
+                const selectedCell = DomHandler.findSingle(overlayRef.current, '[data-pc-section="monthpicker"] [data-pc-section="month"][data-p-highlight="true"]');
 
                 cells.forEach((cell) => (cell.tabIndex = -1));
                 cell = selectedCell || cells[0];
             } else {
-                cell = DomHandler.findSingle(overlayRef.current, 'span.p-highlight');
+                cell = DomHandler.findSingle(overlayRef.current, 'span[data-p-highlight="true"]');
 
                 if (!cell) {
                     const todayCell = DomHandler.findSingle(overlayRef.current, 'td.p-datepicker-today span:not(.p-disabled)');
 
-                    cell = todayCell || DomHandler.findSingle(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    cell = todayCell || DomHandler.findSingle(overlayRef.current, 'table td span:not([data-p-disabled="true"])');
                 }
             }
 
@@ -970,12 +963,14 @@ export const Calendar = React.memo(
                 return;
             }
 
-            const navPrev = DomHandler.findSingle(overlayRef.current, '.p-datepicker-prev');
-            const navNext = DomHandler.findSingle(overlayRef.current, '.p-datepicker-next');
+            const navPrev = DomHandler.findSingle(overlayRef.current, '[data-pc-section="previousbutton"]');
+            const navNext = DomHandler.findSingle(overlayRef.current, '[data-pc-section="nextbutton"]');
 
             if (props.disabled) {
-                DomHandler.addClass(navPrev, 'p-disabled');
-                DomHandler.addClass(navNext, 'p-disabled');
+                !isUnstyled() && DomHandler.addClass(navPrev, 'p-disabled');
+                navPrev.setAttribute('data-p-disabled', true);
+                !isUnstyled() && DomHandler.addClass(navNext, 'p-disabled');
+                navNext.setAttribute('data-p-disabled', true);
 
                 return;
             }
@@ -1158,7 +1153,7 @@ export const Calendar = React.memo(
                     navBackward(event);
                 } else {
                     const prevMonthContainer = overlayRef.current.children[groupIndex - 1];
-                    const cells = DomHandler.find(prevMonthContainer, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    const cells = DomHandler.find(prevMonthContainer, 'table td span:not([data-p-disabled="true"])');
                     const focusCell = cells[cells.length - 1];
 
                     focusCell.tabIndex = '0';
@@ -1170,7 +1165,7 @@ export const Calendar = React.memo(
                     navForward(event);
                 } else {
                     const nextMonthContainer = overlayRef.current.children[groupIndex + 1];
-                    const focusCell = DomHandler.findSingle(nextMonthContainer, '.p-datepicker-calendar td span:not(.p-disabled)');
+                    const focusCell = DomHandler.findSingle(nextMonthContainer, 'table td span:not([data-p-disabled="true"])');
 
                     focusCell.tabIndex = '0';
                     focusCell.focus();
@@ -1261,7 +1256,7 @@ export const Calendar = React.memo(
                 return;
             }
 
-            DomHandler.find(overlayRef.current, '.p-datepicker-calendar td span:not(.p-disabled)').forEach((cell) => (cell.tabIndex = -1));
+            DomHandler.find(overlayRef.current, 'table td span:not([data-p-disabled="true"])').forEach((cell) => (cell.tabIndex = -1));
             event.currentTarget.focus();
 
             if (isMultipleSelection()) {
@@ -1305,7 +1300,7 @@ export const Calendar = React.memo(
                 }
 
                 date.setHours(hours);
-                date.setMinutes(minutes);
+                date.setMinutes(doStepMinute(minutes));
                 date.setSeconds(seconds);
                 date.setMilliseconds(milliseconds);
             }
@@ -1505,8 +1500,19 @@ export const Calendar = React.memo(
         };
 
         const onOverlayEntered = () => {
+            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
+                if (props.view === 'date') {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                    overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
+                } else {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
+                }
+            }
+
             bindOverlayListener();
             props.onShow && props.onShow();
+            DomHandler.focusFirstElement(overlayRef.current);
+            setFocusedState(false);
         };
 
         const onOverlayExit = () => {
@@ -1532,13 +1538,6 @@ export const Calendar = React.memo(
                 if (appendDisabled()) {
                     DomHandler.relativePosition(overlayRef.current, inputRef.current);
                 } else {
-                    if (props.view === 'date') {
-                        overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                        overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                    } else {
-                        overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                    }
-
                     DomHandler.absolutePosition(overlayRef.current, inputRef.current);
                 }
             }
@@ -1548,7 +1547,7 @@ export const Calendar = React.memo(
             if (!touchUIMask.current) {
                 touchUIMask.current = document.createElement('div');
                 touchUIMask.current.style.zIndex = String(ZIndexUtils.get(overlayRef.current) - 1);
-                DomHandler.addMultipleClasses(touchUIMask.current, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker p-component-overlay-enter');
+                !isUnstyled() && DomHandler.addMultipleClasses(touchUIMask.current, 'p-component-overlay p-datepicker-mask p-datepicker-mask-scrollblocker p-component-overlay-enter');
 
                 touchUIMaskClickListener.current = () => {
                     disableModality();
@@ -1558,7 +1557,7 @@ export const Calendar = React.memo(
                 touchUIMask.current.addEventListener('click', touchUIMaskClickListener.current);
 
                 document.body.appendChild(touchUIMask.current);
-                DomHandler.addClass(document.body, 'p-overflow-hidden');
+                DomHandler.blockBodyScroll();
             }
         };
 
@@ -1596,7 +1595,7 @@ export const Calendar = React.memo(
             }
 
             if (!hasBlockerMasks) {
-                DomHandler.removeClass(document.body, 'p-overflow-hidden');
+                DomHandler.unblockBodyScroll();
             }
         };
 
@@ -2540,11 +2539,12 @@ export const Calendar = React.memo(
                     slotChar: props.maskSlotChar,
                     readOnly: props.readOnlyInput || props.disabled,
                     onChange: (e) => {
-                        !ignoreMaskChange.current && updateValueOnInput(e.originalEvent, e.value);
-                        ignoreMaskChange.current = false;
+                        updateValueOnInput(e.originalEvent, e.value, () => {
+                            return false;
+                        });
                     },
-                    onBlur: () => {
-                        ignoreMaskChange.current = true;
+                    onBlur: (e) => {
+                        updateValueOnInput(e, e.target.value);
                     }
                 }).unbindEvents;
             }
@@ -2902,7 +2902,8 @@ export const Calendar = React.memo(
                 const weekHeaderProps = mergeProps(
                     {
                         scope: 'col',
-                        className: cx('weekHeader')
+                        className: cx('weekHeader'),
+                        'data-p-disabled': props.showWeek
                     },
                     ptm('weekHeader', {
                         context: {
@@ -2932,7 +2933,9 @@ export const Calendar = React.memo(
                 {
                     className: cx('dayLabel', { className }),
                     onClick: (e) => onDateSelect(e, date),
-                    onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex)
+                    onKeyDown: (e) => onDateCellKeydown(e, date, groupIndex),
+                    'data-p-highlight': isSelected(date),
+                    'data-p-disabled': !date.selectable
                 },
                 ptm('dayLabel', {
                     context: {
@@ -2957,7 +2960,9 @@ export const Calendar = React.memo(
                 const content = date.otherMonth && !props.showOtherMonths ? null : createDateCellContent(date, dateClassName, groupIndex);
                 const dayProps = mergeProps(
                     {
-                        className: cx('day', { date })
+                        className: cx('day', { date }),
+                        'data-p-today': date.today,
+                        'data-p-other-month': date.otherMonth
                     },
                     ptm('day', {
                         context: {
@@ -2985,7 +2990,8 @@ export const Calendar = React.memo(
 
                 const weekLabelContainerProps = mergeProps(
                     {
-                        className: cx('weekLabelContainer')
+                        className: cx('weekLabelContainer'),
+                        'data-p-disabled': props.showWeek
                     },
                     ptm('weekLabelContainer', {
                         context: {
@@ -3589,8 +3595,8 @@ export const Calendar = React.memo(
 
                 return (
                     <div {...buttonbarProps}>
-                        <Button type="button" label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={cx('todayButton')} pt={ptm('todayButton')} />
-                        <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={cx('clearButton')} pt={ptm('clearButton')} />
+                        <Button type="button" label={today} onClick={onTodayButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={classNames(props.todayButtonClassName, cx('todayButton'))} pt={ptm('todayButton')} />
+                        <Button type="button" label={clear} onClick={onClearButtonClick} onKeyDown={(e) => onContainerButtonKeydown(e)} className={classNames(props.clearButtonClassName, cx('clearButton'))} pt={ptm('clearButton')} />
                     </div>
                 );
             }
@@ -3630,7 +3636,9 @@ export const Calendar = React.memo(
                                 {
                                     className: cx('month', { isMonthSelected, isSelectable, i, currentYear }),
                                     onClick: (event) => onMonthSelect(event, i),
-                                    onKeyDown: (event) => onMonthCellKeydown(event, i)
+                                    onKeyDown: (event) => onMonthCellKeydown(event, i),
+                                    'data-p-disabled': !m.selectable,
+                                    'data-p-highlight': isMonthSelected(i)
                                 },
                                 ptm('month', {
                                     context: {
@@ -3670,7 +3678,9 @@ export const Calendar = React.memo(
                             const yearProps = mergeProps(
                                 {
                                     className: cx('year', { isYearSelected, isSelectable, y }),
-                                    onClick: (event) => onYearSelect(event, y)
+                                    onClick: (event) => onYearSelect(event, y),
+                                    'data-p-highlight': isYearSelected(y),
+                                    'data-p-disabled': !isSelectable(0, -1, y)
                                 },
                                 ptm('year', {
                                     context: {
@@ -3716,7 +3726,7 @@ export const Calendar = React.memo(
         const rootProps = mergeProps(
             {
                 id: props.id,
-                className: cx('root', { focusedState, isFilled }),
+                className: classNames(props.className, cx('root', { focusedState, isFilled })),
                 style: props.style
             },
             CalendarBase.getOtherProps(props),
@@ -3727,6 +3737,7 @@ export const Calendar = React.memo(
             <span ref={elementRef} {...rootProps}>
                 {content}
                 <CalendarPanel
+                    hostName="Calendar"
                     ref={overlayRef}
                     className={panelClassName}
                     style={props.panelStyle}

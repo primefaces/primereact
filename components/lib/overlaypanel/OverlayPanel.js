@@ -275,19 +275,23 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
             ptm('content')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: visibleState,
+                timeout: { enter: 120, exit: 100 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: onEnter,
+                onEntered: onEntered,
+                onExit: onExit,
+                onExited: onExited
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition
-                nodeRef={overlayRef}
-                classNames="p-overlaypanel"
-                in={visibleState}
-                timeout={{ enter: 120, exit: 100 }}
-                options={props.transitionOptions}
-                unmountOnExit
-                onEnter={onEnter}
-                onEntered={onEntered}
-                onExit={onExit}
-                onExited={onExited}
-            >
+            <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                 <div ref={overlayRef} {...rootProps}>
                     <div {...contentProps}>{props.children}</div>
                     {closeIcon}

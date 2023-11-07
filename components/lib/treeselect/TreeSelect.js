@@ -34,7 +34,7 @@ export const TreeSelect = React.memo(
         const isSingleSelectionMode = props.selectionMode === 'single';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
 
-        const { ptm, cx, isUnstyled } = TreeSelectBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 focused: focusedState,
@@ -42,7 +42,9 @@ export const TreeSelect = React.memo(
                 expandedKeys: expandedKeys,
                 filterValue: filteredValue
             }
-        });
+        };
+
+        const { ptm, cx, isUnstyled } = TreeSelectBase.setMetaData(metaData);
 
         useHandleStyle(TreeSelectBase.css.styles, isUnstyled, { name: 'treeselect' });
 
@@ -559,6 +561,7 @@ export const TreeSelect = React.memo(
                         togglerTemplate={props.togglerTemplate}
                         value={props.options}
                         pt={ptm('tree')}
+                        __parentMetadata={{ parent: metaData }}
                     ></Tree>
 
                     {hasNoOptions && <div {...emptyMessageProps}>{props.emptyMessage || localeOption('emptyMessage')}</div>}
@@ -718,6 +721,7 @@ export const TreeSelect = React.memo(
                 {clearIcon}
                 {dropdownIcon}
                 <TreeSelectPanel
+                    hostName="TreeSelect"
                     ref={overlayRef}
                     appendTo={props.appendTo}
                     panelStyle={props.panelStyle}

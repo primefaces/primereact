@@ -1,9 +1,30 @@
-import { useEffect } from 'react';
 import PrimeReact from '../api/Api';
-import { useStyle } from '../hooks/Hooks';
-import { Tailwind } from '../passthrough/tailwind';
+import { useMountEffect, useStyle, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { mergeProps } from '../utils/MergeProps';
 import { ObjectUtils } from '../utils/Utils';
+
+const baseStyle = `
+.p-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.p-hidden-accessible input,
+.p-hidden-accessible select {
+    transform: scale(0);
+}
+
+.p-overflow-hidden {
+    overflow: hidden;
+    padding-right: var(--scrollbar-width);
+}
+`;
 
 const buttonStyles = `
 .p-button {
@@ -92,7 +113,7 @@ const checkboxStyles = `
     display: flex;
     justify-content: center;
     align-items: center;
-}        
+}
 `;
 const inputTextStyles = `
 .p-inputtext {
@@ -200,7 +221,7 @@ const inputTextStyles = `
 .p-fluid .p-input-icon-right {
     display: block;
     width: 100%;
-}        
+}
 `;
 const radioButtonStyles = `
 .p-radiobutton {
@@ -270,201 +291,189 @@ svg.p-icon g {
     }
 }
 `;
-const baseStyles = `
-.p-component, .p-component * {
-    box-sizing: border-box;
-}
+const commonStyle = `
+@layer primereact {
+    .p-component, .p-component * {
+        box-sizing: border-box;
+    }
 
-.p-hidden {
-    display: none;
-}
+    .p-hidden {
+        display: none;
+    }
 
-.p-hidden-space {
-    visibility: hidden;
-}
+    .p-hidden-space {
+        visibility: hidden;
+    }
 
-.p-hidden-accessible {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
+    .p-reset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        text-decoration: none;
+        font-size: 100%;
+        list-style: none;
+    }
 
-.p-hidden-accessible input,
-.p-hidden-accessible select {
-    transform: scale(0);
-}
+    .p-disabled, .p-disabled * {
+        cursor: default !important;
+        pointer-events: none;
+        user-select: none;
+    }
 
-.p-reset {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    text-decoration: none;
-    font-size: 100%;
-    list-style: none;
-}
+    .p-component-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-.p-disabled, .p-disabled * {
-    cursor: default !important;
-    pointer-events: none;
-    user-select: none;
-}
+    .p-unselectable-text {
+        user-select: none;
+    }
 
-.p-component-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+    .p-scrollbar-measure {
+        width: 100px;
+        height: 100px;
+        overflow: scroll;
+        position: absolute;
+        top: -9999px;
+    }
 
-.p-overflow-hidden {
-    overflow: hidden;
-}
+    @-webkit-keyframes p-fadein {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes p-fadein {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
 
-.p-unselectable-text {
-    user-select: none;
-}
+    .p-link {
+        text-align: left;
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        user-select: none;
+    }
 
-.p-scrollbar-measure {
-    width: 100px;
-    height: 100px;
-    overflow: scroll;
-    position: absolute;
-    top: -9999px;
-}
+    .p-link:disabled {
+        cursor: default;
+    }
 
-@-webkit-keyframes p-fadein {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
-@keyframes p-fadein {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
-}
+    /* Non react overlay animations */
+    .p-connected-overlay {
+        opacity: 0;
+        transform: scaleY(0.8);
+        transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+    }
 
-.p-link {
-	text-align: left;
-	background-color: transparent;
-	margin: 0;
-	padding: 0;
-	border: none;
-    cursor: pointer;
-    user-select: none;
-}
+    .p-connected-overlay-visible {
+        opacity: 1;
+        transform: scaleY(1);
+    }
 
-.p-link:disabled {
-	cursor: default;
-}
+    .p-connected-overlay-hidden {
+        opacity: 0;
+        transform: scaleY(1);
+        transition: opacity .1s linear;
+    }
 
-/* Non react overlay animations */
-.p-connected-overlay {
-    opacity: 0;
-    transform: scaleY(0.8);
-    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
-}
+    /* React based overlay animations */
+    .p-connected-overlay-enter {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
 
-.p-connected-overlay-visible {
-    opacity: 1;
-    transform: scaleY(1);
-}
+    .p-connected-overlay-enter-active {
+        opacity: 1;
+        transform: scaleY(1);
+        transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
+    }
 
-.p-connected-overlay-hidden {
-    opacity: 0;
-    transform: scaleY(1);
-    transition: opacity .1s linear;
-}
+    .p-connected-overlay-enter-done {
+        transform: none;
+    }
 
-/* React based overlay animations */
-.p-connected-overlay-enter {
-    opacity: 0;
-    transform: scaleY(0.8);
-}
+    .p-connected-overlay-exit {
+        opacity: 1;
+    }
 
-.p-connected-overlay-enter-active {
-    opacity: 1;
-    transform: scaleY(1);
-    transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
-}
+    .p-connected-overlay-exit-active {
+        opacity: 0;
+        transition: opacity .1s linear;
+    }
 
-.p-connected-overlay-enter-done {
-    transform: none;
-}
+    /* Toggleable Content */
+    .p-toggleable-content-enter {
+        max-height: 0;
+    }
 
-.p-connected-overlay-exit {
-    opacity: 1;
-}
+    .p-toggleable-content-enter-active {
+        overflow: hidden;
+        max-height: 1000px;
+        transition: max-height 1s ease-in-out;
+    }
 
-.p-connected-overlay-exit-active {
-    opacity: 0;
-    transition: opacity .1s linear;
-}
+    .p-toggleable-content-enter-done {
+        transform: none;
+    }
 
-/* Toggleable Content */
-.p-toggleable-content-enter {
-    max-height: 0;
-}
+    .p-toggleable-content-exit {
+        max-height: 1000px;
+    }
 
-.p-toggleable-content-enter-active {
-    overflow: hidden;
-    max-height: 1000px;
-    transition: max-height 1s ease-in-out;
-}
+    .p-toggleable-content-exit-active {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
+    }
 
-.p-toggleable-content-enter-done {
-    transform: none;
-}
+    .p-sr-only {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        word-wrap: normal !important;
+    }
 
-.p-toggleable-content-exit {
-    max-height: 1000px;
-}
+    /* @todo Refactor */
+    .p-menu .p-menuitem-link {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        overflow: hidden;
+        position: relative;
+    }
 
-.p-toggleable-content-exit-active {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
+    ${buttonStyles}
+    ${checkboxStyles}
+    ${inputTextStyles}
+    ${radioButtonStyles}
+    ${iconStyles}
 }
-
-.p-sr-only {
-    border: 0;
-    clip: rect(1px, 1px, 1px, 1px);
-    clip-path: inset(50%);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    word-wrap: normal !important;
-}
-
-.p-menu .p-menuitem-link {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    overflow: hidden;
-    position: relative;
-}
-
-${buttonStyles}
-${checkboxStyles}
-${inputTextStyles}
-${radioButtonStyles}
-${iconStyles}
 `;
 
 export const ComponentBase = {
+    cProps: undefined,
+    cParams: undefined,
+    cName: undefined,
     defaultProps: {
         pt: undefined,
+        ptOptions: undefined,
         unstyled: false
     },
-    context: undefined,
+    context: {},
+    globalCSS: undefined,
     classes: {},
     styles: '',
     extend: (props = {}) => {
@@ -474,58 +483,64 @@ export const ComponentBase = {
 
         const getProps = (props, context = {}) => {
             ComponentBase.context = context;
+            ComponentBase.cProps = props;
 
             return ObjectUtils.getMergedProps(props, defaultProps);
         };
 
         const getOtherProps = (props) => ObjectUtils.getDiffProps(props, defaultProps);
 
-        const getOptionValue = (obj = {}, key = '', params = {}) => {
-            const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
-            const fKey = fKeys.shift();
-            const matchedPTOption = ObjectUtils.isNotEmpty(obj) ? Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) : '';
+        const getPTValue = (obj = {}, key = '', params = {}, searchInDefaultPT = true) => {
+            // obj either is the passthrough options or has a .pt property.
+            if (obj.hasOwnProperty('pt') && obj.pt !== undefined) {
+                obj = obj.pt;
+            }
 
-            return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getJSXElement(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getJSXElement(obj, params);
-        };
-
-        const getPTValue = (obj = {}, key = '', params = {}) => {
-            const datasetPrefix = 'data-pc-';
-            const componentName = (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
-            const pt = ComponentBase.context.pt || PrimeReact.pt || {};
+            const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
+            const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
+            const isTransition = key === 'transition' || (/./g.test(key) && !!(key.split('.')[1] === 'transition'));
+
+            const datasetPrefix = 'data-pc-';
             const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
-            const getValue = (...args) => {
+            const getHostInstance = (params) => {
+                return params?.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
+            };
+
+            const getPropValue = (name) => {
+                return params.props?.[name] || getHostInstance(params)?.[name];
+            };
+
+            ComponentBase.cParams = params;
+            ComponentBase.cName = componentName;
+            const { mergeSections = true, mergeProps: useMergeProps = false } = getPropValue('ptOptions') || ComponentBase.context.ptOptions || {};
+
+            const getPTClassValue = (...args) => {
                 const value = getOptionValue(...args);
 
                 return ObjectUtils.isString(value) ? { className: value } : value;
             };
 
-            const _globalPT = () => {
-                return pt && ObjectUtils.getJSXElement(pt, params);
-            };
+            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, key, params) : _useDefaultPT(getPTClassValue, key, params)) : undefined;
+            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, key, params, componentName);
 
-            const defaultPT = () => {
-                return getOptionValue(pt, componentName, params) || _globalPT();
-            };
-
-            const self = getValue(obj, fkey, params);
-            const baseGlobalPTValue = getValue(defaultPT(), key, params);
-            const globalPT = (isNestedParam ? getValue(getOptionValue(pt, componentName, params), key, params) : undefined) || baseGlobalPTValue;
-            const datasetProps = {
-                ...(fkey === 'root' && { [`${datasetPrefix}name`]: isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[0]) : componentName }),
+            const datasetProps = !isTransition && {
+                ...(fkey === 'root' && { [`${datasetPrefix}name`]: params.props && params.props.__parentMetadata ? ObjectUtils.toFlatCase(params.props.__TYPE) : componentName }),
                 [`${datasetPrefix}section`]: fkey
             };
 
-            const merged = mergeProps(self, globalPT, Object.keys(datasetProps).length ? datasetProps : {});
-
-            return merged;
+            return mergeSections || (!mergeSections && self)
+                ? useMergeProps
+                    ? mergeProps(globalPT, self, Object.keys(datasetProps).length ? datasetProps : {})
+                    : { ...globalPT, ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) }
+                : { ...self, ...(Object.keys(datasetProps).length ? datasetProps : {}) };
         };
 
         const setMetaData = (metadata = {}) => {
             const { props, state } = metadata;
-            const ptm = (key = '', params = {}) => ptmo((props || {}).pt, key, { ...metadata, ...params });
-            const ptmo = (obj = {}, key = '', params = {}) => getPTValue(obj, key, params);
+            const ptm = (key = '', params = {}) => getPTValue((props || {}).pt, key, { ...metadata, ...params });
+            const ptmo = (obj = {}, key = '', params = {}) => getPTValue(obj, key, params, false);
 
             const isUnstyled = () => {
                 return ComponentBase.context.unstyled || PrimeReact.unstyled || props.unstyled;
@@ -559,14 +574,101 @@ export const ComponentBase = {
     }
 };
 
-export const useHandleStyle = (styles, isUnstyled = false, { name, styled = false }) => {
-    const { load: loadCommonStyle } = useStyle(baseStyles, { name: 'common', manual: true });
+const getOptionValue = (obj, key = '', params = {}) => {
+    const fKeys = String(ObjectUtils.toFlatCase(key)).split('.');
+    const fKey = fKeys.shift();
+    const matchedPTOption = ObjectUtils.isNotEmpty(obj) ? Object.keys(obj).find((k) => ObjectUtils.toFlatCase(k) === fKey) : '';
+
+    return fKey ? (ObjectUtils.isObject(obj) ? getOptionValue(ObjectUtils.getItemValue(obj[matchedPTOption], params), fKeys.join('.'), params) : undefined) : ObjectUtils.getItemValue(obj, params);
+};
+
+const _getPT = (pt, key = '', callback) => {
+    const _usept = pt?.['_usept'];
+
+    const getValue = (value, checkSameKey = false) => {
+        const _value = callback ? callback(value) : value;
+        const _key = ObjectUtils.toFlatCase(key);
+
+        return (checkSameKey ? (_key !== ComponentBase.cName ? _value?.[_key] : undefined) : _value?.[_key]) ?? _value;
+    };
+
+    return ObjectUtils.isNotEmpty(_usept)
+        ? {
+              _usept,
+              originalValue: getValue(pt.originalValue),
+              value: getValue(pt.value)
+          }
+        : getValue(pt, true);
+};
+
+const _usePT = (pt, callback, key, params) => {
+    const fn = (value) => callback(value, key, params);
+
+    if (pt?.hasOwnProperty('_usept')) {
+        const { mergeSections = true, mergeProps: useMergeProps = false } = pt['_usept'] || ComponentBase.context.ptOptions || {};
+        const originalValue = fn(pt.originalValue);
+        const value = fn(pt.value);
+
+        if (originalValue === undefined && value === undefined) return undefined;
+        else if (ObjectUtils.isString(value)) return value;
+        else if (ObjectUtils.isString(originalValue)) return originalValue;
+
+        return mergeSections || (!mergeSections && value) ? (useMergeProps ? mergeProps(originalValue, value) : { ...originalValue, ...value }) : value;
+    }
+
+    return fn(pt);
+};
+
+const getGlobalPT = () => {
+    return _getPT(ComponentBase.context.pt || PrimeReact.pt, undefined, (value) => ObjectUtils.getItemValue(value, ComponentBase.cParams));
+};
+
+const getDefaultPT = () => {
+    return _getPT(ComponentBase.context.pt || PrimeReact.pt, undefined, (value) => getOptionValue(value, ComponentBase.cName, ComponentBase.cParams) || ObjectUtils.getItemValue(value, ComponentBase.cParams));
+};
+
+const _useGlobalPT = (callback, key, params) => {
+    return _usePT(getGlobalPT(), callback, key, params);
+};
+
+const _useDefaultPT = (callback, key, params) => {
+    return _usePT(getDefaultPT(), callback, key, params);
+};
+
+export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
+    const { name, styled = false, hostName = '' } = config;
+
+    const globalCSS = _useGlobalPT(getOptionValue, 'global.css', ComponentBase.cParams);
+    const componentName = ObjectUtils.toFlatCase(name);
+
+    const { load: loadBaseStyle } = useStyle(baseStyle, { name: 'base', manual: true });
+    const { load: loadCommonStyle } = useStyle(commonStyle, { name: 'common', manual: true });
+    const { load: loadGlobalStyle } = useStyle(globalCSS, { name: 'global', manual: true });
     const { load } = useStyle(styles, { name: name, manual: true });
 
-    useEffect(() => {
+    const hook = (hookName) => {
+        if (!hostName) {
+            const selfHook = _usePT(_getPT((ComponentBase.cProps || {}).pt, componentName), getOptionValue, `hooks.${hookName}`);
+            const defaultHook = _useDefaultPT(getOptionValue, `hooks.${hookName}`);
+
+            selfHook?.();
+            defaultHook?.();
+        }
+    };
+
+    hook('useMountEffect');
+    useMountEffect(() => {
+        loadBaseStyle();
+        loadGlobalStyle();
         loadCommonStyle();
         if (!styled) load();
+    });
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    useUpdateEffect(() => {
+        hook('useUpdateEffect');
+    });
+
+    useUnmountEffect(() => {
+        hook('useUnmountEffect');
+    });
 };

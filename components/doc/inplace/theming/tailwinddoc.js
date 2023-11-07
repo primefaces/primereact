@@ -24,9 +24,9 @@ export default function UnstyledDemo() {
     return (
         <div className="card">
             <Inplace>
-                <InplaceDisplay>View Content</InplaceDisplay>
+                <InplaceDisplay className="text-gray-700 dark:text-white/80">View Content</InplaceDisplay>
                 <InplaceContent>
-                    <p className="m-0">
+                    <p className="text-gray-700 dark:text-white/80 m-0">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 

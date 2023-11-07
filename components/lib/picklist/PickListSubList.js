@@ -8,6 +8,13 @@ export const PickListSubList = React.memo(
         const listElementRef = React.useRef(null);
         const { ptm, cx } = props;
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const onItemClick = (event) => {
             let originalEvent = event.originalEvent;
             let item = event.value;
@@ -115,7 +122,7 @@ export const PickListSubList = React.memo(
                 {
                     className: cx('header')
                 },
-                ptm('header')
+                getPTOptions('header')
             );
 
             if (props.header) {
@@ -131,7 +138,7 @@ export const PickListSubList = React.memo(
                     const key = JSON.stringify(item);
                     const selected = isSelected(item);
 
-                    return <PickListItem key={key} value={item} template={props.itemTemplate} selected={selected} onClick={onItemClick} onKeyDown={onItemKeyDown} tabIndex={props.tabIndex} ptm={ptm} cx={cx} />;
+                    return <PickListItem hostName={props.hostName} key={key} value={item} template={props.itemTemplate} selected={selected} onClick={onItemClick} onKeyDown={onItemKeyDown} tabIndex={props.tabIndex} ptm={ptm} cx={cx} />;
                 });
             }
 
@@ -144,7 +151,7 @@ export const PickListSubList = React.memo(
                 {
                     className: cx('filterIcon')
                 },
-                ptm('filterIcon')
+                getPTOptions('filterIcon')
             );
             const icon = props.type === 'source' ? props.sourceFilterIcon || <SearchIcon {...filterIconProps} /> : props.targetFilterIcon || <SearchIcon {...filterIconProps} />;
             const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
@@ -154,7 +161,7 @@ export const PickListSubList = React.memo(
                     {
                         className: cx('filter')
                     },
-                    ptm('filter')
+                    getPTOptions('filter')
                 );
 
                 const filterInputProps = mergeProps(
@@ -166,7 +173,7 @@ export const PickListSubList = React.memo(
                         placeholder: props.placeholder,
                         className: cx('filterInput')
                     },
-                    ptm('filterInput')
+                    getPTOptions('filterInput')
                 );
 
                 let content = (
@@ -196,7 +203,7 @@ export const PickListSubList = React.memo(
                     {
                         className: cx('filterContainer')
                     },
-                    ptm('filterContainer')
+                    getPTOptions('filterContainer')
                 );
 
                 return <div {...filterContainerProps}>{content}</div>;
@@ -215,7 +222,7 @@ export const PickListSubList = React.memo(
                     'aria-multiselectable': true,
                     style: props.style
                 },
-                ptm('list')
+                getPTOptions('list')
             );
 
             return <ul {...listProps}>{items}</ul>;
@@ -230,7 +237,7 @@ export const PickListSubList = React.memo(
                 className: classNames(props.className, cx('listWrapper')),
                 ref: listElementRef
             },
-            ptm('listWrapper')
+            getPTOptions('listWrapper')
         );
 
         return (

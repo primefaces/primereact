@@ -10,8 +10,10 @@
 import * as React from 'react';
 import { CSSProperties } from 'react';
 import { ColumnProps } from '../column';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
 import { PaginatorPassThroughOptions, PaginatorTemplate } from '../paginator';
+import { PassThroughOptions } from '../passthrough';
 import { TreeNode } from '../treenode';
 import { IconType, PassThroughType } from '../utils/utils';
 
@@ -209,6 +211,11 @@ export interface TreeTablePassThroughOptions {
      * Uses to pass attributes to the hidden input's DOM element.
      */
     hiddenInput?: TreeTablePassThroughType<React.HTMLAttributes<HTMLInputElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -578,6 +585,11 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * @type {TreeTablePassThroughOptions}
      */
     pt?: TreeTablePassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

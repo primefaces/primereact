@@ -10,6 +10,12 @@ export const CascadeSelectSub = React.memo((props) => {
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
+    const getPTOptions = (key) => {
+        return ptm(key, {
+            hostName: props.hostName
+        });
+    };
+
     const position = () => {
         const parentItem = elementRef.current.parentElement;
         const containerOffset = DomHandler.getOffset(parentItem);
@@ -178,6 +184,7 @@ export const CascadeSelectSub = React.memo((props) => {
 
             return (
                 <CascadeSelectSub
+                    hostName={props.hostName}
                     options={options}
                     className={cx('sublist')}
                     selectionPath={props.selectionPath}
@@ -207,14 +214,14 @@ export const CascadeSelectSub = React.memo((props) => {
             {
                 className: cx('text')
             },
-            ptm('text')
+            getPTOptions('text')
         );
         const content = props.template ? ObjectUtils.getJSXElement(props.template, getOptionValue(option)) : <span {...textProps}>{getOptionLabelToRender(option)}</span>;
         const optionGroupIconProps = mergeProps(
             {
                 className: cx('optionGroupIcon')
             },
-            ptm('optionGroupIcon')
+            getPTOptions('optionGroupIcon')
         );
         const icon = props.optionGroupIcon || <AngleRightIcon {...optionGroupIconProps} />;
         const optionGroup = isOptionGroup(option) && IconUtils.getJSXIcon(icon, { ...optionGroupIconProps }, { props });
@@ -226,16 +233,18 @@ export const CascadeSelectSub = React.memo((props) => {
                 tabIndex: 0,
                 onKeyDown: (event) => onKeyDown(event, option)
             },
-            ptm('content')
+            getPTOptions('content')
         );
 
         const itemProps = mergeProps(
             {
                 className: classNames(option.className, cx('item', { option, isOptionGroup, activeOptionState })),
                 style: option.style,
-                role: 'none'
+                role: 'none',
+                'data-p-item-group': isOptionGroup(option),
+                'data-p-highlight': activeOptionState === option
             },
-            ptm('item')
+            getPTOptions('item')
         );
 
         return (
@@ -262,7 +271,7 @@ export const CascadeSelectSub = React.memo((props) => {
             role: 'listbox',
             'aria-orientation': 'horizontal'
         },
-        props.level === 0 ? ptm('list') : ptm('sublist')
+        props.level === 0 ? getPTOptions('list') : getPTOptions('sublist')
     );
 
     return <ul {...listProps}>{submenu}</ul>;

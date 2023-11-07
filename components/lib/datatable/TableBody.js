@@ -17,6 +17,7 @@ export const TableBody = React.memo(
             const columnMetaData = {
                 props: cProps,
                 parent: props.metaData,
+                hostName: props.hostName,
                 state: {
                     rowGroupHeaderStyleObject: rowGroupHeaderStyleObjectState
                 }
@@ -473,7 +474,7 @@ export const TableBody = React.memo(
         };
 
         const onRowClick = (event) => {
-            if (allowCellSelection() || !allowSelection(event)) {
+            if (allowCellSelection() || !allowSelection(event) || event.defaultPrevented) {
                 return;
             }
 
@@ -516,12 +517,36 @@ export const TableBody = React.memo(
             }
         };
 
-        const onRowRightClick = (event) => {
-            const isMultiSelection = isCheckboxSelectionModeInColumn && ObjectUtils.isEmpty(props.selection);
-            const data = isMultiSelection ? event.data : props.selection;
+        const onRowPointerDown = (e) => {
+            const { originalEvent: event } = e;
 
+            if (DomHandler.isClickable(event.target)) {
+                return;
+            }
+
+            if (props.onRowPointerDown) {
+                props.onRowPointerDown(e);
+            }
+        };
+
+        const onRowPointerUp = (e) => {
+            const { originalEvent: event } = e;
+
+            if (DomHandler.isClickable(event.target)) {
+                return;
+            }
+
+            if (props.onRowPointerUp) {
+                props.onRowPointerUp(e);
+            }
+        };
+
+        const onRowRightClick = (event) => {
             if (props.onContextMenu || props.onContextMenuSelectionChange) {
-                if (!ObjectUtils.isEmpty(props.selection)) DomHandler.clearSelection();
+                const hasSelection = ObjectUtils.isNotEmpty(props.selection);
+                const data = hasSelection ? props.selection : event.data;
+
+                if (hasSelection) DomHandler.clearSelection();
 
                 if (props.onContextMenuSelectionChange) {
                     props.onContextMenuSelectionChange({
@@ -875,7 +900,16 @@ export const TableBody = React.memo(
             if (isSubheaderGrouping && shouldRenderRowGroupHeader(props.value, rowData, rowIndex - props.first)) {
                 const style = rowGroupHeaderStyle();
                 const toggler = props.expandableRowGroups && (
-                    <RowTogglerButton onClick={onRowToggle} rowData={rowData} expanded={expanded} expandedRowIcon={props.expandedRowIcon} collapsedRowIcon={props.collapsedRowIcon} ptCallbacks={props.ptCallbacks} metaData={props.metaData} />
+                    <RowTogglerButton
+                        hostName={props.hostName}
+                        onClick={onRowToggle}
+                        rowData={rowData}
+                        expanded={expanded}
+                        expandedRowIcon={props.expandedRowIcon}
+                        collapsedRowIcon={props.collapsedRowIcon}
+                        ptCallbacks={props.ptCallbacks}
+                        metaData={props.metaData}
+                    />
                 );
                 const options = { index: rowIndex, props: props.tableProps, customRendering: false };
                 let content = ObjectUtils.getJSXElement(props.rowGroupHeaderTemplate, rowData, options);
@@ -930,6 +964,7 @@ export const TableBody = React.memo(
 
                 return (
                     <BodyRow
+                        hostName={props.hostName}
                         allowCellSelection={_allowCellSelection}
                         allowRowSelection={_allowRowSelection}
                         cellClassName={props.cellClassName}
@@ -957,6 +992,8 @@ export const TableBody = React.memo(
                         onRadioChange={onRadioChange}
                         onRowClick={onRowClick}
                         onRowDoubleClick={onRowDoubleClick}
+                        onRowPointerDown={onRowPointerDown}
+                        onRowPointerUp={onRowPointerUp}
                         onRowDragEnd={onRowDragEnd}
                         onRowDragLeave={onRowDragLeave}
                         onRowDragOver={onRowDragOver}
@@ -1088,7 +1125,7 @@ export const TableBody = React.memo(
                 style: props.style,
                 className: cx(ptKey, { className: props.className })
             },
-            ptm(ptKey)
+            ptm(ptKey, { hostName: props.hostName })
         );
 
         return (

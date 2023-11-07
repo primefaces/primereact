@@ -248,7 +248,7 @@ export declare function useCounter(initialValue: number, options: { min: number;
  * @param {*} initialValue - The initial value for debounce.
  * @param {number} delay - The delay in milliseconds.
  */
-export declare function useDebounce(initialValue: any, delay: number): any[];
+export declare function useDebounce<S>(initialValue: S, delay: number): [S, S, React.Dispatch<React.SetStateAction<S>>];
 /**
  * Custom hook to use to get the current mouse position.
  */

@@ -66,13 +66,13 @@ export default function UnstyledDemo() {
     }
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <Toast ref={toast} />
             <div className="flex flex-wrap gap-2">
-                <Button label="Success" className="p-button-success" onClick={showSuccess} />
-                <Button label="Info" className="p-button-info" onClick={showInfo} />
-                <Button label="Warn" className="p-button-warning" onClick={showWarn} />
-                <Button label="Error" className="p-button-danger" onClick={showError} />
+                <Button label="Success" severity="success" onClick={showSuccess} />
+                <Button label="Info" severity="info" onClick={showInfo} />
+                <Button label="Warn" severity="warning" onClick={showWarn} />
+                <Button label="Error" severity="danger" onClick={showError} />
             </div>
         </div>
     )

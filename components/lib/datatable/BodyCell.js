@@ -35,6 +35,7 @@ export const BodyCell = React.memo((props) => {
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 styleObject: styleObjectState,
                 editing: editingState,
@@ -423,8 +424,10 @@ export const BodyCell = React.memo((props) => {
                     break;
 
                 //enter
-                case 13: // @deprecated
-                    if (!DomHandler.isClickable(target)) {
+                case 13:
+                    if (event.shiftKey || event.ctrlKey) {
+                        // #5192 allow TextArea to add new lines
+                    } else if (!DomHandler.isClickable(target)) {
                         onClick(event);
                         event.preventDefault();
                     }
@@ -482,6 +485,7 @@ export const BodyCell = React.memo((props) => {
         });
 
         event.preventDefault();
+        event.stopPropagation();
     };
 
     const onRowEditInit = (event) => {
@@ -590,6 +594,7 @@ export const BodyCell = React.memo((props) => {
                 <>
                     {selectionMode === 'single' && (
                         <RowRadioButton
+                            hostName={props.hostName}
                             column={props.column}
                             checked={props.selected}
                             disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}
@@ -603,6 +608,7 @@ export const BodyCell = React.memo((props) => {
                     )}
                     {selectionMode === 'multiple' && (
                         <RowCheckbox
+                            hostName={props.hostName}
                             column={props.column}
                             checked={props.selected}
                             disabled={!props.isSelectable({ data: props.rowData, index: props.rowIndex })}

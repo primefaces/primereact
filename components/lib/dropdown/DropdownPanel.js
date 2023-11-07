@@ -20,6 +20,13 @@ export const DropdownPanel = React.memo(
             reset: () => props.resetFilter()
         };
 
+        const getPTOptions = (key, options) => {
+            return ptm(key, {
+                hostName: props.hostName,
+                ...options
+            });
+        };
+
         const onEnter = () => {
             props.onEnter(() => {
                 if (props.virtualScrollerRef.current) {
@@ -52,7 +59,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('footer')
                     },
-                    ptm('footer')
+                    getPTOptions('footer')
                 );
 
                 return <div {...footerProps}>{content}</div>;
@@ -79,7 +86,7 @@ export const DropdownPanel = React.memo(
                 {
                     className: cx('emptyMessage')
                 },
-                ptm('emptyMessage')
+                getPTOptions('emptyMessage')
             );
 
             return <li {...emptyMessageProps}>{message}</li>;
@@ -91,15 +98,16 @@ export const DropdownPanel = React.memo(
             style = { ...style, ...option.style };
 
             if (props.optionGroupLabel) {
+                const { optionGroupLabel } = props;
                 const groupContent = props.optionGroupTemplate ? ObjectUtils.getJSXElement(props.optionGroupTemplate, option, index) : props.getOptionGroupLabel(option);
                 const groupChildrenContent = createGroupChildren(option, style);
                 const key = index + '_' + props.getOptionGroupRenderKey(option);
                 const itemGroupProps = mergeProps(
                     {
-                        className: cx('itemGroup'),
+                        className: cx('itemGroup', { optionGroupLabel }),
                         style
                     },
-                    ptm('itemGroup')
+                    getPTOptions('itemGroup')
                 );
 
                 return (
@@ -136,7 +144,7 @@ export const DropdownPanel = React.memo(
                         'aria-label': ariaLabel,
                         onClick: () => props.onFilterClearIconClick(() => DomHandler.focus(filterInputRef.current))
                     },
-                    ptm('clearIcon')
+                    getPTOptions('clearIcon')
                 );
                 const icon = props.filterClearIcon || <TimesIcon {...clearIconProps} />;
                 const filterClearIcon = IconUtils.getJSXIcon(icon, { ...clearIconProps }, { props });
@@ -154,7 +162,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('filterIcon')
                     },
-                    ptm('filterIcon')
+                    getPTOptions('filterIcon')
                 );
                 const icon = props.filterIcon || <SearchIcon {...filterIconProps} />;
                 const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
@@ -162,7 +170,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('filterContainer', { clearIcon })
                     },
-                    ptm('filterContainer')
+                    getPTOptions('filterContainer')
                 );
                 const filterInputProps = mergeProps(
                     {
@@ -175,7 +183,7 @@ export const DropdownPanel = React.memo(
                         onChange: (e) => onFilterInputChange(e),
                         value: props.filterValue
                     },
-                    ptm('filterInput')
+                    getPTOptions('filterInput')
                 );
                 let content = (
                     <div {...filterContainerProps}>
@@ -204,7 +212,7 @@ export const DropdownPanel = React.memo(
                     {
                         className: cx('header')
                     },
-                    ptm('header')
+                    getPTOptions('header')
                 );
 
                 return <div {...headerProps}>{content}</div>;
@@ -231,10 +239,10 @@ export const DropdownPanel = React.memo(
                                 {
                                     ref: options.contentRef,
                                     style: options.style,
-                                    className: cx('list', { options, virtualScrollerProps: props.virtualScrollerOptions }),
+                                    className: classNames(options.className, cx('list', { virtualScrollerProps: props.virtualScrollerOptions })),
                                     role: 'listbox'
                                 },
-                                ptm('list')
+                                getPTOptions('list')
                             );
 
                             return <ul {...listProps}>{content}</ul>;
@@ -250,7 +258,7 @@ export const DropdownPanel = React.memo(
                         className: cx('wrapper'),
                         style: sx('wrapper')
                     },
-                    ptm('wrapper')
+                    getPTOptions('wrapper')
                 );
 
                 const listProps = mergeProps(
@@ -258,7 +266,7 @@ export const DropdownPanel = React.memo(
                         className: cx('list'),
                         role: 'listbox'
                     },
-                    ptm('list')
+                    getPTOptions('list')
                 );
 
                 return (
@@ -275,29 +283,31 @@ export const DropdownPanel = React.memo(
             const footer = createFooter();
             const panelProps = mergeProps(
                 {
-                    ref,
-                    className: cx('panel', { context }),
+                    className: classNames(props.panelClassName, cx('panel', { context })),
                     style: sx('panel'),
                     onClick: props.onClick
                 },
-                ptm('panel')
+                getPTOptions('panel')
+            );
+
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: props.in,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onEnter,
+                    onEntered: onEntered,
+                    onExit: props.onExit,
+                    onExited: props.onExited
+                },
+                getPTOptions('transition')
             );
 
             return (
-                <CSSTransition
-                    nodeRef={ref}
-                    classNames="p-connected-overlay"
-                    in={props.in}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntering={props.onEntering}
-                    onEntered={onEntered}
-                    onExit={props.onExit}
-                    onExited={props.onExited}
-                >
-                    <div {...panelProps}>
+                <CSSTransition nodeRef={ref} {...transitionProps}>
+                    <div ref={ref} {...panelProps}>
                         {filter}
                         {content}
                         {footer}

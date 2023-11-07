@@ -98,6 +98,7 @@
 
     .blocked-scroll {
         overflow: hidden;
+        padding-right: var(--scrollbar-width);
     }
 }
 

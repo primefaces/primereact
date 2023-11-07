@@ -8,11 +8,15 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { IconType, PassThroughType } from '../utils/utils';
 
 export declare type CascadeSelectPassThroughType<T> = PassThroughType<T, CascadeSelectPassThroughMethodOptions>;
+export declare type CascadeSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: CascadeSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -99,6 +103,15 @@ export interface CascadeSelectPassThroughOptions {
      * Uses to pass attributes to the hidden selected message's DOM element.
      */
     hiddenSelectedMessage?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: CascadeSelectPassThroughTransitionType;
 }
 
 /**
@@ -271,6 +284,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @type {CascadeSelectPassThroughOptions}
      */
     pt?: CascadeSelectPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

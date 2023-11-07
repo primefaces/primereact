@@ -11,6 +11,7 @@ export const BodyRow = React.memo((props) => {
     const getBodyRowPTOptions = (key) => {
         return ptm(key, {
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 editing: editing
             },
@@ -116,6 +117,14 @@ export const BodyRow = React.memo((props) => {
 
     const onDoubleClick = (event) => {
         props.onRowDoubleClick({ originalEvent: event, data: props.rowData, index: props.rowIndex });
+    };
+
+    const onPointerDown = (event) => {
+        props.onRowPointerDown({ originalEvent: event, data: props.rowData, index: props.rowIndex });
+    };
+
+    const onPointerUp = (event) => {
+        props.onRowPointerUp({ originalEvent: event, data: props.rowData, index: props.rowIndex });
     };
 
     const onRightClick = (event) => {
@@ -319,6 +328,7 @@ export const BodyRow = React.memo((props) => {
 
                 return (
                     <BodyCell
+                        hostName={props.hostName}
                         key={key}
                         allowCellSelection={props.allowCellSelection}
                         cellClassName={props.cellClassName}
@@ -390,6 +400,8 @@ export const BodyRow = React.memo((props) => {
             onMouseLeave: (e) => onMouseLeave(e),
             onClick: (e) => onClick(e),
             onDoubleClick: (e) => onDoubleClick(e),
+            onPointerDown: (e) => onPointerDown(e),
+            onPointerUp: (e) => onPointerUp(e),
             onContextMenu: (e) => onRightClick(e),
             onTouchEnd: (e) => onTouchEnd(e),
             onKeyDown: (e) => onKeyDown(e),

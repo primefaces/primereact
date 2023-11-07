@@ -31,6 +31,7 @@ let locales = {
         choose: 'Choose',
         upload: 'Upload',
         cancel: 'Cancel',
+        completed: 'Completed',
         pending: 'Pending',
         fileSizeTypes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
         dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

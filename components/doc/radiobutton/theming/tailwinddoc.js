@@ -44,23 +44,23 @@ export default function UnstyledDemo() {
     const [ingredient, setIngredient] = useState('');
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <div className="flex flex-wrap gap-3">
-                <div className="flex align-items-center">
+                <div className="flex items-center">
                     <RadioButton inputId="ingredient1" name="pizza" value="Cheese" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Cheese'} />
-                    <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                    <label htmlFor="ingredient1" className="text-gray-700 dark:text-white/80 ml-2">Cheese</label>
                 </div>
-                <div className="flex align-items-center">
+                <div className="flex items-center">
                     <RadioButton inputId="ingredient2" name="pizza" value="Mushroom" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Mushroom'} />
-                    <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                    <label htmlFor="ingredient2" className="text-gray-700 dark:text-white/80 ml-2">Mushroom</label>
                 </div>
-                <div className="flex align-items-center">
+                <div className="flex items-center">
                     <RadioButton inputId="ingredient3" name="pizza" value="Pepper" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Pepper'} />
-                    <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                    <label htmlFor="ingredient3" className="text-gray-700 dark:text-white/80 ml-2">Pepper</label>
                 </div>
-                <div className="flex align-items-center">
+                <div className="flex items-center">
                     <RadioButton inputId="ingredient4" name="pizza" value="Onion" onChange={(e) => setIngredient(e.value)} checked={ingredient === 'Onion'} />
-                    <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                    <label htmlFor="ingredient4" className="text-gray-700 dark:text-white/80 ml-2">Onion</label>
                 </div>
             </div>
         </div>

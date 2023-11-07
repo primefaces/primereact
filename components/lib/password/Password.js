@@ -98,7 +98,7 @@ export const Password = React.memo(
             }
         };
 
-        const onMaskToggle = () => {
+        const toggleMask = () => {
             setUnmaskedState((prevUnmasked) => !prevUnmasked);
         };
 
@@ -229,6 +229,7 @@ export const Password = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            toggleMask,
             focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
@@ -272,11 +273,11 @@ export const Password = React.memo(
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
             if (props.toggleMask) {
-                let content = <i onClick={onMaskToggle}> {eyeIcon} </i>;
+                let content = <i onClick={toggleMask}> {eyeIcon} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
-                        onClick: onMaskToggle,
+                        onClick: toggleMask,
                         className,
                         element: content,
                         props
@@ -335,19 +336,23 @@ export const Password = React.memo(
                 </>
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: overlayVisibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onOverlayEnter,
+                    onEntered: onOverlayEntered,
+                    onExit: onOverlayExit,
+                    onExited: onOverlayExited
+                },
+                ptm('transition')
+            );
+
             const panel = (
-                <CSSTransition
-                    nodeRef={overlayRef}
-                    classNames="p-connected-overlay"
-                    in={overlayVisibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onOverlayEnter}
-                    onEntered={onOverlayEntered}
-                    onExit={onOverlayExit}
-                    onExited={onOverlayExited}
-                >
+                <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div ref={overlayRef} {...panelProps}>
                         {header}
                         {content}
@@ -380,7 +385,6 @@ export const Password = React.memo(
                 className: cx('root', { isFilled, focusedState }),
                 style: props.style
             },
-            PasswordBase.getOtherProps(props),
             ptm('root')
         );
 

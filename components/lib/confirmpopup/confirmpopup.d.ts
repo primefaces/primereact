@@ -8,11 +8,15 @@
  *
  */
 import * as React from 'react';
-import { CSSTransitionProps } from '../csstransition';
-import { IconType, PassThroughType } from '../utils';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
 import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
+import { IconType, PassThroughType } from '../utils';
 
 export declare type ConfirmPopupPassThroughType<T> = PassThroughType<T, ConfirmPopupPassThroughMethodOptions>;
+export declare type ConfirmPopupPassThroughTransitionType = ReactCSSTransitionProps | ((options: ConfirmPopupPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -57,6 +61,15 @@ export interface ConfirmPopupPassThroughOptions {
      * @see {@link ButtonPassThroughOptions}
      */
     acceptButton?: ButtonPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: ConfirmPopupPassThroughTransitionType;
 }
 
 /**
@@ -195,6 +208,11 @@ export interface ConfirmPopupProps {
      */
     dismissable?: boolean | undefined;
     /**
+     * Specifies if pressing escape key should hide the popup.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
+    /**
      * Footer content of the confirm popup.
      */
     footer?: React.ReactNode | ((options: ConfirmPopupOptions) => React.ReactNode);
@@ -228,6 +246,11 @@ export interface ConfirmPopupProps {
      * @type {ConfirmPopupPassThroughOptions}
      */
     pt?: ConfirmPopupPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

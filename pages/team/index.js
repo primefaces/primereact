@@ -77,18 +77,13 @@ const TemplatesPage = () => {
                         <span>UI/UX Designer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/ulas.jpg" className="border-circle mb-4" alt="Ulaş Turan" />
-                        <span className="mb-2 text-xl font-bold">Ulaş Turan</span>
-                        <span>Front-End Developer</span>
-                    </div>
-                    <div className="flex flex-column align-items-center flex-auto">
                         <img src="https://primefaces.org/cdn/primereact/images/team/bugra.jpg" className="border-circle mb-4" alt="Buğra Beydüz" />
                         <span className="mb-2 text-xl font-bold">Buğra Beydüz</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
                         <img src="https://primefaces.org/cdn/primereact/images/team/aliriza.jpg" className="border-circle mb-4" alt="Alirıza Gücal" />
-                        <span className="mb-2 text-xl font-bold">Ali Rıza Gücal</span>
+                        <span className="mb-2 text-xl font-bold">Alirıza Gücal</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
@@ -100,6 +95,11 @@ const TemplatesPage = () => {
                         <img src="https://primefaces.org/cdn/primereact/images/team/burak.jpg" className="border-circle mb-4" alt="Burak Sağlam" />
                         <span className="mb-2 text-xl font-bold">Burak Sağlam</span>
                         <span>Front-End Developer</span>
+                    </div>
+                    <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/umit.jpg" className="border-circle mb-4" alt="Ümit Çelik" />
+                        <span className="mb-2 text-xl font-bold">Ümit Çelik</span>
+                        <span>UI/UX Designer</span>
                     </div>
                 </div>
             </div>

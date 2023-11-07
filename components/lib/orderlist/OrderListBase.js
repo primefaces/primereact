@@ -3,7 +3,7 @@ import { classNames } from '../utils/Utils';
 
 const classes = {
     root: 'p-orderlist p-component',
-    control: 'p-orderlist-controls',
+    controls: 'p-orderlist-controls',
     droppoint: 'p-orderlist-droppoint',
     header: 'p-orderlist-header',
     list: 'p-orderlist-list',
@@ -17,64 +17,66 @@ const classes = {
 };
 
 const styles = `
-.p-orderlist {
-    display: flex;
-}
-
-.p-orderlist-controls {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.p-orderlist-list-container {
-    flex: 1 1 auto;
-}
-
-.p-orderlist-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    min-height: 12rem;
-    max-height: 24rem;
-}
-
-.p-orderlist-item {
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-}
-
-.p-orderlist-filter {
-    position: relative;
-}
-
-.p-orderlist-filter-icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
-}
-
-.p-orderlist-filter-input {
-    width: 100%;
-}
-
-.p-orderlist.p-state-disabled .p-orderlist-item,
-.p-orderlist.p-state-disabled .p-button {
-    cursor: default;
-}
-
-.p-orderlist.p-state-disabled .p-orderlist-list {
-    overflow: hidden;
-}
-
-.p-orderlist .p-orderlist-droppoint {
-    height: 0.5rem;
-}
-
-.p-orderlist .p-orderlist-droppoint.p-orderlist-droppoint-highlight {
-    background: var(--primary-color);
+@layer primereact {
+    .p-orderlist {
+        display: flex;
+    }
+    
+    .p-orderlist-controls {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .p-orderlist-list-container {
+        flex: 1 1 auto;
+    }
+    
+    .p-orderlist-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+        min-height: 12rem;
+        max-height: 24rem;
+    }
+    
+    .p-orderlist-item {
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .p-orderlist-filter {
+        position: relative;
+    }
+    
+    .p-orderlist-filter-icon {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5rem;
+    }
+    
+    .p-orderlist-filter-input {
+        width: 100%;
+    }
+    
+    .p-orderlist.p-state-disabled .p-orderlist-item,
+    .p-orderlist.p-state-disabled .p-button {
+        cursor: default;
+    }
+    
+    .p-orderlist.p-state-disabled .p-orderlist-list {
+        overflow: hidden;
+    }
+    
+    .p-orderlist .p-orderlist-droppoint {
+        height: 0.5rem;
+    }
+    
+    .p-orderlist .p-orderlist-droppoint.p-orderlist-droppoint-highlight {
+        background: var(--primary-color);
+    }
 }
 `;
 

@@ -368,7 +368,7 @@ export function mask(el, options) {
             } else {
                 caret(pos);
             }
-        }, 10);
+        }, 100);
 
         if (options.onFocus) {
             options.onFocus(e);
@@ -414,11 +414,20 @@ export function mask(el, options) {
 
     const updateModel = (e) => {
         if (options.onChange) {
-            let val = getValue().replace(options.slotChar, '');
+            let val = getValue();
 
             options.onChange({
                 originalEvent: e,
-                value: defaultBuffer !== val ? val : ''
+                value: defaultBuffer !== val ? val : '',
+                stopPropagation: () => {
+                    e.stopPropagation();
+                },
+                preventDefault: () => {
+                    e.preventDefault();
+                },
+                target: {
+                    value: defaultBuffer !== val ? val : ''
+                }
             });
         }
     };

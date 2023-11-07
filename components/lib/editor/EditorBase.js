@@ -675,7 +675,6 @@ const styles = `
     line-height: 22px;
 }
 .ql-snow .ql-picker-options {
-    background-color: #fff;
     display: none;
     min-width: 100%;
     padding: 4px 8px;

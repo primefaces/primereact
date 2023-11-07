@@ -6,6 +6,13 @@ import { mergeProps } from '../utils/Utils';
 export const SplitButtonPanel = React.forwardRef((props, ref) => {
     const { ptm, cx } = props;
 
+    const getPTOptions = (key, options) => {
+        return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
     const createElement = () => {
         const menuProps = mergeProps(
             {
@@ -14,7 +21,7 @@ export const SplitButtonPanel = React.forwardRef((props, ref) => {
                 style: props.menuStyle,
                 onClick: props.onClick
             },
-            ptm('menu')
+            getPTOptions('menu')
         );
 
         const menuListProps = mergeProps(
@@ -23,22 +30,26 @@ export const SplitButtonPanel = React.forwardRef((props, ref) => {
                 className: cx('menuList'),
                 role: 'menu'
             },
-            ptm('menuList')
+            getPTOptions('menuList')
+        );
+
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                in: props.in,
+                timeout: { enter: 120, exit: 100 },
+                options: props.transitionOptions,
+                unmountOnExit: true,
+                onEnter: props.onEnter,
+                onEntered: props.onEntered,
+                onExit: props.onExit,
+                onExited: props.onExited
+            },
+            getPTOptions('transition')
         );
 
         return (
-            <CSSTransition
-                nodeRef={ref}
-                classNames="p-connected-overlay"
-                in={props.in}
-                timeout={{ enter: 120, exit: 100 }}
-                options={props.transitionOptions}
-                unmountOnExit
-                onEnter={props.onEnter}
-                onEntered={props.onEntered}
-                onExit={props.onExit}
-                onExited={props.onExited}
-            >
+            <CSSTransition nodeRef={ref} {...transitionProps}>
                 <div {...menuProps}>
                     <ul {...menuListProps}>{props.children}</ul>
                 </div>

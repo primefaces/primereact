@@ -2,24 +2,27 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { DomHandler, IconUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { SlideMenuBase } from './SlideMenuBase';
 import { SlideMenuSub } from './SlideMenuSub';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const SlideMenu = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = SlideMenuBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [levelState, setLevelState] = React.useState(0);
         const [visibleState, setVisibleState] = React.useState(false);
         const { ptm, cx, sx, isUnstyled } = SlideMenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 visible: visibleState,
                 level: levelState
             }
@@ -31,6 +34,10 @@ export const SlideMenu = React.memo(
         const targetRef = React.useRef(null);
         const backward = React.useRef(null);
         const slideMenuContent = React.useRef(null);
+
+        useOnEscapeKey(targetRef, props.popup && props.closeOnEscape, (event) => {
+            hide(event);
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: targetRef,
@@ -98,6 +105,12 @@ export const SlideMenu = React.memo(
             ZIndexUtils.clear(menuRef.current);
             setLevelState(0);
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         useUpdateEffect(() => {
             setLevelState(0);
@@ -180,23 +193,29 @@ export const SlideMenu = React.memo(
                 ptm('content')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: !props.popup || visibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExit,
+                    onExited
+                },
+                ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={menuRef}
-                    classNames="p-connected-overlay"
-                    in={!props.popup || visibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
+                <CSSTransition nodeRef={menuRef} {...transitionProps}>
                     <div {...rootProps}>
                         <div {...wrapperProps}>
                             <div {...contentProps}>
                                 <SlideMenuSub
+                                    id={idState}
+                                    hostName="SlideMenu"
                                     menuProps={props}
                                     model={props.model}
                                     root

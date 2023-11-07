@@ -124,28 +124,29 @@ export const Paginator = React.memo(
 
             switch (key) {
                 case 'FirstPageLink':
-                    element = <FirstPageLink key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <FirstPageLink hostName="Paginator" key={key} onClick={changePageToFirst} disabled={isFirstPage || isEmpty} template={template} firstPageLinkIcon={props.firstPageLinkIcon} ptm={ptm} cx={cx} />;
                     break;
 
                 case 'PrevPageLink':
-                    element = <PrevPageLink key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <PrevPageLink hostName="Paginator" key={key} onClick={changePageToPrev} disabled={isFirstPage || isEmpty} template={template} prevPageLinkIcon={props.prevPageLinkIcon} ptm={ptm} cx={cx} />;
                     break;
 
                 case 'NextPageLink':
-                    element = <NextPageLink key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <NextPageLink hostName="Paginator" key={key} onClick={changePageToNext} disabled={isLastPage || isEmpty} template={template} nextPageLinkIcon={props.nextPageLinkIcon} ptm={ptm} cx={cx} />;
                     break;
 
                 case 'LastPageLink':
-                    element = <LastPageLink key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} ptm={ptm} cx={cx} />;
+                    element = <LastPageLink hostName="Paginator" key={key} onClick={changePageToLast} disabled={isLastPage || isEmpty} template={template} lastPageLinkIcon={props.lastPageLinkIcon} ptm={ptm} cx={cx} />;
                     break;
 
                 case 'PageLinks':
-                    element = <PageLinks key={key} value={updatePageLinks()} page={page} rows={props.rows} pageCount={pageCount} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />;
+                    element = <PageLinks hostName="Paginator" key={key} value={updatePageLinks()} page={page} rows={props.rows} pageCount={pageCount} onClick={onPageLinkClick} template={template} ptm={ptm} cx={cx} />;
                     break;
 
                 case 'RowsPerPageDropdown':
                     element = (
                         <RowsPerPageDropdown
+                            hostName="Paginator"
                             key={key}
                             value={props.rows}
                             page={page}
@@ -165,10 +166,23 @@ export const Paginator = React.memo(
                     break;
 
                 case 'CurrentPageReport':
-                    element = <CurrentPageReport reportTemplate={props.currentPageReportTemplate} key={key} page={page} pageCount={pageCount} first={props.first} rows={props.rows} totalRecords={props.totalRecords} template={template} ptm={ptm} />;
+                    element = (
+                        <CurrentPageReport
+                            hostName="Paginator"
+                            reportTemplate={props.currentPageReportTemplate}
+                            key={key}
+                            page={page}
+                            pageCount={pageCount}
+                            first={props.first}
+                            rows={props.rows}
+                            totalRecords={props.totalRecords}
+                            template={template}
+                            ptm={ptm}
+                        />
+                    );
                     break;
                 case 'JumpToPageInput':
-                    element = <JumpToPageInput key={key} rows={props.rows} page={page} pageCount={pageCount} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />;
+                    element = <JumpToPageInput hostName="Paginator" key={key} rows={props.rows} page={page} pageCount={pageCount} onChange={changePage} disabled={isEmpty} template={template} ptm={ptm} unstyled={props.unstyled} metaData={metaData} />;
                     break;
 
                 default:

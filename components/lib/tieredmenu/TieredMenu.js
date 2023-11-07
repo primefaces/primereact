@@ -14,11 +14,13 @@ export const TieredMenu = React.memo(
         const context = React.useContext(PrimeReactContext);
         const props = TieredMenuBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [visibleState, setVisibleState] = React.useState(!props.popup);
         const [attributeSelectorState, setAttributeSelectorState] = React.useState(null);
         const { ptm, cx, sx, isUnstyled } = TieredMenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 visible: visibleState,
                 attributeSelector: attributeSelectorState
             }
@@ -147,8 +149,12 @@ export const TieredMenu = React.memo(
         };
 
         useMountEffect(() => {
+            const uniqueId = UniqueComponentId();
+
+            !idState && setIdState(uniqueId);
+
             if (props.breakpoint) {
-                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+                !attributeSelectorState && setAttributeSelectorState(uniqueId);
             }
         });
 
@@ -188,21 +194,39 @@ export const TieredMenu = React.memo(
                 ptm('root')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: { enter: 120, exit: 100 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter,
+                    onEntered,
+                    onExit,
+                    onExited
+                },
+                ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={menuRef}
-                    classNames="p-connected-overlay"
-                    in={visibleState}
-                    timeout={{ enter: 120, exit: 100 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
+                <CSSTransition nodeRef={menuRef} {...transitionProps}>
                     <div {...rootProps}>
-                        <TieredMenuSub menuProps={props} model={props.model} root popup={props.popup} onHide={hide} isMobileMode={isMobileMode} onItemToggle={onItemToggle} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} sx={sx} />
+                        <TieredMenuSub
+                            id={idState}
+                            hostName="TieredMenu"
+                            menuProps={props}
+                            model={props.model}
+                            root
+                            popup={props.popup}
+                            onHide={hide}
+                            isMobileMode={isMobileMode}
+                            onItemToggle={onItemToggle}
+                            submenuIcon={props.submenuIcon}
+                            ptm={ptm}
+                            cx={cx}
+                            sx={sx}
+                        />
                     </div>
                 </CSSTransition>
             );

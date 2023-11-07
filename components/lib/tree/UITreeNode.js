@@ -16,10 +16,12 @@ export const UITreeNode = React.memo((props) => {
 
     const getPTOptions = (key) => {
         return ptm(key, {
+            hostName: props.hostName,
             context: {
-                selected: props.selected,
-                expanded: expanded,
-                checked: props.checked
+                selected: !isCheckboxSelectionMode() ? isSelected() : false,
+                expanded: expanded || false,
+                checked: isCheckboxSelectionMode() ? isChecked() : false,
+                isLeaf
             }
         });
     };

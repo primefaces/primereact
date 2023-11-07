@@ -29,26 +29,29 @@ export const FieldsetBase = ComponentBase.extend({
             togglericon: 'p-fieldset-toggler',
             legendTitle: 'p-fieldset-legend-text',
             legend: 'p-fieldset-legend p-unselectable-text',
-            content: 'p-fieldset-content'
+            content: 'p-fieldset-content',
+            transition: 'p-toggleable-content'
         },
         styles: `
-        .p-fieldset-legend > a,
-        .p-fieldset-legend > span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .p-fieldset-toggleable .p-fieldset-legend a {
-            cursor: pointer;
-            user-select: none;
-            overflow: hidden;
-            position: relative;
-            text-decoration: none;
-        }
-        
-        .p-fieldset-legend-text {
-            line-height: 1;
+        @layer primereact {
+            .p-fieldset-legend > a,
+            .p-fieldset-legend > span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .p-fieldset-toggleable .p-fieldset-legend a {
+                cursor: pointer;
+                user-select: none;
+                overflow: hidden;
+                position: relative;
+                text-decoration: none;
+            }
+            
+            .p-fieldset-legend-text {
+                line-height: 1;
+            }
         }
         `
     }

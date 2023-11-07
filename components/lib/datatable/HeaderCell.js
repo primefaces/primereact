@@ -5,7 +5,7 @@ import { SortAltIcon } from '../icons/sortalt';
 import { SortAmountDownIcon } from '../icons/sortamountdown';
 import { SortAmountUpAltIcon } from '../icons/sortamountupalt';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { ColumnFilter } from './ColumnFilter';
 import { HeaderCheckbox } from './HeaderCheckbox';
 
@@ -21,9 +21,11 @@ export const HeaderCell = React.memo((props) => {
     const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
+        const cProps = getColumnProps();
         const columnMetaData = {
-            props: getColumnProps(),
+            props: cProps,
             parent: parentParams,
+            hostName: props.hostName,
             state: {
                 styleObject: styleObjectState
             },
@@ -36,7 +38,7 @@ export const HeaderCell = React.memo((props) => {
             }
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(getColumnProps(), key, columnMetaData));
+        return mergeProps(ptm(`column.${key}`, { column: columnMetaData }), ptm(`column.${key}`, columnMetaData), ptmo(cProps, key, columnMetaData));
     };
 
     const isBadgeVisible = () => {
@@ -296,7 +298,7 @@ export const HeaderCell = React.memo((props) => {
         if (props.showSelectAll && getColumnProp('selectionMode') === 'multiple' && props.filterDisplay !== 'row') {
             const allRowsSelected = props.allRowsSelected(props.value);
 
-            return <HeaderCheckbox checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} />;
+            return <HeaderCheckbox hostName={props.hostName} checked={allRowsSelected} onChange={props.onColumnCheckboxChange} disabled={props.empty} ptCallbacks={ptCallbacks} metaData={parentMetaData} />;
         }
 
         return null;
@@ -306,6 +308,7 @@ export const HeaderCell = React.memo((props) => {
         if (props.filterDisplay === 'menu' && getColumnProp('filter')) {
             return (
                 <ColumnFilter
+                    hostName={props.hostName}
                     display="menu"
                     column={props.column}
                     filters={props.filters}
@@ -359,6 +362,7 @@ export const HeaderCell = React.memo((props) => {
         const rowSpan = getColumnProp('rowSpan');
         const ariaSort = getAriaSort(sortMeta);
         const headerTooltip = getColumnProp('headerTooltip');
+        const headerClassName = getColumnProp('headerClassName');
         const hasTooltip = ObjectUtils.isNotEmpty(headerTooltip);
         const headerTooltipOptions = getColumnProp('headerTooltipOptions');
 
@@ -366,7 +370,7 @@ export const HeaderCell = React.memo((props) => {
         const header = createHeader(sortMeta);
         const headerCellProps = mergeProps(
             {
-                className: cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }),
+                className: classNames(headerClassName, cx('headerCell', { headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp })),
                 style,
                 role: 'columnheader',
                 onClick: (e) => onClick(e),

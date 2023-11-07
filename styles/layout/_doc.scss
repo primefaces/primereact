@@ -1,10 +1,11 @@
 .doc-tabmenu {
     list-style: none;
     margin: 0 17rem 0 0;
-    padding: 0;
+    padding: 0 0 1px 0;
     display: flex;
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--surface-border);
+    overflow: auto;
 
     li {
         margin-bottom: -1px;
@@ -13,21 +14,22 @@
             background-color: transparent;
             border: 0 none;
             display: block;
-            padding: 1rem 0;
+            padding: 1rem 2rem;
             min-width: 12rem;
             text-align: center;
-            color: var(--text-color-secondary);
+            color: var(--surface-700);
             font-size: 1.125rem;
             letter-spacing: 2px;
             cursor: pointer;
             margin: 0;
-            transition: all 0.3s;
+            transition: all 0.2s;
             border-bottom: 1px solid transparent;
             border-top-right-radius: var(--border-round);
             border-top-left-radius: var(--border-round);
+            white-space: nowrap;
 
             &:hover {
-                border-bottom-color: var(--text-color);
+                border-bottom-color: var(--surface-500);
             }
 
             &:focus {
@@ -41,6 +43,10 @@
                 border-bottom-color: var(--primary-color);
             }
         }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
     }
 }
 
@@ -57,11 +63,12 @@
 }
 
 .doc-intro {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 
     p {
-        font-size: 1.25rem;
-        color: var(--surface-800);
+        font-size: 1.125rem;
+        color: var(--surface-900);
+        margin: 0;
     }
 }
 
@@ -75,7 +82,9 @@
         opacity: 0.7;
         margin-left: 1rem;
         display: none;
-        transition: opacity 0.3s, colors 0.3s;
+        transition:
+            opacity 0.3s,
+            colors 0.3s;
     }
 
     &:hover {
@@ -92,7 +101,7 @@
 .doc-section-description {
     > p {
         font-size: 1.125rem;
-        color: var(--surface-800);
+        color: var(--surface-900);
 
         i {
             border-radius: 6px;
@@ -152,7 +161,12 @@
     > .navbar-item {
         .navbar-item-content {
             border-left: 1px solid var(--surface-border);
-            padding-left: .25rem;
+            padding-left: 0.25rem;
+            transition: all 0.2s;
+
+            &:hover {
+                border-left-color: var(--surface-500);
+            }
         }
     }
 
@@ -160,16 +174,19 @@
         > .navbar-item-content {
             display: flex;
 
-            .p-link {
+            .px-link {
                 padding: 0.25rem 1rem 0.25rem 1rem;
-                color: var(--text-color);
+                color: var(--surface-800);
                 white-space: nowrap;
                 min-width: 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                transition: all 0.2s;
+            }
 
-                &:hover {
-                    color: var(--primary-color);
+            &:hover {
+                .px-link {
+                    color: var(--surface-900);
                 }
             }
         }
@@ -178,8 +195,7 @@
             > .navbar-item-content {
                 border-color: var(--primary-color);
 
-                .p-link {
-                    font-weight: 700;
+                .px-link {
                     color: var(--primary-color);
                 }
             }
@@ -223,7 +239,11 @@
     }
 
     pre {
-        margin: 0 0 1.5rem 0;
+        margin: 0;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
     }
 }
 
@@ -241,7 +261,7 @@
 
     th {
         border-bottom: 1px solid var(--surface-border);
-        padding: 1rem;
+        padding: 0.75rem 1rem;
         text-align: left;
         text-transform: capitalize;
     }
@@ -252,14 +272,35 @@
         }
 
         td {
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--surface-border);
-            white-space: pre-wrap;
+            white-space: pre-line;
             line-height: 1.5;
+            scroll-margin-top: 6.5rem;
 
-            &.doc-option-type {
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
+            &:first-child {
+                color: var(--primary-color);
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+            }
+
+            .doc-option-type {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
                 color: var(--primary-500);
+                font-weight: 500;
 
                 > a {
                     color: var(--primary-500);
@@ -270,20 +311,16 @@
                 }
             }
 
-            &.doc-option-default {
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
-                color: var(--primary-color);
-            }
-
-            &:first-child {
-                color: var(--primary-color);
-                font-weight: 700;
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
-            }
-
             .doc-option-name,
-            > i {
-                font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, Liberation Mono, monospace;
+            > i:not(.pi) {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
                 position: relative;
                 scroll-margin-top: 6.5rem;
                 background-color: var(--highlight-bg);
@@ -292,6 +329,7 @@
                 padding: 2px 6px;
                 font-weight: 600;
                 font-style: normal;
+                white-space: nowrap;
 
                 .doc-option-link {
                     position: absolute;
@@ -300,7 +338,9 @@
                     color: var(--primary-color);
                     opacity: 0.7;
                     display: none;
-                    transition: opacity 0.3s, colors 0.3s;
+                    transition:
+                        opacity 0.3s,
+                        colors 0.3s;
                 }
             }
 
@@ -314,6 +354,71 @@
                         }
                     }
                 }
+            }
+
+            .doc-option-default,
+            .doc-option-returnType {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+                font-weight: 400;
+                font-style: normal;
+                display: flex;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 6px;
+                padding: 2px 6px;
+                max-width: min-content;
+            }
+
+            .doc-option-parameter-name {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+                color: var(--primary-700);
+            }
+
+            .doc-option-parameter-type {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+                color: var(--primary-500);
+            }
+
+            .doc-option-params {
+                font-family:
+                    ui-monospace,
+                    SFMono-Regular,
+                    "SF Mono",
+                    Menlo,
+                    Consolas,
+                    Liberation Mono,
+                    monospace;
+            }
+
+            .doc-option-light {
+                background: var(--bluegray-50);
+                border-color: var(--bluegray-100);
+            }
+
+            .doc-option-dark {
+                background: var(--bluegray-800);
+                border-color: var(--bluegray-800);
             }
         }
     }

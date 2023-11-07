@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { IconUtils, ObjectUtils, UniqueComponentId, mergeProps } from '../utils/Utils';
+import { IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { PanelBase } from './PanelBase';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const Panel = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
@@ -192,8 +192,19 @@ export const Panel = React.forwardRef((inProps, ref) => {
             ptm('content')
         );
 
+        const transitionProps = mergeProps(
+            {
+                classNames: cx('transition'),
+                timeout: { enter: 1000, exit: 450 },
+                in: !collapsed,
+                unmountOnExit: true,
+                options: props.transitionOptions
+            },
+            ptm('transition')
+        );
+
         return (
-            <CSSTransition nodeRef={contentRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={!collapsed} unmountOnExit options={props.transitionOptions}>
+            <CSSTransition nodeRef={contentRef} {...transitionProps}>
                 <div {...toggleableContentProps}>
                     <div {...contentProps}>{props.children}</div>
                 </div>
@@ -233,7 +244,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
             id: idState,
             ref: elementRef,
             style: props.style,
-            className: cx('root')
+            className: classNames(props.className, cx('root'))
         },
         PanelBase.getOtherProps(props),
         ptm('root')

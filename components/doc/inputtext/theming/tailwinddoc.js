@@ -36,7 +36,7 @@ export default function UnstyledDemo() {
     const [value, setValue] = useState('');
 
     return (
-        <div className="card flex justify-content-center">
+        <div className="card flex justify-center">
             <InputText value={value} onChange={(e) => setValue(e.target.value)} />
         </div>
     )

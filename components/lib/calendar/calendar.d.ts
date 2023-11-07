@@ -8,14 +8,18 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
 import { ButtonPassThroughOptions } from '../button/button';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PassThroughOptions } from '../passthrough';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent, Nullable } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils';
 
 export declare type CalendarPassThroughType<T> = PassThroughType<T, CalendarPassThroughMethodOptions>;
+export declare type CalendarPassThroughTransitionType = ReactCSSTransitionProps | ((options: CalendarPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -253,6 +257,15 @@ export interface CalendarPassThroughOptions {
      * Uses to pass attributes to the option's DOM element.
      */
     option?: CalendarPassThroughType<React.HTMLAttributes<HTMLOptionElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: CalendarPassThroughTransitionType;
 }
 
 /**
@@ -929,6 +942,11 @@ interface CalendarBaseProps {
      * @type {CalendarPassThroughOptions}
      */
     pt?: CalendarPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

@@ -8,11 +8,15 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { MenuItem } from '../menuitem';
+import { PassThroughOptions } from '../passthrough';
 import { PassThroughType } from '../utils/utils';
 
 export declare type MenuPassThroughType<T> = PassThroughType<T, MenuPassThroughMethodOptions>;
+export declare type MenuPassThroughTransitionType = ReactCSSTransitionProps | ((options: MenuPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -59,6 +63,15 @@ export interface MenuPassThroughOptions {
      * Uses to pass attributes to the separator's DOM element.
      */
     separator?: MenuPassThroughType<React.HTMLAttributes<HTMLLIElement>>;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MenuPassThroughTransitionType;
 }
 
 /**
@@ -132,10 +145,20 @@ export interface MenuProps extends Omit<React.DetailedHTMLProps<React.HTMLAttrib
      */
     pt?: MenuPassThroughOptions;
     /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies if pressing escape key should hide the Menu Popup.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
 }
 
 /**

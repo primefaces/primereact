@@ -8,6 +8,8 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
@@ -46,6 +48,11 @@ export interface SelectButtonPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
 }
 
 /**
@@ -112,9 +119,15 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
     multiple?: boolean | undefined;
     /**
      * Whether selection can be cleared.
+     * @deprecated Use 'allowEmpty' property instead.
      * @defaultValue true
      */
     unselectable?: boolean | undefined;
+    /**
+     * Whether selection can not be cleared.
+     * @defaultValue true
+     */
+    allowEmpty?: boolean | undefined;
     /**
      * When present, it specifies that the element should be disabled.
      * @defaultValue false
@@ -156,6 +169,11 @@ export interface SelectButtonProps extends Omit<React.DetailedHTMLProps<React.In
      * @type {SelectButtonPassThroughOptions}
      */
     pt?: SelectButtonPassThroughOptions;
+    /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
     /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false

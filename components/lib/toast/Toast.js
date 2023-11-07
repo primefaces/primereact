@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
-import { ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
+import { ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { ToastBase } from './ToastBase';
 import { ToastMessage } from './ToastMessage';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 let messageIdx = 0;
 
@@ -75,9 +74,12 @@ export const Toast = React.memo(
         };
 
         const remove = (messageInfo) => {
-            setMessagesState((m) => m.filter((msg) => msg._pId !== messageInfo._pId));
+            // allow removal by ID or by message equality
+            const removeMessage = messageInfo._pId ? messageInfo.message : messageInfo;
 
-            props.onRemove && props.onRemove(messageInfo.message);
+            setMessagesState((prev) => prev.filter((msg) => msg._pId !== messageInfo._pId && !ObjectUtils.deepEquals(msg.message, removeMessage)));
+
+            props.onRemove && props.onRemove(removeMessage);
         };
 
         const onClose = (messageInfo) => {
@@ -123,6 +125,18 @@ export const Toast = React.memo(
                 ptCallbacks.ptm('root')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: ptCallbacks.cx('transition'),
+                    timeout: { enter: 300, exit: 300 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEntered,
+                    onExited
+                },
+                ptCallbacks.ptm('transition')
+            );
+
             return (
                 <div {...rootProps}>
                     <TransitionGroup>
@@ -131,8 +145,9 @@ export const Toast = React.memo(
                                 const messageRef = React.createRef();
 
                                 return (
-                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} classNames="p-toast-message" unmountOnExit timeout={{ enter: 300, exit: 300 }} onEntered={onEntered} onExited={onExited} options={props.transitionOptions}>
+                                    <CSSTransition nodeRef={messageRef} key={messageInfo._pId} {...transitionProps}>
                                         <ToastMessage
+                                            hostName="Toast"
                                             ref={messageRef}
                                             messageInfo={messageInfo}
                                             index={index}

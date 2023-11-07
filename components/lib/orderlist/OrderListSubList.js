@@ -6,8 +6,15 @@ import { classNames, DomHandler, IconUtils, mergeProps, ObjectUtils } from '../u
 export const OrderListSubList = React.memo((props) => {
     const { ptm, cx } = props;
 
-    const getPTOptions = (item, key) => {
+    const _ptm = (key, options) => {
         return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
+    const getPTOptions = (item, key) => {
+        return _ptm(key, {
             context: {
                 selected: isSelected(item)
             }
@@ -28,25 +35,24 @@ export const OrderListSubList = React.memo((props) => {
     };
 
     const onDragStart = (event, index) => {
+        event.dataTransfer.setData('text', 'orderlist');
         dragging.current = true;
         draggedItemIndex.current = index;
-
-        if (props.dragdropScope) {
-            event.dataTransfer.setData('text', 'orderlist');
-        }
     };
 
     const onDragOver = (event, index) => {
         if (draggedItemIndex.current !== index && draggedItemIndex.current + 1 !== index) {
             dragOverItemIndex.current = index;
-            DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
+            !props.isUnstyled() && DomHandler.addClass(event.target, 'p-orderlist-droppoint-highlight');
+            event.target.setAttribute('data-p-orderlist-droppoint-highlight', true);
             event.preventDefault();
         }
     };
 
     const onDragLeave = (event) => {
         dragOverItemIndex.current = null;
-        DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        !props.isUnstyled() && DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        event.target.setAttribute('data-p-orderlist-droppoint-highlight', false);
     };
 
     const onDrop = (event) => {
@@ -55,7 +61,8 @@ export const OrderListSubList = React.memo((props) => {
 
         ObjectUtils.reorderArray(value, draggedItemIndex.current, dropIndex);
         dragOverItemIndex.current = null;
-        DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        !props.isUnstyled() && DomHandler.removeClass(event.target, 'p-orderlist-droppoint-highlight');
+        event.target.setAttribute('data-p-orderlist-droppoint-highlight', false);
 
         if (props.onChange) {
             props.onChange({
@@ -95,7 +102,7 @@ export const OrderListSubList = React.memo((props) => {
                 onDragLeave: onDragLeave,
                 onDrop: onDrop
             },
-            ptm('droppoint')
+            _ptm('droppoint')
         );
 
         return <li key={key} {...droppointProps}></li>;
@@ -106,7 +113,7 @@ export const OrderListSubList = React.memo((props) => {
             {
                 className: cx('header')
             },
-            ptm('header')
+            _ptm('header')
         );
 
         return props.header ? <div {...headerProps}>{props.header}</div> : null;
@@ -118,22 +125,23 @@ export const OrderListSubList = React.memo((props) => {
                 const content = props.itemTemplate ? props.itemTemplate(item) : item;
                 const key = JSON.stringify(item);
 
-                const itemProps = mergeProps(
-                    {
-                        className: classNames(props.className, cx('item', { item, isSelected })),
-                        onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
-                        onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
-                        role: 'option',
-                        'aria-selected': isSelected(item),
-                        draggable: 'true',
-                        onDragStart: (e) => onDragStart(e, i),
-                        onDragEnd: onDragEnd,
-                        tabIndex: props.tabIndex
-                    },
-                    getPTOptions(item, 'item')
-                );
-
                 if (props.dragdrop) {
+                    const itemProps = mergeProps(
+                        {
+                            className: classNames(props.className, cx('item', { item, isSelected })),
+                            onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
+                            onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
+                            role: 'option',
+                            'aria-selected': isSelected(item),
+                            draggable: 'true',
+                            onDragStart: (e) => onDragStart(e, i),
+                            onDragEnd: onDragEnd,
+                            tabIndex: props.tabIndex,
+                            'data-p-highlight': isSelected(item)
+                        },
+                        getPTOptions(item, 'item')
+                    );
+
                     let items = [];
 
                     if (i === 0) {
@@ -143,7 +151,7 @@ export const OrderListSubList = React.memo((props) => {
                     items.push(
                         <li key={key} {...itemProps}>
                             {content}
-                            <Ripple />
+                            {/*<Ripple />*/}
                         </li>
                     );
 
@@ -153,12 +161,13 @@ export const OrderListSubList = React.memo((props) => {
                 } else {
                     const itemProps = mergeProps(
                         {
+                            role: 'option',
+                            tabIndex: props.tabIndex,
                             className: classNames(props.className, cx('item', { item, isSelected })),
                             onClick: (e) => props.onItemClick({ originalEvent: e, value: item, index: i }),
                             onKeyDown: (e) => props.onItemKeyDown({ originalEvent: e, value: item, index: i }),
-                            role: 'option',
                             'aria-selected': isSelected(item),
-                            tabIndex: props.tabIndex
+                            'data-p-highlight': isSelected(item)
                         },
                         getPTOptions(item, 'item')
                     );
@@ -166,6 +175,7 @@ export const OrderListSubList = React.memo((props) => {
                     return (
                         <li key={key} {...itemProps}>
                             {content}
+                            <Ripple />
                         </li>
                     );
                 }
@@ -186,7 +196,7 @@ export const OrderListSubList = React.memo((props) => {
                 role: 'listbox',
                 'aria-multiselectable': true
             },
-            ptm('list')
+            _ptm('list')
         );
 
         return <ul {...listProps}>{items}</ul>;
@@ -197,7 +207,7 @@ export const OrderListSubList = React.memo((props) => {
             {
                 className: cx('icon')
             },
-            ptm('icon')
+            _ptm('icon')
         );
         const icon = props.filterIcon || <SearchIcon {...searchIconProps} />;
         const filterIcon = IconUtils.getJSXIcon(icon, { ...searchIconProps }, { props });
@@ -207,7 +217,7 @@ export const OrderListSubList = React.memo((props) => {
                 {
                     className: cx('filter')
                 },
-                ptm('filter')
+                _ptm('filter')
             );
 
             const filterInputProps = mergeProps(
@@ -219,14 +229,14 @@ export const OrderListSubList = React.memo((props) => {
                     placeholder: props.placeholder,
                     className: cx('filterInput')
                 },
-                ptm('filterInput')
+                _ptm('filterInput')
             );
 
             const filterIconProps = mergeProps(
                 {
                     className: cx('filterIcon')
                 },
-                ptm('filterIcon')
+                _ptm('filterIcon')
             );
 
             let content = (
@@ -257,7 +267,7 @@ export const OrderListSubList = React.memo((props) => {
                 {
                     className: cx('filterContainer')
                 },
-                ptm('filterContainer')
+                _ptm('filterContainer')
             );
 
             return <div {...filterContainerProps}>{content}</div>;
@@ -274,7 +284,7 @@ export const OrderListSubList = React.memo((props) => {
         {
             className: cx('container')
         },
-        ptm('container')
+        _ptm('container')
     );
 
     return (

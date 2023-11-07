@@ -4,33 +4,31 @@ import { classNames } from '../utils/Utils';
 const classes = {
     root: ({ props }) => classNames('p-blockui-container', props.containerClassName),
     mask: ({ props }) =>
-        classNames(
-            'p-blockui p-component-overlay p-component-overlay-enter',
-            {
-                'p-blockui-document': props.fullScreen
-            },
-            props.className
-        )
+        classNames('p-blockui p-component-overlay p-component-overlay-enter', {
+            'p-blockui-document': props.fullScreen
+        })
 };
 
 const styles = `
-.p-blockui-container {
-    position: relative;
-}
-
-.p-blockui {
-    opacity: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.p-blockui.p-component-overlay {
-    position: absolute;
-}
-
-.p-blockui-document.p-component-overlay {
-    position: fixed;
+@layer primereact {
+    .p-blockui-container {
+        position: relative;
+    }
+    
+    .p-blockui {
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .p-blockui.p-component-overlay {
+        position: absolute;
+    }
+    
+    .p-blockui-document.p-component-overlay {
+        position: fixed;
+    }
 }
 `;
 

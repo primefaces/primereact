@@ -878,6 +878,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
 
         return (
             <TreeTableHeader
+                hostName="TreeTable"
                 columns={columns}
                 columnGroup={columnGroup}
                 tabIndex={props.tabIndex}
@@ -904,12 +905,13 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     };
 
     const createTableFooter = (columns, columnGroup) => {
-        return <TreeTableFooter columns={columns} columnGroup={columnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
+        return <TreeTableFooter hostName="TreeTable" columns={columns} columnGroup={columnGroup} ptCallbacks={ptCallbacks} metaData={metaData} />;
     };
 
     const createTableBody = (value, columns) => {
         return (
             <TreeTableBody
+                hostName="TreeTable"
                 value={value}
                 originalOptions={props.value}
                 checkboxIcon={props.checkboxIcon}
@@ -977,7 +979,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         const footer = createTableFooter(columns, footerColumnGroup);
         const body = createTableBody(value, columns);
 
-        return <TreeTableScrollableView columns={columns} header={header} body={body} footer={footer} scrollHeight={props.scrollHeight} frozen={frozen} frozenWidth={props.frozenWidth} ptCallbacks={ptCallbacks} metaData={metaData} />;
+        return (
+            <TreeTableScrollableView hostName="TreeTable" columns={columns} header={header} body={body} footer={footer} scrollHeight={props.scrollHeight} frozen={frozen} frozenWidth={props.frozenWidth} ptCallbacks={ptCallbacks} metaData={metaData} />
+        );
     };
 
     const createScrollableTable = (value) => {

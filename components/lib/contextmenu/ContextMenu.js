@@ -1,18 +1,19 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { Portal } from '../portal/Portal';
 import { DomHandler, UniqueComponentId, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
 import { ContextMenuBase } from './ContextMenuBase';
 import { ContextMenuSub } from './ContextMenuSub';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ContextMenu = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
         const props = ContextMenuBase.getProps(inProps, context);
 
+        const [idState, setIdState] = React.useState(props.id);
         const [visibleState, setVisibleState] = React.useState(false);
         const [reshowState, setReshowState] = React.useState(false);
         const [resetMenuState, setResetMenuState] = React.useState(false);
@@ -20,6 +21,7 @@ export const ContextMenu = React.memo(
         const { ptm, cx, isUnstyled } = ContextMenuBase.setMetaData({
             props,
             state: {
+                id: idState,
                 visible: visibleState,
                 reshow: reshowState,
                 resetMenu: resetMenuState,
@@ -214,8 +216,16 @@ export const ContextMenu = React.memo(
         };
 
         useMountEffect(() => {
+            const uniqueId = UniqueComponentId();
+
+            !idState && setIdState(uniqueId);
+
+            if (props.global) {
+                bindDocumentContextMenuListener();
+            }
+
             if (props.breakpoint) {
-                !attributeSelectorState && setAttributeSelectorState(UniqueComponentId());
+                !attributeSelectorState && setAttributeSelectorState(uniqueId);
             }
         });
 
@@ -259,7 +269,7 @@ export const ContextMenu = React.memo(
             const rootProps = mergeProps(
                 {
                     id: props.id,
-                    className: cx('root', { context }),
+                    className: classNames(props.className, cx('root', { context })),
                     style: props.style,
                     onClick: (e) => onMenuClick(e),
                     onMouseEnter: (e) => onMenuMouseEnter(e)
@@ -268,21 +278,37 @@ export const ContextMenu = React.memo(
                 ptm('root')
             );
 
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    in: visibleState,
+                    timeout: { enter: 250, exit: 0 },
+                    options: props.transitionOptions,
+                    unmountOnExit: true,
+                    onEnter: onEnter,
+                    onEntered: onEntered,
+                    onExit: onExit,
+                    onExited: onExited
+                },
+                ptm('transition')
+            );
+
             return (
-                <CSSTransition
-                    nodeRef={menuRef}
-                    classNames="p-contextmenu"
-                    in={visibleState}
-                    timeout={{ enter: 250, exit: 0 }}
-                    options={props.transitionOptions}
-                    unmountOnExit
-                    onEnter={onEnter}
-                    onEntered={onEntered}
-                    onExit={onExit}
-                    onExited={onExited}
-                >
+                <CSSTransition nodeRef={menuRef} {...transitionProps}>
                     <div ref={menuRef} {...rootProps}>
-                        <ContextMenuSub menuProps={props} model={props.model} root resetMenu={resetMenuState} onLeafClick={onLeafClick} isMobileMode={isMobileMode} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
+                        <ContextMenuSub
+                            hostName="ContextMenu"
+                            id={idState}
+                            menuProps={props}
+                            model={props.model}
+                            root
+                            resetMenu={resetMenuState}
+                            onLeafClick={onLeafClick}
+                            isMobileMode={isMobileMode}
+                            submenuIcon={props.submenuIcon}
+                            ptm={ptm}
+                            cx={cx}
+                        />
                     </div>
                 </CSSTransition>
             );

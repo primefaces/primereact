@@ -13,6 +13,8 @@ import { PTDoc } from '../../components/doc/mention/pt/ptdoc';
 import { Wireframe } from '../../components/doc/mention/pt/wireframe';
 import { StyleDoc } from '../../components/doc/mention/styledoc';
 import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
+import { TailwindDoc } from '../../components/doc/mention/theming/tailwinddoc';
+import { StyledDoc } from '../../components/doc/mention/theming/styleddoc';
 
 const MentionDemo = () => {
     const docs = [
@@ -97,7 +99,27 @@ const MentionDemo = () => {
         }
     ];
 
-    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={['Mention']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React Mention Component" header="Mention" description="Mention component is used to tag objects in a text." componentDocs={docs} apiDocs={['Mention']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default MentionDemo;

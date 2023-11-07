@@ -9,8 +9,15 @@ export const PanelMenuSub = React.memo((props) => {
     const [activeItemState, setActiveItemState] = React.useState(null);
     const { ptm, cx } = props;
 
-    const getPTOptions = (item, key) => {
+    const _ptm = (key, options) => {
         return ptm(key, {
+            hostName: props.hostName,
+            ...options
+        });
+    };
+
+    const getPTOptions = (item, key) => {
+        return _ptm(key, {
             context: {
                 active: isItemActive(item)
             }
@@ -81,34 +88,46 @@ export const PanelMenuSub = React.memo((props) => {
     });
 
     const createSeparator = (index) => {
-        const key = 'separator_' + index;
+        const key = props.id + '_sep_' + index;
 
         const separatorProps = mergeProps(
             {
+                id: key,
                 key,
-                className: cx('separator')
+                className: cx('separator'),
+                role: 'separator'
             },
-            ptm('separator')
+            _ptm('separator')
         );
 
         return <li {...separatorProps}></li>;
     };
 
-    const createSubmenu = (item, active) => {
+    const createSubmenu = (item, active, index) => {
         const submenuRef = React.createRef();
 
         const toggleableContentProps = mergeProps(
             {
                 className: cx('toggleableContent', { active })
             },
-            ptm('toggleableContent')
+            _ptm('toggleableContent')
         );
 
         if (item.items) {
+            const transitionProps = mergeProps(
+                {
+                    classNames: cx('transition'),
+                    timeout: { enter: 1000, exit: 450 },
+                    in: active,
+                    unmountOnExit: true
+                },
+                _ptm('transition')
+            );
+
             return (
-                <CSSTransition nodeRef={submenuRef} classNames="p-toggleable-content" timeout={{ enter: 1000, exit: 450 }} in={active} unmountOnExit>
+                <CSSTransition nodeRef={submenuRef} {...transitionProps}>
                     <div ref={submenuRef} {...toggleableContentProps}>
-                        <PanelMenuSub menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
+                        <PanelMenuSub id={props.id + '_' + index} menuProps={props.menuProps} model={item.items} multiple={props.multiple} submenuIcon={props.submenuIcon} ptm={ptm} cx={cx} />
                     </div>
                 </CSSTransition>
             );
@@ -122,7 +141,7 @@ export const PanelMenuSub = React.memo((props) => {
             return null;
         }
 
-        const key = item.label + '_' + index;
+        const key = item.id || props.id + '_' + index;
         const active = isItemActive(item);
         const linkClassName = classNames('p-menuitem-link', { 'p-disabled': item.disabled });
         const iconClassName = classNames('p-menuitem-icon', item.icon);
@@ -148,7 +167,7 @@ export const PanelMenuSub = React.memo((props) => {
             getPTOptions(item, 'submenuicon')
         );
         const submenuIcon = item.items && IconUtils.getJSXIcon(active ? props.submenuIcon || <ChevronDownIcon {...submenuIconProps} /> : props.submenuIcon || <ChevronRightIcon {...submenuIconProps} />);
-        const submenu = createSubmenu(item, active);
+        const submenu = createSubmenu(item, active, index);
         const actionProps = mergeProps(
             {
                 href: item.url || '#',
@@ -188,7 +207,7 @@ export const PanelMenuSub = React.memo((props) => {
         const menuitemProps = mergeProps(
             {
                 key,
-                id: item.id,
+                id: key,
                 className: cx('menuitem', { item }),
                 style: item.style,
                 role: 'none'

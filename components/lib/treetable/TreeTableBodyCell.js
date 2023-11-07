@@ -22,6 +22,7 @@ export const TreeTableBodyCell = (props) => {
         const columnMetadata = {
             props: cProps,
             parent: props.metaData,
+            hostName: props.hostName,
             state: {
                 editing: editingState
             },

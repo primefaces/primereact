@@ -39,7 +39,6 @@ export const FileUpload = React.memo(
         const fileInputRef = React.useRef(null);
         const messagesRef = React.useRef(null);
         const contentRef = React.useRef(null);
-        const duplicateIEEvent = React.useRef(false);
         const uploadedFileCount = React.useRef(0);
         const hasFiles = ObjectUtils.isNotEmpty(filesState);
         const hasUploadedFiles = ObjectUtils.isNotEmpty(uploadedFilesState);
@@ -93,13 +92,6 @@ export const FileUpload = React.memo(
             }
         };
 
-        const clearIEInput = () => {
-            if (fileInputRef.current) {
-                duplicateIEEvent.current = true; //IE11 fix to prevent onFileChange trigger again
-                fileInputRef.current.value = '';
-            }
-        };
-
         const formatSize = (bytes) => {
             const k = 1024;
             const dm = 3;
@@ -118,12 +110,6 @@ export const FileUpload = React.memo(
         const onFileSelect = (event) => {
             // give caller a chance to stop the selection
             if (props.onBeforeSelect && props.onBeforeSelect({ originalEvent: event, files: filesState }) === false) {
-                return;
-            }
-
-            if (event.type !== 'drop' && isIE11() && duplicateIEEvent.current) {
-                duplicateIEEvent.current = false;
-
                 return;
             }
 
@@ -157,11 +143,7 @@ export const FileUpload = React.memo(
                 props.onSelect({ originalEvent: event, files: currentFiles });
             }
 
-            if (event.type !== 'drop' && isIE11()) {
-                clearIEInput();
-            } else {
-                clearInput();
-            }
+            clearInput();
 
             if (props.mode === 'basic' && currentFiles.length > 0) {
                 fileInputRef.current.style.display = 'none';
@@ -170,10 +152,6 @@ export const FileUpload = React.memo(
 
         const isFileSelected = (file) => {
             return filesState.some((f) => f.name + f.type + f.size === file.name + file.type + file.size);
-        };
-
-        const isIE11 = () => {
-            return !!window['MSInputMethodContext'] && !!document['documentMode'];
         };
 
         const validate = (file) => {
@@ -274,8 +252,8 @@ export const FileUpload = React.memo(
                             }
                         }
 
-                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                         clear();
+                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                     }
                 };
 
@@ -331,7 +309,8 @@ export const FileUpload = React.memo(
         const onDragOver = (event) => {
             if (!disabled) {
                 event.dataTransfer.dropEffect = 'copy';
-                DomHandler.addClass(contentRef.current, 'p-fileupload-highlight');
+                !isUnstyled() && DomHandler.addClass(contentRef.current, 'p-fileupload-highlight');
+                contentRef.current.setAttribute('data-p-highlight', true);
                 event.stopPropagation();
                 event.preventDefault();
             }
@@ -340,7 +319,8 @@ export const FileUpload = React.memo(
         const onDragLeave = (event) => {
             if (!disabled) {
                 event.dataTransfer.dropEffect = 'copy';
-                DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+                !isUnstyled() && DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+                contentRef.current.setAttribute('data-p-highlight', false);
             }
         };
 
@@ -349,7 +329,8 @@ export const FileUpload = React.memo(
                 return;
             }
 
-            DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+            !isUnstyled() && DomHandler.removeClass(contentRef.current, 'p-fileupload-highlight');
+            contentRef.current.setAttribute('data-p-highlight', false);
             event.stopPropagation();
             event.preventDefault();
 
@@ -413,13 +394,15 @@ export const FileUpload = React.memo(
             const chooseIcon = IconUtils.getJSXIcon(icon, { ...chooseIconProps }, { props });
             const chooseButtonProps = mergeProps(
                 {
-                    className: cx('chooseButton', { iconOnly, disabled, className, focusedState }),
+                    className: classNames(className, cx('chooseButton', { iconOnly, disabled, className, focusedState })),
                     style,
                     onClick: choose,
                     onKeyDown: (e) => onKeyDown(e),
                     onFocus,
                     onBlur,
-                    tabIndex: 0
+                    tabIndex: 0,
+                    'data-p-disabled': disabled,
+                    'data-p-focus': focusedState
                 },
                 ptm('chooseButton')
             );
@@ -523,7 +506,7 @@ export const FileUpload = React.memo(
         const createFiles = () => {
             const badgeOptions = {
                 severity: 'warning',
-                value: 'Pending'
+                value: localeOption('pending') || 'Pending'
             };
             const content = filesState.map((file, index) => createFile(file, index, badgeOptions));
 
@@ -533,7 +516,7 @@ export const FileUpload = React.memo(
         const createUploadedFiles = () => {
             const badgeOptions = {
                 severity: 'success',
-                value: 'Completed'
+                value: localeOption('completed') || 'Completed'
             };
             const content = uploadedFilesState && uploadedFilesState.map((file, index) => createFile(file, index, badgeOptions));
 
@@ -616,7 +599,7 @@ export const FileUpload = React.memo(
 
             const buttonbarProps = mergeProps(
                 {
-                    className: cx('buttonbar'),
+                    className: classNames(props.headerClassName, cx('buttonbar')),
                     style: props.headerStyle
                 },
                 ptm('buttonbar')
@@ -656,12 +639,13 @@ export const FileUpload = React.memo(
             const contentProps = mergeProps(
                 {
                     ref: contentRef,
-                    className: cx('content'),
+                    className: classNames(props.contentClassName, cx('content')),
                     style: props.contentStyle,
                     onDragEnter: (e) => onDragEnter(e),
                     onDragOver: (e) => onDragOver(e),
                     onDragLeave: (e) => onDragLeave(e),
-                    onDrop: (e) => onDrop(e)
+                    onDrop: (e) => onDrop(e),
+                    'data-p-highlight': false
                 },
                 ptm('content')
             );
@@ -712,7 +696,7 @@ export const FileUpload = React.memo(
             const input = !hasFiles && <input {...inputProps} />;
             const rootProps = mergeProps(
                 {
-                    className: cx('root'),
+                    className: classNames(props.className, cx('root')),
                     style: props.style
                 },
                 FileUploadBase.getOtherProps(props),
@@ -721,10 +705,10 @@ export const FileUpload = React.memo(
 
             const basicButtonProps = mergeProps(
                 {
-                    className: cx('basicButton', { hasFiles, className: chooseOptions.className, disabled, focusedState }),
+                    className: classNames(chooseOptions.className, cx('basicButton', { hasFiles, disabled, focusedState })),
                     style: chooseOptions.style,
                     tabIndex: 0,
-                    onMouseUp: onSimpleUploaderClick,
+                    onClick: onSimpleUploaderClick,
                     onKeyDown: (e) => onKeyDown(e),
                     onFocus,
                     onBlur

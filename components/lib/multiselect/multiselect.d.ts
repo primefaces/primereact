@@ -8,15 +8,19 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
+import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
+import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils';
 import { VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
-import { CheckboxPassThroughOptions } from '../checkbox/checkbox';
 
 export declare type MultiSelectPassThroughType<T> = PassThroughType<T, MultiSelectPassThroughMethodOptions>;
+export declare type MultiSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: MultiSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
 
 /**
  * Custom passthrough(pt) option method.
@@ -162,6 +166,15 @@ export interface MultiSelectPassThroughOptions {
      * @type {TooltipPassThroughOptions}
      */
     tooltip?: TooltipPassThroughOptions;
+    /**
+     * Used to manage all lifecycle hooks
+     * @see {@link ComponentHooks}
+     */
+    hooks?: ComponentHooks;
+    /**
+     * Used to control React Transition API.
+     */
+    transition?: MultiSelectPassThroughTransitionType;
 }
 
 /**
@@ -308,6 +321,21 @@ interface MultiSelectChangeEvent {
 }
 
 /**
+ * Custom remove event when chip is removed.
+ * @event
+ */
+interface MultiSelectRemoveEvent {
+    /**
+     * Browser event
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Removed item value
+     */
+    value: any;
+}
+
+/**
  * Custom filter event.
  * @see {@link MultiSelectProps.onFilter}
  * @event
@@ -411,6 +439,10 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Close icon of the multiselect panel header.
      */
     closeIcon?: IconType<MultiSelectProps> | undefined;
+    /**
+     * Clear icon of the multiselect input.
+     */
+    clearIcon?: IconType<MultiSelectProps> | undefined;
     /**
      * A property to uniquely match the value in options for better performance.
      */
@@ -581,6 +613,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      */
     pt?: MultiSelectPassThroughOptions;
     /**
+     * Used to configure passthrough(pt) options of the component.
+     * @type {PassThroughOptions}
+     */
+    ptOptions?: PassThroughOptions;
+    /**
      * When enabled, it removes component related styles in the core.
      * @defaultValue false
      */
@@ -687,6 +724,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Callback to invoke when overlay panel becomes hidden.
      */
     onHide?(): void;
+    /**
+     * Callback to invoke when a chip is removed.
+     * @param {MultiSelectRemoveEvent} event - Custom remove event
+     */
+    onRemove?(event: MultiSelectRemoveEvent): void;
     /**
      * Callback to invoke when all data is selected.
      * @param {MultiSelectAllEvent} event - Custom select event.

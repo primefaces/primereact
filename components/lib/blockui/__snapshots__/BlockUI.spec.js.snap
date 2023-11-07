@@ -3,6 +3,7 @@
 exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1`] = `
 <body
   class="p-overflow-hidden"
+  style="--scrollbar-width: 1024px;"
 >
   <div>
     <div
@@ -22,6 +23,7 @@ exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1
 exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen 1`] = `
 <body
   class="p-overflow-hidden"
+  style="--scrollbar-width: 1024px;"
 >
   <div>
     <div
@@ -117,6 +119,7 @@ exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
 exports[`BlockUI block fullscreen 1`] = `
 <body
   class="p-overflow-hidden"
+  style="--scrollbar-width: 1024px;"
 >
   <div>
     <div
@@ -136,6 +139,7 @@ exports[`BlockUI block fullscreen 1`] = `
 exports[`BlockUI block panel 1`] = `
 <body
   class=""
+  style=""
 >
   <div>
     <div
@@ -178,6 +182,7 @@ exports[`BlockUI block panel 1`] = `
 exports[`BlockUI container style and className 1`] = `
 <body
   class=""
+  style=""
 >
   <div>
     <div
@@ -209,7 +214,7 @@ exports[`BlockUI container style and className 1`] = `
         </div>
       </div>
       <div
-        class="p-blockui p-component-overlay p-component-overlay-enter block-jest"
+        class="block-jest p-blockui p-component-overlay p-component-overlay-enter"
         data-pc-section="mask"
         style="cursor: move; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 4205;"
       />
@@ -221,6 +226,7 @@ exports[`BlockUI container style and className 1`] = `
 exports[`BlockUI unblock panel 1`] = `
 <body
   class=""
+  style=""
 >
   <div>
     <div

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useMountEffect } from '../hooks/Hooks';
 import { Ripple } from '../ripple/Ripple';
-import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { DockBase } from './DockBase';
 
 export const Dock = React.memo(
@@ -10,9 +11,11 @@ export const Dock = React.memo(
         const [currentIndexState, setCurrentIndexState] = React.useState(-3);
         const context = React.useContext(PrimeReactContext);
         const props = DockBase.getProps(inProps, context);
+        const [idState, setIdState] = React.useState(props.id);
         const { ptm, cx, isUnstyled } = DockBase.setMetaData({
             props,
             state: {
+                id: idState,
                 currentIndex: currentIndexState
             }
         });
@@ -51,6 +54,7 @@ export const Dock = React.memo(
             }
 
             const { disabled, icon: _icon, label, template, url, target } = item;
+            const key = item.id || idState + '_' + index;
             const contentClassName = classNames('p-dock-action', { 'p-disabled': disabled });
             const iconClassName = classNames('p-dock-action-icon', _icon);
             const iconProps = mergeProps(
@@ -94,7 +98,8 @@ export const Dock = React.memo(
 
             const menuitemProps = mergeProps(
                 {
-                    key: index,
+                    id: key,
+                    key,
                     className: cx('menuitem', { currentIndexState, index }),
                     role: 'none',
                     onMouseEnter: () => onItemMouseEnter(index)
@@ -154,6 +159,12 @@ export const Dock = React.memo(
 
             return null;
         };
+
+        useMountEffect(() => {
+            if (!idState) {
+                setIdState(UniqueComponentId());
+            }
+        });
 
         React.useImperativeHandle(ref, () => ({
             props,

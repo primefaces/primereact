@@ -15,6 +15,8 @@ let entries = [];
 
 let core = {};
 
+const NPM_LINK = process.env.NPM_LINK === 'true';
+
 // alias entries
 const ALIAS_ICON_COMPONENT_ENTRIES = [
     { find: '../../iconbase/IconBase', replacement: 'primereact/iconbase' },
@@ -65,6 +67,11 @@ const ALIAS_ICON_COMPONENT_ENTRIES = [
     { find: '../icons/windowminimize', replacement: 'primereact/icons/windowminimize' }
 ];
 
+const CORE_PASSTHROUGH_DEPENDENCIES = [
+    { find: '../passthrough', replacement: 'primereact/passthrough' },
+    { find: '../passthrough/tailwind', replacement: 'primereact/passthrough/tailwind' }
+];
+
 const ALIAS_COMPONENT_ENTRIES = [
     { find: '../utils/Utils', replacement: 'primereact/utils' },
     { find: '../api/Api', replacement: 'primereact/api' },
@@ -88,7 +95,8 @@ const ALIAS_COMPONENT_ENTRIES = [
     { find: '../dropdown/Dropdown', replacement: 'primereact/dropdown' },
     { find: '../dialog/Dialog', replacement: 'primereact/dialog' },
     { find: '../paginator/Paginator', replacement: 'primereact/paginator' },
-    { find: '../tree/Tree', replacement: 'primereact/tree' }
+    { find: '../tree/Tree', replacement: 'primereact/tree' },
+    ...CORE_PASSTHROUGH_DEPENDENCIES
 ];
 
 // dependencies
@@ -100,13 +108,13 @@ const GLOBAL_DEPENDENCIES = {
 
 const GLOBAL_COMPONENT_DEPENDENCIES = {
     ...GLOBAL_DEPENDENCIES,
-    ...ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replaceAll('/', '.') }), {})
+    ...(NPM_LINK ? [] : ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replaceAll('/', '.') }), {}))
 };
 
 // externals
 const EXTERNAL = ['react', 'react-dom', 'react-transition-group', '@babel/runtime', '@fullcalendar/core', 'chart.js/auto', 'quill'];
 
-const EXTERNAL_COMPONENT = [...EXTERNAL, ...ALIAS_COMPONENT_ENTRIES.map((entries) => entries.replacement)];
+const EXTERNAL_COMPONENT = [...EXTERNAL, ...(NPM_LINK ? [] : ALIAS_COMPONENT_ENTRIES.map((entries) => entries.replacement))];
 
 // plugins
 const BABEL_PLUGIN_OPTIONS = {
@@ -150,17 +158,24 @@ const TERSER_PLUGIN_OPTIONS = {
 
 const PLUGINS = [replace(REPLACE_PLUGIN_OPTIONS), resolve(RESOLVE_PLUGIN_OPTIONS), commonjs(COMMONJS_PLUGIN_OPTIONS), babel(BABEL_PLUGIN_OPTIONS), postcss(POSTCSS_PLUGIN_OPTIONS)];
 
-const PLUGINS_COMPONENT = [alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT), ...PLUGINS];
+const PLUGINS_COMPONENT = NPM_LINK ? PLUGINS : [alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT), ...PLUGINS];
 
 function addEntry(name, input, output, isComponent = true) {
     const exports = name === 'primereact.api' || name === 'primereact' ? 'named' : 'auto';
-    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement === name.replaceAll('.', '/'));
+    const useCorePlugin = !NPM_LINK && ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement === name.replaceAll('.', '/'));
     const plugins = isComponent ? PLUGINS_COMPONENT : PLUGINS;
     const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
 
+    const onwarn = (warning) => {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+            return;
+        }
+    };
+
     const getEntry = (isMinify) => {
         return {
+            onwarn,
             input,
             plugins: [...plugins, isMinify && terser(TERSER_PLUGIN_OPTIONS), useCorePlugin && corePlugin()],
             external,
@@ -172,15 +187,21 @@ function addEntry(name, input, output, isComponent = true) {
         return {
             ...getEntry(isMinify),
             output: [
-                {
-                    format: 'cjs',
-                    file: `${output}.cjs${isMinify ? '.min' : ''}.js`,
-                    exports
-                },
+                ...(NPM_LINK
+                    ? []
+                    : [
+                          {
+                              format: 'cjs',
+                              file: `${output}.cjs${isMinify ? '.min' : ''}.js`,
+                              exports,
+                              banner: "'use client';" // This line is required for SSR.
+                          }
+                      ]),
                 {
                     format: 'esm',
                     file: `${output}.esm${isMinify ? '.min' : ''}.js`,
-                    exports
+                    exports,
+                    banner: "'use client';" // This line is required for SSR.
                 }
             ]
         };
@@ -202,11 +223,13 @@ function addEntry(name, input, output, isComponent = true) {
     };
 
     entries.push(get_CJS_ESM());
-    entries.push(get_IIFE());
+    if (!NPM_LINK) {
+        entries.push(get_IIFE());
 
-    // Minify
-    entries.push(get_CJS_ESM(true));
-    entries.push(get_IIFE(true));
+        // Minify
+        entries.push(get_CJS_ESM(true));
+        entries.push(get_IIFE(true));
+    }
 }
 
 function corePlugin() {
@@ -292,6 +315,14 @@ function addIcon() {
         });
 }
 
+function addPassThrough() {
+    const inputDir = process.env.INPUT_DIR + 'passthrough';
+    const outputDir = process.env.OUTPUT_DIR + 'passthrough';
+
+    addEntry('passthrough', `${inputDir}/index.js`, `${outputDir}/index`, false);
+    addEntry('passthrough.tailwind', `${inputDir}/tailwind/index.js`, `${outputDir}/tailwind/index`, false);
+}
+
 function addPrimeReact() {
     const input = process.env.INPUT_DIR + 'primereact.all.js';
     const output = process.env.OUTPUT_DIR + 'primereact.all';
@@ -354,7 +385,10 @@ function addPackageJson() {
     },
     "sideEffects": [
         "**/*.css"
-    ]
+    ],
+    "engines": {
+        "node": ">=14.0.0"
+    }
 }`;
 
     !fs.existsSync(outputDir) && fs.mkdirSync(outputDir);
@@ -364,6 +398,7 @@ function addPackageJson() {
 addIcon();
 addComponent();
 addPrimeReact();
+addPassThrough();
 addCore();
 addPackageJson();
 

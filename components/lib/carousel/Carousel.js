@@ -16,7 +16,10 @@ const CarouselItem = React.memo((props) => {
     const content = props.template(props.item);
     const itemClonedProps = mergeProps(
         {
-            className: cx(key, { itemProps: props })
+            className: cx(key, { itemProps: props }),
+            'data-p-carousel-item-active': props.active,
+            'data-p-carousel-item-start': props.start,
+            'data-p-carousel-item-end': props.end
         },
         ptm(key)
     );
@@ -67,14 +70,6 @@ export const Carousel = React.memo(
         const isControlled = props.onPageChange && !isAutoplay;
         const currentPage = isControlled ? props.page : pageState;
 
-        const getPTOptions = (key, index) => {
-            return ptm(key, {
-                context: {
-                    active: currentPage === index
-                }
-            });
-        };
-
         const [bindWindowResizeListener] = useResizeListener({
             listener: () => {
                 calculatePosition();
@@ -118,7 +113,7 @@ export const Carousel = React.memo(
             }
 
             if (itemsContainerRef.current) {
-                DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
+                !isUnstyled() && DomHandler.removeClass(itemsContainerRef.current, 'p-items-hidden');
                 changePosition(totalShiftedItems);
                 itemsContainerRef.current.style.transition = 'transform 500ms ease 0s';
             }
@@ -606,11 +601,21 @@ export const Carousel = React.memo(
 
         const createIndicator = (index) => {
             const isActive = currentPage === index;
+
+            const getPTOptions = (key) => {
+                return ptm(key, {
+                    context: {
+                        active: isActive
+                    }
+                });
+            };
+
             const key = 'carousel-indicator-' + index;
             const indicatorProps = mergeProps(
                 {
                     key,
-                    className: cx('indicator', { isActive })
+                    className: cx('indicator', { isActive }),
+                    'data-p-highlight': isActive
                 },
                 getPTOptions('indicator')
             );
@@ -662,7 +667,7 @@ export const Carousel = React.memo(
             {
                 id: props.id,
                 ref: elementRef,
-                className: classNames(props.className, cx('root')),
+                className: classNames(props.className, cx('root', { isVertical })),
                 style: props.style
             },
             CarouselBase.getOtherProps(props),

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Ripple } from '../ripple/Ripple';
-import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const DropdownItem = React.memo((props) => {
     const { ptm, cx, selected, disabled, option, label } = props;
@@ -26,13 +26,15 @@ export const DropdownItem = React.memo((props) => {
     const content = props.template ? ObjectUtils.getJSXElement(props.template, props.option) : props.label;
     const itemProps = mergeProps(
         {
-            className: cx('item'),
+            role: 'option',
+            key: props.label,
+            className: classNames(option.className, cx('item', { selected, disabled, label })),
             style: props.style,
             onClick: (e) => onClick(e),
             'aria-label': label,
-            role: 'option',
             'aria-selected': selected,
-            key: props.label
+            'data-p-highlight': selected,
+            'data-p-disabled': disabled
         },
         getPTOptions('item', { selected, disabled, option, label })
     );

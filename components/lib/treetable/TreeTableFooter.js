@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ColumnBase } from '../column/ColumnBase';
 import { ColumnGroupBase } from '../columngroup/ColumnGroupBase';
 import { RowBase } from '../row/RowBase';
-import { mergeProps } from '../utils/Utils';
+import { mergeProps, ObjectUtils } from '../utils/Utils';
 
 export const TreeTableFooter = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
@@ -12,16 +12,18 @@ export const TreeTableFooter = React.memo((props) => {
     };
 
     const getColumnProps = (column) => {
-        return ptmo(ColumnBase.getCProps(column));
+        return ColumnBase.getCProps(column);
     };
 
     const getColumnPTOptions = (column, key) => {
+        const cProps = getColumnProps(column);
         const columnMetadata = {
-            props: getColumnProps(column),
-            parent: props.metaData
+            props: cProps,
+            parent: props.metaData,
+            hostName: props.hostName
         };
 
-        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(getColumnProps(column), key, columnMetadata));
+        return mergeProps(ptm(`column.${key}`, { column: columnMetadata }), ptm(`column.${key}`, columnMetadata), ptmo(cProps, key, columnMetadata));
     };
 
     const createFooterCell = (column, index) => {
@@ -36,13 +38,15 @@ export const TreeTableFooter = React.memo((props) => {
             getColumnPTOptions(column, 'footerCell')
         );
 
-        return <td {...footerCellProps}>{getColumnProp(column, 'footer')}</td>;
+        const content = ObjectUtils.getJSXElement(getColumnProp(column, 'footer'), { props: getColumnProps(column) });
+
+        return <td {...footerCellProps}>{content}</td>;
     };
 
     const createFooterRow = (row, index) => {
         const rowColumns = React.Children.toArray(RowBase.getCProp(row, 'children'));
         const rowFooterCells = rowColumns.map(createFooterCell);
-        const footerRowProps = mergeProps(ptm('footerRow'));
+        const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
 
         return (
             <tr {...footerRowProps} key={index}>
@@ -60,7 +64,7 @@ export const TreeTableFooter = React.memo((props) => {
     const createColumns = (columns) => {
         if (columns) {
             const headerCells = columns.map(createFooterCell);
-            const footerRowProps = mergeProps(ptm('footerRow'));
+            const footerRowProps = mergeProps(ptm('footerRow', { hostName: props.hostName }));
 
             return <tr {...footerRowProps}>{headerCells}</tr>;
         } else {
@@ -69,17 +73,7 @@ export const TreeTableFooter = React.memo((props) => {
     };
 
     const hasFooter = () => {
-        if (props.columnGroup) {
-            return true;
-        } else {
-            for (let i = 0; i < props.columns.length; i++) {
-                if (getColumnProp(props.columns[i], 'footer')) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return props.columnGroup ? true : props.columns ? props.columns.some((col) => col && getColumnProp(col, 'footer')) : false;
     };
 
     const content = props.columnGroup ? createColumnGroup() : createColumns(props.columns);
@@ -89,7 +83,7 @@ export const TreeTableFooter = React.memo((props) => {
             {
                 className: cx('tfoot')
             },
-            ptm('tfoot')
+            ptm('tfoot', { hostName: props.hostName })
         );
 
         return <tfoot {...tfootProps}>{content}</tfoot>;

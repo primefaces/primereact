@@ -70,12 +70,12 @@ export const Galleria = React.memo(
         };
 
         const onEnter = () => {
-            DomHandler.addClass(document.body, 'p-overflow-hidden');
+            DomHandler.blockBodyScroll();
         };
 
         const onEntering = () => {
             ZIndexUtils.set('modal', maskRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex['modal']) || PrimeReact.zIndex['modal']);
-            DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
+            !isUnstyled() && DomHandler.addMultipleClasses(maskRef.current, 'p-component-overlay p-component-overlay-enter');
         };
 
         const onEntered = () => {
@@ -83,8 +83,8 @@ export const Galleria = React.memo(
         };
 
         const onExit = () => {
-            DomHandler.removeClass(document.body, 'p-overflow-hidden');
-            DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
+            DomHandler.unblockBodyScroll();
+            !isUnstyled() && DomHandler.addClass(maskRef.current, 'p-component-overlay-leave');
         };
 
         const onExited = () => {
@@ -229,6 +229,7 @@ export const Galleria = React.memo(
                     {header}
                     <div {...contentProps}>
                         <GalleriaItem
+                            hostName="Galleria"
                             ref={previewContentRef}
                             value={props.value}
                             activeItemIndex={activeItemIndex}
@@ -252,6 +253,7 @@ export const Galleria = React.memo(
 
                         {props.showThumbnails && (
                             <GalleriaThumbnails
+                                hostName="Galleria"
                                 value={props.value}
                                 activeItemIndex={activeItemIndex}
                                 onActiveItemChange={onActiveItemChange}
@@ -267,6 +269,7 @@ export const Galleria = React.memo(
                                 autoPlay={props.autoPlay}
                                 slideShowActive={slideShowActiveState}
                                 stopSlideShow={stopSlideShow}
+                                isUnstyled={isUnstyled}
                                 ptm={ptm}
                                 cx={cx}
                                 sx={sx}
@@ -286,27 +289,30 @@ export const Galleria = React.memo(
             if (props.fullScreen) {
                 const maskProps = mergeProps(
                     {
-                        ref: maskRef,
                         className: cx('mask', { visibleState })
                     },
                     ptm('mask')
                 );
 
+                const transitionProps = mergeProps(
+                    {
+                        classNames: cx('transition'),
+                        in: visibleState,
+                        timeout: { enter: 150, exit: 150 },
+                        options: props.transitionOptions,
+                        unmountOnExit: true,
+                        onEnter,
+                        onEntering,
+                        onEntered,
+                        onExit,
+                        onExited
+                    },
+                    ptm('transition')
+                );
+
                 const galleriaWrapper = (
-                    <div {...maskProps}>
-                        <CSSTransition
-                            nodeRef={elementRef}
-                            classNames="p-galleria"
-                            in={visibleState}
-                            timeout={{ enter: 150, exit: 150 }}
-                            options={props.transitionOptions}
-                            unmountOnExit
-                            onEnter={onEnter}
-                            onEntering={onEntering}
-                            onEntered={onEntered}
-                            onExit={onExit}
-                            onExited={onExited}
-                        >
+                    <div ref={maskRef} {...maskProps}>
+                        <CSSTransition nodeRef={elementRef} {...transitionProps}>
                             {element}
                         </CSSTransition>
                     </div>

@@ -36,96 +36,99 @@ const classes = {
     panel: 'p-cascadeselect-panel p-component',
     content: 'p-cascadeselect-item-content',
     optionGroupIcon: 'p-cascadeselect-group-icon',
-    text: 'p-cascadeselect-item-text'
+    text: 'p-cascadeselect-item-text',
+    transition: 'p-connected-overlay'
 };
 
 const styles = `
-.p-cascadeselect {
-    display: inline-flex;
-    cursor: pointer;
-    position: relative;
-    user-select: none;
-}
-
-.p-cascadeselect-trigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.p-cascadeselect-label {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    flex: 1 1 auto;
-    width: 1%;
-    text-overflow: ellipsis;
-    cursor: pointer;
-}
-
-.p-cascadeselect-label-empty {
-    overflow: hidden;
-    visibility: hidden;
-}
-
-.p-cascadeselect .p-cascadeselect-panel {
-    min-width: 100%;
-}
-
-.p-cascadeselect-panel {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.p-cascadeselect-item {
-    cursor: pointer;
-    font-weight: normal;
-    white-space: nowrap;
-}
-
-.p-cascadeselect-item-content {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
-
-.p-cascadeselect-group-icon {
-    margin-left: auto;
-}
-
-.p-cascadeselect-items {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    min-width: 100%;
-}
-
-.p-fluid .p-cascadeselect {
-    display: flex;
-}
-
-.p-fluid .p-cascadeselect .p-cascadeselect-label {
-    width: 1%;
-}
-
-.p-cascadeselect-sublist {
-    position: absolute;
-    min-width: 100%;
-    z-index: 1;
-    display: none;
-}
-
-.p-cascadeselect-item-active {
-    overflow: visible !important;
-}
-
-.p-cascadeselect-item-active > .p-cascadeselect-sublist {
-    display: block;
-    left: 100%;
-    top: 0;
+@layer primereact {
+    .p-cascadeselect {
+        display: inline-flex;
+        cursor: pointer;
+        position: relative;
+        user-select: none;
+    }
+    
+    .p-cascadeselect-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .p-cascadeselect-label {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        flex: 1 1 auto;
+        width: 1%;
+        text-overflow: ellipsis;
+        cursor: pointer;
+    }
+    
+    .p-cascadeselect-label-empty {
+        overflow: hidden;
+        visibility: hidden;
+    }
+    
+    .p-cascadeselect .p-cascadeselect-panel {
+        min-width: 100%;
+    }
+    
+    .p-cascadeselect-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .p-cascadeselect-item {
+        cursor: pointer;
+        font-weight: normal;
+        white-space: nowrap;
+    }
+    
+    .p-cascadeselect-item-content {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .p-cascadeselect-group-icon {
+        margin-left: auto;
+    }
+    
+    .p-cascadeselect-items {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        min-width: 100%;
+    }
+    
+    .p-fluid .p-cascadeselect {
+        display: flex;
+    }
+    
+    .p-fluid .p-cascadeselect .p-cascadeselect-label {
+        width: 1%;
+    }
+    
+    .p-cascadeselect-sublist {
+        position: absolute;
+        min-width: 100%;
+        z-index: 1;
+        display: none;
+    }
+    
+    .p-cascadeselect-item-active {
+        overflow: visible !important;
+    }
+    
+    .p-cascadeselect-item-active > .p-cascadeselect-sublist {
+        display: block;
+        left: 100%;
+        top: 0;
+    }
 }
 `;
 
