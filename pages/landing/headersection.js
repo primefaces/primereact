@@ -197,11 +197,7 @@ const HeaderSection = (props) => {
                         </li>
                     )}
                     <li className="relative">
-                        <button
-                            type="button"
-                            style={{ maxWidth: '8rem' }}
-                            className="px-link flex align-items-center surface-card h-2rem px-2 border-1 border-solid surface-border transition-all transition-duration-300 hover:border-primary"
-                        >
+                        <button type="button" style={{ maxWidth: '8rem' }} className="px-link flex align-items-center surface-card h-2rem px-2 border-1 border-solid surface-border transition-all transition-duration-300 hover:border-primary">
                             <span className="text-900 block white-space-nowrap overflow-hidden"> {versions[0].version}</span>
                             <span className="ml-2 pi pi-angle-down text-600"></span>
                         </button>
