@@ -8,6 +8,15 @@ You must have a local copy of this repository somewhere on your machine. From th
 
 Once that is done, you will run:
 
+**Windows Only:**
+
+You must install Node Env on windows in global space to use environment variables.
+```shell
+npm install -g win-node-env
+```
+
+**ALL:**
+
 ```shell
 ~/primereact/ $ npm run build:lib:dev
 ```
