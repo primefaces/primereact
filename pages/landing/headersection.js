@@ -198,7 +198,6 @@ const HeaderSection = (props) => {
                     )}
                     <li className="relative">
                         <button
-                            // v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'scalein', leaveToClass: 'hidden', leaveActiveClass: 'fadeout', hideOnOutsideClick: true }"
                             type="button"
                             style={{ maxWidth: '8rem' }}
                             className="px-link flex align-items-center surface-card h-2rem px-2 border-1 border-solid surface-border transition-all transition-duration-300 hover:border-primary"

@@ -63,7 +63,7 @@ export function DocSectionCode(props) {
                                 tooltip="Toggle Full Code"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             >
-                                <i class="pi pi-code"></i>
+                                <i className="pi pi-code"></i>
                             </Button>
                         )}
                         {!props.hideToggleCode && props.code.data ? (
@@ -74,7 +74,7 @@ export function DocSectionCode(props) {
                                 tooltip="View Data"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             >
-                                <i class="pi pi-database"></i>
+                                <i className="pi pi-database"></i>
                             </Button>
                         ) : null}
                         {!props.hideCodeSandbox && (
@@ -104,7 +104,7 @@ export function DocSectionCode(props) {
                             </Button>
                         )}
                         <Button type="button" onClick={copyCode} className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center" tooltip="Copy Code" tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}>
-                            <i class="pi pi-copy"></i>
+                            <i className="pi pi-copy"></i>
                         </Button>
                     </div>
 

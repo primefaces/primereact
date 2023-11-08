@@ -19,7 +19,7 @@ const BootstrapDemo = () => {
     ];
 
     const description = `
-    <a href="https://getbootstrap.com" class="font-semibold hover:underline text-primary">Bootstrap</a>
+    <a href="https://getbootstrap.com" className="font-semibold hover:underline text-primary">Bootstrap</a>
     is a well-known CSS library to build responsive and mobile first web projects.
     `;
 
