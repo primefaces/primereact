@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react';
+import { classNames } from '../../components/lib/utils/ClassNames';
 
 const BlockSection = () => {
-    const [animationClass, setAnimationClass] = useState('');
+    const [animation, setAnimation] = useState(false);
 
     useEffect(() => {
-        setAnimationClass('blocks-animation');
+        setAnimation(true);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section id="blocks-section" className="landing-blocks pt-8 overflow-hidden">
             <div className="section-header">PrimeBlocks</div>
-            <p className="section-detail">370+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
+            <p className="section-detail">400+ ready to copy-paste UI blocks to build spectacular applications in no time.</p>
             <div className="flex justify-content-center mt-4">
-                <a href="https://blocks.primereact.org" className="font-semibold p-3 border-round flex align-items-center linkbox active z-1">
-                    <span>Learn More</span>
+                <a href="https://blocks.primereact.org" className="font-semibold p-3 border-round flex align-items-center linkbox active z-2">
+                    <span>Explore All</span>
                     <i className="pi pi-arrow-right ml-2"></i>
                 </a>
             </div>
-            <section className={`prime-blocks ${animationClass} flex justify-content-center align-items-center flex-column`}>
+            <section className={classNames('prime-blocks flex justify-content-center align-items-center flex-column z-1', { 'blocks-animation': animation })}>
                 <div className="flex">
                     <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar w-1 p-3">
@@ -131,7 +132,7 @@ const BlockSection = () => {
                             <div className="block-main mt-4 h-full flex justify-content-center align-items-center flex-column">
                                 <div className="flex justify-content-between">
                                     <div className="block-item w-4rem">
-                                        <div className="bar w-2rem "></div>
+                                        <div className="bar w-2rem"></div>
                                         <span className="text my-2">26 %</span>
                                         <div className="box box-orange"></div>
                                     </div>
@@ -141,12 +142,12 @@ const BlockSection = () => {
                                         <div className="box box-pink"></div>
                                     </div>
                                     <div className="block-item mr-3 w-4rem">
-                                        <div className="bar w-4rem "></div>
+                                        <div className="bar w-4rem"></div>
                                         <span className="text my-2">62 %</span>
                                         <div className="box box-green"></div>
                                     </div>
                                     <div className="block-item w-4rem">
-                                        <div className="bar w-2rem "></div>
+                                        <div className="bar w-2rem"></div>
                                         <span className="text my-2">39 %</span>
                                         <div className="box box-blue"></div>
                                     </div>
@@ -176,18 +177,18 @@ const BlockSection = () => {
                             <div className="bar w-2rem my-3"></div>
                         </div>
                         <div className="block-content flex-1 my-5 mx-4 flex flex-column">
-                            <div className="block-main  h-full flex justify-content-center align-items-center flex-column px-2">
-                                <div className="flex justify-content-between  ">
-                                    <div className="block-item  w-3 flex justify-content-between flex-column ">
-                                        <div className="bar w-full "></div>
+                            <div className="block-main h-full flex justify-content-center align-items-center flex-column px-2">
+                                <div className="flex justify-content-between">
+                                    <div className="block-item w-3 flex justify-content-between flex-column">
+                                        <div className="bar w-full"></div>
                                         <div className="flex align-items-center mt-3">
                                             <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
                                         </div>
                                         <div className="bar bar-button w-4rem mt-4"></div>
                                     </div>
-                                    <div className="block-item  block-item-active animation-3 mx-3 w-3 flex justify-content-between flex-column">
-                                        <div className="bar w-full "></div>
+                                    <div className="block-item block-item-active animation-3 mx-3 w-3 flex justify-content-between flex-column">
+                                        <div className="bar w-full"></div>
                                         <div className="flex align-items-center mt-3">
                                             <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
@@ -198,8 +199,8 @@ const BlockSection = () => {
                                         </div>
                                         <div className="bar bar-button w-4rem mt-4"></div>
                                     </div>
-                                    <div className="block-item  w-3 flex justify-content-between flex-column">
-                                        <div className="bar w-full "></div>
+                                    <div className="block-item w-3 flex justify-content-between flex-column">
+                                        <div className="bar w-full"></div>
                                         <div className="flex align-items-center mt-3">
                                             <div className="circle circle-small circle-highlight mr-2"></div>
                                             <div className="bar w-2rem"></div>
@@ -252,7 +253,7 @@ const BlockSection = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="block-item block-item-active mx-3 animation-1  w-6rem p-0">
+                                    <div className="block-item block-item-active mx-3 animation-1 w-6rem p-0">
                                         <div className="block-image"></div>
                                         <div className="p-2">
                                             <div>
@@ -284,7 +285,7 @@ const BlockSection = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="prime-block  flex align-self-stretch p-1">
+                    <div className="prime-block flex align-self-stretch p-1">
                         <div className="block-sidebar p-3">
                             <div className="logo">
                                 <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks/logo-2.svg" alt="block logo" />
@@ -306,16 +307,16 @@ const BlockSection = () => {
                             <div className="bar w-2rem my-3"></div>
                         </div>
                         <div className="block-content flex-1 my-5 mx-4 flex flex-column">
-                            <div className="block-main  h-full flex justify-content-center align-items-center flex-column px-2">
+                            <div className="block-main h-full flex justify-content-center align-items-center flex-column px-2">
                                 <div className="flex justify-content-between">
-                                    <div className="block-item block-item-table block-item-active animation-1 flex ">
+                                    <div className="block-item block-item-table block-item-active animation-1 flex">
                                         <div className="bar w-3rem mx-3"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                         <div className="bar w-3rem mx-3"></div>
                                     </div>
                                 </div>
-                                <div className="block-item block-item-col  flex ">
+                                <div className="block-item block-item-col flex">
                                     <div className="flex">
                                         <div className="circle circle-small circle-highlight -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
@@ -324,7 +325,7 @@ const BlockSection = () => {
                                     <div className="bar w-3rem mx-3"></div>
                                     <div className="bar w-3rem mx-3"></div>
                                 </div>
-                                <div className="block-item block-item-col  flex ">
+                                <div className="block-item block-item-col flex">
                                     <div className="flex">
                                         <div className="circle circle-small circle-highlight -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
@@ -333,7 +334,7 @@ const BlockSection = () => {
                                     <div className="bar w-3rem mx-3"></div>
                                     <div className="bar w-3rem mx-3"></div>
                                 </div>
-                                <div className="block-item block-item-col  flex ">
+                                <div className="block-item block-item-col flex">
                                     <div className="flex">
                                         <div className="circle circle-small circle-highlight -mr-1"></div>
                                         <div className="bar w-3rem mx-3"></div>
@@ -372,7 +373,7 @@ const BlockSection = () => {
                                     <div className="bar w-4rem mt-2"></div>
                                     <div className="flex">
                                         <div className="bar bar-highlight bar-button w-4rem mr-2 mt-4"></div>
-                                        <div className="bar bar-button w-4rem  mr-2 mt-4"></div>
+                                        <div className="bar bar-button w-4rem mr-2 mt-4"></div>
                                     </div>
                                 </div>
                             </div>

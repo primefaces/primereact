@@ -30,12 +30,12 @@ const UsersSection = (props) => {
     const users2 = usersImages.slice(6);
 
     return (
-        <section className="landing-users py-8 px-5 lg:px-8">
+        <section className="landing-users py-8 px-3 lg:px-8">
             <div className="section-header">Who Uses</div>
             <p className="section-detail">
                 PrimeTek libraries have reached over
                 <span className="font-semibold animated-text relative white-space-nowrap">
-                    <span>130 Million Downloads </span>
+                    <span>140 Million Downloads </span>
                 </span>
                 on npm! Join the PrimeLand community and experience the difference yourself.
             </p>
@@ -43,14 +43,14 @@ const UsersSection = (props) => {
                 <span className="ml-2"> </span>
             </div>
             <div className="logo-section relative w-full md:w-8 mt-6 users-container">
-                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2" style={{ background: 'linear-gradient(to right, var(--home-bg), transparent)' }}></div>
+                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2"></div>
                 <Marquee users={users1} />
-                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2" style={{ background: 'linear-gradient(to left, var(--home-bg), transparent)' }}></div>
+                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2"></div>
             </div>
             <div className="logo-section relative w-full md:w-8 mt-2 users-container">
-                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2" style={{ background: 'linear-gradient(to right, var(--home-bg), transparent)' }}></div>
+                <div className="fade-left h-6rem w-6rem block absolute top-0 left-0 z-2"></div>
                 <Marquee users={users2} reverse />
-                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2" style={{ background: 'linear-gradient(to left, var(--home-bg), transparent)' }}></div>
+                <div className="fade-right h-6rem w-6rem block absolute top-0 right-0 z-2"></div>
             </div>
         </section>
     );

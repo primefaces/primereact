@@ -493,7 +493,6 @@
         {
             "name": "Icons",
             "icon": "pi pi-eye",
-            "to": "/icons",
             "children": [
                 {
                     "name": "Prime Icons",

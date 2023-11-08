@@ -10,6 +10,7 @@ import Menu from './menu';
 import Topbar from './topbar';
 import { PrimeReactContext } from '../lib/api/PrimeReactContext';
 import PrimeReact from '../lib/api/Api';
+import HeaderSection from '../../pages/landing/headersection';
 
 export default function Layout(props) {
     const [ripple, setRipple] = useState(true);
@@ -24,8 +25,8 @@ export default function Layout(props) {
         'layout-news-active': props.newsActive,
         'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
         'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false,
-        'layout-wrapper-dark': props.dark,
-        'layout-wrapper-light': !props.dark
+        'layout-dark': props.dark,
+        'layout-light': !props.dark
     });
     const maskClassName = classNames('layout-mask', {
         'layout-mask-active': sidebarActive
@@ -73,6 +74,20 @@ export default function Layout(props) {
 
     const onConfigButtonClick = () => {
         setConfigActive(true);
+    };
+
+    const toggleColorScheme = () => {
+        let newTheme;
+        let currentTheme = props.theme;
+
+        if (props.dark) {
+            newTheme = currentTheme.replace('dark', 'light');
+        } else {
+            if (currentTheme.includes('light') && currentTheme !== 'fluent-light') newTheme = currentTheme.replace('light', 'dark');
+            else newTheme = 'lara-dark-indigo'; //fallback
+        }
+
+        props.onThemeChange(newTheme, !props.dark);
     };
 
     useEffect(() => {
@@ -125,8 +140,8 @@ export default function Layout(props) {
                 <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon"></link>
             </Head>
             {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-            <Topbar onMenuButtonClick={onMenuButtonClick} onConfigButtonClick={onConfigButtonClick} />
-            <Menu active={sidebarActive} darkTheme={props.dark} />
+            <Topbar dark={props.dark} showConfigurator={true} showMenuButton={true} onMenuButtonClick={onMenuButtonClick} onConfigButtonClick={onConfigButtonClick} darkModeSwitch={toggleColorScheme} />
+
             <AppContentContext.Provider
                 value={{
                     ripple: ripple,
@@ -139,12 +154,13 @@ export default function Layout(props) {
                     onHideOverlaysOnDocumentScrolling: onHideOverlaysOnDocumentScrolling
                 }}
             >
+                <div className={classNames('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={onMaskClick}></div>
+
                 <div className="layout-content">
-                    <div className="layout-content-inner">
-                        {props.children}
-                        <Footer></Footer>
-                    </div>
+                    <Menu active={sidebarActive} darkTheme={props.dark} />
+                    <div className="layout-content-slot">{props.children}</div>
                 </div>
+                <Footer></Footer>
                 <Config
                     ripple={ripple}
                     inputStyle={inputStyle}
@@ -155,6 +171,9 @@ export default function Layout(props) {
                     onThemeChange={onThemeChange}
                     active={configActive}
                     onHide={onConfigHide}
+                    dark={props.dark}
+                    theme={props.theme}
+                    darkModeSwitch={toggleColorScheme}
                 />
             </AppContentContext.Provider>
             <div className={maskClassName} onClick={onMaskClick}></div>
