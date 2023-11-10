@@ -12,7 +12,7 @@ const classes = {
         }),
     label: 'p-button-label p-c',
     root: ({ props, size, disabled }) =>
-        classNames('p-button p-component', {
+        classNames('p-button p-component', props?.plain ? 'p-button-plain' : '', {
             'p-button-icon-only': (props.icon || props.loading) && !props.label && !props.children,
             'p-button-vertical': (props.iconPos === 'top' || props.iconPos === 'bottom') && props.label,
             'p-disabled': disabled,
