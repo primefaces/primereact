@@ -135,7 +135,17 @@ export default function Config(props) {
                         <img src="https://primefaces.org/cdn/primevue/images/themes/lara-light-teal.png" alt="Lara Light Teal" className="border-circle" style={{ width: '1.5rem' }} />
                         <span className="font-medium">Lara</span>
                     </div>
-                    <div className="flex align-items-center justify-content-between gap-3">
+                    <div className="flex align-items-center justify-content-between gap-3 mb-3">
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'teal'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'cyan')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => changeTheme('lara', 'cyan')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #06b6d4 0%, rgba(6, 182, 212, 0.5) 100%)' }}></span>
+                        </button>
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
                                 'border-primary': isThemeActive('lara', 'teal'),
@@ -166,6 +176,8 @@ export default function Config(props) {
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #585fe0 0%, rgba(88, 95, 224, 0.5) 100%)' }}></span>
                         </button>
+                    </div>
+                    <div className="flex align-items-center justify-content-between gap-3">
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
                                 'border-primary': isThemeActive('lara', 'purple'),
@@ -176,6 +188,18 @@ export default function Config(props) {
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #7758e4 0%, rgba(119, 88, 228, 0.5) 100%)' }}></span>
                         </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'teal'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'amber')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => changeTheme('lara', 'amber')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #f59e0b 0%, rgba(245, 158, 11, 0.5) 100%)' }}></span>
+                        </button>
+                        <div className="w-3"></div>
+                        <div className="w-3"></div>
                     </div>
                 </section>
 

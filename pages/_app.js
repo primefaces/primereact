@@ -12,7 +12,7 @@ import '../styles/layout/layout.scss';
 
 function Main({ component: Component }) {
     const [dark, setDark] = useState(false);
-    const [theme, setTheme] = useState('lara-light-indigo');
+    const [theme, setTheme] = useState('lara-light-cyan');
     const [newsActive, setNewsActive] = useState(false);
     const storageKey = 'primereact-news';
     const announcement = useRef(AnnouncementData);

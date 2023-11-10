@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
+import { Badge } from '../../components/lib/badge/Badge';
+import { Button } from '../../components/lib/button/Button';
 import { Calendar } from '../../components/lib/calendar/Calendar';
 import { Chart } from '../../components/lib/chart/Chart';
 import { Chip } from '../../components/lib/chip/Chip';
+import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
 import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
+import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
 import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
 import { Slider } from '../../components/lib/slider/Slider';
-import { Button } from '../../components/lib/button/Button';
 import { TabMenu } from '../../components/lib/tabmenu/Tabmenu';
-import { Badge } from '../../components/lib/badge/Badge';
 
 const HeroSection = () => {
     const selectButtonOptions = [
@@ -26,7 +26,7 @@ const HeroSection = () => {
 
     const [value1, setValue1] = useState(240);
     const [value2, setValue2] = useState(240);
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('C');
     const [dateValue, setDateValue] = useState(null);
     const [chartOptions, setChartOptions] = useState({});
     const [chartData, setChartData] = useState({});
@@ -126,13 +126,13 @@ const HeroSection = () => {
                                 <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
                                 <div className="flex flex-wrap gap-3">
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="category1" name="radiovalue" value="C" onChange={(e) => setCategory('C')} />
+                                        <RadioButton inputId="category1" name="radiovalue" value="C" checked={category === 'C'} onChange={(e) => setCategory('C')} />
                                         <label htmlFor="category1" className="ml-2 font-medium">
                                             Clothing
                                         </label>
                                     </div>
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="category2" name="radiovalue" value="E" onChange={(e) => setCategory('E')} />
+                                        <RadioButton inputId="category2" name="radiovalue" value="E" checked={category === 'E'} onChange={(e) => setCategory('E')} />
                                         <label htmlFor="category2" className="ml-2 font-medium">
                                             Electronics
                                         </label>

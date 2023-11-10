@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Topbar from '../components/layout/topbar';
 import { classNames } from '../components/lib/utils/Utils';
 import NewsSection from '../components/news/newssection';
 import BlockSection from './landing/blocksection';
@@ -9,10 +10,9 @@ import HeroSection from './landing/herosection';
 import TemplateSection from './landing/templatesection';
 import ThemeSection from './landing/themesection';
 import UsersSection from './landing/userssection';
-import Topbar from '../components/layout/topbar';
 
 export default function Home(props) {
-    const [tableTheme, setTableTheme] = useState('lara-light-indigo');
+    const [tableTheme, setTableTheme] = useState('lara-light-blue');
     const landingClass = classNames('landing', { 'layout-light': !props.dark, 'layout-dark': props.dark, 'layout-news-active': props.newsActive });
 
     const changeTableTheme = (newTheme) => {

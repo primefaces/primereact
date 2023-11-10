@@ -159,7 +159,10 @@ const ThemeSection = (props) => {
                     more...
                 </a>
             </div>
-            <div className="themes-main flex mt-7 justify-content-center px-5 lg:px-8" style={{ backgroundImage: `url(/images/landing-new/wave-${props.dark ? 'dark-alt' : 'light-alt'}.svg)`, backgroundSize: 'cover' }}>
+            <div
+                className="themes-main flex mt-7 justify-content-center px-5 lg:px-8"
+                style={{ backgroundImage: `url(https://primefaces.org/cdn/primereact/images/landing-new/wave-${props.dark ? 'dark-alt-gray' : 'light-alt-gray'}.svg)`, backgroundSize: 'cover' }}
+            >
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable
                         value={customers}
