@@ -45,6 +45,7 @@ export const ButtonBase = ComponentBase.extend({
         loading: false,
         loadingIcon: null,
         outlined: false,
+        plain: false,
         raised: false,
         rounded: false,
         severity: null,
