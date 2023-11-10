@@ -224,7 +224,7 @@ export default function Topbar(props) {
                                 <span className="ml-2 pi pi-angle-down text-600"></span>
                             </button>
                         </StyleClass>
-                        <div class="p-3 surface-overlay hidden absolute right-0 top-auto border-round shadow-2 origin-top w-8rem">
+                        <div className="p-3 surface-overlay hidden absolute right-0 top-auto border-round shadow-2 origin-top w-8rem">
                             <ul className="list-none m-0 p-0">
                                 {versions.map((version) => {
                                     return (
