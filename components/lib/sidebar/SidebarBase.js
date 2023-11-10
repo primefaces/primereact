@@ -94,7 +94,7 @@ const styles = `
     .p-sidebar-full .p-sidebar {
         transition: none;
         transform: none;
-        width: 100vw; 
+        width: 100vw;
         height: 100vh;
         max-height: 100%;
         top: 0px !important;
