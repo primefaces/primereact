@@ -53,13 +53,6 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
         return sidebarRef && sidebarRef.current && !sidebarRef.current.contains(event.target);
     };
 
-    const getPositionClass = () => {
-        const positions = ['left', 'right', 'top', 'bottom'];
-        const pos = positions.find((item) => item === props.position);
-
-        return pos ? `p-sidebar-${pos}` : '';
-    };
-
     const focus = () => {
         const activeElement = document.activeElement;
         const isActiveElementInDialog = activeElement && sidebarRef && sidebarRef.current.contains(activeElement);
