@@ -429,6 +429,22 @@ export const InputMask = React.memo(
             }
         };
 
+        const handlePaste = (e) => {
+            if (props.readOnly) {
+                return;
+            }
+
+            caret();
+            updateModel(e);
+
+            if (props.onComplete && isCompleted()) {
+                props.onComplete({
+                    originalEvent: e,
+                    value: getValue()
+                });
+            }
+        };
+
         const getUnmaskedValue = React.useCallback(() => {
             let unmaskedBuffer = [];
 
@@ -607,7 +623,7 @@ export const InputMask = React.memo(
                 onKeyDown={onKeyDown}
                 onKeyPress={onKeyPress}
                 onInput={onInput}
-                onPaste={handleInputChange}
+                onPaste={handlePaste}
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
