@@ -773,7 +773,7 @@ const Tailwind = {
                 {
                     'text-lg px-4 py-4': props.size == 'large',
                     'text-xs px-2 py-2': props.size == 'small',
-                    'p-3 text-base': !props.size || typeof props.size === 'number',
+                    'p-3 text-base': !props.size || typeof props.size === 'number'
                 }
             )
         })
