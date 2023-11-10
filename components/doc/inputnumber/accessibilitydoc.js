@@ -5,8 +5,8 @@ import { DocSectionText } from '../common/docsectiontext';
 export function AccessibilityDoc() {
     const code = {
         basic: `
-<label htmlFor="price">Price</label>
-<InputNumber inputId="price" />
+<label htmlFor="input-price">Price</label>
+<InputNumber id="span-price" inputId="input-price" />
 
 <span id="label_number">Number</span>
 <InputNumber aria-labelledby="label_number" />
@@ -21,7 +21,8 @@ export function AccessibilityDoc() {
                 <h3>Screen Reader</h3>
                 <p>
                     Value to describe the component can either be provided via <i>label</i> tag combined with <i>inputId</i> prop or using <i>aria-labelledby</i>, <i>aria-label</i> props. The input element uses <i>spinbutton</i> role in addition to
-                    the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes.
+                    the <i>aria-valuemin</i>, <i>aria-valuemax</i> and <i>aria-valuenow</i> attributes. Make sure to assign unique identifiers for the <i>span</i>
+                    and <i>input</i>.
                 </p>
 
                 <DocSectionCode code={code} hideToggleCode import hideCodeSandbox hideStackBlitz />
