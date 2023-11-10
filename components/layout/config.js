@@ -90,7 +90,7 @@ export default function Config(props) {
     }, [scale]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Sidebar visible={props.active} onHide={() => props.onHide()} className={classNames('layout-config w-full sm:w-30rem', { 'layout-dark': props.dark }, { 'layout-light': !props.dark })} position="right">
+        <Sidebar visible={props.active} onHide={() => props.onHide()} className={classNames('layout-config w-full sm:w-26rem', { 'layout-dark': props.dark }, { 'layout-light': !props.dark })} position="right">
             <div className="p-2">
                 <section className="pb-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
                     <span className="text-xl font-semibold">Scale</span>
@@ -138,7 +138,7 @@ export default function Config(props) {
                     <div className="flex align-items-center justify-content-between gap-3 mb-3">
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                'border-primary': isThemeActive('lara', 'teal'),
+                                'border-primary': isThemeActive('lara', 'cyan'),
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'cyan')
                             })}
                             style={{ borderRadius: '30px' }}
@@ -190,7 +190,7 @@ export default function Config(props) {
                         </button>
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                'border-primary': isThemeActive('lara', 'teal'),
+                                'border-primary': isThemeActive('lara', 'amber'),
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'amber')
                             })}
                             style={{ borderRadius: '30px' }}
@@ -200,7 +200,7 @@ export default function Config(props) {
                         </button>
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                'border-primary': isThemeActive('lara', 'teal'),
+                                'border-primary': isThemeActive('lara', 'turquoise'),
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'turquoise')
                             })}
                             style={{ borderRadius: '30px' }}
@@ -210,7 +210,7 @@ export default function Config(props) {
                         </button>
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                'border-primary': isThemeActive('lara', 'teal'),
+                                'border-primary': isThemeActive('lara', 'pink'),
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'pink')
                             })}
                             style={{ borderRadius: '30px' }}
