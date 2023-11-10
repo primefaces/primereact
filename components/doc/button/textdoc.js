@@ -64,6 +64,7 @@ export default function TextDemo() {
                 <Button label="Warning" severity="warning" text />
                 <Button label="Help" severity="help" text />
                 <Button label="Danger" severity="danger" text />
+                <Button label="Plain" plain text />
             </div>
             <DocSectionCode code={code} />
         </>
