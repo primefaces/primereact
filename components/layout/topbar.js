@@ -1,8 +1,8 @@
 import { DocSearch } from '@docsearch/react';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import pkg from '../../package.json';
 import { StyleClass } from '../lib/styleclass/StyleClass';
-import Link from 'next/link';
 import { classNames } from '../lib/utils/Utils';
 
 export default function Topbar(props) {
@@ -217,20 +217,21 @@ export default function Topbar(props) {
                             <button
                                 ref={versionsRef}
                                 type="button"
-                                className="p-link flex align-items-center surface-card h-2rem px-2 hover:surface-hover border-1 border-solid surface-border transition-all transition-duration-300 hover:border-primary"
+                                style={{ maxWidth: '8rem' }}
+                                className="px-link flex align-items-center surface-card h-2rem px-2 border-1 border-solid surface-border transition-all transition-duration-300 hover:border-primary"
                             >
-                                <span className="text-900">{versions && versions.length ? versions[0].version : ''}</span>
+                                <span className="text-900 block white-space-nowrap overflow-hidden">{versions && versions.length ? versions[0].version : ''}</span>
                                 <span className="ml-2 pi pi-angle-down text-600"></span>
                             </button>
                         </StyleClass>
-                        <div className="p-3 surface-overlay hidden absolute right-0 top-auto border-round shadow-2 origin-top w-12rem">
+                        <div class="p-3 surface-overlay hidden absolute right-0 top-auto border-round shadow-2 origin-top w-8rem">
                             <ul className="list-none m-0 p-0">
                                 {versions.map((version) => {
                                     return (
                                         <li role="none" key={version.version}>
-                                            <a href={version.url} className="block p-2 border-round hover:surface-hover w-full">
+                                            <a href={version.url} className="inline-flex p-2 border-round hover:surface-hover w-full">
                                                 <span className="font-bold text-900">{version.name}</span>
-                                                <span className="ml-2 text-700">({version.version})</span>
+                                                <span className="ml-2 text-700 white-space-nowrap block overflow-hidden text-overflow-ellipsis">({version.version})</span>
                                             </a>
                                         </li>
                                     );

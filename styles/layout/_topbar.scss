@@ -30,17 +30,13 @@
     .layout-topbar-icon {
         border-radius: var(--border-radius);
         @include focus-visible();
-
-        svg {
-            width: 120px;
-        }
     }
 
     .layout-topbar-logo {
         display: inline-flex;
 
         svg {
-            width: 120px;
+            width: 165px;
         }
     }
 
@@ -48,7 +44,7 @@
         display: none;
 
         svg {
-            width: 25px;
+            width: 36px;
         }
     }
     
