@@ -121,7 +121,7 @@ const styles = `
     }
     
     .p-cascadeselect-item-active {
-        overflow: visible !important;
+        overflow: visible;
     }
     
     .p-cascadeselect-item-active > .p-cascadeselect-sublist {

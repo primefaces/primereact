@@ -387,7 +387,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
 
         widths.forEach((width, index) => {
-            let style = `width: ${width}px !important; max-width: ${width}px !important`;
+            let style = `width: ${width}px; max-width: ${width}px`;
 
             innerHTML += `
                 ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
@@ -599,7 +599,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
-            let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
+            let style = `width: ${colWidth}px; max-width: ${colWidth}px`;
 
             innerHTML += `
                 ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
@@ -805,12 +805,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 @media screen and (max-width: ${props.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
     ${selector} > .p-datatable-tfoot > tr > td {
-        display: none !important;
+        display: none;
     }
 
     ${selector} > .p-datatable-tbody > tr > td {
         display: flex;
-        width: 100% !important;
+        width: 100%;
         align-items: center;
         justify-content: space-between;
     }
