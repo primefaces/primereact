@@ -198,8 +198,26 @@ export default function Config(props) {
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #f59e0b 0%, rgba(245, 158, 11, 0.5) 100%)' }}></span>
                         </button>
-                        <div className="w-3"></div>
-                        <div className="w-3"></div>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'teal'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'turquoise')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => changeTheme('lara', 'turquoise')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #14b8a6 0%, rgba(20, 184, 166, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'teal'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'pink')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => changeTheme('lara', 'pink')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #ec4899 0%, rgba(236, 72, 153, 0.5) 100%)' }}></span>
+                        </button>
                     </div>
                 </section>
 
