@@ -1439,7 +1439,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.onValueChange) {
             props.onValueChange(processedData({ filters }));
         }
-    }, [props.filters, props.children]);
+    }, [props.filters]);
 
     useUpdateEffect(() => {
         if (isStateful()) {
