@@ -11,7 +11,7 @@ const classes = {
 
         return classNames(
             'p-sidebar-mask',
-            pos ? `p-sidebar-${pos}` : '',
+            pos && !props.fullScreen ? `p-sidebar-${pos}` : '',
             {
                 'p-component-overlay p-component-overlay-enter': props.modal,
                 'p-sidebar-mask-scrollblocker': props.blockScroll,
@@ -94,8 +94,8 @@ const styles = `
     .p-sidebar-full .p-sidebar {
         transition: none;
         transform: none;
-        width: 100vw !important;
-        height: 100vh !important;
+        width: 100vw; 
+        height: 100vh;
         max-height: 100%;
         top: 0px !important;
         left: 0px !important;
