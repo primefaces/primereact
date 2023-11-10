@@ -151,6 +151,11 @@ export interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHT
      */
     loadingIcon?: IconType<ButtonProps> | undefined;
     /**
+     * Add a plain textual class to the button without a background initially.
+     * @defaultValue false
+     */
+    plain?: boolean | undefined;
+    /**
      * Content of the tooltip.
      */
     tooltip?: string | undefined;
