@@ -50,7 +50,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
     const ptCallbacks = DataTableBase.setMetaData(metaData);
 
-    const disableRowReorderOnFilter = props.disableRowReorderOnFilter || false;
+    const disableRowReorderOnFilter =  true;
 
     useHandleStyle(DataTableBase.css.styles, ptCallbacks.isUnstyled, { name: 'datatable' });
     const attributeSelector = React.useRef('');
@@ -1688,7 +1688,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
                 isFilterActive={isFilterActive}
-                disableRowReorderOnFilter={disableRowReorderOnFilter}
             />
         );
         const body = (
@@ -1772,7 +1771,6 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
                 isFilterActive={isFilterActive}
-                disableRowReorderOnFilter={disableRowReorderOnFilter}
             />
         );
         const spacerBody = ObjectUtils.isNotEmpty(spacerStyle) ? (

@@ -49,9 +49,7 @@ export const TableBody = React.memo(
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
         const isRadioSelectionModeInColumn = props.selectionModeInColumn === 'single';
         const isCheckboxSelectionModeInColumn = props.selectionModeInColumn === 'multiple';
-        const isFilterActive = props.isFilterActive;
-        const disableRowReorderOnFilter = props.disableRowReorderOnFilter;
-        const disableRowReorderElement = disableRowReorderOnFilter && isFilterActive;
+        const disableRowReorderElement = props.isFilterActive;
 
         const equals = (data1, data2) => {
             if (allowCellSelection()) return (data1.rowIndex === data2.rowIndex || data1.rowData === data2.rowData) && (data1.field === data2.field || data1.cellIndex === data2.cellIndex);
