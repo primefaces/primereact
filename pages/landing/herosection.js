@@ -162,7 +162,7 @@ const HeroSection = () => {
                         <div className="flex flex-column w-6 gap-5 pl-3">
                             <div className="box p-4 fadein animation-duration-500">
                                 <div className="surface-card mb-4 w-full text-center p-5" style={{ borderRadius: '10px' }}>
-                                    <img src="https://primefaces.org/cdn/primevue/images/landing/air-jordan.png" alt="Watch" className="w-14rem" />
+                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/air-jordan.png" alt="Watch" className="w-14rem" />
                                 </div>
                                 <div className="flex align-items-center mb-4">
                                     <div className="flex flex-column">
