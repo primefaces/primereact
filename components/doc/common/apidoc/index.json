@@ -5343,6 +5343,14 @@
                             "description": "Add a border class without a background initially."
                         },
                         {
+                            "name": "plain",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "false",
+                            "description": "Add a plain textual class to the button without a background initially."
+                        },
+                        {
                             "name": "pt",
                             "optional": true,
                             "readonly": false,
@@ -28855,6 +28863,14 @@
                             "description": "When present, it specifies that the element must be filled out before submitting the form."
                         },
                         {
+                            "name": "size",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Size of the input."
+                        },
+                        {
                             "name": "slotChar",
                             "optional": true,
                             "readonly": false,
@@ -30076,6 +30092,14 @@
                             "type": "PassThroughOptions",
                             "default": "",
                             "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "size",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string | number",
+                            "default": "",
+                            "description": "Size of the input."
                         },
                         {
                             "name": "tooltip",

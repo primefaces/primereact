@@ -223,6 +223,7 @@ function addEntry(name, input, output, isComponent = true) {
     };
 
     entries.push(get_CJS_ESM());
+
     if (!NPM_LINK) {
         entries.push(get_IIFE());
 

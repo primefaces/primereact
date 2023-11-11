@@ -1,32 +1,37 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Topbar from '../components/layout/topbar';
 import { classNames } from '../components/lib/utils/Utils';
 import NewsSection from '../components/news/newssection';
 import BlockSection from './landing/blocksection';
-import ComponentSection from './landing/componentsection';
-import DesignerSection from './landing/designersection';
 import FeaturesSection from './landing/featuressection';
 import FooterSection from './landing/footersection';
-import HeaderSection from './landing/headersection';
 import HeroSection from './landing/herosection';
 import TemplateSection from './landing/templatesection';
 import ThemeSection from './landing/themesection';
 import UsersSection from './landing/userssection';
 
 export default function Home(props) {
-    const [tableTheme, setTableTheme] = useState('lara-light-indigo');
-    const rootClassName = classNames('landing', { 'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive });
-
-    const toggleColorScheme = () => {
-        const darkMode = !props.dark;
-        const newTheme = darkMode ? 'lara-dark-indigo' : 'lara-light-indigo';
-
-        props.onThemeChange(newTheme, darkMode);
-    };
+    const [tableTheme, setTableTheme] = useState('lara-light-blue');
+    const landingClass = classNames('landing', { 'layout-light': !props.dark, 'layout-dark': props.dark, 'layout-news-active': props.newsActive });
 
     const changeTableTheme = (newTheme) => {
         props.onTableThemeChange(tableTheme, newTheme);
         setTableTheme(newTheme);
+    };
+
+    const onDarkModeToggle = () => {
+        let newTheme;
+        let currentTheme = props.theme;
+
+        if (props.dark) {
+            newTheme = currentTheme.replace('dark', 'light');
+        } else {
+            if (currentTheme.includes('light') && currentTheme !== 'fluent-light') newTheme = currentTheme.replace('light', 'dark');
+            else newTheme = 'lara-dark-indigo'; //fallback
+        }
+
+        props.onThemeChange(newTheme, !props.dark);
     };
 
     useEffect(() => {
@@ -36,7 +41,7 @@ export default function Home(props) {
     }, [props.dark]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className={rootClassName}>
+        <div className={landingClass}>
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
@@ -54,18 +59,14 @@ export default function Home(props) {
                 <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
             </Head>
-            <div className="landing-intro">
-                {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-                <HeaderSection dark={props.dark} onToggleColorScheme={toggleColorScheme} />
-                <HeroSection />
-            </div>
+            {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
+            <Topbar dark={props.dark} showConfigurator={false} showMenuButton={false} darkModeSwitch={onDarkModeToggle} />
+            <HeroSection />
+            <FeaturesSection dark={props.dark} />
             <UsersSection dark={props.dark} />
-            <ComponentSection />
             <ThemeSection theme={tableTheme} onThemeChange={(t) => changeTableTheme(t)} dark={props.dark} />
             <BlockSection />
-            <DesignerSection dark={props.dark} />
             <TemplateSection dark={props.dark} />
-            <FeaturesSection dark={props.dark} />
             <FooterSection dark={props.dark} />
         </div>
     );

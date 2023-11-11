@@ -53,14 +53,14 @@ const Tailwind = {
                       leaveActiveClass: 'transition-all duration-200 ease-out',
                       leaveToClass: 'opacity-0 scale-75 translate-x-0 translate-y-full translate-z-0'
                   }
-                : props.position === 'left' || props.position === 'topleft' || props.position === 'bottomleft'
+                : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
                 ? {
                       enterFromClass: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
                       enterActiveClass: 'transition-all duration-200 ease-out',
                       leaveActiveClass: 'transition-all duration-200 ease-out',
                       leaveToClass: 'opacity-0 scale-75  -translate-x-full translate-y-0 translate-z-0'
                   }
-                : props.position === 'right' || props.position === 'topright' || props.position === 'bottomright'
+                : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
                 ? {
                       enterFromClass: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
                       enterActiveClass: 'transition-all duration-200 ease-out',

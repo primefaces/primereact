@@ -808,12 +808,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 @media screen and (max-width: ${props.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
     ${selector} > .p-datatable-tfoot > tr > td {
-        display: none !important;
+        display: none;
     }
 
     ${selector} > .p-datatable-tbody > tr > td {
         display: flex;
-        width: 100% !important;
+        width: 100%;
         align-items: center;
         justify-content: space-between;
     }
@@ -1454,7 +1454,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.onValueChange) {
             props.onValueChange(processedData({ filters }));
         }
-    }, [props.filters, props.children]);
+    }, [props.filters]);
 
     useUpdateEffect(() => {
         if (isStateful()) {

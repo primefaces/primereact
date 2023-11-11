@@ -64,6 +64,7 @@ export default function RaisedTextDemo() {
                 <Button label="Warning" severity="warning" text raised />
                 <Button label="Help" severity="help" text raised />
                 <Button label="Danger" severity="danger" text raised />
+                <Button label="Plain" plain text raised />
             </div>
             <DocSectionCode code={code} />
         </>

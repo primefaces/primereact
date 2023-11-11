@@ -18,8 +18,8 @@
                     opacity: 1;
                     visibility: visible;
                     transform: scale(1);
-               }
-           }
+                }
+            }
         }
 
         .prime-block {
@@ -71,8 +71,8 @@
                     border: var(--home-blocks-main-border);
                     border-radius: 13px;
                     background: var(--home-blocks-main-bg);
-               }
-           }
+                }
+            }
         }
 
         .block-item {
@@ -149,8 +149,8 @@
                 
                 .bar{
                     background: var(--home-blocks-tablebar-bg);
-               }
-           }
+                }
+            }
         }
 
         .bar {
@@ -180,8 +180,8 @@
                     height: 3px;
                     border-radius: 6px;
                     background: var(--home-blocks-bar-button-bg);
-               }
-           }
+                }
+            }
         }
 
         .circle {
@@ -193,7 +193,7 @@
             &.circle-small {
                 width: 8px;
                 height: 8px;
-           }
+            }
 
             &.circle-medium {
                 width: 14px;
@@ -216,7 +216,7 @@
 
 @keyframes block-animation {
     to {
-        transform: translateY(-10px) scale(1.02);
+        transform: translateY(-10px) translateX(10px) scale(1.02);
         box-shadow: var(--home-blocks-animation-shadow);
     }
 }

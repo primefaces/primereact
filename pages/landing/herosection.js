@@ -1,101 +1,216 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import GetStartedSection from './getstartedsection';
+import { Badge } from '../../components/lib/badge/Badge';
+import { Button } from '../../components/lib/button/Button';
+import { Calendar } from '../../components/lib/calendar/Calendar';
+import { Chart } from '../../components/lib/chart/Chart';
+import { Chip } from '../../components/lib/chip/Chip';
+import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
+import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
+import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
+import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
+import { Slider } from '../../components/lib/slider/Slider';
+import { TabMenu } from '../../components/lib/tabmenu/Tabmenu';
 
 const HeroSection = () => {
-    const [animationClass, setAnimationClass] = useState('');
+    const selectButtonOptions = [
+        { name: 'Styled', value: 1 },
+        { name: 'Unstyled', value: 2 }
+    ];
+
+    const items = [
+        { label: 'Home', icon: 'pi pi-fw pi-home' },
+        { label: 'Calendar', icon: 'pi pi-fw pi-calendar' }
+    ];
+
+    const [value1, setValue1] = useState(240);
+    const [value2, setValue2] = useState(240);
+    const [category, setCategory] = useState('C');
+    const [dateValue, setDateValue] = useState(null);
+    const [chartOptions, setChartOptions] = useState({});
+    const [chartData, setChartData] = useState({});
+    const [checked, setChecked] = useState(true);
+    const [selectButtonValue, setSelectButtonValue] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [rangeValues, setRangeValues] = useState([20, 80]);
 
     useEffect(() => {
-        setAnimationClass('hero-animation');
         document.body.classList.remove('blocked-scroll');
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+        const data = {
+            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+            datasets: [
+                {
+                    label: 'Annual Income',
+                    data: [40, 59, 40, 50, 56],
+                    fill: true,
+                    borderColor: '#03C4E8',
+                    tension: 0.4,
+                    backgroundColor: 'rgba(151, 210, 222, .2)'
+                }
+            ]
+        };
+
+        const options = {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    min: 0,
+                    max: 100,
+                    grid: {
+                        color: surfaceBorder
+                    }
+                }
+            }
+        };
+
+        setChartData(data);
+        setChartOptions(options);
+    }, []);
+
     return (
-        <section className={`landing-hero ${animationClass} flex align-items-center flex-column justify-content-center relative`}>
-            <div className="hero-inner z-2 relative">
-                <div className="flex flex-column md:align-items-center md:flex-row">
-                    <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://www.primefaces.org/store')}>
-                            <div className="flex flex-column align-items-center">
-                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/templates-icon.svg" alt="primereact templates" />
-                                <div className="name">
-                                    <b>Templates</b>
-                                    <span>Spectacular Designs</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation ml-4 md:ml-0 md:mt-4 flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://designer.primereact.org')}>
-                            <div className="flex flex-column align-items-center">
-                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/designer-icon.svg" alt="primereact templates" />
-                                <div className="name">
-                                    <b>Theme Designer</b>
-                                    <span>Create Your Own</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://github.com/primefaces/primereact')}>
-                            <div className="flex flex-column align-items-center">
-                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/core-icon.svg" alt="primereact core" />
-                                <div className="name">
-                                    <b>Open Source</b>
-                                    <span>90+ UI Components</span>
-                                </div>
-                            </div>
-                        </div>
-                        <Link href="/installation" passHref>
-                            <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation logo hidden md:flex my-4 align-items-center justify-content-center">
-                                <div className="hero-box-inner text-center">
-                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/overview-icon.svg" alt="primereact main" />
-                                    <div className="name">
-                                        <b className="font-bold">NEXT-GEN REACT UI</b>
-                                    </div>
-                                </div>
-                            </div>
+        <section className="landing-hero py-8 px-5 lg:px-8">
+            <div className="flex flex-wrap">
+                <div className="w-full xl:w-6 flex flex-column justify-content-center lg:pr-8 align-items-center xl:align-items-stretch">
+                    <h1 className="text-6xl font-bold text-center xl:text-left">
+                        The Most Complete UI Suite for <span className="font-bold text-primary">React.js</span>
+                    </h1>
+                    <p className="section-detail xl:text-left text-center px-0 mt-0 mb-5">
+                        Elevate your web applications with PrimeReact's comprehensive suite of customizable, feature-rich UI components. With PrimeReact, turning your development vision into reality has never been easier.
+                    </p>
+                    <div className="flex align-items-center gap-3">
+                        <Link href="/installation">
+                            <a className="linkbox active font-semibold py-3 px-4">
+                                <span>Get Started</span>
+                                <i className="pi pi-arrow-right ml-3"></i>
+                            </a>
                         </Link>
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 align-items-center justify-content-center" onClick={() => (window.location.href = 'https://primeflex.org')}>
-                            <div className="flex flex-column align-items-center">
-                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/css-icon.svg" alt="primereact icons" />
-                                <div className="name">
-                                    <b>CSS Utilities</b>
-                                    <span>PrimeFlex CSS</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="p-2 flex flex-row md:flex-column">
-                        <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex align-items-center justify-content-center" onClick={() => (window.location.href = 'https://blocks.primereact.org')}>
-                            <div className="flex flex-column align-items-center">
-                                <img src="https://primefaces.org/cdn/primereact/images/landing-new/blocks-icon.svg" alt="primereact templates" />
-                                <div className="name">
-                                    <b>Prime Blocks</b>
-                                    <span>400+ UI Blocks</span>
-                                </div>
-                            </div>
-                        </div>
-                        <Link href="/icons" passHref>
-                            <div className="hero-box w-10rem h-10rem md:w-12rem md:h-12rem animation flex ml-4 md:ml-0 md:mt-4 align-items-center justify-content-center">
-                                <div className="flex flex-column align-items-center">
-                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/icons-icon.svg" alt="primereact templates" />
-                                    <div className="name">
-                                        <b>Icon Library</b>
-                                        <span>200+ Icons</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
+                        <a href="https://github.com/primefaces/primereact" target="_blank" rel="noopener noreferrer" className="linkbox font-semibold py-3 px-4">
+                            <span>Give a Star</span>
+                            <i className="pi pi-star-fill ml-3 text-yellow-500"></i>
+                        </a>
                     </div>
                 </div>
-                <div className="hero-border-top hidden md:block"></div>
-                <div className="hero-border-left hidden md:block"></div>
-                <div className="hero-border-right hidden md:block"></div>
-            </div>
-            <GetStartedSection />
-            <div className="hero-bg absolute top-0 left-0 right-0 bottom-0 z-0">
-                <div className="hero-strip-top"></div>
-                <div className="hero-strip-left"></div>
+                <div className="w-full xl:w-6 pt-7 xl:pt-0 hidden md:block">
+                    <div className="flex">
+                        <div className="flex flex-column w-6 gap-5 pt-8 pr-3">
+                            <div className="box p-4 fadein animation-duration-500">
+                                <span className="text-secondary font-medium block mb-3">Balance</span>
+                                <div className="flex flex-wrap lg:flex-nowrap justify-content-start gap-3">
+                                    <InputNumber value={value1} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="lg:w-6" onValueChange={(e) => setValue1(e.value)} />
+                                    <InputNumber value={value2} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="lg:w-6" onValueChange={(e) => setValue2(e.value)} />
+                                </div>
+                                <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
+                                <div className="flex flex-wrap gap-3">
+                                    <div className="flex align-items-center">
+                                        <RadioButton inputId="category1" name="radiovalue" value="C" checked={category === 'C'} onChange={(e) => setCategory('C')} />
+                                        <label htmlFor="category1" className="ml-2 font-medium">
+                                            Clothing
+                                        </label>
+                                    </div>
+                                    <div className="flex align-items-center">
+                                        <RadioButton inputId="category2" name="radiovalue" value="E" checked={category === 'E'} onChange={(e) => setCategory('E')} />
+                                        <label htmlFor="category2" className="ml-2 font-medium">
+                                            Electronics
+                                        </label>
+                                    </div>
+                                </div>
+                                <span className="text-secondary font-medium block mt-5 mb-3">Order Date</span>
+                                <Calendar value={dateValue} showWeek className="w-full" />
+                            </div>
+                            <div className="box p-4 fadein animation-duration-500">
+                                <Chart type="line" data={chartData} options={chartOptions} />
+                            </div>
+                            <div className="box p-4 fadein animation-duration-500">
+                                <div className="flex align-items-center">
+                                    <Chip label="React" className="mr-2 font-medium" />
+                                    <Chip label="Typescript" className="mr-2 font-medium" />
+                                    <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} className="ml-auto" />
+                                </div>
+                                <div className="mt-5 flex justify-content-center">
+                                    <SelectButton value={selectButtonValue} onChange={(e) => setSelectButtonValue(e.value)} options={selectButtonOptions} optionLabel="name" />
+                                </div>
+                                <div className="mt-5">
+                                    <Slider value={rangeValues} onChange={(e) => setRangeValues(e.value)} range className="w-full" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-column w-6 gap-5 pl-3">
+                            <div className="box p-4 fadein animation-duration-500">
+                                <div className="surface-card mb-4 w-full text-center p-5" style={{ borderRadius: '10px' }}>
+                                    <img src="https://primefaces.org/cdn/primereact/images/landing-new/air-jordan.png" alt="Watch" className="w-14rem" />
+                                </div>
+                                <div className="flex align-items-center mb-4">
+                                    <div className="flex flex-column">
+                                        <span className="block font-semibold mb-1">Sneaker</span>
+                                        <span className="text-secondary text-sm">Premium Quality</span>
+                                    </div>
+                                    <span className="font-medium text-xl ml-auto">$990</span>
+                                </div>
+                                <Button label="Add to Cart" icon="pi pi-shopping-cart" outlined className="w-full"></Button>
+                            </div>
+                            <div className="box p-4 fadein animation-duration-500">
+                                <ul className="list-none p-0 m-0">
+                                    <li className="flex align-items-center mb-3">
+                                        <span className="mr-3">
+                                            <img src="https://primefaces.org/cdn/primevue/images/landing/avatar.png" alt="Avatar" className="w-3rem h-3rem" />
+                                        </span>
+                                        <div className="flex flex-column">
+                                            <span className="font-bold mb-1">Amanda Williams</span>
+                                            <span className="text-secondary">Administrator</span>
+                                        </div>
+                                    </li>
+                                    <li className="flex">
+                                        <a className="flex align-items-center p-3 border-round w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{ borderRadius: '10px' }}>
+                                            <i className="pi pi-home text-xl mr-3"></i>
+                                            <span className="flex flex-column">
+                                                <span className="font-bold mb-1">Dashboard</span>
+                                                <span className="m-0 text-secondary">Control Panel</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li className="flex">
+                                        <a className="flex align-items-center p-3 border-round w-full hover:surface-hover transition-colors transition-duration-150 cursor-pointer" style={{ borderRadius: '10px' }}>
+                                            <i className="pi pi-envelope text-xl mr-3"></i>
+                                            <span className="flex flex-column">
+                                                <span className="font-bold mb-1">Inbox</span>
+                                                <span className="m-0 text-secondary">View Messages</span>
+                                            </span>
+                                            <Badge value="3" className="ml-auto"></Badge>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="box p-4 fadein animation-duration-500">
+                                <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );

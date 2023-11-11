@@ -452,7 +452,7 @@ export const MegaMenu = React.memo(
 @media screen and (max-width: ${props.breakpoint}) {
     .p-megamenu[${selector}] > .p-megamenu-root-list .p-menuitem-active .p-megamenu-panel {
         position: relative;
-        left: 0 !important;
+        left: 0;
         box-shadow: none;
         border-radius: 0;
         background: inherit;

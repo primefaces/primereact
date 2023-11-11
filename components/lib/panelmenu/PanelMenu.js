@@ -54,7 +54,7 @@ export const PanelMenu = React.memo(
         };
 
         const onItemClick = (event, item) => {
-            if (item.disabled || !item.items) {
+            if (item.disabled) {
                 event.preventDefault();
 
                 return;
@@ -82,8 +82,10 @@ export const PanelMenu = React.memo(
                     activeItem.expanded = false;
                 }
 
-                item.expanded = true;
-                setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
+                if (item.items) {
+                    item.expanded = true;
+                    setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
+                }
             }
         };
 
