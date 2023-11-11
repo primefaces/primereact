@@ -13,11 +13,11 @@ const TemplateSection = (props) => {
     const imageBg = (template) => {
         const url = template === 'templates-text' ? 'png' : 'jpg';
 
-        return `url('https://primefaces.org/cdn/primereact/images/landing/templates/${template}-${isDark ? 'dark' : 'light'}.${url}')`;
+        return `url('https://primefaces.org/cdn/primereact/images/landing-new/templates/${template}-${isDark ? 'dark' : 'light'}.${url}')`;
     };
 
     const templateImg = () => {
-        return `https://primefaces.org/cdn/primereact/images/landing/templates/templates-text-new-${isDark ? 'dark' : 'light'}.png`;
+        return `https://primefaces.org/cdn/primereact/images/landing-new/templates/templates-text-new-${isDark ? 'dark' : 'light'}.png`;
     };
 
     return (
