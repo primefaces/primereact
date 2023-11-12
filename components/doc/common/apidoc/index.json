@@ -15902,14 +15902,6 @@
                             "description": "ColumnGroup component for footer."
                         },
                         {
-                            "name": "frozenRow",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "default": "",
-                            "description": "Whether the row is frozen or not."
-                        },
-                        {
                             "name": "frozenValue",
                             "optional": true,
                             "readonly": false,
@@ -18805,13 +18797,6 @@
                             "readonly": false,
                             "type": "ReactNode",
                             "description": "ColumnGroup component for footer."
-                        },
-                        {
-                            "name": "frozenRow",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "boolean",
-                            "description": "Whether the row is frozen or not."
                         },
                         {
                             "name": "frozenValue",
