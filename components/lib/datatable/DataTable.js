@@ -1083,17 +1083,23 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const checkIfFiltersActive = () => {
-        const _filters = { ...d_filtersState };
-        const activeFilters = getActiveFilters(_filters) || {};
-        const isGlobalFilter = activeFilters['global']?.value || props.globalFilter;
+        const activeFilters = getActiveFilters(d_filtersState) || {};
+        const filterStoreModelObj = (!props.onFilter && props.filters) || getFilters();
 
-        if (!isGlobalFilter) {
-            delete activeFilters['global'];
-        }
+        const appliedFilters = Object.keys(d_filtersState).filter((key) => {
+          const filterStoreModel = filterStoreModelObj?.[key];
+          const filterModel = activeFilters[key];
 
-        const isFilterActive = ObjectUtils.isNotEmpty(activeFilters) && ObjectUtils.isNotEmpty(activeFilters);
+         if (!filterStoreModel || !filterModel) return false
 
-        return isFilterActive;
+          return (
+            (filterStoreModel?.operator
+              ? !ObjectUtils.isEmpty(filterModel?.constraints[0]?.value)
+              : !ObjectUtils.isEmpty(filterModel?.value)) || false
+          );
+        });
+
+        return ObjectUtils.isNotEmpty(appliedFilters);
     };
 
     const filterLocal = (data, filters) => {
