@@ -299,7 +299,7 @@ const Tailwind = {
     },
     dialog: {
         root: ({ state }) => ({
-            className: classNames('rounded-lg shadow-lg border-0', 'max-h-90 transform scale-100', 'm-0 w-[50vw]', 'dark:border dark:border-blue-900/40', {
+            className: classNames('rounded-lg shadow-lg border-0', 'max-h-[90%] transform scale-100', 'm-0 w-[50vw]', 'dark:border dark:border-blue-900/40', {
                 'transition-none transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': state.maximized
             })
         }),
@@ -1497,7 +1497,7 @@ const Tailwind = {
             root: 'rounded-tl-none rounded-bl-none'
         },
         panel: {
-            className: classNames('bg-white text-gray-700 border-0 rounded-md shadow-lg', 'max-h-[200px] overflow-auto', 'bg-white text-gray-700 border-0 rounded-md shadow-lg', 'dark:bg-gray-900 dark:text-white/80')
+            className: classNames('bg-white text-gray-700 border-0 rounded-md shadow-lg', 'max-h-[200px] overflow-auto', 'dark:bg-gray-900 dark:text-white/80')
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
@@ -2161,7 +2161,7 @@ const Tailwind = {
             className: classNames('fixed top-0 left-0 w-full h-full', 'flex items-center justify-center', 'bg-black bg-opacity-90')
         },
         toolbar: {
-            className: classNames('absolute top-0 right-0 flex', 'p-4')
+            className: classNames('absolute top-0 right-0 z-10 flex', 'p-4')
         },
         rotaterightbutton: {
             className: classNames(
