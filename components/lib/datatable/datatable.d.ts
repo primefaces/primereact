@@ -684,6 +684,7 @@ interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
     field: string;
     /**
      * Whether the row is frozen or not.
+     * @defaultValue false
      */
     frozenRow: boolean;
     /**
@@ -1151,6 +1152,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     frozenWidth?: string | undefined;
     /**
      * Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition.
+     * @defaultValue false
      */
     readonly frozenRow?: boolean;
     /**
