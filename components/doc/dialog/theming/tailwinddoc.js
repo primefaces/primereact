@@ -8,7 +8,7 @@ export function TailwindDoc(props) {
 const Tailwind = {
     dialog: {
         root: ({ state }) => ({
-            className: classNames('rounded-lg shadow-lg border-0', 'max-h-90 transform scale-100', 'm-0 w-[50vw]', 'dark:border dark:border-blue-900/40', {
+            className: classNames('rounded-lg shadow-lg border-0', 'max-h-[90%] transform scale-100', 'm-0 w-[50vw]', 'dark:border dark:border-blue-900/40', {
                 'transition-none transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': state.maximized
             })
         }),
