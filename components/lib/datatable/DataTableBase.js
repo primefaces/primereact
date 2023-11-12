@@ -471,7 +471,6 @@ export const DataTableBase = ComponentBase.extend({
         first: 0,
         footer: null,
         footerColumnGroup: null,
-        frozenRow: false,
         frozenValue: null,
         frozenWidth: null,
         globalFilter: null,

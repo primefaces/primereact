@@ -1142,10 +1142,6 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     footerColumnGroup?: React.ReactNode | undefined;
     /**
-     * Whether the row is frozen or not.
-     */
-    frozenRow?: boolean;
-    /**
      * Items of the frozen part in scrollable DataTable.
      */
     frozenValue?: DataTableRowDataArray<TValue>;
