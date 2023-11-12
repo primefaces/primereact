@@ -50,7 +50,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
     const ptCallbacks = DataTableBase.setMetaData(metaData);
 
-    const disableRowReorderOnFilter =  true;
+    const disableRowReorderOnFilter = true;
 
     useHandleStyle(DataTableBase.css.styles, ptCallbacks.isUnstyled, { name: 'datatable' });
     const attributeSelector = React.useRef('');
@@ -1087,16 +1087,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         const filterStoreModelObj = (!props.onFilter && props.filters) || getFilters();
 
         const appliedFilters = Object.keys(d_filtersState).filter((key) => {
-          const filterStoreModel = filterStoreModelObj?.[key];
-          const filterModel = activeFilters[key];
+            const filterStoreModel = filterStoreModelObj?.[key];
+            const filterModel = activeFilters[key];
 
-         if (!filterStoreModel || !filterModel) return false
+            if (!filterStoreModel || !filterModel) return false;
 
-          return (
-            (filterStoreModel?.operator
-              ? !ObjectUtils.isEmpty(filterModel?.constraints[0]?.value)
-              : !ObjectUtils.isEmpty(filterModel?.value)) || false
-          );
+            return (filterStoreModel?.operator ? !ObjectUtils.isEmpty(filterModel?.constraints[0]?.value) : !ObjectUtils.isEmpty(filterModel?.value)) || false;
         });
 
         return ObjectUtils.isNotEmpty(appliedFilters);
