@@ -1150,6 +1150,10 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     frozenWidth?: string | undefined;
     /**
+     * Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition.
+     */
+    readonly frozenRow?: boolean;
+    /**
      * Value of the global filter to use in filtering.
      */
     globalFilter?: string | null | undefined;
