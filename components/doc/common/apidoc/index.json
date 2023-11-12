@@ -15902,6 +15902,14 @@
                             "description": "ColumnGroup component for footer."
                         },
                         {
+                            "name": "frozenRow",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "boolean",
+                            "default": "",
+                            "description": "Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition."
+                        },
+                        {
                             "name": "frozenValue",
                             "optional": true,
                             "readonly": false,
@@ -18811,6 +18819,13 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Width of the frozen part in scrollable DataTable."
+                        },
+                        {
+                            "name": "frozenRow",
+                            "optional": true,
+                            "readonly": true,
+                            "type": "boolean",
+                            "description": "Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition."
                         },
                         {
                             "name": "globalFilter",
