@@ -15906,7 +15906,7 @@
                             "optional": true,
                             "readonly": true,
                             "type": "boolean",
-                            "default": "",
+                            "default": "false",
                             "description": "Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition."
                         },
                         {
