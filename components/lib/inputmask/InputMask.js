@@ -423,7 +423,7 @@ export const InputMask = React.memo(
             }
         
             updateModel(e);
-        
+
             if (props.onComplete && isCompleted()) {
                 props.onComplete({
                     originalEvent: e,
