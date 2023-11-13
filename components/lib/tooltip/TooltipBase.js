@@ -87,6 +87,10 @@ const styles = `
         margin-left: -.25rem;
         border-width: 0 .25em .25rem;
     }
+
+    .p-tooltip-target-wrapper {
+        display: inline-flex;
+    }
 }
 `;
 
