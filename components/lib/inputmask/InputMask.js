@@ -408,20 +408,20 @@ export const InputMask = React.memo(
         };
 
         const onInput = (event) => {
-            androidChrome.current ? handleAndroidInput(event) : handleInputChange(event);
+            androidChrome.current ? handleAndroidInput(event) : (event);
         };
 
         const handleInputChange = (e, isOnPaste = false) => {
             if (props.readOnly) {
                 return;
             }
-        
+
             if (!isOnPaste) {
                 let pos = checkVal(true);
-        
+
                 caret(pos);
             }
-        
+
             updateModel(e);
 
             if (props.onComplete && isCompleted()) {
