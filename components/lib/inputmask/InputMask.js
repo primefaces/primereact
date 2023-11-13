@@ -411,32 +411,19 @@ export const InputMask = React.memo(
             androidChrome.current ? handleAndroidInput(event) : handleInputChange(event);
         };
 
-        const handleInputChange = (e) => {
+        const handleInputChange = (e, isOnPaste = false) => {
             if (props.readOnly) {
                 return;
             }
-
-            let pos = checkVal(true);
-
-            caret(pos);
-            updateModel(e);
-
-            if (props.onComplete && isCompleted()) {
-                props.onComplete({
-                    originalEvent: e,
-                    value: getValue()
-                });
+        
+            if (!isOnPaste) {
+                let pos = checkVal(true);
+        
+                caret(pos);
             }
-        };
-
-        const handlePaste = (e) => {
-            if (props.readOnly) {
-                return;
-            }
-
-            caret();
+        
             updateModel(e);
-
+        
             if (props.onComplete && isCompleted()) {
                 props.onComplete({
                     originalEvent: e,
@@ -623,7 +610,7 @@ export const InputMask = React.memo(
                 onKeyDown={onKeyDown}
                 onKeyPress={onKeyPress}
                 onInput={onInput}
-                onPaste={handlePaste}
+                onPaste={(e) => handleInputChange(e, true)}
                 required={props.required}
                 tooltip={props.tooltip}
                 tooltipOptions={props.tooltipOptions}
