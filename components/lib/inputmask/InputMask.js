@@ -408,7 +408,7 @@ export const InputMask = React.memo(
         };
 
         const onInput = (event) => {
-            androidChrome.current ? handleAndroidInput(event) : (event);
+            androidChrome.current ? handleAndroidInput(event) : handleInputChange(event);
         };
 
         const handleInputChange = (e, isOnPaste = false) => {
