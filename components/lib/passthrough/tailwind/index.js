@@ -326,8 +326,8 @@ const Tailwind = {
         footer: {
             className: classNames('flex gap-2 shrink-0 justify-end align-center', 'border-t-0 bg-white text-gray-700 px-6 pb-6 text-right rounded-b-lg', 'dark:bg-gray-900 dark:text-white/80')
         },
-        mask: ({ props }) => ({
-            className: classNames('transition duration-200', { 'bg-black/40': props.modal })
+        mask: ({ state }) => ({
+            className: classNames('transition duration-200', { 'bg-black/40': state.containerVisible })
         }),
         transition: ({ props }) => {
             return {

@@ -638,7 +638,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             {
                 ref: maskRef,
                 style: sx('mask'),
-                className: cx('mask', { maskVisibleState }),
+                className: cx('mask'),
                 onPointerUp: onMaskPointerUp
             },
             ptm('mask')
