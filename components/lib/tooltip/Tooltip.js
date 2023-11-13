@@ -355,7 +355,11 @@ export const Tooltip = React.memo(
                         const wrapper = document.createElement('div');
                         const isInputElement = target.nodeName === 'INPUT';
 
-                        DomHandler.addMultipleClasses(wrapper, `p-tooltip-target-wrapper inline-flex ${isInputElement ? 'p-inputwrapper' : ''}`);
+                        if (isInputElement) {
+                            DomHandler.addMultipleClasses(wrapper, `p-tooltip-target-wrapper p-inputwrapper`);
+                        } else {
+                            DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
+                        }
 
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
