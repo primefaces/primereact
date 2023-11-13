@@ -352,9 +352,11 @@ export const Tooltip = React.memo(
             if (target) {
                 if (isShowOnDisabled(target)) {
                     if (!target.hasWrapper) {
-                        const wrapper = document.createElement('span');
+                        const wrapper = document.createElement('div');
+                        const isInputtElement = target.nodeName === 'INPUT';
 
-                        DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
+                        DomHandler.addMultipleClasses(wrapper, `p-tooltip-target-wrapper inline-flex ${isInputtElement ? 'p-inputwrapper' : ''}`);
+
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;
