@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Dropdown } from '../../lib/dropdown/Dropdown';
+import { ChevronDownIcon } from '../../lib/icons/chevrondown';
+import { ChevronRightIcon } from '../../lib/icons/chevronright';
 import { DocSectionCode } from '../common/docsectioncode';
 import { DocSectionText } from '../common/docsectiontext';
 
@@ -57,11 +59,17 @@ export function TemplateDoc(props) {
     const code = {
         basic: `
 <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} />
+    valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate}
+    dropdownIcon={(opts) => {
+        return opts.iconProps.overlayVisibleState ? <ChevronRightIcon {...opts.iconProps} /> : <ChevronDownIcon {...opts.iconProps} />;
+    }} 
+/>
         `,
         javascript: `
 import React, { useState } from "react";
 import { Dropdown } from 'primereact/dropdown';
+import { ChevronDownIcon } from 'primereact/icons/chevrondown';
+import { ChevronRightIcon } from 'primereact/icons/chevronright';
 
 export default function TemplateDemo() {
     const [selectedCountry, setSelectedCountry] = useState(null);
@@ -117,7 +125,10 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} />
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} 
+                dropdownIcon={(opts) => {
+                    return opts.iconProps.overlayVisibleState ? <ChevronRightIcon {...opts.iconProps} /> : <ChevronDownIcon {...opts.iconProps} />;
+                }}/>
         </div>    
     )
 }
@@ -125,6 +136,8 @@ export default function TemplateDemo() {
         typescript: `
 import React, { useState } from "react";
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { CheckIcon } from 'primereact/icons/check';
+import { StarIcon } from 'primereact/icons/star';
 
 interface Country {
     name: string;
@@ -185,7 +198,10 @@ export default function TemplateDemo() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCountry} onChange={(e: DropdownChangeEvent) => setSelectedCountry(e.value)} options={countries} optionLabel="name" placeholder="Select a Country" 
-                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} />
+                valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" panelFooterTemplate={panelFooterTemplate} 
+                dropdownIcon={(opts) => {
+                    return opts.iconProps.overlayVisibleState ? <ChevronRightIcon {...opts.iconProps} /> : <ChevronDownIcon {...opts.iconProps} />;
+                }}/>/>
         </div>    
     )
 }
@@ -210,6 +226,9 @@ export default function TemplateDemo() {
                     itemTemplate={countryOptionTemplate}
                     panelFooterTemplate={panelFooterTemplate}
                     className="w-full md:w-14rem"
+                    dropdownIcon={(opts) => {
+                        return opts.iconProps.overlayVisibleState ? <ChevronRightIcon {...opts.iconProps} /> : <ChevronDownIcon {...opts.iconProps} />;
+                    }}
                 />
             </div>
             <DocSectionCode code={code} />

@@ -809,7 +809,8 @@ export const Dropdown = React.memo(
         const createDropdownIcon = () => {
             const dropdownIconProps = mergeProps(
                 {
-                    className: cx('dropdownIcon')
+                    className: cx('dropdownIcon'),
+                    overlayVisibleState
                 },
                 ptm('dropdownIcon')
             );
