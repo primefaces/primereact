@@ -2,7 +2,7 @@ name: Issue Inactive Checker
 
 on:
   schedule:
-    - cron: "0 13 * * 1" # Every Monday at 1PM UTC (9AM EST)
+    - cron: "0 13 * * *" # Every Monday at 1PM UTC (9AM EST)
 
 permissions:
   contents: read
