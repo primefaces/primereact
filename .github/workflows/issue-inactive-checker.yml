@@ -14,9 +14,15 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: cannot replicate
+      - name: Cannot Replicate
         uses: actions-cool/issues-helper@v3
         with:
           actions: "close-issues"
-          labels: "Resolution: Cannot Replicate Status: Needs Reproducer"
+          labels: "Resolution: Cannot Replicate"
+          inactive-day: 20
+      - name: Needs Reproducer
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "close-issues"
+          labels: "Status: Needs Reproducer"
           inactive-day: 20
