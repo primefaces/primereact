@@ -18,5 +18,5 @@ jobs:
         uses: actions-cool/issues-helper@v3
         with:
           actions: "close-issues"
-          labels: "Resolution: Cannot Replicate,Status: Needs Reproducer"
+          labels: "Resolution: Cannot Replicate Status: Needs Reproducer"
           inactive-day: 20
