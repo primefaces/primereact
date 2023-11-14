@@ -95,6 +95,8 @@ export const SplitButton = React.memo(
             if (!idState) {
                 setIdState(UniqueComponentId());
             }
+
+            alignOverlay();
         });
 
         useUnmountEffect(() => {
