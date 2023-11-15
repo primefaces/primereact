@@ -13,7 +13,7 @@ import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
 import { Slider } from '../../components/lib/slider/Slider';
 import { TabMenu } from '../../components/lib/tabmenu/Tabmenu';
 
-const HeroSection = () => {
+const HeroSection = (props) => {
     const selectButtonOptions = [
         { name: 'Styled', value: 1 },
         { name: 'Unstyled', value: 2 }
@@ -89,7 +89,7 @@ const HeroSection = () => {
 
         setChartData(data);
         setChartOptions(options);
-    }, []);
+    }, [props.dark]);
 
     return (
         <section className="landing-hero py-8 px-5 lg:px-8">

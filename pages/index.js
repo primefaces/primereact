@@ -59,9 +59,9 @@ export default function Home(props) {
                 <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
             </Head>
-            {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
+            <NewsSection newsActive={props.newsActive} announcement={props.announcement} onClose={props.onNewsClose} />
             <Topbar dark={props.dark} showConfigurator={false} showMenuButton={false} darkModeSwitch={onDarkModeToggle} />
-            <HeroSection />
+            <HeroSection dark={props.dark} />
             <FeaturesSection dark={props.dark} />
             <UsersSection dark={props.dark} />
             <ThemeSection theme={tableTheme} onThemeChange={(t) => changeTableTheme(t)} dark={props.dark} />

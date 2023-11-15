@@ -37,7 +37,7 @@ export function DocSectionCode(props) {
                         {codeMode !== 'basic' && !props.hideToggleCode && codeMode !== 'data' && (
                             <>
                                 <Button
-                                    className={classNames('py-0 px-2 border-round h-2rem', {
+                                    className={classNames('py-0 px-2 border-round h-2rem shadow-none', {
                                         'code-active': codeLang === 'javascript' && codeMode !== 'data'
                                     })}
                                     label="JS"
@@ -46,7 +46,7 @@ export function DocSectionCode(props) {
                                     tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                                 ></Button>
                                 <Button
-                                    className={classNames('py-0 px-2 border-round h-2rem', { 'code-active': codeLang === 'typescript' })}
+                                    className={classNames('py-0 px-2 border-round h-2rem shadow-none', { 'code-active': codeLang === 'typescript' })}
                                     label="TS"
                                     onClick={() => setCodeLang('typescript')}
                                     tooltip="TypeScript Code"
@@ -59,7 +59,7 @@ export function DocSectionCode(props) {
                             <Button
                                 type="button"
                                 onClick={() => toggleCodeMode('javascript')}
-                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
+                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none"
                                 tooltip="Toggle Full Code"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             >
@@ -70,7 +70,7 @@ export function DocSectionCode(props) {
                             <Button
                                 type="button"
                                 onClick={() => setCodeMode('data')}
-                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
+                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none"
                                 tooltip="View Data"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                             >
@@ -80,7 +80,7 @@ export function DocSectionCode(props) {
                         {!props.hideCodeSandbox && (
                             <Button
                                 type="button"
-                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
+                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none"
                                 tooltip="Edit in CodeSandbox"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                                 onClick={() => codeEditor.openCodeSandbox(codeLang)}
@@ -93,17 +93,17 @@ export function DocSectionCode(props) {
                         {!props.hideStackBlitz && (
                             <Button
                                 type="button"
-                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center"
+                                className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none"
                                 tooltip="Edit in StackBlitz"
                                 tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
                                 onClick={() => codeEditor.openStackBlitz(codeLang)}
                             >
-                                <svg role="img" viewBox="0 0 24 24" width={16} height={16} fill={'currentColor'} style={{ display: 'block' }}>
-                                    <path d="M0 15.98H8.15844L3.40299 27.26L19 11.1945H10.7979L15.5098 0L0 15.98Z" />
+                                <svg role="img" viewBox="0 0 13 19" width={13} height={18} fill={'currentColor'} style={{ display: 'block' }}>
+                                    <path d="M0 10.6533H5.43896L2.26866 18.1733L12.6667 7.463H7.1986L10.3399 0L0 10.6533Z" />
                                 </svg>
                             </Button>
                         )}
-                        <Button type="button" onClick={copyCode} className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center" tooltip="Copy Code" tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}>
+                        <Button type="button" onClick={copyCode} className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none" tooltip="Copy Code" tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}>
                             <i className="pi pi-copy"></i>
                         </Button>
                     </div>
