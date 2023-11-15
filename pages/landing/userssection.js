@@ -35,7 +35,7 @@ const UsersSection = (props) => {
             <p className="section-detail">
                 PrimeTek libraries have reached over
                 <span className="font-semibold animated-text relative white-space-nowrap">
-                    <span>140 Million Downloads </span>
+                    <span>150 Million Downloads </span>
                 </span>
                 on npm! Join the PrimeLand community and experience the difference yourself.
             </p>

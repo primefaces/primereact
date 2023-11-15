@@ -1,12 +1,11 @@
 import '@docsearch/css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { GTagManager } from '../components/analytics/analytics';
 import Layout from '../components/layout/layout';
 import PrimeReact from '../components/lib/api/Api';
 import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
-import AnnouncementData from '../data/news.json';
 import '../styles/demo/demo.scss';
 import '../styles/layout/layout.scss';
 
