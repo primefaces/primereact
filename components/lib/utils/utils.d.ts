@@ -174,7 +174,7 @@ export type IconOptions<ComponentProps, AdditionalProps> = AdditionalProps & {
     /**
      * Icon specific properties.
      */
-    iconProps: React.HTMLProps<HTMLElement | SVGElement>;
+    iconProps: React.HTMLProps<HTMLElement> | React.SVGProps<SVGSVGElement>;
     /**
      * The element representing the icon.
      */
