@@ -13,7 +13,8 @@ import UsersSection from './landing/userssection';
 
 export default function Home(props) {
     const [tableTheme, setTableTheme] = useState('lara-light-blue');
-    const landingClass = classNames('landing', { 'layout-light': !props.dark, 'layout-dark': props.dark, 'layout-news-active': props.newsActive });
+    const [newsActive, setNewsActive] = useState(false);
+    const landingClass = classNames('landing', { 'layout-light': !props.dark, 'layout-dark': props.dark, 'layout-news-active': newsActive });
 
     const changeTableTheme = (newTheme) => {
         props.onTableThemeChange(tableTheme, newTheme);
@@ -59,7 +60,7 @@ export default function Home(props) {
                 <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
             </Head>
-            <NewsSection newsActive={props.newsActive} announcement={props.announcement} onClose={props.onNewsClose} />
+            <NewsSection newsActive={newsActive} setNewsActive={setNewsActive} />
             <Topbar dark={props.dark} showConfigurator={false} showMenuButton={false} darkModeSwitch={onDarkModeToggle} />
             <HeroSection dark={props.dark} />
             <FeaturesSection dark={props.dark} />

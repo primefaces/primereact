@@ -13,39 +13,11 @@ import '../styles/layout/layout.scss';
 function Main({ component: Component }) {
     const [dark, setDark] = useState(false);
     const [theme, setTheme] = useState('lara-light-cyan');
-    const [newsActive, setNewsActive] = useState(false);
-    const storageKey = 'primereact-news';
-    const announcement = useRef(AnnouncementData);
     const context = useContext(PrimeReactContext);
-
-    useEffect(() => {
-        const itemString = localStorage.getItem(storageKey);
-
-        if (itemString) {
-            const item = JSON.parse(itemString);
-
-            if (item.hiddenNews && item.hiddenNews !== announcement.current.id) {
-                setNewsActive(true);
-            }
-        } else {
-            setNewsActive(true);
-        }
-    }, []);
 
     const props = {
         dark: dark,
         theme: theme,
-        newsActive: newsActive && announcement.current,
-        announcement: announcement.current,
-        onNewsClose: () => {
-            setNewsActive(false);
-
-            const item = {
-                hiddenNews: announcement.current.id
-            };
-
-            localStorage.setItem(storageKey, JSON.stringify(item));
-        },
         onThemeChange: (newTheme, dark) => {
             if (context) {
                 context.changeTheme(theme, newTheme, 'theme-link', () => {
