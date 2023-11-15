@@ -164,7 +164,7 @@ export const Password = React.memo(
         };
 
         const onKeyup = (e) => {
-            let keyCode = e.keyCode || e.which;
+            const keyCode = e.code;
 
             if (props.feedback) {
                 let value = e.target.value;
@@ -205,7 +205,7 @@ export const Password = React.memo(
                 setMeterState(meter);
                 setInfoTextState(label);
 
-                if (!!keyCode && keyCode !== 27 && !overlayVisibleState) {
+                if (!!keyCode && keyCode !== 'Escape' && !overlayVisibleState) {
                     show();
                 }
             }
