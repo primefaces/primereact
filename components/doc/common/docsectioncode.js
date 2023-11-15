@@ -103,7 +103,13 @@ export function DocSectionCode(props) {
                                 </svg>
                             </Button>
                         )}
-                        <Button type="button" onClick={copyCode} className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none" tooltip="Copy Code" tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}>
+                        <Button
+                            type="button"
+                            onClick={copyCode}
+                            className="h-2rem w-2rem p-0 inline-flex align-items-center justify-content-center shadow-none"
+                            tooltip="Copy Code"
+                            tooltipOptions={{ position: 'bottom', className: 'doc-section-code-tooltip' }}
+                        >
                             <i className="pi pi-copy"></i>
                         </Button>
                     </div>
