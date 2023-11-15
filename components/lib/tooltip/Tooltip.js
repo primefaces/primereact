@@ -469,9 +469,7 @@ export const Tooltip = React.memo(
         }, [props.content]);
 
         useUnmountEffect(() => {
-            clearTimeouts();
-            unloadTargetEvents();
-
+            hide();
             ZIndexUtils.clear(elementRef.current);
         });
 
