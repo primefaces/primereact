@@ -148,11 +148,11 @@ export default function Config(props) {
                         </button>
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                'border-primary': isThemeActive('lara', 'teal'),
-                                'hover:border-500 surface-border': !isThemeActive('lara', 'teal')
+                                'border-primary': isThemeActive('lara', 'green'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'green')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'teal')}
+                            onClick={() => changeTheme('lara', 'green')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #4dac9c 0%, rgba(77, 172, 156, 0.5) 100%)' }}></span>
                         </button>
@@ -200,11 +200,11 @@ export default function Config(props) {
                         </button>
                         <button
                             className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
-                                'border-primary': isThemeActive('lara', 'turquoise'),
-                                'hover:border-500 surface-border': !isThemeActive('lara', 'turquoise')
+                                'border-primary': isThemeActive('lara', 'teal'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'teal')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'turquoise')}
+                            onClick={() => changeTheme('lara', 'teal')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #14b8a6 0%, rgba(20, 184, 166, 0.5) 100%)' }}></span>
                         </button>
