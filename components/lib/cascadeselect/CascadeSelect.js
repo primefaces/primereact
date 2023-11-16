@@ -371,6 +371,7 @@ export const CascadeSelect = React.memo(
             },
             ptm('panel')
         );
+
         const createHeader = () => {
             if (!props.panelHeaderTemplate) return null;
             const headerProps = mergeProps(
@@ -389,6 +390,7 @@ export const CascadeSelect = React.memo(
 
             return ObjectUtils.getJSXElement(props.panelHeaderTemplate, defaultOptions);
         };
+
         const createOverlay = () => {
             const transitionProps = mergeProps(
                 {
