@@ -1,5 +1,5 @@
+import { classNames } from '@/components/lib/utils/ClassNames';
 import { useEffect, useState } from 'react';
-import { classNames } from '../../components/lib/utils/ClassNames';
 
 const TemplateSection = (props) => {
     const [animation, setAnimation] = useState(false);

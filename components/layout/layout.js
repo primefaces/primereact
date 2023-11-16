@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
+import PrimeReact from '../lib/api/Api';
+import { PrimeReactContext } from '../lib/api/PrimeReactContext';
 import { classNames } from '../lib/utils/Utils';
 import NewsSection from '../news/newssection';
 import AppContentContext from './appcontentcontext';
@@ -8,9 +10,6 @@ import Config from './config';
 import Footer from './footer';
 import Menu from './menu';
 import Topbar from './topbar';
-import { PrimeReactContext } from '../lib/api/PrimeReactContext';
-import PrimeReact from '../lib/api/Api';
-import HeaderSection from '../../pages/landing/headersection';
 
 export default function Layout(props) {
     const [ripple, setRipple] = useState(true);

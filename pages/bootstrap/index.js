@@ -1,7 +1,6 @@
-import React from 'react';
-import { ExampleDoc } from '../../components/doc/bootstrap/exampledoc';
-import { SetupDoc } from '../../components/doc/bootstrap/setupdoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { ExampleDoc } from '@/components/doc/bootstrap/exampledoc';
+import { SetupDoc } from '@/components/doc/bootstrap/setupdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const BootstrapDemo = () => {
     const docs = [

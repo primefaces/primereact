@@ -1,13 +1,12 @@
+import { ColorsDoc } from '@/components/doc/accessibility/colorsdoc';
+import { FormControlsDoc } from '@/components/doc/accessibility/formcontrolsdoc';
+import { IntroductionDoc } from '@/components/doc/accessibility/introductiondoc';
+import { SemanticHTMLDoc } from '@/components/doc/accessibility/semantichtmldoc';
+import { WAIAriaDoc } from '@/components/doc/accessibility/waiariadoc';
+import { WCAGDoc } from '@/components/doc/accessibility/wcagdoc';
+import { DocSectionNav } from '@/components/doc/common/docsectionnav';
+import { DocSections } from '@/components/doc/common/docsections';
 import Head from 'next/head';
-import React from 'react';
-import { ColorsDoc } from '../../components/doc/accessibility/colorsdoc';
-import { FormControlsDoc } from '../../components/doc/accessibility/formcontrolsdoc';
-import { IntroductionDoc } from '../../components/doc/accessibility/introductiondoc';
-import { SemanticHTMLDoc } from '../../components/doc/accessibility/semantichtmldoc';
-import { WAIAriaDoc } from '../../components/doc/accessibility/waiariadoc';
-import { WCAGDoc } from '../../components/doc/accessibility/wcagdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
 
 const AccessibilityDoc = () => {
     const docs = [

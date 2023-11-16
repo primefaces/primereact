@@ -1,6 +1,6 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/useunmounteffect/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/useunmounteffect/importdoc';
+import { DocComponent } from '../@/components/doc/common/doccomponent';
+import { BasicDoc } from '../@/components/doc/hooks/useunmounteffect/basicdoc';
+import { ImportDoc } from '../@/components/doc/hooks/useunmounteffect/importdoc';
 
 const UnmountEffectDemo = () => {
     const docs = [

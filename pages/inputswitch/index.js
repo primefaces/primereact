@@ -1,18 +1,18 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/inputswitch/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/inputswitch/basicdoc';
-import { DisabledDoc } from '../../components/doc/inputswitch/disableddoc';
-import { FormikDoc } from '../../components/doc/inputswitch/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputswitch/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/inputswitch/importdoc';
-import { InvalidDoc } from '../../components/doc/inputswitch/invaliddoc';
-import { PreselectionDoc } from '../../components/doc/inputswitch/preselectiondoc';
-import { PTDoc } from '../../components/doc/inputswitch/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputswitch/pt/wireframe';
-import { StyleDoc } from '../../components/doc/inputswitch/styledoc';
-import { StyledDoc } from '../../components/doc/inputswitch/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputswitch/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputswitch/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/inputswitch/basicdoc';
+import { DisabledDoc } from '@/components/doc/inputswitch/disableddoc';
+import { FormikDoc } from '@/components/doc/inputswitch/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/inputswitch/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/inputswitch/importdoc';
+import { InvalidDoc } from '@/components/doc/inputswitch/invaliddoc';
+import { PreselectionDoc } from '@/components/doc/inputswitch/preselectiondoc';
+import { PTDoc } from '@/components/doc/inputswitch/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inputswitch/pt/wireframe';
+import { StyleDoc } from '@/components/doc/inputswitch/styledoc';
+import { StyledDoc } from '@/components/doc/inputswitch/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputswitch/theming/tailwinddoc';
 
 const InputSwitchDemo = () => {
     const docs = [

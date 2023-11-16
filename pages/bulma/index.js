@@ -1,7 +1,6 @@
-import React from 'react';
-import { ExampleDoc } from '../../components/doc/bulma/exampledoc';
-import { SetupDoc } from '../../components/doc/bulma/setupdoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { ExampleDoc } from '@/components/doc/bulma/exampledoc';
+import { SetupDoc } from '@/components/doc/bulma/setupdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const BulmaDemo = () => {
     const docs = [

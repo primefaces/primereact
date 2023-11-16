@@ -1,5 +1,5 @@
+import { classNames } from '@/components/lib/utils/ClassNames';
 import { useEffect, useState } from 'react';
-import { classNames } from '../../components/lib/utils/ClassNames';
 
 const BlockSection = () => {
     const [animation, setAnimation] = useState(false);

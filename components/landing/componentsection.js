@@ -1,18 +1,18 @@
+import { Badge } from '@/components/lib/badge/Badge';
+import { Button } from '@/components/lib/button/Button';
+import { Calendar } from '@/components/lib/calendar/Calendar';
+import { Chart } from '@/components/lib/chart/Chart';
+import { Chip } from '@/components/lib/chip/Chip';
+import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
+import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
+import { Slider } from '@/components/lib/slider/Slider';
+import { TabMenu } from '@/components/lib/tabmenu/TabMenu';
+import { Tree } from '@/components/lib/tree/Tree';
+import { NodeService } from '@/service/NodeService';
 import { useEffect, useState } from 'react';
-import { Badge } from '../../components/lib/badge/Badge';
-import { Button } from '../../components/lib/button/Button';
-import { Calendar } from '../../components/lib/calendar/Calendar';
-import { Chart } from '../../components/lib/chart/Chart';
-import { Chip } from '../../components/lib/chip/Chip';
-import { InputNumber } from '../../components/lib/inputnumber/InputNumber';
-import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
-import { ProgressBar } from '../../components/lib/progressbar/ProgressBar';
-import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
-import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
-import { Slider } from '../../components/lib/slider/Slider';
-import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
-import { Tree } from '../../components/lib/tree/Tree';
-import { NodeService } from '../../service/NodeService';
 
 let chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

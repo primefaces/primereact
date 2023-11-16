@@ -1,19 +1,18 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/rating/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/rating/basicdoc';
-import { DisabledDoc } from '../../components/doc/rating/disableddoc';
-import { ImportDoc } from '../../components/doc/rating/importdoc';
-import { NumberOfStarsDoc } from '../../components/doc/rating/numberofstarsdoc';
-import { PTDoc } from '../../components/doc/rating/pt/ptdoc';
-import { Wireframe } from '../../components/doc/rating/pt/wireframe';
-import { ReadOnlyDoc } from '../../components/doc/rating/readonlydoc';
-import { StyleDoc } from '../../components/doc/rating/styledoc';
-import { TemplateDoc } from '../../components/doc/rating/templatedoc';
-import { StyledDoc } from '../../components/doc/rating/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/rating/theming/tailwinddoc';
-import { WithoutCancelDoc } from '../../components/doc/rating/withoutcanceldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/rating/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/rating/basicdoc';
+import { DisabledDoc } from '@/components/doc/rating/disableddoc';
+import { ImportDoc } from '@/components/doc/rating/importdoc';
+import { NumberOfStarsDoc } from '@/components/doc/rating/numberofstarsdoc';
+import { PTDoc } from '@/components/doc/rating/pt/ptdoc';
+import { Wireframe } from '@/components/doc/rating/pt/wireframe';
+import { ReadOnlyDoc } from '@/components/doc/rating/readonlydoc';
+import { StyleDoc } from '@/components/doc/rating/styledoc';
+import { TemplateDoc } from '@/components/doc/rating/templatedoc';
+import { StyledDoc } from '@/components/doc/rating/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/rating/theming/tailwinddoc';
+import { WithoutCancelDoc } from '@/components/doc/rating/withoutcanceldoc';
 
 const RatingDemo = () => {
     const docs = [

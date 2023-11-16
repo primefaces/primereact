@@ -1,15 +1,15 @@
+import BlockSection from '@/components/landing/blocksection';
+import FeaturesSection from '@/components/landing/featuressection';
+import FooterSection from '@/components/landing/footersection';
+import HeroSection from '@/components/landing/herosection';
+import TemplateSection from '@/components/landing/templatesection';
+import ThemeSection from '@/components/landing/themesection';
+import UsersSection from '@/components/landing/userssection';
+import Topbar from '@/components/layout/topbar';
+import { classNames } from '@/components/lib/utils/Utils';
+import NewsSection from '@/components/news/newssection';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Topbar from '../components/layout/topbar';
-import { classNames } from '../components/lib/utils/Utils';
-import NewsSection from '../components/news/newssection';
-import BlockSection from './landing/blocksection';
-import FeaturesSection from './landing/featuressection';
-import FooterSection from './landing/footersection';
-import HeroSection from './landing/herosection';
-import TemplateSection from './landing/templatesection';
-import ThemeSection from './landing/themesection';
-import UsersSection from './landing/userssection';
 
 export default function Home(props) {
     const [tableTheme, setTableTheme] = useState('lara-light-blue');

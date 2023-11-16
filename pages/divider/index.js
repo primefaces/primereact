@@ -1,17 +1,17 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/divider/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/divider/basicdoc';
-import { ContentDoc } from '../../components/doc/divider/contentdoc';
-import { ImportDoc } from '../../components/doc/divider/importdoc';
-import { LoginDoc } from '../../components/doc/divider/logindoc';
-import { PTDoc } from '../../components/doc/divider/pt/ptdoc';
-import { Wireframe } from '../../components/doc/divider/pt/wireframe';
-import { StyleDoc } from '../../components/doc/divider/styledoc';
-import { TailwindDoc } from '../../components/doc/divider/theming/tailwinddoc';
-import { TypeDoc } from '../../components/doc/divider/typedoc';
-import { VerticalDoc } from '../../components/doc/divider/verticaldoc';
-import { StyledDoc } from '../../components/doc/fieldset/theming/styleddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/divider/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/divider/basicdoc';
+import { ContentDoc } from '@/components/doc/divider/contentdoc';
+import { ImportDoc } from '@/components/doc/divider/importdoc';
+import { LoginDoc } from '@/components/doc/divider/logindoc';
+import { PTDoc } from '@/components/doc/divider/pt/ptdoc';
+import { Wireframe } from '@/components/doc/divider/pt/wireframe';
+import { StyleDoc } from '@/components/doc/divider/styledoc';
+import { TailwindDoc } from '@/components/doc/divider/theming/tailwinddoc';
+import { TypeDoc } from '@/components/doc/divider/typedoc';
+import { VerticalDoc } from '@/components/doc/divider/verticaldoc';
+import { StyledDoc } from '@/components/doc/fieldset/theming/styleddoc';
 
 const DividerDemo = () => {
     const docs = [

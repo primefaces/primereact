@@ -1,14 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/overlaypanel/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/overlaypanel/basicdoc';
-import { DataTableDoc } from '../../components/doc/overlaypanel/datatabledoc';
-import { ImportDoc } from '../../components/doc/overlaypanel/importdoc';
-import { PTDoc } from '../../components/doc/overlaypanel/pt/ptdoc';
-import { Wireframe } from '../../components/doc/overlaypanel/pt/wireframe';
-import { StyleDoc } from '../../components/doc/overlaypanel/styledoc';
-import { StyledDoc } from '../../components/doc/overlaypanel/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/overlaypanel/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/overlaypanel/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/overlaypanel/basicdoc';
+import { DataTableDoc } from '@/components/doc/overlaypanel/datatabledoc';
+import { ImportDoc } from '@/components/doc/overlaypanel/importdoc';
+import { PTDoc } from '@/components/doc/overlaypanel/pt/ptdoc';
+import { Wireframe } from '@/components/doc/overlaypanel/pt/wireframe';
+import { StyleDoc } from '@/components/doc/overlaypanel/styledoc';
+import { StyledDoc } from '@/components/doc/overlaypanel/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/overlaypanel/theming/tailwinddoc';
 
 const OverlayPanelDemo = () => {
     const docs = [

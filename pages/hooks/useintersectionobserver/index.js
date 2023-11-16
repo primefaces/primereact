@@ -1,7 +1,7 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/useintersectionobserver/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/useintersectionobserver/importdoc';
-import { ThresholdDoc } from '../../../components/doc/hooks/useintersectionobserver/thresholddoc';
+import { DocComponent } from '../@/components/doc/common/doccomponent';
+import { BasicDoc } from '../@/components/doc/hooks/useintersectionobserver/basicdoc';
+import { ImportDoc } from '../@/components/doc/hooks/useintersectionobserver/importdoc';
+import { ThresholdDoc } from '../@/components/doc/hooks/useintersectionobserver/thresholddoc';
 
 const IntersectionObserverDemo = () => {
     const docs = [

@@ -1,16 +1,15 @@
-import React from 'react';
-import { AccessibilityDoc } from '../../components/doc/blockui/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/blockui/basicdoc';
-import { DocumentDoc } from '../../components/doc/blockui/documentdoc';
-import { ImportDoc } from '../../components/doc/blockui/importdoc';
-import { PTDoc } from '../../components/doc/blockui/pt/ptdoc';
-import { Wireframe } from '../../components/doc/blockui/pt/wireframe';
-import { StyleDoc } from '../../components/doc/blockui/styledoc';
-import { TemplateDoc } from '../../components/doc/blockui/templatedoc';
-import { StyledDoc } from '../../components/doc/blockui/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/blockui/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/blockui/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/blockui/basicdoc';
+import { DocumentDoc } from '@/components/doc/blockui/documentdoc';
+import { ImportDoc } from '@/components/doc/blockui/importdoc';
+import { PTDoc } from '@/components/doc/blockui/pt/ptdoc';
+import { Wireframe } from '@/components/doc/blockui/pt/wireframe';
+import { StyleDoc } from '@/components/doc/blockui/styledoc';
+import { TemplateDoc } from '@/components/doc/blockui/templatedoc';
+import { StyledDoc } from '@/components/doc/blockui/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/blockui/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const BlockUIDemo = () => {
     const docs = [

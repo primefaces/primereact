@@ -1,8 +1,8 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { DocumentDoc } from '../../../components/doc/hooks/usemouse/documentdoc';
-import { ElementDoc } from '../../../components/doc/hooks/usemouse/elementdoc';
-import { ImportDoc } from '../../../components/doc/hooks/usemouse/importdoc';
-import { ResetDoc } from '../../../components/doc/hooks/usemouse/resetdoc';
+import { DocComponent } from '../@/components/doc/common/doccomponent';
+import { DocumentDoc } from '../@/components/doc/hooks/usemouse/documentdoc';
+import { ElementDoc } from '../@/components/doc/hooks/usemouse/elementdoc';
+import { ImportDoc } from '../@/components/doc/hooks/usemouse/importdoc';
+import { ResetDoc } from '../@/components/doc/hooks/usemouse/resetdoc';
 
 const MouseDemo = () => {
     const docs = [

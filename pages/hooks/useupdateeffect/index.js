@@ -1,6 +1,6 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/useupdateeffect/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/useupdateeffect/importdoc';
+import { DocComponent } from '../@/components/doc/common/doccomponent';
+import { BasicDoc } from '../@/components/doc/hooks/useupdateeffect/basicdoc';
+import { ImportDoc } from '../@/components/doc/hooks/useupdateeffect/importdoc';
 
 const UpdateEffectDemo = () => {
     const docs = [

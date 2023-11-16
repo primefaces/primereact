@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const FooterSection = (props) => {
+const FooterSection = () => {
     return (
         <section className="landing-footer pt-8 px-5 lg:px-8">
             <div className="landing-footer-container">

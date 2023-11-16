@@ -1,6 +1,6 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/usemounteffect/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/usemounteffect/importdoc';
+import { DocComponent } from '../@/components/doc/common/doccomponent';
+import { BasicDoc } from '../@/components/doc/hooks/usemounteffect/basicdoc';
+import { ImportDoc } from '../@/components/doc/hooks/usemounteffect/importdoc';
 
 const MountEffectDemo = () => {
     const docs = [

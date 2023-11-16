@@ -1,21 +1,21 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/tooltip/accessibilitydoc';
-import { AutoHideDoc } from '../../components/doc/tooltip/autohidedoc';
-import { DelayDoc } from '../../components/doc/tooltip/delaydoc';
-import { DisabledDoc } from '../../components/doc/tooltip/disableddoc';
-import { EventDoc } from '../../components/doc/tooltip/eventdoc';
-import { ImportDoc } from '../../components/doc/tooltip/importdoc';
-import { MouseTrackDoc } from '../../components/doc/tooltip/mousetrackdoc';
-import { PositionDoc } from '../../components/doc/tooltip/positiondoc';
-import { PTDoc } from '../../components/doc/tooltip/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tooltip/pt/wireframe';
-import { ReactiveDoc } from '../../components/doc/tooltip/reactivedoc';
-import { StyleDoc } from '../../components/doc/tooltip/styledoc';
-import { TargetDoc } from '../../components/doc/tooltip/targetdoc';
-import { TemplateDoc } from '../../components/doc/tooltip/templatedoc';
-import { StyledDoc } from '../../components/doc/tooltip/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/tooltip/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/tooltip/accessibilitydoc';
+import { AutoHideDoc } from '@/components/doc/tooltip/autohidedoc';
+import { DelayDoc } from '@/components/doc/tooltip/delaydoc';
+import { DisabledDoc } from '@/components/doc/tooltip/disableddoc';
+import { EventDoc } from '@/components/doc/tooltip/eventdoc';
+import { ImportDoc } from '@/components/doc/tooltip/importdoc';
+import { MouseTrackDoc } from '@/components/doc/tooltip/mousetrackdoc';
+import { PositionDoc } from '@/components/doc/tooltip/positiondoc';
+import { PTDoc } from '@/components/doc/tooltip/pt/ptdoc';
+import { Wireframe } from '@/components/doc/tooltip/pt/wireframe';
+import { ReactiveDoc } from '@/components/doc/tooltip/reactivedoc';
+import { StyleDoc } from '@/components/doc/tooltip/styledoc';
+import { TargetDoc } from '@/components/doc/tooltip/targetdoc';
+import { TemplateDoc } from '@/components/doc/tooltip/templatedoc';
+import { StyledDoc } from '@/components/doc/tooltip/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/tooltip/theming/tailwinddoc';
 
 const TooltipDemo = () => {
     const docs = [

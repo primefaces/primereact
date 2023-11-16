@@ -1,15 +1,15 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/datascroller/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/datascroller/basicdoc';
-import { ImportDoc } from '../../components/doc/datascroller/importdoc';
-import { InlineDataScrollerDoc } from '../../components/doc/datascroller/inlinedoc';
-import { LoaderDataScrollerDoc } from '../../components/doc/datascroller/loaderdoc';
-import { PTDoc } from '../../components/doc/datascroller/pt/ptdoc';
-import { StyleDoc } from '../../components/doc/datascroller/styledoc';
-import { StyledDoc } from '../../components/doc/datascroller/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/datascroller/theming/tailwinddoc';
-import { Wireframe } from '../../components/doc/timeline/pt/wireframe';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/datascroller/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/datascroller/basicdoc';
+import { ImportDoc } from '@/components/doc/datascroller/importdoc';
+import { InlineDataScrollerDoc } from '@/components/doc/datascroller/inlinedoc';
+import { LoaderDataScrollerDoc } from '@/components/doc/datascroller/loaderdoc';
+import { PTDoc } from '@/components/doc/datascroller/pt/ptdoc';
+import { StyleDoc } from '@/components/doc/datascroller/styledoc';
+import { StyledDoc } from '@/components/doc/datascroller/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/datascroller/theming/tailwinddoc';
+import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
 
 const DataScrollerDemo = () => {
     const docs = [

@@ -1,16 +1,16 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/paginator/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/paginator/basicdoc';
-import { ImagesDoc } from '../../components/doc/paginator/imagesdoc';
-import { ImportDoc } from '../../components/doc/paginator/importdoc';
-import { LayoutDoc } from '../../components/doc/paginator/layoutdoc';
-import { PTDoc } from '../../components/doc/paginator/pt/ptdoc';
-import { Wireframe } from '../../components/doc/paginator/pt/wireframe';
-import { StyleDoc } from '../../components/doc/paginator/styledoc';
-import { TemplateDoc } from '../../components/doc/paginator/templatedoc';
-import { StyledDoc } from '../../components/doc/paginator/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/paginator/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/paginator/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/paginator/basicdoc';
+import { ImagesDoc } from '@/components/doc/paginator/imagesdoc';
+import { ImportDoc } from '@/components/doc/paginator/importdoc';
+import { LayoutDoc } from '@/components/doc/paginator/layoutdoc';
+import { PTDoc } from '@/components/doc/paginator/pt/ptdoc';
+import { Wireframe } from '@/components/doc/paginator/pt/wireframe';
+import { StyleDoc } from '@/components/doc/paginator/styledoc';
+import { TemplateDoc } from '@/components/doc/paginator/templatedoc';
+import { StyledDoc } from '@/components/doc/paginator/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/paginator/theming/tailwinddoc';
 
 const PaginatorDemo = () => {
     const docs = [

@@ -1,4 +1,4 @@
-const FeaturesSection = (props) => {
+const FeaturesSection = () => {
     return (
         <section className="landing-features py-8">
             <div className="section-header">Features</div>
