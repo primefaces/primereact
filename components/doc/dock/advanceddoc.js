@@ -1,19 +1,18 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import PrimeReact, { PrimeReactContext } from '@/components/lib/api/Api';
+import { Dialog } from '@/components/lib/dialog/Dialog';
+import { Dock } from '@/components/lib/dock/Dock';
+import { Galleria } from '@/components/lib/galleria/Galleria';
+import { Menubar } from '@/components/lib/menubar/Menubar';
+import { Terminal } from '@/components/lib/terminal/Terminal';
+import { TerminalService } from '@/components/lib/terminalservice/TerminalService';
+import { Toast } from '@/components/lib/toast/Toast';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
+import { Tree } from '@/components/lib/tree/Tree';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
 import { PhotoService } from '../../../service/PhotoService';
-import { PrimeReactContext } from '../../lib/api/Api';
-import { Dialog } from '../../lib/dialog/Dialog';
-import { Dock } from '../../lib/dock/Dock';
-import { Galleria } from '../../lib/galleria/Galleria';
-import { Menubar } from '../../lib/menubar/Menubar';
-import { Terminal } from '../../lib/terminal/Terminal';
-import { TerminalService } from '../../lib/terminalservice/TerminalService';
-import { Toast } from '../../lib/toast/Toast';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { Tree } from '../../lib/tree/Tree';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import PrimeReact from '../../lib/api/Api';
 
 export function AdvancedDoc(props) {
     const [displayTerminal, setDisplayTerminal] = useState(false);

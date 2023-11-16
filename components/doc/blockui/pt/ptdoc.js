@@ -1,7 +1,7 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { BlockUI } from '../../../lib/blockui/BlockUI';
-import { Button } from '../../../lib/button/Button';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { BlockUI } from '@/components/lib/blockui/BlockUI';
+import { Button } from '@/components/lib/button/Button';
 import { useState } from 'react';
 
 export function PTDoc(props) {

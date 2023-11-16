@@ -1,9 +1,9 @@
+import { StyleClass } from '@/components/lib/styleclass/StyleClass';
+import { classNames } from '@/components/lib/utils/Utils';
 import { DocSearch } from '@docsearch/react';
 import Link from 'next/link';
+import pkg from 'package.json';
 import { useEffect, useRef } from 'react';
-import pkg from '../../package.json';
-import { StyleClass } from '../lib/styleclass/StyleClass';
-import { classNames } from '../lib/utils/Utils';
 
 export default function Topbar(props) {
     const versionsRef = useRef(null);

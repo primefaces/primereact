@@ -1,6 +1,6 @@
-import { Chips } from '../../lib/chips/Chips';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chips } from '@/components/lib/chips/Chips';
 
 export function DisabledDoc(props) {
     const code = {

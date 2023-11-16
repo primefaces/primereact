@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Tree } from '../../../lib/tree/Tree';
-import { InputSwitch } from '../../../lib/inputswitch/InputSwitch';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
+import { Tree } from '@/components/lib/tree/Tree';
+import { useEffect, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
 
 export function MultipleSelectionDoc(props) {

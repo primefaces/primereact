@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { ChevronDownIcon } from '@/components/lib/icons/chevrondown';
+import { ChevronRightIcon } from '@/components/lib/icons/chevronright';
 import { useState } from 'react';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { ChevronDownIcon } from '../../lib/icons/chevrondown';
-import { ChevronRightIcon } from '../../lib/icons/chevronright';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [selectedCountry, setSelectedCountry] = useState(null);

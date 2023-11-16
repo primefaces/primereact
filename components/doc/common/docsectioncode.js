@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '../../lib/button/Button';
-import { classNames } from '../../lib/utils/Utils';
+import { Button } from '@/components/lib/button/Button';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useEffect, useState } from 'react';
 import { useCodeEditor } from './codeeditor';
 import { CodeHighlight } from './codehighlight';
 

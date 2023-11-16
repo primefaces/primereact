@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { Badge } from '../lib/badge/Badge';
+import { Badge } from '@/components/lib/badge/Badge';
+import { StyleClass } from '@/components/lib/styleclass/StyleClass';
+import { classNames } from '@/components/lib/utils/Utils';
 import Link from 'next/link';
-import { StyleClass } from '../lib/styleclass/StyleClass';
-import { classNames } from '../lib/utils/Utils';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 
 function MenuItem(props) {
     const router = useRouter();

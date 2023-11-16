@@ -1,6 +1,6 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/useclickoutside/basicdoc';
-import { ImportDoc } from '../@/components/doc/hooks/useclickoutside/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/useclickoutside/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/useclickoutside/importdoc';
 
 const ClickOutsideDemo = () => {
     const docs = [

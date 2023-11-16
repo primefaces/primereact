@@ -1,12 +1,12 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { OverlayPanel } from '@/components/lib/overlaypanel/OverlayPanel';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Button } from '../../lib/button/Button';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { OverlayPanel } from '../../lib/overlaypanel/OverlayPanel';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function DataTableDoc(props) {
     const [products, setProducts] = useState(null);

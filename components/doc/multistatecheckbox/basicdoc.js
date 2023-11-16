@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { MultiStateCheckbox } from '@/components/lib/multistatecheckbox/MultiStateCheckbox';
 import { useState } from 'react';
-import { MultiStateCheckbox } from '../../lib/multistatecheckbox/MultiStateCheckbox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('public');

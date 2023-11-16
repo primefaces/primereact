@@ -1,6 +1,6 @@
+import { classNames } from '@/components/lib/utils/Utils';
 import { useRouter } from 'next/router';
-import React, { memo, useEffect } from 'react';
-import { classNames } from '../lib/utils/Utils';
+import { memo, useEffect } from 'react';
 import MenuData from './menu.json';
 import MenuItem from './menuitem';
 

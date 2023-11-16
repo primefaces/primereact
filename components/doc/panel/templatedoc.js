@@ -1,7 +1,7 @@
-import { Panel } from '../../lib/panel/Panel';
-import { Ripple } from '../../lib/ripple/Ripple';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Panel } from '@/components/lib/panel/Panel';
+import { Ripple } from '@/components/lib/ripple/Ripple';
 
 export function TemplateDoc(props) {
     const template = (options) => {

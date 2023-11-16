@@ -1,20 +1,20 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Dialog } from '@/components/lib/dialog/Dialog';
+import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { InputTextarea } from '@/components/lib/inputtextarea/InputTextarea';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
+import { Rating } from '@/components/lib/rating/Rating';
+import { Tag } from '@/components/lib/tag/Tag';
+import { Toast } from '@/components/lib/toast/Toast';
+import { Toolbar } from '@/components/lib/toolbar/Toolbar';
+import { classNames } from '@/components/lib/utils/Utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
-import { Button } from '../../../lib/button/Button';
-import { Column } from '../../../lib/column/Column';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Dialog } from '../../../lib/dialog/Dialog';
-import { InputNumber } from '../../../lib/inputnumber/InputNumber';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { InputTextarea } from '../../../lib/inputtextarea/InputTextarea';
-import { RadioButton } from '../../../lib/radiobutton/RadioButton';
-import { Rating } from '../../../lib/rating/Rating';
-import { Tag } from '../../../lib/tag/Tag';
-import { Toast } from '../../../lib/toast/Toast';
-import { Toolbar } from '../../../lib/toolbar/Toolbar';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function ProductsDoc(props) {
     let emptyProduct = {

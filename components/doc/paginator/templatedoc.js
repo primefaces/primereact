@@ -1,15 +1,15 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Divider } from '@/components/lib/divider/Divider';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { Paginator } from '@/components/lib/paginator/Paginator';
+import { Ripple } from '@/components/lib/ripple/Ripple';
+import { Slider } from '@/components/lib/slider/Slider';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
+import { classNames } from '@/components/lib/utils/Utils';
 import React, { useState } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Divider } from '../../lib/divider/Divider';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { InputText } from '../../lib/inputtext/InputText';
-import { Paginator } from '../../lib/paginator/Paginator';
-import { Ripple } from '../../lib/ripple/Ripple';
-import { Slider } from '../../lib/slider/Slider';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [first, setFirst] = useState([0, 0, 0]);

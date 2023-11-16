@@ -1,7 +1,7 @@
+import { CodeHighlight } from '@/components/doc/common/codehighlight';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
 import { useState } from 'react';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { CodeHighlight } from '../common/codehighlight';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function WAIAriaDoc(props) {
     const [checked, setChecked] = useState(false);

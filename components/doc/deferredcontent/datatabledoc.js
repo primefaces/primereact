@@ -1,11 +1,11 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { DeferredContent } from '@/components/lib/deferredcontent/DeferredContent';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRef, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function DataTableDoc(props) {
     const toast = useRef(null);

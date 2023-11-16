@@ -1,8 +1,8 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/usemove/basicdoc';
-import { HorizontalDoc } from '../@/components/doc/hooks/usemove/horizontaldoc';
-import { ImportDoc } from '../@/components/doc/hooks/usemove/importdoc';
-import { VerticalDoc } from '../@/components/doc/hooks/usemove/verticaldoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/usemove/basicdoc';
+import { HorizontalDoc } from '@/components/doc/hooks/usemove/horizontaldoc';
+import { ImportDoc } from '@/components/doc/hooks/usemove/importdoc';
+import { VerticalDoc } from '@/components/doc/hooks/usemove/verticaldoc';
 
 const MoveDemo = () => {
     const docs = [

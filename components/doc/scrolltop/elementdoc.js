@@ -1,7 +1,6 @@
-import React from 'react';
-import { ScrollTop } from '../../lib/scrolltop/ScrollTop';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ScrollTop } from '@/components/lib/scrolltop/ScrollTop';
 
 export function ElementDoc(props) {
     const code = {

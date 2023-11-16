@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Menu } from '@/components/lib/menu/Menu';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { Menu } from '../../lib/menu/Menu';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
     const toast = useRef(null);

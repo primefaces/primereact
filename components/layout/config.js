@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '../lib/button/Button';
-import { InputSwitch } from '../lib/inputswitch/InputSwitch';
-import { SelectButton } from '../lib/selectbutton/SelectButton';
-import { Sidebar } from '../lib/sidebar/Sidebar';
-import { classNames } from '../lib/utils/Utils';
+import { Button } from '@/components/lib/button/Button';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
+import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
+import { Sidebar } from '@/components/lib/sidebar/Sidebar';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useEffect, useState } from 'react';
 
 export default function Config(props) {
     const [scale, setScale] = useState(14);

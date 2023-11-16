@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ConditionalStyleDoc(props) {
     const [products, setProducts] = useState([]);

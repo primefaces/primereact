@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Carousel } from '@/components/lib/carousel/Carousel';
+import { Tag } from '@/components/lib/tag/Tag';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Button } from '../../lib/button/Button';
-import { Carousel } from '../../lib/carousel/Carousel';
-import { Tag } from '../../lib/tag/Tag';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ResponsiveDoc(props) {
     const [products, setProducts] = useState([]);

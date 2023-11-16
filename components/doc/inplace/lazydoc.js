@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { Inplace, InplaceDisplay, InplaceContent } from '../../../components/lib/inplace/Inplace';
-import { DataTable } from '../../../components/lib/datatable/DataTable';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useState } from 'react';
 import { Column } from '../../../components/lib/column/Column';
+import { DataTable } from '../../../components/lib/datatable/DataTable';
+import { Inplace, InplaceContent, InplaceDisplay } from '../../../components/lib/inplace/Inplace';
 import { ProductService } from '../../../service/ProductService';
 
 export function LazyDoc(props) {

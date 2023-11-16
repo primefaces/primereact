@@ -1,6 +1,6 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/usetimeout/basicdoc';
-import { ImportDoc } from '../@/components/doc/hooks/usetimeout/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/usetimeout/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/usetimeout/importdoc';
 
 const TimeoutDemo = () => {
     const docs = [

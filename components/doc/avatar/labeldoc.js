@@ -1,7 +1,7 @@
-import { Badge } from '../../lib/badge/Badge';
-import { Avatar } from '../../lib/avatar/Avatar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Badge } from '@/components/lib/badge/Badge';
 
 export function LabelDoc(props) {
     const code = {

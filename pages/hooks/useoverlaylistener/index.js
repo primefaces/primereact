@@ -1,6 +1,6 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/useoverlaylistener/basicdoc';
-import { ImportDoc } from '../@/components/doc/hooks/useoverlaylistener/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/useoverlaylistener/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/useoverlaylistener/importdoc';
 
 const OverlayListenerDemo = () => {
     const docs = [

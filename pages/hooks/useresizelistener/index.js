@@ -1,6 +1,6 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/useresizelistener/basicdoc';
-import { ImportDoc } from '../@/components/doc/hooks/useresizelistener/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/useresizelistener/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/useresizelistener/importdoc';
 
 const ResizeListenerDemo = () => {
     const docs = [

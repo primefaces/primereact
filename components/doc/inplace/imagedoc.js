@@ -1,7 +1,6 @@
-import React from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { Inplace, InplaceContent, InplaceDisplay } from '../../../components/lib/inplace/Inplace';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ImageDoc(props) {
     const code = {

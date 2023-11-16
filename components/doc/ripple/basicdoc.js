@@ -1,7 +1,6 @@
-import React from 'react';
-import { Ripple } from '../../lib/ripple/Ripple';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Ripple } from '@/components/lib/ripple/Ripple';
 
 export function BasicDoc(props) {
     const code = {

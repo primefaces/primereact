@@ -1,4 +1,4 @@
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function CRADoc(props) {
     return (

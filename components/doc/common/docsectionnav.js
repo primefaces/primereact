@@ -1,8 +1,8 @@
+import { useEventListener } from '@/components/lib/hooks/Hooks';
+import { DomHandler, ObjectUtils, classNames } from '@/components/lib/utils/Utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
-import { useEventListener } from '../../lib/hooks/Hooks';
-import { DomHandler, ObjectUtils, classNames } from '../../lib/utils/Utils';
+import { useEffect, useRef, useState } from 'react';
 
 export function DocSectionNav({ docs = [] }) {
     const router = useRouter();

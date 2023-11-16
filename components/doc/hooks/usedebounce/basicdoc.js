@@ -1,8 +1,7 @@
-import React from 'react';
-import { useDebounce } from '../../../lib/hooks/Hooks';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useDebounce } from '@/components/lib/hooks/Hooks';
+import { InputText } from '@/components/lib/inputtext/InputText';
 
 export function BasicDoc(props) {
     const [inputValue, debouncedValue, setInputValue] = useDebounce('', 400);

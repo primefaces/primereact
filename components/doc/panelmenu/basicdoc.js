@@ -1,6 +1,6 @@
-import { PanelMenu } from '../../lib/panelmenu/PanelMenu';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { PanelMenu } from '@/components/lib/panelmenu/PanelMenu';
 
 export function BasicDoc(props) {
     const items = [

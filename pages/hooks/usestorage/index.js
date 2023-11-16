@@ -1,7 +1,7 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { ImportDoc } from '../@/components/doc/hooks/usestorage/importdoc';
-import { LocalDoc } from '../@/components/doc/hooks/usestorage/localdoc';
-import { SessionDoc } from '../@/components/doc/hooks/usestorage/sessiondoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { ImportDoc } from '@/components/doc/hooks/usestorage/importdoc';
+import { LocalDoc } from '@/components/doc/hooks/usestorage/localdoc';
+import { SessionDoc } from '@/components/doc/hooks/usestorage/sessiondoc';
 
 const StorageDemo = () => {
     const docs = [

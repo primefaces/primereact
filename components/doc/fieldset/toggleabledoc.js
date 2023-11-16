@@ -1,6 +1,6 @@
-import { Fieldset } from '../../lib/fieldset/Fieldset';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Fieldset } from '@/components/lib/fieldset/Fieldset';
 
 export function ToggleableDoc(props) {
     const code = {

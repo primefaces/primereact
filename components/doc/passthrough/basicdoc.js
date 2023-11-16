@@ -1,7 +1,7 @@
-import { Panel } from '../../lib/panel/Panel';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Panel } from '@/components/lib/panel/Panel';
+import { classNames } from '@/components/lib/utils/Utils';
 
 export function BasicDoc(props) {
     const code = {

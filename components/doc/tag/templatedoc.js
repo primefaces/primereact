@@ -1,7 +1,6 @@
-import React from 'react';
-import { Tag } from '../../lib/tag/Tag';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Tag } from '@/components/lib/tag/Tag';
 
 export function TemplateDoc(props) {
     const code = {

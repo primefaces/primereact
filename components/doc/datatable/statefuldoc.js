@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { FilterMatchMode, FilterOperator } from '@/components/lib/api/Api';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
+import { Tag } from '@/components/lib/tag/Tag';
+import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
-import { FilterMatchMode, FilterOperator } from '../../lib/api/Api';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { InputText } from '../../lib/inputtext/InputText';
-import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { Tag } from '../../lib/tag/Tag';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function StatefulDoc(props) {
     const [customers, setCustomers] = useState(null);

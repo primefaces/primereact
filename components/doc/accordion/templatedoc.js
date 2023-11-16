@@ -1,7 +1,6 @@
-import React from 'react';
-import { Accordion, AccordionTab } from '../../lib/accordion/Accordion';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Accordion, AccordionTab } from '@/components/lib/accordion/Accordion';
 
 export function TemplateDoc(props) {
     const code = {

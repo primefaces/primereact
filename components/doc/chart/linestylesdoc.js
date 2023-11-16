@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chart } from '@/components/lib/chart/Chart';
 import { useEffect, useState } from 'react';
-import { Chart } from '../../lib/chart/Chart';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function LineStylesDoc(props) {
     const [chartData, setChartData] = useState({});

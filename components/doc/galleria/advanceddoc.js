@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Galleria } from '@/components/lib/galleria/Galleria';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useEffect, useRef, useState } from 'react';
 import { PhotoService } from '../../../service/PhotoService';
-import { Button } from '../../lib/button/Button';
-import { Galleria } from '../../lib/galleria/Galleria';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function AdvancedDoc(props) {
     const [images, setImages] = useState(null);

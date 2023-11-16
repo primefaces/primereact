@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useMountEffect } from '@/components/lib/hooks/Hooks';
+import { Messages } from '@/components/lib/messages/Messages';
 import React, { useRef } from 'react';
-import { useMountEffect } from '../../lib/hooks/Hooks';
-import { Messages } from '../../lib/messages/Messages';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const msgs = useRef(null);

@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
+import { Toolbar } from '@/components/lib/toolbar/Toolbar';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Button } from '../../lib/button/Button';
-import { SplitButton } from '../../lib/splitbutton/SplitButton';
-import { Toolbar } from '../../lib/toolbar/Toolbar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const router = useRouter();

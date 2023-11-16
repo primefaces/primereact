@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../lib/button/Button';
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ValidationDoc(props) {
     const [formData, setFormData] = useState({});

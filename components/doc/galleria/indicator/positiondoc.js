@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
+import { Galleria } from '@/components/lib/galleria/Galleria';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 import { useEffect, useState } from 'react';
 import { PhotoService } from '../../../../service/PhotoService';
-import { Checkbox } from '../../../lib/checkbox/Checkbox';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { RadioButton } from '../../../lib/radiobutton/RadioButton';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function PositionDoc(props) {
     const [images, setImages] = useState(null);

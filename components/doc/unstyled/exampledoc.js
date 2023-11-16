@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 import Link from 'next/link';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ExampleDoc(props) {
     const code = {

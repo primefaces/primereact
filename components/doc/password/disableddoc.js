@@ -1,6 +1,6 @@
-import { Password } from '../../lib/password/Password';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Password } from '@/components/lib/password/Password';
 
 export function DisabledDoc(props) {
     const code = {

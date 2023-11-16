@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Accordion, AccordionTab } from '@/components/lib/accordion/Accordion';
+import { Button } from '@/components/lib/button/Button';
 import { useState } from 'react';
-import { Accordion, AccordionTab } from '../../lib/accordion/Accordion';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ControlledDoc(props) {
     const [activeIndex, setActiveIndex] = useState(null);

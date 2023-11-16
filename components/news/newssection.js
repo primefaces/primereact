@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import { useMountEffect } from '@/components/lib/hooks/Hooks';
+import { useRef } from 'react';
 import AnnouncementData from '../../data/news.json';
-import { useMountEffect } from '../lib/hooks/Hooks';
 
 export default function NewsSection(props) {
     const storageKey = 'primereact-news';

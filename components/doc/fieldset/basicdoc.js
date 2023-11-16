@@ -1,6 +1,6 @@
-import { Fieldset } from '../../lib/fieldset/Fieldset';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Fieldset } from '@/components/lib/fieldset/Fieldset';
 
 export function BasicDoc(props) {
     const code = {

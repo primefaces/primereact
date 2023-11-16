@@ -1,6 +1,6 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/usefavicon/basicdoc';
-import { ImportDoc } from '../@/components/doc/hooks/usefavicon/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/usefavicon/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/usefavicon/importdoc';
 
 const FaviconDemo = () => {
     const docs = [

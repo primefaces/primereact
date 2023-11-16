@@ -1,6 +1,6 @@
-import { Badge } from '../../lib/badge/Badge';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Badge } from '@/components/lib/badge/Badge';
 
 export function SeverityDoc(props) {
     const code = {

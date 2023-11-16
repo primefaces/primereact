@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Divider } from '../../lib/divider/Divider';
-import { Password } from '../../lib/password/Password';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Divider } from '@/components/lib/divider/Divider';
+import { Password } from '@/components/lib/password/Password';
+import { useState } from 'react';
 
 export function TemplateDoc(props) {
     const [value, setValue] = useState('');

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { ContextMenu } from '@/components/lib/contextmenu/ContextMenu';
+import { Toast } from '@/components/lib/toast/Toast';
+import { TreeTable } from '@/components/lib/treetable/TreeTable';
+import { useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
-import { Column } from '../../lib/column/Column';
-import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
-import { Toast } from '../../lib/toast/Toast';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ContextMenuDoc(props) {
     const [nodes, setNodes] = useState([]);

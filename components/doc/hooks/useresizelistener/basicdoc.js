@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useResizeListener } from '../../../lib/hooks/Hooks';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useResizeListener } from '@/components/lib/hooks/Hooks';
+import { useEffect, useState } from 'react';
 
 export function BasicDoc(props) {
     const [eventData, setEventData] = useState({ width: 0, height: 0 });

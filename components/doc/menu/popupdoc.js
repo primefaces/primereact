@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Menu } from '@/components/lib/menu/Menu';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Menu } from '../../lib/menu/Menu';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function PopupDoc(props) {
     const menuLeft = useRef(null);

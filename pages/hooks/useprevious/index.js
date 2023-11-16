@@ -1,6 +1,6 @@
-import { DocComponent } from '../@/components/doc/common/doccomponent';
-import { BasicDoc } from '../@/components/doc/hooks/useprevious/basicdoc';
-import { ImportDoc } from '../@/components/doc/hooks/useprevious/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/useprevious/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/useprevious/importdoc';
 
 const PreviousDemo = () => {
     const docs = [

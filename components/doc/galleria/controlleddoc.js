@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Galleria } from '@/components/lib/galleria/Galleria';
 import { useEffect, useState } from 'react';
 import { PhotoService } from '../../../service/PhotoService';
-import { Button } from '../../lib/button/Button';
-import { Galleria } from '../../lib/galleria/Galleria';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ControlledDoc(props) {
     const [images, setImages] = useState(null);
