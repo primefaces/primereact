@@ -1,11 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import AnnouncementData from '../../data/news.json';
+import { useMountEffect } from '../lib/hooks/Hooks';
 
 export default function NewsSection(props) {
     const storageKey = 'primereact-news';
     const announcement = useRef(AnnouncementData);
 
-    useEffect(() => {
+    useMountEffect(() => {
         const itemString = localStorage.getItem(storageKey);
 
         if (itemString) {
@@ -17,7 +18,7 @@ export default function NewsSection(props) {
         } else {
             props.setNewsActive(true);
         }
-    }, []);
+    });
 
     const onNewsClose = () => {
         props.setNewsActive(false);
