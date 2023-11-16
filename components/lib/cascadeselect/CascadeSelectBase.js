@@ -37,7 +37,8 @@ const classes = {
     content: 'p-cascadeselect-item-content',
     optionGroupIcon: 'p-cascadeselect-group-icon',
     text: 'p-cascadeselect-item-text',
-    transition: 'p-connected-overlay'
+    transition: 'p-connected-overlay',
+    header: 'p-cascadeselect-header'
 };
 
 const styles = `
@@ -77,7 +78,6 @@ const styles = `
     
     .p-cascadeselect-panel {
         position: absolute;
-        top: 0;
         left: 0;
     }
     
@@ -166,7 +166,8 @@ export const CascadeSelectBase = ComponentBase.extend({
         tabIndex: null,
         transitionOptions: null,
         value: null,
-        children: undefined
+        children: undefined,
+        panelHeaderTemplate: null
     },
     css: {
         classes,

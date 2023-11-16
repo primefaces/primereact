@@ -371,7 +371,24 @@ export const CascadeSelect = React.memo(
             },
             ptm('panel')
         );
+        const createHeader = () => {
+            if (!props.panelHeaderTemplate) return null;
+            const headerProps = mergeProps(
+                {
+                    className: cx('header')
+                },
+                ptm('header')
+            );
+            const content = <div {...headerProps}></div>;
 
+            const defaultOptions = {
+                className: 'p-cascadeselect-header',
+                element: content,
+                props
+            };
+
+            return ObjectUtils.getJSXElement(props.panelHeaderTemplate, defaultOptions);
+        };
         const createOverlay = () => {
             const transitionProps = mergeProps(
                 {
@@ -387,10 +404,11 @@ export const CascadeSelect = React.memo(
                 },
                 ptm('transition')
             );
-
+            const header = createHeader();
             const overlay = (
                 <CSSTransition nodeRef={overlayRef} {...transitionProps}>
                     <div {...panelProps}>
+                        {header}
                         <div {...wrapperProps}>
                             <CascadeSelectSub
                                 hostName="CascadeSelect"

@@ -137,6 +137,24 @@ interface CascadeSelectChangeEvent {
  * @event
  */
 interface CascadeSelectGroupChangeEvent extends CascadeSelectChangeEvent {}
+/**
+ * Custom panel header template options.
+ */
+interface CascadeSelectPanelHeaderTemplateOptions {
+    /**
+     * Style class of the panel.
+     */
+    className: string;
+
+    /**
+     * The JSX element that represents the panel.
+     */
+    element: JSX.Element;
+    /**
+     * The props of the CascadeSelect component.
+     */
+    props: CascadeSelectProps;
+}
 
 /**
  * Defines valid properties in CascadeSelect component. In addition to these, all properties of HTMLDivElement can be used in this component.
@@ -294,6 +312,11 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * @defaultValue false
      */
     unstyled?: boolean;
+
+    /**
+     * The template of header.
+     */
+    panelHeaderTemplate?: React.ReactNode | ((options: CascadeSelectPanelHeaderTemplateOptions) => React.ReactNode);
 }
 
 /**
