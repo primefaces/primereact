@@ -154,12 +154,6 @@ export default function Layout(props) {
                 }}
             >
                 <div className={classNames('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={onMaskClick}></div>
-
-                <div className="layout-content">
-                    <Menu active={sidebarActive} darkTheme={props.dark} />
-                    <div className="layout-content-slot">{props.children}</div>
-                </div>
-                <Footer></Footer>
                 <Config
                     ripple={ripple}
                     inputStyle={inputStyle}
@@ -174,8 +168,12 @@ export default function Layout(props) {
                     theme={props.theme}
                     darkModeSwitch={toggleColorScheme}
                 />
+                <div className="layout-content">
+                    <Menu active={sidebarActive} darkTheme={props.dark} />
+                    <div className="layout-content-slot">{props.children}</div>
+                </div>
+                <Footer></Footer>
             </AppContentContext.Provider>
-            <div className={maskClassName} onClick={onMaskClick}></div>
         </div>
     );
 }
