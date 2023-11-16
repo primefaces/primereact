@@ -11,7 +11,7 @@ import { InputSwitch } from '../../components/lib/inputswitch/InputSwitch';
 import { RadioButton } from '../../components/lib/radiobutton/RadioButton';
 import { SelectButton } from '../../components/lib/selectbutton/SelectButton';
 import { Slider } from '../../components/lib/slider/Slider';
-import { TabMenu } from '../../components/lib/tabmenu/Tabmenu';
+import { TabMenu } from '../../components/lib/tabmenu/TabMenu';
 
 const HeroSection = (props) => {
     const selectButtonOptions = [
