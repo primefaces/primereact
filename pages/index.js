@@ -12,13 +12,35 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 export default function Home(props) {
-    const [tableTheme, setTableTheme] = useState('lara-light-blue');
+    const [tableTheme, setTableTheme] = useState('lara-light-cyan');
     const [newsActive, setNewsActive] = useState(false);
     const landingClass = classNames('landing', { 'layout-light': !props.dark, 'layout-dark': props.dark, 'layout-news-active': newsActive });
 
-    const changeTableTheme = (newTheme) => {
-        props.onTableThemeChange(tableTheme, newTheme);
-        setTableTheme(newTheme);
+    const onTableThemeChange = (newTheme) => {
+        replaceTableTheme(newTheme);
+    };
+
+    const replaceTableTheme = (newTheme) => {
+        const elementId = 'home-table-link';
+        const linkElement = document.getElementById(elementId);
+        const tableThemeTokens = linkElement?.getAttribute('href').split('/') || null;
+        const currentTableTheme = tableThemeTokens ? tableThemeTokens[tableThemeTokens.length - 2] : null;
+
+        if (currentTableTheme !== newTheme && tableThemeTokens) {
+            const newThemeUrl = linkElement.getAttribute('href').replace(currentTableTheme, newTheme);
+
+            const cloneLinkElement = linkElement.cloneNode(true);
+
+            cloneLinkElement.setAttribute('id', elementId + '-clone');
+            cloneLinkElement.setAttribute('href', newThemeUrl);
+            cloneLinkElement.addEventListener('load', () => {
+                linkElement.remove();
+                cloneLinkElement.setAttribute('id', elementId);
+            });
+            linkElement.parentNode?.insertBefore(cloneLinkElement, linkElement.nextSibling);
+
+            setTableTheme(newTheme);
+        }
     };
 
     const onDarkModeToggle = () => {
@@ -38,7 +60,7 @@ export default function Home(props) {
     useEffect(() => {
         const newTheme = props.dark ? tableTheme.replace('light', 'dark') : tableTheme.replace('dark', 'light');
 
-        changeTableTheme(newTheme);
+        replaceTableTheme(newTheme);
     }, [props.dark]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -65,7 +87,7 @@ export default function Home(props) {
             <HeroSection dark={props.dark} />
             <FeaturesSection dark={props.dark} />
             <UsersSection dark={props.dark} />
-            <ThemeSection theme={tableTheme} onThemeChange={(t) => changeTableTheme(t)} dark={props.dark} />
+            <ThemeSection theme={tableTheme} onThemeChange={(t) => onTableThemeChange(t)} dark={props.dark} />
             <BlockSection />
             <TemplateSection dark={props.dark} />
             <FooterSection dark={props.dark} />

@@ -1,10 +1,10 @@
+import Layout from '@/components/layout/layout';
+import PrimeReact from '@/components/lib/api/Api';
 import '@docsearch/css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { useContext, useState } from 'react';
 import { GTagManager } from '../components/analytics/analytics';
-import Layout from '../components/layout/layout';
-import PrimeReact from '../components/lib/api/Api';
 import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
 import '../styles/demo/demo.scss';
 import '../styles/layout/layout.scss';
@@ -29,27 +29,6 @@ function Main({ component: Component }) {
                     setTheme(newTheme);
                 });
             }
-        },
-        onTableThemeChange: (currentTableTheme, newTableTheme) => {
-            changeTableTheme(currentTableTheme, newTableTheme);
-        }
-    };
-
-    const changeTableTheme = (currentTableTheme, newTableTheme) => {
-        if (currentTableTheme !== newTableTheme) {
-            const elementId = 'landing-table-theme-link';
-            const linkElement = document.getElementById(elementId);
-            const cloneLinkElement = linkElement.cloneNode(true);
-            const newThemeUrl = linkElement.getAttribute('href').replace(currentTableTheme, newTableTheme);
-
-            cloneLinkElement.setAttribute('id', elementId + '-clone');
-            cloneLinkElement.setAttribute('href', newThemeUrl);
-            cloneLinkElement.addEventListener('load', () => {
-                linkElement.remove();
-                cloneLinkElement.setAttribute('id', elementId);
-            });
-
-            linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
         }
     };
 
