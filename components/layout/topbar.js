@@ -104,7 +104,7 @@ export default function Topbar(props) {
     }, []);
 
     const toggleDarkMode = () => {
-        props.darkModeSwitch();
+        props.onDarkSwitchClick();
     };
 
     return (

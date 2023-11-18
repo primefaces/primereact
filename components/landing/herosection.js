@@ -1,6 +1,4 @@
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
+import AppContentContext from '@/components/layout/appcontentcontext';
 import { Badge } from '@/components/lib/badge/Badge';
 import { Button } from '@/components/lib/button/Button';
 import { Calendar } from '@/components/lib/calendar/Calendar';
@@ -12,8 +10,11 @@ import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { Slider } from '@/components/lib/slider/Slider';
 import { TabMenu } from '@/components/lib/tabmenu/TabMenu';
+import Link from 'next/link';
+import { useContext, useEffect, useState } from 'react';
 
-const HeroSection = (props) => {
+const HeroSection = () => {
+    const { darkMode } = useContext(AppContentContext);
     const selectButtonOptions = [
         { name: 'Styled', value: 1 },
         { name: 'Unstyled', value: 2 }
@@ -25,7 +26,7 @@ const HeroSection = (props) => {
     ];
 
     const [value1, setValue1] = useState(240);
-    const [value2, setValue2] = useState(240);
+    const [value2, setValue2] = useState(360);
     const [category, setCategory] = useState('C');
     const [dateValue, setDateValue] = useState(null);
     const [chartOptions, setChartOptions] = useState({});
@@ -34,10 +35,6 @@ const HeroSection = (props) => {
     const [selectButtonValue, setSelectButtonValue] = useState(1);
     const [activeIndex, setActiveIndex] = useState(0);
     const [rangeValues, setRangeValues] = useState([20, 80]);
-
-    useEffect(() => {
-        document.body.classList.remove('blocked-scroll');
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
@@ -89,7 +86,7 @@ const HeroSection = (props) => {
 
         setChartData(data);
         setChartOptions(options);
-    }, [props.dark]);
+    }, [darkMode]);
 
     return (
         <section className="landing-hero py-8 px-5 lg:px-8">

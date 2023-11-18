@@ -1,10 +1,10 @@
+import AppContentContext from '@/components/layout/appcontentcontext';
 import { classNames } from '@/components/lib/utils/ClassNames';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-const TemplateSection = (props) => {
+const TemplateSection = () => {
     const [animation, setAnimation] = useState(false);
-
-    const isDark = props.dark;
+    const { darkMode } = useContext(AppContentContext);
 
     useEffect(() => {
         setAnimation(true);
@@ -13,11 +13,11 @@ const TemplateSection = (props) => {
     const imageBg = (template) => {
         const url = template === 'templates-text' ? 'png' : 'jpg';
 
-        return `url('https://primefaces.org/cdn/primereact/images/landing-new/templates/${template}-${isDark ? 'dark' : 'light'}.${url}')`;
+        return `url('https://primefaces.org/cdn/primereact/images/landing-new/templates/${template}-${darkMode ? 'dark' : 'light'}.${url}')`;
     };
 
     const templateImg = () => {
-        return `https://primefaces.org/cdn/primereact/images/landing-new/templates/templates-text-new-${isDark ? 'dark' : 'light'}.png`;
+        return `https://primefaces.org/cdn/primereact/images/landing-new/templates/templates-text-new-${darkMode ? 'dark' : 'light'}.png`;
     };
 
     return (

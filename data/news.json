@@ -2,9 +2,5 @@
     "id": 42,
     "content": "Building Design Systems with Tailwind!",
     "linkText": "Learn More",
-    "linkHref": "https://primereact.org/tailwind",
-    "backgroundStyle": "background-color:#06b6d4",
-    "textStyle": "color:#ffffff;font-weight:500",
-    "linkStyle": "color:#ffffff;font-weight:700",
-    "linkHoverStyle": "text-decoration: underline"
+    "linkHref": "https://primereact.org/tailwind"
 }

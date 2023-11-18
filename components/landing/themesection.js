@@ -1,15 +1,19 @@
+import AppContentContext from '@/components/layout/appcontentcontext';
 import { FilterMatchMode, FilterOperator } from '@/components/lib/api/Api';
 import { Button } from '@/components/lib/button/Button';
 import { Column } from '@/components/lib/column/Column';
 import { DataTable } from '@/components/lib/datatable/DataTable';
+import { useUpdateEffect } from '@/components/lib/hooks/useUpdateEffect';
 import { InputText } from '@/components/lib/inputtext/InputText';
 import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
 import { Tag } from '@/components/lib/tag/Tag';
 import { classNames } from '@/components/lib/utils/Utils';
 import { CustomerService } from '@/service/CustomerService';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-const ThemeSection = (props) => {
+const ThemeSection = () => {
+    const [tableTheme, setTableTheme] = useState('lara-light-cyan');
+    const { darkMode } = useContext(AppContentContext);
     const [customers, setCustomers] = useState(null);
     const [selectedCustomers, setSelectedCustomers] = useState(null);
     const [filters, setFilters] = useState({
@@ -25,10 +29,33 @@ const ThemeSection = (props) => {
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [loading, setLoading] = useState(true);
 
-    const changeTheme = (name, color) => {
-        let newTheme = name + '-' + (props.dark ? 'dark' : 'light') + '-' + color;
+    const replaceTableTheme = (newTheme) => {
+        const elementId = 'home-table-link';
+        const linkElement = document.getElementById(elementId);
+        const tableThemeTokens = linkElement?.getAttribute('href').split('/') || null;
+        const currentTableTheme = tableThemeTokens ? tableThemeTokens[tableThemeTokens.length - 2] : null;
 
-        props.onThemeChange(newTheme);
+        if (currentTableTheme !== newTheme && tableThemeTokens) {
+            const newThemeUrl = linkElement.getAttribute('href').replace(currentTableTheme, newTheme);
+
+            const cloneLinkElement = linkElement.cloneNode(true);
+
+            cloneLinkElement.setAttribute('id', elementId + '-clone');
+            cloneLinkElement.setAttribute('href', newThemeUrl);
+            cloneLinkElement.addEventListener('load', () => {
+                linkElement.remove();
+                cloneLinkElement.setAttribute('id', elementId);
+
+                setTableTheme(newTheme);
+            });
+            linkElement.parentNode?.insertBefore(cloneLinkElement, linkElement.nextSibling);
+        }
+    };
+
+    const changeTheme = (name, color) => {
+        let newTheme = name + '-' + (darkMode ? 'dark' : 'light') + '-' + color;
+
+        replaceTableTheme(newTheme);
     };
 
     useEffect(() => {
@@ -37,6 +64,12 @@ const ThemeSection = (props) => {
             setLoading(false);
         });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useUpdateEffect(() => {
+        const newTheme = darkMode ? tableTheme.replace('light', 'dark') : tableTheme.replace('dark', 'light');
+
+        replaceTableTheme(newTheme);
+    }, [darkMode]);
 
     const getCustomers = (data) => {
         return [...(data || [])].map((d) => {
@@ -146,13 +179,13 @@ const ThemeSection = (props) => {
             <div className="section-header">Themes</div>
             <p className="section-detail">Crafted on a design-agnostic infrastructure, choose from a vast amount of themes such as material, bootstrap, tailwind, primeone or develop your own.</p>
             <div className="flex flex-wrap justify-content-center">
-                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: props.theme && props.theme.startsWith('lara') })} onClick={() => changeTheme('lara', 'cyan')}>
+                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: tableTheme && tableTheme.startsWith('lara') })} onClick={() => changeTheme('lara', 'cyan')}>
                     PrimeOne
                 </button>
-                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: props.theme && props.theme.startsWith('md') })} onClick={() => changeTheme('md', 'indigo')}>
+                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: tableTheme && tableTheme.startsWith('md') })} onClick={() => changeTheme('md', 'indigo')}>
                     Material
                 </button>
-                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: props.theme && props.theme.startsWith('bootstrap4') })} onClick={() => changeTheme('bootstrap4', 'blue')}>
+                <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: tableTheme && tableTheme.startsWith('bootstrap4') })} onClick={() => changeTheme('bootstrap4', 'blue')}>
                     Bootstrap
                 </button>
                 <a type="button" className="font-medium p-link linkbox mt-4" href="https://designer.primereact.org">
@@ -161,7 +194,7 @@ const ThemeSection = (props) => {
             </div>
             <div
                 className="themes-main flex mt-7 justify-content-center px-5 lg:px-8"
-                style={{ backgroundImage: `url(https://primefaces.org/cdn/primereact/images/landing-new/wave-${props.dark ? 'dark-alt-gray' : 'light-alt-gray'}.svg)`, backgroundSize: 'cover' }}
+                style={{ backgroundImage: `url(https://primefaces.org/cdn/primereact/images/landing-new/wave-${darkMode ? 'dark-alt-gray' : 'light-alt-gray'}.svg)`, backgroundSize: 'cover' }}
             >
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable

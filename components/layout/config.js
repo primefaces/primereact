@@ -1,16 +1,18 @@
+import AppContentContext from '@/components/layout/appcontentcontext';
+import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
 import { Button } from '@/components/lib/button/Button';
 import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { Sidebar } from '@/components/lib/sidebar/Sidebar';
 import { classNames } from '@/components/lib/utils/Utils';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function Config(props) {
     const [scale, setScale] = useState(14);
     const [scales, setScales] = useState([12, 13, 14, 15, 16]);
-    const [inputStyle, setInputStyle] = useState('outlined');
     const [compactMaterial, setCompactMaterial] = useState(false);
-
+    const { theme, darkMode, changeTheme } = useContext(AppContentContext);
+    const { ripple, inputStyle, setRipple, setInputStyle } = useContext(PrimeReactContext);
     const lightOnlyThemes = ['fluent-light', 'mira', 'nano'];
 
     const decrementScale = () => {
@@ -26,23 +28,15 @@ export default function Config(props) {
         { label: 'Filled', value: 'filled' }
     ];
 
-    const changeInputStyle = (e) => {
-        setInputStyle(e.value);
-        props.onInputStyleChange(e.value);
-    };
-
     const darkToggleDisabled = () => {
-        return lightOnlyThemes.includes(props.theme);
+        return lightOnlyThemes.includes(theme);
     };
 
-    const changeTheme = (theme, color) => {
-        let newTheme, dark;
-
-        if (lightOnlyThemes.includes(theme)) {
-            newTheme = theme;
-            dark = false;
+    const switchTheme = (themeName, color) => {
+        if (lightOnlyThemes.includes(themeName)) {
+            changeTheme(themeName, false);
         } else {
-            newTheme = theme + '-' + (props.dark ? 'dark' : 'light');
+            let newTheme = themeName + '-' + (darkMode ? 'dark' : 'light');
 
             if (color) {
                 newTheme += '-' + color;
@@ -52,42 +46,38 @@ export default function Config(props) {
                 newTheme = newTheme.replace('md-', 'mdc-');
             }
 
-            dark = props.dark;
+            changeTheme(newTheme, darkMode);
         }
-
-        props.onThemeChange({ theme: newTheme, dark: dark });
     };
 
-    const isThemeActive = (theme, color) => {
+    const isThemeActive = (themeFamily, color) => {
         let themeName;
-        let themePrefix = compactMaterial ? 'mdc' : theme;
+        let themePrefix = themeFamily === 'md' && compactMaterial ? 'mdc' : themeFamily;
 
         if (lightOnlyThemes.includes(themePrefix)) {
             themeName = themePrefix;
         } else {
-            themeName = themePrefix + (props.dark ? '-dark' : '-light');
+            themeName = themePrefix + (darkMode ? '-dark' : '-light');
         }
 
         if (color) {
             themeName += '-' + color;
         }
 
-        return props.theme === themeName;
-    };
-
-    const onCompactMaterialChange = (e) => {
-        setCompactMaterial(e.value);
-
-        if (props.theme.startsWith('md')) {
-            let tokens = props.theme.split('-');
-
-            changeTheme(tokens[0].substring(0, 2), tokens[2]);
-        }
+        return theme === themeName;
     };
 
     useEffect(() => {
         document.documentElement.style.fontSize = scale + 'px';
     }, [scale]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        if (theme.startsWith('md')) {
+            let tokens = theme.split('-');
+
+            switchTheme(tokens[0].substring(0, 2), tokens[2]);
+        }
+    }, [compactMaterial]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Sidebar visible={props.active} onHide={() => props.onHide()} className={classNames('layout-config w-full sm:w-26rem', { 'layout-dark': props.dark }, { 'layout-light': !props.dark })} position="right">
@@ -106,27 +96,18 @@ export default function Config(props) {
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
                     <span className="text-xl font-semibold">Input Style</span>
                     <div className="flex gap-5">
-                        <SelectButton
-                            value={inputStyle}
-                            onChange={(e) => {
-                                changeInputStyle(e);
-                            }}
-                            options={inputStyles}
-                            optionLabel={'label'}
-                            optionValue={'value'}
-                            allowEmpty={false}
-                        />
+                        <SelectButton value={inputStyle} onChange={(e) => setInputStyle(e.value)} options={inputStyles} optionLabel="label" optionValue="value" allowEmpty={false} />
                     </div>
                 </section>
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
                     <span className="text-xl font-semibold">Ripple Effect</span>
-                    <InputSwitch checked={props.ripple} disabled={props.disabled} onChange={(e) => props.onRippleChange(e.value)} />
+                    <InputSwitch checked={ripple} onChange={(e) => setRipple(e.value)} />
                 </section>
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
                     <span className={classNames('text-xl font-semibold', { 'p-disabled': darkToggleDisabled() })}>Dark Mode</span>
-                    <InputSwitch checked={props.dark} onChange={() => props.darkModeSwitch()} disabled={darkToggleDisabled()} />
+                    <InputSwitch checked={darkMode} onChange={() => props.onDarkSwitchClick()} disabled={darkToggleDisabled()} />
                 </section>
 
                 <section className="py-4 border-bottom-1 surface-border">
@@ -142,7 +123,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'cyan')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'cyan')}
+                            onClick={() => switchTheme('lara', 'cyan')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #06b6d4 0%, rgba(6, 182, 212, 0.5) 100%)' }}></span>
                         </button>
@@ -152,7 +133,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'green')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'green')}
+                            onClick={() => switchTheme('lara', 'green')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #4dac9c 0%, rgba(77, 172, 156, 0.5) 100%)' }}></span>
                         </button>
@@ -162,7 +143,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'blue')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'blue')}
+                            onClick={() => switchTheme('lara', 'blue')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #4378e6 0%, rgba(67, 120, 230, 0.5) 100%)' }}></span>
                         </button>
@@ -172,7 +153,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'indigo')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'indigo')}
+                            onClick={() => switchTheme('lara', 'indigo')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #585fe0 0%, rgba(88, 95, 224, 0.5) 100%)' }}></span>
                         </button>
@@ -184,7 +165,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'purple')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'purple')}
+                            onClick={() => switchTheme('lara', 'purple')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #7758e4 0%, rgba(119, 88, 228, 0.5) 100%)' }}></span>
                         </button>
@@ -194,7 +175,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'amber')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'amber')}
+                            onClick={() => switchTheme('lara', 'amber')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #f59e0b 0%, rgba(245, 158, 11, 0.5) 100%)' }}></span>
                         </button>
@@ -204,7 +185,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'teal')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'teal')}
+                            onClick={() => switchTheme('lara', 'teal')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #14b8a6 0%, rgba(20, 184, 166, 0.5) 100%)' }}></span>
                         </button>
@@ -214,7 +195,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('lara', 'pink')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('lara', 'pink')}
+                            onClick={() => switchTheme('lara', 'pink')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #ec4899 0%, rgba(236, 72, 153, 0.5) 100%)' }}></span>
                         </button>
@@ -229,7 +210,7 @@ export default function Config(props) {
                             <label htmlFor="material-condensed" className="text-sm">
                                 Condensed
                             </label>
-                            <InputSwitch inputId="material-condensed" checked={compactMaterial} onChange={onCompactMaterialChange} className="ml-auto" />
+                            <InputSwitch inputId="material-condensed" checked={compactMaterial} onChange={(e) => setCompactMaterial(e.value)} className="ml-auto" />
                         </div>
                     </div>
                     <div className="flex align-items-center justify-content-between gap-3">
@@ -239,7 +220,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('md', 'indigo')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('md', 'indigo')}
+                            onClick={() => switchTheme('md', 'indigo')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: '30px', background: 'linear-gradient(180deg, #0565f2 0%, rgba(5, 101, 242, 0.5) 100%)' }}></span>
                         </button>
@@ -249,7 +230,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('md', 'deeppurple')
                             })}
                             style={{ borderRadius: '30px' }}
-                            onClick={() => changeTheme('md', 'deeppurple')}
+                            onClick={() => switchTheme('md', 'deeppurple')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: '30px', background: 'linear-gradient(180deg, #702f92 0%, rgba(112, 47, 146, 0.5) 100%)' }}></span>
                         </button>
@@ -270,7 +251,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('bootstrap4', 'blue')
                             })}
                             style={{ borderRadius: 30 }}
-                            onClick={() => changeTheme('bootstrap4', 'blue')}
+                            onClick={() => switchTheme('bootstrap4', 'blue')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #027bff 0%, rgba(2, 123, 255, 0.5) 100%)' }}></span>
                         </button>
@@ -280,7 +261,7 @@ export default function Config(props) {
                                 'hover:border-500 surface-border': !isThemeActive('bootstrap4', 'purple')
                             })}
                             style={{ borderRadius: 30 }}
-                            onClick={() => changeTheme('bootstrap4', 'purple')}
+                            onClick={() => switchTheme('bootstrap4', 'purple')}
                         >
                             <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #893cae 0%, rgba(137, 60, 174, 0.5) 100%)' }}></span>
                         </button>
@@ -302,7 +283,7 @@ export default function Config(props) {
                                     'hover:border-500 surface-border': !isThemeActive('soho')
                                 })}
                                 style={{ borderRadius: 30 }}
-                                onClick={() => changeTheme('soho')}
+                                onClick={() => switchTheme('soho')}
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #664beb 0%, rgba(102, 75, 235, 0.5) 100%)' }}></span>
                             </button>
@@ -318,7 +299,7 @@ export default function Config(props) {
                                     'hover:border-500 surface-border': !isThemeActive('viva')
                                 })}
                                 style={{ borderRadius: 30 }}
-                                onClick={() => changeTheme('viva')}
+                                onClick={() => switchTheme('viva')}
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #4a67c9 0%, rgba(74, 103, 201, 0.5) 100%)' }}></span>
                             </button>
@@ -341,7 +322,7 @@ export default function Config(props) {
                                     'hover:border-500 surface-border': !isThemeActive('fluent-light')
                                 })}
                                 style={{ borderRadius: 30 }}
-                                onClick={() => changeTheme('fluent-light')}
+                                onClick={() => switchTheme('fluent-light')}
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #0078d4 0%, rgba(0, 120, 212, 0.5) 100%)' }}></span>
                             </button>
@@ -357,7 +338,7 @@ export default function Config(props) {
                                     'hover:border-500 surface-border': !isThemeActive('mira')
                                 })}
                                 style={{ borderRadius: 30 }}
-                                onClick={() => changeTheme('mira')}
+                                onClick={() => switchTheme('mira')}
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #81a1c1 0%, rgba(129, 161, 193, 0.5) 100%)' }}></span>
                             </button>
@@ -373,7 +354,7 @@ export default function Config(props) {
                                     'hover:border-500 surface-border': !isThemeActive('nano')
                                 })}
                                 style={{ borderRadius: 30 }}
-                                onClick={() => changeTheme('nano')}
+                                onClick={() => switchTheme('nano')}
                             >
                                 <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #1469b4 0%, rgba(20, 105, 180, 0.5) 100%)' }}></span>
                             </button>
