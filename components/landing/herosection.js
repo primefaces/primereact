@@ -4,6 +4,7 @@ import { Button } from '@/components/lib/button/Button';
 import { Calendar } from '@/components/lib/calendar/Calendar';
 import { Chart } from '@/components/lib/chart/Chart';
 import { Chip } from '@/components/lib/chip/Chip';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
 import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
@@ -25,9 +26,8 @@ const HeroSection = () => {
         { label: 'Calendar', icon: 'pi pi-fw pi-calendar' }
     ];
 
-    const [value1, setValue1] = useState(240);
-    const [value2, setValue2] = useState(360);
-    const [category, setCategory] = useState('C');
+    const [value1, setValue1] = useState(24);
+    const [category, setCategory] = useState('S');
     const [dateValue, setDateValue] = useState(null);
     const [chartOptions, setChartOptions] = useState({});
     const [chartData, setChartData] = useState({});
@@ -35,6 +35,21 @@ const HeroSection = () => {
     const [selectButtonValue, setSelectButtonValue] = useState(1);
     const [activeIndex, setActiveIndex] = useState(0);
     const [rangeValues, setRangeValues] = useState([20, 80]);
+    const [user, setUser] = useState(null);
+    const [users] = useState([
+        { name: 'Amy Elsner', image: 'amyelsner.png' },
+        { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
+        { name: 'Onyama Limba', image: 'onyamalimba.png' }
+    ]);
+
+    const userTemplate = (rowData) => {
+        return (
+            <div className="flex align-items-center gap-2">
+                <img alt={rowData.name} src={`https://primefaces.org/cdn/primereact/images/avatar/${rowData.image}`} width="32" />
+                <span>{rowData.name}</span>
+            </div>
+        );
+    };
 
     useEffect(() => {
         const documentStyle = getComputedStyle(document.documentElement);
@@ -115,27 +130,32 @@ const HeroSection = () => {
                     <div className="flex">
                         <div className="flex flex-column w-6 gap-5 pt-8 pr-3">
                             <div className="box p-4 fadein animation-duration-500">
-                                <span className="text-secondary font-medium block mb-3">Balance</span>
-                                <div className="flex flex-wrap lg:flex-nowrap justify-content-start gap-3">
-                                    <InputNumber value={value1} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="lg:w-6" onValueChange={(e) => setValue1(e.value)} />
-                                    <InputNumber value={value2} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="lg:w-6" onValueChange={(e) => setValue2(e.value)} />
+                                <div class="flex gap-3">
+                                    <div class="w-6rem">
+                                        <span className="text-secondary font-semibold block mb-3">Amount</span>
+                                        <InputNumber value={value1} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="w-full" onValueChange={(e) => setValue1(e.value)} />
+                                    </div>
+                                    <div class="flex-1">
+                                        <span className="text-secondary font-semibold block mb-3">Beneficiary</span>
+                                        <Dropdown value={user} onChange={(e) => setUser(e.value)} options={users} optionLabel="name" placeholder="Select a User" className="w-full" itemTemplate={userTemplate} />
+                                    </div>
                                 </div>
-                                <span className="text-secondary font-medium block mt-5 mb-3">Category</span>
+                                <span className="text-secondary font-semibold block mt-5 mb-3">Account</span>
                                 <div className="flex flex-wrap gap-3">
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="category1" name="radiovalue" value="C" checked={category === 'C'} onChange={(e) => setCategory('C')} />
+                                        <RadioButton inputId="category1" name="radiovalue" value="S" checked={category === 'S'} onChange={(e) => setCategory('S')} />
                                         <label htmlFor="category1" className="ml-2 font-medium">
-                                            Clothing
+                                            Savings
                                         </label>
                                     </div>
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="category2" name="radiovalue" value="E" checked={category === 'E'} onChange={(e) => setCategory('E')} />
+                                        <RadioButton inputId="category2" name="radiovalue" value="C" checked={category === 'C'} onChange={(e) => setCategory('C')} />
                                         <label htmlFor="category2" className="ml-2 font-medium">
-                                            Electronics
+                                            Checking
                                         </label>
                                     </div>
                                 </div>
-                                <span className="text-secondary font-medium block mt-5 mb-3">Order Date</span>
+                                <span className="text-secondary font-semibold block mt-5 mb-3">Date</span>
                                 <Calendar value={dateValue} showWeek className="w-full" />
                             </div>
                             <div className="box p-4 fadein animation-duration-500">
