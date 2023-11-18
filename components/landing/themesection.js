@@ -194,7 +194,7 @@ const ThemeSection = () => {
             </div>
             <div
                 className="themes-main flex mt-7 justify-content-center px-5 lg:px-8"
-                style={{ backgroundImage: `url(https://primefaces.org/cdn/primereact/images/landing-new/wave-${darkMode ? 'dark-alt-gray' : 'light-alt-gray'}.svg)`, backgroundSize: 'cover' }}
+                style={{ backgroundImage: `url(https://primefaces.org/cdn/primereact/images/landing/wave-${darkMode ? 'dark-alt-gray' : 'light-alt-gray'}.svg)`, backgroundSize: 'cover' }}
             >
                 <div className="box overflow-hidden z-1 p-5 table-container">
                     <DataTable

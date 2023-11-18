@@ -113,7 +113,7 @@ export default function Config(props) {
                 <section className="py-4 border-bottom-1 surface-border">
                     <div className="text-xl font-semibold mb-3">Themes</div>
                     <div className="flex align-items-center gap-2 mb-3">
-                        <img src="https://primefaces.org/cdn/primevue/images/themes/lara-light-teal.png" alt="Lara Light Teal" className="border-circle" style={{ width: '1.5rem' }} />
+                        <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-teal.png" alt="Lara Light Teal" className="border-circle" style={{ width: '1.5rem' }} />
                         <span className="font-medium">Lara</span>
                     </div>
                     <div className="flex align-items-center justify-content-between gap-3 mb-3">
@@ -204,7 +204,7 @@ export default function Config(props) {
 
                 <section className="py-4 border-bottom-1 surface-border">
                     <div className="flex align-items-center gap-2 mb-3">
-                        <img src="https://primefaces.org/cdn/primevue/images/themes/md-light-indigo.svg" alt="Material Design" className="border-circle" style={{ width: '1.5rem' }} />
+                        <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Design" className="border-circle" style={{ width: '1.5rem' }} />
                         <span className="font-medium">Material Design</span>
                         <div className="ml-auto flex align-items-center gap-2">
                             <label htmlFor="material-condensed" className="text-sm">
@@ -241,7 +241,7 @@ export default function Config(props) {
 
                 <section className="py-4 border-bottom-1 surface-border">
                     <div className="flex align-items-center gap-2 mb-3">
-                        <img src="https://primefaces.org/cdn/primevue/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap" className="border-circle" style={{ width: '1.5rem' }} />
+                        <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap" className="border-circle" style={{ width: '1.5rem' }} />
                         <span className="font-medium">Bootstrap</span>
                     </div>
                     <div className="flex align-items-center justify-content-between gap-3">
@@ -274,7 +274,7 @@ export default function Config(props) {
                     <div className="flex gap-3">
                         <div className="w-3">
                             <div className="flex align-items-center gap-2 mb-3">
-                                <img src="https://primefaces.org/cdn/primevue/images/themes/soho-light.png" alt="Soho" className="border-circle" style={{ width: '1.5rem' }} />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/soho-light.png" alt="Soho" className="border-circle" style={{ width: '1.5rem' }} />
                                 <span className="font-medium">Soho</span>
                             </div>
                             <button
@@ -290,7 +290,7 @@ export default function Config(props) {
                         </div>
                         <div className="w-3">
                             <div className="flex align-items-center gap-2 mb-3">
-                                <img src="https://primefaces.org/cdn/primevue/images/themes/viva-light.svg" alt="Viva" className="border-circle" style={{ width: '1.5rem' }} />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/viva-light.svg" alt="Viva" className="border-circle" style={{ width: '1.5rem' }} />
                                 <span className="font-medium">Viva</span>
                             </div>
                             <button
@@ -313,7 +313,7 @@ export default function Config(props) {
                     <div className="flex gap-3">
                         <div className="w-3">
                             <div className="flex align-items-center gap-2 mb-3">
-                                <img src="https://primefaces.org/cdn/primevue/images/themes/fluent-light.png" alt="Fluent" className="border-circle" style={{ width: '1.5rem' }} />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/fluent-light.png" alt="Fluent" className="border-circle" style={{ width: '1.5rem' }} />
                                 <span className="font-medium">Fluent</span>
                             </div>
                             <button
@@ -329,7 +329,7 @@ export default function Config(props) {
                         </div>
                         <div className="w-3">
                             <div className="flex align-items-center gap-2 mb-3">
-                                <img src="https://primefaces.org/cdn/primevue/images/themes/mira.jpg" alt="Mira" className="border-circle" style={{ width: '1.5rem' }} />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/mira.jpg" alt="Mira" className="border-circle" style={{ width: '1.5rem' }} />
                                 <span className="font-medium">Mira</span>
                             </div>
                             <button
@@ -345,7 +345,7 @@ export default function Config(props) {
                         </div>
                         <div className="w-3">
                             <div className="flex align-items-center gap-2 mb-3">
-                                <img src="https://primefaces.org/cdn/primevue/images/themes/nano.jpg" alt="Nano" className="border-circle" style={{ width: '1.5rem' }} />
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/nano.jpg" alt="Nano" className="border-circle" style={{ width: '1.5rem' }} />
                                 <span className="font-medium">Nano</span>
                             </div>
                             <button

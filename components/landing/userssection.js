@@ -9,7 +9,7 @@ const UsersSection = () => {
     const getUsersImages = () =>
         usersData.map((name) => ({
             name,
-            image: `https://primefaces.org/cdn/primereact/images/landing-new/whouses/${name}-${colorScheme}.svg`
+            image: `https://primefaces.org/cdn/primereact/images/landing/whouses/${name}-${colorScheme}.svg`
         }));
 
     const Marquee = ({ users, reverse }) => (
