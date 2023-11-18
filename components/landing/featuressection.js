@@ -10,7 +10,7 @@ const FeaturesSection = () => {
                             <div className="box p-4 w-full animation-duration-500">
                                 <img src="https://primefaces.org/cdn/primevue/images/landing/features/icon-components.svg" alt="components icon" className="block mb-3" />
                                 <div className="font-semibold mb-3 text-lg">80+ UI Components</div>
-                                <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 80+ impressive Vue Components.</p>
+                                <p className="m-0 text-secondary font-medium">The ultimate set of UI Components to assist you with 80+ impressive React Components.</p>
                             </div>
                         </div>
                         <div className="col-12 md:col-6 xl:col-3 flex justify-content-center">
@@ -45,7 +45,7 @@ const FeaturesSection = () => {
                             <div className="box p-4 w-full animation-duration-500">
                                 <img src="https://primefaces.org/cdn/primevue/images/landing/features/icon-mobile.svg" alt="components icon" className="block mb-3" />
                                 <div className="font-semibold mb-3 text-lg">Mobile</div>
-                                <p className="m-0 text-secondary font-medium">First className support for responsive design led by touch optimized elements.</p>
+                                <p className="m-0 text-secondary font-medium">First class support for responsive design led by touch optimized elements.</p>
                             </div>
                         </div>
                         <div className="col-12 md:col-6 xl:col-3 flex justify-content-center">
