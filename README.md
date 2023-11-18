@@ -37,14 +37,6 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 ```
 
-Each PrimeReact theme has its own font family so it is suggested to apply it to your application for a unified look.
-
-```
-body {
-    font-family: var(--font-family);
-}
-```
-
 ## Usage
 
 Each component can be imported individually so that you only bundle what you use. Import path is available in the documentation of the corresponding component.
