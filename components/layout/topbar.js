@@ -16,32 +16,7 @@ export default function Topbar(props) {
         {
             name: 'v9',
             version: '9.6.3',
-            url: 'https://www.primefaces.org/primereact-v9'
-        },
-        {
-            name: 'v8',
-            version: '8.7.0',
-            url: 'https://www.primefaces.org/primereact-v8'
-        },
-        {
-            name: 'v7',
-            version: '7.1.0',
-            url: 'https://www.primefaces.org/primereact-v7'
-        },
-        {
-            name: 'v6',
-            version: '6.6.0',
-            url: 'https://www.primefaces.org/primereact-v6'
-        },
-        {
-            name: 'v5',
-            version: '5.0.2',
-            url: 'https://www.primefaces.org/primereact-v5'
-        },
-        {
-            name: 'v4',
-            version: '4.2.2',
-            url: 'https://www.primefaces.org/primereact-v4'
+            url: 'https://v9.primereact.org'
         }
     ];
 
