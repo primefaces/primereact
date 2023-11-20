@@ -130,12 +130,12 @@ const HeroSection = () => {
                     <div className="flex">
                         <div className="flex flex-column w-6 gap-5 pt-8 pr-3">
                             <div className="box p-4 fadein animation-duration-500">
-                                <div className="flex gap-3">
+                                <div className="flex gap-2">
                                     <div className="w-6rem">
                                         <span className="text-secondary font-semibold block mb-3">Amount</span>
                                         <InputNumber value={value1} mode="currency" currency="USD" locale="en-US" className="w-full" inputClassName="w-full" onValueChange={(e) => setValue1(e.value)} />
                                     </div>
-                                    <div className="flex-1">
+                                    <div className="flex-auto" style={{ width: '1%' }}>
                                         <span className="text-secondary font-semibold block mb-3">Beneficiary</span>
                                         <Dropdown value={user} onChange={(e) => setUser(e.value)} options={users} optionLabel="name" placeholder="Select a User" className="w-full" itemTemplate={userTemplate} />
                                     </div>
