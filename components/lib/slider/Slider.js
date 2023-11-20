@@ -198,8 +198,8 @@ export const Slider = React.memo(
             bottomValue = ObjectUtils.isEmpty(bottomValue) ? null : bottomValue;
             const style = {
                 transition: dragging.current ? 'none' : null,
-                left: leftValue != null && leftValue + '%',
-                bottom: bottomValue != null && bottomValue + '%'
+                left: leftValue && leftValue + '%',
+                bottom: bottomValue && bottomValue + '%'
             };
 
             const handleProps = mergeProps(
