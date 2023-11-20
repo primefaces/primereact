@@ -51,6 +51,7 @@ app.bootstrap({
     name: 'PrimeReact',
     entryPoints: [`components/lib`],
     entryPointStrategy: 'expand',
+    tsconfig: 'api-scripts/tsconfig.json',
     hideGenerator: true,
     excludeExternals: true,
     includeVersion: true,
