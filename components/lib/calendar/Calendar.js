@@ -2513,7 +2513,8 @@ export const Calendar = React.memo(
                     }
                 }
             } else {
-                alignOverlay();
+                // @todo
+                //alignOverlay();
             }
 
             if (props.value) {
