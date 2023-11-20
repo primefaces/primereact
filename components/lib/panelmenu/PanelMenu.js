@@ -209,7 +209,7 @@ export const PanelMenu = React.memo(
 
             const menuContentProps = mergeProps(
                 {
-                    className: cx('menuContent')
+                    className: cx('menuContent', { item })
                 },
                 getPTOptions(item, 'menuContent')
             );

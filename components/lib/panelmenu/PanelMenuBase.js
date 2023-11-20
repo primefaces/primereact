@@ -8,7 +8,7 @@ const classes = {
     headerAction: 'p-panelmenu-header-link',
     panel: ({ item }) => classNames('p-panelmenu-panel', item.className),
     header: ({ active, item }) => classNames('p-component p-panelmenu-header', { 'p-highlight': active, 'p-disabled': item.disabled }),
-    menuContent: 'p-panelmenu-content',
+    menuContent: ({ item }) => classNames({'p-panelmenu-content': item && item.items && item.items.length}),
     root: ({ props }) => classNames('p-panelmenu p-component', props.className),
     separator: 'p-menu-separator',
     toggleableContent: ({ active }) =>
