@@ -6,5 +6,6 @@
             "@/service/*": ["service/*"],
             "@/data/*": ["data/*"]
         }
-    }
+    },
+    "exclude": ["../node_modules", "../dist"]
 }
