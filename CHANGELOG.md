@@ -1,4 +1,15 @@
 # Changelog
+
+## [10.1.1](https://github.com/primefaces/primereact/tree/10.1.1) (2023-11-21)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.1.0...10.1.1)
+
+**Fixed bugs:**
+
+- Calendar with touchUI prop always adds p-overflow-hidden to body in the mounted phase [\#5352](https://github.com/primefaces/primereact/issues/5352)
+- DataTable: Moving selection up with keyboard not working [\#5347](https://github.com/primefaces/primereact/issues/5347)
+- DataTable: fire onRowClickwhen unselect row [\#5342](https://github.com/primefaces/primereact/issues/5342)
+
 ## [10.1.0](https://github.com/primefaces/primereact/tree/10.1.0) (2023-11-20)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.0.9...10.1.0)
