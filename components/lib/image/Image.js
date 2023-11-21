@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useUnmountEffect } from '../hooks/Hooks';
 import { DownloadIcon } from '../icons/download';
 import { EyeIcon } from '../icons/eye';
 import { RefreshIcon } from '../icons/refresh';
@@ -30,9 +29,21 @@ export const Image = React.memo(
         const previewRef = React.useRef(null);
         const previewClick = React.useRef(false);
 
-        useOnEscapeKey(maskRef, props.closeOnEscape, () => {
-            hide();
+        useGlobalOnEscapeKey({
+            callback: () => {
+                if (props.closeOnEscape) {
+                    hide();
+                }
+            },
+            condition: maskVisibleState,
+            priority: [
+                ESC_KEY_HANDLING_PRIORITIES.IMAGE,
+                // Assume that there could be only one image mask activated, so it's safe
+                // to provide one and the same priority all the time:
+                0
+            ]
         });
+
         const { ptm, cx, sx, isUnstyled } = ImageBase.setMetaData({
             props,
             state: {

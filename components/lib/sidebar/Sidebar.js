@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useGlobalOnEscapeKey, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { Portal } from '../portal/Portal';
 import { Ripple } from '../ripple/Ripple';
@@ -29,10 +28,14 @@ export const Sidebar = React.forwardRef((inProps, ref) => {
     const maskRef = React.useRef(null);
     const closeIconRef = React.useRef(null);
 
-    useOnEscapeKey(maskRef, props.closeOnEscape, (event) => {
-        if (ZIndexUtils.get(maskRef.current) === ZIndexUtils.getCurrent('modal', (context && context.autoZIndex) || PrimeReact.autoZIndex)) {
+    const sidebarDisplayOrder = useDisplayOrder('sidebar', visibleState);
+
+    useGlobalOnEscapeKey({
+        callback: (event) => {
             onClose(event);
-        }
+        },
+        condition: visibleState && props.closeOnEscape,
+        priority: [ESC_KEY_HANDLING_PRIORITIES.SIDEBAR, sidebarDisplayOrder]
     });
 
     const [bindDocumentClickListener, unbindDocumentClickListener] = useEventListener({
