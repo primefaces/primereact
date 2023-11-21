@@ -95,6 +95,7 @@ export const Mention = React.memo(
             if (!triggerState) {
                 return;
             }
+
             const { key, index } = triggerState;
             const value = inputRef.current.value;
             const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
