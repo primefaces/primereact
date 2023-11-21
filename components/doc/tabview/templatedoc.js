@@ -1,8 +1,8 @@
-import { Avatar } from '../../lib/avatar/Avatar';
-import { SplitButton } from '../../lib/splitbutton/SplitButton';
-import { TabPanel, TabView } from '../../lib/tabview/TabView';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
+import { TabPanel, TabView } from '@/components/lib/tabview/TabView';
 
 export function TemplateDoc(props) {
     const tab1HeaderTemplate = (options) => {

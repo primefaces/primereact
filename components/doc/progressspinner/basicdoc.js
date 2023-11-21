@@ -1,7 +1,6 @@
-import React from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { ProgressSpinner } from '../../lib/progressspinner/ProgressSpinner';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ProgressSpinner } from '@/components/lib/progressspinner/ProgressSpinner';
 
 export function BasicDoc(props) {
     const code = {

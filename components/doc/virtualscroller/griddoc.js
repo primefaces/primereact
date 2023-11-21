@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { classNames } from '../../lib/utils/Utils';
-import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { classNames } from '@/components/lib/utils/Utils';
+import { VirtualScroller } from '@/components/lib/virtualscroller/VirtualScroller';
+import { useState } from 'react';
 
 export function GridDoc(props) {
     const [items] = useState(Array.from({ length: 1000 }).map((_, i) => Array.from({ length: 1000 }).map((_j, j) => `Item #${i}_${j}`)));

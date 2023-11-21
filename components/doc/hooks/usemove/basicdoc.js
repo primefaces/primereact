@@ -1,9 +1,8 @@
-import React from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useMove } from '../../../../components/lib/hooks/Hooks';
-import { Button } from '../../../lib/button/Button';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function BasicDoc(props) {
     const { ref, x, y, active, reset } = useMove({ initialValue: { x: 0.2, y: 0.6 } });

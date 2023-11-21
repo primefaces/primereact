@@ -1,8 +1,8 @@
-import { Button } from '../../lib/button/Button';
-import { Card } from '../../lib/card/Card';
-import { Timeline } from '../../lib/timeline/Timeline';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Card } from '@/components/lib/card/Card';
+import { Timeline } from '@/components/lib/timeline/Timeline';
 
 export function TemplateDoc(props) {
     const events = [
@@ -86,7 +86,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import './TimelineDemo.css';
 
-inteface TimelineEvent {
+interface TimelineEvent {
     status?: string;
     date?: string;
     icon?: string;

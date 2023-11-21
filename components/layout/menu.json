@@ -13,8 +13,8 @@
                     "to": "/configuration"
                 },
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility"
+                    "name": "Playground",
+                    "to": "/playground"
                 }
             ]
         },
@@ -482,8 +482,7 @@
         {
             "name": "Tailwind",
             "icon": "pi pi-heart",
-            "to": "/tailwind",
-            "badge": "NEW"
+            "to": "/tailwind"
         },
         {
             "name": "Figma UI Kit",
@@ -493,7 +492,6 @@
         {
             "name": "Icons",
             "icon": "pi pi-eye",
-            "to": "/icons",
             "children": [
                 {
                     "name": "Prime Icons",
@@ -623,6 +621,11 @@
             "icon": "pi pi-table",
             "href": "https://primeflex.org"
         },
+        {
+            "name": "Accessibility",
+            "icon": "pi pi-users",
+            "to": "/accessibility"
+        },      
         {
             "name": "Support",
             "icon": "pi pi-question",

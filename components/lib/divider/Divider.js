@@ -8,7 +8,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
     const context = React.useContext(PrimeReactContext);
     const props = DividerBase.getProps(inProps, context);
 
-    const { ptm, cx, isUnstyled } = DividerBase.setMetaData({
+    const { ptm, cx, sx, isUnstyled } = DividerBase.setMetaData({
         props
     });
 
@@ -26,7 +26,7 @@ export const Divider = React.forwardRef((inProps, ref) => {
     const rootProps = mergeProps(
         {
             ref: elementRef,
-            style: props.style,
+            style: sx('root'),
             className: cx('root', { horizontal, vertical }),
             role: 'separator'
         },

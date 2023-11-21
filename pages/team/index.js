@@ -1,28 +1,26 @@
-import React from 'react';
-
 const TemplatesPage = () => {
     return (
         <div>
             <div className="doc-intro">
                 <h1>Meet the Team</h1>
                 <p>
-                    <a href="https://www.primetek.com.tr" className="text-primary hover:underline font-semibold">
+                    <a href="https://www.primetek.com.tr" className="text-primary hover:underline font-medium">
                         PrimeTek
                     </a>{' '}
                     is a world renowned vendor of popular UI Component suites including{' '}
-                    <a href="https://primefaces.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primefaces.org" className="text-primary hover:underline font-medium">
                         PrimeFaces
                     </a>
                     ,{' '}
-                    <a href="https://primeng.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primeng.org" className="text-primary hover:underline font-medium">
                         PrimeNG
                     </a>
                     ,{' '}
-                    <a href="https://primereact.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primereact.org" className="text-primary hover:underline font-medium">
                         PrimeReact
                     </a>{' '}
                     and{' '}
-                    <a href="https://primevue.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primevue.org" className="text-primary hover:underline font-medium">
                         PrimeVue
                     </a>
                     . All the members in our team are full time employees of PrimeTek who share the same passion and vision for open source to create awesome UI libraries.

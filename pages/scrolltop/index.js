@@ -1,15 +1,14 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/scrolltop/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/scrolltop/basicdoc';
-import { ElementDoc } from '../../components/doc/scrolltop/elementdoc';
-import { ImportDoc } from '../../components/doc/scrolltop/importdoc';
-import { PTDoc } from '../../components/doc/scrolltop/pt/ptdoc';
-import { Wireframe } from '../../components/doc/scrolltop/pt/wireframe';
-import { StyleDoc } from '../../components/doc/scrolltop/styledoc';
-import { StyledDoc } from '../../components/doc/scrolltop/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/scrolltop/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/scrolltop/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/scrolltop/basicdoc';
+import { ElementDoc } from '@/components/doc/scrolltop/elementdoc';
+import { ImportDoc } from '@/components/doc/scrolltop/importdoc';
+import { PTDoc } from '@/components/doc/scrolltop/pt/ptdoc';
+import { Wireframe } from '@/components/doc/scrolltop/pt/wireframe';
+import { StyleDoc } from '@/components/doc/scrolltop/styledoc';
+import { StyledDoc } from '@/components/doc/scrolltop/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/scrolltop/theming/tailwinddoc';
 
 const ScrollTopDemo = () => {
     const docs = [

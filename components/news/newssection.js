@@ -1,47 +1,53 @@
-import React from 'react';
+import AppContentContext from '@/components/layout/appcontentcontext';
+import { useMountEffect } from '@/components/lib/hooks/Hooks';
+import News from '@/data/news.json';
+import { useContext } from 'react';
 
-export default function NewsSection(props) {
+export default function NewsSection() {
+    const { newsActive, announcement, showNews, hideNews } = useContext(AppContentContext);
+    const storageKey = 'primereact-news';
+
+    useMountEffect(() => {
+        const itemString = localStorage.getItem(storageKey);
+
+        if (itemString) {
+            const item = JSON.parse(itemString);
+
+            if (!item.hiddenNews || item.hiddenNews !== News.id) {
+                showNews(News);
+            } else {
+                hideNews();
+            }
+        } else {
+            showNews(News);
+        }
+    });
+
+    const close = () => {
+        hideNews();
+        const item = {
+            hiddenNews: announcement.id
+        };
+
+        localStorage.setItem(storageKey, JSON.stringify(item));
+    };
+
+    if (!newsActive) return null;
+
     return (
-        <>
-            <div className="layout-news">
-                <div className="layout-news-container">
-                    <i></i>
-                    <div className="layout-news-content">
-                        <span className="layout-news-text" title={props.announcement.content}>
-                            {props.announcement.content}
-                        </span>
-                        <a className="layout-news-link" href={props.announcement.linkHref}>
-                            {props.announcement.linkText}
-                        </a>
-                    </div>
-                    <a className="layout-news-close" onClick={props.onClose}>
-                        <span className="pi pi-times"></span>
+        <div className="layout-news">
+            <div className="layout-news-container">
+                <i></i>
+                <div className="layout-news-content">
+                    <span className="layout-news-text">{announcement.content}</span>
+                    <a className="layout-news-link" href={announcement.linkHref}>
+                        {announcement.linkText}
                     </a>
                 </div>
+                <a className="layout-news-close" onClick={close}>
+                    <span className="pi pi-times"></span>
+                </a>
             </div>
-            <style jsx>{`
-                .layout-news {
-                    ${props.announcement.backgroundStyle}
-                }
-
-                .layout-news-text {
-                    ${props.announcement.textStyle}
-                }
-
-                .layout-news-close {
-                    ${props.announcement.textStyle}
-                }
-
-                .layout-news-link,
-                .layout-news-link:visited,
-                .layout-news-link:active {
-                    ${props.announcement.linkStyle}
-                }
-
-                .layout-news-link:hover {
-                    ${props.announcement.linkHoverStyle}
-                }
-            `}</style>
-        </>
+        </div>
     );
 }

@@ -150,7 +150,9 @@ export const Tooltip = React.memo(
                     elementRef.current.style.pointerEvents = 'none';
                 }
 
-                if ((isMouseTrack(currentTargetRef.current) || position == 'mouse') && !containerSize.current) {
+                const mouseTrackCheck = isMouseTrack(currentTargetRef.current) || position === 'mouse';
+
+                if ((mouseTrackCheck && !containerSize.current) || mouseTrackCheck) {
                     containerSize.current = {
                         width: DomHandler.getOuterWidth(elementRef.current),
                         height: DomHandler.getOuterHeight(elementRef.current)
@@ -350,9 +352,15 @@ export const Tooltip = React.memo(
             if (target) {
                 if (isShowOnDisabled(target)) {
                     if (!target.hasWrapper) {
-                        const wrapper = document.createElement('span');
+                        const wrapper = document.createElement('div');
+                        const isInputElement = target.nodeName === 'INPUT';
 
-                        DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
+                        if (isInputElement) {
+                            DomHandler.addMultipleClasses(wrapper, `p-tooltip-target-wrapper p-inputwrapper`);
+                        } else {
+                            DomHandler.addClass(wrapper, 'p-tooltip-target-wrapper');
+                        }
+
                         target.parentNode.insertBefore(wrapper, target);
                         wrapper.appendChild(target);
                         target.hasWrapper = true;
@@ -461,9 +469,7 @@ export const Tooltip = React.memo(
         }, [props.content]);
 
         useUnmountEffect(() => {
-            clearTimeouts();
-            unloadTargetEvents();
-
+            hide();
             ZIndexUtils.clear(elementRef.current);
         });
 

@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -54,7 +54,7 @@ export default function UnstyledDemo() {
                     <Badge className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 origin-top-right m-0" value="5+" severity="danger"></Badge>
                 </i>
                 <i className="pi pi-envelope relative text-gray-700 dark:text-white/80" style={{ fontSize: '2rem' }}>
-                    <Badge className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 origin-top-right m-0" severity="danger"></Badge>
+                    <Badge className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 origin-top-right m-0" severity="danger" style={{ minWidth:'0.75rem', height:'0.75rem' }}></Badge>
                 </i>
             </div>
         </div>

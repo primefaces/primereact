@@ -1,6 +1,6 @@
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TabPanel, TabView } from '@/components/lib/tabview/TabView';
 
 export function ClosableDoc(props) {
     const code = {

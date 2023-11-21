@@ -1,6 +1,6 @@
-import { TieredMenu } from '../../lib/tieredmenu/TieredMenu';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TieredMenu } from '@/components/lib/tieredmenu/TieredMenu';
 
 export function BasicDoc(props) {
     const items = [

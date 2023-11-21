@@ -1,7 +1,7 @@
-import { Avatar } from '../../lib/avatar/Avatar';
-import { AvatarGroup } from '../../lib/avatargroup/AvatarGroup';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { AvatarGroup } from '@/components/lib/avatargroup/AvatarGroup';
 
 export function GroupDoc(props) {
     const code = {

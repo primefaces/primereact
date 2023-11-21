@@ -36,13 +36,6 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
             listener && listener(event, { type: 'orientationchange', valid: true });
         }
     });
-    const [bindWindowScrollChangeListener, unbindWindowScrollChangeListener] = useEventListener({
-        target: 'window',
-        type: 'scroll',
-        listener: (event) => {
-            listener && listener(event, { type: 'scroll', valid: true });
-        }
-    });
     const [bindOverlayScrollListener, unbindOverlayScrollListener] = useOverlayScrollListener({
         target,
         listener: (event) => {
@@ -58,7 +51,6 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         bindDocumentClickListener();
         bindWindowResizeListener();
         bindWindowOrientationChangeListener();
-        bindWindowScrollChangeListener();
         bindOverlayScrollListener();
     };
 
@@ -66,7 +58,6 @@ export const useOverlayListener = ({ target, overlay, listener, when = true }) =
         unbindDocumentClickListener();
         unbindWindowResizeListener();
         unbindWindowOrientationChangeListener();
-        unbindWindowScrollChangeListener();
         unbindOverlayScrollListener();
     };
 

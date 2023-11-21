@@ -118,7 +118,9 @@ export const Splitter = React.memo(
         }, [props.stateStorage]);
 
         const saveState = (sizes) => {
-            getStorage().setItem(props.stateKey, JSON.stringify(sizes));
+            if (ObjectUtils.isArray(sizes)) {
+                getStorage().setItem(props.stateKey, JSON.stringify(sizes));
+            }
         };
 
         const restoreState = React.useCallback(() => {
@@ -246,7 +248,6 @@ export const Splitter = React.memo(
                     ref: (el) => (gutterRefs.current[index] = el),
                     className: cx('gutter'),
                     style: props.layout === 'horizontal' ? { width: props.gutterSize + 'px' } : { height: props.gutterSize + 'px' },
-
                     onMouseDown: (event) => onGutterMouseDown(event, index),
                     onTouchStart: (event) => onGutterTouchStart(event, index),
                     onTouchMove: (event) => onGutterTouchMove(event),
@@ -274,6 +275,7 @@ export const Splitter = React.memo(
             const rootProps = mergeProps(
                 {
                     key: index,
+                    id: getPanelProp(panel, 'id'),
                     className: panelClassName,
                     style: { ...getPanelProp(panel, 'style'), flexBasis },
                     role: 'presentation',

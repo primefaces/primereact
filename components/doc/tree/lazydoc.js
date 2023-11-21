@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { Tree } from '../../lib/tree/Tree';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Tree } from '@/components/lib/tree/Tree';
+import { useEffect, useState } from 'react';
 
 export function LazyDoc(props) {
     const [nodes, setNodes] = useState([]);

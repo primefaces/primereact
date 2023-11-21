@@ -40,6 +40,7 @@ export const MultiSelectHeader = React.memo((props) => {
         }
 
         event.preventDefault();
+        event.stopPropagation();
     };
 
     const createFilterElement = () => {

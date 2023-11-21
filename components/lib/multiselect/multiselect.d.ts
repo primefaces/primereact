@@ -321,6 +321,21 @@ interface MultiSelectChangeEvent {
 }
 
 /**
+ * Custom remove event when chip is removed.
+ * @event
+ */
+interface MultiSelectRemoveEvent {
+    /**
+     * Browser event
+     */
+    originalEvent: React.SyntheticEvent;
+    /**
+     * Removed item value
+     */
+    value: any;
+}
+
+/**
  * Custom filter event.
  * @see {@link MultiSelectProps.onFilter}
  * @event
@@ -709,6 +724,11 @@ export interface MultiSelectProps extends Omit<React.DetailedHTMLProps<React.Inp
      * Callback to invoke when overlay panel becomes hidden.
      */
     onHide?(): void;
+    /**
+     * Callback to invoke when a chip is removed.
+     * @param {MultiSelectRemoveEvent} event - Custom remove event
+     */
+    onRemove?(event: MultiSelectRemoveEvent): void;
     /**
      * Callback to invoke when all data is selected.
      * @param {MultiSelectAllEvent} event - Custom select event.

@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Editor } from '@/components/lib/editor/Editor';
 import { useState } from 'react';
-import { Editor } from '../../lib/editor/Editor';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [text, setText] = useState('');

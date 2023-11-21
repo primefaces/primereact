@@ -1,6 +1,6 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Chip } from '../../../lib/chip/Chip';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chip } from '@/components/lib/chip/Chip';
 
 export function PTDoc(props) {
     const code = {

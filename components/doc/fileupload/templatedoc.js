@@ -1,12 +1,12 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { FileUpload } from '@/components/lib/fileupload/FileUpload';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
+import { Tag } from '@/components/lib/tag/Tag';
+import { Toast } from '@/components/lib/toast/Toast';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 import { useRef, useState } from 'react';
-import { Button } from '../../lib/button/Button';
-import { FileUpload } from '../../lib/fileupload/FileUpload';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
-import { Tag } from '../../lib/tag/Tag';
-import { Toast } from '../../lib/toast/Toast';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [totalSize, setTotalSize] = useState(0);

@@ -44,7 +44,6 @@ export const Calendar = React.memo(
         const overlayEventListener = React.useRef(null);
         const touchUIMaskClickListener = React.useRef(null);
         const isOverlayClicked = React.useRef(false);
-        const ignoreMaskChange = React.useRef(false);
         const previousButton = React.useRef(false);
         const nextButton = React.useRef(false);
         const onChangeRef = React.useRef(null);
@@ -121,7 +120,7 @@ export const Calendar = React.memo(
             props.onInput && props.onInput(event);
         };
 
-        const updateValueOnInput = (event, rawValue) => {
+        const updateValueOnInput = (event, rawValue, invalidCallback) => {
             try {
                 const value = parseValueFromString(rawValue);
 
@@ -131,9 +130,13 @@ export const Calendar = React.memo(
                 }
             } catch (err) {
                 //invalid date
-                const value = props.keepInvalid ? rawValue : null;
+                if (invalidCallback) {
+                    invalidCallback();
+                } else {
+                    const value = props.keepInvalid ? rawValue : null;
 
-                updateModel(event, value);
+                    updateModel(event, value);
+                }
             }
         };
 
@@ -2509,6 +2512,9 @@ export const Calendar = React.memo(
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                     }
                 }
+            } else {
+                // @todo
+                //alignOverlay();
             }
 
             if (props.value) {
@@ -2536,11 +2542,12 @@ export const Calendar = React.memo(
                     slotChar: props.maskSlotChar,
                     readOnly: props.readOnlyInput || props.disabled,
                     onChange: (e) => {
-                        !ignoreMaskChange.current && updateValueOnInput(e.originalEvent, e.value);
-                        ignoreMaskChange.current = false;
+                        updateValueOnInput(e.originalEvent, e.value, () => {
+                            return false;
+                        });
                     },
-                    onBlur: () => {
-                        ignoreMaskChange.current = true;
+                    onBlur: (e) => {
+                        updateValueOnInput(e, e.target.value);
                     }
                 }).unbindEvents;
             }

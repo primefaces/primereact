@@ -1,7 +1,6 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { TabView } from '../../../lib/tabview/TabView';
-import { TabPanel } from '../../../lib/tabview/TabView';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TabPanel, TabView } from '@/components/lib/tabview/TabView';
 
 export function PTDoc(props) {
     const tabs = [

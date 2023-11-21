@@ -1,7 +1,7 @@
+import { classNames } from '@/components/lib/utils/Utils';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { classNames } from '../../lib/utils/Utils';
 import { DocApiSection } from './docapisection';
 import { DocSectionNav } from './docsectionnav';
 import { DocSections } from './docsections';

@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { useState } from 'react';
-import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ButtonsDoc(props) {
     const [value1, setValue1] = useState(20);

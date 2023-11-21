@@ -252,8 +252,8 @@ export const FileUpload = React.memo(
                             }
                         }
 
-                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                         clear();
+                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                     }
                 };
 
@@ -506,7 +506,7 @@ export const FileUpload = React.memo(
         const createFiles = () => {
             const badgeOptions = {
                 severity: 'warning',
-                value: 'Pending'
+                value: localeOption('pending') || 'Pending'
             };
             const content = filesState.map((file, index) => createFile(file, index, badgeOptions));
 
@@ -516,7 +516,7 @@ export const FileUpload = React.memo(
         const createUploadedFiles = () => {
             const badgeOptions = {
                 severity: 'success',
-                value: 'Completed'
+                value: localeOption('completed') || 'Completed'
             };
             const content = uploadedFilesState && uploadedFilesState.map((file, index) => createFile(file, index, badgeOptions));
 

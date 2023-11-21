@@ -14,6 +14,8 @@ const classes = {
             'p-button-outlined': props.outlined,
             [`p-button-${size}`]: size
         }),
+    button: 'p-splitbutton-defaultbutton',
+    menuButton: 'p-splitbutton-menubutton',
     menu: ({ subProps: props }) => classNames('p-menu p-menu-overlay p-component', props.menuClassName),
     menuList: 'p-menu-list p-reset',
     separator: 'p-menu-separator',
@@ -30,16 +32,17 @@ const styles = `
         display: inline-flex;
         position: relative;
     }
-    
+
     .p-splitbutton .p-splitbutton-defaultbutton,
     .p-splitbutton.p-button-rounded > .p-splitbutton-defaultbutton.p-button,
-    .p-splitbutton.p-button-outlined > .p-splitbutton-defaultbutton.p-button {
+    .p-splitbutton.p-button-outlined > .p-splitbutton-defaultbutton.p-button,
+    .p-splitbutton.p-button-outlined > .p-splitbutton-defaultbutton.p-button-outlined.p-button:hover {
         flex: 1 1 auto;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-right: 0 none;
     }
-    
+
     .p-splitbutton-menubutton,
     .p-splitbutton.p-button-rounded > .p-splitbutton-menubutton.p-button,
     .p-splitbutton.p-button-outlined > .p-splitbutton-menubutton.p-button {
@@ -49,11 +52,11 @@ const styles = `
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
-    
+
     .p-splitbutton .p-menu {
         min-width: 100%;
     }
-    
+
     .p-fluid .p-splitbutton  {
         display: flex;
     }

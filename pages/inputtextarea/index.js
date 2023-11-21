@@ -1,21 +1,20 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/inputtextarea/accessibilitydoc';
-import { AutoResizeDoc } from '../../components/doc/inputtextarea/autoresizedoc';
-import { BasicDoc } from '../../components/doc/inputtextarea/basicdoc';
-import { DisabledDoc } from '../../components/doc/inputtextarea/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/inputtextarea/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/inputtextarea/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtextarea/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/inputtextarea/importdoc';
-import { InvalidDoc } from '../../components/doc/inputtextarea/invaliddoc';
-import { KeyFilterDoc } from '../../components/doc/inputtextarea/keyfilterdoc';
-import { PTDoc } from '../../components/doc/inputtextarea/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputtextarea/pt/wireframe';
-import { StyleDoc } from '../../components/doc/inputtextarea/styledoc';
-import { StyledDoc } from '../../components/doc/inputtextarea/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputtextarea/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputtextarea/accessibilitydoc';
+import { AutoResizeDoc } from '@/components/doc/inputtextarea/autoresizedoc';
+import { BasicDoc } from '@/components/doc/inputtextarea/basicdoc';
+import { DisabledDoc } from '@/components/doc/inputtextarea/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/inputtextarea/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/inputtextarea/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/inputtextarea/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/inputtextarea/importdoc';
+import { InvalidDoc } from '@/components/doc/inputtextarea/invaliddoc';
+import { KeyFilterDoc } from '@/components/doc/inputtextarea/keyfilterdoc';
+import { PTDoc } from '@/components/doc/inputtextarea/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inputtextarea/pt/wireframe';
+import { StyleDoc } from '@/components/doc/inputtextarea/styledoc';
+import { StyledDoc } from '@/components/doc/inputtextarea/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputtextarea/theming/tailwinddoc';
 
 const InputTextareaDemo = () => {
     const docs = [

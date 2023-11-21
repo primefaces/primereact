@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Knob } from '@/components/lib/knob/Knob';
+import { Slider } from '@/components/lib/slider/Slider';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 import { useState } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Knob } from '../../lib/knob/Knob';
-import { Slider } from '../../lib/slider/Slider';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ReactiveDoc(props) {
     const [buttonTooltip, setButtonTooltip] = useState('Click to proceed');

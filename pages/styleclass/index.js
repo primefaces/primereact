@@ -1,8 +1,7 @@
-import React from 'react';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AnimationDoc } from '../../components/doc/styleclass/animationdoc';
-import { ImportDoc } from '../../components/doc/styleclass/importdoc';
-import { ToggleClassDoc } from '../../components/doc/styleclass/toggleclassdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AnimationDoc } from '@/components/doc/styleclass/animationdoc';
+import { ImportDoc } from '@/components/doc/styleclass/importdoc';
+import { ToggleClassDoc } from '@/components/doc/styleclass/toggleclassdoc';
 
 const StyleClassDemo = () => {
     const docs = [

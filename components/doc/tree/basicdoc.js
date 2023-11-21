@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Tree } from '@/components/lib/tree/Tree';
 import { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
-import { Tree } from '../../lib/tree/Tree';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [nodes, setNodes] = useState([]);

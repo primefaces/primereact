@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { classNames } from '../../../lib/utils/Utils';
-import { VirtualScroller } from '../../../lib/virtualscroller/VirtualScroller';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { classNames } from '@/components/lib/utils/Utils';
+import { VirtualScroller } from '@/components/lib/virtualscroller/VirtualScroller';
+import { useState } from 'react';
 
 export function PTDoc(props) {
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));

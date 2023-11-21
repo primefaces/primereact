@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { ObjectUtils } from '../../lib/utils/Utils';
+import { ObjectUtils } from '@/components/lib/utils/Utils';
+import { useEffect } from 'react';
 import APIDoc from './apidoc';
 import DocApiTable from './docapitable';
 import { DocSectionNav } from './docsectionnav';

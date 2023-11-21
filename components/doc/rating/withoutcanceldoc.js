@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Rating } from '@/components/lib/rating/Rating';
 import { useState } from 'react';
-import { Rating } from '../../lib/rating/Rating';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function WithoutCancelDoc(props) {
     const [value, setValue] = useState(null);

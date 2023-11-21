@@ -1,7 +1,6 @@
-import React from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
 
 export function IndeterminateDoc(props) {
     const code = {

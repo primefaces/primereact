@@ -47,7 +47,7 @@ export const OrderListControls = React.memo((props) => {
         if (props.selection) {
             let value = [...props.value];
 
-            for (let i = 0; i < props.selection.length; i++) {
+            for (let i = props.selection.length - 1; i >= 0; i--) {
                 const selectedItem = props.selection[i];
                 const selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, props.dataKey);
 
@@ -103,7 +103,7 @@ export const OrderListControls = React.memo((props) => {
         if (props.selection) {
             let value = [...props.value];
 
-            for (let i = props.selection.length - 1; i >= 0; i--) {
+            for (let i = 0; i < props.selection.length; i++) {
                 let selectedItem = props.selection[i];
                 let selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value, props.dataKey);
 
@@ -191,10 +191,10 @@ export const OrderListControls = React.memo((props) => {
 
     return (
         <div {...controlsProps}>
-            <Button {...moveUpButtonProps}></Button>
-            <Button {...moveTopButtonProps}></Button>
-            <Button {...moveDownButtonProps}></Button>
-            <Button {...moveBottomButtonProps}></Button>
+            <Button pt={ptm('moveUpButton')} {...moveUpButtonProps}></Button>
+            <Button pt={ptm('moveTopButton')} {...moveTopButtonProps}></Button>
+            <Button pt={ptm('moveDownButton')} {...moveDownButtonProps}></Button>
+            <Button pt={ptm('moveBottomButton')} {...moveBottomButtonProps}></Button>
         </div>
     );
 });

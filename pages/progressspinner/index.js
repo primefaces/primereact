@@ -1,15 +1,14 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/progressspinner/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/progressspinner/basicdoc';
-import { CustomDoc } from '../../components/doc/progressspinner/customdoc';
-import { ImportDoc } from '../../components/doc/progressspinner/importdoc';
-import { PTDoc } from '../../components/doc/progressspinner/pt/ptdoc';
-import { Wireframe } from '../../components/doc/progressspinner/pt/wireframe';
-import { StyleDoc } from '../../components/doc/progressspinner/styledoc';
-import { StyledDoc } from '../../components/doc/progressspinner/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/progressspinner/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/progressspinner/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/progressspinner/basicdoc';
+import { CustomDoc } from '@/components/doc/progressspinner/customdoc';
+import { ImportDoc } from '@/components/doc/progressspinner/importdoc';
+import { PTDoc } from '@/components/doc/progressspinner/pt/ptdoc';
+import { Wireframe } from '@/components/doc/progressspinner/pt/wireframe';
+import { StyleDoc } from '@/components/doc/progressspinner/styledoc';
+import { StyledDoc } from '@/components/doc/progressspinner/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/progressspinner/theming/tailwinddoc';
 
 const SkeletonDemo = () => {
     const docs = [

@@ -82,8 +82,10 @@ export const PanelMenu = React.memo(
                     activeItem.expanded = false;
                 }
 
-                item.expanded = true;
-                setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
+                if (item.items) {
+                    item.expanded = true;
+                    setActiveItemState(props.multiple ? [...(activeItem || []), item] : item);
+                }
             }
         };
 

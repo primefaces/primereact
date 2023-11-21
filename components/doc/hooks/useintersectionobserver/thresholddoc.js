@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
-import { useIntersectionObserver } from '../../../lib/hooks/Hooks';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useIntersectionObserver } from '@/components/lib/hooks/Hooks';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useRef } from 'react';
 
 export function ThresholdDoc(props) {
     const elementRef = useRef(null);

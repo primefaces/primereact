@@ -1,12 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/panelmenu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/panelmenu/pt/wireframe';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
-import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
-import { MultipleDoc } from '../../components/doc/panelmenu/multipledoc';
-import { StyleDoc } from '../../components/doc/panelmenu/styledoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/panelmenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/panelmenu/basicdoc';
+import { ImportDoc } from '@/components/doc/panelmenu/importdoc';
+import { MultipleDoc } from '@/components/doc/panelmenu/multipledoc';
+import { PTDoc } from '@/components/doc/panelmenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/panelmenu/pt/wireframe';
+import { StyleDoc } from '@/components/doc/panelmenu/styledoc';
+import { StyledDoc } from '@/components/doc/panelmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/panelmenu/theming/tailwinddoc';
 
 const PanelMenuDemo = () => {
     const docs = [
@@ -54,7 +56,27 @@ const PanelMenuDemo = () => {
         }
     ];
 
-    return <DocComponent title="React PanelMenu Component" header="PanelMenu" description="PanelMenu is a hybrid of accordion-tree components." componentDocs={docs} apiDocs={['PanelMenu', 'MenuItem']} ptDocs={ptDocs} />;
+    const themingDocs = [
+        {
+            id: 'styled',
+            label: 'Styled',
+            component: StyledDoc
+        },
+        {
+            id: 'unstyled',
+            label: 'Unstyled',
+            description: 'Theming is implemented with the pass through properties in unstyled mode.',
+            children: [
+                {
+                    id: 'tailwind',
+                    label: 'Tailwind',
+                    component: TailwindDoc
+                }
+            ]
+        }
+    ];
+
+    return <DocComponent title="React PanelMenu Component" header="PanelMenu" description="PanelMenu is a hybrid of accordion-tree components." componentDocs={docs} apiDocs={['PanelMenu', 'MenuItem']} ptDocs={ptDocs} themingDocs={themingDocs} />;
 };
 
 export default PanelMenuDemo;

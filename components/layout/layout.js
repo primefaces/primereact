@@ -1,111 +1,62 @@
+import AppContentContext from '@/components/layout/appcontentcontext';
+import Config from '@/components/layout/config';
+import Footer from '@/components/layout/footer';
+import Menu from '@/components/layout/menu';
+import Topbar from '@/components/layout/topbar';
+import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
+import { DomHandler, classNames } from '@/components/lib/utils/Utils';
+import NewsSection from '@/components/news/newssection';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import { classNames } from '../lib/utils/Utils';
-import NewsSection from '../news/newssection';
-import AppContentContext from './appcontentcontext';
-import Config from './config';
-import Footer from './footer';
-import Menu from './menu';
-import Topbar from './topbar';
-import { PrimeReactContext } from '../lib/api/PrimeReactContext';
-import PrimeReact from '../lib/api/Api';
 
-export default function Layout(props) {
-    const [ripple, setRipple] = useState(true);
-    const [inputStyle, setInputStyle] = useState('outlined');
-    const [disabled, setDisabled] = useState(false);
+export default function Layout({ children }) {
     const [sidebarActive, setSidebarActive] = useState(false);
     const [configActive, setConfigActive] = useState(false);
+    const { ripple, inputStyle } = useContext(PrimeReactContext);
+    const { theme, darkMode, newsActive, changeTheme } = useContext(AppContentContext);
     const router = useRouter();
-    const context = useContext(PrimeReactContext);
 
     const wrapperClassName = classNames('layout-wrapper', {
-        'layout-news-active': props.newsActive,
-        'p-input-filled': (context && context.inputStyle === 'filled') || PrimeReact.inputStyle === 'filled',
-        'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false,
-        'layout-wrapper-dark': props.dark,
-        'layout-wrapper-light': !props.dark
-    });
-    const maskClassName = classNames('layout-mask', {
-        'layout-mask-active': sidebarActive
+        'layout-news-active': newsActive,
+        'p-input-filled': inputStyle === 'filled',
+        'p-ripple-disabled': ripple === false,
+        'layout-dark': darkMode,
+        'layout-light': !darkMode
     });
 
-    const onMenuButtonClick = () => {
-        setSidebarActive(true);
-    };
+    const toggleDarkMode = () => {
+        let newTheme = null;
 
-    const onMaskClick = () => {
-        setSidebarActive(false);
-    };
-
-    const onThemeChange = (event) => {
-        if (event.theme.startsWith('md')) {
-            setRipple(true);
+        if (darkMode) {
+            newTheme = theme.replace('dark', 'light');
+        } else {
+            if (theme.includes('light') && theme !== 'fluent-light') newTheme = theme.replace('light', 'dark');
+            else newTheme = 'lara-dark-cyan';
         }
 
-        props.onThemeChange(event.theme, event.dark);
-    };
-
-    const onInputStyleChange = (value) => {
-        if (context) {
-            context.setInputStyle(value);
-        }
-
-        setInputStyle(value);
-    };
-
-    const onRippleChange = (value) => {
-        if (context) {
-            context.setRipple(value);
-        }
-
-        setRipple(value);
-    };
-
-    const onHideOverlaysOnDocumentScrolling = (value) => {
-        setHideOverlaysOnDocumentScrolling(value);
-    };
-
-    const onConfigHide = () => {
-        setConfigActive(false);
-    };
-
-    const onConfigButtonClick = () => {
-        setConfigActive(true);
+        changeTheme(newTheme, !darkMode);
     };
 
     useEffect(() => {
-        if (context) {
-            context.setRipple(ripple);
-            context.setInputStyle(inputStyle);
-        }
-
-        setRipple(true);
-        setInputStyle('outlined');
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-        if (sidebarActive) document.body.classList.add('blocked-scroll');
-        else document.body.classList.remove('blocked-scroll');
+        if (sidebarActive) DomHandler.blockBodyScroll('blocked-scroll');
+        else DomHandler.unblockBodyScroll('blocked-scroll');
     }, [sidebarActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        const handleRouteChange = (url, { shallow }) => {
+        const handleRouteChangeComplete = (l) => {
             setSidebarActive(false);
         };
 
-        router.events.on('routeChangeComplete', handleRouteChange);
+        router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
         return () => {
-            router.events.off('routeChangeComplete', handleRouteChange);
+            router.events.off('routeChangeComplete', handleRouteChangeComplete);
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    PrimeReact.ripple = ripple;
-
     return (
-        <div className={wrapperClassName}>
+        <div className={wrapperClassName} data-p-theme={theme}>
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
@@ -124,40 +75,15 @@ export default function Layout(props) {
                 <meta property="og:ttl" content="604800"></meta>
                 <link rel="icon" href="https://primefaces.org/cdn/primereact/images/favicon.ico" type="image/x-icon"></link>
             </Head>
-            {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-            <Topbar onMenuButtonClick={onMenuButtonClick} onConfigButtonClick={onConfigButtonClick} />
-            <Menu active={sidebarActive} darkTheme={props.dark} />
-            <AppContentContext.Provider
-                value={{
-                    ripple: ripple,
-                    inputStyle: inputStyle,
-                    disabled: disabled,
-                    darkTheme: props.dark,
-                    setDisabled: setDisabled,
-                    onInputStyleChange: onInputStyleChange,
-                    onRippleChange: onRippleChange,
-                    onHideOverlaysOnDocumentScrolling: onHideOverlaysOnDocumentScrolling
-                }}
-            >
-                <div className="layout-content">
-                    <div className="layout-content-inner">
-                        {props.children}
-                        <Footer></Footer>
-                    </div>
-                </div>
-                <Config
-                    ripple={ripple}
-                    inputStyle={inputStyle}
-                    disabled={disabled}
-                    onRippleChange={onRippleChange}
-                    onHideOverlaysOnDocumentScrolling={onHideOverlaysOnDocumentScrolling}
-                    onInputStyleChange={onInputStyleChange}
-                    onThemeChange={onThemeChange}
-                    active={configActive}
-                    onHide={onConfigHide}
-                />
-            </AppContentContext.Provider>
-            <div className={maskClassName} onClick={onMaskClick}></div>
+            <NewsSection />
+            <Topbar showConfigurator showMenuButton onMenuButtonClick={() => setSidebarActive(true)} onConfigButtonClick={() => setConfigActive(true)} onDarkSwitchClick={toggleDarkMode} />
+            <div className={classNames('layout-mask', { 'layout-mask-active': sidebarActive })} onClick={() => setSidebarActive(false)}></div>
+            <Config active={configActive} onHide={() => setConfigActive(false)} onDarkSwitchClick={toggleDarkMode} />
+            <div className="layout-content">
+                <Menu active={sidebarActive} />
+                <div className="layout-content-slot">{children}</div>
+            </div>
+            <Footer />
         </div>
     );
 }

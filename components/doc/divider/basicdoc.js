@@ -1,6 +1,6 @@
-import { Divider } from '../../lib/divider/Divider';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Divider } from '@/components/lib/divider/Divider';
 
 export function BasicDoc(props) {
     const code = {

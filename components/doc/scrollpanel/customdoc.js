@@ -1,6 +1,6 @@
-import { ScrollPanel } from '../../lib/scrollpanel/ScrollPanel';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ScrollPanel } from '@/components/lib/scrollpanel/ScrollPanel';
 
 export function CustomDemo(props) {
     const code = {

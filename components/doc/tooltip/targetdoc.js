@@ -1,7 +1,7 @@
-import { Badge } from '../../lib/badge/Badge';
-import { Tooltip } from '../../lib/tooltip/Tooltip';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Badge } from '@/components/lib/badge/Badge';
+import { Tooltip } from '@/components/lib/tooltip/Tooltip';
 
 export function TargetDoc(props) {
     const code = {

@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Knob } from '@/components/lib/knob/Knob';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useFormik } from 'formik';
 import { useRef } from 'react';
-import { Button } from '../../../lib/button/Button';
-import { Knob } from '../../../lib/knob/Knob';
-import { Toast } from '../../../lib/toast/Toast';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
     const toast = useRef(null);

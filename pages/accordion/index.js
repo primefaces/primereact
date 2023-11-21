@@ -1,17 +1,18 @@
-import { AccessibilityDoc } from '../../components/doc/accordion/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/accordion/basicdoc';
-import { ControlledDoc } from '../../components/doc/accordion/controlleddoc';
-import { DisabledDoc } from '../../components/doc/accordion/disableddoc';
-import { ImportDoc } from '../../components/doc/accordion/importdoc';
-import { MultipleDoc } from '../../components/doc/accordion/multipledoc';
-import { PTDoc } from '../../components/doc/accordion/pt/ptdoc';
-import { Wireframe } from '../../components/doc/accordion/pt/wireframe';
-import { StyleDoc } from '../../components/doc/accordion/styledoc';
-import { TemplateDoc } from '../../components/doc/accordion/templatedoc';
-import { StyledDoc } from '../../components/doc/accordion/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/accordion/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/accordion/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/accordion/basicdoc';
+import { ControlledDoc } from '@/components/doc/accordion/controlleddoc';
+import { DisabledDoc } from '@/components/doc/accordion/disableddoc';
+import { DynamicDoc } from '@/components/doc/accordion/dynamicdoc';
+import { ImportDoc } from '@/components/doc/accordion/importdoc';
+import { MultipleDoc } from '@/components/doc/accordion/multipledoc';
+import { PTDoc } from '@/components/doc/accordion/pt/ptdoc';
+import { Wireframe } from '@/components/doc/accordion/pt/wireframe';
+import { StyleDoc } from '@/components/doc/accordion/styledoc';
+import { TemplateDoc } from '@/components/doc/accordion/templatedoc';
+import { StyledDoc } from '@/components/doc/accordion/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/accordion/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const AccordionDemo = () => {
     const docs = [
@@ -29,6 +30,11 @@ const AccordionDemo = () => {
             id: 'multiple',
             label: 'Multiple',
             component: MultipleDoc
+        },
+        {
+            id: 'dynamic',
+            label: 'Dynamic',
+            component: DynamicDoc
         },
         {
             id: 'disabled',

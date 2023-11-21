@@ -6,5 +6,13 @@ import * as React from 'react';
  * @param {*} fn the callback function
  * @returns the hook
  */
-export const useMountEffect = (fn) => React.useEffect(fn, []);
+export const useMountEffect = (fn) => {
+    const mounted = React.useRef(false);
+    return React.useEffect(() => {
+        if (!mounted.current) {
+            mounted.current = true;
+            return fn && fn();
+        }
+    }, []);
+};
 /* eslint-enable */

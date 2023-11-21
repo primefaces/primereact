@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useEventListener } from '../../../lib/hooks/Hooks';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useEventListener } from '@/components/lib/hooks/Hooks';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useEffect, useState } from 'react';
 
 export function DocumentDoc(props) {
     const [pressed, setPressed] = useState(false);

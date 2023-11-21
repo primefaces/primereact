@@ -1,16 +1,13 @@
+import { DocSectionNav } from '@/components/doc/common/docsectionnav';
+import { DocSections } from '@/components/doc/common/docsections';
+import { ContextDoc } from '@/components/doc/installation/context';
+import { DownloadDoc } from '@/components/doc/installation/downloaddoc';
+import { ExamplesDoc } from '@/components/doc/installation/examplesdoc';
+import { StyledModeDoc } from '@/components/doc/installation/styleddoc';
+import { UnstyledModeDoc } from '@/components/doc/installation/unstyledmodedoc';
+import { UsageDoc } from '@/components/doc/installation/usagedoc';
+import { NextJSDoc } from '@/components/doc/installation/videos/nextjsdoc';
 import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ContextDoc } from '../../components/doc/installation/context';
-import { DownloadDoc } from '../../components/doc/installation/downloaddoc';
-import { ExamplesDoc } from '../../components/doc/installation/examplesdoc';
-import { StylesDoc } from '../../components/doc/installation/stylesdoc';
-import { UsageDoc } from '../../components/doc/installation/usagedoc';
-import { CRADoc } from '../../components/doc/installation/videos/cradoc';
-import { NextJSDoc } from '../../components/doc/installation/videos/nextjsdoc';
-import { UnstyledModeDoc } from '../../components/doc/installation/unstyledmodedoc';
-import { StyledModeDoc } from '../../components/doc/installation/styleddoc';
 
 const InstallationPage = () => {
     const docs = [
@@ -23,11 +20,6 @@ const InstallationPage = () => {
             id: 'context',
             label: 'Context',
             component: ContextDoc
-        },
-        {
-            id: 'styles',
-            label: 'Styles',
-            component: StylesDoc
         },
         {
             id: 'usage',
@@ -61,11 +53,6 @@ const InstallationPage = () => {
             label: 'Videos',
             description: 'Video tutorials to take you through step-by-step.',
             children: [
-                {
-                    id: 'cra',
-                    label: 'CRA',
-                    component: CRADoc
-                },
                 {
                     id: 'nextjs',
                     label: 'Next.js',

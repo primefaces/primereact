@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { StyleClass } from '../../lib/styleclass/StyleClass';
-import { Button } from '../../lib/button/Button';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { StyleClass } from '@/components/lib/styleclass/StyleClass';
+import { useRef } from 'react';
 
 export function AnimationDoc(props) {
     const openBtnRef = useRef(null);

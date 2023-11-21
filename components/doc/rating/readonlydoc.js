@@ -1,6 +1,6 @@
-import { Rating } from '../../lib/rating/Rating';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Rating } from '@/components/lib/rating/Rating';
 
 export function ReadOnlyDoc(props) {
     const code = {

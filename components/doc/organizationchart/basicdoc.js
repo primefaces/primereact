@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { OrganizationChart } from '@/components/lib/organizationchart/OrganizationChart';
 import { useState } from 'react';
-import { OrganizationChart } from '../../lib/organizationchart/OrganizationChart';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [data] = useState([

@@ -1,19 +1,18 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/radiobutton/accessibilitydoc';
-import { DisabledDoc } from '../../components/doc/radiobutton/disableddoc';
-import { DynamicDoc } from '../../components/doc/radiobutton/dynamicdoc';
-import { FormikDoc } from '../../components/doc/radiobutton/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/radiobutton/form/hookformdoc';
-import { GroupDoc } from '../../components/doc/radiobutton/groupdoc';
-import { ImportDoc } from '../../components/doc/radiobutton/importdoc';
-import { InvalidDoc } from '../../components/doc/radiobutton/invaliddoc';
-import { PTDoc } from '../../components/doc/radiobutton/pt/ptdoc';
-import { Wireframe } from '../../components/doc/radiobutton/pt/wireframe';
-import { StyleDoc } from '../../components/doc/radiobutton/styledoc';
-import { StyledDoc } from '../../components/doc/radiobutton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/radiobutton/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/radiobutton/accessibilitydoc';
+import { DisabledDoc } from '@/components/doc/radiobutton/disableddoc';
+import { DynamicDoc } from '@/components/doc/radiobutton/dynamicdoc';
+import { FormikDoc } from '@/components/doc/radiobutton/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/radiobutton/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/radiobutton/groupdoc';
+import { ImportDoc } from '@/components/doc/radiobutton/importdoc';
+import { InvalidDoc } from '@/components/doc/radiobutton/invaliddoc';
+import { PTDoc } from '@/components/doc/radiobutton/pt/ptdoc';
+import { Wireframe } from '@/components/doc/radiobutton/pt/wireframe';
+import { StyleDoc } from '@/components/doc/radiobutton/styledoc';
+import { StyledDoc } from '@/components/doc/radiobutton/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/radiobutton/theming/tailwinddoc';
 
 const RadioButtonDemo = () => {
     const docs = [

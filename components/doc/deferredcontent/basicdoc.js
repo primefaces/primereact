@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { DeferredContent } from '@/components/lib/deferredcontent/DeferredContent';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRef } from 'react';
-import { DeferredContent } from '../../lib/deferredcontent/DeferredContent';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const toast = useRef(null);

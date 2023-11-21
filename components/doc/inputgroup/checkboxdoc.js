@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 import { useState } from 'react';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { InputText } from '../../lib/inputtext/InputText';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function CheckboxDoc(props) {
     const [checked1, setChecked1] = useState(false);

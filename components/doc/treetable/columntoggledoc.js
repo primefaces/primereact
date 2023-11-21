@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
+import { TreeTable } from '@/components/lib/treetable/TreeTable';
+import { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
-import { Column } from '../../lib/column/Column';
-import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ColumnToggleDoc(props) {
     let columns = [

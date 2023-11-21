@@ -1,7 +1,6 @@
-import React from 'react';
-import { SplitButton } from '../../../lib/splitbutton/SplitButton';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
 
 export function PTDoc(props) {
     const items = [

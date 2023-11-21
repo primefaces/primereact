@@ -1,6 +1,6 @@
-import { Menubar } from '../../lib/menubar/Menubar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Menubar } from '@/components/lib/menubar/Menubar';
 
 export function BasicDoc(props) {
     const items = [

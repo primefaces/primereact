@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ContextMenu } from '@/components/lib/contextmenu/ContextMenu';
 import { useRef } from 'react';
-import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const cm = useRef(null);

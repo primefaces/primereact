@@ -1,14 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/tabmenu/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/tabmenu/basicdoc';
-import { ControlledDoc } from '../../components/doc/tabmenu/controlleddoc';
-import { ImportDoc } from '../../components/doc/tabmenu/importdoc';
-import { PTDoc } from '../../components/doc/tabmenu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tabmenu/pt/wireframe';
-import { StyleDoc } from '../../components/doc/tabmenu/styledoc';
-import { StyledDoc } from '../../components/doc/tabmenu/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/tabmenu/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/tabmenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/tabmenu/basicdoc';
+import { ControlledDoc } from '@/components/doc/tabmenu/controlleddoc';
+import { ImportDoc } from '@/components/doc/tabmenu/importdoc';
+import { PTDoc } from '@/components/doc/tabmenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/tabmenu/pt/wireframe';
+import { StyleDoc } from '@/components/doc/tabmenu/styledoc';
+import { StyledDoc } from '@/components/doc/tabmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/tabmenu/theming/tailwinddoc';
 
 const TabMenuDemo = () => {
     const docs = [

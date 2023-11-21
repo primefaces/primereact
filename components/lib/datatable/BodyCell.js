@@ -424,8 +424,10 @@ export const BodyCell = React.memo((props) => {
                     break;
 
                 //enter
-                case 13: // @deprecated
-                    if (!DomHandler.isClickable(target)) {
+                case 13:
+                    if (event.shiftKey || event.ctrlKey) {
+                        // #5192 allow TextArea to add new lines
+                    } else if (!DomHandler.isClickable(target)) {
                         onClick(event);
                         event.preventDefault();
                     }

@@ -1,8 +1,8 @@
+import { ObjectUtils, classNames } from '@/components/lib/utils/Utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import AppContentContext from '../../layout/appcontentcontext';
-import { ObjectUtils, classNames } from '../../lib/utils/Utils';
 import { DocSectionText } from './docsectiontext';
 
 const DocApiTable = (props) => {

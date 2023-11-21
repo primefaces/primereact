@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { InputTextarea } from '../inputtextarea/InputTextarea';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
@@ -202,7 +202,7 @@ export const Mention = React.memo(
 
             if (currentText.trim() !== selectedText) {
                 const prevText = value.substring(0, triggerState.index);
-                const nextText = value.substring(spaceIndex > -1 ? triggerState.index : triggerState.index + currentText.length);
+                const nextText = value.substring(spaceIndex > -1 ? selectionStart : triggerState.index + currentText.length);
 
                 inputRef.current.value = `${prevText}${selectedText} ${nextText}`;
                 event.target = inputRef.current;
@@ -351,6 +351,10 @@ export const Mention = React.memo(
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
+
+        useMountEffect(() => {
+            alignOverlay();
+        });
 
         useUpdateEffect(() => {
             if (searchingState) {

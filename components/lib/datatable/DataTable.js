@@ -805,12 +805,12 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 @media screen and (max-width: ${props.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
     ${selector} > .p-datatable-tfoot > tr > td {
-        display: none !important;
+        display: none;
     }
 
     ${selector} > .p-datatable-tbody > tr > td {
         display: flex;
-        width: 100% !important;
+        width: 100%;
         align-items: center;
         justify-content: space-between;
     }
@@ -1258,6 +1258,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         }
     };
 
+    const resetResizeColumnsWidth = () => {
+        destroyStyleElement();
+    };
+
     const resetColumnOrder = () => {
         const columns = getColumns(true);
         let columnOrder = [];
@@ -1435,7 +1439,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.onValueChange) {
             props.onValueChange(processedData({ filters }));
         }
-    }, [props.filters, props.children]);
+    }, [props.filters]);
 
     useUpdateEffect(() => {
         if (isStateful()) {
@@ -1476,6 +1480,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         reset,
         resetColumnOrder,
         resetScroll,
+        resetResizeColumnsWidth,
         restoreColumnWidths,
         restoreState,
         restoreTableState,
@@ -1673,80 +1678,83 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             <TableBody
                 hostName="DataTable"
                 ref={bodyRef}
-                value={dataToRender(rows)}
-                style={style}
-                className={classNames('p-datatable-tbody', className)}
-                empty={empty}
-                frozenRow={false}
-                tableProps={props}
-                tableSelector={attributeSelector.current}
-                columns={columns}
-                selectionModeInColumn={selectionModeInColumn}
-                first={first}
-                editingMeta={editingMetaState}
-                onEditingMetaChange={onEditingMetaChange}
-                tabIndex={props.tabIndex}
-                onRowClick={props.onRowClick}
-                onRowDoubleClick={props.onRowDoubleClick}
-                onRowPointerDown={props.onRowPointerDown}
-                onRowPointerUp={props.onRowPointerUp}
-                onRowMouseEnter={props.onRowMouseEnter}
-                onRowMouseLeave={props.onRowMouseLeave}
-                onCellClick={props.onCellClick}
-                selection={props.selection}
-                onSelectionChange={props.onSelectionChange}
-                lazy={props.lazy}
-                paginator={props.paginator}
-                onCellSelect={props.onCellSelect}
-                onCellUnselect={props.onCellUnselect}
-                onRowSelect={props.onRowSelect}
-                onRowUnselect={props.onRowUnselect}
-                dragSelection={props.dragSelection}
-                onContextMenu={props.onContextMenu}
-                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                metaKeySelection={props.metaKeySelection}
-                selectionMode={props.selectionMode}
+                cellClassName={props.cellClassName}
                 cellSelection={props.cellSelection}
+                checkIcon={props.checkIcon}
+                className={classNames('p-datatable-tbody', className)}
+                collapsedRowIcon={props.collapsedRowIcon}
+                columns={columns}
+                compareSelectionBy={props.compareSelectionBy}
                 contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey}
-                expandedRows={props.expandedRows}
-                onRowCollapse={props.onRowCollapse}
-                onRowExpand={props.onRowExpand}
-                onRowToggle={props.onRowToggle}
+                dragSelection={props.dragSelection}
                 editMode={props.editMode}
+                editingMeta={editingMetaState}
                 editingRows={props.editingRows}
-                onRowReorder={props.onRowReorder}
-                reorderableRows={props.reorderableRows}
-                scrollable={props.scrollable}
-                rowGroupMode={props.rowGroupMode}
-                groupRowsBy={props.groupRowsBy}
-                expandableRowGroups={props.expandableRowGroups}
-                loading={props.loading}
+                empty={empty}
                 emptyMessage={props.emptyMessage}
-                rowGroupHeaderTemplate={props.rowGroupHeaderTemplate}
+                expandableRowGroups={props.expandableRowGroups}
+                expandedRowIcon={props.expandedRowIcon}
+                expandedRows={props.expandedRows}
+                first={first}
+                frozenRow={false}
+                groupRowsBy={props.groupRowsBy}
+                isDataSelectable={props.isDataSelectable}
+                isVirtualScrollerDisabled={isVirtualScrollerDisabled}
+                lazy={props.lazy}
+                loading={props.loading}
+                metaKeySelection={props.metaKeySelection}
+                onCellClick={props.onCellClick}
+                onCellSelect={props.onCellSelect}
+                onCellUnselect={props.onCellUnselect}
+                onContextMenu={props.onContextMenu}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onEditingMetaChange={onEditingMetaChange}
+                onRowClick={props.onRowClick}
+                onRowCollapse={props.onRowCollapse}
+                onRowDoubleClick={props.onRowDoubleClick}
+                onRowEditCancel={props.onRowEditCancel}
+                onRowEditChange={props.onRowEditChange}
+                onRowEditComplete={props.onRowEditComplete}
+                onRowEditInit={props.onRowEditInit}
+                onRowEditSave={props.onRowEditSave}
+                onRowExpand={props.onRowExpand}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
+                onRowPointerDown={props.onRowPointerDown}
+                onRowPointerUp={props.onRowPointerUp}
+                onRowReorder={props.onRowReorder}
+                onRowSelect={props.onRowSelect}
+                onRowToggle={props.onRowToggle}
+                onRowUnselect={props.onRowUnselect}
+                onSelectionChange={props.onSelectionChange}
+                paginator={props.paginator}
+                reorderableRows={props.reorderableRows}
+                responsiveLayout={props.responsiveLayout}
+                rowClassName={props.rowClassName}
+                rowEditValidator={props.rowEditValidator}
+                rowEditorCancelIcon={props.rowEditorCancelIcon}
+                rowEditorInitIcon={props.rowEditorInitIcon}
+                rowEditorSaveIcon={props.rowEditorSaveIcon}
                 rowExpansionTemplate={props.rowExpansionTemplate}
                 rowGroupFooterTemplate={props.rowGroupFooterTemplate}
-                onRowEditChange={props.onRowEditChange}
-                compareSelectionBy={props.compareSelectionBy}
+                rowGroupHeaderTemplate={props.rowGroupHeaderTemplate}
+                rowGroupMode={props.rowGroupMode}
+                scrollable={props.scrollable}
                 selectOnEdit={props.selectOnEdit}
-                onRowEditInit={props.onRowEditInit}
-                rowEditValidator={props.rowEditValidator}
-                onRowEditSave={props.onRowEditSave}
-                onRowEditComplete={props.onRowEditComplete}
-                onRowEditCancel={props.onRowEditCancel}
-                cellClassName={props.cellClassName}
-                responsiveLayout={props.responsiveLayout}
+                selection={props.selection}
                 selectionAutoFocus={props.selectionAutoFocus}
-                isDataSelectable={props.isDataSelectable}
-                showSelectionElement={props.showSelectionElement}
+                selectionMode={props.selectionMode}
+                selectionModeInColumn={selectionModeInColumn}
                 showRowReorderElement={props.showRowReorderElement}
-                expandedRowIcon={props.expandedRowIcon}
-                collapsedRowIcon={props.collapsedRowIcon}
-                checkIcon={props.checkIcon}
-                rowClassName={props.rowClassName}
+                showSelectionElement={props.showSelectionElement}
+                style={style}
+                tabIndex={props.tabIndex}
+                tableProps={props}
+                tableSelector={attributeSelector.current}
+                value={dataToRender(rows)}
                 virtualScrollerContentRef={contentRef}
                 virtualScrollerOptions={options}
-                isVirtualScrollerDisabled={isVirtualScrollerDisabled}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
             />

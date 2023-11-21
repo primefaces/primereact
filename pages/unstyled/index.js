@@ -1,8 +1,8 @@
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { ArchitectureDoc } from '../../components/doc/unstyled/architecturedoc';
-import { ExampleDoc } from '../../components/doc/unstyled/exampledoc';
-import { SetupDoc } from '../../components/doc/unstyled/setupdoc';
-import { ThemeDoc } from '../../components/doc/unstyled/themedoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { ArchitectureDoc } from '@/components/doc/unstyled/architecturedoc';
+import { ExampleDoc } from '@/components/doc/unstyled/exampledoc';
+import { SetupDoc } from '@/components/doc/unstyled/setupdoc';
+import { ThemeDoc } from '@/components/doc/unstyled/themedoc';
 
 const UnstyledDemo = () => {
     const docs = [

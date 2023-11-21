@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Menu } from '@/components/lib/menu/Menu';
+import { Toast } from '@/components/lib/toast/Toast';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useRef } from 'react';
-import { Avatar } from '../../lib/avatar/Avatar';
-import { Menu } from '../../lib/menu/Menu';
-import { Toast } from '../../lib/toast/Toast';
-import { classNames } from '../../lib/utils/Utils';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const toast = useRef(null);

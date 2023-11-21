@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Checkbox } from '@/components/lib/checkbox/Checkbox';
 import { useState } from 'react';
-import { Checkbox } from '../../lib/checkbox/Checkbox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
     const [ingredients, setIngredients] = useState([]);

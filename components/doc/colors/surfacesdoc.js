@@ -1,4 +1,4 @@
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function SurfacesDoc(props) {
     const shades = [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900];

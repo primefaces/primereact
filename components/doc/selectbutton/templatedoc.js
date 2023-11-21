@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
 import { useState } from 'react';
-import { SelectButton } from '../../lib/selectbutton/SelectButton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [value, setValue] = useState(null);

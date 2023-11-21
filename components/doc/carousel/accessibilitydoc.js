@@ -1,7 +1,7 @@
-import { DevelopmentSection } from '../common/developmentsection';
+import { DevelopmentSection } from '@/components/doc/common/developmentsection';
 
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function AccessibilityDoc() {
     return (

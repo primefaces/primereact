@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { TimesIcon } from '../icons/times';
 import { TimesCircleIcon } from '../icons/timescircle';
@@ -481,6 +481,13 @@ export const MultiSelect = React.memo(
         const removeChip = (event, item) => {
             const value = props.value.filter((val) => !ObjectUtils.equals(val, item, equalityKey));
 
+            if (props.onRemove) {
+                props.onRemove({
+                    originalEvent: event,
+                    value
+                });
+            }
+
             updateModel(event, value, item);
         };
 
@@ -606,6 +613,10 @@ export const MultiSelect = React.memo(
             getInput: () => inputRef.current
         }));
 
+        useMountEffect(() => {
+            alignOverlay();
+        });
+
         React.useEffect(() => {
             ObjectUtils.combinedRefs(inputRef, props.inputRef);
         }, [inputRef, props.inputRef]);
@@ -617,10 +628,10 @@ export const MultiSelect = React.memo(
         }, [props.overlayVisible]);
 
         useUpdateEffect(() => {
-            if (overlayVisibleState && hasFilter) {
+            if (overlayVisibleState && filterState && hasFilter) {
                 alignOverlay();
             }
-        }, [overlayVisibleState, hasFilter]);
+        }, [overlayVisibleState, filterState, hasFilter]);
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
@@ -630,7 +641,7 @@ export const MultiSelect = React.memo(
             const clearIconProps = mergeProps(
                 {
                     className: cx('clearIcon'),
-                    onClick: (e) => updateModel(e, null, null)
+                    onClick: (e) => updateModel(e, [], [])
                 },
                 ptm('clearIcon')
             );

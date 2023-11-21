@@ -1,6 +1,6 @@
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
 
 export function RaisedTextDoc(props) {
     const code = {
@@ -64,6 +64,7 @@ export default function RaisedTextDemo() {
                 <Button label="Warning" severity="warning" text raised />
                 <Button label="Help" severity="help" text raised />
                 <Button label="Danger" severity="danger" text raised />
+                <Button label="Plain" plain text raised />
             </div>
             <DocSectionCode code={code} />
         </>

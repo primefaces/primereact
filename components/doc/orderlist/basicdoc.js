@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { OrderList } from '@/components/lib/orderlist/OrderList';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { OrderList } from '../../lib/orderlist/OrderList';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [products, setProducts] = useState([]);

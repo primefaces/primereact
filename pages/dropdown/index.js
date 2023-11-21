@@ -1,24 +1,24 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/dropdown/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/dropdown/basicdoc';
-import { ClearIconDoc } from '../../components/doc/dropdown/clearicondoc';
-import { DisabledDoc } from '../../components/doc/dropdown/disableddoc';
-import { EditableDoc } from '../../components/doc/dropdown/editabledoc';
-import { FilterDoc } from '../../components/doc/dropdown/filterdoc';
-import { FloatLabelDoc } from '../../components/doc/dropdown/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/dropdown/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/dropdown/form/hookformdoc';
-import { GroupDoc } from '../../components/doc/dropdown/groupdoc';
-import { ImportDoc } from '../../components/doc/dropdown/importdoc';
-import { InvalidDoc } from '../../components/doc/dropdown/invaliddoc';
-import { PTDoc } from '../../components/doc/dropdown/pt/ptdoc';
-import { Wireframe } from '../../components/doc/dropdown/pt/wireframe';
-import { StyleDoc } from '../../components/doc/dropdown/styledoc';
-import { TemplateDoc } from '../../components/doc/dropdown/templatedoc';
-import { StyledDoc } from '../../components/doc/dropdown/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/dropdown/theming/tailwinddoc';
-import { VirtualScrollDoc } from '../../components/doc/dropdown/virtualscrolldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/dropdown/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/dropdown/basicdoc';
+import { ClearIconDoc } from '@/components/doc/dropdown/clearicondoc';
+import { DisabledDoc } from '@/components/doc/dropdown/disableddoc';
+import { EditableDoc } from '@/components/doc/dropdown/editabledoc';
+import { FilterDoc } from '@/components/doc/dropdown/filterdoc';
+import { FloatLabelDoc } from '@/components/doc/dropdown/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/dropdown/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/dropdown/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/dropdown/groupdoc';
+import { ImportDoc } from '@/components/doc/dropdown/importdoc';
+import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
+import { PTDoc } from '@/components/doc/dropdown/pt/ptdoc';
+import { Wireframe } from '@/components/doc/dropdown/pt/wireframe';
+import { StyleDoc } from '@/components/doc/dropdown/styledoc';
+import { TemplateDoc } from '@/components/doc/dropdown/templatedoc';
+import { StyledDoc } from '@/components/doc/dropdown/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/dropdown/theming/tailwinddoc';
+import { VirtualScrollDoc } from '@/components/doc/dropdown/virtualscrolldoc';
 
 const DropdownDemo = () => {
     const docs = [

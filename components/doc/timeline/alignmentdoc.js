@@ -1,6 +1,6 @@
-import { Timeline } from '../../lib/timeline/Timeline';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Timeline } from '@/components/lib/timeline/Timeline';
 
 export function AlignmentDoc(props) {
     const events = [
@@ -41,7 +41,7 @@ export default function AlignmentDemo() {
 import React from 'react'; 
 import { Timeline } from 'primereact/timeline';
 
-inteface TimelineEvent {
+interface TimelineEvent {
     status?: string;
     date?: string;
     icon?: string;

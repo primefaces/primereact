@@ -191,7 +191,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
                 innerHTML += `
                     @media screen and (max-width: ${breakpoint}) {
                         .p-overlaypanel[${attributeSelector.current}] {
-                            width: ${props.breakpoints[breakpoint]} !important;
+                            width: ${props.breakpoints[breakpoint]};
                         }
                     }
                 `;

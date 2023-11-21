@@ -1,5 +1,5 @@
-import { CodeHighlight } from '../common/codehighlight';
-import { DocSectionText } from '../common/docsectiontext';
+import { CodeHighlight } from '@/components/doc/common/codehighlight';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function FormControlsDoc(props) {
     return (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
-import { mergeProps, ObjectUtils } from '../utils/Utils';
+import { classNames, mergeProps, ObjectUtils } from '../utils/Utils';
 import { TimelineBase } from './TimelineBase';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
@@ -98,7 +98,7 @@ export const Timeline = React.memo(
         const rootProps = mergeProps(
             {
                 ref: elementRef,
-                className: cx('root')
+                className: classNames(props.className, cx('root'))
             },
             TimelineBase.getOtherProps(props),
             ptm('root')

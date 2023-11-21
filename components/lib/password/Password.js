@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useOnEscapeKey } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
@@ -45,6 +45,10 @@ export const Password = React.memo(
         const { ptm, cx, isUnstyled } = PasswordBase.setMetaData(metaData);
 
         useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
+
+        useOnEscapeKey(overlayRef, props.feedback, (event) => {
+            hide();
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -98,7 +102,7 @@ export const Password = React.memo(
             }
         };
 
-        const onMaskToggle = () => {
+        const toggleMask = () => {
             setUnmaskedState((prevUnmasked) => !prevUnmasked);
         };
 
@@ -160,7 +164,7 @@ export const Password = React.memo(
         };
 
         const onKeyup = (e) => {
-            let keyCode = e.keyCode || e.which;
+            const keyCode = e.code;
 
             if (props.feedback) {
                 let value = e.target.value;
@@ -201,7 +205,7 @@ export const Password = React.memo(
                 setMeterState(meter);
                 setInfoTextState(label);
 
-                if (!!keyCode && !overlayVisibleState) {
+                if (!!keyCode && keyCode !== 'Escape' && !overlayVisibleState) {
                     show();
                 }
             }
@@ -229,6 +233,7 @@ export const Password = React.memo(
 
         React.useImperativeHandle(ref, () => ({
             props,
+            toggleMask,
             focus: () => DomHandler.focus(inputRef.current),
             getElement: () => elementRef.current,
             getOverlay: () => overlayRef.current,
@@ -253,6 +258,10 @@ export const Password = React.memo(
             }
         }, [isFilled]);
 
+        useMountEffect(() => {
+            alignOverlay();
+        });
+
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
         });
@@ -272,11 +281,11 @@ export const Password = React.memo(
             const eyeIcon = IconUtils.getJSXIcon(icon, unmaskedState ? { ...hideIconProps } : { ...showIconProps }, { props });
 
             if (props.toggleMask) {
-                let content = <i onClick={onMaskToggle}> {eyeIcon} </i>;
+                let content = <i onClick={toggleMask}> {eyeIcon} </i>;
 
                 if (props.icon) {
                     const defaultIconOptions = {
-                        onClick: onMaskToggle,
+                        onClick: toggleMask,
                         className,
                         element: content,
                         props

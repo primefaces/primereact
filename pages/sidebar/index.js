@@ -1,17 +1,17 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/sidebar/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/sidebar/basicdoc';
-import { FullScreenDoc } from '../../components/doc/sidebar/fullscreendoc';
-import { ImportDoc } from '../../components/doc/sidebar/importdoc';
-import { PositionDoc } from '../../components/doc/sidebar/positiondoc';
-import { PTDoc } from '../../components/doc/sidebar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/sidebar/pt/wireframe';
-import { SizeDoc } from '../../components/doc/sidebar/sizedoc';
-import { StyleDoc } from '../../components/doc/sidebar/styledoc';
-import { TemplateDoc } from '../../components/doc/sidebar/templatedoc';
-import { StyledDoc } from '../../components/doc/sidebar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/sidebar/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/sidebar/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/sidebar/basicdoc';
+import { FullScreenDoc } from '@/components/doc/sidebar/fullscreendoc';
+import { ImportDoc } from '@/components/doc/sidebar/importdoc';
+import { PositionDoc } from '@/components/doc/sidebar/positiondoc';
+import { PTDoc } from '@/components/doc/sidebar/pt/ptdoc';
+import { Wireframe } from '@/components/doc/sidebar/pt/wireframe';
+import { SizeDoc } from '@/components/doc/sidebar/sizedoc';
+import { StyleDoc } from '@/components/doc/sidebar/styledoc';
+import { TemplateDoc } from '@/components/doc/sidebar/templatedoc';
+import { StyledDoc } from '@/components/doc/sidebar/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/sidebar/theming/tailwinddoc';
 
 const SidebarDemo = () => {
     const docs = [

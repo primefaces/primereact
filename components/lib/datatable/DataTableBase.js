@@ -116,7 +116,7 @@ const styles = `
 
     .p-datatable .p-column-resizer {
         display: block;
-        position: absolute !important;
+        position: absolute;
         top: 0;
         right: 0;
         margin: 0;
@@ -254,7 +254,7 @@ const styles = `
     }
 
     .p-datatable .p-virtualscroller .p-virtualscroller-loading {
-        transform: none !important;
+        transform: none;
         min-height: 0;
         position: sticky;
         top: 0;
@@ -405,7 +405,7 @@ const classes = {
         }),
     headerCheckboxIcon: 'p-checkbox-icon',
     headerContent: 'p-column-header-content',
-    headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, column, getColumnProp }) =>
+    headerCell: ({ headerProps: props, frozen, sortMeta, align, _isSortableDisabled, getColumnProp }) =>
         ObjectUtils.isEmpty(props)
             ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
@@ -471,6 +471,7 @@ export const DataTableBase = ComponentBase.extend({
         first: 0,
         footer: null,
         footerColumnGroup: null,
+        frozenRow: false,
         frozenValue: null,
         frozenWidth: null,
         globalFilter: null,
@@ -502,8 +503,6 @@ export const DataTableBase = ComponentBase.extend({
         onRowClick: null,
         onRowCollapse: null,
         onRowDoubleClick: null,
-        onRowPointerDown: null,
-        onRowPointerUp: null,
         onRowEditCancel: null,
         onRowEditChange: null,
         onRowEditComplete: null,
@@ -512,6 +511,8 @@ export const DataTableBase = ComponentBase.extend({
         onRowExpand: null,
         onRowMouseEnter: null,
         onRowMouseLeave: null,
+        onRowPointerDown: null,
+        onRowPointerUp: null,
         onRowReorder: null,
         onRowSelect: null,
         onRowToggle: null,

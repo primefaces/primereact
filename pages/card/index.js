@@ -1,14 +1,14 @@
-import { AccessibilityDoc } from '../../components/doc/card/accessibilitydoc';
-import { AdvancedDoc } from '../../components/doc/card/advanceddoc';
-import { BasicDoc } from '../../components/doc/card/basicdoc';
-import { ImportDoc } from '../../components/doc/card/importdoc';
-import { PTDoc } from '../../components/doc/card/pt/ptdoc';
-import { Wireframe } from '../../components/doc/card/pt/wireframe';
-import { StyleDoc } from '../../components/doc/card/styledoc';
-import { StyledDoc } from '../../components/doc/card/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/card/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/card/accessibilitydoc';
+import { AdvancedDoc } from '@/components/doc/card/advanceddoc';
+import { BasicDoc } from '@/components/doc/card/basicdoc';
+import { ImportDoc } from '@/components/doc/card/importdoc';
+import { PTDoc } from '@/components/doc/card/pt/ptdoc';
+import { Wireframe } from '@/components/doc/card/pt/wireframe';
+import { StyleDoc } from '@/components/doc/card/styledoc';
+import { StyledDoc } from '@/components/doc/card/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/card/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CardDemo = () => {
     const docs = [

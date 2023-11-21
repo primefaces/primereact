@@ -1,6 +1,6 @@
-import { ColorPicker } from '../../lib/colorpicker/ColorPicker';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ColorPicker } from '@/components/lib/colorpicker/ColorPicker';
 
 export function DisabledDoc(props) {
     const code = {

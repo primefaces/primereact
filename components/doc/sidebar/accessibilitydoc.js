@@ -1,6 +1,6 @@
-import { DocSectionText } from '../common/docsectiontext';
-import { DevelopmentSection } from '../common/developmentsection';
-import { CodeHighlight } from '../common/codehighlight';
+import { CodeHighlight } from '@/components/doc/common/codehighlight';
+import { DevelopmentSection } from '@/components/doc/common/developmentsection';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function AccessibilityDoc() {
     return (

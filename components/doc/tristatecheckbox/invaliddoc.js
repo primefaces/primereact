@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TriStateCheckbox } from '@/components/lib/tristatecheckbox/TriStateCheckbox';
 import { useState } from 'react';
-import { TriStateCheckbox } from '../../lib/tristatecheckbox/TriStateCheckbox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function InvalidDoc(props) {
     const [value, setValue] = useState(null);

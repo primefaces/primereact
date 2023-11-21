@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Panel } from '@/components/lib/panel/Panel';
 import css from 'styled-jsx/css';
-import { Panel } from '../../../lib/panel/Panel';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function CssInJsDoc(props) {
     const { className, styles } = css.resolve`

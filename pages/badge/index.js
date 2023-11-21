@@ -1,18 +1,17 @@
-import React from 'react';
-import { AccessibilityDoc } from '../../components/doc/badge/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/badge/basicdoc';
-import { ButtonDoc } from '../../components/doc/badge/buttondoc';
-import { ImportDoc } from '../../components/doc/badge/importdoc';
-import { PositionDoc } from '../../components/doc/badge/positiondoc';
-import { PTDoc } from '../../components/doc/badge/pt/ptdoc';
-import { Wireframe } from '../../components/doc/badge/pt/wireframe';
-import { SeverityDoc } from '../../components/doc/badge/severitydoc';
-import { SizeDoc } from '../../components/doc/badge/sizedoc';
-import { StyleDoc } from '../../components/doc/badge/styledoc';
-import { StyledDoc } from '../../components/doc/badge/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/badge/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/badge/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/badge/basicdoc';
+import { ButtonDoc } from '@/components/doc/badge/buttondoc';
+import { ImportDoc } from '@/components/doc/badge/importdoc';
+import { PositionDoc } from '@/components/doc/badge/positiondoc';
+import { PTDoc } from '@/components/doc/badge/pt/ptdoc';
+import { Wireframe } from '@/components/doc/badge/pt/wireframe';
+import { SeverityDoc } from '@/components/doc/badge/severitydoc';
+import { SizeDoc } from '@/components/doc/badge/sizedoc';
+import { StyleDoc } from '@/components/doc/badge/styledoc';
+import { StyledDoc } from '@/components/doc/badge/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/badge/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const BadgeDemo = () => {
     const docs = [

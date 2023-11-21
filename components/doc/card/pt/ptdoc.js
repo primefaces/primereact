@@ -1,6 +1,6 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Card } from '../../../lib/card/Card';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Card } from '@/components/lib/card/Card';
 
 export function PTDoc(props) {
     const code = {

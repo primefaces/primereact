@@ -1,23 +1,22 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/password/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/password/basicdoc';
-import { DisabledDoc } from '../../components/doc/password/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/password/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/password/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/password/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/password/importdoc';
-import { InvalidDoc } from '../../components/doc/password/invaliddoc';
-import { LocaleDoc } from '../../components/doc/password/localedoc';
-import { MeterDoc } from '../../components/doc/password/meterdoc';
-import { PTDoc } from '../../components/doc/password/pt/ptdoc';
-import { Wireframe } from '../../components/doc/password/pt/wireframe';
-import { StyleDoc } from '../../components/doc/password/styledoc';
-import { TemplateDoc } from '../../components/doc/password/templatedoc';
-import { StyledDoc } from '../../components/doc/password/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/password/theming/tailwinddoc';
-import { ToggleMaskDoc } from '../../components/doc/password/togglemaskdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/password/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/password/basicdoc';
+import { DisabledDoc } from '@/components/doc/password/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/password/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/password/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/password/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/password/importdoc';
+import { InvalidDoc } from '@/components/doc/password/invaliddoc';
+import { LocaleDoc } from '@/components/doc/password/localedoc';
+import { MeterDoc } from '@/components/doc/password/meterdoc';
+import { PTDoc } from '@/components/doc/password/pt/ptdoc';
+import { Wireframe } from '@/components/doc/password/pt/wireframe';
+import { StyleDoc } from '@/components/doc/password/styledoc';
+import { TemplateDoc } from '@/components/doc/password/templatedoc';
+import { StyledDoc } from '@/components/doc/password/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/password/theming/tailwinddoc';
+import { ToggleMaskDoc } from '@/components/doc/password/togglemaskdoc';
 
 const PasswordDemo = () => {
     const docs = [

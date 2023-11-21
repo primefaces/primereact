@@ -309,6 +309,10 @@ export declare class Password extends React.Component<PasswordProps, any> {
      */
     public focus(): void;
     /**
+     * Toggle the mask on or off.
+     */
+    public toggleMask(): void;
+    /**
      * Used to get container element.
      * @return {HTMLDivElement} Container element
      */

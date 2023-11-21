@@ -1,19 +1,19 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/speeddial/accessibilitydoc';
-import { CircleDoc } from '../../components/doc/speeddial/circledoc';
-import { CustomDoc } from '../../components/doc/speeddial/customdoc';
-import { ImportDoc } from '../../components/doc/speeddial/importdoc';
-import { LinearDoc } from '../../components/doc/speeddial/lineardoc';
-import { MaskDoc } from '../../components/doc/speeddial/maskdoc';
-import { PTDoc } from '../../components/doc/speeddial/pt/ptdoc';
-import { Wireframe } from '../../components/doc/speeddial/pt/wireframe';
-import { QuarterCircleDoc } from '../../components/doc/speeddial/quartercircledoc';
-import { SemiCircleDoc } from '../../components/doc/speeddial/semicircledoc';
-import { StyleDoc } from '../../components/doc/speeddial/styledoc';
-import { StyledDoc } from '../../components/doc/speeddial/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/speeddial/theming/tailwinddoc';
-import { TooltipDoc } from '../../components/doc/speeddial/tooltipdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/speeddial/accessibilitydoc';
+import { CircleDoc } from '@/components/doc/speeddial/circledoc';
+import { CustomDoc } from '@/components/doc/speeddial/customdoc';
+import { ImportDoc } from '@/components/doc/speeddial/importdoc';
+import { LinearDoc } from '@/components/doc/speeddial/lineardoc';
+import { MaskDoc } from '@/components/doc/speeddial/maskdoc';
+import { PTDoc } from '@/components/doc/speeddial/pt/ptdoc';
+import { Wireframe } from '@/components/doc/speeddial/pt/wireframe';
+import { QuarterCircleDoc } from '@/components/doc/speeddial/quartercircledoc';
+import { SemiCircleDoc } from '@/components/doc/speeddial/semicircledoc';
+import { StyleDoc } from '@/components/doc/speeddial/styledoc';
+import { StyledDoc } from '@/components/doc/speeddial/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/speeddial/theming/tailwinddoc';
+import { TooltipDoc } from '@/components/doc/speeddial/tooltipdoc';
 
 const SpeedDialDemo = () => {
     const docs = [

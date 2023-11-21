@@ -15,6 +15,8 @@ let entries = [];
 
 let core = {};
 
+const NPM_LINK = process.env.NPM_LINK === 'true';
+
 // alias entries
 const ALIAS_ICON_COMPONENT_ENTRIES = [
     { find: '../../iconbase/IconBase', replacement: 'primereact/iconbase' },
@@ -106,13 +108,13 @@ const GLOBAL_DEPENDENCIES = {
 
 const GLOBAL_COMPONENT_DEPENDENCIES = {
     ...GLOBAL_DEPENDENCIES,
-    ...ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replaceAll('/', '.') }), {})
+    ...(NPM_LINK ? [] : ALIAS_COMPONENT_ENTRIES.reduce((acc, cur) => ({ ...acc, [cur.replacement]: cur.replacement.replaceAll('/', '.') }), {}))
 };
 
 // externals
 const EXTERNAL = ['react', 'react-dom', 'react-transition-group', '@babel/runtime', '@fullcalendar/core', 'chart.js/auto', 'quill'];
 
-const EXTERNAL_COMPONENT = [...EXTERNAL, ...ALIAS_COMPONENT_ENTRIES.map((entries) => entries.replacement)];
+const EXTERNAL_COMPONENT = [...EXTERNAL, ...(NPM_LINK ? [] : ALIAS_COMPONENT_ENTRIES.map((entries) => entries.replacement))];
 
 // plugins
 const BABEL_PLUGIN_OPTIONS = {
@@ -156,11 +158,11 @@ const TERSER_PLUGIN_OPTIONS = {
 
 const PLUGINS = [replace(REPLACE_PLUGIN_OPTIONS), resolve(RESOLVE_PLUGIN_OPTIONS), commonjs(COMMONJS_PLUGIN_OPTIONS), babel(BABEL_PLUGIN_OPTIONS), postcss(POSTCSS_PLUGIN_OPTIONS)];
 
-const PLUGINS_COMPONENT = [alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT), ...PLUGINS];
+const PLUGINS_COMPONENT = NPM_LINK ? PLUGINS : [alias(ALIAS_PLUGIN_OPTIONS_FOR_COMPONENT), ...PLUGINS];
 
 function addEntry(name, input, output, isComponent = true) {
     const exports = name === 'primereact.api' || name === 'primereact' ? 'named' : 'auto';
-    const useCorePlugin = ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement === name.replaceAll('.', '/'));
+    const useCorePlugin = !NPM_LINK && ALIAS_COMPONENT_ENTRIES.some((entry) => entry.replacement === name.replaceAll('.', '/'));
     const plugins = isComponent ? PLUGINS_COMPONENT : PLUGINS;
     const external = isComponent ? EXTERNAL_COMPONENT : EXTERNAL;
     const inlineDynamicImports = true;
@@ -185,12 +187,16 @@ function addEntry(name, input, output, isComponent = true) {
         return {
             ...getEntry(isMinify),
             output: [
-                {
-                    format: 'cjs',
-                    file: `${output}.cjs${isMinify ? '.min' : ''}.js`,
-                    exports,
-                    banner: "'use client';" // This line is required for SSR.
-                },
+                ...(NPM_LINK
+                    ? []
+                    : [
+                          {
+                              format: 'cjs',
+                              file: `${output}.cjs${isMinify ? '.min' : ''}.js`,
+                              exports,
+                              banner: "'use client';" // This line is required for SSR.
+                          }
+                      ]),
                 {
                     format: 'esm',
                     file: `${output}.esm${isMinify ? '.min' : ''}.js`,
@@ -217,11 +223,14 @@ function addEntry(name, input, output, isComponent = true) {
     };
 
     entries.push(get_CJS_ESM());
-    entries.push(get_IIFE());
 
-    // Minify
-    entries.push(get_CJS_ESM(true));
-    entries.push(get_IIFE(true));
+    if (!NPM_LINK) {
+        entries.push(get_IIFE());
+
+        // Minify
+        entries.push(get_CJS_ESM(true));
+        entries.push(get_IIFE(true));
+    }
 }
 
 function corePlugin() {
@@ -377,7 +386,10 @@ function addPackageJson() {
     },
     "sideEffects": [
         "**/*.css"
-    ]
+    ],
+    "engines": {
+        "node": ">=14.0.0"
+    }
 }`;
 
     !fs.existsSync(outputDir) && fs.mkdirSync(outputDir);

@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { SplitButton } from '@/components/lib/splitbutton/SplitButton';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
-import { SplitButton } from '../../lib/splitbutton/SplitButton';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const router = useRouter();
