@@ -97,8 +97,7 @@ export const SplitButtonBase = ComponentBase.extend({
         onClick: null,
         onShow: null,
         onHide: null,
-        children: undefined,
-        closeOnEscape: true
+        children: undefined
     },
     css: {
         classes,

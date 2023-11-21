@@ -33,9 +33,7 @@ export const SplitButton = React.memo(
         const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metaData);
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
-        useOnEscapeKey(overlayRef, props.closeOnEscape, (event) => {
-            hide();
-        });
+        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
