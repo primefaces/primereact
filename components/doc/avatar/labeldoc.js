@@ -108,7 +108,7 @@ export default function LabelDemo() {
 
                     <div className="flex-auto">
                         <h5>Badge</h5>
-                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                        <Avatar label="U" size="xlarge" className="p-overlay-badge">
                             <Badge value="4" />
                         </Avatar>
                     </div>
