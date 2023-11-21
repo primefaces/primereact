@@ -11,7 +11,8 @@ export const ESC_KEY_HANDLING_PRIORITIES = {
     IMAGE: 400,
     MENU: 500,
     OVERLAY_PANEL: 600,
-    PASSWORD: 700
+    PASSWORD: 700,
+    CASCADE_SELECT: 800
 };
 
 /**
