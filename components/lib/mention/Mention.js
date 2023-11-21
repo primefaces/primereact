@@ -92,8 +92,8 @@ export const Mention = React.memo(
         };
 
         const alignOverlay = () => {
-            if(!triggerState) {
-                return
+            if (!triggerState) {
+                return;
             }
             const { key, index } = triggerState;
             const value = inputRef.current.value;
