@@ -14,7 +14,7 @@ export function LabelDoc(props) {
 <Avatar label="V" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
 <Avatar label="U" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
 
-<Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+<Avatar label="U" size="xlarge" className="p-overlay-badge">
 <Badge value="4" />
         `,
         javascript: `
@@ -41,7 +41,7 @@ export default function LabelDemo() {
 
             <div className="flex-auto">
                 <h5>Badge</h5>
-                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                <Avatar label="U" size="xlarge" className="p-overlay-badge">
                     <Badge value="4" />
                 </Avatar>
             </div>
@@ -73,7 +73,7 @@ export default function LabelDemo() {
 
             <div className="flex-auto">
                 <h5>Badge</h5>
-                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                <Avatar label="U" size="xlarge" className="p-overlay-badge">
                     <Badge value="4" />
                 </Avatar>
             </div>

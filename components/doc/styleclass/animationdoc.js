@@ -15,7 +15,7 @@ export function AnimationDoc(props) {
 </StyleClass>
 
 <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="fadeout" leaveToClassName="hidden">
-    <Button ref={closeBtnRef} label="Hide" />
+    <Button ref={closeBtnRef} severity="secondary" label="Hide" />
 </StyleClass>
 
 <div className="hidden animation-duration-500 box">
@@ -33,14 +33,14 @@ export default function AnimationsDoc() {
     const closeBtnRef = useRef(null);
 
     return (
-        <div className="card flex flex-column align-items-center">
+        <div className="card flex flex-column align-items-center h-16rem">
             <div>
                 <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="fadein">
                     <Button ref={openBtnRef} label="Show" className="mr-2" />
                 </StyleClass>
 
                 <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="fadeout" leaveToClassName="hidden">
-                    <Button ref={closeBtnRef} label="Hide" />
+                    <Button ref={closeBtnRef} severity="secondary" label="Hide" />
                 </StyleClass>
             </div>
 
@@ -62,14 +62,14 @@ export default function AnimationsDoc() {
     const closeBtnRef = useRef<Button>(null);
 
     return (
-        <div className="card flex flex-column align-items-center">
+        <div className="card flex flex-column align-items-center h-16rem">
             <div>
                 <StyleClass nodeRef={openBtnRef} selector=".box" enterClassName="hidden" enterActiveClassName="fadein">
                     <Button ref={openBtnRef} label="Show" className="mr-2" />
                 </StyleClass>
 
                 <StyleClass nodeRef={closeBtnRef} selector=".box" leaveActiveClassName="fadeout" leaveToClassName="hidden">
-                    <Button ref={closeBtnRef} label="Hide" />
+                    <Button ref={closeBtnRef} severity="secondary" label="Hide" />
                 </StyleClass>
             </div>
 
