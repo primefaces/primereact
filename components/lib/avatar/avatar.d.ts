@@ -98,6 +98,14 @@ export interface AvatarProps extends Omit<React.DetailedHTMLProps<React.HTMLAttr
      */
     shape?: 'square' | 'circle' | undefined;
     /**
+     * Establishes a string value that labels the component.
+     */
+    ariaLabel?: string | undefined;
+    /**
+     * Establishes relationships between the component and label(s) where its value should be one or more element IDs.
+     */
+    ariaLabelledby?: string | undefined;
+    /**
      * Size of the element.
      * @defaultValue normal
      */

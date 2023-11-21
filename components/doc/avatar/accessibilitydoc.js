@@ -3,7 +3,6 @@ import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function AccessibilityDoc() {
     return (
-        <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
                 <h3>Screen Reader</h3>
                 <p>
@@ -14,6 +13,5 @@ export function AccessibilityDoc() {
                 <h4>Keyboard Support</h4>
                 <p>Component does not include any interactive elements.</p>
             </DocSectionText>
-        </DevelopmentSection>
     );
 }
