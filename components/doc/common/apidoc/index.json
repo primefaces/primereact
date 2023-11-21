@@ -43790,6 +43790,14 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "When present, it specifies that the element should be visible."
+                        },
+                        {
+                            "name": "closeOnEscape",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "default": "true",
+                            "description": "Specifies if pressing escape key should hide the Split button Popup."
                         }
                     ]
                 },

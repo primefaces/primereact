@@ -239,6 +239,11 @@ export interface SplitButtonProps extends Omit<React.DetailedHTMLProps<React.HTM
      * @defaultValue false
      */
     unstyled?: boolean;
+    /**
+     * Specifies if pressing escape key should hide the Split button Popup.
+     * @defaultValue true
+     */
+    closeOnEscape?: boolean | undefined;
 }
 
 /**
