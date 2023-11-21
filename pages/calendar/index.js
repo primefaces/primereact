@@ -19,7 +19,6 @@ import { MultipleMonthsDoc } from '@/components/doc/calendar/multiplemonthsdoc';
 import { PTDoc } from '@/components/doc/calendar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/calendar/pt/wireframe';
 import { RangeDoc } from '@/components/doc/calendar/rangedoc';
-import { StyleDoc } from '@/components/doc/calendar/styledoc';
 import { StyledDoc } from '@/components/doc/calendar/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/calendar/theming/tailwinddoc';
 import { TimeDoc } from '@/components/doc/calendar/timedoc';
@@ -142,11 +141,7 @@ const CalendarDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

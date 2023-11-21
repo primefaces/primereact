@@ -6,7 +6,6 @@ import { ImportDoc } from '@/components/doc/tieredmenu/importdoc';
 import { PopupDoc } from '@/components/doc/tieredmenu/popupdoc';
 import { PTDoc } from '@/components/doc/tieredmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tieredmenu/pt/wireframe';
-import { StyleDoc } from '@/components/doc/tieredmenu/styledoc';
 import { StyledDoc } from '@/components/doc/tieredmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tieredmenu/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const TieredMenuDemo = () => {
             label: 'Popup',
             component: PopupDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

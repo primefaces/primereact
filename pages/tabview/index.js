@@ -10,7 +10,6 @@ import { ImportDoc } from '@/components/doc/tabview/importdoc';
 import { PTDoc } from '@/components/doc/tabview/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tabview/pt/wireframe';
 import { ScrollableDoc } from '@/components/doc/tabview/scrollabledoc';
-import { StyleDoc } from '@/components/doc/tabview/styledoc';
 import { TemplateDoc } from '@/components/doc/tabview/templatedoc';
 import { StyledDoc } from '@/components/doc/tabview/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tabview/theming/tailwinddoc';
@@ -57,11 +56,7 @@ const TabViewDemo = () => {
             label: 'Scrollable',
             component: ScrollableDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

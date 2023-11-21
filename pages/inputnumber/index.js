@@ -14,7 +14,6 @@ import { NumeralsDoc } from '@/components/doc/inputnumber/numberalsdoc';
 import { PrefixSuffixDoc } from '@/components/doc/inputnumber/prefixsuffixdoc';
 import { PTDoc } from '@/components/doc/inputnumber/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputnumber/pt/wireframe';
-import { StyleDoc } from '@/components/doc/inputnumber/styledoc';
 import { StyledDoc } from '@/components/doc/inputnumber/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputnumber/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/inputnumber/verticaldoc';
@@ -88,11 +87,7 @@ const InputNumberDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

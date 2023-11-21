@@ -10,7 +10,6 @@ import { PrimeFlexDoc } from '@/components/doc/dataview/primeflexdoc';
 import { PTDoc } from '@/components/doc/dataview/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dataview/pt/wireframe';
 import { SortingDoc } from '@/components/doc/dataview/sortingdoc';
-import { StyleDoc } from '@/components/doc/dataview/styledoc';
 import { StyledDoc } from '@/components/doc/dataview/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/dataview/theming/tailwinddoc';
 
@@ -51,11 +50,7 @@ const DataViewDemo = () => {
             label: 'Loading',
             component: LoadingDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

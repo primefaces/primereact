@@ -13,7 +13,6 @@ import { MultipleDoc } from '@/components/doc/autocomplete/multipledoc';
 import { ObjectsDoc } from '@/components/doc/autocomplete/objectsdoc';
 import { PTDoc } from '@/components/doc/autocomplete/pt/ptdoc';
 import { Wireframe } from '@/components/doc/autocomplete/pt/wireframe';
-import { StyleDoc } from '@/components/doc/autocomplete/styledoc';
 import { TemplateDoc } from '@/components/doc/autocomplete/templatedoc';
 import { StyledDoc } from '@/components/doc/autocomplete/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/autocomplete/theming/tailwinddoc';
@@ -99,11 +98,6 @@ const AutoCompleteDemo = () => {
                     component: HookFormDoc
                 }
             ]
-        },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -10,7 +10,6 @@ import { LazyDoc } from '@/components/doc/virtualscroller/lazydoc';
 import { LoadingDoc } from '@/components/doc/virtualscroller/loadingdoc';
 import { PTDoc } from '@/components/doc/virtualscroller/pt/ptdoc';
 import { Wireframe } from '@/components/doc/virtualscroller/pt/wireframe';
-import { StyleDoc } from '@/components/doc/virtualscroller/styledoc';
 import { StyledDoc } from '@/components/doc/virtualscroller/theming/styleddoc';
 
 const VirtualScrollerDemo = () => {
@@ -50,11 +49,7 @@ const VirtualScrollerDemo = () => {
             label: 'Lazy',
             component: LazyDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

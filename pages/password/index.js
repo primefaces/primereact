@@ -12,7 +12,6 @@ import { LocaleDoc } from '@/components/doc/password/localedoc';
 import { MeterDoc } from '@/components/doc/password/meterdoc';
 import { PTDoc } from '@/components/doc/password/pt/ptdoc';
 import { Wireframe } from '@/components/doc/password/pt/wireframe';
-import { StyleDoc } from '@/components/doc/password/styledoc';
 import { TemplateDoc } from '@/components/doc/password/templatedoc';
 import { StyledDoc } from '@/components/doc/password/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/password/theming/tailwinddoc';
@@ -82,11 +81,7 @@ const PasswordDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

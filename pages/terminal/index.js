@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/terminal/basicdoc';
 import { ImportDoc } from '@/components/doc/terminal/importdoc';
 import { PTDoc } from '@/components/doc/terminal/pt/ptdoc';
 import { Wireframe } from '@/components/doc/terminal/pt/wireframe';
-import { StyleDoc } from '@/components/doc/terminal/styledoc';
 import { StyledDoc } from '@/components/doc/terminal/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/terminal/theming/tailwinddoc';
 
@@ -21,11 +20,7 @@ const TerminalDemo = () => {
             label: 'Basic',
             component: BasicDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

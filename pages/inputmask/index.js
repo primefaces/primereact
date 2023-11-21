@@ -13,7 +13,6 @@ import { OptionalDoc } from '@/components/doc/inputmask/optionaldoc';
 import { PTDoc } from '@/components/doc/inputmask/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputmask/pt/wireframe';
 import { SlotCharDoc } from '@/components/doc/inputmask/slotchardoc';
-import { StyleDoc } from '@/components/doc/inputmask/styledoc';
 import { StyledDoc } from '@/components/doc/inputmask/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputmask/theming/tailwinddoc';
 import Link from 'next/link';
@@ -77,11 +76,7 @@ const InputMaskDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

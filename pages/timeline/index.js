@@ -8,7 +8,6 @@ import { ImportDoc } from '@/components/doc/timeline/importdoc';
 import { OppositeDoc } from '@/components/doc/timeline/oppositedoc';
 import { PTDoc } from '@/components/doc/timeline/pt/ptdoc';
 import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
-import { StyleDoc } from '@/components/doc/timeline/styledoc';
 import { TemplateDoc } from '@/components/doc/timeline/templatedoc';
 import { StyledDoc } from '@/components/doc/timeline/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/timeline/theming/tailwinddoc';
@@ -45,11 +44,7 @@ const TimelineDemo = () => {
             label: 'Horizontal',
             component: HorizontalDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

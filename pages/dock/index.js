@@ -6,7 +6,6 @@ import { BasicDoc } from '@/components/doc/dock/basicdoc';
 import { ImportDoc } from '@/components/doc/dock/importdoc';
 import { PTDoc } from '@/components/doc/dock/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dock/pt/wireframe';
-import { StyleDoc } from '@/components/doc/dock/styledoc';
 import { StyledDoc } from '@/components/doc/dock/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/dock/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const DockDemo = () => {
             label: 'Advanced',
             component: AdvancedDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',
