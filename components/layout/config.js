@@ -14,6 +14,8 @@ export default function Config(props) {
     const { theme, darkMode, changeTheme } = useContext(AppContentContext);
     const { ripple, inputStyle, setRipple, setInputStyle } = useContext(PrimeReactContext);
     const lightOnlyThemes = ['fluent-light', 'mira', 'nano'];
+    const currentURL = window.location.href;
+    const isRippleDemoPage = currentURL.includes('/ripple');
 
     const decrementScale = () => {
         setScale((prevScale) => --prevScale);
@@ -102,7 +104,7 @@ export default function Config(props) {
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
                     <span className="text-xl font-semibold">Ripple Effect</span>
-                    <InputSwitch checked={ripple} onChange={(e) => setRipple(e.value)} />
+                    <InputSwitch checked={ripple} onChange={(e) => setRipple(e.value)} disabled={isRippleDemoPage} />
                 </section>
 
                 <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">

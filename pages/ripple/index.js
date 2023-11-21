@@ -5,8 +5,8 @@ import { ConfigurationDoc } from '@/components/doc/ripple/configurationdoc';
 import { ImportDoc } from '@/components/doc/ripple/importdoc';
 import { StyledDoc } from '@/components/doc/ripple/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/ripple/theming/tailwinddoc';
-import AppContentContext from '@/components/layout/appcontentcontext';
-import { useContext, useEffect } from 'react';
+import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
+import { useContext, useEffect, useRef } from 'react';
 
 const RippleDemo = () => {
     const docs = [
@@ -32,15 +32,14 @@ const RippleDemo = () => {
             component: AccessibilityDoc
         }
     ];
-    const appContentContext = useContext(AppContentContext);
+    const { ripple, setRipple } = useContext(PrimeReactContext);
+    const userRippleValue = useRef(ripple);
 
     useEffect(() => {
-        appContentContext.setDisabled(true);
-        appContentContext.onRippleChange(true);
+        setRipple(true);
 
         return () => {
-            appContentContext.setDisabled(false);
-            appContentContext.onRippleChange(false);
+            setRipple(userRippleValue.current);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
