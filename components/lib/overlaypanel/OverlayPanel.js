@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ESC_KEY_HANDLING_PRIORITIES, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
@@ -53,19 +53,14 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         when: visibleState
     });
 
+    const overlayPanelDisplayOrder = useDisplayOrder('overlay-panel', visibleState);
+
     useGlobalOnEscapeKey({
         callback: () => {
             hide();
         },
         condition: visibleState && props.closeOnEscape,
-        priority: [
-            ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL,
-            // Assumption: there could be only one OverlayPanel active at once,
-            //             therefore we could always use one and the same priority.
-            //             If there could be several - then some sort of zIndex should be
-            //             used instead of 0.
-            0
-        ]
+        priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayPanelDisplayOrder]
     });
 
     const isOutsideClicked = (target) => {
