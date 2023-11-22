@@ -47709,7 +47709,7 @@
                             "name": "content",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "ReactNode",
                             "default": "",
                             "description": "Content to be displayed in tooltip."
                         },
