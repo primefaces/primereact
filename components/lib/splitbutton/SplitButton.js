@@ -39,7 +39,7 @@ export const SplitButton = React.memo(
             callback: () => {
                 hide();
             },
-            condition: overlayVisibleState,
+            when: overlayVisibleState,
             priority: [ESC_KEY_HANDLING_PRIORITIES.SPLIT_BUTTON, overlayDisplayOrder]
         });
 

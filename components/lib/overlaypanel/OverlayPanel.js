@@ -59,7 +59,7 @@ export const OverlayPanel = React.forwardRef((inProps, ref) => {
         callback: () => {
             hide();
         },
-        condition: visibleState && props.closeOnEscape,
+        when: visibleState && props.closeOnEscape,
         priority: [ESC_KEY_HANDLING_PRIORITIES.OVERLAY_PANEL, overlayPanelDisplayOrder]
     });
 

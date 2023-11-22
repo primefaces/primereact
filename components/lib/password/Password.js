@@ -52,7 +52,7 @@ export const Password = React.memo(
             callback: () => {
                 hide();
             },
-            condition: overlayVisibleState && props.feedback,
+            when: overlayVisibleState && props.feedback,
             priority: [ESC_KEY_HANDLING_PRIORITIES.PASSWORD, passwordDisplayOrder]
         });
 

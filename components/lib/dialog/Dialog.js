@@ -57,7 +57,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 onClose(event);
             }
         },
-        condition: visibleState,
+        when: visibleState,
         priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 

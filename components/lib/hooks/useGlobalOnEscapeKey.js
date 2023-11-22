@@ -101,10 +101,10 @@ const globalEscKeyHandlingLogic = {
     }
 };
 
-export const useGlobalOnEscapeKey = ({ callback, condition, priority }) => {
+export const useGlobalOnEscapeKey = ({ callback, when, priority }) => {
     useEffect(() => {
-        if (!condition) return;
+        if (!when) return;
 
         return globalEscKeyHandlingLogic.addListener(callback, priority);
-    }, [condition, callback, priority]);
+    }, [when, callback, priority]);
 };

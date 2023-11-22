@@ -35,7 +35,7 @@ export const Image = React.memo(
                     hide();
                 }
             },
-            condition: maskVisibleState,
+            when: maskVisibleState,
             priority: [
                 ESC_KEY_HANDLING_PRIORITIES.IMAGE,
                 // Assume that there could be only one image mask activated, so it's safe

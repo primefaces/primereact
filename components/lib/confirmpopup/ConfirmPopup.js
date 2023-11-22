@@ -64,7 +64,7 @@ export const ConfirmPopup = React.memo(
                     hide('hide');
                 }
             },
-            condition: visibleState,
+            when: visibleState,
             priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
         });
 

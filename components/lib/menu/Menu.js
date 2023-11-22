@@ -32,7 +32,7 @@ export const Menu = React.memo(
             callback: (event) => {
                 hide(event);
             },
-            condition: visibleState && props.popup && props.closeOnEscape,
+            when: visibleState && props.popup && props.closeOnEscape,
             priority: [ESC_KEY_HANDLING_PRIORITIES.MENU, popupMenuDisplayOrder]
         });
 

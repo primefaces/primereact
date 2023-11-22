@@ -294,7 +294,7 @@ export declare function useMatchMedia(query: string, when?: boolean): boolean;
 /**
  * Custom hook to use detect global escape button click.
  */
-export declare function useGlobalOnEscapeKey(props: { callback: (event: KeyboardEvent) => void; condition: boolean; priority: [number, number] }): void;
+export declare function useGlobalOnEscapeKey(props: { callback: (event: KeyboardEvent) => void; when: boolean; priority: [number, number] }): void;
 /**
  * Custom hook to use display order of component of one and the same group
  * @param {string} group
