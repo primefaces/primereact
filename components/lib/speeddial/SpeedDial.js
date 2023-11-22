@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useEventListener, useMountEffect, useUpdateEffect, useOnEscapeKey } from '../hooks/Hooks';
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
@@ -39,6 +39,8 @@ export const SpeedDial = React.memo(
             },
             when: visibleState
         });
+
+        useOnEscapeKey(elementRef, visible, () => hide());
 
         const show = () => {
             props.onVisibleChange ? props.onVisibleChange(true) : setVisibleState(true);
