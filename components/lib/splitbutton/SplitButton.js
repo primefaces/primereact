@@ -10,6 +10,7 @@ import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, cla
 import { SplitButtonBase } from './SplitButtonBase';
 import { SplitButtonItem } from './SplitButtonItem';
 import { SplitButtonPanel } from './SplitButtonPanel';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const SplitButton = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -32,6 +33,7 @@ export const SplitButton = React.memo(
         const { ptm, cx, isUnstyled } = SplitButtonBase.setMetaData(metaData);
 
         useHandleStyle(SplitButtonBase.css.styles, isUnstyled, { name: 'splitbutton' });
+        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
