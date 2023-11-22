@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useEffect, useState } from 'react';
 import { BlockUI } from '../../../components/lib/blockui/BlockUI';
 import { Button } from '../../../components/lib/button/Button';
 

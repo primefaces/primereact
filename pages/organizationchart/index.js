@@ -1,16 +1,16 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/organizationchart/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/organizationchart/basicdoc';
-import { ColoredDoc } from '../../components/doc/organizationchart/coloreddoc';
-import { ImportDoc } from '../../components/doc/organizationchart/importdoc';
-import { PTDoc } from '../../components/doc/organizationchart/pt/ptdoc';
-import { Wireframe } from '../../components/doc/organizationchart/pt/wireframe';
-import { SelectionDoc } from '../../components/doc/organizationchart/selectiondoc';
-import { StyleDoc } from '../../components/doc/organizationchart/styledoc';
-import { TemplateDoc } from '../../components/doc/organizationchart/templatedoc';
-import { StyledDoc } from '../../components/doc/organizationchart/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/organizationchart/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/organizationchart/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/organizationchart/basicdoc';
+import { ColoredDoc } from '@/components/doc/organizationchart/coloreddoc';
+import { ImportDoc } from '@/components/doc/organizationchart/importdoc';
+import { PTDoc } from '@/components/doc/organizationchart/pt/ptdoc';
+import { Wireframe } from '@/components/doc/organizationchart/pt/wireframe';
+import { SelectionDoc } from '@/components/doc/organizationchart/selectiondoc';
+import { StyleDoc } from '@/components/doc/organizationchart/styledoc';
+import { TemplateDoc } from '@/components/doc/organizationchart/templatedoc';
+import { StyledDoc } from '@/components/doc/organizationchart/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/organizationchart/theming/tailwinddoc';
 
 const OrganizationChartDemo = () => {
     const docs = [

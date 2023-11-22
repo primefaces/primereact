@@ -1,5 +1,5 @@
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import React from 'react';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function PaletteDoc(props) {
     const colors = ['primary', 'blue', 'green', 'yellow', 'cyan', 'pink', 'indigo', 'teal', 'orange', 'bluegray', 'purple', 'red', 'gray'];

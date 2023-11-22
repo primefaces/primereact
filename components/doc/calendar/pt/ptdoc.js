@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import { useState } from 'react';
-import { Calendar } from '../../../lib/calendar/Calendar';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const [date, setDate] = useState(null);
@@ -13,7 +13,9 @@ export function PTDoc(props) {
     onChange={(e) => setDate(e.value)}
     showIcon
     pt={{
-        input: { className: 'w-16rem' },
+        input: {
+            root: { className: 'border-teal-500' }
+        },
         dropdownButton: {
             root: { className: 'bg-teal-500 border-teal-500' }
         }
@@ -34,7 +36,9 @@ export default function PTDemo() {
                 onChange={(e) => setDate(e.value)}
                 showIcon
                 pt={{
-                    input: { className: 'w-16rem' },
+                    input: {
+                        root: { className: 'border-teal-500' }
+                    },
                     dropdownButton: {
                         root: { className: 'bg-teal-500 border-teal-500' }
                     }
@@ -58,7 +62,9 @@ export default function PTDemo() {
                 onChange={(e) => setDate(e.value)}
                 showIcon
                 pt={{
-                    input: { className: 'w-16rem' },
+                    input: {
+                        root: { className: 'border-teal-500' }
+                    },
                     dropdownButton: {
                         root: { className: 'bg-teal-500 border-teal-500' }
                     }
@@ -79,7 +85,9 @@ export default function PTDemo() {
                     onChange={(e) => setDate(e.value)}
                     showIcon
                     pt={{
-                        input: { className: 'w-16rem' },
+                        input: {
+                            root: { className: 'border-teal-500' }
+                        },
                         dropdownButton: {
                             root: { className: 'bg-teal-500 border-teal-500' }
                         }

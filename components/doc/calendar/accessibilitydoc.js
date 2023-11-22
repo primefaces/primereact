@@ -1,6 +1,6 @@
-import { DevelopmentSection } from '../common/developmentsection';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DevelopmentSection } from '@/components/doc/common/developmentsection';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 import Link from 'next/link';
 

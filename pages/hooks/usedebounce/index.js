@@ -1,6 +1,6 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/usedebounce/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/usedebounce/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/usedebounce/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/usedebounce/importdoc';
 
 const DebounceDemo = () => {
     const docs = [

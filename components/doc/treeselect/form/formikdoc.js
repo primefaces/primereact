@@ -1,12 +1,12 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Toast } from '@/components/lib/toast/Toast';
+import { TreeSelect } from '@/components/lib/treeselect/TreeSelect';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useFormik } from 'formik';
 import { useEffect, useRef, useState } from 'react';
 import { NodeService } from '../../../../service/NodeService';
-import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
-import { TreeSelect } from '../../../lib/treeselect/TreeSelect';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function FormikDoc(props) {
     const toast = useRef(null);

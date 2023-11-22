@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { ProgressBar } from '../../lib/progressbar/ProgressBar';
-import { Toast } from '../../lib/toast/Toast';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useEffect, useRef, useState } from 'react';
 
 export function DynamicDoc(props) {
     const [value, setValue] = useState(0);

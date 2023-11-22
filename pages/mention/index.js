@@ -1,20 +1,20 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/mention/accessibilitydoc';
-import { AutoResizeDoc } from '../../components/doc/mention/autoresizedoc';
-import { BasicDoc } from '../../components/doc/mention/basicdoc';
-import { DisabledDoc } from '../../components/doc/mention/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/mention/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/mention/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/mention/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/mention/importdoc';
-import { InvalidDoc } from '../../components/doc/mention/invaliddoc';
-import { PTDoc } from '../../components/doc/mention/pt/ptdoc';
-import { Wireframe } from '../../components/doc/mention/pt/wireframe';
-import { StyleDoc } from '../../components/doc/mention/styledoc';
-import { TriggersDoc } from '../../components/doc/mention/triggersdoc';
-import { TailwindDoc } from '../../components/doc/mention/theming/tailwinddoc';
-import { StyledDoc } from '../../components/doc/mention/theming/styleddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/mention/accessibilitydoc';
+import { AutoResizeDoc } from '@/components/doc/mention/autoresizedoc';
+import { BasicDoc } from '@/components/doc/mention/basicdoc';
+import { DisabledDoc } from '@/components/doc/mention/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/mention/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/mention/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/mention/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/mention/importdoc';
+import { InvalidDoc } from '@/components/doc/mention/invaliddoc';
+import { PTDoc } from '@/components/doc/mention/pt/ptdoc';
+import { Wireframe } from '@/components/doc/mention/pt/wireframe';
+import { StyleDoc } from '@/components/doc/mention/styledoc';
+import { StyledDoc } from '@/components/doc/mention/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/mention/theming/tailwinddoc';
+import { TriggersDoc } from '@/components/doc/mention/triggersdoc';
 
 const MentionDemo = () => {
     const docs = [

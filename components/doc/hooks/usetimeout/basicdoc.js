@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
-import { useTimeout } from '../../../lib/hooks/Hooks';
-import { Toast } from '../../../lib/toast/Toast';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useTimeout } from '@/components/lib/hooks/Hooks';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useRef } from 'react';
 
 export function BasicDoc(props) {
     const toast = useRef(null);

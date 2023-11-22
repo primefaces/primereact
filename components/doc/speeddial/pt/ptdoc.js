@@ -1,7 +1,7 @@
-import { SpeedDial } from '../../../lib/speeddial/SpeedDial';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { SpeedDial } from '@/components/lib/speeddial/SpeedDial';
+import { classNames } from '@/components/lib/utils/Utils';
 
 export function PTDoc(props) {
     const items = [

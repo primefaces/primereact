@@ -1,16 +1,16 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/menu/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/menu/basicdoc';
-import { GroupDoc } from '../../components/doc/menu/groupdoc';
-import { ImportDoc } from '../../components/doc/menu/importdoc';
-import { PopupDoc } from '../../components/doc/menu/popupdoc';
-import { PTDoc } from '../../components/doc/menu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/menu/pt/wireframe';
-import { StyleDoc } from '../../components/doc/menu/styledoc';
-import { TemplateDoc } from '../../components/doc/menu/templatedoc';
-import { StyledDoc } from '../../components/doc/menu/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/menu/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/menu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/menu/basicdoc';
+import { GroupDoc } from '@/components/doc/menu/groupdoc';
+import { ImportDoc } from '@/components/doc/menu/importdoc';
+import { PopupDoc } from '@/components/doc/menu/popupdoc';
+import { PTDoc } from '@/components/doc/menu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/menu/pt/wireframe';
+import { StyleDoc } from '@/components/doc/menu/styledoc';
+import { TemplateDoc } from '@/components/doc/menu/templatedoc';
+import { StyledDoc } from '@/components/doc/menu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/menu/theming/tailwinddoc';
 
 const MenuDemo = () => {
     const docs = [

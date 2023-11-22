@@ -1,15 +1,15 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/panel/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/panel/basicdoc';
-import { ImportDoc } from '../../components/doc/panel/importdoc';
-import { PTDoc } from '../../components/doc/panel/pt/ptdoc';
-import { Wireframe } from '../../components/doc/panel/pt/wireframe';
-import { StyleDoc } from '../../components/doc/panel/styledoc';
-import { TemplateDoc } from '../../components/doc/panel/templatedoc';
-import { StyledDoc } from '../../components/doc/panel/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/panel/theming/tailwinddoc';
-import { ToggleableDoc } from '../../components/doc/panel/toggleabledoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/panel/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/panel/basicdoc';
+import { ImportDoc } from '@/components/doc/panel/importdoc';
+import { PTDoc } from '@/components/doc/panel/pt/ptdoc';
+import { Wireframe } from '@/components/doc/panel/pt/wireframe';
+import { StyleDoc } from '@/components/doc/panel/styledoc';
+import { TemplateDoc } from '@/components/doc/panel/templatedoc';
+import { StyledDoc } from '@/components/doc/panel/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/panel/theming/tailwinddoc';
+import { ToggleableDoc } from '@/components/doc/panel/toggleabledoc';
 
 const PanelDemo = () => {
     const docs = [

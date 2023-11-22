@@ -30,7 +30,7 @@ const styles = `
     }
     
     .p-scrolltop-helper {
-        display: none !important;
+        display: none;
     }
     
     .p-scrolltop-enter {

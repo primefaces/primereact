@@ -1,18 +1,18 @@
-import { AccessibilityDoc } from '../../components/doc/colorpicker/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/colorpicker/basicdoc';
-import { DisabledDoc } from '../../components/doc/colorpicker/disableddoc';
-import { FormikDoc } from '../../components/doc/colorpicker/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/colorpicker/form/hookformdoc';
-import { FormatDoc } from '../../components/doc/colorpicker/formatdoc';
-import { ImportDoc } from '../../components/doc/colorpicker/importdoc';
-import { InlineDoc } from '../../components/doc/colorpicker/inlinedoc';
-import { PTDoc } from '../../components/doc/colorpicker/pt/ptdoc';
-import { Wireframe } from '../../components/doc/colorpicker/pt/wireframe';
-import { StyleDoc } from '../../components/doc/colorpicker/styledoc';
-import { StyledDoc } from '../../components/doc/colorpicker/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/colorpicker/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/colorpicker/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/colorpicker/basicdoc';
+import { DisabledDoc } from '@/components/doc/colorpicker/disableddoc';
+import { FormikDoc } from '@/components/doc/colorpicker/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/colorpicker/form/hookformdoc';
+import { FormatDoc } from '@/components/doc/colorpicker/formatdoc';
+import { ImportDoc } from '@/components/doc/colorpicker/importdoc';
+import { InlineDoc } from '@/components/doc/colorpicker/inlinedoc';
+import { PTDoc } from '@/components/doc/colorpicker/pt/ptdoc';
+import { Wireframe } from '@/components/doc/colorpicker/pt/wireframe';
+import { StyleDoc } from '@/components/doc/colorpicker/styledoc';
+import { StyledDoc } from '@/components/doc/colorpicker/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/colorpicker/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const ColorPickerDemo = () => {
     const docs = [

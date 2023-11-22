@@ -59,7 +59,10 @@ export const BodyCell = React.memo((props) => {
         type: 'click',
         listener: (e) => {
             if (!selfClick.current && isOutsideClicked(e.target)) {
-                switchCellToViewMode(e, true);
+                // #2666 for overlay components and outside is clicked
+                setTimeout(() => {
+                    switchCellToViewMode(e, true);
+                }, 0);
             }
 
             selfClick.current = false;

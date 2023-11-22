@@ -1,7 +1,6 @@
-import React from 'react';
-import { ExampleDoc } from '../../components/doc/bootstrap/exampledoc';
-import { SetupDoc } from '../../components/doc/bootstrap/setupdoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { ExampleDoc } from '@/components/doc/bootstrap/exampledoc';
+import { SetupDoc } from '@/components/doc/bootstrap/setupdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const BootstrapDemo = () => {
     const docs = [
@@ -19,7 +18,7 @@ const BootstrapDemo = () => {
     ];
 
     const description = `
-    <a href="https://getbootstrap.com" class="font-semibold hover:underline text-primary">Bootstrap</a>
+    <a href="https://getbootstrap.com" className="font-medium hover:underline text-primary">Bootstrap</a>
     is a well-known CSS library to build responsive and mobile first web projects.
     `;
 

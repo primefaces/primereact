@@ -1,105 +1,66 @@
+import { GTagManager } from '@/components/analytics/analytics';
+import AppContentContext from '@/components/layout/appcontentcontext';
+import Layout from '@/components/layout/layout';
+import { PrimeReactProvider } from '@/components/lib/api/PrimeReactContext';
+import { switchTheme } from '@/components/utils/utils';
 import '@docsearch/css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { GTagManager } from '../components/analytics/analytics';
-import Layout from '../components/layout/layout';
-import PrimeReact from '../components/lib/api/Api';
-import { PrimeReactContext, PrimeReactProvider } from '../components/lib/api/PrimeReactContext';
-import AnnouncementData from '../data/news.json';
+import { useState } from 'react';
 import '../styles/demo/demo.scss';
 import '../styles/layout/layout.scss';
 
-function Main({ component: Component }) {
-    const [dark, setDark] = useState(false);
-    const [theme, setTheme] = useState('lara-light-indigo');
-    const [newsActive, setNewsActive] = useState(false);
-    const storageKey = 'primereact-news';
-    const announcement = useRef(AnnouncementData);
-    const context = useContext(PrimeReactContext);
-
-    useEffect(() => {
-        const itemString = localStorage.getItem(storageKey);
-
-        if (itemString) {
-            const item = JSON.parse(itemString);
-
-            if (item.hiddenNews && item.hiddenNews !== announcement.current.id) {
-                setNewsActive(true);
-            }
-        } else {
-            setNewsActive(true);
-        }
-    }, []);
-
-    const props = {
-        dark: dark,
-        theme: theme,
-        newsActive: newsActive && announcement.current,
-        announcement: announcement.current,
-        onNewsClose: () => {
-            setNewsActive(false);
-
-            const item = {
-                hiddenNews: announcement.current.id
-            };
-
-            localStorage.setItem(storageKey, JSON.stringify(item));
-        },
-        onThemeChange: (newTheme, dark) => {
-            if (context) {
-                context.changeTheme(theme, newTheme, 'theme-link', () => {
-                    setDark(dark);
-                    setTheme(newTheme);
-                });
-            } else {
-                PrimeReact.changeTheme(theme, newTheme, 'theme-link', () => {
-                    setDark(dark);
-                    setTheme(newTheme);
-                });
-            }
-        },
-        onTableThemeChange: (currentTableTheme, newTableTheme) => {
-            changeTableTheme(currentTableTheme, newTableTheme);
-        }
-    };
-
-    const changeTableTheme = (currentTableTheme, newTableTheme) => {
-        if (currentTableTheme !== newTableTheme) {
-            const elementId = 'landing-table-theme-link';
-            const linkElement = document.getElementById(elementId);
-            const cloneLinkElement = linkElement.cloneNode(true);
-            const newThemeUrl = linkElement.getAttribute('href').replace(currentTableTheme, newTableTheme);
-
-            cloneLinkElement.setAttribute('id', elementId + '-clone');
-            cloneLinkElement.setAttribute('href', newThemeUrl);
-            cloneLinkElement.addEventListener('load', () => {
-                linkElement.remove();
-                cloneLinkElement.setAttribute('id', elementId);
-            });
-
-            linkElement.parentNode.insertBefore(cloneLinkElement, linkElement.nextSibling);
-        }
-    };
-
+function AppContent({ component: Component, pageProps }) {
     if (Component.getLayout) {
-        return Component.getLayout(<Component {...props} />);
+        return Component.getLayout(<Component {...pageProps} />);
     } else {
         return (
-            <Layout {...props}>
-                <Component {...props} />
+            <Layout>
+                <Component {...pageProps} />
             </Layout>
         );
     }
 }
 
-export default function MyApp({ Component }) {
+export default function MyApp({ Component, pageProps }) {
     const isProduction = process.env.NODE_ENV === 'production';
+    const [darkMode, setDarkMode] = useState(false);
+    const [theme, setTheme] = useState('lara-light-cyan');
+    const [newsActive, setNewsActive] = useState(false);
+    const [announcement, setAnnouncement] = useState(null);
+
+    const appState = {
+        darkMode: darkMode,
+        theme: theme,
+        newsActive: newsActive,
+        announcement: announcement,
+        changeTheme: (newTheme, dark) => {
+            if (newTheme !== theme) {
+                switchTheme(theme, newTheme, 'theme-link', () => {
+                    setDarkMode(dark);
+                    setTheme(newTheme);
+                });
+            }
+        },
+        showNews: (message) => {
+            setNewsActive(true);
+            setAnnouncement(message);
+        },
+        hideNews: () => {
+            setNewsActive(false);
+        }
+    };
+
+    const primereactConfig = {
+        ripple: true
+    };
 
     return (
-        <PrimeReactProvider>
-            {isProduction && <GTagManager />}
-            <Main component={Component} />
-        </PrimeReactProvider>
+        <AppContentContext.Provider value={appState}>
+            <PrimeReactProvider value={primereactConfig}>
+                {isProduction && <GTagManager />}
+                <AppContent component={Component} pageProps={pageProps} />
+            </PrimeReactProvider>
+        </AppContentContext.Provider>
     );
 }

@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import { useState } from 'react';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function MinMaxDoc(props) {
     let today = new Date();

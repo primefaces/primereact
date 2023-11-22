@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Sidebar } from '@/components/lib/sidebar/Sidebar';
 import { useState } from 'react';
-import { Sidebar } from '../../lib/sidebar/Sidebar';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function SizeDoc(props) {
     const [visible, setVisible] = useState(false);

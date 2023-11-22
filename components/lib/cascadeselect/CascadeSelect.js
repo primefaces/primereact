@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect, useOnEscapeKey } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, useMergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -45,6 +44,8 @@ export const CascadeSelect = React.memo(
             },
             when: overlayVisibleState
         });
+
+        useOnEscapeKey(overlayRef, overlayVisibleState, () => hide());
 
         const onOptionSelect = (event) => {
             if (props.onChange) {
@@ -234,7 +235,7 @@ export const CascadeSelect = React.memo(
     }
 
     .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active > .p-cascadeselect-sublist {
-        left: 0 !important;
+        left: 0;
         box-shadow: none;
         border-radius: 0;
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
@@ -271,6 +272,8 @@ export const CascadeSelect = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(inputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         React.useEffect(() => {

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Skeleton } from '@/components/lib/skeleton/Skeleton';
+import { useState } from 'react';
 import { CarService } from '../../../../service/CarService';
-import { Column } from '../../../lib/column/Column';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Skeleton } from '../../../lib/skeleton/Skeleton';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function LazyVirtualScrollDoc(props) {
     const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));

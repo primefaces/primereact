@@ -1,6 +1,6 @@
-import { CascadeSelect } from '../../lib/cascadeselect/CascadeSelect';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { CascadeSelect } from '@/components/lib/cascadeselect/CascadeSelect';
 
 export function DisabledDoc(props) {
     const code = {

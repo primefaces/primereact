@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Password } from '@/components/lib/password/Password';
+import { Toast } from '@/components/lib/toast/Toast';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useFormik } from 'formik';
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
-import { classNames } from '../../../lib/utils/Utils';
-import { Password } from '../../../lib/password/Password';
+import { useRef } from 'react';
 
 export function FormikDoc(props) {
     const toast = useRef(null);

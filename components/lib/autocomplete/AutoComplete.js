@@ -160,7 +160,7 @@ export const AutoComplete = React.memo(
         };
 
         const formatValue = (value) => {
-            if (value) {
+            if (ObjectUtils.isNotEmpty(value)) {
                 if (typeof value === 'string') {
                     return value;
                 } else if (props.selectedItemTemplate) {
@@ -488,6 +488,8 @@ export const AutoComplete = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(inputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {

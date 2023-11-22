@@ -66,11 +66,15 @@ export interface InputTextContext {
  * Defines valid properties in InputText component. In addition to these, all properties of HTMLInputElement can be used in this component.
  * @group Properties
  */
-export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'value'> {
+export interface InputTextProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onInput' | 'ref' | 'value' | 'size'> {
     /**
      * Format definition of the keys to block.
      */
     keyfilter?: KeyFilterType;
+    /**
+     * Size of the input.
+     */
+    size?: number | string | undefined;
     /**
      * Content of the tooltip.
      */

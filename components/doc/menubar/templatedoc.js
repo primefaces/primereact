@@ -1,7 +1,7 @@
-import { InputText } from '../../lib/inputtext/InputText';
-import { Menubar } from '../../lib/menubar/Menubar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { Menubar } from '@/components/lib/menubar/Menubar';
 
 export function TemplateDoc(props) {
     const items = [

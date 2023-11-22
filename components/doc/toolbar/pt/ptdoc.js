@@ -1,7 +1,7 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Toolbar } from '../../../lib/toolbar/Toolbar';
-import { Button } from '../../../lib/button/Button';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Toolbar } from '@/components/lib/toolbar/Toolbar';
 import React from 'react';
 
 export function PTDoc(props) {

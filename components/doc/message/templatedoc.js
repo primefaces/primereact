@@ -1,7 +1,6 @@
-import React from 'react';
-import { Message } from '../../lib/message/Message';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Message } from '@/components/lib/message/Message';
 
 export function TemplateDoc(props) {
     const content = (

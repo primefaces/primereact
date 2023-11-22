@@ -1,14 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/panelmenu/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/panelmenu/basicdoc';
-import { ImportDoc } from '../../components/doc/panelmenu/importdoc';
-import { MultipleDoc } from '../../components/doc/panelmenu/multipledoc';
-import { PTDoc } from '../../components/doc/panelmenu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/panelmenu/pt/wireframe';
-import { StyleDoc } from '../../components/doc/panelmenu/styledoc';
-import { StyledDoc } from '../../components/doc/panelmenu/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/panelmenu/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/panelmenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/panelmenu/basicdoc';
+import { ImportDoc } from '@/components/doc/panelmenu/importdoc';
+import { MultipleDoc } from '@/components/doc/panelmenu/multipledoc';
+import { PTDoc } from '@/components/doc/panelmenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/panelmenu/pt/wireframe';
+import { StyleDoc } from '@/components/doc/panelmenu/styledoc';
+import { StyledDoc } from '@/components/doc/panelmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/panelmenu/theming/tailwinddoc';
 
 const PanelMenuDemo = () => {
     const docs = [

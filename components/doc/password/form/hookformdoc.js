@@ -1,11 +1,11 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Password } from '@/components/lib/password/Password';
+import { Toast } from '@/components/lib/toast/Toast';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../../../lib/button/Button';
-import { Password } from '../../../lib/password/Password';
-import { Toast } from '../../../lib/toast/Toast';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function HookFormDoc(props) {
     const toast = useRef(null);

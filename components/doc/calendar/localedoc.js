@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { addLocale } from '@/components/lib/api/Locale';
+import { Calendar } from '@/components/lib/calendar/Calendar';
 import Link from 'next/link';
 import { useState } from 'react';
-import { addLocale } from '../../lib/api/Locale';
-import { Calendar } from '../../lib/calendar/Calendar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function LocaleDoc(props) {
     const [date, setDate] = useState(null);

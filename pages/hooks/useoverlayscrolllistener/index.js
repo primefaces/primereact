@@ -1,6 +1,6 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../../components/doc/hooks/useoverlayscrolllistener/basicdoc';
-import { ImportDoc } from '../../../components/doc/hooks/useoverlayscrolllistener/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/hooks/useoverlayscrolllistener/basicdoc';
+import { ImportDoc } from '@/components/doc/hooks/useoverlayscrolllistener/importdoc';
 
 const OverlayScrollListenerDemo = () => {
     const docs = [

@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dock } from '@/components/lib/dock/Dock';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 import { useState } from 'react';
-import { Dock } from '../../lib/dock/Dock';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [position, setPosition] = useState('bottom');

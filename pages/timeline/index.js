@@ -1,18 +1,17 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/timeline/accessibilitydoc';
-import { AlignmentDoc } from '../../components/doc/timeline/alignmentdoc';
-import { BasicDoc } from '../../components/doc/timeline/basicdoc';
-import { HorizontalDoc } from '../../components/doc/timeline/horizontaldoc';
-import { ImportDoc } from '../../components/doc/timeline/importdoc';
-import { OppositeDoc } from '../../components/doc/timeline/oppositedoc';
-import { PTDoc } from '../../components/doc/timeline/pt/ptdoc';
-import { Wireframe } from '../../components/doc/timeline/pt/wireframe';
-import { StyleDoc } from '../../components/doc/timeline/styledoc';
-import { TemplateDoc } from '../../components/doc/timeline/templatedoc';
-import { StyledDoc } from '../../components/doc/timeline/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/timeline/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/timeline/accessibilitydoc';
+import { AlignmentDoc } from '@/components/doc/timeline/alignmentdoc';
+import { BasicDoc } from '@/components/doc/timeline/basicdoc';
+import { HorizontalDoc } from '@/components/doc/timeline/horizontaldoc';
+import { ImportDoc } from '@/components/doc/timeline/importdoc';
+import { OppositeDoc } from '@/components/doc/timeline/oppositedoc';
+import { PTDoc } from '@/components/doc/timeline/pt/ptdoc';
+import { Wireframe } from '@/components/doc/timeline/pt/wireframe';
+import { StyleDoc } from '@/components/doc/timeline/styledoc';
+import { TemplateDoc } from '@/components/doc/timeline/templatedoc';
+import { StyledDoc } from '@/components/doc/timeline/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/timeline/theming/tailwinddoc';
 
 const TimelineDemo = () => {
     const docs = [

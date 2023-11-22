@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function StyleDoc() {
     return (

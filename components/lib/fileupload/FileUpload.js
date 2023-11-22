@@ -253,8 +253,8 @@ export const FileUpload = React.memo(
                             }
                         }
 
-                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                         clear();
+                        setUploadedFilesState((prevUploadedFiles) => [...prevUploadedFiles, ...files]);
                     }
                 };
 

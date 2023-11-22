@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
 import { useEffect, useState } from 'react';
 import { CountryService } from '../../../service/CountryService';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ObjectsDoc(props) {
     const [countries, setCountries] = useState([]);

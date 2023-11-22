@@ -1,17 +1,16 @@
-import React from 'react';
-import { AccessibilityDoc } from '../../components/doc/avatar/accessibilitydoc';
-import { GroupDoc } from '../../components/doc/avatar/groupdoc';
-import { IconDoc } from '../../components/doc/avatar/icondoc';
-import { ImageDoc } from '../../components/doc/avatar/imagedoc';
-import { ImportDoc } from '../../components/doc/avatar/importdoc';
-import { LabelDoc } from '../../components/doc/avatar/labeldoc';
-import { PTDoc } from '../../components/doc/avatar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/avatar/pt/wireframe';
-import { StyleDoc } from '../../components/doc/avatar/styledoc';
-import { StyledDoc } from '../../components/doc/avatar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/avatar/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/avatar/accessibilitydoc';
+import { GroupDoc } from '@/components/doc/avatar/groupdoc';
+import { IconDoc } from '@/components/doc/avatar/icondoc';
+import { ImageDoc } from '@/components/doc/avatar/imagedoc';
+import { ImportDoc } from '@/components/doc/avatar/importdoc';
+import { LabelDoc } from '@/components/doc/avatar/labeldoc';
+import { PTDoc } from '@/components/doc/avatar/pt/ptdoc';
+import { Wireframe } from '@/components/doc/avatar/pt/wireframe';
+import { StyleDoc } from '@/components/doc/avatar/styledoc';
+import { StyledDoc } from '@/components/doc/avatar/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/avatar/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const AvatarDemo = () => {
     const docs = [

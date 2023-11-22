@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react';
 
 const UIKitPage = (props) => {
     return (
@@ -153,7 +152,7 @@ const UIKitPage = (props) => {
                     <div className="card mb-5" style={{ borderRadius: '50px' }}>
                         <div className="text-900 font-bold text-5xl mb-3 text-center">Pricing</div>
                         <div className="mb-2 text-center line-height-3 text-lg">Choose the right plan for your business. Whether you are an individual or a member of a team, UI Kit is available for affordable prices.</div>
-                        <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary hover:underline font-semibold text-center block text-lg">
+                        <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary hover:underline font-medium text-center block text-lg">
                             View License Details
                         </a>
 
@@ -165,7 +164,8 @@ const UIKitPage = (props) => {
                                         <div className="text-600 font-medium">For individual designers</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <div className="flex gap-3 flex-wrap">
-                                            <span className="text-2xl font-bold text-900">$99</span>
+                                            <span className="text-2xl font-medium text-600 line-through">$99</span>
+                                            <span className="text-2xl font-bold text-900">$49</span>
                                         </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
@@ -209,7 +209,8 @@ const UIKitPage = (props) => {
                                         <div className="text-600 font-medium">For small teams</div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <div className="flex gap-3 flex-wrap">
-                                            <span className="text-2xl font-bold text-900">$249</span>
+                                            <span className="text-2xl font-medium text-600 line-through">$249</span>
+                                            <span className="text-2xl font-bold text-900">$149</span>
                                         </div>
                                         <hr className="my-3 mx-0 border-top-1 border-none surface-border" />
                                         <ul className="list-none p-0 m-0 flex-grow-1 text-lg">
@@ -312,7 +313,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">We're a reseller, are we able to purchase a license on behalf of our client?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3 text-lg">
                                     Yes, after the purchase, please{' '}
-                                    <a href="mailto:contact@primetek.com.tr" className="text-primary hover:underline font-semibold">
+                                    <a href="mailto:contact@primetek.com.tr" className="text-primary hover:underline font-medium">
                                         contact us
                                     </a>{' '}
                                     so we can transfer the license to your client.
@@ -331,7 +332,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">How can I get support?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3 text-lg">
                                     Support is provided by PrimeTek via
-                                    <a href="https://github.com/orgs/primefaces/discussions/categories/figma-ui-kit" className="text-primary hover:underline font-semibold">
+                                    <a href="https://github.com/orgs/primefaces/discussions/categories/figma-ui-kit" className="text-primary hover:underline font-medium">
                                         a dedicated forum channel monitored
                                     </a>{' '}
                                     by PrimeTek support staff.

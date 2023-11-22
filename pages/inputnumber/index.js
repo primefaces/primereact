@@ -1,23 +1,23 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/inputnumber/accessibilitydoc';
-import { ButtonsDoc } from '../../components/doc/inputnumber/buttonsdoc';
-import { CurrencyDoc } from '../../components/doc/inputnumber/currencydoc';
-import { DisabledDoc } from '../../components/doc/inputnumber/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/inputnumber/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/inputnumber/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputnumber/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/inputnumber/importdoc';
-import { InvalidDoc } from '../../components/doc/inputnumber/invaliddoc';
-import { LocaleDoc } from '../../components/doc/inputnumber/localedoc';
-import { NumeralsDoc } from '../../components/doc/inputnumber/numberalsdoc';
-import { PrefixSuffixDoc } from '../../components/doc/inputnumber/prefixsuffixdoc';
-import { PTDoc } from '../../components/doc/inputnumber/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputnumber/pt/wireframe';
-import { StyleDoc } from '../../components/doc/inputnumber/styledoc';
-import { StyledDoc } from '../../components/doc/inputnumber/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputnumber/theming/tailwinddoc';
-import { VerticalDoc } from '../../components/doc/inputnumber/verticaldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputnumber/accessibilitydoc';
+import { ButtonsDoc } from '@/components/doc/inputnumber/buttonsdoc';
+import { CurrencyDoc } from '@/components/doc/inputnumber/currencydoc';
+import { DisabledDoc } from '@/components/doc/inputnumber/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/inputnumber/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/inputnumber/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/inputnumber/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/inputnumber/importdoc';
+import { InvalidDoc } from '@/components/doc/inputnumber/invaliddoc';
+import { LocaleDoc } from '@/components/doc/inputnumber/localedoc';
+import { NumeralsDoc } from '@/components/doc/inputnumber/numberalsdoc';
+import { PrefixSuffixDoc } from '@/components/doc/inputnumber/prefixsuffixdoc';
+import { PTDoc } from '@/components/doc/inputnumber/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inputnumber/pt/wireframe';
+import { StyleDoc } from '@/components/doc/inputnumber/styledoc';
+import { StyledDoc } from '@/components/doc/inputnumber/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputnumber/theming/tailwinddoc';
+import { VerticalDoc } from '@/components/doc/inputnumber/verticaldoc';
 
 const InputNumberDemo = () => {
     const docs = [

@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { TabPanel, TabView } from '@/components/lib/tabview/TabView';
 import { useState } from 'react';
-import { TabView, TabPanel } from '../../lib/tabview/TabView';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ControlledDoc(props) {
     const [activeIndex, setActiveIndex] = useState(0);

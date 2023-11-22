@@ -1,12 +1,12 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Rating } from '@/components/lib/rating/Rating';
+import { Tag } from '@/components/lib/tag/Tag';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Button } from '../../lib/button/Button';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Rating } from '../../lib/rating/Rating';
-import { Tag } from '../../lib/tag/Tag';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [products, setProducts] = useState([]);

@@ -1,7 +1,7 @@
-import { Badge } from '../../lib/badge/Badge';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Badge } from '@/components/lib/badge/Badge';
+import { Button } from '@/components/lib/button/Button';
 
 export function ButtonDoc(props) {
     const code = {

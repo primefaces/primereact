@@ -364,6 +364,8 @@ export const TreeSelect = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(focusInputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {

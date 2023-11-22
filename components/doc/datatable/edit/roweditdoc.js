@@ -1,13 +1,13 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { Tag } from '@/components/lib/tag/Tag';
 import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
-import { Column } from '../../../lib/column/Column';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Dropdown } from '../../../lib/dropdown/Dropdown';
-import { InputNumber } from '../../../lib/inputnumber/InputNumber';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { Tag } from '../../../lib/tag/Tag';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function RowEditDoc(props) {
     const [products, setProducts] = useState(null);

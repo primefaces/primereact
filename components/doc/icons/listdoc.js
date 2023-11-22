@@ -1,7 +1,7 @@
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputText } from '@/components/lib/inputtext/InputText';
 import { useEffect, useState } from 'react';
 import { IconService } from '../../../service/IconService';
-import { InputText } from '../../lib/inputtext/InputText';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function ListDoc(props) {
     const [icons, setIcons] = useState(null);

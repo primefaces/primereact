@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { FileUpload } from '@/components/lib/fileupload/FileUpload';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRef } from 'react';
-import { FileUpload } from '../../lib/fileupload/FileUpload';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function AutoDoc(props) {
     const toast = useRef(null);

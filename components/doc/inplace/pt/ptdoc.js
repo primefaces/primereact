@@ -1,8 +1,6 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Inplace } from '../../../lib/inplace/Inplace';
-import { InplaceDisplay } from '../../../lib/inplace/Inplace';
-import { InplaceContent } from '../../../lib/inplace/Inplace';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Inplace, InplaceContent, InplaceDisplay } from '@/components/lib/inplace/Inplace';
 
 export function PTDoc(props) {
     const code = {

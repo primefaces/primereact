@@ -643,6 +643,8 @@ export const Dropdown = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(focusInputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {
@@ -810,7 +812,8 @@ export const Dropdown = React.memo(
         const createDropdownIcon = () => {
             const dropdownIconProps = mergeProps(
                 {
-                    className: cx('dropdownIcon')
+                    className: cx('dropdownIcon'),
+                    'data-pr-overlay-visible': overlayVisibleState
                 },
                 ptm('dropdownIcon')
             );

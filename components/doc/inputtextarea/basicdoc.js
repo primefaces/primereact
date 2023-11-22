@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputTextarea } from '@/components/lib/inputtextarea/InputTextarea';
 import { useState } from 'react';
-import { InputTextarea } from '../../lib/inputtextarea/InputTextarea';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');

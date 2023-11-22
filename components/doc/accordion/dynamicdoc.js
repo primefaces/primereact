@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Accordion, AccordionTab } from '@/components/lib/accordion/Accordion';
 import { useState } from 'react';
-import { Accordion, AccordionTab } from '../../lib/accordion/Accordion';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function DynamicDoc(props) {
     const [tabs] = useState([

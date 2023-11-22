@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { CascadeSelect } from '@/components/lib/cascadeselect/CascadeSelect';
 import { useState } from 'react';
-import { CascadeSelect } from '../../../lib/cascadeselect/CascadeSelect';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const [selectedCity, setSelectedCity] = useState(null);

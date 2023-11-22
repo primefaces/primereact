@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
 import { useState } from 'react';
-import { AutoComplete } from '../../lib/autocomplete/AutoComplete';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function DropdownDoc(props) {
     const [value, setValue] = useState('');

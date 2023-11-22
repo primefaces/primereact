@@ -1,7 +1,6 @@
-import React from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import { useMove } from '../../../../components/lib/hooks/Hooks';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function HorizontalDoc(props) {
     const { ref, x } = useMove({ initialValue: { x: 0.2 } });

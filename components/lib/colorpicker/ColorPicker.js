@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useEventListener, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, ZIndexUtils, classNames, useMergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, ZIndexUtils, useMergeProps } from '../utils/Utils';
 import { ColorPickerBase } from './ColorPickerBase';
 import { ColorPickerPanel } from './ColorPickerPanel';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const ColorPicker = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -516,6 +515,8 @@ export const ColorPicker = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(inputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {

@@ -316,7 +316,7 @@ const commonStyle = `
     }
 
     .p-disabled, .p-disabled * {
-        cursor: default !important;
+        cursor: default;
         pointer-events: none;
         user-select: none;
     }
@@ -442,7 +442,7 @@ const commonStyle = `
         padding: 0;
         position: absolute;
         width: 1px;
-        word-wrap: normal !important;
+        word-wrap: normal;
     }
 
     /* @todo Refactor */
@@ -472,7 +472,7 @@ export const ComponentBase = {
         ptOptions: undefined,
         unstyled: false
     },
-    context: undefined,
+    context: {},
     globalCSS: undefined,
     classes: {},
     styles: '',
@@ -635,7 +635,7 @@ const _useDefaultPT = (callback, key, params) => {
     return _usePT(getDefaultPT(), callback, key, params);
 };
 
-export const useHandleStyle = (styles, isUnstyled = () => {}, config) => {
+export const useHandleStyle = (styles, _isUnstyled = () => {}, config) => {
     const { name, styled = false, hostName = '' } = config;
 
     const globalCSS = _useGlobalPT(getOptionValue, 'global.css', ComponentBase.cParams);

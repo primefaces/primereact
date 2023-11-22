@@ -1,19 +1,19 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/tabview/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/tabview/basicdoc';
-import { ClosableDoc } from '../../components/doc/tabview/closabledoc';
-import { ControlledDoc } from '../../components/doc/tabview/controlleddoc';
-import { DisabledDoc } from '../../components/doc/tabview/disableddoc';
-import { HeaderIconDoc } from '../../components/doc/tabview/headericondoc';
-import { ImportDoc } from '../../components/doc/tabview/importdoc';
-import { PTDoc } from '../../components/doc/tabview/pt/ptdoc';
-import { Wireframe } from '../../components/doc/tabview/pt/wireframe';
-import { ScrollableDoc } from '../../components/doc/tabview/scrollabledoc';
-import { StyleDoc } from '../../components/doc/tabview/styledoc';
-import { TemplateDoc } from '../../components/doc/tabview/templatedoc';
-import { StyledDoc } from '../../components/doc/tabview/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/tabview/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/tabview/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/tabview/basicdoc';
+import { ClosableDoc } from '@/components/doc/tabview/closabledoc';
+import { ControlledDoc } from '@/components/doc/tabview/controlleddoc';
+import { DisabledDoc } from '@/components/doc/tabview/disableddoc';
+import { HeaderIconDoc } from '@/components/doc/tabview/headericondoc';
+import { ImportDoc } from '@/components/doc/tabview/importdoc';
+import { PTDoc } from '@/components/doc/tabview/pt/ptdoc';
+import { Wireframe } from '@/components/doc/tabview/pt/wireframe';
+import { ScrollableDoc } from '@/components/doc/tabview/scrollabledoc';
+import { StyleDoc } from '@/components/doc/tabview/styledoc';
+import { TemplateDoc } from '@/components/doc/tabview/templatedoc';
+import { StyledDoc } from '@/components/doc/tabview/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/tabview/theming/tailwinddoc';
 
 const TabViewDemo = () => {
     const docs = [

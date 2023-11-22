@@ -1,14 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/contextmenu/pt/ptdoc';
-import { Wireframe } from '../../components/doc/contextmenu/pt/wireframe';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/contextmenu/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/contextmenu/basicdoc';
-import { DocumentDoc } from '../../components/doc/contextmenu/documentdoc';
-import { ImportDoc } from '../../components/doc/contextmenu/importdoc';
-import { StyleDoc } from '../../components/doc/contextmenu/styledoc';
-import { TailwindDoc } from '../../components/doc/contextmenu/theming/tailwinddoc';
-import { StyledDoc } from '../../components/doc/contextmenu/theming/styleddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/contextmenu/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/contextmenu/basicdoc';
+import { DocumentDoc } from '@/components/doc/contextmenu/documentdoc';
+import { ImportDoc } from '@/components/doc/contextmenu/importdoc';
+import { PTDoc } from '@/components/doc/contextmenu/pt/ptdoc';
+import { Wireframe } from '@/components/doc/contextmenu/pt/wireframe';
+import { StyleDoc } from '@/components/doc/contextmenu/styledoc';
+import { StyledDoc } from '@/components/doc/contextmenu/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/contextmenu/theming/tailwinddoc';
 
 const ContextMenuDemo = () => {
     const docs = [

@@ -684,6 +684,7 @@ interface DataTableCellClassNameOptions<TValue extends DataTableValueArray> {
     field: string;
     /**
      * Whether the row is frozen or not.
+     * @defaultValue false
      */
     frozenRow: boolean;
     /**
@@ -1149,6 +1150,11 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      * Width of the frozen part in scrollable DataTable.
      */
     frozenWidth?: string | undefined;
+    /**
+     * Whether the row is frozen or not. Read-Only necessary for unstyled TypeScript definition.
+     * @defaultValue false
+     */
+    readonly frozenRow?: boolean;
     /**
      * Value of the global filter to use in filtering.
      */

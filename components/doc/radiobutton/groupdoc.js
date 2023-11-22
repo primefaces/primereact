@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 import { useState } from 'react';
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function GroupDoc(props) {
     const [ingredient, setIngredient] = useState('');

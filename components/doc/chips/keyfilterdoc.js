@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Chips } from '@/components/lib/chips/Chips';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Chips } from '../../lib/chips/Chips';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function KeyFilterDoc(props) {
     const [value, setValue] = useState([]);

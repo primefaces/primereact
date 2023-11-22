@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { PickList } from '@/components/lib/picklist/PickList';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
-import { PickList } from '../../../lib/picklist/PickList';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const [source, setSource] = useState([]);

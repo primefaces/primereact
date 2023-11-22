@@ -119,7 +119,9 @@ export const Splitter = React.memo(
         }, [props.stateStorage]);
 
         const saveState = (sizes) => {
-            getStorage().setItem(props.stateKey, JSON.stringify(sizes));
+            if (ObjectUtils.isArray(sizes)) {
+                getStorage().setItem(props.stateKey, JSON.stringify(sizes));
+            }
         };
 
         const restoreState = React.useCallback(() => {

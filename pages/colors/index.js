@@ -1,10 +1,9 @@
+import { OverviewDoc } from '@/components/doc/colors/overviewdoc';
+import { PaletteDoc } from '@/components/doc/colors/palettedoc';
+import { SurfacesDoc } from '@/components/doc/colors/surfacesdoc';
+import { DocSectionNav } from '@/components/doc/common/docsectionnav';
+import { DocSections } from '@/components/doc/common/docsections';
 import Head from 'next/head';
-import React from 'react';
-import { OverviewDoc } from '../../components/doc/colors/overviewdoc';
-import { PaletteDoc } from '../../components/doc/colors/palettedoc';
-import { SurfacesDoc } from '../../components/doc/colors/surfacesdoc';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
 
 const IconsDoc = () => {
     const docs = [

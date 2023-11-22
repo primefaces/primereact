@@ -1,4 +1,4 @@
-import pkg from '../../package.json';
+import pkg from 'package.json';
 
 export default function Footer() {
     const version = pkg.version;

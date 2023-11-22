@@ -398,7 +398,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
                     .p-dialog[${attributeSelector.current}] {
-                        width: ${props.breakpoints[breakpoint]} !important;
+                        width: ${props.breakpoints[breakpoint]};
                     }
                 }
             `;
@@ -639,7 +639,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             {
                 ref: maskRef,
                 style: sx('mask'),
-                className: cx('mask', { maskVisibleState }),
+                className: cx('mask'),
                 onPointerUp: onMaskPointerUp
             },
             ptm('mask')

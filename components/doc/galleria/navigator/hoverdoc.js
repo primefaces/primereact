@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Galleria } from '@/components/lib/galleria/Galleria';
 import { useEffect, useState } from 'react';
 import { PhotoService } from '../../../../service/PhotoService';
-import { Galleria } from '../../../lib/galleria/Galleria';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function HoverDoc(props) {
     const [images, setImages] = useState(null);

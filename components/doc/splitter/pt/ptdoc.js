@@ -1,7 +1,6 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Splitter } from '../../../lib/splitter/Splitter';
-import { SplitterPanel } from '../../../lib/splitter/Splitter';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Splitter, SplitterPanel } from '@/components/lib/splitter/Splitter';
 
 export function PTDoc(props) {
     const code = {

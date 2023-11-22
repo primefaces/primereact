@@ -1,6 +1,6 @@
-import { Avatar } from '../../../lib/avatar/Avatar';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
 
 export function PTDoc(props) {
     const code = {

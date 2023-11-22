@@ -1,20 +1,19 @@
-import React from 'react';
-import { AccessibilityDoc } from '../../components/doc/cascadeselect/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/cascadeselect/basicdoc';
-import { DisabledDoc } from '../../components/doc/cascadeselect/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/cascadeselect/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/cascadeselect/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/cascadeselect/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/cascadeselect/importdoc';
-import { InvalidDoc } from '../../components/doc/cascadeselect/invaliddoc';
-import { PTDoc } from '../../components/doc/cascadeselect/pt/ptdoc';
-import { Wireframe } from '../../components/doc/cascadeselect/pt/wireframe';
-import { StyleDoc } from '../../components/doc/cascadeselect/styledoc';
-import { TemplateDoc } from '../../components/doc/cascadeselect/templatedoc';
-import { StyledDoc } from '../../components/doc/cascadeselect/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/cascadeselect/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/cascadeselect/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/cascadeselect/basicdoc';
+import { DisabledDoc } from '@/components/doc/cascadeselect/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/cascadeselect/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/cascadeselect/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/cascadeselect/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/cascadeselect/importdoc';
+import { InvalidDoc } from '@/components/doc/cascadeselect/invaliddoc';
+import { PTDoc } from '@/components/doc/cascadeselect/pt/ptdoc';
+import { Wireframe } from '@/components/doc/cascadeselect/pt/wireframe';
+import { StyleDoc } from '@/components/doc/cascadeselect/styledoc';
+import { TemplateDoc } from '@/components/doc/cascadeselect/templatedoc';
+import { StyledDoc } from '@/components/doc/cascadeselect/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/cascadeselect/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CascadeSelectDemo = () => {
     const docs = [
