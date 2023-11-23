@@ -67,7 +67,10 @@ export const ProgressBar = React.memo(
                 {
                     className: classNames(props.className, cx('root')),
                     style: props.style,
-                    role: 'progressbar'
+                    role: 'progressbar',
+                    'aria-valuemin': '0',
+                    'aria-valuenow': props.value,
+                    'aria-valuemax': '100'
                 },
                 ProgressBarBase.getOtherProps(props),
                 ptm('root')
