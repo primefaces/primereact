@@ -55,7 +55,7 @@
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode",
+                            "type": "ReactNode | Function",
                             "default": "",
                             "description": "Used to define the header of the tab."
                         },
