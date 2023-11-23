@@ -14,7 +14,6 @@ import { KeyFilterDoc } from '@/components/doc/inputtext/keyfilterdoc';
 import { PTDoc } from '@/components/doc/inputtext/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputtext/pt/wireframe';
 import { SizesDoc } from '@/components/doc/inputtext/sizesdoc';
-import { StyleDoc } from '@/components/doc/inputtext/styledoc';
 import { StyledDoc } from '@/components/doc/inputtext/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputtext/theming/tailwinddoc';
 
@@ -82,11 +81,7 @@ const InputTextDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

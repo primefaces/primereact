@@ -14,7 +14,6 @@ import { Wireframe } from '@/components/doc/tree/pt/wireframe';
 import { CheckboxSelectionDoc } from '@/components/doc/tree/selection/checkboxselectiondoc';
 import { MultipleSelectionDoc } from '@/components/doc/tree/selection/multipleselectiondoc';
 import { SingleSelectionDoc } from '@/components/doc/tree/selection/singleselectiondoc';
-import { StyleDoc } from '@/components/doc/tree/styledoc';
 import { TemplateDoc } from '@/components/doc/tree/templatedoc';
 import { StyledDoc } from '@/components/doc/tree/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tree/theming/tailwinddoc';
@@ -88,11 +87,7 @@ const TreeDemo = () => {
             label: 'Filter',
             component: FilterDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

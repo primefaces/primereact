@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/accordion/importdoc';
 import { MultipleDoc } from '@/components/doc/accordion/multipledoc';
 import { PTDoc } from '@/components/doc/accordion/pt/ptdoc';
 import { Wireframe } from '@/components/doc/accordion/pt/wireframe';
-import { StyleDoc } from '@/components/doc/accordion/styledoc';
 import { TemplateDoc } from '@/components/doc/accordion/templatedoc';
 import { StyledDoc } from '@/components/doc/accordion/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/accordion/theming/tailwinddoc';
@@ -51,11 +50,7 @@ const AccordionDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

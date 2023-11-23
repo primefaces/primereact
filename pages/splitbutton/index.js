@@ -13,7 +13,6 @@ import { RaisedTextDoc } from '@/components/doc/splitbutton/raisedtextdoc';
 import { RoundedDoc } from '@/components/doc/splitbutton/roundeddoc';
 import { SeverityDoc } from '@/components/doc/splitbutton/severitydoc';
 import { SizesDoc } from '@/components/doc/splitbutton/sizesdoc';
-import { StyleDoc } from '@/components/doc/splitbutton/styledoc';
 import { TextDoc } from '@/components/doc/splitbutton/textdoc';
 import { StyledDoc } from '@/components/doc/splitbutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/splitbutton/theming/tailwinddoc';
@@ -75,11 +74,7 @@ const SplitButtonDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

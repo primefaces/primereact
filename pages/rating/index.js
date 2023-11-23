@@ -8,7 +8,6 @@ import { NumberOfStarsDoc } from '@/components/doc/rating/numberofstarsdoc';
 import { PTDoc } from '@/components/doc/rating/pt/ptdoc';
 import { Wireframe } from '@/components/doc/rating/pt/wireframe';
 import { ReadOnlyDoc } from '@/components/doc/rating/readonlydoc';
-import { StyleDoc } from '@/components/doc/rating/styledoc';
 import { TemplateDoc } from '@/components/doc/rating/templatedoc';
 import { StyledDoc } from '@/components/doc/rating/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/rating/theming/tailwinddoc';
@@ -51,11 +50,7 @@ const RatingDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

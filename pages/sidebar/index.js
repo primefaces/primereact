@@ -8,7 +8,6 @@ import { PositionDoc } from '@/components/doc/sidebar/positiondoc';
 import { PTDoc } from '@/components/doc/sidebar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/sidebar/pt/wireframe';
 import { SizeDoc } from '@/components/doc/sidebar/sizedoc';
-import { StyleDoc } from '@/components/doc/sidebar/styledoc';
 import { TemplateDoc } from '@/components/doc/sidebar/templatedoc';
 import { StyledDoc } from '@/components/doc/sidebar/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/sidebar/theming/tailwinddoc';
@@ -45,11 +44,7 @@ const SidebarDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

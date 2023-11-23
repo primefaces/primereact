@@ -7,7 +7,6 @@ import { FilterDoc } from '@/components/doc/orderlist/filterdoc';
 import { ImportDoc } from '@/components/doc/orderlist/importdoc';
 import { PTDoc } from '@/components/doc/orderlist/pt/ptdoc';
 import { Wireframe } from '@/components/doc/orderlist/pt/wireframe';
-import { StyleDoc } from '@/components/doc/orderlist/styledoc';
 import { StyledDoc } from '@/components/doc/orderlist/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/orderlist/theming/tailwinddoc';
 
@@ -33,11 +32,7 @@ const OrderListDemo = () => {
             label: 'DragDrop',
             component: DragDropDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

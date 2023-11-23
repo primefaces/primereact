@@ -4,7 +4,6 @@ import { BasicDoc } from '@/components/doc/card/basicdoc';
 import { ImportDoc } from '@/components/doc/card/importdoc';
 import { PTDoc } from '@/components/doc/card/pt/ptdoc';
 import { Wireframe } from '@/components/doc/card/pt/wireframe';
-import { StyleDoc } from '@/components/doc/card/styledoc';
 import { StyledDoc } from '@/components/doc/card/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/card/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
@@ -27,11 +26,7 @@ const CardDemo = () => {
             label: 'Advanced',
             component: AdvancedDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

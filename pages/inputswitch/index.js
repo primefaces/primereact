@@ -10,7 +10,6 @@ import { InvalidDoc } from '@/components/doc/inputswitch/invaliddoc';
 import { PreselectionDoc } from '@/components/doc/inputswitch/preselectiondoc';
 import { PTDoc } from '@/components/doc/inputswitch/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputswitch/pt/wireframe';
-import { StyleDoc } from '@/components/doc/inputswitch/styledoc';
 import { StyledDoc } from '@/components/doc/inputswitch/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputswitch/theming/tailwinddoc';
 
@@ -58,11 +57,7 @@ const InputSwitchDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

@@ -12,7 +12,6 @@ import { InvalidDoc } from '@/components/doc/listbox/invaliddoc';
 import { MultipleDoc } from '@/components/doc/listbox/multipledoc';
 import { PTDoc } from '@/components/doc/listbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/listbox/pt/wireframe';
-import { StyleDoc } from '@/components/doc/listbox/styledoc';
 import { TemplateDoc } from '@/components/doc/listbox/templatedoc';
 import { StyledDoc } from '@/components/doc/listbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/listbox/theming/tailwinddoc';
@@ -82,11 +81,7 @@ const ListBoxDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

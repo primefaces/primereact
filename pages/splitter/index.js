@@ -7,7 +7,6 @@ import { NestedDoc } from '@/components/doc/splitter/nesteddoc';
 import { PTDoc } from '@/components/doc/splitter/pt/ptdoc';
 import { Wireframe } from '@/components/doc/splitter/pt/wireframe';
 import { SizeDoc } from '@/components/doc/splitter/sizedoc';
-import { StyleDoc } from '@/components/doc/splitter/styledoc';
 import { StyledDoc } from '@/components/doc/splitter/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/splitter/theming/tailwinddoc';
 import { VerticalDoc } from '@/components/doc/splitter/verticaldoc';
@@ -39,11 +38,7 @@ const SplitterDemo = () => {
             label: 'Nested',
             component: NestedDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

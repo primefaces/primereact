@@ -6,7 +6,6 @@ import { ImportDoc } from '@/components/doc/avatar/importdoc';
 import { LabelDoc } from '@/components/doc/avatar/labeldoc';
 import { PTDoc } from '@/components/doc/avatar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/avatar/pt/wireframe';
-import { StyleDoc } from '@/components/doc/avatar/styledoc';
 import { StyledDoc } from '@/components/doc/avatar/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/avatar/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
@@ -38,11 +37,6 @@ const AvatarDemo = () => {
             id: 'group',
             label: 'Group',
             component: GroupDoc
-        },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
         },
         {
             id: 'accessibility',

@@ -9,7 +9,6 @@ import { ImportDoc } from '@/components/doc/checkbox/importdoc';
 import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
 import { PTDoc } from '@/components/doc/checkbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/checkbox/pt/wireframe';
-import { StyleDoc } from '@/components/doc/checkbox/styledoc';
 import { StyledDoc } from '@/components/doc/checkbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/checkbox/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
@@ -64,11 +63,7 @@ const CheckboxDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',
