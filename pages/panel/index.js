@@ -5,7 +5,6 @@ import { BasicDoc } from '@/components/doc/panel/basicdoc';
 import { ImportDoc } from '@/components/doc/panel/importdoc';
 import { PTDoc } from '@/components/doc/panel/pt/ptdoc';
 import { Wireframe } from '@/components/doc/panel/pt/wireframe';
-import { StyleDoc } from '@/components/doc/panel/styledoc';
 import { TemplateDoc } from '@/components/doc/panel/templatedoc';
 import { StyledDoc } from '@/components/doc/panel/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/panel/theming/tailwinddoc';
@@ -33,11 +32,7 @@ const PanelDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

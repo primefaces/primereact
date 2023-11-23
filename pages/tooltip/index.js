@@ -11,7 +11,6 @@ import { PositionDoc } from '@/components/doc/tooltip/positiondoc';
 import { PTDoc } from '@/components/doc/tooltip/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tooltip/pt/wireframe';
 import { ReactiveDoc } from '@/components/doc/tooltip/reactivedoc';
-import { StyleDoc } from '@/components/doc/tooltip/styledoc';
 import { TargetDoc } from '@/components/doc/tooltip/targetdoc';
 import { TemplateDoc } from '@/components/doc/tooltip/templatedoc';
 import { StyledDoc } from '@/components/doc/tooltip/theming/styleddoc';
@@ -69,11 +68,7 @@ const TooltipDemo = () => {
             label: 'Delay',
             component: DelayDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

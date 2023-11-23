@@ -9,7 +9,6 @@ import { PTDoc } from '@/components/doc/messages/pt/ptdoc';
 import { Wireframe } from '@/components/doc/messages/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/messages/severitydoc';
 import { StickyDoc } from '@/components/doc/messages/stickydoc';
-import { StyleDoc } from '@/components/doc/messages/styledoc';
 import { TemplateDoc } from '@/components/doc/messages/templatedoc';
 import { StyledDoc } from '@/components/doc/messages/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/messages/theming/tailwinddoc';
@@ -51,11 +50,7 @@ const MessagesDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

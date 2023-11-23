@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/progressbar/importdoc';
 import { IndeterminateDoc } from '@/components/doc/progressbar/indeterminatedoc';
 import { PTDoc } from '@/components/doc/progressbar/pt/ptdoc';
 import { Wireframe } from '@/components/doc/progressbar/pt/wireframe';
-import { StyleDoc } from '@/components/doc/progressbar/styledoc';
 import { TemplateDoc } from '@/components/doc/progressbar/templatedoc';
 import { StyledDoc } from '@/components/doc/progressbar/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/progressbar/theming/tailwinddoc';
@@ -39,11 +38,7 @@ const ProgressBarDemo = () => {
             label: 'Indeterminate',
             component: IndeterminateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

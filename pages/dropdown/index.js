@@ -14,7 +14,6 @@ import { ImportDoc } from '@/components/doc/dropdown/importdoc';
 import { InvalidDoc } from '@/components/doc/dropdown/invaliddoc';
 import { PTDoc } from '@/components/doc/dropdown/pt/ptdoc';
 import { Wireframe } from '@/components/doc/dropdown/pt/wireframe';
-import { StyleDoc } from '@/components/doc/dropdown/styledoc';
 import { TemplateDoc } from '@/components/doc/dropdown/templatedoc';
 import { StyledDoc } from '@/components/doc/dropdown/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/dropdown/theming/tailwinddoc';
@@ -95,11 +94,6 @@ const DropdownDemo = () => {
             ]
         },
 
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
         {
             id: 'accessibility',
             label: 'Accessibility',

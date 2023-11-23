@@ -8,7 +8,6 @@ import { PillDoc } from '@/components/doc/tag/pilldoc';
 import { PTDoc } from '@/components/doc/tag/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tag/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/tag/severitydoc';
-import { StyleDoc } from '@/components/doc/tag/styledoc';
 import { TemplateDoc } from '@/components/doc/tag/templatedoc';
 import { StyledDoc } from '@/components/doc/tag/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tag/theming/tailwinddoc';
@@ -45,11 +44,7 @@ const TerminalDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

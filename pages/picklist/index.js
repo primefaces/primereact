@@ -6,7 +6,6 @@ import { FilterDoc } from '@/components/doc/picklist/filterdoc';
 import { ImportDoc } from '@/components/doc/picklist/importdoc';
 import { PTDoc } from '@/components/doc/picklist/pt/ptdoc';
 import { Wireframe } from '@/components/doc/picklist/pt/wireframe';
-import { StyleDoc } from '@/components/doc/picklist/styledoc';
 import { StyledDoc } from '@/components/doc/picklist/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/picklist/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const PickListDemo = () => {
             label: 'Filter',
             component: FilterDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

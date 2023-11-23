@@ -7,7 +7,6 @@ import { PTDoc } from '@/components/doc/badge/pt/ptdoc';
 import { Wireframe } from '@/components/doc/badge/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/badge/severitydoc';
 import { SizeDoc } from '@/components/doc/badge/sizedoc';
-import { StyleDoc } from '@/components/doc/badge/styledoc';
 import { StyledDoc } from '@/components/doc/badge/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/badge/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
@@ -45,11 +44,7 @@ const BadgeDemo = () => {
             label: 'Button',
             component: ButtonDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

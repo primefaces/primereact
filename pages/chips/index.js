@@ -10,7 +10,6 @@ import { KeyFilterDoc } from '@/components/doc/chips/keyfilterdoc';
 import { PTDoc } from '@/components/doc/chips/pt/ptdoc';
 import { Wireframe } from '@/components/doc/chips/pt/wireframe';
 import { SeparatorDoc } from '@/components/doc/chips/separatordoc';
-import { StyleDoc } from '@/components/doc/chips/styledoc';
 import { TemplateDoc } from '@/components/doc/chips/templatedoc';
 import { StyledDoc } from '@/components/doc/chips/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/chips/theming/tailwinddoc';
@@ -76,11 +75,7 @@ const ChipsDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

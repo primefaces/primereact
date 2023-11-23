@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/divider/importdoc';
 import { LoginDoc } from '@/components/doc/divider/logindoc';
 import { PTDoc } from '@/components/doc/divider/pt/ptdoc';
 import { Wireframe } from '@/components/doc/divider/pt/wireframe';
-import { StyleDoc } from '@/components/doc/divider/styledoc';
 import { TailwindDoc } from '@/components/doc/divider/theming/tailwinddoc';
 import { TypeDoc } from '@/components/doc/divider/typedoc';
 import { VerticalDoc } from '@/components/doc/divider/verticaldoc';
@@ -45,11 +44,7 @@ const DividerDemo = () => {
             label: 'Login',
             component: LoginDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

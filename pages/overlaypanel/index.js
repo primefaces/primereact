@@ -6,7 +6,6 @@ import { DataTableDoc } from '@/components/doc/overlaypanel/datatabledoc';
 import { ImportDoc } from '@/components/doc/overlaypanel/importdoc';
 import { PTDoc } from '@/components/doc/overlaypanel/pt/ptdoc';
 import { Wireframe } from '@/components/doc/overlaypanel/pt/wireframe';
-import { StyleDoc } from '@/components/doc/overlaypanel/styledoc';
 import { StyledDoc } from '@/components/doc/overlaypanel/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/overlaypanel/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const OverlayPanelDemo = () => {
             label: 'DataTable',
             component: DataTableDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

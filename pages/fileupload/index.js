@@ -8,7 +8,6 @@ import { CustomUploadDoc } from '@/components/doc/fileupload/customuploaddoc';
 import { ImportDoc } from '@/components/doc/fileupload/importdoc';
 import { PTDoc } from '@/components/doc/fileupload/pt/ptdoc';
 import { Wireframe } from '@/components/doc/fileupload/pt/wireframe';
-import { StyleDoc } from '@/components/doc/fileupload/styledoc';
 import { TemplateDoc } from '@/components/doc/fileupload/templatedoc';
 import { StyledDoc } from '@/components/doc/fileupload/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/fileupload/theming/tailwinddoc';
@@ -45,11 +44,7 @@ const FileUploadDemo = () => {
             label: 'Custom Upload',
             component: CustomUploadDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

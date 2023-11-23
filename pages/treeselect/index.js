@@ -15,7 +15,6 @@ import { InvalidDoc } from '@/components/doc/treeselect/invaliddoc';
 import { MultipleDoc } from '@/components/doc/treeselect/multipledoc';
 import { PTDoc } from '@/components/doc/treeselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/treeselect/pt/wireframe';
-import { StyleDoc } from '@/components/doc/treeselect/styledoc';
 import { StyledDoc } from '@/components/doc/treeselect/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/treeselect/theming/tailwinddoc';
 
@@ -88,11 +87,7 @@ const TreeSelectDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',
