@@ -57,7 +57,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const onDisplayKeyDown = (event) => {
-        if (event.key === 'Enter') {
+        if (event.code === 'Enter' || event.code === 'Space') {
             open(event);
             event.preventDefault();
         }
