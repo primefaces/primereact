@@ -64,8 +64,6 @@ export const AvatarBase = ComponentBase.extend({
         onImageError: null,
         shape: 'square',
         size: 'normal',
-        ariaLabel: null,
-        ariaLabelledby: null,
         style: null,
         template: null,
         children: undefined
