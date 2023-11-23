@@ -42,12 +42,9 @@ export const Terminal = React.memo(
             setCommandTextState(e.target.value);
         };
 
-        const onInputKeyDown = (e) => {
-            const code = e.which || e.keyCode;
-
-            switch (code) {
-                //up
-                case 38:
+        const onKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowUp':
                     if (commandsState && commandsState.length) {
                         const prevIndex = indexState - 1 < 0 ? commandsState.length - 1 : indexState - 1;
                         const command = commandsState[prevIndex];
@@ -58,8 +55,7 @@ export const Terminal = React.memo(
 
                     break;
 
-                //enter
-                case 13:
+                case 'Enter':
                     if (!!commandTextState) {
                         let newCommands = [...commandsState];
 
@@ -141,7 +137,8 @@ export const Terminal = React.memo(
             );
             const responseProps = mergeProps(
                 {
-                    className: cx('response')
+                    className: cx('response'),
+                    'aria-live': 'polite'
                 },
                 ptm('response')
             );
@@ -183,7 +180,7 @@ export const Terminal = React.memo(
                     className: cx('commandText'),
                     autoComplete: 'off',
                     onChange: (e) => onInputChange(e),
-                    onKeyDown: (e) => onInputKeyDown(e)
+                    onKeyDown
                 },
                 ptm('commandText')
             );
