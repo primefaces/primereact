@@ -10,68 +10,54 @@
 
 # PrimeReact
 
-PrimeReact is available at [npm](https://www.npmjs.com/package/primereact).
+PrimeReact is a rich set of open source UI Components for React. See [PrimeReact homepage](https://primereact.org/) for live showcase and documentation.
 
 ## Download
 
-PrimeReact is available at npm, if you have an existing application run the following command to download it to your project.
+PrimeReact is available at [npm](https://www.npmjs.com/package/primereact).
 
 ```
-// with npm
+# Using npm
 npm install primereact
 
-// with yarn
+# Using yarn
 yarn add primereact
+
+# Using pnpm
+pnpm add primereact
 ```
 
-Please note that react >= 17.0.0 and react-dom >= 17.0.0 are peer dependencies and some components have optional dependencies.
-
-## Styles
-
-Theme is the necessary css file of the components, visit the [Themes](https://primereact.org/theming) section for the complete list of available themes to choose from.
-
-```javascript
-//theme
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-```
-
-Each PrimeReact theme has its own font family so it is suggested to apply it to your application for a unified look.
-
-```
-body {
-    font-family: var(--font-family);
-}
-```
-
-## Usage
+## Import
 
 Each component can be imported individually so that you only bundle what you use. Import path is available in the documentation of the corresponding component.
 
-#### Module
-
 ```javascript
 //import { ComponentName } from 'primereact/{componentname}';
-import { Dialog } from 'primereact/dialog';
-import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Button } from 'primereact/button';
+
+export default function MyComponent() {
+  return (
+    <Button label="PrimeReact" />
+  )
+}
 ```
 
-## QuickStart
+## Theming
 
-[Example applications](https://github.com/primefaces/primereact-examples) based on create-react-app and Next.js are available at github.
+PrimeReact has two theming has modes; styled or unstyled.
 
-Next.js
-PrimeReact has first class support for SSR and Next.JS, in fact this website is also built with Next.js
+**Styled Mode**
 
-[![Getting Started with NextJS and PrimeReact](http://img.youtube.com/vi/OrRffCobuts/0.jpg)](http://www.youtube.com/watch?v=OrRffCobuts 'Getting Started with NextJS and PrimeReact')
+Styled mode is based on pre-skinned components with opinionated themes like Material, Bootstrap or PrimeOne themes. Theme is the required css file to be imported, visit the [Themes](https://primereact.org/theming) section for the complete list of available themes to choose from.
 
-CRA
-Create-React-App is the official scaffolding project by Facebook
+```javascript
+// theme
+import 'primereact/resources/themes/lara-light-cyan/theme.css';
+```
 
-[![Getting Started with PrimeReact](http://img.youtube.com/vi/Prz3phy2bHY/0.jpg)](http://www.youtube.com/watch?v=Prz3phy2bHY 'Getting Started with PrimeReact')
+**Unstyled Mode**
 
-## TypeScript
-
-Typescript is fully supported as type definition files are provided in the npm package of PrimeReact. A sample [typescript-primereact application](https://github.com/primefaces/primereact-examples/tree/main/cra-basic-ts) is available as well at github.
+Unstyled mode is disabled by default for all components. Using the PrimeReact context, set `unstyled` as true to enable it globally. Visit the [Unstyled mode](https://primereact.org/unstyled) documentation for more information and examples.
 
 ## Contributors
 
