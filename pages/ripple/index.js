@@ -38,8 +38,10 @@ const RippleDemo = () => {
     useEffect(() => {
         setRipple(true);
 
+        const currentRipple = userRippleValue.current;
+
         return () => {
-            setRipple(userRippleValue.current);
+            setRipple(currentRipple);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
