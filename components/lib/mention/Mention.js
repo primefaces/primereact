@@ -100,7 +100,6 @@ export const Mention = React.memo(
                 overlayRef.current.style.transformOrigin = 'top';
                 overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
                 overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
-                console.log('mahmut');
             }
         };
 
