@@ -1757,6 +1757,13 @@
                             "description": "Close"
                         },
                         {
+                            "name": "completed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Completed"
+                        },
+                        {
                             "name": "pending",
                             "optional": true,
                             "readonly": false,
@@ -1806,11 +1813,137 @@
                             "description": "['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
                         },
                         {
+                            "name": "chooseYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Year"
+                        },
+                        {
+                            "name": "chooseMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Month"
+                        },
+                        {
+                            "name": "chooseDate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Date"
+                        },
+                        {
+                            "name": "prevDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Decade"
+                        },
+                        {
+                            "name": "nextDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": ""
+                        },
+                        {
+                            "name": "prevYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Year"
+                        },
+                        {
+                            "name": "nextYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Year"
+                        },
+                        {
+                            "name": "prevMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Month"
+                        },
+                        {
+                            "name": "nextMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Month"
+                        },
+                        {
+                            "name": "prevHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Hour"
+                        },
+                        {
+                            "name": "nextHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Hour"
+                        },
+                        {
+                            "name": "prevMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Minute"
+                        },
+                        {
+                            "name": "nextMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Minute"
+                        },
+                        {
+                            "name": "prevSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Second"
+                        },
+                        {
+                            "name": "nextSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Second"
+                        },
+                        {
+                            "name": "am",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "PM"
+                        },
+                        {
+                            "name": "pm",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "AM"
+                        },
+                        {
                             "name": "today",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
                             "description": "Today"
+                        },
+                        {
+                            "name": "now",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Now"
                         },
                         {
                             "name": "weekHeader",
@@ -1866,21 +1999,48 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "No available options"
+                            "description": "No results found"
                         },
                         {
-                            "name": "emptyMessage",
+                            "name": "searchMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "{0} results are available"
+                        },
+                        {
+                            "name": "selectionMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "{0} items selected"
+                        },
+                        {
+                            "name": "emptySelectionMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No selected item"
+                        },
+                        {
+                            "name": "emptySearchMessage",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
                             "description": "No results found"
                         },
                         {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No available options"
+                        },
+                        {
                             "name": "aria",
                             "optional": true,
                             "readonly": false,
-                            "type": "Object",
-                            "description": "True"
+                            "type": "Object"
                         }
                     ],
                     "callbacks": []
