@@ -99,7 +99,7 @@ interface AccordionTabProps {
     /**
      * Used to define the header of the tab.
      */
-    header?: React.ReactNode | undefined;
+    header?: React.ReactNode | ((props: AccordionTabProps) => React.ReactNode) | undefined;
     /**
      * Style class of the tab header.
      */
