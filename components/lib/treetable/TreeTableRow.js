@@ -456,6 +456,10 @@ export const TreeTableRow = React.memo((props) => {
     const createCell = (column, index) => {
         let toggler, checkbox;
 
+        if (getColumnProp(column, 'hidden')) {
+            return null;
+        }
+
         if (getColumnProp(column, 'expander')) {
             toggler = createToggler(column);
             checkbox = createCheckbox(column);
