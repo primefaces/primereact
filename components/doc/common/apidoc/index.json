@@ -16928,7 +16928,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when row edit is completed."
+                            "description": "Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event."
                         },
                         {
                             "name": "onRowEditInit",
@@ -19871,7 +19871,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when row edit is completed."
+                            "description": "Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event."
                         },
                         {
                             "name": "onRowEditInit",
