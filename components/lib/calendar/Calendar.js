@@ -892,7 +892,7 @@ export const Calendar = React.memo(
                 value.setFullYear(viewYear);
             }
 
-            if (props.monthNavigator && props.view !== 'month') {
+            if (renderMonthsNavigator(0)) {
                 let viewMonth = value.getMonth();
                 let viewMonthWithMinMax = parseInt((isInMinYear(value) && Math.max(props.minDate.getMonth(), viewMonth).toString()) || (isInMaxYear(value) && Math.min(props.maxDate.getMonth(), viewMonth).toString()) || viewMonth);
 
@@ -2709,10 +2709,14 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleMonthElement = (month) => {
+        const renderMonthsNavigator = (index) => {
+            return props.monthNavigator && props.view !== 'month' && (props.numberOfMonths === 1 || index === 0);
+        };
+
+        const createTitleMonthElement = (month, monthIndex) => {
             const monthNames = localeOption('monthNames', props.locale);
 
-            if (props.monthNavigator && props.view !== 'month') {
+            if (renderMonthsNavigator(monthIndex)) {
                 const viewDate = getViewDate();
                 const viewMonth = viewDate.getMonth();
                 const displayedMonthOptions = monthNames
@@ -2866,8 +2870,8 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const createTitle = (monthMetaData) => {
-            const month = createTitleMonthElement(monthMetaData.month);
+        const createTitle = (monthMetaData, index) => {
+            const month = createTitleMonthElement(monthMetaData.month, index);
             const year = createTitleYearElement(monthMetaData.year);
             const decade = createTitleDecadeElement();
             const titleProps = mergeProps(
@@ -3063,7 +3067,7 @@ export const Calendar = React.memo(
             const weekDays = createWeekDaysMeta();
             const backwardNavigator = createBackwardNavigator(index === 0);
             const forwardNavigator = createForwardNavigator(props.numberOfMonths === 1 || index === props.numberOfMonths - 1);
-            const title = createTitle(monthMetaData);
+            const title = createTitle(monthMetaData, index);
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
