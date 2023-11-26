@@ -214,6 +214,7 @@ export const MultiSelectBase = ComponentBase.extend({
         disabled: false,
         display: 'comma',
         dropdownIcon: null,
+        emptyMessage: null,
         emptyFilterMessage: null,
         filter: false,
         filterBy: null,
