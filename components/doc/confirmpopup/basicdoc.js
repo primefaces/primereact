@@ -21,6 +21,7 @@ export function BasicDoc(props) {
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -32,6 +33,7 @@ export function BasicDoc(props) {
             message: 'Do you want to delete this record?',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            defaultFocus: 'reject',
             accept,
             reject
         });
@@ -68,6 +70,7 @@ export default function BasicDemo() {
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -78,6 +81,7 @@ export default function BasicDemo() {
             target: event.currentTarget,
             message: 'Do you want to delete this record?',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject
@@ -118,6 +122,7 @@ export default function BasicDemo() {
             target: event.currentTarget,
             message: 'Are you sure you want to proceed?',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -128,6 +133,7 @@ export default function BasicDemo() {
             target: event.currentTarget,
             message: 'Do you want to delete this record?',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject

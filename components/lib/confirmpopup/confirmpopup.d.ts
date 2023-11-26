@@ -123,6 +123,11 @@ interface ConfirmPopupOptions {
      */
     rejectLabel: string;
     /**
+     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * @defaultValue accept
+     */
+    defaultFocus: string;
+    /**
      * Default element created by the component.
      */
     element: React.ReactNode;
@@ -155,6 +160,11 @@ export interface ConfirmPopupProps {
      * @defaultValue false
      */
     visible?: boolean | undefined;
+    /**
+     * Element to receive the focus when the dialog gets visible, valid values are "accept" and "reject".
+     * @defaultValue accept
+     */
+    defaultFocus?: string | undefined;
     /**
      * Message of the confirmation.
      */
