@@ -44013,18 +44013,18 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "icon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SplitButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
-                            "description": "Uses to pass attributes to the icon's DOM element."
-                        },
-                        {
                             "name": "button",
                             "optional": true,
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
                             "name": "menuButton",
