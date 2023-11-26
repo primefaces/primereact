@@ -40,6 +40,7 @@ export const Chip = React.memo(
                     key: 'removeIcon',
                     tabIndex: 0,
                     className: cx('removeIcon'),
+                    role: 'button',
                     onClick: close,
                     onKeyDown
                 },
