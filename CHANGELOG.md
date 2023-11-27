@@ -41,7 +41,6 @@
 - Mention: Component not rendering [\#5374](https://github.com/primefaces/primereact/issues/5374)
 - Primereact Tooltip props children and content have different types [\#5376](https://github.com/primefaces/primereact/issues/5376)
 - Slider: Setting min boundary value component is breaking the component. [\#5398](https://github.com/primefaces/primereact/issues/5398)
-- TreeTable: Fixed tree table header creator bug [/#5314](https://github.com/primefaces/primereact/issues/5314)
 
 
 ## [10.1.1](https://github.com/primefaces/primereact/tree/10.1.1) (2023-11-21)
