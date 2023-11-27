@@ -1,4 +1,13 @@
 # Changelog
+
+## [9.6.4](https://github.com/primefaces/primereact/tree/9.6.4) (2023-11-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/9.6.3...9.6.4)
+
+**Fixed bugs:**
+
+- DataTable: memory leak when data updated continuously [\#5420](https://github.com/primefaces/primereact/issues/5420)
+
 ## [9.6.3](https://github.com/primefaces/primereact/tree/9.6.3) (2023-10-18)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/9.6.2...9.6.3)
