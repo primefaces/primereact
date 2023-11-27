@@ -9,7 +9,7 @@ import { PTDoc } from '@/components/doc/messages/pt/ptdoc';
 import { Wireframe } from '@/components/doc/messages/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/messages/severitydoc';
 import { StickyDoc } from '@/components/doc/messages/stickydoc';
-import { CustomIcon } from '@/components/doc/messages/CustomIcon';
+import { CustomIcon } from '@/components/doc/messages/customicon';
 import { TemplateDoc } from '@/components/doc/messages/templatedoc';
 import { StyledDoc } from '@/components/doc/messages/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/messages/theming/tailwinddoc';
