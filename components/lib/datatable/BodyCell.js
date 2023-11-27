@@ -190,6 +190,8 @@ export const BodyCell = React.memo((props) => {
             } else {
                 event.preventDefault();
             }
+
+            return newRowData;
         });
     };
 
