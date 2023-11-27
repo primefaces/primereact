@@ -336,7 +336,6 @@ export const TreeTableHeader = React.memo((props) => {
 
             const header = (
                 <div {...headerContentProps}>
-                    {header}
                     {title}
                     {sortIconElement}
                     {sortBadge}
