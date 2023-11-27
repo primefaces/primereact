@@ -463,7 +463,7 @@
                             "type": "any"
                         }
                     ],
-                    "returnType": "null | ReactElement<any, any>"
+                    "returnType": "ReactNode"
                 },
                 "locale": {
                     "name": "locale",
