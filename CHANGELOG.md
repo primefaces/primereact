@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.2.1](https://github.com/primefaces/primereact/tree/10.2.1) (2023-11-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.2.0...10.2.1)
+
+**Fixed bugs:**
+
+- Tree Table Header Bug [\#5412](https://github.com/primefaces/primereact/issues/5412)
+
 ## [10.2.0](https://github.com/primefaces/primereact/tree/10.2.0) (2023-11-27)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.1.1...10.2.0)
@@ -13,7 +21,6 @@
 - SplitButton: SplitButton popup not closing on escape button click [\#5365](https://github.com/primefaces/primereact/issues/5365)
 - Speed Dial: Speed Dial Menu does not close on escape key press [\#5367](https://github.com/primefaces/primereact/issues/5367)
 - PanelMenu: Menu items with no sub-items toggling border [\#5349](https://github.com/primefaces/primereact/issues/5349)
-
 
 **Fixed bugs:**
 
