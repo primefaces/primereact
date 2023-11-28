@@ -331,7 +331,7 @@ export const TreeTableHeader = React.memo((props) => {
                 {
                     className: cx('headerContent')
                 },
-                getColumnPTOptions('headerContent')
+                getColumnPTOptions(column, 'headerContent')
             );
 
             const header = (
