@@ -90,7 +90,9 @@ export const Panel = React.forwardRef((inProps, ref) => {
                     id: buttonId,
                     'aria-controls': contentId,
                     'aria-expanded': !collapsed,
-                    role: 'tab'
+                    type: 'button',
+                    role: 'button',
+                    'aria-label': props.toggleButtonProps && props.toggleButtonProps['aria-label'] ? props.toggleButtonProps['aria-label'] : props.header
                 },
                 ptm('toggler')
             );
@@ -161,6 +163,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
                 iconsElement,
                 togglerElement,
                 element: content,
+                id: idState + '_header',
                 props,
                 collapsed
             };
