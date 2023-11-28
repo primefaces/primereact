@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect, useOnEscapeKey } from '../hooks/Hooks';
+import { useMountEffect, useOnEscapeKey, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
@@ -142,7 +142,7 @@ export const CascadeSelect = React.memo(
                 //down
                 case 40:
                     if (overlayVisibleState) {
-                        DomHandler.findSingle(overlayRef.current, '.p-cascadeselect-item').children[0].focus();
+                        DomHandler.findSingle(overlayRef.current, '[data-pc-section="item"]').children[0].focus();
                     } else if (event.altKey && props.options && props.options.length) {
                         show();
                     }
