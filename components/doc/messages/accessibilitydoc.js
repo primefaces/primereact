@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 export function AccessibilityDoc() {
     return (
-        <DevelopmentSection>
             <DocSectionText id="accessibility" label="Accessibility">
                 <h3>Screen Reader</h3>
                 <p>
@@ -44,6 +43,5 @@ export function AccessibilityDoc() {
                     </table>
                 </div>
             </DocSectionText>
-        </DevelopmentSection>
     );
 }
