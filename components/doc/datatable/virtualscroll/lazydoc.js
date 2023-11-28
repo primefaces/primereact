@@ -20,19 +20,22 @@ export function LazyVirtualScrollDoc(props) {
         }
 
         //simulate remote connection with a timeout
-        loadLazyTimeout = setTimeout(() => {
-            let _virtualCars = [...virtualCars];
-            let { first, last } = event;
+        loadLazyTimeout = setTimeout(
+            () => {
+                let _virtualCars = [...virtualCars];
+                let { first, last } = event;
 
-            //load data of required page
-            const loadedCars = cars.slice(first, last);
+                //load data of required page
+                const loadedCars = cars.slice(first, last);
 
-            //populate page of virtual cars
-            Array.prototype.splice.apply(_virtualCars, [...[first, last - first], ...loadedCars]);
+                //populate page of virtual cars
+                Array.prototype.splice.apply(_virtualCars, [...[first, last - first], ...loadedCars]);
 
-            setVirtualCars(_virtualCars);
-            setLazyLoading(false);
-        }, Math.random() * 1000 + 250);
+                setVirtualCars(_virtualCars);
+                setLazyLoading(false);
+            },
+            Math.random() * 1000 + 250
+        );
     };
 
     const loadingTemplate = (options) => {
