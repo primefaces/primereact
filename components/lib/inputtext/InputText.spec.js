@@ -31,6 +31,18 @@ describe('InputText', () => {
         expect(input).toHaveValue('');
         expect(container).toMatchSnapshot();
     });
+    test('when input has className only 1 className is printed', () => {
+        // Arrange
+        const { container } = render(<InputText className="jest" />);
+        const input = container.getElementsByTagName('input')[0];
+
+        // Act
+        fireEvent.input(input, { target: { value: 'jest' } });
+
+        // Act
+        expect(container).toMatchSnapshot();
+        expect(input).toHaveValue('jest');
+    });
     test('when input is is set for validation only', () => {
         // Arrange
         const { container } = render(<InputText validateOnly keyfilter={`alpha`} />);
