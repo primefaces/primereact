@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { localeOption } from '../api/Api';
 import { useMountEffect } from '../hooks/Hooks';
 import { ChevronLeftIcon } from '../icons/chevronleft';
 import { ChevronRightIcon } from '../icons/chevronright';
@@ -14,6 +15,18 @@ export const GalleriaItem = React.memo(
                 hostName: props.hostName,
                 ...options
             });
+        };
+
+        const ariaSlideNumber = (value) => {
+            return localeOption('aria') ? localeOption('aria').slideNumber.replace(/{slideNumber}/g, value) : undefined;
+        };
+
+        const ariaSlideLabel = () => {
+            return localeOption('aria') ? localeOption('aria').slide : undefined;
+        };
+
+        const ariaPageLabel = (value) => {
+            return localeOption('aria') ? localeOption('aria').pageLabel.replace(/{page}/g, value) : undefined;
         };
 
         const next = () => {
@@ -74,12 +87,24 @@ export const GalleriaItem = React.memo(
         };
 
         const onIndicatorKeyDown = (event, index) => {
-            if (event.which === 13) {
-                stopSlideShow();
+            switch (event.code) {
+                case 'Enter':
+                case 'Space':
+                    stopSlideShow();
 
-                props.onActiveItemChange({
-                    index
-                });
+                    props.onActiveItemChange({
+                        index
+                    });
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowDown':
+                case 'ArrowUp':
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
             }
         };
 
@@ -108,7 +133,8 @@ export const GalleriaItem = React.memo(
                         className: cx('previousItemButton', { isDisabled }),
                         onClick: navBackward,
                         disabled: isDisabled,
-                        'data-p-disabled': isDisabled
+                        'data-p-disabled': isDisabled,
+                        'data-pc-group-section': 'itemnavigator'
                     },
                     getPTOptions('previousItemButton')
                 );
@@ -143,7 +169,8 @@ export const GalleriaItem = React.memo(
                         className: cx('nextItemButton', { isDisabled }),
                         onClick: navForward,
                         disabled: isDisabled,
-                        'data-p-disabled': isDisabled
+                        'data-p-disabled': isDisabled,
+                        'data-pc-group-section': 'itemnavigator'
                     },
                     getPTOptions('nextItemButton')
                 );
@@ -186,10 +213,13 @@ export const GalleriaItem = React.memo(
                     className: cx('indicator', { isActive }),
                     key: key,
                     tabIndex: 0,
+                    'aria-label': ariaPageLabel(index + 1),
+                    'aria-selected': props.activeIndex === index,
+                    'aria-controls': props.id + '_item_' + index,
+                    'data-p-highlight': isActive,
                     onClick: () => onIndicatorClick(index),
                     onMouseEnter: () => onIndicatorMouseEnter(index),
-                    onKeyDown: (e) => onIndicatorKeyDown(e, index),
-                    'data-p-highlight': isActive
+                    onKeyDown: (e) => onIndicatorKeyDown(e, index)
                 },
                 getPTOptions('indicator')
             );
@@ -248,7 +278,11 @@ export const GalleriaItem = React.memo(
 
         const itemProps = mergeProps(
             {
-                className: cx('item')
+                className: cx('item'),
+                id: props.id + '_item_' + props.activeItemIndex,
+                role: 'group',
+                'aria-label': ariaSlideNumber(props.activeIndex + 1),
+                'aria-roledescription': ariaSlideLabel
             },
             getPTOptions('item')
         );
