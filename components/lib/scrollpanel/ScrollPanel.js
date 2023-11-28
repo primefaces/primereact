@@ -19,6 +19,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const contentRef = React.useRef(null);
     const xBarRef = React.useRef(null);
     const yBarRef = React.useRef(null);
+    const [lastScrollLeft, setLastScrollLeft] = React.useState(0);
+    const [lastScrollTop, setLastScrollTop] = React.useState(0);
     const isXBarClicked = React.useRef(false);
     const isYBarClicked = React.useRef(false);
     const lastPageX = React.useRef(null);
@@ -43,7 +45,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
         }
     };
 
-    const moveBar = () => {
+    const moveBar = (event) => {
         // horizontal scroll
         const totalWidth = contentRef.current.scrollWidth;
         const ownWidth = contentRef.current.clientWidth;
@@ -63,6 +65,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                 DomHandler.addClass(xBarRef.current, 'p-scrollpanel-hidden');
             } else {
                 DomHandler.removeClass(xBarRef.current, 'p-scrollpanel-hidden');
+                setLastScrollLeft(event.target.scrollLeft);
                 xBarRef.current.style.cssText = 'width:' + Math.max(scrollXRatio.current * 100, 10) + '%; left:' + (contentRef.current.scrollLeft / totalWidth) * 100 + '%;bottom:' + bottom + 'px;';
             }
 
@@ -70,6 +73,7 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
                 DomHandler.addClass(yBarRef.current, 'p-scrollpanel-hidden');
             } else {
                 DomHandler.removeClass(yBarRef.current, 'p-scrollpanel-hidden');
+                setLastScrollTop(event.target.scrollTop);
                 yBarRef.current.style.cssText = 'height:' + Math.max(scrollYRatio.current * 100, 10) + '%; top: calc(' + (contentRef.current.scrollTop / totalHeight) * 100 + '% - ' + xBarRef.current.clientHeight + 'px);right:' + right + 'px;';
             }
         });
@@ -199,6 +203,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const barXProps = mergeProps(
         {
             ref: xBarRef,
+            role: 'scrollbar',
+            'aria-valuenow': lastScrollTop,
             className: cx('barx'),
             onMouseDown: onXBarMouseDown
         },
@@ -208,6 +214,8 @@ export const ScrollPanel = React.forwardRef((inProps, ref) => {
     const barYProps = mergeProps(
         {
             ref: yBarRef,
+            role: 'scrollbar',
+            'aria-valuenow': lastScrollLeft,
             className: cx('bary'),
             onMouseDown: onYBarMouseDown
         },
