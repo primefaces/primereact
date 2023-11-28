@@ -85,7 +85,8 @@ export const Message = React.memo(
                 className: classNames(props.className, cx('root')),
                 style: props.style,
                 role: 'alert',
-                'aria-live': 'polite'
+                'aria-live': 'polite',
+                'aria-atomic': 'true'
             },
             MessageBase.getOtherProps(props),
             ptm('root')
