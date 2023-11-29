@@ -882,8 +882,8 @@ const Tailwind = {
             className: classNames(
                 'inline-flex items-center',
                 {
-                    'cursor-pointer': !props.readonly,
-                    'cursor-default': props.readonly
+                    'cursor-pointer': !props.readOnly,
+                    'cursor-default': props.readOnly
                 },
                 {
                     'outline-none outline-offset-0 shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]': context.focused
@@ -1016,7 +1016,7 @@ const Tailwind = {
         label: 'font-bold text-center w-full',
         icon: ({ props }) => ({
             className: classNames(' mr-2', {
-                'text-gray-600 dark:text-white/70': !props.modelValue,
+                'text-gray-600 dark:text-white/70': !props.checked,
                 'text-white': props.checked
             })
         })
@@ -1312,8 +1312,8 @@ const Tailwind = {
         labelContainer: 'overflow-hidden flex flex-auto cursor-pointer',
         label: ({ props }) => ({
             className: classNames('block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis', 'text-gray-800 dark:text-white/80', 'p-3 transition duration-200', {
-                '!p-3': props.display !== 'chip' && (props?.modelValue == null || props?.modelValue == undefined),
-                '!py-1.5 px-3': props.display === 'chip' && props?.modelValue !== null
+                '!p-3': props.display !== 'chip' && (props.value == null || props.value == undefined),
+                '!py-1.5 px-3': props.display === 'chip' && props.value !== null
             })
         }),
         token: {
