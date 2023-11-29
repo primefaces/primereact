@@ -1496,19 +1496,27 @@ export const Calendar = React.memo(
                 ZIndexUtils.set(key, overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
             }
 
+            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
+                let inputWidth = DomHandler.getOuterWidth(inputRef.current);
+
+                // #5435 must have reasonable width if input is too small
+                if (inputWidth < 220) {
+                    inputWidth = 220;
+                }
+
+                if (props.view === 'date') {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                } else {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                    overlayRef.current.style.width = inputWidth + 'px';
+                }
+            }
+
             alignOverlay();
         };
 
         const onOverlayEntered = () => {
-            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
-                if (props.view === 'date') {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                } else {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                }
-            }
-
             bindOverlayListener();
             props.onShow && props.onShow();
             DomHandler.focusFirstElement(overlayRef.current);
