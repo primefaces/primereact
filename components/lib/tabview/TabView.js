@@ -28,6 +28,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
     const nextBtnRef = React.useRef(null);
     const tabsRef = React.useRef({});
     const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
+    const count = React.Children.count(props.children);
 
     const metaData = {
         props,
@@ -46,11 +47,21 @@ export const TabView = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(TabViewBase.css.styles, isUnstyled, { name: 'tabview' });
 
-    const getTabPT = (tab, key) => {
-        return ptmo(getTabProp(tab, 'pt'), key, {
+    const getTabPT = (tab, key, index) => {
+        const tabMetaData = {
             props: tab.props,
-            parent: metaData
-        });
+            parent: metaData,
+            context: {
+                index,
+                count,
+                first: index === 0,
+                last: index === count - 1,
+                active: index == activeIndexState,
+                disabled: getTabProp(tab, 'disabled')
+            }
+        };
+
+        return mergeProps(ptm(`tab.${key}`, { tab: tabMetaData }), ptm(`tabpanel.${key}`, { tabpanel: tabMetaData }), ptm(`tabpanel.${key}`, tabMetaData), ptmo(getTabProp(tab, 'pt'), key, tabMetaData));
     };
 
     const isSelected = (index) => index === activeIndex;
@@ -209,7 +220,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
             {
                 className: cx('tab.headertitle')
             },
-            getTabPT(tab, 'headertitle')
+            getTabPT(tab, 'headertitle', index)
         );
         const titleElement = <span {...headerTitleProps}>{header}</span>;
         const rightIconElement = rightIcon && IconUtils.getJSXIcon(rightIcon, undefined, { props });
@@ -228,7 +239,7 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 onClick: (e) => onTabHeaderClick(e, tab, index),
                 onKeyDown: (e) => onKeyDown(e, tab, index)
             },
-            getTabPT(tab, 'headeraction')
+            getTabPT(tab, 'headeraction', index)
         );
 
         let content = (
@@ -269,8 +280,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
                 style: sx('tab.header', { headerStyle, _style }),
                 role: 'presentation'
             },
-            getTabPT(tab, 'root'),
-            getTabPT(tab, 'header')
+            getTabPT(tab, 'root', index),
+            getTabPT(tab, 'header', index)
         );
 
         return <li {...headerProps}>{content}</li>;
@@ -348,8 +359,8 @@ export const TabView = React.forwardRef((inProps, ref) => {
                         'aria-hidden': !selected
                     },
                     TabPanelBase.getCOtherProps(tab),
-                    getTabPT(tab, 'root'),
-                    getTabPT(tab, 'content')
+                    getTabPT(tab, 'root', index),
+                    getTabPT(tab, 'content', index)
                 );
 
                 return <div {...contentProps}>{!props.renderActiveOnly ? getTabProp(tab, 'children') : selected && getTabProp(tab, 'children')}</div>;
