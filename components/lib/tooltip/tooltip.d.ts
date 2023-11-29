@@ -84,7 +84,7 @@ export interface TooltipProps extends TooltipOptions {
     /**
      * Content to be displayed in tooltip.
      */
-    content?: string | undefined;
+    content?: React.ReactNode | string | undefined;
     /**
      * Used to get the child elements of the component.
      * @readonly

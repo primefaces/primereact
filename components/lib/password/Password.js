@@ -407,7 +407,7 @@ export const Password = React.memo(
                 ref: inputRef,
                 id: props.inputId,
                 ...inputProps,
-                className: cx('input'),
+                className: classNames(props.inputClassName, cx('input')),
                 onBlur: onBlur,
                 onFocus: onFocus,
                 onInput: onInput,

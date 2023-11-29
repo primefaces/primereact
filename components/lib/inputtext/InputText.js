@@ -3,7 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { KeyFilter } from '../keyfilter/KeyFilter';
 import { Tooltip } from '../tooltip/Tooltip';
-import { DomHandler, ObjectUtils, mergeProps } from '../utils/Utils';
+import { DomHandler, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 import { InputTextBase } from './InputTextBase';
 
 export const InputText = React.memo(
@@ -69,7 +69,7 @@ export const InputText = React.memo(
 
         const rootProps = mergeProps(
             {
-                className: cx('root', { isFilled }),
+                className: classNames(props.className, cx('root', { isFilled })),
                 onBeforeInput: onBeforeInput,
                 onInput: onInput,
                 onKeyDown: onKeyDown,

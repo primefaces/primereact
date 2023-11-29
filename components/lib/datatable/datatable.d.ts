@@ -1542,7 +1542,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     onRowEditChange?(event: DataTableRowEditEvent): void;
     /**
-     * Callback to invoke when row edit is completed.
+     * Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event.
      * @param {DataTableRowEditCompleteEvent} event - Custom row edit complete event.
      */
     onRowEditComplete?(event: DataTableRowEditCompleteEvent): void;

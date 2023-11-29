@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { ariaLabel } from '../api/Api';
+import { ariaLabel, PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMountEffect } from '../hooks/Hooks';
+import { ChevronDownIcon } from '../icons/chevrondown';
+import { ChevronRightIcon } from '../icons/chevronright';
 import { classNames, IconUtils, mergeProps, ObjectUtils, UniqueComponentId } from '../utils/Utils';
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
-import { ChevronRightIcon } from '../icons/chevronright';
-import { ChevronDownIcon } from '../icons/chevrondown';
-import { PrimeReactContext } from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const AccordionTab = () => {};
 
@@ -113,7 +112,8 @@ export const Accordion = React.forwardRef((inProps, ref) => {
             },
             getTabPT(tab, 'headertitle', index)
         );
-        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), AccordionTabBase.getCProps(tab)) : <span {...headerTitleProps}>{getTabProp(tab, 'header')}</span>;
+        const tabCProps = AccordionTabBase.getCProps(tab);
+        const header = getTabProp(tab, 'headerTemplate') ? ObjectUtils.getJSXElement(getTabProp(tab, 'headerTemplate'), tabCProps) : <span {...headerTitleProps}>{ObjectUtils.getJSXElement(getTabProp(tab, 'header'), tabCProps)}</span>;
         const headerIconProps = mergeProps(
             {
                 className: cx('tab.headericon')
@@ -130,7 +130,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 'data-p-highlight': selected,
                 'data-p-disabled': getTabProp(tab, 'disabled')
             },
-            getTabPT(tab, 'header', index)
+            getTabPT(tab, 'tab.header', index)
         );
 
         const headerActionProps = mergeProps(

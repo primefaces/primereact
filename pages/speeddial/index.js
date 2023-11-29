@@ -10,7 +10,6 @@ import { PTDoc } from '@/components/doc/speeddial/pt/ptdoc';
 import { Wireframe } from '@/components/doc/speeddial/pt/wireframe';
 import { QuarterCircleDoc } from '@/components/doc/speeddial/quartercircledoc';
 import { SemiCircleDoc } from '@/components/doc/speeddial/semicircledoc';
-import { StyleDoc } from '@/components/doc/speeddial/styledoc';
 import { StyledDoc } from '@/components/doc/speeddial/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/speeddial/theming/tailwinddoc';
 import { TooltipDoc } from '@/components/doc/speeddial/tooltipdoc';
@@ -57,11 +56,7 @@ const SpeedDialDemo = () => {
             label: 'Custom',
             component: CustomDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

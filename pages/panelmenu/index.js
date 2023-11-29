@@ -6,7 +6,6 @@ import { ImportDoc } from '@/components/doc/panelmenu/importdoc';
 import { MultipleDoc } from '@/components/doc/panelmenu/multipledoc';
 import { PTDoc } from '@/components/doc/panelmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/panelmenu/pt/wireframe';
-import { StyleDoc } from '@/components/doc/panelmenu/styledoc';
 import { StyledDoc } from '@/components/doc/panelmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/panelmenu/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const PanelMenuDemo = () => {
             label: 'Multiple',
             component: MultipleDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

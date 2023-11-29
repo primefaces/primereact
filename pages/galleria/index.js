@@ -21,7 +21,6 @@ import { ItemWithoutThumbnailsDoc } from '@/components/doc/galleria/navigator/it
 import { PTDoc } from '@/components/doc/galleria/pt/ptdoc';
 import { Wireframe } from '@/components/doc/galleria/pt/wireframe';
 import { ResponsiveDoc } from '@/components/doc/galleria/responsivedoc';
-import { StyleDoc } from '@/components/doc/galleria/styledoc';
 import { StyledDoc } from '@/components/doc/galleria/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/galleria/theming/tailwinddoc';
 import { ThumbnailDoc } from '@/components/doc/galleria/thumbnaildoc';
@@ -144,11 +143,7 @@ const GalleriaDemo = () => {
             label: 'Advanced',
             component: AdvancedDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

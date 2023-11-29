@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/organizationchart/importdoc';
 import { PTDoc } from '@/components/doc/organizationchart/pt/ptdoc';
 import { Wireframe } from '@/components/doc/organizationchart/pt/wireframe';
 import { SelectionDoc } from '@/components/doc/organizationchart/selectiondoc';
-import { StyleDoc } from '@/components/doc/organizationchart/styledoc';
 import { TemplateDoc } from '@/components/doc/organizationchart/templatedoc';
 import { StyledDoc } from '@/components/doc/organizationchart/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/organizationchart/theming/tailwinddoc';
@@ -39,11 +38,7 @@ const OrganizationChartDemo = () => {
             label: 'Colored',
             component: ColoredDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

@@ -9,7 +9,6 @@ import { ImportDoc } from '@/components/doc/multistatecheckbox/importdoc';
 import { InvalidDoc } from '@/components/doc/multistatecheckbox/invaliddoc';
 import { PTDoc } from '@/components/doc/multistatecheckbox/pt/ptdoc';
 import { Wireframe } from '@/components/doc/multistatecheckbox/pt/wireframe';
-import { StyleDoc } from '@/components/doc/multistatecheckbox/styledoc';
 import { StyledDoc } from '@/components/doc/multistatecheckbox/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/multistatecheckbox/theming/tailwinddoc';
 
@@ -52,11 +51,7 @@ const MultiStateCheckboxDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

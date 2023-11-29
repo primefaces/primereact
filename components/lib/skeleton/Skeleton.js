@@ -27,7 +27,8 @@ export const Skeleton = React.memo(
             {
                 ref: elementRef,
                 className: classNames(props.className, cx('root')),
-                style: { ...style, ...sx('root') }
+                style: { ...style, ...sx('root') },
+                'aria-hidden': true
             },
             SkeletonBase.getOtherProps(props),
             ptm('root')

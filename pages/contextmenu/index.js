@@ -6,7 +6,6 @@ import { DocumentDoc } from '@/components/doc/contextmenu/documentdoc';
 import { ImportDoc } from '@/components/doc/contextmenu/importdoc';
 import { PTDoc } from '@/components/doc/contextmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/contextmenu/pt/wireframe';
-import { StyleDoc } from '@/components/doc/contextmenu/styledoc';
 import { StyledDoc } from '@/components/doc/contextmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/contextmenu/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const ContextMenuDemo = () => {
             label: 'Document',
             component: DocumentDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

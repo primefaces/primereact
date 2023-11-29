@@ -7,6 +7,7 @@ exports[`BlockUI block and unblock fullscreen events: blocked-event-fullscreen 1
 >
   <div>
     <div
+      aria-busy="false"
       class="p-blockui-container"
       data-pc-name="blockui"
       data-pc-section="root"
@@ -27,6 +28,7 @@ exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen
 >
   <div>
     <div
+      aria-busy="false"
       class="p-blockui-container"
       data-pc-name="blockui"
       data-pc-section="root"
@@ -43,6 +45,7 @@ exports[`BlockUI block and unblock fullscreen events: unblocked-event-fullscreen
 exports[`BlockUI block and unblock panel events: blocked-event 1`] = `
 <div>
   <div
+    aria-busy="false"
     class="p-blockui-container"
     data-pc-name="blockui"
     data-pc-section="root"
@@ -81,6 +84,7 @@ exports[`BlockUI block and unblock panel events: blocked-event 1`] = `
 exports[`BlockUI block and unblock panel events: unblocked-event 1`] = `
 <div>
   <div
+    aria-busy="false"
     class="p-blockui-container"
     data-pc-name="blockui"
     data-pc-section="root"
@@ -123,6 +127,7 @@ exports[`BlockUI block fullscreen 1`] = `
 >
   <div>
     <div
+      aria-busy="true"
       class="p-blockui-container"
       data-pc-name="blockui"
       data-pc-section="root"
@@ -143,6 +148,7 @@ exports[`BlockUI block panel 1`] = `
 >
   <div>
     <div
+      aria-busy="true"
       class="p-blockui-container"
       data-pc-name="blockui"
       data-pc-section="root"
@@ -186,6 +192,7 @@ exports[`BlockUI container style and className 1`] = `
 >
   <div>
     <div
+      aria-busy="true"
       class="p-blockui-container container-jest"
       data-pc-name="blockui"
       data-pc-section="root"
@@ -230,6 +237,7 @@ exports[`BlockUI unblock panel 1`] = `
 >
   <div>
     <div
+      aria-busy="false"
       class="p-blockui-container"
       data-pc-name="blockui"
       data-pc-section="root"

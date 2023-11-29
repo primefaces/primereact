@@ -9,7 +9,6 @@ import { PTDoc } from '@/components/doc/toast/pt/ptdoc';
 import { Wireframe } from '@/components/doc/toast/pt/wireframe';
 import { SeverityDoc } from '@/components/doc/toast/severitydoc';
 import { StickyDoc } from '@/components/doc/toast/stickydoc';
-import { StyleDoc } from '@/components/doc/toast/styledoc';
 import { TemplateDoc } from '@/components/doc/toast/templatedoc';
 import { StyledDoc } from '@/components/doc/toast/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/toast/theming/tailwinddoc';
@@ -51,11 +50,7 @@ const ToastDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

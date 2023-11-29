@@ -39,13 +39,16 @@ export function LazyLoadDoc(props) {
         }
 
         //imitate delay of a backend call
-        networkTimeout = setTimeout(() => {
-            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
-                setTotalRecords(data.totalRecords);
-                setCustomers(data.customers);
-                setLoading(false);
-            });
-        }, Math.random() * 1000 + 250);
+        networkTimeout = setTimeout(
+            () => {
+                CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
+                    setTotalRecords(data.totalRecords);
+                    setCustomers(data.customers);
+                    setLoading(false);
+                });
+            },
+            Math.random() * 1000 + 250
+        );
     };
 
     const onPage = (event) => {

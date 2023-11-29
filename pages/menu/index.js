@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/menu/importdoc';
 import { PopupDoc } from '@/components/doc/menu/popupdoc';
 import { PTDoc } from '@/components/doc/menu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/menu/pt/wireframe';
-import { StyleDoc } from '@/components/doc/menu/styledoc';
 import { TemplateDoc } from '@/components/doc/menu/templatedoc';
 import { StyledDoc } from '@/components/doc/menu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/menu/theming/tailwinddoc';
@@ -39,11 +38,7 @@ const MenuDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

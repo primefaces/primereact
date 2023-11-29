@@ -8,7 +8,6 @@ import { InputDoc } from '@/components/doc/inplace/inputdoc';
 import { LazyDoc } from '@/components/doc/inplace/lazydoc';
 import { PTDoc } from '@/components/doc/inplace/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inplace/pt/wireframe';
-import { StyleDoc } from '@/components/doc/inplace/styledoc';
 import { StyledDoc } from '@/components/doc/inplace/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inplace/theming/tailwinddoc';
 
@@ -39,11 +38,7 @@ const ChipDemo = () => {
             label: 'Lazy',
             component: LazyDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

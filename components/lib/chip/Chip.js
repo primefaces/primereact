@@ -18,8 +18,7 @@ export const Chip = React.memo(
         useHandleStyle(ChipBase.css.styles, isUnstyled, { name: 'chip' });
 
         const onKeyDown = (event) => {
-            if (event.keyCode === 13) {
-                // enter
+            if (event.key === 'Enter' || event.key === 'Backspace') {
                 close(event);
             }
         };
@@ -40,6 +39,7 @@ export const Chip = React.memo(
                     key: 'removeIcon',
                     tabIndex: 0,
                     className: cx('removeIcon'),
+                    role: 'button',
                     onClick: close,
                     onKeyDown
                 },
@@ -97,7 +97,8 @@ export const Chip = React.memo(
                 {
                     ref: elementRef,
                     style: props.style,
-                    className: classNames(props.className, cx('root'))
+                    className: classNames(props.className, cx('root')),
+                    'aria-label': props.label
                 },
                 ChipBase.getOtherProps(props),
                 ptm('root')

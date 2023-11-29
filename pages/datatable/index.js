@@ -50,7 +50,6 @@ import { RemovableSortDoc } from '@/components/doc/datatable/sort/removablesortd
 import { SingleColumnDoc } from '@/components/doc/datatable/sort/singlecolumndoc';
 import { StatefulDoc } from '@/components/doc/datatable/statefuldoc';
 import { StripedRowsDoc } from '@/components/doc/datatable/stripedrowsdoc';
-import { StyleDoc } from '@/components/doc/datatable/styledoc';
 import { TemplateDoc } from '@/components/doc/datatable/templatedoc';
 import { StyledDoc } from '@/components/doc/datatable/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/datatable/theming/tailwinddoc';
@@ -375,11 +374,7 @@ const DataTableDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

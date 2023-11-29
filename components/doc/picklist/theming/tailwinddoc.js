@@ -185,7 +185,7 @@ export default function UnstyledDemo() {
     const itemTemplate = (item) => {
         return (
             <div className="flex flex-wrap p-2 items-center gap-3">
-                <img className="w-4rem shadow-2 shrink-0 round-md" src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} />
+                <img className="w-16 shadow-md shrink-0 rounded" src={\`https://primefaces.org/cdn/primereact/images/product/\${item.image}\`} alt={item.name} />
                 <div className="flex-1 flex flex-col gap-2">
                     <span className="font-bold">{item.name}</span>
                     <div className="flex items-center gap-2">

@@ -126,6 +126,7 @@ export const ConfirmDialog = React.memo(
         }));
 
         const createFooter = () => {
+            const defaultFocus = getPropValue('defaultFocus');
             const acceptClassName = classNames('p-confirm-dialog-accept', getPropValue('acceptClassName'));
             const rejectClassName = classNames(
                 'p-confirm-dialog-reject',
@@ -137,6 +138,7 @@ export const ConfirmDialog = React.memo(
 
             const rejectButtonProps = {
                 label: rejectLabel,
+                autoFocus: defaultFocus === 'reject',
                 icon: getPropValue('rejectIcon'),
                 className: classNames(getPropValue('rejectClassName'), cx('rejectButton', { getPropValue })),
                 onClick: reject,
@@ -150,6 +152,7 @@ export const ConfirmDialog = React.memo(
             const acceptButtonProps = mergeProps(
                 {
                     label: acceptLabel,
+                    autoFocus: defaultFocus === undefined || defaultFocus === 'accept',
                     icon: getPropValue('acceptIcon'),
                     className: classNames(getPropValue('acceptClassName'), cx('acceptButton')),
                     onClick: accept,
@@ -164,7 +167,7 @@ export const ConfirmDialog = React.memo(
             const content = (
                 <>
                     <Button {...rejectButtonProps} />
-                    <Button {...acceptButtonProps} autoFocus />
+                    <Button {...acceptButtonProps} />
                 </>
             );
 

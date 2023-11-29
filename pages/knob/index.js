@@ -15,7 +15,6 @@ import { ReadOnlyDoc } from '@/components/doc/knob/readonlydoc';
 import { SizeDoc } from '@/components/doc/knob/sizedoc';
 import { StepDoc } from '@/components/doc/knob/stepdoc';
 import { StrokeDoc } from '@/components/doc/knob/strokedoc';
-import { StyleDoc } from '@/components/doc/knob/styledoc';
 import { TemplateDoc } from '@/components/doc/knob/templatedoc';
 import { StyledDoc } from '@/components/doc/knob/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/knob/theming/tailwinddoc';
@@ -94,11 +93,7 @@ const KnobDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',
