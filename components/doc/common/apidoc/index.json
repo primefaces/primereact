@@ -16945,7 +16945,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when the cancel icon is clicked on row editing mode."
+                            "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows."
                         },
                         {
                             "name": "onRowEditComplete",
@@ -19888,7 +19888,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when the cancel icon is clicked on row editing mode."
+                            "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows."
                         },
                         {
                             "name": "onRowEditComplete",
