@@ -386,7 +386,8 @@ export const FileUpload = React.memo(
             const input = <input {...inputProps} />;
             const chooseIconProps = mergeProps(
                 {
-                    className: cx('chooseIcon', { iconOnly })
+                    className: cx('chooseIcon', { iconOnly }),
+                    'aria-hidden': 'true'
                 },
                 ptm('chooseIcon')
             );
@@ -547,14 +548,16 @@ export const FileUpload = React.memo(
                 const cancelLabel = !cancelOptions.iconOnly ? cancelButtonLabel : '';
                 const uploadIconProps = mergeProps(
                     {
-                        className: cx('uploadIcon', { iconOnly: uploadOptions.iconOnly })
+                        className: cx('uploadIcon', { iconOnly: uploadOptions.iconOnly }),
+                        'aria-hidden': 'true'
                     },
                     ptm('uploadIcon')
                 );
                 const uploadIcon = IconUtils.getJSXIcon(uploadOptions.icon || <UploadIcon {...uploadIconProps} />, { ...uploadIconProps }, { props });
                 const cancelIconProps = mergeProps(
                     {
-                        className: cx('cancelIcon', { iconOnly: cancelOptions.iconOnly })
+                        className: cx('cancelIcon', { iconOnly: cancelOptions.iconOnly }),
+                        'aria-hidden': 'true'
                     },
                     ptm('cancelIcon')
                 );
@@ -564,6 +567,7 @@ export const FileUpload = React.memo(
                     <Button
                         type="button"
                         label={uploadLabel}
+                        aria-hidden="true"
                         icon={uploadIcon}
                         onClick={upload}
                         disabled={uploadDisabled}
@@ -577,6 +581,7 @@ export const FileUpload = React.memo(
                     <Button
                         type="button"
                         label={cancelLabel}
+                        aria-hidden="true"
                         icon={cancelIcon}
                         onClick={clear}
                         disabled={cancelDisabled}
