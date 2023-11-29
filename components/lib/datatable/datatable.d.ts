@@ -1537,7 +1537,7 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
      */
     onRowEditCancel?(event: DataTableRowEditEvent): void;
     /**
-     * Callback to invoke when the cancel icon is clicked on row editing mode.
+     * Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows.
      * @param {DataTableRowEditEvent} event - Custom row edit event.
      */
     onRowEditChange?(event: DataTableRowEditEvent): void;
