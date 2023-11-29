@@ -1,5 +1,55 @@
 # Changelog
 
+## [10.2.1](https://github.com/primefaces/primereact/tree/10.2.1) (2023-11-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.2.0...10.2.1)
+
+**Fixed bugs:**
+
+- Tree Table Header Bug [\#5412](https://github.com/primefaces/primereact/issues/5412)
+
+## [10.2.0](https://github.com/primefaces/primereact/tree/10.2.0) (2023-11-27)
+
+[Full Changelog](https://github.com/primefaces/primereact/compare/10.1.1...10.2.0)
+
+**Enhancements:**
+
+- MISC Section | Accessibility [\#5356](https://github.com/primefaces/primereact/issues/5356)
+- Chip Removable Icon to have button role [\#4190](https://github.com/primefaces/primereact/issues/4190)
+- TreeTable: selected rows are not highlighted [\#5370](https://github.com/primefaces/primereact/issues/5370)
+- CascadeSelect: Popup does not close on escape key press [\#5360](https://github.com/primefaces/primereact/issues/5360)
+- SplitButton: SplitButton popup not closing on escape button click [\#5365](https://github.com/primefaces/primereact/issues/5365)
+- Speed Dial: Speed Dial Menu does not close on escape key press [\#5367](https://github.com/primefaces/primereact/issues/5367)
+- PanelMenu: Menu items with no sub-items toggling border [\#5349](https://github.com/primefaces/primereact/issues/5349)
+
+**Fixed bugs:**
+
+- DataTable: Cell editing with Dropdown doesn't work [\#3079](https://github.com/primefaces/primereact/issues/3079)
+- DataTable editor with 3rd party dropdown / overlay [\#2097](https://github.com/primefaces/primereact/issues/2097)
+- Mention: Page Breaks when navigating to Mention component [\#5363](https://github.com/primefaces/primereact/issues/5363)
+- TabView: Closes all tabs on click [\#5369](https://github.com/primefaces/primereact/issues/5369)
+- DataTable: Cell edit support Dropdown [\#2666](https://github.com/primefaces/primereact/issues/2666)
+- DataTable: editMode="cell" and Dropdown z-Index issue [\#5320](https://github.com/primefaces/primereact/issues/5320)
+- AccordionTab: Invalid values for props $$typeof, type on div tag [\#5379](https://github.com/primefaces/primereact/issues/5379)
+- Password: inputClassName doesn't work with Tailwind [\#5385](https://github.com/primefaces/primereact/issues/5385)
+- TreeTable: Unable to hide a column with hidden prop [\#5384](https://github.com/primefaces/primereact/issues/5384)
+- Calendar: monthNavigator={true} with numberOfMonths={>1} shows controls for the first month only [\#5390](https://github.com/primefaces/primereact/issues/5390)
+- TreeTable: column align header is not working [\#5315](https://github.com/primefaces/primereact/issues/5315)
+- Tree: Custom collapseIcon/expandIcon is not applied on children [\#5393](https://github.com/primefaces/primereact/issues/5393)
+- Slider: Setting min boundary value component is breaking the component. [\#5398](https://github.com/primefaces/primereact/issues/5398)
+- MultiSelect emptyMessage prop results in error [\#5340](https://github.com/primefaces/primereact/issues/5340)
+- SplitButton: pt attribute doesn't behave as described in documentation [\#4883](https://github.com/primefaces/primereact/issues/4883)
+- Tailwind: Button tailwind/index.js  [\#5407](https://github.com/primefaces/primereact/issues/5407)
+- DataTable: memory leak when data updated continuously [\#4656](https://github.com/primefaces/primereact/issues/4656)
+- Removing style section from pages [\#5354](https://github.com/primefaces/primereact/issues/5354)
+- Missing type definition in for hideOverlaysOnDocumentScrolling in APIOptions [\#5378](https://github.com/primefaces/primereact/issues/5378)
+- Misc Demos Refactor [\#5357](https://github.com/primefaces/primereact/issues/5357)
+- Tailwind: Documentation transition: TRANSITIONS.overlay [\#5387](https://github.com/primefaces/primereact/issues/5387)
+- Mention: Component not rendering [\#5374](https://github.com/primefaces/primereact/issues/5374)
+- Primereact Tooltip props children and content have different types [\#5376](https://github.com/primefaces/primereact/issues/5376)
+- Slider: Setting min boundary value component is breaking the component. [\#5398](https://github.com/primefaces/primereact/issues/5398)
+
+
 ## [10.1.1](https://github.com/primefaces/primereact/tree/10.1.1) (2023-11-21)
 
 [Full Changelog](https://github.com/primefaces/primereact/compare/10.1.0...10.1.1)

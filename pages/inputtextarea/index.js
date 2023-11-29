@@ -12,7 +12,6 @@ import { InvalidDoc } from '@/components/doc/inputtextarea/invaliddoc';
 import { KeyFilterDoc } from '@/components/doc/inputtextarea/keyfilterdoc';
 import { PTDoc } from '@/components/doc/inputtextarea/pt/ptdoc';
 import { Wireframe } from '@/components/doc/inputtextarea/pt/wireframe';
-import { StyleDoc } from '@/components/doc/inputtextarea/styledoc';
 import { StyledDoc } from '@/components/doc/inputtextarea/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/inputtextarea/theming/tailwinddoc';
 
@@ -70,11 +69,7 @@ const InputTextareaDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

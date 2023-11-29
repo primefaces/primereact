@@ -104,8 +104,10 @@ export const Ripple = React.memo(
 
         const rootProps = mergeProps(
             {
+                'aria-hidden': true,
                 className: classNames(cx('root'))
             },
+            RippleBase.getOtherProps(props),
             ptm('root')
         );
 

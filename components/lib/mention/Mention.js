@@ -93,13 +93,15 @@ export const Mention = React.memo(
         };
 
         const alignOverlay = () => {
-            const { key, index } = triggerState;
-            const value = inputRef.current.value;
-            const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
+            if (triggerState) {
+                const { key, index } = triggerState;
+                const value = inputRef.current.value;
+                const position = DomHandler.getCursorOffset(inputRef.current, value.substring(0, index - 1), value.substring(index), key);
 
-            overlayRef.current.style.transformOrigin = 'top';
-            overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
-            overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
+                overlayRef.current.style.transformOrigin = 'top';
+                overlayRef.current.style.left = `calc(${position.left}px + 1rem)`;
+                overlayRef.current.style.top = `calc(${position.top}px + 1.2rem)`;
+            }
         };
 
         const onPanelClick = (event) => {

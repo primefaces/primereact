@@ -8,7 +8,6 @@ import { ImportDoc } from '@/components/doc/colorpicker/importdoc';
 import { InlineDoc } from '@/components/doc/colorpicker/inlinedoc';
 import { PTDoc } from '@/components/doc/colorpicker/pt/ptdoc';
 import { Wireframe } from '@/components/doc/colorpicker/pt/wireframe';
-import { StyleDoc } from '@/components/doc/colorpicker/styledoc';
 import { StyledDoc } from '@/components/doc/colorpicker/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/colorpicker/theming/tailwinddoc';
 import DocApiTable from '@/components/doc/common/docapitable';
@@ -58,11 +57,7 @@ const ColorPickerDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

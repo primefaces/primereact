@@ -234,6 +234,10 @@ export const TreeTableHeader = React.memo((props) => {
     const createHeaderCell = (column, options) => {
         let filterElement;
 
+        if (getColumnProp(column, 'hidden')) {
+            return null;
+        }
+
         if (getColumnProp(column, 'filter') && options.renderFilter) {
             filterElement = getColumnProp(column, 'filterElement') || (
                 <InputText
@@ -280,6 +284,7 @@ export const TreeTableHeader = React.memo((props) => {
             const multipleSorted = multiSortMetaData !== null;
             const sorted = getColumnProp(column, 'sortable') && (singleSorted || multipleSorted);
             const frozen = getColumnProp(column, 'frozen');
+            const align = getColumnProp(column, 'alignHeader') || getColumnProp(column, 'align');
             let sortOrder = 0;
 
             if (singleSorted) sortOrder = props.sortOrder;
@@ -295,7 +300,7 @@ export const TreeTableHeader = React.memo((props) => {
             const resizer = createResizer(column);
             const headerCellProps = mergeProps(
                 {
-                    className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, frozen, column, options, getColumnProp, sorted })),
+                    className: classNames(getColumnProp(column, 'headerClassName') || getColumnProp(column, 'className'), cx('headerCell', { headerProps: props, frozen, column, options, getColumnProp, sorted, align })),
                     style: getColumnProp(column, 'headerStyle') || getColumnProp(column, 'style'),
                     tabIndex: getColumnProp(column, 'sortable') ? props.tabIndex : null,
                     onClick: (e) => onHeaderClick(e, column),
@@ -323,14 +328,27 @@ export const TreeTableHeader = React.memo((props) => {
                 })
             );
 
+            const headerContentProps = mergeProps(
+                {
+                    className: cx('headerContent')
+                },
+                getColumnPTOptions(column, 'headerContent')
+            );
+
+            const header = (
+                <div {...headerContentProps}>
+                    {title}
+                    {sortIconElement}
+                    {sortBadge}
+                    {filterElement}
+                </div>
+            );
+
             return (
                 <React.Fragment key={column.columnKey || column.field || options.index}>
                     <th ref={headerCellRef} {...headerCellProps}>
                         {resizer}
-                        {title}
-                        {sortIconElement}
-                        {sortBadge}
-                        {filterElement}
+                        {header}
                     </th>
                     {hasTooltip && <Tooltip target={headerCellRef} content={headerTooltip} {...getColumnProp(column, 'headerTooltipOptions')} unstyled={props.unstyled} />}
                 </React.Fragment>

@@ -174,7 +174,9 @@ export const CascadeSelectSub = React.memo((props) => {
     });
 
     useUpdateEffect(() => {
-        setActiveOptionState(null);
+        if (!props.parentActive) {
+            setActiveOptionState(null);
+        }
     }, [props.parentActive]);
 
     const createSubmenu = (option) => {

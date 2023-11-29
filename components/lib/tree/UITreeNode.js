@@ -744,40 +744,43 @@ export const UITreeNode = React.memo((props) => {
                             <UITreeNode
                                 key={childNode.key || childNode.label}
                                 node={childNode}
-                                originalOptions={props.originalOptions}
-                                parent={props.node}
-                                index={index}
-                                last={index === props.node.children.length - 1}
-                                path={props.path + '-' + index}
-                                disabled={props.disabled}
-                                selectionMode={props.selectionMode}
-                                selectionKeys={props.selectionKeys}
-                                onSelectionChange={props.onSelectionChange}
-                                metaKeySelection={props.metaKeySelection}
-                                propagateSelectionDown={props.propagateSelectionDown}
-                                propagateSelectionUp={props.propagateSelectionUp}
+                                checkboxIcon={props.checkboxIcon}
+                                collapseIcon={props.collapseIcon}
                                 contextMenuSelectionKey={props.contextMenuSelectionKey}
-                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                                onContextMenu={props.onContextMenu}
-                                onExpand={props.onExpand}
-                                onCollapse={props.onCollapse}
-                                onSelect={props.onSelect}
-                                onUnselect={props.onUnselect}
-                                onClick={props.onClick}
-                                onDoubleClick={props.onDoubleClick}
-                                expandedKeys={props.expandedKeys}
-                                onToggle={props.onToggle}
-                                onPropagateUp={propagateUp}
-                                nodeTemplate={props.nodeTemplate}
-                                togglerTemplate={props.togglerTemplate}
-                                isNodeLeaf={props.isNodeLeaf}
+                                cx={cx}
+                                disabled={props.disabled}
                                 dragdropScope={props.dragdropScope}
-                                onDragStart={props.onDragStart}
+                                expandIcon={props.expandIcon}
+                                expandedKeys={props.expandedKeys}
+                                index={index}
+                                isNodeLeaf={props.isNodeLeaf}
+                                last={index === props.node.children.length - 1}
+                                metaKeySelection={props.metaKeySelection}
+                                nodeTemplate={props.nodeTemplate}
+                                onClick={props.onClick}
+                                onCollapse={props.onCollapse}
+                                onContextMenu={props.onContextMenu}
+                                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                                onDoubleClick={props.onDoubleClick}
                                 onDragEnd={props.onDragEnd}
+                                onDragStart={props.onDragStart}
                                 onDrop={props.onDrop}
                                 onDropPoint={props.onDropPoint}
+                                onExpand={props.onExpand}
+                                onPropagateUp={propagateUp}
+                                onSelect={props.onSelect}
+                                onSelectionChange={props.onSelectionChange}
+                                onToggle={props.onToggle}
+                                onUnselect={props.onUnselect}
+                                originalOptions={props.originalOptions}
+                                parent={props.node}
+                                path={props.path + '-' + index}
+                                propagateSelectionDown={props.propagateSelectionDown}
+                                propagateSelectionUp={props.propagateSelectionUp}
                                 ptm={ptm}
-                                cx={cx}
+                                selectionKeys={props.selectionKeys}
+                                selectionMode={props.selectionMode}
+                                togglerTemplate={props.togglerTemplate}
                             />
                         );
                     })}

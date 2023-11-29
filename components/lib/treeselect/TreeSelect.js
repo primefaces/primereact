@@ -141,6 +141,7 @@ export const TreeSelect = React.memo(
 
         const onNodeUnselect = (node) => {
             props.onNodeUnselect && props.onNodeUnselect(node);
+            isCheckboxSelectionMode && node.originalEvent.stopPropagation();
         };
 
         const onNodeToggle = (e) => {

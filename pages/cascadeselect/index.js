@@ -8,7 +8,6 @@ import { ImportDoc } from '@/components/doc/cascadeselect/importdoc';
 import { InvalidDoc } from '@/components/doc/cascadeselect/invaliddoc';
 import { PTDoc } from '@/components/doc/cascadeselect/pt/ptdoc';
 import { Wireframe } from '@/components/doc/cascadeselect/pt/wireframe';
-import { StyleDoc } from '@/components/doc/cascadeselect/styledoc';
 import { TemplateDoc } from '@/components/doc/cascadeselect/templatedoc';
 import { StyledDoc } from '@/components/doc/cascadeselect/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/cascadeselect/theming/tailwinddoc';
@@ -64,11 +63,7 @@ const CascadeSelectDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

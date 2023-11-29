@@ -16,7 +16,6 @@ import { RaisedTextDoc } from '@/components/doc/button/raisedtextdoc';
 import { RoundedDoc } from '@/components/doc/button/roundeddoc';
 import { SeverityDoc } from '@/components/doc/button/severitydoc';
 import { SizesDoc } from '@/components/doc/button/sizesdoc';
-import { StyleDoc } from '@/components/doc/button/styledoc';
 import { TemplateDoc } from '@/components/doc/button/templatedoc';
 import { TextDoc } from '@/components/doc/button/textdoc';
 import { StyledDoc } from '@/components/doc/button/theming/styleddoc';
@@ -111,11 +110,7 @@ const ButtonDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

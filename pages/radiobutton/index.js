@@ -10,7 +10,6 @@ import { ImportDoc } from '@/components/doc/radiobutton/importdoc';
 import { InvalidDoc } from '@/components/doc/radiobutton/invaliddoc';
 import { PTDoc } from '@/components/doc/radiobutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/radiobutton/pt/wireframe';
-import { StyleDoc } from '@/components/doc/radiobutton/styledoc';
 import { StyledDoc } from '@/components/doc/radiobutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/radiobutton/theming/tailwinddoc';
 
@@ -58,11 +57,7 @@ const RadioButtonDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

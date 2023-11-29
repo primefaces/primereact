@@ -6,7 +6,6 @@ import { ControlledDoc } from '@/components/doc/tabmenu/controlleddoc';
 import { ImportDoc } from '@/components/doc/tabmenu/importdoc';
 import { PTDoc } from '@/components/doc/tabmenu/pt/ptdoc';
 import { Wireframe } from '@/components/doc/tabmenu/pt/wireframe';
-import { StyleDoc } from '@/components/doc/tabmenu/styledoc';
 import { StyledDoc } from '@/components/doc/tabmenu/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/tabmenu/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const TabMenuDemo = () => {
             label: 'Controlled',
             component: ControlledDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

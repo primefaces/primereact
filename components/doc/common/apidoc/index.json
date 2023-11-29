@@ -55,7 +55,7 @@
                             "name": "header",
                             "optional": true,
                             "readonly": false,
-                            "type": "ReactNode",
+                            "type": "ReactNode | Function",
                             "default": "",
                             "description": "Used to define the header of the tab."
                         },
@@ -1757,6 +1757,13 @@
                             "description": "Close"
                         },
                         {
+                            "name": "completed",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Completed"
+                        },
+                        {
                             "name": "pending",
                             "optional": true,
                             "readonly": false,
@@ -1806,11 +1813,137 @@
                             "description": "['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
                         },
                         {
+                            "name": "chooseYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Year"
+                        },
+                        {
+                            "name": "chooseMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Month"
+                        },
+                        {
+                            "name": "chooseDate",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Choose Date"
+                        },
+                        {
+                            "name": "prevDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Decade"
+                        },
+                        {
+                            "name": "nextDecade",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": ""
+                        },
+                        {
+                            "name": "prevYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Year"
+                        },
+                        {
+                            "name": "nextYear",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Year"
+                        },
+                        {
+                            "name": "prevMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Month"
+                        },
+                        {
+                            "name": "nextMonth",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Month"
+                        },
+                        {
+                            "name": "prevHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Hour"
+                        },
+                        {
+                            "name": "nextHour",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Hour"
+                        },
+                        {
+                            "name": "prevMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Minute"
+                        },
+                        {
+                            "name": "nextMinute",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Minute"
+                        },
+                        {
+                            "name": "prevSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Previous Second"
+                        },
+                        {
+                            "name": "nextSecond",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Next Second"
+                        },
+                        {
+                            "name": "am",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "PM"
+                        },
+                        {
+                            "name": "pm",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "AM"
+                        },
+                        {
                             "name": "today",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
                             "description": "Today"
+                        },
+                        {
+                            "name": "now",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Now"
                         },
                         {
                             "name": "weekHeader",
@@ -1866,21 +1999,48 @@
                             "optional": true,
                             "readonly": false,
                             "type": "string",
-                            "description": "No available options"
+                            "description": "No results found"
                         },
                         {
-                            "name": "emptyMessage",
+                            "name": "searchMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "{0} results are available"
+                        },
+                        {
+                            "name": "selectionMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "{0} items selected"
+                        },
+                        {
+                            "name": "emptySelectionMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No selected item"
+                        },
+                        {
+                            "name": "emptySearchMessage",
                             "optional": true,
                             "readonly": false,
                             "type": "string",
                             "description": "No results found"
                         },
                         {
+                            "name": "emptyMessage",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "No available options"
+                        },
+                        {
                             "name": "aria",
                             "optional": true,
                             "readonly": false,
-                            "type": "Object",
-                            "description": "True"
+                            "type": "Object"
                         }
                     ],
                     "callbacks": []
@@ -13697,6 +13857,14 @@
                             "description": "Style of the content section."
                         },
                         {
+                            "name": "defaultFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "accept",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
+                        },
+                        {
                             "name": "dismissableMask",
                             "optional": true,
                             "readonly": false,
@@ -14321,6 +14489,13 @@
                             "description": "Label of the reject button."
                         },
                         {
+                            "name": "defaultFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
+                        },
+                        {
                             "name": "element",
                             "optional": false,
                             "readonly": false,
@@ -14466,6 +14641,14 @@
                             "type": "boolean",
                             "default": "true",
                             "description": "Specifies if pressing escape key should hide the popup."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "accept",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "dismissable",
@@ -14792,6 +14975,13 @@
                             "readonly": false,
                             "type": "string",
                             "description": "Label of the reject button."
+                        },
+                        {
+                            "name": "defaultFocus",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Element to receive the focus when the dialog gets visible, valid values are \"accept\" and \"reject\"."
                         },
                         {
                             "name": "element",
@@ -16768,7 +16958,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when row edit is completed."
+                            "description": "Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event."
                         },
                         {
                             "name": "onRowEditInit",
@@ -19711,7 +19901,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when row edit is completed."
+                            "description": "Callback to invoke when any change (edit start, edit cancel, edit save) is made to a row. This event fires after any preceding event."
                         },
                         {
                             "name": "onRowEditInit",
@@ -43859,18 +44049,18 @@
                             "description": "Uses to pass attributes to the root's DOM element."
                         },
                         {
-                            "name": "icon",
-                            "optional": true,
-                            "readonly": false,
-                            "type": "SplitButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
-                            "description": "Uses to pass attributes to the icon's DOM element."
-                        },
-                        {
                             "name": "button",
                             "optional": true,
                             "readonly": false,
                             "type": "ButtonPassThroughOptions",
                             "description": "Uses to pass attributes to the Button component."
+                        },
+                        {
+                            "name": "icon",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "SplitButtonPassThroughType<SVGProps<SVGSVGElement> | HTMLAttributes<SVGSVGElement | HTMLSpanElement>>",
+                            "description": "Uses to pass attributes to the icon's DOM element."
                         },
                         {
                             "name": "menuButton",
@@ -47715,7 +47905,7 @@
                             "name": "content",
                             "optional": true,
                             "readonly": false,
-                            "type": "string",
+                            "type": "ReactNode",
                             "default": "",
                             "description": "Content to be displayed in tooltip."
                         },

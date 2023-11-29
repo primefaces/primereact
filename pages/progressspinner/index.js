@@ -6,7 +6,6 @@ import { CustomDoc } from '@/components/doc/progressspinner/customdoc';
 import { ImportDoc } from '@/components/doc/progressspinner/importdoc';
 import { PTDoc } from '@/components/doc/progressspinner/pt/ptdoc';
 import { Wireframe } from '@/components/doc/progressspinner/pt/wireframe';
-import { StyleDoc } from '@/components/doc/progressspinner/styledoc';
 import { StyledDoc } from '@/components/doc/progressspinner/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/progressspinner/theming/tailwinddoc';
 
@@ -27,11 +26,7 @@ const SkeletonDemo = () => {
             label: 'Custom',
             component: CustomDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

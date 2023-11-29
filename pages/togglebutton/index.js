@@ -8,7 +8,6 @@ import { HookFormDoc } from '@/components/doc/togglebutton/form/hookformdoc';
 import { ImportDoc } from '@/components/doc/togglebutton/importdoc';
 import { PTDoc } from '@/components/doc/togglebutton/pt/ptdoc';
 import { Wireframe } from '@/components/doc/togglebutton/pt/wireframe';
-import { StyleDoc } from '@/components/doc/togglebutton/styledoc';
 import { StyledDoc } from '@/components/doc/togglebutton/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/togglebutton/theming/tailwinddoc';
 
@@ -46,11 +45,7 @@ const ToggleButtonDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

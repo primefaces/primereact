@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/confirmdialog/importdoc';
 import { PositionDoc } from '@/components/doc/confirmdialog/positiondoc';
 import { PTDoc } from '@/components/doc/confirmdialog/pt/ptdoc';
 import { Wireframe } from '@/components/doc/confirmdialog/pt/wireframe';
-import { StyleDoc } from '@/components/doc/confirmdialog/styledoc';
 import { StyledDoc } from '@/components/doc/confirmdialog/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/confirmdialog/theming/tailwinddoc';
 import { ConfirmDialog } from '@/components/lib/confirmdialog/ConfirmDialog';
@@ -34,11 +33,7 @@ const ConfirmDialogDemo = () => {
             label: 'Declarative',
             component: DeclarativeDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

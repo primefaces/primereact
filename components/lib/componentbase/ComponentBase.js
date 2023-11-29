@@ -265,7 +265,8 @@ svg.p-icon {
     pointer-events: auto;
 }
 
-svg.p-icon g {
+svg.p-icon g,
+.p-disabled svg.p-icon {
     pointer-events: none;
 }
 

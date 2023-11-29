@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
@@ -8,7 +9,6 @@ import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, useMergeProps } from '../utils/Utils';
 import { ConfirmPopupBase } from './ConfirmPopupBase';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 
 export const confirmPopup = (props = {}) => {
     props = { ...props, ...{ visible: props.visible === undefined ? true : props.visible } };
@@ -46,6 +46,7 @@ export const ConfirmPopup = React.memo(
 
         const overlayRef = React.useRef(null);
         const acceptBtnRef = React.useRef(null);
+        const rejectBtnRef = React.useRef(null);
         const isPanelClicked = React.useRef(false);
         const overlayEventListener = React.useRef(null);
         const confirmProps = React.useRef(null);
@@ -138,8 +139,14 @@ export const ConfirmPopup = React.memo(
         const onEntered = () => {
             bindOverlayListener();
 
-            if (acceptBtnRef.current) {
-                acceptBtnRef.current.focus();
+            const defaultFocus = getPropValue('defaultFocus');
+
+            if (defaultFocus === undefined || defaultFocus === 'accept') {
+                acceptBtnRef.current && acceptBtnRef.current.focus();
+            }
+
+            if (defaultFocus === 'reject') {
+                rejectBtnRef.current && rejectBtnRef.current.focus();
             }
 
             callbackFromProp('onShow');
@@ -281,6 +288,7 @@ export const ConfirmPopup = React.memo(
             );
 
             const rejectButtonProps = mergeProps({
+                ref: rejectBtnRef,
                 label: rejectLabel,
                 icon: getPropValue('rejectIcon'),
                 className: cx('rejectButton', { getPropValue }),

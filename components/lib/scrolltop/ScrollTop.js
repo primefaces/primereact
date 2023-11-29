@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PrimeReact, { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useEventListener, useUnmountEffect } from '../hooks/Hooks';
@@ -92,13 +92,15 @@ export const ScrollTop = React.memo(
         );
         const icon = props.icon || <ChevronUpIcon {...iconProps} />;
         const scrollIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props });
+        const scrollTopAriaLabel = localeOption('aria') ? localeOption('aria').scrollTop : undefined;
         const rootProps = mergeProps(
             {
                 ref: scrollElementRef,
                 type: 'button',
                 className: classNames(props.className, cx('root')),
                 style: props.style,
-                onClick
+                onClick,
+                'aria-label': scrollTopAriaLabel
             },
             ScrollTopBase.getOtherProps(props),
             ptm('root')

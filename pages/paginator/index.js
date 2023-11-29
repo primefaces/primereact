@@ -7,7 +7,6 @@ import { ImportDoc } from '@/components/doc/paginator/importdoc';
 import { LayoutDoc } from '@/components/doc/paginator/layoutdoc';
 import { PTDoc } from '@/components/doc/paginator/pt/ptdoc';
 import { Wireframe } from '@/components/doc/paginator/pt/wireframe';
-import { StyleDoc } from '@/components/doc/paginator/styledoc';
 import { TemplateDoc } from '@/components/doc/paginator/templatedoc';
 import { StyledDoc } from '@/components/doc/paginator/theming/styleddoc';
 import { TailwindDoc } from '@/components/doc/paginator/theming/tailwinddoc';
@@ -39,11 +38,7 @@ const PaginatorDemo = () => {
             label: 'Images',
             component: ImagesDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

@@ -38,13 +38,13 @@ export interface SplitButtonPassThroughOptions {
      */
     root?: SplitButtonPassThroughType<React.HTMLAttributes<HTMLDivElement>>;
     /**
-     * Uses to pass attributes to the icon's DOM element.
-     */
-    icon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
-    /**
      * Uses to pass attributes to the Button component.
      */
     button?: ButtonPassThroughOptions;
+    /**
+     * Uses to pass attributes to the icon's DOM element.
+     */
+    icon?: SplitButtonPassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement | SVGSVGElement>>;
     /**
      * Uses to pass attributes to the Button component.
      */

@@ -23,17 +23,20 @@ export function LazyDoc(props) {
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout.current = setTimeout(() => {
-            const { first, last } = event;
-            const _lazyItems = [...lazyItems];
+        loadLazyTimeout.current = setTimeout(
+            () => {
+                const { first, last } = event;
+                const _lazyItems = [...lazyItems];
 
-            for (let i = first; i < last; i++) {
-                _lazyItems[i] = `Item #${i}`;
-            }
+                for (let i = first; i < last; i++) {
+                    _lazyItems[i] = `Item #${i}`;
+                }
 
-            setLazyItems(_lazyItems);
-            setLazyLoading(false);
-        }, Math.random() * 1000 + 250);
+                setLazyItems(_lazyItems);
+                setLazyLoading(false);
+            },
+            Math.random() * 1000 + 250
+        );
     };
 
     const itemTemplate = (item, options) => {

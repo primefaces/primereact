@@ -9,7 +9,7 @@ export function ButtonDoc(props) {
 <Button type="button" label="Emails">
     <Badge value="8"></Badge>
 </Button>
-<Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+<Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
     <Badge value="8" severity="danger"></Badge>
 </Button>
             `,
@@ -24,7 +24,7 @@ export default function ButtonDemo() {
             <Button type="button" label="Emails">
                 <Badge value="8"></Badge>
             </Button>
-            <Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+            <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
                 <Badge value="8" severity="danger"></Badge>
             </Button>
         </div>
@@ -42,7 +42,7 @@ export default function ButtonDemo() {
             <Button type="button" label="Emails">
                 <Badge value="8"></Badge>
             </Button>
-            <Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+            <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
                 <Badge value="8" severity="danger"></Badge>
             </Button>
         </div>
@@ -60,7 +60,7 @@ export default function ButtonDemo() {
                 <Button type="button" label="Emails">
                     <Badge value="8"></Badge>
                 </Button>
-                <Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+                <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
                     <Badge value="8" severity="danger"></Badge>
                 </Button>
             </div>

@@ -29,9 +29,10 @@ export const ProgressSpinner = React.memo(
                 ref: elementRef,
                 style: props.style,
                 className: classNames(props.className, cx('root')),
-                role: 'alert',
+                role: 'progressbar',
                 'aria-busy': true
             },
+            ProgressSpinnerBase.getOtherProps(props),
             ptm('root')
         );
 
