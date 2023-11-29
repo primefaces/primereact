@@ -92,7 +92,7 @@ export const Panel = React.forwardRef((inProps, ref) => {
                     'aria-expanded': !collapsed,
                     type: 'button',
                     role: 'button',
-                    'aria-label': props.toggleButtonProps && props.toggleButtonProps['aria-label'] ? props.toggleButtonProps['aria-label'] : props.header
+                    'aria-label': props.header
                 },
                 ptm('toggler')
             );
