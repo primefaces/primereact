@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useOnEscapeKey } from '../../lib/hooks/Hooks';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { useDisplayOrder, useEventListener, useMountEffect, useUnmountEffect, useUpdateEffect, useGlobalOnEscapeKey, ESC_KEY_HANDLING_PRIORITIES } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
@@ -50,18 +49,16 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useHandleStyle(DialogBase.css.styles, isUnstyled, { name: 'dialog' });
 
-    useOnEscapeKey(maskRef, props.closable && props.closeOnEscape, (event) => {
-        const currentTarget = event.currentTarget;
+    const displayOrder = useDisplayOrder('dialog', visibleState);
 
-        if (!currentTarget || !currentTarget.primeDialogParams) {
-            return;
-        }
-
-        const params = currentTarget.primeDialogParams;
-        const paramLength = params.length;
-
-        onClose(event);
-        params.splice(paramLength - 1, 1);
+    useGlobalOnEscapeKey({
+        callback: (event) => {
+            if (props.closable && props.closeOnEscape) {
+                onClose(event);
+            }
+        },
+        when: visibleState,
+        priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
     });
 
     const [bindDocumentKeyDownListener, unbindDocumentKeyDownListener] = useEventListener({ type: 'keydown', listener: (event) => onKeyDown(event) });
@@ -319,12 +316,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const enableDocumentSettings = () => {
         bindGlobalListeners();
-        updateGlobalDialogsRegistry(true);
     };
 
     const disableDocumentSettings = () => {
         unbindGlobalListeners();
-        updateGlobalDialogsRegistry(false);
     };
 
     const updateScrollBlocker = () => {
@@ -339,8 +334,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     const updateGlobalDialogsRegistry = (isMounted) => {
-        // Update current dialog info in global registry if it is mounted:
-        if (isMounted) {
+        // Update current dialog info in global registry if it is mounted and visible:
+        if (isMounted && visibleState) {
             const newParam = { id: idState, hasBlockScroll: shouldBlockScroll };
 
             // Create registry if not yet created:
@@ -356,7 +351,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
                 document.primeDialogParams = document.primeDialogParams.toSpliced(currentDialogIndexInRegistry, 1, newParam);
             }
         }
-        // Or remove it from global registry if unmounted:
+        // Or remove it from global registry if unmounted or invisible:
         else {
             document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter((param) => param.id !== idState);
         }
@@ -407,6 +402,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     };
 
     useMountEffect(() => {
+        updateGlobalDialogsRegistry(true);
+
         if (props.visible) {
             setMaskVisibleState(true);
         }
@@ -441,10 +438,11 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     useUpdateEffect(() => {
         updateGlobalDialogsRegistry(true);
-    }, [shouldBlockScroll]);
+    }, [shouldBlockScroll, visibleState]);
 
     useUnmountEffect(() => {
         disableDocumentSettings();
+        updateGlobalDialogsRegistry(false);
         DomHandler.removeInlineStyle(styleElement.current);
         ZIndexUtils.clear(maskRef.current);
     });

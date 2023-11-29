@@ -4,7 +4,7 @@ import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, classNames, mergeProps } from '../utils/Utils';
@@ -58,8 +58,16 @@ export const ConfirmPopup = React.memo(
         const acceptLabel = getPropValue('acceptLabel') || localeOption('accept');
         const rejectLabel = getPropValue('rejectLabel') || localeOption('reject');
 
-        useOnEscapeKey(overlayRef, props.dismissable && props.closeOnEscape, (event) => {
-            hide('hide');
+        const displayOrder = useDisplayOrder('dialog', visibleState);
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                if (props.dismissable && props.closeOnEscape) {
+                    hide('hide');
+                }
+            },
+            when: visibleState,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.DIALOG, displayOrder]
         });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({

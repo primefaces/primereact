@@ -25898,22 +25898,35 @@
                     "returnType": "boolean",
                     "description": "Custom hook to detect if window size matches or not."
                 },
-                "useOnEscapeKey": {
-                    "name": "useOnEscapeKey",
+                "useGlobalOnEscapeKey": {
+                    "name": "useGlobalOnEscapeKey",
                     "parameters": [
                         {
-                            "name": "ref",
-                            "type": "RefObject<Element>",
-                            "description": "The ref of the element to detect escape button click."
-                        },
-                        {
-                            "name": "callback",
-                            "type": "any",
-                            "description": "The callback to run when escape button clicked."
+                            "name": "params",
+                            "type": "object"
                         }
                     ],
                     "returnType": "void",
-                    "description": "Custom hook to use detect escape button click."
+                    "description": "Custom hook to use detect global escape button click."
+                },
+                "useDisplayOrder": {
+                    "name": "useDisplayOrder",
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "string",
+                            "description": "ID of the group of UI components to which component belongs"
+                        },
+                        {
+                            "name": "isVisible",
+                            "type": "boolean",
+                            "optional": true,
+                            "default": "true",
+                            "description": "Is current component currently visible"
+                        }
+                    ],
+                    "returnType": "number|undefined",
+                    "description": "Custom hook to use display order of component of one and the same group."
                 }
             }
         },
