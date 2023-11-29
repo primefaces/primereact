@@ -10,16 +10,15 @@ export const Ripple = React.memo(
         const targetRef = React.useRef(null);
         const context = React.useContext(PrimeReactContext);
         const props = RippleBase.getProps(inProps, context);
-
+        const isRippleActive = (context && context.ripple) || PrimeReact.ripple;
         const metaData = {
             props
         };
-
-        useStyle(RippleBase.css.styles, { name: 'ripple' });
-
         const { ptm, cx } = RippleBase.setMetaData({
             ...metaData
         });
+
+        useStyle(RippleBase.css.styles, { name: 'ripple', manual: !isRippleActive });
 
         const getTarget = () => {
             return inkRef.current && inkRef.current.parentElement;
@@ -101,6 +100,8 @@ export const Ripple = React.memo(
             }
         });
 
+        if (!isRippleActive) return null;
+
         const rootProps = mergeProps(
             {
                 'aria-hidden': true,
@@ -110,7 +111,7 @@ export const Ripple = React.memo(
             ptm('root')
         );
 
-        return (context && context.ripple) || PrimeReact.ripple ? <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span> : null;
+        return <span role="presentation" ref={inkRef} {...rootProps} onAnimationEnd={onAnimationEnd}></span>;
     })
 );
 

@@ -17,7 +17,7 @@ export const useStyle = (css, options = {}) => {
     };
 
     const load = () => {
-        if (!document) return;
+        if (!document || isLoaded) return;
 
         styleRef.current = document.querySelector(`style[data-primereact-style-id="${name}"]`) || document.getElementById(id) || document.createElement('style');
 
@@ -30,8 +30,6 @@ export const useStyle = (css, options = {}) => {
             document.head.appendChild(styleRef.current);
             name && styleRef.current.setAttribute('data-primereact-style-id', name);
         }
-
-        if (isLoaded) return;
 
         styleRef.current.textContent = css;
 
@@ -50,7 +48,7 @@ export const useStyle = (css, options = {}) => {
 
         // return () => {if (!manual) unload()}; /* @todo */
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [manual]);
 
     return {
         id,

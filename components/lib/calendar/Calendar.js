@@ -2960,12 +2960,7 @@ export const Calendar = React.memo(
                 })
             );
 
-            return (
-                <span {...dayLabelProps}>
-                    {content}
-                    <Ripple />
-                </span>
-            );
+            return <span {...dayLabelProps}>{content}</span>;
         };
 
         const createWeek = (weekDates, weekNumber, groupIndex) => {
