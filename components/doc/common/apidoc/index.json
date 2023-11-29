@@ -25902,8 +25902,8 @@
                     "name": "useGlobalOnEscapeKey",
                     "parameters": [
                         {
-                            "name": "params",
-                            "type": "object"
+                            "name": "props",
+                            "type": "Object"
                         }
                     ],
                     "returnType": "void",
@@ -25915,18 +25915,16 @@
                         {
                             "name": "group",
                             "type": "string",
-                            "description": "ID of the group of UI components to which component belongs"
+                            "description": ""
                         },
                         {
                             "name": "isVisible",
                             "type": "boolean",
-                            "optional": true,
-                            "default": "true",
-                            "description": "Is current component currently visible"
+                            "description": ""
                         }
                     ],
-                    "returnType": "number|undefined",
-                    "description": "Custom hook to use display order of component of one and the same group."
+                    "returnType": "number | undefined",
+                    "description": "Custom hook to use display order of component of one and the same group"
                 }
             }
         },
