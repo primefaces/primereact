@@ -24,8 +24,8 @@ const Tailwind = {
             className: classNames(
                 'inline-flex items-center',
                 {
-                    'cursor-pointer': !props.readonly,
-                    'cursor-default': props.readonly
+                    'cursor-pointer': !props.readOnly,
+                    'cursor-default': props.readOnly
                 },
                 {
                     'outline-none outline-offset-0 shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]': context.focused

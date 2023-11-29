@@ -7,10 +7,13 @@ export function TailwindDoc(props) {
         basic: `
 const TRANSITIONS = {
     overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
+        timeout: 150,
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-100',
+            exitActive: '!opacity-0 transition-opacity duration-150 ease-linear'
+        }
     }
 };
 
@@ -24,9 +27,8 @@ const Tailwind = {
         labelContainer: 'overflow-hidden flex flex-auto cursor-pointer',
         label: ({ props }) => ({
             className: classNames('block overflow-hidden whitespace-nowrap cursor-pointer overflow-ellipsis', 'text-gray-800 dark:text-white/80', 'p-3 transition duration-200', {
-                '!p-3': props.display !== 'chip' && (props?.modelValue == null || props?.modelValue == undefined),
-                '!py-1.5 px-3': props.display == 'chip' && props?.modelValue !== null,
-                '!p-3': props.display == 'chip' && props?.modelValue == null
+                '!p-3': props.display !== 'chip' && (props.value == null || props.value == undefined),
+                '!py-1.5 px-3': props.display === 'chip' && props.value !== null
             })
         }),
         token: {
@@ -71,18 +73,12 @@ const Tailwind = {
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
-            className: classNames(
-                'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-                'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
-                {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-400 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-                }
-            )
+            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
+            })
         }),
         checkboxContainer: {
             className: classNames('inline-flex cursor-pointer select-none align-bottom relative', 'mr-2', 'w-6 h-6')
