@@ -189,7 +189,7 @@ export const OrderListControls = React.memo((props) => {
         ptm('moveBottomButton')
     );
 
-    const isMoveDisabled = !props.selection || !props.selection.length ? true : false;
+    const isMoveDisabled = ObjectUtils.isEmpty(props.selection);
 
     return (
         <div {...controlsProps}>
