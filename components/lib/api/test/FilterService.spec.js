@@ -8,20 +8,20 @@ afterEach(() => {
 });
 
 const checkParametersNullOrUndefined = (filterType) => {
-    it('When value parameter is undefined', () => {
+    it('When filter parameter is undefined', () => {
         expect(filters[filterType]('value', undefined)).toBeTruthy();
     });
 
-    it('When value parameter is null', () => {
+    it('When filter parameter is null', () => {
         expect(filters[filterType]('value', null)).toBeTruthy();
     });
 
-    it('When filter parameter is undefined', () => {
+    it('When value parameter is undefined', () => {
         expect(filters[filterType](undefined, 'filter')).toBeFalsy();
     });
 
-    it('When filter parameter is null', () => {
-        expect(filters[filterType](undefined, 'filter')).toBeFalsy();
+    it('When value parameter is null', () => {
+        expect(filters[filterType](null, 'filter')).toBeFalsy();
     });
 };
 
