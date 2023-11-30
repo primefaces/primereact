@@ -141,6 +141,40 @@ describe('FilterService', () => {
         });
     });
 
+    describe('notIn filter test', () => {
+        it('When filter parameter is undefined', () => {
+            expect(filters.notIn('value', undefined)).toBeTruthy();
+        });
+
+        it('When filter parameter is null', () => {
+            expect(filters.notIn('value', null)).toBeTruthy();
+        });
+
+        it('When value parameter is undefined', () => {
+            expect(filters.notIn(undefined, 'filter')).toBeTruthy();
+        });
+
+        it('When value parameter is null', () => {
+            expect(filters.notIn(null, 'filter')).toBeTruthy();
+        });
+
+        it('When value parameter equal to any filter word', () => {
+            jest.spyOn(ObjectUtils, 'removeAccents').mockImplementation((value, filter) => value === filter);
+
+            const notInFilter = filters.notIn('e', 'filter');
+
+            expect(notInFilter).toBeFalsy();
+        });
+
+        it('When value parameter not equal to any filter word', () => {
+            jest.spyOn(ObjectUtils, 'removeAccents').mockImplementation((value, filter) => value === filter);
+
+            const notInFilter = filters.notIn('d', 'filter');
+
+            expect(notInFilter).toBeTruthy();
+        });
+    });
+
     describe('between filter test', () => {
         checkParametersNullOrUndefined('between');
         it('When value has getTime func and smaller than filter[0]', () => {
