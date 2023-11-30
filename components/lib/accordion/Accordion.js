@@ -5,7 +5,7 @@ import { DomHandler, classNames, IconUtils, mergeProps, ObjectUtils, UniqueCompo
 import { AccordionBase, AccordionTabBase } from './AccordionBase';
 import { ChevronRightIcon } from '../icons/chevronright';
 import { ChevronDownIcon } from '../icons/chevrondown';
-import { PrimeReactContext } from '../api/Api';
+import { PrimeReactContext, ariaLabel } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const AccordionTab = () => {};
