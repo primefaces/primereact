@@ -682,7 +682,7 @@ interface ColumnFilterMetaData {
     /**
      * Type of filter match.
      */
-    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
+    matchMode: 'startsWith' | 'contains' | 'endsWith' | 'equals' | 'notEquals' | 'in' | 'notIn' | 'lt' | 'lte' | 'gt' | 'gte' | 'custom';
 }
 
 interface ColumnFilterMetaDataWithConstraint {
