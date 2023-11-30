@@ -45,7 +45,7 @@ export interface SidebarPassThroughOptions {
     /**
      * Uses to pass attributes to the close icon's DOM element.
      */
-    closeIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
+    closeButtonIcon?: SidebarPassThroughType<React.HTMLAttributes<HTMLSpanElement>>;
     /**
      * Uses to pass attributes to the content's DOM element.
      */
