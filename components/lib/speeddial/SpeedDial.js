@@ -6,12 +6,15 @@ import { useEventListener, useMountEffect, useUpdateEffect } from '../hooks/Hook
 import { MinusIcon } from '../icons/minus';
 import { PlusIcon } from '../icons/plus';
 import { Ripple } from '../ripple/Ripple';
-import { DomHandler, IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, classNames, mergeProps } from '../utils/Utils';
 import { SpeedDialBase } from './SpeedDialBase';
 
 export const SpeedDial = React.memo(
     React.forwardRef((inProps, ref) => {
         const [visibleState, setVisibleState] = React.useState(false);
+        const [idState, setIdState] = React.useState(null);
+        const [focused, setFocused] = React.useState(false);
+        const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
         const context = React.useContext(PrimeReactContext);
         const props = SpeedDialBase.getProps(inProps, context);
         const visible = props.onVisibleChange ? props.visible : visibleState;
@@ -45,6 +48,15 @@ export const SpeedDial = React.memo(
             props.onShow && props.onShow();
         };
 
+        const onFocus = () => {
+            setFocused(true);
+        };
+
+        const onBlur = () => {
+            setFocused(false);
+            setFocusedOptionIndex(-1);
+        };
+
         const hide = () => {
             props.onVisibleChange ? props.onVisibleChange(false) : setVisibleState(false);
             props.onHide && props.onHide();
@@ -65,8 +77,233 @@ export const SpeedDial = React.memo(
             e.preventDefault();
         };
 
+        const onKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                    onArrowDown(event);
+                    break;
+
+                case 'ArrowUp':
+                    onArrowUp(event);
+                    break;
+
+                case 'ArrowLeft':
+                    onArrowLeft(event);
+                    break;
+
+                case 'ArrowRight':
+                    onArrowRight(event);
+                    break;
+
+                case 'Enter':
+                case 'Space':
+                    onEnterKey(event);
+                    break;
+
+                case 'Escape':
+                    onEscapeKey(event);
+                    break;
+
+                case 'Home':
+                    onHomeKey(event);
+                    break;
+
+                case 'End':
+                    onEndKey(event);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onTogglerKeydown = (event) => {
+            switch (event.code) {
+                case 'ArrowDown':
+                case 'ArrowLeft':
+                    onTogglerArrowDown(event);
+
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowRight':
+                    onTogglerArrowUp(event);
+
+                    break;
+
+                case 'Escape':
+                    onEscapeKey();
+
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        const onTogglerArrowUp = (event) => {
+            setFocused(true);
+            DomHandler.focus(listRef.current);
+
+            show();
+            navigatePrevItem(event);
+
+            event.preventDefault();
+        };
+
+        const onTogglerArrowDown = (event) => {
+            setFocused(true);
+            DomHandler.focus(listRef.current);
+
+            show();
+            navigateNextItem(event);
+
+            event.preventDefault();
+        };
+
+        const onEnterKey = (event) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const itemIndex = [...items].findIndex((item) => item.id === focusedOptionIndex);
+
+            onItemClick(event, props.model[itemIndex]);
+            onBlur(event);
+
+            const buttonEl = DomHandler.findSingle(elementRef.current, 'button');
+
+            buttonEl && DomHandler.focus(buttonEl);
+        };
+
+        const onEscapeKey = () => {
+            hide();
+
+            const buttonEl = DomHandler.findSingle(elementRef.current, 'button');
+
+            buttonEl && DomHandler.focus(buttonEl);
+        };
+
+        const onArrowUp = (event) => {
+            let direction = props.direction;
+
+            if (direction === 'up') {
+                navigateNextItem(event);
+            } else if (direction === 'down') {
+                navigatePrevItem(event);
+            } else {
+                navigateNextItem(event);
+            }
+        };
+
+        const onArrowDown = (event) => {
+            let direction = props.direction;
+
+            if (direction === 'up') {
+                navigatePrevItem(event);
+            } else if (direction === 'down') {
+                navigateNextItem(event);
+            } else {
+                navigatePrevItem(event);
+            }
+        };
+
+        const onArrowLeft = (event) => {
+            let direction = props.direction;
+            const leftValidDirections = ['left', 'up-right', 'down-left'];
+            const rightValidDirections = ['right', 'up-left', 'down-right'];
+
+            if (leftValidDirections.includes(direction)) {
+                navigateNextItem(event);
+            } else if (rightValidDirections.includes(direction)) {
+                navigatePrevItem(event);
+            } else {
+                navigatePrevItem(event);
+            }
+        };
+
+        const onArrowRight = (event) => {
+            let direction = props.direction;
+            const leftValidDirections = ['left', 'up-right', 'down-left'];
+            const rightValidDirections = ['right', 'up-left', 'down-right'];
+
+            if (leftValidDirections.includes(direction)) {
+                navigatePrevItem(event);
+            } else if (rightValidDirections.includes(direction)) {
+                navigateNextItem(event);
+            } else {
+                navigateNextItem(event);
+            }
+        };
+
+        const onEndKey = (event) => {
+            event.preventDefault();
+
+            setFocusedOptionIndex(-1);
+            navigatePrevItem(event, -1);
+        };
+
+        const onHomeKey = (event) => {
+            event.preventDefault();
+
+            setFocusedOptionIndex(-1);
+            navigateNextItem(event, -1);
+        };
+
+        const navigateNextItem = (event, index = null) => {
+            const optionIndex = findNextOptionIndex(index || focusedOptionIndex);
+
+            changeFocusedOptionIndex(optionIndex);
+
+            event.preventDefault();
+        };
+
+        const navigatePrevItem = (event, index = null) => {
+            const optionIndex = findPrevOptionIndex(index || focusedOptionIndex);
+
+            changeFocusedOptionIndex(optionIndex);
+
+            event.preventDefault();
+        };
+
+        const changeFocusedOptionIndex = (index) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
+
+            if (filteredItems[index]) {
+                setFocusedOptionIndex(filteredItems[index].getAttribute('id'));
+            }
+        };
+
+        const findPrevOptionIndex = (index) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
+            const newIndex = index === -1 ? filteredItems[filteredItems.length - 1].id : index;
+            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute('id') === newIndex);
+
+            matchedOptionIndex = index === -1 ? filteredItems.length - 1 : matchedOptionIndex - 1;
+
+            return matchedOptionIndex;
+        };
+
+        const findNextOptionIndex = (index) => {
+            const items = DomHandler.find(elementRef.current, '[data-pc-section="menuitem"]');
+            const filteredItems = [...items].filter((item) => !DomHandler.hasClass(DomHandler.findSingle(item, 'a'), 'p-disabled'));
+            const newIndex = index === -1 ? filteredItems[0].id : index;
+            let matchedOptionIndex = filteredItems.findIndex((link) => link.getAttribute('id') === newIndex);
+
+            matchedOptionIndex = index === -1 ? 0 : matchedOptionIndex + 1;
+
+            return matchedOptionIndex;
+        };
+
         const isOutsideClicked = (event) => {
             return elementRef.current && !(elementRef.current.isSameNode(event.target) || elementRef.current.contains(event.target));
+        };
+
+        const isItemActive = (id) => {
+            return focusedOptionIndex === id;
+        };
+
+        const focusedOptionId = () => {
+            return focusedOptionIndex !== -1 ? focusedOptionIndex : null;
         };
 
         const calculateTransitionDelay = (index) => {
@@ -186,8 +423,10 @@ export const SpeedDial = React.memo(
                     href: url || '#',
                     role: 'menuitem',
                     className: classNames(_itemClassName, cx('action', { disabled })),
+                    'aria-label': item.label,
                     style: _itemStyle,
                     target: target,
+                    tabIndex: '-1',
                     'data-pr-tooltip': label,
                     onClick: (e) => onItemClick(e, item)
                 },
@@ -217,9 +456,11 @@ export const SpeedDial = React.memo(
             const menuItemProps = mergeProps(
                 {
                     key: index,
-                    className: cx('menuitem'),
+                    id: `${idState}_${index}`,
+                    className: cx('menuitem', { active: isItemActive(`${idState}_${index}`) }),
                     style: getItemStyle(index),
-                    role: 'none'
+                    'aria-controls': idState + '_item',
+                    role: 'menuitem'
                 },
                 ptm('menuitem')
             );
@@ -238,7 +479,12 @@ export const SpeedDial = React.memo(
                     ref: listRef,
                     className: cx('menu'),
                     style: sx('menu'),
-                    role: 'menu'
+                    role: 'menu',
+                    tabIndex: '-1',
+                    onFocus,
+                    onKeyDown,
+                    onBlur,
+                    'aria-activedescendant': focused ? focusedOptionId() : undefined
                 },
                 ptm('menu')
             );
@@ -269,7 +515,12 @@ export const SpeedDial = React.memo(
                 icon: toggleIcon,
                 onClick: (e) => onClick(e),
                 disabled: props.disabled,
+                onKeyDown: onTogglerKeydown,
                 'aria-label': props['aria-label'],
+                'aria-expanded': visible,
+                'aria-haspopup': true,
+                'aria-controls': idState + '_list',
+                'aria-labelledby': props.ariaLabelledby,
                 pt: ptm('button'),
                 unstyled: props.unstyled,
                 __parentMetadata: {
@@ -310,13 +561,18 @@ export const SpeedDial = React.memo(
             return null;
         };
 
+        React.useEffect(() => {
+            setIdState(props.id || UniqueComponentId());
+        }, [props.id]);
+
         const button = createButton();
         const list = createList();
         const mask = createMask();
         const rootProps = mergeProps(
             {
                 className: classNames(props.className, cx('root', { visible })),
-                style: { ...props.style, ...sx('root') }
+                style: { ...props.style, ...sx('root') },
+                id: idState
             },
             SpeedDialBase.getOtherProps(props),
             ptm('root')
@@ -324,7 +580,7 @@ export const SpeedDial = React.memo(
 
         return (
             <React.Fragment>
-                <div id={props.id} ref={elementRef} {...rootProps}>
+                <div ref={elementRef} {...rootProps}>
                     {button}
                     {list}
                 </div>

@@ -43300,6 +43300,14 @@
                             "description": "Specifies the opening type of actions."
                         },
                         {
+                            "name": "ariaLabelledby",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Identifier of the underlying list element."
+                        },
+                        {
                             "name": "unstyled",
                             "optional": true,
                             "readonly": false,
