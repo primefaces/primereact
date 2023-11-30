@@ -1,13 +1,20 @@
 import sdk from '@stackblitz/sdk';
-import { getCRA, getNextJS } from './templates';
+import { getVite } from './templates';
 
 const useCodeSandbox = (props) => {
     const getSandboxParameters = (sourceType) => {
-        const { files, dependencies, sourceFileName } = props.template === 'cra' ? getCRA(props, sourceType) : getNextJS(props, sourceType);
+        const sandboxDependencies = {
+            vite: '^4.0.0',
+            '@vitejs/plugin-react': '^4.0.0'
+        };
+        const { files, dependencies, sourceFileName } = getVite({ dependencies: sandboxDependencies, ...props }, sourceType);
 
         files['sandbox.config.json'] = {
             content: {
-                infiniteLoopProtection: false
+                infiniteLoopProtection: false,
+                container: {
+                    node: '16'
+                }
             }
         };
 
@@ -37,7 +44,7 @@ const useCodeSandbox = (props) => {
 };
 
 export const useStackBlitz = (props) => {
-    const getStackBlitzParameters = (sourceType) => (props.template === 'cra' ? getCRA(props, sourceType) : getNextJS(props, sourceType));
+    const getStackBlitzParameters = (sourceType) => getVite(props, sourceType);
 
     return (sourceType, errorCallback) => {
         const stackBlitzParameters = getStackBlitzParameters(sourceType);
@@ -54,7 +61,7 @@ export const useStackBlitz = (props) => {
 
         const primereactproject = {
             title: props.title || 'PrimeReact Demo',
-            template: props.template === 'cra' ? 'create-react-app' : 'node',
+            template: 'node',
             description: props.embedded
                 ? "This example demonstrates how to style components with Tailwind CSS using PrimeReact's unstyled property. As mentioned in the PrimeReact documentation, components can be styled or have HTML attributes added using a global or inline pass through approach. In this example, we utilize the global PT approach with Tailwind CSS."
                 : '**' +
@@ -66,7 +73,7 @@ export const useStackBlitz = (props) => {
 
         if (props.embedded) {
             sdk.embedProject('embed', primereactproject, {
-                openFile: 'src/App.js',
+                openFile: 'src/App.jsx',
                 view: 'default',
                 height: '800px'
             });
@@ -81,7 +88,7 @@ export const useStackBlitz = (props) => {
 
 /**
  * @todo Write the documentation.
- * @param {string} props.template - valid values are 'cra' and 'nextjs'.
+ * @param {string} props.template - valid values are 'vite'.
  * @returns
  */
 export const useCodeEditor = (props) => {
