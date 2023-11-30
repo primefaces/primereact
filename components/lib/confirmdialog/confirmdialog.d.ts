@@ -8,6 +8,7 @@
  *
  */
 import * as React from 'react';
+import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
 import { ButtonPassThroughOptions } from '../button/button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { DialogProps } from '../dialog';
@@ -88,7 +89,7 @@ export interface ConfirmDialogPassThroughOptions {
     /**
      * Used to control React Transition API.
      */
-    transition?: OverlayPanelPassThroughTransitionType;
+    transition?: ConfirmDialogPassThroughTransitionType;
 }
 
 /**

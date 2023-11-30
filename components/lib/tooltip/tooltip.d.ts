@@ -21,6 +21,7 @@ export declare type TooltipPassThroughType<T> = PassThroughType<T, TooltipPassTh
 export interface TooltipPassThroughMethodOptions {
     props: TooltipProps;
     state: TooltipState;
+    context: TooltipContext;
 }
 
 /**
@@ -45,6 +46,32 @@ export interface TooltipPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline context in Tooltip component.
+ */
+export interface TooltipContext {
+    /**
+     * Right aligned tooltip as a boolean.
+     * @defaultValue false
+     */
+    right: boolean;
+    /**
+     * Right aligned tooltip as a boolean.
+     * @defaultValue false
+     */
+    left: boolean;
+    /**
+     * Right aligned tooltip as a boolean.
+     * @defaultValue false
+     */
+    top: boolean;
+    /**
+     * Right aligned tooltip as a boolean.
+     * @defaultValue false
+     */
+    bottom: boolean;
 }
 
 /**
