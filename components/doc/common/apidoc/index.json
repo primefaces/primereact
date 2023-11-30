@@ -14318,7 +14318,7 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
-                "ConfirmDialogThroughMethodOptions": {
+                "ConfirmDialogPassThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
                     "props": [
@@ -14431,6 +14431,13 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -14556,7 +14563,10 @@
             "description": "Defines the custom types used by the module.",
             "values": {
                 "ConfirmDialogPassThroughType": {
-                    "values": "PassThroughType<T, ConfirmDialogThroughMethodOptions>"
+                    "values": "PassThroughType<T, ConfirmDialogPassThroughMethodOptions>"
+                },
+                "ConfirmDialogPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -42354,7 +42364,7 @@
                             "description": "Uses to pass attributes to the close button's DOM element."
                         },
                         {
-                            "name": "closeIcon",
+                            "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
@@ -48137,6 +48147,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TooltipState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TooltipContext"
                         }
                     ],
                     "callbacks": []
@@ -48172,6 +48188,41 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TooltipContext": {
+                    "description": "Defines current inline context in Tooltip component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "right",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "left",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "top",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "bottom",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
                         }
                     ],
                     "callbacks": []
