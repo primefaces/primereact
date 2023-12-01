@@ -7,7 +7,7 @@ import { CodeHighlight } from './codehighlight';
 export function DocSectionCode(props) {
     const [codeMode, setCodeMode] = useState('basic');
     const [codeLang, setCodeLang] = useState(props.code['javascript'] ? 'javascript' : 'basic');
-    const codeEditor = useCodeEditor({ ...props, template: 'cra' });
+    const codeEditor = useCodeEditor({ ...props, template: 'vite' });
 
     useEffect(() => {
         if (props.embedded) {
