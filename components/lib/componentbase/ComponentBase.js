@@ -504,7 +504,6 @@ export const ComponentBase = {
             const datasetPrefix = 'data-pc-';
             const fkey = isNestedParam ? ObjectUtils.toFlatCase(originalkey.split('.')[1]) : originalkey;
             const isTransition = fkey === 'transition' || (/./g.test(originalkey) && !!(originalkey.split('.')[1] === 'transition'));
-            
 
             const getHostInstance = (params) => {
                 return params?.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
