@@ -169,7 +169,7 @@ const Tailwind = {
         },
         body: 'p-5', // Padding.
         title: 'text-2xl font-bold mb-2', // Font size, font weight, and margin bottom.
-        subtitle: {
+        subTitle: {
             className: classNames(
                 'font-normal mb-2 text-gray-600', // Font weight, margin bottom, and text color.
                 'dark:text-white/60 ' //dark
@@ -516,10 +516,10 @@ const Tailwind = {
         },
         chooseIcon: 'mr-2 inline-block',
         chooseButtonLabel: 'flex-1 font-bold',
-        uploadbutton: {
+        uploadButton: {
             icon: 'mr-2'
         },
-        cancelbutton: {
+        cancelButton: {
             icon: 'mr-2'
         },
         content: {
@@ -531,7 +531,7 @@ const Tailwind = {
         thumbnail: 'shrink-0',
         fileName: 'mb-2',
         fileSize: 'mr-2',
-        uploadicon: 'mr-2'
+        uploadIcon: 'mr-2'
     },
     //Messages
     messages: {
@@ -750,8 +750,8 @@ const Tailwind = {
         menu: {
             className: classNames('outline-none', 'py-1	px-0 rounded-md	 list-none bg-white	border-none shadow-lg')
         },
-        menulist: 'm-0 p-0 border-none outline-none no-underline list-none',
-        menubutton: {
+        menuList: 'm-0 p-0 border-none outline-none no-underline list-none',
+        menuButton: {
             root: ({ parent }) => ({
                 className: classNames('rounded-l-none', { 'rounded-r-full': parent.props.rounded })
             }),
@@ -785,15 +785,15 @@ const Tailwind = {
                 className: classNames({ 'rounded-tr-none rounded-br-none': props.showButtons && props.buttonLayout == 'stacked' })
             })
         },
-        buttongroup: ({ props }) => ({
+        buttonGroup: ({ props }) => ({
             className: classNames({ 'flex flex-col': props.showButtons && props.buttonLayout == 'stacked' })
         }),
-        incrementbutton: ({ props }) => ({
+        incrementButton: ({ props }) => ({
             className: classNames('flex !items-center !justify-center', {
                 'rounded-br-none rounded-bl-none rounded-bl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
             })
         }),
-        decrementbutton: ({ props }) => ({
+        decrementButton: ({ props }) => ({
             className: classNames('flex !items-center !justify-center', {
                 'rounded-tr-none rounded-tl-none rounded-tl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
             })
@@ -837,7 +837,7 @@ const Tailwind = {
         label: {
             className: classNames('block whitespace-nowrap overflow-hidden flex flex-1 w-1 text-overflow-ellipsis cursor-pointer', 'bg-transparent border-0 p-3 text-gray-700 dark:text-white/80', 'appearance-none rounded-md')
         },
-        dropdownbutton: {
+        dropdownButton: {
             className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
         },
         panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
@@ -855,7 +855,7 @@ const Tailwind = {
         content: {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
-        optiongroupicon: 'ml-auto',
+        optionGroupIcon: 'ml-auto',
         transition: TRANSITIONS.overlay
     },
     inputmask: {
@@ -867,7 +867,7 @@ const Tailwind = {
                 'opacity-60 select-none pointer-events-none cursor-default': props.disabled
             })
         }),
-        cancelitem: ({ context }) => ({
+        cancelItem: ({ context }) => ({
             className: classNames(
                 'inline-flex items-center cursor-pointer'
 
@@ -876,7 +876,7 @@ const Tailwind = {
                 // }
             )
         }),
-        cancelicon: {
+        cancelIcon: {
             className: classNames('text-red-500', 'w-5 h-5', 'transition duration-200 ease-in')
         },
         item: ({ props, context }) => ({
@@ -891,10 +891,10 @@ const Tailwind = {
                 }
             )
         }),
-        officon: {
+        offIcon: {
             className: classNames('text-gray-700 hover:text-blue-400', 'w-5 h-5', 'transition duration-200 ease-in')
         },
-        onicon: {
+        onIcon: {
             className: classNames('text-blue-500', 'w-5 h-5', 'transition duration-200 ease-in')
         }
     },
@@ -954,7 +954,7 @@ const Tailwind = {
         }),
         panel: 'p-5 bg-white dark:bg-gray-900 text-gray-700 dark:text-white/80 shadow-md rounded-md',
         meter: 'mb-2 bg-gray-300 dark:bg-gray-700 h-3',
-        meterlabel: ({ state, props }) => ({
+        meterLabel: ({ state, props }) => ({
             className: classNames(
                 'transition-width duration-1000 ease-in-out h-full',
                 {
@@ -965,10 +965,10 @@ const Tailwind = {
                 { 'pr-[2.5rem] ': props.toggleMask }
             )
         }),
-        showicon: {
+        showIcon: {
             className: classNames('absolute top-1/2 -mt-2', 'right-3 text-gray-600 dark:text-white/70')
         },
-        hideicon: {
+        hideIcon: {
             className: classNames('absolute top-1/2 -mt-2', 'right-3 text-gray-600 dark:text-white/70')
         },
         transition: TRANSITIONS.overlay
@@ -1098,14 +1098,14 @@ const Tailwind = {
                 'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
             })
         }),
-        itemgroup: {
+        itemGroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
         },
         header: {
             className: classNames('p-3 border-b border-gray-300 text-gray-700 bg-gray-100 mt-0 rounded-tl-lg rounded-tr-lg', 'dark:bg-gray-800 dark:text-white/80 dark:border-blue-900/40')
         },
-        filtercontainer: 'relative',
-        filterinput: {
+        filterContainer: 'relative',
+        filterInput: {
             className: classNames(
                 'pr-7 -mr-7',
                 'w-full',
@@ -1114,8 +1114,8 @@ const Tailwind = {
                 'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        filtericon: '-mt-2 absolute top-1/2',
-        clearicon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
+        filterIcon: '-mt-2 absolute top-1/2',
+        clearIcon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
         transition: TRANSITIONS.overlay
     },
     calendar: {
@@ -1474,7 +1474,7 @@ const Tailwind = {
         token: {
             className: classNames('py-1 px-2 mr-2 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white/80 rounded-full', 'cursor-default inline-flex items-center')
         },
-        dropdownbutton: {
+        dropdownButton: {
             root: 'rounded-tl-none rounded-bl-none'
         },
         panel: {
