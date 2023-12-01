@@ -501,9 +501,10 @@ export const ComponentBase = {
             const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
             const isNestedParam = /./g.test(originalkey) && !!params[originalkey.split('.')[0]];
-            const isTransition = fkey === 'transition' || (/./g.test(originalkey) && !!(originalkey.split('.')[1] === 'transition'));
             const datasetPrefix = 'data-pc-';
             const fkey = isNestedParam ? ObjectUtils.toFlatCase(originalkey.split('.')[1]) : originalkey;
+            const isTransition = fkey === 'transition' || (/./g.test(originalkey) && !!(originalkey.split('.')[1] === 'transition'));
+            
 
             const getHostInstance = (params) => {
                 return params?.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
