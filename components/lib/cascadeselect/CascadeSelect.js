@@ -338,7 +338,7 @@ export const CascadeSelect = React.memo(
                     ref: labelRef,
                     className: cx('label', { label })
                 },
-                ptm('label')
+                ptm('label', { label })
             );
 
             return <span {...labelProps}>{label}</span>;
@@ -443,7 +443,7 @@ export const CascadeSelect = React.memo(
                     onClick: (e) => onClick(e)
                 },
                 otherProps,
-                ptm('root')
+                ptm('root', { focusedState, overlayVisibleState })
             );
 
             return (
