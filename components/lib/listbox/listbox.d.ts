@@ -8,14 +8,14 @@
  *
  */
 import * as React from 'react';
+import { ComponentHooks } from '../componentbase/componentbase';
+import { InputTextPassThroughOptions } from '../inputtext/inputtext';
+import { PassThroughOptions } from '../passthrough';
 import { SelectItemOptionsType } from '../selectitem/selectitem';
 import { TooltipPassThroughOptions } from '../tooltip/tooltip';
 import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { IconType, PassThroughType } from '../utils/utils';
 import { VirtualScroller, VirtualScrollerPassThroughOptions, VirtualScrollerProps } from '../virtualscroller';
-import { InputTextPassThroughOptions } from '../inputtext/inputtext';
-import { PassThroughOptions } from '../passthrough';
-import { ComponentHooks } from '../componentbase/componentbase';
 
 export declare type ListBoxPassThroughType<T> = PassThroughType<T, ListBoxPassThroughMethodOptions>;
 
@@ -109,6 +109,11 @@ export interface ListBoxContext {
      * @defaultValue false
      */
     selected: boolean;
+    /**
+     * Current focused state of the item as a boolean.
+     * @defaultValue false
+     */
+    focused: boolean;
     /**
      * Current disabled state of the item as a boolean.
      * @defaultValue false
