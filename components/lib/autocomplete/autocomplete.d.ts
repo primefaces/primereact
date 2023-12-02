@@ -216,6 +216,11 @@ export interface AutoCompleteContext {
      * @defaultValue false
      */
     selected: boolean;
+    /**
+     * Current disabled state of the item as a boolean.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**

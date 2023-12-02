@@ -7,10 +7,13 @@ export function TailwindDoc(props) {
         basic: `
 const TRANSITIONS = {
     overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
+        timeout: 150,
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-100',
+            exitActive: '!opacity-0 transition-opacity duration-150 ease-linear'
+        }
     }
 };
 
@@ -33,7 +36,7 @@ const Tailwind = {
                 'focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] hover:border-blue-500 focus:outline-none dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
             )
         },
-        inputtoken: {
+        inputToken: {
             className: classNames('py-0.375rem px-0', 'flex-1 inline-flex')
         },
         input: ({ props }) => ({
@@ -53,7 +56,7 @@ const Tailwind = {
         token: {
             className: classNames('py-1 px-2 mr-2 bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-white/80 rounded-full', 'cursor-default inline-flex items-center')
         },
-        dropdownbutton: {
+        dropdownButton: {
             root: 'rounded-tl-none rounded-bl-none'
         },
         panel: {
@@ -61,20 +64,14 @@ const Tailwind = {
         },
         list: 'py-3 list-none m-0',
         item: ({ context }) => ({
-            className: classNames(
-                'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap',
-                'm-0 p-3 border-0  transition-shadow duration-200 rounded-none',
-                'dark:text-white/80 dark:hover:bg-gray-800',
-                'hover:text-gray-700 hover:bg-gray-200',
-                {
-                    'text-gray-700': !context.focused && !context.selected,
-                    'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90': context.focused && !context.selected,
-                    'bg-blue-500 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                    'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-                }
-            )
+            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.selected,
+                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
+                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': context.selected
+            })
         }),
-        itemgroup: {
+        itemGroup: {
             className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
         },
         transition: TRANSITIONS.overlay

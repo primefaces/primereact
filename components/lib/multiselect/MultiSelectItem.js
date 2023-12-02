@@ -4,7 +4,7 @@ import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
-    const [focused, setFocused] = React.useState(false);
+    const [focusedState, setFocusedState] = React.useState(false);
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
@@ -13,7 +13,7 @@ export const MultiSelectItem = React.memo((props) => {
             context: {
                 selected: props.selected,
                 disabled: props.disabled,
-                focused: focused
+                focused: focusedState
             }
         });
     };
@@ -40,11 +40,11 @@ export const MultiSelectItem = React.memo((props) => {
     };
 
     const onFocus = (event) => {
-        setFocused(true);
+        setFocusedState(true);
     };
 
     const onBlur = (event) => {
-        setFocused(false);
+        setFocusedState(false);
     };
 
     const checkboxIconProps = mergeProps(
