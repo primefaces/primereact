@@ -4,6 +4,7 @@ import { DomHandler, useMergeProps, ObjectUtils } from '../utils/Utils';
 
 export const ListBoxItem = React.memo((props) => {
     const mergeProps = useMergeProps();
+    const [focusedState, setFocusedState] = React.useState(false);
     const {
         ptCallbacks: { ptm, cx }
     } = props;
@@ -13,9 +14,18 @@ export const ListBoxItem = React.memo((props) => {
             hostName: props.hostName,
             context: {
                 selected: props.selected,
-                disabled: props.disabled
+                disabled: props.disabled,
+                focused: focusedState
             }
         });
+    };
+
+    const onFocus = (event) => {
+        setFocusedState(true);
+    };
+
+    const onBlur = (event) => {
+        setFocusedState(false);
     };
 
     const onClick = (event) => {
@@ -92,6 +102,8 @@ export const ListBoxItem = React.memo((props) => {
             onClick: onClick,
             onTouchEnd: onTouchEnd,
             onKeyDown: onKeyDown,
+            onFocus: onFocus,
+            onBlur: onBlur,
             tabIndex: '-1',
             'aria-label': props.label,
             key: props.label,

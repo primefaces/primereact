@@ -342,6 +342,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "AccordionPassThroughMethodOptions"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "AccordionContext"
                         }
                     ],
                     "callbacks": []
@@ -412,6 +418,55 @@
                             "readonly": false,
                             "type": "AccordionPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "AccordionContext": {
+                    "description": "Defines current inline context in Accordion component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Opened tab index."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total number of tabs"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the first tab?"
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the last tab?"
+                        },
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently selected."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently disabled."
                         }
                     ],
                     "callbacks": []
@@ -4514,6 +4569,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current selection state of the item as a boolean."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the item as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -9343,6 +9405,13 @@
                             "readonly": false,
                             "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLUListElement>>",
                             "description": "Uses to pass attributes to the list's DOM element."
+                        },
+                        {
+                            "name": "sublist",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "CascadeSelectPassThroughType<HTMLAttributes<HTMLUListElement>>",
+                            "description": "Uses to pass attributes to the sub-list's DOM element."
                         },
                         {
                             "name": "item",
@@ -14318,7 +14387,7 @@
         "interfaces": {
             "description": "Defines the custom interfaces used by the module.",
             "values": {
-                "ConfirmDialogThroughMethodOptions": {
+                "ConfirmDialogPassThroughMethodOptions": {
                     "description": "Custom passthrough(pt) option method.",
                     "relatedProp": "",
                     "props": [
@@ -14431,6 +14500,13 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        },
+                        {
+                            "name": "transition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ConfirmDialogPassThroughTransitionType",
+                            "description": "Used to control React Transition API."
                         }
                     ],
                     "callbacks": []
@@ -14556,7 +14632,10 @@
             "description": "Defines the custom types used by the module.",
             "values": {
                 "ConfirmDialogPassThroughType": {
-                    "values": "PassThroughType<T, ConfirmDialogThroughMethodOptions>"
+                    "values": "PassThroughType<T, ConfirmDialogPassThroughMethodOptions>"
+                },
+                "ConfirmDialogPassThroughTransitionType": {
+                    "values": "ReactCSSTransitionProps | Function | undefined"
                 }
             }
         }
@@ -16945,7 +17024,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when the cancel icon is clicked on row editing mode."
+                            "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows."
                         },
                         {
                             "name": "onRowEditComplete",
@@ -19888,7 +19967,7 @@
                                 }
                             ],
                             "returnType": "void",
-                            "description": "Callback to invoke when the cancel icon is clicked on row editing mode."
+                            "description": "Callback to invoke when the editing icon is clicked on row editing mode. Use in conjuction with editingRows value from the Datatable to programmatically control editing rows."
                         },
                         {
                             "name": "onRowEditComplete",
@@ -25898,22 +25977,33 @@
                     "returnType": "boolean",
                     "description": "Custom hook to detect if window size matches or not."
                 },
-                "useOnEscapeKey": {
-                    "name": "useOnEscapeKey",
+                "useGlobalOnEscapeKey": {
+                    "name": "useGlobalOnEscapeKey",
                     "parameters": [
                         {
-                            "name": "ref",
-                            "type": "RefObject<Element>",
-                            "description": "The ref of the element to detect escape button click."
-                        },
-                        {
-                            "name": "callback",
-                            "type": "any",
-                            "description": "The callback to run when escape button clicked."
+                            "name": "props",
+                            "type": "Object"
                         }
                     ],
                     "returnType": "void",
-                    "description": "Custom hook to use detect escape button click."
+                    "description": "Custom hook to use detect global escape button click."
+                },
+                "useDisplayOrder": {
+                    "name": "useDisplayOrder",
+                    "parameters": [
+                        {
+                            "name": "group",
+                            "type": "string",
+                            "description": ""
+                        },
+                        {
+                            "name": "isVisible",
+                            "type": "boolean",
+                            "description": ""
+                        }
+                    ],
+                    "returnType": "number | undefined",
+                    "description": "Custom hook to use display order of component of one and the same group"
                 }
             }
         },
@@ -31463,6 +31553,13 @@
                             "description": "Current selection state of the item as a boolean."
                         },
                         {
+                            "name": "focused",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current focused state of the item as a boolean."
+                        },
+                        {
                             "name": "disabled",
                             "optional": false,
                             "readonly": false,
@@ -34728,6 +34825,13 @@
                             "readonly": false,
                             "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's container DOM element."
                         },
                         {
                             "name": "headerCheckbox",
@@ -42349,7 +42453,7 @@
                             "description": "Uses to pass attributes to the close button's DOM element."
                         },
                         {
-                            "name": "closeIcon",
+                            "name": "closeButtonIcon",
                             "optional": true,
                             "readonly": false,
                             "type": "SidebarPassThroughType<HTMLAttributes<HTMLSpanElement>>",
@@ -45596,6 +45700,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TabViewPassThroughMethodOptions"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TabViewContext"
                         }
                     ],
                     "callbacks": []
@@ -45645,6 +45755,55 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TabViewContext": {
+                    "description": "Defines current inline context in Tabview component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "index",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Opened tab index."
+                        },
+                        {
+                            "name": "count",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Total number of tabs"
+                        },
+                        {
+                            "name": "first",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the first tab?"
+                        },
+                        {
+                            "name": "last",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this the last tab?"
+                        },
+                        {
+                            "name": "selected",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently selected."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Is this tab currently disabled."
                         }
                     ],
                     "callbacks": []
@@ -48132,6 +48291,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "TooltipState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "TooltipContext"
                         }
                     ],
                     "callbacks": []
@@ -48167,6 +48332,41 @@
                             "readonly": false,
                             "type": "ComponentHooks",
                             "description": "Used to manage all lifecycle hooks"
+                        }
+                    ],
+                    "callbacks": []
+                },
+                "TooltipContext": {
+                    "description": "Defines current inline context in Tooltip component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "right",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "left",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "top",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
+                        },
+                        {
+                            "name": "bottom",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Right aligned tooltip as a boolean."
                         }
                     ],
                     "callbacks": []

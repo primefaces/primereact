@@ -131,7 +131,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
                 'data-p-highlight': selected,
                 'data-p-disabled': getTabProp(tab, 'disabled')
             },
-            getTabPT(tab, 'tab.header', index)
+            getTabPT(tab, 'header', index)
         );
 
         const headerActionProps = mergeProps(

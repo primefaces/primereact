@@ -84,6 +84,10 @@ export interface CascadeSelectPassThroughOptions {
      */
     list?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
     /**
+     * Uses to pass attributes to the sub-list's DOM element.
+     */
+    sublist?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLUListElement>>;
+    /**
      * Uses to pass attributes to the item's DOM element.
      */
     item?: CascadeSelectPassThroughType<React.HTMLAttributes<HTMLLIElement>>;

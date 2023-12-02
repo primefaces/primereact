@@ -81,6 +81,7 @@ interface TabPanelHeaderTemplateOptions {
 export interface TabPanelPassThroughMethodOptions {
     props: TabPanelProps;
     parent: TabViewPassThroughMethodOptions;
+    context: TabViewContext;
 }
 
 /**
@@ -113,6 +114,40 @@ export interface TabPanelPassThroughOptions {
      * @see {@link ComponentHooks}
      */
     hooks?: ComponentHooks;
+}
+
+/**
+ * Defines current inline context in Tabview component.
+ */
+export interface TabViewContext {
+    /**
+     * Opened tab index.
+     */
+    index: number;
+    /**
+     * Total number of tabs
+     */
+    count: number;
+    /**
+     * Is this the first tab?
+     * @defaultValue false
+     */
+    first: boolean;
+    /**
+     * Is this the last tab?
+     * @defaultValue false
+     */
+    last: boolean;
+    /**
+     * Is this tab currently selected.
+     * @defaultValue false
+     */
+    selected: boolean;
+    /**
+     * Is this tab currently disabled.
+     * @defaultValue false
+     */
+    disabled: boolean;
 }
 
 /**

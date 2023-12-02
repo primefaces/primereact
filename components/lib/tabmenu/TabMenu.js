@@ -20,16 +20,21 @@ export const TabMenu = React.memo(
         const tabsRef = React.useRef({});
         const activeIndex = props.onTabChange ? props.activeIndex : activeIndexState;
 
-        const { ptm, cx, isUnstyled } = TabMenuBase.setMetaData({
+        const metaData = {
             props,
             state: {
                 id: idState,
                 activeIndex: activeIndexState
             }
+        };
+
+        const { ptm, cx, isUnstyled } = TabMenuBase.setMetaData({
+            ...metaData
         });
 
         const getPTOptions = (key, item, index) => {
             return ptm(key, {
+                parent: metaData,
                 context: {
                     item,
                     index
