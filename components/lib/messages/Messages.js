@@ -3,7 +3,7 @@ import { TransitionGroup } from 'react-transition-group';
 import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { ObjectUtils, classNames, mergeProps } from '../utils/Utils';
+import { ObjectUtils, mergeProps } from '../utils/Utils';
 import { MessagesBase } from './MessagesBase';
 import { UIMessage } from './UIMessage';
 
@@ -103,7 +103,7 @@ export const Messages = React.memo(
 
         const transitionProps = mergeProps(
             {
-                classNames: classNames('p-message', ptCallbacks.cx('transition')),
+                classNames: ptCallbacks.cx('uimessage.transition'),
                 unmountOnExit: true,
                 timeout: { enter: 300, exit: 300 },
                 options: props.transitionOptions
