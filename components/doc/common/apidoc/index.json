@@ -4569,6 +4569,13 @@
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current selection state of the item as a boolean."
+                        },
+                        {
+                            "name": "disabled",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Current disabled state of the item as a boolean."
                         }
                     ],
                     "callbacks": []
@@ -34818,6 +34825,13 @@
                             "readonly": false,
                             "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
                             "description": "Uses to pass attributes to the header's DOM element."
+                        },
+                        {
+                            "name": "headerCheckboxContainer",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "MultiSelectPassThroughType<HTMLAttributes<HTMLDivElement>>",
+                            "description": "Uses to pass attributes to the header checkbox's container DOM element."
                         },
                         {
                             "name": "headerCheckbox",
