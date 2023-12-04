@@ -7,8 +7,8 @@ export function TailwindDoc(props) {
         basic: `
 const Tailwind = {    
     picklist: {
-        root: 'flex',
-        controls: 'flex flex-col justify-center p-5',
+        root: 'flex flex-col xl:flex-row',
+        controls: 'flex flex-row xl:flex-col justify-center p-5',
         moveUpButton: {
             root: {
                 className: classNames(
@@ -16,7 +16,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -29,7 +29,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -42,7 +42,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -55,7 +55,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -81,7 +81,7 @@ const Tailwind = {
                 'text-gray-600 dark:bg-blue-900/40': !context.selected
             })
         }),
-        buttons: 'flex flex-col justify-center p-5',
+        buttons: 'flex flex-row xl:flex-col justify-center p-5',
         movetotargetbutton: {
             root: {
                 className: classNames(
@@ -89,7 +89,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -102,7 +102,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -115,7 +115,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -128,7 +128,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -200,7 +200,7 @@ export default function UnstyledDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1400px"
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }} />
         </div>
     );

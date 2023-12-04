@@ -40,7 +40,7 @@ export function PTDoc(props) {
     target={target}
     onChange={onChange}
     itemTemplate={itemTemplate}
-    breakpoint="1400px"
+    breakpoint="1280px"
     sourceHeader="Available"
     targetHeader="Selected"
     sourceStyle={{ height: '24rem' }}
@@ -98,7 +98,7 @@ export default function PTDemo() {
                 target={target}
                 onChange={onChange}
                 itemTemplate={itemTemplate}
-                breakpoint="1400px"
+                breakpoint="1280px"
                 sourceHeader="Available"
                 targetHeader="Selected"
                 sourceStyle={{ height: '24rem' }}
@@ -172,7 +172,7 @@ export default function PTDemo() {
                 target={target}
                 onChange={onChange}
                 itemTemplate={itemTemplate}
-                breakpoint="1400px"
+                breakpoint="1280px"
                 sourceHeader="Available"
                 targetHeader="Selected"
                 sourceStyle={{ height: '24rem' }}
@@ -219,7 +219,7 @@ export default function PTDemo() {
                     target={target}
                     onChange={onChange}
                     itemTemplate={itemTemplate}
-                    breakpoint="1400px"
+                    breakpoint="1280px"
                     sourceHeader="Available"
                     targetHeader="Selected"
                     sourceStyle={{ height: '24rem' }}
