@@ -952,7 +952,8 @@
                             "returnType": "void",
                             "description": "This method is used to change the theme dynamically."
                         }
-                    ]
+                    ],
+                    "extendedBy": "CascadeSelectContext"
                 },
                 "PrimeReactPTOptions": {
                     "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag globally for all components.",
@@ -9314,6 +9315,12 @@
                             "optional": false,
                             "readonly": false,
                             "type": "CascadeSelectState"
+                        },
+                        {
+                            "name": "context",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "CascadeSelectContext"
                         }
                     ],
                     "callbacks": []
@@ -9324,27 +9331,270 @@
                     "props": [
                         {
                             "name": "focused",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current focused state as a boolean."
                         },
                         {
                             "name": "overlayVisible",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "boolean",
                             "description": "Current overlay visible state as a boolean."
                         },
                         {
                             "name": "attributeSelector",
-                            "optional": false,
+                            "optional": true,
                             "readonly": false,
                             "type": "string",
                             "description": "Current overlay attributeSelector state as a string."
+                        },
+                        {
+                            "name": "selected",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "For items, this is the state of the item."
+                        },
+                        {
+                            "name": "grouped",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "For items, this is whether it is a group item or not."
                         }
                     ],
                     "callbacks": []
+                },
+                "CascadeSelectContext": {
+                    "description": "Defines current inline context in CascadeSelect component.",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "appendTo",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "AppendToType",
+                            "description": "This option allows components with overlays like dropdowns or popups to be mounted into either the component or any DOM element, such as document body and self."
+                        },
+                        {
+                            "name": "autoZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                        },
+                        {
+                            "name": "cssTransition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "PrimeReact components utilize \"react-transition-group\" internally to implement animations. Setting \"cssTransition\" to \"false\" disables all animations."
+                        },
+                        {
+                            "name": "filterMatchModeOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "FilterMatchModeOptions",
+                            "description": "Default filter modes to display on DataTable filter menus."
+                        },
+                        {
+                            "name": "hideOverlaysOnDocumentScrolling",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Define behavior if the browser window is scrolled while displaying an overlay panel like a Dropdown or Calendar. Depending on your organization's accessibility needs some prefer panels to be closed on scrolling and some prefer the overlay follow the scroll."
+                        },
+                        {
+                            "name": "inputStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "InputStyleType",
+                            "description": "Input fields have two styles: default (outlined with borders) and filled (background-colored). Applying 'p-input-filled' to an input's ancestor enables the filled style."
+                        },
+                        {
+                            "name": "locale",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The locale configuration sets up the language and region specific preferences."
+                        },
+                        {
+                            "name": "nonce",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "The nonce value to use on dynamically generated style elements."
+                        },
+                        {
+                            "name": "nullSortOrder",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "number",
+                            "description": "Determines how null values are sorted."
+                        },
+                        {
+                            "name": "ripple",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "Ripple is an optional animation for the supported components such as buttons."
+                        },
+                        {
+                            "name": "zIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "ZIndexOptions",
+                            "description": "ZIndexes are managed automatically to make sure layering of overlay components work seamlessly when combining multiple components. When autoZIndex is false, each group increments its zIndex within itself."
+                        },
+                        {
+                            "name": "pt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PrimeReactPTOptions",
+                            "description": "This option allows to direct implementation of all relevant attributes (e.g., style, classnames) within the respective HTML tag."
+                        },
+                        {
+                            "name": "ptOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "PassThroughOptions",
+                            "description": "Used to configure passthrough(pt) options of the component."
+                        },
+                        {
+                            "name": "unstyled",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "boolean",
+                            "description": "When enabled, it removes all of components styles in the core."
+                        },
+                        {
+                            "name": "setAppendTo",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<AppendToType>>",
+                            "description": "Sets the \"appendTo\" state of the context."
+                        },
+                        {
+                            "name": "setAutoZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"autoZIndex\" state of the context."
+                        },
+                        {
+                            "name": "setCssTransition",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"cssTransition\" state of the context."
+                        },
+                        {
+                            "name": "setFilterMatchModeOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<FilterMatchModeOptions>>",
+                            "description": "Sets the \"filterMatchModeOptions\" state of the context."
+                        },
+                        {
+                            "name": "setHideOverlaysOnDocumentScrolling",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"hideOverlaysOnDocumentScrolling\" state of the context."
+                        },
+                        {
+                            "name": "setInputStyle",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<InputStyleType>>",
+                            "description": "Sets the \"inputStyle\" state of the context."
+                        },
+                        {
+                            "name": "setLocale",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<string>>",
+                            "description": "Sets the \"locale\" state of the context."
+                        },
+                        {
+                            "name": "setNonce",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<string>>",
+                            "description": "Sets the \"nonce\" state of the context."
+                        },
+                        {
+                            "name": "setNullSortOrder",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<number>>",
+                            "description": "Sets the \"nullSortOrder\" state of the context."
+                        },
+                        {
+                            "name": "setRipple",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<boolean>>",
+                            "description": "Sets the \"ripple\" state of the context."
+                        },
+                        {
+                            "name": "setZIndex",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<ZIndexOptions>>",
+                            "description": "Sets the \"zIndex\" state of the context."
+                        },
+                        {
+                            "name": "setPt",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "Dispatch<SetStateAction<PrimeReactPTOptions>>",
+                            "description": "Sets the \"pt\" state of the context."
+                        },
+                        {
+                            "name": "label",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Label of the currently selected item"
+                        }
+                    ],
+                    "callbacks": [
+                        {
+                            "name": "changeTheme",
+                            "parameters": [
+                                {
+                                    "name": "theme",
+                                    "optional": true,
+                                    "type": "string",
+                                    "description": "The name of the theme to be applied."
+                                },
+                                {
+                                    "name": "newTheme",
+                                    "optional": true,
+                                    "type": "string",
+                                    "description": "The name of the new theme to be applied."
+                                },
+                                {
+                                    "name": "linkElementId",
+                                    "optional": true,
+                                    "type": "string",
+                                    "description": "The id of the link element to be updated."
+                                },
+                                {
+                                    "name": "callback",
+                                    "optional": true,
+                                    "type": "Function",
+                                    "description": "Callback to invoke when the theme change is completed."
+                                }
+                            ],
+                            "returnType": "void",
+                            "description": "This method is used to change the theme dynamically."
+                        }
+                    ],
+                    "extendedTypes": "APIOptions"
                 },
                 "CascadeSelectPassThroughOptions": {
                     "description": "Custom passthrough(pt) options.",
