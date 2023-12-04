@@ -23,6 +23,9 @@ export const CascadeSelect = React.memo(
                 focused: focusedState,
                 overlayVisible: overlayVisibleState,
                 attributeSelector: attributeSelectorState
+            },
+            context: {
+                ...context
             }
         });
 
@@ -338,7 +341,7 @@ export const CascadeSelect = React.memo(
                     ref: labelRef,
                     className: cx('label', { label })
                 },
-                ptm('label')
+                ptm('label', { context: { label, ...context } })
             );
 
             return <span {...labelProps}>{label}</span>;
