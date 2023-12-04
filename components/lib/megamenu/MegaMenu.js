@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
-import { useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useEventListener, useMatchMedia, useMountEffect, useResizeListener, useUpdateEffect, useGlobalOnEscapeKey } from '../hooks/Hooks';
 import { AngleDownIcon } from '../icons/angledown';
 import { AngleRightIcon } from '../icons/angleright';
 import { BarsIcon } from '../icons/bars';
@@ -36,6 +36,15 @@ export const MegaMenu = React.memo(
         });
 
         useHandleStyle(MegaMenuBase.css.styles, isUnstyled, { name: 'megamenu' });
+        const overlayDisplayOrder = useDisplayOrder('split-button-tooltip', activeItemState);
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                setActiveItemState(null);
+            },
+            when: activeItemState,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.MEGA_MENU, overlayDisplayOrder]
+        });
 
         const getPTOptions = (item, key, index) => {
             return ptm(key, {
