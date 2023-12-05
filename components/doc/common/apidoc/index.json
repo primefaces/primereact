@@ -10547,12 +10547,37 @@
                                 {
                                     "name": "event",
                                     "optional": false,
-                                    "type": "MouseEvent<HTMLElement, MouseEvent>",
-                                    "description": "Browser event."
+                                    "type": "ChipRemoveEvent",
+                                    "description": "Custom remove event"
                                 }
                             ],
                             "returnType": "void",
                             "description": "Callback to invoke when a chip is removed."
+                        }
+                    ]
+                }
+            }
+        },
+        "events": {
+            "description": "Defines the custom events used by the component's callbacks.",
+            "values": {
+                "ChipRemoveEvent": {
+                    "description": "Custom remove event",
+                    "relatedProp": "",
+                    "props": [
+                        {
+                            "name": "originalEvent",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "SyntheticEvent<Element, Event>",
+                            "description": "Browser event"
+                        },
+                        {
+                            "name": "value",
+                            "optional": false,
+                            "readonly": false,
+                            "type": "string",
+                            "description": "Removed item value"
                         }
                     ]
                 }
