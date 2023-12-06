@@ -2611,7 +2611,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime, props.locale]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
