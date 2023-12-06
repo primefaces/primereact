@@ -371,7 +371,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const saveColumnWidths = (state) => {
         let widths = [];
-        let headers = DomHandler.find(elementRef.current, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(elementRef.current, '[data-pc-section="thead"] > tr > th');
 
         headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
@@ -384,15 +384,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const addColumnWidthStyles = (widths) => {
         createStyleElement();
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+        let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > [data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
 
         widths.forEach((width, index) => {
             let style = `width: ${width}px !important; max-width: ${width}px !important`;
 
             innerHTML += `
-                ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `;
@@ -557,7 +557,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     updateTableWidth(frozenBodyRef.current);
 
                     if (wrapperRef.current) {
-                        updateTableWidth(DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller-content'));
+                        updateTableWidth(DomHandler.findSingle(wrapperRef.current, '[data-pc-name="virtualscroller"] > table > tbody'));
                     }
                 }
             }
@@ -587,7 +587,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const resizeTableCells = (newColumnWidth, nextColumnWidth) => {
         let widths = [];
         let colIndex = DomHandler.index(resizeColumnElement.current);
-        let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(tableRef.current, '[data-pc-section="thead"] > tr > th');
 
         headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
 
@@ -595,16 +595,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         createStyleElement();
 
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+        let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > [data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
             let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
             innerHTML += `
-                ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `;
@@ -744,8 +744,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let dragColIndex = columns.findIndex((child) => isSameColumn(child, draggedColumn.current));
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
                 let widths = [];
-                let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
-
+                let headers = DomHandler.find(tableRef.current, '[data-pc-section="thead"] > tr > th');
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
@@ -798,34 +797,35 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (!responsiveStyleElement.current) {
             responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
-            let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
-            let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
-            let gridLinesSelector = `.p-datatable[${attributeSelector.current}].p-datatable-gridlines > ${tableSelector}`;
+            let tableSelector = `[data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
+            let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > ${tableSelector}`;
+            let gridLinesSelector = `[data-pc-name="datatable"][${attributeSelector.current}][data-showgridlines="true"] > ${tableSelector}`;
+
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
-    ${selector} > .p-datatable-thead > tr > th,
-    ${selector} > .p-datatable-tfoot > tr > td {
+    ${selector} > [data-pc-section="thead"] > tr > th,
+    ${selector} > [data-pc-section="tfoot"] > tr > td {
         display: none;
     }
 
-    ${selector} > .p-datatable-tbody > tr > td {
+    ${selector} > [data-pc-section="tbody"] > tr > td {
         display: flex;
         width: 100%;
         align-items: center;
         justify-content: space-between;
     }
 
-    ${selector} > .p-datatable-tbody > tr > td:not(:last-child) {
+    ${selector} > [data-pc-section="tbody"] > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
+    ${gridLinesSelector} > [data-pc-section="tbody"] > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    ${selector} > .p-datatable-tbody > tr > td > .p-column-title {
+    ${selector} > [data-pc-section="tbody"] > tr > td > [data-pc-section="columntitle"] {
         display: block;
     }
 }
@@ -1252,7 +1252,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const resetScroll = () => {
         if (wrapperRef.current) {
-            const scrollableContainer = !isVirtualScrollerDisabled() ? DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller') : wrapperRef.current;
+            const scrollableContainer = !isVirtualScrollerDisabled() ? DomHandler.findSingle(wrapperRef.current, '[data-pc-name="virtualscroller"]') : wrapperRef.current;
 
             scrollableContainer.scrollTo(0, 0);
         }
@@ -1342,7 +1342,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const closeEditingRows = () => {
-        DomHandler.find(document.body, '.p-row-editor-cancel').forEach((button, index) => {
+        DomHandler.find(document.body, '[data-pc-section="roweditorcancelbuttonprops"]').forEach((button, index) => {
             setTimeout(() => {
                 button.click();
             }, index * 5);
@@ -1966,7 +1966,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             id: props.id,
             className: classNames(props.className, ptCallbacks.cx('root', { selectable })),
             style: props.style,
-            'data-scrollselectors': '.p-datatable-wrapper'
+            'data-scrollselectors': '.p-datatable-wrapper',
+            'data-showgridlines': props.showGridlines
         },
         DataTableBase.getOtherProps(props),
         ptCallbacks.ptm('root')
