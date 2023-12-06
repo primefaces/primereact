@@ -745,7 +745,9 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
                 let widths = [];
                 let headers = DomHandler.find(tableRef.current, '[data-pc-section="thead"] > tr > th');
+
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
+
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
                 const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];

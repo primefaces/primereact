@@ -233,6 +233,7 @@ export const BodyCell = React.memo((props) => {
         tabindexTimeout.current = setTimeout(() => {
             if (editingState) {
                 const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+
                 focusableEl && focusableEl.focus();
             }
 
