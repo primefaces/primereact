@@ -104,6 +104,11 @@ const TemplatesPage = () => {
                         <span className="mb-2 text-xl font-bold">Burak Sağlam</span>
                         <span>Front-End Developer</span>
                     </div>
+                    <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/taner.jpg" className="border-circle mb-4" alt="Taner Engin" />
+                        <span className="mb-2 text-xl font-bold">Taner Engin</span>
+                        <span>Front-End Developer</span>
+                    </div>
                 </div>
             </div>
         </div>
