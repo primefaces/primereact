@@ -444,6 +444,10 @@
                     "to": "/theming"
                 },
                 {
+                    "name": "Visual Editor",
+                    "href": "https://designer.primereact.org"
+                },
+                {
                     "name": "Colors",
                     "to": "/colors"
                 },
@@ -621,7 +625,7 @@
             "name": "Accessibility",
             "icon": "pi pi-users",
             "to": "/accessibility"
-        },
+        },      
         {
             "name": "Support",
             "icon": "pi pi-question",
