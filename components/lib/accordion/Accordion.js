@@ -83,7 +83,7 @@ export const Accordion = React.forwardRef((inProps, ref) => {
     };
 
     const isSelected = (index) => {
-        return props.multiple ? activeIndex && activeIndex.some((i) => i === index) : activeIndex === index;
+        return props.multiple && Array.isArray(activeIndex) ? activeIndex && activeIndex.some((i) => i === index) : activeIndex === index;
     };
 
     React.useImperativeHandle(ref, () => ({
