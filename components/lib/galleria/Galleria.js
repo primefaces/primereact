@@ -211,7 +211,8 @@ export const Galleria = React.memo(
                     ref: elementRef,
                     id: id,
                     className: classNames(props.className, cx('root', { context, thumbnailsPosClassName, indicatorPosClassName })),
-                    style: props.style
+                    style: props.style,
+                    role: 'region'
                 },
                 GalleriaBase.getOtherProps(props),
                 ptm('root')

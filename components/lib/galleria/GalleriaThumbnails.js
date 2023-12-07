@@ -493,7 +493,7 @@ export const GalleriaThumbnails = React.memo(
                         type: 'button',
                         disabled: isDisabled,
                         'data-p-disabled': isDisabled,
-                        'aria-label': localeOption('aria') ? localeOption('aria').prevPageLabel : undefined,
+                        'aria-label': localeOption('aria') ? localeOption('aria').previousPageLabel : undefined,
                         'data-pc-group-section': 'thumbnailnavigator'
                     },
                     getPTOptions('previousThumbnailButton')

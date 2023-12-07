@@ -158,12 +158,14 @@ export const Image = React.memo(
         });
 
         const createPreview = () => {
+            const ariaLabel = localeOption('aria') ? localeOption('aria').zoomImage : undefined;
             const buttonProps = mergeProps(
                 {
                     ref: previewButton,
                     className: cx('button'),
                     onClick: show,
-                    type: 'button'
+                    type: 'button',
+                    'aria-label': ariaLabel
                 },
                 ptm('button')
             );
