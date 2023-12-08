@@ -69,10 +69,6 @@ export const BodyCell = React.memo((props) => {
         options: true
     });
 
-    if (props.editMode === 'row' && props.editing !== editingState) {
-        setEditingState(props.editing);
-    }
-
     const isEditable = () => {
         return getColumnProp('editor');
     };
@@ -516,6 +512,12 @@ export const BodyCell = React.memo((props) => {
             focusOnElement();
         }
     });
+
+    React.useEffect(() => {
+        if (props.editMode === 'row' && props.editing !== editingState) {
+            setEditingState(props.editing);
+        }
+    }, [props.editMode, props.editing, editingState]);
 
     useUpdateEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
