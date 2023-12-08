@@ -369,9 +369,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
                 if (newColumnWidth > 15 && nextColumnWidth > 15) {
                     if (props.scrollable) {
                         let scrollableView = findParentScrollableView(resizeColumn.current);
-                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
-                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
-                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+                        let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablebodytable"]');
+                        let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollableheadertable"]');
+                        let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablefootertable"]');
                         let resizeColumnIndex = DomHandler.index(resizeColumn.current);
 
                         resizeColGroup(scrollableHeaderTable, resizeColumnIndex, newColumnWidth, nextColumnWidth);
@@ -388,9 +388,9 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
             } else if (props.columnResizeMode === 'expand') {
                 if (props.scrollable) {
                     let scrollableView = findParentScrollableView(resizeColumn.current);
-                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-body-table');
-                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-header-table');
-                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table.p-treetable-scrollable-footer-table');
+                    let scrollableBodyTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablebodytable"]');
+                    let scrollableHeaderTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollableheadertable"]');
+                    let scrollableFooterTable = DomHandler.findSingle(scrollableView, 'table[data-pc-section="scrollablefootertable"]');
 
                     scrollableBodyTable.style.width = scrollableBodyTable.offsetWidth + delta + 'px';
                     scrollableHeaderTable.style.width = scrollableHeaderTable.offsetWidth + delta + 'px';
