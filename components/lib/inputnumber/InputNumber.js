@@ -963,6 +963,7 @@ export const InputNumber = React.memo(
             props.onFocus && props.onFocus(event);
 
             if ((props.suffix || props.currency || props.prefix) && inputRef.current && !isFocusedByClick.current) {
+                // GitHub #1866,#5537
                 let inputValue = inputRef.current.value;
                 let prefixLength = (prefixChar.current || '').length;
                 let suffixLength = (suffixChar.current || '').length;
