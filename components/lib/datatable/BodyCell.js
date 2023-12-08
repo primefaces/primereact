@@ -27,11 +27,10 @@ export const BodyCell = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
-    const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        const cProps = getColumnProps(props.column);
-
+        const cProps = getColumnProps();
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
