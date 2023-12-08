@@ -725,7 +725,7 @@ export const InputNumber = React.memo(
             return index || 0;
         };
 
-        const onInputMouseDown = () => {
+        const onInputPointerDown = () => {
             isFocusedByClick.current = true;
         };
 
@@ -1078,7 +1078,7 @@ export const InputNumber = React.memo(
                     onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
-                    onMouseDown={onInputMouseDown}
+                    onPointerDown={onInputPointerDown}
                     onBlur={onInputBlur}
                     onFocus={onInputFocus}
                     onPaste={onPaste}
