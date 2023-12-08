@@ -6985,7 +6985,7 @@
                             "name": "previousButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
@@ -7034,7 +7034,7 @@
                             "name": "nextButton",
                             "optional": true,
                             "readonly": false,
-                            "type": "ButtonPassThroughOptions",
+                            "type": "CalendarPassThroughType<HTMLAttributes<HTMLButtonElement>>",
                             "description": "Uses to pass attributes to the Button component."
                         },
                         {
