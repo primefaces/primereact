@@ -7,10 +7,13 @@ export function TailwindDoc(props) {
         basic: `
 const TRANSITIONS = {
     overlay: {
-        enterFromClass: 'opacity-0 scale-75',
-        enterActiveClass: 'transition-transform transition-opacity duration-150 ease-in',
-        leaveActiveClass: 'transition-opacity duration-150 ease-linear',
-        leaveToClass: 'opacity-0'
+        timeout: 150,
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-100',
+            exitActive: '!opacity-0 transition-opacity duration-150 ease-linear'
+        }
     }
 };
 
@@ -44,13 +47,11 @@ const Tailwind = {
             className: classNames('flex items-center justify-between', 'p-2 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-semibold m-0 border-b border-gray-300 dark:border-blue-900/40 rounded-t-lg')
         },
         previousButton: {
-            root: ({ props }) => ({
-                className: classNames(
-                    'flex items-center justify-center cursor-pointer overflow-hidden relative',
-                    'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
-                    'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
-                )
-            })
+            className: classNames(
+                'flex items-center justify-center cursor-pointer overflow-hidden relative',
+                'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
+                'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
+            )
         },
         title: 'leading-8 mx-auto',
         monthTitle: {
@@ -60,13 +61,11 @@ const Tailwind = {
             className: classNames('text-gray-700 dark:text-white/80 transition duration-200 font-semibold p-2', 'hover:text-blue-500')
         },
         nextButton: {
-            root: ({ props }) => ({
-                className: classNames(
-                    'flex items-center justify-center cursor-pointer overflow-hidden relative',
-                    'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
-                    'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
-                )
-            })
+            className: classNames(
+                'flex items-center justify-center cursor-pointer overflow-hidden relative',
+                'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
+                'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
+            )
         },
         table: {
             className: classNames('border-collapse w-full', 'my-2')
@@ -139,41 +138,8 @@ const Tailwind = {
             className: classNames('flex-1', 'border-l border-gray-300 pr-0.5 pl-0.5 pt-0 pb-0', 'first:pl-0 first:border-l-0')
         },
         transition: TRANSITIONS.overlay
-    },
-    listbox: {
-        root: {
-            className: classNames('bg-white dark:bg-gray-900 border border-gray-400 dark:border-blue-900/40 transition-colors duration-200 ease-in-out rounded-md', 'w-full md:w-56')
-        },
-        wrapper: 'overflow-auto',
-        list: 'py-3 list-none m-0',
-        item: ({ context }) => ({
-            className: classNames('cursor-pointer font-normal overflow-hidden relative whitespace-nowrap', 'm-0 p-3 border-0  transition-shadow duration-200 rounded-none', {
-                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': !context.focused && !context.selected,
-                'bg-gray-300 text-gray-700 dark:text-white/80 dark:bg-gray-800/90 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:bg-gray-800': context.focused && !context.selected,
-                'bg-blue-100 text-blue-700 dark:bg-blue-400 dark:text-white/80': context.focused && context.selected,
-                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': !context.focused && context.selected
-            })
-        }),
-        itemgroup: {
-            className: classNames('m-0 p-3 text-gray-800 bg-white font-bold', 'dark:bg-gray-900 dark:text-white/80', 'cursor-auto')
-        },
-        header: {
-            className: classNames('p-3 border-b border-gray-300 text-gray-700 bg-gray-100 mt-0 rounded-tl-lg rounded-tr-lg', 'dark:bg-gray-800 dark:text-white/80 dark:border-blue-900/40')
-        },
-        filtercontainer: 'relative',
-        filterinput: {
-            root: {
-                className: classNames(
-                    'pr-7 -mr-7',
-                    'w-full',
-                    'font-sans text-base text-gray-700 bg-white py-3 px-3 border border-gray-300 transition duration-200 rounded-lg appearance-none',
-                    'dark:bg-gray-900 dark:border-blue-900/40 dark:hover:border-blue-300 dark:text-white/80',
-                    'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
-                )
-            }
-        },
-        filtericon: '-mt-2 absolute top-1/2'
     }
+}
         `
     };
 
