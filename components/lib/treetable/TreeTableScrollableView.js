@@ -63,7 +63,7 @@ export const TreeTableScrollableView = React.memo((props) => {
         let frozenScrollBody;
 
         if (frozenView) {
-            frozenScrollBody = DomHandler.findSingle(frozenView, '.p-treetable-scrollable-body');
+            frozenScrollBody = DomHandler.findSingle(frozenView, '[data-pc-section="scrollablebody"]');
         }
 
         scrollHeaderBoxRef.current.style.transform = `translateX(-${scrollBodyRef.current.scrollLeft}px)`;
