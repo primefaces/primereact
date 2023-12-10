@@ -16,16 +16,7 @@ import { TooltipOptions } from '../tooltip/tooltipoptions';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
 
-export declare type RoundingMode = 
-    | 'ceil' 
-    | 'floor' 
-    | 'expand' 
-    | 'trunc' 
-    | 'halfCeil' 
-    | 'halfFloor' 
-    | 'halfExpand' 
-    | 'halfTrunc' 
-    | 'halfEven';
+export declare type RoundingMode = 'ceil' | 'floor' | 'expand' | 'trunc' | 'halfCeil' | 'halfFloor' | 'halfExpand' | 'halfTrunc' | 'halfEven';
 
 export declare type InputNumberPassThroughType<T> = PassThroughType<T, InputNumberPassThroughMethodOptions>;
 
