@@ -60,7 +60,8 @@ export const InputNumber = React.memo(
                 currencyDisplay: props.currencyDisplay,
                 useGrouping: props.useGrouping,
                 minimumFractionDigits: props.minFractionDigits,
-                maximumFractionDigits: props.maxFractionDigits
+                maximumFractionDigits: props.maxFractionDigits,
+                roundingMode: props.roundingMode
             };
         };
 
@@ -110,7 +111,8 @@ export const InputNumber = React.memo(
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
@@ -140,7 +142,8 @@ export const InputNumber = React.memo(
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 suffixChar.current = formatter.format(1).split('1')[1];
