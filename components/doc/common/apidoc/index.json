@@ -16257,7 +16257,7 @@
                             "name": "columnResizeMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"fit\" | \"expand\"",
+                            "type": "\"expand\" | \"fit\"",
                             "default": "fit",
                             "description": "Used to define the resize mode of the columns, valid values are \"fit\" and \"expand\"."
                         },
@@ -19186,7 +19186,7 @@
                             "name": "columnResizeMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"fit\" | \"expand\"",
+                            "type": "\"expand\" | \"fit\"",
                             "description": "Used to define the resize mode of the columns, valid values are \"fit\" and \"expand\"."
                         },
                         {
@@ -29926,6 +29926,14 @@
                             "description": "When present, it specifies that the element must be filled out before submitting the form."
                         },
                         {
+                            "name": "roundingMode",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "RoundingMode",
+                            "default": "",
+                            "description": "How decimals should be rounded.\nThe default value is  `\"halfExpand\"` , [further information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#roundingmode)."
+                        },
+                        {
                             "name": "showButtons",
                             "optional": true,
                             "readonly": false,
@@ -30252,6 +30260,9 @@
         "types": {
             "description": "Defines the custom types used by the module.",
             "values": {
+                "RoundingMode": {
+                    "values": "\"ceil\" | \"floor\" | \"expand\" | \"trunc\" | \"halfCeil\" | \"halfFloor\" | \"halfExpand\" | \"halfTrunc\" | \"halfEven\""
+                },
                 "InputNumberPassThroughType": {
                     "values": "PassThroughType<T, InputNumberPassThroughMethodOptions>"
                 }
@@ -51511,7 +51522,7 @@
                             "name": "columnResizeMode",
                             "optional": true,
                             "readonly": false,
-                            "type": "\"fit\" | \"expand\"",
+                            "type": "\"expand\" | \"fit\"",
                             "default": "fit",
                             "description": "Defines whether the overall table width should change on column resize, valid values are \"fit\" and \"expand\"."
                         },
