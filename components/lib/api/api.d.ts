@@ -129,7 +129,7 @@ export interface ZIndexOptions {
 
 export type InputStyleType = 'outlined' | 'filled';
 
-export type AppendToType = 'self' | HTMLElement | undefined | null;
+export type AppendToType = 'self' | HTMLElement | undefined | null | (() => HTMLElement);
 
 /**
  * Filter match modes for DataTable filter menus.
