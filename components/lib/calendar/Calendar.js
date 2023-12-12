@@ -1534,7 +1534,9 @@ export const Calendar = React.memo(
         };
 
         const appendDisabled = () => {
-            return props.appendTo === 'self' || props.inline;
+            const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
+
+            return appendTo === 'self' || props.inline;
         };
 
         const alignOverlay = () => {
