@@ -3708,7 +3708,7 @@ export const Calendar = React.memo(
                                     context: {
                                         year: y,
                                         yearIndex: i,
-                                        selected: isYearSelected(i),
+                                        selected: isYearSelected(y),
                                         disabled: !y.selectable
                                     }
                                 })
