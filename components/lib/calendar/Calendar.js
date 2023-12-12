@@ -2571,8 +2571,8 @@ export const Calendar = React.memo(
         }, [props.view]);
 
         useUpdateEffect(() => {
-            alignOverlay();
-        }, [currentView]);
+            overlayVisibleState && alignOverlay();
+        }, [currentView, overlayVisibleState]);
 
         useUpdateEffect(() => {
             if (!props.onViewDateChange && !viewStateChanged.current) {
