@@ -2573,6 +2573,12 @@ export const Calendar = React.memo(
         }, [props.view]);
 
         useUpdateEffect(() => {
+            if (overlayVisibleState || props.visible) {
+                alignOverlay();
+            }
+        }, [currentView, overlayVisibleState, props.visible]);
+
+        useUpdateEffect(() => {
             if (!props.onViewDateChange && !viewStateChanged.current) {
                 setValue(props.value);
             }
