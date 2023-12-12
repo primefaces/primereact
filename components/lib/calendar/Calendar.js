@@ -3666,8 +3666,8 @@ export const Calendar = React.memo(
                                     context: {
                                         month: m,
                                         monthIndex: i,
-                                        selected: isMonthSelected(i),
-                                        disabled: !m.selectable
+                                        disabled: !m.selectable,
+                                        selected: isMonthSelected(i)
                                     }
                                 })
                             );
@@ -3709,7 +3709,7 @@ export const Calendar = React.memo(
                                         year: y,
                                         yearIndex: i,
                                         selected: isYearSelected(y),
-                                        disabled: !y.selectable
+                                        disabled: !isSelectable(0, -1, y)
                                     }
                                 })
                             );
