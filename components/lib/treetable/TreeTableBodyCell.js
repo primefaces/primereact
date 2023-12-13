@@ -226,10 +226,11 @@ export const TreeTableBodyCell = (props) => {
             <span {...editorKeyHelperLabelProps}></span>
         </a>
     );
+    const align = getColumnProp('align');
     /* eslint-enable */
     const bodyCellProps = mergeProps(
         {
-            className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState })),
+            className: classNames(bodyClassName || props.className, cx('bodyCell', { bodyProps: props, editingState, align })),
             style,
             onClick: (e) => onClick(e),
             onKeyDown: (e) => onKeyDown(e)
