@@ -414,6 +414,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             destroyStyle();
         };
     }, [props.breakpoints]);
+
     useMountEffect(() => {
         updateGlobalDialogsRegistry(true);
 
