@@ -1082,8 +1082,9 @@ interface DataTableBaseProps<TValue extends DataTableValueArray> extends Omit<Re
     editingRows?: DataTableValueArray | DataTableEditingRows | undefined;
     /**
      * Text to display when there is no data.
+     * @defaultValue No results found
      */
-    emptyMessage?: React.ReactNode | ((frozen: boolean) => React.ReactNode);
+    emptyMessage?: string | React.ReactNode | ((frozen: boolean) => React.ReactNode) | undefined;
     /**
      * Makes row groups toggleable, default is false.
      * @defaultValue false

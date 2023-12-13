@@ -230,7 +230,7 @@ export const TreeTableBody = React.memo((props) => {
             return null;
         } else {
             const colSpan = props.columns ? props.columns.length : null;
-            const content = props.emptyMessage || localeOption('emptyMessage');
+            const content = ObjectUtils.getJSXElement(props.emptyMessage, { props: props.tableProps }) || localeOption('emptyMessage');
             const emptyMessageProps = mergeProps(
                 {
                     className: cx('emptyMessage')
