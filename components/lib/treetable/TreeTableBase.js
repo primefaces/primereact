@@ -187,10 +187,11 @@ const classes = {
     tbody: 'p-treetable-tbody',
     tfoot: 'p-treetable-tfoot',
     emptyMessage: 'p-treetable-emptymessage',
-    bodyCell: ({ bodyProps: props, editingState }) =>
+    bodyCell: ({ bodyProps: props, editingState, align }) =>
         classNames({
             'p-editable-column': props.editor,
-            'p-cell-editing': props.editor ? editingState : false
+            'p-cell-editing': props.editor ? editingState : false,
+            [`p-align-${align}`]: !!align
         }),
     sortBadge: 'p-sortable-column-badge',
     headerTitle: 'p-column-title',
