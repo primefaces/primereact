@@ -2,7 +2,9 @@ import { AccessibilityDoc } from '@/components/doc/calendar/accessibilitydoc';
 import { BasicDoc } from '@/components/doc/calendar/basicdoc';
 import { ButtonBarDoc } from '@/components/doc/calendar/buttonbardoc';
 import { DateTemplateDoc } from '@/components/doc/calendar/datetemplatedoc';
-import { DisabledDoc } from '@/components/doc/calendar/disableddoc';
+import { DisabledDoc } from '@/components/doc/calendar/disabled/disableddoc';
+import { DisabledDateDoc } from '@/components/doc/calendar/disabled/disableddatedoc';
+
 import { FloatLabelDoc } from '@/components/doc/calendar/floatlabeldoc';
 import { FormikDoc } from '@/components/doc/calendar/form/formikdoc';
 import { HookFormDoc } from '@/components/doc/calendar/form/hookfromdoc';
@@ -122,7 +124,18 @@ const CalendarDemo = () => {
         {
             id: 'disabled',
             label: 'Disabled',
-            component: DisabledDoc
+            children: [
+                {
+                    label: 'disabled',
+                    id: 'disabled',
+                    component: DisabledDoc
+                },
+                {
+                    label: 'disabledDate',
+                    id: 'disabledDate',
+                    component: DisabledDateDoc
+                }
+            ]
         },
         {
             id: 'form',

@@ -1841,12 +1841,16 @@ export const Calendar = React.memo(
                 }
             }
 
-            if (props.disabledDates || props.enabledDates) {
-                validDate = !isDateDisabled(day, month, year);
-            }
+            if (props.disabledDate) {
+                validDate = !props.disabledDate(day, month, year);
+            } else {
+                if (props.disabledDates || props.enabledDates) {
+                    validDate = !isDateDisabled(day, month, year);
+                }
 
-            if (props.disabledDays && currentView === 'date') {
-                validDay = !isDayDisabled(day, month, year);
+                if (props.disabledDays && currentView === 'date') {
+                    validDay = !isDayDisabled(day, month, year);
+                }
             }
 
             if (props.selectOtherMonths === false && otherMonth) {
@@ -3656,17 +3660,17 @@ export const Calendar = React.memo(
                         {monthPickerValues().map((m, i) => {
                             const monthProps = mergeProps(
                                 {
-                                    className: cx('month', { isMonthSelected, isSelectable, i, currentYear }),
+                                    className: cx('month', { isMonthSelected, checkDateIsDisabled, i, currentYear }),
                                     onClick: (event) => onMonthSelect(event, i),
                                     onKeyDown: (event) => onMonthCellKeydown(event, i),
-                                    'data-p-disabled': !isSelectable(0, i, currentYear),
+                                    'data-p-disabled': checkDateIsDisabled(i, currentYear),
                                     'data-p-highlight': isMonthSelected(i)
                                 },
                                 ptm('month', {
                                     context: {
                                         month: m,
                                         monthIndex: i,
-                                        disabled: !isSelectable(0, i, currentYear),
+                                        disabled: checkDateIsDisabled(i, currentYear),
                                         selected: isMonthSelected(i)
                                     }
                                 })
@@ -3685,6 +3689,28 @@ export const Calendar = React.memo(
             return null;
         };
 
+        const checkDateIsDisabled = (month, year) => {
+            const daysCountInAllMonth = month === -1 ? new Array(12).map((_, i) => getDaysCountInMonth(i, year)) : [getDaysCountInMonth(month, year)];
+
+            for (let i = 0; i < daysCountInAllMonth.length; i++) {
+                const monthDays = daysCountInAllMonth[i];
+                const selectableDays = new Set();
+                const _month = month === -1 ? i : month;
+
+                for (let day = 1; day <= monthDays; day++) {
+                    let isDateSelectable = isSelectable(day, _month, year);
+
+                    selectableDays.add(isDateSelectable);
+                }
+
+                if (selectableDays.has(true)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
         const createYearPicker = () => {
             if (currentView === 'year') {
                 const yearPickerProps = mergeProps(
@@ -3699,17 +3725,17 @@ export const Calendar = React.memo(
                         {yearPickerValues().map((y, i) => {
                             const yearProps = mergeProps(
                                 {
-                                    className: cx('year', { isYearSelected, isSelectable, y }),
+                                    className: cx('year', { isYearSelected, isSelectable, y, checkDateIsDisabled }),
                                     onClick: (event) => onYearSelect(event, y),
                                     'data-p-highlight': isYearSelected(y),
-                                    'data-p-disabled': !isSelectable(0, -1, y)
+                                    'data-p-disabled': checkDateIsDisabled(-1, y)
                                 },
                                 ptm('year', {
                                     context: {
                                         year: y,
                                         yearIndex: i,
                                         selected: isYearSelected(y),
-                                        disabled: !isSelectable(0, -1, y)
+                                        disabled: checkDateIsDisabled(-1, y)
                                     }
                                 })
                             );
