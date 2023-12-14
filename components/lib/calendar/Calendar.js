@@ -3690,7 +3690,7 @@ export const Calendar = React.memo(
         };
 
         const checkDateIsDisabled = (month, year) => {
-            const daysCountInAllMonth = month === -1 ? new Array(12).map((_, i) => getDaysCountInMonth(i, year)) : [getDaysCountInMonth(month, year)];
+            const daysCountInAllMonth = month === -1 ? new Array(12).fill(0).map((_, i) => getDaysCountInMonth(i, year)) : [getDaysCountInMonth(month, year)];
 
             for (let i = 0; i < daysCountInAllMonth.length; i++) {
                 const monthDays = daysCountInAllMonth[i];
