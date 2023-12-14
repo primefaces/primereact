@@ -14,9 +14,13 @@ import { Calendar } from 'primereact/calendar';
 export default function DisabledDateDemo() {
     const disabledDate = (day, month, year) => {
         if (day === 13) return true;
-        if (month === 10) return true;
+
+        if (month === 10) return false;
+
         if (year === 2025) return true;
+
         if (new Date(year, month, day) < new Date()) return true;
+        
         return false;
     }
 
@@ -34,9 +38,13 @@ import { Calendar } from 'primereact/calendar';
 export default function DisabledDateDemo() {
     const disabledDate = (day, month, year) => {
         if (day === 13) return true;
-        if (month === 10) return true;
+
+        if (month === 10) return false;
+
         if (year === 2024) return true;
+
         if (new Date(year, month, day) < new Date()) return true;
+
         return false;
     }
 
