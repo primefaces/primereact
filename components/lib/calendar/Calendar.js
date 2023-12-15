@@ -3690,17 +3690,14 @@ export const Calendar = React.memo(
 
             for (let i = 0; i < daysCountInAllMonth.length; i++) {
                 const monthDays = daysCountInAllMonth[i];
-                const selectableDays = new Set();
                 const _month = month === -1 ? i : month;
 
                 for (let day = 1; day <= monthDays; day++) {
                     let isDateSelectable = isSelectable(day, _month, year);
 
-                    selectableDays.add(isDateSelectable);
-                }
-
-                if (selectableDays.has(true)) {
-                    return false;
+                    if (isDateSelectable) {
+                        return false;
+                    }
                 }
             }
 
