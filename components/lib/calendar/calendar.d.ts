@@ -567,10 +567,6 @@ interface CalendarBaseProps {
      */
     disabled?: boolean | undefined;
     /**
-     * Specify the date that cannot be selected.
-     */
-    disabledDate?: ((day: number, month: number, year: number) => boolean) | undefined;
-    /**
      * Array with dates to disable.
      */
     disabledDates?: Date[] | undefined;

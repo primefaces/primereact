@@ -1841,16 +1841,12 @@ export const Calendar = React.memo(
                 }
             }
 
-            if (props.disabledDate) {
-                validDate = !props.disabledDate(day, month, year);
-            } else {
-                if (props.disabledDates || props.enabledDates) {
-                    validDate = !isDateDisabled(day, month, year);
-                }
+            if (props.disabledDates || props.enabledDates) {
+                validDate = !isDateDisabled(day, month, year);
+            }
 
-                if (props.disabledDays && currentView === 'date') {
-                    validDay = !isDayDisabled(day, month, year);
-                }
+            if (props.disabledDays && currentView === 'date') {
+                validDay = !isDayDisabled(day, month, year);
             }
 
             if (props.selectOtherMonths === false && otherMonth) {
