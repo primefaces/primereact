@@ -1841,11 +1841,7 @@ export const Calendar = React.memo(
                 }
             }
 
-            if (props.disabledDates || props.enabledDates) {
-                validDate = !isDateDisabled(day, month, year);
-            }
-
-            if (props.disabledDays && currentView === 'date') {
+            if (props.disabledDates || props.enabledDates || props.disabledDays) {
                 validDay = !isDayDisabled(day, month, year);
             }
 
@@ -1995,24 +1991,24 @@ export const Calendar = React.memo(
             return today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
         };
 
-        const isDateDisabled = (day, month, year) => {
-            if (props.disabledDates) {
-                return props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
-            }
-
-            if (props.enabledDates) {
-                return !props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
-            }
-
-            return false;
-        };
-
         const isDayDisabled = (day, month, year) => {
-            if (props.disabledDays) {
+            if (props.disabledDates) {
+                if (props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
+                    return true;
+                }
+            } else if (props.enabledDates) {
+                if (!props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
+                    return true;
+                }
+            }
+
+            if (props.disabledDays && currentView === 'date') {
                 let weekday = new Date(year, month, day);
                 let weekdayNumber = weekday.getDay();
 
-                return props.disabledDays.indexOf(weekdayNumber) !== -1;
+                if (props.disabledDays.indexOf(weekdayNumber) !== -1) {
+                    return true;
+                }
             }
 
             return false;
