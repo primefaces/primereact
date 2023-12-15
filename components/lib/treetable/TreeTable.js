@@ -213,7 +213,7 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
     const sortNodes = (data) => {
         let value = [...data];
 
-        if (columnSortable.current && columnSortable.current === 'custom' && columnSortFunction.current) {
+        if (columnSortable.current && columnSortFunction.current) {
             value = columnSortFunction.current({
                 data,
                 field: getSortField(),
@@ -912,39 +912,40 @@ export const TreeTable = React.forwardRef((inProps, ref) => {
         return (
             <TreeTableBody
                 hostName="TreeTable"
-                value={value}
-                originalOptions={props.value}
                 checkboxIcon={props.checkboxIcon}
                 columns={columns}
+                contextMenuSelectionKey={props.contextMenuSelectionKey}
+                emptyMessage={props.emptyMessage}
                 expandedKeys={getExpandedKeys()}
-                selectOnEdit={props.selectOnEdit}
-                onToggle={onToggle}
-                togglerTemplate={props.togglerTemplate}
-                onExpand={props.onExpand}
-                onCollapse={props.onCollapse}
-                paginator={props.paginator}
                 first={getFirst()}
-                rows={getRows()}
-                selectionMode={props.selectionMode}
-                selectionKeys={props.selectionKeys}
-                onSelectionChange={props.onSelectionChange}
+                lazy={props.lazy}
+                loading={props.loading}
+                metaData={metaData}
                 metaKeySelection={props.metaKeySelection}
+                onCollapse={props.onCollapse}
+                onContextMenu={props.onContextMenu}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onExpand={props.onExpand}
                 onRowClick={props.onRowClick}
                 onRowMouseEnter={props.onRowMouseEnter}
                 onRowMouseLeave={props.onRowMouseLeave}
                 onSelect={props.onSelect}
+                onSelectionChange={props.onSelectionChange}
+                onToggle={onToggle}
                 onUnselect={props.onUnselect}
-                propagateSelectionUp={props.propagateSelectionUp}
+                originalOptions={props.value}
+                paginator={props.paginator}
                 propagateSelectionDown={props.propagateSelectionDown}
-                lazy={props.lazy}
-                rowClassName={props.rowClassName}
-                emptyMessage={props.emptyMessage}
-                loading={props.loading}
-                contextMenuSelectionKey={props.contextMenuSelectionKey}
-                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                onContextMenu={props.onContextMenu}
+                propagateSelectionUp={props.propagateSelectionUp}
                 ptCallbacks={ptCallbacks}
-                metaData={metaData}
+                rowClassName={props.rowClassName}
+                rows={getRows()}
+                selectOnEdit={props.selectOnEdit}
+                selectionKeys={props.selectionKeys}
+                selectionMode={props.selectionMode}
+                togglerTemplate={props.togglerTemplate}
+                tableProps={props}
+                value={value}
             />
         );
     };

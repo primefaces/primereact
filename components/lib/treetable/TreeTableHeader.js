@@ -284,7 +284,7 @@ export const TreeTableHeader = React.memo((props) => {
             const multipleSorted = multiSortMetaData !== null;
             const sorted = getColumnProp(column, 'sortable') && (singleSorted || multipleSorted);
             const frozen = getColumnProp(column, 'frozen');
-            const align = getColumnProp(column, 'alignHeader') || getColumnProp(column, 'align');
+            const align = getColumnProp(column, 'alignHeader');
             let sortOrder = 0;
 
             if (singleSorted) sortOrder = props.sortOrder;

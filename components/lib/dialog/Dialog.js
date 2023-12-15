@@ -383,6 +383,10 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         unbindDocumentKeyDownListener();
     };
 
+    const destroyStyle = () => {
+        styleElement.current = DomHandler.removeInlineStyle(styleElement.current);
+    };
+
     const createStyle = () => {
         styleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
@@ -391,8 +395,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         for (let breakpoint in props.breakpoints) {
             innerHTML += `
                 @media screen and (max-width: ${breakpoint}) {
-                    .p-dialog[${attributeSelector.current}] {
-                        width: ${props.breakpoints[breakpoint]};
+                    [data-pc-name="dialog"][${attributeSelector.current}] {
+                        width: ${props.breakpoints[breakpoint]} !important;
                     }
                 }
             `;
@@ -401,15 +405,21 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         styleElement.current.innerHTML = innerHTML;
     };
 
+    useUpdateEffect(() => {
+        if (props.breakpoints) {
+            createStyle();
+        }
+
+        return () => {
+            destroyStyle();
+        };
+    }, [props.breakpoints]);
+
     useMountEffect(() => {
         updateGlobalDialogsRegistry(true);
 
         if (props.visible) {
             setMaskVisibleState(true);
-        }
-
-        if (props.breakpoints) {
-            createStyle();
         }
     });
 
