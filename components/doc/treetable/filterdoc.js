@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
+import { TreeTable } from '@/components/lib/treetable/TreeTable';
+import { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
-import { Column } from '../../lib/column/Column';
-import { InputText } from '../../lib/inputtext/InputText';
-import { SelectButton } from '../../lib/selectbutton/SelectButton';
-import { TreeTable } from '../../lib/treetable/TreeTable';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function FilterDoc(props) {
     const [nodes, setNodes] = useState([]);

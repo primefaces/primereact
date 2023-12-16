@@ -1,32 +1,31 @@
-import { AccessibilityDoc } from '../../components/doc/calendar/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/calendar/basicdoc';
-import { ButtonBarDoc } from '../../components/doc/calendar/buttonbardoc';
-import { DateTemplateDoc } from '../../components/doc/calendar/datetemplatedoc';
-import { DisabledDoc } from '../../components/doc/calendar/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/calendar/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/calendar/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/calendar/form/hookfromdoc';
-import { FormatDoc } from '../../components/doc/calendar/formatdoc';
-import { IconDoc } from '../../components/doc/calendar/icondoc';
-import { ImportDoc } from '../../components/doc/calendar/importdoc';
-import { InlineDoc } from '../../components/doc/calendar/inlinedoc';
-import { InvalidDoc } from '../../components/doc/calendar/invaliddoc';
-import { LocaleDoc } from '../../components/doc/calendar/localedoc';
-import { MinMaxDoc } from '../../components/doc/calendar/minmaxdoc';
-import { MonthPickerDoc } from '../../components/doc/calendar/monthpickerdoc';
-import { MultipleDoc } from '../../components/doc/calendar/multipledoc';
-import { MultipleMonthsDoc } from '../../components/doc/calendar/multiplemonthsdoc';
-import { PTDoc } from '../../components/doc/calendar/pt/ptdoc';
-import { Wireframe } from '../../components/doc/calendar/pt/wireframe';
-import { RangeDoc } from '../../components/doc/calendar/rangedoc';
-import { StyleDoc } from '../../components/doc/calendar/styledoc';
-import { StyledDoc } from '../../components/doc/calendar/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/calendar/theming/tailwinddoc';
-import { TimeDoc } from '../../components/doc/calendar/timedoc';
-import { TouchUIDoc } from '../../components/doc/calendar/touchuidoc';
-import { YearPickerDoc } from '../../components/doc/calendar/yearpickerdoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/calendar/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/calendar/basicdoc';
+import { ButtonBarDoc } from '@/components/doc/calendar/buttonbardoc';
+import { DateTemplateDoc } from '@/components/doc/calendar/datetemplatedoc';
+import { DisabledDoc } from '@/components/doc/calendar/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/calendar/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/calendar/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/calendar/form/hookfromdoc';
+import { FormatDoc } from '@/components/doc/calendar/formatdoc';
+import { IconDoc } from '@/components/doc/calendar/icondoc';
+import { ImportDoc } from '@/components/doc/calendar/importdoc';
+import { InlineDoc } from '@/components/doc/calendar/inlinedoc';
+import { InvalidDoc } from '@/components/doc/calendar/invaliddoc';
+import { LocaleDoc } from '@/components/doc/calendar/localedoc';
+import { MinMaxDoc } from '@/components/doc/calendar/minmaxdoc';
+import { MonthPickerDoc } from '@/components/doc/calendar/monthpickerdoc';
+import { MultipleDoc } from '@/components/doc/calendar/multipledoc';
+import { MultipleMonthsDoc } from '@/components/doc/calendar/multiplemonthsdoc';
+import { PTDoc } from '@/components/doc/calendar/pt/ptdoc';
+import { Wireframe } from '@/components/doc/calendar/pt/wireframe';
+import { RangeDoc } from '@/components/doc/calendar/rangedoc';
+import { StyledDoc } from '@/components/doc/calendar/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/calendar/theming/tailwinddoc';
+import { TimeDoc } from '@/components/doc/calendar/timedoc';
+import { TouchUIDoc } from '@/components/doc/calendar/touchuidoc';
+import { YearPickerDoc } from '@/components/doc/calendar/yearpickerdoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CalendarDemo = () => {
     const docs = [
@@ -142,11 +141,7 @@ const CalendarDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

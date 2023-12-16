@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { PickList } from '@/components/lib/picklist/PickList';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { PickList } from '../../lib/picklist/PickList';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function FilterDoc(props) {
     const [source, setSource] = useState([]);
@@ -35,7 +35,7 @@ export function FilterDoc(props) {
 
     const code = {
         basic: `
-<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
+<PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
     sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
     sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         `,
@@ -75,7 +75,7 @@ export default function FilterDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
@@ -131,7 +131,7 @@ export default function FilterDemo() {
 
     return (
         <div className="card">
-            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1400px"
+            <PickList source={source} target={target} onChange={onChange} itemTemplate={itemTemplate} filter filterBy="name" breakpoint="1280px"
                 sourceHeader="Available" targetHeader="Selected" sourceStyle={{ height: '24rem' }} targetStyle={{ height: '24rem' }}
                 sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" />
         </div>
@@ -174,7 +174,7 @@ export default function FilterDemo() {
                     targetHeader="Selected"
                     sourceStyle={{ height: '24rem' }}
                     targetStyle={{ height: '24rem' }}
-                    breakpoint="1400px"
+                    breakpoint="1280px"
                     filter
                     filterBy="name"
                     sourceFilterPlaceholder="Search by name"

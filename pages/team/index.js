@@ -1,28 +1,26 @@
-import React from 'react';
-
 const TemplatesPage = () => {
     return (
         <div>
             <div className="doc-intro">
                 <h1>Meet the Team</h1>
                 <p>
-                    <a href="https://www.primetek.com.tr" className="text-primary hover:underline font-semibold">
+                    <a href="https://www.primetek.com.tr" className="text-primary hover:underline font-medium">
                         PrimeTek
                     </a>{' '}
                     is a world renowned vendor of popular UI Component suites including{' '}
-                    <a href="https://primefaces.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primefaces.org" className="text-primary hover:underline font-medium">
                         PrimeFaces
                     </a>
                     ,{' '}
-                    <a href="https://primeng.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primeng.org" className="text-primary hover:underline font-medium">
                         PrimeNG
                     </a>
                     ,{' '}
-                    <a href="https://primereact.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primereact.org" className="text-primary hover:underline font-medium">
                         PrimeReact
                     </a>{' '}
                     and{' '}
-                    <a href="https://primevue.org" className="text-primary hover:underline font-semibold">
+                    <a href="https://primevue.org" className="text-primary hover:underline font-medium">
                         PrimeVue
                     </a>
                     . All the members in our team are full time employees of PrimeTek who share the same passion and vision for open source to create awesome UI libraries.
@@ -77,13 +75,23 @@ const TemplatesPage = () => {
                         <span>UI/UX Designer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/bugra.jpg" className="border-circle mb-4" alt="Buğra Beydüz" />
-                        <span className="mb-2 text-xl font-bold">Buğra Beydüz</span>
+                        <img src="https://primefaces.org/cdn/primereact/images/team/aliriza.jpg" className="border-circle mb-4" alt="Alirıza Gücal" />
+                        <span className="mb-2 text-xl font-bold">Alirıza Gücal</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/aliriza.jpg" className="border-circle mb-4" alt="Alirıza Gücal" />
-                        <span className="mb-2 text-xl font-bold">Alirıza Gücal</span>
+                        <img src="https://primefaces.org/cdn/primereact/images/team/umit.jpg" className="border-circle mb-4" alt="Ümit Çelik" />
+                        <span className="mb-2 text-xl font-bold">Ümit Çelik</span>
+                        <span>UI/UX Designer</span>
+                    </div>
+                    <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/toprak.jpg" className="border-circle mb-4" alt="Toprak Koç" />
+                        <span className="mb-2 text-xl font-bold">Toprak Koç</span>
+                        <span>Front-End Developer</span>
+                    </div>
+                    <div className="flex flex-column align-items-center flex-auto">
+                        <img src="https://primefaces.org/cdn/primereact/images/team/mehmet.jpg" className="border-circle mb-4" alt="Mehmet Çetin" />
+                        <span className="mb-2 text-xl font-bold">Mehmet Çetin</span>
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
@@ -97,9 +105,9 @@ const TemplatesPage = () => {
                         <span>Front-End Developer</span>
                     </div>
                     <div className="flex flex-column align-items-center flex-auto">
-                        <img src="https://primefaces.org/cdn/primereact/images/team/umit.jpg" className="border-circle mb-4" alt="Ümit Çelik" />
-                        <span className="mb-2 text-xl font-bold">Ümit Çelik</span>
-                        <span>UI/UX Designer</span>
+                        <img src="https://primefaces.org/cdn/primereact/images/team/taner.jpg" className="border-circle mb-4" alt="Taner Engin" />
+                        <span className="mb-2 text-xl font-bold">Taner Engin</span>
+                        <span>Front-End Developer</span>
                     </div>
                 </div>
             </div>

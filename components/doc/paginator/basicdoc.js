@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Paginator } from '@/components/lib/paginator/Paginator';
 import { useState } from 'react';
-import { Paginator } from '../../lib/paginator/Paginator';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [first, setFirst] = useState(0);

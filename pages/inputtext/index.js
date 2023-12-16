@@ -1,23 +1,21 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/inputtext/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/inputtext/basicdoc';
-import { DisabledDoc } from '../../components/doc/inputtext/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/inputtext/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/inputtext/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputtext/form/hookformdoc';
-import { HelpTextDoc } from '../../components/doc/inputtext/helptextdoc';
-import { IconsDoc } from '../../components/doc/inputtext/iconsdoc';
-import { ImportDoc } from '../../components/doc/inputtext/importdoc';
-import { InvalidDoc } from '../../components/doc/inputtext/invaliddoc';
-import { KeyFilterDoc } from '../../components/doc/inputtext/keyfilterdoc';
-import { PTDoc } from '../../components/doc/inputtext/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputtext/pt/wireframe';
-import { SizesDoc } from '../../components/doc/inputtext/sizesdoc';
-import { StyleDoc } from '../../components/doc/inputtext/styledoc';
-import { StyledDoc } from '../../components/doc/inputtext/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputtext/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputtext/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/inputtext/basicdoc';
+import { DisabledDoc } from '@/components/doc/inputtext/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/inputtext/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/inputtext/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/inputtext/form/hookformdoc';
+import { HelpTextDoc } from '@/components/doc/inputtext/helptextdoc';
+import { IconsDoc } from '@/components/doc/inputtext/iconsdoc';
+import { ImportDoc } from '@/components/doc/inputtext/importdoc';
+import { InvalidDoc } from '@/components/doc/inputtext/invaliddoc';
+import { KeyFilterDoc } from '@/components/doc/inputtext/keyfilterdoc';
+import { PTDoc } from '@/components/doc/inputtext/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inputtext/pt/wireframe';
+import { SizesDoc } from '@/components/doc/inputtext/sizesdoc';
+import { StyledDoc } from '@/components/doc/inputtext/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputtext/theming/tailwinddoc';
 
 const InputTextDemo = () => {
     const docs = [
@@ -83,11 +81,7 @@ const InputTextDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

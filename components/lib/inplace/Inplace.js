@@ -2,6 +2,7 @@ import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { classNames, IconUtils, mergeProps, ObjectUtils } from '../utils/Utils';
 import { InplaceBase } from './InplaceBase';
@@ -44,6 +45,10 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const close = (event) => {
+        if (props.disabled) {
+            return;
+        }
+
         props.onClose && props.onClose(event);
 
         if (props.onToggle) {
@@ -57,7 +62,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const onDisplayKeyDown = (event) => {
-        if (event.key === 'Enter') {
+        if (event.code === 'Enter' || event.code === 'Space') {
             open(event);
             event.preventDefault();
         }
@@ -69,7 +74,8 @@ export const Inplace = React.forwardRef((inProps, ref) => {
                 onClick: open,
                 className: cx('display'),
                 onKeyDown: onDisplayKeyDown,
-                tabIndex: props.tabIndex,
+                tabIndex: props.tabIndex || '0',
+                role: 'button',
                 'aria-label': props.ariaLabel
             },
             ptm('display')
@@ -81,7 +87,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const createCloseButton = () => {
         const icon = props.closeIcon || <TimesIcon />;
         const closeIcon = IconUtils.getJSXIcon(icon, undefined, { props });
-        const ariaLabel = localeOption('close');
+        const closeAriaLabel = localeOption('aria') ? localeOption('aria').close : undefined;
 
         if (props.closable) {
             const closeButtonProps = mergeProps({
@@ -89,7 +95,7 @@ export const Inplace = React.forwardRef((inProps, ref) => {
                 icon: closeIcon,
                 type: 'button',
                 onClick: close,
-                'aria-label': ariaLabel,
+                'aria-label': closeAriaLabel,
                 pt: ptm('closeButton'),
                 __parentMetadata: {
                     parent: metaData
@@ -132,6 +138,10 @@ export const Inplace = React.forwardRef((inProps, ref) => {
         });
     };
 
+    useUpdateEffect(() => {
+        props.active ? open(null) : close(null);
+    }, [props.active]);
+
     React.useImperativeHandle(ref, () => ({
         props,
         getElement: () => elementRef.current
@@ -142,7 +152,8 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     const rootProps = mergeProps(
         {
             ref: elementRef,
-            className: classNames(props.className, cx('root'))
+            className: classNames(props.className, cx('root')),
+            'aria-live': 'polite'
         },
         InplaceBase.getOtherProps(props),
         ptm('root')

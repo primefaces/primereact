@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { PickList } from '@/components/lib/picklist/PickList';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../../service/ProductService';
-import { PickList } from '../../../lib/picklist/PickList';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function PTDoc(props) {
     const [source, setSource] = useState([]);
@@ -40,7 +40,7 @@ export function PTDoc(props) {
     target={target}
     onChange={onChange}
     itemTemplate={itemTemplate}
-    breakpoint="1400px"
+    breakpoint="1280px"
     sourceHeader="Available"
     targetHeader="Selected"
     sourceStyle={{ height: '24rem' }}
@@ -98,7 +98,7 @@ export default function PTDemo() {
                 target={target}
                 onChange={onChange}
                 itemTemplate={itemTemplate}
-                breakpoint="1400px"
+                breakpoint="1280px"
                 sourceHeader="Available"
                 targetHeader="Selected"
                 sourceStyle={{ height: '24rem' }}
@@ -172,7 +172,7 @@ export default function PTDemo() {
                 target={target}
                 onChange={onChange}
                 itemTemplate={itemTemplate}
-                breakpoint="1400px"
+                breakpoint="1280px"
                 sourceHeader="Available"
                 targetHeader="Selected"
                 sourceStyle={{ height: '24rem' }}
@@ -219,7 +219,7 @@ export default function PTDemo() {
                     target={target}
                     onChange={onChange}
                     itemTemplate={itemTemplate}
-                    breakpoint="1400px"
+                    breakpoint="1280px"
                     sourceHeader="Available"
                     targetHeader="Selected"
                     sourceStyle={{ height: '24rem' }}

@@ -10,9 +10,10 @@ export const CascadeSelectSub = React.memo((props) => {
     const context = React.useContext(PrimeReactContext);
     const { ptm, cx } = props;
 
-    const getPTOptions = (key) => {
+    const getPTOptions = (key, options) => {
         return ptm(key, {
-            hostName: props.hostName
+            hostName: props.hostName,
+            state: { ...options }
         });
     };
 
@@ -173,7 +174,9 @@ export const CascadeSelectSub = React.memo((props) => {
     });
 
     useUpdateEffect(() => {
-        setActiveOptionState(null);
+        if (!props.parentActive) {
+            setActiveOptionState(null);
+        }
     }, [props.parentActive]);
 
     const createSubmenu = (option) => {
@@ -236,15 +239,17 @@ export const CascadeSelectSub = React.memo((props) => {
             getPTOptions('content')
         );
 
+        const isSelected = activeOptionState === option;
+        const isGroup = isOptionGroup(option);
         const itemProps = mergeProps(
             {
-                className: classNames(option.className, cx('item', { option, isOptionGroup, activeOptionState })),
+                className: classNames(option.className, cx('item', { option, isGroup, isSelected })),
                 style: option.style,
                 role: 'none',
-                'data-p-item-group': isOptionGroup(option),
-                'data-p-highlight': activeOptionState === option
+                'data-p-item-group': isGroup,
+                'data-p-highlight': isSelected
             },
-            getPTOptions('item')
+            getPTOptions('item', { selected: isSelected, group: isGroup })
         );
 
         return (

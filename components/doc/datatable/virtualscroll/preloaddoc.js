@@ -1,10 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
 import Link from 'next/link';
-import React from 'react';
 import { CarService } from '../../../../service/CarService';
-import { Column } from '../../../lib/column/Column';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function PreloadVirtualScrollDoc(props) {
     const cars = Array.from({ length: 100000 }).map((_, i) => CarService.generateCar(i + 1));

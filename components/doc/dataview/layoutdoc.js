@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { DataView, DataViewLayoutOptions } from '@/components/lib/dataview/DataView';
+import { Rating } from '@/components/lib/rating/Rating';
+import { Tag } from '@/components/lib/tag/Tag';
+import { useEffect, useState } from 'react';
 import { ProductService } from '../../../service/ProductService';
-import { Button } from '../../lib/button/Button';
-import { DataView, DataViewLayoutOptions } from '../../lib/dataview/DataView';
-import { Rating } from '../../lib/rating/Rating';
-import { Tag } from '../../lib/tag/Tag';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function LayoutDoc(props) {
     const [products, setProducts] = useState([]);

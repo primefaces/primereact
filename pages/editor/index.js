@@ -1,19 +1,17 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/editor/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/editor/basicdoc';
-import { FormikDoc } from '../../components/doc/editor/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/editor/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/editor/importdoc';
-import { PTDoc } from '../../components/doc/editor/pt/ptdoc';
-import { Wireframe } from '../../components/doc/editor/pt/wireframe';
-import { QuillDoc } from '../../components/doc/editor/quilldoc';
-import { ReadOnlyDoc } from '../../components/doc/editor/readonlydoc';
-import { StyleDoc } from '../../components/doc/editor/styledoc';
-import { TemplateDoc } from '../../components/doc/editor/templatedoc';
-import { StyledDoc } from '../../components/doc/editor/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/editor/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/editor/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/editor/basicdoc';
+import { FormikDoc } from '@/components/doc/editor/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/editor/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/editor/importdoc';
+import { PTDoc } from '@/components/doc/editor/pt/ptdoc';
+import { Wireframe } from '@/components/doc/editor/pt/wireframe';
+import { QuillDoc } from '@/components/doc/editor/quilldoc';
+import { ReadOnlyDoc } from '@/components/doc/editor/readonlydoc';
+import { TemplateDoc } from '@/components/doc/editor/templatedoc';
+import { StyledDoc } from '@/components/doc/editor/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/editor/theming/tailwinddoc';
 
 const EditorDemo = () => {
     const docs = [
@@ -59,11 +57,7 @@ const EditorDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

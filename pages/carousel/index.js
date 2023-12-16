@@ -1,17 +1,16 @@
-import { AccessibilityDoc } from '../../components/doc/carousel/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/carousel/basicdoc';
-import { CircularDoc } from '../../components/doc/carousel/circulardoc';
-import { ImportDoc } from '../../components/doc/carousel/importdoc';
-import { NumScrollDoc } from '../../components/doc/carousel/numscrolldoc';
-import { PTDoc } from '../../components/doc/carousel/pt/ptdoc';
-import { Wireframe } from '../../components/doc/carousel/pt/wireframe';
-import { ResponsiveDoc } from '../../components/doc/carousel/responsivedoc';
-import { StyleDoc } from '../../components/doc/carousel/styledoc';
-import { StyledDoc } from '../../components/doc/carousel/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/carousel/theming/tailwinddoc';
-import { VerticalDoc } from '../../components/doc/carousel/verticaldoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/carousel/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/carousel/basicdoc';
+import { CircularDoc } from '@/components/doc/carousel/circulardoc';
+import { ImportDoc } from '@/components/doc/carousel/importdoc';
+import { NumScrollDoc } from '@/components/doc/carousel/numscrolldoc';
+import { PTDoc } from '@/components/doc/carousel/pt/ptdoc';
+import { Wireframe } from '@/components/doc/carousel/pt/wireframe';
+import { ResponsiveDoc } from '@/components/doc/carousel/responsivedoc';
+import { StyledDoc } from '@/components/doc/carousel/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/carousel/theming/tailwinddoc';
+import { VerticalDoc } from '@/components/doc/carousel/verticaldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CarouselDemo = () => {
     const docs = [
@@ -45,11 +44,7 @@ const CarouselDemo = () => {
             label: 'Vertical',
             component: VerticalDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

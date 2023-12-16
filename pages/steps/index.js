@@ -1,14 +1,13 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/steps/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/steps/basicdoc';
-import { ImportDoc } from '../../components/doc/steps/importdoc';
-import { InteractiveDoc } from '../../components/doc/steps/interactivedoc';
-import { PTDoc } from '../../components/doc/steps/pt/ptdoc';
-import { Wireframe } from '../../components/doc/steps/pt/wireframe';
-import { StyleDoc } from '../../components/doc/steps/styledoc';
-import { StyledDoc } from '../../components/doc/steps/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/steps/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/steps/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/steps/basicdoc';
+import { ImportDoc } from '@/components/doc/steps/importdoc';
+import { InteractiveDoc } from '@/components/doc/steps/interactivedoc';
+import { PTDoc } from '@/components/doc/steps/pt/ptdoc';
+import { Wireframe } from '@/components/doc/steps/pt/wireframe';
+import { StyledDoc } from '@/components/doc/steps/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/steps/theming/tailwinddoc';
 
 const StepsDemo = () => {
     const docs = [
@@ -27,11 +26,7 @@ const StepsDemo = () => {
             label: 'Interactive',
             component: InteractiveDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

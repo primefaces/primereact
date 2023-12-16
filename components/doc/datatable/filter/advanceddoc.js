@@ -1,21 +1,21 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { FilterMatchMode, FilterOperator } from '@/components/lib/api/Api';
+import { Button } from '@/components/lib/button/Button';
+import { Calendar } from '@/components/lib/calendar/Calendar';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
+import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
+import { ProgressBar } from '@/components/lib/progressbar/ProgressBar';
+import { Slider } from '@/components/lib/slider/Slider';
+import { Tag } from '@/components/lib/tag/Tag';
+import { TriStateCheckbox } from '@/components/lib/tristatecheckbox/TriStateCheckbox';
+import { classNames } from '@/components/lib/utils/Utils';
 import React, { useEffect, useState } from 'react';
 import { CustomerService } from '../../../../service/CustomerService';
-import { FilterMatchMode, FilterOperator } from '../../../lib/api/Api';
-import { Button } from '../../../lib/button/Button';
-import { Calendar } from '../../../lib/calendar/Calendar';
-import { Column } from '../../../lib/column/Column';
-import { DataTable } from '../../../lib/datatable/DataTable';
-import { Dropdown } from '../../../lib/dropdown/Dropdown';
-import { InputNumber } from '../../../lib/inputnumber/InputNumber';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { MultiSelect } from '../../../lib/multiselect/MultiSelect';
-import { ProgressBar } from '../../../lib/progressbar/ProgressBar';
-import { Slider } from '../../../lib/slider/Slider';
-import { Tag } from '../../../lib/tag/Tag';
-import { TriStateCheckbox } from '../../../lib/tristatecheckbox/TriStateCheckbox';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function AdvancedFilterDoc(props) {
     const [customers, setCustomers] = useState(null);

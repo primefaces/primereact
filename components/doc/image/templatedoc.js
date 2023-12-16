@@ -1,9 +1,9 @@
-import { Image } from '../../lib/image/Image';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Image } from '@/components/lib/image/Image';
 
 export function TemplateDoc(props) {
-    const icon = <i className="pi pi-check"></i>;
+    const icon = <i className="pi pi-search"></i>;
 
     const code = {
         basic: `
@@ -14,7 +14,7 @@ import React from 'react';
 import { Image } from 'primereact/image';
 
 export default function TemplateDemo() {
-    const icon = (<i className="pi pi-check"></i>)
+    const icon = (<i className="pi pi-search"></i>)
 
     return (
         <div className="card flex justify-content-center">
@@ -28,7 +28,7 @@ import React from 'react';
 import { Image } from 'primereact/image';
 
 export default function TemplateDemo() {
-    const icon = (<i className="pi pi-check"></i>)
+    const icon = (<i className="pi pi-search"></i>)
 
     return (
         <div className="card flex justify-content-center">

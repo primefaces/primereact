@@ -1,6 +1,6 @@
-import { ListBox } from '../../lib/listbox/ListBox';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ListBox } from '@/components/lib/listbox/ListBox';
 
 export function DisabledDoc(props) {
     const cities = [

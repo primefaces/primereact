@@ -21,7 +21,7 @@ const styles = `
     }
     
     .p-ripple-disabled .p-ink {
-        display: none !important;
+        display: none;
     }
 
     @keyframes ripple {

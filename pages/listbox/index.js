@@ -1,22 +1,21 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/listbox/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/listbox/basicdoc';
-import { DisabledDoc } from '../../components/doc/listbox/disableddoc';
-import { FilterDoc } from '../../components/doc/listbox/filterdoc';
-import { FormikDoc } from '../../components/doc/listbox/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/listbox/form/hookformdoc';
-import { GroupDoc } from '../../components/doc/listbox/groupdoc';
-import { ImportDoc } from '../../components/doc/listbox/importdoc';
-import { InvalidDoc } from '../../components/doc/listbox/invaliddoc';
-import { MultipleDoc } from '../../components/doc/listbox/multipledoc';
-import { PTDoc } from '../../components/doc/listbox/pt/ptdoc';
-import { Wireframe } from '../../components/doc/listbox/pt/wireframe';
-import { StyleDoc } from '../../components/doc/listbox/styledoc';
-import { TemplateDoc } from '../../components/doc/listbox/templatedoc';
-import { StyledDoc } from '../../components/doc/listbox/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/listbox/theming/tailwinddoc';
-import { VirtualScrollDoc } from '../../components/doc/listbox/virtualscrolldoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/listbox/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/listbox/basicdoc';
+import { DisabledDoc } from '@/components/doc/listbox/disableddoc';
+import { FilterDoc } from '@/components/doc/listbox/filterdoc';
+import { FormikDoc } from '@/components/doc/listbox/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/listbox/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/listbox/groupdoc';
+import { ImportDoc } from '@/components/doc/listbox/importdoc';
+import { InvalidDoc } from '@/components/doc/listbox/invaliddoc';
+import { MultipleDoc } from '@/components/doc/listbox/multipledoc';
+import { PTDoc } from '@/components/doc/listbox/pt/ptdoc';
+import { Wireframe } from '@/components/doc/listbox/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/listbox/templatedoc';
+import { StyledDoc } from '@/components/doc/listbox/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/listbox/theming/tailwinddoc';
+import { VirtualScrollDoc } from '@/components/doc/listbox/virtualscrolldoc';
 
 const ListBoxDemo = () => {
     const docs = [
@@ -82,11 +81,7 @@ const ListBoxDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

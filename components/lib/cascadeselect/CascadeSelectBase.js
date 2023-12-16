@@ -25,10 +25,10 @@ const classes = {
             'p-ripple-disabled': (context && context.ripple === false) || PrimeReact.ripple === false
         }),
     sublist: 'p-cascadeselect-panel p-cascadeselect-items p-cascadeselect-sublist',
-    item: ({ option, isOptionGroup, activeOptionState }) =>
+    item: ({ option, isGroup, isSelected }) =>
         classNames('p-cascadeselect-item', {
-            'p-cascadeselect-item-group': isOptionGroup(option),
-            'p-cascadeselect-item-active p-highlight': activeOptionState === option
+            'p-cascadeselect-item-group': isGroup,
+            'p-cascadeselect-item-active p-highlight': isSelected
         }),
     dropdownIcon: 'p-cascadeselect-trigger-icon',
     dropdownButton: 'p-cascadeselect-trigger',
@@ -121,7 +121,7 @@ const styles = `
     }
     
     .p-cascadeselect-item-active {
-        overflow: visible !important;
+        overflow: visible;
     }
     
     .p-cascadeselect-item-active > .p-cascadeselect-sublist {

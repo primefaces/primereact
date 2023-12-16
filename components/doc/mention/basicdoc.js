@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Mention } from '@/components/lib/mention/Mention';
 import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
-import { Mention } from '../../lib/mention/Mention';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');

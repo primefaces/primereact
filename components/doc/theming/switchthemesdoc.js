@@ -1,5 +1,5 @@
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export function SwitchThemesDoc(props) {
     const code1 = {
@@ -30,7 +30,7 @@ changeTheme(currentTheme: string, newTheme: string, linkElementId: string, callb
     return (
         <>
             <DocSectionText {...props}>
-                <p className="line-height-3 bg-indigo-600 text-white p-3 text-lg" style={{ borderRadius: '10px' }}>
+                <p className="notification">
                     Solution below works however there is room for improvement. The upcoming styling api will greatly improve dynamic theme switching ability, eliminates the prerequisites with the introduction of CSS variables and dynamic imports.
                 </p>
                 <p>

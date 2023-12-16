@@ -1,6 +1,6 @@
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 
 export function DisabledDoc(props) {
     const code = {

@@ -1,7 +1,7 @@
-import { PrimeIcons } from '../../lib/api/PrimeIcons';
-import { Menu } from '../../lib/menu/Menu';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { PrimeIcons } from '@/components/lib/api/PrimeIcons';
+import { Menu } from '@/components/lib/menu/Menu';
 
 export function ConstantsDoc(props) {
     const items = [

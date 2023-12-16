@@ -69,7 +69,7 @@ const styles = `
     
     .p-treetable .p-column-resizer {
         display: block;
-        position: absolute !important;
+        position: absolute;
         top: 0;
         right: 0;
         margin: 0;
@@ -132,6 +132,28 @@ const styles = `
         justify-content: center;
         z-index: 2;
     }
+
+    /* Alignment */
+    .p-treetable .p-treetable-thead > tr > th.p-align-left > .p-column-header-content,
+    .p-treetable .p-treetable-tbody > tr > td.p-align-left,
+    .p-treetable .p-treetable-tfoot > tr > td.p-align-left {
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .p-treetable .p-treetable-thead > tr > th.p-align-right > .p-column-header-content,
+    .p-treetable .p-treetable-tbody > tr > td.p-align-right,
+    .p-treetable .p-treetable-tfoot > tr > td.p-align-right {
+        text-align: right;
+        justify-content: flex-end;
+    }
+
+    .p-treetable .p-treetable-thead > tr > th.p-align-center > .p-column-header-content,
+    .p-treetable .p-treetable-tbody > tr > td.p-align-center,
+    .p-treetable .p-treetable-tfoot > tr > td.p-align-center {
+        text-align: center;
+        justify-content: center;
+    }
 }
 `;
 
@@ -151,8 +173,8 @@ const classes = {
     header: 'p-treetable-header',
     footer: 'p-treetable-footer',
     resizeHelper: 'p-column-resizer-helper',
-    reorderIndicatorUp: 'p-datatable-reorder-indicator-up',
-    reorderIndicatorDown: 'p-datatable-reorder-indicator-down',
+    reorderIndicatorUp: 'p-treetable-reorder-indicator-up',
+    reorderIndicatorDown: 'p-treetable-reorder-indicator-down',
     wrapper: 'p-treetable-wrapper',
     table: ({ props }) =>
         classNames('p-treetable-table', {
@@ -165,22 +187,25 @@ const classes = {
     tbody: 'p-treetable-tbody',
     tfoot: 'p-treetable-tfoot',
     emptyMessage: 'p-treetable-emptymessage',
-    bodyCell: ({ bodyProps: props, editingState }) =>
+    bodyCell: ({ bodyProps: props, editingState, align }) =>
         classNames({
             'p-editable-column': props.editor,
-            'p-cell-editing': props.editor ? editingState : false
+            'p-cell-editing': props.editor ? editingState : false,
+            [`p-align-${align}`]: !!align
         }),
     sortBadge: 'p-sortable-column-badge',
     headerTitle: 'p-column-title',
-    headerCell: ({ headerProps: props, column, options, getColumnProp, sorted, frozen }) =>
+    headerContent: 'p-column-header-content',
+    headerCell: ({ headerProps: props, frozen, column, options, getColumnProp, sorted, align }) =>
         options.filterOnly
-            ? 'p-filter-column'
+            ? classNames('p-filter-column', { 'p-frozen-column': frozen })
             : classNames({
                   'p-sortable-column': getColumnProp(column, 'sortable'),
                   'p-highlight': sorted,
                   'p-frozen-column': frozen,
                   'p-resizable-column': props.resizableColumns && getColumnProp(column, 'resizeable'),
-                  'p-reorderable-column': props.reorderableColumns && getColumnProp(column, 'reorderable') && !frozen
+                  'p-reorderable-column': props.reorderableColumns && getColumnProp(column, 'reorderable') && !frozen,
+                  [`p-align-${align}`]: !!align
               }),
     columnResizer: 'p-column-resizer p-clickable',
     sortIcon: 'p-sortable-column-icon',
@@ -266,9 +291,9 @@ export const TreeTableBase = ComponentBase.extend({
         propagateSelectionDown: true,
         propagateSelectionUp: true,
         removableSort: false,
-        reorderableColumns: false,
         reorderIndicatorDownIcon: null,
         reorderIndicatorUpIcon: null,
+        reorderableColumns: false,
         resizableColumns: false,
         rowClassName: null,
         rowHover: false,
@@ -281,8 +306,8 @@ export const TreeTableBase = ComponentBase.extend({
         selectionMode: null,
         showGridlines: false,
         sortField: null,
-        sortMode: 'single',
         sortIcon: null,
+        sortMode: 'single',
         sortOrder: null,
         stripedRows: false,
         style: null,

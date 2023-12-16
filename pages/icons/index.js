@@ -1,13 +1,12 @@
-import React from 'react';
-import { BasicDoc } from '../../components/doc/icons/basicdoc';
-import { ColorDoc } from '../../components/doc/icons/colordoc';
-import { ConstantsDoc } from '../../components/doc/icons/constantsdoc';
-import { DownloadDoc } from '../../components/doc/icons/downloaddoc';
-import { ImportDoc } from '../../components/doc/icons/importdoc';
-import { ListDoc } from '../../components/doc/icons/listdoc';
-import { SizeDoc } from '../../components/doc/icons/sizedoc';
-import { SpinDoc } from '../../components/doc/icons/spindoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/icons/basicdoc';
+import { ColorDoc } from '@/components/doc/icons/colordoc';
+import { ConstantsDoc } from '@/components/doc/icons/constantsdoc';
+import { DownloadDoc } from '@/components/doc/icons/downloaddoc';
+import { ImportDoc } from '@/components/doc/icons/importdoc';
+import { ListDoc } from '@/components/doc/icons/listdoc';
+import { SizeDoc } from '@/components/doc/icons/sizedoc';
+import { SpinDoc } from '@/components/doc/icons/spindoc';
 
 const IconsDoc = () => {
     const docs = [

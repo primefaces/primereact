@@ -1,6 +1,6 @@
-import { Splitter, SplitterPanel } from '../../lib/splitter/Splitter';
-import { DocSectionText } from '../common/docsectiontext';
-import { DocSectionCode } from '../common/docsectioncode';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Splitter, SplitterPanel } from '@/components/lib/splitter/Splitter';
 
 export function HorizontalDoc(props) {
     const code = {

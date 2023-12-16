@@ -351,7 +351,7 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Used to define a string that labels the component.
      */

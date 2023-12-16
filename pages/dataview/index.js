@@ -1,18 +1,17 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/dataview/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/dataview/basicdoc';
-import { ImportDoc } from '../../components/doc/dataview/importdoc';
-import { LayoutDoc } from '../../components/doc/dataview/layoutdoc';
-import { LoadingDoc } from '../../components/doc/dataview/loadingdoc';
-import { PaginationDoc } from '../../components/doc/dataview/paginationdoc';
-import { PrimeFlexDoc } from '../../components/doc/dataview/primeflexdoc';
-import { PTDoc } from '../../components/doc/dataview/pt/ptdoc';
-import { Wireframe } from '../../components/doc/dataview/pt/wireframe';
-import { SortingDoc } from '../../components/doc/dataview/sortingdoc';
-import { StyleDoc } from '../../components/doc/dataview/styledoc';
-import { StyledDoc } from '../../components/doc/dataview/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/dataview/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/dataview/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/dataview/basicdoc';
+import { ImportDoc } from '@/components/doc/dataview/importdoc';
+import { LayoutDoc } from '@/components/doc/dataview/layoutdoc';
+import { LoadingDoc } from '@/components/doc/dataview/loadingdoc';
+import { PaginationDoc } from '@/components/doc/dataview/paginationdoc';
+import { PrimeFlexDoc } from '@/components/doc/dataview/primeflexdoc';
+import { PTDoc } from '@/components/doc/dataview/pt/ptdoc';
+import { Wireframe } from '@/components/doc/dataview/pt/wireframe';
+import { SortingDoc } from '@/components/doc/dataview/sortingdoc';
+import { StyledDoc } from '@/components/doc/dataview/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/dataview/theming/tailwinddoc';
 
 const DataViewDemo = () => {
     const docs = [
@@ -51,11 +50,7 @@ const DataViewDemo = () => {
             label: 'Loading',
             component: LoadingDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

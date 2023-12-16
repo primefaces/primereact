@@ -1,7 +1,7 @@
-import { Avatar } from '../../lib/avatar/Avatar';
-import { AvatarGroup } from '../../lib/avatargroup/AvatarGroup';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { AvatarGroup } from '@/components/lib/avatargroup/AvatarGroup';
 
 export function GroupDoc(props) {
     const code = {
@@ -12,7 +12,7 @@ export function GroupDoc(props) {
   <Avatar image="/images/avatar/onyamalimba.png" size="large" shape="circle" />
   <Avatar image="/images/avatar/ionibowcher.png" size="large" shape="circle" />
   <Avatar image="/images/avatar/xuxuefeng.png" size="large" shape="circle" />
-  <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+  <Avatar label="+2" shape="circle" size="large"/>
 </AvatarGroup>
 
         `,
@@ -32,7 +32,7 @@ export default function GroupDemo() {
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" size="large" shape="circle" />
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" size="large" shape="circle" />
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png" size="large" shape="circle" />
-                <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                <Avatar label="+2" shape="circle" size="large"/>
             </AvatarGroup>
         </div>
     )
@@ -54,7 +54,7 @@ export default function GroupDemo() {
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" size="large" shape="circle" />
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" size="large" shape="circle" />
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png" size="large" shape="circle" />
-                <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                <Avatar label="+2" shape="circle" size="large"/>
             </AvatarGroup>
         </div>
     )
@@ -74,7 +74,7 @@ export default function GroupDemo() {
                     <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/onyamalimba.png" size="large" shape="circle" />
                     <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/ionibowcher.png" size="large" shape="circle" />
                     <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/xuxuefeng.png" size="large" shape="circle" />
-                    <Avatar label="+2" shape="circle" size="large" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} />
+                    <Avatar label="+2" shape="circle" size="large" />
                 </AvatarGroup>
             </div>
             <DocSectionCode code={code} />

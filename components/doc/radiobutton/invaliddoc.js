@@ -1,6 +1,6 @@
-import { RadioButton } from '../../lib/radiobutton/RadioButton';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { RadioButton } from '@/components/lib/radiobutton/RadioButton';
 
 export function InvalidDoc(props) {
     const code = {

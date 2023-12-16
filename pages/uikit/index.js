@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react';
 
 const UIKitPage = (props) => {
     return (
@@ -133,7 +132,7 @@ const UIKitPage = (props) => {
 
                     <div className="flex flex-column md:flex-row gap-4 md:gap-8 mb-5">
                         <a
-                            href="https://www.figma.com/file/Q7lwa8MLIcA0ts9bd9wiw2/Preview-%7C-PrimeOne-%7C-2.1.1?type=design&node-id=806%3A36648&mode=design&t=yXUcTsp5wucRdpXy-1"
+                            href="https://www.figma.com/file/96Tql1EywmMtVlSFTkQ2MB/Preview-%7C-PrimeOne-%7C-2.2.0?type=design&node-id=806%3A36648&mode=design&t=CPR8n1g9WLc5D2Hs-1"
                             className="p-5 w-full md:w-6 bg-white flex flex-column align-items-center border-2 border-transparent hover:border-primary transition-colors transition-duration-300"
                             style={{ borderRadius: '50px' }}
                         >
@@ -141,7 +140,7 @@ const UIKitPage = (props) => {
                             <img alt="Figma Light" src="https://primefaces.org/cdn/primereact/images/uikit/logo-figma-light.svg" className="w-4rem" />
                         </a>
                         <a
-                            href="https://www.figma.com/file/Br6Z9SxeYKGZWwKXUcUkGA/Preview-%7C-Dark-%7C-PrimeOne-%7C-2.1.1?type=design&node-id=806%3A36648&mode=design&t=GhlXi6oKNtsPtiS6-1"
+                            href="https://www.figma.com/file/ujRD6FFCWw1bE0h4wIebxl/Preview-%7C-Dark-%7C-PrimeOne-%7C-2.2.0?type=design&node-id=806%3A36648&mode=design&t=bG7aorZhOFIqX1qz-1"
                             className="p-5 w-full md:w-6 bg-gray-900 flex flex-column align-items-center border-2 border-transparent hover:border-primary transition-colors transition-duration-300"
                             style={{ borderRadius: '50px' }}
                         >
@@ -153,7 +152,7 @@ const UIKitPage = (props) => {
                     <div className="card mb-5" style={{ borderRadius: '50px' }}>
                         <div className="text-900 font-bold text-5xl mb-3 text-center">Pricing</div>
                         <div className="mb-2 text-center line-height-3 text-lg">Choose the right plan for your business. Whether you are an individual or a member of a team, UI Kit is available for affordable prices.</div>
-                        <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary hover:underline font-semibold text-center block text-lg">
+                        <a href="https://www.primefaces.org/uikit/licenses" className="mb-6 text-primary hover:underline font-medium text-center block text-lg">
                             View License Details
                         </a>
 
@@ -312,7 +311,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">We're a reseller, are we able to purchase a license on behalf of our client?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3 text-lg">
                                     Yes, after the purchase, please{' '}
-                                    <a href="mailto:contact@primetek.com.tr" className="text-primary hover:underline font-semibold">
+                                    <a href="mailto:contact@primetek.com.tr" className="text-primary hover:underline font-medium">
                                         contact us
                                     </a>{' '}
                                     so we can transfer the license to your client.
@@ -331,7 +330,7 @@ const UIKitPage = (props) => {
                                 <div className="text-xl text-900 line-height-3 mb-2 text-900">How can I get support?</div>
                                 <p className="mt-0 mb-6 p-0 line-height-3 text-lg">
                                     Support is provided by PrimeTek via
-                                    <a href="https://github.com/orgs/primefaces/discussions/categories/figma-ui-kit" className="text-primary hover:underline font-semibold">
+                                    <a href="https://github.com/orgs/primefaces/discussions/categories/figma-ui-kit" className="text-primary hover:underline font-medium">
                                         a dedicated forum channel monitored
                                     </a>{' '}
                                     by PrimeTek support staff.

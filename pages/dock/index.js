@@ -1,14 +1,13 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/dock/pt/ptdoc';
-import { Wireframe } from '../../components/doc/dock/pt/wireframe';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/dock/accessibilitydoc';
-import { AdvancedDoc } from '../../components/doc/dock/advanceddoc';
-import { BasicDoc } from '../../components/doc/dock/basicdoc';
-import { ImportDoc } from '../../components/doc/dock/importdoc';
-import { StyleDoc } from '../../components/doc/dock/styledoc';
-import { TailwindDoc } from '../../components/doc/dock/theming/tailwinddoc';
-import { StyledDoc } from '../../components/doc/dock/theming/styleddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/dock/accessibilitydoc';
+import { AdvancedDoc } from '@/components/doc/dock/advanceddoc';
+import { BasicDoc } from '@/components/doc/dock/basicdoc';
+import { ImportDoc } from '@/components/doc/dock/importdoc';
+import { PTDoc } from '@/components/doc/dock/pt/ptdoc';
+import { Wireframe } from '@/components/doc/dock/pt/wireframe';
+import { StyledDoc } from '@/components/doc/dock/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/dock/theming/tailwinddoc';
 
 const DockDemo = () => {
     const docs = [
@@ -27,11 +26,7 @@ const DockDemo = () => {
             label: 'Advanced',
             component: AdvancedDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

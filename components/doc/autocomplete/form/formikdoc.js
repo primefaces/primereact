@@ -1,11 +1,11 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { AutoComplete } from '@/components/lib/autocomplete/AutoComplete';
+import { Button } from '@/components/lib/button/Button';
+import { Toast } from '@/components/lib/toast/Toast';
+import { classNames } from '@/components/lib/utils/Utils';
 import { useFormik } from 'formik';
-import React, { useRef, useState } from 'react';
-import { AutoComplete } from '../../../lib/autocomplete/AutoComplete';
-import { Button } from '../../../lib/button/Button';
-import { Toast } from '../../../lib/toast/Toast';
-import { classNames } from '../../../lib/utils/Utils';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { useRef, useState } from 'react';
 
 export function FormikDoc(props) {
     const toast = useRef(null);

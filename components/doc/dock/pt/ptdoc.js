@@ -1,6 +1,6 @@
-import { Dock } from '../../../lib/dock/Dock';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dock } from '@/components/lib/dock/Dock';
 
 export function PTDoc(props) {
     const items = [

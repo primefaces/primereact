@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -8,9 +8,11 @@ export function TailwindDoc(props) {
 const Tailwind = {
     inputnumber: {
         root: 'w-full inline-flex',
-        input: ({ props }) => ({
-            className: classNames({ 'rounded-tr-none rounded-br-none': props.showButtons && props.buttonLayout == 'stacked' })
-        }),
+        input: {
+            root: ({ props }) => ({
+                className: classNames({ 'rounded-tr-none rounded-br-none': props.showButtons && props.buttonLayout == 'stacked' })
+            })
+        },
         buttongroup: ({ props }) => ({
             className: classNames({ 'flex flex-col': props.showButtons && props.buttonLayout == 'stacked' })
         }),
@@ -19,7 +21,6 @@ const Tailwind = {
                 'rounded-br-none rounded-bl-none rounded-bl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'
             })
         }),
-        label: 'hidden',
         decrementbutton: ({ props }) => ({
             className: classNames('flex !items-center !justify-center', {
                 'rounded-tr-none rounded-tl-none rounded-tl-none !p-0 flex-1 w-[3rem]': props.showButtons && props.buttonLayout == 'stacked'

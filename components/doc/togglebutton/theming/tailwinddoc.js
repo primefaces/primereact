@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -26,7 +26,7 @@ const Tailwind = {
         label: 'font-bold text-center w-full',
         icon: ({ props }) => ({
             className: classNames(' mr-2', {
-                'text-gray-600 dark:text-white/70': !props.modelValue,
+                'text-gray-600 dark:text-white/70': !props.checked,
                 'text-white': props.checked
             })
         })

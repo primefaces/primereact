@@ -371,7 +371,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const saveColumnWidths = (state) => {
         let widths = [];
-        let headers = DomHandler.find(elementRef.current, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(elementRef.current, '[data-pc-section="thead"] > tr > th');
 
         headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
         state.columnWidths = widths.join(',');
@@ -384,15 +384,15 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const addColumnWidthStyles = (widths) => {
         createStyleElement();
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+        let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > [data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
 
         widths.forEach((width, index) => {
             let style = `width: ${width}px !important; max-width: ${width}px !important`;
 
             innerHTML += `
-                ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `;
@@ -557,7 +557,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                     updateTableWidth(frozenBodyRef.current);
 
                     if (wrapperRef.current) {
-                        updateTableWidth(DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller-content'));
+                        updateTableWidth(DomHandler.findSingle(wrapperRef.current, '[data-pc-name="virtualscroller"] > table > tbody'));
                     }
                 }
             }
@@ -587,7 +587,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     const resizeTableCells = (newColumnWidth, nextColumnWidth) => {
         let widths = [];
         let colIndex = DomHandler.index(resizeColumnElement.current);
-        let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
+        let headers = DomHandler.find(tableRef.current, '[data-pc-section="thead"] > tr > th');
 
         headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
 
@@ -595,16 +595,16 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         createStyleElement();
 
         let innerHTML = '';
-        let selector = `.p-datatable[${attributeSelector.current}] > .p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
+        let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > [data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
 
         widths.forEach((width, index) => {
             let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
             let style = `width: ${colWidth}px !important; max-width: ${colWidth}px !important`;
 
             innerHTML += `
-                ${selector} > .p-datatable-thead > tr > th:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tbody > tr > td:nth-child(${index + 1}),
-                ${selector} > .p-datatable-tfoot > tr > td:nth-child(${index + 1}) {
+                ${selector} > [data-pc-section="thead"] > tr > th:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tbody"] > tr > td:nth-child(${index + 1}),
+                ${selector} > [data-pc-section="tfoot"] > tr > td:nth-child(${index + 1}) {
                     ${style}
                 }
             `;
@@ -744,9 +744,10 @@ export const DataTable = React.forwardRef((inProps, ref) => {
                 let dragColIndex = columns.findIndex((child) => isSameColumn(child, draggedColumn.current));
                 let dropColIndex = columns.findIndex((child) => isSameColumn(child, column));
                 let widths = [];
-                let headers = DomHandler.find(tableRef.current, '.p-datatable-thead > tr > th');
+                let headers = DomHandler.find(tableRef.current, '[data-pc-section="thead"] > tr > th');
 
                 headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
+
                 const movedItem = widths.find((items, index) => index === dragColIndex);
                 const remainingItems = widths.filter((items, index) => index !== dragColIndex);
                 const reorderedWidths = [...remainingItems.slice(0, dropColIndex), movedItem, ...remainingItems.slice(dropColIndex)];
@@ -798,34 +799,35 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (!responsiveStyleElement.current) {
             responsiveStyleElement.current = DomHandler.createInlineStyle((context && context.nonce) || PrimeReact.nonce);
 
-            let tableSelector = `.p-datatable-wrapper ${isVirtualScrollerDisabled() ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
-            let selector = `.p-datatable[${attributeSelector.current}] > ${tableSelector}`;
-            let gridLinesSelector = `.p-datatable[${attributeSelector.current}].p-datatable-gridlines > ${tableSelector}`;
+            let tableSelector = `[data-pc-section="wrapper"] ${isVirtualScrollerDisabled() ? '' : '> [data-pc-name="virtualscroller"]'} > [data-pc-section="table"]`;
+            let selector = `[data-pc-name="datatable"][${attributeSelector.current}] > ${tableSelector}`;
+            let gridLinesSelector = `[data-pc-name="datatable"][${attributeSelector.current}][data-showgridlines="true"] > ${tableSelector}`;
+
             let innerHTML = `
 @media screen and (max-width: ${props.breakpoint}) {
-    ${selector} > .p-datatable-thead > tr > th,
-    ${selector} > .p-datatable-tfoot > tr > td {
-        display: none !important;
+    ${selector} > [data-pc-section="thead"] > tr > th,
+    ${selector} > [data-pc-section="tfoot"] > tr > td {
+        display: none;
     }
 
-    ${selector} > .p-datatable-tbody > tr > td {
+    ${selector} > [data-pc-section="tbody"] > tr > td {
         display: flex;
-        width: 100% !important;
+        width: 100%;
         align-items: center;
         justify-content: space-between;
     }
 
-    ${selector} > .p-datatable-tbody > tr > td:not(:last-child) {
+    ${selector} > [data-pc-section="tbody"] > tr > td:not(:last-child) {
         border: 0 none;
     }
 
-    ${gridLinesSelector} > .p-datatable-tbody > tr > td:last-child {
+    ${gridLinesSelector} > [data-pc-section="tbody"] > tr > td:last-child {
         border-top: 0;
         border-right: 0;
         border-left: 0;
     }
 
-    ${selector} > .p-datatable-tbody > tr > td > .p-column-title {
+    ${selector} > [data-pc-section="tbody"] > tr > td > [data-pc-section="columntitle"] {
         display: block;
     }
 }
@@ -1252,7 +1254,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
 
     const resetScroll = () => {
         if (wrapperRef.current) {
-            const scrollableContainer = !isVirtualScrollerDisabled() ? DomHandler.findSingle(wrapperRef.current, '.p-virtualscroller') : wrapperRef.current;
+            const scrollableContainer = !isVirtualScrollerDisabled() ? DomHandler.findSingle(wrapperRef.current, '[data-pc-name="virtualscroller"]') : wrapperRef.current;
 
             scrollableContainer.scrollTo(0, 0);
         }
@@ -1342,7 +1344,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
     };
 
     const closeEditingRows = () => {
-        DomHandler.find(document.body, '.p-row-editor-cancel').forEach((button, index) => {
+        DomHandler.find(document.body, '[data-pc-section="roweditorcancelbuttonprops"]').forEach((button, index) => {
             setTimeout(() => {
                 button.click();
             }, index * 5);
@@ -1439,7 +1441,7 @@ export const DataTable = React.forwardRef((inProps, ref) => {
         if (props.onValueChange) {
             props.onValueChange(processedData({ filters }));
         }
-    }, [props.filters, props.children]);
+    }, [props.filters]);
 
     useUpdateEffect(() => {
         if (isStateful()) {
@@ -1678,80 +1680,83 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             <TableBody
                 hostName="DataTable"
                 ref={bodyRef}
-                value={dataToRender(rows)}
-                style={style}
-                className={classNames('p-datatable-tbody', className)}
-                empty={empty}
-                frozenRow={false}
-                tableProps={props}
-                tableSelector={attributeSelector.current}
-                columns={columns}
-                selectionModeInColumn={selectionModeInColumn}
-                first={first}
-                editingMeta={editingMetaState}
-                onEditingMetaChange={onEditingMetaChange}
-                tabIndex={props.tabIndex}
-                onRowClick={props.onRowClick}
-                onRowDoubleClick={props.onRowDoubleClick}
-                onRowPointerDown={props.onRowPointerDown}
-                onRowPointerUp={props.onRowPointerUp}
-                onRowMouseEnter={props.onRowMouseEnter}
-                onRowMouseLeave={props.onRowMouseLeave}
-                onCellClick={props.onCellClick}
-                selection={props.selection}
-                onSelectionChange={props.onSelectionChange}
-                lazy={props.lazy}
-                paginator={props.paginator}
-                onCellSelect={props.onCellSelect}
-                onCellUnselect={props.onCellUnselect}
-                onRowSelect={props.onRowSelect}
-                onRowUnselect={props.onRowUnselect}
-                dragSelection={props.dragSelection}
-                onContextMenu={props.onContextMenu}
-                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
-                metaKeySelection={props.metaKeySelection}
-                selectionMode={props.selectionMode}
+                cellClassName={props.cellClassName}
                 cellSelection={props.cellSelection}
+                checkIcon={props.checkIcon}
+                className={classNames('p-datatable-tbody', className)}
+                collapsedRowIcon={props.collapsedRowIcon}
+                columns={columns}
+                compareSelectionBy={props.compareSelectionBy}
                 contextMenuSelection={props.contextMenuSelection}
                 dataKey={props.dataKey}
-                expandedRows={props.expandedRows}
-                onRowCollapse={props.onRowCollapse}
-                onRowExpand={props.onRowExpand}
-                onRowToggle={props.onRowToggle}
+                dragSelection={props.dragSelection}
                 editMode={props.editMode}
+                editingMeta={editingMetaState}
                 editingRows={props.editingRows}
-                onRowReorder={props.onRowReorder}
-                reorderableRows={props.reorderableRows}
-                scrollable={props.scrollable}
-                rowGroupMode={props.rowGroupMode}
-                groupRowsBy={props.groupRowsBy}
-                expandableRowGroups={props.expandableRowGroups}
-                loading={props.loading}
+                empty={empty}
                 emptyMessage={props.emptyMessage}
-                rowGroupHeaderTemplate={props.rowGroupHeaderTemplate}
+                expandableRowGroups={props.expandableRowGroups}
+                expandedRowIcon={props.expandedRowIcon}
+                expandedRows={props.expandedRows}
+                first={first}
+                frozenRow={false}
+                groupRowsBy={props.groupRowsBy}
+                isDataSelectable={props.isDataSelectable}
+                isVirtualScrollerDisabled={isVirtualScrollerDisabled}
+                lazy={props.lazy}
+                loading={props.loading}
+                metaKeySelection={props.metaKeySelection}
+                onCellClick={props.onCellClick}
+                onCellSelect={props.onCellSelect}
+                onCellUnselect={props.onCellUnselect}
+                onContextMenu={props.onContextMenu}
+                onContextMenuSelectionChange={props.onContextMenuSelectionChange}
+                onEditingMetaChange={onEditingMetaChange}
+                onRowClick={props.onRowClick}
+                onRowCollapse={props.onRowCollapse}
+                onRowDoubleClick={props.onRowDoubleClick}
+                onRowEditCancel={props.onRowEditCancel}
+                onRowEditChange={props.onRowEditChange}
+                onRowEditComplete={props.onRowEditComplete}
+                onRowEditInit={props.onRowEditInit}
+                onRowEditSave={props.onRowEditSave}
+                onRowExpand={props.onRowExpand}
+                onRowMouseEnter={props.onRowMouseEnter}
+                onRowMouseLeave={props.onRowMouseLeave}
+                onRowPointerDown={props.onRowPointerDown}
+                onRowPointerUp={props.onRowPointerUp}
+                onRowReorder={props.onRowReorder}
+                onRowSelect={props.onRowSelect}
+                onRowToggle={props.onRowToggle}
+                onRowUnselect={props.onRowUnselect}
+                onSelectionChange={props.onSelectionChange}
+                paginator={props.paginator}
+                reorderableRows={props.reorderableRows}
+                responsiveLayout={props.responsiveLayout}
+                rowClassName={props.rowClassName}
+                rowEditValidator={props.rowEditValidator}
+                rowEditorCancelIcon={props.rowEditorCancelIcon}
+                rowEditorInitIcon={props.rowEditorInitIcon}
+                rowEditorSaveIcon={props.rowEditorSaveIcon}
                 rowExpansionTemplate={props.rowExpansionTemplate}
                 rowGroupFooterTemplate={props.rowGroupFooterTemplate}
-                onRowEditChange={props.onRowEditChange}
-                compareSelectionBy={props.compareSelectionBy}
+                rowGroupHeaderTemplate={props.rowGroupHeaderTemplate}
+                rowGroupMode={props.rowGroupMode}
+                scrollable={props.scrollable}
                 selectOnEdit={props.selectOnEdit}
-                onRowEditInit={props.onRowEditInit}
-                rowEditValidator={props.rowEditValidator}
-                onRowEditSave={props.onRowEditSave}
-                onRowEditComplete={props.onRowEditComplete}
-                onRowEditCancel={props.onRowEditCancel}
-                cellClassName={props.cellClassName}
-                responsiveLayout={props.responsiveLayout}
+                selection={props.selection}
                 selectionAutoFocus={props.selectionAutoFocus}
-                isDataSelectable={props.isDataSelectable}
-                showSelectionElement={props.showSelectionElement}
+                selectionMode={props.selectionMode}
+                selectionModeInColumn={selectionModeInColumn}
                 showRowReorderElement={props.showRowReorderElement}
-                expandedRowIcon={props.expandedRowIcon}
-                collapsedRowIcon={props.collapsedRowIcon}
-                checkIcon={props.checkIcon}
-                rowClassName={props.rowClassName}
+                showSelectionElement={props.showSelectionElement}
+                style={style}
+                tabIndex={props.tabIndex}
+                tableProps={props}
+                tableSelector={attributeSelector.current}
+                value={dataToRender(rows)}
                 virtualScrollerContentRef={contentRef}
                 virtualScrollerOptions={options}
-                isVirtualScrollerDisabled={isVirtualScrollerDisabled}
                 ptCallbacks={ptCallbacks}
                 metaData={metaData}
             />
@@ -1963,7 +1968,8 @@ export const DataTable = React.forwardRef((inProps, ref) => {
             id: props.id,
             className: classNames(props.className, ptCallbacks.cx('root', { selectable })),
             style: props.style,
-            'data-scrollselectors': '.p-datatable-wrapper'
+            'data-scrollselectors': '.p-datatable-wrapper',
+            'data-showgridlines': props.showGridlines
         },
         DataTableBase.getOtherProps(props),
         ptCallbacks.ptm('root')

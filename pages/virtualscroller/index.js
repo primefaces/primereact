@@ -1,17 +1,16 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/virtualscroller/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/virtualscroller/basicdoc';
-import { DelayDoc } from '../../components/doc/virtualscroller/delaydoc';
-import { GridDoc } from '../../components/doc/virtualscroller/griddoc';
-import { HorizontalDoc } from '../../components/doc/virtualscroller/horizontaldoc';
-import { ImportDoc } from '../../components/doc/virtualscroller/importdoc';
-import { LazyDoc } from '../../components/doc/virtualscroller/lazydoc';
-import { LoadingDoc } from '../../components/doc/virtualscroller/loadingdoc';
-import { PTDoc } from '../../components/doc/virtualscroller/pt/ptdoc';
-import { Wireframe } from '../../components/doc/virtualscroller/pt/wireframe';
-import { StyleDoc } from '../../components/doc/virtualscroller/styledoc';
-import { StyledDoc } from '../../components/doc/virtualscroller/theming/styleddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/virtualscroller/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/virtualscroller/basicdoc';
+import { DelayDoc } from '@/components/doc/virtualscroller/delaydoc';
+import { GridDoc } from '@/components/doc/virtualscroller/griddoc';
+import { HorizontalDoc } from '@/components/doc/virtualscroller/horizontaldoc';
+import { ImportDoc } from '@/components/doc/virtualscroller/importdoc';
+import { LazyDoc } from '@/components/doc/virtualscroller/lazydoc';
+import { LoadingDoc } from '@/components/doc/virtualscroller/loadingdoc';
+import { PTDoc } from '@/components/doc/virtualscroller/pt/ptdoc';
+import { Wireframe } from '@/components/doc/virtualscroller/pt/wireframe';
+import { StyledDoc } from '@/components/doc/virtualscroller/theming/styleddoc';
 
 const VirtualScrollerDemo = () => {
     const docs = [
@@ -50,11 +49,7 @@ const VirtualScrollerDemo = () => {
             label: 'Lazy',
             component: LazyDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

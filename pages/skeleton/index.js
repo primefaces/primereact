@@ -1,17 +1,15 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/skeleton/accessibilitydoc';
-import { CardDoc } from '../../components/doc/skeleton/carddoc';
-import { DataTableDoc } from '../../components/doc/skeleton/datatabledoc';
-import { ImportDoc } from '../../components/doc/skeleton/importdoc';
-import { ListDoc } from '../../components/doc/skeleton/listdoc';
-import { PTDoc } from '../../components/doc/skeleton/pt/ptdoc';
-import { Wireframe } from '../../components/doc/skeleton/pt/wireframe';
-import { ShapesDoc } from '../../components/doc/skeleton/shapesdoc';
-import { StyleDoc } from '../../components/doc/skeleton/styledoc';
-import { StyledDoc } from '../../components/doc/skeleton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/skeleton/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/skeleton/accessibilitydoc';
+import { CardDoc } from '@/components/doc/skeleton/carddoc';
+import { DataTableDoc } from '@/components/doc/skeleton/datatabledoc';
+import { ImportDoc } from '@/components/doc/skeleton/importdoc';
+import { ListDoc } from '@/components/doc/skeleton/listdoc';
+import { PTDoc } from '@/components/doc/skeleton/pt/ptdoc';
+import { Wireframe } from '@/components/doc/skeleton/pt/wireframe';
+import { ShapesDoc } from '@/components/doc/skeleton/shapesdoc';
+import { StyledDoc } from '@/components/doc/skeleton/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/skeleton/theming/tailwinddoc';
 
 const SkeletonDemo = () => {
     const docs = [
@@ -40,11 +38,7 @@ const SkeletonDemo = () => {
             label: 'DataTable',
             component: DataTableDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

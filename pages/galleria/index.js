@@ -1,30 +1,29 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/galleria/accessibilitydoc';
-import { AdvancedDoc } from '../../components/doc/galleria/advanceddoc';
-import { AutoPlayDoc } from '../../components/doc/galleria/autoplaydoc';
-import { BasicDoc } from '../../components/doc/galleria/basicdoc';
-import { CaptionDoc } from '../../components/doc/galleria/captiondoc';
-import { ControlledDoc } from '../../components/doc/galleria/controlleddoc';
-import { CustomContentDoc } from '../../components/doc/galleria/fullscreen/customcontentdoc';
-import { WithoutThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withoutthumbnailsdoc';
-import { WithThumbnailsDoc } from '../../components/doc/galleria/fullscreen/withthumbnailsdoc';
-import { ImportDoc } from '../../components/doc/galleria/importdoc';
-import { ClickEventDoc } from '../../components/doc/galleria/indicator/clickeventdoc';
-import { HoverEventDoc } from '../../components/doc/galleria/indicator/hovereventdoc';
-import { PositionDoc } from '../../components/doc/galleria/indicator/positiondoc';
-import { IndicatorTemplateDoc } from '../../components/doc/galleria/indicator/templatedoc';
-import { HoverDoc } from '../../components/doc/galleria/navigator/hoverdoc';
-import { IndicatorsDoc } from '../../components/doc/galleria/navigator/indicatorsdoc';
-import { ItemThumbnailsDoc } from '../../components/doc/galleria/navigator/itemthumbnailsdoc';
-import { ItemWithoutThumbnailsDoc } from '../../components/doc/galleria/navigator/itemwithouthumbnailsdoc';
-import { PTDoc } from '../../components/doc/galleria/pt/ptdoc';
-import { Wireframe } from '../../components/doc/galleria/pt/wireframe';
-import { ResponsiveDoc } from '../../components/doc/galleria/responsivedoc';
-import { StyleDoc } from '../../components/doc/galleria/styledoc';
-import { StyledDoc } from '../../components/doc/galleria/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/galleria/theming/tailwinddoc';
-import { ThumbnailDoc } from '../../components/doc/galleria/thumbnaildoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/galleria/accessibilitydoc';
+import { AdvancedDoc } from '@/components/doc/galleria/advanceddoc';
+import { AutoPlayDoc } from '@/components/doc/galleria/autoplaydoc';
+import { BasicDoc } from '@/components/doc/galleria/basicdoc';
+import { CaptionDoc } from '@/components/doc/galleria/captiondoc';
+import { ControlledDoc } from '@/components/doc/galleria/controlleddoc';
+import { CustomContentDoc } from '@/components/doc/galleria/fullscreen/customcontentdoc';
+import { WithoutThumbnailsDoc } from '@/components/doc/galleria/fullscreen/withoutthumbnailsdoc';
+import { WithThumbnailsDoc } from '@/components/doc/galleria/fullscreen/withthumbnailsdoc';
+import { ImportDoc } from '@/components/doc/galleria/importdoc';
+import { ClickEventDoc } from '@/components/doc/galleria/indicator/clickeventdoc';
+import { HoverEventDoc } from '@/components/doc/galleria/indicator/hovereventdoc';
+import { PositionDoc } from '@/components/doc/galleria/indicator/positiondoc';
+import { IndicatorTemplateDoc } from '@/components/doc/galleria/indicator/templatedoc';
+import { HoverDoc } from '@/components/doc/galleria/navigator/hoverdoc';
+import { IndicatorsDoc } from '@/components/doc/galleria/navigator/indicatorsdoc';
+import { ItemThumbnailsDoc } from '@/components/doc/galleria/navigator/itemthumbnailsdoc';
+import { ItemWithoutThumbnailsDoc } from '@/components/doc/galleria/navigator/itemwithouthumbnailsdoc';
+import { PTDoc } from '@/components/doc/galleria/pt/ptdoc';
+import { Wireframe } from '@/components/doc/galleria/pt/wireframe';
+import { ResponsiveDoc } from '@/components/doc/galleria/responsivedoc';
+import { StyledDoc } from '@/components/doc/galleria/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/galleria/theming/tailwinddoc';
+import { ThumbnailDoc } from '@/components/doc/galleria/thumbnaildoc';
 
 const GalleriaDemo = () => {
     const docs = [
@@ -144,11 +143,7 @@ const GalleriaDemo = () => {
             label: 'Advanced',
             component: AdvancedDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

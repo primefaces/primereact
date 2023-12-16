@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -77,7 +77,7 @@ export default function UnstyledDemo() {
             <div className="flex flex-col xl:flex-row xl:items-start p-4 gap-4 bg-white dark:bg-gray-900">
                 <img
                     className="w-3/4 sm:w-64 xl:w-40 shadow-md block xl:block mx-auto rounded-md"
-                    src={\`https://primefaces.org/cdn/primevue/images/product/\${product.image}\`}
+                    src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`}
                     alt={product.name}
                 />
                 <div className="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-4">
@@ -124,7 +124,7 @@ export default function UnstyledDemo() {
                     <Tag value={product.inventoryStatus} severity={getSeverity(product)} />
                 </div>
                 <div className="flex flex-col items-center gap-3 py-5">
-                    <img className="w-3/4 shadow-md rounded-md" src={\`https://primefaces.org/cdn/primevue/images/product/\${product.image}\`} alt={product.name} />
+                    <img className="w-3/4 shadow-md rounded-md" src={\`https://primefaces.org/cdn/primereact/images/product/\${product.image}\`} alt={product.name} />
                     <div className="text-2xl font-bold text-gray-700 dark:text-white/80">{product.name}</div>
                     <Rating value={product.rating} readonly cancel={false} />
                 </div>

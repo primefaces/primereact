@@ -1,6 +1,6 @@
-import { InputMask } from '../../lib/inputmask/InputMask';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputMask } from '@/components/lib/inputmask/InputMask';
 
 export function DisabledDoc(props) {
     const code = {

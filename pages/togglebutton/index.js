@@ -1,16 +1,15 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/togglebutton/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/togglebutton/basicdoc';
-import { CustomizedDoc } from '../../components/doc/togglebutton/customizeddoc';
-import { FormikDoc } from '../../components/doc/togglebutton/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/togglebutton/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/togglebutton/importdoc';
-import { PTDoc } from '../../components/doc/togglebutton/pt/ptdoc';
-import { Wireframe } from '../../components/doc/togglebutton/pt/wireframe';
-import { StyleDoc } from '../../components/doc/togglebutton/styledoc';
-import { StyledDoc } from '../../components/doc/togglebutton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/togglebutton/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/togglebutton/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/togglebutton/basicdoc';
+import { CustomizedDoc } from '@/components/doc/togglebutton/customizeddoc';
+import { FormikDoc } from '@/components/doc/togglebutton/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/togglebutton/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/togglebutton/importdoc';
+import { PTDoc } from '@/components/doc/togglebutton/pt/ptdoc';
+import { Wireframe } from '@/components/doc/togglebutton/pt/wireframe';
+import { StyledDoc } from '@/components/doc/togglebutton/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/togglebutton/theming/tailwinddoc';
 
 const ToggleButtonDemo = () => {
     const docs = [
@@ -46,11 +45,7 @@ const ToggleButtonDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

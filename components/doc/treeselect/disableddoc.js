@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { TreeSelect } from '@/components/lib/treeselect/TreeSelect';
+import { useEffect, useState } from 'react';
 import { NodeService } from '../../../service/NodeService';
-import { TreeSelect } from '../../lib/treeselect/TreeSelect';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function DisabledDoc(props) {
     const [nodes, setNodes] = useState(null);

@@ -1,9 +1,8 @@
-import React from 'react';
-import { AddLocaleDoc } from '../../components/doc/configuration/locale/addlocaledoc';
-import { ImportDoc } from '../../components/doc/configuration/locale/importdoc';
-import { RepositoryDoc } from '../../components/doc/configuration/locale/repositorydoc';
-import { SetLocaleDoc } from '../../components/doc/configuration/locale/setlocaledoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AddLocaleDoc } from '@/components/doc/configuration/locale/addlocaledoc';
+import { ImportDoc } from '@/components/doc/configuration/locale/importdoc';
+import { RepositoryDoc } from '@/components/doc/configuration/locale/repositorydoc';
+import { SetLocaleDoc } from '@/components/doc/configuration/locale/setlocaledoc';
 
 const LocalePage = () => {
     const docs = [

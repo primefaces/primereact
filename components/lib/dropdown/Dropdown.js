@@ -642,6 +642,8 @@ export const Dropdown = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(focusInputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {
@@ -738,7 +740,7 @@ export const Dropdown = React.memo(
                     onBlur: onInputBlur,
                     onKeyDown: onInputKeyDown,
                     disabled: props.disabled,
-                    tabIndex: props.tabIndex,
+                    tabIndex: props.tabIndex || 0,
                     ...ariaProps
                 },
                 ptm('input')
@@ -769,6 +771,7 @@ export const Dropdown = React.memo(
                         onFocus: onEditableInputFocus,
                         onBlur: onInputBlur,
                         'aria-haspopup': 'listbox',
+                        tabIndex: props.tabIndex || 0,
                         ...ariaProps
                     },
                     ptm('input')
@@ -780,7 +783,8 @@ export const Dropdown = React.memo(
                 const inputProps = mergeProps(
                     {
                         ref: inputRef,
-                        className: cx('input', { label })
+                        className: cx('input', { label }),
+                        tabIndex: '-1'
                     },
                     ptm('input')
                 );
@@ -809,7 +813,8 @@ export const Dropdown = React.memo(
         const createDropdownIcon = () => {
             const dropdownIconProps = mergeProps(
                 {
-                    className: cx('dropdownIcon')
+                    className: cx('dropdownIcon'),
+                    'data-pr-overlay-visible': overlayVisibleState
                 },
                 ptm('dropdownIcon')
             );

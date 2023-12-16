@@ -1,10 +1,10 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Skeleton } from '@/components/lib/skeleton/Skeleton';
+import { classNames } from '@/components/lib/utils/Utils';
+import { VirtualScroller } from '@/components/lib/virtualscroller/VirtualScroller';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { Skeleton } from '../../lib/skeleton/Skeleton';
-import { classNames } from '../../lib/utils/Utils';
-import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { useState } from 'react';
 
 export function LoadingDoc(props) {
     const [items] = useState(Array.from({ length: 100000 }).map((_, i) => `Item #${i}`));

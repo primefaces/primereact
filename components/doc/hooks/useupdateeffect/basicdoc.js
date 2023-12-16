@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
-import { useUpdateEffect } from '../../../lib/hooks/Hooks';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { Toast } from '../../../lib/toast/Toast';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useUpdateEffect } from '@/components/lib/hooks/Hooks';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useRef, useState } from 'react';
 
 export function BasicDoc(props) {
     const toast = useRef(null);

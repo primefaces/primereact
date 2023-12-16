@@ -1,38 +1,36 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/treetable/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/treetable/basicdoc';
-import { ColumnGroupDoc } from '../../components/doc/treetable/columngroupdoc';
-import { ColumnToggleDoc } from '../../components/doc/treetable/columntoggledoc';
-import { ConditionalStyleDoc } from '../../components/doc/treetable/conditionalstyledoc';
-import { ContextMenuDoc } from '../../components/doc/treetable/contextmenudoc';
-import { ControlledDoc } from '../../components/doc/treetable/controlleddoc';
-import { DynamicColumnsDoc } from '../../components/doc/treetable/dynamiccolumnsdoc';
-import { EditDoc } from '../../components/doc/treetable/editdoc';
-import { FilterDoc } from '../../components/doc/treetable/filterdoc';
-import { ImportDoc } from '../../components/doc/treetable/importdoc';
-import { LazyLoadDoc } from '../../components/doc/treetable/lazyloaddoc';
-import { PaginatorBasicDoc } from '../../components/doc/treetable/paginator/basicdoc';
-import { PaginatorTemplateDoc } from '../../components/doc/treetable/paginator/templatedoc';
-import { PTDoc } from '../../components/doc/treetable/pt/ptdoc';
-import { Wireframe } from '../../components/doc/treetable/pt/wireframe';
-import { ReorderDoc } from '../../components/doc/treetable/reorderdoc';
-import { ExpandModeDoc } from '../../components/doc/treetable/resize/expandmodedoc';
-import { FitModeDoc } from '../../components/doc/treetable/resize/fitmodedoc';
-import { FrozenColumnsDoc } from '../../components/doc/treetable/scroll/frozencolumnsdoc';
-import { HorizontalScrollDoc } from '../../components/doc/treetable/scroll/horizontaldoc';
-import { VerticalScrollDoc } from '../../components/doc/treetable/scroll/verticaldoc';
-import { CheckboxRowSelectionDoc } from '../../components/doc/treetable/selection/checkboxdoc';
-import { RowSelectionEventsDoc } from '../../components/doc/treetable/selection/eventsdoc';
-import { MultipleRowsSelectionDoc } from '../../components/doc/treetable/selection/multipledoc';
-import { SingleRowSelectionDoc } from '../../components/doc/treetable/selection/singledoc';
-import { MultipleColumnsDoc } from '../../components/doc/treetable/sort/multiplecolumnsdoc';
-import { SingleColumnDoc } from '../../components/doc/treetable/sort/singlecolumndoc';
-import { StyleDoc } from '../../components/doc/treetable/styledoc';
-import { TemplateDoc } from '../../components/doc/treetable/templatedoc';
-import { StyledDoc } from '../../components/doc/treetable/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/treetable/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/treetable/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/treetable/basicdoc';
+import { ColumnGroupDoc } from '@/components/doc/treetable/columngroupdoc';
+import { ColumnToggleDoc } from '@/components/doc/treetable/columntoggledoc';
+import { ConditionalStyleDoc } from '@/components/doc/treetable/conditionalstyledoc';
+import { ContextMenuDoc } from '@/components/doc/treetable/contextmenudoc';
+import { ControlledDoc } from '@/components/doc/treetable/controlleddoc';
+import { DynamicColumnsDoc } from '@/components/doc/treetable/dynamiccolumnsdoc';
+import { EditDoc } from '@/components/doc/treetable/editdoc';
+import { FilterDoc } from '@/components/doc/treetable/filterdoc';
+import { ImportDoc } from '@/components/doc/treetable/importdoc';
+import { LazyLoadDoc } from '@/components/doc/treetable/lazyloaddoc';
+import { PaginatorBasicDoc } from '@/components/doc/treetable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '@/components/doc/treetable/paginator/templatedoc';
+import { PTDoc } from '@/components/doc/treetable/pt/ptdoc';
+import { Wireframe } from '@/components/doc/treetable/pt/wireframe';
+import { ReorderDoc } from '@/components/doc/treetable/reorderdoc';
+import { ExpandModeDoc } from '@/components/doc/treetable/resize/expandmodedoc';
+import { FitModeDoc } from '@/components/doc/treetable/resize/fitmodedoc';
+import { FrozenColumnsDoc } from '@/components/doc/treetable/scroll/frozencolumnsdoc';
+import { HorizontalScrollDoc } from '@/components/doc/treetable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '@/components/doc/treetable/scroll/verticaldoc';
+import { CheckboxRowSelectionDoc } from '@/components/doc/treetable/selection/checkboxdoc';
+import { RowSelectionEventsDoc } from '@/components/doc/treetable/selection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '@/components/doc/treetable/selection/multipledoc';
+import { SingleRowSelectionDoc } from '@/components/doc/treetable/selection/singledoc';
+import { MultipleColumnsDoc } from '@/components/doc/treetable/sort/multiplecolumnsdoc';
+import { SingleColumnDoc } from '@/components/doc/treetable/sort/singlecolumndoc';
+import { TemplateDoc } from '@/components/doc/treetable/templatedoc';
+import { StyledDoc } from '@/components/doc/treetable/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/treetable/theming/tailwinddoc';
 
 const TreeTableDemo = () => {
     const docs = [
@@ -196,11 +194,7 @@ const TreeTableDemo = () => {
             label: 'Context Menu',
             component: ContextMenuDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

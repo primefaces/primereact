@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -8,7 +8,7 @@ export function TailwindDoc(props) {
 const Tailwind = {
     dialog: {
         root: ({ state }) => ({
-            className: classNames('rounded-lg shadow-lg border-0', 'max-h-90 transform scale-100', 'm-0 w-[50vw]', 'dark:border dark:border-blue-900/40', {
+            className: classNames('rounded-lg shadow-lg border-0', 'max-h-[90%] transform scale-100', 'm-0 w-[50vw]', 'dark:border dark:border-blue-900/40', {
                 'transition-none transform-none !w-screen !h-screen !max-h-full !top-0 !left-0': state.maximized
             })
         }),
@@ -35,8 +35,8 @@ const Tailwind = {
         footer: {
             className: classNames('shrink-0 ', 'border-t-0 bg-white text-gray-700 px-6 pb-6 text-right rounded-b-lg', 'dark:bg-gray-900  dark:text-white/80')
         },
-        mask: ({ props }) => ({
-            className: classNames('transition duration-200', { 'bg-black/40': props.modal })
+        mask: ({ state }) => ({
+            className: classNames('transition duration-200', { 'bg-black/40': state.containerVisible })
         }),
         transition: ({ props }) => {
             return props.position === 'top'
@@ -53,14 +53,14 @@ const Tailwind = {
                       leaveActiveClass: 'transition-all duration-200 ease-out',
                       leaveToClass: 'opacity-0 scale-75 translate-x-0 translate-y-full translate-z-0'
                   }
-                : props.position === 'left' || props.position === 'topleft' || props.position === 'bottomleft'
+                : props.position === 'left' || props.position === 'top-left' || props.position === 'bottom-left'
                 ? {
                       enterFromClass: 'opacity-0 scale-75 -translate-x-full translate-y-0 translate-z-0',
                       enterActiveClass: 'transition-all duration-200 ease-out',
                       leaveActiveClass: 'transition-all duration-200 ease-out',
                       leaveToClass: 'opacity-0 scale-75  -translate-x-full translate-y-0 translate-z-0'
                   }
-                : props.position === 'right' || props.position === 'topright' || props.position === 'bottomright'
+                : props.position === 'right' || props.position === 'top-right' || props.position === 'bottom-right'
                 ? {
                       enterFromClass: 'opacity-0 scale-75 translate-x-full translate-y-0 translate-z-0',
                       enterActiveClass: 'transition-all duration-200 ease-out',

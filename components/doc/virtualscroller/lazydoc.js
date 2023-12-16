@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Skeleton } from '../../lib/skeleton/Skeleton';
-import { classNames } from '../../lib/utils/Utils';
-import { VirtualScroller } from '../../lib/virtualscroller/VirtualScroller';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Skeleton } from '@/components/lib/skeleton/Skeleton';
+import { classNames } from '@/components/lib/utils/Utils';
+import { VirtualScroller } from '@/components/lib/virtualscroller/VirtualScroller';
+import { useEffect, useRef, useState } from 'react';
 
 export function LazyDoc(props) {
     const [lazyItems, setLazyItems] = useState([]);
@@ -23,17 +23,20 @@ export function LazyDoc(props) {
         }
 
         //imitate delay of a backend call
-        loadLazyTimeout.current = setTimeout(() => {
-            const { first, last } = event;
-            const _lazyItems = [...lazyItems];
+        loadLazyTimeout.current = setTimeout(
+            () => {
+                const { first, last } = event;
+                const _lazyItems = [...lazyItems];
 
-            for (let i = first; i < last; i++) {
-                _lazyItems[i] = `Item #${i}`;
-            }
+                for (let i = first; i < last; i++) {
+                    _lazyItems[i] = `Item #${i}`;
+                }
 
-            setLazyItems(_lazyItems);
-            setLazyLoading(false);
-        }, Math.random() * 1000 + 250);
+                setLazyItems(_lazyItems);
+                setLazyLoading(false);
+            },
+            Math.random() * 1000 + 250
+        );
     };
 
     const itemTemplate = (item, options) => {

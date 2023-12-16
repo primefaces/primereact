@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function StickyDoc(props) {
     const toast = useRef(null);
@@ -87,8 +87,8 @@ export default function StickyDemo() {
             <div className="card flex justify-content-center">
                 <Toast ref={toast} />
                 <div className="flex flex-wrap gap-2">
-                    <Button onClick={showSticky} label="Sticky" severity="success" />
-                    <Button onClick={clear} label="Clear" />
+                    <Button onClick={showSticky} label="Sticky" />
+                    <Button onClick={clear} label="Clear" severity="secondary" />
                 </div>
             </div>
             <DocSectionCode code={code} />

@@ -1,20 +1,18 @@
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { PTDoc } from '../../components/doc/checkbox/pt/ptdoc';
-import { Wireframe } from '../../components/doc/checkbox/pt/wireframe';
-import { AccessibilityDoc } from '../../components/doc/checkbox/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/checkbox/basicdoc';
-import { DisabledDoc } from '../../components/doc/checkbox/disableddoc';
-import { DynamicDoc } from '../../components/doc/checkbox/dynamicdoc';
-import { FormikDoc } from '../../components/doc/checkbox/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/checkbox/form/hookformdoc';
-import { GroupDoc } from '../../components/doc/checkbox/groupdoc';
-import { ImportDoc } from '../../components/doc/checkbox/importdoc';
-import { InvalidDoc } from '../../components/doc/checkbox/invaliddoc';
-import { StyleDoc } from '../../components/doc/checkbox/styledoc';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { TailwindDoc } from '../../components/doc/checkbox/theming/tailwinddoc';
-import { StyledDoc } from '../../components/doc/checkbox/theming/styleddoc';
+import { AccessibilityDoc } from '@/components/doc/checkbox/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/checkbox/basicdoc';
+import { DisabledDoc } from '@/components/doc/checkbox/disableddoc';
+import { DynamicDoc } from '@/components/doc/checkbox/dynamicdoc';
+import { FormikDoc } from '@/components/doc/checkbox/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/checkbox/form/hookformdoc';
+import { GroupDoc } from '@/components/doc/checkbox/groupdoc';
+import { ImportDoc } from '@/components/doc/checkbox/importdoc';
+import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
+import { PTDoc } from '@/components/doc/checkbox/pt/ptdoc';
+import { Wireframe } from '@/components/doc/checkbox/pt/wireframe';
+import { StyledDoc } from '@/components/doc/checkbox/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/checkbox/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const CheckboxDemo = () => {
     const docs = [
@@ -65,11 +63,7 @@ const CheckboxDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

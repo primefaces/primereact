@@ -1,9 +1,9 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { confirmDialog } from '@/components/lib/confirmdialog/ConfirmDialog';
+import { Toast } from '@/components/lib/toast/Toast';
 import { useRef } from 'react';
-import { Button } from '../../lib/button/Button';
-import { confirmDialog } from '../../lib/confirmdialog/ConfirmDialog';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const toast = useRef(null);
@@ -21,6 +21,7 @@ export function BasicDoc(props) {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -32,6 +33,7 @@ export function BasicDoc(props) {
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
             acceptClassName: 'p-button-danger',
+            defaultFocus: 'reject',
             accept,
             reject
         });
@@ -66,6 +68,7 @@ export default function BasicDemo() {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -76,6 +79,7 @@ export default function BasicDemo() {
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject
@@ -116,6 +120,7 @@ export default function BasicDemo() {
             message: 'Are you sure you want to proceed?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            defaultFocus: 'accept',
             accept,
             reject
         });
@@ -126,6 +131,7 @@ export default function BasicDemo() {
             message: 'Do you want to delete this record?',
             header: 'Delete Confirmation',
             icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept,
             reject

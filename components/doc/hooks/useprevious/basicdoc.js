@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { usePrevious } from '../../../lib/hooks/Hooks';
-import { InputText } from '../../../lib/inputtext/InputText';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { usePrevious } from '@/components/lib/hooks/Hooks';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { useState } from 'react';
 
 export function BasicDoc(props) {
     const [value, setValue] = useState('');

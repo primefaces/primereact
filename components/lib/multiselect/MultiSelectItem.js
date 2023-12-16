@@ -4,13 +4,16 @@ import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, classNames, mergeProps } from '../utils/Utils';
 
 export const MultiSelectItem = React.memo((props) => {
+    const [focusedState, setFocusedState] = React.useState(false);
     const { ptm, cx } = props;
 
     const getPTOptions = (key) => {
         return ptm(key, {
             hostName: props.hostName,
             context: {
-                selected: props.selected
+                selected: props.selected,
+                disabled: props.disabled,
+                focused: focusedState
             }
         });
     };
@@ -24,6 +27,7 @@ export const MultiSelectItem = React.memo((props) => {
         }
 
         event.preventDefault();
+        event.stopPropagation();
     };
 
     const onKeyDown = (event) => {
@@ -33,6 +37,14 @@ export const MultiSelectItem = React.memo((props) => {
                 option: props.option
             });
         }
+    };
+
+    const onFocus = (event) => {
+        setFocusedState(true);
+    };
+
+    const onBlur = (event) => {
+        setFocusedState(false);
     };
 
     const checkboxIconProps = mergeProps(
@@ -70,6 +82,8 @@ export const MultiSelectItem = React.memo((props) => {
             onClick: onClick,
             tabIndex: tabIndex,
             onKeyDown: onKeyDown,
+            onFocus: onFocus,
+            onBlur: onBlur,
             role: 'option',
             'aria-selected': props.selected,
             'data-p-highlight': props.selected,

@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import { Tree } from '../../lib/tree/Tree';
-import { Toast } from '../../lib/toast/Toast';
-import { ContextMenu } from '../../lib/contextmenu/ContextMenu';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { NodeService } from '../../../service/NodeService';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { ContextMenu } from '@/components/lib/contextmenu/ContextMenu';
+import { Toast } from '@/components/lib/toast/Toast';
+import { Tree } from '@/components/lib/tree/Tree';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { NodeService } from '../../../service/NodeService';
 
 export function ContextMenuDoc(props) {
     const [nodes, setNodes] = useState([]);

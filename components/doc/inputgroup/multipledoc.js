@@ -1,6 +1,6 @@
-import { InputNumber } from '../../lib/inputnumber/InputNumber';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 
 export function MultipleDoc(props) {
     const code = {

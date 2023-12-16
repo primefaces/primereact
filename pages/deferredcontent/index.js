@@ -1,12 +1,11 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/deferredcontent/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/deferredcontent/basicdoc';
-import { DataTableDoc } from '../../components/doc/deferredcontent/datatabledoc';
-import { ImportDoc } from '../../components/doc/deferredcontent/importdoc';
-import { Wireframe } from '../../components/doc/deferredcontent/pt/wireframe';
-import { StyleDoc } from '../../components/doc/deferredcontent/styledoc';
-import { StyledDoc } from '../../components/doc/deferredcontent/theming/styleddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/deferredcontent/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/deferredcontent/basicdoc';
+import { DataTableDoc } from '@/components/doc/deferredcontent/datatabledoc';
+import { ImportDoc } from '@/components/doc/deferredcontent/importdoc';
+import { Wireframe } from '@/components/doc/deferredcontent/pt/wireframe';
+import { StyledDoc } from '@/components/doc/deferredcontent/theming/styleddoc';
 
 const DeferredContentDemo = () => {
     const docs = [
@@ -25,11 +24,7 @@ const DeferredContentDemo = () => {
             label: 'DataTable',
             component: DataTableDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

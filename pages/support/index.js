@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SupportPage = () => {
     return (
         <div>
@@ -10,11 +8,11 @@ const SupportPage = () => {
                     <i className="pi pi-github absolute text-200" style={{ bottom: '-50px', right: '-50px', fontSize: '200px', transform: 'rotateX(45deg) rotateY(0deg) rotateZ(-45deg)' }}></i>
                     <div className="text-2xl text-900 font-semibold mb-3 relative">Community Support</div>
                     <p className="m-0 line-height-3 relative text-lg text-800">
-                        <a href="https://github.com/orgs/primefaces/discussions" className="text-primary hover:underline font-semibold">
+                        <a href="https://github.com/orgs/primefaces/discussions" className="text-primary hover:underline font-medium">
                             Forum
                         </a>{' '}
                         and{' '}
-                        <a href="https://discord.gg/gzKFYnpmCY" className="text-primary hover:underline font-semibold">
+                        <a href="https://discord.gg/gzKFYnpmCY" className="text-primary hover:underline font-medium">
                             Discord
                         </a>{' '}
                         are where the community users gather to seek support, post topics and discuss the technology. GitHub issue tracker is the channel where community users can create tickets however PrimeTek does not guarantee a response time
@@ -103,8 +101,9 @@ const SupportPage = () => {
             <div className="card mb-5">
                 <div className="text-2xl text-900 font-semibold mb-3">Enhancement Credits</div>
                 <p className="m-0 line-height-3 mb-5 text-secondary text-lg text-800">
-                    New features and enhancement requests are not available in core services and provided via a credit based model instead named PrimeCredit. When you have a feature request, we offer an initial estimate in terms of credits and once
-                    this estimate is confirmed by you then implementation will be delivered by our team within an estimated timeframe.
+                    New features and enhancement requests are not available in core services and provided via a credit based model instead named PrimeCredit. When you have an enhancement request, initially our team will review your requirement to
+                    verify if it is suitable to be included in the open source core library. We cannot guarantee that all requests can be accepted depending on the project roadmap, workload at the time and type of the requirement. After successful
+                    verification, we prepare an initial estimate in terms of credits and once this estimate is confirmed by you, implementation will be delivered by our team within an estimated timeframe.
                 </p>
 
                 <div className="flex flex-column md:flex-row gap-5">
@@ -127,30 +126,30 @@ const SupportPage = () => {
                 <div className="text-2xl text-900 font-semibold mb-5">Frequently Asked Questions</div>
                 <div className="flex flex-wrap text-lg -ml-5 -mt-5">
                     <div className="w-full lg:w-4 p-5">
-                        <div className="text-900 line-height-3 mb-2 font-medium">What is the duration of the service?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">What is the duration of the service?</div>
                         <p className="mt-0 mb-5 p-0 line-height-3 text-800">Support service is for one year.</p>
 
-                        <div className="text-900 line-height-3 mb-2 font-medium">How many JIRA accounts do we get?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">How many JIRA accounts do we get?</div>
                         <p className="mt-0 mb-5 p-0 line-height-3 text-800">We provide one shared account per organization that any number of members in your organization can use it.</p>
 
-                        <div className="text-900 line-height-3 mb-2 font-medium">What happens if we extend after 1 year and we have unused tickets?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">What happens if we extend after 1 year and we have unused tickets?</div>
                         <p className="mt-0 p-0 line-height-3 text-800">Unused tickets expire and cannot be transferred to the new subscription.</p>
                     </div>
                     <div className="w-full lg:w-4 p-5">
-                        <div className="text-900 line-height-3 mb-2 font-medium">When can we purchase PrimeCredits for feature development?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">When can we purchase PrimeCredits for feature development?</div>
                         <p className="mt-0 mb-5 p-0 line-height-3 text-800">PrimeCredits can be purchased anytime during an active subscription.</p>
 
-                        <div className="text-900 line-height-3 mb-2 font-medium">Are all of our requests guaranteed to be implemented with PrimeCredits?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">Are all of our requests guaranteed to be implemented with PrimeCredits?</div>
                         <p className="mt-0 mb-5 p-0 line-height-3 text-800">No, PrimeTek does not guarantee the implementation so it is suggested to confirm with us before purchasing credits.</p>
 
-                        <div className="text-900 line-height-3 mb-2 font-medium">Can we get PrimeCredits without PRO support?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">Can we get PrimeCredits without PRO support?</div>
                         <p className="mt-0 p-0 line-height-3 text-800">No, feature development is exclusive to PRO members.</p>
                     </div>
                     <div className="w-full lg:w-4 p-5">
-                        <div className="text-900 line-height-3 mb-2 font-medium">Is there a limit on developers in our organization who can use the service?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">Is there a limit on developers in our organization who can use the service?</div>
                         <p className="mt-0 mb-5 p-0 line-height-3 text-800">PRO is per organization so there is no limit on the number of developers.</p>
 
-                        <div className="text-900 line-height-3 mb-2 font-medium">What is not covered by PRO?</div>
+                        <div className="text-xl text-900 line-height-3 mb-2 font-medium">What is not covered by PRO?</div>
                         <p className="mt-0 p-0 line-height-3 text-800">As PRO support focuses on the library, application consulting and code reviews are out of scope.</p>
                     </div>
                 </div>

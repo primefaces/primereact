@@ -1,7 +1,7 @@
-import { Badge } from '../../lib/badge/Badge';
-import { Avatar } from '../../lib/avatar/Avatar';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Avatar } from '@/components/lib/avatar/Avatar';
+import { Badge } from '@/components/lib/badge/Badge';
 
 export function LabelDoc(props) {
     const code = {
@@ -14,7 +14,7 @@ export function LabelDoc(props) {
 <Avatar label="V" size="large" style={{ backgroundColor: '#2196F3', color: '#ffffff' }} shape="circle" />
 <Avatar label="U" style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} shape="circle" />
 
-<Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+<Avatar label="U" size="xlarge" className="p-overlay-badge">
 <Badge value="4" />
         `,
         javascript: `
@@ -41,7 +41,7 @@ export default function LabelDemo() {
 
             <div className="flex-auto">
                 <h5>Badge</h5>
-                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                <Avatar label="U" size="xlarge" className="p-overlay-badge">
                     <Badge value="4" />
                 </Avatar>
             </div>
@@ -73,7 +73,7 @@ export default function LabelDemo() {
 
             <div className="flex-auto">
                 <h5>Badge</h5>
-                <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                <Avatar label="U" size="xlarge" className="p-overlay-badge">
                     <Badge value="4" />
                 </Avatar>
             </div>
@@ -108,7 +108,7 @@ export default function LabelDemo() {
 
                     <div className="flex-auto">
                         <h5>Badge</h5>
-                        <Avatar label="U" size="xlarge" className="p-overlay-badge" style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}>
+                        <Avatar label="U" size="xlarge" className="p-overlay-badge">
                             <Badge value="4" />
                         </Avatar>
                     </div>

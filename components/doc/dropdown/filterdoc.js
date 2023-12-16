@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Dropdown } from '@/components/lib/dropdown/Dropdown';
 import { useState } from 'react';
-import { Dropdown } from '../../lib/dropdown/Dropdown';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function FilterDoc(props) {
     const [selectedCountry, setSelectedCountry] = useState(null);

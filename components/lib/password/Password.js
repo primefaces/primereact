@@ -2,7 +2,7 @@ import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useOverlayListener, useUnmountEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useMountEffect, useOverlayListener, useUnmountEffect, useDisplayOrder, useGlobalOnEscapeKey } from '../hooks/Hooks';
 import { EyeIcon } from '../icons/eye';
 import { EyeSlashIcon } from '../icons/eyeslash';
 import { InputText } from '../inputtext/InputText';
@@ -45,6 +45,16 @@ export const Password = React.memo(
         const { ptm, cx, isUnstyled } = PasswordBase.setMetaData(metaData);
 
         useHandleStyle(PasswordBase.css.styles, isUnstyled, { name: 'password' });
+
+        const passwordDisplayOrder = useDisplayOrder('password', overlayVisibleState);
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState && props.feedback,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.PASSWORD, passwordDisplayOrder]
+        });
 
         const [bindOverlayListener, unbindOverlayListener] = useOverlayListener({
             target: elementRef,
@@ -160,7 +170,7 @@ export const Password = React.memo(
         };
 
         const onKeyup = (e) => {
-            let keyCode = e.keyCode || e.which;
+            const keyCode = e.code;
 
             if (props.feedback) {
                 let value = e.target.value;
@@ -201,7 +211,7 @@ export const Password = React.memo(
                 setMeterState(meter);
                 setInfoTextState(label);
 
-                if (!!keyCode && !overlayVisibleState) {
+                if (!!keyCode && keyCode !== 'Escape' && !overlayVisibleState) {
                     show();
                 }
             }
@@ -253,6 +263,10 @@ export const Password = React.memo(
                 DomHandler.removeClass(elementRef.current, 'p-inputwrapper-filled');
             }
         }, [isFilled]);
+
+        useMountEffect(() => {
+            alignOverlay();
+        });
 
         useUnmountEffect(() => {
             ZIndexUtils.clear(overlayRef.current);
@@ -393,7 +407,7 @@ export const Password = React.memo(
                 ref: inputRef,
                 id: props.inputId,
                 ...inputProps,
-                className: cx('input'),
+                className: classNames(props.inputClassName, cx('input')),
                 onBlur: onBlur,
                 onFocus: onFocus,
                 onInput: onInput,

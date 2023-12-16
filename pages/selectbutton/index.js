@@ -1,18 +1,18 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/selectbutton/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/selectbutton/basicdoc';
-import { DisabledDoc } from '../../components/doc/selectbutton/disableddoc';
-import { FormikDoc } from '../../components/doc/selectbutton/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/selectbutton/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/selectbutton/importdoc';
-import { InvalidDoc } from '../../components/doc/selectbutton/invaliddoc';
-import { MultipleDoc } from '../../components/doc/selectbutton/multipledoc';
-import { PTDoc } from '../../components/doc/selectbutton/pt/ptdoc';
-import { Wireframe } from '../../components/doc/selectbutton/pt/wireframe';
-import { TemplateDoc } from '../../components/doc/selectbutton/templatedoc';
-import { StyledDoc } from '../../components/doc/selectbutton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/selectbutton/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/selectbutton/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/selectbutton/basicdoc';
+import { DisabledDoc } from '@/components/doc/selectbutton/disableddoc';
+import { FormikDoc } from '@/components/doc/selectbutton/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/selectbutton/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/selectbutton/importdoc';
+import { InvalidDoc } from '@/components/doc/selectbutton/invaliddoc';
+import { MultipleDoc } from '@/components/doc/selectbutton/multipledoc';
+import { PTDoc } from '@/components/doc/selectbutton/pt/ptdoc';
+import { Wireframe } from '@/components/doc/selectbutton/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/selectbutton/templatedoc';
+import { StyledDoc } from '@/components/doc/selectbutton/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/selectbutton/theming/tailwinddoc';
 
 const SelectButtonDemo = () => {
     const docs = [

@@ -892,7 +892,7 @@ export const Calendar = React.memo(
                 value.setFullYear(viewYear);
             }
 
-            if (props.monthNavigator && props.view !== 'month') {
+            if (renderMonthsNavigator(0)) {
                 let viewMonth = value.getMonth();
                 let viewMonthWithMinMax = parseInt((isInMinYear(value) && Math.max(props.minDate.getMonth(), viewMonth).toString()) || (isInMaxYear(value) && Math.min(props.maxDate.getMonth(), viewMonth).toString()) || viewMonth);
 
@@ -944,7 +944,7 @@ export const Calendar = React.memo(
         const updateViewDate = (event, value) => {
             validateDate(value);
 
-            if (props.onViewDateChange) {
+            if (props.onViewDateChange && event) {
                 props.onViewDateChange({
                     originalEvent: event,
                     value
@@ -1496,19 +1496,27 @@ export const Calendar = React.memo(
                 ZIndexUtils.set(key, overlayRef.current, (context && context.autoZIndex) || PrimeReact.autoZIndex, props.baseZIndex || (context && context.zIndex[key]) || PrimeReact.zIndex[key]);
             }
 
+            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
+                let inputWidth = DomHandler.getOuterWidth(inputRef.current);
+
+                // #5435 must have reasonable width if input is too small
+                if (inputWidth < 220) {
+                    inputWidth = 220;
+                }
+
+                if (props.view === 'date') {
+                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                } else {
+                    overlayRef.current.style.minWidth = inputWidth + 'px';
+                    overlayRef.current.style.width = inputWidth + 'px';
+                }
+            }
+
             alignOverlay();
         };
 
         const onOverlayEntered = () => {
-            if (!props.touchUI && overlayRef && overlayRef.current && inputRef && inputRef.current && !appendDisabled()) {
-                if (props.view === 'date') {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
-                    overlayRef.current.style.minWidth = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                } else {
-                    overlayRef.current.style.width = DomHandler.getOuterWidth(inputRef.current) + 'px';
-                }
-            }
-
             bindOverlayListener();
             props.onShow && props.onShow();
             DomHandler.focusFirstElement(overlayRef.current);
@@ -1526,7 +1534,9 @@ export const Calendar = React.memo(
         };
 
         const appendDisabled = () => {
-            return props.appendTo === 'self' || props.inline;
+            const appendTo = props.appendTo || (context && context.appendTo) || PrimeReact.appendTo;
+
+            return appendTo === 'self' || props.inline;
         };
 
         const alignOverlay = () => {
@@ -1831,11 +1841,7 @@ export const Calendar = React.memo(
                 }
             }
 
-            if (props.disabledDates || props.enabledDates) {
-                validDate = !isDateDisabled(day, month, year);
-            }
-
-            if (props.disabledDays && currentView === 'date') {
+            if (props.disabledDates || props.enabledDates || props.disabledDays) {
                 validDay = !isDayDisabled(day, month, year);
             }
 
@@ -1985,24 +1991,24 @@ export const Calendar = React.memo(
             return today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
         };
 
-        const isDateDisabled = (day, month, year) => {
-            if (props.disabledDates) {
-                return props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
-            }
-
-            if (props.enabledDates) {
-                return !props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day);
-            }
-
-            return false;
-        };
-
         const isDayDisabled = (day, month, year) => {
-            if (props.disabledDays) {
+            if (props.disabledDates) {
+                if (props.disabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
+                    return true;
+                }
+            } else if (props.enabledDates) {
+                if (!props.enabledDates.some((d) => d.getFullYear() === year && d.getMonth() === month && d.getDate() === day)) {
+                    return true;
+                }
+            }
+
+            if (props.disabledDays && currentView === 'date') {
                 let weekday = new Date(year, month, day);
                 let weekdayNumber = weekday.getDay();
 
-                return props.disabledDays.indexOf(weekdayNumber) !== -1;
+                if (props.disabledDays.indexOf(weekdayNumber) !== -1) {
+                    return true;
+                }
             }
 
             return false;
@@ -2512,6 +2518,9 @@ export const Calendar = React.memo(
                         overlayRef.current.style.width = DomHandler.getOuterWidth(overlayRef.current) + 'px';
                     }
                 }
+            } else {
+                // @todo
+                //alignOverlay();
             }
 
             if (props.value) {
@@ -2560,10 +2569,20 @@ export const Calendar = React.memo(
         }, [props.view]);
 
         useUpdateEffect(() => {
+            if (overlayVisibleState || props.visible) {
+                alignOverlay();
+            }
+        }, [currentView, overlayVisibleState, props.visible]);
+
+        useUpdateEffect(() => {
             if (!props.onViewDateChange && !viewStateChanged.current) {
                 setValue(props.value);
             }
-        }, [props.onViewDateChange, props.value]);
+
+            if (props.viewDate) {
+                updateViewDate(null, getViewDate(props.viewDate));
+            }
+        }, [props.onViewDateChange, props.value, props.viewDate]);
 
         useUpdateEffect(() => {
             const newDate = props.value;
@@ -2600,7 +2619,7 @@ export const Calendar = React.memo(
 
         useUpdateEffect(() => {
             updateInputfield(props.value);
-        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime]);
+        }, [props.dateFormat, props.hourFormat, props.timeOnly, props.showSeconds, props.showMillisec, props.showTime, props.locale]);
 
         useUpdateEffect(() => {
             if (overlayRef.current) {
@@ -2706,10 +2725,14 @@ export const Calendar = React.memo(
             );
         };
 
-        const createTitleMonthElement = (month) => {
+        const renderMonthsNavigator = (index) => {
+            return props.monthNavigator && props.view !== 'month' && (props.numberOfMonths === 1 || index === 0);
+        };
+
+        const createTitleMonthElement = (month, monthIndex) => {
             const monthNames = localeOption('monthNames', props.locale);
 
-            if (props.monthNavigator && props.view !== 'month') {
+            if (renderMonthsNavigator(monthIndex)) {
                 const viewDate = getViewDate();
                 const viewMonth = viewDate.getMonth();
                 const displayedMonthOptions = monthNames
@@ -2863,8 +2886,8 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const createTitle = (monthMetaData) => {
-            const month = createTitleMonthElement(monthMetaData.month);
+        const createTitle = (monthMetaData, index) => {
+            const month = createTitleMonthElement(monthMetaData.month, index);
             const year = createTitleYearElement(monthMetaData.year);
             const decade = createTitleDecadeElement();
             const titleProps = mergeProps(
@@ -2945,12 +2968,7 @@ export const Calendar = React.memo(
                 })
             );
 
-            return (
-                <span {...dayLabelProps}>
-                    {content}
-                    <Ripple />
-                </span>
-            );
+            return <span {...dayLabelProps}>{content}</span>;
         };
 
         const createWeek = (weekDates, weekNumber, groupIndex) => {
@@ -3060,7 +3078,7 @@ export const Calendar = React.memo(
             const weekDays = createWeekDaysMeta();
             const backwardNavigator = createBackwardNavigator(index === 0);
             const forwardNavigator = createForwardNavigator(props.numberOfMonths === 1 || index === props.numberOfMonths - 1);
-            const title = createTitle(monthMetaData);
+            const title = createTitle(monthMetaData, index);
 
             const dateViewGrid = createDateViewGrid(monthMetaData, weekDays, index);
             const header = props.headerTemplate ? props.headerTemplate() : null;
@@ -3634,18 +3652,18 @@ export const Calendar = React.memo(
                         {monthPickerValues().map((m, i) => {
                             const monthProps = mergeProps(
                                 {
-                                    className: cx('month', { isMonthSelected, isSelectable, i, currentYear }),
+                                    className: cx('month', { isMonthSelected, isMonthYearDisabled, i, currentYear }),
                                     onClick: (event) => onMonthSelect(event, i),
                                     onKeyDown: (event) => onMonthCellKeydown(event, i),
-                                    'data-p-disabled': !m.selectable,
+                                    'data-p-disabled': isMonthYearDisabled(i, currentYear),
                                     'data-p-highlight': isMonthSelected(i)
                                 },
                                 ptm('month', {
                                     context: {
                                         month: m,
                                         monthIndex: i,
-                                        selected: isMonthSelected(i),
-                                        disabled: !m.selectable
+                                        disabled: isMonthYearDisabled(i, currentYear),
+                                        selected: isMonthSelected(i)
                                     }
                                 })
                             );
@@ -3663,6 +3681,25 @@ export const Calendar = React.memo(
             return null;
         };
 
+        const isMonthYearDisabled = (month, year) => {
+            const daysCountInAllMonth = month === -1 ? new Array(12).fill(0).map((_, i) => getDaysCountInMonth(i, year)) : [getDaysCountInMonth(month, year)];
+
+            for (let i = 0; i < daysCountInAllMonth.length; i++) {
+                const monthDays = daysCountInAllMonth[i];
+                const _month = month === -1 ? i : month;
+
+                for (let day = 1; day <= monthDays; day++) {
+                    let isDateSelectable = isSelectable(day, _month, year);
+
+                    if (isDateSelectable) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        };
+
         const createYearPicker = () => {
             if (currentView === 'year') {
                 const yearPickerProps = mergeProps(
@@ -3677,17 +3714,17 @@ export const Calendar = React.memo(
                         {yearPickerValues().map((y, i) => {
                             const yearProps = mergeProps(
                                 {
-                                    className: cx('year', { isYearSelected, isSelectable, y }),
+                                    className: cx('year', { isYearSelected, isSelectable, y, isMonthYearDisabled }),
                                     onClick: (event) => onYearSelect(event, y),
                                     'data-p-highlight': isYearSelected(y),
-                                    'data-p-disabled': !isSelectable(0, -1, y)
+                                    'data-p-disabled': isMonthYearDisabled(-1, y)
                                 },
                                 ptm('year', {
                                     context: {
                                         year: y,
                                         yearIndex: i,
-                                        selected: isYearSelected(i),
-                                        disabled: !y.selectable
+                                        selected: isYearSelected(y),
+                                        disabled: isMonthYearDisabled(-1, y)
                                     }
                                 })
                             );

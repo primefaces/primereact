@@ -1,8 +1,8 @@
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { FontAwesomeDoc } from '../../components/doc/customicons/fontawesomedoc';
-import { ImageDoc } from '../../components/doc/customicons/imagedoc';
-import { MaterialDoc } from '../../components/doc/customicons/materialdoc';
-import { SVGDoc } from '../../components/doc/customicons/svgdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { FontAwesomeDoc } from '@/components/doc/customicons/fontawesomedoc';
+import { ImageDoc } from '@/components/doc/customicons/imagedoc';
+import { MaterialDoc } from '@/components/doc/customicons/materialdoc';
+import { SVGDoc } from '@/components/doc/customicons/svgdoc';
 
 const ContextMenuDemo = () => {
     const docs = [

@@ -1,8 +1,7 @@
-import React from 'react';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { CSSLayerDoc } from '../../components/doc/tailwind/csslayerdoc';
-import { ExampleDoc } from '../../components/doc/tailwind/unstyledmode/exampledoc';
-import { SetupDoc } from '../../components/doc/tailwind/unstyledmode/setupdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { CSSLayerDoc } from '@/components/doc/tailwind/csslayerdoc';
+import { ExampleDoc } from '@/components/doc/tailwind/unstyledmode/exampledoc';
+import { SetupDoc } from '@/components/doc/tailwind/unstyledmode/setupdoc';
 
 const TailwindDemo = () => {
     const docs = [

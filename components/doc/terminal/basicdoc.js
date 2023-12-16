@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
-import { Terminal } from '../../lib/terminal/Terminal';
-import { TerminalService } from '../../lib/terminalservice/TerminalService';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Terminal } from '@/components/lib/terminal/Terminal';
+import { TerminalService } from '@/components/lib/terminalservice/TerminalService';
+import { useEffect } from 'react';
 
 export function BasicDoc(props) {
     const commandHandler = (text) => {
@@ -46,7 +46,16 @@ export function BasicDoc(props) {
 
     const code = {
         basic: `
-<Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
+<Terminal 
+    welcomeMessage="Welcome to PrimeReact" 
+    prompt="primereact $" 
+    pt={{
+        root: 'bg-gray-900 text-white border-round',
+        prompt: 'text-gray-400 mr-2',
+        command: 'text-primary-300',
+        response: 'text-primary-300'
+    }} 
+/>
         `,
         javascript: `
 import React, { useEffect } from 'react';
@@ -100,7 +109,16 @@ export default function TerminalDemo() {
             <p>
                 Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
             </p>
-            <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
+            <Terminal 
+                welcomeMessage="Welcome to PrimeReact" 
+                prompt="primereact $" 
+                pt={{
+                    root: 'bg-gray-900 text-white border-round',
+                    prompt: 'text-gray-400 mr-2',
+                    command: 'text-primary-300',
+                    response: 'text-primary-300'
+                }} 
+            />
         </div>
     );
 }
@@ -157,7 +175,16 @@ export default function TerminalDemo() {
             <p>
                 Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
             </p>
-            <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
+            <Terminal 
+                welcomeMessage="Welcome to PrimeReact" 
+                prompt="primereact $" 
+                pt={{
+                    root: 'bg-gray-900 text-white border-round',
+                    prompt: 'text-gray-400 mr-2',
+                    command: 'text-primary-300',
+                    response: 'text-primary-300'
+                }} 
+            />
         </div>
     );
 }
@@ -176,7 +203,16 @@ export default function TerminalDemo() {
                 <p>
                     Enter "<strong>date</strong>" to display the current date, "<strong>greet {'{0}'}</strong>" for a message, "<strong>random</strong>" to get a random number and "<strong>clear</strong>" to clear all commands.
                 </p>
-                <Terminal welcomeMessage="Welcome to PrimeReact" prompt="primereact $" />
+                <Terminal
+                    welcomeMessage="Welcome to PrimeReact"
+                    prompt="primereact $"
+                    pt={{
+                        root: 'bg-gray-900 text-white border-round',
+                        prompt: 'text-gray-400 mr-2',
+                        command: 'text-primary-300',
+                        response: 'text-primary-300'
+                    }}
+                />
             </div>
             <DocSectionCode code={code} />
         </>

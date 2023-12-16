@@ -140,6 +140,7 @@ export const TreeSelect = React.memo(
 
         const onNodeUnselect = (node) => {
             props.onNodeUnselect && props.onNodeUnselect(node);
+            isCheckboxSelectionMode && node.originalEvent.stopPropagation();
         };
 
         const onNodeToggle = (e) => {
@@ -363,6 +364,8 @@ export const TreeSelect = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(focusInputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         useUpdateEffect(() => {

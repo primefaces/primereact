@@ -1,42 +1,34 @@
+import BlockSection from '@/components/landing/blocksection';
+import FeaturesSection from '@/components/landing/featuressection';
+import FooterSection from '@/components/landing/footersection';
+import HeroSection from '@/components/landing/herosection';
+import TemplateSection from '@/components/landing/templatesection';
+import ThemeSection from '@/components/landing/themesection';
+import UsersSection from '@/components/landing/userssection';
+import AppContentContext from '@/components/layout/appcontentcontext';
+import Topbar from '@/components/layout/topbar';
+import { useMountEffect } from '@/components/lib/primereact.all';
+import { classNames } from '@/components/lib/utils/Utils';
+import NewsSection from '@/components/news/newssection';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import { classNames } from '../components/lib/utils/Utils';
-import NewsSection from '../components/news/newssection';
-import BlockSection from './landing/blocksection';
-import ComponentSection from './landing/componentsection';
-import DesignerSection from './landing/designersection';
-import FeaturesSection from './landing/featuressection';
-import FooterSection from './landing/footersection';
-import HeaderSection from './landing/headersection';
-import HeroSection from './landing/herosection';
-import TemplateSection from './landing/templatesection';
-import ThemeSection from './landing/themesection';
-import UsersSection from './landing/userssection';
+import { useContext } from 'react';
 
-export default function Home(props) {
-    const [tableTheme, setTableTheme] = useState('lara-light-indigo');
-    const rootClassName = classNames('landing', { 'landing-light': !props.dark, 'landing-dark': props.dark, 'landing-news-active': props.newsActive });
+export default function Home() {
+    const { newsActive, darkMode, changeTheme } = useContext(AppContentContext);
+    const landingClass = classNames('landing', { 'layout-light': !darkMode, 'layout-dark': darkMode, 'layout-news-active': newsActive });
 
-    const toggleColorScheme = () => {
-        const darkMode = !props.dark;
-        const newTheme = darkMode ? 'lara-dark-indigo' : 'lara-light-indigo';
+    const toggleDarkMode = () => {
+        const newTheme = darkMode ? 'lara-light-cyan' : 'lara-dark-cyan';
 
-        props.onThemeChange(newTheme, darkMode);
+        changeTheme(newTheme, !darkMode);
     };
 
-    const changeTableTheme = (newTheme) => {
-        props.onTableThemeChange(tableTheme, newTheme);
-        setTableTheme(newTheme);
-    };
-
-    useEffect(() => {
-        const newTheme = props.dark ? tableTheme.replace('light', 'dark') : tableTheme.replace('dark', 'light');
-
-        changeTableTheme(newTheme);
-    }, [props.dark]); // eslint-disable-line react-hooks/exhaustive-deps
+    useMountEffect(() => {
+        changeTheme(darkMode ? 'lara-dark-cyan' : 'lara-light-cyan', darkMode);
+    });
 
     return (
-        <div className={rootClassName}>
+        <div className={landingClass}>
             <Head>
                 <title>PrimeReact - React UI Component Library</title>
                 <meta charSet="UTF-8" />
@@ -54,19 +46,15 @@ export default function Home(props) {
                 <meta property="og:image" content="https://primefaces.org/static/social/primereact-preview.jpg"></meta>
                 <meta property="og:ttl" content="604800"></meta>
             </Head>
-            <div className="landing-intro">
-                {props.newsActive && <NewsSection announcement={props.announcement} onClose={props.onNewsClose} />}
-                <HeaderSection dark={props.dark} onToggleColorScheme={toggleColorScheme} />
-                <HeroSection />
-            </div>
-            <UsersSection dark={props.dark} />
-            <ComponentSection />
-            <ThemeSection theme={tableTheme} onThemeChange={(t) => changeTableTheme(t)} dark={props.dark} />
+            <NewsSection />
+            <Topbar onDarkSwitchClick={toggleDarkMode} />
+            <HeroSection />
+            <FeaturesSection />
+            <UsersSection />
+            <ThemeSection />
             <BlockSection />
-            <DesignerSection dark={props.dark} />
-            <TemplateSection dark={props.dark} />
-            <FeaturesSection dark={props.dark} />
-            <FooterSection dark={props.dark} />
+            <TemplateSection />
+            <FooterSection />
         </div>
     );
 }

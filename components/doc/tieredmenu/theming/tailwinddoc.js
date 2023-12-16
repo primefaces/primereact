@@ -1,10 +1,22 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
         basic: `
+export const TRANSITIONS = {
+    overlay: {
+        timeout: 150,
+        classNames: {
+            enter: 'opacity-0 scale-75',
+            enterActive: 'opacity-100 !scale-100 transition-transform transition-opacity duration-150 ease-in',
+            exit: 'opacity-100',
+            exitActive: '!opacity-0 transition-opacity duration-150 ease-linear'
+        }
+    }
+};
+
 const Tailwind = {
     tieredmenu: {
         root: {

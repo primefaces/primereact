@@ -1,18 +1,18 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/messages/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/messages/basicdoc';
-import { ClosableDoc } from '../../components/doc/messages/closeabledoc';
-import { DynamicDoc } from '../../components/doc/messages/dynamicdoc';
-import { ImportDoc } from '../../components/doc/messages/importdoc';
-import { PTDoc } from '../../components/doc/messages/pt/ptdoc';
-import { Wireframe } from '../../components/doc/messages/pt/wireframe';
-import { SeverityDoc } from '../../components/doc/messages/severitydoc';
-import { StickyDoc } from '../../components/doc/messages/stickydoc';
-import { StyleDoc } from '../../components/doc/messages/styledoc';
-import { TemplateDoc } from '../../components/doc/messages/templatedoc';
-import { StyledDoc } from '../../components/doc/messages/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/messages/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/messages/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/messages/basicdoc';
+import { ClosableDoc } from '@/components/doc/messages/closeabledoc';
+import { DynamicDoc } from '@/components/doc/messages/dynamicdoc';
+import { ImportDoc } from '@/components/doc/messages/importdoc';
+import { PTDoc } from '@/components/doc/messages/pt/ptdoc';
+import { Wireframe } from '@/components/doc/messages/pt/wireframe';
+import { SeverityDoc } from '@/components/doc/messages/severitydoc';
+import { StickyDoc } from '@/components/doc/messages/stickydoc';
+import { CustomIcon } from '@/components/doc/messages/customicon';
+import { TemplateDoc } from '@/components/doc/messages/templatedoc';
+import { StyledDoc } from '@/components/doc/messages/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/messages/theming/tailwinddoc';
 
 const MessagesDemo = () => {
     const docs = [
@@ -47,14 +47,14 @@ const MessagesDemo = () => {
             component: StickyDoc
         },
         {
+            id: 'customicon',
+            label: 'Custom Icon',
+            component: CustomIcon
+        },
+        {
             id: 'template',
             label: 'Template',
             component: TemplateDoc
-        },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
         },
         {
             id: 'accessibility',

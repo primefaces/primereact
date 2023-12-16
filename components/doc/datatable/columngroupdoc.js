@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Column } from '../../lib/column/Column';
-import { ColumnGroup } from '../../lib/columngroup/ColumnGroup';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { Row } from '../../lib/row/Row';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { ColumnGroup } from '@/components/lib/columngroup/ColumnGroup';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { Row } from '@/components/lib/row/Row';
+import { useState } from 'react';
 
 export function ColumnGroupDoc(props) {
     const [sales] = useState([

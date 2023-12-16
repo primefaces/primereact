@@ -1,5 +1,4 @@
-import React from 'react';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 
 export const Wireframe = (props) => {
     return (

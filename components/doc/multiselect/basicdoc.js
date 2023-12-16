@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { MultiSelect } from '@/components/lib/multiselect/MultiSelect';
 import { useState } from 'react';
-import { MultiSelect } from '../../lib/multiselect/MultiSelect';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function BasicDoc(props) {
     const [selectedCities, setSelectedCities] = useState(null);

@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -24,7 +24,7 @@ const Tailwind = {
         label: {
             className: classNames('block whitespace-nowrap overflow-hidden flex flex-1 w-1 text-overflow-ellipsis cursor-pointer', 'bg-transparent border-0 p-3 text-gray-700 dark:text-white/80', 'appearance-none rounded-md')
         },
-        dropdownbutton: {
+        dropdownButton: {
             className: classNames('flex items-center justify-center shrink-0', 'bg-transparent text-gray-600 dark:text-white/80 w-[3rem] rounded-tr-6 rounded-br-6')
         },
         panel: 'absolute py-3 bg-white dark:bg-gray-900 border-0 shadow-md',
@@ -32,17 +32,16 @@ const Tailwind = {
         sublist: {
             className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
         },
-        item: {
-            className: classNames(
-                'cursor-pointer font-normal whitespace-nowrap',
-                'm-0 border-0 bg-transparent transition-shadow rounded-none',
-                'text-gray-700 dark:text-white/80 hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80'
-            )
-        },
+        item: ({ state }) => ({
+            className: classNames('cursor-pointer font-normal whitespace-nowrap', 'm-0 border-0 bg-transparent transition-shadow rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:text-white/80 dark:hover:bg-gray-800/80': !state.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': state.selected
+            })
+        }),
         content: {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
-        groupicon: 'ml-auto',
+        optionGroupIcon: 'ml-auto',
         transition: TRANSITIONS.overlay
     }
 }

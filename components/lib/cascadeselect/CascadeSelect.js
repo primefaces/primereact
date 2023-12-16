@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { PrimeReactContext } from '../api/Api';
+import PrimeReact, { PrimeReactContext } from '../api/Api';
+import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
-import { useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
+import { ESC_KEY_HANDLING_PRIORITIES, useDisplayOrder, useGlobalOnEscapeKey, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { CascadeSelectBase } from './CascadeSelectBase';
 import { CascadeSelectSub } from './CascadeSelectSub';
-import PrimeReact from '../api/Api';
-import { useHandleStyle } from '../componentbase/ComponentBase';
 
 export const CascadeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -24,6 +23,9 @@ export const CascadeSelect = React.memo(
                 focused: focusedState,
                 overlayVisible: overlayVisibleState,
                 attributeSelector: attributeSelectorState
+            },
+            context: {
+                ...context
             }
         });
 
@@ -43,6 +45,16 @@ export const CascadeSelect = React.memo(
                 valid && hide();
             },
             when: overlayVisibleState
+        });
+
+        const cascadeSelectOverlayDisplayOrder = useDisplayOrder('cascade-select', overlayVisibleState);
+
+        useGlobalOnEscapeKey({
+            callback: () => {
+                hide();
+            },
+            when: overlayVisibleState,
+            priority: [ESC_KEY_HANDLING_PRIORITIES.CASCADE_SELECT, cascadeSelectOverlayDisplayOrder]
         });
 
         const onOptionSelect = (event) => {
@@ -141,7 +153,7 @@ export const CascadeSelect = React.memo(
                 //down
                 case 40:
                     if (overlayVisibleState) {
-                        DomHandler.findSingle(overlayRef.current, '.p-cascadeselect-item').children[0].focus();
+                        DomHandler.findSingle(overlayRef.current, '[data-pc-section="item"]').children[0].focus();
                     } else if (event.altKey && props.options && props.options.length) {
                         show();
                     }
@@ -233,7 +245,7 @@ export const CascadeSelect = React.memo(
     }
 
     .p-cascadeselect-panel[${selector}] .p-cascadeselect-item-active > .p-cascadeselect-sublist {
-        left: 0 !important;
+        left: 0;
         box-shadow: none;
         border-radius: 0;
         padding: 0 0 0 calc(var(--inline-spacing) * 2); /* @todo */
@@ -270,6 +282,8 @@ export const CascadeSelect = React.memo(
             if (props.autoFocus) {
                 DomHandler.focus(inputRef.current, props.autoFocus);
             }
+
+            alignOverlay();
         });
 
         React.useEffect(() => {
@@ -327,7 +341,7 @@ export const CascadeSelect = React.memo(
                     ref: labelRef,
                     className: cx('label', { label })
                 },
-                ptm('label')
+                ptm('label', { context: { label, ...context } })
             );
 
             return <span {...labelProps}>{label}</span>;
@@ -398,6 +412,7 @@ export const CascadeSelect = React.memo(
                                 optionGroupIcon={props.optionGroupIcon}
                                 optionLabel={props.optionLabel}
                                 optionValue={props.optionValue}
+                                parentActive={props.value != null}
                                 level={0}
                                 optionGroupLabel={props.optionGroupLabel}
                                 optionGroupChildren={props.optionGroupChildren}

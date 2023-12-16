@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
-import { Captcha } from '../../lib/captcha/Captcha';
-import { Toast } from '../../lib/toast/Toast';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Captcha } from '@/components/lib/captcha/Captcha';
+import { Toast } from '@/components/lib/toast/Toast';
+import { useRef } from 'react';
 
 export function CaptchaDoc(props) {
     const toast = useRef(null);

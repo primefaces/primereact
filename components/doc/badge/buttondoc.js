@@ -1,7 +1,7 @@
-import { Badge } from '../../lib/badge/Badge';
-import { Button } from '../../lib/button/Button';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Badge } from '@/components/lib/badge/Badge';
+import { Button } from '@/components/lib/button/Button';
 
 export function ButtonDoc(props) {
     const code = {
@@ -9,7 +9,7 @@ export function ButtonDoc(props) {
 <Button type="button" label="Emails">
     <Badge value="8"></Badge>
 </Button>
-<Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+<Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
     <Badge value="8" severity="danger"></Badge>
 </Button>
             `,
@@ -24,7 +24,7 @@ export default function ButtonDemo() {
             <Button type="button" label="Emails">
                 <Badge value="8"></Badge>
             </Button>
-            <Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+            <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
                 <Badge value="8" severity="danger"></Badge>
             </Button>
         </div>
@@ -42,7 +42,7 @@ export default function ButtonDemo() {
             <Button type="button" label="Emails">
                 <Badge value="8"></Badge>
             </Button>
-            <Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+            <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
                 <Badge value="8" severity="danger"></Badge>
             </Button>
         </div>
@@ -60,7 +60,7 @@ export default function ButtonDemo() {
                 <Button type="button" label="Emails">
                     <Badge value="8"></Badge>
                 </Button>
-                <Button type="button" label="Messages" icon="pi pi-users" severity="warning">
+                <Button type="button" label="Messages" icon="pi pi-users" severity="secondary">
                     <Badge value="8" severity="danger"></Badge>
                 </Button>
             </div>

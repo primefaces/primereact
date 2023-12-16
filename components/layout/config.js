@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '../lib/button/Button';
-import { InputSwitch } from '../lib/inputswitch/InputSwitch';
-import { RadioButton } from '../lib/radiobutton/RadioButton';
-import { Sidebar } from '../lib/sidebar/Sidebar';
-import { classNames } from '../lib/utils/Utils';
+import AppContentContext from '@/components/layout/appcontentcontext';
+import { PrimeReactContext } from '@/components/lib/api/PrimeReactContext';
+import { Button } from '@/components/lib/button/Button';
+import { InputSwitch } from '@/components/lib/inputswitch/InputSwitch';
+import { SelectButton } from '@/components/lib/selectbutton/SelectButton';
+import { Sidebar } from '@/components/lib/sidebar/Sidebar';
+import { classNames } from '@/components/lib/utils/Utils';
+import { useContext, useEffect, useState } from 'react';
 
 export default function Config(props) {
     const [scale, setScale] = useState(14);
     const [scales, setScales] = useState([12, 13, 14, 15, 16]);
-
-    const onThemeChange = (theme, dark) => {
-        props.onThemeChange({ theme, dark });
-    };
+    const [compactMaterial, setCompactMaterial] = useState(false);
+    const { theme, darkMode, changeTheme } = useContext(AppContentContext);
+    const { ripple, inputStyle, setRipple, setInputStyle } = useContext(PrimeReactContext);
+    const lightOnlyThemes = ['fluent-light', 'mira', 'nano'];
 
     const decrementScale = () => {
         setScale((prevScale) => --prevScale);
@@ -21,305 +23,343 @@ export default function Config(props) {
         setScale((prevScale) => ++prevScale);
     };
 
+    const inputStyles = [
+        { label: 'Outlined', value: 'outlined' },
+        { label: 'Filled', value: 'filled' }
+    ];
+
+    const darkToggleDisabled = () => {
+        return lightOnlyThemes.includes(theme);
+    };
+
+    const switchTheme = (themeName, color) => {
+        if (lightOnlyThemes.includes(themeName)) {
+            changeTheme(themeName, false);
+        } else {
+            let newTheme = themeName + '-' + (darkMode ? 'dark' : 'light');
+
+            if (color) {
+                newTheme += '-' + color;
+            }
+
+            if (newTheme.startsWith('md-') && compactMaterial) {
+                newTheme = newTheme.replace('md-', 'mdc-');
+            }
+
+            changeTheme(newTheme, darkMode);
+        }
+    };
+
+    const isThemeActive = (themeFamily, color) => {
+        let themeName;
+        let themePrefix = themeFamily === 'md' && compactMaterial ? 'mdc' : themeFamily;
+
+        if (lightOnlyThemes.includes(themePrefix)) {
+            themeName = themePrefix;
+        } else {
+            themeName = themePrefix + (darkMode ? '-dark' : '-light');
+        }
+
+        if (color) {
+            themeName += '-' + color;
+        }
+
+        return theme === themeName;
+    };
+
     useEffect(() => {
         document.documentElement.style.fontSize = scale + 'px';
     }, [scale]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        if (theme.startsWith('md')) {
+            let tokens = theme.split('-');
+
+            switchTheme(tokens[0].substring(0, 2), tokens[2]);
+        }
+    }, [compactMaterial]); // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
-        <Sidebar visible={props.active} onHide={() => props.onHide()} className="layout-config w-full sm:w-30rem" position="right">
+        <Sidebar visible={props.active} onHide={() => props.onHide()} className={classNames('layout-config w-full sm:w-26rem', { 'layout-dark': props.dark }, { 'layout-light': !props.dark })} position="right">
             <div className="p-2">
-                <section className="mb-5">
-                    <h3>Component Scale</h3>
-                    <div className="flex align-items-center gap-2">
-                        <Button icon="pi pi-minus" onClick={decrementScale} className="p-button-text p-button-rounded w-2rem h-2rem" disabled={scale === scales[0]} />
+                <section className="pb-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+                    <span className="text-xl font-semibold">Scale</span>
+                    <div className="flex align-items-center gap-2 border-1 surface-border py-1 px-2" style={{ borderRadius: '30px' }}>
+                        <Button icon="pi pi-minus" onClick={decrementScale} text rounded className=" w-2rem h-2rem" disabled={scale === scales[0]} />
                         {scales.map((s) => {
-                            return <i className={classNames('pi pi-circle-fill text-sm text-600', { 'text-lg text-primary': s === scale })} key={s} />;
+                            return <i className={classNames('pi pi-circle-fill text-sm text-200', { 'text-lg text-primary': s === scale })} key={s} />;
                         })}
-                        <Button icon="pi pi-plus" onClick={incrementScale} className="p-button-text p-button-rounded w-2rem h-2rem" disabled={scale === scales[scales.length - 1]} />
+                        <Button icon="pi pi-plus" onClick={incrementScale} text rounded className="w-2rem h-2rem" disabled={scale === scales[scales.length - 1]} />
                     </div>
                 </section>
 
-                <section className="mb-5">
-                    <h3>Input Style</h3>
+                <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+                    <span className="text-xl font-semibold">Input Style</span>
                     <div className="flex gap-5">
-                        <div className="flex align-items-center gap-2">
-                            <RadioButton inputId="inputstyle_outlined" name="inputstyle" value="outlined" onChange={() => props.onInputStyleChange('outlined')} checked={props.inputStyle === 'outlined'} />
-                            <label htmlFor="inputstyle_outlined">Outlined</label>
-                        </div>
-                        <div className="flex align-items-center gap-2">
-                            <RadioButton inputId="inputstyle_filled" name="inputstyle" value="filled" onChange={() => props.onInputStyleChange('filled')} checked={props.inputStyle === 'filled'} />
-                            <label htmlFor="inputstyle_filled">Filled</label>
-                        </div>
+                        <SelectButton value={inputStyle} onChange={(e) => setInputStyle(e.value)} options={inputStyles} optionLabel="label" optionValue="value" allowEmpty={false} />
                     </div>
                 </section>
 
-                <section className="mb-5">
-                    <h3>Ripple Effect</h3>
-                    <InputSwitch checked={props.ripple} disabled={props.disabled} onChange={(e) => props.onRippleChange(e.value)} />
+                <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+                    <span className="text-xl font-semibold">Ripple Effect</span>
+                    <InputSwitch checked={ripple} onChange={(e) => setRipple(e.value)} />
                 </section>
 
-                <section>
-                    <h3>Themes</h3>
-                    <h4>Bootstrap</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('bootstrap4-light-blue')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap Light Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Blue</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('bootstrap4-light-purple')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-purple.svg" alt="Bootstrap Light Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('bootstrap4-dark-blue', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-dark-blue.svg" alt="Bootstrap Dark Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Blue</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('bootstrap4-dark-purple', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-dark-purple.svg" alt="Bootstrap Dark Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Purple</span>
+                <section className="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+                    <span className={classNames('text-xl font-semibold', { 'p-disabled': darkToggleDisabled() })}>Dark Mode</span>
+                    <InputSwitch checked={darkMode} onChange={() => props.onDarkSwitchClick()} disabled={darkToggleDisabled()} />
+                </section>
+
+                <section className="py-4 border-bottom-1 surface-border">
+                    <div className="text-xl font-semibold mb-3">Themes</div>
+                    <div className="flex align-items-center gap-2 mb-3">
+                        <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-teal.png" alt="Lara Light Teal" className="border-circle" style={{ width: '1.5rem' }} />
+                        <span className="font-medium">Lara</span>
+                    </div>
+                    <div className="flex align-items-center justify-content-between gap-3 mb-3">
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'cyan'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'cyan')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'cyan')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #06b6d4 0%, rgba(6, 182, 212, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'green'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'green')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'green')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #4dac9c 0%, rgba(77, 172, 156, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'blue'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'blue')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'blue')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #4378e6 0%, rgba(67, 120, 230, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'indigo'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'indigo')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'indigo')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #585fe0 0%, rgba(88, 95, 224, 0.5) 100%)' }}></span>
+                        </button>
+                    </div>
+                    <div className="flex align-items-center justify-content-between gap-3">
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'purple'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'purple')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'purple')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #7758e4 0%, rgba(119, 88, 228, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'amber'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'amber')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'amber')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #f59e0b 0%, rgba(245, 158, 11, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'teal'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'teal')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'teal')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #14b8a6 0%, rgba(20, 184, 166, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('lara', 'pink'),
+                                'hover:border-500 surface-border': !isThemeActive('lara', 'pink')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('lara', 'pink')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: ' 30px', background: 'linear-gradient(180deg, #ec4899 0%, rgba(236, 72, 153, 0.5) 100%)' }}></span>
+                        </button>
+                    </div>
+                </section>
+
+                <section className="py-4 border-bottom-1 surface-border">
+                    <div className="flex align-items-center gap-2 mb-3">
+                        <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Design" className="border-circle" style={{ width: '1.5rem' }} />
+                        <span className="font-medium">Material Design</span>
+                        <div className="ml-auto flex align-items-center gap-2">
+                            <label htmlFor="material-condensed" className="text-sm">
+                                Condensed
+                            </label>
+                            <InputSwitch inputId="material-condensed" checked={compactMaterial} onChange={(e) => setCompactMaterial(e.value)} className="ml-auto" />
                         </div>
                     </div>
-
-                    <h4>Material Design</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('md-light-indigo')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Light Indigo" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Indigo</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('md-light-deeppurple')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-deeppurple.svg" alt="Material Light Deep Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Deep Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('md-dark-indigo', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-indigo.svg" alt="Material Dark Indigo" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Indigo</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('md-dark-deeppurple', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Dark Deep Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Deep Purple</span>
-                        </div>
+                    <div className="flex align-items-center justify-content-between gap-3">
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('md', 'indigo'),
+                                'hover:border-500 surface-border': !isThemeActive('md', 'indigo')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('md', 'indigo')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: '30px', background: 'linear-gradient(180deg, #0565f2 0%, rgba(5, 101, 242, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('md', 'deeppurple'),
+                                'hover:border-500 surface-border': !isThemeActive('md', 'deeppurple')
+                            })}
+                            style={{ borderRadius: '30px' }}
+                            onClick={() => switchTheme('md', 'deeppurple')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: '30px', background: 'linear-gradient(180deg, #702f92 0%, rgba(112, 47, 146, 0.5) 100%)' }}></span>
+                        </button>
+                        <div className="w-3"></div>
+                        <div className="w-3"></div>
                     </div>
+                </section>
 
-                    <h4>Material Design Compact</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('mdc-light-indigo')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-indigo.svg" alt="Material Compact Light Indigo" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Indigo</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('mdc-light-deeppurple')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-light-deeppurple.svg" alt="Material Compact Deep Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Deep Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('mdc-dark-indigo', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-indigo.svg" alt="Material Compact Dark Indigo" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Indigo</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('mdc-dark-deeppurple', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/md-dark-deeppurple.svg" alt="Material Compact Dark Deep Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Deep Purple</span>
-                        </div>
+                <section className="py-4 border-bottom-1 surface-border">
+                    <div className="flex align-items-center gap-2 mb-3">
+                        <img src="https://primefaces.org/cdn/primereact/images/themes/bootstrap4-light-blue.svg" alt="Bootstrap" className="border-circle" style={{ width: '1.5rem' }} />
+                        <span className="font-medium">Bootstrap</span>
                     </div>
-
-                    <h4>Fluent UI</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('fluent-light')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/fluent-light.png" alt="Fluent Light" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Blue</span>
-                        </div>
+                    <div className="flex align-items-center justify-content-between gap-3">
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('bootstrap4', 'blue'),
+                                'hover:border-500 surface-border': !isThemeActive('bootstrap4', 'blue')
+                            })}
+                            style={{ borderRadius: 30 }}
+                            onClick={() => switchTheme('bootstrap4', 'blue')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #027bff 0%, rgba(2, 123, 255, 0.5) 100%)' }}></span>
+                        </button>
+                        <button
+                            className={classNames('bg-transparent border-1 cursor-pointer p-2 w-3 flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                'border-primary': isThemeActive('bootstrap4', 'purple'),
+                                'hover:border-500 surface-border': !isThemeActive('bootstrap4', 'purple')
+                            })}
+                            style={{ borderRadius: 30 }}
+                            onClick={() => switchTheme('bootstrap4', 'purple')}
+                        >
+                            <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #893cae 0%, rgba(137, 60, 174, 0.5) 100%)' }}></span>
+                        </button>
+                        <div className="w-3"></div>
+                        <div className="w-3"></div>
                     </div>
+                </section>
 
-                    <h4>PrimeOne Design</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-light-indigo')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-indigo.png" alt="Lara Light Indigo" className="w-3rem h-3rem border-round" />
+                <section className="py-4 border-bottom-1 surface-border">
+                    <div className="flex gap-3">
+                        <div className="w-3">
+                            <div className="flex align-items-center gap-2 mb-3">
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/soho-light.png" alt="Soho" className="border-circle" style={{ width: '1.5rem' }} />
+                                <span className="font-medium">Soho</span>
+                            </div>
+                            <button
+                                className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                    'border-primary': isThemeActive('soho'),
+                                    'hover:border-500 surface-border': !isThemeActive('soho')
+                                })}
+                                style={{ borderRadius: 30 }}
+                                onClick={() => switchTheme('soho')}
+                            >
+                                <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #664beb 0%, rgba(102, 75, 235, 0.5) 100%)' }}></span>
                             </button>
-                            <span className="white-space-nowrap">Lara Indigo</span>
                         </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-light-blue')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-blue.png" alt="Lara Light Blue" className="w-3rem h-3rem border-round" />
+                        <div className="w-3">
+                            <div className="flex align-items-center gap-2 mb-3">
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/viva-light.svg" alt="Viva" className="border-circle" style={{ width: '1.5rem' }} />
+                                <span className="font-medium">Viva</span>
+                            </div>
+                            <button
+                                className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                    'border-primary': isThemeActive('viva'),
+                                    'hover:border-500 surface-border': !isThemeActive('viva')
+                                })}
+                                style={{ borderRadius: 30 }}
+                                onClick={() => switchTheme('viva')}
+                            >
+                                <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #4a67c9 0%, rgba(74, 103, 201, 0.5) 100%)' }}></span>
                             </button>
-                            <span className="white-space-nowrap">Lara Blue</span>
                         </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-light-purple')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-purple.png" alt="Lara Light Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Lara Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-light-teal')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-light-teal.png" alt="Lara Light Teal" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Lara Teal</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-dark-indigo', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-dark-indigo.png" alt="Lara Dark Indigo" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Lara Indigo</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-dark-blue', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-dark-blue.png" alt="Lara Dark Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Lara Blue</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-dark-purple', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-dark-purple.png" alt="Lara Dark Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Lara Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('lara-dark-teal', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/lara-dark-teal.png" alt="Lara Dark Teal" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Lara Teal</span>
-                        </div>
+                        <div className="w-3"></div>
+                        <div className="w-3"></div>
                     </div>
+                </section>
 
-                    <h4>Misc</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('soho-light')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/soho-light.png" alt="Soho Light" className="w-3rem h-3rem border-round" />
+                <section className="py-4">
+                    <div className="flex gap-3">
+                        <div className="w-3">
+                            <div className="flex align-items-center gap-2 mb-3">
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/fluent-light.png" alt="Fluent" className="border-circle" style={{ width: '1.5rem' }} />
+                                <span className="font-medium">Fluent</span>
+                            </div>
+                            <button
+                                className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                    'border-primary': isThemeActive('fluent-light'),
+                                    'hover:border-500 surface-border': !isThemeActive('fluent-light')
+                                })}
+                                style={{ borderRadius: 30 }}
+                                onClick={() => switchTheme('fluent-light')}
+                            >
+                                <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #0078d4 0%, rgba(0, 120, 212, 0.5) 100%)' }}></span>
                             </button>
-                            <span className="white-space-nowrap">Soho Light</span>
                         </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('soho-dark', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/soho-dark.png" alt="Soho Dark" className="w-3rem h-3rem border-round" />
+                        <div className="w-3">
+                            <div className="flex align-items-center gap-2 mb-3">
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/mira.jpg" alt="Mira" className="border-circle" style={{ width: '1.5rem' }} />
+                                <span className="font-medium">Mira</span>
+                            </div>
+                            <button
+                                className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                    'border-primary': isThemeActive('mira'),
+                                    'hover:border-500 surface-border': !isThemeActive('mira')
+                                })}
+                                style={{ borderRadius: 30 }}
+                                onClick={() => switchTheme('mira')}
+                            >
+                                <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #81a1c1 0%, rgba(129, 161, 193, 0.5) 100%)' }}></span>
                             </button>
-                            <span className="white-space-nowrap">Soho Dark</span>
                         </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('viva-light')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/viva-light.svg" alt="Viva Light" className="w-3rem h-3rem border-round" />
+                        <div className="w-3">
+                            <div className="flex align-items-center gap-2 mb-3">
+                                <img src="https://primefaces.org/cdn/primereact/images/themes/nano.jpg" alt="Nano" className="border-circle" style={{ width: '1.5rem' }} />
+                                <span className="font-medium">Nano</span>
+                            </div>
+                            <button
+                                className={classNames('bg-transparent border-1 cursor-pointer p-2 w-full flex align-items-center justify-content-center transition-all transition-duration-200', {
+                                    'border-primary': isThemeActive('nano'),
+                                    'hover:border-500 surface-border': !isThemeActive('nano')
+                                })}
+                                style={{ borderRadius: 30 }}
+                                onClick={() => switchTheme('nano')}
+                            >
+                                <span className="block h-1rem w-full" style={{ borderRadius: 30, background: 'linear-gradient(180deg, #1469b4 0%, rgba(20, 105, 180, 0.5) 100%)' }}></span>
                             </button>
-                            <span className="white-space-nowrap">Viva Light</span>
                         </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('viva-dark', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/viva-dark.svg" alt="Viva Dark" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Viva Dark</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('mira')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/mira.jpg" alt="Mira" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Mira</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('nano')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/nano.jpg" alt="Nano" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Nano</span>
-                        </div>
-                    </div>
-
-                    <h4>PrimeOne Design - Legacy</h4>
-                    <div className="grid free-themes">
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('saga-blue')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/saga-blue.png" alt="Saga Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Saga Blue</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('saga-green')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/saga-green.png" alt="Saga Green" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Saga Green</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('saga-orange')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/saga-orange.png" alt="Saga Orange" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className=" white-space-nowrap">Saga Orange</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('saga-purple')}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/saga-purple.png" alt="Saga Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Saga Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('vela-blue', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/vela-blue.png" alt="Vela Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Vela Blue</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('vela-green', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/vela-green.png" alt="Vela Green" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Vela Green</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('vela-orange', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/vela-orange.png" alt="Vela Orange" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Vela Orange</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('vela-purple', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/vela-purple.png" alt="Vela Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Vela Purple</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('arya-blue', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/arya-blue.png" alt="Arya Blue" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Arya Blue</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('arya-green', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/arya-green.png" alt="Arya Green" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Arya Green</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('arya-orange', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/arya-orange.png" alt="Arya Orange" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Arya Orange</span>
-                        </div>
-                        <div className="col-3 flex flex-column align-items-center gap-2">
-                            <button className="p-link h-3rem" onClick={() => onThemeChange('arya-purple', true)}>
-                                <img src="https://primefaces.org/cdn/primereact/images/themes/arya-purple.png" alt="Arya Purple" className="w-3rem h-3rem border-round" />
-                            </button>
-                            <span className="white-space-nowrap">Arya Purple</span>
-                        </div>
+                        <div className="w-3"></div>
                     </div>
                 </section>
             </div>

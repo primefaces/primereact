@@ -1,8 +1,8 @@
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../components/doc/inputgroup/basicdoc';
-import { ButtonDoc } from '../../components/doc/inputgroup/buttondoc';
-import { CheckboxDoc } from '../../components/doc/inputgroup/checkboxdoc';
-import { MultipleDoc } from '../../components/doc/inputgroup/multipledoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/inputgroup/basicdoc';
+import { ButtonDoc } from '@/components/doc/inputgroup/buttondoc';
+import { CheckboxDoc } from '@/components/doc/inputgroup/checkboxdoc';
+import { MultipleDoc } from '@/components/doc/inputgroup/multipledoc';
 
 const InputGroupDemo = () => {
     const docs = [

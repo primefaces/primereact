@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useEventListener } from '../../../lib/hooks/Hooks';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { useEventListener } from '@/components/lib/hooks/Hooks';
+import { useEffect, useRef, useState } from 'react';
 
 export function ElementDoc(props) {
     const [hover, setHover] = useState(false);

@@ -1,18 +1,17 @@
-import React from 'react';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AppendToDoc } from '../../components/doc/configuration/appendtodoc';
-import { CSSTransitionDoc } from '../../components/doc/configuration/csstransitiondoc';
-import { FilterMatchModeDoc } from '../../components/doc/configuration/filtermatchmodedoc';
-import { HideOverlaysDoc } from '../../components/doc/configuration/hideoverlaysdoc';
-import { InputStyleDoc } from '../../components/doc/configuration/inputstyledoc';
-import { AddLocaleDoc } from '../../components/doc/configuration/locale/addlocaledoc';
-import { ImportDoc } from '../../components/doc/configuration/locale/importdoc';
-import { RepositoryDoc } from '../../components/doc/configuration/locale/repositorydoc';
-import { SetLocaleDoc } from '../../components/doc/configuration/locale/setlocaledoc';
-import { NonceDoc } from '../../components/doc/configuration/noncedoc';
-import { NullSortOrderDoc } from '../../components/doc/configuration/nullsortorderdoc';
-import { RippleDoc } from '../../components/doc/configuration/rippledoc';
-import { ZIndexDoc } from '../../components/doc/configuration/zindexdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AppendToDoc } from '@/components/doc/configuration/appendtodoc';
+import { CSSTransitionDoc } from '@/components/doc/configuration/csstransitiondoc';
+import { FilterMatchModeDoc } from '@/components/doc/configuration/filtermatchmodedoc';
+import { HideOverlaysDoc } from '@/components/doc/configuration/hideoverlaysdoc';
+import { InputStyleDoc } from '@/components/doc/configuration/inputstyledoc';
+import { AddLocaleDoc } from '@/components/doc/configuration/locale/addlocaledoc';
+import { ImportDoc } from '@/components/doc/configuration/locale/importdoc';
+import { RepositoryDoc } from '@/components/doc/configuration/locale/repositorydoc';
+import { SetLocaleDoc } from '@/components/doc/configuration/locale/setlocaledoc';
+import { NonceDoc } from '@/components/doc/configuration/noncedoc';
+import { NullSortOrderDoc } from '@/components/doc/configuration/nullsortorderdoc';
+import { RippleDoc } from '@/components/doc/configuration/rippledoc';
+import { ZIndexDoc } from '@/components/doc/configuration/zindexdoc';
 
 const InstallationPage = () => {
     const docs = [

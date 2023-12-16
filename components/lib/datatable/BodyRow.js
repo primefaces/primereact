@@ -68,7 +68,7 @@ export const BodyRow = React.memo((props) => {
     const findPrevSelectableRow = (row) => {
         const prevRow = row.previousElementSibling;
 
-        return prevRow ? DomHandler.getAttribute(prevRow, 'data-p-selectable-row') === true : null;
+        return prevRow ? (DomHandler.getAttribute(prevRow, 'data-p-selectable-row') === true ? prevRow : findPrevSelectableRow(prevRow)) : null;
     };
 
     const shouldRenderBodyCell = (value, column, i) => {

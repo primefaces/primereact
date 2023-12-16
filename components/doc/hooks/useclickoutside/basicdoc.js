@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { Button } from '../../../lib/button/Button';
-import { useClickOutside } from '../../../lib/hooks/Hooks';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Button } from '@/components/lib/button/Button';
+import { useClickOutside } from '@/components/lib/hooks/Hooks';
+import { useRef, useState } from 'react';
 
 export function BasicDoc(props) {
     const [visible, setVisible] = useState(false);

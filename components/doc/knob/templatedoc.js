@@ -1,7 +1,7 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Knob } from '@/components/lib/knob/Knob';
 import { useState } from 'react';
-import { Knob } from '../../lib/knob/Knob';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function TemplateDoc(props) {
     const [value, setValue] = useState(60);

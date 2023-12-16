@@ -1,7 +1,7 @@
-import { DocComponent } from '../../../components/doc/common/doccomponent';
-import { DocumentDoc } from '../../../components/doc/hooks/useeventlistener/documentdoc';
-import { ElementDoc } from '../../../components/doc/hooks/useeventlistener/elementdoc';
-import { ImportDoc } from '../../../components/doc/hooks/useeventlistener/importdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { DocumentDoc } from '@/components/doc/hooks/useeventlistener/documentdoc';
+import { ElementDoc } from '@/components/doc/hooks/useeventlistener/elementdoc';
+import { ImportDoc } from '@/components/doc/hooks/useeventlistener/importdoc';
 
 const EventListenerDemo = () => {
     const docs = [

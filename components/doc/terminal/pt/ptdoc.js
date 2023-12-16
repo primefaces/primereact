@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
-import { Terminal } from '../../../lib/terminal/Terminal';
-import { TerminalService } from '../../../lib/terminalservice/TerminalService';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Terminal } from '@/components/lib/terminal/Terminal';
+import { TerminalService } from '@/components/lib/terminalservice/TerminalService';
+import { useEffect } from 'react';
 
 export function PTDoc(props) {
     const commandHandler = (text) => {

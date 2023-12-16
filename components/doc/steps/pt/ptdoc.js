@@ -1,6 +1,6 @@
-import { DocSectionText } from '../../common/docsectiontext';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { Steps } from '../../../lib/steps/Steps';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Steps } from '@/components/lib/steps/Steps';
 
 export function PTDoc(props) {
     const items = [

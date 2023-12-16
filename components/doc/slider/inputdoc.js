@@ -1,8 +1,8 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputText } from '@/components/lib/inputtext/InputText';
+import { Slider } from '@/components/lib/slider/Slider';
 import { useState } from 'react';
-import { InputText } from '../../lib/inputtext/InputText';
-import { Slider } from '../../lib/slider/Slider';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function InputDoc(props) {
     const [value, setValue] = useState(50);

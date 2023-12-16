@@ -1,61 +1,60 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/datatable/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/datatable/basicdoc';
-import { DisabledCellSelectionDoc } from '../../components/doc/datatable/cellselection/disableddoc';
-import { CellSelectEventsDoc } from '../../components/doc/datatable/cellselection/eventsdoc';
-import { MultipleCellsSelectionDoc } from '../../components/doc/datatable/cellselection/multipledoc';
-import { SingleCellSelectionDoc } from '../../components/doc/datatable/cellselection/singledoc';
-import { ExpandModeDoc } from '../../components/doc/datatable/colresize/expandmodedoc';
-import { FitModeDoc } from '../../components/doc/datatable/colresize/fitmodedoc';
-import { ColumnGroupDoc } from '../../components/doc/datatable/columngroupdoc';
-import { ColumnToggleDoc } from '../../components/doc/datatable/columntoggledoc';
-import { ConditionalStyleDoc } from '../../components/doc/datatable/conditionalstyledoc';
-import { ContextMenuDoc } from '../../components/doc/datatable/contextmenudoc';
-import { DynamicColumnsDoc } from '../../components/doc/datatable/dynamiccolumnsdoc';
-import { CellEditDoc } from '../../components/doc/datatable/edit/celleditdoc';
-import { RowEditDoc } from '../../components/doc/datatable/edit/roweditdoc';
-import { ExportDoc } from '../../components/doc/datatable/exportdoc';
-import { AdvancedFilterDoc } from '../../components/doc/datatable/filter/advanceddoc';
-import { BasicFilterDoc } from '../../components/doc/datatable/filter/basicdoc';
-import { GridLinesDoc } from '../../components/doc/datatable/gridlinesdoc';
-import { ImportDoc } from '../../components/doc/datatable/importdoc';
-import { LazyLoadDoc } from '../../components/doc/datatable/lazyloaddoc';
-import { PaginatorBasicDoc } from '../../components/doc/datatable/paginator/basicdoc';
-import { PaginatorTemplateDoc } from '../../components/doc/datatable/paginator/templatedoc';
-import { PTDoc } from '../../components/doc/datatable/pt/ptdoc';
-import { Wireframe } from '../../components/doc/datatable/pt/wireframe';
-import { ReorderDoc } from '../../components/doc/datatable/reorderdoc';
-import { RowExpansionDoc } from '../../components/doc/datatable/rowexpansiondoc';
-import { ExpandableRowGroupDoc } from '../../components/doc/datatable/rowgroup/expandabledoc';
-import { RowSpanRowGroupDoc } from '../../components/doc/datatable/rowgroup/rowspandoc';
-import { SubHeaderRowGroupDoc } from '../../components/doc/datatable/rowgroup/subheaderdoc';
-import { CheckboxRowSelectionDoc } from '../../components/doc/datatable/rowselection/checkboxdoc';
-import { DisabledRowSelectionDoc } from '../../components/doc/datatable/rowselection/disableddoc';
-import { RowSelectEventsDoc } from '../../components/doc/datatable/rowselection/eventsdoc';
-import { MultipleRowsSelectionDoc } from '../../components/doc/datatable/rowselection/multipledoc';
-import { RadioButtonRowSelectionDoc } from '../../components/doc/datatable/rowselection/radiobuttondoc';
-import { SingleRowSelectionDoc } from '../../components/doc/datatable/rowselection/singledoc';
-import { CustomersDoc } from '../../components/doc/datatable/samples/customersdoc';
-import { ProductsDoc } from '../../components/doc/datatable/samples/productsdoc';
-import { FlexibleScrollDoc } from '../../components/doc/datatable/scroll/flexibledoc';
-import { FrozenColumnsDoc } from '../../components/doc/datatable/scroll/frozencolumnsdoc';
-import { FrozenRowsDoc } from '../../components/doc/datatable/scroll/frozenrowsdoc';
-import { HorizontalScrollDoc } from '../../components/doc/datatable/scroll/horizontaldoc';
-import { VerticalScrollDoc } from '../../components/doc/datatable/scroll/verticaldoc';
-import { SizeDoc } from '../../components/doc/datatable/sizedoc';
-import { MultipleColumnsDoc } from '../../components/doc/datatable/sort/multiplecolumnsdoc';
-import { PresortDoc } from '../../components/doc/datatable/sort/presortdoc';
-import { RemovableSortDoc } from '../../components/doc/datatable/sort/removablesortdoc';
-import { SingleColumnDoc } from '../../components/doc/datatable/sort/singlecolumndoc';
-import { StatefulDoc } from '../../components/doc/datatable/statefuldoc';
-import { StripedRowsDoc } from '../../components/doc/datatable/stripedrowsdoc';
-import { StyleDoc } from '../../components/doc/datatable/styledoc';
-import { TemplateDoc } from '../../components/doc/datatable/templatedoc';
-import { StyledDoc } from '../../components/doc/datatable/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/datatable/theming/tailwinddoc';
-import { LazyVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/lazydoc';
-import { PreloadVirtualScrollDoc } from '../../components/doc/datatable/virtualscroll/preloaddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/datatable/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/datatable/basicdoc';
+import { DisabledCellSelectionDoc } from '@/components/doc/datatable/cellselection/disableddoc';
+import { CellSelectEventsDoc } from '@/components/doc/datatable/cellselection/eventsdoc';
+import { MultipleCellsSelectionDoc } from '@/components/doc/datatable/cellselection/multipledoc';
+import { SingleCellSelectionDoc } from '@/components/doc/datatable/cellselection/singledoc';
+import { ExpandModeDoc } from '@/components/doc/datatable/colresize/expandmodedoc';
+import { FitModeDoc } from '@/components/doc/datatable/colresize/fitmodedoc';
+import { ColumnGroupDoc } from '@/components/doc/datatable/columngroupdoc';
+import { ColumnToggleDoc } from '@/components/doc/datatable/columntoggledoc';
+import { ConditionalStyleDoc } from '@/components/doc/datatable/conditionalstyledoc';
+import { ContextMenuDoc } from '@/components/doc/datatable/contextmenudoc';
+import { DynamicColumnsDoc } from '@/components/doc/datatable/dynamiccolumnsdoc';
+import { CellEditDoc } from '@/components/doc/datatable/edit/celleditdoc';
+import { RowEditDoc } from '@/components/doc/datatable/edit/roweditdoc';
+import { ExportDoc } from '@/components/doc/datatable/exportdoc';
+import { AdvancedFilterDoc } from '@/components/doc/datatable/filter/advanceddoc';
+import { BasicFilterDoc } from '@/components/doc/datatable/filter/basicdoc';
+import { GridLinesDoc } from '@/components/doc/datatable/gridlinesdoc';
+import { ImportDoc } from '@/components/doc/datatable/importdoc';
+import { LazyLoadDoc } from '@/components/doc/datatable/lazyloaddoc';
+import { PaginatorBasicDoc } from '@/components/doc/datatable/paginator/basicdoc';
+import { PaginatorTemplateDoc } from '@/components/doc/datatable/paginator/templatedoc';
+import { PTDoc } from '@/components/doc/datatable/pt/ptdoc';
+import { Wireframe } from '@/components/doc/datatable/pt/wireframe';
+import { ReorderDoc } from '@/components/doc/datatable/reorderdoc';
+import { RowExpansionDoc } from '@/components/doc/datatable/rowexpansiondoc';
+import { ExpandableRowGroupDoc } from '@/components/doc/datatable/rowgroup/expandabledoc';
+import { RowSpanRowGroupDoc } from '@/components/doc/datatable/rowgroup/rowspandoc';
+import { SubHeaderRowGroupDoc } from '@/components/doc/datatable/rowgroup/subheaderdoc';
+import { CheckboxRowSelectionDoc } from '@/components/doc/datatable/rowselection/checkboxdoc';
+import { DisabledRowSelectionDoc } from '@/components/doc/datatable/rowselection/disableddoc';
+import { RowSelectEventsDoc } from '@/components/doc/datatable/rowselection/eventsdoc';
+import { MultipleRowsSelectionDoc } from '@/components/doc/datatable/rowselection/multipledoc';
+import { RadioButtonRowSelectionDoc } from '@/components/doc/datatable/rowselection/radiobuttondoc';
+import { SingleRowSelectionDoc } from '@/components/doc/datatable/rowselection/singledoc';
+import { CustomersDoc } from '@/components/doc/datatable/samples/customersdoc';
+import { ProductsDoc } from '@/components/doc/datatable/samples/productsdoc';
+import { FlexibleScrollDoc } from '@/components/doc/datatable/scroll/flexibledoc';
+import { FrozenColumnsDoc } from '@/components/doc/datatable/scroll/frozencolumnsdoc';
+import { FrozenRowsDoc } from '@/components/doc/datatable/scroll/frozenrowsdoc';
+import { HorizontalScrollDoc } from '@/components/doc/datatable/scroll/horizontaldoc';
+import { VerticalScrollDoc } from '@/components/doc/datatable/scroll/verticaldoc';
+import { SizeDoc } from '@/components/doc/datatable/sizedoc';
+import { MultipleColumnsDoc } from '@/components/doc/datatable/sort/multiplecolumnsdoc';
+import { PresortDoc } from '@/components/doc/datatable/sort/presortdoc';
+import { RemovableSortDoc } from '@/components/doc/datatable/sort/removablesortdoc';
+import { SingleColumnDoc } from '@/components/doc/datatable/sort/singlecolumndoc';
+import { StatefulDoc } from '@/components/doc/datatable/statefuldoc';
+import { StripedRowsDoc } from '@/components/doc/datatable/stripedrowsdoc';
+import { TemplateDoc } from '@/components/doc/datatable/templatedoc';
+import { StyledDoc } from '@/components/doc/datatable/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/datatable/theming/tailwinddoc';
+import { LazyVirtualScrollDoc } from '@/components/doc/datatable/virtualscroll/lazydoc';
+import { PreloadVirtualScrollDoc } from '@/components/doc/datatable/virtualscroll/preloaddoc';
 
 const DataTableDemo = () => {
     const docs = [
@@ -375,11 +374,7 @@ const DataTableDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

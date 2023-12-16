@@ -1,28 +1,27 @@
-import { AccessibilityDoc } from '../../components/doc/button/accessibilitydoc';
-import { BadgesDoc } from '../../components/doc/button/badgesdoc';
-import { BasicDoc } from '../../components/doc/button/basicdoc';
-import { ButtonSetDoc } from '../../components/doc/button/buttonsetdoc';
-import { DisabledDoc } from '../../components/doc/button/disableddoc';
-import { IconOnlyDoc } from '../../components/doc/button/icononlydoc';
-import { IconsDoc } from '../../components/doc/button/iconsdoc';
-import { ImportDoc } from '../../components/doc/button/importdoc';
-import { LinkDoc } from '../../components/doc/button/linkdoc';
-import { LoadingDoc } from '../../components/doc/button/loadingdoc';
-import { OutlinedDoc } from '../../components/doc/button/outlineddoc';
-import { PTDoc } from '../../components/doc/button/pt/ptdoc';
-import { Wireframe } from '../../components/doc/button/pt/wireframe';
-import { RaisedDoc } from '../../components/doc/button/raiseddoc';
-import { RaisedTextDoc } from '../../components/doc/button/raisedtextdoc';
-import { RoundedDoc } from '../../components/doc/button/roundeddoc';
-import { SeverityDoc } from '../../components/doc/button/severitydoc';
-import { SizesDoc } from '../../components/doc/button/sizesdoc';
-import { StyleDoc } from '../../components/doc/button/styledoc';
-import { TemplateDoc } from '../../components/doc/button/templatedoc';
-import { TextDoc } from '../../components/doc/button/textdoc';
-import { StyledDoc } from '../../components/doc/button/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/button/theming/tailwinddoc';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/button/accessibilitydoc';
+import { BadgesDoc } from '@/components/doc/button/badgesdoc';
+import { BasicDoc } from '@/components/doc/button/basicdoc';
+import { ButtonSetDoc } from '@/components/doc/button/buttonsetdoc';
+import { DisabledDoc } from '@/components/doc/button/disableddoc';
+import { IconOnlyDoc } from '@/components/doc/button/icononlydoc';
+import { IconsDoc } from '@/components/doc/button/iconsdoc';
+import { ImportDoc } from '@/components/doc/button/importdoc';
+import { LinkDoc } from '@/components/doc/button/linkdoc';
+import { LoadingDoc } from '@/components/doc/button/loadingdoc';
+import { OutlinedDoc } from '@/components/doc/button/outlineddoc';
+import { PTDoc } from '@/components/doc/button/pt/ptdoc';
+import { Wireframe } from '@/components/doc/button/pt/wireframe';
+import { RaisedDoc } from '@/components/doc/button/raiseddoc';
+import { RaisedTextDoc } from '@/components/doc/button/raisedtextdoc';
+import { RoundedDoc } from '@/components/doc/button/roundeddoc';
+import { SeverityDoc } from '@/components/doc/button/severitydoc';
+import { SizesDoc } from '@/components/doc/button/sizesdoc';
+import { TemplateDoc } from '@/components/doc/button/templatedoc';
+import { TextDoc } from '@/components/doc/button/textdoc';
+import { StyledDoc } from '@/components/doc/button/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/button/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
 
 const ButtonDemo = () => {
     const docs = [
@@ -111,11 +110,7 @@ const ButtonDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

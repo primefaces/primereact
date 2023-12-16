@@ -1,6 +1,6 @@
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
 import Link from 'next/link';
-import { DocSectionCode } from '../../common/docsectioncode';
-import { DocSectionText } from '../../common/docsectiontext';
 
 export function TailwindDoc(props) {
     const code = {
@@ -9,9 +9,9 @@ const Tailwind = {
     speeddial: {
         root: 'absolute flex',
         button: {
-            root: ({ parent }) => ({
+            root: ({ state }) => ({
                 className: classNames('w-16 !h-16 !rounded-full justify-center z-10', {
-                    'rotate-45': parent.state.visible
+                    'rotate-45': state.visible
                 })
             }),
             label: {

@@ -1,16 +1,15 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/image/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/image/basicdoc';
-import { ImportDoc } from '../../components/doc/image/importdoc';
-import { PreviewDoc } from '../../components/doc/image/previewdoc';
-import { PTDoc } from '../../components/doc/image/pt/ptdoc';
-import { Wireframe } from '../../components/doc/image/pt/wireframe';
-import { StyleDoc } from '../../components/doc/image/styledoc';
-import { TemplateDoc } from '../../components/doc/image/templatedoc';
-import { StyledDoc } from '../../components/doc/image/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/image/theming/tailwinddoc';
-import { ThumbnailDoc } from '../../components/doc/image/thumbnaildoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/image/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/image/basicdoc';
+import { ImportDoc } from '@/components/doc/image/importdoc';
+import { PreviewDoc } from '@/components/doc/image/previewdoc';
+import { PTDoc } from '@/components/doc/image/pt/ptdoc';
+import { Wireframe } from '@/components/doc/image/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/image/templatedoc';
+import { StyledDoc } from '@/components/doc/image/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/image/theming/tailwinddoc';
+import { ThumbnailDoc } from '@/components/doc/image/thumbnaildoc';
 
 const ImageDemo = () => {
     const docs = [
@@ -39,11 +38,7 @@ const ImageDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

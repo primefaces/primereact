@@ -1,23 +1,21 @@
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/inputmask/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/inputmask/basicdoc';
+import { DisabledDoc } from '@/components/doc/inputmask/disableddoc';
+import { FloatLabelDoc } from '@/components/doc/inputmask/floatlabeldoc';
+import { FormikDoc } from '@/components/doc/inputmask/form/formikdoc';
+import { HookFormDoc } from '@/components/doc/inputmask/form/hookformdoc';
+import { ImportDoc } from '@/components/doc/inputmask/importdoc';
+import { InvalidDoc } from '@/components/doc/inputmask/invaliddoc';
+import { MaskDoc } from '@/components/doc/inputmask/maskdoc';
+import { OptionalDoc } from '@/components/doc/inputmask/optionaldoc';
+import { PTDoc } from '@/components/doc/inputmask/pt/ptdoc';
+import { Wireframe } from '@/components/doc/inputmask/pt/wireframe';
+import { SlotCharDoc } from '@/components/doc/inputmask/slotchardoc';
+import { StyledDoc } from '@/components/doc/inputmask/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/inputmask/theming/tailwinddoc';
 import Link from 'next/link';
-import React from 'react';
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/inputmask/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/inputmask/basicdoc';
-import { DisabledDoc } from '../../components/doc/inputmask/disableddoc';
-import { FloatLabelDoc } from '../../components/doc/inputmask/floatlabeldoc';
-import { FormikDoc } from '../../components/doc/inputmask/form/formikdoc';
-import { HookFormDoc } from '../../components/doc/inputmask/form/hookformdoc';
-import { ImportDoc } from '../../components/doc/inputmask/importdoc';
-import { InvalidDoc } from '../../components/doc/inputmask/invaliddoc';
-import { MaskDoc } from '../../components/doc/inputmask/maskdoc';
-import { OptionalDoc } from '../../components/doc/inputmask/optionaldoc';
-import { PTDoc } from '../../components/doc/inputmask/pt/ptdoc';
-import { Wireframe } from '../../components/doc/inputmask/pt/wireframe';
-import { SlotCharDoc } from '../../components/doc/inputmask/slotchardoc';
-import { StyleDoc } from '../../components/doc/inputmask/styledoc';
-import { StyledDoc } from '../../components/doc/inputmask/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/inputmask/theming/tailwinddoc';
 
 const InputMaskDemo = () => {
     const docs = [
@@ -78,11 +76,7 @@ const InputMaskDemo = () => {
                 }
             ]
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

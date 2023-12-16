@@ -1,15 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/confirmpopup/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/confirmpopup/basicdoc';
-import { DeclarativeDoc } from '../../components/doc/confirmpopup/declarativedoc';
-import { ImportDoc } from '../../components/doc/confirmpopup/importdoc';
-import { PTDoc } from '../../components/doc/confirmpopup/pt/ptdoc';
-import { Wireframe } from '../../components/doc/confirmpopup/pt/wireframe';
-import { StyleDoc } from '../../components/doc/confirmpopup/styledoc';
-import { StyledDoc } from '../../components/doc/confirmpopup/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/confirmpopup/theming/tailwinddoc';
-import { ConfirmPopup } from '../../components/lib/confirmpopup/ConfirmPopup';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/confirmpopup/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/confirmpopup/basicdoc';
+import { DeclarativeDoc } from '@/components/doc/confirmpopup/declarativedoc';
+import { ImportDoc } from '@/components/doc/confirmpopup/importdoc';
+import { PTDoc } from '@/components/doc/confirmpopup/pt/ptdoc';
+import { Wireframe } from '@/components/doc/confirmpopup/pt/wireframe';
+import { StyledDoc } from '@/components/doc/confirmpopup/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/confirmpopup/theming/tailwinddoc';
+import { ConfirmPopup } from '@/components/lib/confirmpopup/ConfirmPopup';
 
 const ConfirmPopupDemo = () => {
     const docs = [
@@ -28,11 +27,7 @@ const ConfirmPopupDemo = () => {
             label: 'Declarative',
             component: DeclarativeDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

@@ -1,15 +1,14 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/fieldset/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/fieldset/basicdoc';
-import { ImportDoc } from '../../components/doc/fieldset/importdoc';
-import { PTDoc } from '../../components/doc/fieldset/pt/ptdoc';
-import { Wireframe } from '../../components/doc/fieldset/pt/wireframe';
-import { StyleDoc } from '../../components/doc/fieldset/styledoc';
-import { TemplateDoc } from '../../components/doc/fieldset/templatedoc';
-import { StyledDoc } from '../../components/doc/fieldset/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/fieldset/theming/tailwinddoc';
-import { ToggleableDoc } from '../../components/doc/fieldset/toggleabledoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/fieldset/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/fieldset/basicdoc';
+import { ImportDoc } from '@/components/doc/fieldset/importdoc';
+import { PTDoc } from '@/components/doc/fieldset/pt/ptdoc';
+import { Wireframe } from '@/components/doc/fieldset/pt/wireframe';
+import { TemplateDoc } from '@/components/doc/fieldset/templatedoc';
+import { StyledDoc } from '@/components/doc/fieldset/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/fieldset/theming/tailwinddoc';
+import { ToggleableDoc } from '@/components/doc/fieldset/toggleabledoc';
 
 const FieldsetDemo = () => {
     const docs = [
@@ -33,11 +32,7 @@ const FieldsetDemo = () => {
             label: 'Template',
             component: TemplateDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

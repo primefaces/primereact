@@ -1,9 +1,9 @@
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/keyfilter/accessibilitydoc';
-import { ImportDoc } from '../../components/doc/keyfilter/importdoc';
-import { PresetsDoc } from '../../components/doc/keyfilter/presetsdoc';
-import { RegexDoc } from '../../components/doc/keyfilter/regexdoc';
-import { RegexWordDoc } from '../../components/doc/keyfilter/regexworddoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/keyfilter/accessibilitydoc';
+import { ImportDoc } from '@/components/doc/keyfilter/importdoc';
+import { PresetsDoc } from '@/components/doc/keyfilter/presetsdoc';
+import { RegexDoc } from '@/components/doc/keyfilter/regexdoc';
+import { RegexWordDoc } from '@/components/doc/keyfilter/regexworddoc';
 
 const KeyFilterDemo = () => {
     const docs = [

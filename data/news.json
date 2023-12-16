@@ -1,10 +1,6 @@
 {
-    "id": 42,
-    "content": "Building Design Systems with Tailwind!",
-    "linkText": "Learn More",
-    "linkHref": "https://primereact.org/tailwind",
-    "backgroundStyle": "background-color:#07c4e8",
-    "textStyle": "color:#191919;font-weight:500",
-    "linkStyle": "color:#191919;font-weight:700",
-    "linkHoverStyle": "text-decoration: underline"
+    "id": 44,
+    "content": "Sakai Free Admin Template",
+    "linkText": "View Demo",
+    "linkHref": "https://sakai.primereact.org"
 }

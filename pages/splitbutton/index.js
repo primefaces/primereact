@@ -1,22 +1,21 @@
-import DocApiTable from '../../components/doc/common/docapitable';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { AccessibilityDoc } from '../../components/doc/splitbutton/accessibilitydoc';
-import { BasicDoc } from '../../components/doc/splitbutton/basicdoc';
-import { DisabledDoc } from '../../components/doc/splitbutton/disableddoc';
-import { ImportDoc } from '../../components/doc/splitbutton/importdoc';
-import { LoadingDoc } from '../../components/doc/splitbutton/loadingdoc';
-import { OutlinedDoc } from '../../components/doc/splitbutton/outlineddoc';
-import { PTDoc } from '../../components/doc/splitbutton/pt/ptdoc';
-import { Wireframe } from '../../components/doc/splitbutton/pt/wireframe';
-import { RaisedDoc } from '../../components/doc/splitbutton/raiseddoc';
-import { RaisedTextDoc } from '../../components/doc/splitbutton/raisedtextdoc';
-import { RoundedDoc } from '../../components/doc/splitbutton/roundeddoc';
-import { SeverityDoc } from '../../components/doc/splitbutton/severitydoc';
-import { SizesDoc } from '../../components/doc/splitbutton/sizesdoc';
-import { StyleDoc } from '../../components/doc/splitbutton/styledoc';
-import { TextDoc } from '../../components/doc/splitbutton/textdoc';
-import { StyledDoc } from '../../components/doc/splitbutton/theming/styleddoc';
-import { TailwindDoc } from '../../components/doc/splitbutton/theming/tailwinddoc';
+import DocApiTable from '@/components/doc/common/docapitable';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { AccessibilityDoc } from '@/components/doc/splitbutton/accessibilitydoc';
+import { BasicDoc } from '@/components/doc/splitbutton/basicdoc';
+import { DisabledDoc } from '@/components/doc/splitbutton/disableddoc';
+import { ImportDoc } from '@/components/doc/splitbutton/importdoc';
+import { LoadingDoc } from '@/components/doc/splitbutton/loadingdoc';
+import { OutlinedDoc } from '@/components/doc/splitbutton/outlineddoc';
+import { PTDoc } from '@/components/doc/splitbutton/pt/ptdoc';
+import { Wireframe } from '@/components/doc/splitbutton/pt/wireframe';
+import { RaisedDoc } from '@/components/doc/splitbutton/raiseddoc';
+import { RaisedTextDoc } from '@/components/doc/splitbutton/raisedtextdoc';
+import { RoundedDoc } from '@/components/doc/splitbutton/roundeddoc';
+import { SeverityDoc } from '@/components/doc/splitbutton/severitydoc';
+import { SizesDoc } from '@/components/doc/splitbutton/sizesdoc';
+import { TextDoc } from '@/components/doc/splitbutton/textdoc';
+import { StyledDoc } from '@/components/doc/splitbutton/theming/styleddoc';
+import { TailwindDoc } from '@/components/doc/splitbutton/theming/tailwinddoc';
 
 const SplitButtonDemo = () => {
     const docs = [
@@ -75,11 +74,7 @@ const SplitButtonDemo = () => {
             label: 'Disabled',
             component: DisabledDoc
         },
-        {
-            id: 'style',
-            label: 'Style',
-            component: StyleDoc
-        },
+
         {
             id: 'accessibility',
             label: 'Accessibility',

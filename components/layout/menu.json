@@ -13,8 +13,8 @@
                     "to": "/configuration"
                 },
                 {
-                    "name": "Accessibility",
-                    "to": "/accessibility"
+                    "name": "Playground",
+                    "to": "/playground"
                 }
             ]
         },
@@ -444,10 +444,6 @@
                     "to": "/theming"
                 },
                 {
-                    "name": "Visual Editor",
-                    "href": "https://designer.primereact.org"
-                },
-                {
                     "name": "Colors",
                     "to": "/colors"
                 },
@@ -482,8 +478,7 @@
         {
             "name": "Tailwind",
             "icon": "pi pi-heart",
-            "to": "/tailwind",
-            "badge": "NEW"
+            "to": "/tailwind"
         },
         {
             "name": "Figma UI Kit",
@@ -493,7 +488,6 @@
         {
             "name": "Icons",
             "icon": "pi pi-eye",
-            "to": "/icons",
             "children": [
                 {
                     "name": "Prime Icons",
@@ -622,6 +616,11 @@
             "name": "PrimeFlex CSS",
             "icon": "pi pi-table",
             "href": "https://primeflex.org"
+        },
+        {
+            "name": "Accessibility",
+            "icon": "pi pi-users",
+            "to": "/accessibility"
         },
         {
             "name": "Support",

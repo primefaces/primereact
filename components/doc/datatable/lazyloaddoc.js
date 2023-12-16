@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { DocSectionCode } from '@/components/doc/common/docsectioncode';
+import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { Column } from '@/components/lib/column/Column';
+import { DataTable } from '@/components/lib/datatable/DataTable';
+import { useEffect, useState } from 'react';
 import { CustomerService } from '../../../service/CustomerService';
-import { Column } from '../../lib/column/Column';
-import { DataTable } from '../../lib/datatable/DataTable';
-import { DocSectionCode } from '../common/docsectioncode';
-import { DocSectionText } from '../common/docsectiontext';
 
 export function LazyLoadDoc(props) {
     const [loading, setLoading] = useState(false);
@@ -39,13 +39,16 @@ export function LazyLoadDoc(props) {
         }
 
         //imitate delay of a backend call
-        networkTimeout = setTimeout(() => {
-            CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
-                setTotalRecords(data.totalRecords);
-                setCustomers(data.customers);
-                setLoading(false);
-            });
-        }, Math.random() * 1000 + 250);
+        networkTimeout = setTimeout(
+            () => {
+                CustomerService.getCustomers({ lazyEvent: JSON.stringify(lazyState) }).then((data) => {
+                    setTotalRecords(data.totalRecords);
+                    setCustomers(data.customers);
+                    setLoading(false);
+                });
+            },
+            Math.random() * 1000 + 250
+        );
     };
 
     const onPage = (event) => {

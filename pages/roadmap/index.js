@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react';
 
 const Roadmap = () => {
     return (
@@ -16,7 +15,7 @@ const Roadmap = () => {
                 <h1>Roadmap</h1>
                 <p>
                     At{' '}
-                    <a href="https://www.primetek.com.tr/" className="font-semibold hover:underline text-primary">
+                    <a href="https://www.primetek.com.tr/" className="font-medium hover:underline text-primary">
                         PrimeTek
                     </a>
                     , we are passionate about improving PrimeReact and would like to share our ideas for 2023 with the community. These are planned to be implemented in parallel to the regular maintenance work of the library involving review of issue

@@ -25,7 +25,8 @@ const classes = {
             'p-button-loading-label-only': props.loading && !props.icon && props.label,
             [`p-button-loading-${props.iconPos}`]: props.loading && props.label,
             [`p-button-${size}`]: size,
-            [`p-button-${props.severity}`]: props.severity
+            [`p-button-${props.severity}`]: props.severity,
+            'p-button-plain': props.plain
         })
 };
 
@@ -45,6 +46,7 @@ export const ButtonBase = ComponentBase.extend({
         loading: false,
         loadingIcon: null,
         outlined: false,
+        plain: false,
         raised: false,
         rounded: false,
         severity: null,

@@ -1,10 +1,9 @@
-import React from 'react';
-import { DocComponent } from '../../components/doc/common/doccomponent';
-import { BasicDoc } from '../../components/doc/passthrough/basicdoc';
-import { CustomCSSDoc } from '../../components/doc/passthrough/customcss';
-import { GlobalPTDoc } from '../../components/doc/passthrough/globalptdoc';
-import { LifeCyleDoc } from '../../components/doc/passthrough/lifecycle';
-import { UsePassThroughDoc } from '../../components/doc/passthrough/usepassthroughdoc';
+import { DocComponent } from '@/components/doc/common/doccomponent';
+import { BasicDoc } from '@/components/doc/passthrough/basicdoc';
+import { CustomCSSDoc } from '@/components/doc/passthrough/customcss';
+import { GlobalPTDoc } from '@/components/doc/passthrough/globalptdoc';
+import { LifeCyleDoc } from '@/components/doc/passthrough/lifecycle';
+import { UsePassThroughDoc } from '@/components/doc/passthrough/usepassthroughdoc';
 
 const PassThroughDemo = () => {
     const docs = [

@@ -265,7 +265,8 @@ svg.p-icon {
     pointer-events: auto;
 }
 
-svg.p-icon g {
+svg.p-icon g,
+.p-disabled svg.p-icon {
     pointer-events: none;
 }
 
@@ -295,12 +296,15 @@ const commonStyles = `
 .p-component, .p-component * {
     box-sizing: border-box;
 }
+
 .p-hidden {
     display: none;
 }
+
 .p-hidden-space {
     visibility: hidden;
 }
+
 .p-reset {
     margin: 0;
     padding: 0;
@@ -310,11 +314,13 @@ const commonStyles = `
     font-size: 100%;
     list-style: none;
 }
+
 .p-disabled, .p-disabled * {
-    cursor: default !important;
+    cursor: default;
     pointer-events: none;
     user-select: none;
 }
+
 .p-component-overlay {
     position: fixed;
     top: 0;
@@ -322,9 +328,11 @@ const commonStyles = `
     width: 100%;
     height: 100%;
 }
+
 .p-unselectable-text {
     user-select: none;
 }
+
 .p-scrollbar-measure {
     width: 100px;
     height: 100px;
@@ -332,6 +340,7 @@ const commonStyles = `
     position: absolute;
     top: -9999px;
 }
+
 @-webkit-keyframes p-fadein {
   0%   { opacity: 0; }
   100% { opacity: 1; }
@@ -340,6 +349,7 @@ const commonStyles = `
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
+
 .p-link {
     text-align: left;
     background-color: transparent;
@@ -349,64 +359,79 @@ const commonStyles = `
     cursor: pointer;
     user-select: none;
 }
+
 .p-link:disabled {
     cursor: default;
 }
+
 /* Non react overlay animations */
 .p-connected-overlay {
     opacity: 0;
     transform: scaleY(0.8);
     transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
 }
+
 .p-connected-overlay-visible {
     opacity: 1;
     transform: scaleY(1);
 }
+
 .p-connected-overlay-hidden {
     opacity: 0;
     transform: scaleY(1);
     transition: opacity .1s linear;
 }
+
 /* React based overlay animations */
 .p-connected-overlay-enter {
     opacity: 0;
     transform: scaleY(0.8);
 }
+
 .p-connected-overlay-enter-active {
     opacity: 1;
     transform: scaleY(1);
     transition: transform .12s cubic-bezier(0, 0, 0.2, 1), opacity .12s cubic-bezier(0, 0, 0.2, 1);
 }
+
 .p-connected-overlay-enter-done {
     transform: none;
 }
+
 .p-connected-overlay-exit {
     opacity: 1;
 }
+
 .p-connected-overlay-exit-active {
     opacity: 0;
     transition: opacity .1s linear;
 }
+
 /* Toggleable Content */
 .p-toggleable-content-enter {
     max-height: 0;
 }
+
 .p-toggleable-content-enter-active {
     overflow: hidden;
     max-height: 1000px;
     transition: max-height 1s ease-in-out;
 }
+
 .p-toggleable-content-enter-done {
     transform: none;
 }
+
 .p-toggleable-content-exit {
     max-height: 1000px;
 }
+
 .p-toggleable-content-exit-active {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
 }
+
 .p-sr-only {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
@@ -417,8 +442,9 @@ const commonStyles = `
     padding: 0;
     position: absolute;
     width: 1px;
-    word-wrap: normal !important;
+    word-wrap: normal;
 }
+
 /* @todo Refactor */
 .p-menu .p-menuitem-link {
     cursor: pointer;
@@ -474,13 +500,13 @@ export const ComponentBase = {
                 obj = obj.pt;
             }
 
+            const originalkey = key;
+            const isNestedParam = /./g.test(originalkey) && !!params[originalkey.split('.')[0]];
+            const fkey = isNestedParam ? ObjectUtils.toFlatCase(originalkey.split('.')[1]) : ObjectUtils.toFlatCase(originalkey);
             const hostName = params.hostName && ObjectUtils.toFlatCase(params.hostName);
             const componentName = hostName || (params.props && params.props.__TYPE && ObjectUtils.toFlatCase(params.props.__TYPE)) || '';
-            const isNestedParam = /./g.test(key) && !!params[key.split('.')[0]];
-            const isTransition = key === 'transition' || (/./g.test(key) && !!(key.split('.')[1] === 'transition'));
-
+            const isTransition = fkey === 'transition';
             const datasetPrefix = 'data-pc-';
-            const fkey = isNestedParam ? ObjectUtils.toFlatCase(key.split('.')[1]) : ObjectUtils.toFlatCase(key);
 
             const getHostInstance = (params) => {
                 return params?.props ? (params.hostName ? (params.props.__TYPE === params.hostName ? params.props : getHostInstance(params.parent)) : params.parent) : undefined;
@@ -500,8 +526,8 @@ export const ComponentBase = {
                 return ObjectUtils.isString(value) ? { className: value } : value;
             };
 
-            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, key, params) : _useDefaultPT(getPTClassValue, key, params)) : undefined;
-            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, key, params, componentName);
+            const globalPT = searchInDefaultPT ? (isNestedParam ? _useGlobalPT(getPTClassValue, originalkey, params) : _useDefaultPT(getPTClassValue, originalkey, params)) : undefined;
+            const self = isNestedParam ? undefined : _usePT(_getPT(obj, componentName), getPTClassValue, originalkey, params, componentName);
 
             const datasetProps = !isTransition && {
                 ...(fkey === 'root' && { [`${datasetPrefix}name`]: params.props && params.props.__parentMetadata ? ObjectUtils.toFlatCase(params.props.__TYPE) : componentName }),

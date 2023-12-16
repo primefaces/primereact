@@ -1,18 +1,17 @@
+import { DocSectionNav } from '@/components/doc/common/docsectionnav';
+import { DocSections } from '@/components/doc/common/docsections';
+import { ArchitectureDoc } from '@/components/doc/theming/architecturedoc';
+import { BuiltInThemesDoc } from '@/components/doc/theming/builtinthemesdoc';
+import { CSSVariablesDoc } from '@/components/doc/theming/cssvariablesdoc';
+import { CustomThemeDoc } from '@/components/doc/theming/customthemedoc';
+import { PrimeFlexDoc } from '@/components/doc/theming/primeflexdoc';
+import { ScaleDoc } from '@/components/doc/theming/scaledoc';
+import { CssInJsDoc } from '@/components/doc/theming/scopedstyling/cssinjsdoc';
+import { CSSModulesDoc } from '@/components/doc/theming/scopedstyling/cssmodulesdoc';
+import { NamedClassDoc } from '@/components/doc/theming/scopedstyling/namedclassdoc';
+import { SwitchThemesDoc } from '@/components/doc/theming/switchthemesdoc';
+import { UtilsDoc } from '@/components/doc/theming/utilsdoc';
 import Head from 'next/head';
-import React from 'react';
-import { DocSectionNav } from '../../components/doc/common/docsectionnav';
-import { DocSections } from '../../components/doc/common/docsections';
-import { ArchitectureDoc } from '../../components/doc/theming/architecturedoc';
-import { BuiltInThemesDoc } from '../../components/doc/theming/builtinthemesdoc';
-import { CSSVariablesDoc } from '../../components/doc/theming/cssvariablesdoc';
-import { CustomThemeDoc } from '../../components/doc/theming/customthemedoc';
-import { PrimeFlexDoc } from '../../components/doc/theming/primeflexdoc';
-import { ScaleDoc } from '../../components/doc/theming/scaledoc';
-import { CssInJsDoc } from '../../components/doc/theming/scopedstyling/cssinjsdoc';
-import { CSSModulesDoc } from '../../components/doc/theming/scopedstyling/cssmodulesdoc';
-import { NamedClassDoc } from '../../components/doc/theming/scopedstyling/namedclassdoc';
-import { SwitchThemesDoc } from '../../components/doc/theming/switchthemesdoc';
-import { UtilsDoc } from '../../components/doc/theming/utilsdoc';
 
 const ThemingDoc = () => {
     const docs = [
