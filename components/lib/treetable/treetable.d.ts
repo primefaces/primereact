@@ -620,9 +620,9 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
     defaultSortOrder?: 1 | 0 | -1 | undefined | null;
     /**
      * Text to display when there is no data.
-     * @defaultValue No records found
+     * @defaultValue No results found
      */
-    emptyMessage?: string | undefined;
+    emptyMessage?: string | React.ReactNode | ((props: TreeTableProps) => React.ReactNode) | undefined;
     /**
      * An array of keys to represent the state of the tree expansion state in controlled mode.
      */
@@ -733,7 +733,7 @@ export interface TreeTableProps extends Omit<React.DetailedHTMLProps<React.Input
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and 'self'. The self value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    paginatorDropdownAppendTo?: 'self' | HTMLElement | undefined | null;
+    paginatorDropdownAppendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * Content for the left side of the paginator.
      */

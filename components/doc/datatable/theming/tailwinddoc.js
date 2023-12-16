@@ -90,7 +90,7 @@ const Tailwind = {
                     context?.size === 'small' ? 'p-2' : context?.size === 'large' ? 'p-5' : 'p-4', // Size
                     'dark:text-white/80 dark:border-blue-900/40', // Dark Mode
                     {
-                        'sticky bg-inherit': props?.frozen || props?.frozen === '', // Frozen Columns
+                        'sticky bg-inherit': props && (props.frozen || props.frozen === ''), // Frozen Columns
                         'border-x border-y': context.showGridlines
                     }
                 )

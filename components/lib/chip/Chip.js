@@ -28,7 +28,10 @@ export const Chip = React.memo(
             setVisibleState(false);
 
             if (props.onRemove) {
-                props.onRemove(event);
+                props.onRemove({
+                    originalEvent: event,
+                    value: props.label || props.image || props.icon
+                });
             }
         };
 

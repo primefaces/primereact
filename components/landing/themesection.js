@@ -188,9 +188,6 @@ const ThemeSection = () => {
                 <button type="button" className={classNames('font-medium linkbox mr-3 mt-4', { active: tableTheme && tableTheme.startsWith('bootstrap4') })} onClick={() => changeTheme('bootstrap4', 'blue')}>
                     Bootstrap
                 </button>
-                <a type="button" className="font-medium p-link linkbox mt-4" href="https://designer.primereact.org">
-                    more...
-                </a>
             </div>
             <div
                 className="themes-main flex mt-7 justify-content-center px-5 lg:px-8"

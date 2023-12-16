@@ -64,13 +64,13 @@ export const TreeTableScrollableView = React.memo((props) => {
         let frozenScrollBody;
 
         if (frozenView) {
-            frozenScrollBody = DomHandler.findSingle(frozenView, '.p-treetable-scrollable-body');
+            frozenScrollBody = DomHandler.findSingle(frozenView, '[data-pc-section="scrollablebody"]');
         }
 
-        scrollHeaderBoxRef.current.style.marginLeft = -1 * scrollBodyRef.current.scrollLeft + 'px';
+        scrollHeaderBoxRef.current.style.transform = `translateX(-${scrollBodyRef.current.scrollLeft}px)`;
 
         if (scrollFooterBoxRef.current) {
-            scrollFooterBoxRef.current.style.marginLeft = -1 * scrollBodyRef.current.scrollLeft + 'px';
+            scrollFooterBoxRef.current.style.transform = `translateX(-${scrollBodyRef.current.scrollLeft}px)`;
         }
 
         if (frozenScrollBody) {
@@ -79,16 +79,20 @@ export const TreeTableScrollableView = React.memo((props) => {
     };
 
     useMountEffect(() => {
-        if (!props.frozen) {
-            const scrollBarWidth = DomHandler.calculateScrollbarWidth();
+        let el = DomHandler.find(findDataTableContainer(elementRef.current), '[data-pc-section="scrollablebody"]');
 
+        el = el.length > 1 ? el[1] : el[0];
+
+        const scrollBarWidth = DomHandler.calculateScrollbarWidth(el);
+
+        if (!props.frozen) {
             scrollHeaderBoxRef.current.style.marginRight = scrollBarWidth + 'px';
 
             if (scrollFooterBoxRef.current) {
                 scrollFooterBoxRef.current.style.marginRight = scrollBarWidth + 'px';
             }
         } else {
-            scrollBodyRef.current.style.paddingBottom = DomHandler.calculateScrollbarWidth() + 'px';
+            scrollBodyRef.current.style.paddingBottom = scrollBarWidth + 'px';
         }
     });
 

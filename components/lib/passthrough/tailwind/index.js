@@ -396,6 +396,7 @@ const Tailwind = {
                 'dark:border dark:border-blue-900/40 dark:bg-gray-900  dark:text-white/80'
             )
         },
+        closeButton: 'flex items-center justify-center overflow-hidden absolute top-0 right-0 w-6 h-6',
         content: 'p-5 items-center flex',
         transition: TRANSITIONS.overlay
     },
@@ -492,10 +493,10 @@ const Tailwind = {
         },
         arrow: ({ context }) => ({
             className: classNames('absolute w-0 h-0 border-transparent border-solid', {
-                '-m-t-1 border-y-[0.25rem] border-r-[0.25rem] border-l-0 border-r-gray-600': context.right,
-                '-m-t-1 border-y-[0.25rem] border-l-[0.25rem] border-r-0 border-l-gray-600': context.left,
-                '-m-l-1 border-x-[0.25rem] border-t-[0.25rem] border-b-0 border-t-gray-600': context.top,
-                '-m-l-1 border-x-[0.25rem] border-b-[0.25rem] border-t-0 border-b-gray-600': context.bottom
+                '-mt-1 border-y-[0.25rem] border-r-[0.25rem] border-l-0 border-r-gray-600': context.right,
+                '-mt-1 border-y-[0.25rem] border-l-[0.25rem] border-r-0 border-l-gray-600': context.left,
+                '-ml-1 border-x-[0.25rem] border-t-[0.25rem] border-b-0 border-t-gray-600': context.top,
+                '-ml-1 border-x-[0.25rem] border-b-[0.25rem] border-t-0 border-b-gray-600': context.bottom
             })
         }),
         text: {
@@ -697,6 +698,14 @@ const Tailwind = {
                 'mt-2 order-2': props.iconPos == 'bottom' && props.label != null
             })
         }),
+        loadingIcon: ({ props }) => ({
+            className: classNames('mx-0', {
+                'mr-2': props.loading && props.iconPos == 'left' && props.label != null,
+                'ml-2 order-1': props.loading && props.iconPos == 'right' && props.label != null,
+                'mb-2': props.loading && props.iconPos == 'top' && props.label != null,
+                'mt-2 order-2': props.loading && props.iconPos == 'bottom' && props.label != null
+            })
+        }),
         badge: ({ props }) => ({
             className: classNames({ 'ml-2 w-4 h-4 leading-none flex items-center justify-center': props.badge })
         })
@@ -845,13 +854,12 @@ const Tailwind = {
         sublist: {
             className: classNames('block absolute left-full top-0', 'min-w-full z-10', 'py-3 bg-white dark:bg-gray-900 border-0 shadow-md')
         },
-        item: {
-            className: classNames(
-                'cursor-pointer font-normal whitespace-nowrap',
-                'm-0 border-0 bg-transparent transition-shadow rounded-none',
-                'text-gray-700 dark:text-white/80 hover:text-gray-700 dark:hover:text-white/80 hover:bg-gray-200 dark:hover:bg-gray-800/80'
-            )
-        },
+        item: ({ state }) => ({
+            className: classNames('cursor-pointer font-normal whitespace-nowrap', 'm-0 border-0 bg-transparent transition-shadow rounded-none', {
+                'text-gray-700 hover:text-gray-700 hover:bg-gray-200 dark:text-white/80 dark:hover:text-white/80 dark:hover:bg-gray-800/80': !state.selected,
+                'bg-blue-50 text-blue-700 dark:bg-blue-300 dark:text-white/80': state.selected
+            })
+        }),
         content: {
             className: classNames('flex items-center overflow-hidden relative', 'py-3 px-5')
         },
@@ -1125,10 +1133,10 @@ const Tailwind = {
             })
         }),
         input: {
-            root: ({ props }) => ({
+            root: ({ parent }) => ({
                 className: classNames('font-sans text-base text-gray-600 dark:text-white/80 bg-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-blue-900/40 transition-colors duration-200 appearance-none', 'hover:border-blue-500', {
-                    'rounded-lg': !props.showIcon,
-                    'border-r-0 rounded-l-lg': props.showIcon
+                    'rounded-lg': !parent.props.showIcon,
+                    'border-r-0 rounded-l-lg': parent.props.showIcon
                 })
             })
         },
@@ -1147,13 +1155,11 @@ const Tailwind = {
             className: classNames('flex items-center justify-between', 'p-2 text-gray-700 dark:text-white/80 bg-white dark:bg-gray-900 font-semibold m-0 border-b border-gray-300 dark:border-blue-900/40 rounded-t-lg')
         },
         previousButton: {
-            root: ({ props }) => ({
-                className: classNames(
-                    'flex items-center justify-center cursor-pointer overflow-hidden relative',
-                    'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
-                    'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
-                )
-            })
+            className: classNames(
+                'flex items-center justify-center cursor-pointer overflow-hidden relative',
+                'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
+                'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
+            )
         },
         title: 'leading-8 mx-auto',
         monthTitle: {
@@ -1163,13 +1169,11 @@ const Tailwind = {
             className: classNames('text-gray-700 dark:text-white/80 transition duration-200 font-semibold p-2', 'hover:text-blue-500')
         },
         nextButton: {
-            root: ({ props }) => ({
-                className: classNames(
-                    'flex items-center justify-center cursor-pointer overflow-hidden relative',
-                    'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
-                    'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
-                )
-            })
+            className: classNames(
+                'flex items-center justify-center cursor-pointer overflow-hidden relative',
+                'w-8 h-8 text-gray-600 dark:text-white/70 border-0 bg-transparent rounded-full transition-colors duration-200 ease-in-out',
+                'hover:text-gray-700 dark:hover:text-white/80 hover:border-transparent hover:bg-gray-200 dark:hover:bg-gray-800/80 '
+            )
         },
         table: {
             className: classNames('border-collapse w-full', 'my-2')
@@ -1368,13 +1372,15 @@ const Tailwind = {
         },
         filterContainer: 'relative',
         filterInput: {
-            className: classNames(
-                'pr-7 -mr-7',
-                'w-full',
-                'font-sans text-base text-gray-700 bg-white py-3 px-3 border border-gray-300 transition duration-200 rounded-lg appearance-none',
-                'dark:bg-gray-900 dark:border-blue-900/40 dark:hover:border-blue-300 dark:text-white/80',
-                'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
-            )
+            root: {
+                className: classNames(
+                    'pr-7 -mr-7',
+                    'w-full',
+                    'font-sans text-base text-gray-700 bg-white py-3 px-3 border border-gray-300 transition duration-200 rounded-lg appearance-none',
+                    'dark:bg-gray-900 dark:border-blue-900/40 dark:hover:border-blue-300 dark:text-white/80',
+                    'hover:border-blue-500 focus:outline-none focus:outline-offset-0 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] dark:focus:shadow-[0_0_0_0.2rem_rgba(147,197,253,0.5)]'
+                )
+            }
         },
         filterIcon: '-mt-2 absolute top-1/2',
         clearIcon: 'text-gray-500 right-12 -mt-2 absolute top-1/2',
@@ -2615,8 +2621,8 @@ const Tailwind = {
         })
     },
     picklist: {
-        root: 'flex',
-        controls: 'flex flex-col justify-center p-5',
+        root: 'flex flex-col xl:flex-row',
+        controls: 'flex flex-row xl:flex-col justify-center p-5',
         moveUpButton: {
             root: {
                 className: classNames(
@@ -2624,7 +2630,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2637,7 +2643,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2650,7 +2656,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2663,7 +2669,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2689,7 +2695,7 @@ const Tailwind = {
                 'text-gray-600 dark:bg-blue-900/40': !context.selected
             })
         }),
-        buttons: 'flex flex-col justify-center p-5',
+        buttons: 'flex flex-row xl:flex-col justify-center p-5',
         movetotargetbutton: {
             root: {
                 className: classNames(
@@ -2697,7 +2703,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2710,7 +2716,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2723,7 +2729,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -2736,7 +2742,7 @@ const Tailwind = {
                     'text-white bg-blue-500 border border-blue-500 rounded-md',
                     'transition duration-200 ease-in-out',
                     'justify-center px-0 py-3', // icon only
-                    'mb-2', // orderlist button
+                    'mr-2 xl:mb-2', // orderlist button
                     'dark:bg-sky-300 dark:border-sky-300 dark:text-gray-900' //Dark Mode
                 )
             },
@@ -3169,7 +3175,7 @@ const Tailwind = {
                     context.size === 'small' ? 'p-2' : context.size === 'large' ? 'p-5' : 'p-4', // Size
                     'dark:text-white/80 dark:border-blue-900/40', // Dark Mode
                     {
-                        'sticky bg-inherit': props.frozen || props.frozen === '', // Frozen Columns
+                        'sticky bg-inherit': props && (props.frozen || props.frozen === ''), // Frozen Columns
                         'border-x border-y': context.showGridlines
                     }
                 )

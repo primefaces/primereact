@@ -45,6 +45,8 @@ export const InputNumber = React.memo(
         const _prefix = React.useRef(null);
         const _index = React.useRef(null);
 
+        const isFocusedByClick = React.useRef(false);
+
         const _locale = props.locale || (context && context.locale) || PrimeReact.locale;
         const stacked = props.showButtons && props.buttonLayout === 'stacked';
         const horizontal = props.showButtons && props.buttonLayout === 'horizontal';
@@ -59,7 +61,8 @@ export const InputNumber = React.memo(
                 currencyDisplay: props.currencyDisplay,
                 useGrouping: props.useGrouping,
                 minimumFractionDigits: props.minFractionDigits,
-                maximumFractionDigits: props.maxFractionDigits
+                maximumFractionDigits: props.maxFractionDigits,
+                roundingMode: props.roundingMode
             };
         };
 
@@ -109,7 +112,8 @@ export const InputNumber = React.memo(
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 return new RegExp(`[${formatter.format(1).replace(/\s/g, '').replace(_numeral.current, '').replace(_group.current, '')}]`, 'g');
@@ -139,7 +143,8 @@ export const InputNumber = React.memo(
                     currency: props.currency,
                     currencyDisplay: props.currencyDisplay,
                     minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+                    maximumFractionDigits: 0,
+                    roundingMode: props.roundingMode
                 });
 
                 suffixChar.current = formatter.format(1).split('1')[1];
@@ -724,6 +729,10 @@ export const InputNumber = React.memo(
             return index || 0;
         };
 
+        const onInputPointerDown = () => {
+            isFocusedByClick.current = true;
+        };
+
         const onInputClick = () => {
             initCursor();
         };
@@ -957,16 +966,21 @@ export const InputNumber = React.memo(
             setFocusedState(true);
             props.onFocus && props.onFocus(event);
 
-            if ((props.suffix || props.currency || props.prefix) && inputRef.current) {
-                // GitHub #1866 Cursor must be placed before/after symbol or arrow keys don't work
-                const selectionEnd = initCursor();
+            if ((props.suffix || props.currency || props.prefix) && inputRef.current && !isFocusedByClick.current) {
+                // GitHub #1866,#5537
+                let inputValue = inputRef.current.value;
+                let prefixLength = (prefixChar.current || '').length;
+                let suffixLength = (suffixChar.current || '').length;
+                let end = inputValue.length === 0 ? 0 : inputValue.length - suffixLength;
 
-                inputRef.current.setSelectionRange(selectionEnd, selectionEnd);
+                inputRef.current.setSelectionRange(prefixLength, end);
             }
         };
 
         const onInputBlur = (event) => {
             setFocusedState(false);
+
+            isFocusedByClick.current = false;
 
             if (inputRef.current) {
                 let currentValue = inputRef.current.value;
@@ -1068,6 +1082,7 @@ export const InputNumber = React.memo(
                     onKeyPress={onInputKeyUp}
                     onInput={onInput}
                     onClick={onInputClick}
+                    onPointerDown={onInputPointerDown}
                     onBlur={onInputBlur}
                     onFocus={onInputFocus}
                     onPaste={onPaste}

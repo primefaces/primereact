@@ -2,6 +2,7 @@ import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
+import { useUpdateEffect } from '../hooks/Hooks';
 import { TimesIcon } from '../icons/times';
 import { classNames, IconUtils, useMergeProps, ObjectUtils } from '../utils/Utils';
 import { InplaceBase } from './InplaceBase';
@@ -45,6 +46,10 @@ export const Inplace = React.forwardRef((inProps, ref) => {
     };
 
     const close = (event) => {
+        if (props.disabled) {
+            return;
+        }
+
         props.onClose && props.onClose(event);
 
         if (props.onToggle) {
@@ -133,6 +138,10 @@ export const Inplace = React.forwardRef((inProps, ref) => {
             }
         });
     };
+
+    useUpdateEffect(() => {
+        props.active ? open(null) : close(null);
+    }, [props.active]);
 
     React.useImperativeHandle(ref, () => ({
         props,

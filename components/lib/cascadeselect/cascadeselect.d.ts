@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { APIOptions } from '../api/api';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
@@ -24,6 +25,7 @@ export declare type CascadeSelectPassThroughTransitionType = ReactCSSTransitionP
 export interface CascadeSelectPassThroughMethodOptions {
     props: CascadeSelectProps;
     state: CascadeSelectState;
+    context: CascadeSelectContext;
 }
 
 /**
@@ -34,16 +36,34 @@ export interface CascadeSelectState {
      * Current focused state as a boolean.
      * @defaultValue false
      */
-    focused: boolean;
+    focused?: boolean;
     /**
      * Current overlay visible state as a boolean.
      * @defaultValue false
      */
-    overlayVisible: boolean;
+    overlayVisible?: boolean;
     /**
      * Current overlay attributeSelector state as a string.
      */
-    attributeSelector: string;
+    attributeSelector?: string;
+    /**
+     * For items, this is the state of the item.
+     */
+    selected?: boolean;
+    /**
+     * For items, this is whether it is a group item or not.
+     */
+    grouped?: boolean;
+}
+
+/**
+ * Defines current inline context in CascadeSelect component.
+ */
+export interface CascadeSelectContext extends APIOptions {
+    /**
+     * Label of the currently selected item
+     */
+    label?: string;
 }
 
 /**
@@ -237,7 +257,7 @@ export interface CascadeSelectProps extends Omit<React.DetailedHTMLProps<React.I
      * DOM element instance where the overlay panel should be mounted. Valid values are any DOM Element and "self". The "self" value is used to render a component where it is located.
      * @defaultValue document.body
      */
-    appendTo?: 'self' | HTMLElement | undefined | null;
+    appendTo?: 'self' | HTMLElement | undefined | null | (() => HTMLElement);
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      * @type {CSSTransitionProps}

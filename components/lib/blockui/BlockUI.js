@@ -14,6 +14,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const [visibleState, setVisibleState] = React.useState(props.blocked);
     const elementRef = React.useRef(null);
     const maskRef = React.useRef(null);
+    const activeElementRef = React.useRef(null);
 
     const { ptm, cx, isUnstyled } = BlockUIBase.setMetaData({
         props
@@ -23,13 +24,18 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
 
     const block = () => {
         setVisibleState(true);
+        activeElementRef.current = document.activeElement;
     };
 
     const unblock = () => {
         const callback = () => {
             setVisibleState(false);
 
-            props.fullScreen && DomHandler.unblockBodyScroll();
+            if (props.fullScreen) {
+                DomHandler.unblockBodyScroll();
+                activeElementRef.current && activeElementRef.current.focus();
+            }
+
             props.onUnblocked && props.onUnblocked();
         };
 
@@ -47,7 +53,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     const onPortalMounted = () => {
         if (props.fullScreen) {
             DomHandler.blockBodyScroll();
-            document.activeElement.blur();
+            activeElementRef.current && activeElementRef.current.blur();
         }
 
         if (props.autoZIndex) {
@@ -68,9 +74,7 @@ export const BlockUI = React.forwardRef((inProps, ref) => {
     }, [props.blocked]);
 
     useUnmountEffect(() => {
-        if (props.fullScreen) {
-            DomHandler.unblockBodyScroll();
-        }
+        props.fullScreen && DomHandler.unblockBodyScroll();
 
         ZIndexUtils.clear(maskRef.current);
     });

@@ -40,7 +40,8 @@ export const TreeTableHeader = React.memo((props) => {
                 DomHandler.getAttribute(targetNode, 'data-p-sortable-column') === true ||
                 DomHandler.getAttribute(targetNode, 'data-pc-section') === 'headertitle' ||
                 DomHandler.getAttribute(targetNode, 'data-pc-section') === 'sorticon' ||
-                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sorticon'
+                DomHandler.getAttribute(targetNode.parentElement, 'data-pc-section') === 'sorticon' ||
+                (targetNode.closest('[data-p-sortable-column="true"]') && !targetNode.closest('[data-pc-section="filtermenubutton"]'))
             ) {
                 props.onSort({
                     originalEvent: event,
@@ -284,7 +285,7 @@ export const TreeTableHeader = React.memo((props) => {
             const multipleSorted = multiSortMetaData !== null;
             const sorted = getColumnProp(column, 'sortable') && (singleSorted || multipleSorted);
             const frozen = getColumnProp(column, 'frozen');
-            const align = getColumnProp(column, 'alignHeader') || getColumnProp(column, 'align');
+            const align = getColumnProp(column, 'alignHeader');
             let sortOrder = 0;
 
             if (singleSorted) sortOrder = props.sortOrder;

@@ -28,11 +28,10 @@ export const BodyCell = React.memo((props) => {
     const { ptm, ptmo, cx } = props.ptCallbacks;
 
     const getColumnProp = (name) => ColumnBase.getCProp(props.column, name);
-    const getColumnProps = (column) => ColumnBase.getCProps(column);
+    const getColumnProps = () => ColumnBase.getCProps(props.column);
 
     const getColumnPTOptions = (key) => {
-        const cProps = getColumnProps(props.column);
-
+        const cProps = getColumnProps();
         const columnMetaData = {
             props: cProps,
             parent: props.metaData,
@@ -69,10 +68,6 @@ export const BodyCell = React.memo((props) => {
         },
         options: true
     });
-
-    if (props.editMode === 'row' && props.editing !== editingState) {
-        setEditingState(props.editing);
-    }
 
     const isEditable = () => {
         return getColumnProp('editor');
@@ -233,7 +228,7 @@ export const BodyCell = React.memo((props) => {
         clearTimeout(tabindexTimeout.current);
         tabindexTimeout.current = setTimeout(() => {
             if (editingState) {
-                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not(.p-cell-editor-key-helper)') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
+                const focusableEl = props.editMode === 'cell' ? DomHandler.getFirstFocusableElement(elementRef.current, ':not([data-pc-section="editorkeyhelperlabel"])') : DomHandler.findSingle(elementRef.current, '[data-p-row-editor-save="true"]');
 
                 focusableEl && focusableEl.focus();
             }
@@ -517,6 +512,12 @@ export const BodyCell = React.memo((props) => {
             focusOnElement();
         }
     });
+
+    React.useEffect(() => {
+        if (props.editMode === 'row' && props.editing !== editingState) {
+            setEditingState(props.editing);
+        }
+    }, [props.editMode, props.editing, editingState]);
 
     useUpdateEffect(() => {
         if (props.editMode === 'cell' || props.editMode === 'row') {
