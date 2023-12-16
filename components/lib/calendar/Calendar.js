@@ -3652,17 +3652,17 @@ export const Calendar = React.memo(
                         {monthPickerValues().map((m, i) => {
                             const monthProps = mergeProps(
                                 {
-                                    className: cx('month', { isMonthSelected, checkDateIsDisabled, i, currentYear }),
+                                    className: cx('month', { isMonthSelected, isMonthYearDisabled, i, currentYear }),
                                     onClick: (event) => onMonthSelect(event, i),
                                     onKeyDown: (event) => onMonthCellKeydown(event, i),
-                                    'data-p-disabled': checkDateIsDisabled(i, currentYear),
+                                    'data-p-disabled': isMonthYearDisabled(i, currentYear),
                                     'data-p-highlight': isMonthSelected(i)
                                 },
                                 ptm('month', {
                                     context: {
                                         month: m,
                                         monthIndex: i,
-                                        disabled: checkDateIsDisabled(i, currentYear),
+                                        disabled: isMonthYearDisabled(i, currentYear),
                                         selected: isMonthSelected(i)
                                     }
                                 })
@@ -3681,7 +3681,7 @@ export const Calendar = React.memo(
             return null;
         };
 
-        const checkDateIsDisabled = (month, year) => {
+        const isMonthYearDisabled = (month, year) => {
             const daysCountInAllMonth = month === -1 ? new Array(12).fill(0).map((_, i) => getDaysCountInMonth(i, year)) : [getDaysCountInMonth(month, year)];
 
             for (let i = 0; i < daysCountInAllMonth.length; i++) {
@@ -3714,17 +3714,17 @@ export const Calendar = React.memo(
                         {yearPickerValues().map((y, i) => {
                             const yearProps = mergeProps(
                                 {
-                                    className: cx('year', { isYearSelected, isSelectable, y, checkDateIsDisabled }),
+                                    className: cx('year', { isYearSelected, isSelectable, y, isMonthYearDisabled }),
                                     onClick: (event) => onYearSelect(event, y),
                                     'data-p-highlight': isYearSelected(y),
-                                    'data-p-disabled': checkDateIsDisabled(-1, y)
+                                    'data-p-disabled': isMonthYearDisabled(-1, y)
                                 },
                                 ptm('year', {
                                     context: {
                                         year: y,
                                         yearIndex: i,
                                         selected: isYearSelected(y),
-                                        disabled: checkDateIsDisabled(-1, y)
+                                        disabled: isMonthYearDisabled(-1, y)
                                     }
                                 })
                             );
