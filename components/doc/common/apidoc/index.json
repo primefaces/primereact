@@ -50762,6 +50762,22 @@
                             "description": "Template of toggler element."
                         },
                         {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "string",
+                            "default": "",
+                            "description": "Content of the tooltip."
+                        },
+                        {
+                            "name": "tooltipOptions",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipOptions",
+                            "default": "",
+                            "description": "Configuration of the tooltip, refer to the tooltip documentation for more information."
+                        },
+                        {
                             "name": "transitionOptions",
                             "optional": true,
                             "readonly": false,
@@ -51179,6 +51195,13 @@
                             "readonly": false,
                             "type": "TreeSelectPassThroughTransitionType",
                             "description": "Used to control React Transition API."
+                        },
+                        {
+                            "name": "tooltip",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "TooltipPassThroughOptions",
+                            "description": "Uses to pass attributes to the Tooltip component."
                         }
                     ],
                     "callbacks": []
