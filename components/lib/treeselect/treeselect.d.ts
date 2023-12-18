@@ -16,6 +16,8 @@ import { TreeNodeTemplateOptions, TreePassThroughOptions, TreeTogglerTemplateOpt
 import { TreeNode } from '../treenode';
 import { FormEvent } from '../ts-helpers';
 import { IconType, PassThroughType } from '../utils/utils';
+import { TooltipPassThroughOptions } from '../tooltip/tooltip';
+import { TooltipOptions } from '../tooltip/tooltipoptions';
 
 export declare type TreeSelectPassThroughType<T> = PassThroughType<T, TreeSelectPassThroughMethodOptions>;
 export declare type TreeSelectPassThroughTransitionType = ReactCSSTransitionProps | ((options: TreeSelectPassThroughMethodOptions) => ReactCSSTransitionProps) | undefined;
@@ -123,6 +125,11 @@ export interface TreeSelectPassThroughOptions {
      * Used to control React Transition API.
      */
     transition?: TreeSelectPassThroughTransitionType;
+    /**
+     * Uses to pass attributes to the Tooltip component.
+     * @see {@link TooltipPassThroughOptions}
+     */
+    tooltip?: TooltipPassThroughOptions;
 }
 
 /**
@@ -524,6 +531,14 @@ export interface TreeSelectProps extends Omit<React.DetailedHTMLProps<React.Inpu
      * Defines the selection mode, valid values "single", "multiple", and "checkbox".
      */
     selectionMode?: 'single' | 'multiple' | 'checkbox' | undefined;
+    /**
+     * Content of the tooltip.
+     */
+    tooltip?: string | undefined;
+    /**
+     * Configuration of the tooltip, refer to the tooltip documentation for more information.
+     */
+    tooltipOptions?: TooltipOptions | undefined;
     /**
      * The properties of CSSTransition can be customized, except for "nodeRef" and "in" properties.
      */
