@@ -1005,6 +1005,7 @@ export const InputNumber = React.memo(
 
                 if (isValueChanged(currentValue, props.value)) {
                     let newValue = validateValue(parseValue(currentValue));
+
                     updateInputValue(newValue);
                     updateModel(event, newValue);
                 }
