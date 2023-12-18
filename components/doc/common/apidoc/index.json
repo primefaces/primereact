@@ -13514,7 +13514,7 @@
                                     "name": "value",
                                     "optional": false,
                                     "type": "any",
-                                    "description": "Browser event"
+                                    "description": "the new value of the cell"
                                 }
                             ],
                             "returnType": "void",
