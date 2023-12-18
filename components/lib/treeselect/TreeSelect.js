@@ -11,6 +11,7 @@ import { Tree } from '../tree/Tree';
 import { DomHandler, IconUtils, ObjectUtils, ZIndexUtils, mergeProps } from '../utils/Utils';
 import { TreeSelectBase } from './TreeSelectBase';
 import { TreeSelectPanel } from './TreeSelectPanel';
+import { Tooltip } from '../tooltip/Tooltip';
 
 export const TreeSelect = React.memo(
     React.forwardRef((inProps, ref) => {
@@ -33,6 +34,7 @@ export const TreeSelect = React.memo(
         const hasNoOptions = ObjectUtils.isEmpty(props.options);
         const isSingleSelectionMode = props.selectionMode === 'single';
         const isCheckboxSelectionMode = props.selectionMode === 'checkbox';
+        const hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
 
         const metaData = {
             props,
@@ -744,6 +746,7 @@ export const TreeSelect = React.memo(
                 >
                     {content}
                 </TreeSelectPanel>
+                {hasTooltip && <Tooltip target={elementRef} content={props.tooltip} {...props.tooltipOptions} pt={ptm('tooltip')} />}
             </div>
         );
     })
